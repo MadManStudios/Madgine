@@ -8,9 +8,9 @@ struct META_EXPORT ScopeField {
 
     ScopeField(const ScopePtr &ptr, const Accessor *pointer);
 
-    void value(ValueType &retVal) const;
+    KeyValueResult value(ValueType &retVal) const;
 
-    ScopeField &operator=(const ValueType &v);
+    KeyValueResult operator=(const ValueType &v);
 
     const char *key() const;
 

@@ -33,10 +33,11 @@ namespace Widgets {
             accessors[i] = {
                 widgets[i].mName.c_str(),
                 nullptr,
-                [](const Accessor *self, ValueType &out, const ScopePtr &scope) {
+                [](const Accessor *self, ValueType &out, const ScopePtr &scope) -> KeyValueResult {
                     CompoundWidget *compound = scope_cast<CompoundWidget>(scope);
                     WidgetBase *w = compound->getTemplateWidget(self->mName);
                     to_ValueType(out, w);
+                    return {};
                 },
                 nullptr,
                 { { ValueTypeEnum::ScopeValue }, WidgetLoader::load(widgets[i].mType)->metaTable()->mSelf }

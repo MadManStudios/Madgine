@@ -24,10 +24,10 @@ namespace Behavior {
             Threading::Task<bool> loadImpl(PyModulePtr &module, ResourceDataInfo &info, Filesystem::FileEventType event);
             void unloadImpl(PyModulePtr &module);
 
-            void find_spec(ValueType &result, std::string_view name, std::optional<std::string_view> import_path, ObjectPtr target_module);
+            KeyValueResult find_spec(ValueType &result, std::string_view name, std::optional<std::string_view> import_path, ObjectPtr target_module);
 
-            void create_module(ValueType &result, ObjectPtr spec);
-            void exec_module(ValueType &result, ObjectPtr module);
+            KeyValueResult create_module(ValueType &result, ObjectPtr spec);
+            KeyValueResult exec_module(ValueType &result, ObjectPtr module);
 
         private:
             struct Python3FunctionTable : FunctionTable {

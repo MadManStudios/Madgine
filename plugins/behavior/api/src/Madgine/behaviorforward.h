@@ -9,7 +9,6 @@ namespace Behavior {
     struct Behavior;
     struct BehaviorStateBase;
     struct BehaviorReceiver;
-    struct BehaviorError;
     struct BehaviorList;
 
     struct ParameterTuple;

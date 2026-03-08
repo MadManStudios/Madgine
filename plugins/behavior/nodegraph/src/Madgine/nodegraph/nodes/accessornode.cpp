@@ -106,25 +106,20 @@ namespace Behavior {
             }
         }
 
-        BehaviorError AccessorNode::interpretRead(NodeInterpreterStateBase &interpreter, ValueType &retVal, std::unique_ptr<NodeInterpreterData> &data, uint32_t providerIndex, uint32_t group) const
+        KeyValueResult AccessorNode::interpretRead(NodeInterpreterStateBase &interpreter, ValueType &retVal, std::unique_ptr<NodeInterpreterData> &data, uint32_t providerIndex, uint32_t group) const
         {
             if (accessor()->mType.mType == ValueTypeEnum::ApiFunctionValue || accessor()->mType.mType == ValueTypeEnum::BoundApiFunctionValue) {
                 ArgumentList arguments { dataInCount() };
                 for (size_t i = 0; i < dataInCount(); ++i) {
-                    BehaviorError error = NodeInterpretHandle<NodeBase> { { interpreter }, *this }.read(arguments[i], i);
-                    if (error.mResult != GenericResult::SUCCESS) {
-                        return error;
-                    }
+                    KEYVALUE_PROPAGATE_ERROR(NodeInterpretHandle<NodeBase> { { interpreter }, *this }.read(arguments[i], i));
                 }
-                (*accessor()->mType.mSecondary.mFunctionTable)->mFunctionPtr((*accessor()->mType.mSecondary.mFunctionTable), retVal, arguments);
+                return (*accessor()->mType.mSecondary.mFunctionTable)->mFunctionPtr((*accessor()->mType.mSecondary.mFunctionTable), retVal, arguments);
             } else {
                 ValueType scope;
-                if (BehaviorError error = NodeInterpretHandle<NodeBase> { { interpreter }, *this }.read(scope, 0); error.mResult != GenericResult::SUCCESS)
-                    return error;
+                KEYVALUE_PROPAGATE_ERROR(NodeInterpretHandle<NodeBase> { { interpreter }, *this }.read(scope, 0));
 
-                accessor()->mGetter(accessor(), retVal, scope.as<ScopePtr>());
+                return accessor()->mGetter(accessor(), retVal, scope.as<ScopePtr>());
             }
-            return {};
         }
 
         CodeGen::Statement AccessorNode::generateRead(CodeGenerator &generator, std::unique_ptr<CodeGeneratorData> &data, uint32_t providerIndex, uint32_t group) const

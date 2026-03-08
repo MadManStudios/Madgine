@@ -25,7 +25,7 @@ ScopePtr BoundApiFunction::scope() const
     return { mScope, *mFunction.mTable->mArguments[0].mType.mSecondary.mMetaTable };
 }
 
-void BoundApiFunction::operator()(ValueType &retVal, const ArgumentList &args) const
+KeyValueResult BoundApiFunction::operator()(ValueType &retVal, const ArgumentList &args) const
 {
     ArgumentList fullArgs;
     fullArgs.reserve(args.size() + 1);

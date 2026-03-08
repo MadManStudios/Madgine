@@ -13,15 +13,14 @@ ScopeField::ScopeField(const ScopePtr &ptr, const Accessor *pointer)
     assert(ptr);
 }
 
-void ScopeField::value(ValueType &retVal) const
+KeyValueResult ScopeField::value(ValueType &retVal) const
 {
-    mPointer->mGetter(mPointer, retVal, mScope);
+    return mPointer->mGetter(mPointer, retVal, mScope);
 }
 
-ScopeField &ScopeField::operator=(const ValueType &v)
+KeyValueResult ScopeField::operator=(const ValueType &v)
 {
-    mPointer->mSetter(mPointer, mScope, v);
-    return *this;
+    return mPointer->mSetter(mPointer, mScope, v);
 }
 
 const char *ScopeField::key() const

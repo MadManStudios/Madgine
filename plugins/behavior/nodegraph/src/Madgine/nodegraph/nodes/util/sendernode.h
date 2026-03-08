@@ -355,7 +355,7 @@ namespace Behavior {
                         rec.set_done();
                     }
 
-                    void set_error(BehaviorError result)
+                    void set_error(KeyValueError result)
                     {
                         NodeReceiver<T> rec = std::move(mReceiver);
                         mData->cleanup();
@@ -414,7 +414,7 @@ namespace Behavior {
                 }
             }
 
-            BehaviorError interpretRead(NodeInterpreterStateBase &interpreter, ValueType &retVal, std::unique_ptr<NodeInterpreterData> &data, uint32_t providerIndex, uint32_t group) const override
+            KeyValueResult interpretRead(NodeInterpreterStateBase &interpreter, ValueType &retVal, std::unique_ptr<NodeInterpreterData> &data, uint32_t providerIndex, uint32_t group) const override
             {
                 if constexpr (Config::constant) {
 
@@ -427,7 +427,7 @@ namespace Behavior {
                     assert(!rec.mStorage.is_null());
                     if constexpr (rec.mStorage.can_have_error) {
                         if (rec.mStorage.is_error()) {
-                            return std::move(rec.mStorage).error().mError;
+                            return { GenericResult::UNKNOWN_ERROR, std::make_unique<KeyValueError>(std::move(rec.mStorage).error().mError) };
                         }
                     }
                     retVal = TupleUnpacker::select(

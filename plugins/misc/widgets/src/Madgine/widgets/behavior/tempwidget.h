@@ -27,7 +27,7 @@ namespace Widgets {
 
         struct receiver : Execution::algorithm_receiver<Behavior::BehaviorReceiver &> {
             void set_value(ArgumentList args);
-            void set_error(Behavior::BehaviorError error);
+            void set_error(KeyValueError error);
             void set_done();
 
             friend bool tag_invoke(Behavior::get_named_d_t, receiver &rec, std::string_view name, ValueTypeRef &out)

@@ -23,7 +23,7 @@ namespace Behavior {
         using ExecutionData = std::variant<
             CodeObject,
             PyFramePtr,
-            BehaviorError>;
+            KeyValueError>;
 
         PyObject *evalFrame(PyThreadState *tstate, _PyInterpreterFrame *frame, int throwExc);
         void evalCode(BehaviorReceiver &receiver, CodeObject code);
@@ -32,7 +32,7 @@ namespace Behavior {
 
         PyObject *suspend(Closure<void(BehaviorReceiver &, std::vector<PyFramePtr>, Log::Log *, Execution::StopToken)> callback);
 
-        MADGINE_PYTHON3_EXPORT BehaviorError fetchError();
+        MADGINE_PYTHON3_EXPORT KeyValueError fetchError();
 
         struct MADGINE_PYTHON3_EXPORT ExecutionState : BehaviorReceiver {
             ExecutionState(ExecutionData data);
@@ -47,7 +47,7 @@ namespace Behavior {
         };
 
         struct ExecutionSender : Execution::base_sender {
-            using result_type = BehaviorError;
+            using result_type = KeyValueError;
             template <template <typename...> typename Tuple>
             using value_types = Tuple<ArgumentList>;
 

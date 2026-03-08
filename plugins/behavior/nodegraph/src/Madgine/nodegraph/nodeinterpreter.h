@@ -52,9 +52,9 @@ namespace Behavior {
             void branch(BehaviorReceiver &receiver, uint32_t flowIn, NodeDebugLocation &location);
             void branch(BehaviorReceiver &receiver, Pin pin, NodeDebugLocation &location);
 
-            BehaviorError read(ValueType &retVal, Pin pin);
+            KeyValueResult read(ValueType &retVal, Pin pin);
 
-            BehaviorError read(ValueType &retVal, uint32_t dataProvider);
+            KeyValueResult read(ValueType &retVal, uint32_t dataProvider);
 
             const NodeGraph *graph() const;
 
@@ -100,7 +100,7 @@ namespace Behavior {
             {
             }
 
-            using result_type = BehaviorError;
+            using result_type = KeyValueError;
             template <template <typename...> typename Tuple>
             using value_types = Tuple<ArgumentList>;
 

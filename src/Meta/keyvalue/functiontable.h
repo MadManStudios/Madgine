@@ -2,10 +2,12 @@
 
 #include "valuetype_desc.h"
 
+#include "keyvalueresult.h"
+
 namespace Engine {
 
 struct FunctionTable {
-    typedef void (*FPtr)(const FunctionTable *, ValueType &, const ArgumentList &);
+    typedef KeyValueResult (*FPtr)(const FunctionTable *, ValueType &, const ArgumentList &);
     FPtr mFunctionPtr;
 
     std::string_view mName;

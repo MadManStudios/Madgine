@@ -4,10 +4,11 @@
 #include "Generic/execution/concepts.h"
 #include "Generic/execution/virtualstate.h"
 #include "Generic/genericresult.h"
+#include "keyvalueresult.h"
 
 namespace Engine {
 
-using KeyValueReceiver = Execution::VirtualReceiverBaseEx<type_pack<GenericResult>, type_pack<const ArgumentList &>, Execution::get_stop_token>;
+using KeyValueReceiver = Execution::VirtualReceiverBaseEx<type_pack<KeyValueError>, type_pack<const ArgumentList &>, Execution::get_stop_token>;
 
 struct KeyValueSenderStateBase {
     virtual void connect(KeyValueReceiver &receiver) = 0;
@@ -41,7 +42,7 @@ struct KeyValueSenderState : KeyValueSenderStateBase {
 struct KeyValueSender {
 
     using is_sender = void;
-    using result_type = GenericResult;
+    using result_type = KeyValueError;
     template <template <typename...> typename Tuple>
     using value_types = Tuple<>;
 

@@ -43,7 +43,7 @@ namespace Audio {
     };
 
     struct PlaybackSender : Execution::base_sender {
-        using result_type = GenericResult;
+        using result_type = KeyValueError;
         template <template <typename...> typename Tuple>
         using value_types = Tuple<>;
 

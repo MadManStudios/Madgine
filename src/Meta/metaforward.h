@@ -7,6 +7,7 @@ namespace Engine {
 
 struct ValueType;
 struct KeyValuePair;
+struct KeyValueResult;
 
 template <typename T, typename Base>
 struct VirtualScope;

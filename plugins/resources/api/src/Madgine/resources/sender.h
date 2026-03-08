@@ -41,11 +41,11 @@ namespace Resources {
                     if (success)
                         mState.start();
                     else
-                        this->mRec.set_error(GenericResult { GenericResult::UNKNOWN_ERROR });
+                        this->mRec.set_error(KEYVALUE_UNKNOWN_ERROR());
                 };
 
                 if (!this->mRec.mHandle) {
-                    this->mRec.set_error(GenericResult { GenericResult::UNKNOWN_ERROR });
+                    this->mRec.set_error(KEYVALUE_UNKNOWN_ERROR());
                     return;
                 }
 

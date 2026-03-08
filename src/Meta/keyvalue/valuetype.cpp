@@ -229,7 +229,7 @@ void ValueType::setType(ValueTypeDesc type)
     }
 }
 
-void ValueType::call(ValueType &retVal, const ArgumentList &args) const
+KeyValueResult ValueType::call(ValueType &retVal, const ArgumentList &args) const
 {
     return std::visit(overloaded {
                           [&](const ApiFunction &function) {
@@ -250,7 +250,7 @@ void ValueType::call(ValueType &retVal, const ArgumentList &args) const
                           [&](const ObjectPtr &o) {
                               return o.call(retVal, args);
                           },
-                          [](const auto &) {
+                          [](const auto &) -> KeyValueResult {
                               throw "calling operator is not supported";
                           } },
         mUnion);

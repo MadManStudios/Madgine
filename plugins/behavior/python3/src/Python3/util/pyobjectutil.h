@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Meta/keyvalue/keyvalueresult.h"
+
 namespace Engine {
 namespace Behavior {
     namespace Python3 {
@@ -66,11 +68,17 @@ namespace Behavior {
         MADGINE_PYTHON3_EXPORT PyObject *toPyObject(const ValueTypeDesc &t);
         MADGINE_PYTHON3_EXPORT PyObject *toPyObject(const KeyValueBinding &b);
 
-        MADGINE_PYTHON3_EXPORT ValueType fromPyObject(PyObject *obj);
+        MADGINE_PYTHON3_EXPORT KeyValueResult fromPyObject(ValueType &result, PyObject *obj);
         MADGINE_PYTHON3_EXPORT void fromPyObject(BehaviorReceiver &receiver, PyObject *obj);
+
+        MADGINE_PYTHON3_EXPORT PyObject *toPyError(const KeyValueError &);
 
         MADGINE_PYTHON3_EXPORT ExtendedValueTypeDesc PyToValueTypeDesc(PyObject *obj);
 
     }
 }
 }
+
+#define PYTHON3_PROPAGATE_ERROR(...)                                                                          \
+    if (::Engine::KeyValueResult _result = (__VA_ARGS__); _result.mState != ::Engine::GenericResult::SUCCESS) \
+    return toPyError(*_result.mError)

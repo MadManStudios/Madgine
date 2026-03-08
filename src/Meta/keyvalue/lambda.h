@@ -84,10 +84,11 @@ private:
         sArgs.data()
     };
 
-    static void sGetter(const Accessor *, ValueType &retVal, const ScopePtr &scope)
+    static KeyValueResult sGetter(const Accessor *, ValueType &retVal, const ScopePtr &scope)
     {
         assert(scope.mType == &sMetaTable);
         to_ValueType(retVal, BoundApiFunction { &sFunctionTable, scope });
+        return {};
     }
 
     static const constexpr Accessor sMembers[2] {

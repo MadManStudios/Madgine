@@ -53,9 +53,9 @@ std::map<std::string_view, ValueType> ObjectPtr::values() const
     return mInstance->values();
 }
 
-void ObjectPtr::call(ValueType &retVal, const ArgumentList &args) const
+KeyValueResult ObjectPtr::call(ValueType &retVal, const ArgumentList &args) const
 {
-    mInstance->call(retVal, args);
+    return mInstance->call(retVal, args);
 }
 
 std::string ObjectPtr::descriptor() const

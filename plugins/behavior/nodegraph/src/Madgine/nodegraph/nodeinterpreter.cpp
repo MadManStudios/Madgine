@@ -45,7 +45,7 @@ namespace Behavior {
                 mContinuation, Debug::ContinuationType::Flow);
         }
 
-        BehaviorError NodeInterpreterStateBase::read(ValueType &retVal, Pin pin)
+        KeyValueResult NodeInterpreterStateBase::read(ValueType &retVal, Pin pin)
         {
             if (!pin) {
                 throw 0;
@@ -59,7 +59,7 @@ namespace Behavior {
                     if (get_named_d(*this, name, retVal)) {
                         return {};
                     } else {
-                        return BEHAVIOR_ERROR(BehaviorResult::UNKNOWN_ERROR) << "No input named '" << name << "' found";
+                        return KEYVALUE_UNKNOWN_ERROR() << "No input named '" << name << "' found";
                     }
                 }
             } else {
@@ -67,7 +67,7 @@ namespace Behavior {
             }
         }
 
-        BehaviorError NodeInterpreterStateBase::read(ValueType &retVal, uint32_t dataProvider)
+        KeyValueResult NodeInterpreterStateBase::read(ValueType &retVal, uint32_t dataProvider)
         {
             return read(retVal, mGraph->mDataInPins[dataProvider].mSource);
         }

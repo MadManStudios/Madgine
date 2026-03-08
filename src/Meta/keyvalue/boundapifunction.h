@@ -28,7 +28,7 @@ struct META_EXPORT BoundApiFunction {
 
     ScopePtr scope() const;
 
-    void operator()(ValueType &retVal, const ArgumentList &args) const;
+    KeyValueResult operator()(ValueType &retVal, const ArgumentList &args) const;
 
     ApiFunction mFunction;
     void *mScope = nullptr;

@@ -252,11 +252,12 @@ namespace Behavior {
             return suspendEx;
         }
 
-        BehaviorError fetchError()
+        KeyValueError fetchError()
         {
             PyObjectPtr type, value, traceback;
             PyErr_Fetch(&type, &value, &traceback);
 
+            const char *function = "";
             const char *filename = "";
             size_t line = 0;
 
@@ -265,6 +266,8 @@ namespace Behavior {
                 while (tb->tb_next)
                     tb = tb->tb_next;
 
+                
+                function = PyUnicode_AsUTF8(PyFrame_GetCode(tb->tb_frame)->co_name);
                 filename = PyUnicode_AsUTF8(PyFrame_GetCode(tb->tb_frame)->co_filename);
                 line = PyFrame_GetCode(tb->tb_frame)->co_firstlineno;
             }
@@ -276,7 +279,7 @@ namespace Behavior {
             if (errorMessage)
                 msg = errorMessage;
 
-            return { BehaviorResult::UNKNOWN_ERROR, msg, filename, line };
+            return { msg, function, filename, line };
         }
 
         void setupExecution()
@@ -315,7 +318,7 @@ namespace Behavior {
                                    frame.reset();
                                }
                            },
-                           [](BehaviorError &error) {} },
+                           [](KeyValueError &error) {} },
                 mData);
         }
 
@@ -341,7 +344,7 @@ namespace Behavior {
 
                                evalFrame(*this, std::move(frame));
                            },
-                           [this](BehaviorError error) {
+                           [this](KeyValueError error) {
                                set_error(std::move(error));
                            } },
                 std::move(mData));

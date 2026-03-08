@@ -1,5 +1,7 @@
 #pragma once
 
+#include "keyvalueresult.h"
+
 namespace Engine {
 
 struct META_EXPORT ApiFunction {
@@ -21,7 +23,7 @@ struct META_EXPORT ApiFunction {
         return mTable != nullptr;
     }
 
-    void operator()(ValueType &retVal, const ArgumentList &args) const;
+    KeyValueResult operator()(ValueType &retVal, const ArgumentList &args) const;
 
     size_t argumentsCount(bool excludeThis = false) const;
     bool isMemberFunction() const;

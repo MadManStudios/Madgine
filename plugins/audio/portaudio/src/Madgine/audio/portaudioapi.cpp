@@ -69,7 +69,7 @@ namespace Audio {
     };
 
     struct PlaybackSender : Execution::base_sender {
-        using result_type = GenericResult;
+        using result_type = KeyValueError;
         template <template <typename...> typename Tuple>
         using value_types = Tuple<>;
 
@@ -137,7 +137,7 @@ namespace Audio {
             if (err != paNoError) {
                 PortAudioApi &api = state.mApi;
                 mState = nullptr;
-                state.set_error(BEHAVIOR_UNKNOWN_ERROR() << "PortAudio Error: " << err);
+                state.set_error(KEYVALUE_UNKNOWN_ERROR() << "PortAudio Error: " << err);
                 api.reuseStream(*this);
             }
         }

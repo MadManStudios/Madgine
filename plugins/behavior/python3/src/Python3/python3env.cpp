@@ -265,12 +265,13 @@ namespace Behavior {
                 co_return false;
             }
 
-            config.site_import = !mRoot.toolMode();
-            config._init_main = !mRoot.toolMode();
+            config.site_import = false;
 
             status = Py_InitializeFromConfig(&config);
             HANDLE_STATUS();
             PyConfig_Clear(&config);
+
+            PyRun_SimpleString("import importlib");
 
             setupExecution();
 

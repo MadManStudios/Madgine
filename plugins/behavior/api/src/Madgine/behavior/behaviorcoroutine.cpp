@@ -78,7 +78,7 @@ namespace Behavior {
         throw;
     }
 
-    void CoroutineBehaviorState::set_error(BehaviorError result)
+    void CoroutineBehaviorState::set_error(KeyValueError result)
     {
         mReceiver->set_error(result);
     }
@@ -130,7 +130,7 @@ namespace Behavior {
     {
 
         if (!mNext->resumeImpl()) {
-            set_error(BehaviorError {});
+            set_error(KeyValueError { "A bound object has become unavailable" });
         }
     }
 

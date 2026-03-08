@@ -61,7 +61,7 @@ namespace Behavior {
                 receiver.set_value();
             }
 
-            void set_error(BehaviorError result)
+            void set_error(KeyValueError result)
             {
                 NodeReceiver<NodeBase> receiver = std::move(mState->mReceiver);
                 destruct(mState);
@@ -240,7 +240,7 @@ namespace Behavior {
             static_cast<BehaviorInterpretData *>(data.get())->start(std::move(receiver), mParameters);
         }
 
-        BehaviorError BehaviorNode::interpretRead(NodeInterpreterStateBase &interpreter, ValueType &retVal, std::unique_ptr<NodeInterpreterData> &data, uint32_t providerIndex, uint32_t group) const
+        KeyValueResult BehaviorNode::interpretRead(NodeInterpreterStateBase &interpreter, ValueType &retVal, std::unique_ptr<NodeInterpreterData> &data, uint32_t providerIndex, uint32_t group) const
         {
             retVal = static_cast<BehaviorInterpretData *>(data.get())->mRec.mResult[providerIndex];
             return {};

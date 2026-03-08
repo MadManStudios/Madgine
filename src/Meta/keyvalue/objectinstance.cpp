@@ -11,7 +11,7 @@ std::map<std::string_view, ValueType> ObjectInstance::values() const
     return {};
 }
 
-void ObjectInstance::call(ValueType &retVal, const ArgumentList &args)
+KeyValueResult ObjectInstance::call(ValueType &retVal, const ArgumentList &args)
 
 {
     throw 0;

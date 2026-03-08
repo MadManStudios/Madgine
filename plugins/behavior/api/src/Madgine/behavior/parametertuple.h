@@ -66,17 +66,19 @@ namespace Behavior {
         static const MetaTable *sMetaTablePtr;
 
         template <size_t I>
-        static void sGetter(const Accessor *, ValueType &retVal, const ScopePtr &scope)
+        static KeyValueResult sGetter(const Accessor *, ValueType &retVal, const ScopePtr &scope)
         {
             assert(scope.mType == &sMetaTable);
             to_ValueType(retVal, std::get<I>(static_cast<TypedParameterTupleInstance *>(scope.mScope)->mTuple));
+            return {};
         }
 
         template <size_t I, typename T>
-        static void sSetter(const Accessor *, const ScopePtr &scope, const ValueType &val)
+        static KeyValueResult sSetter(const Accessor *, const ScopePtr &scope, const ValueType &val)
         {
             assert(scope.mType == &sMetaTable);
             std::get<I>(static_cast<TypedParameterTupleInstance *>(scope.mScope)->mTuple) = ValueType_as<T>(val);
+            return {};
         }
 
         static const constexpr auto sMembers = []<size_t... Is>(auto_pack<Is...>) constexpr -> std::array<Accessor, sizeof...(Ty) + 1>

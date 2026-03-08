@@ -47,7 +47,7 @@ void ScopePtr::moveAssign(ScopePtr other) const
     mType->moveAssign(*this, other);
 }
 
-void ScopePtr::call(ValueType &retVal, const ArgumentList &args) const
+KeyValueResult ScopePtr::call(ValueType &retVal, const ArgumentList &args) const
 {
     return mType->call(*this, retVal, args);
 }

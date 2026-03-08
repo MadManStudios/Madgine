@@ -20,13 +20,15 @@ namespace Behavior {
             ArgumentList arguments { argCount };
 
             for (size_t i = 0; i < argCount; ++i) {
-                arguments[i] = fromPyObject(PyTuple_GetItem(args, i));
+                PYTHON3_PROPAGATE_ERROR(fromPyObject(arguments[i], PyTuple_GetItem(args, i)));
             }
 
             ValueType retVal;
+            KeyValueResult result;
             Py_BEGIN_ALLOW_THREADS
-                self->mFunction(retVal, arguments);
+                 result = self->mFunction(retVal, arguments);
             Py_END_ALLOW_THREADS
+                PYTHON3_PROPAGATE_ERROR(std::move(result));
 
                 return toPyObject(retVal);
         }

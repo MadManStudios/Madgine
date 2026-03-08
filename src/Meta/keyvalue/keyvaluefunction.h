@@ -6,15 +6,16 @@ namespace Engine {
 
 struct META_EXPORT KeyValueFunction {
     template <typename R, typename... Args, size_t... I>
-    static void unpackHelper(void (*f)(), ValueType &retVal, const ArgumentList &args, std::index_sequence<I...>)
+    static KeyValueResult unpackHelper(void (*f)(), ValueType &retVal, const ArgumentList &args, std::index_sequence<I...>)
     {
         to_ValueType(retVal, invoke_patch_void<std::monostate>(reinterpret_cast<R (*)(Args...)>(f), ValueType_as<std::remove_cv_t<std::remove_reference_t<Args>>>(getArgument(args, I))...));
+        return {};
     }
 
     template <typename R, typename... Args>
-    static void unpackApiMethod(void (*f)(), ValueType &retVal, const ArgumentList &args)
+    static KeyValueResult unpackApiMethod(void (*f)(), ValueType &retVal, const ArgumentList &args)
     {
-        unpackHelper<R, Args...>(f, retVal, args, std::index_sequence_for<Args...>());
+        return unpackHelper<R, Args...>(f, retVal, args, std::index_sequence_for<Args...>());
     }
 
     template <typename R, typename... Args>
@@ -29,11 +30,11 @@ struct META_EXPORT KeyValueFunction {
         return mFunction == other.mFunction;
     }
 
-    void operator()(ValueType &retVal, const ArgumentList &args) const;
+    KeyValueResult operator()(ValueType &retVal, const ArgumentList &args) const;
 
 private:
     void (*mFunction)();
-    void (*mWrapper)(void (*)(), ValueType &, const ArgumentList &);
+    KeyValueResult (*mWrapper)(void (*)(), ValueType &, const ArgumentList &);
 };
 
 }

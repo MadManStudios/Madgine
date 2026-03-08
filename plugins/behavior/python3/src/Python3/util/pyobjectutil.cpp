@@ -52,8 +52,8 @@ namespace Behavior {
 
             virtual bool getValue(ValueType &retVal, std::string_view name) const override
             {
-                retVal = fromPyObject(mPtr.get(name));
-                return true;
+                KeyValueResult result = fromPyObject(retVal, mPtr.get(name));
+                return result.mState == GenericResult::SUCCESS;
             }
 
             virtual void setValue(std::string_view name, const ValueType &value) override
@@ -66,16 +66,18 @@ namespace Behavior {
                 Python3InnerLock lock;
                 std::map<std::string_view, ValueType> results;
                 std::ranges::transform(mPtr, std::inserter(results, results.end()), [](std::pair<PyObject *, PyObject *> p) {
-                    return std::make_pair(PyUnicode_AsUTF8(p.first), fromPyObject(p.second));
+                    ValueType v;
+                    fromPyObject(v, p.second);
+                    return std::make_pair(PyUnicode_AsUTF8(p.first), std::move(v));
                 });
                 return results;
             }
 
-            virtual void call(ValueType &retVal, const ArgumentList &args) override
+            virtual KeyValueResult call(ValueType &retVal, const ArgumentList &args) override
             {
                 Python3InnerLock lock;
 
-                retVal = fromPyObject(mPtr.call(args));
+                return fromPyObject(retVal, mPtr.call(args));
             }
 
             virtual std::string descriptor() const override
@@ -329,49 +331,61 @@ namespace Behavior {
         struct Functor_to_KeyValuePair {
             void operator()(KeyValuePair &p, const std::pair<PyObject *, PyObject *> &o)
             {
-                p.mKey = fromPyObject(o.first);
-                p.mValue = fromPyObject(o.second);
+                KeyValueResult result = fromPyObject(p.mKey, o.first);
+                if (result.mState != GenericResult::SUCCESS)
+                    throw 0;
+                result = fromPyObject(p.mValue, o.second);
+                if (result.mState != GenericResult::SUCCESS)
+                    throw 0;
             }
         };
 
         struct Functor_to_ValueRef {
             void operator()(ValueType &r, PyObject *o)
             {
-                r = fromPyObject(o);
+                KeyValueResult result = fromPyObject(r, o);
+                if (result.mState != GenericResult::SUCCESS)
+                    throw 0;
             }
         };
 
-        //TODO ValueType &
-        ValueType fromPyObject(PyObject *obj)
+        KeyValueResult fromPyObject(ValueType &result, PyObject *obj)
         {
-            if (!obj) {
-                PyErr_Print();
-                throw 0;
+            if (!obj) {                
+                return { GenericResult::UNKNOWN_ERROR, std::make_unique<KeyValueError>(fetchError()) };
             } else if (obj == Py_None) {
-                return ValueType { std::monostate {} };
+                to_ValueType(result, std::monostate {});
+                return {};
             } else if (PyUnicode_Check(obj)) {
                 const char *s;
                 if (!PyArg_Parse(obj, "s", &s))
                     throw 0;
-                return ValueType { std::string { s } };
+                to_ValueType(result, std::string { s });
+                return {};
             } else if (PyBool_Check(obj)) {
-                return ValueType { obj == Py_True };
+                to_ValueType(result, obj == Py_True);
+                return {};
             } else if (PyLong_Check(obj)) {
                 int i;
                 if (!PyArg_Parse(obj, "i", &i))
                     throw 0;
-                return ValueType { i };
+                to_ValueType(result, i);
+                return {};
             } else if (PyDict_Check(obj)) {
                 Py_INCREF(obj);
-                return ValueType { KeyValueVirtualAssociativeRange { PyDictPtr { obj }, Engine::type_holder<Functor_to_KeyValuePair> } };
+                to_ValueType(result, KeyValueVirtualAssociativeRange { PyDictPtr { obj }, Engine::type_holder<Functor_to_KeyValuePair> });
+                return {};
             } else if (PyList_Check(obj)) {
                 Py_INCREF(obj);
-                return ValueType { KeyValueVirtualSequenceRange { PyListPtr { obj }, Engine::type_holder<Functor_to_ValueRef> } };
+                to_ValueType(result, KeyValueVirtualSequenceRange { PyListPtr { obj }, Engine::type_holder<Functor_to_ValueRef> });
+                return {};
             } else if (obj->ob_type == &PyTypedScopePtrType) {
-                return ValueType { reinterpret_cast<PyTypedScopePtr *>(obj)->mPtr };
+                to_ValueType(result, reinterpret_cast<PyTypedScopePtr *>(obj)->mPtr);
+                return {};
             } else {
                 Py_INCREF(obj);
-                return ValueType { ObjectPtr { std::make_unique<PyObjectInstance>(obj) } };
+                to_ValueType(result, ObjectPtr { std::make_unique<PyObjectInstance>(obj) });
+                return {};
             }
         }
 
@@ -407,6 +421,13 @@ namespace Behavior {
             }
         }
 
+        PyObject *toPyError(const KeyValueError &err)
+        {
+            PyErr_SetString(PyExc_Exception, err.mMsg.c_str());
+
+            return nullptr;
+        }
+
         ExtendedValueTypeDesc PyToValueTypeDesc(PyObject *obj)
         {
             assert(PyType_Check(obj));
@@ -418,7 +439,6 @@ namespace Behavior {
             }
             throw 0;
         }
-
     }
 }
 }

@@ -23,7 +23,7 @@ namespace Behavior {
             if (self->mIt == self->mIt.end())
                 return NULL;
             ValueType v;
-            self->mIt->value(v);
+            PYTHON3_PROPAGATE_ERROR(self->mIt->value(v));
             PyObject *item = toPyObject(v);
             if (!item)
                 return NULL;

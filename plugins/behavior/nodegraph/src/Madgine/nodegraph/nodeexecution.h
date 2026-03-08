@@ -16,14 +16,14 @@ namespace Behavior {
         struct MADGINE_NODEGRAPH_EXPORT NodeInterpretHandleBase {
             NodeInterpreterStateBase &mInterpreter;
 
-            BehaviorError read(const NodeBase &node, ValueType &retVal, uint32_t dataInIndex, uint32_t group = 0);
+            KeyValueResult read(const NodeBase &node, ValueType &retVal, uint32_t dataInIndex, uint32_t group = 0);
         };
 
         template <typename Node>
         struct NodeInterpretHandle : NodeInterpretHandleBase {
             const Node &mNode;
 
-            BehaviorError read(ValueType &retVal, uint32_t dataInIndex, uint32_t group = 0)
+            KeyValueResult read(ValueType &retVal, uint32_t dataInIndex, uint32_t group = 0)
             {
                 return NodeInterpretHandleBase::read(mNode, retVal, dataInIndex, group);
             }
@@ -55,9 +55,9 @@ namespace Behavior {
             {
                 mReceiver.set_done();
             }
-            void set_error(BehaviorError result)
+            void set_error(KeyValueError result)
             {
-                mReceiver.set_error(result);
+                mReceiver.set_error(std::move(result));
             }
 
             friend NodeDebugLocation *tag_invoke(Execution::get_debug_location_t, NodeReceiver &rec)
@@ -136,7 +136,7 @@ namespace Behavior {
                 VirtualBehaviorState<Rec>::set_value(std::move(args));
             }
 
-            void set_error(BehaviorError error) override
+            void set_error(KeyValueError error) override
             {
                 VirtualBehaviorState<Rec>::set_error(std::move(error));
             }
@@ -154,7 +154,7 @@ namespace Behavior {
         struct NodeSender {
             using is_sender = void;
 
-            using result_type = BehaviorError;
+            using result_type = KeyValueError;
             template <template <typename...> typename Tuple>
             using value_types = Tuple<ArgumentList>;
 
@@ -179,7 +179,7 @@ namespace Behavior {
 
             using is_sender = void;
 
-            using result_type = BehaviorError;
+            using result_type = KeyValueError;
             template <template <typename...> typename Tuple>
             using value_types = Tuple<decayed_t<T>...>;
 
@@ -206,9 +206,9 @@ namespace Behavior {
                     } else {
                         ArgumentList data { sizeof...(T) };
                         for (size_t index = 0; index < sizeof...(T); ++index) {
-                            BehaviorError error = handle.read(data[index], index + mBaseIndex);
-                            if (error.mResult != GenericResult::SUCCESS) {
-                                this->set_error(std::move(error));
+                            KeyValueResult error = handle.read(data[index], index + mBaseIndex);
+                            if (error.mState != GenericResult::SUCCESS) {
+                                this->set_error(std::move(*error.mError));
                                 return;
                             }
                         }
@@ -267,7 +267,7 @@ namespace Behavior {
                     this->start();
                 }
 
-                void set_error(BehaviorError result)
+                void set_error(KeyValueError result)
                 {
                     this->mRec.set_error(std::move(result));
                 }

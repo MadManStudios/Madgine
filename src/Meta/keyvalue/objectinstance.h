@@ -1,5 +1,7 @@
 #pragma once
 
+#include "keyvalueresult.h"
+
 namespace Engine {
 
 struct META_EXPORT ObjectInstance {
@@ -9,7 +11,7 @@ struct META_EXPORT ObjectInstance {
     virtual void setValue(std::string_view name, const ValueType &value) = 0;
     virtual std::map<std::string_view, ValueType> values() const;
 
-    virtual void call(ValueType &retVal, const ArgumentList &args);
+    virtual KeyValueResult call(ValueType &retVal, const ArgumentList &args);
 
     virtual std::string descriptor() const;
 };

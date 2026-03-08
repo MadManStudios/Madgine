@@ -4,6 +4,8 @@
 
 #include "Interfaces/debug/stacktrace.h"
 
+#include "Meta/keyvalue/keyvalueresult.h"
+
 #include "Madgine/debug/debuglocation.h"
 
 #include "behaviorstatebase.h"
@@ -80,7 +82,7 @@ namespace Behavior {
         void suspendImpl() override;
         void return_void();
         void unhandled_exception();
-        void set_error(BehaviorError result);
+        void set_error(KeyValueError result);
         void set_done();
 
         template <typename T>

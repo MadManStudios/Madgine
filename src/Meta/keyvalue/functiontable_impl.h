@@ -11,112 +11,119 @@ namespace Engine {
 
 struct MetaFunctionTag;
 
+template <size_t I>
+struct MetaFunction {
+    std::array<FunctionArgument, I> mArguments;
+    ExtendedValueTypeDesc mReturn;
+};
+
 template <typename R, typename... Args, size_t... Is>
-static constexpr std::array<FunctionArgument, sizeof...(Args)> metafunctionArgsHelper(std::string_view args, std::index_sequence<Is...>)
+static constexpr MetaFunction<sizeof...(Args)> metafunctionHelper(std::string_view args, std::index_sequence<Is...>)
 {
     std::array<std::string_view, sizeof...(Args)> argumentNames = StringUtil::tokenize<sizeof...(Args)>(args, ',');
-    return { { { toValueTypeDesc<std::remove_const_t<std::remove_reference_t<Args>>>(), argumentNames[Is] }... } };
+    return { { { { toValueTypeDesc<std::remove_const_t<std::remove_reference_t<Args>>>(), argumentNames[Is] }... } }, ::Engine::toValueTypeDesc<::Engine::patch_void_t<R, std::monostate>>() };
 }
 
 template <typename R, typename T, typename... Args, size_t... Is>
-static constexpr std::array<FunctionArgument, sizeof...(Args) + 1> metafunctionArgsMemberHelper(std::string_view args, std::index_sequence<Is...>)
+static constexpr MetaFunction<sizeof...(Args) + 1> metafunctionMemberHelper(std::string_view args, std::index_sequence<Is...>)
 {
     std::array<std::string_view, sizeof...(Args)> argumentNames = StringUtil::tokenize<sizeof...(Args)>(args, ',');
-    return { { { toValueTypeDesc<T *>(), "this" }, { toValueTypeDesc<std::remove_const_t<std::remove_reference_t<Args>>>(), argumentNames[Is] }... } };
+    return { { { { toValueTypeDesc<T *>(), "this" }, { toValueTypeDesc<std::remove_const_t<std::remove_reference_t<Args>>>(), argumentNames[Is] }... } }, ::Engine::toValueTypeDesc<::Engine::patch_void_t<R, std::monostate>>() };
 }
 
 template <typename R, typename... Args>
-static constexpr std::array<FunctionArgument, sizeof...(Args)> metafunctionArgs(R (*f)(Args...), std::string_view args)
+static constexpr auto metafunction(R (*f)(Args...), std::string_view args)
 {
-    return metafunctionArgsHelper<R, Args...>(args, std::index_sequence_for<Args...>());
+    return metafunctionHelper<R, Args...>(args, std::index_sequence_for<Args...>());
 }
 
 template <typename R, typename T, typename... Args>
-static constexpr std::array<FunctionArgument, sizeof...(Args) + 1> metafunctionArgs(R (T::*f)(Args...), std::string_view args)
+static constexpr auto metafunction(R (T::*f)(Args...), std::string_view args)
 {
-    return metafunctionArgsMemberHelper<R, T, Args...>(args, std::index_sequence_for<Args...>());
+    return metafunctionMemberHelper<R, T, Args...>(args, std::index_sequence_for<Args...>());
 }
 
 template <typename R, typename T, typename... Args>
-static constexpr std::array<FunctionArgument, sizeof...(Args) + 1> metafunctionArgs(R (T::*f)(Args...) const, std::string_view args)
+static constexpr auto metafunction(R (T::*f)(Args...) const, std::string_view args)
 {
-    return metafunctionArgsMemberHelper<R, T, Args...>(args, std::index_sequence_for<Args...>());
+    return metafunctionMemberHelper<R, T, Args...>(args, std::index_sequence_for<Args...>());
 }
 
 template <typename T, typename... Args>
-static constexpr std::array<FunctionArgument, sizeof...(Args) + 1> metafunctionArgs(void (T::*f)(ArgumentList &, Args...), std::string_view args)
+static constexpr auto metafunction(void (T::*f)(ArgumentList &, Args...), std::string_view args)
 {
-    return metafunctionArgsMemberHelper<ValueType, T, Args...>(args, std::index_sequence_for<Args...>());
+    return metafunctionMemberHelper<ValueType, T, Args...>(args, std::index_sequence_for<Args...>());
 }
 
 template <typename T, typename... Args>
-static constexpr std::array<FunctionArgument, sizeof...(Args) + 1> metafunctionArgs(void (T::*f)(ValueType &, Args...), std::string_view args)
+static constexpr auto metafunction(void (T::*f)(ValueType &, Args...), std::string_view args)
 {
-    return metafunctionArgsMemberHelper<ValueType, T, Args...>(args, std::index_sequence_for<Args...>());
+    return metafunctionMemberHelper<ValueType, T, Args...>(args, std::index_sequence_for<Args...>());
+}
+
+template <typename T, typename... Args>
+static constexpr auto metafunction(KeyValueResult (T::*f)(ArgumentList &, Args...), std::string_view args)
+{
+    return metafunctionMemberHelper<ValueType, T, Args...>(args, std::index_sequence_for<Args...>());
+}
+
+template <typename T, typename... Args>
+static constexpr auto metafunction(KeyValueResult (T::*f)(ValueType &, Args...), std::string_view args)
+{
+    return metafunctionMemberHelper<ValueType, T, Args...>(args, std::index_sequence_for<Args...>());
 }
 
 template <auto F, typename R, typename T, typename... Args, size_t... I>
-static void unpackMemberHelper(const FunctionTable *table, ValueType &retVal, const ArgumentList &args, std::index_sequence<I...>)
+static KeyValueResult unpackMemberHelper(const FunctionTable *table, ValueType &retVal, const ArgumentList &args, std::index_sequence<I...>)
 {
     T *t = scope_cast<T>(ValueType_as<ScopePtr>(getArgument(args, 0)));
     to_ValueType(retVal, std::invoke(patch_void(F, std::monostate {}), t, ValueType_as<std::remove_cv_t<std::remove_reference_t<Args>>>(getArgument(args, I + 1))...));
+    return {};
 }
 
 template <auto F, typename R, typename... Args, size_t... I>
-static void unpackApiHelper(const FunctionTable *table, ValueType &retVal, const ArgumentList &args, std::index_sequence<I...>)
+static KeyValueResult unpackApiHelper(const FunctionTable *table, ValueType &retVal, const ArgumentList &args, std::index_sequence<I...>)
 {
     to_ValueType(retVal, std::invoke(patch_void(F, std::monostate {}), ValueType_as<std::remove_cv_t<std::remove_reference_t<Args>>>(getArgument(args, I))...));
+    return {};
 }
 
 template <auto F, typename T, typename... Args, size_t... I>
-static void unpackAsyncHelper(const FunctionTable *table, ValueType &retVal, const ArgumentList &args, std::index_sequence<I...>)
+static KeyValueResult unpackReturnListHelper(const FunctionTable *table, ValueType &retVal, const ArgumentList &args, std::index_sequence<I...>)
 {
     T *t = scope_cast<T>(ValueType_as<ScopePtr>(getArgument(args, 0)));
-    (t->*F)(retVal, ValueType_as<std::remove_cv_t<std::remove_reference_t<Args>>>(getArgument(args, I + 1))...);
+    return std::invoke(patch_void(F, KeyValueResult{}), t, retVal, ValueType_as<std::remove_cv_t<std::remove_reference_t<Args>>>(getArgument(args, I + 1))...);
 }
 
 template <auto F, typename T, typename... Args, size_t... I>
-static void unpackReturnListHelper(const FunctionTable *table, ValueType &retVal, const ArgumentList &args, std::index_sequence<I...>)
+static KeyValueResult unpackReturnHelper(const FunctionTable *table, ValueType &retVal, const ArgumentList &args, std::index_sequence<I...>)
 {
     T *t = scope_cast<T>(ValueType_as<ScopePtr>(getArgument(args, 0)));
-    (t->*F)(retVal, ValueType_as<std::remove_cv_t<std::remove_reference_t<Args>>>(getArgument(args, I + 1))...);
-}
-
-template <auto F, typename T, typename... Args, size_t... I>
-static void unpackReturnHelper(const FunctionTable *table, ValueType &retVal, const ArgumentList &args, std::index_sequence<I...>)
-{
-    T *t = scope_cast<T>(ValueType_as<ScopePtr>(getArgument(args, 0)));
-    (t->*F)(retVal, ValueType_as<std::remove_cv_t<std::remove_reference_t<Args>>>(getArgument(args, I + 1))...);
+    return std::invoke(patch_void(F, KeyValueResult{}), t, retVal, ValueType_as<std::remove_cv_t<std::remove_reference_t<Args>>>(getArgument(args, I + 1))...);
 }
 
 template <auto F, typename R, typename T, typename... Args>
-static void unpackMemberApiMethod(const FunctionTable *table, ValueType &retVal, const ArgumentList &args)
+static KeyValueResult unpackMemberApiMethod(const FunctionTable *table, ValueType &retVal, const ArgumentList &args)
 {
-    unpackMemberHelper<F, R, T, Args...>(table, retVal, args, std::index_sequence_for<Args...>());
+    return unpackMemberHelper<F, R, T, Args...>(table, retVal, args, std::index_sequence_for<Args...>());
 }
 
 template <auto F, typename R, typename... Args>
-static void unpackApiMethod(const FunctionTable *table, ValueType &retVal, const ArgumentList &args)
+static KeyValueResult unpackApiMethod(const FunctionTable *table, ValueType &retVal, const ArgumentList &args)
 {
-    unpackApiHelper<F, R, Args...>(table, retVal, args, std::index_sequence_for<Args...>());
+    return unpackApiHelper<F, R, Args...>(table, retVal, args, std::index_sequence_for<Args...>());
 }
 
 template <auto F, typename T, typename... Args>
-static void unpackAsyncMethod(const FunctionTable *table, ValueType &retVal, const ArgumentList &args)
+static KeyValueResult unpackReturnListMethod(const FunctionTable *table, ValueType &retVal, const ArgumentList &args)
 {
-    unpackAsyncHelper<F, T, Args...>(table, retVal, args, std::index_sequence_for<Args...>());
+    return unpackReturnListHelper<F, T, Args...>(table, retVal, args, std::index_sequence_for<Args...>());
 }
 
 template <auto F, typename T, typename... Args>
-static void unpackReturnListMethod(const FunctionTable *table, ValueType &retVal, const ArgumentList &args)
+static KeyValueResult unpackReturnMethod(const FunctionTable *table, ValueType &retVal, const ArgumentList &args)
 {
-    unpackReturnListHelper<F, T, Args...>(table, retVal, args, std::index_sequence_for<Args...>());
-}
-
-template <auto F, typename T, typename... Args>
-static void unpackReturnMethod(const FunctionTable *table, ValueType &retVal, const ArgumentList &args)
-{
-    unpackReturnHelper<F, T, Args...>(table, retVal, args, std::index_sequence_for<Args...>());
+    return unpackReturnHelper<F, T, Args...>(table, retVal, args, std::index_sequence_for<Args...>());
 }
 
 template <auto F, typename R, typename... Args>
@@ -148,17 +155,29 @@ static constexpr typename FunctionTable::FPtr wrapHelper(void (T::*f)(ValueType 
 {
     return &unpackReturnMethod<F, T, Args...>;
 }
+
+template <auto F, typename T, typename... Args>
+static constexpr typename FunctionTable::FPtr wrapHelper(KeyValueResult (T::*f)(ArgumentList &, Args...))
+{
+    return &unpackReturnListMethod<F, T, Args...>;
+}
+
+template <auto F, typename T, typename... Args>
+static constexpr typename FunctionTable::FPtr wrapHelper(KeyValueResult (T::*f)(ValueType &, Args...))
+{
+    return &unpackReturnMethod<F, T, Args...>;
+}
 }
 
 #define FUNCTIONTABLE_IMPL(F, NameInit, Name, Tag, ArgNames)                                                                                                                                                                                                                                                                                                                                                                                    \
     namespace Engine {                                                                                                                                                                                                                                                                                                                                                                                                                          \
         template <>                                                                                                                                                                                                                                                                                                                                                                                                                             \
         struct LineStruct<Tag, __LINE__> {                                                                                                                                                                                                                                                                                                                                                                                                      \
-            static constexpr const auto args = metafunctionArgs(&F, ArgNames);                                                                                                                                                                                                                                                                                                                                                                  \
+            static constexpr const auto meta = metafunction(&F, ArgNames);                                                                                                                                                                                                                                                                                                                                                                  \
             NameInit                                                                                                                                                                                                                                                                                                                                                                                                                            \
         };                                                                                                                                                                                                                                                                                                                                                                                                                                      \
     }                                                                                                                                                                                                                                                                                                                                                                                                                                           \
-    DLL_EXPORT_VARIABLE(constexpr, const ::Engine::FunctionTable, , function, SINGLE_ARG({ ::Engine::wrapHelper<&F>(&F), Name, ::Engine::CallableTraits<decltype(&F)>::argument_count, ::Engine::CallableTraits<decltype(&F)>::is_member_function, ::Engine::LineStruct<Tag, __LINE__>::args.data(), ::Engine::toValueTypeDesc<::Engine::patch_void_t<typename ::Engine::CallableTraits<decltype(&F)>::return_type, std::monostate>>() }), &F); \
+    DLL_EXPORT_VARIABLE(constexpr, const ::Engine::FunctionTable, , function, SINGLE_ARG({ ::Engine::wrapHelper<&F>(&F), Name, ::Engine::CallableTraits<decltype(&F)>::argument_count, ::Engine::CallableTraits<decltype(&F)>::is_member_function, ::Engine::LineStruct<Tag, __LINE__>::meta.mArguments.data(), ::Engine::LineStruct<Tag, __LINE__>::meta.mReturn }), &F); \
     namespace Engine {                                                                                                                                                                                                                                                                                                                                                                                                                          \
         static ::Engine::FunctionTableRegistrator<&F> CONCAT2(__reg_, __LINE__);                                                                                                                                                                                                                                                                                                                                                                \
     }

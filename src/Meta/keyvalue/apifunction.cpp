@@ -9,7 +9,7 @@
 
 namespace Engine {
 
-void ApiFunction::operator()(ValueType &retVal, const ArgumentList &args) const
+KeyValueResult ApiFunction::operator()(ValueType &retVal, const ArgumentList &args) const
 {
     return mTable->mFunctionPtr(mTable, retVal, args);
 }

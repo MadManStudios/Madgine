@@ -5,7 +5,6 @@
 #include "Generic/functor.h"
 
 #include "behaviorcoroutine.h"
-#include "behaviorerror.h"
 #include "behaviorreceiver.h"
 
 namespace Engine {
@@ -60,7 +59,7 @@ namespace Behavior {
 
         using is_sender = void;
 
-        using result_type = BehaviorError;
+        using result_type = KeyValueError;
         template <template <typename...> typename Tuple>
         using value_types = Tuple<ArgumentList>;
 

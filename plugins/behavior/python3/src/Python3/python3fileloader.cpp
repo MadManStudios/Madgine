@@ -65,6 +65,10 @@ namespace Behavior {
 
             if (!module) {
                 module = { info.resource()->name() };
+                if (!module) {
+                    LOG_ERROR(fetchError());
+                    co_return false;
+                }
             } else {
                 PyModulePtr { "importlib" }.call("reload", "(O)", (PyObject *)module);
             }
@@ -111,7 +115,7 @@ namespace Behavior {
 
             mFunctionPtr = [](const FunctionTable *self, ValueType &retVal, const ArgumentList &args) {
                 Python3InnerLock lock;
-                retVal = fromPyObject(static_cast<const Python3FunctionTable *>(self)->mFunctionObject.call(args));
+                return fromPyObject(retVal, static_cast<const Python3FunctionTable *>(self)->mFunctionObject.call(args));
             };
 
             registerFunction(*this);
@@ -122,46 +126,48 @@ namespace Behavior {
             unregisterFunction(*this);
         }
 
-        void Python3FileLoader::find_spec(ValueType &result, std::string_view name, std::optional<std::string_view> import_path, ObjectPtr target_module)
+        KeyValueResult Python3FileLoader::find_spec(ValueType &result, std::string_view name, std::optional<std::string_view> import_path, ObjectPtr target_module)
         {
             Resource *res = get(name, this);
             if (!res)
-                return;
+                return {};
             Python3InnerLock lock;
             PyModulePtr module { "importlib.machinery" };
             if (!module) {
-                return;
+                return { GenericResult::UNKNOWN_ERROR, std::make_unique<KeyValueError>(fetchError()) };
             }
             PyObjectPtr spec = module.get("ModuleSpec").call({ { { "loader_state", toPyObject(ScopePtr { res }) } } }, "sO", res->name().data(), toPyObject(ScopePtr { this }));
-            result = fromPyObject(spec);
+            return fromPyObject(result, spec);
         }
 
-        void Python3FileLoader::create_module(ValueType &result, ObjectPtr spec)
+        KeyValueResult Python3FileLoader::create_module(ValueType &result, ObjectPtr spec)
         {
             Python3InnerLock lock;
-            ValueType resourcePtr = fromPyObject(PyObjectPtr { toPyObject(spec) }.get("loader_state"));
+            ValueType resourcePtr;
+            KEYVALUE_PROPAGATE_ERROR(fromPyObject(resourcePtr, PyObjectPtr { toPyObject(spec) }.get("loader_state")));
             Resource *res = scope_cast<Resource>(resourcePtr.as<ScopePtr>());
             Handle handle = create(res, Filesystem::FileEventType::FILE_CREATED, this);
             handle.info()->setPersistent(true);
             PyModulePtr &module = *getDataPtr(handle, this, false);
             assert(!module);
             module = PyModulePtr::create(res->name());
-            result = fromPyObject(module);
+            return fromPyObject(result, module);
         }
 
-        void Python3FileLoader::exec_module(ValueType &result, ObjectPtr module)
+        KeyValueResult Python3FileLoader::exec_module(ValueType &result, ObjectPtr module)
         {
             Python3InnerLock lock;
 
             PyObjectPtr moduleObject { toPyObject(module) };
-            ValueType resourcePtr = fromPyObject(moduleObject.get("__spec__").get("loader_state"));
+            ValueType resourcePtr;
+            KEYVALUE_PROPAGATE_ERROR(fromPyObject(resourcePtr, moduleObject.get("__spec__").get("loader_state")));
             Resource *res = scope_cast<Resource>(resourcePtr.as<ScopePtr>());
 
             PyModulePtr importlib { "importlib.util" };
 
             PyObjectPtr spec = importlib.get("spec_from_file_location").call("ss", res->name().data(), res->path().c_str());
 
-            result = fromPyObject(spec.get("loader").get("exec_module").call("(O)", (PyObject *)moduleObject));
+            KEYVALUE_PROPAGATE_ERROR(fromPyObject(result, spec.get("loader").get("exec_module").call("(O)", (PyObject *)moduleObject)));
 
             PyObject *dict = PyModule_GetDict(moduleObject);
 
@@ -173,6 +179,7 @@ namespace Behavior {
                     Python3FunctionTable &table = mTables.emplace_back(PyObjectPtr::fromBorrowed(value));
                 }
             }
+            return {};
         }
 
         std::vector<std::string_view> Python3BehaviorFactory::names() const

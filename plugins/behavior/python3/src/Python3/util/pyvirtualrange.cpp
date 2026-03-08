@@ -39,7 +39,8 @@ namespace Behavior {
         static PyObject *
         PyVirtualAssociativeRange_subscript(PyVirtualAssociativeRange *self, PyObject *key)
         {
-            ValueType val = fromPyObject(key);
+            ValueType val; 
+            PYTHON3_PROPAGATE_ERROR(fromPyObject(val, key));
 
             auto it = std::ranges::find(self->mRange, val, &KeyValuePair::mKey);
             if (it == self->mRange.end()) {

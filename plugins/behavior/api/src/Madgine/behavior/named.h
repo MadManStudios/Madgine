@@ -7,8 +7,6 @@
 
 #include "Meta/keyvalue/valuetype_forward.h"
 
-#include "behaviorerror.h"
-
 namespace Engine {
 namespace Behavior {
 
@@ -78,7 +76,7 @@ namespace Behavior {
         {
             if (!mValue.mValue) {
                 if (!mValue.resolve(this->mRec)) {
-                    this->mRec.set_error(BEHAVIOR_UNKNOWN_ERROR() << "Named value '" << std::string(Name) << "' not found");
+                    this->mRec.set_error(KEYVALUE_UNKNOWN_ERROR() << "Named value '" << std::string(Name) << "' not found");
                     return;
                 }
             }
@@ -102,7 +100,7 @@ namespace Behavior {
 
         using is_sender = void;
 
-        using result_type = BehaviorError;
+        using result_type = KeyValueError;
         template <template <typename...> typename Tuple>
         using value_types = Tuple<ValueType_Return<T> &>;
 

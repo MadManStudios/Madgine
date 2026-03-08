@@ -32,7 +32,7 @@ constexpr Accessor property(const char *name)
     using GetterScope = typename getter_traits::class_type;
     using T = typename getter_traits::return_type;
 
-    void (*setter)(const Accessor *, const ScopePtr &, const ValueType &) = nullptr;
+    KeyValueResult (*setter)(const Accessor *, const ScopePtr &, const ValueType &) = nullptr;
 
     if constexpr (Setter != nullptr) {
         using setter_traits = CallableTraits<decltype(Setter)>;
@@ -41,7 +41,7 @@ constexpr Accessor property(const char *name)
         // TODO remove const in tuple types
         // static_assert(std::is_same_v<typename setter_traits::argument_types, std::tuple<T>>);
 
-        setter = [](const Accessor *, const ScopePtr &scope, const ValueType &v) {
+        setter = [](const Accessor *, const ScopePtr &scope, const ValueType &v) -> KeyValueResult {
             if constexpr (std::same_as<SetterScope, void>) {
                 using SetterScope = std::remove_pointer_t<typename setter_traits::argument_types::template select<0>>;
                 if constexpr (std::is_convertible_v<Scope &, SetterScope &>) {
@@ -53,13 +53,14 @@ constexpr Accessor property(const char *name)
                 static_assert(std::is_convertible_v<Scope &, SetterScope &>);
                 TupleUnpacker::invoke(Setter, scope_cast<Scope>(scope), ValueType_as<std::decay_t<T>>(v));
             }
+            return {};
         };
     }
 
     return {
         name,
         nullptr,
-        [](const Accessor *, ValueType &retVal, const ScopePtr &scope) {
+        [](const Accessor *, ValueType &retVal, const ScopePtr &scope) -> KeyValueResult {
             T value = [=]() -> T {
                 if constexpr (std::same_as<GetterScope, void>) {
                     using GetterScope = std::remove_pointer_t<typename getter_traits::argument_types::template select<0>>;
@@ -75,6 +76,7 @@ constexpr Accessor property(const char *name)
             }();
 
             to_ValueType(retVal, forward_ref<T>(value));
+            return {};
         },
         setter,
         toValueTypeDesc<std::decay_t<T>>()

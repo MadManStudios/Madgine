@@ -14,7 +14,7 @@ namespace Engine {
 namespace Widgets {
 
     struct TempWidgetSender : Execution::base_sender {
-        using result_type = Behavior::BehaviorError;
+        using result_type = KeyValueError;
         template <template <typename...> typename Tuple>
         using value_types = Tuple<>;
 
@@ -88,7 +88,7 @@ namespace Widgets {
         algorithm_receiver::set_value(std::move(args));
     }
 
-    void TempWidgetState::receiver::set_error(Behavior::BehaviorError error)
+    void TempWidgetState::receiver::set_error(KeyValueError error)
     {
         WidgetManager *mgr;
         [[maybe_unused]] bool result = Behavior::get_named<"WidgetManager", WidgetManager *>(*this, mgr);

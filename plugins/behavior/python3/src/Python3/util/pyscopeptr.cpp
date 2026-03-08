@@ -26,7 +26,7 @@ namespace Behavior {
                 return NULL;
             }
             ValueType v;
-            it->value(v);
+            PYTHON3_PROPAGATE_ERROR(it->value(v));
             return toPyObject(v);
         }
 
@@ -39,7 +39,7 @@ namespace Behavior {
             ScopeIterator proxyIt = p.find("__proxy");
             if (proxyIt != p.end()) {
                 ValueType proxy;
-                proxyIt->value(proxy);
+                PYTHON3_PROPAGATE_ERROR(proxyIt->value(proxy));
                 if (proxy.is<ScopePtr>()) {
                     return TypedScopePtr_iter(proxy.as<ScopePtr>());
                 }

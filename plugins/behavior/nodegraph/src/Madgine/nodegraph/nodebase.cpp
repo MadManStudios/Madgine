@@ -329,7 +329,7 @@ namespace Behavior {
             throw 0;
         }
 
-        BehaviorError NodeBase::interpretRead(NodeInterpreterStateBase &interpreter, ValueType &retVal, std::unique_ptr<NodeInterpreterData> &data, uint32_t providerIndex, uint32_t group) const
+        KeyValueResult NodeBase::interpretRead(NodeInterpreterStateBase &interpreter, ValueType &retVal, std::unique_ptr<NodeInterpreterData> &data, uint32_t providerIndex, uint32_t group) const
         {
             throw 0;
         }

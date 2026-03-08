@@ -2,6 +2,7 @@
 
 #include "metatable.h"
 #include "valuetype_desc.h"
+#include "keyvalueresult.h"
 
 namespace Engine {
 
@@ -49,7 +50,7 @@ struct META_EXPORT ScopePtr {
 
     void moveAssign(ScopePtr other) const;
 
-    void call(ValueType &retVal, const ArgumentList &args) const;
+    KeyValueResult call(ValueType &retVal, const ArgumentList &args) const;
 
     void *mScope = nullptr;
     const MetaTable *mType = nullptr;

@@ -135,9 +135,9 @@ struct META_EXPORT ValueType {
 
     void setType(ValueTypeDesc type);
 
-    void call(ValueType &retVal, const ArgumentList &args) const;
+    KeyValueResult call(ValueType &retVal, const ArgumentList &args) const;
     template <typename... Args>
-    void call(ValueType &retVal, Args &&...args)
+    KeyValueResult call(ValueType &retVal, Args &&...args)
     {
         return call(retVal, { ValueType { std::forward<Args>(args) }... });
     }

@@ -23,14 +23,14 @@ ScopeIterator MetaTable::find(std::string_view key, ScopePtr scope) const
     }
 }
 
-void MetaTable::call(ScopePtr scope, ValueType &retVal, const ArgumentList &args) const
+KeyValueResult MetaTable::call(ScopePtr scope, ValueType &retVal, const ArgumentList &args) const
 {
     ScopeIterator op = find("__call", scope);
     if (op == scope.end())
         throw "No call-operator for type!";
     ValueType f;
-    op->value(f);
-    f.as<BoundApiFunction>()(retVal, args);
+    KEYVALUE_PROPAGATE_ERROR(op->value(f));
+    return f.as<BoundApiFunction>()(retVal, args);
 }
 
 void MetaTable::moveAssign(ScopePtr scope, ScopePtr other) const

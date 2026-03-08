@@ -36,9 +36,10 @@ void componentInit(std::array<Accessor, 32> &accessors)
                 [](const Accessor *self, const ScopePtr &entity) {
                     return scope_cast<Scene::Entity::Entity>(entity)->hasComponent(self->mName);
                 },
-                [](const Accessor *self, ValueType &ret, const ScopePtr &entity) {
+                [](const Accessor *self, ValueType &ret, const ScopePtr &entity) -> KeyValueResult {
                     uint32_t index = Scene::Entity::EntityComponentRegistry::sComponentsByName().at(self->mName);
                     to_ValueType(ret, ScopePtr { scope_cast<Scene::Entity::Entity>(entity)->getComponent(index), *Scene::Entity::EntityComponentRegistry::get(index).mType });
+                    return {};
                 },
                 nullptr,
                 ExtendedValueTypeDesc {
