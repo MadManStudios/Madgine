@@ -131,18 +131,6 @@ namespace Execution {
             T mTransform;
         };
 
-        template <typename T>
-        static auto return_types_helper()
-        {
-            if constexpr (std::same_as<T, void>) {
-                return type_pack<> {};
-            } else if constexpr (InstanceOf<T, std::tuple>) {
-                return to_type_pack<T> {};
-            } else {
-                return type_pack<T> {};
-            }
-        }
-
         template <AnySender Sender, typename Rec, typename T>
         struct state : algorithm_state<Sender, receiver<Rec, T>> {
 
@@ -166,7 +154,7 @@ namespace Execution {
             using helper = decltype(TupleUnpacker::invoke(std::declval<T>(), std::declval<V>()...));
             using helper_type = typename std::decay_t<Sender>::template value_types<helper>;
             template <template <typename...> typename Tuple>
-            using value_types = typename decltype(return_types_helper<helper_type>())::template instantiate<Tuple>;
+            using value_types = typename to_type_pack<helper_type>::template instantiate<Tuple>;
 
             template <typename Rec>
             friend auto tag_invoke(connect_t, sender &&sender, Rec &&rec)

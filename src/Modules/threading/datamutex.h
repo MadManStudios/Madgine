@@ -92,20 +92,8 @@ namespace Threading {
 
             using is_sender = void;
 
-            template <typename T>
-            static auto return_types_helper()
-            {
-                if constexpr (std::same_as<T, void>) {
-                    return type_pack<> {};
-                } else if constexpr (InstanceOf<T, std::tuple>) {
-                    return to_type_pack<T> {};
-                } else {
-                    return type_pack<T> {};
-                }
-            }
-
             template <template <typename...> typename Tuple>
-            using value_types = typename decltype(return_types_helper<std::invoke_result_t<F>>())::template instantiate<Tuple>;
+            using value_types = typename to_type_pack<std::invoke_result_t<F>>::template instantiate<Tuple>;
             using result_type = void;
 
             template <typename Rec>

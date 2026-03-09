@@ -208,15 +208,4 @@ namespace __generic_impl__ {
 template <typename T, size_t n>
 using type_pack_repeat_n_times = typename __generic_impl__::type_pack_repeat_n_times_helper<T, std::make_index_sequence<n>>::type;
 
-template <typename T>
-struct to_type_pack_helper;
-
-template <template <typename...> typename Outer, typename... Ty>
-struct to_type_pack_helper<Outer<Ty...>> {
-    using type = type_pack<Ty...>;
-};
-
-template <typename T>
-using to_type_pack = typename to_type_pack_helper<T>::type;
-
 }

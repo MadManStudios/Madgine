@@ -11,16 +11,30 @@ struct container_api_impl;
 template <typename...>
 struct type_pack;
 
+
 template <typename T>
-struct make_type_pack {
+struct to_type_pack_helper {
     using type = type_pack<T>;
 };
-template <typename... T>
-struct make_type_pack<type_pack<T...>> {
-    using type = type_pack<T...>;
+
+template <typename... Ty>
+struct to_type_pack_helper<std::tuple<Ty...>> {
+    using type = type_pack<Ty...>;
 };
+
+template <typename... Ty>
+struct to_type_pack_helper<type_pack<Ty...>> {
+    using type = type_pack<Ty...>;
+};
+
+template <>
+struct to_type_pack_helper<void> {
+    using type = type_pack<>;
+};
+
 template <typename T>
-using make_type_pack_t = typename make_type_pack<T>::type;
+using to_type_pack = typename to_type_pack_helper<T>::type;
+
 
 struct CompoundAtomicOperation;
 
@@ -71,7 +85,7 @@ namespace Execution {
     struct VirtualReceiverBaseEx;
 
     template <typename R, typename... V>
-    using VirtualReceiverBase = VirtualReceiverBaseEx<make_type_pack_t<R>, type_pack<V...>>;
+    using VirtualReceiverBase = VirtualReceiverBaseEx<to_type_pack<R>, type_pack<V...>>;
 
     template <typename... _Ty>
     struct SignalStub;
