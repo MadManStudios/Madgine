@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Generic/execution/algorithm.h"
-#include "Generic/execution/make_sender.h"
 #include "Generic/execution/storage.h"
 
 #include "Madgine/debug/debuggablesender.h"

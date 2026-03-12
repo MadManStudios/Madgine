@@ -246,7 +246,7 @@ namespace Serialize {
                         Tuple args = owningArgs;
                         writeFunctionAction(unit, index, &args, {}, request.mRequester, request.mRequesterTransactionId);
                         R result = TupleUnpacker::invokeExpand(patch_void(f, Void {}), static_cast<T *>(unit), traits::patchArgs(std::move(args), { in.mStream.id() }));
-                        request.mReceiver.set_value(result);
+                        request.mReceiver.set_value<R>(result);
                     } break;
                     case QUERY: {
                         R result;
@@ -255,7 +255,7 @@ namespace Serialize {
                             FormattedMessageStream &out = getMasterFunctionRequestResponseTarget(unit, request.mRequester);
                             writeFunctionResult(unit, index, &result, out, request.mRequesterTransactionId);
                         }
-                        request.mReceiver.set_value(result);
+                        request.mReceiver.set_value<R>(result);
                     } break;
                     }
                     return StreamResult {};

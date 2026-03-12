@@ -40,22 +40,21 @@ TEST(Serialize_Container, SyncedUnit)
     unit1.set1 = { 1, 2, 3 };
     unit2.set1 = { 4, 5, 6 };
 
-    HANDLE_MGR_RECEIVER(mgr1.addTopLevelItemImpl(receiver, &unit1, 10));
-    HANDLE_MGR_RECEIVER(mgr2.addTopLevelItemImpl(receiver, &unit2, 10));
+    HANDLE_MGR_FUTURE(mgr1.addTopLevelItem(&unit1, 10));
+    HANDLE_MGR_FUTURE(mgr2.addTopLevelItem(&unit2, 10));
 
     Buffer buffer;
     HANDLE_MGR_RESULT(mgr1, mgr1.setMasterBuffer(buffer));
     mgr1.sendMessages();
-    HANDLE_MGR_RECEIVER(mgr2.setSlaveBuffer(receiver, buffer));
+    HANDLE_MGR_FUTURE(mgr2.setSlaveBuffer(buffer));
 
 
     ASSERT_EQ(unit1.list1, unit2.list1);
     ASSERT_EQ(unit1.list2, unit2.list2);
     ASSERT_EQ(unit1.set1, unit2.set1);
-    
-    GenericTestReceiver calledFuture;
-    Engine::Execution::detach_with_receiver(unit1.list2.emplace_async(unit1.list2.end(), 6), calledFuture);
-    ASSERT_TRUE(calledFuture.is_ready());
+
+    auto fut = unit1.list2.emplace_async(unit1.list2.end(), 6);
+    ASSERT_TRUE(fut.is_ready());
     ASSERT_EQ(unit1.list2.back(), 6);
 
     mgr1.sendMessages();
@@ -63,8 +62,7 @@ TEST(Serialize_Container, SyncedUnit)
 
     ASSERT_EQ(unit1.list2, unit2.list2);
 
-    calledFuture.reset();
-    Engine::Execution::detach_with_receiver(unit2.list2.emplace_async(unit2.list2.end(), 7), calledFuture);
+    fut = unit2.list2.emplace_async(unit2.list2.end(), 7);
 
     ASSERT_EQ(unit1.list2, unit2.list2);
 
@@ -74,15 +72,14 @@ TEST(Serialize_Container, SyncedUnit)
     ASSERT_EQ(unit1.list2.back(), 7);
 
     mgr1.sendMessages();
-    ASSERT_FALSE(calledFuture.is_ready());
+    ASSERT_FALSE(fut.is_ready());
     mgr2.receiveMessages(1, 0ms);
-    ASSERT_TRUE(calledFuture.is_ready());
+    ASSERT_TRUE(fut.is_ready());
 
     ASSERT_EQ(unit1.list2, unit2.list2);
 
-    calledFuture.reset();
-    Engine::Execution::detach_with_receiver(unit1.list2.erase_async(std::next(unit1.list2.begin())), calledFuture);
-    ASSERT_TRUE(calledFuture.is_ready());
+    fut = unit1.list2.erase_async(std::next(unit1.list2.begin()));
+    ASSERT_TRUE(fut.is_ready());
 
     ASSERT_EQ(unit1.list2.size(), 3);
 

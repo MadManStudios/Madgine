@@ -27,8 +27,7 @@ namespace Serialize {
         ParticipantId participantId() const;
 
         void setStaticSlaveId(UnitId slaveId);
-        void receiveStateImpl(Execution::VirtualReceiverBase<SyncManagerResult> &receiver, SyncManager *mgr);
-        ASYNC_STUB(receiveState, receiveStateImpl, Execution::make_simple_virtual_sender<SyncManagerResult>);
+        Execution::Future<SyncManagerResult> receiveState(SyncManager *mgr);        
         void stateReadDone();
 
         std::set<std::reference_wrapper<FormattedMessageStream>, CompareStreamId> getMasterMessageTargets() const;
@@ -40,7 +39,7 @@ namespace Serialize {
 
         friend struct SyncManager;
 
-        Execution::VirtualReceiverBase<SyncManagerResult> *mReceivingMasterState = nullptr;
+        Execution::Promise<SyncManagerResult> mReceivingMasterState = std::nullopt;
     };
 
     template <typename T>

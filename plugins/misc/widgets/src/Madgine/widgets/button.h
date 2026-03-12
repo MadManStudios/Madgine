@@ -18,7 +18,7 @@ namespace Widgets {
 
         virtual ~Button() = default;
 
-        Execution::SignalStub<> &clickEvent();
+        Execution::SignalStub<void> &clickEvent();
 
         void setEnabled(bool enabled);
         bool isEnabled() const;
@@ -40,7 +40,7 @@ namespace Widgets {
         void emitClicked();
 
     private:
-        Execution::Signal<> mClicked;
+        Execution::Signal<void> mClicked;
 
         bool mHovered = false;
 

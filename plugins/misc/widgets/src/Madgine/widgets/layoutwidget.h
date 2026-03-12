@@ -16,7 +16,7 @@ namespace Widgets {
     struct LayoutWidget {
         std::string mName;
         WidgetLoader::Handle mWidgetTemplate;
-        Execution::Flag<WidgetBase *> mWidget;
+        Execution::Flag<void, WidgetBase *> mWidget;
         WidgetType mType = WidgetType::DEFAULT_WIDGET;
         bool mDefaultVisibility = false;
     };

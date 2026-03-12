@@ -358,57 +358,57 @@ namespace Widgets {
     {
     }
 
-    Execution::SignalStub<const Input::PointerMoveEvent &> &WidgetBase::pointerMoveEvent()
+    Execution::SignalStub<void, const Input::PointerMoveEvent &> &WidgetBase::pointerMoveEvent()
     {
         return mPointerMoveSignal;
     }
 
-    Execution::SignalStub<const PointerClickEvent &> &WidgetBase::pointerClickEvent()
+    Execution::SignalStub<void, const PointerClickEvent &> &WidgetBase::pointerClickEvent()
     {
         return mPointerClickSignal;
     }
 
-    Execution::SignalStub<const Input::PointerMoveEvent &> &WidgetBase::pointerEnterEvent()
+    Execution::SignalStub<void, const Input::PointerMoveEvent &> &WidgetBase::pointerEnterEvent()
     {
         return mPointerEnterSignal;
     }
 
-    Execution::SignalStub<const Input::PointerMoveEvent &> &WidgetBase::pointerLeaveEvent()
+    Execution::SignalStub<void, const Input::PointerMoveEvent &> &WidgetBase::pointerLeaveEvent()
     {
         return mPointerLeaveSignal;
     }
 
-    Execution::SignalStub<const DragBeginEvent &> &WidgetBase::dragBeginEvent()
+    Execution::SignalStub<void, const DragBeginEvent &> &WidgetBase::dragBeginEvent()
     {
         return mDragBeginSignal;
     }
 
-    Execution::SignalStub<const DragMoveEvent &> &WidgetBase::dragMoveEvent()
+    Execution::SignalStub<void, const DragMoveEvent &> &WidgetBase::dragMoveEvent()
     {
         return mDragMoveSignal;
     }
 
-    Execution::SignalStub<const DragEndEvent &> &WidgetBase::dragEndEvent()
+    Execution::SignalStub<void, const DragEndEvent &> &WidgetBase::dragEndEvent()
     {
         return mDragEndSignal;
     }
 
-    Execution::SignalStub<> &WidgetBase::dragAbortEvent()
+    Execution::SignalStub<void> &WidgetBase::dragAbortEvent()
     {
         return mDragAbortSignal;
     }
 
-    Execution::SignalStub<const Input::AxisEvent &> &WidgetBase::axisEvent()
+    Execution::SignalStub<void, const Input::AxisEvent &> &WidgetBase::axisEvent()
     {
         return mAxisEventSignal;
     }
 
-    Execution::SignalStub<const Input::KeyPressEvent &> &WidgetBase::keyPressEvent()
+    Execution::SignalStub<void, const Input::KeyPressEvent &> &WidgetBase::keyPressEvent()
     {
         return mKeyPressSignal;
     }
 
-    Execution::SignalStub<const Input::KeyReleaseEvent &> &WidgetBase::keyReleaseEvent()
+    Execution::SignalStub<void, const Input::KeyReleaseEvent &> &WidgetBase::keyReleaseEvent()
     {
         return mKeyReleaseSignal;
     }

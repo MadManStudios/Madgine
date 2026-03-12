@@ -87,7 +87,7 @@ namespace Execution {
     template <typename R, typename... V>
     using VirtualReceiverBase = VirtualReceiverBaseEx<to_type_pack<R>, type_pack<V...>>;
 
-    template <typename... _Ty>
+    template <typename R, typename... _Ty>
     struct SignalStub;
     template <typename T, typename... _Ty>
     struct ConnectionInstance;

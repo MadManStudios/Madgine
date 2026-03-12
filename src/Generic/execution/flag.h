@@ -5,12 +5,12 @@
 namespace Engine {
 namespace Execution {
 
-    template <typename... _Ty>
-    struct Flag : FlagStub<_Ty...> {
-        using FlagStub<_Ty...>::FlagStub;
+    template <typename R, typename... _Ty>
+    struct Flag : FlagStub<R, _Ty...> {
+        using FlagStub<R, _Ty...>::FlagStub;
 
         struct CallbackDelay {
-            CallbackDelay(ConnectionStack<Connection<FlagStub<_Ty...>, _Ty...>> stack, Flag<_Ty...> *flag)
+            CallbackDelay(ConnectionStack<Connection<FlagStub<R, _Ty...>>> stack, Flag<R, _Ty...> *flag)
                 : mStack(std::move(stack))
                 , mFlag(flag)
             {
@@ -19,21 +19,44 @@ namespace Execution {
 
             ~CallbackDelay()
             {
-                while (Connection<FlagStub<_Ty...>, _Ty...> *current = mStack.pop()) {
-                    TupleUnpacker::invokeExpand(&Connection<FlagStub<_Ty...>, _Ty...>::set_value, current, *mFlag->mValue);
+                while (Connection<FlagStub<R, _Ty...>> *current = mStack.pop()) {
+                    mFlag->mStorage.reproduce(*current);
                 }
             }
 
-            ConnectionStack<Connection<FlagStub<_Ty...>, _Ty...>> mStack;
-            Flag<_Ty...> *mFlag;
+            ConnectionStack<Connection<FlagStub<R, _Ty...>>> mStack;
+            Flag<R, _Ty...> *mFlag;
         };
 
-        CallbackDelay emplace(_Ty &&...args)
+        template <typename... Ty>
+        CallbackDelay set_value(Ty &&...args)
         {
-            ConnectionStack<Connection<FlagStub<_Ty...>, _Ty...>> stack = std::move(this->mStack);
+            ConnectionStack<Connection<FlagStub<R, _Ty...>>> stack = std::move(this->mStack);
             {
                 std::lock_guard guard { this->mStack.mutex() };
-                this->mValue.emplace(std::forward<_Ty>(args)...);
+                this->mStorage.set_value(std::forward<Ty>(args)...);
+            }
+
+            return { std::move(stack), this };
+        }
+
+        CallbackDelay set_done()
+        {
+            ConnectionStack<Connection<FlagStub<R, _Ty...>>> stack = std::move(this->mStack);
+            {
+                std::lock_guard guard { this->mStack.mutex() };
+                this->mStorage.set_done();
+            }
+
+            return { std::move(stack), this };
+        }
+
+        CallbackDelay set_error(patch_void_t<R> &&r)
+        {
+            ConnectionStack<Connection<FlagStub<R, _Ty...>>> stack = std::move(this->mStack);
+            {
+                std::lock_guard guard { this->mStack.mutex() };
+                this->mStorage.set_error(std::forward<R>(r));
             }
 
             return { std::move(stack), this };
@@ -42,7 +65,7 @@ namespace Execution {
         void reset()
         {
             std::lock_guard guard { this->mStack.mutex() };
-            this->mValue.reset();
+            this->mStorage.reset();
         }
     };
 }

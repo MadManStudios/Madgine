@@ -113,29 +113,29 @@ namespace Widgets {
         virtual bool injectKeyPress(const Input::KeyPressEvent &arg);
         virtual bool injectKeyRelease(const Input::KeyReleaseEvent &arg);
               
-        Execution::SignalStub<const Input::PointerMoveEvent &> &pointerMoveEvent();
-        Execution::SignalStub<const PointerClickEvent &> &pointerClickEvent();
-        Execution::SignalStub<const Input::PointerMoveEvent &> &pointerEnterEvent();
+        Execution::SignalStub<void, const Input::PointerMoveEvent &> &pointerMoveEvent();
+        Execution::SignalStub<void, const PointerClickEvent &> &pointerClickEvent();
+        Execution::SignalStub<void, const Input::PointerMoveEvent &> &pointerEnterEvent();
         auto pointerEnterSender()
         {
             return mPointerEnterSignal | Execution::then([](const Input::PointerMoveEvent &args) {
                 return 3;
             });
         }
-        Execution::SignalStub<const Input::PointerMoveEvent &> &pointerLeaveEvent();
+        Execution::SignalStub<void, const Input::PointerMoveEvent &> &pointerLeaveEvent();
         auto pointerLeaveSender()
         {
             return mPointerLeaveSignal | Execution::then([](const Input::PointerMoveEvent &args) {
                 return 3;
             });
         }
-        Execution::SignalStub<const DragBeginEvent &> &dragBeginEvent();
-        Execution::SignalStub<const DragMoveEvent &> &dragMoveEvent();
-        Execution::SignalStub<const DragEndEvent &> &dragEndEvent();
-        Execution::SignalStub<> &dragAbortEvent();
-        Execution::SignalStub<const Input::AxisEvent &> &axisEvent();
-        Execution::SignalStub<const Input::KeyPressEvent &> &keyPressEvent();
-        Execution::SignalStub<const Input::KeyReleaseEvent &> &keyReleaseEvent();
+        Execution::SignalStub<void, const DragBeginEvent &> &dragBeginEvent();
+        Execution::SignalStub<void, const DragMoveEvent &> &dragMoveEvent();
+        Execution::SignalStub<void, const DragEndEvent &> &dragEndEvent();
+        Execution::SignalStub<void> &dragAbortEvent();
+        Execution::SignalStub<void, const Input::AxisEvent &> &axisEvent();
+        Execution::SignalStub<void, const Input::KeyPressEvent &> &keyPressEvent();
+        Execution::SignalStub<void, const Input::KeyReleaseEvent &> &keyReleaseEvent();
 
         virtual bool containsPoint(const Vector2 &point, const Rect2i &screenSpace, float extend = 0.0f) const;
         WidgetBase *getHoveredUp(const Vector2 &point, const Rect2i &screenSpace);
@@ -184,17 +184,17 @@ namespace Widgets {
     protected:
         void destroyChild(WidgetBase *w);
 
-        Execution::Signal<const Input::PointerMoveEvent &> mPointerMoveSignal;
-        Execution::Signal<const PointerClickEvent &> mPointerClickSignal;
-        Execution::Signal<const Input::PointerMoveEvent &> mPointerEnterSignal;
-        Execution::Signal<const Input::PointerMoveEvent &> mPointerLeaveSignal;
-        Execution::Signal<const DragBeginEvent &> mDragBeginSignal;
-        Execution::Signal<const DragMoveEvent &> mDragMoveSignal;
-        Execution::Signal<const DragEndEvent &> mDragEndSignal;
-        Execution::Signal<> mDragAbortSignal;
-        Execution::Signal<const Input::AxisEvent &> mAxisEventSignal;
-        Execution::Signal<const Input::KeyPressEvent &> mKeyPressSignal;
-        Execution::Signal<const Input::KeyReleaseEvent &> mKeyReleaseSignal;
+        Execution::Signal<void, const Input::PointerMoveEvent &> mPointerMoveSignal;
+        Execution::Signal<void, const PointerClickEvent &> mPointerClickSignal;
+        Execution::Signal<void, const Input::PointerMoveEvent &> mPointerEnterSignal;
+        Execution::Signal<void, const Input::PointerMoveEvent &> mPointerLeaveSignal;
+        Execution::Signal<void, const DragBeginEvent &> mDragBeginSignal;
+        Execution::Signal<void, const DragMoveEvent &> mDragMoveSignal;
+        Execution::Signal<void, const DragEndEvent &> mDragEndSignal;
+        Execution::Signal<void> mDragAbortSignal;
+        Execution::Signal<void, const Input::AxisEvent &> mAxisEventSignal;
+        Execution::Signal<void, const Input::KeyPressEvent &> mKeyPressSignal;
+        Execution::Signal<void, const Input::KeyReleaseEvent &> mKeyReleaseSignal;
 
         std::vector<std::unique_ptr<WidgetBase>> mChildren;
 

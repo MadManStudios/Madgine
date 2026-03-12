@@ -15,7 +15,7 @@ namespace Widgets {
 
         void render(WidgetsRenderData &renderData) override;
 
-        Execution::SignalStub<size_t> &indexChangedEvent();
+        Execution::SignalStub<void, size_t> &indexChangedEvent();
 
         void addItem(const std::string &text);
         void clear();
@@ -54,7 +54,7 @@ namespace Widgets {
         int mHoveredIndex = -1;
         size_t mSelectedIndex = 0;
 
-        Execution::Signal<size_t> mIndexChanged;
+        Execution::Signal<void, size_t> mIndexChanged;
     };
 }
 }

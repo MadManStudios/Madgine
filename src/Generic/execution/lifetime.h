@@ -222,7 +222,7 @@ namespace Execution {
             {
                 if (mStrongRefCount.fetch_sub(1) == 1) {
                     mState.set_value();
-                    mFinished.emplace();
+                    mFinished.set_value();
                     decreaseWeakCount();
                 }
             }
@@ -257,7 +257,7 @@ namespace Execution {
             state &mState;
             std::atomic<uint32_t> mStrongRefCount = 1;
             std::atomic<uint32_t> mWeakRefCount = 1;
-            Flag<> mFinished;
+            Flag<void> mFinished;
         };
 
         template <typename Sender>

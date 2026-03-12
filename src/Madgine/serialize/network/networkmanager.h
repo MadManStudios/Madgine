@@ -23,8 +23,7 @@ namespace Network {
         void operator=(const NetworkManager &) = delete;
 
         NetworkManagerResult startServer(int port);
-        void connectImpl(Execution::VirtualReceiverBase<type_pack<NetworkManagerResult, Serialize::SyncManagerResult>> &receiver, std::string_view url, int portNr, Serialize::Format format, TimeOut timeout = {});
-        ASYNC_STUB(connect, connectImpl, Execution::make_simple_virtual_sender<type_pack<NetworkManagerResult, Serialize::SyncManagerResult>>);
+        Execution::Future<NetworkManagerResult> connect(std::string_view url, int portNr, Serialize::Format format, TimeOut timeout = {});
 
         SocketAddress getAddress(Serialize::ParticipantId id);
 

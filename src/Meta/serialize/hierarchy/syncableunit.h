@@ -161,30 +161,28 @@ namespace Serialize {
             using R = typename traits::return_type;
 
             if constexpr (std::same_as<R, void>) {
-                return make_message_sender<>(
-                    [this](auto &receiver, Args &&...args2) {
-                        typename traits::decay_argument_types::as_tuple argTuple { std::forward<Args>(args2)... };
-                        if (this->isMaster()) {
-                            this->writeFunctionAction(functionIndex<f>, &argTuple);
-                            TupleUnpacker::invokeExpand(f, static_cast<T *>(this), argTuple);
-                            receiver.set_value();
-                        } else {
-                            this->writeFunctionRequest(functionIndex<f>, CALL, &argTuple, 0, 0, receiver);
-                        }
-                    },
-                    std::forward<Args>(args)...);
+                Execution::Promise<MessageResult> promise;
+                Execution::Future<MessageResult> future = promise.getFuture();
+                typename traits::decay_argument_types::as_tuple argTuple { std::forward<Args>(args)... };
+                if (this->isMaster()) {
+                    this->writeFunctionAction(functionIndex<f>, &argTuple);
+                    TupleUnpacker::invokeExpand(f, static_cast<T *>(this), argTuple);
+                    promise.set_value();
+                } else {
+                    this->writeFunctionRequest(functionIndex<f>, CALL, &argTuple, 0, 0, std::move(promise));
+                }
+                return future;
             } else {
-                return make_message_sender<R>(
-                    [this](auto &receiver, Args &&...args2) {
-                        typename traits::decay_argument_types::as_tuple argTuple { std::forward<Args>(args2)... };
-                        if (this->isMaster()) {
-                            this->writeFunctionAction(functionIndex<f>, &argTuple);
-                            receiver.set_value(TupleUnpacker::invokeExpand(f, static_cast<T *>(this), argTuple));
-                        } else {
-                            this->writeFunctionRequest(functionIndex<f>, CALL, &argTuple, 0, 0, receiver);
-                        }
-                    },
-                    std::forward<Args>(args)...);
+                Execution::Promise<MessageResult, R> promise;
+                Execution::Future<MessageResult, R> future = promise.getFuture();
+                typename traits::decay_argument_types::as_tuple argTuple { std::forward<Args>(args)... };
+                if (this->isMaster()) {
+                    this->writeFunctionAction(functionIndex<f>, &argTuple);
+                    promise.set_value(TupleUnpacker::invokeExpand(f, static_cast<T *>(this), argTuple));
+                } else {
+                    this->writeFunctionRequest(functionIndex<f>, CALL, &argTuple, 0, 0, std::move(promise));
+                }
+                return future;
             }
         }
 
@@ -216,21 +214,20 @@ namespace Serialize {
             using traits = SyncFunctionTraits<typename Callable<f>::traits>;
             using R = typename traits::return_type;
             using Tuple = traits::decay_argument_types::as_tuple;
-            return make_message_sender<R>(
-                [this](auto &receiver, Args &&...args2) {
-                    Tuple args { std::forward<Args>(args2)... };
-                    if (this->isMaster()) {
-                        if constexpr (std::same_as<decltype(TupleUnpacker::invokeExpand(f, static_cast<T *>(this), traits::patchArgs(std::move(args), { 1 }))), void>) {
-                            TupleUnpacker::invokeExpand(f, static_cast<T *>(this), traits::patchArgs(std::move(args), { sLocalMasterParticipantId })); // TODO: Constant
-                            receiver.set_value();
-                        } else {
-                            receiver.set_value(TupleUnpacker::invokeExpand(f, static_cast<T *>(this), traits::patchArgs(std::move(args), { sLocalMasterParticipantId })));
-                        }
-                    } else {
-                        this->writeFunctionRequest(functionIndex<f>, QUERY, &args, 0, 0, receiver);
-                    }
-                },
-                std::forward<Args>(args)...);
+            Tuple argsTuple { std::forward<Args>(args)... };
+            Execution::Promise<MessageResult, R> promise;
+            Execution::Future<MessageResult, R> future = promise.getFuture();
+            if (this->isMaster()) {
+                if constexpr (std::same_as<decltype(TupleUnpacker::invokeExpand(f, static_cast<T *>(this), traits::patchArgs(std::move(argsTuple), { sLocalMasterParticipantId }))), void>) {
+                    TupleUnpacker::invokeExpand(f, static_cast<T *>(this), traits::patchArgs(std::move(argsTuple), { sLocalMasterParticipantId }));
+                    promise.set_value();
+                } else {
+                    promise.set_value(TupleUnpacker::invokeExpand(f, static_cast<T *>(this), traits::patchArgs(std::move(argsTuple), { sLocalMasterParticipantId })));
+                }
+            } else {
+                this->writeFunctionRequest(functionIndex<f>, QUERY, &argsTuple, 0, 0, std::move(promise));
+            }
+            return future;
         }
 
         template <auto f, typename... Args>

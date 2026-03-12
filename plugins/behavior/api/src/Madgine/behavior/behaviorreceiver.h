@@ -25,14 +25,5 @@ namespace Behavior {
         using Execution::VirtualState<Base, Rec>::VirtualState;
     };
 
-    template <typename F, typename... Args>
-    auto make_simple_behavior_sender(F &&f, Args &&...args)
-    {
-        return Execution::make_sender<KeyValueError, ArgumentList>(
-            [args = std::tuple<Args...> { std::forward<Args>(args)... }, f { forward_capture<F>(f) }]<typename Rec>(Rec &&rec) mutable {
-                return TupleUnpacker::constructExpand<VirtualBehaviorState<Rec, Execution::SimpleInheritedState<F, std::tuple<Args...>, BehaviorReceiver>>>(std::forward<Rec>(rec), std::forward<F>(f), std::move(args));
-            });
-    }
-
 }
 }

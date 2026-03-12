@@ -6,8 +6,6 @@
 
 #include "Generic/bytebuffer.h"
 
-#include "../../Generic/testreceiver.h"
-
 using namespace Engine::Serialize;
 
 struct ComplexDataType {
@@ -59,9 +57,9 @@ struct TestUnit : TopLevelUnit<TestUnit> {
     int mData;
     int mCallCount = 0;
 
-    void call_void(int i, TestReceiver<Engine::Serialize::MessageResult> &rec);
-    void call(int i, TestReceiver<Engine::Serialize::MessageResult, int> &rec);
-    void query(int i, TestReceiver<Engine::Serialize::MessageResult, int> &rec);
+    Engine::Execution::Future<Engine::Serialize::MessageResult> call_void(int i);
+    Engine::Execution::Future<Engine::Serialize::MessageResult, int> call(int i);
+    Engine::Execution::Future<Engine::Serialize::MessageResult, int> query(int i);
 
     SERIALIZABLE_CONTAINER(list1, std::list<int>);
     SERIALIZABLE_CONTAINER(set1, std::set<int>);

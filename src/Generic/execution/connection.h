@@ -5,11 +5,11 @@
 namespace Engine {
 namespace Execution {
 
-    template <typename... Ty>
-    using ConnectionReceiver = VirtualReceiverBaseEx<type_pack<>, type_pack<Ty...>>;
+    template <typename R, typename... Ty>
+    using ConnectionReceiver = VirtualReceiverBaseEx<to_type_pack<R>, type_pack<Ty...>>;
 
-    template <typename Stub, typename... Ty>
-    struct Connection : ConnectionReceiver<Ty...> {
+    template <typename Stub>
+    struct Connection : Stub::template value_types<type_pack>::template prepend<typename Stub::result_type>::template instantiate<ConnectionReceiver> {
 
         Connection(Stub &stub)
             : mStub(stub)
@@ -42,13 +42,13 @@ namespace Execution {
         friend struct ConnectionQueue;
 
         Stub &mStub;
-        std::atomic<Connection<Stub, Ty...> *> mNext = nullptr;
+        std::atomic<Connection<Stub> *> mNext = nullptr;
     };
 
-    template <typename Stub, typename... Ty>
+    template <typename Stub, typename R, typename... Ty>
     struct ConnectionSender {
 
-        using result_type = void;
+        using result_type = R;
         template <template <typename...> typename Tuple>
         using value_types = Tuple<Ty...>;
 
@@ -57,7 +57,7 @@ namespace Execution {
         template <typename Rec>
         friend auto tag_invoke(Execution::connect_t, Stub &stub, Rec &&rec)
         {
-            return Execution::VirtualState<Connection<Stub, Ty...>, Rec>(std::forward<Rec>(rec), stub);
+            return Execution::VirtualState<Connection<Stub>, Rec>(std::forward<Rec>(rec), stub);
         }
     };
 

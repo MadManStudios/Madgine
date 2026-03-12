@@ -12,9 +12,9 @@ namespace Execution {
     struct ValueStub;
 
     template <typename... Ty>
-    struct ValueConnection : Connection<ValueStub<Ty...>, Ty...> {
+    struct ValueConnection : Connection<ValueStub<Ty...>> {
         ValueConnection(ValueStub<Ty...> &stub, std::tuple<Ty...> value)
-            : Connection<ValueStub<Ty...>, Ty...>(stub)
+            : Connection<ValueStub<Ty...>>(stub)
             , mValue(std::move(value))
         {
         }
@@ -46,7 +46,7 @@ namespace Execution {
     };
 
     template <typename... Ty>
-    struct ValueStub : ConnectionSender<ValueStub<Ty...>, Ty...> {
+    struct ValueStub : ConnectionSender<ValueStub<Ty...>, void, Ty...> {
         template <typename... Args>
         ValueStub(Args &&...args)
             : mValue(std::forward<Args>(args)...)
@@ -64,7 +64,7 @@ namespace Execution {
             return mValue;
         }
 
-        void enqueue(Connection<ValueStub<Ty...>, Ty...> *con)
+        void enqueue(Connection<ValueStub<Ty...>> *con)
         {
             mStack.push(con);
         }
@@ -75,13 +75,13 @@ namespace Execution {
             if (con->mValue != mValue) {
                 std::tuple<Ty...> value = mValue;
                 guard.unlock();
-                TupleUnpacker::invokeExpand(&Connection<ValueStub<Ty...>, Ty...>::set_value, con, std::move(value));                
+                TupleUnpacker::invokeExpand(&Connection<ValueStub<Ty...>>::set_value, con, std::move(value));                
             } else {
                 mStack.push(con, guard);
             }            
         }
 
-        bool extract(Connection<ValueStub<Ty...>, Ty...> *con)
+        bool extract(Connection<ValueStub<Ty...>> *con)
         {
             return mStack.extract(con);
         }
@@ -99,7 +99,7 @@ namespace Execution {
         }
 
     protected:
-        ConnectionStack<Connection<ValueStub<Ty...>, Ty...>> mStack;
+        ConnectionStack<Connection<ValueStub<Ty...>>> mStack;
         std::tuple<Ty...> mValue;
     };
 

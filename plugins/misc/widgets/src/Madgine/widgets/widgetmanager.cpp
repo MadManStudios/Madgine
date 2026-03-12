@@ -536,16 +536,16 @@ namespace Widgets {
         if (it != mWidgetsLayout.end() && it->mWidget.isSet()) {
             switch (it->mType) {
             case WidgetType::MODAL_OVERLAY:
-                openModalWidget(std::get<0>(*it->mWidget));
+                openModalWidget(*it->mWidget);
                 break;
             case WidgetType::DEFAULT_WIDGET:
-                openWidget(std::get<0>(*it->mWidget));
+                openWidget(*it->mWidget);
                 break;
             case WidgetType::NONMODAL_OVERLAY:
-                openWidget(std::get<0>(*it->mWidget));
+                openWidget(*it->mWidget);
                 break;
             case WidgetType::ROOT_WIDGET:
-                swapCurrentRoot(std::get<0>(*it->mWidget));
+                swapCurrentRoot(*it->mWidget);
                 break;
             }
         }
@@ -557,13 +557,13 @@ namespace Widgets {
         if (it != mWidgetsLayout.end()) {
             switch (it->mType) {
             case WidgetType::MODAL_OVERLAY:
-                closeModalWidget(std::get<0>(*it->mWidget));
+                closeModalWidget(*it->mWidget);
                 break;
             case WidgetType::DEFAULT_WIDGET:
-                closeWidget(std::get<0>(*it->mWidget));
+                closeWidget(*it->mWidget);
                 break;
             case WidgetType::NONMODAL_OVERLAY:
-                closeWidget(std::get<0>(*it->mWidget));
+                closeWidget(*it->mWidget);
                 break;
             case WidgetType::ROOT_WIDGET:
                 // swapCurrentRoot(it->mWidget);
@@ -609,7 +609,7 @@ namespace Widgets {
             if (!layoutWidget.mWidget.isSet() && layoutWidget.mWidgetTemplate && layoutWidget.mWidgetTemplate.info()->loadingTask().is_ready() && layoutWidget.mWidgetTemplate.info()->loadingTask()) {
                 std::unique_ptr<WidgetBase> p = layoutWidget.mWidgetTemplate.create(*this);
 
-                layoutWidget.mWidget.emplace(p.get());
+                layoutWidget.mWidget.set_value(p.get());
                 p->applyGeometry(Vector3 { Vector2 { mClientSpace.mSize }, Window::platformCapabilities.mScalingFactor });
                 mTopLevelWidgets.emplace_back(std::move(p));
 
@@ -728,7 +728,7 @@ namespace Widgets {
             for (LayoutWidget &layoutWidget : mWidgetsLayout) {
                 if (!layoutWidget.mWidget.isSet() && layoutWidget.mWidgetTemplate.available()) {
                     std::unique_ptr<WidgetBase> p = layoutWidget.mWidgetTemplate.create(*this);
-                    layoutWidget.mWidget.emplace(p.get());
+                    layoutWidget.mWidget.set_value(p.get());
                     p->applyGeometry(Vector3 { Vector2 { mClientSpace.mSize }, Window::platformCapabilities.mScalingFactor });
                     mTopLevelWidgets.emplace_back(std::move(p));
                     if (layoutWidget.mDefaultVisibility) {
@@ -739,7 +739,7 @@ namespace Widgets {
         } else {
             for (LayoutWidget &layoutWidget : mWidgetsLayout) {
                 if (layoutWidget.mWidget.isSet()) {
-                    destroyTopLevel(std::get<0>(*layoutWidget.mWidget));
+                    destroyTopLevel(*layoutWidget.mWidget);
                     layoutWidget.mWidget.reset();
                 }
             }

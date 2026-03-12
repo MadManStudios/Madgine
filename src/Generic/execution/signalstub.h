@@ -7,22 +7,22 @@
 namespace Engine {
 namespace Execution {
 
-    template <typename... Ty>
-    struct SignalStub : ConnectionSender<SignalStub<Ty...>, Ty...> {
+    template <typename R, typename... Ty>
+    struct SignalStub : ConnectionSender<SignalStub<R, Ty...>, R, Ty...> {
         SignalStub() = default;
 
-        SignalStub(const SignalStub<Ty...> &other)
+        SignalStub(const SignalStub<R, Ty...> &other)
         {
         }
 
-        SignalStub(SignalStub<Ty...> &&) noexcept
+        SignalStub(SignalStub<R, Ty...> &&) noexcept
         {
         }
 
-        SignalStub<Ty...> &operator=(const SignalStub<Ty...> &other) = delete;
+        SignalStub<R, Ty...> &operator=(const SignalStub<R, Ty...> &other) = delete;
 
-        template <typename T, typename R, typename... Args>
-        auto connect(R (T::*f)(Args...), T *t)
+        template <typename T, typename... Args>
+        auto connect(void (T::*f)(Args...), T *t)
         {
             return connect([t, f](Args... args) { return (t->*f)(std::forward<Args>(args)...); });
         }
@@ -33,18 +33,18 @@ namespace Execution {
             return *this | Execution::then(TupleUnpacker::wrap(std::forward<T>(slot))) | Execution::repeat;
         }
 
-        void enqueue(Connection<SignalStub<Ty...>, Ty...> *con)
+        void enqueue(Connection<SignalStub<R, Ty...>> *con)
         {
             mStack.push(con);
         }
 
-        bool extract(Connection<SignalStub<Ty...>, Ty...> *con)
+        bool extract(Connection<SignalStub<R, Ty...>> *con)
         {
             return mStack.extract(con);
         }
 
     protected:
-        ConnectionStack<Connection<SignalStub<Ty...>, Ty...>> mStack;
+        ConnectionStack<Connection<SignalStub<R, Ty...>>> mStack;
     };
 
 }

@@ -22,9 +22,7 @@ namespace Scene {
 
         Entity::EntityPtr createEntity(const std::string &name = "",
             const std::function<void(Entity::Entity &)> &init = {});
-        void createEntityAsyncImpl(Serialize::GenericMessageReceiver receiver, const std::string &name = "",
-            std::function<void(Entity::Entity &)> init = {});
-        ASYNC_STUB(createEntityAsync, createEntityAsyncImpl, Serialize::make_message_sender<Entity::EntityPtr>);
+        Execution::Sender<Serialize::MessageResult, Entity::EntityPtr> createEntityAsync(const std::string &name = "", std::function<void(Entity::Entity &)> init = {});        
 
         void startLifetime();
         void endLifetime();
@@ -35,7 +33,7 @@ namespace Scene {
         void remove(Entity::EntityPtr e);
         void clear();
 
-        Execution::SignalStub<const EntityContainer::iterator &, int> &entitiesSignal();
+        Execution::SignalStub<void, const EntityContainer::iterator &, int> &entitiesSignal();
 
         static std::string generateUniqueName();
 
@@ -64,7 +62,7 @@ namespace Scene {
         std::tuple<SceneContainer &, std::string, std::function<void(Entity::Entity &)>> createEntityData(const std::string &name, std::function<void(Entity::Entity &)> init);
         const char *writeEntity(Serialize::CallerHierarchyFormattedSerializeStream out, const Entity::EntityHandle &handle) const;
 
-        SYNCABLE_CONTAINER(mEntities, EntityContainer, Execution::SignalFunctor<const EntityContainer::iterator &, int>);
+        SYNCABLE_CONTAINER(mEntities, EntityContainer, Execution::SignalFunctor<void, const EntityContainer::iterator &, int>);
     };
 
 }

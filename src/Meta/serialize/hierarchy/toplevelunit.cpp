@@ -63,19 +63,20 @@ namespace Serialize {
             setSlaveId(slaveId, mSlaveManager);
     }
 
-    void TopLevelUnitBase::receiveStateImpl(Execution::VirtualReceiverBase<SyncManagerResult> &receiver, SyncManager *mgr)
+     Execution::Future<SyncManagerResult> TopLevelUnitBase::receiveState(SyncManager *mgr)
     {
         if (mStaticSlaveId)
             setSlaveId(mStaticSlaveId, mgr);
         assert(!mReceivingMasterState);
-        mReceivingMasterState = &receiver;
+        mReceivingMasterState = {};
+        return mReceivingMasterState.getFuture();
     }
 
     void TopLevelUnitBase::stateReadDone()
     {
         assert(mReceivingMasterState);
-        Execution::VirtualReceiverBase<SyncManagerResult> *rec = std::exchange(mReceivingMasterState, nullptr);
-        rec->set_value();
+        Execution::Promise<SyncManagerResult> promise = std::exchange(mReceivingMasterState, std::nullopt);
+        promise.set_value();
     }
 
     std::set<std::reference_wrapper<FormattedMessageStream>, CompareStreamId> TopLevelUnitBase::getMasterMessageTargets() const

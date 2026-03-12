@@ -1,19 +1,13 @@
 #pragma once
 
-#include "Meta/serialize/syncmanager.h"
-
-#include "Meta/serialize/streams/syncstreamdata.h"
-
-#include "Meta/serialize/formatter/safebinaryformatter.h"
-
-#include "Meta/serialize/streams/buffered_streambuf.h"
-
 #include "Generic/execution/algorithm.h"
 #include "Generic/execution/execution.h"
 
-#include "../../Generic/testreceiver.h"
-
 #include "Meta/serialize/formats.h"
+#include "Meta/serialize/formatter/safebinaryformatter.h"
+#include "Meta/serialize/streams/buffered_streambuf.h"
+#include "Meta/serialize/streams/syncstreamdata.h"
+#include "Meta/serialize/syncmanager.h"
 
 using namespace Engine::Serialize;
 
@@ -113,13 +107,13 @@ struct TestManager : SyncManager {
     {
     }
 
-    void setSlaveBuffer(
-        TestReceiver<Engine::Serialize::SyncManagerResult> &receiver, Buffer &buffer, Engine::Serialize::Format format = Engine::Serialize::Formats::safebinary)
+    Engine::Execution::Future<Engine::Serialize::SyncManagerResult> setSlaveBuffer(
+        Buffer &buffer, Engine::Serialize::Format format = Engine::Serialize::Formats::safebinary)
     {
         std::unique_ptr<buffered_streambuf> buf = std::make_unique<buffered_streambuf>(std::make_unique<BufferedTestBuf>(buffer, false));
-        Engine::Execution::detach_with_receiver(
-            setSlaveStream(format, std::move(buf), 1s, std::make_unique<SyncStreamData>(*this, 0)), receiver);
+        Engine::Execution::Future<Engine::Serialize::SyncManagerResult> fut = setSlaveStream(format, std::move(buf), 1s, std::make_unique<SyncStreamData>(*this, 0));
         receiveMessages(-1, 1s);
+        return fut;
     }
 
     SyncManagerResult setMasterBuffer(
@@ -139,15 +133,13 @@ struct TestManager : SyncManager {
         StreamResult result = __VA_ARGS__;                   \
         ASSERT_EQ(result.mState, StreamState::OK) << result; \
     }
-#define ASSERT_MESSAGEFUTURE_EQ(f, ...)   \
-    {                                     \
-        ASSERT_TRUE(f.mValue);            \
-        ASSERT_EQ(f.mValue, __VA_ARGS__); \
+#define ASSERT_MESSAGEFUTURE_EQ(f, ...) \
+    {                                   \
+        ASSERT_TRUE(f.is_value());      \
+        ASSERT_EQ(*f, __VA_ARGS__);     \
     }
-#define HANDLE_MGR_RECEIVER(...)                  \
-    {                                             \
-        TestReceiver<SyncManagerResult> receiver; \
-        __VA_ARGS__;                              \
-        ASSERT_TRUE(receiver.mFinished);          \
-        ASSERT_TRUE(receiver.mHasValue);          \
+#define HANDLE_MGR_FUTURE(...)                                             \
+    {                                                                      \
+        Engine::Execution::Future<SyncManagerResult> future = __VA_ARGS__; \
+        ASSERT_TRUE(future.is_value());                                    \
     }

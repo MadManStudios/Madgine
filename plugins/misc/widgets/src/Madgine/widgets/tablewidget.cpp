@@ -188,7 +188,7 @@ namespace Widgets {
         mVerticalLayoutRenderData.update(mColumnConfigs, pixelSize.x, pixelSize.z);
     }
 
-    Execution::SignalStub<IndexType<uint32_t>> &TableWidget::selectedRowChanged()
+    Execution::SignalStub<void, IndexType<uint32_t>> &TableWidget::selectedRowChanged()
     {
         return mSelectedRowChanged;
     }

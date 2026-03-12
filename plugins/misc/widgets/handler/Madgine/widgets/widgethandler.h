@@ -38,8 +38,8 @@ namespace Widgets {
         virtual void onDragEnd(const DragEndEvent &me);
         virtual void onDragAbort();
 
-        virtual bool onKeyPress(const Input::KeyPressEvent &evt);
-        virtual bool onKeyRelease(const Input::KeyReleaseEvent &evt);
+        virtual void onKeyPress(const Input::KeyPressEvent &evt);
+        virtual void onKeyRelease(const Input::KeyReleaseEvent &evt);
 
         virtual void onAxisEvent(const Input::AxisEvent &evt);
 
@@ -52,7 +52,7 @@ namespace Widgets {
         {
             if (!mWidget)
                 return nullptr;
-            Widgets::Button *button = std::get<0>(*mWidget->mWidget)->getChildRecursive<Widgets::Button>(name);
+            Widgets::Button *button = (*mWidget->mWidget)->getChildRecursive<Widgets::Button>(name);
             if (button)
                 mLifetime.attach(button->clickEvent().connect(std::forward<Ty>(args)...));
             return button;

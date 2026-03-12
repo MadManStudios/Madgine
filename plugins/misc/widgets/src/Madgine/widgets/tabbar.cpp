@@ -32,7 +32,7 @@ namespace Widgets {
     {
     }
 
-    Execution::SignalStub<uint32_t> &TabBar::selectedTabChangedEvent()
+    Execution::SignalStub<void, uint32_t> &TabBar::selectedTabChangedEvent()
     {
         return mSelectedTabChanged;
     }

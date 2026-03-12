@@ -3,6 +3,7 @@
 #include "scenecontainer.h"
 
 #include "Generic/execution/execution.h"
+#include "Generic/execution/sender.h"
 #include "Generic/projections.h"
 
 #include "Meta/serialize/container/noparent.h"
@@ -115,16 +116,15 @@ namespace Scene {
         return TupleUnpacker::invokeFlatten(LIFT(mEntities.emplace, this), mEntities.end(), createEntityData(name, init))->ptr();
     }
 
-    void SceneContainer::createEntityAsyncImpl(Serialize::GenericMessageReceiver receiver, const std::string &name, std::function<void(Entity::Entity &)> init)
+    Execution::Sender<Serialize::MessageResult, Entity::EntityPtr> SceneContainer::createEntityAsync(const std::string &name, std::function<void(Entity::Entity &)> init)
     {
-        Execution::detach(mutex().locked(AccessMode::WRITE, [this, name, init { std::move(init) }, receiver { std::move(receiver) }]() mutable {
-            auto toPtr = [](const typename EntityContainer::iterator &it) { return it->ptr(); };
+        auto fut = co_await mutex().locked(AccessMode::WRITE, [this, name, init { std::move(init) }]() mutable {
+            return TupleUnpacker::invokeFlatten(LIFT(mEntities.emplace_async, this), mEntities.end(), createEntityData(name, std::move(init)));
+        });
 
-            Execution::detach_with_receiver(
-                TupleUnpacker::invokeFlatten(LIFT(mEntities.emplace_async, this), mEntities.end(), createEntityData(name, std::move(init)))
-                    | Execution::then(std::move(toPtr)),
-                std::move(receiver));
-        }));
+        auto it = co_await fut;
+            
+        co_return it->ptr();
     }
 
     void SceneContainer::startLifetime()
@@ -142,7 +142,7 @@ namespace Scene {
         return mLifetime;
     }
 
-    Execution::SignalStub<const SceneContainer::EntityContainer::iterator &, int> &SceneContainer::entitiesSignal()
+    Execution::SignalStub<void, const SceneContainer::EntityContainer::iterator &, int> &SceneContainer::entitiesSignal()
     {
         return mEntities.observer().signal();
     }

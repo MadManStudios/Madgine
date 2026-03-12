@@ -174,9 +174,9 @@ namespace Execution {
                 return true;
             }
 
-            ValueStorage<Sender> await_resume()
+            decltype(auto) await_resume()
             {
-                return std::move(mResult).value();
+                return std::move(mResult).value().get();
             }
 
             template <typename... V2>
@@ -225,7 +225,7 @@ namespace Execution {
     template <typename R, typename... V>
     struct CoroutineSenderState : CoroutineSenderStateBase<R, V...> {
 
-        void return_value(V &&...value)
+        void return_value(V...value)
         {
             construct(mResult, std::forward<V>(value)...);
         }

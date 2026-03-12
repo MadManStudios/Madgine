@@ -2,54 +2,56 @@
 
 #include "connection.h"
 #include "container/stack.h"
+#include "storage.h"
 
 namespace Engine {
 namespace Execution {
 
-    template <typename... Ty>
-    struct FlagStub : ConnectionSender<FlagStub<Ty...>, Ty...> {
-        template <typename... Args>
-        FlagStub(Args &&...args)
-            : mValue(std::forward<Args>(args)...)
-        {
-        }
+    template <typename R, typename... Ty>
+    struct FlagStub : ConnectionSender<FlagStub<R, Ty...>, R, Ty...> {
+        FlagStub() = default;
+        FlagStub(const FlagStub<R, Ty...> &other) { }
+        FlagStub(FlagStub<R, Ty...> &&) noexcept { }
 
-        FlagStub(const FlagStub<Ty...> &other) { }
-        FlagStub(FlagStub<Ty...> &&) noexcept { }
-
-        FlagStub<Ty...> &operator=(const FlagStub<Ty...> &other) = delete;
+        FlagStub<R, Ty...> &operator=(const FlagStub<R, Ty...> &other) = delete;
 
         bool isSet() const
         {
             std::unique_lock guard { mStack.mutex() };
-            return static_cast<bool>(mValue);
+            return !mStorage.is_null();
         }
 
-        const std::tuple<Ty...> &operator*() const
+        bool isValue() const
         {
             std::unique_lock guard { mStack.mutex() };
-            return *mValue;
+            return mStorage.is_value();
         }
 
-        void enqueue(Connection<FlagStub<Ty...>, Ty...> *con)
+        decltype(auto) operator*() const
         {
             std::unique_lock guard { mStack.mutex() };
-            if (mValue) {
+            return mStorage.value().get();
+        }
+
+        void enqueue(Connection<FlagStub<R, Ty...>> *con)
+        {
+            std::unique_lock guard { mStack.mutex() };
+            if (!mStorage.is_null()) {
                 guard.unlock();
-                TupleUnpacker::invokeExpand(&Connection<FlagStub<Ty...>, Ty...>::set_value, con, *mValue);
+                mStorage.reproduce(*con);                
             } else {
                 mStack.push(con, guard);
             }
         }
 
-        bool extract(Connection<FlagStub<Ty...>, Ty...> *con)
+        bool extract(Connection<FlagStub<R, Ty...>> *con)
         {
             return mStack.extract(con);
         }
 
     protected:
-        ConnectionStack<Connection<FlagStub<Ty...>, Ty...>> mStack;
-        std::optional<std::tuple<Ty...>> mValue;
+        ConnectionStack<Connection<FlagStub<R, Ty...>>> mStack;
+        ResultStorageImpl<ValueStorageImpl<Ty...>, ErrorStorageImpl<R>> mStorage;
     };
 
 }

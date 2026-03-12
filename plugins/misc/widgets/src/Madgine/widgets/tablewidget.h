@@ -33,7 +33,7 @@ namespace Widgets {
 
         void sizeChanged(const Vector3 &pixelSize) override;
 
-        Execution::SignalStub<IndexType<uint32_t>> &selectedRowChanged();
+        Execution::SignalStub<void, IndexType<uint32_t>> &selectedRowChanged();
         IndexType<uint32_t> selectedRow() const;
         void setSelectedRow(IndexType<uint32_t> row);
 
@@ -63,7 +63,7 @@ namespace Widgets {
         IndexType<uint32_t> mHoveredRow;
         IndexType<uint32_t> mSelectedRow;
 
-        Execution::Signal<IndexType<uint32_t>> mSelectedRowChanged;
+        Execution::Signal<void, IndexType<uint32_t>> mSelectedRowChanged;
     };
 }
 }

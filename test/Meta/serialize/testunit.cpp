@@ -2,12 +2,12 @@
 
 #include "testunit.h"
 
-#include "Meta/serialize/serializetable_impl.h"
+#include "Generic/execution/algorithm.h"
+#include "Generic/execution/execution.h"
 
 #include "Meta/serialize/configs/creator.h"
 
-#include "Generic/execution/algorithm.h"
-#include "Generic/execution/execution.h"
+#include "Meta/serialize/serializetable_impl.h"
 
 SERIALIZETABLE_BEGIN(ComplexDataType)
 SERIALIZETABLE_END(ComplexDataType)
@@ -44,34 +44,34 @@ Engine::Serialize::StreamResult readList1(Engine::Serialize::CallerHierarchyForm
 
 SERIALIZETABLE_BEGIN(TestUnit)
 
-FIELD(list1)
-FIELD(list2)
-FIELD(set1)
-FIELD(set2)
-FIELD(map1, KeyValueCreator<DefaultCreator, DefaultCreator>)
+    FIELD(list1)
+    FIELD(list2)
+    FIELD(set1)
+    FIELD(set2)
+    FIELD(map1, KeyValueCreator<DefaultCreator, DefaultCreator>)
 
-FIELD(complexList1, CustomCreator<&readList1, &writeList1>)
-FIELD(complexList2)
-FIELD(complexList3)
+    FIELD(complexList1, CustomCreator<&readList1, &writeList1>)
+    FIELD(complexList2)
+    FIELD(complexList3)
 
-FIELD(bytes)
+    FIELD(bytes)
 
-SYNCFUNCTION(foo)
-SYNCFUNCTION(bar)
+    SYNCFUNCTION(foo)
+    SYNCFUNCTION(bar)
 
 SERIALIZETABLE_END(TestUnit)
 
-void TestUnit::call_void(int i, TestReceiver<Engine::Serialize::MessageResult> &rec)
+Engine::Execution::Future<Engine::Serialize::MessageResult> TestUnit::call_void(int i)
 {
-    Engine::Execution::detach_with_receiver(TopLevelUnit<TestUnit>::call<&TestUnit::bar>(i), rec);
+    return TopLevelUnit<TestUnit>::call<&TestUnit::bar>(i);
 }
 
-void TestUnit::call(int i, TestReceiver<Engine::Serialize::MessageResult, int> &rec)
+Engine::Execution::Future<Engine::Serialize::MessageResult, int> TestUnit::call(int i)
 {
-    Engine::Execution::detach_with_receiver(TopLevelUnit<TestUnit>::call<&TestUnit::foo>(i), rec);
+    return TopLevelUnit<TestUnit>::call<&TestUnit::foo>(i);
 }
 
-void TestUnit::query(int i, TestReceiver<Engine::Serialize::MessageResult, int> &rec)
+Engine::Execution::Future<Engine::Serialize::MessageResult, int> TestUnit::query(int i)
 {
-    Engine::Execution::detach_with_receiver(TopLevelUnit<TestUnit>::query<&TestUnit::foo>(i), rec);
+    return TopLevelUnit<TestUnit>::query<&TestUnit::foo>(i);
 }

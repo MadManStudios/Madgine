@@ -13,13 +13,18 @@ namespace Execution {
 
         void reproduce(auto &rec)
         {
-            TupleUnpacker::invokeExpand(LIFT(rec.set_value, &), std::move(mValues));
+            TupleUnpacker::invokeExpand(LIFT(rec.set_value, &), mValues);
         }
 
         template <size_t I>
-        decltype(auto) get()
+        decltype(auto) get() &&
         {
             return std::get<I>(mValues);
+        }
+
+        const std::tuple<V...>& get() const&
+        {
+            return mValues;
         }
 
         std::tuple<V...> mValues;
@@ -35,17 +40,27 @@ namespace Execution {
 
         void reproduce(auto &rec)
         {
-            rec.set_value(std::forward<V>(std::get<0>(mValues)));
+            rec.set_value(std::get<0>(mValues));
         }
 
-        operator V()
+        operator V() &&
         {
             return std::forward<V>(std::get<0>(mValues));
         }
 
-        V get()
+        V get() &&
         {
             return std::forward<V>(std::get<0>(mValues));
+        }
+
+        operator const V &() const &
+        {
+            return std::get<0>(mValues);
+        }
+
+        const V &get() const &
+        {
+            return std::get<0>(mValues);
         }
 
         std::tuple<V> mValues;
@@ -64,7 +79,7 @@ namespace Execution {
 
         void reproduce(auto &rec)
         {
-            rec.set_error(std::forward<R>(mError));
+            rec.set_error(mError);
         }
 
         R mError;
@@ -140,6 +155,10 @@ namespace Execution {
             return std::holds_alternative<DoneStorage>(mState);
         }
 
+        void reset() {
+            mState.template emplace<NullStorage>();
+        }
+
         template <typename... V>
         void set_value(V &&...v)
         {
@@ -166,6 +185,16 @@ namespace Execution {
         }
 
         Error error() &&
+        {
+            return std::move(std::get<Error>(mState));
+        }
+
+        const Value &value() const &
+        {
+            return std::move(std::get<Value>(mState));
+        }
+
+        const Error &error() const &
         {
             return std::move(std::get<Error>(mState));
         }

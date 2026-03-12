@@ -53,11 +53,12 @@ namespace Network {
         return NetworkManagerResult::SUCCESS;
     }
 
-    void NetworkManager::connectImpl(Execution::VirtualReceiverBase<type_pack<NetworkManagerResult, Serialize::SyncManagerResult>> &receiver, std::string_view url, int portNr, Serialize::Format format, TimeOut timeout)
+    Execution::Future<NetworkManagerResult> NetworkManager::connect(std::string_view url, int portNr, Serialize::Format format, TimeOut timeout)
     {
         if (isConnected()) {
-            receiver.set_error(NetworkManagerResult::ALREADY_CONNECTED);
-            return;
+            Execution::Promise<NetworkManagerResult> promise;
+            promise.set_error(NetworkManagerResult::ALREADY_CONNECTED);
+            return promise.getFuture();
         }
 
         Socket socket;
@@ -65,11 +66,13 @@ namespace Network {
 
         if (!socket) {
             NetworkManagerResult result = recordSocketError(error);
-            receiver.set_error(result);
-            return;
+            Execution::Promise<NetworkManagerResult> promise;
+            promise.set_error(std::move(result));
+            return promise.getFuture();
         }
 
-        setSlaveStreamImpl(receiver, format, std::make_unique<Engine::Serialize::buffered_streambuf>(std::make_unique<NetworkBuffer>(std::move(socket))), timeout);
+        Execution::Future<Serialize::SyncManagerResult> fut = setSlaveStream(format, std::make_unique<Engine::Serialize::buffered_streambuf>(std::make_unique<NetworkBuffer>(std::move(socket))), timeout);
+        return reinterpret_cast<Execution::Future<NetworkManagerResult>&&>(fut);
     }
 
     void NetworkManager::close()

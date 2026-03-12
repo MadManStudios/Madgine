@@ -1,41 +1,9 @@
 #pragma once
 
-#include "make_sender.h"
 #include "virtualstate.h"
 
 namespace Engine {
 namespace Execution {
-
-    template <typename F, typename Tuple, typename State>
-    struct SimpleInheritedState : State {
-
-        template <typename... Args>
-        SimpleInheritedState(F &&f, Tuple &&args, Args &&...baseArgs)
-            : State(std::forward<Args>(baseArgs)...)
-            , mF(std::forward<F>(f))
-            , mArgs(std::move(args))
-        {
-        }
-
-        void start()
-        {
-            TupleUnpacker::invokeExpand(std::forward<F>(mF), *this, std::move(mArgs));
-        }
-
-        void stop()
-        {
-
-        }
-
-        F mF;
-        Tuple mArgs;
-    };
-
-    template <typename State, typename F, typename Tuple, typename... Args>
-    auto make_inherited_state(F &&f, Tuple &&args, Args &&...baseArgs)
-    {
-        return SimpleInheritedState<F, Tuple, State> { std::forward<F>(f), std::forward<Tuple>(args), std::forward<Args>(baseArgs)... };
-    }
 
     template <typename State, typename... Args>
     struct VirtualSender {
@@ -66,11 +34,6 @@ namespace Execution {
         return VirtualSender<State, Args...>(std::forward<Args>(args)...);
     }
 
-    template <typename R, typename... V, typename F, typename... Args>
-    auto make_simple_virtual_sender(F &&f, Args &&...args)
-    {
-        return make_virtual_sender<SimpleInheritedState<F, std::tuple<Args...>, VirtualReceiverBase<R, V...>>>(std::forward<F>(f), std::tuple<Args...> { std::forward<Args>(args)... });
-    }
 
 }
 }

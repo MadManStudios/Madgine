@@ -10,7 +10,7 @@ namespace Execution {
         using ValueStub<_Ty...>::ValueStub;
 
         struct CallbackDelay {
-            CallbackDelay(ConnectionStack<Connection<ValueStub<_Ty...>, _Ty...>> stack, Value<_Ty...> *value)
+            CallbackDelay(ConnectionStack<Connection<ValueStub<_Ty...>>> stack, Value<_Ty...> *value)
                 : mStack(std::move(stack))
                 , mValue(value)
             {
@@ -19,18 +19,18 @@ namespace Execution {
 
             ~CallbackDelay()
             {
-                while (Connection<ValueStub<_Ty...>, _Ty...> *current = mStack.pop()) {
-                    TupleUnpacker::invokeExpand(&Connection<ValueStub<_Ty...>, _Ty...>::set_value, current, mValue->mValue);
+                while (Connection<ValueStub<_Ty...>> *current = mStack.pop()) {
+                    TupleUnpacker::invokeExpand(&Connection<ValueStub<_Ty...>>::set_value, current, mValue->mValue);
                 }
             }
 
-            ConnectionStack<Connection<ValueStub<_Ty...>, _Ty...>> mStack;
+            ConnectionStack<Connection<ValueStub<_Ty...>>> mStack;
             Value<_Ty...> *mValue;
         };
 
         CallbackDelay set(_Ty &&...args)
         {
-            ConnectionStack<Connection<ValueStub<_Ty...>, _Ty...>> stack = std::move(this->mStack);
+            ConnectionStack<Connection<ValueStub<_Ty...>>> stack = std::move(this->mStack);
             {
                 std::lock_guard guard { this->mStack.mutex() };
                 this->mValue = { std::forward<_Ty>(args)... };

@@ -131,7 +131,7 @@ namespace Execution {
         {
             Sender sender = std::forward<Sender>(std::get<Sender>(mData));
             mData.template emplace<State>(
-                DelayedConstruct<State> { [&]() { return connect(std::forward<Sender>(sender), rec); } });
+                DelayedConstruct<State> { [&]() { return Execution::connect(std::forward<Sender>(sender), rec); } });
         }
 
         void start() override

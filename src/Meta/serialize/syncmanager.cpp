@@ -25,7 +25,7 @@ namespace Serialize {
 
     SyncManager::SyncManager(SyncManager &&other) noexcept
         : SerializeManager(std::move(other))
-        , mReceivingMasterState(std::exchange(other.mReceivingMasterState, nullptr))
+        , mReceivingMasterState(std::exchange(other.mReceivingMasterState, std::nullopt))
         , mTopLevelUnits(std::move(other.mTopLevelUnits))
     {
         for (TopLevelUnitBase *unit : mTopLevelUnits) {
@@ -47,8 +47,7 @@ namespace Serialize {
     SyncManager::~SyncManager()
     {
         if (mReceivingMasterState) {
-            mReceivingMasterState->set_error(SyncManagerResult::UNKNOWN_ERROR);
-            mReceivingMasterState = nullptr;
+            mReceivingMasterState.set_done();
         }
         clearTopLevelItems();
     }
@@ -183,7 +182,7 @@ namespace Serialize {
         mTopLevelUnitNameMappings.clear();
     }
 
-    void SyncManager::addTopLevelItemImpl(Execution::VirtualReceiverBase<SyncManagerResult> &receiver, TopLevelUnitBase *unit, std::string_view name)
+    Execution::Future<SyncManagerResult> SyncManager::addTopLevelItem(TopLevelUnitBase *unit, std::string_view name)
     {
         [[maybe_unused]] auto pib = mTopLevelUnitNameMappings.try_emplace(std::string { name }, unit);
         assert(pib.second);
@@ -202,29 +201,32 @@ namespace Serialize {
             }
         }
 
-        addTopLevelItemImpl(receiver, unit);
+        return addTopLevelItem(unit);
     }
 
-    void SyncManager::addTopLevelItemImpl(Execution::VirtualReceiverBase<SyncManagerResult> &receiver, TopLevelUnitBase *unit, UnitId slaveId)
+    Execution::Future<SyncManagerResult> SyncManager::addTopLevelItem(TopLevelUnitBase *unit, UnitId slaveId)
     {
         if (!unit->addManager(this)) {
-            receiver.set_error(SyncManagerResult::UNKNOWN_ERROR);
-            return;
+            Execution::Promise<SyncManagerResult> promise;
+            promise.set_error(SyncManagerResult::UNKNOWN_ERROR);
+            return promise.getFuture();
         }
         unit->mStaticSlaveId = slaveId;
         mTopLevelUnits.insert(unit);
 
         if (unit->mSynced) {
             if (mSlaveStream) {
-                unit->receiveStateImpl(receiver, this);
-                return;
+                return unit->receiveState(this);
             } else {
                 for (FormattedMessageStream &stream : mMasterStreams | std::views::transform(projectionPairSecond)) {
                     this->sendState(stream, unit);
                 }
             }
         }
-        receiver.set_value();
+
+        Execution::Promise<SyncManagerResult> promise;
+        promise.set_value();
+        return promise.getFuture();
     }
 
     void SyncManager::removeTopLevelItem(TopLevelUnitBase *unit)
@@ -246,11 +248,11 @@ namespace Serialize {
         mTopLevelUnits.erase(unit);
     }
 
-    void SyncManager::moveTopLevelItem(TopLevelUnitBase *oldUnit,
+    Engine::Execution::Future<SyncManagerResult> SyncManager::moveTopLevelItem(TopLevelUnitBase *oldUnit,
         TopLevelUnitBase *newUnit)
     {
         removeTopLevelItem(oldUnit);
-        Execution::sync_expect(addTopLevelItem(newUnit, false));
+        return addTopLevelItem(newUnit, false);
     }
 
     FormattedMessageStream &SyncManager::getSlaveMessageTarget()
@@ -266,12 +268,13 @@ namespace Serialize {
             it = removeMasterStream(it);
     }
 
-    void SyncManager::setSlaveStreamImpl(Execution::VirtualReceiverBase<SyncManagerResult> &receiver, Format format, std::unique_ptr<message_streambuf> buffer,
+    Execution::Future<SyncManagerResult> SyncManager::setSlaveStream(Format format, std::unique_ptr<message_streambuf> buffer,
         TimeOut timeout, std::unique_ptr<SyncStreamData> data)
     {
         if (mSlaveStream) {
-            receiver.set_error(SyncManagerResult::UNKNOWN_ERROR);
-            return;
+            Execution::Promise<SyncManagerResult> promise;
+            promise.set_error(SyncManagerResult::UNKNOWN_ERROR);
+            return promise.getFuture();
         }
 
         SyncManagerResult state = SyncManagerResult::SUCCESS;
@@ -296,18 +299,22 @@ namespace Serialize {
             assert(!mReceivingMasterState);
 
             mReceivingCounter = 1 + mTopLevelUnits.size();
-            mReceivingMasterState = &receiver;
+            mReceivingMasterState = {};
             mReceivingMasterStateTimeout = timeout;
             for (TopLevelUnitBase *unit : mTopLevelUnits) {
                 Execution::detach(unit->receiveState(this) | Execution::then([this]() { decreaseReceivingCounter(); }));
             }
+            Execution::Future<SyncManagerResult> fut = mReceivingMasterState.getFuture();
             decreaseReceivingCounter();
+            return fut;
         } else {
             for (TopLevelUnitBase *unit : updatedUnits | std::views::reverse) {
                 [[maybe_unused]] bool result = unit->updateManagerType(this, true);
                 assert(result);
             }
-            receiver.set_error(state);
+            Execution::Promise<SyncManagerResult> promise;
+            promise.set_error(std::move(state));
+            return promise.getFuture();
         }
     }
 
@@ -315,8 +322,8 @@ namespace Serialize {
     {
         assert(mReceivingMasterState);
         if (--mReceivingCounter == 0) {
-            Execution::VirtualReceiverBase<SyncManagerResult> *rec = std::exchange(mReceivingMasterState, nullptr);
-            rec->set_value();
+            Execution::Promise<SyncManagerResult> promise = std::exchange(mReceivingMasterState, std::nullopt);
+            promise.set_value();
         }
     }
 
@@ -337,8 +344,8 @@ namespace Serialize {
         }
 
         if (mReceivingMasterState) {
-            mReceivingMasterState->set_error(reason);
-            mReceivingMasterState = nullptr;
+            Execution::Promise<SyncManagerResult> promise = std::exchange(mReceivingMasterState, std::nullopt);
+            promise.set_error(std::move(reason));            
         }
     }
 

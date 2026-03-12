@@ -24,11 +24,10 @@ namespace Serialize {
         ~SyncManager();
 
         void clearTopLevelItems();
-        void addTopLevelItemImpl(Execution::VirtualReceiverBase<SyncManagerResult> &receiver, TopLevelUnitBase *unit, std::string_view name);
-        void addTopLevelItemImpl(Execution::VirtualReceiverBase<SyncManagerResult> &receiver, TopLevelUnitBase *unit, UnitId slaveId = 0);
-        ASYNC_STUB(addTopLevelItem, addTopLevelItemImpl, Execution::make_simple_virtual_sender<SyncManagerResult>);
+        Execution::Future<SyncManagerResult> addTopLevelItem(TopLevelUnitBase *unit, std::string_view name);
+        Execution::Future<SyncManagerResult> addTopLevelItem(TopLevelUnitBase *unit, UnitId slaveId = 0);
         void removeTopLevelItem(TopLevelUnitBase *unit);
-        void moveTopLevelItem(TopLevelUnitBase *oldUnit, TopLevelUnitBase *newUnit);
+        Engine::Execution::Future<SyncManagerResult> moveTopLevelItem(TopLevelUnitBase *oldUnit, TopLevelUnitBase *newUnit);
 
         std::set<std::reference_wrapper<FormattedMessageStream>, CompareStreamId> getMasterMessageTargets();
 
@@ -56,8 +55,7 @@ namespace Serialize {
         FormattedMessageStream &getMasterStream(ParticipantId id);
 
         void removeAllStreams();
-        void setSlaveStreamImpl(Execution::VirtualReceiverBase<SyncManagerResult> &receiver, Format format, std::unique_ptr<message_streambuf> buffer, TimeOut timeout = {}, std::unique_ptr<SyncStreamData> data = {});
-        ASYNC_STUB(setSlaveStream, setSlaveStreamImpl, Execution::make_simple_virtual_sender<SyncManagerResult>);
+        Execution::Future<SyncManagerResult> setSlaveStream(Format format, std::unique_ptr<message_streambuf> buffer, TimeOut timeout = {}, std::unique_ptr<SyncStreamData> data = {});
         void decreaseReceivingCounter();
         virtual void removeSlaveStream(SyncManagerResult reason = SyncManagerResult::UNKNOWN_ERROR);
 
@@ -73,7 +71,7 @@ namespace Serialize {
 
         std::unique_ptr<SyncStreamData> createStreamData(ParticipantId id = createStreamId());
 
-        Execution::VirtualReceiverBase<SyncManagerResult> *mReceivingMasterState = nullptr;
+        Execution::Promise<SyncManagerResult> mReceivingMasterState = std::nullopt;
         TimeOut mReceivingMasterStateTimeout;
         size_t mReceivingCounter;
 

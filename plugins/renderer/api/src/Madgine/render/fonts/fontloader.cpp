@@ -243,7 +243,7 @@ namespace Render {
             }
 
             TempData &data = tempData[style];
-            data.mBuffer = (co_await Filesystem::readFileAsync(stylePath)).value();
+            data.mBuffer = (co_await Filesystem::readFileAsync(stylePath)).value().get();
 
             if (FT_New_Memory_Face(mFreeType, static_cast<const FT_Byte *>(data.mBuffer.mData), data.mBuffer.mSize, 0, &data.mFace)) {
                 LOG_ERROR("FREETYPE: Failed to load font");

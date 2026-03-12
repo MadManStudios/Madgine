@@ -67,12 +67,12 @@ namespace Resources {
         std::string_view protocol = mPath.protocol();
 
         if (protocol == "http" || protocol == "https" || protocol == "ftp") {
-            co_return (co_await FetchSender<std::vector<std::byte>>(mPath, { mPath })).get();
+            co_return co_await FetchSender<std::vector<std::byte>>(mPath, { mPath });
         } else if (!protocol.empty()) {
             LOG_WARNING("Unrecognized file protocol '" << protocol << "'");
         }
 
-        co_return (co_await Filesystem::readFileAsync(mPath)).get();
+        co_return co_await Filesystem::readFileAsync(mPath);
     }
 
 }

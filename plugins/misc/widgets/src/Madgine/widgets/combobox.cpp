@@ -104,7 +104,7 @@ namespace Widgets {
         }
     }
 
-    Execution::SignalStub<size_t> &Combobox::indexChangedEvent()
+    Execution::SignalStub<void, size_t> &Combobox::indexChangedEvent()
     {
         return mIndexChanged;
     }

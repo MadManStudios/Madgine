@@ -45,7 +45,7 @@ namespace Widgets {
     void WidgetHandlerBase::abortDrag()
     {
         if (mWidget)
-            std::get<0>(*mWidget->mWidget)->abortDrag();
+            (*mWidget->mWidget)->abortDrag();
     }
 
     void WidgetHandlerBase::onPointerMove(const Input::PointerMoveEvent &me)
@@ -72,14 +72,12 @@ namespace Widgets {
     {
     }
 
-    bool WidgetHandlerBase::onKeyPress(const Input::KeyPressEvent &evt)
+    void WidgetHandlerBase::onKeyPress(const Input::KeyPressEvent &evt)
     {
-        return false;
     }
 
-    bool WidgetHandlerBase::onKeyRelease(const Input::KeyReleaseEvent &evt)
-    {
-        return false;
+    void WidgetHandlerBase::onKeyRelease(const Input::KeyReleaseEvent &evt)
+    {        
     }
 
     void WidgetHandlerBase::onAxisEvent(const Input::AxisEvent &evt)
@@ -88,7 +86,7 @@ namespace Widgets {
 
     bool WidgetHandlerBase::dragging() const
     {
-        return mWidget ? std::get<0>(*mWidget->mWidget)->dragging() : false;
+        return mWidget ? (*mWidget->mWidget)->dragging() : false;
     }
 
     void WidgetHandlerBase::startLifetime()
@@ -107,7 +105,7 @@ namespace Widgets {
 
     Widgets::WidgetBase *WidgetHandlerBase::widget() const
     {
-        return std::get<0>(*mWidget->mWidget);
+        return (*mWidget->mWidget);
     }
 
     void WidgetHandlerBase::open()
@@ -138,7 +136,7 @@ namespace Widgets {
 
     bool WidgetHandlerBase::isOpen() const
     {
-        return mWidget->mWidget.isSet() && std::get<0>(*mWidget->mWidget)->mVisible;
+        return mWidget->mWidget.isSet() && (*mWidget->mWidget)->mVisible;
     }
 
     bool WidgetHandlerBase::isRootWindow() const

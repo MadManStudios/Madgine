@@ -21,19 +21,18 @@ TEST(Serialize_Call, Call)
     NoParent<TestUnit> unit1;
     NoParent<TestUnit> unit2;
 
-    HANDLE_MGR_RECEIVER(mgr1.addTopLevelItemImpl(receiver, &unit1, 10));
-    HANDLE_MGR_RECEIVER(mgr2.addTopLevelItemImpl(receiver, &unit2, 10));
+    HANDLE_MGR_FUTURE(mgr1.addTopLevelItem(&unit1, 10));
+    HANDLE_MGR_FUTURE(mgr2.addTopLevelItem(&unit2, 10));
 
     Buffer buffer;
     HANDLE_MGR_RESULT(mgr1, mgr1.setMasterBuffer(buffer));
     mgr1.sendMessages();
-    HANDLE_MGR_RECEIVER(mgr2.setSlaveBuffer(receiver, buffer));
+    HANDLE_MGR_FUTURE(mgr2.setSlaveBuffer(buffer));
 
     ASSERT_EQ(unit1.mCallCount, 0);
     ASSERT_EQ(unit2.mCallCount, 0);
 
-    TestReceiver<Engine::Serialize::MessageResult, int> f1;
-    unit1.call(1, f1);
+    auto f1 = unit1.call(1);
 
     ASSERT_TRUE(f1.is_ready());
     ASSERT_MESSAGEFUTURE_EQ(f1, 2);
@@ -46,9 +45,8 @@ TEST(Serialize_Call, Call)
 
     ASSERT_EQ(unit1.mCallCount, 1);
     ASSERT_EQ(unit2.mCallCount, 1);
-
-    TestReceiver<Engine::Serialize::MessageResult, int> f2;
-    unit2.call(2, f2);
+    
+    auto f2 = unit2.call(2);
 
     ASSERT_FALSE(f2.is_ready());
 
@@ -72,11 +70,10 @@ TEST(Serialize_Call, Call)
     ASSERT_EQ(unit1.mCallCount, 2);
     ASSERT_EQ(unit2.mCallCount, 2);
 
-    TestReceiver<Engine::Serialize::MessageResult> f3;
-    unit1.call_void(4, f3);
+    auto f3 = unit1.call_void(4);
 
     ASSERT_TRUE(f3.is_ready());
-    ASSERT_TRUE(f3.mHasValue);
+    ASSERT_TRUE(f3.is_value());
 
     ASSERT_EQ(unit1.mCallCount, 3);
     ASSERT_EQ(unit2.mCallCount, 2);
@@ -99,26 +96,25 @@ TEST(Serialize_Call, Call_Hierarchical)
     NoParent<TestUnit> unit2;
     NoParent<TestUnit> unit3;
 
-    HANDLE_MGR_RECEIVER(mgr1.addTopLevelItemImpl(receiver, &unit1, 10));
-    HANDLE_MGR_RECEIVER(mgr2.addTopLevelItemImpl(receiver, &unit2, 10));
-    HANDLE_MGR_RECEIVER(mgr3.addTopLevelItemImpl(receiver, &unit3, 10));
+    HANDLE_MGR_FUTURE(mgr1.addTopLevelItem(&unit1, 10));
+    HANDLE_MGR_FUTURE(mgr2.addTopLevelItem(&unit2, 10));
+    HANDLE_MGR_FUTURE(mgr3.addTopLevelItem(&unit3, 10));
 
     Buffer buffer;
     HANDLE_MGR_RESULT(mgr1, mgr1.setMasterBuffer(buffer));
     mgr1.sendMessages();
-    HANDLE_MGR_RECEIVER(mgr2.setSlaveBuffer(receiver, buffer));
+    HANDLE_MGR_FUTURE(mgr2.setSlaveBuffer(buffer));
 
     Buffer buffer2;
     HANDLE_MGR_RESULT(mgr2, mgr2.setMasterBuffer(buffer2));
     mgr2.sendMessages();
-    HANDLE_MGR_RECEIVER(mgr3.setSlaveBuffer(receiver, buffer2));
+    HANDLE_MGR_FUTURE(mgr3.setSlaveBuffer(buffer2));
 
     ASSERT_EQ(unit1.mCallCount, 0);
     ASSERT_EQ(unit2.mCallCount, 0);
     ASSERT_EQ(unit3.mCallCount, 0);
 
-    TestReceiver<Engine::Serialize::MessageResult, int> f1;
-    unit1.call(1, f1);
+    auto f1 = unit1.call(1);
 
     ASSERT_TRUE(f1.is_ready());
     ASSERT_MESSAGEFUTURE_EQ(f1, 2);
@@ -141,8 +137,7 @@ TEST(Serialize_Call, Call_Hierarchical)
     ASSERT_EQ(unit2.mCallCount, 1);
     ASSERT_EQ(unit3.mCallCount, 1);
 
-    TestReceiver<Engine::Serialize::MessageResult, int> f2;
-    unit3.call(2, f2);
+    auto f2 = unit3.call(2);
 
     ASSERT_FALSE(f2.is_ready());
 

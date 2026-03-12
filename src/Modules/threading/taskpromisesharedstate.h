@@ -31,11 +31,11 @@ namespace Threading {
         TaskPromiseSharedState() = default;
         TaskPromiseSharedState(T val)
             : TaskPromiseSharedStateBase(true)
-            , mFlag(std::move(val))
         {
+            mFlag.set_value(std::forward<T>(val));
         }
 
-        Execution::Flag<T> mFlag = std::nullopt;
+        Execution::Flag<void, T> mFlag;
 
         bool valid()
         {
@@ -51,10 +51,10 @@ namespace Threading {
 
         void set_value(T val)
         {
-            ManualLifetime<typename Execution::Flag<T>::CallbackDelay> cb;
+            ManualLifetime<typename Execution::Flag<void, T>::CallbackDelay> cb;
             {
                 std::lock_guard guard { mMutex };
-                construct(cb, mFlag.emplace(std::move(val)));
+                construct(cb, mFlag.set_value(std::move(val)));
             }
             destruct(cb);
         }
@@ -63,7 +63,7 @@ namespace Threading {
         {
             std::lock_guard guard { mMutex };
             assert(mFlag.isSet());
-            return std::get<0>(*mFlag);
+            return *mFlag;
         }
 
         auto &sender()
@@ -79,10 +79,10 @@ namespace Threading {
             : TaskPromiseSharedStateBase(ready)
         {
             if (ready)
-                mFlag.emplace();
+                mFlag.set_value();
         }
 
-        Execution::Flag<> mFlag = std::nullopt;
+        Execution::Flag<void> mFlag;
 
         bool valid()
         {
@@ -100,7 +100,7 @@ namespace Threading {
         {
             {
                 std::lock_guard guard { mMutex };
-                mFlag.emplace();
+                mFlag.set_value();
             }
         }
 

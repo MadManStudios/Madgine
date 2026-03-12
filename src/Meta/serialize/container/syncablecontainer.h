@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Generic/container/containerevent.h"
+#include "Generic/execution/future.h"
 
 #include "serializablecontainer.h"
 #include "syncable.h"
@@ -83,19 +84,17 @@ namespace Serialize {
         }
 
         template <typename... _Ty>
-        auto emplace_async(const iterator &where, _Ty &&...args)
+        Execution::Future<MessageResult, iterator> emplace_async(const iterator &where, _Ty &&...args)
         {
-            return make_message_sender<iterator>(
-                [this](auto &receiver, const iterator &where, _Ty &&...args2) {
-                    if (this->isMaster()) {
-                        receiver.set_value(Engine::emplace(*this, where, std::forward<_Ty>(args2)...));
-                    } else {
-                        dummy_t temp { std::forward<_Ty>(args2)... };
-                        this->writeRequest(receiver, emplace_request_t { where, temp });
-                    }
-                },
-                where,
-                std::forward<_Ty>(args)...);
+            Execution::Promise<MessageResult, iterator> promise;
+            Execution::Future<MessageResult, iterator> future = promise.getFuture();
+            if (this->isMaster()) {
+                promise.set_value(Engine::emplace(*this, where, std::forward<_Ty>(args)...));
+            } else {
+                dummy_t temp { std::forward<_Ty>(args)... };
+                this->writeRequest(std::move(promise), emplace_request_t { where, temp });
+            }
+            return future;
         }
 
         iterator erase(const iterator &it)
@@ -106,15 +105,14 @@ namespace Serialize {
 
         auto erase_async(const iterator &where)
         {
-            return make_message_sender<iterator>(
-                [this](auto &receiver, const iterator &where) {
-                    if (this->isMaster()) {
-                        receiver.set_value(erase(where));
-                    } else {
-                        this->writeRequest(receiver, erase_t { where });
-                    }
-                },
-                where);
+            Execution::Promise<MessageResult, iterator> promise;
+            Execution::Future<MessageResult, iterator> future = promise.getFuture();
+            if (this->isMaster()) {
+                promise.set_value(erase(where));
+            } else {
+                this->writeRequest(std::move(promise), erase_t { where });
+            }
+            return future;
         }
 
         iterator erase(const iterator &from, const iterator &to)
@@ -125,16 +123,15 @@ namespace Serialize {
 
         auto erase_async(const iterator &from, const iterator &to)
         {
-            return make_message_sender<iterator>(
-                [this](auto &receiver, const iterator &from, const iterator &to) {
-                    iterator it = this->end();
-                    if (this->isMaster()) {
-                        receiver.set_value(erase(from, to));
-                    } else {
-                        this->writeRequest(receiver, erase_range_t { from, to });
-                    }
-                },
-                from, to);
+            Execution::Promise<iterator> promise;
+            Execution::Future<iterator> future = promise.getFuture();
+            iterator it = this->end();
+            if (this->isMaster()) {
+                promise.set_value(erase(from, to));
+            } else {
+                this->writeRequest(std::move(promise), erase_range_t { from, to });
+            }
+            return future;
         }
 
         struct _InsertOperation : Base::InsertOperation {

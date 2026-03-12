@@ -90,8 +90,8 @@ namespace Tools {
 
                     for (const Widgets::LayoutWidget &w : mWidgetManager->layoutWidgets()) {
                         ImGui::PushID(&w);
-                        if (ImGui::MenuItem(w.mName.c_str(), nullptr, w.mWidget.isSet() && std::get<0>(*w.mWidget)->mVisible, w.mWidget.isSet())) {
-                            if (std::get<0>(*w.mWidget)->mVisible)
+                        if (ImGui::MenuItem(w.mName.c_str(), nullptr, w.mWidget.isSet() && (*w.mWidget)->mVisible, w.mWidget.isSet())) {
+                            if ((*w.mWidget)->mVisible)
                                 mWidgetManager->closeLayout(w.mName);
                             else
                                 mWidgetManager->openLayout(w.mName);
@@ -111,7 +111,7 @@ namespace Tools {
                                     if (mInspector->drawValue("Template", widgetTemplate, true).first) {
                                         w.mWidgetTemplate = scope_cast<Widgets::WidgetLoader::Resource>(widgetTemplate);
                                         if (w.mWidget.isSet()) {
-                                            mWidgetManager->destroyTopLevel(std::get<0>(*w.mWidget));
+                                            mWidgetManager->destroyTopLevel(*w.mWidget);
                                             w.mWidget.reset();
                                         }
                                     }
@@ -180,7 +180,7 @@ namespace Tools {
             if (beginSubPanel("Widgets - Hierarchy", &mGameHierarchyVisible, ImGuiDir_Left)) {
 
                 for (Widgets::LayoutWidget &layoutWidget : manager().layoutWidgets()) {
-                    Widgets::WidgetBase *widget = layoutWidget.mWidget.isSet() ? std::get<0>(*layoutWidget.mWidget) : nullptr;
+                    Widgets::WidgetBase *widget = layoutWidget.mWidget.isSet() ? *layoutWidget.mWidget : nullptr;
                     if (widget && widget->mVisible) {
                         if (ImGui::TreeNode(widget->mName.c_str())) {
                             drawWidget(widget, hoveredWidget);

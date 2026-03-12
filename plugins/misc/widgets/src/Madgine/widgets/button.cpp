@@ -38,7 +38,7 @@ namespace Widgets {
     {
     }
 
-    Execution::SignalStub<> &Button::clickEvent()
+    Execution::SignalStub<void> &Button::clickEvent()
     {
         return mClicked;
     }

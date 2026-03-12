@@ -202,7 +202,7 @@ namespace Serialize {
             if (accepted) {
                 std::ranges::iterator_t<C> it;
                 STREAM_PROPAGATE_ERROR(performOperation(c, op, in, it, request.mRequester, request.mRequesterTransactionId));
-                request.mReceiver.set_value(it);
+                request.mReceiver.set_value<std::ranges::iterator_t<C>>(it);
             } else {
                 if (request.mRequesterTransactionId) {
                     WriteMessage msg = getRequestResponseTarget(&c, request.mRequester, request.mRequesterTransactionId);
