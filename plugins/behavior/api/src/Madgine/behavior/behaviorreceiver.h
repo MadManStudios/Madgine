@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Generic/execution/virtualsender.h"
+#include "Generic/execution/virtualstate.h"
 
 #include "Meta/keyvalue/argumentlist.h"
 

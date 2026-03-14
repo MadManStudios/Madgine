@@ -1,8 +1,6 @@
 #pragma once
 
 #include "Generic/execution/future.h"
-#include "Generic/execution/virtualsender.h"
-#include "Generic/execution/virtualstate.h"
 #include "Generic/nulledptr.h"
 
 namespace Engine {

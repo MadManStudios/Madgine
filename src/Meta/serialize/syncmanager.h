@@ -1,6 +1,5 @@
 #pragma once
 
-#include "Generic/execution/virtualsender.h"
 #include "Generic/functor.h"
 #include "Generic/genericresult.h"
 #include "Generic/timeout.h"

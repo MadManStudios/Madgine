@@ -1,7 +1,5 @@
 #pragma once
 
-#include "Generic/execution/virtualsender.h"
-
 #include "Madgine/behavior/behavior.h"
 #include "Madgine/root/rootcomponentbase.h"
 #include "Madgine/root/rootcomponentcollector.h"
