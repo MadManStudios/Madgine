@@ -60,7 +60,9 @@ namespace Serialize {
 
         std::unique_ptr<std::basic_streambuf<char>> mBuffer;
 
-        MessageId mRunningMessageId = 0;
+        std::chrono::steady_clock::time_point mLastSentMessage = std::chrono::steady_clock::now();
+        static constexpr MessageId sKeepAliveMessageId = 1;
+        MessageId mRunningMessageId = sKeepAliveMessageId;
     };
 }
 }

@@ -126,6 +126,19 @@ namespace Serialize {
 
     StreamResult buffered_streambuf::sendMessages()
     {
+        std::chrono::steady_clock::time_point now = std::chrono::steady_clock::now();
+        if (!mBufferedSendMsgs.empty()) {
+            mLastSentMessage = now;
+        } else if (now - mLastSentMessage > 5s) {
+            BufferedMessageHeader keepalive;
+            keepalive.mMessageId = sKeepAliveMessageId;
+            keepalive.mMsgSize = 0;
+            int num = mBuffer->sputn(reinterpret_cast<const char *>(&keepalive), sizeof(keepalive));
+            if (num != sizeof(keepalive)) {
+                return STREAM_CONNECTION_LOST_ERROR() << "Connection lost sending keepalive";
+            }
+            mLastSentMessage = now;
+        }
         while (!mBufferedSendMsgs.empty()) {
             BufferedSendMessage msg = std::move(mBufferedSendMsgs.front());
             mBufferedSendMsgs.pop();
@@ -159,10 +172,15 @@ namespace Serialize {
                 }
                 mBytesToRead -= num;
                 if (mBytesToRead == 0) {
-                    assert(mReceiveMessageHeader.mMsgSize > 0);
-                    mBytesToRead = mReceiveMessageHeader.mMsgSize;
-                    mRecBuffer.resize(mBytesToRead);
-                    assert(mReceiveMessageHeader.mMessageId != 0);
+                    assert(mReceiveMessageHeader.mMessageId != 0);                    
+                    if (mReceiveMessageHeader.mMessageId == sKeepAliveMessageId) {
+                        assert(mReceiveMessageHeader.mMsgSize == 0);
+                        mBytesToRead = sizeof mReceiveMessageHeader;
+                    } else {
+                        assert(mReceiveMessageHeader.mMsgSize > 0);
+                        mBytesToRead = mReceiveMessageHeader.mMsgSize;
+                        mRecBuffer.resize(mBytesToRead);
+                    }                    
                 }
             }
         }

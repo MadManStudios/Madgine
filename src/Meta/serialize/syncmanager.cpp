@@ -264,8 +264,8 @@ namespace Serialize {
     void SyncManager::removeAllStreams()
     {
         removeSlaveStream();
-        for (auto it = mMasterStreams.begin(); it != mMasterStreams.end();)
-            it = removeMasterStream(it);
+        while (!mMasterStreams.empty())
+            removeMasterStream(mMasterStreams.begin()->first);
     }
 
     Execution::Future<SyncManagerResult> SyncManager::setSlaveStream(Format format, std::unique_ptr<message_streambuf> buffer,
@@ -341,11 +341,12 @@ namespace Serialize {
             mSlaveStream->setId(0);
             mSlaveStream.reset();
             setSlaveStreamData(nullptr);
+            mSlaveStreamClosedSignal.emit();
         }
 
         if (mReceivingMasterState) {
             Execution::Promise<SyncManagerResult> promise = std::exchange(mReceivingMasterState, std::nullopt);
-            promise.set_error(std::move(reason));            
+            promise.set_error(std::move(reason));
         }
     }
 
@@ -409,9 +410,11 @@ namespace Serialize {
         return SyncManagerResult::SUCCESS;
     }
 
-    std::map<ParticipantId, FormattedMessageStream>::iterator SyncManager::removeMasterStream(std::map<ParticipantId, FormattedMessageStream>::iterator it, SyncManagerResult reason)
+    void SyncManager::removeMasterStream(ParticipantId id, SyncManagerResult reason)
     {
-        return mMasterStreams.erase(it);
+        mMasterStreamClosedSignal.emit(id);
+        [[maybe_unused]] size_t count = mMasterStreams.erase(id);
+        assert(count == 1);
     }
 
     ParticipantId SyncManager::getParticipantId(SyncManager *manager)
@@ -458,7 +461,9 @@ namespace Serialize {
                 ++it;
                 break;
             default:
-                it = removeMasterStream(it);
+                ParticipantId id = it->first;
+                ++it;
+                removeMasterStream(id);
             }
         }
     }
@@ -481,7 +486,9 @@ namespace Serialize {
                 ++it;
                 break;
             default:
-                it = removeMasterStream(it);
+                ParticipantId id = it->first;
+                ++it;
+                removeMasterStream(id);
             }
         }
     }
@@ -603,6 +610,16 @@ namespace Serialize {
     std::unique_ptr<SyncStreamData> SyncManager::createStreamData(ParticipantId id)
     {
         return std::make_unique<SyncStreamData>(*this, id);
+    }
+
+    Execution::SignalStub<void> &SyncManager::slaveStreamClosed()
+    {
+        return mSlaveStreamClosedSignal;
+    }
+
+    Execution::SignalStub<void, ParticipantId> &SyncManager::masterStreamClosed()
+    {
+        return mMasterStreamClosedSignal;
     }
 
 } // namespace Serialize

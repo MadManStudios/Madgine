@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Generic/execution/signal.h"
 #include "Generic/functor.h"
 #include "Generic/genericresult.h"
 #include "Generic/timeout.h"
@@ -47,6 +48,9 @@ namespace Serialize {
 
         static ParticipantId getParticipantId(SyncManager *manager);
 
+        Execution::SignalStub<void> &slaveStreamClosed();
+        Execution::SignalStub<void, ParticipantId> &masterStreamClosed();
+
     protected:
         StreamResult receiveMessages(FormattedMessageStream &stream, int &msgCount, TimeOut timeout = {});
 
@@ -60,7 +64,7 @@ namespace Serialize {
 
         SyncManagerResult addMasterStream(Format format, std::unique_ptr<message_streambuf> buffer, std::unique_ptr<SyncStreamData> data = {});
         SyncManagerResult moveMasterStream(ParticipantId streamId, SyncManager *target);
-        virtual std::map<ParticipantId, FormattedMessageStream>::iterator removeMasterStream(std::map<ParticipantId, FormattedMessageStream>::iterator it, SyncManagerResult reason = SyncManagerResult::UNKNOWN_ERROR);
+        virtual void removeMasterStream(ParticipantId id, SyncManagerResult reason = SyncManagerResult::UNKNOWN_ERROR);
 
         const std::set<TopLevelUnitBase *> &getTopLevelUnits() const;
 
@@ -81,6 +85,9 @@ namespace Serialize {
         std::set<TopLevelUnitBase *> mTopLevelUnits; // TODO: Sort by MasterId
 
         std::map<std::string, TopLevelUnitBase *> mTopLevelUnitNameMappings;
+
+        Execution::Signal<void> mSlaveStreamClosedSignal;
+        Execution::Signal<void, ParticipantId> mMasterStreamClosedSignal;
     };
 }
 }
