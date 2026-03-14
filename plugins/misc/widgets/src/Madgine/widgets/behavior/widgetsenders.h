@@ -16,7 +16,7 @@ namespace Widgets {
     using NamedWidgetManager = Behavior::Named<"WidgetManager", WidgetManager &>;
 
     constexpr auto wait_frame = [](std::chrono::steady_clock::duration duration, NamedWidgetManager manager = {}, std::chrono::steady_clock::duration durationOverride = -1s, std::chrono::steady_clock::duration acc = 0s) {
-        return manager | Execution::let_value([=](auto &&manager) { return manager.clock().wait(duration, durationOverride, acc); });
+        return std::move(manager) | Execution::let_value([=](auto &&manager) { return manager.clock().wait(duration, durationOverride, acc); });
     };
 
     constexpr auto yield_frame = [](NamedWidgetManager manager = {}, std::chrono::steady_clock::duration duration = 0s, std::chrono::steady_clock::duration acc = 0s) {
