@@ -14,8 +14,7 @@ namespace Serialize {
 
     ENUM_BASE(SyncManagerResult, GenericResult,
         STREAM_ERROR,
-        TIMEOUT,
-        CANCELED)
+        TIMEOUT)
 
     struct META_EXPORT SyncManager : SerializeManager {
         SyncManager(const std::string &name);
@@ -48,8 +47,8 @@ namespace Serialize {
 
         static ParticipantId getParticipantId(SyncManager *manager);
 
-        Execution::SignalStub<void> &slaveStreamClosed();
-        Execution::SignalStub<void, ParticipantId> &masterStreamClosed();
+        Execution::SignalStub<void, StreamState> &slaveStreamClosed();
+        Execution::SignalStub<void, ParticipantId, StreamState> &masterStreamClosed();
 
     protected:
         StreamResult receiveMessages(FormattedMessageStream &stream, int &msgCount, TimeOut timeout = {});
@@ -60,11 +59,11 @@ namespace Serialize {
         void removeAllStreams();
         Execution::Future<SyncManagerResult> setSlaveStream(Format format, std::unique_ptr<message_streambuf> buffer, TimeOut timeout = {}, std::unique_ptr<SyncStreamData> data = {});
         void decreaseReceivingCounter();
-        virtual void removeSlaveStream(SyncManagerResult reason = SyncManagerResult::UNKNOWN_ERROR);
+        virtual void removeSlaveStream(StreamState reason = StreamState::UNKNOWN_ERROR);
 
         SyncManagerResult addMasterStream(Format format, std::unique_ptr<message_streambuf> buffer, std::unique_ptr<SyncStreamData> data = {});
         SyncManagerResult moveMasterStream(ParticipantId streamId, SyncManager *target);
-        virtual void removeMasterStream(ParticipantId id, SyncManagerResult reason = SyncManagerResult::UNKNOWN_ERROR);
+        virtual void removeMasterStream(ParticipantId id, StreamState reason = StreamState::UNKNOWN_ERROR);
 
         const std::set<TopLevelUnitBase *> &getTopLevelUnits() const;
 
@@ -86,8 +85,8 @@ namespace Serialize {
 
         std::map<std::string, TopLevelUnitBase *> mTopLevelUnitNameMappings;
 
-        Execution::Signal<void> mSlaveStreamClosedSignal;
-        Execution::Signal<void, ParticipantId> mMasterStreamClosedSignal;
+        Execution::Signal<void, StreamState> mSlaveStreamClosedSignal;
+        Execution::Signal<void, ParticipantId, StreamState> mMasterStreamClosedSignal;
     };
 }
 }

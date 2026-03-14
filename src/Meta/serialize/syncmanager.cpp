@@ -327,7 +327,7 @@ namespace Serialize {
         }
     }
 
-    void SyncManager::removeSlaveStream(SyncManagerResult reason)
+    void SyncManager::removeSlaveStream(StreamState reason)
     {
         if (mSlaveStream) {
             while (!mSlaveMappings.empty()) {
@@ -341,12 +341,12 @@ namespace Serialize {
             mSlaveStream->setId(0);
             mSlaveStream.reset();
             setSlaveStreamData(nullptr);
-            mSlaveStreamClosedSignal.emit();
+            mSlaveStreamClosedSignal.emit(reason);
         }
 
         if (mReceivingMasterState) {
             Execution::Promise<SyncManagerResult> promise = std::exchange(mReceivingMasterState, std::nullopt);
-            promise.set_error(std::move(reason));
+            promise.set_done();
         }
     }
 
@@ -410,9 +410,9 @@ namespace Serialize {
         return SyncManagerResult::SUCCESS;
     }
 
-    void SyncManager::removeMasterStream(ParticipantId id, SyncManagerResult reason)
+    void SyncManager::removeMasterStream(ParticipantId id, StreamState reason)
     {
-        mMasterStreamClosedSignal.emit(id);
+        mMasterStreamClosedSignal.emit(id, reason);
         [[maybe_unused]] size_t count = mMasterStreams.erase(id);
         assert(count == 1);
     }
@@ -447,7 +447,7 @@ namespace Serialize {
             case StreamState::OK:
                 if (mReceivingMasterState && mReceivingMasterStateTimeout.expired()) {
                     // StreamResult result = STREAM_INTEGRITY_ERROR(*mSlaveStream) << "Server did not provide initial state in time (timeout)";
-                    removeSlaveStream(SyncManagerResult::TIMEOUT);
+                    removeSlaveStream(StreamState::REJECTED);
                 }
                 break;
             default:
@@ -612,12 +612,12 @@ namespace Serialize {
         return std::make_unique<SyncStreamData>(*this, id);
     }
 
-    Execution::SignalStub<void> &SyncManager::slaveStreamClosed()
+    Execution::SignalStub<void, StreamState> &SyncManager::slaveStreamClosed()
     {
         return mSlaveStreamClosedSignal;
     }
 
-    Execution::SignalStub<void, ParticipantId> &SyncManager::masterStreamClosed()
+    Execution::SignalStub<void, ParticipantId, StreamState> &SyncManager::masterStreamClosed()
     {
         return mMasterStreamClosedSignal;
     }
