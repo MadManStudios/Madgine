@@ -56,7 +56,7 @@ namespace Serialize {
         FormattedMessageStream *getSlaveStream();
         FormattedMessageStream &getMasterStream(ParticipantId id);
 
-        void removeAllStreams();
+        void removeAllStreams(StreamState reason = StreamState::UNKNOWN_ERROR);
         Execution::Future<SyncManagerResult> setSlaveStream(Format format, std::unique_ptr<message_streambuf> buffer, TimeOut timeout = {}, std::unique_ptr<SyncStreamData> data = {});
         void decreaseReceivingCounter();
         virtual void removeSlaveStream(StreamState reason = StreamState::UNKNOWN_ERROR);

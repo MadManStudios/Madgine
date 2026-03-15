@@ -261,11 +261,11 @@ namespace Serialize {
         return *mSlaveStream;
     }
 
-    void SyncManager::removeAllStreams()
+    void SyncManager::removeAllStreams(StreamState reason)
     {
-        removeSlaveStream();
+        removeSlaveStream(reason);
         while (!mMasterStreams.empty())
-            removeMasterStream(mMasterStreams.begin()->first);
+            removeMasterStream(mMasterStreams.begin()->first, reason);
     }
 
     Execution::Future<SyncManagerResult> SyncManager::setSlaveStream(Format format, std::unique_ptr<message_streambuf> buffer,
