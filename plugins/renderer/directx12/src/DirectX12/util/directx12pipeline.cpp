@@ -32,7 +32,7 @@ namespace Render {
         return true;
     }
 
-    ID3D12PipelineState *DirectX12Pipeline::get(VertexFormat vertexFormat, size_t groupSize, DirectX12RenderTarget *target, bool depthChecking) const
+    const ReleasePtr<ID3D12PipelineState> &DirectX12Pipeline::get(VertexFormat vertexFormat, size_t groupSize, DirectX12RenderTarget *target, bool depthChecking) const
     {
         size_t samplesBits = sqrt(target->samples());
         assert(samplesBits * samplesBits == target->samples());
@@ -80,9 +80,9 @@ namespace Render {
             };
 
             if (!checkVertex(mVertexShader))
-                return nullptr;
+                return pipeline;
             if (!checkPixel(mPixelShader))
-                return nullptr;
+                return pipeline;
 
             D3D12_GRAPHICS_PIPELINE_STATE_DESC pipelineDesc;
             ZeroMemory(&pipelineDesc, sizeof(D3D12_GRAPHICS_PIPELINE_STATE_DESC));

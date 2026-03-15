@@ -39,12 +39,13 @@ namespace Render {
         size_t samplesBits = sqrt(target->samples());
         assert(samplesBits * samplesBits == target->samples());
 
-        ID3D12PipelineState *pipeline = mPipeline->get(vertexFormat, groupSize, target, mDepthChecking);
+        ReleasePtr<ID3D12PipelineState> pipeline = mPipeline->get(vertexFormat, groupSize, target, mDepthChecking);
         if (!pipeline) {
             return false;
         }
 
         commandList->SetPipelineState(pipeline);
+        target->mCommandList.attachResource(std::move(pipeline));
 
         assert(groupSize > 0 && groupSize <= 3);
         D3D12_PRIMITIVE_TOPOLOGY mode = sModes[groupSize - 1];
@@ -245,6 +246,10 @@ namespace Render {
         assert(block);
         DirectX12ResourceBlock<1> *resBlock = block;
         static_cast<DirectX12RenderTarget *>(target)->mCommandList->SetGraphicsRootDescriptorTable(3 + space, resBlock->mHandle);
+
+        for (size_t i = 0; i < resBlock->mSize; ++i) {
+            static_cast<DirectX12RenderTarget *>(target)->mCommandList.attachResource(resBlock->mResources[i]);
+        }
     }
 
     DirectX12PipelineInstanceHandle::DirectX12PipelineInstanceHandle(const PipelineConfiguration &config, DirectX12PipelineLoader::Handle pipeline)
