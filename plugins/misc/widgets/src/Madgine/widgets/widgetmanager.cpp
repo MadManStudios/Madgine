@@ -626,7 +626,7 @@ namespace Widgets {
         }
 
         int layer = 0;
-        for (Widgets::WidgetBase *w : mModalWidgetList) {
+        for (Widgets::WidgetBase *w : std::ranges::views::reverse(mModalWidgetList)) {
             if (w->mVisible) {
                 renderData.setAlpha(w->opacity());
                 renderData.setLayer(20 * ++layer);
