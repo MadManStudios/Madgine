@@ -14,7 +14,7 @@ namespace Render {
     struct DirectX12ResourceBlock {
         D3D12_GPU_DESCRIPTOR_HANDLE mHandle;
         size_t mSize = I;
-        std::variant<ConstTexturePtr, GPUPtr<void>, GPUPtr<Void[]>> mResources[I];
+        std::variant<ReleasePtr<ID3D12Resource>, GPUPtr<void>, GPUPtr<Void[]>> mResources[I];
     };
 
     struct MADGINE_DIRECTX12_EXPORT DirectX12Texture : Texture {
@@ -22,10 +22,10 @@ namespace Render {
         DirectX12Texture(TextureType type, bool isRenderTarget, TextureFormat format, Vector2i size, size_t samples = 1, const ByteBuffer &data = {});
         DirectX12Texture(TextureType type = TextureType_2D, bool isRenderTarget = false, TextureFormat format = FORMAT_RGBA8, size_t samples = 1);
         DirectX12Texture(const DirectX12Texture &) = delete;
-        DirectX12Texture(DirectX12Texture &&);
+        DirectX12Texture(DirectX12Texture &&) = delete;
         ~DirectX12Texture();
 
-        DirectX12Texture &operator=(DirectX12Texture &&);
+        DirectX12Texture &operator=(DirectX12Texture &&) = delete;
 
         void reset();
 

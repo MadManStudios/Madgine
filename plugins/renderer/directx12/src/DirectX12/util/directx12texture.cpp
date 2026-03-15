@@ -18,7 +18,6 @@ namespace Render {
         bool isDepthTarget = mFormat == FORMAT_D24;
 
         DXGI_FORMAT xFormat, clearFormat;
-        D3D12_SRV_DIMENSION dimension;
         size_t byteCount;
         switch (format) {
         case FORMAT_RGBA8:
@@ -127,7 +126,7 @@ namespace Render {
 
         OffsetPtr handle = DirectX12RenderContext::getSingleton().mDescriptorHeap.allocate();
         mBlock.mHandle = DirectX12RenderContext::getSingleton().mDescriptorHeap.gpuHandle(handle);
-        mBlock.mResources[0] = ConstTexturePtr { this, NoOpFunctor {} };
+        mBlock.mResources[0] = mResource;
         mResourceBlock.setupAs<DirectX12ResourceBlock<1> *>() = &mBlock;
         createShaderResourceView(handle);
     }
@@ -139,30 +138,15 @@ namespace Render {
     {
     }
 
-    DirectX12Texture::DirectX12Texture(DirectX12Texture &&other)
-        : Texture(std::move(other))
-        , mIsRenderTarget(std::exchange(other.mIsRenderTarget, false))
-        , mSamples(std::exchange(other.mSamples, 0))
-    {
-    }
-
     DirectX12Texture::~DirectX12Texture()
     {
         reset();
     }
 
-    DirectX12Texture &DirectX12Texture::operator=(DirectX12Texture &&other)
-    {
-        Texture::operator=(std::move(other));
-        std::swap(mIsRenderTarget, other.mIsRenderTarget);
-        std::swap(mSamples, other.mSamples);
-        return *this;
-    }
-
     void DirectX12Texture::reset()
     {
         mResource.reset();
-        if (mResourceBlock) {            
+        if (mResourceBlock) {
             mResourceBlock.release<DirectX12ResourceBlock<1> *>();
             DirectX12RenderContext::getSingleton().mDescriptorHeap.deallocate(DirectX12RenderContext::getSingleton().mDescriptorHeap.fromGpuHandle(mBlock.mHandle));
             mSamples = 0;

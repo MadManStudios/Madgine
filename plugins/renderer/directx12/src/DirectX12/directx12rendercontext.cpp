@@ -438,9 +438,10 @@ namespace Render {
 
         for (size_t i = 0; i < data.size(); ++i) {
             std::visit(overloaded {
-                           [=, this](const ConstTexturePtr &tex) {
+                           [=, this, &block](const ConstTexturePtr &tex) {
                                if (tex) {
                                    std::static_pointer_cast<const DirectX12Texture>(tex)->createShaderResourceView(offset + i);
+                                   block->mResources[i] = std::static_pointer_cast<const DirectX12Texture>(tex)->resourcePtr();
                                } else {
                                    D3D12_SHADER_RESOURCE_VIEW_DESC shaderResourceViewDesc {};
                                    shaderResourceViewDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
@@ -462,6 +463,8 @@ namespace Render {
                                cbvDesc.SizeInBytes = alignTo(buf.size(), 256);
 
                                GetDevice()->CreateConstantBufferView(&cbvDesc, mDescriptorHeap.cpuHandle(offset + i));
+
+                               block->mResources[i] = buf;
                            },
                            [&](const GPUPtr<Void[]> &buf) {
                                auto [resource, resOffset] = mBufferMemoryHeap.resolve(buf.get());
@@ -476,10 +479,10 @@ namespace Render {
                                srvDesc.Buffer.StructureByteStride = buf.elementSize();
 
                                GetDevice()->CreateShaderResourceView(resource, &srvDesc, mDescriptorHeap.cpuHandle(offset + i));
-                           } },
-                data[i]);
 
-            block->mResources[i] = std::move(data[i]);
+                               block->mResources[i] = buf;
+                           } },
+                data[i]);            
         }
 
         UniqueResourceBlock result;
