@@ -14,7 +14,8 @@ struct ReleasePtr : std::unique_ptr<T, ReleaseDeleter> {
     ReleasePtr(const ReleasePtr &other)
         : std::unique_ptr<T, ReleaseDeleter> { other.get() }
     {
-        this->get()->AddRef();
+        if (*this)
+            this->get()->AddRef();
     }
     ReleasePtr(ReleasePtr &&) = default;
     template <typename U>
