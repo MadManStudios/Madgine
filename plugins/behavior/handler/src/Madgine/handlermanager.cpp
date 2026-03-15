@@ -57,7 +57,7 @@ namespace Behavior {
 
     Threading::Task<void> HandlerManager::finalize()
     {
-        assert(!mLifetime.running());
+        co_await mLifetime.finished();        
 
         for (const std::unique_ptr<HandlerBase> &handler : mHandlers)
             co_await handler->callFinalize();
