@@ -163,7 +163,13 @@ namespace Window {
 
 #ifdef MADGINE_MAINWINDOW_LAYOUT
         std::string_view name = StringUtil::tokenize<2>(STRINGIFY2(MADGINE_MAINWINDOW_LAYOUT), ':')[1];
-        if (!co_await loadLayout(LayoutLoader::get(name)))
+        LayoutLoader::Resource *res = LayoutLoader::get(name);
+        if (!res) {
+            LOG_ERROR("Unable to load layout '" << name << "'!");
+            co_return false;
+        }
+
+        if (!co_await loadLayout(res))
             co_return false;
 #endif
 
