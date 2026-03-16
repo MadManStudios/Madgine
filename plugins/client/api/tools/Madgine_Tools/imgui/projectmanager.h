@@ -6,6 +6,8 @@
 
 #include "Modules/ini/inifile.h"
 
+#include "Madgine/window/layoutloader.h"
+
 #include "Madgine_Tools/toolbase.h"
 #include "Madgine_Tools/toolscollector.h"
 
@@ -45,27 +47,21 @@ namespace Tools {
         bool mShowTipsOnStartup = true;
 
 #ifndef MADGINE_MAINWINDOW_LAYOUT
-        const Filesystem::Path &projectRoot() const;
-        const std::string &projectRootString() const;
-        const std::string &layout() const;
-
         void save();
         void load();
 
-        void setProjectRoot(const Filesystem::Path &root);
-        void setLayout(const std::string &layout);
-
-        std::vector<std::string> projectLayouts() const;
+        Window::LayoutLoader::Resource *layout() const;
+        std::string_view layoutString() const;
+        void setLayoutString(std::string_view name);
+        void setLayout(Window::LayoutLoader::Resource *layout);
 
         void setCurrentConfig(const Filesystem::Path &config);
 
     protected:
         void createProjectDialog();
-        void openProjectDialog();
 
     private:
-        Filesystem::Path mProjectRoot;
-        std::string mLayout;
+        Window::LayoutLoader::Resource *mLayout = nullptr;
 
         bool mShowConfigurations = false;
 

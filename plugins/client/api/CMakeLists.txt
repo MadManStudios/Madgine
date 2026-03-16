@@ -14,21 +14,9 @@ target_link_plugins(Client Render)
 target_link_libraries(Client PUBLIC Meta Modules)
 
 set_config(MADGINE_MAINWINDOW_LAYOUT CLIENT LAYOUT)
-set_config(MADGINE_GAME_ROOT CLIENT ROOT)
 
 configure_file(src/Madgine/clientconfig.in.h clientconfig.h)
 target_include_directories(Client PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>)
-
-if (MADGINE_GAME_ROOT)
-
-	set(path ${MADGINE_GAME_ROOT})
-	if (NOT IS_ABSOLUTE path)
-		set(path ${CMAKE_SOURCE_DIR}/${path})
-	endif()			
-
-	add_data_source(Game ${path}/data)
-	add_tooling_parameters(--game-root ${path})
-endif()
 
 
 set(sources "")

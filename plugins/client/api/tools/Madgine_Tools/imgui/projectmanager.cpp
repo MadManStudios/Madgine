@@ -25,15 +25,13 @@
 
 METATABLE_BEGIN_BASE(Engine::Tools::ProjectManager, Engine::Tools::ToolBase)
 #ifndef MADGINE_MAINWINDOW_LAYOUT
-    PROPERTY(ProjectRoot, projectRootString, setProjectRoot)
     PROPERTY(Layout, layout, setLayout)
 #endif
 METATABLE_END(Engine::Tools::ProjectManager)
 
 SERIALIZETABLE_INHERIT_BEGIN(Engine::Tools::ProjectManager, Engine::Tools::ToolBase)
 #ifndef MADGINE_MAINWINDOW_LAYOUT
-    ENCAPSULATED_FIELD(ProjectRoot, projectRoot, setProjectRoot)
-    ENCAPSULATED_FIELD(Layout, layout, setLayout)
+    ENCAPSULATED_FIELD(Layout, layoutString, setLayoutString)
     FIELD(mShowConfigurations)
     FIELD(mConfigs)
 #endif
@@ -84,7 +82,7 @@ namespace Tools {
 #ifndef MADGINE_MAINWINDOW_LAYOUT
     void ProjectManager::renderLandingPage()
     {
-        if (mProjectRoot.empty()) {
+        if (Window::LayoutLoader::getSingleton().resources().empty()) {
 
             if (beginGame()) {
 
@@ -109,9 +107,6 @@ namespace Tools {
                     ImGui::Spring();
                     if (ImGui::Button(IMGUI_ICON_FILE "\nCreate Project...", widget_size))
                         createProjectDialog();
-                    ImGui::Spring();
-                    if (ImGui::Button(IMGUI_ICON_FOLDER "\nOpen Project...", widget_size))
-                        openProjectDialog();
                     ImGui::Spring();
                     ImGui::Button("Icon\nSomething", widget_size);
                     ImGui::Spring();
@@ -198,8 +193,6 @@ namespace Tools {
         if (beginGame()) {
             if (ImGui::BeginMenuBar()) {
                 if (ImGui::BeginMenu("Layout")) {
-                    if (mProjectRoot.empty())
-                        ImGui::BeginDisabled();
                     if (ImGui::MenuItem("New Layout...")) {
                         mRoot.dialogs().show([]() -> Dialog<std::string> {
                     DialogSettings &settings = co_await get_dialog_settings;
@@ -210,7 +203,7 @@ namespace Tools {
                     } while (co_yield settings);
                     co_return layoutName; }(),
                             [this](const std::string &layoutName) {
-                                setLayout(layoutName);
+                                // setLayout(layoutName); TODO Proper resource selection Dialog
                             });
                     }
                     if (ImGui::MenuItem("Save Layout")) {
@@ -219,13 +212,11 @@ namespace Tools {
 
                     ImGui::Separator();
 
-                    for (const std::string &layout : projectLayouts()) {
-                        if (ImGui::MenuItem(layout.c_str(), nullptr, mLayout == layout)) {
-                            setLayout(layout);
+                    for (const auto &[name, res] : Window::LayoutLoader::getSingleton()) {
+                        if (ImGui::MenuItem(name.data(), nullptr, mLayout == &res)) {
+                            setLayout(Window::LayoutLoader::get(name));
                         }
                     }
-                    if (mProjectRoot.empty())
-                        ImGui::EndDisabled();
 
                     ImGui::EndMenu();
                 }
@@ -298,10 +289,6 @@ namespace Tools {
                 createProjectDialog();
             }
 
-            if (ImGui::MenuItem("Open Project...")) {
-                openProjectDialog();
-            }
-
             ImGui::Separator();
 
             ImGui::MenuItem("Configurations", "", &mShowConfigurations);
@@ -328,8 +315,10 @@ namespace Tools {
             std::string layout = mConfiguration["General"]["LAYOUT"];
             if (ImGui::BeginCombo("Layout", layout.c_str())) {
                 for (Resources::ResourceBase *res : Window::LayoutLoader::getSingleton().resources()) {
-                    if (ImGui::Selectable(res->name().data(), res->name() == layout)) {
-                        mConfiguration["General"]["LAYOUT"] = res->name();
+                    auto p = Resources::ResourceManager::getSingleton().makeRelative(res->path());
+                    std::string relativePath = p.first + ":" + std::string { p.second.stem() };
+                    if (ImGui::Selectable(relativePath.c_str(), relativePath == layout)) {
+                        mConfiguration["General"]["LAYOUT"] = relativePath;
                         changed = true;
                     }
                 }
@@ -357,42 +346,7 @@ namespace Tools {
 
     void ProjectManager::saveConfiguration(const Filesystem::Path &config)
     {
-        mConfiguration["General"]["ROOT"] = mProjectRoot.relative(SOURCE_DIR);
         mConfiguration.saveToDisk(config / "client.ini");
-    }
-
-    void ProjectManager::setProjectRoot(const Filesystem::Path &root)
-    {
-        if (mProjectRoot != root) {
-
-            if (!mProjectRoot.empty()) {
-                // Resources::ResourceManager::getSingleton().unregisterResourceLocation(mProjectRoot);
-            }
-
-            mProjectRoot = root;
-
-            if (!mProjectRoot.empty()) {
-                Resources::ResourceManager::getSingleton().registerResourceLocation(mProjectRoot / "data", "Game", 80);
-            }
-
-            const std::vector<std::string> &layouts = projectLayouts();
-            mLayout = layouts.empty() ? "" : layouts.front();
-
-            load();
-        }
-    }
-
-    std::vector<std::string> ProjectManager::projectLayouts() const
-    {
-        if (mProjectRoot.empty())
-            return {};
-        std::vector<std::string> result;
-        for (const Filesystem::Path &p : Filesystem::listFiles(mProjectRoot / "data")) {
-            if (p.extension() == ".layout") {
-                result.push_back(std::string { p.stem() });
-            }
-        }
-        return result;
     }
 
     void ProjectManager::setCurrentConfig(const Filesystem::Path &config)
@@ -408,66 +362,41 @@ namespace Tools {
     void ProjectManager::createProjectDialog()
     {
         mTemplates->showTemplateDialog("NewProject", [this](const Filesystem::Path &path) {
-            setProjectRoot(path);
+            // TODO Show success message
         });
     }
 
-    void ProjectManager::openProjectDialog()
+    void ProjectManager::setLayout(Window::LayoutLoader::Resource *layout)
     {
-        Filesystem::Path currentSelectionPath;
-        if (!mProjectRoot.empty()) {
-            currentSelectionPath = mProjectRoot.absolute();
-        }
-
-        mRoot.dialogs().show(
-            mRoot.directoryPicker(currentSelectionPath),
-            [this](const Filesystem::Path &selected) {
-                setProjectRoot(selected);
-            });
-    }
-
-    void ProjectManager::setLayout(const std::string &layout)
-    {
-        assert(!mProjectRoot.empty() || layout.empty());
         if (mLayout != layout) {
             mLayout = layout;
             load();
         }
     }
 
-    const Filesystem::Path &ProjectManager::projectRoot() const
-    {
-        return mProjectRoot;
-    }
-
-    const std::string &ProjectManager::projectRootString() const
-    {
-        return projectRoot().str();
-    }
-
-    const std::string &ProjectManager::layout() const
+    Window::LayoutLoader::Resource *ProjectManager::layout() const
     {
         return mLayout;
     }
 
+    std::string_view ProjectManager::layoutString() const
+    {
+        return mLayout ? mLayout->name() : "";
+    }
+
+    void ProjectManager::setLayoutString(std::string_view name)
+    {
+        setLayout(Window::LayoutLoader::get(name));
+    }
+
     void ProjectManager::save()
     {
-        Window::LayoutLoader::Resource *res = Window::LayoutLoader::get(mLayout);
-        Filesystem::Path filePath;
-        if (res) {
-            filePath = res->path();
-        } else {
-            Filesystem::Path folder = mProjectRoot / "data";
-            Filesystem::createDirectory(folder);
-            filePath = folder / (mLayout + ".layout");
-        }
-
-        mWindow->saveLayout(filePath);
+        mWindow->saveLayout(mLayout->path());
     }
 
     void ProjectManager::load()
     {
-        if (!mLayout.empty()) {
+        if (mLayout) {
             mWindow->taskQueue()->queueTask(mWindow->loadLayout(mLayout));
         }
     }

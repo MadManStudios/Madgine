@@ -33,7 +33,6 @@ namespace Resources {
 
 #if ENABLE_PLUGINS
     CLI::Parameter<Filesystem::Path> sourceDirPath { { "--source-dir" }, SOURCE_DIR, "Set source root folder." };
-    CLI::Parameter<Filesystem::Path> gameRootPath { { "--game-root" }, "", "Set game root folder." };
 #endif
 
     static ResourceManager *sSingleton = nullptr;
@@ -180,10 +179,6 @@ namespace Resources {
 
         if (!bakeOutputList->empty()) {
             registerResourceLocation(bakeOutputList->parentPath(), "Generated", 50);
-        }
-
-        if (!gameRootPath->empty()) {
-            registerResourceLocation(*gameRootPath / "data", "Game", 80);
         }
 
 #else

@@ -73,8 +73,9 @@ namespace Widgets {
             co_return false;
 
 #ifdef MADGINE_MAINWINDOW_LAYOUT
+        std::string_view atlasName = StringUtil::tokenize<2>(STRINGIFY2(MADGINE_MAINWINDOW_LAYOUT), ':')[1];
         AtlasLoader::Handle atlas;
-        bool hasAtlas = co_await atlas.load(STRINGIFY2(MADGINE_MAINWINDOW_LAYOUT));
+        bool hasAtlas = co_await atlas.load(atlasName);
         if (hasAtlas) {
             mData->mAtlas.preload(*atlas);
         }

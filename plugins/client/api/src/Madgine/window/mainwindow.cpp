@@ -120,18 +120,9 @@ namespace Window {
         }
     }
 
-    Threading::Task<bool> MainWindow::loadLayout(std::string_view name)
+    Threading::Task<bool> MainWindow::loadLayout(Window::LayoutLoader::Resource *res)
     {
-        LayoutLoader::Resource *res = LayoutLoader::get(name);
-
-        if (res) {
-            return res->loadTask(*this);
-        } else {
-            LOG_ERROR("Could not find layout " << name << "!");
-            return []() -> Threading::Task<bool> {
-                co_return false;
-            }();
-        }
+        return res->loadTask(*this);
     }
 
     /**
@@ -171,7 +162,8 @@ namespace Window {
         applyClientSpaceResize();
 
 #ifdef MADGINE_MAINWINDOW_LAYOUT
-        if (!co_await loadLayout(STRINGIFY2(MADGINE_MAINWINDOW_LAYOUT)))
+        std::string_view name = StringUtil::tokenize<2>(STRINGIFY2(MADGINE_MAINWINDOW_LAYOUT), ':')[1];
+        if (!co_await loadLayout(LayoutLoader::get(name)))
             co_return false;
 #endif
 

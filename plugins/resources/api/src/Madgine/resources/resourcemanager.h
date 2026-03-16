@@ -58,6 +58,7 @@ namespace Resources {
         Threading::TaskQueue *taskQueue();
 
         std::map<std::pair<std::string, Filesystem::Path>, std::vector<ResourceBase *>> buildResourceList();
+        std::pair<std::string, Filesystem::Path> makeRelative(const Filesystem::Path &path) const;
 
     private:
         void updateResources(Filesystem::FileEventType event, const Filesystem::Path &path, int priority);
@@ -69,7 +70,6 @@ namespace Resources {
 
         void enumerateResources();
 
-        std::pair<std::string, Filesystem::Path> makeRelative(const Filesystem::Path &path) const;
         Filesystem::Path getProjectPath(std::string_view name) const;
 
     private:
