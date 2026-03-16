@@ -182,6 +182,60 @@ namespace StringUtil {
         }
     }
 
+    inline Generator<char32_t> parseUTF8(std::string_view string) {
+        size_t expected = 0;
+        char32_t current;
+        for (unsigned char c : string) {
+            if (c >= 0xF0) {
+                if (expected == 0) {
+                    expected = 3;
+                    current = c & 0x7;
+                } else {
+                    expected = 0;
+                    current = 0;
+                    co_yield 0xFFFD;
+                }
+            } else if (c >= 0xE0) {
+                if (expected == 0) {
+                    expected = 2;
+                    current = c & 0xF;
+                } else {
+                    expected = 0;
+                    current = 0;
+                    co_yield 0xFFFD;
+                }
+            } else if (c >= 0xC0) {
+                if (expected == 0) {
+                    expected = 1;
+                    current = c & 0x1F;
+                } else {
+                    expected = 0;
+                    current = 0;
+                    co_yield 0xFFFD;
+                }
+            } else if (c >= 0x80) {
+                if (expected > 0) {
+                    current = (current << 6) | (c & 0x3F);
+                    --expected;
+                    if (expected == 0)
+                        co_yield current;
+                } else {
+                    expected = 0;
+                    current = 0;
+                    co_yield 0xFFFD;
+                }
+            } else {
+                if (expected == 0) {
+                    co_yield c;
+                } else {
+                    expected = 0;
+                    current = 0;
+                    co_yield 0xFFFD;
+                }
+            }
+        }
+    }
+
 }
 
 constexpr size_t strlen(const char *s)

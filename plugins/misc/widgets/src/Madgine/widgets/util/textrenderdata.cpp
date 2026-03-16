@@ -92,9 +92,7 @@ namespace Widgets {
 
     void TextRenderData::renderText(WidgetsRenderData &renderData, std::string_view text, Vector2 pos, Vector2 size, const Render::TypeFace *typeFace, Render::FontStyle style, float fontSize, ColorFrame color, Vector2 pivot, Vector2 shadowOffset, int cursorIndex)
     {
-        size_t textLen = text.size();
-
-        if (textLen == 0 && cursorIndex == -1)
+        if (text.empty() && cursorIndex == -1)
             return;
 
         float scale = fontSize / Render::FontLoader::sFontSize;
@@ -125,9 +123,10 @@ namespace Widgets {
 
         size_t baseLayer = renderData.subLayer();
 
-        for (const char *c = line.mBegin; c <= line.mEnd; ++c) {
+        size_t index = 0;
+        for (char32_t c : StringUtil::parseUTF8({line.mBegin, line.mEnd})) {
 
-            if (c - line.mBegin == cursorIndex) {
+            if (index == cursorIndex) {
                 const Render::Glyph &cursor = typeFace->mFonts.at(style)['|'];
 
                 float width = 3.0f * scale;
@@ -141,11 +140,10 @@ namespace Widgets {
                 else
                     renderData.renderQuadUV({ pos.x + startX, pos.y + startY }, { width, cursorHeight }, color, tex, { cursor.mUV, cursor.mSize }, typeFace->mTexture->size(), cursor.mFlipped);
             }
+            ++index;
 
-            if (c == line.mEnd)
-                break;
-
-            const Render::Glyph &g = typeFace->mFonts.at(style)[static_cast<unsigned char>(*c)];
+            unsigned char code = c > 0xFE ? '?' : c;
+            const Render::Glyph &g = typeFace->mFonts.at(style)[code];
 
             float width = g.mSize.x * scale;
             float height = g.mSize.y * scale;
@@ -170,14 +168,26 @@ namespace Widgets {
 
             cursorX += g.mAdvance / 64.0f * scale;
         }
+        if (index == cursorIndex) {
+            const Render::Glyph &cursor = typeFace->mFonts.at(style)['|'];
+
+            float width = 3.0f * scale;
+
+            float startX = cursorX - 1.5f * scale;
+            float startY = originY - ref.mBearing.y * scale;
+
+            renderData.setSubLayer(baseLayer + 2);
+            if (useSmallSize)
+                renderData.renderQuadUV({ pos.x + startX, pos.y + startY }, { width, cursorHeight }, color, tex, { cursor.mUV2, cursor.mSize2 }, typeFace->mTexture->size(), cursor.mFlipped2);
+            else
+                renderData.renderQuadUV({ pos.x + startX, pos.y + startY }, { width, cursorHeight }, color, tex, { cursor.mUV, cursor.mSize }, typeFace->mTexture->size(), cursor.mFlipped);
+        }
 
         renderData.setSubLayer(baseLayer);
     }
 
     void TextRenderData::renderSelection(WidgetsRenderData &renderData, std::string_view text, Vector2 pos, Vector2 size, const Render::TypeFace *typeFace, Render::FontStyle style, float fontSize, Vector2 pivot, const Atlas2::Entry &entry, int selectionStart, int selectionEnd, ColorFrame color)
     {
-        size_t textLen = text.size();
-
         float scale = fontSize / Render::FontLoader::sFontSize;
 
         float minY = typeFace->mDescender / 64.0f * scale;
@@ -191,20 +201,28 @@ namespace Widgets {
         float startX;
         float endX;
 
-        for (size_t i = 0; i <= textLen; ++i) {
+        size_t i = 0;
+        for (char32_t c : StringUtil::parseUTF8(text)) {
+            
             if (i == selectionStart)
                 startX = cursorX;
 
             if (i == selectionEnd)
                 endX = cursorX;
 
-            if (i == textLen)
-                break;
+            ++i;
 
-            const Render::Glyph &g = typeFace->mFonts.at(style)[text[i]];
+            unsigned char code = c > 0xFE ? '?' : c;
+            const Render::Glyph &g = typeFace->mFonts.at(style)[code];
 
             cursorX += g.mAdvance / 64.0f * scale;
         }
+        if (i == selectionStart)
+            startX = cursorX;
+
+        if (i == selectionEnd)
+            endX = cursorX;
+
 
         const Render::Glyph &ref = typeFace->mFonts.at(style)['D'];
 
@@ -221,8 +239,9 @@ namespace Widgets {
 
         float result = 0.0f;
 
-        for (char c : text) {
-            const Render::Glyph &g = typeFace->mFonts.at(style)[static_cast<uint8_t>(c)];
+        for (char32_t c : StringUtil::parseUTF8(text)) {
+            unsigned char code = c > 0xFE ? '?' : c;
+            const Render::Glyph &g = typeFace->mFonts.at(style)[code];
 
             result += g.mAdvance / 64.0f * scale;
         }
