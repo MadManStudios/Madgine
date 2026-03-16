@@ -5,8 +5,8 @@
 namespace Engine {
 
 struct META_EXPORT KeyValueError {
-    KeyValueError(const std::string &msg = "");
-    KeyValueError(const std::string &msg, const char *function, const char *file, size_t sourceLine);
+    KeyValueError(GenericResult state = GenericResult::UNKNOWN_ERROR, const std::string &msg = "");
+    KeyValueError(GenericResult state, const std::string &msg, const char *function, const char *file, size_t sourceLine);
 
     META_EXPORT friend std::ostream &operator<<(std::ostream &out, const KeyValueError &error);
 
@@ -17,19 +17,22 @@ struct META_EXPORT KeyValueError {
         size_t mLineNr;
     };
     std::vector<StackEntry> mStackTrace;
+
+    GenericResult mState;
 };
 
 struct [[nodiscard]] META_EXPORT KeyValueResult {
 
     KeyValueResult() = default;
-    KeyValueResult(GenericResult state, std::unique_ptr<KeyValueError> error);
+    KeyValueResult(std::unique_ptr<KeyValueError> error);
     KeyValueResult(const KeyValueResult &other);
     KeyValueResult(KeyValueResult &&) = default;
 
     KeyValueResult &operator=(const KeyValueResult &) = delete;
     KeyValueResult &operator=(KeyValueResult &&) = default;
-
-    GenericResult mState = GenericResult::SUCCESS;
+    
+    explicit operator bool() const;
+        
     std::unique_ptr<KeyValueError> mError;
 
     META_EXPORT friend std::ostream &operator<<(std::ostream &out, const KeyValueResult &result);
@@ -67,7 +70,7 @@ struct META_EXPORT KeyValueResultBuilder {
 #define KEYVALUE_UNKNOWN_ERROR() KEYVALUE_ERROR(::Engine::GenericResult::UNKNOWN_ERROR)
 
 #define KEYVALUE_PROPAGATE_ERROR(...)                                                                                        \
-    if (::Engine::KeyValueResult _result = (__VA_ARGS__); _result.mState != ::Engine::GenericResult::SUCCESS) \
+    if (::Engine::KeyValueResult _result = (__VA_ARGS__)) \
     return _result
 
 }

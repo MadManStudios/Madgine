@@ -130,7 +130,7 @@ namespace Behavior {
     {
 
         if (!mNext->resumeImpl()) {
-            set_error(KeyValueError { "A bound object has become unavailable" });
+            set_error(KeyValueError { GenericResult::UNKNOWN_ERROR, "A bound object has become unavailable" });
         }
     }
 

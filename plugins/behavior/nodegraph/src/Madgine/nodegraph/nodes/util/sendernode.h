@@ -427,7 +427,7 @@ namespace Behavior {
                     assert(!rec.mStorage.is_null());
                     if constexpr (rec.mStorage.can_have_error) {
                         if (rec.mStorage.is_error()) {
-                            return { GenericResult::UNKNOWN_ERROR, std::make_unique<KeyValueError>(std::move(rec.mStorage).error().mError) };
+                            return std::make_unique<KeyValueError>(std::move(rec.mStorage).error().mError);
                         }
                     }
                     retVal = TupleUnpacker::select(

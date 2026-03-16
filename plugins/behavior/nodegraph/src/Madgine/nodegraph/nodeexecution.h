@@ -207,7 +207,7 @@ namespace Behavior {
                         ArgumentList data { sizeof...(T) };
                         for (size_t index = 0; index < sizeof...(T); ++index) {
                             KeyValueResult error = handle.read(data[index], index + mBaseIndex);
-                            if (error.mState != GenericResult::SUCCESS) {
+                            if (error) {
                                 this->set_error(std::move(*error.mError));
                                 return;
                             }

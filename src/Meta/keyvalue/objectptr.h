@@ -11,7 +11,7 @@ struct META_EXPORT ObjectPtr {
     ObjectPtr(const std::shared_ptr<ObjectInstance> &instance);
 
     void setValue(std::string_view name, const ValueType &value);
-    bool getValue(ValueType &retVal, std::string_view name) const;
+    KeyValueResult getValue(ValueType &retVal, std::string_view name) const;
     std::map<std::string_view, ValueType> values() const;
 
     KeyValueResult call(ValueType &retVal, const ArgumentList &args) const;

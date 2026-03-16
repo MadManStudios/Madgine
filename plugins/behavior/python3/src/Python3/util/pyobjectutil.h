@@ -79,6 +79,6 @@ namespace Behavior {
 }
 }
 
-#define PYTHON3_PROPAGATE_ERROR(...)                                                                          \
-    if (::Engine::KeyValueResult _result = (__VA_ARGS__); _result.mState != ::Engine::GenericResult::SUCCESS) \
+#define PYTHON3_PROPAGATE_ERROR(...)                      \
+    if (::Engine::KeyValueResult _result = (__VA_ARGS__)) \
     return toPyError(*_result.mError)

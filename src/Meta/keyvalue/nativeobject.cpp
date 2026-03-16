@@ -13,13 +13,13 @@ struct NativeObjectInstance : ObjectInstance {
     {
     }
 
-    virtual bool getValue(ValueType &retVal, std::string_view name) const override
+    virtual KeyValueResult getValue(ValueType &retVal, std::string_view name) const override
     {
         auto it = mData.find(name);
         if (it == mData.end())
-            return false;
+            return KEYVALUE_UNKNOWN_ERROR() << "No field named '" << name << "'!";
         retVal = it->second;
-        return true;
+        return {};
     }
 
     virtual void setValue(std::string_view name, const ValueType &value) override

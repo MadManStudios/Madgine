@@ -4,31 +4,31 @@
 
 namespace Engine {
 
-KeyValueResult::KeyValueResult(GenericResult state, std::unique_ptr<KeyValueError> error)
-    : mState(state)
-    , mError(std::move(error))
+KeyValueResult::KeyValueResult(std::unique_ptr<KeyValueError> error)
+    : mError(std::move(error))
 {
 }
 
 KeyValueResult::KeyValueResult(const KeyValueResult &other)
-    : mState(other.mState)
-    , mError(other.mError ? std::make_unique<KeyValueError>(*other.mError) : std::unique_ptr<KeyValueError> {})
+    : mError(other.mError ? std::make_unique<KeyValueError>(*other.mError) : std::unique_ptr<KeyValueError> {})
 {
 }
 
-KeyValueError::KeyValueError(const std::string &msg)
-    : mMsg(msg)
+KeyValueError::KeyValueError(GenericResult state, const std::string &msg)
+    : mState(state)
+    , mMsg(msg)
 {
 }
 
-KeyValueError::KeyValueError(const std::string &msg, const char *function, const char *file, size_t sourceLine)
-    : KeyValueError(msg)
+KeyValueError::KeyValueError(GenericResult state, const std::string &msg, const char *function, const char *file, size_t sourceLine)
+    : KeyValueError(state, msg)
 {
     mStackTrace.emplace_back(StackEntry { function, file, sourceLine });
 }
 
 std::ostream &operator<<(std::ostream &out, const KeyValueError &error)
 {
+    out << error.mState << '\n';
     out << error.mMsg;
     for (const KeyValueError::StackEntry &entry : error.mStackTrace) {
         out << "\n"
@@ -39,28 +39,30 @@ std::ostream &operator<<(std::ostream &out, const KeyValueError &error)
 
 std::ostream &operator<<(std::ostream &out, const KeyValueResult &result)
 {
-    out << result.mState;
-    if (result.mState != GenericResult::SUCCESS)
-        out << '\n'
-            << *result.mError;
+    if (result.mError)
+        out << *result.mError;
+    else
+        out << "No Error";
     return out;
 }
 
 KeyValueResultBuilder::operator KeyValueResult()
 {
     assert(mType != GenericResult::SUCCESS);
-    return {
-        mType,
-        std::make_unique<KeyValueError>(mMsg.str(), mFunction, mFile, mLine)
-    };
+    return std::make_unique<KeyValueError>(mType, mMsg.str(), mFunction, mFile, mLine);
 }
 
 KeyValueResultBuilder::operator KeyValueError()
 {
     assert(mType != GenericResult::SUCCESS);
     return {
-        mMsg.str(), mFunction, mFile, mLine
+        mType, mMsg.str(), mFunction, mFile, mLine
     };
+}
+
+KeyValueResult::operator bool() const
+{
+    return static_cast<bool>(mError);
 }
 
 }

@@ -279,7 +279,7 @@ namespace Behavior {
             if (errorMessage)
                 msg = errorMessage;
 
-            return { msg, function, filename, line };
+            return { GenericResult::UNKNOWN_ERROR, msg, function, filename, line };
         }
 
         void setupExecution()

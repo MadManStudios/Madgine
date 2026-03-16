@@ -134,7 +134,7 @@ namespace Behavior {
             Python3InnerLock lock;
             PyModulePtr module { "importlib.machinery" };
             if (!module) {
-                return { GenericResult::UNKNOWN_ERROR, std::make_unique<KeyValueError>(fetchError()) };
+                return std::make_unique<KeyValueError>(fetchError());
             }
             PyObjectPtr spec = module.get("ModuleSpec").call({ { { "loader_state", toPyObject(ScopePtr { res }) } } }, "sO", res->name().data(), toPyObject(ScopePtr { this }));
             return fromPyObject(result, spec);

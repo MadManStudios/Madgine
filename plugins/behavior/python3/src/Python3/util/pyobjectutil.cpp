@@ -50,10 +50,9 @@ namespace Behavior {
                 mPtr.reset();
             }
 
-            virtual bool getValue(ValueType &retVal, std::string_view name) const override
+            virtual KeyValueResult getValue(ValueType &retVal, std::string_view name) const override
             {
-                KeyValueResult result = fromPyObject(retVal, mPtr.get(name));
-                return result.mState == GenericResult::SUCCESS;
+                return fromPyObject(retVal, mPtr.get(name));
             }
 
             virtual void setValue(std::string_view name, const ValueType &value) override
@@ -332,10 +331,10 @@ namespace Behavior {
             void operator()(KeyValuePair &p, const std::pair<PyObject *, PyObject *> &o)
             {
                 KeyValueResult result = fromPyObject(p.mKey, o.first);
-                if (result.mState != GenericResult::SUCCESS)
+                if (result)
                     throw 0;
                 result = fromPyObject(p.mValue, o.second);
-                if (result.mState != GenericResult::SUCCESS)
+                if (result)
                     throw 0;
             }
         };
@@ -344,7 +343,7 @@ namespace Behavior {
             void operator()(ValueType &r, PyObject *o)
             {
                 KeyValueResult result = fromPyObject(r, o);
-                if (result.mState != GenericResult::SUCCESS)
+                if (result)
                     throw 0;
             }
         };
@@ -352,7 +351,7 @@ namespace Behavior {
         KeyValueResult fromPyObject(ValueType &result, PyObject *obj)
         {
             if (!obj) {                
-                return { GenericResult::UNKNOWN_ERROR, std::make_unique<KeyValueError>(fetchError()) };
+                return std::make_unique<KeyValueError>(fetchError());
             } else if (obj == Py_None) {
                 to_ValueType(result, std::monostate {});
                 return {};

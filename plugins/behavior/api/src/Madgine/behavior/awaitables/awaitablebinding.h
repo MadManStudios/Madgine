@@ -69,7 +69,7 @@ namespace Behavior {
             if (!Execution::access_binding(mBinding, [&](const auto &) {
                     behavior.resume();
                 })) {
-                behavior.promise().set_error(KeyValueError { "TODO" });
+                behavior.promise().set_error(KeyValueError { GenericResult::UNKNOWN_ERROR, "TODO" });
             }
         }
 

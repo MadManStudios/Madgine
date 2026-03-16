@@ -41,10 +41,10 @@ void ObjectPtr::setValue(std::string_view name, const ValueType &value)
     mInstance->setValue(name, value);
 }
 
-bool ObjectPtr::getValue(ValueType &retVal, std::string_view name) const
+KeyValueResult ObjectPtr::getValue(ValueType &retVal, std::string_view name) const
 {
     if (!mInstance)
-        return false;
+        return KEYVALUE_UNKNOWN_ERROR() << "cannot get value of null reference";
     return mInstance->getValue(retVal, name);
 }
 
