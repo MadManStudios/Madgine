@@ -124,6 +124,7 @@ protected:
     std::string mBuffer;
     bool mNeedSeparator = false;
     bool mNeedStringOpen = false;
+    bool mNeedStringClose = false;
 };
 
 }

@@ -67,6 +67,7 @@ bool JsonParser::parse(const char *&c, const char *end, JsonObject &object)
             break;
         case '"':
             object.mValue = std::string {};
+            mNeedStringClose = true;
             ++c;
             break;
         case '0':
@@ -128,35 +129,39 @@ bool JsonParser::parse(const char *&c, const char *end, std::vector<JsonObject> 
 
 bool JsonParser::parse(const char *&c, const char *end, std::map<std::string, JsonObject> &object)
 {
-    if (*c == '}') {
-        mStack.pop_back();
-        mNeedSeparator = true;
-        ++c;
-        return skipWs(c, end);
-    }
-    if (mNeedSeparator) {
-        switch (*c) {
-        case ',':
-            mNeedSeparator = false;
-            mNeedStringOpen = true;
+    if (mBuffer.empty()) {
+        if (*c == '}') {
+            mStack.pop_back();
+            mNeedSeparator = true;
             ++c;
-            if (skipWs(c, end))
+            return skipWs(c, end);
+        }
+        if (mNeedSeparator) {
+            switch (*c) {
+            case ',':
+                mNeedSeparator = false;
+                mNeedStringOpen = true;
+                ++c;
+                if (skipWs(c, end))
+                    return true;
+                break;
+            default:
+                throw 0;
+            }
+        }
+        if (mNeedStringOpen) {
+            if (*c != '"')
+                throw 0;
+            mNeedStringOpen = false;
+            mNeedStringClose = true;
+            ++c;
+            if (c == end)
                 return true;
-            break;
-        default:
-            throw 0;
         }
     }
-    if (mNeedStringOpen) {
-        if (*c != '"')
-            throw 0;
-        mNeedStringOpen = false;
-        ++c;
-        if (c == end)
+    if (mNeedStringClose)
+        if (parse(c, end, mBuffer, false))
             return true;
-    }
-    if (parse(c, end, mBuffer, false))
-        return true;
 
     switch (*c) {
     case ':':
@@ -174,6 +179,8 @@ bool JsonParser::parse(const char *&c, const char *end, std::string &s, bool pop
     while (c != end) {
         switch (*c) {
         case '"':
+            assert(mNeedStringClose);
+            mNeedStringClose = false;
             if (pop) {
                 mStack.pop_back();
                 mNeedSeparator = true;
