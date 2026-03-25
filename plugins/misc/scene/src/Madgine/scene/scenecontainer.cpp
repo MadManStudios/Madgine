@@ -110,13 +110,7 @@ namespace Scene {
         return "Entity";
     }
 
-    Entity::EntityPtr SceneContainer::createEntity(const std::string &name,
-        const std::function<void(Entity::Entity &)> &init)
-    {
-        return TupleUnpacker::invokeFlatten(LIFT(mEntities.emplace, this), mEntities.end(), createEntityData(name, init))->ptr();
-    }
-
-    Execution::Sender<Serialize::MessageResult, Entity::EntityPtr> SceneContainer::createEntityAsync(const std::string &name, std::function<void(Entity::Entity &)> init)
+    Execution::Future<Serialize::MessageResult, Entity::EntityPtr> SceneContainer::createEntity(const std::string &name, std::function<void(Entity::Entity &)> init)
     {
         auto fut = co_await mutex().locked(AccessMode::WRITE, [this, name, init { std::move(init) }]() mutable {
             return TupleUnpacker::invokeFlatten(LIFT(mEntities.emplace_async, this), mEntities.end(), createEntityData(name, std::move(init)));

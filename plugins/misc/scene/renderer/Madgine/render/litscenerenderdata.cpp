@@ -2,8 +2,6 @@
 
 #include "litscenerenderdata.h"
 
-#include "Modules/threading/awaitables/awaitablesender.h"
-
 #include "Madgine/render/rendercontext.h"
 #include "Madgine/scene/entity/components/material.h"
 #include "Madgine/scene/entity/components/mesh.h"

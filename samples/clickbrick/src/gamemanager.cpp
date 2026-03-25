@@ -35,12 +35,8 @@
 
 #include "Madgine/render/scenemainwindowcomponent.h"
 
-#include "Modules/threading/awaitables/awaitablesender.h"
-
 #include "Madgine/render/rendercontext.h"
 #include "Modules/threading/awaitables/awaitabletimepoint.h"
-
-#include "Madgine/behavior/awaitables/awaitablesender.h"
 
 #include "Madgine/scene/behavior/scenesenders.h"
 
@@ -139,9 +135,7 @@ Engine::Threading::Task<void> GameManager::updateApp()
 
 void GameManager::spawnBrick()
 {
-    Engine::Scene::Entity::EntityPtr brick = mUI.app().getGlobalAPIComponent<Engine::Scene::SceneManager>().container("Default").createEntity();
-
-    Engine::Execution::access_binding(brick, [](Engine::Scene::Entity::Entity &brick) {
+    mUI.app().getGlobalAPIComponent<Engine::Scene::SceneManager>().container("Default").createEntity("", [](Engine::Scene::Entity::Entity &brick) {
         Engine::Scene::Entity::Transform *t = brick.addComponent<Engine::Scene::Entity::Transform>();
         t->mScale = { 0.01f, 0.01f, 0.01f };
 

@@ -78,14 +78,16 @@ namespace Behavior {
         throw;
     }
 
-    void CoroutineBehaviorState::set_error(KeyValueError result)
+    bool CoroutineBehaviorState::set_error(KeyValueError result)
     {
         mReceiver->set_error(result);
+        return true;
     }
 
-    void CoroutineBehaviorState::set_done()
+    bool CoroutineBehaviorState::set_done()
     {
         mReceiver->set_done();
+        return true;
     }
 
     bool CoroutineBehaviorState::InitialSuspend::await_ready() noexcept

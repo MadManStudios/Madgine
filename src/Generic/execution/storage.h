@@ -11,9 +11,9 @@ namespace Execution {
         {
         }
 
-        void reproduce(auto &rec)
+        auto reproduce(auto &rec)
         {
-            TupleUnpacker::invokeExpand(LIFT(rec.set_value, &), mValues);
+            return TupleUnpacker::invokeExpand(LIFT(rec.set_value, &), mValues);
         }
 
         template <size_t I>
@@ -38,9 +38,9 @@ namespace Execution {
         {
         }
 
-        void reproduce(auto &rec)
+        auto reproduce(auto &rec)
         {
-            rec.set_value(std::get<0>(mValues));
+            return rec.set_value(std::get<0>(mValues));
         }
 
         operator V() &&
@@ -77,9 +77,9 @@ namespace Execution {
         {
         }
 
-        void reproduce(auto &rec)
+        auto reproduce(auto &rec)
         {
-            rec.set_error(mError);
+            return rec.set_error(mError);
         }
 
         R mError;
@@ -91,7 +91,7 @@ namespace Execution {
 
         static constexpr bool is_void = true;
 
-        void reproduce(auto &rec)
+        auto reproduce(auto &rec) -> decltype(rec.set_done())
         {
             throw 0;
         }
@@ -104,14 +104,14 @@ namespace Execution {
     using ErrorStorage = ErrorStorageImpl<typename std::decay_t<Sender>::result_type>;
 
     struct DoneStorage {
-        void reproduce(auto &rec)
+        auto reproduce(auto &rec)
         {
-            rec.set_done();
+            return rec.set_done();
         }
     };
 
     struct NullStorage {
-        void reproduce(auto &rec)
+        auto reproduce(auto &rec) -> decltype(rec.set_done())
         {
             throw 0;
         }
@@ -122,17 +122,12 @@ namespace Execution {
 
         static constexpr bool can_have_error = !Error::is_void;
 
-        void reproduce(auto &rec)
+        auto reproduce(auto &rec)
         {
-            std::visit([&](auto &storage) {
-                storage.reproduce(rec);
+            return std::visit([&](auto &storage) {
+                return storage.reproduce(rec);
             },
                 mState);
-        }
-
-        void reproduce_error(auto &rec)
-        {
-            std::get<Error>(mState).reproduce(rec);
         }
 
         bool is_null() const

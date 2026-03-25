@@ -3,7 +3,6 @@
 #include "widgetsenders.h"
 
 #include "Madgine/behavior/awaitables/awaitablebinding.h"
-#include "Madgine/behavior/awaitables/awaitablesender.h"
 #include "Madgine/behavior/nativebehaviorcollector.h"
 
 #include "../widgetmanager.h"

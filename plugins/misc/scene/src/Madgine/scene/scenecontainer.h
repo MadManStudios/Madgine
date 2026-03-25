@@ -20,9 +20,7 @@ namespace Scene {
 
         SceneContainer(SceneManager &sceneMgr);
 
-        Entity::EntityPtr createEntity(const std::string &name = "",
-            const std::function<void(Entity::Entity &)> &init = {});
-        Execution::Sender<Serialize::MessageResult, Entity::EntityPtr> createEntityAsync(const std::string &name = "", std::function<void(Entity::Entity &)> init = {});        
+        Execution::Future<Serialize::MessageResult, Entity::EntityPtr> createEntity(const std::string &name = "", std::function<void(Entity::Entity &)> init = {});
 
         void startLifetime();
         void endLifetime();

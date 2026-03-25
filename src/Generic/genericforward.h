@@ -11,7 +11,6 @@ struct container_api_impl;
 template <typename...>
 struct type_pack;
 
-
 template <typename T>
 struct to_type_pack_helper {
     using type = type_pack<T>;
@@ -34,7 +33,6 @@ struct to_type_pack_helper<void> {
 
 template <typename T>
 using to_type_pack = typename to_type_pack_helper<T>::type;
-
 
 struct CompoundAtomicOperation;
 
@@ -100,7 +98,7 @@ namespace Execution {
     struct BindingPtr;
     template <typename T>
     struct ConstantBinding;
-    
+
     template <typename T>
     struct Bindable;
 

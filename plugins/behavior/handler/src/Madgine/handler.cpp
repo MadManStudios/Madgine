@@ -2,8 +2,6 @@
 
 #include "handler.h"
 
-#include "Modules/threading/awaitables/awaitablesender.h"
-
 #include "Madgine/behavior/behavior.h"
 #include "Madgine/window/mainwindow.h"
 

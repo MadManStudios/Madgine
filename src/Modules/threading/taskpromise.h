@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Generic/execution/awaitablesender.h"
 #include "Generic/execution/concepts.h"
 
 #include "taskhandle.h"
@@ -15,9 +16,6 @@
 
 namespace Engine {
 namespace Threading {
-
-    template <typename Sender>
-    struct TaskAwaitableSender;
 
     struct TaskFinalSuspend {
         bool await_ready() noexcept { return !mHandle; }
@@ -77,6 +75,11 @@ namespace Threading {
             mThenReturn = std::move(handle);
         }
 
+        static auto unpack_storage(auto &&storage)
+        {
+            return std::forward<decltype(storage)>(storage);
+        }
+
         template <typename T>
         decltype(auto) await_transform(T &&awaitable)
         {
@@ -84,7 +87,7 @@ namespace Threading {
             mCurrentSuspensionPoint = Debug::StackTrace<1>::getCurrent(1);
 #endif
             if constexpr (Execution::AnySender<std::remove_reference_t<T>>) {
-                return TaskAwaitableSender<T> { std::forward<T>(awaitable), stopToken() };
+                return Execution::AwaitableSender<T, TaskPromiseBase, TaskHandle> { std::forward<T>(awaitable), *this };
             } else {
                 return std::forward<T>(awaitable);
             }
@@ -92,9 +95,20 @@ namespace Threading {
 
         void setQueue(TaskQueue *queue);
         TaskQueue *queue() const;
-        Execution::StopToken stopToken();
+
+        friend MODULES_EXPORT Execution::StopToken tag_invoke(Execution::get_stop_token_t, TaskPromiseBase &promise);
 
         bool immediate() const;
+
+        bool set_done();
+        bool set_value(auto &&...)
+        {
+            return set_done();
+        }
+        bool set_error(auto &&)
+        {
+            return set_done();
+        }
 
     protected:
         TaskHandle mThenReturn;

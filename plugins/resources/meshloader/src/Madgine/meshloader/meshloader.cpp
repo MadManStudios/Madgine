@@ -8,8 +8,6 @@
 
 #include "Interfaces/filesystem/fsapi.h"
 
-#include "Modules/threading/awaitables/awaitablesender.h"
-
 #include "Madgine/render/vertex.h"
 
 #include "Meta/keyvalue/metatable_impl.h"

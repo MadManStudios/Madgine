@@ -25,8 +25,6 @@ namespace Behavior {
 
     struct CoroutineBehaviorState;
 
-    template <typename Sender>
-    struct BehaviorAwaitableSender;
     template <typename Binding>
     struct BehaviorAwaitableBinding;
 

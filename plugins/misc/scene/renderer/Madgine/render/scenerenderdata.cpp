@@ -4,8 +4,6 @@
 
 #include "Generic/container/safeiterator.h"
 
-#include "Modules/threading/awaitables/awaitablesender.h"
-
 #include "Madgine/render/rendercontext.h"
 #include "Madgine/scene/behavior/animation.h"
 #include "Madgine/scene/entity/components/skeleton.h"

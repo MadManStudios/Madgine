@@ -8,7 +8,6 @@
 #include "Interfaces/window/windowsettings.h"
 
 #include "Modules/debug/profiler/profile.h"
-#include "Modules/threading/awaitables/awaitablesender.h"
 
 #include "Madgine/imageloader/imageloader.h"
 #include "Madgine/render/fonts/fontloader.h"

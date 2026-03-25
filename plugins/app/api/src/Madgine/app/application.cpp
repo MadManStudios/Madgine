@@ -4,7 +4,6 @@
 
 #include "Generic/execution/execution.h"
 
-#include "Modules/threading/awaitables/awaitablesender.h"
 #include "Modules/threading/workgroupstorage.h"
 
 #include "Meta/keyvalue/metatable_impl.h"

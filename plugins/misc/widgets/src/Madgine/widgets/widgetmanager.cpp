@@ -7,8 +7,6 @@
 
 #include "Meta/serialize/helper/typedobjectserialize.h"
 
-#include "Modules/threading/awaitables/awaitablesender.h"
-
 #include "Madgine/imageloader/imagedata.h"
 #include "Madgine/meshloader/gpumeshloader.h"
 #include "Madgine/meshloader/meshloader.h"

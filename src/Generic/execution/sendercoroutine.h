@@ -1,11 +1,12 @@
 #pragma once
 
 #include "../callable_view.h"
+#include "awaitablesender.h"
 #include "concepts.h"
 #include "statedescriptor.h"
+#include "stoppable.h"
 #include "storage.h"
 #include "virtualstate.h"
-#include "stoppable.h"
 
 namespace Engine {
 namespace Execution {
@@ -34,7 +35,8 @@ namespace Execution {
     template <typename R, typename... V>
     struct CoroutineSenderStateBase : SenderStateBase<R, V...> {
 
-        Sender<R, V...> get_return_object() {
+        Sender<R, V...> get_return_object()
+        {
             return typename Sender<R, V...>::StatePtr { this };
         }
 
@@ -93,127 +95,41 @@ namespace Execution {
             throw;
         }
 
-        void set_error(R result)
+        bool set_value(auto &&...)
+        {
+            return false;
+        }
+
+        bool set_error(R result)
         {
             mReceiver->set_error(std::forward<R>(result));
+            return true;
         }
 
-        void set_done()
+        bool set_done()
         {
             mReceiver->set_done();
+            return true;
         }
 
-        template <typename Sender>
-        struct SenderAwaitableSender;
+        static decltype(auto) unpack_storage(auto &&result)
+        {
+            return std::forward<decltype(result)>(result).value().get();
+        }
 
-        template <typename Sender>
-        struct SenderAwaitableReceiver {
-
-            template <typename... V2>
-            void set_value(V2 &&...value)
-            {
-                mState->set_value(std::forward<V2>(value)...);
-            }
-
-            void set_done()
-            {
-                mState->set_done();
-            }
-
-            template <typename... R2>
-            void set_error(R2 &&...result)
-            {
-                mState->set_error(std::forward<R2>(result)...);
-            }
-
-            template <typename CPO, typename... Args>
-                requires(is_tag_invocable_v<CPO, SenderReceiver<R, V...> &, Args...>)
-            friend auto tag_invoke(CPO f, SenderAwaitableReceiver &rec, Args &&...args) noexcept(is_nothrow_tag_invocable_v<CPO, SenderReceiver<R, V...> &, Args...>)
-                -> tag_invoke_result_t<CPO, SenderReceiver<R, V...> &, Args...>
-            {
-                return tag_invoke(f, *rec.mCoroutine->mReceiver, std::forward<Args>(args)...);
-            }
-
-            SenderAwaitableSender<Sender> *mState;
-            CoroutineSenderStateBase *mCoroutine;
-        };
-
-        template <typename Sender>
-        struct SenderAwaitableSender {
-
-            static auto buildState(SenderAwaitableSender *self, Sender &&sender, CoroutineSenderStateBase *state)
-            {
-                return Execution::connect(std::forward<Sender>(sender) | Execution::stoppable, SenderAwaitableReceiver<Sender> { self, state });
-            }
-
-            using S = std::invoke_result_t<decltype(&SenderAwaitableSender::buildState), SenderAwaitableSender *, Sender, std::nullptr_t>;
-
-            SenderAwaitableSender(Sender &&sender, CoroutineSenderStateBase *state)
-                : mState(buildState(this, std::forward<Sender>(sender), state))
-            {
-            }
-
-            bool await_ready()
-            {
-                mState.start();
-                return mFlag.test() && mResult.is_value();
-            }
-
-            bool await_suspend(std::coroutine_handle<CoroutineSenderState<R, V...>> coroutine)
-            {
-                mCoroutine = coroutine;
-                if (mFlag.test_and_set()) {
-                    if (mResult.is_value()) {
-                        return false;
-                    } else if (mResult.is_error()) {
-                        mResult.reproduce_error(mCoroutine.promise());
-                    } else {
-                        mCoroutine.promise().set_done();
-                    }
-                }
-                return true;
-            }
-
-            decltype(auto) await_resume()
-            {
-                return std::move(mResult).value().get();
-            }
-
-            template <typename... V2>
-            void set_value(V2 &&...v)
-            {
-                mResult.set_value(std::forward<V2>(v)...);
-                if (mFlag.test_and_set())
-                    mCoroutine.resume();
-            }
-
-            void set_done()
-            {
-                mResult.set_done();
-                if (mFlag.test_and_set())
-                    mCoroutine.promise().set_done();
-            }
-
-            template <typename... R2>
-            void set_error(R2 &&...error)
-            {
-                mResult.set_error(std::forward<R2>(error)...);
-                if (mFlag.test_and_set())
-                    mResult.reproduce_error(mCoroutine.promise());
-            }
-
-        private:
-            S mState;
-            std::atomic_flag mFlag = ATOMIC_FLAG_INIT;
-            std::coroutine_handle<CoroutineSenderState<R, V...>> mCoroutine;
-            Execution::ResultStorage<Sender> mResult;
-        };
+        template <typename CPO, typename... Args>
+            requires(is_tag_invocable_v<CPO, SenderReceiver<R, V...> &, Args...>)
+        friend auto tag_invoke(CPO f, CoroutineSenderStateBase &state, Args &&...args) noexcept(is_nothrow_tag_invocable_v<CPO, SenderReceiver<R, V...> &, Args...>)
+            -> tag_invoke_result_t<CPO, SenderReceiver<R, V...> &, Args...>
+        {
+            return tag_invoke(f, *state.mReceiver, std::forward<Args>(args)...);
+        }
 
         template <typename T>
         decltype(auto) await_transform(T &&awaitable)
         {
             if constexpr (AnySender<std::remove_reference_t<T>>) {
-                return SenderAwaitableSender<T> { std::forward<T>(awaitable), this };
+                return AwaitableSender<T, CoroutineSenderStateBase> { std::forward<T>(awaitable), *this };
             } else {
                 return std::forward<T>(awaitable);
             }
@@ -225,7 +141,7 @@ namespace Execution {
     template <typename R, typename... V>
     struct CoroutineSenderState : CoroutineSenderStateBase<R, V...> {
 
-        void return_value(V...value)
+        void return_value(V... value)
         {
             construct(mResult, std::forward<V>(value)...);
         }

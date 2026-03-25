@@ -20,10 +20,12 @@ namespace Threading {
         }
         ~TaskHandle();
 
-        void operator()();
-        void resumeInQueue();
+        void operator()();        
+        void resume();
 
         std::coroutine_handle<TaskPromiseBase> release();
+
+        TaskPromiseBase &promise();
 
         TaskQueue *queue() const;
 

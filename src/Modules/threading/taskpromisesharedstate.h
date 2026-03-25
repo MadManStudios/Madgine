@@ -182,7 +182,7 @@ namespace Threading {
         {
             destruct(mState);
             if (mFlag.test_and_set())
-                mTask.resumeInQueue();
+                mTask.resume();
         }
 
     private:

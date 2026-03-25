@@ -2,8 +2,6 @@
 
 #include "imageloader.h"
 
-#include "Modules/threading/awaitables/awaitablesender.h"
-
 #include "Meta/keyvalue/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
@@ -22,7 +20,7 @@ namespace Resources {
     ImageLoader::ImageLoader()
         : ResourceLoader({ ".png", ".jpg" })
     {
-        //getOrCreateManual("Test", "https://avatars.githubusercontent.com/u/202794897?v=4", {}, this);
+        // getOrCreateManual("Test", "https://avatars.githubusercontent.com/u/202794897?v=4", {}, this);
     }
 
     Threading::Task<bool> ImageLoader::loadImpl(ImageData &data, ResourceDataInfo &info)

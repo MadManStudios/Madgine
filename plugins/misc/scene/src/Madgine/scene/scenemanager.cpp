@@ -5,7 +5,6 @@
 #include "Meta/serialize/configs/controlled.h"
 #include "Meta/serialize/configs/guard.h"
 
-#include "Modules/threading/awaitables/awaitablesender.h"
 #include "Modules/threading/awaitables/awaitabletimepoint.h"
 #include "Modules/uniquecomponent/uniquecomponentcollector.h"
 
@@ -51,9 +50,9 @@ namespace Scene {
     SceneManager::SceneManager(App::Application &app)
         : VirtualScope(app)
         , mMutex("SceneData")
-        , mLifetime(&app.lifetime())        
+        , mLifetime(&app.lifetime())
         , mSimulationClock(mClock.now())
-        , mAnimationClock(mClock.now())        
+        , mAnimationClock(mClock.now())
         , mFrameClock(std::chrono::steady_clock::now())
         , mSceneComponents(*this)
     {

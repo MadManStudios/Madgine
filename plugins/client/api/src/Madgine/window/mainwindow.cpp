@@ -14,7 +14,6 @@
 #include "Meta/serialize/formats.h"
 
 #include "Modules/debug/profiler/profile.h"
-#include "Modules/threading/awaitables/awaitablesender.h"
 #include "Modules/threading/awaitables/awaitabletimepoint.h"
 
 #include "Madgine/render/rendercontext.h"

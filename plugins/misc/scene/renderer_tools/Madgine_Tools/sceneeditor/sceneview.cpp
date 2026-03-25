@@ -177,11 +177,9 @@ namespace Tools {
                 Render::GPUMeshLoader::Resource *resource;
                 if (ImGui::AcceptDraggableValueType(resource)) {
                     throw "TODO"; // Wrong manager
-                    Scene::Entity::EntityPtr e = mEditor.sceneMgr().container("Default").createEntity();
-                    Execution::access_binding(e, [&](Scene::Entity::Entity &e) {
+                    Execution::Future<Serialize::MessageResult, Scene::Entity::EntityPtr> e = mEditor.sceneMgr().container("Default").createEntity("", [&](Scene::Entity::Entity &e) {
                         e.addComponent<Scene::Entity::Transform>()->mPosition = pos;
-                        e.addComponent<Scene::Entity::Mesh>()->set(resource);
-                        return true;
+                        e.addComponent<Scene::Entity::Mesh>()->set(resource);                        
                     });
                     mEditor.select(e);
                 } else if (ImGui::IsDraggableValueTypeBeingAccepted(resource)) {

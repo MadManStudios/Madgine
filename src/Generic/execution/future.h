@@ -1,5 +1,6 @@
 #pragma once
 
+#include "awaitablesender.h"
 #include "flag.h"
 
 namespace Engine {
@@ -12,6 +13,8 @@ namespace Execution {
 
     template <typename R, typename... V>
     struct Future {
+
+        Future() = default;
 
         Future(std::shared_ptr<FutureSharedState<R, V...>> state)
             : mState(std::move(state))
@@ -31,6 +34,16 @@ namespace Execution {
         decltype(auto) operator*() const
         {
             return *mState->mValue;
+        }
+
+        explicit operator bool() const
+        {
+            return static_cast<bool>(mState);
+        }
+
+        void reset()
+        {
+            mState.reset();
         }
 
         using is_sender = void;
@@ -67,6 +80,85 @@ namespace Execution {
 
             return state { future.mState, std::forward<Rec>(rec) };
         }
+
+        struct promise_type : FutureSharedState<R, V...> {
+
+            Future<R, V...> get_return_object()
+            {
+                mState = {
+                    this, [](promise_type *p) {
+                        std::coroutine_handle<promise_type>::from_promise(*p).destroy();
+                    }
+                };
+                return mState;
+            }
+
+            constexpr std::suspend_never initial_suspend() const noexcept
+            {
+                return {};
+            }
+
+            struct FinalSuspend {
+                bool await_ready() const noexcept
+                {
+                    return false;
+                }
+
+                void await_suspend(std::coroutine_handle<promise_type> handle) noexcept
+                {
+                    handle.promise().mState.reset();
+                }
+
+                void await_resume() noexcept
+                {
+                    throw 0;
+                }
+            };
+
+            constexpr FinalSuspend final_suspend() const noexcept
+            {
+                return {};
+            }
+
+            void return_value(V... value)
+            {
+                this->mValue.set_value(std::forward<V>(value)...);
+            }
+
+            void unhandled_exception()
+            {
+                throw;
+            }
+
+            static decltype(auto) unpack_storage(auto&& storage)
+            {
+                return std::forward<decltype(storage)>(storage).value().get();
+            }
+
+            bool set_value(auto &&...) {
+                return false;
+            }
+            bool set_error(R error) {
+                mState->mValue.set_error(std::forward<R>(error));
+                return true;
+            }
+            bool set_done() {
+                mState->mValue.set_done();
+                return true;
+            }
+
+            template <typename T>
+            decltype(auto) await_transform(T &&awaitable)
+            {
+                if constexpr (AnySender<std::remove_reference_t<T>>) {
+                    return AwaitableSender<T, promise_type> { std::forward<T>(awaitable), *this };
+                } else {
+                    return std::forward<T>(awaitable);
+                }
+            }
+
+            std::shared_ptr<FutureSharedState<R, V...>> mState;
+        };
 
     private:
         std::shared_ptr<FutureSharedState<R, V...>> mState;
@@ -109,7 +201,7 @@ namespace Execution {
             mState->mValue.set_value(std::forward<V2>(v)...);
         }
 
-        void set_error(R &&r)
+        void set_error(patch_void_t<R> &&r)
         {
             mState->mValue.set_error(std::forward<R>(r));
         }

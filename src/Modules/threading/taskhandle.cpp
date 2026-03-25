@@ -48,7 +48,7 @@ namespace Threading {
 #endif
     }
 
-    void TaskHandle::resumeInQueue()
+    void TaskHandle::resume()
     {
         queue()->queueHandle(std::move(*this), true);
     }
@@ -56,6 +56,11 @@ namespace Threading {
     std::coroutine_handle<TaskPromiseBase> TaskHandle::release()
     {
         return std::exchange(mHandle, std::coroutine_handle<TaskPromiseBase> {});
+    }
+
+    TaskPromiseBase &TaskHandle::promise()
+    {
+        return mHandle.promise();
     }
 
     TaskQueue *TaskHandle::queue() const

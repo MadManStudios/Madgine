@@ -2,6 +2,7 @@
 
 #include "concepts.h"
 #include "stop_callback.h"
+#include "stop_source.h"
 
 namespace Engine {
 namespace Execution {
@@ -135,9 +136,12 @@ namespace Execution {
         struct sender : algorithm_sender<Sender> {
 
             template <typename Rec>
-            friend auto tag_invoke(connect_t, sender &&sender, Rec &&rec)
+            friend auto tag_invoke(connect_t connect, sender &&sender, Rec &&rec)
             {
-                return state<Sender, Rec> { std::forward<Sender>(sender.mSender), std::forward<Rec>(rec) };
+                if constexpr (!tag_invocable<get_stop_token_t, Rec&>)                
+                    return tag_invoke(connect, std::forward<Sender>(sender.mSender), std::forward<Rec>(rec));
+                else
+                    return state<Sender, Rec> { std::forward<Sender>(sender.mSender), std::forward<Rec>(rec) };
             }
         };
 

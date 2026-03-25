@@ -2,8 +2,6 @@
 
 #include "widgethandler.h"
 
-#include "Modules/threading/awaitables/awaitablesender.h"
-
 #include "Madgine/handlermanager.h"
 #include "Madgine/widgets/widget.h"
 #include "Madgine/widgets/widgetmanager.h"

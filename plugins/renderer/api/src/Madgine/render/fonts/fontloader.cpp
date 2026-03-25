@@ -14,8 +14,6 @@
 #include "Meta/serialize/formats.h"
 #include "Meta/serialize/operations.h"
 
-#include "Modules/threading/awaitables/awaitablesender.h"
-
 #include "Madgine/render/rendercontext.h"
 #include "Madgine/serialize/filesystem/filemanager.h"
 #include "Madgine/serialize/memory/memorymanager.h"

@@ -1,11 +1,13 @@
 #pragma once
 
 #include "Generic/closure.h"
+#include "Generic/execution/awaitablesender.h"
 
 #include "Interfaces/debug/stacktrace.h"
 
 #include "Meta/keyvalue/keyvalueresult.h"
 
+#include "Madgine/debug/debuggablesender.h"
 #include "Madgine/debug/debuglocation.h"
 
 #include "behaviorstatebase.h"
@@ -82,20 +84,38 @@ namespace Behavior {
         void suspendImpl() override;
         void return_void();
         void unhandled_exception();
-        void set_error(KeyValueError result);
-        void set_done();
+        bool set_value(auto &&...) {
+            return false;
+        }
+        bool set_error(KeyValueError result);
+        bool set_done();
+
+        static decltype(auto) unpack_storage(auto &&result)
+        {
+            return std::forward<decltype(result)>(result).value().get();
+        }
 
         template <typename T>
         decltype(auto) await_transform(T &&awaitable)
         {
             if constexpr (Execution::AnySender<std::remove_reference_t<T>>) {
-                return CoroutineAwaiterGuard<BehaviorAwaitableSender<T>> { std::forward<T>(awaitable), this };
+                return CoroutineAwaiterGuard<Execution::AwaitableSender<Execution::with_debug_location_t::sender<T>, CoroutineBehaviorState>> { std::forward<T>(awaitable) | Execution::with_debug_location(mDebugLocation.mChild), *this };
             } else if constexpr (Execution::AnyBinding<std::remove_reference_t<T>>) {
                 return CoroutineAwaiterGuard<BehaviorAwaitableBinding<T>> { std::forward<T>(awaitable) };
             } else {
                 return CoroutineAwaiterGuard<T> { std::forward<T>(awaitable) };
             }
         }
+
+        template <typename CPO, typename... Args>
+            requires(is_tag_invocable_v<CPO, BehaviorReceiver &, Args...>)
+        friend auto tag_invoke(CPO f, CoroutineBehaviorState &state, Args &&...args) noexcept(is_nothrow_tag_invocable_v<CPO, BehaviorReceiver &, Args...>)
+            -> tag_invoke_result_t<CPO, BehaviorReceiver &, Args...>
+        {
+            return tag_invoke(f, *state.mReceiver, std::forward<Args>(args)...);
+        }
+
+        friend MADGINE_BEHAVIOR_EXPORT CoroutineLocation *tag_invoke(Execution::get_debug_location_t, CoroutineBehaviorState &state);
 
         CoroutineLocation mDebugLocation;
 
@@ -119,7 +139,7 @@ namespace Behavior {
 
         auto await_suspend(std::coroutine_handle<CoroutineBehaviorState> handle)
         {
-            using result_type = std::invoke_result_t<decltype(&Awaiter::await_suspend), Awaiter &, std::coroutine_handle<CoroutineBehaviorState>>;
+            using result_type = decltype(mAwaiter.await_suspend(std::move(handle)));
             if constexpr (std::same_as<result_type, bool>) {
                 bool result = mAwaiter.await_suspend(std::move(handle));
                 if (result) {

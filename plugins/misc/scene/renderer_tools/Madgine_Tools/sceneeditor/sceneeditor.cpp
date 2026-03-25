@@ -56,6 +56,10 @@ namespace Tools {
         renderToolBar();
 
         auto guard = sceneMgr().mutex().lock(AccessMode::WRITE);
+        if (mSelectedEntityFuture && mSelectedEntityFuture.is_ready()) {
+            mSelectedEntity = *mSelectedEntityFuture;
+            mSelectedEntityFuture = {};
+        }
         mEntityCache.update();
         renderHierarchy();
         Behavior::BehaviorHandle behaviorToAdd = renderDetails();
@@ -77,13 +81,22 @@ namespace Tools {
 
     void SceneEditor::deselect()
     {
+        mSelectedEntityFuture = {};
         mSelectedEntity = {};
         mHoveredAxis = -1;
     }
 
     void SceneEditor::select(const Scene::Entity::EntityPtr &entity)
     {
+        mSelectedEntityFuture = {};
         mSelectedEntity = entity;
+        mHoveredAxis = -1;
+    }
+
+    void SceneEditor::select(const Execution::Future<Serialize::MessageResult, Scene::Entity::EntityPtr> &entity)
+    {
+        mSelectedEntityFuture = entity;
+        mSelectedEntity = {};
         mHoveredAxis = -1;
     }
 
