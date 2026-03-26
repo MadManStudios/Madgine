@@ -306,7 +306,7 @@ namespace Execution {
             template <typename Rec>
             friend auto tag_invoke(connect_t, sender &&sender, Rec &&rec)
             {
-                return algorithm_state<Sender, receiver<Rec, T>> { std::forward<Sender>(sender.mSender), std::forward<Rec>(rec), std::forward<T>(sender.mOnError) };
+                return algorithm_state<Sender, receiver<Rec, T>> { std::forward<Sender>(sender.mSender), { std::forward<Rec>(rec), std::forward<T>(sender.mOnError) } };
             }
 
             T mOnError;

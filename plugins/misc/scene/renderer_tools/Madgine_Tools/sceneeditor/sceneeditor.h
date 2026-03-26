@@ -27,7 +27,6 @@ namespace Tools {
 
         void deselect();
         void select(const Scene::Entity::EntityPtr &entity);
-        void select(const Execution::Future<Serialize::MessageResult, Scene::Entity::EntityPtr> &entity);
 
         virtual Scene::SceneManager &sceneMgr() = 0;
 
@@ -54,7 +53,6 @@ namespace Tools {
 
     protected:
         Scene::Entity::EntityPtr mSelectedEntity;
-        Execution::Future<Serialize::MessageResult, Scene::Entity::EntityPtr> mSelectedEntityFuture;
 
     private:
         std::vector<std::unique_ptr<SceneView>> mSceneViews;

@@ -56,10 +56,6 @@ namespace Tools {
         renderToolBar();
 
         auto guard = sceneMgr().mutex().lock(AccessMode::WRITE);
-        if (mSelectedEntityFuture && mSelectedEntityFuture.is_ready()) {
-            mSelectedEntity = *mSelectedEntityFuture;
-            mSelectedEntityFuture = {};
-        }
         mEntityCache.update();
         renderHierarchy();
         Behavior::BehaviorHandle behaviorToAdd = renderDetails();
@@ -81,22 +77,13 @@ namespace Tools {
 
     void SceneEditor::deselect()
     {
-        mSelectedEntityFuture = {};
         mSelectedEntity = {};
         mHoveredAxis = -1;
     }
 
     void SceneEditor::select(const Scene::Entity::EntityPtr &entity)
     {
-        mSelectedEntityFuture = {};
         mSelectedEntity = entity;
-        mHoveredAxis = -1;
-    }
-
-    void SceneEditor::select(const Execution::Future<Serialize::MessageResult, Scene::Entity::EntityPtr> &entity)
-    {
-        mSelectedEntityFuture = entity;
-        mSelectedEntity = {};
         mHoveredAxis = -1;
     }
 
@@ -142,7 +129,7 @@ namespace Tools {
 
                 if (ImGui::BeginPopupCompoundContextWindow()) {
                     if (ImGui::MenuItem(IMGUI_ICON_PLUS " New Entity")) {
-                        select(sceneMgr().container("Default").createEntity());
+                        sceneMgr().container("Default").createEntity("", {}, [this](Scene::Entity::EntityPtr ptr) { select(std::move(ptr)); });
                     }
                     ImGui::EndPopup();
                 }
@@ -378,7 +365,7 @@ namespace Tools {
         if (mTool.beginToolBar("Scene")) {
 
             if (ImGui::Button(IMGUI_ICON_PLUS)) {
-                select(sceneMgr().container("Editor").createEntity());
+                sceneMgr().container("Editor").createEntity("", {}, [this](Scene::Entity::EntityPtr ptr) { select(std::move(ptr)); });
             }
 
             mTool.endToolBar();
