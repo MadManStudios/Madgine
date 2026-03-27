@@ -2,28 +2,22 @@
 #include "Modules/moduleslib.h"
 
 #define IMGUI_DEFINE_MATH_OPERATORS
-#include "imguiaddons.h"
-
-#include "../imgui/imgui_internal.h"
-
-#include "Meta/math/matrix3.h"
-
-#include "Meta/keyvalue/scopeptr.h"
-
-#include "Meta/keyvalue/boundapifunction.h"
+#include "Generic/coroutines/generator.h"
+#include "Generic/enum.h"
 
 #include "Interfaces/filesystem/fsapi.h"
 #include "Interfaces/filesystem/path.h"
 
-#include "Generic/enum.h"
-
-#include "Modules/threading/workgroupstorage.h"
-
-#include "Generic/coroutines/generator.h"
+#include "Meta/keyvalue/boundapifunction.h"
+#include "Meta/keyvalue/scopeptr.h"
+#include "Meta/keyvalue/valuetype.h"
+#include "Meta/math/matrix3.h"
 
 #include "Modules/threading/threadlocal.h"
+#include "Modules/threading/workgroupstorage.h"
 
-#include "Meta/keyvalue/valuetype.h"
+#include "../imgui/imgui_internal.h"
+#include "imguiaddons.h"
 
 // Engine::Threading::WorkgroupLocal<ImGuiContext *>
 THREADLOCAL(ImGuiContext *)
@@ -971,7 +965,7 @@ bool LED(const char *label, bool on, const ImVec2 &size)
     return pressed;
 }
 
-bool LED(const char* label, bool *on, const ImVec2& size)
+bool LED(const char *label, bool *on, const ImVec2 &size)
 {
     bool pressed = LED(label, *on, size);
     if (pressed)
@@ -1052,20 +1046,29 @@ bool IsDraggableValueTypeBeingAccepted(Engine::CallableView<bool(const Engine::V
     return false;
 }
 
-bool BeginFilesystemPicker(Engine::Filesystem::Path &path, Engine::Filesystem::Path &selection)
+bool BeginFilesystemPicker(Engine::Filesystem::Path &path, Engine::Filesystem::Path &selection, const Engine::Filesystem::Path &base)
 {
     bool changed = false;
 
-    if (path.empty())
-        path = Engine::Filesystem::Path { "." }.absolute();
-    if (selection.empty())
-        selection = Engine::Filesystem::Path { "." }.absolute();
+    if (!base.empty()) {
+        if (!path.isRelative(base))
+            path = base.absolute();
+        if (!selection.isRelative(base))
+            selection = base.absolute();
+    } else {
+        if (path.empty())
+            path = Engine::Filesystem::Path { "." }.absolute();
+        if (selection.empty())
+            selection = Engine::Filesystem::Path { "." }.absolute();
+    }
 
+    ImGui::BeginDisabled(path == base);
     if (ImGui::Button("Up")) {
         selection = path;
         path = path / "..";
         changed = true;
     }
+    ImGui::EndDisabled();
 
     ImGui::SameLine();
 
@@ -1081,7 +1084,7 @@ bool BeginFilesystemPicker(Engine::Filesystem::Path &path, Engine::Filesystem::P
 
 bool DirectoryPicker(Engine::Filesystem::Path &path, Engine::Filesystem::Path &selection, const FilesystemPickerOptions &options)
 {
-    bool changed = BeginFilesystemPicker(path, selection);
+    bool changed = BeginFilesystemPicker(path, selection, options.mBase);
 
     ImVec2 size = ImGui::GetContentRegionAvail();
     size.x -= 4.0f;
@@ -1128,7 +1131,7 @@ FilesystemPickerOptions *GetFilesystemPickerOptions()
 
 bool FilePicker(Engine::Filesystem::Path &path, Engine::Filesystem::Path &selection, bool *itemDoubleClicked, const FilesystemPickerOptions &options)
 {
-    bool changed = BeginFilesystemPicker(path, selection);
+    bool changed = BeginFilesystemPicker(path, selection, options.mBase);
 
     bool selectedIsFile = false;
     bool selectedIsDir = false;
@@ -1142,7 +1145,7 @@ bool FilePicker(Engine::Filesystem::Path &path, Engine::Filesystem::Path &select
     ImGuiStyle &style = g.Style;
 
     std::string fileName = selection.relative(path).str();
-    
+
     size.y -= CalcTextSize(fileName.c_str(), NULL, true).y + style.FramePadding.y * 2.0f;
 
     if (ImGui::BeginTable("CurrentFolder", 1, ImGuiTableFlags_Borders | ImGuiTableFlags_RowBg | ImGuiTableFlags_ScrollY | ImGuiTableFlags_Hideable | ImGuiTableFlags_Resizable, size)) {

@@ -16,7 +16,10 @@ namespace Tools {
 
         std::string_view key() const override;
 
+#ifndef STATIC_BUILD
         void showTemplateDialog(std::string_view name, Closure<void(const Filesystem::Path &)> cb = {});
+        void showUniqueComponentTemplateDialog(Closure<void(const Filesystem::Path &)> cb = {});
+#endif
 
     private:
         Inspector *mInspector;

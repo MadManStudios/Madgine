@@ -127,7 +127,9 @@ namespace Tools {
         if (dockingDir == ImGuiDir_None)
             ImGui::SetNextWindowDockID(ImGui::DockBuilderGetCentralNode(mRoot.rootDockSpaceId())->ID, ImGuiCond_FirstUseEver);
 
-        if (ImGui::Begin(name, open, flags)) {
+        std::string fullName = std::string { name } + "##" + std::string { key() };
+
+        if (ImGui::Begin(fullName.c_str(), open, flags)) {
 
             float ratio = 0.2f;
 

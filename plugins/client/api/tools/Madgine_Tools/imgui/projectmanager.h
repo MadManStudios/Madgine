@@ -59,6 +59,7 @@ namespace Tools {
 
     protected:
         void createProjectDialog();
+        void createPluginDialog();
 
     private:
         Window::LayoutLoader::Resource *mLayout = nullptr;

@@ -4,12 +4,14 @@
 
 #include "Interfaces/filesystem/fsapi.h"
 
+#include "Modules/plugins/plugin.h"
 #include "Modules/uniquecomponent/uniquecomponentcollector.h"
 
 #include "Meta/keyvalue/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
 #include "Madgine_Tools/inspector/inspector.h"
+#include "Madgine_Tools/pluginmanager/pluginmanager.h"
 #include "Madgine_Tools/renderer/imroot.h"
 #include "TemplateEngine/parser.h"
 #include "imgui/imgui.h"
@@ -43,6 +45,17 @@ namespace Tools {
 
     void Templates::renderMenu()
     {
+#ifndef STATIC_BUILD
+        if (ImGui::BeginMenu("Code")) {
+            if (ImGui::BeginMenu("New")) {
+                if (ImGui::MenuItem("UniqueComponent")) {
+                    showUniqueComponentTemplateDialog();
+                }
+                ImGui::EndMenu();
+            }
+            ImGui::EndMenu();
+        }
+
         if (ImGui::IsKeyDown(ImGuiMod_Ctrl)) {
             if (ImGui::BeginMenu("Dev")) {
                 if (ImGui::BeginMenu("Templates")) {
@@ -59,6 +72,7 @@ namespace Tools {
                 ImGui::EndMenu();
             }
         }
+#endif
     }
 
     std::string_view Templates::key() const
@@ -66,19 +80,21 @@ namespace Tools {
         return "Templates";
     }
 
+#ifndef STATIC_BUILD
     void Templates::showTemplateDialog(std::string_view name, Closure<void(const Filesystem::Path &)> cb)
     {
-        Filesystem::Path dir = Filesystem::Path { PROJECT_ROOT "/templates" } / name;
-
         mRoot.dialogs().show(
-            [](Templates *templates, Filesystem::Path path) -> Dialog<TemplateEngine::Parser, Filesystem::Path> {
+            [](Templates *templates, std::string name) -> Dialog<TemplateEngine::Parser, Filesystem::Path> {
                 Filesystem::Path outputPath { "C:\\Users\\Bub\\Desktop\\Test" };
+
+                Filesystem::Path path = Filesystem::Path { PROJECT_ROOT "/templates" } / name;
 
                 TemplateEngine::Parser parser { path };
 
                 DialogSettings &settings = co_await get_dialog_settings;
-                settings.header = "Generate 'Test'";
+                settings.header = "Generate '" + name + "'";
                 do {
+
                     if (ImGui::BeginTable("fields", 2, ImGuiTableFlags_Resizable)) {
                         for (auto &[key, value] : parser.fields()) {
                             templates->mInspector->drawValue(key, value, true, value.type());
@@ -93,21 +109,98 @@ namespace Tools {
                     }
                     ImGui::SameLine();
                     if (ImGui::Button("...")) {
-                        std::optional<std::tuple<Filesystem::Path>> result = co_await templates->mRoot.directoryPicker();
-                        if (result) {
-                            outputPath = std::get<0>(*result);
-                        }
+                        settings.open(templates->mRoot.directoryPicker(), outputPath);
                     }
 
                 } while (co_yield settings);
                 co_return { std::move(parser), std::move(outputPath) };
-            }(this, dir),
+            }(this, std::string { name }),
             [cb { std::move(cb) }](const TemplateEngine::Parser &parser, const Filesystem::Path &outTarget) {
                 parser.generateFiles(outTarget);
                 if (cb)
                     cb(outTarget);
             });
     }
+
+    void Templates::showUniqueComponentTemplateDialog(Closure<void(const Filesystem::Path &)> cb)
+    {
+
+        mRoot.dialogs().show(
+            [](Templates *templates) -> Dialog<TemplateEngine::Parser, Filesystem::Path> {
+                Filesystem::Path outputPath { "C:\\Users\\Bub\\Desktop\\Test" };
+
+                Filesystem::Path path = PROJECT_ROOT "/templates/UniqueComponent";
+
+                TemplateEngine::Parser parser { path };
+
+                const Plugins::Plugin *currentPlugin = nullptr;
+                const UniqueComponent::RegistryBase *currentRegistry = nullptr;
+
+                DialogSettings &settings = co_await get_dialog_settings;
+                settings.header = "Generate 'UniqueComponent'";
+                do {
+
+                    if (ImGui::BeginTable("fields", 2, ImGuiTableFlags_Resizable)) {
+                        for (auto &[key, value] : parser.fields()) {
+                            if (key == "prefix" || key == "base" || key == "precompiled" || key == "collector" || key == "plugin")
+                                ImGui::BeginDisabled();
+                            templates->mInspector->drawValue(key, value, true, value.type());
+                            if (key == "prefix" || key == "base" || key == "precompiled" || key == "collector" || key == "plugin")
+                                ImGui::EndDisabled();
+                        }
+                        ImGui::EndTable();
+                    }
+
+                    if (PluginSelector("Plugin", currentPlugin)) {
+                        outputPath = currentPlugin->info()->mSourceRoot;
+                        parser.fields()["precompiled"] = std::string_view { currentPlugin->info()->mPrecompiledHeaderPath };
+                        parser.fields()["plugin"] = currentPlugin->name();
+                    }
+
+                    if (ImGui::BeginCombo("Registry", currentRegistry ? currentRegistry->named_type_info().mFullName.data() : "")) {
+                        for (UniqueComponent::RegistryBase *registry : UniqueComponent::registryRegistry()) {
+                            if (ImGui::Selectable(registry->named_type_info().mFullName.data())) {
+                                currentRegistry = registry;
+                                std::string_view name = registry->named_type_info().mFullName;
+                                assert(name.ends_with("Registry"));
+                                parser.fields()["prefix"] = name.substr(0, name.size() - strlen("Registry"));
+
+                                // parser.fields()["include"] =
+                                parser.fields()["collector"] = std::string { Filesystem::Path { registry->mHeader() }.relative(currentRegistry->mBinary->mSourceRoot).str() };
+                            }
+                        }
+                        ImGui::EndCombo();
+                    }
+
+                    if (!currentPlugin || !currentRegistry) {
+                        ImGui::BeginDisabled();
+                    }
+                    ImGui::Text("Target:");
+                    std::string s = outputPath;
+                    if (ImGui::InputText("###Target", &s)) {
+                        outputPath = s;
+                        if (outputPath.isAbsolute()) {
+                            outputPath = outputPath.relative(currentPlugin->info()->mSourceRoot);
+                        }
+                    }
+                    ImGui::SameLine();
+                    if (ImGui::Button("...")) {
+                        settings.open(templates->mRoot.directoryPicker(outputPath, outputPath, currentPlugin->info()->mSourceRoot), outputPath);
+                    }
+                    if (!currentPlugin || !currentRegistry) {
+                        ImGui::EndDisabled();
+                    }
+
+                } while (co_yield settings);
+                co_return { std::move(parser), std::move(outputPath) };
+            }(this),
+            [cb { std::move(cb) }](const TemplateEngine::Parser &parser, const Filesystem::Path &outTarget) {
+                parser.generateFiles(outTarget);
+                if (cb)
+                    cb(outTarget);
+            });
+    }
+#endif
 
 }
 }

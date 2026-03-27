@@ -10,6 +10,8 @@ namespace Tools {
 
     template <typename... T>
     struct Dialog;
+        
+    struct DialogPromise;
 }
 }
 

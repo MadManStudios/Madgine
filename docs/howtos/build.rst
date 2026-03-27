@@ -17,38 +17,17 @@ Setup The Madgine
 
 Download the source code from `GitHub <https://github.com/MadManRises/Madgine>`_.
 
-There are two ways to use and compile the engine. 
-
-Setup Build From The Repository
--------------------------------
-
-The first one being to build the project using CMake from the top-level folder of the engine. This is useful if you intend to modify the engine code itself. No further CMake scripts are needed. 
-
-Setup Build From An External Project
-------------------------------------
-
-The second method is to create a separate CMake project and reference the engine code from there. This allows you to separate your own work from the engine code, but keeps the benefit of building the engine source code together with your game/plugin code, allowing for better whole program optimization. All the necessary utility scripts for this method are provided. To setup the engine this way, create your own CMakeLists.txt for your game/plugin and add the following:
-
-.. code-block:: cmake
-
-   include(<root folder of local madgine repository>/cmake/MadgineSDK.cmake)
-
-To create the executable add the following line to the end of your CmakeLists.txt:
-
-.. code-block:: cmake
-
-   create_launcher(<name>)
- 
-
 Generating Project Files
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
+For the first startup build the project using CMake from the top-level folder of the engine. No further CMake scripts are needed. 
 Generate the build files using CMake for your preferred compiler/IDE or open the folder in IDEs that have direct CMake integration. 
 
 Build Configurations
 ~~~~~~~~~~~~~~~~~~~~
 
 The default build settings lead to a project with the following properties:
+
 * Tools are included
 * Plugins are built as dynamic libraries
 * Plugin selection can be changed at any time

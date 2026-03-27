@@ -50,17 +50,30 @@ namespace Tools {
                 }
                 if (ImGui::BeginTabItem("Hub")) {
 
-                    ImGui::TextColored(ImColor(255, 40, 40, 255), "Changes are only applied on rebuild!");
+                    ImGui::TextColored(ImColor(255, 40, 40, 255), "Changes are only applied on reconfigure/rebuild!");
 
-                    if (ImGui::Button("Test")) {
+                    bool fetch = mSources.empty() && !mFetching;
+
+                    if (!mFetching)
+                        ImGui::BeginDisabled();
+                    fetch |= ImGui::Button("Refresh");
+                    if (!mFetching)
+                        ImGui::EndDisabled();
+
+                    if (fetch) {
+                        mFetching = true;
                         mLifetime.attach(FetchSender<JsonParser>("https://api.github.com/orgs/MadManStudios/repos", { "Accept: application/vnd.github+json", "User-Agent: Madgine" }) | Execution::then([this](JsonObject result) {
                             // LOG(result);
                             mSources.clear();
                             for (JsonObject &repo : result.asList()) {
+                                if (!repo.asObject()["custom_properties"].asObject().contains("Madgine-Plugin-Group"))
+                                    continue;
                                 PluginSource &source = mSources.emplace_back();
                                 source.mIcon = repo.asObject()["owner"].asObject()["avatar_url"].asString();
                                 source.mName = repo.asObject()["name"].asString();
+                                source.mUrl = repo.asObject()["clone_url"].asString();
                             }
+                            mFetching = false;
                         }));
                     }
 
@@ -70,6 +83,8 @@ namespace Tools {
                         ImGui::TableSetupColumn("Name", ImGuiTableColumnFlags_WidthStretch);
                         ImGui::TableSetupColumn("NoIdea", 0);
 
+                        std::vector<std::string> dependencies = mCurrentDependencies;
+
                         for (PluginSource &source : mSources) {
                             ImGui::TableNextRow();
                             ImGui::TableNextColumn();
@@ -77,7 +92,100 @@ namespace Tools {
                             ImGui::TableNextColumn();
                             ImGui::Text(source.mName);
                             ImGui::TableNextColumn();
-                            ImGui::Button("Activate");
+
+                            bool isActive = std::ranges::find(mCurrentDependencies, source.mUrl) != mCurrentDependencies.end();
+                            std::erase(dependencies, source.mUrl);
+
+                            ImGui::PushID(source.mName.c_str());
+                            if (ImGui::Button(isActive ? "Deactivate##Button" : "Activate##Button")) {
+                                if (isActive) {
+                                    std::erase(mCurrentDependencies, source.mUrl);
+                                } else {
+                                    mCurrentDependencies.push_back(source.mUrl);
+                                }
+                                std::ofstream out { SOURCE_DIR "/dependencies.txt" };
+                                for (const std::string &dep : mCurrentDependencies) {
+                                    out << dep << '\n';
+                                }
+                            }
+                            ImGui::PopID();
+                        }
+
+                        ImGui::TableNextRow();
+                        ImGui::TableNextColumn();
+                        ImGui::Dummy({ 0.0f, 20.0f });
+                        ImGui::TableNextRow();
+                        ImGui::TableNextColumn();
+                        ImGui::Text("Custom");
+                        ImGui::TableNextColumn();
+                        ImGui::InputText("##CustomIn", &mCustomDependencyInput);
+                        ImGui::TableNextColumn();
+                        if (ImGui::Button("Add##CustomAdd")) {
+                        }
+
+                        auto locals = std::ranges::stable_partition(dependencies, [](const std::string &s) { return !s.starts_with("http"); });
+
+                        for (const std::string &customDependency : std::ranges::subrange(dependencies.begin(), locals.begin())) {
+                            Filesystem::Path path = customDependency;
+
+                            std::string name { path.stem() };
+
+                            ImGui::TableNextRow();
+                            ImGui::TableNextColumn();
+                            ImGui::Text(name);
+                            ImGui::TableNextColumn();
+                            ImGui::Text(customDependency);
+                            ImGui::TableNextColumn();
+
+                            ImGui::PushID(name.c_str());
+                            if (ImGui::Button("Remove")) {
+                                std::erase(mCurrentDependencies, customDependency);
+                                std::ofstream out { SOURCE_DIR "/dependencies.txt" };
+                                for (const std::string &dep : mCurrentDependencies) {
+                                    out << dep << '\n';
+                                }
+                            }
+                            ImGui::PopID();
+                        }
+
+                        ImGui::TableNextRow();
+                        ImGui::TableNextColumn();
+                        ImGui::Dummy({ 0.0f, 20.0f });
+                        ImGui::TableNextRow();
+                        ImGui::TableNextColumn();
+                        ImGui::Text("Local");
+                        ImGui::TableNextColumn();
+                        std::string localDependency = mLocalDependencyInput.str();
+                        if (ImGui::InputText("##LocalIn", &localDependency))
+                            mLocalDependencyInput = localDependency;
+                        ImGui::TableNextColumn();
+                        if (ImGui::Button("...")) {
+                        }
+                        ImGui::SameLine();
+                        if (ImGui::Button("Add##LocalAdd")) {
+                        }
+
+                        for (const std::string &localDependency : locals) {
+                            Filesystem::Path path = localDependency;
+
+                            std::string name { path.stem() };
+
+                            ImGui::TableNextRow();
+                            ImGui::TableNextColumn();
+                            ImGui::Text(name);
+                            ImGui::TableNextColumn();
+                            ImGui::Text(localDependency);
+                            ImGui::TableNextColumn();
+
+                            ImGui::PushID(name.c_str());
+                            if (ImGui::Button("Remove")) {
+                                std::erase(mCurrentDependencies, localDependency);
+                                std::ofstream out { SOURCE_DIR "/dependencies.txt" };
+                                for (const std::string &dep : mCurrentDependencies) {
+                                    out << dep << '\n';
+                                }
+                            }
+                            ImGui::PopID();
                         }
 
                         ImGui::EndTable();
@@ -130,12 +238,29 @@ namespace Tools {
     {
         bool changed = false;
 
-        for (auto &section : mManager) {
-            if (ImGui::CollapsingHeader(section.name().c_str())) {
-                Ini::IniFile &file = isConfiguration ? mCurrentConfiguration : mManager.selection();
+        Ini::IniFile &file = isConfiguration ? mCurrentConfiguration : mManager.selection();
+
+        for (auto &section : mManager) {            
+            if (ImGui::CollapsingHeader(section.name().c_str())) {                
+                
                 if (isConfiguration) {
                     ImGui::Indent();
                 }
+
+                if (section.isExclusive() && !section.isAtleastOne()) {
+                    bool noneLoaded = true;
+                    for (auto &plugin : section) {
+                        if (plugin.isLoaded(file)) {
+                            noneLoaded = false;
+                            break;
+                        }
+                    }
+                    if (ImGui::RadioButton("<None>", noneLoaded)) {
+                        section.unload(file);
+                        changed = true;
+                    }                    
+                }
+
                 for (auto &plugin : section) {
                     const std::string &project = plugin.project();
 
@@ -205,6 +330,14 @@ namespace Tools {
 
         Execution::detach(mLifetime);
 
+        if (Filesystem::exists(SOURCE_DIR "/dependencies.txt")) {
+            std::ifstream in { SOURCE_DIR "/dependencies.txt" };
+            std::string line;
+            while (std::getline(in, line)) {
+                mCurrentDependencies.push_back(std::move(line));
+            }
+        }
+
         co_return true;
     }
 
@@ -219,6 +352,29 @@ namespace Tools {
     std::string_view PluginManager::key() const
     {
         return "Plugin Manager";
+    }
+
+    bool PluginSelector(const char *label, const Plugins::Plugin *&outPlugin)
+    {
+        bool changed = false;
+
+        if (ImGui::BeginCombo(label, outPlugin ? outPlugin->name().c_str() : "")) {
+
+            for (const auto &section : Plugins::PluginManager::getSingleton()) {
+                for (const auto &plugin : section) {
+                    if (plugin.isLoaded(Plugins::PluginManager::getSingleton().selection())) {
+                        if (ImGui::Selectable(plugin.name().c_str(), &plugin == outPlugin)) {
+                            outPlugin = &plugin;
+                            changed = true;
+                        }
+                    }
+                }
+            }
+
+            ImGui::EndCombo();
+        }
+
+        return changed;
     }
 
 }

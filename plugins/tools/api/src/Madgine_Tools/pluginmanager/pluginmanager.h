@@ -36,6 +36,7 @@ namespace Tools {
         struct PluginSource {
             Filesystem::Path mIcon;
             std::string mName;
+            std::string mUrl;
         };
         std::vector<PluginSource> mSources;
         struct Icon {
@@ -45,7 +46,16 @@ namespace Tools {
         std::map<std::string, Icon> mIconCache;
 
         Execution::Lifetime<> mLifetime;
+
+        bool mFetching = false;
+
+        std::vector<std::string> mCurrentDependencies;
+
+        std::string mCustomDependencyInput;
+        Filesystem::Path mLocalDependencyInput;
     };
+
+    MADGINE_TOOLS_EXPORT bool PluginSelector(const char *label, const Plugins::Plugin *&plugin);
 
 }
 }

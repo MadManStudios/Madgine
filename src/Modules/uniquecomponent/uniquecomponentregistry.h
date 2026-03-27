@@ -55,12 +55,12 @@ namespace UniqueComponent {
         virtual void onPluginLoad(const Plugins::BinaryInfo *) = 0;
         virtual void onPluginUnload(const Plugins::BinaryInfo *) = 0;
 
-        const TypeInfo &type_info()
+        const TypeInfo &type_info() const
         {
             return mTi;
         }
 
-        const TypeInfo &named_type_info()
+        const TypeInfo &named_type_info() const
         {
             return mNamedTi;
         }

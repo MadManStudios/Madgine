@@ -85,8 +85,7 @@ void Parser::registerField(std::string name, std::string type)
 {
     Engine::ValueType &field = mFields[name];
     Engine::ValueTypeDesc targetType;
-    if (type.empty() || type == "lc_string" || type == "uc_string" || type == "string")
-    {
+    if (type.empty() || type == "lc_string" || type == "uc_string" || type == "string") {
         targetType = Engine::toValueTypeDesc<std::string>();
     } else {
         LOG_ERROR("Unknown type: " << type);
@@ -112,6 +111,7 @@ void Parser::generate(Engine::Stream &in, Engine::Stream &out) const
     bool openTag = false;
     bool hasType = false;
     std::string name;
+    std::string type;
 
     for (char c : std::ranges::subrange { in.iterator(), in.end() }) {
         switch (c) {
@@ -121,14 +121,24 @@ void Parser::generate(Engine::Stream &in, Engine::Stream &out) const
                 hasType = false;
                 name.clear();
             } else {
+                std::string value = mFields.at(name).as<std::string>();
+
+                if (hasType) {
+                    if (type == "uc_string") {
+                        value = Engine::StringUtil::toUpper(std::move(value));
+                    } else if (type == "lc_string") {
+                        value = Engine::StringUtil::toLower(std::move(value));
+                    }
+                    hasType = false;
+                }
                 openTag = false;
-                hasType = false;
-                out << mFields.at(name).as<std::string>();
+                out << value;
             }
             break;
         case '#':
             if (openTag) {
                 hasType = true;
+                type.clear();
             } else {
                 out << c;
             }
@@ -136,6 +146,7 @@ void Parser::generate(Engine::Stream &in, Engine::Stream &out) const
         default:
             if (openTag) {
                 if (hasType) {
+                    type += c;
                 } else {
                     name += c;
                 }

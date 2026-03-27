@@ -8,25 +8,10 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-
 Project(%name%)
 
 if (CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
 	include($ENV{MADGINE}/cmake/MadgineSDK.cmake)
 endif()
 
-set(sources "")
-
-FolderSources(sources "" src )	
-
-
-add_plugin(%name% %name% Game ${sources} PRECOMPILED_HEADER src/%name#lc_string%lib.h)
-
-
-target_link_plugins(%name% )
-
-
-create_launcher(%name%)
-
-
-packaging()
+add_subdirectory(api)

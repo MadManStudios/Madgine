@@ -13,7 +13,14 @@ namespace Tools {
         Declined,
         Canceled)
 
-    struct DialogSettings {
+    struct MADGINE_TOOLS_EXPORT DialogSettings {
+
+        DialogSettings() = default;
+
+        DialogSettings(const DialogSettings &) = delete;
+
+        DialogSettings &operator=(const DialogSettings &) = delete;
+
         bool showAccept = true;
         bool showDecline = true;
         bool showCancel = false;
@@ -28,13 +35,25 @@ namespace Tools {
         void decline();
         void cancel();
 
+        template <typename... T>
+        void open(Dialog<T...> dialog, T &...out)
+        {
+            dialog.setCallback([&](const T &...result) {
+                (DefaultAssign {}(out, result), ...);
+            });
+            open(std::move(dialog.mHandle));
+        }
+
+        void open(CoroutineHandle<DialogPromise> handle);
+
         std::optional<DialogResult> result;
+        std::vector<CoroutineHandle<DialogPromise>> mSubDialogs;
+
+        size_t mModalLayers = 0;
     };
 
     struct DialogDeclined { };
     constexpr DialogDeclined dialogDeclined;
-
-    struct DialogPromise;
 
     struct MADGINE_TOOLS_EXPORT DialogContainer {
         DialogContainer() = default;
@@ -56,6 +75,8 @@ namespace Tools {
     protected:
         bool renderHeader(DialogSettings &settings);
         void renderFooter(DialogSettings &settings);
+
+        void handleDialogs(std::vector<CoroutineHandle<DialogPromise>> &dialogs);
 
     private:
         std::vector<CoroutineHandle<DialogPromise>> mDialogs;
@@ -82,29 +103,20 @@ namespace Tools {
                 return mPromise.mSettings.result.has_value() && *mPromise.mSettings.result != DialogResult::Canceled;
             }
 
-            void await_suspend(CoroutineHandle<DialogPromise> self) const noexcept
+            template <typename T>
+            void await_suspend(std::coroutine_handle<T> self) const noexcept
             {
-                *mPromise.mOutHandle = std::move(self);
             }
             constexpr bool await_resume() const noexcept { return !mPromise.mSettings.result; }
 
             DialogPromise &mPromise;
         };
 
-        struct FinalSuspender {
-            constexpr bool await_ready() const noexcept
-            {
-                return !mResume;
-            }
-
-            void await_suspend(CoroutineHandle<DialogPromise> self) noexcept
-            {
-                self->mTargetContainer->show(std::move(mResume));
-            }
-            constexpr void await_resume() const noexcept { }
-
-            CoroutineHandle<DialogPromise> mResume;
-        };
+        std::suspend_always final_suspend() noexcept
+        {
+            assert(mSettings.result && *mSettings.result != DialogResult::Canceled);
+            return {};
+        }
 
         YieldSuspender yield_value(DialogSettings &settings)
         {
@@ -118,9 +130,6 @@ namespace Tools {
         }
 
         DialogSettings mSettings;
-        CoroutineHandle<DialogPromise> *mOutHandle = nullptr;
-        CoroutineHandle<DialogPromise> mResume;
-        DialogContainer *mTargetContainer = nullptr;
     };
 
     struct get_dialog_settings_t {
@@ -146,31 +155,6 @@ namespace Tools {
     };
 
     template <typename... T>
-    struct AwaitableDialog {
-
-        bool await_ready() const
-        {
-            return false;
-        }
-
-        void await_suspend(CoroutineHandle<DialogPromise> other)
-        {
-            mDialog.setCallback([this](T... values) { mResult = { std::forward<T>(values)... }; });
-            DialogContainer *container = other->mTargetContainer;
-            mDialog.mHandle->mResume = std::move(other);
-            container->show(std::move(mDialog.mHandle));
-        }
-
-        auto await_resume()
-        {
-            return std::move(mResult);
-        }
-
-        Dialog<T...> mDialog;
-        std::optional<std::tuple<T...>> mResult;
-    };
-
-    template <typename... T>
     struct Dialog {
         struct promise_type : DialogPromise {
 
@@ -187,12 +171,6 @@ namespace Tools {
                     TupleUnpacker::invokeFromTuple(mCallback, value);
             }
 
-            FinalSuspender final_suspend() noexcept
-            {
-                assert(mSettings.result && *mSettings.result != DialogResult::Canceled);
-                return { std::move(mResume) };
-            }
-
             template <typename A>
             decltype(auto) await_transform(A &&a)
             {
@@ -205,11 +183,6 @@ namespace Tools {
 
             Closure<void(T...)> mCallback;
         };
-
-        AwaitableDialog<T...> operator co_await() &&
-        {
-            return { std::move(*this) };
-        }
 
         template <typename F>
         void setCallback(F &&f)

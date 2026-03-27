@@ -46,7 +46,7 @@ namespace Tools {
 
         DialogContainer &dialogs();
 
-        Dialog<Filesystem::Path> directoryPicker(Filesystem::Path path = {}, Filesystem::Path selected = {});
+        Dialog<Filesystem::Path> directoryPicker(Filesystem::Path path = {}, Filesystem::Path selected = {}, Filesystem::Path base = {});
         Dialog<Filesystem::Path> filePicker(bool allowNewFile = false, Filesystem::Path path = {}, Filesystem::Path selected = {});
 
         virtual void Image(const Filesystem::Path &path, Vector2i image_size = { -1, -1 }) = 0;

@@ -2,9 +2,14 @@
 
 #include "resourceeditor.h"
 
+#include "Interfaces/filesystem/fsapi.h"
+
+#include "Modules/plugins/plugin.h"
+
 #include "Madgine/resources/resourceloaderbase.h"
 #include "Madgine/resources/resourcemanager.h"
 
+#include "Madgine_Tools/pluginmanager/pluginmanager.h"
 #include "Madgine_Tools/renderer/imroot.h"
 #include "imgui/imgui_internal.h"
 #include "imgui/imguiaddons.h"
@@ -122,7 +127,7 @@ namespace Tools {
                         save(path);
                     if (ImGui::MenuItem("Save as...")) {
                         mRoot.dialogs().show(
-                            mRoot.filePicker(true), std::move(save));
+                            resourceFilePicker(true), std::move(save));
                     }
                     ImGui::EndMenu();
                 }
@@ -136,7 +141,7 @@ namespace Tools {
                 if (ImGui::Button("Save")) {
                     if (path.empty()) {
                         mRoot.dialogs().show(
-                            mRoot.filePicker(true), std::move(save));
+                            resourceFilePicker(true), std::move(save));
                     } else {
                         save(path);
                     }
@@ -150,12 +155,49 @@ namespace Tools {
             if (ImGui::Shortcut(ImGuiKey_S | ImGuiMod_Ctrl)) {
                 if (path.empty())
                     mRoot.dialogs().show(
-                        mRoot.filePicker(true), std::move(save));
+                        resourceFilePicker(true), std::move(save));
                 else
                     save(path);
             }
         }
         return visible;
+    }
+
+    Dialog<Filesystem::Path> ResourceEditor::resourceFilePicker(bool allowNewFile, Filesystem::Path path, Filesystem::Path selected)
+    {
+        DialogSettings &settings = co_await get_dialog_settings;
+        settings.acceptText = allowNewFile ? "Save" : "Open";
+        settings.declineText = "Cancel";
+
+        const Plugins::Plugin *plugin = nullptr;
+
+        bool implicitlyAccepted = false;
+        do {
+            ImGui::FilesystemPickerOptions options;
+
+            bool enabled = true;
+
+            #if ENABLE_PLUGINS
+            if (PluginSelector("Plugin", plugin)) {
+                selected = Filesystem::Path { plugin->info()->mSourceRoot } / plugin->info()->mDataPath;
+            }
+
+            if (plugin) {
+                options.mBase = Filesystem::Path { plugin->info()->mSourceRoot } / plugin->info()->mDataPath;
+            } else {
+                enabled = false;
+            }
+            #endif
+
+            if (!enabled)
+                ImGui::BeginDisabled();
+            ImGui::FilePicker(path, selected, &implicitlyAccepted, options);
+            if (!enabled)
+                ImGui::EndDisabled();
+
+            settings.acceptPossible = enabled && !selected.empty() && (allowNewFile || Filesystem::exists(selected));
+        } while (!implicitlyAccepted && (co_yield settings));
+        co_return selected;
     }
 
 }

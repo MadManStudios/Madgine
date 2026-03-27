@@ -59,7 +59,7 @@ namespace Plugins {
     {
         if (mAtleastOne) {
             if (mPlugins.empty()) {
-                LOG_ERROR("No plugin available in Section tagged as atleastOne: " << mName);
+                LOG_FATAL("No plugin available in Section tagged as atleastOne: " << mName);
                 std::terminate();
             }
             for (Plugin &p : kvValues(mPlugins)) {
@@ -165,6 +165,7 @@ namespace Plugins {
         p->unloadDependents(mMgr, file);
         p->setLoaded(false, file);
 
+        mMgr.onUpdate();
         return false;
     }
 

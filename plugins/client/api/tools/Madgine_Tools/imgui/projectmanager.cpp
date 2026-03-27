@@ -17,6 +17,7 @@
 #include "Meta/serialize/serializetable_impl.h"
 
 #include "Madgine_Tools/imguiicons.h"
+#include "Madgine_Tools/pluginmanager/pluginmanager.h"
 #include "Madgine_Tools/templates/templates.h"
 #include "clientimroot.h"
 #include "imgui/imgui.h"
@@ -108,7 +109,12 @@ namespace Tools {
                     if (ImGui::Button(IMGUI_ICON_FILE "\nCreate Project...", widget_size))
                         createProjectDialog();
                     ImGui::Spring();
-                    ImGui::Button("Icon\nSomething", widget_size);
+                    if (ImGui::Button(IMGUI_ICON_FILE "\nCreate Plugin...", widget_size))
+                        createPluginDialog();
+                    ImGui::Spring();
+                    if (ImGui::Button("Open Plugin Manager", widget_size)) {
+                        getTool<PluginManager>().setVisible(true);
+                    }
                     ImGui::Spring();
 
                     ImGui::PopStyleColor();
@@ -117,7 +123,7 @@ namespace Tools {
                     ImGui::EndHorizontal();
                     ImGui::Spring();
                     ImGui::BeginHorizontal("bLanding");
-                    ImGui::Text("Below");
+                    
                     ImGui::EndHorizontal();
                     ImGui::Spring();
                     ImGui::EndVertical();
@@ -206,9 +212,13 @@ namespace Tools {
                                 // setLayout(layoutName); TODO Proper resource selection Dialog
                             });
                     }
+                    if (!mLayout)
+                        ImGui::BeginDisabled();
                     if (ImGui::MenuItem("Save Layout")) {
                         save();
                     }
+                    if (!mLayout)
+                        ImGui::EndDisabled();
 
                     ImGui::Separator();
 
@@ -289,6 +299,10 @@ namespace Tools {
                 createProjectDialog();
             }
 
+            if (ImGui::MenuItem("New Plugin...")) {
+                createPluginDialog();
+            }
+
             ImGui::Separator();
 
             ImGui::MenuItem("Configurations", "", &mShowConfigurations);
@@ -362,6 +376,13 @@ namespace Tools {
     void ProjectManager::createProjectDialog()
     {
         mTemplates->showTemplateDialog("NewProject", [this](const Filesystem::Path &path) {
+            // TODO Show success message
+        });
+    }
+
+    void ProjectManager::createPluginDialog()
+    {
+        mTemplates->showTemplateDialog("NewPlugin", [this](const Filesystem::Path &path) {
             // TODO Show success message
         });
     }

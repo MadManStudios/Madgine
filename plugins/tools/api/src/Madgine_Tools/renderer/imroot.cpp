@@ -262,13 +262,16 @@ namespace Tools {
         }
     }
 
-    Dialog<Filesystem::Path> ImRoot::directoryPicker(Filesystem::Path path, Filesystem::Path selected)
+    Dialog<Filesystem::Path> ImRoot::directoryPicker(Filesystem::Path path, Filesystem::Path selected, Filesystem::Path base)
     {
         DialogSettings &settings = co_await get_dialog_settings;
         settings.acceptText = "Open";
 
+        ImGui::FilesystemPickerOptions options;
+        options.mBase = base;
+
         do {
-            ImGui::DirectoryPicker(path, selected);
+            ImGui::DirectoryPicker(path, selected, options);
         } while (co_yield settings);
         co_return selected;
     }

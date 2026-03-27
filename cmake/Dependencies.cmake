@@ -40,6 +40,11 @@ function(resolve_dependencies)
 				list(APPEND dependencies ${name})
 
 				Message(STATUS ${name})
+			elseif(EXISTS ${file})
+				FetchContent_Declare(
+					${name}
+					SOURCE_DIR ${file}
+				)
 			else()
 				MESSAGE(SEND_ERROR "Unable to parse dependency ${file}")
 			endif()

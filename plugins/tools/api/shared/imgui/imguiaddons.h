@@ -1,16 +1,17 @@
 #pragma once
 
-#include "imconfig.h"
-#include "imgui.h"
+#include "Generic/coroutines/generator.h"
+
+#include "Interfaces/filesystem/path.h"
 
 #include "Meta/keyvalue/valuetype_forward.h"
 
-#include "Generic/coroutines/generator.h"
-
 #include "Modules/debug/history.h"
 
-namespace ImGui {
+#include "imconfig.h"
+#include "imgui.h"
 
+namespace ImGui {
 
 //////// Utility
 
@@ -172,7 +173,6 @@ IMGUI_API bool ValueTypeTypePicker(Engine::ExtendedValueTypeDesc &t);
 
 IMGUI_API bool MethodPicker(const char *label, const std::vector<std::pair<std::string, Engine::BoundApiFunction>> &methods, Engine::BoundApiFunction *m, std::string *currentName, std::string *filter = nullptr, int expectedArgumentCount = -1);
 
-
 ////////// Drag & Drop ValueTypes
 
 IMGUI_API void ResetDraggableValueType();
@@ -206,6 +206,7 @@ bool IsDraggableValueTypeBeingAccepted(
 
 struct FilesystemPickerOptions {
     const char *(*mIconLookup)(const Engine::Filesystem::Path &path, bool isDir) = nullptr;
+    Engine::Filesystem::Path mBase;
 };
 
 IMGUI_API FilesystemPickerOptions *GetFilesystemPickerOptions();
@@ -229,7 +230,6 @@ IMGUI_API bool InteractiveView(InteractiveViewState &state);
 IMGUI_API void SetWindowDockingDir(ImGuiID dockSpaceId, ImGuiDir dir, float ratio, bool outer, ImGuiCond cond = 0);
 
 IMGUI_API void MakeTabVisible(const char *name);
-
 
 ////////// History
 

@@ -22,46 +22,53 @@ namespace Tools {
         result = DialogResult::Canceled;
     }
 
+    void DialogSettings::open(CoroutineHandle<DialogPromise> handle)
+    {
+        mSubDialogs.push_back(std::move(handle));
+    }
+
     void DialogContainer::show(CoroutineHandle<DialogPromise> dialog)
     {
-        dialog->mTargetContainer = this;
         mDialogs.push_back(std::move(dialog));
     }
 
     void DialogContainer::render()
     {
-        std::vector<CoroutineHandle<DialogPromise>> dialogs = std::move(mDialogs);
+        handleDialogs(mDialogs);
+    }
 
-        for (CoroutineHandle<DialogPromise> &dialog : dialogs) {
+    void DialogContainer::handleDialogs(std::vector<CoroutineHandle<DialogPromise>> &dialogs)
+    {
+        std::vector<CoroutineHandle<DialogPromise>> localDialogs = std::move(dialogs);
+
+        for (CoroutineHandle<DialogPromise> &dialog : localDialogs) {
             if (renderHeader(dialog->mSettings)) {
-                CoroutineHandle<DialogPromise> continuation;
-                dialog->mOutHandle = &continuation;
-                DialogSettings backup = dialog->mSettings;
-                dialog.release().resume();
-                DialogSettings &settings = continuation ? continuation->mSettings : backup;
-                renderFooter(settings);
-                if (continuation) {
-                    if (settings.result) {
-                        if (*settings.result != DialogResult::Canceled) {
-                            continuation.release().resume();
-                        }
-                    } else {
-                        mDialogs.push_back(std::move(continuation));
+                dialog.resume();
+                handleDialogs(dialog->mSettings.mSubDialogs);
+                renderFooter(dialog->mSettings);
+                if (dialog->mSettings.result) {
+                    if (*dialog->mSettings.result != DialogResult::Canceled && !dialog.done()) {
+                        dialog.resume();
                     }
+                    assert(*dialog->mSettings.result == DialogResult::Canceled || dialog.done());
+                } else {
+                    dialogs.push_back(std::move(dialog));
                 }
+            } else {
+                dialogs.push_back(std::move(dialog));
             }
         }
     }
 
     bool DialogContainer::renderHeader(DialogSettings &settings)
     {
-        std::string header = settings.header;
+        std::string id = settings.header + "##" + std::to_string(reinterpret_cast<uintptr_t>(&settings));
 
-        ImGui::PushID(this);
-        ImGui::OpenPopup(header.c_str());
+        if (!ImGui::IsPopupOpen(id.c_str()))
+            ImGui::OpenPopup(id.c_str());
 
         ImGui::SetNextWindowSize({ 500, 400 }, ImGuiCond_FirstUseEver);
-        if (ImGui::BeginPopupModal(header.c_str())) {
+        if (ImGui::BeginPopupModal(id.c_str())) {
 
             ImVec2 size = ImGui::GetContentRegionAvail();
             size.x -= 4.0f;
@@ -70,7 +77,6 @@ namespace Tools {
 
             return true;
         } else {
-            ImGui::PopID();
             return false;
         }
     }
@@ -108,7 +114,6 @@ namespace Tools {
         ImGui::EndHorizontal();
 
         ImGui::EndPopup();
-        ImGui::PopID();
     }
 
 }
