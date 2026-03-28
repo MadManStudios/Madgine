@@ -14,13 +14,13 @@ KeyValueResult::KeyValueResult(const KeyValueResult &other)
 {
 }
 
-KeyValueError::KeyValueError(GenericResult state, const std::string &msg)
+KeyValueError::KeyValueError(EnumHolder state, const std::string &msg)
     : mState(state)
     , mMsg(msg)
 {
 }
 
-KeyValueError::KeyValueError(GenericResult state, const std::string &msg, const char *function, const char *file, size_t sourceLine)
+KeyValueError::KeyValueError(EnumHolder state, const std::string &msg, const char *function, const char *file, size_t sourceLine)
     : KeyValueError(state, msg)
 {
     mStackTrace.emplace_back(StackEntry { function, file, sourceLine });
@@ -48,13 +48,13 @@ std::ostream &operator<<(std::ostream &out, const KeyValueResult &result)
 
 KeyValueResultBuilder::operator KeyValueResult()
 {
-    assert(mType != GenericResult::SUCCESS);
+    assert(mType != GenericResult { GenericResult::SUCCESS });
     return std::make_unique<KeyValueError>(mType, mMsg.str(), mFunction, mFile, mLine);
 }
 
 KeyValueResultBuilder::operator KeyValueError()
 {
-    assert(mType != GenericResult::SUCCESS);
+    assert(mType != GenericResult { GenericResult::SUCCESS });
     return {
         mType, mMsg.str(), mFunction, mFile, mLine
     };

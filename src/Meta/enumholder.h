@@ -19,6 +19,14 @@ struct META_EXPORT EnumHolder {
 
     bool operator==(const EnumHolder &other) const;
 
+    template <typename Rep, typename... Reps>
+    bool operator!=(const EnumImpl<Rep, Reps...> &e) const
+    {
+        if (mTable != &Rep::sTable)
+            return true;
+        return static_cast<typename Rep::EnumType>(mValue) != e;
+    }
+
     std::string_view toString() const;
     const EnumMetaTable *table() const;
 

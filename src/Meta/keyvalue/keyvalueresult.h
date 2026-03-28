@@ -2,11 +2,18 @@
 
 #include "Generic/genericresult.h"
 
+#include "../enumholder.h"
+
 namespace Engine {
 
 struct META_EXPORT KeyValueError {
-    KeyValueError(GenericResult state = GenericResult::UNKNOWN_ERROR, const std::string &msg = "");
-    KeyValueError(GenericResult state, const std::string &msg, const char *function, const char *file, size_t sourceLine);
+    template <typename Rep, typename... Reps>
+    KeyValueError(EnumImpl<Rep, Reps...> state, const std::string &msg = "")
+        : KeyValueError(EnumHolder { state }, msg)
+    {
+    }
+    KeyValueError(EnumHolder state = GenericResult { GenericResult::UNKNOWN_ERROR }, const std::string &msg = "");
+    KeyValueError(EnumHolder state, const std::string &msg, const char *function, const char *file, size_t sourceLine);
 
     META_EXPORT friend std::ostream &operator<<(std::ostream &out, const KeyValueError &error);
 
@@ -18,7 +25,7 @@ struct META_EXPORT KeyValueError {
     };
     std::vector<StackEntry> mStackTrace;
 
-    GenericResult mState;
+    EnumHolder mState;
 };
 
 struct [[nodiscard]] META_EXPORT KeyValueResult {
@@ -30,22 +37,22 @@ struct [[nodiscard]] META_EXPORT KeyValueResult {
 
     KeyValueResult &operator=(const KeyValueResult &) = delete;
     KeyValueResult &operator=(KeyValueResult &&) = default;
-    
+
     explicit operator bool() const;
-        
+
     std::unique_ptr<KeyValueError> mError;
 
     META_EXPORT friend std::ostream &operator<<(std::ostream &out, const KeyValueResult &result);
 };
 
 struct META_EXPORT KeyValueResultBuilder {
-    GenericResult mType;
+    EnumHolder mType;
     const char *mFunction;
     const char *mFile;
     size_t mLine;
     std::ostringstream mMsg;
 
-    KeyValueResultBuilder(GenericResult type, const char *function, const char *file, size_t line)
+    KeyValueResultBuilder(EnumHolder type, const char *function, const char *file, size_t line)
         : mType(type)
         , mFunction(function)
         , mFile(file)
@@ -67,9 +74,9 @@ struct META_EXPORT KeyValueResultBuilder {
 #define KEYVALUE_ERROR(Type) \
     ::Engine::KeyValueResultBuilder { Type, __func__, __FILE__, __LINE__ }
 
-#define KEYVALUE_UNKNOWN_ERROR() KEYVALUE_ERROR(::Engine::GenericResult::UNKNOWN_ERROR)
+#define KEYVALUE_UNKNOWN_ERROR() KEYVALUE_ERROR(::Engine::GenericResult{::Engine::GenericResult::UNKNOWN_ERROR})
 
-#define KEYVALUE_PROPAGATE_ERROR(...)                                                                                        \
+#define KEYVALUE_PROPAGATE_ERROR(...)                     \
     if (::Engine::KeyValueResult _result = (__VA_ARGS__)) \
     return _result
 
