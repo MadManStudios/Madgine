@@ -28,6 +28,8 @@ struct KeyValueBinding {
         std::remove_reference_t<Binding> mBinding;
     };
 
+    KeyValueBinding() = default;
+
     template <Execution::AnyBinding Binding>
     KeyValueBinding(Binding &&binding)
         : mPtr(InnerBinding<Binding> { std::forward<Binding>(binding) })

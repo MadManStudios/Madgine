@@ -73,12 +73,12 @@ namespace Behavior {
         return BehaviorFactoryRegistry::get(mIndex).mFactory->createParameters(mHandle);
     }
 
-    std::vector<ValueTypeDesc> BehaviorHandle::parameterTypes() const
+    std::vector<ExtendedValueTypeDesc> BehaviorHandle::parameterTypes() const
     {
         return BehaviorFactoryRegistry::get(mIndex).mFactory->parameterTypes(mHandle);
     }
 
-    std::vector<ValueTypeDesc> BehaviorHandle::resultTypes() const
+    std::vector<ExtendedValueTypeDesc> BehaviorHandle::resultTypes() const
     {
         return BehaviorFactoryRegistry::get(mIndex).mFactory->resultTypes(mHandle);
     }

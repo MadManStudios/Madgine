@@ -44,8 +44,7 @@ namespace Behavior {
             std::string mFullClassName;
 
         public:
-            ParameterTuple mParameters;
-            std::vector<NamedDescriptor> mNamedInputs;
+            ParameterTuple mDefaultParameters;
             uint32_t mSubBehaviorCount = 0;
         };
 

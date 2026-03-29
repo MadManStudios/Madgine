@@ -6,6 +6,7 @@
 #include "Generic/fixed_string.h"
 
 #include "Meta/keyvalue/valuetype_forward.h"
+#include "Meta/serialize/streams/streamresult.h"
 
 namespace Engine {
 namespace Behavior {
@@ -98,11 +99,23 @@ namespace Behavior {
     template <fixed_string Name, typename T>
     struct Named {
 
+        Named() = default;
+
+        Named(T &&value)
+            : mValue(std::in_place, std::forward<T>(value))
+        {
+        }
+
+        Named(std::optional<forward_ref_t<T>> value)
+            : mValue(std::move(value))
+        {
+        }
+
         using is_sender = void;
 
         using result_type = KeyValueError;
         template <template <typename...> typename Tuple>
-        using value_types = Tuple<ValueType_Return<T> &>;
+        using value_types = Tuple<T &>;
 
         bool resolve(auto &context)
         {
@@ -112,12 +125,12 @@ namespace Behavior {
             return static_cast<bool>(mValue);
         }
 
-        ValueType_Return<T> &operator->()
+        T &operator->()
         {
             return *mValue;
         }
 
-        ValueType_Return<T> &operator*()
+        T &operator*()
         {
             return *mValue;
         }
@@ -125,11 +138,6 @@ namespace Behavior {
         decltype(auto) operator->*(auto &&arg)
         {
             return *mValue->*std::forward<decltype(arg)>(arg);
-        }
-
-        operator ValueType_Return<T> &()
-        {
-            return *mValue;
         }
 
         template <typename Rec>
@@ -144,7 +152,21 @@ namespace Behavior {
             return NamedState<Rec, Name, T> { sender, std::forward<Rec>(rec) };
         }
 
-        std::optional<forward_ref_t<ValueType_Return<T>>> mValue;
+        using decay_t = std::optional<forward_ref_t<T>>;
+
+        template <bool isReferenceWrapped>
+        friend decltype(auto) tag_invoke(convert_ValueType_t<isReferenceWrapped> convert_ValueType, Named<Name, T> &named)
+        {
+            return convert_ValueType(named.mValue);
+        }
+
+        template <bool isReferenceWrapped>
+        friend decltype(auto) tag_invoke(convert_ValueType_t<isReferenceWrapped> convert_ValueType, Named<Name, T> &&named)
+        {
+            return convert_ValueType(std::move(named.mValue));
+        }
+
+        std::optional<forward_ref_t<T>> mValue;
     };
 
     struct NamedDescriptor {
@@ -214,4 +236,23 @@ namespace Behavior {
     constexpr with_named_t<Name> with_named;
 
 }
+
+namespace Serialize {
+    template <fixed_string Name, typename T>
+    struct Operations<Behavior::Named<Name, T>> {
+        static StreamResult read(CallerHierarchyFormattedSerializeStream in, Behavior::Named<Name, T> &n, const char *name)
+        {
+            return Serialize::read(in, n.mValue, name);
+        }
+        static void write(CallerHierarchyFormattedSerializeStream out, const Behavior::Named<Name, T> &n, const char *name)
+        {
+            Serialize::write(out, n.mValue, name);
+        }
+        static StreamResult visitStream(CallerHierarchyFormattedSerializeStream in, const char *name, const StreamVisitor &visitor, size_t depth)
+        {
+            Serialize::visitStream<std::optional<forward_ref_t<T>>>(in, name, visitor, depth);
+        }
+    };
+}
+
 }

@@ -17,8 +17,8 @@ namespace Behavior {
         virtual std::string_view name(const UniqueOpaquePtr &handle) const = 0;
         virtual Behavior create(const UniqueOpaquePtr &handle, const ParameterTuple &args, std::vector<Behavior> behaviors) const = 0;
         virtual ParameterTuple createParameters(const UniqueOpaquePtr &handle) const = 0;
-        virtual std::vector<ValueTypeDesc> parameterTypes(const UniqueOpaquePtr &handle) const = 0;
-        virtual std::vector<ValueTypeDesc> resultTypes(const UniqueOpaquePtr &handle) const = 0;
+        virtual std::vector<ExtendedValueTypeDesc> parameterTypes(const UniqueOpaquePtr &handle) const = 0;
+        virtual std::vector<ExtendedValueTypeDesc> resultTypes(const UniqueOpaquePtr &handle) const = 0;
         virtual std::vector<NamedDescriptor> namedInputs(const UniqueOpaquePtr &handle) const = 0;
         virtual size_t subBehaviorCount(const UniqueOpaquePtr &handle) const = 0;
     };

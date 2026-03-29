@@ -30,5 +30,10 @@ namespace Behavior {
 
     template <Execution::AnySender Sender>
     struct SenderBehaviorState;
+
+    
+    template <typename T>
+    struct Bindable;
+
 }
 }

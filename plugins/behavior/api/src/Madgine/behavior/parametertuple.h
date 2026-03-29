@@ -10,6 +10,10 @@ namespace Engine {
 namespace Behavior {
 
     struct ParameterTupleBase {
+        virtual size_t size() const = 0;
+        virtual std::string_view name(size_t index) const = 0;
+        virtual ExtendedValueTypeDesc type(size_t index) const = 0;
+
         virtual std::unique_ptr<ParameterTupleBase> clone() = 0;
         virtual ScopePtr customScopePtr() = 0;
 
@@ -26,6 +30,20 @@ namespace Behavior {
         {
         }
 
+        size_t size() const override
+        {
+            return sizeof...(Ty);
+        }
+
+        ExtendedValueTypeDesc type(size_t index) const override
+        {
+            if constexpr (sizeof...(Ty) == 0) {
+                throw 0;
+            } else {
+                return TupleUnpacker::select(mTuple, [](auto &&a) { return toValueTypeDesc<std::decay_t<decltype(a)>>(); }, index);
+            }
+        }
+
         std::tuple<Ty...> mTuple;
     };
 
@@ -34,17 +52,30 @@ namespace Behavior {
 
         using ParameterTupleInstance<Ty...>::ParameterTupleInstance;
 
-        virtual std::unique_ptr<ParameterTupleBase> clone() override
+        static const constexpr auto sNames = []<size_t... Is>(auto_pack<Is...>) constexpr -> std::array<std::string_view, sizeof...(Ty)>
+        {
+            return {
+                Names::template get<Is>...
+            };
+        }
+        (index_pack_for<Ty...> {});
+
+        std::string_view name(size_t index) const override
+        {
+            return sNames[index];
+        }
+
+        std::unique_ptr<ParameterTupleBase> clone() override
         {
             return std::make_unique<TypedParameterTupleInstance<Names, Ty...>>(this->mTuple);
         }
 
-        virtual ScopePtr customScopePtr() override
+        ScopePtr customScopePtr() override
         {
             return { this, &sMetaTable };
         }
 
-        virtual Serialize::StreamResult read(Serialize::CallerHierarchyFormattedSerializeStream in) override
+        Serialize::StreamResult read(Serialize::CallerHierarchyFormattedSerializeStream in) override
         {
             std::tuple<dependent_t<Serialize::StreamResult, Ty>...> results;
             [&]<size_t... Is>(auto_pack<Is...>) {
@@ -56,7 +87,7 @@ namespace Behavior {
                     return std::move(second); }, Serialize::StreamResult {});
         }
 
-        virtual void write(Serialize::CallerHierarchyFormattedSerializeStream out) override
+        void write(Serialize::CallerHierarchyFormattedSerializeStream out) override
         {
             [this, &out]<size_t... Is>(auto_pack<Is...>) {
                 (Serialize::write(out, std::get<Is>(this->mTuple), Names::template get<Is>.c_str()), ...);
@@ -128,6 +159,21 @@ namespace Behavior {
                 out = instance->mTuple;
             }
             return instance;
+        }
+
+        size_t size() const
+        {
+            return mTuple->size();
+        }
+
+        std::string_view name(size_t index) const
+        {
+            return mTuple->name(index);
+        }
+
+        ExtendedValueTypeDesc type(size_t index) const
+        {
+            return mTuple->type(index);
         }
 
         void reset()

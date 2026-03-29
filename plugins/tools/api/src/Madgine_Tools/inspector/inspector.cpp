@@ -116,12 +116,14 @@ namespace Tools {
                 std::pair<bool, bool> result;
                 if (!Execution::access_binding(binding.mPtr, [&](const ValueType &v) {
                         ValueType v_copy = v;
-                        result = drawValue(id, v_copy, false, possibleTypes);
-                        actualType = v_copy.type();
+                        result = drawValue(id, v_copy, false, v_copy.type());
                     })) {
                     ValueType v;
-                    result = drawValue(id, v, false, possibleTypes);
-                    actualType = v.type();
+                    result = drawValue(id, v, false, v.type());                    
+                }
+                if (!possibleTypes.mType.isRegular()) {
+                    ImGui::SameLine(0, 0);
+                    result.first |= drawTypeDecorations(actualType, possibleTypes);
                 }
                 return result;
             },
@@ -397,21 +399,21 @@ namespace Tools {
                 return true;
             }
             break;
-        case ExtendedValueTypeEnum::OptionalType:
-            if (ImGui::Checkbox("##Optional", &isSet)) {
+        case ExtendedValueTypeEnum::VariantType: // Very hacky
+             if (ImGui::Checkbox("##Optional", &isSet)) {
                 if (isSet) {
-                    type = { possibleTypes.mType.unwrap(), possibleTypes.mSecondary };
+                    type = possibleTypes.unwrap();
                 } else {
                     type = toValueTypeDesc<std::monostate>();
                 }
                 return true;
             }
             break;
-        case ExtendedValueTypeEnum::BindableType:
+        /* case ExtendedValueTypeEnum::BindableType:
             if (ImGui::LED("##Bindable", type.mType == ValueTypeEnum::BindingValue, { ImGui::GetFrameHeight(), ImGui::GetFrameHeight() })) {
 
             }
-            break;
+            break;*/
         default:
             throw 0;
         }

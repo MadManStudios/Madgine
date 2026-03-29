@@ -86,8 +86,7 @@ struct META_EXPORT ValueTypeIndex {
 
 enum class ExtendedValueTypeEnum : unsigned char {
     GenericType = static_cast<unsigned char>(ValueTypeEnum::MAX_VALUETYPE_TYPE),
-    OptionalType,
-    BindableType,
+    VariantType,
     MAX_EXTENDEDVALUETYPE_TYPE
 };
 
@@ -106,45 +105,28 @@ struct META_EXPORT ExtendedValueTypeIndex {
         mTypeList[0] = t;
     }
 
-    constexpr ExtendedValueTypeIndex(ExtendedValueTypeIndex t, const ExtendedValueTypeIndex &inner)
+    constexpr ExtendedValueTypeIndex(ExtendedValueTypeIndex t, auto &&inner)
     {
         mTypeList[0] = t;
-        size_t i = 0;
-        int mark = 1;
-        do {
-            --mark;
-            mTypeList[i + 1] = inner.mTypeList[i];
-            if (mTypeList[i + 1] == static_cast<ExtendedValueTypeEnum>(ValueTypeEnum::KeyValueVirtualAssociativeRangeValue)) {
-                assert(mark == 0);
-                mark = 2;
-            }
-            if (mTypeList[i + 1] == static_cast<ExtendedValueTypeEnum>(ValueTypeEnum::KeyValueVirtualSequenceRangeValue) || mTypeList[i + 1] == ExtendedValueTypeEnum::BindableType || mTypeList[i + 1] == ExtendedValueTypeEnum::OptionalType) {
-                assert(mark == 0);
-                mark = 1;
-            }
-            ++i;
-        } while (mark > 0);
-    }
 
-    constexpr ExtendedValueTypeIndex(ExtendedValueTypeIndex t, const ExtendedValueTypeIndex &innerKey, const ExtendedValueTypeIndex &innerValue)
-    {
-        mTypeList[0] = t;
-        mTypeList[1] = innerKey.mTypeList[0];
-        size_t i = 0;
-        int mark = 1;
-        do {
-            --mark;
-            mTypeList[i + 2] = innerValue.mTypeList[i];
-            if (mTypeList[i + 2] == static_cast<ExtendedValueTypeEnum>(ValueTypeEnum::KeyValueVirtualAssociativeRangeValue)) {
-                assert(mark == 0);
-                mark = 2;
-            }
-            if (mTypeList[i + 2] == static_cast<ExtendedValueTypeEnum>(ValueTypeEnum::KeyValueVirtualSequenceRangeValue) || mTypeList[i + 2] == ExtendedValueTypeEnum::BindableType || mTypeList[i + 2] == ExtendedValueTypeEnum::OptionalType) {
-                assert(mark == 0);
-                mark = 1;
-            }
-            ++i;
-        } while (mark > 0);
+        size_t offset = 1;
+        for (ExtendedValueTypeIndex index : inner) {
+            size_t i = 0;
+            int mark = 1;
+            do {
+                --mark;
+                ExtendedValueTypeEnum type = index.mTypeList[i];
+                mTypeList[i + offset] = type;
+                if (type == static_cast<ExtendedValueTypeEnum>(ValueTypeEnum::KeyValueVirtualAssociativeRangeValue) || type == ExtendedValueTypeEnum::VariantType) {
+                    mark += 2;
+                }
+                if (type == static_cast<ExtendedValueTypeEnum>(ValueTypeEnum::KeyValueVirtualSequenceRangeValue) ||type == static_cast<ExtendedValueTypeEnum>(ValueTypeEnum::BindingValue)) {
+                    mark += 1;
+                }
+                ++i;
+            } while (mark > 0);
+            offset += i;
+        }
     }
 
     constexpr bool canAccept(ValueTypeIndex valueType)
@@ -159,7 +141,7 @@ struct META_EXPORT ExtendedValueTypeIndex {
 
     constexpr ExtendedValueTypeIndex unwrap()
     {
-        assert(mTypeList[0] == static_cast<ExtendedValueTypeEnum>(ValueTypeEnum::KeyValueVirtualSequenceRangeValue) || mTypeList[0] == ExtendedValueTypeEnum::BindableType || mTypeList[0] == ExtendedValueTypeEnum::OptionalType);
+        assert(mTypeList[0] == static_cast<ExtendedValueTypeEnum>(ValueTypeEnum::KeyValueVirtualSequenceRangeValue) || mTypeList[0] == ExtendedValueTypeEnum::VariantType);
 
         ExtendedValueTypeIndex result;
         int i = 0;
@@ -168,11 +150,11 @@ struct META_EXPORT ExtendedValueTypeIndex {
         do {
             --mark;
             result.mTypeList[i] = mTypeList[i + 1];
-            if (result.mTypeList[i] == static_cast<ExtendedValueTypeEnum>(ValueTypeEnum::KeyValueVirtualAssociativeRangeValue)) {
+            if (result.mTypeList[i] == static_cast<ExtendedValueTypeEnum>(ValueTypeEnum::KeyValueVirtualAssociativeRangeValue) || mTypeList[i] == ExtendedValueTypeEnum::VariantType) {
                 assert(mark == 0);
                 mark = 2;
             }
-            if (result.mTypeList[i] == static_cast<ExtendedValueTypeEnum>(ValueTypeEnum::KeyValueVirtualSequenceRangeValue) || mTypeList[i] == ExtendedValueTypeEnum::BindableType || mTypeList[i] == ExtendedValueTypeEnum::OptionalType) {
+            if (result.mTypeList[i] == static_cast<ExtendedValueTypeEnum>(ValueTypeEnum::KeyValueVirtualSequenceRangeValue)) {
                 assert(mark == 0);
                 mark = 1;
             }
@@ -300,17 +282,11 @@ struct META_EXPORT ExtendedValueTypeDesc {
     {
     }
 
-    constexpr ExtendedValueTypeDesc(ExtendedValueTypeIndex type, const ExtendedValueTypeDesc &innerDesc)
-        : mType(type, innerDesc.mType)
-        , mSecondary(innerDesc.mSecondary)
+    constexpr ExtendedValueTypeDesc(ExtendedValueTypeIndex type, std::initializer_list<ExtendedValueTypeDesc> innerDesc)
+        : mType(type, innerDesc | std::views::transform(&ExtendedValueTypeDesc::mType))
+        , mSecondary(innerDesc.begin()->mSecondary)
     {
-    }
-
-    constexpr ExtendedValueTypeDesc(ExtendedValueTypeIndex type, const ExtendedValueTypeDesc &innerKeyDesc, const ExtendedValueTypeDesc &innerValueDesc)
-        : mType(type, innerKeyDesc.mType, innerValueDesc.mType)
-        , mSecondary(innerValueDesc.mSecondary)
-    {
-        //assert(!innerKeyDesc.mSecondary.mDummy);
+        // assert(!innerKeyDesc.mSecondary.mDummy || !innerValueDesc.mSecondary.mDummy || innerKeyDesc.mSecondary.mDummy == innerValueDesc.mSecondary.mDummy);
     }
 
     constexpr ExtendedValueTypeDesc(const ValueTypeDesc &desc)
@@ -335,6 +311,11 @@ struct META_EXPORT ExtendedValueTypeDesc {
         return mType == valueType.mType;
     }
 
+    constexpr ExtendedValueTypeDesc unwrap()
+    {
+        return { mType.unwrap(), mSecondary };
+    }
+
     constexpr operator ValueTypeDesc() const
     {
         assert(mType.isRegular());
@@ -354,6 +335,84 @@ struct META_EXPORT ExtendedValueTypeDesc {
 
     std::string toString(size_t level = 0) const;
 };
+
+template <bool isReferenceWrapped>
+struct convert_ValueType_t {
+
+    template <typename T>
+        requires(!tag_invocable<convert_ValueType_t, T>)
+    decltype(auto) operator()(T &&t) const
+    {
+        static_assert(!requires { typename std::decay_t<T>::no_value_type; });
+
+        if constexpr (InstanceOf<std::decay_t<T>, std::reference_wrapper>) {
+            return convert_ValueType_t<true> {}(t.get());
+        } else if constexpr (ValueTypePrimitive<std::decay_t<T>> || std::same_as<ValueType, std::decay_t<T>>) {
+            return std::forward<T>(t);
+        } else if constexpr (String<std::decay_t<T>>) {
+            return std::string { std::forward<T>(t) };
+        } else if constexpr (std::ranges::range<T>) {
+            if constexpr (std::same_as<KeyType_t<std::ranges::range_value_t<T>>, Void>)
+                return KeyValueVirtualSequenceRange { std::forward<T>(t) };
+            else
+                return KeyValueVirtualAssociativeRange { std::forward<T>(t) };
+        } else if constexpr (std::is_enum_v<std::decay_t<T>>) {
+            if constexpr (std::is_reference_v<T>) {
+                return static_cast<std::underlying_type_t<T> &>(t);
+            } else {
+                return static_cast<std::underlying_type_t<T>>(t);
+            }
+        } else if constexpr (InstanceOf<std::decay_t<T>, EnumImpl>) {
+            return EnumHolder { std::forward<T>(t) };
+        } else if constexpr (InstanceOf<std::decay_t<T>, Flags>) {
+            return FlagsHolder { std::forward<T>(t) };
+        } else if constexpr (Execution::AnyBinding<std::decay_t<T>>) {
+            return KeyValueBinding { std::forward<T>(t) };
+        } else if constexpr (Execution::AnySender<std::decay_t<T>>) {
+            return KeyValueSender { std::forward<T>(t) };
+        } else if constexpr (InstanceOfA<std::decay_t<T>, TypedBoundApiFunction>) {
+            return BoundApiFunction { std::forward<T>(t) };
+        } else if constexpr (Pointer<std::decay_t<T>>) {
+            return ScopePtr { t };
+        } else if constexpr (InstanceOf<std::decay_t<T>, std::unique_ptr>) {
+            return ScopePtr { t.get() };
+        } else if constexpr (isReferenceWrapped) {
+            return ScopePtr { &t };
+        } else {
+            return OwnedScopePtr { std::forward<T>(t) };
+        }
+        // static_assert(dependent_bool<T, false>::value, "The provided type can not be converted to a ValueType");
+    }
+
+    template <typename T>
+    friend std::variant<T, std::monostate> tag_invoke(convert_ValueType_t, std::optional<T> &&o)
+    {
+        if (o) {
+            return { std::move(*o) };
+        } else {
+            return { std::monostate {} };
+        }
+    }
+
+    template <typename T>
+    friend std::variant<std::reference_wrapper<T>, std::monostate> tag_invoke(convert_ValueType_t, std::optional<T> &o)
+    {
+        if (o) {
+            return { *o };
+        } else {
+            return { std::monostate {} };
+        }
+    }
+
+    template <typename T>
+        requires tag_invocable<convert_ValueType_t, T>
+    decltype(auto) operator()(T &&t) const
+    {
+        return tag_invoke(*this, std::forward<T>(t));
+    }
+};
+
+inline constexpr convert_ValueType_t<false> convert_ValueType {};
 
 template <typename T>
 constexpr ValueTypeIndex toValueTypeIndex()
@@ -382,14 +441,18 @@ constexpr ValueTypeIndex toValueTypeIndex()
     }
 }
 
-template <typename T>
+template <typename T, bool isReferenceWrapped = false>
 constexpr ExtendedValueTypeDesc toValueTypeDesc()
 {
+    static_assert(!std::is_rvalue_reference_v<T>);
     static_assert(!requires { typename std::decay_t<T>::no_value_type; });
 
-    static_assert(!std::is_rvalue_reference_v<T>);
-    if constexpr (InstanceOf<T, std::optional>) {
-        return { { ExtendedValueTypeEnum::OptionalType }, toValueTypeDesc<typename is_instance<T, std::optional>::argument_types::template unpack_unique<>>() };
+    if constexpr (tag_invocable<convert_ValueType_t<isReferenceWrapped>, T>) {
+        return toValueTypeDesc<std::decay_t<std::invoke_result_t<convert_ValueType_t<isReferenceWrapped>, T>>, isReferenceWrapped>();
+    } else if constexpr (InstanceOf<T, std::reference_wrapper>) {
+        return toValueTypeDesc<typename T::type, true>();
+    } else if constexpr (InstanceOf<T, std::variant>) {
+        return { { ExtendedValueTypeEnum::VariantType }, { toValueTypeDesc<typename is_instance<T, std::variant>::argument_types::template select<0>>(), toValueTypeDesc<typename is_instance<T, std::variant>::argument_types::template select<1>>() } };
     } else if constexpr (ValueTypePrimitive<T>) {
         return { toValueTypeIndex<T>() };
     } else if constexpr (std::same_as<T, ValueType>) {
@@ -398,37 +461,33 @@ constexpr ExtendedValueTypeDesc toValueTypeDesc()
         return { { ValueTypeEnum::FlagsValue }, &T::Representation::sTable };
     } else if constexpr (InstanceOf<std::decay_t<T>, EnumImpl>) {
         return { { ValueTypeEnum::EnumValue }, &T::Representation::sTable };
+    } else if constexpr (Execution::AnyBinding<T>) {
+        return { { ValueTypeEnum::BindingValue }, { toValueTypeDesc<std::decay_t<typename T::type>>() } };
     } else if constexpr (Execution::AnySender<T>) {
         return { { ValueTypeEnum::SenderValue }, nullptr };
-    } else if constexpr (Execution::AnyBinding<T>) {
-        return { { ValueTypeEnum::BindingValue }, &table<std::decay_t<typename T::type>> };
     } else if constexpr (std::same_as<T, ScopePtr>) {
         return { { ValueTypeEnum::ScopeValue }, static_cast<const MetaTable **>(nullptr) };
-    } else if constexpr (InstanceOf<T, Execution::Bindable>) {
-        return { { ExtendedValueTypeEnum::BindableType }, toValueTypeDesc<typename is_instance<T, Execution::Bindable>::argument_types::template unpack_unique<>>() };
     } else if constexpr (std::ranges::range<T>) {
         if constexpr (std::same_as<KeyType_t<std::ranges::range_value_t<T>>, Void>)
-            return { { ValueTypeEnum::KeyValueVirtualSequenceRangeValue }, toValueTypeDesc<std::ranges::range_value_t<T>>() };
+            return { { ValueTypeEnum::KeyValueVirtualSequenceRangeValue }, { toValueTypeDesc<std::ranges::range_value_t<T>, true>() } };
         else
-            return { { ValueTypeEnum::KeyValueVirtualAssociativeRangeValue }, toValueTypeDesc<KeyType_t<std::ranges::range_reference_t<T>>>(), toValueTypeDesc<ValueType_t<std::ranges::range_reference_t<T>>>() };
+            return { { ValueTypeEnum::KeyValueVirtualAssociativeRangeValue }, { toValueTypeDesc<KeyType_t<std::ranges::range_reference_t<T>>, true>(), toValueTypeDesc<ValueType_t<std::ranges::range_reference_t<T>>, true>() } };
     } else if constexpr (InstanceOfA<T, TypedBoundApiFunction>) {
         return { { ValueTypeEnum::BoundApiFunctionValue }, is_instance_auto<T, TypedBoundApiFunction>::arguments::value };
-    } else if constexpr (Pointer<T> || InstanceOf<T, std::reference_wrapper>) {
+    } else if constexpr (Pointer<T>) {
         if constexpr (Function<std::remove_pointer_t<T>>)
             // return { { ValueTypeEnum::ApiFunctionValue }, nullptr };
             throw 0;
         else if constexpr (std::same_as<std::remove_cv_t<std::remove_pointer_t<T>>, FunctionTable>)
             // return { { ValueTypeEnum::ApiFunctionValue }, nullptr };
             throw 0;
-        else if constexpr (InstanceOf<T, std::reference_wrapper>) {
-            return { { ValueTypeEnum::ScopeValue }, &table<resolveCustomScopePtr_t<typename T::type>> };
-        } else {
+        else {
             return { { ValueTypeEnum::ScopeValue }, &table<std::remove_pointer_t<resolveCustomScopePtr_t<T>>> };
         }
     } else if constexpr (InstanceOf<std::decay_t<T>, std::unique_ptr>) {
         return { { ValueTypeEnum::ScopeValue }, &table<typename is_instance<std::decay_t<T>, std::unique_ptr>::argument_types::first> };
     } else {
-        return { { ValueTypeEnum::OwnedScopeValue }, &table<resolveCustomScopePtr_t<T>> };
+        return { { ValueTypeEnum::OwnedScopeValue }, &table<decayed_t<resolveCustomScopePtr_t<T>>> };
     }
 }
 }

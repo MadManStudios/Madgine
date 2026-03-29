@@ -519,6 +519,12 @@ namespace Tools {
 
             Behavior::NodeGraph::PinDesc outputPin = Behavior::NodeGraph::NodeBase::pinFromId(outputPinIdN);
 
+            if (outputPin.mDir == inputPin.mDir) {
+                ShowLabel("x Incompatible Pin Directions", ImColor(45, 32, 32, 180));
+                ed::RejectNewItem(ImColor(255, 0, 0), 2.0f);
+                return;
+            }
+
             if (outputPin.mDir == Behavior::NodeGraph::PinDir::In) {
                 std::swap(inputPin, outputPin);
             }
@@ -574,7 +580,7 @@ namespace Tools {
             ShowLabel("+ Create Link", ImColor(32, 45, 32, 180));
             if (ed::AcceptNewItem(ImColor(128, 255, 128), 4.0f)) {
                 if (outputPin.mType == Behavior::NodeGraph::PinType::Flow) {
-                    mGraph.connectFlow(inputPin.mPin, outputPin.mPin);
+                    mGraph.connectFlow(outputPin.mPin, inputPin.mPin);
                 } else {
                     mGraph.connectData(inputPin.mPin, outputPin.mPin);
                 }

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Generic/execution/bindable.h"
+#include "Madgine/behavior/bindable.h"
 
 #include "util/textrenderdata.h"
 #include "widget.h"
@@ -14,7 +14,7 @@ namespace Widgets {
         void render(WidgetsRenderData &renderData) override;
 
         TextRenderData mTextRenderData;      
-        Execution::Bindable<std::string> mText;
+        Behavior::Bindable<std::string> mText;
     };
 }
 }

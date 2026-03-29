@@ -1,7 +1,8 @@
 #pragma once
 
-#include "Generic/execution/bindable.h"
 #include "Generic/execution/signal.h"
+
+#include "Madgine/behavior/bindable.h"
 
 #include "util/colortintrenderdata.h"
 #include "util/scalableimagerenderdata.h"
@@ -29,7 +30,7 @@ namespace Widgets {
         ScalableImageRenderData mImageRenderData;
         ColorTintRenderData mColorTintRenderData;
 
-        Execution::Bindable<std::string> mText;
+        Behavior::Bindable<std::string> mText;
 
     protected:
         void injectPointerEnter(const Input::PointerMoveEvent &arg) override;

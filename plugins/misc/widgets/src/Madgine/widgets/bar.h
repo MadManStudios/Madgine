@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Generic/execution/bindable.h"
+#include "Madgine/behavior/bindable.h"
 
 #include "widget.h"
 
@@ -12,8 +12,8 @@ namespace Widgets {
 
         void render(WidgetsRenderData &renderData) override;
 
-        Execution::Bindable<float> mRatio = 0.0f;
-        Execution::Bindable<Color4> mColor;
+        Behavior::Bindable<float> mRatio = 0.0f;
+        Behavior::Bindable<Color4> mColor;
     };
 }
 }

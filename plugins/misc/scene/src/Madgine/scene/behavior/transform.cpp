@@ -6,4 +6,4 @@
 
 #include "Madgine/behavior/nativebehaviorcollector.h"
 
-NATIVE_BEHAVIOR(Rotate, Engine::Scene::rotate, Engine::Behavior::InputParameter<"Axis", Engine::Vector3>, Engine::Behavior::InputParameter<"Speed", float>)
+NATIVE_BEHAVIOR(Rotate, Engine::Scene::rotate, Engine::Behavior::InputParameter<"Axis", Engine::Vector3>, Engine::Behavior::InputParameter<"Speed", float>, Engine::Behavior::InputParameter<"Entity", Engine::Scene::EntityBinding>)

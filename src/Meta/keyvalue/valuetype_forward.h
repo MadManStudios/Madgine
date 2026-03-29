@@ -92,14 +92,38 @@ template <ValueTypePrimitive T>
 META_EXPORT ValueType_Return<T> ValueType_as_impl(const ValueType &v);
 
 template <typename T>
+T variantHelper(const ValueType &v)
+{
+    throw 0;
+}
+
+template <typename T, typename Ty, typename... Tys>
+T variantHelper(const ValueType &v)
+{
+    if (ValueType_is<Ty>(v)) {
+        return Ty { ValueType_as<Ty>(v) };
+    } else {
+        return variantHelper<T, Tys...>(v);
+    }
+}
+
+template <typename Ty>
 decltype(auto) ValueType_as(const ValueType &v)
 {
+    using T = decayed_t<Ty>;
+
     if constexpr (InstanceOf<T, std::optional>) {
         if (ValueType_isNull(v))
             return T {};
         else {
             return T { ValueType_as<typename is_instance<T, std::optional>::argument_types::template unpack_unique<>>(v) };
         }
+    } else if constexpr (InstanceOf<T, std::variant>) {
+        return [&]<typename... U>(type_pack<U...>) -> T {
+            int count = (ValueType_is<U>(v) + ...);
+            assert(count == 1);
+            return variantHelper<T, U...>(v);
+        }(typename is_instance<T, std::variant>::argument_types {});
     } else if constexpr (std::same_as<T, ValueType>) {
         return v;
     } else if constexpr (ValueTypePrimitive<T>) {
@@ -115,82 +139,16 @@ decltype(auto) ValueType_as(const ValueType &v)
         return ValueType_as_impl<FlagsHolder>(v).safe_cast<T>();
     } else if constexpr (Execution::AnyBinding<T>) {
         return (ValueType_as_impl<KeyValueBinding>(v)->*&ValueType_as<typename T::type>)();
-    } else if constexpr (InstanceOf<std::decay_t<T>, Execution::Bindable>) {
-        using V = typename is_instance<T, Execution::Bindable>::argument_types::template unpack_unique<>;
-        if (ValueType_is<V>(v)) {
-            return T { ValueType_as_impl<V>(v) };
-        } else {
-            return T { (ValueType_as_impl<KeyValueBinding>(v)->*&ValueType_as<V>)() };
-        }
     } else {
-        using Ty = resolveCustomScopePtr_t<std::remove_reference_t<T>, true>;
-        std::remove_pointer_t<Ty> *ptr = scope_cast<std::remove_pointer_t<Ty>>(ValueType_as_impl<ScopePtr>(v));
-        if constexpr (Pointer<Ty>) {
+        using U = resolveCustomScopePtr_t<std::remove_reference_t<T>, true>;
+        std::remove_pointer_t<U> *ptr = scope_cast<std::remove_pointer_t<U>>(ValueType_as_impl<ScopePtr>(v));
+        if constexpr (Pointer<U>) {
             return ptr;
         } else {
             return *ptr;
         }
     }
     // static_assert(dependent_bool<T, false>::value, "A ValueType can not be converted to the given target type");
-}
-
-template <bool isReferenceWrapped = false, typename T>
-decltype(auto) convert_ValueType(T &&t)
-{
-    static_assert(!requires { typename std::decay_t<T>::no_value_type; });
-
-    if constexpr (InstanceOf<std::decay_t<T>, std::reference_wrapper>) {
-        return convert_ValueType<true>(t.get());
-    } else if constexpr (InstanceOf<std::decay_t<T>, std::optional>) {
-        using U = std::conditional_t<std::is_lvalue_reference_v<T>, std::reference_wrapper<typename std::decay_t<T>::value_type>, typename std::decay_t<T>::value_type>;
-        using R = std::variant<U, std::monostate>;
-        if (t) {
-            return R { *std::forward<T>(t) };
-        } else {
-            return R { std::monostate {} };
-        }
-    } else if constexpr (InstanceOf<std::decay_t<T>, Execution::Bindable>) {
-        using U = typename is_instance<std::decay_t<T>, Execution::Bindable>::argument_types::template unpack_unique<>;
-        using R = std::variant<std::remove_reference_t<decltype(convert_ValueType(std::declval<U>()))>, KeyValueBinding>;
-        return std::visit([](auto &v) {
-            return R { convert_ValueType(v) };
-        },
-            std::forward<T>(t).mValue);
-    } else if constexpr (ValueTypePrimitive<std::decay_t<T>> || std::same_as<ValueType, std::decay_t<T>>) {
-        return std::forward<T>(t);
-    } else if constexpr (String<std::decay_t<T>>) {
-        return std::string { std::forward<T>(t) };
-    } else if constexpr (std::ranges::range<T>) {
-        if constexpr (std::same_as<KeyType_t<std::ranges::range_value_t<T>>, Void>)
-            return KeyValueVirtualSequenceRange { std::forward<T>(t) };
-        else
-            return KeyValueVirtualAssociativeRange { std::forward<T>(t) };
-    } else if constexpr (std::is_enum_v<std::decay_t<T>>) {
-        if constexpr (std::is_reference_v<T>) {
-            return static_cast<std::underlying_type_t<T> &>(t);
-        } else {
-            return static_cast<std::underlying_type_t<T>>(t);
-        }
-    } else if constexpr (InstanceOf<std::decay_t<T>, EnumImpl>) {
-        return EnumHolder { std::forward<T>(t) };
-    } else if constexpr (InstanceOf<std::decay_t<T>, Flags>) {
-        return FlagsHolder { std::forward<T>(t) };
-    } else if constexpr (Execution::AnyBinding<std::decay_t<T>>) {
-        return KeyValueBinding { std::forward<T>(t) };
-    } else if constexpr (Execution::AnySender<std::decay_t<T>>) {
-        return KeyValueSender { std::forward<T>(t) };
-    } else if constexpr (InstanceOfA<std::decay_t<T>, TypedBoundApiFunction>) {
-        return BoundApiFunction { std::forward<T>(t) };
-    } else if constexpr (Pointer<std::decay_t<T>>) {
-        return ScopePtr { t };
-    } else if constexpr (InstanceOf<std::decay_t<T>, std::unique_ptr>) {
-        return ScopePtr { t.get() };
-    } else if constexpr (isReferenceWrapped) {
-        return ScopePtr { &t };
-    } else {
-        return OwnedScopePtr { std::forward<T>(t) };
-    }
-    // static_assert(dependent_bool<T, false>::value, "The provided type can not be converted to a ValueType");
 }
 
 template <typename T>

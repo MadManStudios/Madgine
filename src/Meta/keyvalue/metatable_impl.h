@@ -79,7 +79,7 @@ constexpr Accessor property(const char *name)
             return {};
         },
         setter,
-        toValueTypeDesc<std::decay_t<T>>()
+        toValueTypeDesc<forward_ref_t<T>>()
     };
 }
 

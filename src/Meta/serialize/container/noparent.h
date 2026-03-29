@@ -6,6 +6,8 @@ namespace Serialize {
     template <typename T>
     struct NoParent : T {
 
+        using decay_t = T;
+
         template <typename... Args>
         NoParent(Args &&...args)
             : T(std::forward<Args>(args)...)

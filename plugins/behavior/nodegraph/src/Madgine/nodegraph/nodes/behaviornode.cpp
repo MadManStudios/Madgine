@@ -14,11 +14,11 @@
 #include "../nodeinterpreter.h"
 
 METATABLE_BEGIN_BASE(Engine::Behavior::NodeGraph::BehaviorNode, Engine::Behavior::NodeGraph::NodeBase)
-    MEMBER(mParameters)
+    MEMBER(mDefaultParameters)
 METATABLE_END(Engine::Behavior::NodeGraph::BehaviorNode)
 
 SERIALIZETABLE_INHERIT_BEGIN(Engine::Behavior::NodeGraph::BehaviorNode, Engine::Behavior::NodeGraph::NodeBase)
-    FIELD(mParameters)
+    FIELD(mDefaultParameters)
 SERIALIZETABLE_END(Engine::Behavior::NodeGraph::BehaviorNode)
 
 namespace Engine {
@@ -110,11 +110,10 @@ namespace Behavior {
             : VirtualData(graph)
             , mBehavior(std::move(behavior))
             , mFullClassName(mBehavior.toString())
-            , mParameters(mBehavior.createParameters())
+            , mDefaultParameters(mBehavior.createParameters())
         {
             future = Engine::Resources::ResourceManager::getSingleton().taskQueue()->queueTask(mBehavior.state().then([this](bool success) {
                 if (success) {
-                    mNamedInputs = mBehavior.namedInputs();
                     mSubBehaviorCount = mBehavior.subBehaviorCount();
                     this->setup();
                 }
@@ -126,10 +125,9 @@ namespace Behavior {
             : VirtualData(graph)
             , mBehavior(std::move(behavior))
             , mFullClassName(mBehavior.toString())
-            , mParameters(mBehavior.createParameters())
+            , mDefaultParameters(mBehavior.createParameters())
         {
             assert(mBehavior.state());
-            mNamedInputs = mBehavior.namedInputs();
             mSubBehaviorCount = mBehavior.subBehaviorCount();
             this->setup();
         }
@@ -138,8 +136,7 @@ namespace Behavior {
             : VirtualData(other, graph)
             , mBehavior(other.mBehavior)
             , mFullClassName(other.mFullClassName)
-            , mParameters(other.mParameters)
-            , mNamedInputs(other.mNamedInputs)
+            , mDefaultParameters(other.mDefaultParameters)
         {
         }
 
@@ -194,7 +191,7 @@ namespace Behavior {
             if (group == 0) {
                 return 0;
             } else {
-                return mNamedInputs.size();
+                return mDefaultParameters.size();
             }
         }
 
@@ -203,9 +200,9 @@ namespace Behavior {
             if (group == 0) {
                 throw 0;
             } else {
-                if (index >= mNamedInputs.size())
+                if (index >= mDefaultParameters.size())
                     return "<unknown>";
-                return mNamedInputs[index].mName;
+                return mDefaultParameters.name(index);
             }
         }
 
@@ -214,9 +211,9 @@ namespace Behavior {
             if (group == 0) {
                 throw 0;
             } else {
-                if (index >= mNamedInputs.size())
+                if (index >= mDefaultParameters.size())
                     return { ExtendedValueTypeEnum::GenericType };
-                return mNamedInputs[index].mType;
+                return mDefaultParameters.type(index);
             }
         }
 
@@ -237,7 +234,7 @@ namespace Behavior {
 
         void BehaviorNode::interpret(NodeReceiver<NodeBase> receiver, std::unique_ptr<NodeInterpreterData> &data, uint32_t flowIn, uint32_t group) const
         {
-            static_cast<BehaviorInterpretData *>(data.get())->start(std::move(receiver), mParameters);
+            static_cast<BehaviorInterpretData *>(data.get())->start(std::move(receiver), mDefaultParameters);
         }
 
         KeyValueResult BehaviorNode::interpretRead(NodeInterpreterStateBase &interpreter, ValueType &retVal, std::unique_ptr<NodeInterpreterData> &data, uint32_t providerIndex, uint32_t group) const

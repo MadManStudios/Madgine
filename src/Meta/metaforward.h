@@ -49,6 +49,9 @@ enum KeyValueValueFlags : uint8_t;
 struct Functor_to_KeyValuePair;
 struct Functor_to_ValueType;
 
+template <bool isReferenceWrapped>
+struct convert_ValueType_t;
+
 using KeyValueVirtualAssociativeIterator = VirtualIterator<KeyValuePair>;
 using KeyValueVirtualAssociativeRange = VirtualRange<KeyValuePair, Functor_to_KeyValuePair>;
 using KeyValueVirtualSequenceIterator = VirtualIterator<ValueType>;

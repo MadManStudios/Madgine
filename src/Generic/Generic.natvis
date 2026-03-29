@@ -1,17 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <AutoVisualizer xmlns="http://schemas.microsoft.com/vstudio/debugger/natvis/2010">
-  <Type Name="Engine::BitPtr&lt;*,*&gt;">
-   <DisplayString>{($T1*)((uintptr_t)(mPtr) &gt;&gt; $T2 &lt;&lt; $T2)}</DisplayString>
-     <Expand>
-        <ExpandedItem>($T1*)((uintptr_t)(mPtr) &gt;&gt; $T2 &lt;&lt; $T2)</ExpandedItem>
-     </Expand>
-  </Type>
+	<Type Name="Engine::BitPtr&lt;*,*&gt;">
+		<DisplayString>{($T1*)((uintptr_t)(mPtr) &gt;&gt; $T2 &lt;&lt; $T2)}</DisplayString>
+		<Expand>
+			<ExpandedItem>($T1*)((uintptr_t)(mPtr) &gt;&gt; $T2 &lt;&lt; $T2)</ExpandedItem>
+		</Expand>
+	</Type>
 
-  <Type Name="Engine::BitField&lt;*,*,*&gt;">
-   <DisplayString>{($T3)((mHolder &gt;&gt; $T1) &amp; ((1 &lt;&lt; $T2) - 1))}</DisplayString>
-     <Expand>
-        <ExpandedItem>($T3)((mHolder &gt;&gt; $T1) &amp; ((1 &lt;&lt; $T2) - 1))</ExpandedItem>
-     </Expand>
-  </Type>
+	<Type Name="Engine::BitField&lt;*,*,*&gt;">
+		<DisplayString>{($T3)((mHolder &gt;&gt; $T1) &amp; ((1 &lt;&lt; $T2) - 1))}</DisplayString>
+		<Expand>
+			<ExpandedItem>($T3)((mHolder &gt;&gt; $T1) &amp; ((1 &lt;&lt; $T2) - 1))</ExpandedItem>
+		</Expand>
+	</Type>
+
+	<Type Name="Engine::BitArray&lt;*,*,*&gt;">
+		<DisplayString>{{size = {$T1}}}</DisplayString>
+		<Expand>
+			<Item Name="[size]">$T1</Item>
+			<IndexListItems>
+				<Size>$T1</Size>
+				<ValueNode>($T3)(((*(uint64_t*)mData) &gt;&gt; (Engine::BitArray&lt;$T1,$T2,$T3&gt;::FreeBitCount + $i * $T2)) &amp; ((1 &lt;&lt; $T2) - 1))</ValueNode>
+			</IndexListItems>
+		</Expand>
+	</Type>
 
 </AutoVisualizer>

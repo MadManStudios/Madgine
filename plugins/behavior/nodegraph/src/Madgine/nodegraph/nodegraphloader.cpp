@@ -87,13 +87,13 @@ namespace Behavior {
             return ParameterTuple { std::make_tuple(), auto_pack<> {} };
         }
 
-        std::vector<ValueTypeDesc> NodeGraphBehaviorFactory::parameterTypes(const UniqueOpaquePtr &handle) const
+        std::vector<ExtendedValueTypeDesc> NodeGraphBehaviorFactory::parameterTypes(const UniqueOpaquePtr &handle) const
         {
             const NodeGraphLoader::Handle &graph = handle.as<NodeGraphLoader::Handle>();
             return {};
         }
 
-        std::vector<ValueTypeDesc> NodeGraphBehaviorFactory::resultTypes(const UniqueOpaquePtr &handle) const
+        std::vector<ExtendedValueTypeDesc> NodeGraphBehaviorFactory::resultTypes(const UniqueOpaquePtr &handle) const
         {
             const NodeGraphLoader::Handle &graph = handle.as<NodeGraphLoader::Handle>();
             return {};

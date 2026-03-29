@@ -99,9 +99,6 @@ namespace Execution {
     template <typename T>
     struct ConstantBinding;
 
-    template <typename T>
-    struct Bindable;
-
     struct BindingError;
 
     namespace State {

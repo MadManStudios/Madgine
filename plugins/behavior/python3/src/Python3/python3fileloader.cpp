@@ -227,13 +227,13 @@ namespace Behavior {
             return ParameterTuple { std::make_tuple(), auto_pack<> {} };
         }
 
-        std::vector<ValueTypeDesc> Python3BehaviorFactory::parameterTypes(const UniqueOpaquePtr &handle) const
+        std::vector<ExtendedValueTypeDesc> Python3BehaviorFactory::parameterTypes(const UniqueOpaquePtr &handle) const
         {
             const Python3FileLoader::Handle &file = handle.as<Python3FileLoader::Handle>();
             return {};
         }
 
-        std::vector<ValueTypeDesc> Python3BehaviorFactory::resultTypes(const UniqueOpaquePtr &handle) const
+        std::vector<ExtendedValueTypeDesc> Python3BehaviorFactory::resultTypes(const UniqueOpaquePtr &handle) const
         {
             const Python3FileLoader::Handle &file = handle.as<Python3FileLoader::Handle>();
             return {};

@@ -244,10 +244,10 @@ namespace Tools {
     {
         ImVec2 cursor = ImGui::GetCursorPos();
         ImGui::SetCursorScreenPos(ImGui::GetMousePos());
-        if (type.mType.isRegular()) {
-            ShowLabel(type.toString());
+        if (type.mType == ExtendedValueTypeEnum::VariantType) {
+            ShowLabel(type.unwrap().toString());
         } else {
-            ShowLabel("*");
+            ShowLabel(type.toString());
         }
         ImGui::SetCursorPos(cursor);
     }

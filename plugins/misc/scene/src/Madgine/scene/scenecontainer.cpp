@@ -19,10 +19,6 @@ METATABLE_BEGIN(Engine::Scene::SceneContainer)
     READONLY_PROPERTY(entities, entities)
 METATABLE_END(Engine::Scene::SceneContainer)
 
-using Helper = Engine::Serialize::NoParent<Engine::Scene::SceneContainer>;
-METATABLE_BEGIN_BASE(Helper, Engine::Scene::SceneContainer)
-METATABLE_END(Helper)
-
 static Engine::Threading::DataMutex::Lock static_lock(Engine::Scene::SceneContainer *container)
 {
     return container->mutex().lock(Engine::AccessMode::WRITE);

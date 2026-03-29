@@ -51,8 +51,8 @@ namespace Behavior {
             std::string_view name(const UniqueOpaquePtr &handle) const override;
             Behavior create(const UniqueOpaquePtr &handle, const ParameterTuple &args, std::vector<Behavior> behaviors) const override;
             ParameterTuple createParameters(const UniqueOpaquePtr &handle) const override;
-            std::vector<ValueTypeDesc> parameterTypes(const UniqueOpaquePtr &handle) const override;
-            std::vector<ValueTypeDesc> resultTypes(const UniqueOpaquePtr &handle) const override;
+            std::vector<ExtendedValueTypeDesc> parameterTypes(const UniqueOpaquePtr &handle) const override;
+            std::vector<ExtendedValueTypeDesc> resultTypes(const UniqueOpaquePtr &handle) const override;
             std::vector<NamedDescriptor> namedInputs(const UniqueOpaquePtr &handle) const override;
             size_t subBehaviorCount(const UniqueOpaquePtr &handle) const override;
         };

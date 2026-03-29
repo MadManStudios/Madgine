@@ -162,9 +162,9 @@ using const_if = std::conditional_t<b, const T, T>;
 
 template <typename T>
 using forward_ref_t = std::conditional_t<
-    std::is_lvalue_reference_v<T>,
+    std::is_lvalue_reference_v<T> && !std::is_const_v<std::remove_reference_t<T>>,
     std::reference_wrapper<std::remove_reference_t<T>>,
-    T>;
+    std::remove_const_t<std::remove_reference_t<T>>>;
 
 template <typename T>
 struct decay_ref {

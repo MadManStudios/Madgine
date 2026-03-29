@@ -90,6 +90,10 @@ std::string ExtendedValueTypeDesc::toString(size_t level) const
         return "Range<" + toString(level + 1) + ">";
     } else if (mType.mTypeList[level] == static_cast<ExtendedValueTypeEnum>(ValueTypeEnum::KeyValueVirtualAssociativeRangeValue)) {
         return "Map<" + toString(level + 1) + ", " + toString(level + 2) + ">";
+    } else if (mType.mTypeList[level] == ExtendedValueTypeEnum::VariantType){
+        return "Variant<" + toString(level + 1) + ", " + toString(level + 2) + ">";
+    } else if (mType.mTypeList[level] == static_cast<ExtendedValueTypeEnum>(ValueTypeEnum::BindingValue)) {
+        return "Binding<" + toString(level + 1) + ">";
     } else if (mType.isRegular(level)) {
         return ValueTypeDesc { { static_cast<ValueTypeEnum>(static_cast<ExtendedValueTypeEnum>(mType.mTypeList[level])) }, mSecondary }.toString();
     } else {
