@@ -46,7 +46,6 @@
 
 #include "container/container_traits.h"
 #include "container/iterator_traits.h"
-#include "decay.h"
 #include "tupleunpacker.h"
 #include "typeunpacker.h"
 // clang-format on

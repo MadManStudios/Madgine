@@ -21,11 +21,11 @@ namespace Serialize {
         virtual ~VirtualUnit() = default;
         virtual SerializableUnitPtr customUnitPtr() override
         {
-            return { this, &serializeTable<decayed_t<T>>() };
+            return { this, &serializeTable<meta_decayed_t<T>>() };
         }
         virtual SerializableUnitConstPtr customUnitPtr() const override
         {
-            return { this, &serializeTable<decayed_t<T>>() };
+            return { this, &serializeTable<meta_decayed_t<T>>() };
         }
     };
 
@@ -44,11 +44,11 @@ namespace Serialize {
         virtual ~VirtualData() = default;
         virtual SerializableDataPtr customUnitPtr() override
         {
-            return { static_cast<decayed_t<T> *>(this), &serializeTable<decayed_t<T>>() };
+            return { static_cast<meta_decayed_t<T> *>(this), &serializeTable<meta_decayed_t<T>>() };
         }
         virtual SerializableDataConstPtr customUnitPtr() const override
         {
-            return { static_cast<const decayed_t<T> *>(this), &serializeTable<decayed_t<T>>() };
+            return { static_cast<const meta_decayed_t<T> *>(this), &serializeTable<meta_decayed_t<T>>() };
         }
     };
 

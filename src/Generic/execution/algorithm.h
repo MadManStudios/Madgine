@@ -990,7 +990,7 @@ namespace Execution {
 
             using inner_state = connect_result_t<Sender, receiver<Rec, Sender>>;
 
-            using Values = std::vector<typename Sender::template value_types<identity>>;
+            using Values = std::vector<std::optional<typename Sender::template value_types<identity>>>;
             using R = typename Sender::result_type;
 
             template <typename R>
@@ -1061,6 +1061,17 @@ namespace Execution {
                         throw 0;
                     }
                 }
+            }
+
+            friend auto tag_invoke(visit_state_t, state *state, auto &&visitor)
+            {
+                visitor(Execution::State::BeginBlock { "When All Range" });
+                for (size_t i = 0; i < state->mSize; ++i) {
+                    visitor(Execution::State::BeginBlock { "", static_cast<bool>(state->mValues[i]) });
+                    visit_state(&state->mStates[i], visitor);
+                    visitor(Execution::State::EndBlock {});
+                }
+                visitor(Execution::State::EndBlock {});
             }
 
             std::unique_ptr<ManualLifetime<inner_state>[]> mStates;
@@ -1813,6 +1824,12 @@ namespace Execution {
                         mResult.reproduce(mRec);
                     }
                 }
+            }
+
+            friend void tag_invoke(visit_state_t, state *state, auto &&visitor)
+            {
+                visit_state(state ? &state->mStopState : nullptr, visitor);
+                visit_state(state ? &state->mInnerState : nullptr, visitor);
             }
 
             ResultStorage<Inner> mResult;

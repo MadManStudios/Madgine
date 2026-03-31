@@ -88,12 +88,12 @@ namespace Behavior {
 
             virtual std::unique_ptr<NodeBase> clone(NodeGraph &graph) const = 0;
 
+            void refresh();
+
         protected:
             virtual uint32_t flowOutBaseCount(uint32_t group = 0) const { return 0; }
             virtual uint32_t dataInBaseCount(uint32_t group = 0) const { return 0; }
             virtual uint32_t dataOutBaseCount(uint32_t group = 0) const { return 0; }
-
-            void setup();
 
             NodeGraph &mGraph;
 

@@ -17,7 +17,7 @@ struct MADGINE_ROOT_EXPORT KeyValueRegistry {
 template <typename T>
 struct KeyValueWorkGroupLocal : T {
 
-    using decay_t = T;
+    using meta_t = T;
 
     template <typename... Args>
         requires std::constructible_from<T, Args...>
@@ -36,7 +36,7 @@ struct KeyValueWorkGroupLocal : T {
 template <typename T>
 struct KeyValueGlobal : T {
 
-    using decay_t = T;
+    using meta_t = T;
 
     template <typename... Args>
     KeyValueGlobal(const char *name, Args &&...args)

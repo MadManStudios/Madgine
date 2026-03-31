@@ -13,6 +13,8 @@ struct MetaFunctionTag;
 
 template <size_t I>
 struct MetaFunction {
+    static constexpr size_t argumentCount = I;
+
     std::array<FunctionArgument, I> mArguments;
     ExtendedValueTypeDesc mReturn;
 };
@@ -73,113 +75,26 @@ static constexpr auto metafunction(KeyValueResult (T::*f)(ValueType &, Args...),
     return metafunctionMemberHelper<ValueType, T, Args...>(args, std::index_sequence_for<Args...>());
 }
 
-template <auto F, typename R, typename T, typename... Args, size_t... I>
-static KeyValueResult unpackMemberHelper(const FunctionTable *table, ValueType &retVal, const ArgumentList &args, std::index_sequence<I...>)
+template <auto F, size_t... Is>
+static constexpr typename FunctionTable::FPtr wrapHelper(std::index_sequence<Is...>)
 {
-    T *t = scope_cast<T>(ValueType_as<ScopePtr>(getArgument(args, 0)));
-    to_ValueType(retVal, std::invoke(patch_void(F, std::monostate {}), t, ValueType_as<std::remove_cv_t<std::remove_reference_t<Args>>>(getArgument(args, I + 1))...));
-    return {};
-}
-
-template <auto F, typename R, typename... Args, size_t... I>
-static KeyValueResult unpackApiHelper(const FunctionTable *table, ValueType &retVal, const ArgumentList &args, std::index_sequence<I...>)
-{
-    to_ValueType(retVal, std::invoke(patch_void(F, std::monostate {}), ValueType_as<std::remove_cv_t<std::remove_reference_t<Args>>>(getArgument(args, I))...));
-    return {};
-}
-
-template <auto F, typename T, typename... Args, size_t... I>
-static KeyValueResult unpackReturnListHelper(const FunctionTable *table, ValueType &retVal, const ArgumentList &args, std::index_sequence<I...>)
-{
-    T *t = scope_cast<T>(ValueType_as<ScopePtr>(getArgument(args, 0)));
-    return std::invoke(patch_void(F, KeyValueResult{}), t, retVal, ValueType_as<std::remove_cv_t<std::remove_reference_t<Args>>>(getArgument(args, I + 1))...);
-}
-
-template <auto F, typename T, typename... Args, size_t... I>
-static KeyValueResult unpackReturnHelper(const FunctionTable *table, ValueType &retVal, const ArgumentList &args, std::index_sequence<I...>)
-{
-    T *t = scope_cast<T>(ValueType_as<ScopePtr>(getArgument(args, 0)));
-    return std::invoke(patch_void(F, KeyValueResult{}), t, retVal, ValueType_as<std::remove_cv_t<std::remove_reference_t<Args>>>(getArgument(args, I + 1))...);
-}
-
-template <auto F, typename R, typename T, typename... Args>
-static KeyValueResult unpackMemberApiMethod(const FunctionTable *table, ValueType &retVal, const ArgumentList &args)
-{
-    return unpackMemberHelper<F, R, T, Args...>(table, retVal, args, std::index_sequence_for<Args...>());
-}
-
-template <auto F, typename R, typename... Args>
-static KeyValueResult unpackApiMethod(const FunctionTable *table, ValueType &retVal, const ArgumentList &args)
-{
-    return unpackApiHelper<F, R, Args...>(table, retVal, args, std::index_sequence_for<Args...>());
-}
-
-template <auto F, typename T, typename... Args>
-static KeyValueResult unpackReturnListMethod(const FunctionTable *table, ValueType &retVal, const ArgumentList &args)
-{
-    return unpackReturnListHelper<F, T, Args...>(table, retVal, args, std::index_sequence_for<Args...>());
-}
-
-template <auto F, typename T, typename... Args>
-static KeyValueResult unpackReturnMethod(const FunctionTable *table, ValueType &retVal, const ArgumentList &args)
-{
-    return unpackReturnHelper<F, T, Args...>(table, retVal, args, std::index_sequence_for<Args...>());
-}
-
-template <auto F, typename R, typename... Args>
-static constexpr typename FunctionTable::FPtr wrapHelper(R (*f)(Args...))
-{
-    return &unpackApiMethod<F, R, Args...>;
-}
-
-template <auto F, typename R, typename T, typename... Args>
-static constexpr typename FunctionTable::FPtr wrapHelper(R (T::*f)(Args...))
-{
-    return &unpackMemberApiMethod<F, R, T, Args...>;
-}
-
-template <auto F, typename R, typename T, typename... Args>
-static constexpr typename FunctionTable::FPtr wrapHelper(R (T::*f)(Args...) const)
-{
-    return &unpackMemberApiMethod<F, R, T, Args...>;
-}
-
-template <auto F, typename T, typename... Args>
-static constexpr typename FunctionTable::FPtr wrapHelper(void (T::*f)(ArgumentList &, Args...))
-{
-    return &unpackReturnListMethod<F, T, Args...>;
-}
-
-template <auto F, typename T, typename... Args>
-static constexpr typename FunctionTable::FPtr wrapHelper(void (T::*f)(ValueType &, Args...))
-{
-    return &unpackReturnMethod<F, T, Args...>;
-}
-
-template <auto F, typename T, typename... Args>
-static constexpr typename FunctionTable::FPtr wrapHelper(KeyValueResult (T::*f)(ArgumentList &, Args...))
-{
-    return &unpackReturnListMethod<F, T, Args...>;
-}
-
-template <auto F, typename T, typename... Args>
-static constexpr typename FunctionTable::FPtr wrapHelper(KeyValueResult (T::*f)(ValueType &, Args...))
-{
-    return &unpackReturnMethod<F, T, Args...>;
+    return [](const FunctionTable *, ValueType &retVal, const ArgumentList &args) {
+        return ValueType_unwrap(retVal, F, args.at(Is)...);
+    };
 }
 }
 
-#define FUNCTIONTABLE_IMPL(F, NameInit, Name, Tag, ArgNames)                                                                                                                                                                                                                                                                                                                                                                                    \
-    namespace Engine {                                                                                                                                                                                                                                                                                                                                                                                                                          \
-        template <>                                                                                                                                                                                                                                                                                                                                                                                                                             \
-        struct LineStruct<Tag, __LINE__> {                                                                                                                                                                                                                                                                                                                                                                                                      \
-            static constexpr const auto meta = metafunction(&F, ArgNames);                                                                                                                                                                                                                                                                                                                                                                  \
-            NameInit                                                                                                                                                                                                                                                                                                                                                                                                                            \
-        };                                                                                                                                                                                                                                                                                                                                                                                                                                      \
-    }                                                                                                                                                                                                                                                                                                                                                                                                                                           \
-    DLL_EXPORT_VARIABLE(constexpr, const ::Engine::FunctionTable, , function, SINGLE_ARG({ ::Engine::wrapHelper<&F>(&F), Name, ::Engine::CallableTraits<decltype(&F)>::argument_count, ::Engine::CallableTraits<decltype(&F)>::is_member_function, ::Engine::LineStruct<Tag, __LINE__>::meta.mArguments.data(), ::Engine::LineStruct<Tag, __LINE__>::meta.mReturn }), &F); \
-    namespace Engine {                                                                                                                                                                                                                                                                                                                                                                                                                          \
-        static ::Engine::FunctionTableRegistrator<&F> CONCAT2(__reg_, __LINE__);                                                                                                                                                                                                                                                                                                                                                                \
+#define FUNCTIONTABLE_IMPL(F, NameInit, Name, Tag, ArgNames)                                                                                                                                                                                                                                                                                                             \
+    namespace Engine {                                                                                                                                                                                                                                                                                                                                                   \
+        template <>                                                                                                                                                                                                                                                                                                                                                      \
+        struct LineStruct<Tag, __LINE__> {                                                                                                                                                                                                                                                                                                                               \
+            static constexpr const auto meta = metafunction(&F, ArgNames);                                                                                                                                                                                                                                                                                               \
+            NameInit                                                                                                                                                                                                                                                                                                                                                     \
+        };                                                                                                                                                                                                                                                                                                                                                               \
+    }                                                                                                                                                                                                                                                                                                                                                                    \
+    DLL_EXPORT_VARIABLE(constexpr, const ::Engine::FunctionTable, , function, SINGLE_ARG({ ::Engine::wrapHelper<&F>(std::make_index_sequence<::Engine::LineStruct<Tag, __LINE__>::meta.argumentCount> {}), Name, ::Engine::CallableTraits<decltype(&F)>::argument_count, ::Engine::CallableTraits<decltype(&F)>::is_member_function, ::Engine::LineStruct<Tag, __LINE__>::meta.mArguments.data(), ::Engine::LineStruct<Tag, __LINE__>::meta.mReturn }), &F); \
+    namespace Engine {                                                                                                                                                                                                                                                                                                                                                   \
+        static ::Engine::FunctionTableRegistrator<&F> CONCAT2(__reg_, __LINE__);                                                                                                                                                                                                                                                                                         \
     }
 
 #define FUNCTIONTABLE(F, ...) FUNCTIONTABLE_IMPL(F, , #F, ::Engine::MetaFunctionTag, #__VA_ARGS__)

@@ -131,19 +131,9 @@ namespace Behavior {
                 throw 0;
             }
 
-            void set_value(ArgumentList args) override
+            friend void tag_invoke(Execution::visit_state_t visit_state, NodeState *s, auto &&visitor)
             {
-                VirtualBehaviorState<Rec>::set_value(std::move(args));
-            }
-
-            void set_error(KeyValueError error) override
-            {
-                VirtualBehaviorState<Rec>::set_error(std::move(error));
-            }
-
-            void set_done() override
-            {
-                VirtualBehaviorState<Rec>::set_done();
+                visitor(Execution::State::DebugLocation { s ? &s->mDebugLocation : nullptr });
             }
 
             uint32_t mFlowOutIndex = 0;
@@ -181,7 +171,7 @@ namespace Behavior {
 
             using result_type = KeyValueError;
             template <template <typename...> typename Tuple>
-            using value_types = Tuple<decayed_t<T>...>;
+            using value_types = Tuple<meta_decayed_t<T>...>;
 
             NodeReader(size_t *baseIndex = nullptr)
                 : mBaseIndex(baseIndex ? *baseIndex : 0)
@@ -213,9 +203,20 @@ namespace Behavior {
                             }
                         }
 
-                        this->set_value(ValueType_as<decayed_t<T>>(data.at(I))...);
+                        KeyValueResult error;
+                        ValueType_erased([&](ValueType &r) {
+                            error = ValueType_unwrap(r, [this](meta_decayed_t<T>... val) { this->set_value(std::forward<meta_decayed_t<T>>(val)...); }, data.at(I)...);
+                        });
+                        if (error)
+                            this->set_error(std::move(*error.mError));
                     }
                 }
+
+                friend void tag_invoke(Execution::visit_state_t, state *s, auto &&visitor)
+                {
+                    visitor(Execution::State::Text { "NodeReader" });
+                }
+
                 size_t mBaseIndex;
             };
 
@@ -249,11 +250,14 @@ namespace Behavior {
 
             using Signature = Execution::signature<>;
 
-            template <typename Rec>
-            struct receiver : NodeState<flowOutGroup, Rec> {
+            template <typename Inner, typename Rec>
+            struct state;
 
-                receiver(Rec &&rec, std::vector<NodeResults> &results)
-                    : NodeState<flowOutGroup, Rec>(std::forward<Rec>(rec), 0)
+            template <typename Inner, typename Rec>
+            struct receiver {
+
+                receiver(state<Inner, Rec> *state, std::vector<NodeResults> &results)
+                    : mState(state)
                     , mResults(results)
                 {
                 }
@@ -264,20 +268,51 @@ namespace Behavior {
                     if (mResults.size() <= flowOutGroup)
                         mResults.resize(flowOutGroup + 1);
                     mResults[flowOutGroup] = { std::forward<Args>(args)... };
-                    this->start();
+                    mState->startAlgorithm();
                 }
 
                 void set_error(KeyValueError result)
                 {
-                    this->mRec.set_error(std::move(result));
+                    mState->set_error(std::move(result));
                 }
 
                 void set_done()
                 {
-                    this->mRec.set_done();
+                    mState->set_done();
                 }
 
+                state<Inner, Rec> *mState;
                 std::vector<NodeResults> &mResults;
+            };
+
+            template <typename Inner, typename Rec>
+            struct state : NodeState<flowOutGroup, Rec> {
+
+                using inner_state = Execution::connect_result_t<Inner, receiver<Inner, Rec>>;
+
+                state(Inner &&inner, Rec &&rec, std::vector<NodeResults> &results)
+                    : NodeState<flowOutGroup, Rec>(std::forward<Rec>(rec), 0)
+                    , mInnerState(Execution::connect(std::forward<Inner>(inner), receiver<Inner, Rec> { this, results }))
+                {
+                }
+
+                void start() {
+                    mInnerState.start();
+                }
+
+                void startAlgorithm() {
+                    mPassed = true;
+                    NodeState<flowOutGroup, Rec>::start();
+                }
+
+                friend void tag_invoke(Execution::visit_state_t visit_state, state *s, auto &&visitor)
+                {
+                    visit_state(!s || s->mPassed ? nullptr : &s->mInnerState, visitor);
+                    visit_state(s && s->mPassed ? static_cast<NodeState<flowOutGroup, Rec> *>(s) : nullptr, visitor);                    
+                }
+
+                inner_state mInnerState;
+                bool mPassed = false;
             };
 
             template <typename Inner>
@@ -289,7 +324,7 @@ namespace Behavior {
                 template <typename Rec>
                 friend auto tag_invoke(Execution::connect_t connect, sender &&sender, Rec &&rec)
                 {
-                    return tag_invoke(connect, std::forward<Inner>(sender.mInner), receiver<Rec> { std::forward<Rec>(rec), sender.mResults });
+                    return state<Inner, Rec> { std::forward<Inner>(sender.mInner), std::forward<Rec>(rec), sender.mResults };
                 }
 
                 Inner mInner;

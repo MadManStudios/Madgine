@@ -35,6 +35,9 @@
 #include "imgui/imguiaddons.h"
 #include "scenetool.h"
 
+METATABLE_BEGIN(Engine::Tools::SceneEditor) //TODO proper inheritance
+METATABLE_END(Engine::Tools::SceneEditor)
+
 namespace Engine {
 namespace Tools {
 

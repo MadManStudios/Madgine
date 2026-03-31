@@ -86,6 +86,8 @@ namespace Resources {
     template <typename T, typename _Data, typename _Base = InstanceLoaderInterface<T, _Data>>
     struct InstanceLoaderImpl : _Base {
 
+        using meta_t = T;
+
         using Interface = _Base;
         using Base = _Base;
         using Data = _Data;
@@ -195,7 +197,7 @@ namespace Resources {
         virtual std::vector<const MetaTable *> resourceTypes() const override
         {
             std::vector<const MetaTable *> result = Base::resourceTypes();
-            result.push_back(table<decayed_t<Resource>>);
+            result.push_back(table<meta_decayed_t<Resource>>);
             return result;
         }
 

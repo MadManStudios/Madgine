@@ -71,7 +71,7 @@ namespace Behavior {
             return os;
         }
 
-        using decay_t = std::variant<T, Execution::BindingPtr<T>>;
+        using meta_t = std::variant<T, Execution::BindingPtr<T>>;
 
         template <bool isReferenceWrapped>
         friend std::variant<T, Execution::BindingPtr<T>> tag_invoke(convert_ValueType_t<isReferenceWrapped> convert_ValueType, Bindable<T> &&bindable)
@@ -159,7 +159,7 @@ namespace Behavior {
             return os;
         }
 
-        using decay_t = std::variant<std::string, Execution::BindingPtr<std::string_view>>;
+        using meta_t = std::variant<std::string, Execution::BindingPtr<std::string_view>>;
 
         template <bool isReferenceWrapped>
         friend std::variant<std::string, Execution::BindingPtr<std::string_view>> tag_invoke(convert_ValueType_t<isReferenceWrapped> convert_ValueType, Bindable<std::string> &&bindable)

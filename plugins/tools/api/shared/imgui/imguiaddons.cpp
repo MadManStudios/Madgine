@@ -1005,20 +1005,30 @@ const ValueTypePayload *GetValuetypePayload()
     return nullptr;
 }
 
-bool AcceptDraggableValueType(Engine::CallableView<void(const Engine::ValueType &)> output, Engine::CallableView<bool(const Engine::ValueType &)> validate)
+bool AcceptDraggableValueType(Engine::CallableView<Engine::KeyValueResult(Engine::ValueType &, const Engine::ValueType &, bool)> output)
 {
     if (ImGui::AcceptDragDropPayload("ValueType")) {
         const ValueTypePayload *payload = GetValuetypePayload();
         assert(payload);
-        if (validate(payload->mValue)) {
-            output(payload->mValue);
+        Engine::ValueType result;
+        Engine::KeyValueResult error = output(result, payload->mValue, false);
+        if (!error){
+            if (Engine::ValueType_is<bool>(result) && Engine::ValueType_as<bool>(result)) {
+                error = output(result, payload->mValue, true);
+            } else {
+                return false;
+            }
+        }
+        if (error) {
+
+        } else {
             return true;
         }
     }
     return false;
 }
 
-bool IsDraggableValueTypeBeingAccepted(Engine::CallableView<bool(const Engine::ValueType &)> validate)
+bool IsDraggableValueTypeBeingAccepted(Engine::CallableView<Engine::KeyValueResult(Engine::ValueType &, const Engine::ValueType &)> validate)
 {
     ImGuiContext &g = *GImGui;
     if (!g.DragDropActive)
@@ -1040,7 +1050,17 @@ bool IsDraggableValueTypeBeingAccepted(Engine::CallableView<bool(const Engine::V
     if (g.DragDropAcceptIdPrev == id) {
         const ValueTypePayload *payload = GetValuetypePayload();
         assert(payload);
-        return validate(payload->mValue);
+        Engine::ValueType result;
+        Engine::KeyValueResult error = validate(result, payload->mValue);
+        if (!error) {
+            if (Engine::ValueType_is<bool>(result) && Engine::ValueType_as<bool>(result)) {
+                return true;
+            } else {                
+                return false;
+    }
+        } else {
+
+        }
     }
 
     return false;

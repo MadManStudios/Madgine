@@ -19,7 +19,7 @@ struct VirtualScope : Base {
     using Base::Base;
     virtual ScopePtr customScopePtr() override
     {
-        return { this, table<decayed_t<T>> };
+        return { this, table<meta_decayed_t<T>> };
     }
 };
 

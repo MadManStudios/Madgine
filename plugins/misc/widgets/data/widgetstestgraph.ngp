@@ -51,13 +51,13 @@
             </mDataInPins>
         </Node>
         <Node type="Native/temp_widget" serId=12>
-            <mParameters>
+            <mDefaultParameters>
                 <Class serId=13>
                     <Name>test</Name>
                 </Class>
                 <Position>[0, 0, 0, 0, 0, 0, 0, 0, 0]</Position>
                 <Size>[1, 0, 0, 0, 1, 0, 0, 0, 1]</Size>
-            </mParameters>
+            </mDefaultParameters>
             <mFlowOutPins>
                 <Item>
                     <Item serId=14>
@@ -82,14 +82,35 @@
                 <Item>
                 </Item>
                 <Item>
+                    <Item serId=18>
+                        <mSource serId=19>
+                            <mNode>-1</mNode>
+                            <mIndex>-1</mIndex>
+                            <mGroup>0</mGroup>
+                        </mSource>
+                    </Item>
+                    <Item serId=20>
+                        <mSource serId=21>
+                            <mNode>-1</mNode>
+                            <mIndex>-1</mIndex>
+                            <mGroup>0</mGroup>
+                        </mSource>
+                    </Item>
+                    <Item serId=22>
+                        <mSource serId=23>
+                            <mNode>-1</mNode>
+                            <mIndex>-1</mIndex>
+                            <mGroup>0</mGroup>
+                        </mSource>
+                    </Item>
                 </Item>
-            </mDataInPins>            
+            </mDataInPins>
         </Node>
-        <Node type="StopWhen" serId=18>
+        <Node type="StopWhen" serId=24>
             <mFlowOutPins>
                 <Item>
-                    <Item serId=19>
-                        <mTarget serId=20>
+                    <Item serId=25>
+                        <mTarget serId=26>
                             <mNode>-1</mNode>
                             <mIndex>-1</mIndex>
                             <mGroup>0</mGroup>
@@ -97,8 +118,8 @@
                     </Item>
                 </Item>
                 <Item>
-                    <Item serId=21>
-                        <mTarget serId=22>
+                    <Item serId=27>
+                        <mTarget serId=28>
                             <mNode>3</mNode>
                             <mIndex>0</mIndex>
                             <mGroup>0</mGroup>
@@ -108,8 +129,8 @@
             </mFlowOutPins>
             <mDataInPins>
                 <Item>
-                    <Item serId=23>
-                        <mSource serId=24>
+                    <Item serId=29>
+                        <mSource serId=30>
                             <mNode>5</mNode>
                             <mIndex>0</mIndex>
                             <mGroup>0</mGroup>
@@ -118,15 +139,15 @@
                 </Item>
             </mDataInPins>
         </Node>
-        <Node type="Accessor/Engine::Widgets::WidgetBase/PointerLeave" serId=25>
+        <Node type="Accessor/Engine::Widgets::WidgetBase/PointerLeave" serId=31>
             <mFlowOutPins>
                 <Item>
                 </Item>
             </mFlowOutPins>
             <mDataInPins>
                 <Item>
-                    <Item serId=26>
-                        <mSource serId=27>
+                    <Item serId=32>
+                        <mSource serId=33>
                             <mNode>-1</mNode>
                             <mIndex>0</mIndex>
                             <mGroup>1</mGroup>
@@ -135,11 +156,11 @@
                 </Item>
             </mDataInPins>
         </Node>
-        <Node type="WhenAll" serId=28>
+        <Node type="WhenAll" serId=34>
             <mFlowOutPins>
                 <Item>
-                    <Item serId=29>
-                        <mTarget serId=30>
+                    <Item serId=35>
+                        <mTarget serId=36>
                             <mNode>-1</mNode>
                             <mIndex>-1</mIndex>
                             <mGroup>0</mGroup>
@@ -147,15 +168,15 @@
                     </Item>
                 </Item>
                 <Item>
-                    <Item serId=31>
-                        <mTarget serId=32>
+                    <Item serId=37>
+                        <mTarget serId=38>
                             <mNode>7</mNode>
                             <mIndex>0</mIndex>
                             <mGroup>0</mGroup>
                         </mTarget>
                     </Item>
-                    <Item serId=33>
-                        <mTarget serId=34>
+                    <Item serId=39>
+                        <mTarget serId=40>
                             <mNode>8</mNode>
                             <mIndex>0</mIndex>
                             <mGroup>0</mGroup>
@@ -166,15 +187,15 @@
             <mDataInPins>
             </mDataInPins>
         </Node>
-        <Node type="Native/Animate_Opacity" serId=35>
-            <mParameters>
+        <Node type="Native/Animate_Opacity" serId=41>
+            <mDefaultParameters>
                 <Delta>-1</Delta>
                 <Duration>3000000000ns</Duration>
-            </mParameters>
+            </mDefaultParameters>
             <mFlowOutPins>
                 <Item>
-                    <Item serId=36>
-                        <mTarget serId=37>
+                    <Item serId=42>
+                        <mTarget serId=43>
                             <mNode>-1</mNode>
                             <mIndex>-1</mIndex>
                             <mGroup>0</mGroup>
@@ -188,18 +209,32 @@
                 <Item>
                 </Item>
                 <Item>
+                    <Item serId=44>
+                        <mSource serId=45>
+                            <mNode>-1</mNode>
+                            <mIndex>-1</mIndex>
+                            <mGroup>0</mGroup>
+                        </mSource>
+                    </Item>
+                    <Item serId=46>
+                        <mSource serId=47>
+                            <mNode>-1</mNode>
+                            <mIndex>-1</mIndex>
+                            <mGroup>0</mGroup>
+                        </mSource>
+                    </Item>
                 </Item>
             </mDataInPins>
         </Node>
-        <Node type="Native/Animate_Move" serId=38>
-            <mParameters>
+        <Node type="Native/Animate_Move" serId=48>
+            <mDefaultParameters>
                 <Distance>[0, 1.03696e-43, 0, 1.03696e-43, -0.1, 1.03696e-43, 0, 8.18358e-43, 0]</Distance>
                 <Duration>1500000000ns</Duration>
-            </mParameters>
+            </mDefaultParameters>
             <mFlowOutPins>
                 <Item>
-                    <Item serId=39>
-                        <mTarget serId=40>
+                    <Item serId=49>
+                        <mTarget serId=50>
                             <mNode>-1</mNode>
                             <mIndex>-1</mIndex>
                             <mGroup>0</mGroup>
@@ -213,13 +248,27 @@
                 <Item>
                 </Item>
                 <Item>
+                    <Item serId=51>
+                        <mSource serId=52>
+                            <mNode>-1</mNode>
+                            <mIndex>-1</mIndex>
+                            <mGroup>0</mGroup>
+                        </mSource>
+                    </Item>
+                    <Item serId=53>
+                        <mSource serId=54>
+                            <mNode>-1</mNode>
+                            <mIndex>-1</mIndex>
+                            <mGroup>0</mGroup>
+                        </mSource>
+                    </Item>
                 </Item>
             </mDataInPins>
         </Node>
     </mNodes>
     <mFlowOutPins>
-        <Item serId=41>
-            <mTarget serId=42>
+        <Item serId=55>
+            <mTarget serId=56>
                 <mNode>2</mNode>
                 <mIndex>0</mIndex>
                 <mGroup>0</mGroup>
@@ -228,10 +277,10 @@
     </mFlowOutPins>
     <mDataInPins>
     </mDataInPins>
-    <mLayoutData>{"nodes":{"node:120000":{"location":{"x":395,"y":-303}},"node:180000":{"location":{"x":568,"y":-302}},"node:2147483645":{"location":{"x":1024,"y":-415}},"node:2147483646":{"location":{"x":187,"y":-415}},"node:240000":{"location":{"x":394,"y":-204}},"node:300000":{"location":{"x":235,"y":-185}},"node:360000":{"location":{"x":588,"y":-205}},"node:420000":{"location":{"x":812,"y":-243}},"node:480000":{"location":{"x":812,"y":-130}},"node:60000":{"location":{"x":235,"y":-265}}},"selection":null,"view":{"scroll":{"x":187.17877197265625,"y":-412.97064208984375},"visible_rect":{"max":{"x":1048.951904296875,"y":141.538497924804688},"min":{"x":187.854507446289062,"y":-414.461517333984375}},"zoom":0.996402859687805176}}</mLayoutData>
+    <mLayoutData>{"nodes":{"node:120000":{"location":{"x":380,"y":-385}},"node:180000":{"location":{"x":576,"y":-357}},"node:2147483645":{"location":{"x":1008,"y":-543}},"node:2147483646":{"location":{"x":178,"y":-543}},"node:240000":{"location":{"x":381,"y":-245}},"node:300000":{"location":{"x":173,"y":-249}},"node:360000":{"location":{"x":588,"y":-193}},"node:420000":{"location":{"x":826,"y":-241}},"node:480000":{"location":{"x":826,"y":-97}},"node:60000":{"location":{"x":173,"y":-329}}},"selection":["node:180000"],"view":{"scroll":{"x":178.1055908203125,"y":-542.372314453125},"visible_rect":{"max":{"x":1032.1055908203125,"y":99.627685546875},"min":{"x":178.1055908203125,"y":-542.372314453125}},"zoom":1}}</mLayoutData>
     <mNamedInputs>
-        <Item serId=43>
-            <mDescriptor serId=44>
+        <Item serId=57>
+            <mDescriptor serId=58>
                 <mName>Widget</mName>
                 <mType>Engine::ValueType</mType>
             </mDescriptor>

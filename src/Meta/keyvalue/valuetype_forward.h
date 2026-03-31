@@ -67,6 +67,7 @@ struct ValueType_ReturnHelper<T *> {
 };
 
 template <Execution::AnyBinding T>
+    requires(!std::same_as<T, KeyValueBinding>)
 struct ValueType_ReturnHelper<T> {
     typedef Execution::CallBinding<typename ValueType_ReturnHelper<typename T::type>::type (*)(const ValueType &), Execution::BindingPtr<const ValueType &>> type;
 };
@@ -89,66 +90,122 @@ bool ValueType_is(const ValueType &v)
 }
 
 template <ValueTypePrimitive T>
-META_EXPORT ValueType_Return<T> ValueType_as_impl(const ValueType &v);
+META_EXPORT ValueType_Return<T> ValueType_as(const ValueType &v);
 
-template <typename T>
-T variantHelper(const ValueType &v)
-{
-    throw 0;
-}
-
-template <typename T, typename Ty, typename... Tys>
-T variantHelper(const ValueType &v)
-{
-    if (ValueType_is<Ty>(v)) {
-        return Ty { ValueType_as<Ty>(v) };
-    } else {
-        return variantHelper<T, Tys...>(v);
-    }
-}
-
-template <typename Ty>
-decltype(auto) ValueType_as(const ValueType &v)
-{
-    using T = decayed_t<Ty>;
+template <typename Callable, typename Arg>
+KeyValueResult ValueType_call(Callable &&callable, Arg &&arg)
+{    
+    using T = meta_decayed_t<std::decay_t<typename CallableTraits<Callable>::argument_types::template unpack_unique<>>>;
 
     if constexpr (InstanceOf<T, std::optional>) {
-        if (ValueType_isNull(v))
-            return T {};
+        if (ValueType_isNull(arg))
+            return callable(T {});
         else {
-            return T { ValueType_as<typename is_instance<T, std::optional>::argument_types::template unpack_unique<>>(v) };
+            return ValueType_call([&](const typename is_instance<T, std::optional>::argument_types::template unpack_unique<> &v) -> decltype(auto) {
+                return callable(T { v });
+            },
+                std::forward<Arg>(arg));
         }
     } else if constexpr (InstanceOf<T, std::variant>) {
-        return [&]<typename... U>(type_pack<U...>) -> T {
-            int count = (ValueType_is<U>(v) + ...);
-            assert(count == 1);
-            return variantHelper<T, U...>(v);
-        }(typename is_instance<T, std::variant>::argument_types {});
+        throw 0;
     } else if constexpr (std::same_as<T, ValueType>) {
-        return v;
+        return callable(arg);
     } else if constexpr (ValueTypePrimitive<T>) {
-        return ValueType_as_impl<T>(v);
-    } else if constexpr (std::ranges::range<T>) {
-        if constexpr (std::same_as<KeyType_t<typename T::iterator::value_type>, Void>)
-            return ValueType_as_impl<KeyValueVirtualSequenceRange>(v).safe_cast<T>();
-        else
-            return ValueType_as_impl<KeyValueVirtualAssociativeRange>(v).safe_cast<T>();
+        return callable(ValueType_as<T>(arg));
+    } else if constexpr (std::ranges::range<T> && requires { typename T::iterator; }) {
+        if constexpr (std::same_as<KeyType_t<typename T::iterator::value_type>, Void>) {
+            if (!ValueType_is<KeyValueVirtualSequenceRange>(arg))
+                throw 0;
+            return callable(ValueType_as<KeyValueVirtualSequenceRange>(arg).template safe_cast<T>());
+        } else {
+            if (!ValueType_is<KeyValueVirtualAssociativeRange>(arg))
+                throw 0;
+            return callable(ValueType_as<KeyValueVirtualAssociativeRange>(arg).template safe_cast<T>());
+        }
     } else if constexpr (InstanceOf<std::decay_t<T>, EnumImpl>) {
-        return ValueType_as_impl<EnumHolder>(v).safe_cast<T>();
+        if (!ValueType_is<EnumHolder>(arg))
+            throw 0;
+        return callable(ValueType_as<EnumHolder>(arg).template safe_cast<T>());
     } else if constexpr (InstanceOf<std::decay_t<T>, Flags>) {
-        return ValueType_as_impl<FlagsHolder>(v).safe_cast<T>();
+        if (!ValueType_is<FlagsHolder>(arg))
+            throw 0;
+        return callable(ValueType_as<FlagsHolder>(arg).template safe_cast<T>());
     } else if constexpr (Execution::AnyBinding<T>) {
-        return (ValueType_as_impl<KeyValueBinding>(v)->*&ValueType_as<typename T::type>)();
+        if (!ValueType_is<KeyValueBinding>(arg))
+            throw 0;
+        return callable(T { ValueType_as<KeyValueBinding>(arg).template unwrap<T>() });
     } else {
-        using U = resolveCustomScopePtr_t<std::remove_reference_t<T>, true>;
+        if (ValueType_is<KeyValueBinding>(arg)) {
+            KeyValueResult result;
+            if (!Execution::access_binding(ValueType_as<KeyValueBinding>(arg), [&](const ValueType& v) {
+                result = ValueType_call(std::forward<Callable>(callable), v);
+                })) {
+                throw 0;
+            }
+            return result;
+        } else if (ValueType_is<ScopePtr>(arg)) {            
+            std::remove_pointer_t<T> *ptr = scope_cast<std::remove_pointer_t<T>>(ValueType_as<ScopePtr>(arg));
+            if constexpr (std::is_pointer_v<T>) {
+                return callable(ptr);            
+            } else {
+                if (!ptr) {
+                    throw 0;
+                }
+                return callable(*ptr);
+            }            
+        }
+        throw 0;
+        /*using U = resolveCustomScopePtr_t<std::remove_reference_t<T>, true>;
         std::remove_pointer_t<U> *ptr = scope_cast<std::remove_pointer_t<U>>(ValueType_as_impl<ScopePtr>(v));
         if constexpr (Pointer<U>) {
             return ptr;
         } else {
             return *ptr;
-        }
+        }*/
     }
     // static_assert(dependent_bool<T, false>::value, "A ValueType can not be converted to the given target type");
+}
+
+template <typename Callable>
+KeyValueResult ValueType_unwrap_impl(type_pack<>, Callable &&callable)
+{
+    return std::invoke(std::forward<Callable>(callable));
+}
+
+template <typename Callable, typename Arg, typename... Args, typename Param, typename... Params>
+KeyValueResult ValueType_unwrap_impl(type_pack<Param, Params...>, Callable &&callable, Arg &&arg, Args &&...args)
+{
+    auto call = [&](Param param) {
+        return ValueType_unwrap_impl(type_pack<Params...> {}, [&](Params... params) { return std::invoke(std::forward<Callable>(callable), std::forward<Param>(param), std::forward<Params>(params)...); }, std::forward<Args>(args)...);
+    };
+
+    return ValueType_call(call, std::forward<Arg>(arg));
+}
+
+template <typename Callable, typename... Args>
+KeyValueResult ValueType_unwrap(ValueType &result, Callable &&callable, Args &&...args)
+{
+    using traits = CallableTraits<Callable>;
+
+    if constexpr (std::same_as<typename traits::argument_types::template resize<1>, type_pack<ValueType &>>) {
+        if constexpr (std::same_as<typename traits::class_type, void>) {
+            return ValueType_unwrap_impl(typename traits::argument_types::pop_front {}, [&](auto &&...args) { return std::invoke(std::forward<Callable>(callable), result, std::forward<decltype(args)>(args)...); }, std::forward<Args>(args)...);
+        } else {
+            return ValueType_unwrap_impl(typename traits::argument_types::pop_front::template prepend<typename traits::class_type&> {}, [&](auto &&obj, auto &&...args) { return std::invoke(std::forward<Callable>(callable), obj, result, std::forward<decltype(args)>(args)...); }, std::forward<Args>(args)...);
+        }
+    } else {
+        using argumentTypes = std::conditional_t<std::same_as<typename traits::class_type, void>,
+            typename traits::argument_types,
+            typename traits::argument_types::template prepend<std::add_lvalue_reference_t<typename traits::class_type>>>;
+        return ValueType_unwrap_impl(argumentTypes {}, [&](auto &&...args) -> KeyValueResult {
+            using R = std::invoke_result_t<Callable&&, decltype(args)&&...>;
+            if constexpr (std::is_void_v<R>) {
+                std::invoke(std::forward<Callable>(callable), std::forward<decltype(args)>(args)...);
+            } else {
+                to_ValueType(result, forward_ref<R>(std::invoke(std::forward<Callable>(callable), std::forward<decltype(args)>(args)...)));
+            }            
+            return {}; }, std::forward<Args>(args)...);
+    }
 }
 
 template <typename T>

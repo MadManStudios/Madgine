@@ -31,7 +31,7 @@ namespace Behavior {
             : VirtualData(graph)
             , mFullClassName { fullClassName }
         {
-            setup();
+            refresh();
         }
 
         AccessorNode::AccessorNode(const AccessorNode &other, NodeGraph &graph)
@@ -118,7 +118,7 @@ namespace Behavior {
                 ValueType scope;
                 KEYVALUE_PROPAGATE_ERROR(NodeInterpretHandle<NodeBase> { { interpreter }, *this }.read(scope, 0));
 
-                return accessor()->mGetter(accessor(), retVal, scope.as<ScopePtr>());
+                return accessor()->mGetter(accessor(), retVal, scope);
             }
         }
 

@@ -9,6 +9,7 @@
 namespace Engine {
 
 template <typename T>
+    requires(!std::is_pointer_v<T>)
 T *scope_cast(const ScopePtr &ptr);
 
 using Constructor = OwnedScopePtr (*)();

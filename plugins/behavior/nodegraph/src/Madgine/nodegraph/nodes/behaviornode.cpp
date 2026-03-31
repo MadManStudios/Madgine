@@ -95,8 +95,14 @@ namespace Behavior {
                 state(NodeReceiver<NodeBase> receiver, Behavior::StatePtr behavior)
                     : mReceiver(std::move(receiver))
                     , mBehavior(std::move(behavior))
-                    , mLocation([](CallableView<void(const Execution::StateDescriptor &)>) -> void { throw 0; })
+                    , mLocation([this](CallableView<void(const Execution::StateDescriptor &)> visitor) -> void { mBehavior->visitState(visitor); })
                 {
+                    receiver.mDebugLocation.mChild = &mLocation;
+                }
+
+                ~state()
+                {
+                    mReceiver.mDebugLocation.mChild = nullptr;
                 }
 
                 NodeReceiver<NodeBase> mReceiver;
@@ -115,7 +121,7 @@ namespace Behavior {
             future = Engine::Resources::ResourceManager::getSingleton().taskQueue()->queueTask(mBehavior.state().then([this](bool success) {
                 if (success) {
                     mSubBehaviorCount = mBehavior.subBehaviorCount();
-                    this->setup();
+                    this->refresh();
                 }
                 return success;
             }));
@@ -129,7 +135,7 @@ namespace Behavior {
         {
             assert(mBehavior.state());
             mSubBehaviorCount = mBehavior.subBehaviorCount();
-            this->setup();
+            this->refresh();
         }
 
         BehaviorNode::BehaviorNode(const BehaviorNode &other, NodeGraph &graph)
@@ -137,6 +143,7 @@ namespace Behavior {
             , mBehavior(other.mBehavior)
             , mFullClassName(other.mFullClassName)
             , mDefaultParameters(other.mDefaultParameters)
+            , mSubBehaviorCount(other.mSubBehaviorCount)
         {
         }
 

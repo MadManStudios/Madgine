@@ -19,40 +19,22 @@
 namespace Engine {
 namespace Tools {
 
-    struct ConnectorInfo {
-        ImVec2 mPos;
-        Behavior::NodeGraph::PinType mType;
-        uint32_t mIndex;
-    };
-
-    TypedPtr visualizeDebugLocation(DebuggerView &view, const Debug::ContextInfo &context, const Behavior::NodeGraph::NodeDebugLocation &location, TypedPtr inlineLocation)
+    std::vector<TypedPtr> visualizeDebugLocation(DebuggerView &view, const Debug::ContextInfo &context, const Behavior::NodeGraph::NodeDebugLocation *location, TypedPtr inlineLocation)
     {
-        TypedPtr child;
-        const Behavior::NodeGraph::NodeGraph &graph = *location.mInterpreter->graph();
+        if (!location)
+            return {};
+
+        std::vector<TypedPtr> children;
+        const Behavior::NodeGraph::NodeGraph &graph = *location->mInterpreter->graph();
 
         if (inlineLocation) {
+            return { location };
 
-            const Behavior::NodeGraph::NodeDebugLocation *inlineNodeLocation = inlineLocation.as<const Behavior::NodeGraph::NodeDebugLocation>();
-            if (!inlineNodeLocation || inlineNodeLocation->mInterpreter != location.mInterpreter)
-                return &location;
-
-            ImGui::EndVertical();
-
-            EndNode();
-
-            BeginNode(location.mNode, graph.nodeIndex(location.mNode));
-
-            ImGui::BeginVertical("child");
-
-            if (location.mChild)
-                child = view.visualizeDebugLocation(context, location.mChild, inlineLocation);
-
-            ed::SelectNode(60000 * graph.nodeIndex(location.mNode), true);
         } else {
-            if (!location.mEditorContext) {
+            if (!location->mEditorContext) {
                 ed::Config config;
 
-                config.UserPointer = location.mInterpreter;
+                config.UserPointer = location->mInterpreter;
 
                 config.LoadSettings = [](char *data, void *userPointer) {
                     const std::string &layout = static_cast<Behavior::NodeGraph::NodeInterpreterStateBase *>(userPointer)->graph()->mLayoutData;
@@ -62,42 +44,63 @@ namespace Tools {
                     return layout.size();
                 };
 
-                location.mEditorContext = { ed::CreateEditor(&config), &ed::DestroyEditor };
+                location->mEditorContext = { ed::CreateEditor(&config), &ed::DestroyEditor };
             }
 
-            ImGui::PushID(&location);
+            ImGui::PushID(location);
 
-            ImRect oldViewport = BeginNodeEditor(location.mEditorContext.get(), { 0, 250 });
+            ImRect oldViewport = BeginNodeEditor(location->mEditorContext.get(), { 0, 250 });
 
             ed::NodeId selectedNodes[256];
             auto selectedNodesCount = ed::GetSelectedNodes(selectedNodes, 256);
             assert(selectedNodesCount < 255);
             ed::ClearSelection();
 
-            if (location.mNode) {
-                uint32_t nodeId = graph.nodeIndex(location.mNode);
-                BeginNode(location.mNode, nodeId);
+            children = { location };
+            while (true) {
+                std::vector<TypedPtr> newChildren;
+                for (auto it = children.begin(); it != children.end();) {
+                    const Behavior::NodeGraph::NodeDebugLocation *childLocation = it->as<const Behavior::NodeGraph::NodeDebugLocation>();
+                    if (!childLocation || childLocation->mInterpreter != location->mInterpreter) {
+                        ++it;
+                        continue;
+                    }
 
-                if (location.mChild) {
-                    ImGui::BeginVertical("child");
-                    child = view.visualizeDebugLocation(context, location.mChild, &location);
-                    ImGui::EndVertical();
+                    it = children.erase(it);
+
+                    if (childLocation->mNode) {
+                        uint32_t nodeId = graph.nodeIndex(childLocation->mNode);
+                        BeginNode(childLocation->mNode, nodeId);
+
+                        if (childLocation->mChild) {
+                            ImGui::BeginVertical("child");
+                            std::ranges::move(view.visualizeDebugLocation(context, childLocation->mChild, location), std::back_inserter(newChildren));
+                            ImGui::EndVertical();
+                        }
+
+                        EndNode();
+
+                        ed::SelectNode(60000 * nodeId, true);
+                    }
                 }
 
-                EndNode();
+                if (newChildren.empty())
+                    break;
 
-                ed::SelectNode(60000 * nodeId, true);
+                std::ranges::move(newChildren, std::back_inserter(children));   
             }
 
             ed::NodeId ids[256];
-            [[maybe_unused]] auto handledNodesCount = ed::GetOrderedNodeIds(ids, 256);
+            auto handledNodesCount = ed::GetOrderedNodeIds(ids, 256);
             assert(handledNodesCount < 255);
+            std::vector<size_t> handledNodeIds { ids, ids + handledNodesCount };
+            std::ranges::sort(handledNodeIds);
             uint32_t handledIndex = 0;
 
             uint32_t nodeId = 1;
             for (Behavior::NodeGraph::NodeBase *node : graph.nodes() | std::views::transform(projectionUniquePtrToPtr)) {
 
-                if (static_cast<size_t>(ids[handledIndex]) == 60000 * nodeId) {
+                if (handledIndex < handledNodesCount && static_cast<size_t>(handledNodeIds[handledIndex]) == 60000 * nodeId) {
                     ++handledIndex;
                 } else {
                     BeginNode(node, nodeId);
@@ -132,7 +135,7 @@ namespace Tools {
                 }
             }
 
-            if (recenter)
+            if (recenter && false)
                 ed::NavigateToSelection(true);
 
             EndNodeEditor(oldViewport);
@@ -140,7 +143,7 @@ namespace Tools {
             ImGui::PopID();
         }
 
-        if (child)
+        for (const TypedPtr &child : children)        
             view.visualizeDebugLocation(context, child, {});
 
         return {};

@@ -30,22 +30,25 @@ SERIALIZETABLE_END(Engine::Tools::BehaviorTool)
 namespace Engine {
 namespace Tools {
 
-    TypedPtr visualizeCoroutineLocation(DebuggerView &view, const Debug::ContextInfo &context, const Behavior::CoroutineLocation &location, TypedPtr inlineLocation)
+    std::vector<TypedPtr> visualizeCoroutineLocation(DebuggerView &view, const Debug::ContextInfo &context, const Behavior::CoroutineLocation *location, TypedPtr inlineLocation)
     {
+        if (!location)
+            return {};
+
         const char *name = "<unknown>";
 #ifndef NDEBUG
-        Debug::FullStackTrace trace = location.mStacktrace.calculateReadable();
+        Debug::FullStackTrace trace = location->mStacktrace.calculateReadable();
         if (!trace.empty()) {
             name = trace[0].mFunction;
         }
 #endif
         ImGui::BeginGroupPanel(name);
-        TypedPtr content;
-        if (location.mChild)
-            content = view.visualizeDebugLocation(context, location.mChild, inlineLocation);
+        std::vector<TypedPtr> content;
+        if (location->mChild)
+            content = view.visualizeDebugLocation(context, location->mChild, inlineLocation);
         ImGui::EndGroupPanel();
 
-        return content == location.mChild ? &location : content;
+        return content;
     }
 
     BehaviorTool::BehaviorTool(ImRoot &root)

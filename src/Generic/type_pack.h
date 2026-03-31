@@ -21,6 +21,18 @@ struct type_pack<> {
 
     static constexpr const size_t size = 0;
 
+    struct helpers {
+        template <size_t n, typename Fill, typename... T>
+        struct resize_helper {
+            using type = resize_helper<n - 1, Fill, T..., Fill>::type;
+        };
+
+        template <typename Fill, typename... T>
+        struct resize_helper<0, Fill, T...> {
+            using type = type_pack<T...>;
+        };
+    };
+
     using indices = std::index_sequence<>;
 
     template <typename... T>
@@ -31,6 +43,8 @@ struct type_pack<> {
     using prepend_if = std::conditional_t<Cond, type_pack<T>, type_pack<>>;
     template <typename Pack2>
     using concat = Pack2;
+    template <size_t n, typename Fill = void>
+    using resize = helpers::resize_helper<n, Fill>;
 
     template <template <typename...> typename Filter, typename... Args>
     using filter = type_pack<>;
@@ -97,23 +111,14 @@ struct type_pack<Head, Ty...> {
         contains<T> struct is_or_contains<type_pack<Ty2...>, T> : is_or_contains<T, T> {
         };
 
-        template <size_t n, typename Fill, int select>
-        struct resize_helper;
-
-        template <size_t n, typename Fill>            
-        struct resize_helper<n, Fill, 0>
-        {
-            using type = type_pack<Head, Ty...>;
+        template <size_t n, typename Fill, typename... T>
+        struct resize_helper {
+            using type = typename Tail::helpers::template resize_helper<n - 1, Fill, T..., Head>::type;
         };
 
-        template <size_t n, typename Fill>            
-        struct resize_helper<n, Fill, -1> {
-            using type = typename Tail::template resize<n, Fill>;
-        };
-
-        template <size_t n, typename Fill>
-        struct resize_helper<n, Fill, 1> {
-            using type = typename type_pack<Head, Ty..., Fill>::template resize<n, Fill>;
+        template <typename Fill, typename... T>
+        struct resize_helper<0, Fill, T...> {
+            using type = type_pack<T...>;
         };
     };
 
@@ -135,7 +140,7 @@ struct type_pack<Head, Ty...> {
     template <typename Pack2>
     using concat = typename Pack2::template prepend<Head, Ty...>;
     template <size_t n, typename Fill = void>
-    using resize = typename helpers::template resize_helper<n, Fill, n < size ? -1 : (n > size ? 1 : 0)>::type;
+    using resize = typename helpers::template resize_helper<n, Fill>::type;
 
     template <template <typename> typename F>
     using transform = type_pack<F<Head>, F<Ty>...>;

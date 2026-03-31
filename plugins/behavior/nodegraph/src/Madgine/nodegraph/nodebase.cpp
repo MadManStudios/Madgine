@@ -344,10 +344,10 @@ namespace Behavior {
             throw 0;
         }
 
-        void NodeBase::setup()
+        void NodeBase::refresh()
         {
             mFlowInPins.resize(flowInGroupCount());
-            for (size_t i = 0; i < flowInGroupCount(); ++i) {
+            for (size_t i = 0; i < flowInGroupCount(); ++i) {                
                 mFlowInPins[i].resize(flowInCount(i));
             }
             mFlowOutPins.resize(flowOutGroupCount());

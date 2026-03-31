@@ -136,7 +136,7 @@ namespace Behavior {
 
         void NodeInterpreterStateBase::stop()
         {
-            throw 0;
+            //Nothing to do. It is the responsibility of child behaviors to listen to the stop source.
         }
 
     }

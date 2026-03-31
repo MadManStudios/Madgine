@@ -6,7 +6,7 @@ namespace Serialize {
     template <typename T>
     struct NoParent : T {
 
-        using decay_t = T;
+        using meta_t = T;
 
         template <typename... Args>
         NoParent(Args &&...args)

@@ -4,6 +4,7 @@
 #include "Generic/execution/concepts.h"
 #include "Generic/execution/virtualstate.h"
 #include "Generic/genericresult.h"
+#include "Generic/callable_view.h"
 #include "keyvalueresult.h"
 
 namespace Engine {
@@ -13,6 +14,8 @@ using KeyValueReceiver = Execution::VirtualReceiverBaseEx<type_pack<KeyValueErro
 struct KeyValueSenderStateBase {
     virtual void connect(KeyValueReceiver &receiver) = 0;
     virtual void start() = 0;
+
+    virtual void visitState(CallableView<void(const Execution::StateDescriptor &)> visitor) = 0;
 };
 
 template <typename Sender>
@@ -25,15 +28,20 @@ struct KeyValueSenderState : KeyValueSenderStateBase {
     {
     }
 
-    virtual void connect(KeyValueReceiver &receiver) override
+    void connect(KeyValueReceiver &receiver) override
     {
         mState.template emplace<State>(DelayedConstruct<State> {
             [&, sender { std::forward<Sender>(std::get<Sender>(mState)) }]() mutable { return Execution::connect(std::move(sender), receiver); } });
     }
 
-    virtual void start() override
+    void start() override
     {
         std::get<State>(mState).start();
+    }
+
+    void visitState(CallableView<void(const Execution::StateDescriptor &)> visitor) override
+    {
+        Execution::visit_state(&std::get<State>(mState), visitor);
     }
 
     std::variant<Sender, State> mState;
@@ -72,6 +80,15 @@ struct KeyValueSender {
         void start()
         {
             mState->start();
+        }
+
+        friend void tag_invoke(Execution::visit_state_t, state *s, auto &&visitor)
+        {
+            if (s) {
+                s->mState->visitState(std::forward<decltype(visitor)>(visitor));
+            } else {
+                visitor(Execution::State::Text { "KeyValueSender" });
+            }
         }
 
         std::shared_ptr<KeyValueSenderStateBase> mState;

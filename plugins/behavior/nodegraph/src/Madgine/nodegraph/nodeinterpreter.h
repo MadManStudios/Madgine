@@ -69,6 +69,11 @@ namespace Behavior {
             void start();
             void stop();
 
+            friend void tag_invoke(Execution::visit_state_t, NodeInterpreterStateBase *state, auto &&visitor)
+            {
+                visitor(Execution::State::DebugLocation { &state->mDebugLocation });
+            }
+
         protected:
             NodeDebugLocation mDebugLocation;
 

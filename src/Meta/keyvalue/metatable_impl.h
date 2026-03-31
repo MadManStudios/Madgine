@@ -32,51 +32,23 @@ constexpr Accessor property(const char *name)
     using GetterScope = typename getter_traits::class_type;
     using T = typename getter_traits::return_type;
 
-    KeyValueResult (*setter)(const Accessor *, const ScopePtr &, const ValueType &) = nullptr;
+    KeyValueResult (*setter)(const Accessor *, const ValueType &, const ValueType &) = nullptr;
 
     if constexpr (Setter != nullptr) {
-        using setter_traits = CallableTraits<decltype(Setter)>;
-        using SetterScope = typename setter_traits::class_type;
-
-        // TODO remove const in tuple types
-        // static_assert(std::is_same_v<typename setter_traits::argument_types, std::tuple<T>>);
-
-        setter = [](const Accessor *, const ScopePtr &scope, const ValueType &v) -> KeyValueResult {
-            if constexpr (std::same_as<SetterScope, void>) {
-                using SetterScope = std::remove_pointer_t<typename setter_traits::argument_types::template select<0>>;
-                if constexpr (std::is_convertible_v<Scope &, SetterScope &>) {
-                    TupleUnpacker::invoke(Setter, scope_cast<Scope>(scope), ValueType_as<std::decay_t<T>>(v));
-                } else {
-                    TupleUnpacker::invoke(Setter, scope, ValueType_as<std::decay_t<T>>(v));
-                }
-            } else {
-                static_assert(std::is_convertible_v<Scope &, SetterScope &>);
-                TupleUnpacker::invoke(Setter, scope_cast<Scope>(scope), ValueType_as<std::decay_t<T>>(v));
-            }
-            return {};
+        setter = [](const Accessor *, const ValueType &scope, const ValueType &v) -> KeyValueResult {
+            KeyValueResult result;
+            ValueType_erased([&](ValueType &r) {
+                result = ValueType_unwrap(r, Setter, scope, v);
+            });
+            return result;            
         };
     }
 
     return {
         name,
         nullptr,
-        [](const Accessor *, ValueType &retVal, const ScopePtr &scope) -> KeyValueResult {
-            T value = [=]() -> T {
-                if constexpr (std::same_as<GetterScope, void>) {
-                    using GetterScope = std::remove_pointer_t<typename getter_traits::argument_types::template select<0>>;
-                    if constexpr (std::is_convertible_v<Scope &, GetterScope &>) {
-                        return TupleUnpacker::invoke(Getter, scope_cast<Scope>(scope));
-                    } else {
-                        return TupleUnpacker::invoke(Getter, scope);
-                    }
-                } else {
-                    static_assert(std::is_convertible_v<Scope &, GetterScope &>);
-                    return TupleUnpacker::invoke(Getter, scope_cast<Scope>(scope));
-                }
-            }();
-
-            to_ValueType(retVal, forward_ref<T>(value));
-            return {};
+        [](const Accessor *, ValueType &retVal, const ValueType &scope) -> KeyValueResult {
+            return ValueType_unwrap(retVal, Getter, scope);
         },
         setter,
         toValueTypeDesc<forward_ref_t<T>>()

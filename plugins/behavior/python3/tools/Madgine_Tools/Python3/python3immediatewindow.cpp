@@ -44,10 +44,10 @@ UNIQUECOMPONENT(Engine::Tools::Python3ImmediateWindow)
 namespace Engine {
 namespace Tools {
 
-    TypedPtr visualizeDebugLocation(DebuggerView &view, const Debug::ContextInfo &context, const Behavior::Python3::Python3DebugLocation &location, TypedPtr inlineLocation)
+    std::vector<TypedPtr> visualizeDebugLocation(DebuggerView &view, const Debug::ContextInfo &context, const Behavior::Python3::Python3DebugLocation *location, TypedPtr inlineLocation)
     {
         Behavior::Python3::Python3Lock lock;
-        ImGui::BeginGroupPanel(PyUnicode_AsUTF8(PyFrame_GetCode(location.mFrame)->co_filename));
+        ImGui::BeginGroupPanel(PyUnicode_AsUTF8(PyFrame_GetCode(location->mFrame)->co_filename));
         if (ImGui::TreeNode("Code")) {
 
             if (ImGui::BeginTable("Code", 2, ImGuiTableFlags_BordersOuter | ImGuiTableFlags_SizingFixedFit)) {
@@ -56,7 +56,7 @@ namespace Tools {
                 ImGui::TableSetupColumn("Source", ImGuiTableColumnFlags_WidthStretch);
 
                 Behavior::Python3::PyModulePtr inspect { "inspect" };
-                Behavior::Python3::PyObjectPtr sourcelines = PyObject_CallFunctionObjArgs(inspect.get("getsourcelines"), location.mFrame, NULL);
+                Behavior::Python3::PyObjectPtr sourcelines = PyObject_CallFunctionObjArgs(inspect.get("getsourcelines"), location->mFrame, NULL);
                 Behavior::Python3::PyListPtr sources = Behavior::Python3::PyListPtr::fromBorrowed(PyTuple_GetItem(sourcelines, 0));
                 size_t baseLine = PyLong_AsLong(PyTuple_GetItem(sourcelines, 1));
 
@@ -72,7 +72,7 @@ namespace Tools {
 
                     ImGui::Text("%s", PyUnicode_AsUTF8(line));
 
-                    if (baseLine == location.lineNr()) {
+                    if (baseLine == location->lineNr()) {
                         DrawDebugMarker(0.5f * (ImGui::GetCursorScreenPos().y + startY) - 7.0f);
                     }
 

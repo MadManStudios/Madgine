@@ -135,7 +135,7 @@ namespace Tools {
                     bool changed = mInspector->drawValue(function.mFunction.mTable->mArguments[i].mName, v, true, function.mFunction.mTable->mArguments[i].mType).first;
 
                     if (ImGui::BeginDragDropTarget()) {
-                        changed |= ImGui::AcceptDraggableValueType([&](const ValueType &dropped) { v = dropped; }, [&](const ValueType &dropped) { return function.mFunction.mTable->mArguments[i].mType.canAccept(dropped.type()); });
+                        changed |= ImGui::AcceptDraggableValueType(v, [&](const ValueType &dropped) { return function.mFunction.mTable->mArguments[i].mType.canAccept(dropped.type()); });
                         ImGui::EndDragDropTarget();
                     }
                     if (changed) {

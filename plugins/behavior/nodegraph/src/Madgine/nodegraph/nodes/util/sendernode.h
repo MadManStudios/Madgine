@@ -20,19 +20,19 @@ namespace Behavior {
     namespace NodeGraph {
 
         template <typename T>
-        using is_router = is_instance_auto1<decayed_t<T>, NodeRouter>;
+        using is_router = is_instance_auto1<meta_decayed_t<T>, NodeRouter>;
 
         template <typename T>
-        using is_algorithm = is_instance_auto1<decayed_t<T>, NodeAlgorithm>;
+        using is_algorithm = is_instance_auto1<meta_decayed_t<T>, NodeAlgorithm>;
 
         template <typename T>
-        using is_pred_sender = std::bool_constant<is_instance<decayed_t<T>, NodeReader>::value || is_instance<decayed_t<T>, NodeStream>::value>;
+        using is_pred_sender = std::bool_constant<is_instance<meta_decayed_t<T>, NodeReader>::value || is_instance<meta_decayed_t<T>, NodeStream>::value>;
 
         template <typename T>
-        using is_succ_sender = is_instance_auto1<decayed_t<T>, NodeSender>;
+        using is_succ_sender = is_instance_auto1<meta_decayed_t<T>, NodeSender>;
 
         template <typename T>
-        using is_range = is_instance_auto1<decayed_t<T>, NodeRange>;
+        using is_range = is_instance_auto1<meta_decayed_t<T>, NodeRange>;
 
         template <typename T>
         using is_value = std::negation<std::disjunction<is_algorithm<T>, is_pred_sender<T>, is_succ_sender<T>, is_algorithm<T>, is_router<T>, is_range<T>>>;
@@ -48,7 +48,7 @@ namespace Behavior {
         template <size_t I>
         struct dynamic_value_type : ValueType {
             static constexpr size_t index = I;
-            using decay_t = ValueType;
+            using meta_t = ValueType;
             using ValueType::operator=;
             using no_value_type = void;
         };
@@ -63,6 +63,8 @@ namespace Behavior {
 
         template <typename T, typename Config, auto Algorithm, typename... Arguments>
         struct SenderNode : Node<T, AutoMaskNode<>> {
+
+            using meta_t = T;
 
             using argument_types = type_pack<Arguments...>;
             using algorithms = typename argument_types::template filter<is_any_algorithm>;
@@ -106,7 +108,7 @@ namespace Behavior {
                         std::make_tuple(NodeAlgorithm<I + 1> { *results }),
                         buildArgs<I + 1>(node, std::move(values), type_pack<Ts...> {}, results));
                 } else {
-                    return TupleUnpacker::prepend<decayed_t<first_t<Vs...>>>(
+                    return TupleUnpacker::prepend<meta_decayed_t<first_t<Vs...>>>(
                         std::get<0>(std::move(values)),
                         buildArgs<I>(node, TupleUnpacker::popFront(std::move(values)), type_pack<Ts...> {}, results));
                 }
@@ -124,7 +126,7 @@ namespace Behavior {
                 if constexpr (InstanceOfA<decayedT, dynamic_value_type>) {
                     return getArguments<Ty::index>().type();
                 } else {
-                    return toValueTypeDesc<std::remove_reference_t<decayed_t<Ty>>>();
+                    return toValueTypeDesc<std::remove_reference_t<meta_decayed_t<Ty>>>();
                 }
             }
 
@@ -185,7 +187,7 @@ namespace Behavior {
             SenderNode(NodeGraph &graph)
                 : Node<T, AutoMaskNode<>>(graph)
             {
-                this->setup();
+                this->refresh();
             }
 
             SenderNode(const SenderNode &other, NodeGraph &graph)
@@ -462,12 +464,12 @@ namespace Behavior {
 
             value_argument_tuple mArguments;
             template <size_t I>
-            const decayed_t<std::tuple_element_t<I, value_argument_tuple>> &getArguments() const
+            const meta_decayed_t<std::tuple_element_t<I, value_argument_tuple>> &getArguments() const
             {
                 return std::get<I>(mArguments);
             }
             template <size_t I>
-            void setArguments(decayed_t<std::tuple_element_t<I, value_argument_tuple>> v)
+            void setArguments(meta_decayed_t<std::tuple_element_t<I, value_argument_tuple>> v)
             {
                 std::get<I>(mArguments) = v;
             }

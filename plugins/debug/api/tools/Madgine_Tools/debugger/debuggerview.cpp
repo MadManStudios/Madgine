@@ -59,10 +59,10 @@ namespace Tools {
         co_await ToolBase::finalize();
     }
 
-    TypedPtr DebuggerView::visualizeDebugLocation(const Debug::ContextInfo &context, TypedPtr location, TypedPtr inlineLocation)
+    std::vector<TypedPtr> DebuggerView::visualizeDebugLocation(const Debug::ContextInfo &context, TypedPtr location, TypedPtr inlineLocation)
     {
         if (const Debug::SenderLocation *senderLocation = location.as<const Debug::SenderLocation>()) {
-            TypedPtr subLocation;
+            std::vector<TypedPtr> subLocations;
 
             IndexType<size_t> breakpoint;
             bool isMarker = false;
@@ -101,7 +101,7 @@ namespace Tools {
                                    ImGui::EndDisabled();
                                },
                                [&, inlineLocation](const Execution::State::DebugLocation &subLoc) {
-                                   subLocation = visualizeDebugLocation(context, subLoc.mLocation, inlineLocation);
+                                   std::ranges::move(visualizeDebugLocation(context, subLoc.mLocation, inlineLocation), std::back_inserter(subLocations));
                                    actualContent = true;
                                },
                                [&](const Execution::State::Breakpoint &bp) {
@@ -204,7 +204,7 @@ namespace Tools {
             };
             senderLocation->visit(visitor);
 
-            return subLocation;
+            return subLocations;
         } else {
             auto it = mDebugLocationVisualizers.find(location.type());
             if (it != mDebugLocationVisualizers.end()) {
@@ -334,8 +334,8 @@ namespace Tools {
         std::unique_lock guard { context.mMutex };
         if (context.mChild) {
             if (BeginDebuggablePanel("Debug Context")) {
-                [[maybe_unused]] TypedPtr child = visualizeDebugLocation(context, context.mChild, {});
-                assert(!child); // Parents that allow inline rendering need to take care of child rendering.
+                [[maybe_unused]] std::vector<TypedPtr> children = visualizeDebugLocation(context, context.mChild, {});
+                assert(children.empty()); // Parents that allow inline rendering need to take care of child rendering.
                 EndDebuggablePanel();
             }
         }

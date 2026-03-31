@@ -72,7 +72,7 @@ namespace Behavior {
 
         ScopePtr customScopePtr() override
         {
-            return { this, &sMetaTable };
+            return { this, sMetaTablePtr };
         }
 
         Serialize::StreamResult read(Serialize::CallerHierarchyFormattedSerializeStream in) override
@@ -97,19 +97,19 @@ namespace Behavior {
         static const MetaTable *sMetaTablePtr;
 
         template <size_t I>
-        static KeyValueResult sGetter(const Accessor *, ValueType &retVal, const ScopePtr &scope)
+        static KeyValueResult sGetter(const Accessor *, ValueType &retVal, const ValueType &scope)
         {
-            assert(scope.mType == &sMetaTable);
-            to_ValueType(retVal, std::get<I>(static_cast<TypedParameterTupleInstance *>(scope.mScope)->mTuple));
-            return {};
+            return ValueType_unwrap(retVal, [](TypedParameterTupleInstance &instance) -> decltype(auto) { return std::get<I>(instance.mTuple); }, scope);
         }
 
         template <size_t I, typename T>
-        static KeyValueResult sSetter(const Accessor *, const ScopePtr &scope, const ValueType &val)
+        static KeyValueResult sSetter(const Accessor *, const ValueType &scope, const ValueType &val)
         {
-            assert(scope.mType == &sMetaTable);
-            std::get<I>(static_cast<TypedParameterTupleInstance *>(scope.mScope)->mTuple) = ValueType_as<T>(val);
-            return {};
+            KeyValueResult result;
+            ValueType_erased([&](ValueType &r) {
+                result = ValueType_unwrap(r, [](TypedParameterTupleInstance &instance, T value) { std::get<I>(instance.mTuple) = std::move(value); }, scope, val);
+            });
+            return result;
         }
 
         static const constexpr auto sMembers = []<size_t... Is>(auto_pack<Is...>) constexpr -> std::array<Accessor, sizeof...(Ty) + 1>
@@ -118,16 +118,7 @@ namespace Behavior {
                 {} } };
         }
         (index_pack_for<Ty...> {});
-
-        static const constexpr MetaTable sMetaTable {
-            &sMetaTablePtr,
-            "<ParameterTuple>",
-            sMembers.data()
-        };
     };
-
-    template <typename Names, typename... Ty>
-    const MetaTable *TypedParameterTupleInstance<Names, Ty...>::sMetaTablePtr = &TypedParameterTupleInstance<Names, Ty...>::sMetaTable;
 
     struct MADGINE_BEHAVIOR_EXPORT ParameterTuple {
 
@@ -214,3 +205,14 @@ namespace Serialize {
 }
 
 }
+
+template <typename Names, typename... Ty>
+constexpr const Engine::MetaTable table_instance<Engine::Behavior::TypedParameterTupleInstance<Names, Ty...>> = {
+    &Engine::Behavior::TypedParameterTupleInstance<Names, Ty...>::sMetaTablePtr,
+    "<ParameterTuple>",
+    Engine::Behavior::TypedParameterTupleInstance<Names, Ty...>::sMembers.data()
+};
+
+
+template <typename Names, typename... Ty>
+const Engine::MetaTable *Engine::Behavior::TypedParameterTupleInstance<Names, Ty...>::sMetaTablePtr = &table_instance<Engine::Behavior::TypedParameterTupleInstance<Names, Ty...>>;

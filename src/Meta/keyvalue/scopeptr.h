@@ -62,7 +62,7 @@ T *scope_cast(const ScopePtr &ptr)
 {
     OffsetPtr offset { 0 };
     if (!ptr.mType->isDerivedFrom<std::remove_const_t<T>>(&offset))
-        std::terminate();
+        return nullptr;
 
     return static_cast<T *>(reinterpret_cast<void *>(reinterpret_cast<std::byte *>(ptr.mScope) + offset));
 }

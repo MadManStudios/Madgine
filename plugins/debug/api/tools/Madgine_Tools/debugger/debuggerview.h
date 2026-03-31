@@ -52,14 +52,14 @@ namespace Tools {
         void registerDebugLocationVisualizer()
         {
             using T = std::remove_reference_t<typename CallableTraits<decltype(Visualizer)>::argument_types::template select<2>>;
-            auto [it, b] = mDebugLocationVisualizers.try_emplace(typeid(T), [](DebuggerView &view, const Debug::ContextInfo &context, const void *location, TypedPtr inlineLocation) -> TypedPtr {
-                T &typedLocation = *static_cast<T*>(location);
+            auto [it, b] = mDebugLocationVisualizers.try_emplace(typeid(std::remove_pointer_t<T>), [](DebuggerView &view, const Debug::ContextInfo &context, const void *location, TypedPtr inlineLocation) -> std::vector<TypedPtr> {
+                T typedLocation = static_cast<T>(location);
                 return Visualizer(view, context, typedLocation, inlineLocation);
             });
             assert(b);
         }
 
-        TypedPtr visualizeDebugLocation(const Debug::ContextInfo &context, TypedPtr location, TypedPtr inlineLocation);
+        std::vector<TypedPtr> visualizeDebugLocation(const Debug::ContextInfo &context, TypedPtr location, TypedPtr inlineLocation);
 
         ControlButton contextControls(bool running);
 
@@ -68,7 +68,7 @@ namespace Tools {
         Debug::ContextInfo *mSelectedContext = nullptr;
         Debug::DebugLocation *mSelectedLocation = nullptr;
 
-        std::map<std::type_index, TypedPtr (*)(DebuggerView &, const Debug::ContextInfo &, const void *, TypedPtr), std::less<>> mDebugLocationVisualizers;
+        std::map<std::type_index, std::vector<TypedPtr> (*)(DebuggerView &, const Debug::ContextInfo &, const void *, TypedPtr), std::less<>> mDebugLocationVisualizers;
 
         Inspector *mInspector = nullptr;
     };

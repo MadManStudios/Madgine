@@ -2,6 +2,7 @@
 
 #include "Generic/callerhierarchy.h"
 
+#include "../../meta_decay.h"
 #include "../primitivetypes.h"
 #include "../streams/streamresult.h"
 #include "serializetable_forward.h"
@@ -15,13 +16,13 @@ namespace Serialize {
     private:
         template <typename T>
         SerializableDataConstPtr(const T *t, std::true_type)
-            : SerializableDataConstPtr(t ? t->customUnitPtr() : SerializableDataConstPtr { static_cast<const void *>(nullptr), &serializeTable<decayed_t<T>>() })
+            : SerializableDataConstPtr(t ? t->customUnitPtr() : SerializableDataConstPtr { static_cast<const void *>(nullptr), &serializeTable<meta_decayed_t<T>>() })
         {
         }
 
         template <typename T>
         SerializableDataConstPtr(const T *t, std::false_type)
-            : SerializableDataConstPtr(t, &serializeTable<decayed_t<T>>())
+            : SerializableDataConstPtr(t, &serializeTable<meta_decayed_t<T>>())
         {
         }
 
@@ -81,7 +82,7 @@ namespace Serialize {
     private:
         template <typename T>
         SerializableDataPtr(T *t, std::true_type)
-            : SerializableDataPtr(t ? SerializableDataPtr { t->customUnitPtr() } : SerializableDataPtr { static_cast<void *>(nullptr), &serializeTable<decayed_t<T>>() })
+            : SerializableDataPtr(t ? SerializableDataPtr { t->customUnitPtr() } : SerializableDataPtr { static_cast<void *>(nullptr), &serializeTable<meta_decayed_t<T>>() })
         {
         }
 
@@ -138,7 +139,7 @@ namespace Serialize {
         template <typename T>
         static StreamResult visitStream(CallerHierarchyFormattedSerializeStream in, const char *name, const StreamVisitor &visitor, size_t depth)
         {
-            return visitStream(&serializeTable<decayed_t<T>>(), in, name, visitor, depth);
+            return visitStream(&serializeTable<meta_decayed_t<T>>(), in, name, visitor, depth);
         }
 
         void *unit() const;
@@ -148,13 +149,13 @@ namespace Serialize {
     private:
         template <typename T>
         SerializableUnitConstPtr(const T *t, std::true_type)
-            : SerializableUnitConstPtr(t ? t->customUnitPtr() : SerializableUnitConstPtr { nullptr, &serializeTable<decayed_t<T>>() })
+            : SerializableUnitConstPtr(t ? t->customUnitPtr() : SerializableUnitConstPtr { nullptr, &serializeTable<meta_decayed_t<T>>() })
         {
         }
 
         template <typename T>
         SerializableUnitConstPtr(const T *t, std::false_type)
-            : SerializableUnitConstPtr(t, &serializeTable<decayed_t<T>>())
+            : SerializableUnitConstPtr(t, &serializeTable<meta_decayed_t<T>>())
         {
         }
 
@@ -208,7 +209,7 @@ namespace Serialize {
     private:
         template <typename T>
         SerializableUnitPtr(T *t, std::true_type)
-            : SerializableUnitPtr(t ? t->customUnitPtr() : SerializableUnitPtr { nullptr, &serializeTable<decayed_t<T>>() })
+            : SerializableUnitPtr(t ? t->customUnitPtr() : SerializableUnitPtr { nullptr, &serializeTable<meta_decayed_t<T>>() })
         {
         }
 

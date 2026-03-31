@@ -44,7 +44,7 @@ namespace Behavior {
             auto f = [&](ValueType &v) {
                 result = get_named_d(std::forward<T>(context), Name, v);
                 if (result)
-                    o = ValueType_as<V>(v);
+                    ValueType_unwrap(v, [&](const V &v) { o = v; }, v);
             };
             ValueType_erased(CallableView<void(ValueType &)> { f });
             return result;
@@ -152,7 +152,7 @@ namespace Behavior {
             return NamedState<Rec, Name, T> { sender, std::forward<Rec>(rec) };
         }
 
-        using decay_t = std::optional<forward_ref_t<T>>;
+        using meta_t = std::optional<forward_ref_t<T>>;
 
         template <bool isReferenceWrapped>
         friend decltype(auto) tag_invoke(convert_ValueType_t<isReferenceWrapped> convert_ValueType, Named<Name, T> &named)

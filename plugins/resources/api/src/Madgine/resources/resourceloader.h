@@ -94,6 +94,8 @@ namespace Resources {
     template <typename T, typename _Data, typename _Base = ResourceLoaderInterface<T, _Data>>
     struct ResourceLoaderImpl : _Base {
 
+        using meta_t = T;
+
         using Interface = _Base;
         using Base = _Base;
         using Data = _Data;
@@ -382,7 +384,7 @@ namespace Resources {
         virtual std::vector<const MetaTable *> resourceTypes() const override
         {
             std::vector<const MetaTable *> result = Base::resourceTypes();
-            result.push_back(table<decayed_t<Resource>>);
+            result.push_back(table<meta_decayed_t<Resource>>);
             return result;
         }
 
@@ -409,6 +411,9 @@ namespace Resources {
                                                                                   \
     METATABLE_BEGIN_BASE_EX(5, Loader::Resource, Engine::Resources::ResourceBase) \
     METATABLE_END_EX(6, Loader::Resource)                                         \
+                                                                                  \
+    METATABLE_BEGIN_EX(7, Loader::Handle)                                         \
+    METATABLE_END_EX(8, Loader::Handle)                                           \
                                                                                   \
     SERIALIZETABLE_BEGIN_EX(9, Loader::Handle)                                    \
         ENCAPSULATED_FIELD_EX(10, Name, name, loadSerialize)                      \

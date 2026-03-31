@@ -1,5 +1,7 @@
 #pragma once
 
+#include "keyvalueresult.h"
+
 namespace Engine {
 
 META_EXPORT void ValueType_erased(CallableView<void(ValueType &)> cb);
@@ -30,7 +32,8 @@ struct KeyValueBinding {
 
     KeyValueBinding() = default;
 
-    template <Execution::AnyBinding Binding>
+    template <DecayedNoneOf<KeyValueBinding> Binding>
+        requires Execution::AnyBinding<Binding>
     KeyValueBinding(Binding &&binding)
         : mPtr(InnerBinding<Binding> { std::forward<Binding>(binding) })
     {
@@ -40,6 +43,42 @@ struct KeyValueBinding {
     decltype(auto) operator->*(P &&right) const
     {
         return mPtr->*std::forward<P>(right);
+    }
+
+    template <typename F, std::same_as<KeyValueBinding> T>
+    friend bool tag_invoke(Execution::access_binding_t access, const T &binding, F &&callback)
+    {
+        return tag_invoke(access, binding.mPtr, std::forward<F>(callback));
+    }
+
+    template <typename T>
+    struct Unwrapper {
+
+        using type = T::type;
+
+        template <typename F>
+        friend bool tag_invoke(Execution::access_binding_t access, const Unwrapper &binding, F &&callback)
+        {
+            return tag_invoke(access, binding.mPtr, [&](const ValueType &v) {
+                KeyValueResult error;
+                ValueType_erased([&](ValueType &result) {
+                    error = ValueType_unwrap(result, std::forward<F>(callback), v);
+                });
+                if (error) {
+                    throw 0;
+                    return false;
+                }
+                return true;
+            });
+        }
+
+        Execution::BindingPtr<const ValueType &> mPtr;
+    };
+
+    template <typename T>
+    Unwrapper<T> unwrap() const
+    {
+        return { mPtr };
     }
 
     Execution::BindingPtr<const ValueType &> mPtr;

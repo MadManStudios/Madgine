@@ -45,7 +45,7 @@ namespace Behavior {
     };
 
     template <typename T>
-    using is_parameter = is_instance_auto1<decayed_t<T>, InputParameter>;
+    using is_parameter = is_instance_auto1<meta_decayed_t<T>, InputParameter>;
 
     template <typename T>
     using is_sub_behavior = std::is_same<T, SubBehavior>;

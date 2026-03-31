@@ -5,6 +5,7 @@
 #include "Generic/execution/concepts.h"
 #include "Generic/keyvalue.h"
 
+#include "../meta_decay.h"
 #include "table_forward.h"
 #include "valuetype_types.h"
 
@@ -21,13 +22,13 @@ auto resolveCustomScopePtr(T *t)
         } else {
             using Ptr = decltype(t->customScopePtr());
             if constexpr (std::same_as<Ptr, ScopePtr>) {
-                return Ptr { nullptr, table<decayed_t<T>> };
+                return Ptr { nullptr, table<meta_decayed_t<T>> };
             } else {
                 return Ptr { nullptr };
             }
         }
     } else {
-        return ScopePtr { t, table<decayed_t<T>> };
+        return ScopePtr { t, table<meta_decayed_t<T>> };
     }
 }
 
@@ -120,7 +121,7 @@ struct META_EXPORT ExtendedValueTypeIndex {
                 if (type == static_cast<ExtendedValueTypeEnum>(ValueTypeEnum::KeyValueVirtualAssociativeRangeValue) || type == ExtendedValueTypeEnum::VariantType) {
                     mark += 2;
                 }
-                if (type == static_cast<ExtendedValueTypeEnum>(ValueTypeEnum::KeyValueVirtualSequenceRangeValue) ||type == static_cast<ExtendedValueTypeEnum>(ValueTypeEnum::BindingValue)) {
+                if (type == static_cast<ExtendedValueTypeEnum>(ValueTypeEnum::KeyValueVirtualSequenceRangeValue) || type == static_cast<ExtendedValueTypeEnum>(ValueTypeEnum::BindingValue)) {
                     mark += 1;
                 }
                 ++i;
@@ -487,7 +488,7 @@ constexpr ExtendedValueTypeDesc toValueTypeDesc()
     } else if constexpr (InstanceOf<std::decay_t<T>, std::unique_ptr>) {
         return { { ValueTypeEnum::ScopeValue }, &table<typename is_instance<std::decay_t<T>, std::unique_ptr>::argument_types::first> };
     } else {
-        return { { ValueTypeEnum::OwnedScopeValue }, &table<decayed_t<resolveCustomScopePtr_t<T>>> };
+        return { { ValueTypeEnum::OwnedScopeValue }, &table<meta_decayed_t<resolveCustomScopePtr_t<T>>> };
     }
 }
 }
