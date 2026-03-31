@@ -25,7 +25,7 @@ namespace Tools {
         Inspector *mInspector = nullptr;
     };
 
-    MADGINE_BEHAVIOR_TOOLS_EXPORT Behavior::BehaviorHandle BehaviorSelector();
+    MADGINE_BEHAVIOR_TOOLS_EXPORT Behavior::BehaviorHandle BehaviorSelector(ImGuiTextFilter **outFilter = nullptr);
 
 }
 }

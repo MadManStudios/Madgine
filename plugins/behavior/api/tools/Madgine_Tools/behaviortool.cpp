@@ -107,20 +107,38 @@ namespace Tools {
     {
     }
 
-    Behavior::BehaviorHandle BehaviorSelector()
+    Behavior::BehaviorHandle BehaviorSelector(ImGuiTextFilter **outFilter)
     {
         Behavior::BehaviorHandle result;
 
-        for (auto [name, index] : Behavior::BehaviorFactoryRegistry::sComponentsByName()) {
-            if (ImGui::BeginMenu(name.data())) {
-                const Behavior::BehaviorFactoryBase *factory = Behavior::BehaviorFactoryRegistry::get(index).mFactory;
-                for (std::string_view name : factory->names()) {
+        static ImGuiTextFilter filter;
+        if (outFilter)
+            *outFilter = &filter;
+
+        filter.Draw("##Filter", -FLT_MIN);
+        if (ImGui::IsWindowAppearing())
+            ImGui::SetKeyboardFocusHere(-1);
+
+        for (auto [factoryName, index] : Behavior::BehaviorFactoryRegistry::sComponentsByName()) {
+
+            bool hasMenu = false;
+            const Behavior::BehaviorFactoryBase *factory = Behavior::BehaviorFactoryRegistry::get(index).mFactory;
+            for (std::string_view name : factory->names()) {
+                if (filter.PassFilter(name.data())) {
+
+                    if (!hasMenu) {
+                        hasMenu = ImGui::BeginMenu(factoryName.data());
+                        if (!hasMenu)
+                            break;
+                    }
+
                     if (ImGui::MenuItem(name.data())) {
                         result = { index, std::string { name } };
                     }
                 }
-                ImGui::EndMenu();
             }
+            if (hasMenu)
+                ImGui::EndMenu();
         }
 
         return result;

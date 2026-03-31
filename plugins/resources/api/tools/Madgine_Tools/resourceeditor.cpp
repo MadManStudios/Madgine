@@ -171,19 +171,22 @@ namespace Tools {
 
         const Plugins::Plugin *plugin = nullptr;
 
+        ImGui::FilesystemPickerOptions options;
+        options.mExtensions = mResourceLoader->fileExtensions();
+
         bool implicitlyAccepted = false;
         do {
-            ImGui::FilesystemPickerOptions options;
+            
 
             bool enabled = true;
 
             #if ENABLE_PLUGINS
-            if (PluginSelector("Plugin", plugin)) {
-                selected = Filesystem::Path { plugin->info()->mSourceRoot } / plugin->info()->mDataPath;
+            if (PluginSelector("Plugin", plugin, true)) {
+                selected = Filesystem::Path { SOURCE_DIR } / plugin->info()->mDataPath;
             }
 
             if (plugin) {
-                options.mBase = Filesystem::Path { plugin->info()->mSourceRoot } / plugin->info()->mDataPath;
+                options.mBase = Filesystem::Path { SOURCE_DIR } / plugin->info()->mDataPath;
             } else {
                 enabled = false;
             }

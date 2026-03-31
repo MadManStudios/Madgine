@@ -26,7 +26,7 @@ namespace Tools {
 
         Resources::ResourceLoaderBase *mResourceLoader = nullptr;
         ResourcesTool *mManager = nullptr;
-        std::string mType;
+        std::string mType;        
 
         Dialog<Filesystem::Path> mSaveAsDialog;
     };

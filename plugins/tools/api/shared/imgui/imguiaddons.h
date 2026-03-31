@@ -207,6 +207,7 @@ bool IsDraggableValueTypeBeingAccepted(
 struct FilesystemPickerOptions {
     const char *(*mIconLookup)(const Engine::Filesystem::Path &path, bool isDir) = nullptr;
     Engine::Filesystem::Path mBase;
+    std::vector<std::string> mExtensions;
 };
 
 IMGUI_API FilesystemPickerOptions *GetFilesystemPickerOptions();

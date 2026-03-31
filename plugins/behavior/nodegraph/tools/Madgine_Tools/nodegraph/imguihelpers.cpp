@@ -76,53 +76,37 @@ namespace Tools {
         }
     }
 
-    ImVec2 DataPinIcon(ExtendedValueTypeDesc type, uint32_t mask, bool connected)
+    void DataPinIcon(ExtendedValueTypeDesc type, uint32_t mask, bool connected)
     {
         IconType icon = IconType::Circle;
         if (type.mType == ValueTypeEnum::SenderValue)
             icon = IconType::Diamond;
 
         Icon(ImVec2(sPinIconSize, sPinIconSize), icon, connected, DataColor(mask, type), ImColor(32, 32, 32, 255));
-        ImVec2 align { 0.5f, 0.5f };
-        return ImGui::GetItemRectMin() + align * ImGui::GetItemRectSize();
     }
 
-    ImVec2 DataInstancePinIcon(ExtendedValueTypeDesc type, uint32_t mask, bool connected)
-    {
-        IconType icon = IconType::Square;
-        if (type.mType == ValueTypeEnum::SenderValue)
-            icon = IconType::Diamond;
-
-        Icon(ImVec2(sPinIconSize, sPinIconSize), icon, connected, DataColor(mask, type), ImColor(32, 32, 32, 255));
-        ImVec2 align { 0.5f, 0.5f };
-        return ImGui::GetItemRectMin() + align * ImGui::GetItemRectSize();
-    }
-
-    ImVec2 FlowPinIcon(uint32_t mask, bool connected)
+    void FlowPinIcon(uint32_t mask, bool connected)
     {
         Icon(ImVec2(sPinIconSize, sPinIconSize), IconType::Flow, connected, FlowColor(mask), ImColor(32, 32, 32, 255));
-        ImVec2 align { 0.5f, 0.5f };
-        return ImGui::GetItemRectMin() + align * ImGui::GetItemRectSize();
     }
 
-    ImVec2 FlowOutPin(const char *name, uint32_t mask, bool connected)
+    void FlowOutPin(const char *name, uint32_t mask, bool connected)
     {
         ImGui::Spring();
         if (name) {
             ImGui::TextUnformatted(name);
             ImGui::Spring(0);
         }
-        return FlowPinIcon(mask, connected);
+        FlowPinIcon(mask, connected);
     }
 
     void FlowOutPin(const char *name, uint32_t nodeId, uint32_t pinId, uint32_t group, uint32_t mask, bool connected)
     {
         int id = 60000 * nodeId + Behavior::NodeGraph::NodeBase::flowOutId(pinId, group);
-        ed::BeginPin(id, ed::PinKind::Output);
-
+        
         ImGui::BeginHorizontal(id, ImVec2 { 0, 0 }, 0.5f);
 
-        ImVec2 pos = FlowOutPin(name, mask, connected);
+        FlowOutPin(name, mask, connected);
 
         ImGui::EndHorizontal();
 
@@ -132,31 +116,30 @@ namespace Tools {
 
         ImVec2 pivot = rect.GetBR() - ImVec2 { 0.5f * sPinIconSize, 0.5f * rect.GetHeight() };
 
+        ed::BeginPin(id, ed::PinKind::Output);
+        ed::PinRect(rect.GetTL(), rect.GetBR());
         ed::PinPivotRect(pivot, pivot);
-
         ed::EndPin();
     }
 
-    ImVec2 FlowInPin(const char *name, uint32_t mask, bool connected)
+    void FlowInPin(const char *name, uint32_t mask, bool connected)
     {
-        ImVec2 pos = FlowPinIcon(mask, connected);
+        FlowPinIcon(mask, connected);
         if (name) {
             ImGui::Spring(0);
             ImGui::TextUnformatted(name);
         }
-        ImGui::Spring();
-        return pos;
+        ImGui::Spring();        
     }
 
     void FlowInPin(const char *name, uint32_t nodeId, uint32_t pinId, uint32_t group, uint32_t mask, bool connected)
     {
         int id = 60000 * nodeId + Behavior::NodeGraph::NodeBase::flowInId(pinId, group);
-        ed::BeginPin(id, ed::PinKind::Input);
+        
 
         ImGui::BeginHorizontal(id, ImVec2 { 0, 0 }, 0.5f);
 
-        ImVec2 pos = FlowInPin(name, mask, connected);
-        // ed::PinPivotRect(pos, pos);
+        FlowInPin(name, mask, connected);
 
         ImGui::EndHorizontal();
 
@@ -166,65 +149,64 @@ namespace Tools {
 
         ImVec2 pivot = rect.GetTL() + ImVec2 { 0.5f * sPinIconSize, 0.5f * rect.GetHeight() };
 
+        ed::BeginPin(id, ed::PinKind::Input);
+        ed::PinRect(rect.GetTL(), rect.GetBR());
         ed::PinPivotRect(pivot, pivot);
-
         ed::EndPin();
     }
 
-    ImVec2 DataOutPin(const char *name, ExtendedValueTypeDesc type, uint32_t mask, bool connected)
+    void DataOutPin(const char *name, ExtendedValueTypeDesc type, uint32_t mask, bool connected)
     {
         ImGui::Spring();
         if (name) {
             ImGui::TextUnformatted(name);
             ImGui::Spring(0);
         }
-        return DataPinIcon(type, mask, connected);
+        DataPinIcon(type, mask, connected);
     }
 
     bool DataOutPin(const char *name, uint32_t nodeId, uint32_t pinId, uint32_t group, ExtendedValueTypeDesc type, uint32_t mask, bool connected)
     {
         int id = 60000 * nodeId + Behavior::NodeGraph::NodeBase::dataOutId(pinId, group);
-        ed::BeginPin(id, ed::PinKind::Output);
 
         ImGui::BeginHorizontal(id, ImVec2 { 0, 0 }, 0.5f);
 
-        ImVec2 pos = DataOutPin(name, type, mask, connected);
-        // ed::PinPivotRect(pos, pos);
+        DataOutPin(name, type, mask, connected);
 
         ImGui::EndHorizontal();
 
         ImRect rect = { ImGui::GetItemRectMin(), ImGui::GetItemRectMax() };
 
-        // ImGui::GetWindowDrawList()->AddRectFilled(rect.GetTL(), rect.GetBR(), ImColor(229, 229, 229, 200));
+        //ImGui::GetWindowDrawList()->AddRectFilled(rect.GetTL(), rect.GetBR(), ImColor(229, 229, 229, 200));
 
         ImVec2 pivot = rect.GetBR() - ImVec2 { 0.5f * sPinIconSize, 0.5f * rect.GetHeight() };
 
+        ed::BeginPin(id, ed::PinKind::Output);
+        ed::PinRect(rect.GetTL(), rect.GetBR());
         ed::PinPivotRect(pivot, pivot);
-
         ed::EndPin();
+
         return ImGui::IsItemHovered();
     }
 
-    ImVec2 DataInPin(const char *name, ExtendedValueTypeDesc type, uint32_t mask, bool connected)
+    void DataInPin(const char *name, ExtendedValueTypeDesc type, uint32_t mask, bool connected)
     {
-        ImVec2 pos = DataPinIcon(type, mask, connected);
+        DataPinIcon(type, mask, connected);
         if (name) {
             ImGui::Spring(0);
             ImGui::TextUnformatted(name);
         }
-        ImGui::Spring();
-        return pos;
+        ImGui::Spring();        
     }
 
     bool DataInPin(const char *name, uint32_t nodeId, uint32_t pinId, uint32_t group, ExtendedValueTypeDesc type, uint32_t mask, bool connected)
     {
         int id = 60000 * nodeId + Behavior::NodeGraph::NodeBase::dataInId(pinId, group);
-        ed::BeginPin(id, ed::PinKind::Input);
+        
 
         ImGui::BeginHorizontal(id, ImVec2 { 0, 0 }, 0.5f);
 
-        ImVec2 pos = DataInPin(name, type, mask, connected);
-        // ed::PinPivotRect(pos, pos);
+        DataInPin(name, type, mask, connected);
 
         ImGui::EndHorizontal();
 
@@ -234,9 +216,11 @@ namespace Tools {
 
         ImVec2 pivot = rect.GetTL() + ImVec2 { 0.5f * sPinIconSize, 0.5f * rect.GetHeight() };
 
+        ed::BeginPin(id, ed::PinKind::Input);
+        ed::PinRect(rect.GetTL(), rect.GetBR());        
         ed::PinPivotRect(pivot, pivot);
-
         ed::EndPin();
+
         return ImGui::IsItemHovered();
     }
 

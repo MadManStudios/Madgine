@@ -273,49 +273,102 @@ namespace Tools {
 
                 ImVec2 popupPosition = ImGui::GetMousePos();
                 ed::Suspend();
-                /*if (ed::ShowNodeContextMenu(&contextNodeId))
-                else if (ed::ShowPinContextMenu(&contextPinId))
-                else if (ed::ShowLinkContextMenu(&contextLinkId))
-                else */
-                if (ed::ShowBackgroundContextMenu()) {
+                if (ed::ShowNodeContextMenu(&mContextNode)) {
+                    mContextPin = {};
+                    mContextLink = {};
+                    mPopupPosition = popupPosition;
+                    ImGui::OpenPopup("NodeGraphPopup");
+                } else if (ed::ShowPinContextMenu(&mContextPin)) {
+                    mContextNode = {};
+                    mContextLink = {};
+                    mPopupPosition = popupPosition;
+                    ImGui::OpenPopup("NodeGraphPopup");
+                } else if (ed::ShowLinkContextMenu(&mContextLink)) {
+                    mContextNode = {};
+                    mContextPin = {};
+                    mPopupPosition = popupPosition;
+                    ImGui::OpenPopup("NodeGraphPopup");
+                } else if (ed::ShowBackgroundContextMenu()) {
+                    mContextLink = {};
+                    mContextNode = {};
+                    mContextPin = {};
                     mPopupPosition = popupPosition;
                     ImGui::OpenPopup("NodeGraphPopup");
                 }
 
                 ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(8, 8));
                 if (ImGui::BeginPopup("NodeGraphPopup")) {
-                    if (ImGui::BeginMenu(IMGUI_ICON_PLUS " Add Node")) {
-                        if (ImGui::BeginMenu("Nodes")) {
+
+                    if (mContextLink) {
+                        if (ImGui::MenuItem(IMGUI_ICON_X " Delete")) {
+                            ed::DeleteLink(mContextLink);
+                        }
+                        ImGui::Separator();
+                    } else if (mContextNode) {
+                        if (ImGui::MenuItem("Refresh")) {
+                            mGraph.node(mContextNode.Get() / 60000)->refresh();
+                        }
+                        if (ImGui::MenuItem(IMGUI_ICON_X " Delete")) {
+                            ed::DeleteNode(mContextNode);
+                        }
+                        ImGui::Separator();
+                    } else if (mContextPin) {
+                        ImGui::Separator();
+                    } else {
+                        if (ImGui::BeginMenu(IMGUI_ICON_PLUS " Add Node")) {
+                            ImGuiTextFilter *filter;
+                            if (Behavior::BehaviorHandle behavior = BehaviorSelector(&filter)) {
+                                mPendingLibraryBehavior = behavior;
+                            }
+                            bool hasMenu = false;
                             for (const std::pair<const std::string_view, IndexType<uint32_t>> &nodeDesc : Behavior::NodeGraph::NodeRegistry::sComponentsByName()) {
-                                if (ImGui::MenuItem(nodeDesc.first.data())) {
-                                    Behavior::NodeGraph::NodeBase *node = mGraph.addNode(construct(Behavior::NodeGraph::NodeRegistry::get(nodeDesc.second), mGraph));
-                                    ed::SetNodePosition(60000 * mGraph.nodeIndex(node), mPopupPosition);
+                                if (filter->PassFilter(nodeDesc.first.data())) {
+
+                                    if (!hasMenu) {
+                                        hasMenu = ImGui::BeginMenu("Nodes");
+                                        if (!hasMenu)
+                                            break;
+                                    }
+
+                                    if (ImGui::MenuItem(nodeDesc.first.data())) {
+                                        Behavior::NodeGraph::NodeBase *node = mGraph.addNode(construct(Behavior::NodeGraph::NodeRegistry::get(nodeDesc.second), mGraph));
+                                        ed::SetNodePosition(60000 * mGraph.nodeIndex(node), mPopupPosition);
+                                    }
                                 }
                             }
-                            ImGui::EndMenu();
-                        }
-                        if (Behavior::BehaviorHandle behavior = BehaviorSelector()) {
-                            mPendingLibraryBehavior = behavior;
-                        }
-                        if (ImGui::BeginMenu("Accessors")) {
-                            const MetaTable *type = sTypeList();
-                            while (type) {
-                                if (ImGui::BeginMenu(type->mTypeName)) {
+                            if (hasMenu)
+                                ImGui::EndMenu();
+
+                            if (ImGui::BeginMenu("Accessors")) {
+                                const MetaTable *type = sTypeList();
+                                while (type) {
+
+                                    bool hasMenu = false;
                                     for (const Accessor *accessor = type->mMembers; accessor->mName; ++accessor) {
-                                        if (ImGui::MenuItem(accessor->mName)) {
-                                            Behavior::NodeGraph::NodeBase *node = mGraph.addNode(std::make_unique<Behavior::NodeGraph::AccessorNode>(mGraph, "Accessor/"s + type->mTypeName + "/" + accessor->mName));
-                                            ed::SetNodePosition(60000 * mGraph.nodeIndex(node), mPopupPosition);
+
+                                        if (filter->PassFilter(type->mTypeName) || filter->PassFilter(accessor->mName)) {
+
+                                            if (!hasMenu) {
+                                                hasMenu = ImGui::BeginMenu(type->mTypeName);
+                                                if (!hasMenu)
+                                                    break;
+                                            }
+                                            if (ImGui::MenuItem(accessor->mName)) {
+                                                Behavior::NodeGraph::NodeBase *node = mGraph.addNode(std::make_unique<Behavior::NodeGraph::AccessorNode>(mGraph, "Accessor/"s + type->mTypeName + "/" + accessor->mName));
+                                                ed::SetNodePosition(60000 * mGraph.nodeIndex(node), mPopupPosition);
+                                            }
                                         }
                                     }
-                                    ImGui::EndMenu();
+                                    if (hasMenu)
+                                        ImGui::EndMenu();
+
+                                    type = type->mNext;
                                 }
-                                type = type->mNext;
+                                ImGui::EndMenu();
                             }
                             ImGui::EndMenu();
                         }
-                        ImGui::EndMenu();
                     }
-
                     ImGui::EndPopup();
                 }
                 ImGui::PopStyleVar();
@@ -467,7 +520,7 @@ namespace Tools {
         if (mInitialLoad) {
             mInitialLoad = false;
         } else if ((reason & (ed::SaveReasonFlags::User | ed::SaveReasonFlags::AddNode | ed::SaveReasonFlags::RemoveNode)) != ed::SaveReasonFlags::None) {
-            mIsDirty = true;            
+            mIsDirty = true;
         }
 
         mGraph.mLayoutData = view;
@@ -610,6 +663,5 @@ namespace Tools {
             }
         }*/
     }
-
 }
 }

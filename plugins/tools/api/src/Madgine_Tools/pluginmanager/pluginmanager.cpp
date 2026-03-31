@@ -354,14 +354,18 @@ namespace Tools {
         return "Plugin Manager";
     }
 
-    bool PluginSelector(const char *label, const Plugins::Plugin *&outPlugin)
+    bool PluginSelector(const char *label, const Plugins::Plugin *&outPlugin, bool requiresData)
     {
         bool changed = false;
 
         if (ImGui::BeginCombo(label, outPlugin ? outPlugin->name().c_str() : "")) {
 
-            for (const auto &section : Plugins::PluginManager::getSingleton()) {
-                for (const auto &plugin : section) {
+            Plugins::PluginManager &manager = Plugins::PluginManager::getSingleton();
+            for (auto &section : manager) {
+                for (auto &plugin : section) {
+                    plugin.ensureModule(manager);
+                    if (requiresData && plugin.info()->mDataPath.empty())
+                        continue;
                     if (plugin.isLoaded(Plugins::PluginManager::getSingleton().selection())) {
                         if (ImGui::Selectable(plugin.name().c_str(), &plugin == outPlugin)) {
                             outPlugin = &plugin;

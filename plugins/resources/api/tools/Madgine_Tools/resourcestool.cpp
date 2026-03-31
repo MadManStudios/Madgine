@@ -20,6 +20,8 @@
 #include "imgui/imguiaddons.h"
 #include "resourceeditor.h"
 
+#include "Madgine_Tools/imguiicons.h"
+
 UNIQUECOMPONENT(Engine::Tools::ResourcesTool);
 
 METATABLE_BEGIN_BASE(Engine::Tools::ResourcesTool, Engine::Tools::ToolBase)
@@ -107,7 +109,7 @@ namespace Tools {
             ImGui::SetCursorScreenPos(start_pos);
 
             // Multi-select
-            ImGuiMultiSelectFlags ms_flags = ImGuiMultiSelectFlags_ClearOnEscape | ImGuiMultiSelectFlags_ClearOnClickVoid | ImGuiMultiSelectFlags_NoAutoSelect;
+            ImGuiMultiSelectFlags ms_flags = ImGuiMultiSelectFlags_ClearOnEscape | ImGuiMultiSelectFlags_ClearOnClickVoid;
 
             // - Enable box-select (in 2D mode, so that changing box-select rectangle X1/X2 boundaries will affect clipped items)
             ms_flags |= ImGuiMultiSelectFlags_BoxSelect2d;
@@ -122,7 +124,7 @@ namespace Tools {
 
             // Use custom selection adapter: store ID in selection (recommended)
             Selection.UserData = this;
-            Selection.AdapterIndexToStorageId = [](ImGuiSelectionBasicStorage *self_, int idx) { ResourcesTool* self = (ResourcesTool*)self_->UserData; return static_cast<ImGuiID>(reinterpret_cast<uintptr_t>(self->mResources[idx].mResource)); };
+            Selection.AdapterIndexToStorageId = [](ImGuiSelectionBasicStorage *self_, int idx) { return static_cast<ImGuiID>(idx); };
             Selection.ApplyRequests(ms_io);
 
             const bool want_delete = (ImGui::Shortcut(ImGuiKey_Delete, ImGuiInputFlags_Repeat) && (Selection.Size > 0)) || mDeleteRequested;
@@ -161,7 +163,7 @@ namespace Tools {
                         ImGui::SetCursorScreenPos(pos);
 
                         ImGui::SetNextItemSelectionUserData(item_idx);
-                        bool item_is_selected = Selection.Contains(static_cast<ImGuiID>(reinterpret_cast<uintptr_t>(resource.mResource)));
+                        bool item_is_selected = Selection.Contains(static_cast<ImGuiID>(item_idx));
                         bool item_is_visible = ImGui::IsRectVisible(layoutItemSize);
 
                         ImGui::Selectable("", item_is_selected, ImGuiSelectableFlags_None, layoutItemSize);
@@ -232,13 +234,15 @@ namespace Tools {
 
             // Context menu
             if (ImGui::BeginPopupContextWindow()) {
-                if (ImGui::Selectable("Refresh")) {
-                    refresh();
+                if (Selection.Size == 1) {
+                    void *p = nullptr;
+                    ImGuiID id;
+                    Selection.GetNextSelectedItem(&p, &id);
+                    Resources::ResourceBase *res = mResources[id].mResource;
+                    ImGui::Text("Source: " + res->plugin());
+                    ImGui::Separator();
                 }
-                ImGui::Separator();
-                ImGui::Text("Selection: %d items", Selection.Size);
-                ImGui::Separator();
-                if (ImGui::MenuItem("Delete", "Del", false, Selection.Size > 0))
+                if (ImGui::MenuItem(IMGUI_ICON_X " Delete", "Del", false, Selection.Size > 0))
                     mDeleteRequested = true;
                 ImGui::EndPopup();
             }

@@ -75,5 +75,10 @@ namespace Resources {
         co_return co_await Filesystem::readFileAsync(mPath);
     }
 
+    std::string ResourceBase::plugin() const
+    {
+        return Resources::ResourceManager::getSingleton().makeRelative(mPath).first;
+    }
+
 }
 }

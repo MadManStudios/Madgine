@@ -16,16 +16,16 @@ namespace Tools {
     ImColor DataColor(uint32_t mask, ExtendedValueTypeDesc type = ExtendedValueTypeIndex { ExtendedValueTypeEnum::GenericType });
     ImColor FlowColor(uint32_t mask);
 
-    ImVec2 DataPinIcon(ExtendedValueTypeDesc type, uint32_t mask, bool connected);
-    ImVec2 FlowPinIcon(uint32_t mask, bool connected);
+    void DataPinIcon(ExtendedValueTypeDesc type, uint32_t mask, bool connected);
+    void FlowPinIcon(uint32_t mask, bool connected);
 
-    ImVec2 FlowOutPin(const char *name, uint32_t mask, bool connected);
+    void FlowOutPin(const char *name, uint32_t mask, bool connected);
     void FlowOutPin(const char *name, uint32_t nodeId, uint32_t pinId, uint32_t group, uint32_t mask, bool connected);
-    ImVec2 FlowInPin(const char *name, uint32_t mask, bool connected);
+    void FlowInPin(const char *name, uint32_t mask, bool connected);
     void FlowInPin(const char *name, uint32_t nodeId, uint32_t pinId, uint32_t group, uint32_t mask, bool connected);
-    ImVec2 DataOutPin(const char *name, ExtendedValueTypeDesc type, uint32_t mask, bool connected);
+    void DataOutPin(const char *name, ExtendedValueTypeDesc type, uint32_t mask, bool connected);
     bool DataOutPin(const char *name, uint32_t nodeId, uint32_t pinId, uint32_t group, ExtendedValueTypeDesc type, uint32_t mask, bool connected);
-    ImVec2 DataInPin(const char *name, ExtendedValueTypeDesc type, uint32_t mask, bool connected);
+    void DataInPin(const char *name, ExtendedValueTypeDesc type, uint32_t mask, bool connected);
     bool DataInPin(const char *name, uint32_t nodeId, uint32_t pinId, uint32_t group, ExtendedValueTypeDesc type, uint32_t mask, bool connected);
 
     void HoverPin(ExtendedValueTypeDesc type);

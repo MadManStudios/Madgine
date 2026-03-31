@@ -74,6 +74,11 @@ namespace Tools {
 
         bool mIsDirty = false;
         bool mInitialLoad = false;
+
+        ed::NodeId mContextNode;
+        ed::PinId mContextPin;
+        ed::LinkId mContextLink;
+
     };
 
 }

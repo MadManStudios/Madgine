@@ -1057,7 +1057,7 @@ bool IsDraggableValueTypeBeingAccepted(Engine::CallableView<Engine::KeyValueResu
                 return true;
             } else {                
                 return false;
-    }
+            }
         } else {
 
         }
@@ -1164,9 +1164,16 @@ bool FilePicker(Engine::Filesystem::Path &path, Engine::Filesystem::Path &select
 
     ImGuiStyle &style = g.Style;
 
-    std::string fileName = selection.relative(path).str();
+    Engine::Filesystem::Path file = selection.relative(path);
+    if (file == ".")
+        file.clear();
 
-    size.y -= CalcTextSize(fileName.c_str(), NULL, true).y + style.FramePadding.y * 2.0f;
+    float elementHeight = CalcTextSize(file.c_str(), NULL, true).y + style.FramePadding.y * 2.0f;
+    size.y -= elementHeight; //Filename
+    if (!options.mExtensions.empty()) {
+        size.y -= style.ItemSpacing.y;
+        size.y -= elementHeight; // Extension
+    }
 
     if (ImGui::BeginTable("CurrentFolder", 1, ImGuiTableFlags_Borders | ImGuiTableFlags_RowBg | ImGuiTableFlags_ScrollY | ImGuiTableFlags_Hideable | ImGuiTableFlags_Resizable, size)) {
 
@@ -1226,12 +1233,36 @@ bool FilePicker(Engine::Filesystem::Path &path, Engine::Filesystem::Path &select
         ImGui::EndTable();
     }
 
-    if (InputText("Filename:", &fileName)) {
-        Engine::Filesystem::Path p = fileName;
+    std::string extension { file.extension() };
+    if (extension.empty() && !options.mExtensions.empty()) {
+        extension = options.mExtensions.front();
+        file = file.str() + extension;
+    }
+
+    std::string baseName { file.stem() };    
+
+    if (InputText("Filename:", &baseName)) {
+        Engine::Filesystem::Path p = baseName + extension;
         if (!p.empty() && p.isRelative())
             selection = path / p;
 
         changed = true;
+    }
+
+    if (!options.mExtensions.empty()) {             
+        if (BeginCombo("Extension", extension.c_str())) {
+            for (const std::string& ext : options.mExtensions) {
+                if (Selectable(ext.c_str(), ext == extension)) {
+                    extension = ext;
+                    Engine::Filesystem::Path p = baseName + extension;
+                    if (!p.empty() && p.isRelative())
+                        selection = path / p;
+
+                    changed = true;
+                }
+            }
+            ImGui::EndCombo();
+        }
     }
 
     return changed;

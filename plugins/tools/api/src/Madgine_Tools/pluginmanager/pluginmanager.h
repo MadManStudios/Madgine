@@ -55,7 +55,7 @@ namespace Tools {
         Filesystem::Path mLocalDependencyInput;
     };
 
-    MADGINE_TOOLS_EXPORT bool PluginSelector(const char *label, const Plugins::Plugin *&plugin);
+    MADGINE_TOOLS_EXPORT bool PluginSelector(const char *label, const Plugins::Plugin *&plugin, bool requiresData = false);
 
 }
 }
