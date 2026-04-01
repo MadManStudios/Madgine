@@ -36,11 +36,7 @@ constexpr Accessor property(const char *name)
 
     if constexpr (Setter != nullptr) {
         setter = [](const Accessor *, const ValueType &scope, const ValueType &v) -> KeyValueResult {
-            KeyValueResult result;
-            ValueType_erased([&](ValueType &r) {
-                result = ValueType_unwrap(r, Setter, scope, v);
-            });
-            return result;            
+            return ValueType_unwrap(Setter, scope, v);        
         };
     }
 

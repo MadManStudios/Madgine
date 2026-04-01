@@ -203,10 +203,7 @@ namespace Behavior {
                             }
                         }
 
-                        KeyValueResult error;
-                        ValueType_erased([&](ValueType &r) {
-                            error = ValueType_unwrap(r, [this](meta_decayed_t<T>... val) { this->set_value(std::forward<meta_decayed_t<T>>(val)...); }, data.at(I)...);
-                        });
+                        KeyValueResult error = ValueType_unwrap([this](meta_decayed_t<T>... val) { this->set_value(std::forward<meta_decayed_t<T>>(val)...); }, data.at(I)...);
                         if (error)
                             this->set_error(std::move(*error.mError));
                     }

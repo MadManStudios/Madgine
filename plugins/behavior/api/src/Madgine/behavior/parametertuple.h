@@ -105,11 +105,7 @@ namespace Behavior {
         template <size_t I, typename T>
         static KeyValueResult sSetter(const Accessor *, const ValueType &scope, const ValueType &val)
         {
-            KeyValueResult result;
-            ValueType_erased([&](ValueType &r) {
-                result = ValueType_unwrap(r, [](TypedParameterTupleInstance &instance, T value) { std::get<I>(instance.mTuple) = std::move(value); }, scope, val);
-            });
-            return result;
+            return ValueType_unwrap([](TypedParameterTupleInstance &instance, T value) { std::get<I>(instance.mTuple) = std::move(value); }, scope, val);
         }
 
         static const constexpr auto sMembers = []<size_t... Is>(auto_pack<Is...>) constexpr -> std::array<Accessor, sizeof...(Ty) + 1>
@@ -212,7 +208,6 @@ constexpr const Engine::MetaTable table_instance<Engine::Behavior::TypedParamete
     "<ParameterTuple>",
     Engine::Behavior::TypedParameterTupleInstance<Names, Ty...>::sMembers.data()
 };
-
 
 template <typename Names, typename... Ty>
 const Engine::MetaTable *Engine::Behavior::TypedParameterTupleInstance<Names, Ty...>::sMetaTablePtr = &table_instance<Engine::Behavior::TypedParameterTupleInstance<Names, Ty...>>;

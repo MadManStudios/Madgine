@@ -208,6 +208,16 @@ KeyValueResult ValueType_unwrap(ValueType &result, Callable &&callable, Args &&.
     }
 }
 
+template <typename Callable, typename... Args>
+KeyValueResult ValueType_unwrap(Callable &&callable, Args &&...args)
+{
+    KeyValueResult result;
+    ValueType_erased([&](ValueType &v) {
+        result = ValueType_unwrap(v, std::forward<Callable>(callable), std::forward<Args>(args)...);
+    });
+    return result;
+}
+
 template <typename T>
     requires(ValueTypePrimitive<std::decay_t<T>> || std::same_as<ValueType, std::decay_t<T>>)
 META_EXPORT void to_ValueType_impl(ValueType &v, T &&t);
