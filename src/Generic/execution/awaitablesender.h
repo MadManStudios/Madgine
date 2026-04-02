@@ -59,7 +59,17 @@ namespace Execution {
         bool await_ready()
         {
             mState.start();
-            return mFlag.test();
+            if (!mFlag.test())
+                return false;
+
+            static_assert(!std::same_as<decltype(mResult.error().reproduce(mHandle.promise())), bool>);
+            if (mResult.is_done()) {
+                return !decltype(mResult.error().reproduce(mHandle.promise())) {};
+            } else if (mResult.is_error()) {
+                return !decltype(mResult.done().reproduce(mHandle.promise())) {};
+            } else {
+                return !decltype(mResult.value().reproduce(mHandle.promise())) {};
+            }
         }
 
         template <typename T>

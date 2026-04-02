@@ -29,13 +29,26 @@ namespace Behavior {
         ~BoundValueBase();
 
         virtual bool resumeImpl() = 0;
-        virtual void suspendImpl() = 0;
 
         BoundValueBase *mNext = nullptr;
     };
 
     template <typename Awaiter>
     struct CoroutineAwaiterGuard;
+
+    
+    struct MADGINE_BEHAVIOR_EXPORT BehaviorCoroutineHandle {
+        BehaviorCoroutineHandle() = default;
+        BehaviorCoroutineHandle(std::coroutine_handle<CoroutineBehaviorState> handle);
+
+        CoroutineBehaviorState &promise() const;
+
+        void resume();
+
+    private:
+        std::coroutine_handle<CoroutineBehaviorState> mHandle;
+    };
+
 
     struct MADGINE_BEHAVIOR_EXPORT CoroutineBehaviorState : BehaviorStateBase, BoundValueBase {
 
@@ -77,18 +90,16 @@ namespace Behavior {
 
         InitialSuspend initial_suspend() noexcept;
         FinalSuspend final_suspend() noexcept;
-
-        void resume();
-        void suspend();
+             
         bool resumeImpl() override;
-        void suspendImpl() override;
         void return_void();
         void unhandled_exception();
-        bool set_value(auto &&...) {
-            return false;
+        std::bool_constant<false> set_value(auto &&...)
+        {
+            return {};
         }
-        bool set_error(KeyValueError result);
-        bool set_done();
+        std::bool_constant<true> set_error(KeyValueError result);
+        std::bool_constant<true> set_done();
 
         static decltype(auto) unpack_storage(auto &&result)
         {
@@ -99,7 +110,7 @@ namespace Behavior {
         decltype(auto) await_transform(T &&awaitable)
         {
             if constexpr (Execution::AnySender<std::remove_reference_t<T>>) {
-                return CoroutineAwaiterGuard<Execution::AwaitableSender<Execution::with_debug_location_t::sender<T>, CoroutineBehaviorState>> { std::forward<T>(awaitable) | Execution::with_debug_location(mDebugLocation.mChild), *this };
+                return CoroutineAwaiterGuard<Execution::AwaitableSender<Execution::with_debug_location_t::sender<T>, CoroutineBehaviorState, BehaviorCoroutineHandle>> { std::forward<T>(awaitable) | Execution::with_debug_location(mDebugLocation.mChild), *this };
             } else if constexpr (Execution::AnyBinding<std::remove_reference_t<T>>) {
                 return CoroutineAwaiterGuard<BehaviorAwaitableBinding<T>> { std::forward<T>(awaitable) };
             } else {
@@ -137,32 +148,17 @@ namespace Behavior {
             return mAwaiter.await_ready();
         }
 
-        auto await_suspend(std::coroutine_handle<CoroutineBehaviorState> handle)
+        auto await_suspend(BehaviorCoroutineHandle handle)
         {
-            using result_type = decltype(mAwaiter.await_suspend(std::move(handle)));
-            if constexpr (std::same_as<result_type, bool>) {
-                bool result = mAwaiter.await_suspend(std::move(handle));
-                if (result) {
-                    mState = &handle.promise();
-                    mState->suspend();
-                }
-                return result;
-            } else {
-                mState = &handle.promise();
-                mState->suspend();
-                return mAwaiter.await_suspend(std::move(handle));
-            }
+            return mAwaiter.await_suspend(std::move(handle));
         }
 
         decltype(auto) await_resume()
         {
-            if (mState)
-                mState->resume();
             return mAwaiter.await_resume();
         }
 
-        Awaiter mAwaiter;
-        CoroutineBehaviorState *mState = nullptr;
+        Awaiter mAwaiter;        
     };
 
 }

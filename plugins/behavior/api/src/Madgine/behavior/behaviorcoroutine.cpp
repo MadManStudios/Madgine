@@ -78,16 +78,16 @@ namespace Behavior {
         throw;
     }
 
-    bool CoroutineBehaviorState::set_error(KeyValueError result)
+    std::bool_constant<true> CoroutineBehaviorState::set_error(KeyValueError result)
     {
         mReceiver->set_error(result);
-        return true;
+        return {};
     }
 
-    bool CoroutineBehaviorState::set_done()
+    std::bool_constant<true> CoroutineBehaviorState::set_done()
     {
         mReceiver->set_done();
-        return true;
+        return {};
     }
 
     bool CoroutineBehaviorState::InitialSuspend::await_ready() noexcept
@@ -128,26 +128,27 @@ namespace Behavior {
         }
     }
 
-    void CoroutineBehaviorState::resume()
-    {
-
-        if (!mNext->resumeImpl()) {
-            set_error(KeyValueError { GenericResult { GenericResult::UNKNOWN_ERROR }, "A bound object has become unavailable" });
-        }
-    }
-
-    void CoroutineBehaviorState::suspend()
-    {
-        mNext->suspendImpl();
-    }
-
     bool CoroutineBehaviorState::resumeImpl()
     {
+        std::coroutine_handle<CoroutineBehaviorState>::from_promise(*this).resume();
         return true;
     }
 
-    void CoroutineBehaviorState::suspendImpl()
+    void BehaviorCoroutineHandle::resume()
     {
+        if (!promise().mNext->resumeImpl()) {
+            promise().set_error(KeyValueError { GenericResult { GenericResult::UNKNOWN_ERROR }, "A bound object has become unavailable" });
+        }
+    }
+
+    BehaviorCoroutineHandle::BehaviorCoroutineHandle(std::coroutine_handle<CoroutineBehaviorState> handle)
+        : mHandle(handle)
+    {
+    }
+
+    CoroutineBehaviorState &BehaviorCoroutineHandle::promise() const
+    {
+        return mHandle.promise();
     }
 
 }

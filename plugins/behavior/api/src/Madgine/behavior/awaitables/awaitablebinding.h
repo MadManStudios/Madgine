@@ -40,12 +40,6 @@ namespace Behavior {
             });
         }
 
-        void suspendImpl() override
-        {
-            mNext->suspendImpl();
-            mValue.reset();
-        }
-
         std::optional<forward_ref_t<T>> mValue;
         Binding mBinding;
     };
@@ -63,7 +57,7 @@ namespace Behavior {
             return false;
         }
 
-        void await_suspend(std::coroutine_handle<CoroutineBehaviorState> behavior)
+        void await_suspend(BehaviorCoroutineHandle behavior)
         {
             mState = &behavior.promise();
             if (!Execution::access_binding(mBinding, [&](const auto &) {

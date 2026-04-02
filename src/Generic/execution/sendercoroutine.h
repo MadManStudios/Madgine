@@ -95,21 +95,21 @@ namespace Execution {
             throw;
         }
 
-        bool set_value(auto &&...)
+        std::bool_constant<false> set_value(auto &&...)
         {
-            return false;
+            return {};
         }
 
-        bool set_error(R result)
+        std::bool_constant<true> set_error(R result)
         {
             mReceiver->set_error(std::forward<R>(result));
-            return true;
+            return {};
         }
 
-        bool set_done()
+        std::bool_constant<true> set_done()
         {
             mReceiver->set_done();
-            return true;
+            return {};
         }
 
         static decltype(auto) unpack_storage(auto &&result)

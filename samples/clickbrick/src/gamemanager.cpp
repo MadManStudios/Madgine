@@ -2,52 +2,39 @@
 
 #include "gamemanager.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
-
-#include "Madgine/scene/scenemanager.h"
-
-#include "Madgine/widgets/scenewindow.h"
-
-#include "Madgine/scene/entity/components/mesh.h"
-#include "Madgine/scene/entity/components/transform.h"
-
-#include "Meta/math/geometry3.h"
+#include "Interfaces/log/logsenders.h"
 
 #include "Meta/math/boundingbox.h"
-
-#include "Madgine/widgets/label.h"
-
-#include "gameoverhandler.h"
-
-#include "Madgine/app/application.h"
-
+#include "Meta/math/geometry3.h"
 #include "Meta/math/ray3.h"
 
-#include "Madgine/scene/entity/entity.h"
-
+#include "Modules/threading/awaitables/awaitabletimepoint.h"
 #include "Modules/threading/datamutex.h"
 
-#include "Madgine/render/rendertarget.h"
-
+#include "Madgine/app/application.h"
+#include "Madgine/behavior/awaitables/awaitablebinding.h"
 #include "Madgine/handlermanager.h"
-
+#include "Madgine/render/rendercontext.h"
+#include "Madgine/render/rendertarget.h"
+#include "Madgine/render/scenemainwindowcomponent.h"
+#include "Madgine/scene/behavior/scenesenders.h"
+#include "Madgine/scene/entity/components/mesh.h"
+#include "Madgine/scene/entity/components/transform.h"
+#include "Madgine/scene/entity/entity.h"
+#include "Madgine/scene/scenemanager.h"
+#include "Madgine/widgets/events.h"
+#include "Madgine/widgets/label.h"
+#include "Madgine/widgets/scenewindow.h"
 #include "Madgine/window/mainwindow.h"
 
-#include "Madgine/render/scenemainwindowcomponent.h"
+#include "Meta/keyvalue/metatable_impl.h"
 
-#include "Madgine/render/rendercontext.h"
-#include "Modules/threading/awaitables/awaitabletimepoint.h"
-
-#include "Madgine/scene/behavior/scenesenders.h"
-
-#include "Madgine/widgets/events.h"
-
-#include "Madgine/behavior/awaitables/awaitablebinding.h"
+#include "gameoverhandler.h"
 
 UNIQUECOMPONENT(ClickBrick::GameManager)
 
 METATABLE_BEGIN_BASE(ClickBrick::GameManager, Engine::Widgets::WidgetHandlerBase)
-MEMBER(mCamera)
+    MEMBER(mCamera)
 METATABLE_END(ClickBrick::GameManager)
 
 NATIVE_BEHAVIOR(ClickBrick_Test, ClickBrick::Test)
@@ -77,8 +64,6 @@ Engine::Threading::Task<bool> GameManager::init()
 
     mGameRenderTarget = mUI.window().getRenderer()->createRenderTexture({ 1, 1 }, { .mName = "Game", .mFormat = Engine::Render::FORMAT_RGBA8_SRGB });
     mGameRenderTarget->addRenderPass(&mSceneRenderer);
-
-    mUI.app().taskQueue()->queueTask(updateApp());
 
     co_return co_await WidgetHandlerBase::init();
 }
@@ -113,24 +98,22 @@ void GameManager::setWidget(Engine::Widgets::WidgetBase *widget)
     }
 }
 
-Engine::Threading::Task<void> GameManager::updateApp()
+Engine::Behavior::Behavior GameManager::game()
 {
-    /* while (mUI.app().taskQueue()->running()) {
-        co_await Engine::Threading::TaskQualifiers { mSceneMgr.clock()(1ms) };
+    std::chrono::microseconds spawnInterval = 1s;
+    std::chrono::microseconds acc = 0s;
 
-        std::chrono::microseconds timeSinceLastFrame = mSceneClock.tick(mSceneMgr.clock().now());
+    while (true) {
+        std::chrono::microseconds timeSinceLastFrame = co_await Engine::Scene::yield_simulation();
 
-        mAcc += timeSinceLastFrame;
-        while (mAcc > mSpawnInterval) {
-            mAcc -= mSpawnInterval;
-            mSpawnInterval *= 999;
-            mSpawnInterval /= 1000;
-            co_await mSceneMgr.mutex().locked(Engine::AccessMode::WRITE, [this]() {
-                spawnBrick();
-            });
+        acc += timeSinceLastFrame;
+        while (acc > spawnInterval) {
+            acc -= spawnInterval;
+            spawnInterval *= 999;
+            spawnInterval /= 1000;
+            spawnBrick();
         }
-    }*/
-    co_return;
+    }
 }
 
 void GameManager::spawnBrick()
@@ -201,13 +184,12 @@ void GameManager::modLife(int diff)
 
 void GameManager::start()
 {
-    mSpawnInterval = 1s;
-    mAcc = 0us;
-
     mScore = 0;
     mScoreLabel->mText = "Score: " + std::to_string(mScore);
     mLife = 3;
     mLifeLabel->mText = "Life: " + std::to_string(mLife);
+
+    mLifetime.attach(game());
 }
 
 Engine::Behavior::Behavior Brick(float speed, Engine::Vector3 dir, Engine::Quaternion q, Engine::Scene::EntityBinding entity)

@@ -24,14 +24,14 @@ namespace ClickBrick {
 
         GameManager(Engine::Behavior::HandlerManager &ui);
 
-        virtual Engine::Threading::Task<bool> init() override;
-        virtual Engine::Threading::Task<void> finalize() override;
+        Engine::Threading::Task<bool> init() override;
+        Engine::Threading::Task<void> finalize() override;
 
-        virtual std::string_view key() const override;
+        std::string_view key() const override;
 
-        virtual void setWidget(Engine::Widgets::WidgetBase *widget) override;
+        void setWidget(Engine::Widgets::WidgetBase *widget) override;
 
-        Engine::Threading::Task<void> updateApp();
+        Engine::Behavior::Behavior game();
 
         void spawnBrick();
 
@@ -54,8 +54,6 @@ namespace ClickBrick {
 
         Engine::Scene::SceneManager &mSceneMgr;
 
-        std::chrono::microseconds mSpawnInterval = 1s;
-        std::chrono::microseconds mAcc = 0s;
         Engine::IntervalClock<Engine::Threading::CustomTimepoint> mSceneClock;
         
         Engine::ManualLifetime<Engine::Render::SceneRenderPass> mSceneRenderer;

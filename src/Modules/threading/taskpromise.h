@@ -100,12 +100,12 @@ namespace Threading {
 
         bool immediate() const;
 
-        bool set_done();
-        bool set_value(auto &&...)
+        std::bool_constant<false> set_done();
+        std::bool_constant<false> set_value(auto &&...)
         {
             return set_done();
         }
-        bool set_error(auto &&)
+        std::bool_constant<false> set_error(auto &&)
         {
             return set_done();
         }

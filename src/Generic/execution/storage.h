@@ -22,7 +22,7 @@ namespace Execution {
             return std::get<I>(mValues);
         }
 
-        const std::tuple<V...>& get() const&
+        const std::tuple<V...> &get() const &
         {
             return mValues;
         }
@@ -125,7 +125,12 @@ namespace Execution {
         auto reproduce(auto &rec)
         {
             return std::visit([&](auto &storage) {
-                return storage.reproduce(rec);
+                using R = decltype(storage.reproduce(rec));
+                if constexpr (std::same_as<R, std::bool_constant<true>> || std::same_as<R, std::bool_constant<false>>) {
+                    return bool { storage.reproduce(rec) };
+                } else {
+                    return storage.reproduce(rec);
+                }
             },
                 mState);
         }
@@ -150,7 +155,8 @@ namespace Execution {
             return std::holds_alternative<DoneStorage>(mState);
         }
 
-        void reset() {
+        void reset()
+        {
             mState.template emplace<NullStorage>();
         }
 
@@ -184,14 +190,39 @@ namespace Execution {
             return std::move(std::get<Error>(mState));
         }
 
+        DoneStorage done() &&
+        {
+            return std::move(std::get<DoneStorage>(mState));
+        }
+
+        Value &value() &
+        {
+            return std::get<Value>(mState);
+        }
+
+        Error &error() &
+        {
+            return std::get<Error>(mState);
+        }
+
+        DoneStorage &done() &
+        {
+            return std::get<DoneStorage>(mState);
+        }
+
         const Value &value() const &
         {
-            return std::move(std::get<Value>(mState));
+            return std::get<Value>(mState);
         }
 
         const Error &error() const &
         {
-            return std::move(std::get<Error>(mState));
+            return std::get<Error>(mState);
+        }
+
+        const DoneStorage &done() const &
+        {
+            return std::get<DoneStorage>(mState);
         }
 
         std::variant<NullStorage, Value, Error, DoneStorage> mState;
