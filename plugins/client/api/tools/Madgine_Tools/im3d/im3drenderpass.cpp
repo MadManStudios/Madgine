@@ -54,15 +54,27 @@ namespace Render {
             perApplication->p = target->getClipSpaceMatrix() * mCamera->getProjectionMatrix(aspectRatio);
         }
 
-        /*for (const std::pair<Im3DNativeMesh, std::vector<Matrix4>> &p : mContext->mNativeMeshes)
-            target->renderInstancedMesh(RenderPassFlags_NoLighting, p.first, p.second);*/
+        for (const std::pair<Im3DNativeMesh, std::vector<Matrix4>> &p : mContext->mNativeMeshes) {
+            mPipeline->bindMesh(target, *p.first);
+
+            for (const Matrix4 &m : p.second) {
+                {
+                    auto perObject = mPipeline->mapParameters<HLSL::Im3DPerObject>(2);
+
+                    perObject->mv = m * mCamera->getViewMatrix();
+
+                    perObject->hasTexture = false;
+                    perObject->hasDistanceField = false;
+                }
+
+                mPipeline->render(target);
+            }
+        }
 
         for (std::pair<const Im3DTextureId, Im3D::Im3DContext::RenderData> &p : mContext->mRenderData) {
 
             {
-                auto perObject = mPipeline->mapParameters<HLSL::Im3DPerObject>(2);
-
-                perObject->hasDistanceField = false;
+                auto perObject = mPipeline->mapParameters<HLSL::Im3DPerObject>(2);                
 
                 perObject->mv = mCamera->getViewMatrix();
 

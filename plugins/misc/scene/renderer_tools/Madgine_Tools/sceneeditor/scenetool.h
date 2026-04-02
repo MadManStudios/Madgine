@@ -22,12 +22,13 @@ namespace Tools {
         SceneTool(ImRoot &root);
         SceneTool(const SceneTool &) = delete;
 
-        virtual Threading::Task<bool> init() override;
-        virtual Threading::Task<void> finalize() override;
+        Threading::Task<bool> init() override;
+        Threading::Task<void> finalize() override;
 
-        virtual void render() override;
-        virtual void renderMenu() override;
-        virtual void renderSettings() override;
+        void update() override;
+        void render() override;
+        void renderMenu() override;
+        void renderSettings() override;
 
         std::string_view key() const override;
 

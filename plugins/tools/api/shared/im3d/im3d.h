@@ -16,6 +16,9 @@
 #include "im3d_parameters.h"
 
 namespace Engine {
+namespace Render {
+    struct GPUMeshData;
+}
 
 enum Im3DMeshType {
     IM3D_POINTS,
@@ -24,7 +27,7 @@ enum Im3DMeshType {
     IM3D_MESHTYPE_COUNT
 };
 
-typedef uintptr_t Im3DNativeMesh;
+typedef const Render::GPUMeshData *Im3DNativeMesh;
 typedef uintptr_t Im3DTextureId;
 
 typedef uint32_t Im3DID;

@@ -1007,12 +1007,11 @@ const ValueTypePayload *GetValuetypePayload()
 
 bool AcceptDraggableValueType(Engine::CallableView<Engine::KeyValueResult(Engine::ValueType &, const Engine::ValueType &, bool)> output)
 {
-    if (ImGui::AcceptDragDropPayload("ValueType")) {
-        const ValueTypePayload *payload = GetValuetypePayload();
-        assert(payload);
+    const ValueTypePayload *payload = GetValuetypePayload();
+    if (payload) {
         Engine::ValueType result;
         Engine::KeyValueResult error = output(result, payload->mValue, false);
-        if (!error){
+        if (!error) {
             if (Engine::ValueType_is<bool>(result) && Engine::ValueType_as<bool>(result)) {
                 error = output(result, payload->mValue, true);
             } else {
@@ -1022,44 +1021,21 @@ bool AcceptDraggableValueType(Engine::CallableView<Engine::KeyValueResult(Engine
         if (error) {
 
         } else {
-            return true;
+            return ImGui::AcceptDragDropPayload("ValueType");
         }
     }
     return false;
 }
 
-bool IsDraggableValueTypeBeingAccepted(Engine::CallableView<Engine::KeyValueResult(Engine::ValueType &, const Engine::ValueType &)> validate)
+bool IsDraggableValueTypeBeingAccepted(Engine::CallableView<Engine::KeyValueResult(const Engine::ValueType &)> output)
 {
-    ImGuiContext &g = *GImGui;
-    if (!g.DragDropActive)
-        return false;
-
-    ImGuiWindow *window = g.CurrentWindow;
-    if (!(g.LastItemData.StatusFlags & ImGuiItemStatusFlags_HoveredRect))
-        return false;
-    if (g.HoveredWindowUnderMovingWindow == NULL || window->RootWindow != g.HoveredWindowUnderMovingWindow->RootWindow)
-        return false;
-
-    const ImRect &display_rect = (g.LastItemData.StatusFlags & ImGuiItemStatusFlags_HasDisplayRect) ? g.LastItemData.DisplayRect : g.LastItemData.Rect;
-    ImGuiID id = g.LastItemData.ID;
-    if (id == 0)
-        id = window->GetIDFromRectangle(display_rect);
-    if (g.DragDropPayload.SourceId == id)
-        return false;
-
-    if (g.DragDropAcceptIdPrev == id) {
+    if (IsDragDropPayloadBeingAccepted()){
         const ValueTypePayload *payload = GetValuetypePayload();
-        assert(payload);
-        Engine::ValueType result;
-        Engine::KeyValueResult error = validate(result, payload->mValue);
-        if (!error) {
-            if (Engine::ValueType_is<bool>(result) && Engine::ValueType_as<bool>(result)) {
-                return true;
-            } else {                
-                return false;
-            }
+        assert(payload);        
+        Engine::KeyValueResult error = output(payload->mValue);
+        if (error) {
         } else {
-
+            return true;
         }
     }
 

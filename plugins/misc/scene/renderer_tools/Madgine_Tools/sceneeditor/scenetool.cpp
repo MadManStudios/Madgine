@@ -76,12 +76,17 @@ namespace Tools {
         co_await ResourceEditor::finalize();
     }
 
-    void SceneTool::render()
+    void SceneTool::update()
     {
         std::erase_if(mFiles, [&](std::pair<Scene::SceneLoader::Resource *const, SceneFile> &p) {
             return !p.second.render();
         });
 
+        ResourceEditor::update();
+    }
+
+    void SceneTool::render()
+    {
         ResourceEditor::render();
 
         if (beginToolWindow("Scene", &mVisible, ImGuiWindowFlags_MenuBar)) {

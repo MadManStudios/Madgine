@@ -192,13 +192,13 @@ bool AcceptDraggableValueType(
     return AcceptDraggableValueType([&](Engine::ValueType &ret, const Engine::ValueType &v, bool set) { return ValueType_unwrap(ret, [&](const T &t) { if (set) result = t; return validate(t); }, v); });
 }
 
-IMGUI_API bool IsDraggableValueTypeBeingAccepted(Engine::CallableView<Engine::KeyValueResult(Engine::ValueType &, const Engine::ValueType &)> validate);
-template <typename T, typename Validator = bool (*)(const T &)>
+IMGUI_API bool IsDraggableValueTypeBeingAccepted(Engine::CallableView<Engine::KeyValueResult(const Engine::ValueType &)> output);
+template <typename T>
 bool IsDraggableValueTypeBeingAccepted(
-    T &result, Validator &&validate = [](const T &t) { return true; })
+    T &result)
 {
-    return IsDraggableValueTypeBeingAccepted([&](Engine::ValueType &ret, const Engine::ValueType &v) {
-        return ValueType_unwrap(ret, validate, v);
+    return IsDraggableValueTypeBeingAccepted([&](const Engine::ValueType &v) {
+        return ValueType_unwrap([&](const T &t) { result = t; }, v);
     });
 }
 

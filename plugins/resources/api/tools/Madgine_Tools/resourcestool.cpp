@@ -75,7 +75,7 @@ namespace Tools {
 
     void ResourcesTool::render()
     {
-        if (beginToolPanel("Resources", &mVisible, ImGuiDir_Down)) {
+        if (beginToolPanel("Resources", &mVisible, ImGuiDir_Down) && !ImGui::IsWindowAppearing()) {
             int count = mResources.size();
 
             ImGuiIO &io = ImGui::GetIO();
@@ -181,30 +181,7 @@ namespace Tools {
                         if (item_curr_idx_to_focus == item_idx)
                             ImGui::SetKeyboardFocusHere(-1);
 
-                        // Drag and drop
-                        if (ImGui::BeginDragDropSource()) {
-                            // Create payload with full selection OR single unselected item.
-                            // (the later is only possible when using ImGuiMultiSelectFlags_SelectOnClickRelease)
-                            if (ImGui::GetDragDropPayload() == NULL) {
-                                ImVector<ImGuiID> payload_items;
-                                void *it = NULL;
-                                ImGuiID id = 0;
-                                if (!item_is_selected)
-                                    payload_items.push_back(id);
-                                else
-                                    while (Selection.GetNextSelectedItem(&it, &id))
-                                        payload_items.push_back(id);
-                                ImGui::SetDragDropPayload("ASSETS_BROWSER_ITEMS", payload_items.Data, (size_t)payload_items.size_in_bytes());
-                            }
-
-                            // Display payload content in tooltip, by extracting it from the payload data
-                            // (we could read from selection, but it is more correct and reusable to read from payload)
-                            const ImGuiPayload *payload = ImGui::GetDragDropPayload();
-                            const int payload_count = (int)payload->DataSize / (int)sizeof(ImGuiID);
-                            ImGui::Text("%d assets", payload_count);
-
-                            ImGui::EndDragDropSource();
-                        }
+                        ImGui::DraggableValueTypeSource("Resource", ScopePtr { resource.mResource, resource.mLoader->resourceTypes().back() });
 
                         // Render icon (a real app would likely display an image/thumbnail here)
                         // Because we use ImGuiMultiSelectFlags_BoxSelect2d, clipping vertical may occasionally be larger, so we coarse-clip our rendering as well.

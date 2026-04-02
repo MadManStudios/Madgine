@@ -176,15 +176,16 @@ namespace Tools {
                 Vector3 pos = ray.point(5.0f);
                 Render::GPUMeshLoader::Resource *resource;
                 if (ImGui::AcceptDraggableValueType(resource)) {
-                    throw "TODO"; // Wrong manager
-                    mEditor.sceneMgr().container("Default").createEntity("", [&](Scene::Entity::Entity &e) {
+                    mEditor.sceneMgr().container("Default").createEntity("", [=](Scene::Entity::Entity &e) {
                         e.addComponent<Scene::Entity::Transform>()->mPosition = pos;
                         e.addComponent<Scene::Entity::Mesh>()->set(resource);                        
                     }, [this](Scene::Entity::EntityPtr ptr) { mEditor.select(std::move(ptr)); });                    
                 } else if (ImGui::IsDraggableValueTypeBeingAccepted(resource)) {
                     Render::GPUMeshLoader::Handle handle = resource->loadData();
                     handle.info()->setPersistent(true);
-                    // Im3D::NativeMesh(handle->mMaterials.front().mResourceBlock, handle->mAABB, TranslationMatrix(pos)); //TODO
+                    if (handle.available()) {
+                        Im3D::NativeMesh(&*handle, handle->mAABB, TranslationMatrix(pos));
+                    }
                 }
                 ImGui::EndDragDropTarget();
             }

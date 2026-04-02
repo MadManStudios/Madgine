@@ -46,11 +46,14 @@ namespace Tools {
 
         mPointShadowRenderData.setup(tool.mWindow.getRenderer());
 
+        mSceneData.setup(tool.mWindow.getRenderer());
+
         createView(mSceneData, mPointShadowRenderData, mIm3DContext);
     }
 
     SceneFile::~SceneFile()
     {
+        mSceneData.shutdown(tool().mWindow.getRenderer());
 
         mPointShadowRenderData.shutdown(tool().mWindow.getRenderer());
 
@@ -79,8 +82,7 @@ namespace Tools {
 
         bool open = true;
 
-        // mManager.simulationClock().tick(mManager.clock().now());
-        // mManager.animationClock().tick(mManager.clock().now());
+        //mManager.simulationClock().tick(mManager.clock().now());
 
         if (tool().BeginResourceFile(this, mPath, mIsDirty, [this](const Filesystem::Path &path) { save(path); }, &open)) {
 

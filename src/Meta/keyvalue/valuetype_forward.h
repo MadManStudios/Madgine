@@ -144,13 +144,14 @@ KeyValueResult ValueType_call(Callable &&callable, Arg &&arg)
             }
             return result;
         } else if (ValueType_is<ScopePtr>(arg)) {            
-            std::remove_pointer_t<T> *ptr = scope_cast<std::remove_pointer_t<T>>(ValueType_as<ScopePtr>(arg));
+            ScopePtr scope = ValueType_as<ScopePtr>(arg);
+            std::remove_pointer_t<T> *ptr = scope_cast<std::remove_pointer_t<T>>(scope);
+            if (!ptr) {
+                return KEYVALUE_UNKNOWN_ERROR() << "No known conversion from " << scope.mType->mTypeName << " to " << toValueTypeDesc<T>().toString();
+            }
             if constexpr (std::is_pointer_v<T>) {
                 return callable(ptr);            
             } else {
-                if (!ptr) {
-                    throw 0;
-                }
                 return callable(*ptr);
             }            
         }
