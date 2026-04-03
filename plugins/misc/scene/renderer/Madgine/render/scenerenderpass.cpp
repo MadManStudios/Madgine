@@ -80,7 +80,7 @@ namespace Render {
         if (!mPipeline.available())
             return;
 
-        Vector2i size = target->size();
+        Vector2i size = target->renderSpace().mSize;
 
         float aspectRatio = float(size.x) / size.y;
 

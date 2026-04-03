@@ -155,6 +155,8 @@ namespace Render {
 
     void DirectX12RenderTarget::setRenderSpace(const Rect2i &space)
     {
+        RenderTarget::setRenderSpace(space);
+
         D3D12_VIEWPORT viewport;
         viewport.Width = static_cast<float>(space.mSize.x);
         viewport.Height = static_cast<float>(space.mSize.y);

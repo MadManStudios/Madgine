@@ -146,6 +146,8 @@ namespace Render {
 
     void VulkanRenderTarget::setRenderSpace(const Rect2i &space)
     {
+        RenderTarget::setRenderSpace(space);
+
         VkViewport viewport {};
         viewport.width = static_cast<float>(space.mSize.x);
         viewport.height = static_cast<float>(space.mSize.y);

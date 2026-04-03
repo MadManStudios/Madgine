@@ -115,6 +115,8 @@ namespace Render {
     void RenderTarget::beginFrame()
     {
         pushAnnotation(mName.empty() ? "<unnamed target>" : mName.c_str());
+
+        mRenderSpace = { { 0, 0 }, size() };
     }
 
     RenderFuture RenderTarget::endFrame()
@@ -198,6 +200,16 @@ namespace Render {
     const std::vector<std::string> &RenderTarget::postProcessing() const
     {
         return mPostProcessing;
+    }
+
+    void RenderTarget::setRenderSpace(const Rect2i &space)
+    {
+        mRenderSpace = space;
+    }
+
+    const Rect2i &RenderTarget::renderSpace() const
+    {
+        return mRenderSpace;
     }
 
 }

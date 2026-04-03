@@ -193,6 +193,8 @@ namespace Render {
 
     void VulkanRenderWindow::setRenderSpace(const Rect2i &space)
     {
+        RenderTarget::setRenderSpace(space);
+
         int x = mClipSpaceRotation[0][0] * space.mTopLeft.x + mClipSpaceRotation[1][0] * space.mTopLeft.y;
         int y = mClipSpaceRotation[0][1] * space.mTopLeft.x + mClipSpaceRotation[1][1] * space.mTopLeft.y;
 

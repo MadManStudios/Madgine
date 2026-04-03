@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Meta/math/rect2i.h"
+
 #include "Madgine/render/resourceblock.h"
 #include "Madgine/render/texturedescriptor.h"
 #include "Madgine/render/vertex.h"
@@ -44,7 +46,8 @@ namespace Render {
         virtual void pushAnnotation(const char *tag) = 0;
         virtual void popAnnotation() = 0;
 
-        virtual void setRenderSpace(const Rect2i &space) = 0;
+        const Rect2i &renderSpace() const;
+        virtual void setRenderSpace(const Rect2i &space);
         virtual void setScissorsRect(const Rect2i &space) = 0;
 
         bool canFlipFlop() const;
@@ -79,6 +82,8 @@ namespace Render {
         bool mFlipFlop;
 
         std::vector<std::string> mPostProcessing;
+
+        Rect2i mRenderSpace;
     };
 
 }

@@ -70,6 +70,8 @@ namespace Render {
 
     void OpenGLRenderTarget::setRenderSpace(const Rect2i &space)
     {
+        RenderTarget::setRenderSpace(space);
+
         const Vector2i &screenSize = size();
 
         glViewport(space.mTopLeft.x, screenSize.y - (space.mTopLeft.y + space.mSize.y), space.mSize.x, space.mSize.y);
