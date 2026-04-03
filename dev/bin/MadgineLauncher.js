@@ -31,7 +31,7 @@ if (ENVIRONMENT_IS_NODE) {
 
 // --pre-jses are emitted after the Module integration code, so that they can
 // refer to Module (if they choose; they can also define Module)
-// include: /tmp/tmpq9s427wy.js
+// include: /tmp/tmppt8jr1om.js
 
   Module['expectedDataFileDownloads'] ??= 0;
   Module['expectedDataFileDownloads']++;
@@ -209,11 +209,11 @@ Module['FS_createPath']("/", "shadercache", true, true);
     }
 
     }
-    loadPackage({"files": [{"filename": "/data/Band.png", "start": 0, "end": 279834}, {"filename": "/data/Band20.fbx", "start": 279834, "end": 319254}, {"filename": "/data/Brick.fbx", "start": 319254, "end": 349346}, {"filename": "/data/Data-LICENSES.txt", "start": 349346, "end": 353800}, {"filename": "/data/Gamepad.jpg", "start": 353800, "end": 462256}, {"filename": "/data/NodeGraph.png", "start": 462256, "end": 464502}, {"filename": "/data/OpenSans.msdf", "start": 464502, "end": 17311134}, {"filename": "/data/Planes.fbx", "start": 17311134, "end": 17345130}, {"filename": "/data/Rock_034_Base_Color.jpg", "start": 17345130, "end": 17635963}, {"filename": "/data/blank_white.png", "start": 17635963, "end": 17636082}, {"filename": "/data/default.atl", "start": 17636082, "end": 17636167}, {"filename": "/data/default.layout", "start": 17636167, "end": 17637841}, {"filename": "/data/default_tex.png", "start": 17637841, "end": 17638046}, {"filename": "/data/gameover.widget", "start": 17638046, "end": 17640146}, {"filename": "/data/grid.png", "start": 17640146, "end": 17640298}, {"filename": "/data/icons.ttf", "start": 17640298, "end": 17643762}, {"filename": "/data/ingame.widget", "start": 17643762, "end": 17646590}, {"filename": "/data/mage.fbx", "start": 17646590, "end": 17749386}, {"filename": "/data/mage_animated.fbx", "start": 17749386, "end": 20500806}, {"filename": "/data/mage_attack.fbx", "start": 20500806, "end": 20747798}, {"filename": "/data/mainmenu.widget", "start": 20747798, "end": 20751023}, {"filename": "/shadercache/bloom_PS.glsl_es", "start": 20751023, "end": 20751853}, {"filename": "/shadercache/bloom_VS.glsl_es", "start": 20751853, "end": 20752159}, {"filename": "/shadercache/blur_PS.glsl_es", "start": 20752159, "end": 20753731}, {"filename": "/shadercache/blur_VS.glsl_es", "start": 20753731, "end": 20754037}, {"filename": "/shadercache/grid_PS.glsl_es", "start": 20754037, "end": 20755207}, {"filename": "/shadercache/grid_VS.glsl_es", "start": 20755207, "end": 20755805}, {"filename": "/shadercache/im3d_PS.glsl_es", "start": 20755805, "end": 20756868}, {"filename": "/shadercache/im3d_VS.glsl_es", "start": 20756868, "end": 20757880}, {"filename": "/shadercache/imgui_PS.glsl_es", "start": 20757880, "end": 20758317}, {"filename": "/shadercache/imgui_VS.glsl_es", "start": 20758317, "end": 20759004}, {"filename": "/shadercache/pointshadow_PS.glsl_es", "start": 20759004, "end": 20759291}, {"filename": "/shadercache/pointshadow_VS.glsl_es", "start": 20759291, "end": 20760398}, {"filename": "/shadercache/scene_VS.glsl_es", "start": 20760398, "end": 20762217}, {"filename": "/shadercache/scene_lighting.glsl_es", "start": 20762217, "end": 20768510}, {"filename": "/shadercache/widgets_PS.glsl_es", "start": 20768510, "end": 20769794}, {"filename": "/shadercache/widgets_VS.glsl_es", "start": 20769794, "end": 20770712}], "remote_package_size": 20770712});
+    loadPackage({"files": [{"filename": "/data/Band.png", "start": 0, "end": 279834}, {"filename": "/data/Band20.fbx", "start": 279834, "end": 319254}, {"filename": "/data/Brick.fbx", "start": 319254, "end": 349346}, {"filename": "/data/Data-LICENSES.txt", "start": 349346, "end": 353800}, {"filename": "/data/Gamepad.jpg", "start": 353800, "end": 462256}, {"filename": "/data/NodeGraph.png", "start": 462256, "end": 464502}, {"filename": "/data/OpenSans.msdf", "start": 464502, "end": 17311134}, {"filename": "/data/Planes.fbx", "start": 17311134, "end": 17345130}, {"filename": "/data/Rock_034_Base_Color.jpg", "start": 17345130, "end": 17635963}, {"filename": "/data/blank_white.png", "start": 17635963, "end": 17636082}, {"filename": "/data/default.atl", "start": 17636082, "end": 17636167}, {"filename": "/data/default.layout", "start": 17636167, "end": 17637841}, {"filename": "/data/default_tex.png", "start": 17637841, "end": 17638046}, {"filename": "/data/gameover.widget", "start": 17638046, "end": 17640217}, {"filename": "/data/grid.png", "start": 17640217, "end": 17640369}, {"filename": "/data/icons.ttf", "start": 17640369, "end": 17643833}, {"filename": "/data/ingame.widget", "start": 17643833, "end": 17646765}, {"filename": "/data/mage.fbx", "start": 17646765, "end": 17749561}, {"filename": "/data/mage_animated.fbx", "start": 17749561, "end": 20500981}, {"filename": "/data/mage_attack.fbx", "start": 20500981, "end": 20747973}, {"filename": "/data/mainmenu.widget", "start": 20747973, "end": 20751198}, {"filename": "/shadercache/bloom_PS.glsl_es", "start": 20751198, "end": 20752028}, {"filename": "/shadercache/bloom_VS.glsl_es", "start": 20752028, "end": 20752334}, {"filename": "/shadercache/blur_PS.glsl_es", "start": 20752334, "end": 20753906}, {"filename": "/shadercache/blur_VS.glsl_es", "start": 20753906, "end": 20754212}, {"filename": "/shadercache/grid_PS.glsl_es", "start": 20754212, "end": 20755382}, {"filename": "/shadercache/grid_VS.glsl_es", "start": 20755382, "end": 20755980}, {"filename": "/shadercache/im3d_PS.glsl_es", "start": 20755980, "end": 20757043}, {"filename": "/shadercache/im3d_VS.glsl_es", "start": 20757043, "end": 20758055}, {"filename": "/shadercache/imgui_PS.glsl_es", "start": 20758055, "end": 20758492}, {"filename": "/shadercache/imgui_VS.glsl_es", "start": 20758492, "end": 20759179}, {"filename": "/shadercache/pointshadow_PS.glsl_es", "start": 20759179, "end": 20759466}, {"filename": "/shadercache/pointshadow_VS.glsl_es", "start": 20759466, "end": 20760573}, {"filename": "/shadercache/scene_VS.glsl_es", "start": 20760573, "end": 20762392}, {"filename": "/shadercache/scene_lighting.glsl_es", "start": 20762392, "end": 20768685}, {"filename": "/shadercache/widgets_PS.glsl_es", "start": 20768685, "end": 20769969}, {"filename": "/shadercache/widgets_VS.glsl_es", "start": 20769969, "end": 20770887}], "remote_package_size": 20770887});
 
   })();
 
-// end include: /tmp/tmpq9s427wy.js
+// end include: /tmp/tmppt8jr1om.js
 // include: /home/runner/work/Madgine/Madgine/out/build/Emscripten-RelWithDebInfo-OpenGL/_deps/madginesentry-build/js/header.js
 
 /**
@@ -8360,22 +8360,22 @@ if (Module['wasmBinary']) wasmBinary = Module['wasmBinary'];
 // end include: postlibrary.js
 
 var ASM_CONSTS = {
-  1350136: ($0) => { Module.sentry_capture_event(UTF8ToString($0)) },  
- 1350182: () => { FS.syncfs( false, function(err) { assert(!err); }); },  
- 1350234: () => { FS.mkdir('/cwd'); FS.mount(IDBFS, {}, '/cwd'); FS.syncfs( true, function(err) { assert(!err); _setupDoneImpl(); }); },  
- 1350350: () => { if (document.activeElement == Module.canvas) { Module.input.focus(); } },  
- 1350421: () => { if (document.activeElement == Module.input) { Module.canvas.focus(); } },  
- 1350492: () => { document.body.style.cursor = 'default'; },  
- 1350532: () => { document.body.style.cursor = 'text'; },  
- 1350569: () => { document.body.style.cursor = 'move'; },  
- 1350606: () => { document.body.style.cursor = 'ns-resize'; },  
- 1350648: () => { document.body.style.cursor = 'ew-resize'; },  
- 1350690: () => { document.body.style.cursor = 'nesw-resize'; },  
- 1350734: () => { document.body.style.cursor = 'nwse-resize'; },  
- 1350778: () => { document.body.style.cursor = 'grab'; },  
- 1350815: () => { document.body.style.cursor = 'not-allowed'; },  
- 1350859: () => { Module.input.focus(); },  
- 1350881: () => { Module.canvas.focus(); }
+  1299240: ($0) => { Module.sentry_capture_event(UTF8ToString($0)) },  
+ 1299286: () => { FS.syncfs( false, function(err) { assert(!err); }); },  
+ 1299338: () => { FS.mkdir('/cwd'); FS.mount(IDBFS, {}, '/cwd'); FS.syncfs( true, function(err) { assert(!err); _setupDoneImpl(); }); },  
+ 1299454: () => { if (document.activeElement == Module.canvas) { Module.input.focus(); } },  
+ 1299525: () => { if (document.activeElement == Module.input) { Module.canvas.focus(); } },  
+ 1299596: () => { document.body.style.cursor = 'default'; },  
+ 1299636: () => { document.body.style.cursor = 'text'; },  
+ 1299673: () => { document.body.style.cursor = 'move'; },  
+ 1299710: () => { document.body.style.cursor = 'ns-resize'; },  
+ 1299752: () => { document.body.style.cursor = 'ew-resize'; },  
+ 1299794: () => { document.body.style.cursor = 'nesw-resize'; },  
+ 1299838: () => { document.body.style.cursor = 'nwse-resize'; },  
+ 1299882: () => { document.body.style.cursor = 'grab'; },  
+ 1299919: () => { document.body.style.cursor = 'not-allowed'; },  
+ 1299963: () => { Module.input.focus(); },  
+ 1299985: () => { Module.canvas.focus(); }
 };
 var wasmImports = {
   /** @export */
