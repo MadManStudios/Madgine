@@ -113,13 +113,13 @@ namespace Scene {
         });
 
         auto it = co_await fut;
-            
+
         co_return it->ptr();
     }
 
     void SceneContainer::createEntity(const std::string &name, std::function<void(Entity::Entity &)> init, Closure<void(Entity::EntityPtr)> cb, Closure<void(Serialize::MessageResult)> onError)
     {
-        mLifetime.attach(createEntityAsync(name, init) | Execution::then(std::move(cb)) | Execution::onError(std::move(onError)));
+        mLifetime.attach(createEntityAsync(name, init) | Execution::then(cb ? std::move(cb) : [](Entity::EntityPtr) { }) | Execution::onError(onError ? std::move(onError) : [](Serialize::MessageResult) { }));
     }
 
     void SceneContainer::startLifetime()

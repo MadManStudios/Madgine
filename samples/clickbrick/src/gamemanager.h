@@ -58,10 +58,10 @@ namespace ClickBrick {
         
         Engine::ManualLifetime<Engine::Render::SceneRenderPass> mSceneRenderer;
         std::unique_ptr<Engine::Render::RenderTarget> mGameRenderTarget;
+
+        std::vector<Engine::Scene::Entity::EntityPtr> mBricks;
     };
 
-    Engine::Behavior::Behavior Brick(float speed, Engine::Vector3 dir, Engine::Quaternion q, Engine::Scene::EntityBinding entity = {});
-    Engine::Behavior::Behavior Test(Engine::Scene::EntityBinding entity = {});
-    Engine::Behavior::Behavior Test2(Engine::Scene::EntityBinding entity = {});
+    Engine::Behavior::Behavior Brick(float speed, Engine::Vector3 dir, Engine::Quaternion q, GameManager &manager, Engine::Scene::EntityBinding entity = {});
 
 }

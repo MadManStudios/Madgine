@@ -37,9 +37,7 @@ METATABLE_BEGIN_BASE(ClickBrick::GameManager, Engine::Widgets::WidgetHandlerBase
     MEMBER(mCamera)
 METATABLE_END(ClickBrick::GameManager)
 
-NATIVE_BEHAVIOR(ClickBrick_Test, ClickBrick::Test)
-NATIVE_BEHAVIOR(ClickBrick_Test2, ClickBrick::Test2)
-NATIVE_BEHAVIOR(ClickBrick_Brick, ClickBrick::Brick, Engine::Behavior::InputParameter<"Speed", float>, Engine::Behavior::InputParameter<"Direction", Engine::Vector3>, Engine::Behavior::InputParameter<"Rotation", Engine::Quaternion>)
+//NATIVE_BEHAVIOR(ClickBrick_Brick, ClickBrick::Brick, Engine::Behavior::InputParameter<"Speed", float>, Engine::Behavior::InputParameter<"Direction", Engine::Vector3>, Engine::Behavior::InputParameter<"Rotation", Engine::Quaternion>)
 
 namespace ClickBrick {
 
@@ -118,27 +116,24 @@ Engine::Behavior::Behavior GameManager::game()
 
 void GameManager::spawnBrick()
 {
-    mUI.app().getGlobalAPIComponent<Engine::Scene::SceneManager>().container("Default").createEntity("", [](Engine::Scene::Entity::Entity &brick) {
+    Engine::Vector3 dir = { static_cast<float>(rand() - RAND_MAX / 2), static_cast<float>(rand() - RAND_MAX / 2), static_cast<float>(rand() - RAND_MAX / 2) };
+    dir.normalize();
+    Engine::Vector3 orientation = { static_cast<float>(rand() - RAND_MAX / 2), static_cast<float>(rand() - RAND_MAX / 2), static_cast<float>(rand() - RAND_MAX / 2) };
+    Engine::Quaternion q { static_cast<float>(rand()), orientation };
+
+    mUI.app().getGlobalAPIComponent<Engine::Scene::SceneManager>().container("Default").createEntity("", [=](Engine::Scene::Entity::Entity &brick) {
         Engine::Scene::Entity::Transform *t = brick.addComponent<Engine::Scene::Entity::Transform>();
         t->mScale = { 0.01f, 0.01f, 0.01f };
-
-        Engine::Vector3 dir = { static_cast<float>(rand() - RAND_MAX / 2), static_cast<float>(rand() - RAND_MAX / 2), static_cast<float>(rand() - RAND_MAX / 2) };
-        dir.normalize();
-        t->mPosition = dir * -10;
-
-        Engine::Vector3 orientation = { static_cast<float>(rand() - RAND_MAX / 2), static_cast<float>(rand() - RAND_MAX / 2), static_cast<float>(rand() - RAND_MAX / 2) };
-        Engine::Quaternion q { static_cast<float>(rand()), orientation };
+        t->mPosition = dir * -10;        
         t->mOrientation = q;
 
         brick.addComponent<Engine::Scene::Entity::Mesh>()->setName("Brick");
         brick.getComponent<Engine::Scene::Entity::Mesh>()->handle().info()->setPersistent(true);
 
+        return true; }, [=](Engine::Scene::Entity::EntityPtr brick) {
         float speed = rand() / float(RAND_MAX) * 2.0f + 1.0f;
-
-        brick.addBehavior(Brick(speed, dir, q));
-
-        return true;
-    });
+        Engine::Execution::access_binding(brick, [&](Engine::Scene::Entity::Entity &e) { e.addBehavior(Brick(speed, dir, q, *this)); });
+            mBricks.push_back(brick); });
 }
 
 void GameManager::onPointerClickHandler(const Engine::Widgets::PointerClickEvent &evt)
@@ -148,16 +143,18 @@ void GameManager::onPointerClickHandler(const Engine::Widgets::PointerClickEvent
     Engine::Scene::Entity::EntityPtr hit;
     float distance = std::numeric_limits<float>::max();
 
-    /* for (const Engine::Scene::Entity::EntityPtr &e : mBricks) {
-        const Engine::AABB &aabb = e->getComponent<Engine::Scene::Entity::Mesh>()->aabb();
-        Engine::BoundingBox bb = e->getComponent<Engine::Scene::Entity::Transform>()->matrix() * aabb;
-        if (Engine::UpTo<float, 2> hits = Engine::Intersect(ray, bb)) {
-            if (hits[0] < distance) {
-                hit = e;
-                distance = hits[0];
-            }
-        }
-    }*/
+    for (const Engine::Scene::Entity::EntityPtr &brick : mBricks) {
+        Engine::Execution::access_binding(brick, [&](Engine::Scene::Entity::Entity &e) {
+            const Engine::AABB &aabb = e.getComponent<Engine::Scene::Entity::Mesh>()->aabb();
+            Engine::BoundingBox bb = e.getComponent<Engine::Scene::Entity::Transform>()->matrix() * aabb;
+            if (Engine::UpTo<float, 2> hits = Engine::Intersect(ray, bb)) {
+                if (hits[0] < distance) {
+                    hit = brick;
+                    distance = hits[0];
+                }
+            }   
+        });        
+    }
 
     if (hit) {
         Engine::Execution::access_binding(hit, &Engine::Scene::Entity::Entity::endLifetime);
@@ -184,15 +181,17 @@ void GameManager::modLife(int diff)
 
 void GameManager::start()
 {
+    mSceneMgr.clear();
+
     mScore = 0;
     mScoreLabel->mText = "Score: " + std::to_string(mScore);
     mLife = 3;
     mLifeLabel->mText = "Life: " + std::to_string(mLife);
 
-    mLifetime.attach(game());
+    mLifetime.attach(game() | Engine::Behavior::with_named<"Scene">(mSceneMgr));
 }
 
-Engine::Behavior::Behavior Brick(float speed, Engine::Vector3 dir, Engine::Quaternion q, Engine::Scene::EntityBinding entity)
+Engine::Behavior::Behavior Brick(float speed, Engine::Vector3 dir, Engine::Quaternion q, GameManager &manager, Engine::Scene::EntityBinding entity)
 {
 
     float qAcc = 1.0f;
@@ -201,13 +200,12 @@ Engine::Behavior::Behavior Brick(float speed, Engine::Vector3 dir, Engine::Quate
     Engine::Quaternion q0 = q;
     Engine::Quaternion q1 = q;
 
-    bool loop = true;
-    while (loop) {
+    auto e = co_await *entity;
+    Engine::Scene::Entity::Transform *t = e->getComponent<Engine::Scene::Entity::Transform>();
+
+    while (t->mPosition.length() < 10.5f) {
 
         std::chrono::microseconds elapsedTime = co_await Engine::Scene::yield_simulation();
-
-        auto e = co_await *entity;
-        Engine::Scene::Entity::Transform *t = e->getComponent<Engine::Scene::Entity::Transform>();
 
         float ratio = std::chrono::duration_cast<std::chrono::duration<float>>(elapsedTime).count();
 
@@ -224,60 +222,13 @@ Engine::Behavior::Behavior Brick(float speed, Engine::Vector3 dir, Engine::Quate
         }
 
         t->mOrientation = Engine::slerp(q0, q1, qAcc);
-
-        loop = t->mPosition.length() < 10.5f;
     }
+
+    manager.modLife(-1);
 
     Engine::Execution::access_binding(*entity, &Engine::Scene::Entity::Entity::endLifetime);
 
     co_return;
-}
-
-Engine::Behavior::Behavior Test(Engine::Scene::EntityBinding entity)
-{
-
-    bool loop = true;
-    while (loop) {
-
-        co_await Engine::Execution::sequence(
-            Engine::Scene::wait_simulation(1s),
-            Engine::Scene::wait_simulation(2s),
-            Engine::Scene::wait_simulation(3s),
-            Engine::Scene::wait_simulation(4s));
-
-        /* Engine::Scene::Entity::Transform *t = e->getComponent<Engine::Scene::Entity::Transform>();
-
-        float ratio = std::chrono::duration_cast<std::chrono::duration<float>>(elapsedTime).count();
-
-        t->mPosition += speed * ratio * dir;
-
-        qAcc += qSpeed * 0.1f * ratio;
-
-        if (qAcc >= 1.0f) {
-            qAcc = 0.0f;
-            q0 = q1;
-
-            Engine::Vector3 orientation = { static_cast<float>(rand() - RAND_MAX / 2), static_cast<float>(rand() - RAND_MAX / 2), static_cast<float>(rand() - RAND_MAX / 2) };
-            q1 = { static_cast<float>(rand()), orientation };
-        }
-
-        t->mOrientation = Engine::slerp(q0, q1, qAcc);
-
-        loop = t->mPosition.length() < 10.5f;*/
-    }
-
-    co_return;
-}
-
-Engine::Behavior::Behavior Test2(Engine::Scene::EntityBinding entity)
-{
-
-    return Engine::Execution::sequence(
-               Engine::Scene::wait_simulation(1s),
-               Engine::Scene::wait_simulation(2s),
-               Engine::Scene::wait_simulation(3s),
-               Engine::Scene::wait_simulation(4s))
-        | Engine::Execution::repeat;
 }
 
 }
