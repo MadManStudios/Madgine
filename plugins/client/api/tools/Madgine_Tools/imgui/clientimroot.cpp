@@ -398,8 +398,6 @@ namespace Tools {
 
             io.MouseWheel += mZAxis * 0.3f;
 
-            io.BackendPlatformUserData = &mWindow;
-
             mWindow.osWindow()->setCursorIcon(convertCursorIcon(ImGui::GetMouseCursor()));
 
             ImGuiViewport *main_viewport = ImGui::GetMainViewport();
@@ -410,8 +408,6 @@ namespace Tools {
             }
 
             renderViewport(target, main_viewport);
-
-            io.BackendPlatformUserData = nullptr;
         } else {
             renderViewport(target, mViewportMappings.at(target));
         }
@@ -760,8 +756,12 @@ namespace Tools {
 
         io.DeltaTime = std::chrono::duration_cast<std::chrono::duration<float>>(mFrameClock.tick(std::chrono::steady_clock::now())).count();
 
+        io.BackendPlatformUserData = &mRoot.window();
+
         if (mRoot.ImRoot::render())
             mRoot.setCentralNode();
+
+        io.BackendPlatformUserData = nullptr;
 
         co_return {};
     }
