@@ -173,9 +173,6 @@ namespace Resources {
     METATABLE_BEGIN_BASE_EX(3, Loader::Resource, Engine::Resources::ResourceBase) \
     METATABLE_END_EX(4, Loader::Resource)                                         \
                                                                                   \
-    METATABLE_BEGIN_EX(5, Loader::Handle)                                         \
-    METATABLE_END_EX(6, Loader::Handle)                                           \
-                                                                                  \
     SERIALIZETABLE_BEGIN_EX(8, Loader::Handle)                                    \
         ENCAPSULATED_FIELD_EX(9, Name, name, loadSerialize)                       \
     SERIALIZETABLE_END_EX(10, Loader::Handle)
@@ -189,9 +186,6 @@ namespace Resources {
                                                                  \
     METATABLE_BEGIN_BASE_EX(4, Loader::Resource, Base::Resource) \
     METATABLE_END_EX(5, Loader::Resource)                        \
-                                                                 \
-    METATABLE_BEGIN_EX(7, Loader::Handle)                        \
-    METATABLE_END_EX(8, Loader::Handle)                          \
                                                                  \
     SERIALIZETABLE_BEGIN_EX(9, Loader::Handle)                   \
         ENCAPSULATED_FIELD_EX(10, Name, name, loadSerialize)     \

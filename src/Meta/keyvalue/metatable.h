@@ -2,9 +2,9 @@
 
 #include "Generic/offsetptr.h"
 
-#include "table_forward.h"
-
+#include "../meta_decay.h"
 #include "keyvalueresult.h"
+#include "table_forward.h"
 
 namespace Engine {
 
@@ -74,7 +74,7 @@ struct META_EXPORT MetaTable {
     template <typename T>
     bool isDerivedFrom(OffsetPtr *offset = nullptr) const
     {
-        return isDerivedFrom(table<T>, offset);
+        return isDerivedFrom(table<meta_decayed_t<T>>, offset);
     }
     bool isDerivedFrom(const MetaTable *baseType, OffsetPtr *offset = nullptr) const;
 
