@@ -8,7 +8,7 @@
 
 #include "Madgine/imageloader/imageloader.h"
 #include "Madgine/render/pipelineloader.h"
-#include "Madgine/render/renderpass.h"
+#include "Madgine/render/renderdata.h"
 #include "Madgine/window/mainwindowcomponent.h"
 #include "Madgine/window/mainwindowcomponentcollector.h"
 
@@ -19,6 +19,18 @@ struct ImGuiViewport;
 
 namespace Engine {
 namespace Tools {
+
+    struct ClientImRoot;
+
+    struct ImGuiRenderData : Render::RenderData {
+        ImGuiRenderData(ClientImRoot &root);
+
+        Threading::ImmediateTask<Render::RenderFuture> render(Render::RenderContext *context) override;
+
+        ClientImRoot &mRoot;
+
+        IntervalClock<> mFrameClock = std::chrono::steady_clock::now();
+    };
 
     struct MADGINE_CLIENT_TOOLS_EXPORT ClientImRoot : Window::MainWindowComponent<ClientImRoot>,
                                                       ImRoot {
@@ -76,8 +88,6 @@ namespace Tools {
 
         Filesystem::Path mImGuiIniFilePath;
 
-        IntervalClock<> mFrameClock;
-
         std::vector<Render::RenderTarget *> mRenderTargets;
 
         Render::TexturePtr mFontTexture;
@@ -87,6 +97,8 @@ namespace Tools {
             Render::TexturePtr mTexture;
         };
         std::map<Filesystem::Path, CachedImage> mImageCache;
+
+        ImGuiRenderData mRenderData;
     };
 
 }

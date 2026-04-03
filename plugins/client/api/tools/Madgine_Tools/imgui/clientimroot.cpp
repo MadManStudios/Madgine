@@ -191,7 +191,7 @@ namespace Tools {
     ClientImRoot::ClientImRoot(Window::MainWindow &window)
         : MainWindowComponent(window, 80)
         , mImGuiIniFilePath(Filesystem::appDataPath() / "imgui.ini")
-        , mFrameClock(std::chrono::steady_clock::now())
+        , mRenderData(*this)
     {
     }
 
@@ -314,11 +314,15 @@ namespace Tools {
 
         io.FontGlobalScale = 1.0f / Window::platformCapabilities.mScalingFactor;
 
+        addDependency(&mRenderData);
+
         co_return true;
     }
 
     Threading::Task<void> ClientImRoot::finalize()
     {
+        removeDependency(&mRenderData);
+
         ImGuiIO &io = ImGui::GetIO();
 
         ImGui::SaveIniSettingsToDisk(io.IniFilename);
@@ -388,24 +392,15 @@ namespace Tools {
 
         if (mWindow.getRenderWindow() == target) {
 
-            MainWindowComponentBase::render(target, iteration);
-
             ImGuiIO &io = ImGui::GetIO();
+
+            MainWindowComponentBase::render(target, iteration);
 
             io.MouseWheel += mZAxis * 0.3f;
 
-            io.DeltaTime = std::chrono::duration_cast<std::chrono::duration<float>>(mFrameClock.tick(std::chrono::steady_clock::now())).count();
-
             io.BackendPlatformUserData = &mWindow;
 
-            Vector2i size = mWindow.getScreenSpace().mSize;
-
-            io.DisplaySize = ImVec2(size.x / io.DisplayFramebufferScale.x, size.y / io.DisplayFramebufferScale.y);
-
             mWindow.osWindow()->setCursorIcon(convertCursorIcon(ImGui::GetMouseCursor()));
-
-            if (ImRoot::render())
-                setCentralNode();
 
             ImGuiViewport *main_viewport = ImGui::GetMainViewport();
             main_viewport->Flags |= ImGuiViewportFlags_NoRendererClear; // TODO: Is that necessary every Frame?
@@ -722,7 +717,7 @@ namespace Tools {
 
         CachedImage &image = mImageCache[path];
         if (!image.mTexture && !image.mHandle) {
-            image.mHandle.create(name, path);            
+            image.mHandle.create(name, path);
         }
 
         if (!image.mTexture && image.mHandle.available()) {
@@ -748,6 +743,27 @@ namespace Tools {
         } else {
             ImGui::DrawSpinner(pos, pos + image_size, spinnerRadius, 6, ImGui::GetColorU32(ImGuiCol_ButtonHovered));
         }
+    }
+
+    ImGuiRenderData::ImGuiRenderData(ClientImRoot &root)
+        : mRoot(root)
+    {
+    }
+
+    Threading::ImmediateTask<Render::RenderFuture> ImGuiRenderData::render(Render::RenderContext *context)
+    {
+        ImGuiIO &io = ImGui::GetIO();
+
+        Vector2i size = mRoot.window().getScreenSpace().mSize;
+
+        io.DisplaySize = ImVec2(size.x / io.DisplayFramebufferScale.x, size.y / io.DisplayFramebufferScale.y);
+
+        io.DeltaTime = std::chrono::duration_cast<std::chrono::duration<float>>(mFrameClock.tick(std::chrono::steady_clock::now())).count();
+
+        if (mRoot.ImRoot::render())
+            mRoot.setCentralNode();
+
+        co_return {};
     }
 
 }

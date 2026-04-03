@@ -2,6 +2,8 @@
 
 #include "rendertarget.h"
 
+#include "Generic/container/safeiterator.h"
+
 #include "Meta/math/matrix4.h"
 
 #include "Madgine/render/texture.h"
@@ -47,7 +49,7 @@ namespace Render {
         if (mBlitSource)
             dependencies.push_back(mBlitSource->update(context));
 
-        for (RenderPass *pass : mRenderPasses)
+        for (RenderPass *pass : safeIterate(mRenderPasses))
             pass->preRender(dependencies, context);
 
         for (Threading::TaskFuture<RenderFuture> &dependency : dependencies)
