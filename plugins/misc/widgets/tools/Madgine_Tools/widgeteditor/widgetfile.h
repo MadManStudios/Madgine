@@ -4,6 +4,8 @@
 #include "Madgine/widgets/widgetloader.h"
 #include "Madgine/widgets/widgetmanager.h"
 
+#include "Madgine_Tools/util/undostack.h"
+
 namespace Engine {
 namespace Tools {
 
@@ -25,7 +27,7 @@ namespace Tools {
     private:
         WidgetEditor &mEditor;
         Filesystem::Path mPath;
-        bool mIsDirty = false;
+        UndoStack mHistory;
 
         Widgets::WidgetManager mWidgetManager;
         Widgets::WidgetBase *mTopLevel = nullptr;

@@ -71,7 +71,8 @@ namespace Tools {
         Serialize::write(stream, mContainer, "Container");
 
         mPath = path;
-        mIsDirty = false;
+        
+        mHistory.onSave();
     }
 
     bool SceneFile::render()
@@ -84,7 +85,7 @@ namespace Tools {
 
         //mManager.simulationClock().tick(mManager.clock().now());
 
-        if (tool().BeginResourceFile(this, mPath, mIsDirty, [this](const Filesystem::Path &path) { save(path); }, &open)) {
+        if (tool().BeginResourceFile(this, mPath, mHistory.isDirty(), [this](const Filesystem::Path &path) { save(path); }, &open)) {
 
             if (ImGui::BeginMenuBar()) {
 

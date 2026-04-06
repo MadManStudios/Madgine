@@ -5,6 +5,7 @@
 #include "Madgine/scene/sceneloader.h"
 #include "Madgine/scene/scenemanager.h"
 
+#include "Madgine_Tools/util/undostack.h"
 #include "entitycache.h"
 #include "sceneeditor.h"
 
@@ -33,7 +34,7 @@ namespace Tools {
 
     private:
         Filesystem::Path mPath;
-        bool mIsDirty = true;
+        UndoStack mHistory;
 
         Scene::SceneManager mManager;
         Scene::SceneContainer &mContainer;

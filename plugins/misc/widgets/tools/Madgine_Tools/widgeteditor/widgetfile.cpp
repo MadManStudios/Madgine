@@ -72,7 +72,8 @@ namespace Tools {
         Serialize::write(stream, *mTopLevel, "Widget");
 
         mPath = path;
-        mIsDirty = false;
+
+        mHistory.onSave();
     }
 
     void WidgetFile::renderSelection()
@@ -81,7 +82,9 @@ namespace Tools {
             if (mEditor.beginSubPanel("Details", &mEditor.mWidgetDetailsVisible, ImGuiDir_Right)) {
 
                 if (mSelected) {
-                    mIsDirty |= mSelected->render();
+                    if (mSelected->render()) {
+                        mHistory.addOperation();
+                    }
                 }
 
                 // io.WantCaptureMouse = true;
@@ -206,7 +209,7 @@ namespace Tools {
 
         bool open = true;
 
-        if (mEditor.BeginResourceFile(this, mPath, mIsDirty, [this](const Filesystem::Path &path) { save(path); }, &open)) {
+        if (mEditor.BeginResourceFile(this, mPath, mHistory.isDirty(), [this](const Filesystem::Path &path) { save(path); }, &open)) {
 
             ImVec2 pos;
 
