@@ -247,7 +247,7 @@ struct Style
         ScrollDuration           = 0.35f;
         FlowMarkerDistance       = 30.0f;
         FlowSpeed                = 150.0f;
-        FlowDuration             = 0.1f;
+        FlowDuration             = 2.0f;
         PivotAlignment           = ImVec2(0.5f, 0.5f);
         PivotSize                = ImVec2(0.0f, 0.0f);
         PivotScale               = ImVec2(1, 1);

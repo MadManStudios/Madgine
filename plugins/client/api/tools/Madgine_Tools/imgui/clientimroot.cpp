@@ -264,6 +264,8 @@ namespace Tools {
             }
         };
 
+        io.BackendFlags |= ImGuiBackendFlags_RendererHasVtxOffset | ImGuiBackendFlags_HasMouseCursors | ImGuiBackendFlags_RendererHasTextures;
+
         ImGui::FilesystemPickerOptions *filepickerOptions = ImGui::GetFilesystemPickerOptions();
 
         filepickerOptions->mIconLookup = [](const Filesystem::Path &path, bool isDir) {
@@ -281,36 +283,28 @@ namespace Tools {
         ImFontConfig defaultConfig {};
         defaultConfig.SizePixels = 13.0f * Window::platformCapabilities.mScalingFactor;
         defaultConfig.RasterizerDensity = 2.0f;
-        io.FontDefault = io.Fonts->AddFontDefault(&defaultConfig);
+        io.FontDefault = io.Fonts->AddFontDefaultVector(&defaultConfig);
+        ImGui::GetStyle().FontSizeBase = 16.0f;
 
         Filesystem::Path iconsPath = Resources::ResourceManager::getSingleton().findResourceFile("icons.ttf");
         auto iconsResult = co_await Filesystem::readFileAsync(iconsPath);
         if (iconsResult.is_value()) {
-            ByteBuffer iconsData = std::move(iconsResult).value();
+            mIconsData = std::move(iconsResult).value().get();
 
             static const ImWchar icons_ranges[] = { 0xf100, 0xf1ff, 0 };
 
             ImFontConfig config;
             config.MergeMode = true;
-            config.FontBuilderFlags |= ImGuiFreeTypeBuilderFlags_LoadColor;
+            config.FontLoaderFlags |= ImGuiFreeTypeLoaderFlags_LoadColor;
             // config.GlyphMinAdvanceX = 13.0f;
             config.GlyphOffset = { 0.0f, 3.0f * Window::platformCapabilities.mScalingFactor };
             config.FontDataOwnedByAtlas = false;
             config.RasterizerDensity = 5.0f;
 
-            io.Fonts->AddFontFromMemoryTTF(const_cast<void *>(iconsData.mData), iconsData.mSize, 13.0f * Window::platformCapabilities.mScalingFactor, &config, icons_ranges);
+            io.Fonts->AddFontFromMemoryTTF(const_cast<void *>(mIconsData.mData), mIconsData.mSize, 13.0f * Window::platformCapabilities.mScalingFactor, &config, icons_ranges);
         } else {
             LOG_ERROR("Reading icons.ttf failed!");
         }
-
-        io.Fonts->Build();
-
-        unsigned char *pixels;
-        int width, height;
-        io.Fonts->GetTexDataAsRGBA32(&pixels, &width, &height);
-        mFontTexture = Render::RenderContext::getSingleton().createTexture(Render::TextureType_2D, Render::FORMAT_RGBA8_SRGB, { width, height }, { pixels, static_cast<size_t>(width * height * 4) });
-
-        io.Fonts->SetTexID(mFontTexture->resourceBlock());
 
         io.FontGlobalScale = 1.0f / Window::platformCapabilities.mScalingFactor;
 
@@ -321,6 +315,12 @@ namespace Tools {
 
     Threading::Task<void> ClientImRoot::finalize()
     {
+        for (ImTextureData *tex : ImGui::GetPlatformIO().Textures) {
+            if (Render::TexturePtr *ptr = static_cast<Render::TexturePtr *>(tex->BackendUserData)) {
+                ptr->reset();
+            }
+        }
+
         removeDependency(&mRenderData);
 
         ImGuiIO &io = ImGui::GetIO();
@@ -328,6 +328,8 @@ namespace Tools {
         ImGui::SaveIniSettingsToDisk(io.IniFilename);
 
         io.IniFilename = nullptr;
+
+        ImGui::DestroyPlatformWindows();
 
         co_await ImRoot::finalize();
 
@@ -339,7 +341,7 @@ namespace Tools {
         Im3D::DestroyContext();
         ImGui::DestroyContext();
 
-        mFontTexture.reset();
+        mIconsData.clear();
         mImageCache.clear();
 
         co_await MainWindowComponentBase::finalize();
@@ -426,6 +428,12 @@ namespace Tools {
             return;
 
         ImDrawData *draw_data = vp->DrawData;
+
+        if (draw_data->Textures != nullptr)
+            for (ImTextureData *tex : *draw_data->Textures)
+                if (tex->Status != ImTextureStatus_OK)
+                    updateTexture(tex);
+
         draw_data->ScaleClipRects(ImGui::GetIO().DisplayFramebufferScale);
 
         {
@@ -499,6 +507,41 @@ namespace Tools {
             }
             global_idx_offset += cmd_list->IdxBuffer.Size;
             global_vtx_offset += cmd_list->VtxBuffer.Size;
+        }
+    }
+
+    void ClientImRoot::updateTexture(ImTextureData *tex)
+    {
+        switch (tex->Status) {
+        case ImTextureStatus_WantCreate: {
+            Render::TexturePtr ptr = Render::RenderContext::getSingleton().createTexture(Render::TextureType_2D, Render::FORMAT_RGBA8_SRGB, { tex->Width, tex->Height }, { tex->GetPixels(), static_cast<size_t>(tex->Width * tex->Height * 4) });
+
+            tex->SetTexID(ImTextureID { ptr->resourceBlock() });
+            tex->BackendUserData = new Render::TexturePtr { std::move(ptr) };
+
+            tex->SetStatus(ImTextureStatus_OK);
+            break;
+        }
+        case ImTextureStatus_WantUpdates: {
+            Render::TexturePtr &ptr = *static_cast<Render::TexturePtr *>(tex->BackendUserData);
+
+            for (int y = 0; y < tex->UpdateRect.h; y++) {
+                const void *row = static_cast<uint32_t *>(tex->GetPixels()) + ((tex->UpdateRect.y + y) * tex->Width + tex->UpdateRect.x);
+                mWindow.getRenderer()->setTextureSubData(ptr, { tex->UpdateRect.x, tex->UpdateRect.y + y }, { tex->UpdateRect.w, 1 }, { row, static_cast<size_t>(tex->UpdateRect.w * 4) });
+            }
+
+            tex->SetStatus(ImTextureStatus_OK);
+            break;
+        }
+        case ImTextureStatus_WantDestroy:
+            if (tex->UnusedFrames > 0) {
+                Render::TexturePtr &ptr = *static_cast<Render::TexturePtr *>(tex->BackendUserData);
+                tex->BackendUserData = nullptr;
+                tex->SetTexID(ImTextureID_Invalid);
+                ptr.reset();
+                tex->SetStatus(ImTextureStatus_Destroyed);
+            }
+            break;
         }
     }
 

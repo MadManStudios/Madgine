@@ -43,7 +43,7 @@ IMGUI_API void BeginGroupPanel(const char *name = "", const ImVec2 &size = ImVec
 IMGUI_API void EndGroupPanel();
 
 IMGUI_API bool BeginPopupCompoundContextItem(const char *str_id = nullptr);
-IMGUI_API bool BeginPopupCompoundContextWindow(const char *str_id = nullptr, ImGuiPopupFlags popup_flags = 1);
+IMGUI_API bool BeginPopupCompoundContextWindow(const char *str_id = nullptr, ImGuiPopupFlags popup_flags = 0);
 
 IMGUI_API bool BeginStatus();
 IMGUI_API void EndStatus();

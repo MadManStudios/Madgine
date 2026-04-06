@@ -8,4 +8,6 @@ add_workspace_library(ImGui ${sources} SOURCE_ROOT ..)
 target_link_libraries(ImGui PUBLIC Meta Modules)
 target_link_libraries(ImGui PRIVATE freetype)
 
+target_include_directories(ImGui PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+
 install_to_workspace(ImGui TARGETS ImGui)

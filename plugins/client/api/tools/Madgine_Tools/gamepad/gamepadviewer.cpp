@@ -146,10 +146,8 @@ namespace Tools {
             float y_off = sqrtf(fabs(y - 2) / 2) * sign(y - 2);
             renderCircle(DPadOffset + ImVec2 { x_off, y_off } * 0.038f, 0.013f);
 
-            ImGuiIO &io = ImGui::GetIO();
-
             auto button = [&](Input::Key::Key key, ImVec2 off, float radius) {
-                if (io.KeysDown[key])
+                if (ImGui::IsKeyDown(static_cast<ImGuiKey>(key)))
                     renderCircle(off, radius);
             };
             button(Input::Key::GP_A, { 0.68f, 0.215f }, 0.02f);

@@ -16,6 +16,7 @@
 
 struct ImGuiDockNode;
 struct ImGuiViewport;
+struct ImTextureData;
 
 namespace Engine {
 namespace Tools {
@@ -46,6 +47,7 @@ namespace Tools {
         void shutdown(Render::RenderTarget *target) override;
 
         void renderViewport(Render::RenderTarget *target, ImGuiViewport *vp);
+        void updateTexture(ImTextureData *tex);
 
         void addViewportMapping(Render::RenderTarget *target, ImGuiViewport *vp);
         void removeViewportMapping(Render::RenderTarget *target);
@@ -90,7 +92,7 @@ namespace Tools {
 
         std::vector<Render::RenderTarget *> mRenderTargets;
 
-        Render::TexturePtr mFontTexture;
+        ByteBuffer mIconsData;        
 
         struct CachedImage {
             Resources::ImageLoader::Handle mHandle;

@@ -690,7 +690,7 @@ bool TempInputText(const ImRect &bb, ImGuiID id, const char *label, std::string 
         *s
     };
 
-    bool value_changed = InputTextEx(label, NULL, s->data(), s->size() + 1, bb.GetSize(), flags | ImGuiInputTextFlags_MergedItem | ImGuiInputTextFlags_CallbackResize, &InputTextCallback<std::string>, &cb);
+    bool value_changed = InputTextEx(label, NULL, s->data(), s->size() + 1, bb.GetSize(), flags | ImGuiInputTextFlags_TempInput | ImGuiInputTextFlags_CallbackResize, &InputTextCallback<std::string>, &cb);
     if (init) {
         // First frame we started displaying the InputText widget, we expect it to take the active id.
         IM_ASSERT(g.ActiveId == id);
@@ -710,7 +710,7 @@ bool EditableTreeNode(const void *id, std::string *s, ImGuiTreeNodeFlags flags)
     ImVec2 pos_before = window->DC.CursorPos;
 
     PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(g.Style.ItemSpacing.x, g.Style.FramePadding.y * 2.0f));
-    bool b = Selectable("##Selectable", flags & ImGuiTreeNodeFlags_Selected, ImGuiSelectableFlags_AllowDoubleClick | ImGuiSelectableFlags_AllowItemOverlap);
+    bool b = Selectable("##Selectable", flags & ImGuiTreeNodeFlags_Selected, ImGuiSelectableFlags_AllowDoubleClick | ImGuiSelectableFlags_AllowOverlap);
     PopStyleVar();
 
     ImGuiID inputId = window->GetID("##Input");
@@ -1031,7 +1031,8 @@ bool IsDraggableValueTypeBeingAccepted(Engine::CallableView<Engine::KeyValueResu
 {
     if (IsDragDropPayloadBeingAccepted()){
         const ValueTypePayload *payload = GetValuetypePayload();
-        assert(payload);        
+        if (!payload)
+            return false;
         Engine::KeyValueResult error = output(payload->mValue);
         if (error) {
         } else {
@@ -1251,7 +1252,7 @@ bool InteractiveView(InteractiveViewState &state)
     ImGuiIO &io = ImGui::GetIO();
 
     if (state.mActive) {
-        ImGui::SetItemUsingMouseWheel();
+        SetItemKeyOwner(ImGuiKey_MouseWheelY);
         for (int i = 0; i < 3; ++i) {
             if (io.MouseClicked[i]) {
                 state.mMouseDown[i] = true;
@@ -1461,7 +1462,7 @@ bool BeginPopupCompoundContextWindow(const char *str_id, ImGuiPopupFlags popup_f
     if (!str_id)
         str_id = "compound_context";
     ImGuiID id = ImHashStr(str_id, 0, ImHashData(&window, sizeof(window)));
-    int mouse_button = (popup_flags & ImGuiPopupFlags_MouseButtonMask_);
+    ImGuiMouseButton mouse_button = GetMouseButtonFromPopupFlags(popup_flags);
     if (IsMouseReleased(mouse_button) && IsWindowHovered(ImGuiHoveredFlags_AllowWhenBlockedByPopup))
         OpenPopupEx(id, popup_flags);
     return BeginPopupEx(id, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoSavedSettings);

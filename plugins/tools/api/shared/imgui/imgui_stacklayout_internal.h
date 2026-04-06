@@ -2,10 +2,8 @@
 // (stack layout headers)
 
 /*
-
 Index of this file:
 // [SECTION] Stack Layout Internal API
-
 */
 
 #pragma once
@@ -19,12 +17,10 @@ Index of this file:
 // [SECTION] Stack Layout Internal API
 //-----------------------------------------------------------------------------
 
-namespace ImGuiInternal
-{
-    IMGUI_API ImGuiLayoutType GetCurrentLayoutType(ImGuiID window_id);
-    IMGUI_API void            UpdateItemRect(ImGuiID window_id, const ImVec2& min, const ImVec2& max);
-
+namespace ImGuiInternal {
+IMGUI_API ImGuiLayoutType GetCurrentLayoutType(ImGuiID window_id);
+IMGUI_API void UpdateItemRect(ImGuiID window_id, const ImVec2 &min, const ImVec2 &max);
+IMGUI_API void LayoutErrorRecoveryTryToRecoverWindowState(ImGuiID window_id);
 } // namespace ImGuiInternal
-
 
 #endif // #ifndef IMGUI_DISABLE
