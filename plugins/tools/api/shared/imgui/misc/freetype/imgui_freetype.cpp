@@ -242,7 +242,7 @@ static const FT_Glyph_Metrics* ImGui_ImplFreeType_LoadGlyph(ImGui_ImplFreeType_F
 #endif // IMGUI_ENABLE_FREETYPE_LUNASVG
 
     // Apply convenience transform (this is not picking from real "Bold"/"Italic" fonts! Merely applying FreeType helper transform. Oblique == Slanting)
-    if (src_data->UserFlags & ImGuiFreeTypeLoaderFlags_Bold)
+    /* if (src_data->UserFlags & ImGuiFreeTypeLoaderFlags_Bold)
         FT_GlyphSlot_Embolden(slot);
     if (src_data->UserFlags & ImGuiFreeTypeLoaderFlags_Oblique)
     {
@@ -251,7 +251,7 @@ static const FT_Glyph_Metrics* ImGui_ImplFreeType_LoadGlyph(ImGui_ImplFreeType_F
         //FT_Outline_Get_BBox(&slot->outline, &bbox);
         //slot->metrics.width = bbox.xMax - bbox.xMin;
         //slot->metrics.height = bbox.yMax - bbox.yMin;
-    }
+    }*/
 
     return &slot->metrics;
 }
