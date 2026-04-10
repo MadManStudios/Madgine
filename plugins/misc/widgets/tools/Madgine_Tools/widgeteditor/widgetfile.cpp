@@ -31,8 +31,7 @@ namespace Engine {
 namespace Tools {
 
     WidgetFile::WidgetFile(WidgetEditor &editor, Widgets::WidgetLoader::Resource *resource)
-        : mEditor(editor)
-        , mPath(resource ? resource->path() : "")
+        : ResourceFile(editor, resource ? resource->path() : "")
         , mWidgetManager(editor.manager())
         , mRenderTarget(editor.manager().window().getRenderer()->createRenderTexture({ 1, 1 }, { .mName { resource ? resource->name() : "<Unnamed>" }, .mFormat = Render::FORMAT_RGBA8_SRGB }))
     {
