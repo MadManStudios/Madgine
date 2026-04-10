@@ -50,11 +50,21 @@ Proxy<ScopeField> ScopeIterator::operator->() const
     return { mScope, mPointer };
 }
 
-void ScopeIterator::operator++()
+ScopeIterator &ScopeIterator::operator++()
 {
     assert(mPointer);
     ++mPointer;
     check();
+    return *this;
+}
+
+ScopeIterator ScopeIterator::operator++(int)
+{
+    assert(mPointer);
+    ScopeIterator it = *this;
+    ++mPointer;
+    check();
+    return it;
 }
 
 void ScopeIterator::check()
