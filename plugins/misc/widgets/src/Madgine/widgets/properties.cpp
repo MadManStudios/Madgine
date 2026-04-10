@@ -123,6 +123,11 @@ namespace Widgets {
         }
     }
 
+    void PropertyList::unset(PropertyDescriptor desc)
+    {
+        unset(PropertyRange { begin(), end() }, desc);
+    }
+
     void PropertyList::unsetConditional(uint16_t mask, PropertyDescriptor desc)
     {
         auto it = std::ranges::find(*this, PropertyDescriptor { PropertyType::CONDITIONAL, 0, mask });

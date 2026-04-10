@@ -148,6 +148,7 @@ namespace Widgets {
         Geometry calculateGeometry(uint16_t activeConditions, GeometrySourceInfo *source = nullptr);
 
         void addConditional(uint16_t mask);
+        void removeConditional(uint16_t mask);
         PropertyRange conditionals();
 
         void setPosValue(uint16_t index, float value, uint16_t mask = 0);

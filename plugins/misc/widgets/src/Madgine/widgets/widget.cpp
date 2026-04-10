@@ -554,6 +554,11 @@ namespace Widgets {
         mProperties.set(PropertyDescriptor { PropertyType::CONDITIONAL, 0, mask });
     }
 
+    void WidgetBase::removeConditional(uint16_t mask)
+    {
+        mProperties.unset(PropertyDescriptor { PropertyType::CONDITIONAL, 0, mask });
+    }
+
     PropertyRange WidgetBase::conditionals()
     {
         return {

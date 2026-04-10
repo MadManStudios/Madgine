@@ -67,6 +67,7 @@ namespace Widgets {
         void set(PropertyDescriptor desc, std::vector<float> params = {});
         void setConditional(uint16_t mask, PropertyDescriptor desc, std::vector<float> params = {});
 
+        void unset(PropertyDescriptor desc);
         void unsetConditional(uint16_t mask, PropertyDescriptor desc);
 
         operator PropertyRange() const;
