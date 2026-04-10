@@ -78,12 +78,13 @@ namespace Tools {
 
     void WidgetFile::renderSelection()
     {
-        if (mEditor.mWidgetDetailsVisible) {
-            if (mEditor.beginSubPanel("Details", &mEditor.mWidgetDetailsVisible, ImGuiDir_Right)) {
+        if (editor().mWidgetDetailsVisible) {
+            if (editor().beginSubPanel("Details", &editor().mWidgetDetailsVisible, ImGuiDir_Right)) {
 
                 if (mSelected) {
                     if (mSelected->render()) {
-                        mHistory.addOperation();
+                        throw 0;
+                        //mHistory.addOperation();
                     }
                 }
 
@@ -163,8 +164,8 @@ namespace Tools {
 
     void WidgetFile::renderHierarchy(Widgets::WidgetBase **hoveredWidget)
     {
-        if (mEditor.mHierarchyVisible) {
-            if (mEditor.beginSubPanel("Hierarchy", &mEditor.mHierarchyVisible, ImGuiDir_Left)) {
+        if (editor().mHierarchyVisible) {
+            if (editor().beginSubPanel("Hierarchy", &editor().mHierarchyVisible, ImGuiDir_Left)) {
 
                 Widgets::WidgetBase *root = mTopLevel;
                 if (root) {
@@ -209,7 +210,7 @@ namespace Tools {
 
         bool open = true;
 
-        if (mEditor.BeginResourceFile(this, mPath, mHistory.isDirty(), [this](const Filesystem::Path &path) { save(path); }, &open)) {
+        if (Begin(&open)) {
 
             ImVec2 pos;
 
@@ -217,8 +218,8 @@ namespace Tools {
 
                 if (ImGui::BeginMenu("Panels")) {
 
-                    ImGui::MenuItem("Hierarchy", nullptr, &mEditor.mHierarchyVisible);
-                    ImGui::MenuItem("Widget Details", nullptr, &mEditor.mWidgetDetailsVisible);
+                    ImGui::MenuItem("Hierarchy", nullptr, &editor().mHierarchyVisible);
+                    ImGui::MenuItem("Widget Details", nullptr, &editor().mWidgetDetailsVisible);
 
                     ImGui::EndMenu();
                 }
@@ -226,7 +227,7 @@ namespace Tools {
                 ImGui::EndMenuBar();
             }
 
-            if (mEditor.beginContent()) {
+            if (editor().beginContent()) {
 
                 pos = ImGui::GetWindowPos();
                 ImVec2 min = ImGui::GetWindowContentRegionMin();
@@ -253,7 +254,7 @@ namespace Tools {
 
                 Widgets::WidgetBase *hoveredWidget = nullptr;
                 if (!mDragging)
-                    hoveredWidget = mEditor.handleManagerInteractions(mWidgetManager, pos);
+                    hoveredWidget = editor().handleManagerInteractions(mWidgetManager, pos);
                 if (hoveredWidget)
                     mSettings.try_emplace(hoveredWidget, hoveredWidget, mEditor.getTool<Inspector>());
                 renderHierarchy(&hoveredWidget);
@@ -274,7 +275,7 @@ namespace Tools {
 
                     Widgets::WidgetBase *selectedWidget = mSelected->widget();
 
-                    mEditor.renderWidgetBorders(selectedWidget, screenSpace.mTopLeft, IM_COL32(255, 255, 255, 255));
+                    editor().renderWidgetBorders(selectedWidget, screenSpace.mTopLeft, IM_COL32(255, 255, 255, 255));
 
                     Vector3 absoluteSize = selectedWidget->getAbsoluteSize();
                     Vector2 absolutePos = selectedWidget->getAbsolutePosition() + Vector2 { screenSpace.mTopLeft };

@@ -4,17 +4,17 @@
 #include "Madgine/widgets/widgetloader.h"
 #include "Madgine/widgets/widgetmanager.h"
 
-#include "Madgine_Tools/util/undostack.h"
+#include "Madgine_Tools/resourcefile.h"
 
 namespace Engine {
 namespace Tools {
 
-    struct WidgetFile {
+    struct WidgetFile : ResourceFile<WidgetEditor> {
 
         WidgetFile(WidgetEditor &editor, Widgets::WidgetLoader::Resource *resource);
         ~WidgetFile();
 
-        void save(const Filesystem::Path &path);
+        void save(const Filesystem::Path &path) override;
 
         void renderSelection();
         void renderHierarchy(Widgets::WidgetBase **hoveredWidget = nullptr);
@@ -25,9 +25,6 @@ namespace Tools {
         Widgets::WidgetManager &widgetManager();
 
     private:
-        WidgetEditor &mEditor;
-        Filesystem::Path mPath;
-        UndoStack mHistory;
 
         Widgets::WidgetManager mWidgetManager;
         Widgets::WidgetBase *mTopLevel = nullptr;

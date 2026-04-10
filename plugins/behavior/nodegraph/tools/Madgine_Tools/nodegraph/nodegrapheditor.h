@@ -5,6 +5,7 @@
 #include "Madgine/nodegraph/pins.h"
 
 #include "Madgine_Tools/resourceeditor.h"
+#include "Madgine_Tools/resourcefile.h"
 #include "Madgine_Tools/toolbase.h"
 #include "Madgine_Tools/toolscollector.h"
 #include "nodegraphfile.h"
@@ -14,7 +15,7 @@ namespace Tools {
 
     namespace ed = ax::NodeEditor;
 
-    struct NodeGraphEditor : public Tool<NodeGraphEditor, ResourceEditor> {
+    struct NodeGraphEditor : public Tool<NodeGraphEditor, ResourceEditor>, ResourceFile<NodeGraphEditor> {
 
         SERIALIZABLEUNIT(NodeGraphEditor)
 
@@ -28,7 +29,7 @@ namespace Tools {
 
         std::string_view key() const override;
 
-        void save(const Filesystem::Path &path);
+        void save(const Filesystem::Path &path) override;
         void open(Resources::ResourceBase *res) override;
         std::string_view getCurrentName() const;
 
@@ -54,7 +55,6 @@ namespace Tools {
 
         Behavior::NodeGraph::NodeGraphLoader::Handle mGraphHandle;
         Behavior::NodeGraph::NodeGraph mGraph;
-        Filesystem::Path mFilePath;
 
         struct NodeMessages {
             std::vector<std::string> mErrorMessages;
@@ -71,14 +71,12 @@ namespace Tools {
         std::optional<Behavior::NodeGraph::PinDesc> mDragPin;
         std::optional<ExtendedValueTypeDesc> mDragType;
         uint32_t mDragMask;
-
-        bool mIsDirty = false;
+        
         bool mInitialLoad = false;
 
         ed::NodeId mContextNode;
         ed::PinId mContextPin;
         ed::LinkId mContextLink;
-
     };
 
 }

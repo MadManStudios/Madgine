@@ -31,7 +31,7 @@ namespace Tools {
 
     SceneFile::SceneFile(SceneTool &tool, Scene::SceneLoader::Resource *resource)
         : SceneEditor(tool)
-        , mPath(resource ? resource->path() : "")
+        , ResourceFile(tool, resource ? resource->path() : "")
         , mManager(tool.sceneMgr().app())
         , mContainer(mManager.container("Editor"))
         , mSceneData(mManager)
@@ -85,7 +85,7 @@ namespace Tools {
 
         //mManager.simulationClock().tick(mManager.clock().now());
 
-        if (tool().BeginResourceFile(this, mPath, mHistory.isDirty(), [this](const Filesystem::Path &path) { save(path); }, &open)) {
+        if (Begin(&open)) {
 
             if (ImGui::BeginMenuBar()) {
 

@@ -5,7 +5,7 @@
 #include "Madgine/scene/sceneloader.h"
 #include "Madgine/scene/scenemanager.h"
 
-#include "Madgine_Tools/util/undostack.h"
+#include "Madgine_Tools/resourcefile.h"
 #include "entitycache.h"
 #include "sceneeditor.h"
 
@@ -17,12 +17,12 @@ namespace Im3D {
 
 namespace Tools {
 
-    struct SceneFile : SceneEditor {
+    struct SceneFile : ResourceFile<SceneTool>, SceneEditor {
 
         SceneFile(SceneTool &tool, Scene::SceneLoader::Resource *resource);
         ~SceneFile();
 
-        void save(const Filesystem::Path &path);
+        void save(const Filesystem::Path &path) override;
 
         bool render();
 
@@ -33,8 +33,6 @@ namespace Tools {
         void renderHierarchyEntity(const EntityCache::Node &entity);
 
     private:
-        Filesystem::Path mPath;
-        UndoStack mHistory;
 
         Scene::SceneManager mManager;
         Scene::SceneContainer &mContainer;

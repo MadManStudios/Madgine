@@ -50,6 +50,7 @@ namespace Tools {
 
     NodeGraphEditor::NodeGraphEditor(ImRoot &root)
         : Tool<NodeGraphEditor, ResourceEditor>(root)
+        , ResourceFile(*this, "")
     {
         mVisible = false;
     }
@@ -73,7 +74,7 @@ namespace Tools {
 
     void NodeGraphEditor::render()
     {
-        if (BeginResourceFile(this, mFilePath, mIsDirty, [this](const Filesystem::Path &path) { save(path); }, &mVisible, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_MenuBar)) {
+        if (Begin(&mVisible, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_MenuBar)) {
 
             if (ImGui::BeginMenuBar()) {
                 if (ImGui::BeginMenu("Dev")) {
@@ -474,14 +475,14 @@ namespace Tools {
 
     void NodeGraphEditor::save(const Filesystem::Path &path)
     {
-        mFilePath = path;
+        mPath = path;
 
-        mGraph.saveToFile(mFilePath);
+        mGraph.saveToFile(path);
 
         if (!mGraphHandle)
-            mGraphHandle.create(mFilePath.stem(), mFilePath);
+            mGraphHandle.create(path.stem(), path);
 
-        mIsDirty = false;
+        mHistory.onSave();        
     }
 
     void NodeGraphEditor::open(Resources::ResourceBase *res)
@@ -490,10 +491,10 @@ namespace Tools {
             mEditor.reset();
             if (b) {
                 mGraph = *mGraphHandle;
-                mFilePath = mGraphHandle.info()->resource()->path();
+                mPath = mGraphHandle.info()->resource()->path();
             } else {
                 mGraph = {};
-                mFilePath.clear();
+                mPath.clear();
             }
             createEditor();
         };
@@ -510,7 +511,7 @@ namespace Tools {
 
     std::string_view NodeGraphEditor::getCurrentName() const
     {
-        return mFilePath.stem();
+        return mPath.stem();
     }
 
     bool NodeGraphEditor::saveImpl(std::string_view view, ed::SaveReasonFlags reason)
@@ -520,7 +521,7 @@ namespace Tools {
         if (mInitialLoad) {
             mInitialLoad = false;
         } else if ((reason & (ed::SaveReasonFlags::User | ed::SaveReasonFlags::AddNode | ed::SaveReasonFlags::RemoveNode)) != ed::SaveReasonFlags::None) {
-            mIsDirty = true;
+            //mIsDirty = true; //TODO
         }
 
         mGraph.mLayoutData = view;

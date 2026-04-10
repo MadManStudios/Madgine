@@ -17,9 +17,9 @@ namespace Tools {
 
         virtual void open(Resources::ResourceBase *res) = 0;
 
-        bool BeginResourceFile(const void *id, const Filesystem::Path &path, bool isDirty, Closure<void(const Filesystem::Path &)> save, bool *open = nullptr, ImGuiWindowFlags flags = 0);
-
         Dialog<Filesystem::Path> resourceFilePicker(bool allowNewFile = false, Filesystem::Path path = {}, Filesystem::Path selected = {});
+
+        friend struct ResourceFileBase;
 
     private:
         using ToolBase::init;

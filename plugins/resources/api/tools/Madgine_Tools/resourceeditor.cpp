@@ -18,8 +18,6 @@
 namespace Engine {
 namespace Tools {
 
-    MADGINE_TOOLS_EXPORT extern const ImGuiWindowClass windowClass;
-
     ResourceEditor::ResourceEditor(ImRoot &root)
         : ToolBase(root)
     {
@@ -102,65 +100,6 @@ namespace Tools {
         mManager->registerEditor(&loader, this);
 
         co_return true;
-    }
-
-    bool ResourceEditor::BeginResourceFile(const void *id, const Filesystem::Path &path, bool isDirty, Closure<void(const Filesystem::Path &)> save, bool *open, ImGuiWindowFlags flags)
-    {
-        std::string fileName;
-        if (!path.empty()) {
-            fileName = path.filename().str();
-        } else {
-            fileName = "<unnamed>";
-        }
-
-        if (isDirty)
-            flags |= ImGuiWindowFlags_UnsavedDocument;
-
-        ImGui::SetNextWindowDockID(mRoot.rootDockSpaceId(), ImGuiCond_FirstUseEver);
-        ImGui::SetNextWindowClass(&windowClass);
-        bool visible = beginToolWindow(fileName.c_str(), open, flags | ImGuiWindowFlags_MenuBar);
-        if (visible) {
-
-            if (ImGui::BeginMenuBar()) {
-                if (ImGui::BeginMenu("File")) {
-                    if (ImGui::MenuItem(("Save '"s + path.filename().str() + "'").c_str(), "Ctrl+S", false, isDirty && !path.empty()))
-                        save(path);
-                    if (ImGui::MenuItem("Save as...")) {
-                        mRoot.dialogs().show(
-                            resourceFilePicker(true), std::move(save));
-                    }
-                    ImGui::EndMenu();
-                }
-                ImGui::EndMenuBar();
-            }
-
-            if (beginToolBar("Editor")) {
-
-                if (!isDirty)
-                    ImGui::BeginDisabled();
-                if (ImGui::Button("Save")) {
-                    if (path.empty()) {
-                        mRoot.dialogs().show(
-                            resourceFilePicker(true), std::move(save));
-                    } else {
-                        save(path);
-                    }
-                }
-                if (!isDirty)
-                    ImGui::EndDisabled();
-
-                endToolBar();
-            }
-
-            if (ImGui::Shortcut(ImGuiKey_S | ImGuiMod_Ctrl)) {
-                if (path.empty())
-                    mRoot.dialogs().show(
-                        resourceFilePicker(true), std::move(save));
-                else
-                    save(path);
-            }
-        }
-        return visible;
     }
 
     Dialog<Filesystem::Path> ResourceEditor::resourceFilePicker(bool allowNewFile, Filesystem::Path path, Filesystem::Path selected)
