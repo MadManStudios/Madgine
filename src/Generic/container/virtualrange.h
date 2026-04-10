@@ -21,6 +21,7 @@ namespace __generic_impl__ {
         virtual void increment() = 0;
         virtual void getValue(RefT &ref) const = 0;
         virtual std::unique_ptr<VirtualIteratorBase<RefT>> clone() const = 0;
+        virtual bool compare(VirtualIteratorBase<RefT> &other) const = 0;
         virtual bool ended() const = 0;
 
         const std::shared_ptr<VirtualRangeBase<RefT>> &range() const
@@ -61,6 +62,15 @@ namespace __generic_impl__ {
         virtual std::unique_ptr<VirtualIteratorBase<RefT>> clone() const override
         {
             return std::make_unique<VirtualIteratorImpl<RefT, It, EndIt, Assign>>(mIt, mEnd, this->mRange);
+        }
+
+        bool compare(VirtualIteratorBase<RefT> &other) const
+        {
+            if (auto *otherImpl = dynamic_cast<VirtualIteratorImpl<RefT, It, EndIt, Assign> *>(&other)) {
+                return mIt == otherImpl->mIt;
+            } else {
+                return false;
+            }
         }
 
         virtual bool ended() const override
@@ -143,6 +153,11 @@ struct VirtualIterator {
         RefT result;
         mImpl->getValue(result);
         return result;
+    }
+
+    bool operator==(const VirtualIterator &other) const
+    {
+        return mImpl->compare(*other.mImpl);
     }
 
     bool operator==(const VirtualSentinel &other) const
