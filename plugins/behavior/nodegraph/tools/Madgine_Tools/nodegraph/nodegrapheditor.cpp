@@ -428,13 +428,13 @@ namespace Tools {
                 if (mSelectedInputs) {
                     if (ImGui::BeginTable("inputs", 2, ImGuiTableFlags_Resizable)) {
                         KeyValueVirtualSequenceRange range { mGraph.mNamedInputs };
-                        mIsDirty |= getTool<Inspector>().drawValue("Inputs", range, true);
+                        getTool<Inspector>().drawValue("Inputs", range, true);
                         ImGui::EndTable();
                     }
                 }
                 if (mSelectedNodeIndex) {
                     if (ImGui::BeginTable("columns", 2, ImGuiTableFlags_Resizable)) {
-                        mIsDirty |= getTool<Inspector>().drawMembers(mGraph.nodes()[mSelectedNodeIndex].get());
+                        getTool<Inspector>().drawMembers(mGraph.nodes()[mSelectedNodeIndex].get());
                         ImGui::EndTable();
                     }
                 }
