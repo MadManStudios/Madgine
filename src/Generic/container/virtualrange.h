@@ -288,8 +288,7 @@ namespace __generic_impl__ {
 template <typename RefT, typename AssignDefault>
 struct VirtualRange {
 
-    template <typename C, typename Assign = AssignDefault>
-        requires(!std::same_as<std::decay_t<C>, VirtualRange<RefT, AssignDefault>>)
+    template <DecayedNoneOf<VirtualRange<RefT, AssignDefault>> C, typename Assign = AssignDefault>
     explicit VirtualRange(C &&c, type_holder_t<Assign> = {})
         : mRange(std::make_shared<__generic_impl__::VirtualRangeImpl<RefT, C, Assign>>(std::forward<C>(c)))
     {

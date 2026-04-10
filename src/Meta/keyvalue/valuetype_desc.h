@@ -354,7 +354,7 @@ struct convert_ValueType_t {
             return std::string { std::forward<T>(t) };
         } else if constexpr (std::ranges::range<T>) {
             if constexpr (std::same_as<KeyType_t<std::ranges::range_value_t<T>>, Void>)
-                return KeyValueVirtualSequenceRange { std::forward<T>(t) };
+                return KeyValueVirtualSequenceRange { std::forward<T>(t), type_holder<Functor_to_ValueType> };
             else
                 return KeyValueVirtualAssociativeRange { std::forward<T>(t) };
         } else if constexpr (std::is_enum_v<std::decay_t<T>>) {
