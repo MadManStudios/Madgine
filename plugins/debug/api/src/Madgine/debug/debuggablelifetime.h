@@ -18,7 +18,27 @@ namespace Debug {
         virtual void endLifetime() = 0;
         virtual bool running() = 0;
 
-        Generator<DebuggableLifetimeBase &> children();
+        struct MADGINE_DEBUGGER_EXPORT iterator {
+
+            using iterator_category = std::forward_iterator_tag;
+            using value_type = DebuggableLifetimeBase;
+            using difference_type = ptrdiff_t;
+            using pointer = DebuggableLifetimeBase *;
+            using reference = DebuggableLifetimeBase &;
+
+            iterator();
+            iterator(DebuggableLifetimeBase *current);
+
+            DebuggableLifetimeBase &operator*() const;
+
+            iterator &operator++();
+            iterator operator++(int);
+
+            bool operator==(const iterator &other) const;
+
+            DebuggableLifetimeBase *mCurrent = nullptr;
+        };
+        std::ranges::subrange<iterator, iterator> children();
 
         virtual ScopePtr owner() = 0;
 
@@ -65,7 +85,7 @@ namespace Debug {
         {
             return mLifetime.finished();
         }
-        
+
         template <typename F>
         auto tracked(F &&callback)
         {

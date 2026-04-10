@@ -96,13 +96,9 @@ namespace Debug {
     {
     }
 
-    Generator<DebuggableLifetimeBase &> DebuggableLifetimeBase::children()
+    std::ranges::subrange<DebuggableLifetimeBase::iterator, DebuggableLifetimeBase::iterator> DebuggableLifetimeBase::children()
     {
-        DebuggableLifetimeBase *child = mFirstChild;
-        while (child) {
-            co_yield *child;
-            child = child->mNext;
-        }
+        return { mFirstChild, nullptr };
     }
 
     const std::vector<std::reference_wrapper<ContextInfo>> &DebuggableLifetimeBase::debugContexts()
@@ -115,6 +111,34 @@ namespace Debug {
         ContextInfo &context = Debugger::getSingleton().createContext();
         mDebugContexts.emplace_back(context);
         return context;
+    }
+
+    DebuggableLifetimeBase::iterator::iterator() = default;
+    DebuggableLifetimeBase::iterator::iterator(DebuggableLifetimeBase *current)
+        : mCurrent(current)
+    {
+    }
+
+    DebuggableLifetimeBase &DebuggableLifetimeBase::iterator::operator*() const
+    {
+        return *mCurrent;
+    }
+
+    DebuggableLifetimeBase::iterator &DebuggableLifetimeBase::iterator::operator++()
+    {
+        mCurrent = mCurrent->mNext;
+        return *this;
+    }
+    DebuggableLifetimeBase::iterator DebuggableLifetimeBase::iterator::operator++(int)
+    {
+        iterator copy = *this;
+        mCurrent = mCurrent->mNext;
+        return copy;
+    }
+
+    bool DebuggableLifetimeBase::iterator::operator==(const DebuggableLifetimeBase::iterator &other) const
+    {
+        return mCurrent == other.mCurrent;
     }
 
 }
