@@ -2,6 +2,8 @@
 
 #include "renderpass.h"
 
+#include "Generic/container/safeiterator.h"
+
 #include "Meta/keyvalue/metatable_impl.h"
 
 #include "renderdata.h"
@@ -20,7 +22,7 @@ namespace Render {
 
     void RenderPass::preRender(std::vector<Threading::TaskFuture<RenderFuture>> &dependencies, RenderContext *context)
     {
-        for (RenderData *dep : mDependencies)
+        for (RenderData *dep : safeIterate(mDependencies))
             dependencies.push_back(dep->update(context));
         for ([[maybe_unused]] const auto &fut : dependencies)
             assert(fut.valid());
