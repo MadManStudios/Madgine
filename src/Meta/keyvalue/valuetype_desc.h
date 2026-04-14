@@ -60,6 +60,9 @@ using resolveCustomScopePtr_t = typename decltype(resolveHelper<T, keepPtr>())::
 template <typename T>
 concept ValueTypePrimitive = ValueTypeList::contains<T>;
 
+template <typename T>
+concept ValueTypeStorage = ValueTypeStorageList::contains<T>;
+
 enum class ValueTypeEnum : unsigned char {
 #define VALUETYPE_SEP ,
 #define VALUETYPE_TYPE(Name, Storage, ...) Name##Value

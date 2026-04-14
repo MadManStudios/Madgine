@@ -117,10 +117,13 @@ struct META_EXPORT ValueType {
     bool is() const;
 
     template <typename T>
-    ValueType_Return<T> as() const;
+    const T &as() const;
 
     template <typename T>
-    ValueType_Return<T> asDefault(const T &defaultValue)
+    T &as();
+
+    template <typename T>
+    T &asDefault(const T &defaultValue)
     {
         if (!is<T>()) {
             mUnion = defaultValue;
@@ -153,29 +156,15 @@ bool ValueType::is() const
 }
 
 template <typename T>
-ValueType_Return<T> ValueType::as() const
+const T &ValueType::as() const
 {
+    return std::get<T>(mUnion);
+}
 
-    if constexpr (ValueTypePrimitive<T>) {
-        return visit([](const auto &v) -> ValueType_Return<T> {
-            if constexpr (std::is_convertible_v<decltype(v), ValueType_Return<T>>)
-                return v;
-            else
-                throw 0;
-        });
-        // return std::get<static_cast<size_t>(toValueTypeIndex<T>().mIndex)>(mUnion);
-    } else if constexpr (std::same_as<T, ValueType>) {
-        return *this;
-    } else if constexpr (Enum<T>) {
-        return static_cast<T>(std::get<std::underlying_type_t<T>>(mUnion));
-    } else {
-        if constexpr (Pointer<T>) {
-            return scope_cast<std::remove_pointer_t<T>>(std::get<ScopePtr>(mUnion));
-        } else {
-            return scope_cast<std::remove_reference_t<T>>(std::get<OwnedScopePtr>(mUnion));
-        }
-    }
-    // static_assert(dependent_bool<T, false>::value, "Invalid target type for Valuetype cast provided!");
+template <typename T>
+T &ValueType::as()
+{
+    return std::get<T>(mUnion);
 }
 
 META_EXPORT std::ostream &operator<<(std::ostream &stream,

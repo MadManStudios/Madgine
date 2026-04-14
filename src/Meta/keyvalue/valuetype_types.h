@@ -8,9 +8,9 @@ using ValueTypeList = type_pack<
 #include "valuetypedefinclude.h"
     >;
 
-using QualifiedValueTypeList = type_pack<
+using ValueTypeStorageList = type_pack<
 #define VALUETYPE_SEP ,
-#define VALUETYPE_TYPE(Name, Storage, ...) type_pack<__VA_ARGS__>
+#define VALUETYPE_TYPE(Name, Storage, ...) std::decay_t<Storage>
 #include "valuetypedefinclude.h"
     >;
 

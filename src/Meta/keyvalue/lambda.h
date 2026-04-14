@@ -50,18 +50,15 @@ private:
     static constexpr const auto sArgs = metafunctionArgs(&Functor::operator());
 
     template <auto F, typename R, typename T, typename... Args, size_t... I>
-    static void unpackMemberHelper(const FunctionTable *table, ArgumentList &results, const ArgumentList &args, std::index_sequence<I...>)
-    {
-        ScopePtr scope = ValueType_as<ScopePtr>(getArgument(args, 0));
-        assert(scope.mType == &sMetaTable);
-        T *t = static_cast<T *>(scope.mScope);
-        results = { invoke_patch_void<std::monostate>(F, t, ValueType_as<std::remove_cv_t<std::remove_reference_t<Args>>>(getArgument(args, I + 1))...) };
+    static KeyValueResult unpackMemberHelper(const FunctionTable *table, ValueType &retVal, const ArgumentList &args, std::index_sequence<I...>)
+    {        
+        return ValueType_unwrap(retVal, F, getArgument(args, 0), getArgument(args, I + 1)...);
     }
 
     template <auto F, typename R, typename T, typename... Args>
-    static void unpackMemberApiMethod(const FunctionTable *table, ArgumentList &results, const ArgumentList &args)
+    static KeyValueResult unpackMemberApiMethod(const FunctionTable *table, ArgumentList &results, const ArgumentList &args)
     {
-        unpackMemberHelper<F, R, T, Args...>(table, results, args, std::make_index_sequence<sizeof...(Args)>());
+        return unpackMemberHelper<F, R, T, Args...>(table, results, args, std::make_index_sequence<sizeof...(Args)>());
     }
 
     template <auto F, typename R, typename T, typename... Args>

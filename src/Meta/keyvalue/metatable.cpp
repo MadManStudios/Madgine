@@ -54,7 +54,7 @@ std::string MetaTable::name(ScopePtr scope) const
         ValueType name;
         nameIt->value(name);
         if (name.is<std::string>()) {
-            return name.as<std::string>();
+            return name.as<CoWString>();
         }
     }
     ScopeIterator proxyIt = find("__proxy", scope);

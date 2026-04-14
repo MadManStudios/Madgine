@@ -121,7 +121,7 @@ void Parser::generate(Engine::Stream &in, Engine::Stream &out) const
                 hasType = false;
                 name.clear();
             } else {
-                std::string value = mFields.at(name).as<std::string>();
+                std::string value = mFields.at(name).as<Engine::CoWString>();
 
                 if (hasType) {
                     if (type == "uc_string") {

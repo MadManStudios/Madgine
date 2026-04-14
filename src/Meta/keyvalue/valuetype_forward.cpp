@@ -30,10 +30,16 @@ ValueTypeDesc ValueType_type(const ValueType &v)
     return v.type();
 }
 
-template <ValueTypePrimitive T>
-META_EXPORT ValueType_Return<T> ValueType_as(const ValueType &v)
+template <ValueTypeStorage T>
+META_EXPORT const T &ValueType_as(const ValueType &v)
 {
-    return v.as<std::decay_t<T>>();
+    return v.as<T>();
+}
+
+template <ValueTypeStorage T>
+META_EXPORT T &ValueType_as(ValueType &v)
+{
+    return v.as<T>();
 }
 
 #define VALUETYPE_SEP
@@ -48,11 +54,12 @@ META_EXPORT ValueType_Return<T> ValueType_as(const ValueType &v)
     META_EXPORT void to_ValueType_impl<const std::decay_t<Type>>(ValueType & v, const std::decay_t<Type> &&t) { v = std::move(t); } \
                                                                                                                                     \
     template <>                                                                                                                     \
-    META_EXPORT void to_ValueType_impl<const std::decay_t<Type> &>(ValueType & v, const std::decay_t<Type> &t) { v = t; }           \
-                                                                                                                                    \
-    template META_EXPORT ValueType_Return<std::decay_t<Type>> ValueType_as<std::decay_t<Type>>(const ValueType &v);
+    META_EXPORT void to_ValueType_impl<const std::decay_t<Type> &>(ValueType & v, const std::decay_t<Type> &t) { v = t; }
 
-#define VALUETYPE_TYPE(Name, Storage, ...) FOR_EACH(VALUETYPE_IMPL, VALUETYPE_SEP, __VA_ARGS__)
+#define VALUETYPE_TYPE(Name, Storage, ...)                                         \
+    FOR_EACH(VALUETYPE_IMPL, VALUETYPE_SEP, __VA_ARGS__)                           \
+    template META_EXPORT const Storage &ValueType_as<Storage>(const ValueType &v); \
+    template META_EXPORT Storage &ValueType_as<Storage>(ValueType & v);
 
 #include "valuetypedefinclude.h"
 #undef VALUETYPE_IMPL

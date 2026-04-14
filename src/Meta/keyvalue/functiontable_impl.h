@@ -2,7 +2,6 @@
 
 #include "Generic/linestruct.h"
 
-#include "argumentlist.h"
 #include "functionargument.h"
 #include "functiontable.h"
 #include "valuetype_forward.h"
@@ -79,7 +78,7 @@ template <auto F, size_t... Is>
 static constexpr typename FunctionTable::FPtr wrapHelper(std::index_sequence<Is...>)
 {
     return [](const FunctionTable *, ValueType &retVal, const ArgumentList &args) {
-        return ValueType_unwrap(retVal, F, args.at(Is)...);
+        return ValueType_unwrap(retVal, F, getArgument(args, Is)...);
     };
 }
 }
