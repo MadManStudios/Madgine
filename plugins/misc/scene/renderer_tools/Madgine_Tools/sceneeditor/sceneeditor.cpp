@@ -365,13 +365,13 @@ namespace Tools {
 
     void SceneEditor::renderToolBar()
     {
-        if (mTool.beginToolBar("Scene")) {
+        if (ImGui::BeginToolBar("Scene")) {
 
             if (ImGui::Button(IMGUI_ICON_PLUS)) {
                 sceneMgr().container("Editor").createEntity("", {}, [this](Scene::Entity::EntityPtr ptr) { select(std::move(ptr)); });
             }
 
-            mTool.endToolBar();
+            ImGui::EndToolBar();
         }
     }
 

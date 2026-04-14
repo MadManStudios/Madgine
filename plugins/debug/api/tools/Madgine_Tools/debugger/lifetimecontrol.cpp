@@ -220,9 +220,9 @@ namespace Tools {
     void LifetimeControl::renderToolbar()
     {
         if (beginGame()) {
-            if (beginToolBar("Lifetime")) {
+            if (ImGui::BeginToolBar("Lifetime")) {
                 controls(Debug::getRootLifetime());
-                endToolBar();
+                ImGui::EndToolBar();
             }
         }
         ImGui::End();

@@ -151,9 +151,12 @@ namespace Tools {
         window_flags |= ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoNavFocus;
         // window_flags |= ImGuiWindowFlags_NoBackground;
 
-        ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.0f, 0.0f));
+        ImGuiStyle &style = ImGui::GetStyle();
+        ImVec4 backgroundCol = style.Colors[ImGuiCol_WindowBg];
+
         ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.0f);
         ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.0f);
+        ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.0f, 0.0f));
         ImGui::PushStyleColor(ImGuiCol_WindowBg, { 0, 0, 0, 0 });
         ImGui::Begin("Madgine Root Window", nullptr, window_flags | ImGuiWindowFlags_NoDocking);
 
@@ -166,6 +169,15 @@ namespace Tools {
         ImGui::SetNextWindowDockID(mRootDockSpaceId, ImGuiCond_Appearing);
         ImGui::SetNextWindowClass(&windowClass);
         if (ImGui::Begin("Game", nullptr, window_flags | ImGuiWindowFlags_MenuBar)) {
+            ImGui::PopStyleVar();
+            ImGui::PushStyleColor(ImGuiCol_ChildBg, backgroundCol);
+            ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, { 0.0f, 0.0f });
+            if (ImGui::BeginToolBar("Dummy"))
+                ImGui::EndToolBar();
+            ImGui::PopStyleVar();
+            ImGui::PopStyleColor();
+            ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.0f, 0.0f));
+
             ImGui::DockSpace(mGameDockSpaceId, ImVec2(0.0f, 0.0f), dockspace_flags);
 
             gameVisible = true;

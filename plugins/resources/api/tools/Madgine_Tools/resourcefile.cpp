@@ -49,7 +49,7 @@ namespace Tools {
                 ImGui::EndMenuBar();
             }
 
-            if (mEditor.beginToolBar("Editor")) {
+            if (ImGui::BeginToolBar("Editor")) {
 
                 if (!mHistory.isDirty())
                     ImGui::BeginDisabled();
@@ -66,7 +66,7 @@ namespace Tools {
 
                 mHistory.renderControls();
 
-                mEditor.endToolBar();
+                ImGui::EndToolBar();
             }
 
             if (ImGui::Shortcut(ImGuiKey_S | ImGuiMod_Ctrl)) {

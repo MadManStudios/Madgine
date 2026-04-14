@@ -66,9 +66,6 @@ namespace Tools {
         bool beginContent(ImGuiWindowFlags flags = 0);
         bool beginGame();
 
-        bool beginToolBar(const char *name);
-        void endToolBar();
-
     protected:
         virtual Threading::Task<bool> init();
         virtual Threading::Task<void> finalize();

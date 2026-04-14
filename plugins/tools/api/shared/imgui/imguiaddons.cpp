@@ -1619,4 +1619,32 @@ void EndStatus()
     End();
 }
 
+bool BeginToolBar(const char *name)
+{
+    ImGuiStyle &style = ImGui::GetStyle();
+    const float height = style.FramePadding[ImGuiAxis_Y] * 2.0f + style.WindowPadding[ImGuiAxis_Y] * 2.0f + ImGui::GetFontSize();
+
+    if (ImGui::BeginChild("Toolbar", { 0.0f, height }, ImGuiChildFlags_NavFlattened | ImGuiChildFlags_AlwaysUseWindowPadding, ImGuiWindowFlags_NoScrollbar)) {
+       
+        ImGui::BeginHorizontal(name);
+
+        return true;
+    } else {
+        ImGui::EndChild();
+        return false;
+    }
+}
+
+void EndToolBar()
+{
+    ImGui::EndHorizontal();
+    ImGui::SameLine();
+
+    ImGui::SeparatorEx(ImGuiSeparatorFlags_Vertical);
+    ImGui::SameLine();
+
+    ImGui::EndChild();
+}
+
+
 }
