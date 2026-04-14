@@ -78,6 +78,12 @@ struct CoW {
         return mPtr ? *mPtr : *mConstPtr;
     }
 
+    T *operator&()
+    {
+        promote();
+        return mPtr.get();
+    }
+
     T *operator->()
     {
         promote();
