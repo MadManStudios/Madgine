@@ -53,6 +53,7 @@ namespace Tools {
 
                 if (!mHistory.isDirty())
                     ImGui::BeginDisabled();
+                ImGui::SetNextItemShortcut(ImGuiKey_S | ImGuiMod_Ctrl);
                 if (ImGui::Button(IMGUI_ICON_SAVE)) {
                     if (mPath.empty()) {
                         mEditor.root().dialogs().show(
@@ -67,14 +68,6 @@ namespace Tools {
                 mHistory.renderControls();
 
                 ImGui::EndToolBar();
-            }
-
-            if (ImGui::Shortcut(ImGuiKey_S | ImGuiMod_Ctrl)) {
-                if (mPath.empty())
-                    mEditor.root().dialogs().show(
-                        mEditor.resourceFilePicker(true), [this](const Filesystem::Path &p) { save(p); });
-                else
-                    save(mPath);
             }
         }
         return visible;
