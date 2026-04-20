@@ -79,7 +79,27 @@ KeyValueResult ValueType_call(Callable &&callable, Arg &&arg)
                 std::forward<Arg>(arg));
         }
     } else if constexpr (InstanceOf<T, std::variant>) {
-        throw 0;
+        return [&]<typename... Ty>(type_pack<Ty...>) {
+            bool matched = false;
+            KeyValueResult result;
+            ([&]() {
+                if (ValueType_is<Ty>) {
+                    if (matched) {
+                        result = KEYVALUE_UNKNOWN_ERROR() << "More than one variant type could match";
+                        return;
+                    }
+                    matched = true;
+                    result = ValueType_call([&](const Ty &t) {
+                        return callable(T { t });
+                    },
+                        std::forward<Arg>(arg));
+                }
+            }(), ...);
+            if (!matched) {
+                result = KEYVALUE_UNKNOWN_ERROR() << "No variant type matched argument";
+            }
+            return result;
+        }(typename is_instance<T, std::variant>::argument_types {});
     } else if constexpr (std::same_as<T, ValueType>) {
         return callable(arg);
     } else if constexpr (ValueTypePrimitive<T>) {
