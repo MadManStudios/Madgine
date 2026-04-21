@@ -168,6 +168,7 @@ namespace Tools {
         if (dockId == 0)
             dockId = ImGui::GetID("Floating");
         mDockSpaceId = ImHashStr(key().data(), 0, dockId);
+        mCurrentWindowId = ImGui::GetCurrentWindow()->ID;
         ImGuiID lastDockId = (ImGuiID)std::exchange(*ImGui::GetStateStorage()->GetIntRef(ImGui::GetID("DockID")), (int)mDockSpaceId);
         if (lastDockId != 0 && lastDockId != mDockSpaceId) {
             ImGuiDockNode *node = ImGui::DockBuilderGetNode(mDockSpaceId);
@@ -226,6 +227,10 @@ namespace Tools {
     {
         assert(dockingDir != ImGuiDir_None);
 
+        ImGuiWindowClass subPanelClass;
+        subPanelClass.FocusRouteParentWindowId = mCurrentWindowId;
+        ImGui::SetNextWindowClass(&subPanelClass);
+
         std::string newName = std::format("{}##{:x}", name, mDockSpaceId);
         if (ImGui::Begin(newName.c_str(), open, flags)) {
             ImGui::SetWindowDockingDir(mDockSpaceId, dockingDir, ratio, false, ImGuiCond_FirstUseEver);
@@ -249,6 +254,7 @@ namespace Tools {
 
         ImGuiWindowClass window_class;
         window_class.DockNodeFlagsOverrideSet = ImGuiDockNodeFlags_NoTabBar;
+        window_class.FocusRouteParentWindowId = mCurrentWindowId;
         ImGui::SetNextWindowClass(&window_class);
 
         ImGui::SetNextWindowDockID(ImGui::DockBuilderGetCentralNode(mDockSpaceId)->ID, ImGuiCond_Appearing);

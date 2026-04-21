@@ -18,6 +18,7 @@
 
 #include "Modules/uniquecomponent/uniquecomponentcollector.h"
 
+#include "../util/trace_imgui.h"
 #include "imgui/imgui_internal.h"
 #include "inspector.h"
 
@@ -59,13 +60,13 @@ namespace Tools {
         }
     }
 
-    bool FunctionTool::renderFunction(BoundApiFunction &function, std::string_view functionName, ArgumentList &args)
+    bool FunctionTool::renderFunction(const Traced<BoundApiFunction &> &function, std::string_view functionName, ArgumentList &args)
     {
         ImGui::Text(functionName);
         return renderFunctionDetails(function, args);
     }
 
-    bool FunctionTool::renderFunctionSelect(BoundApiFunction &function, std::string &functionName, ArgumentList &args)
+    bool FunctionTool::renderFunctionSelect(const Traced<BoundApiFunction &> &function, std::string &functionName, ArgumentList &args)
     {
         bool changed = false;
 
@@ -73,17 +74,17 @@ namespace Tools {
 
         std::string name = functionName;
 
-        if (function.mScope)
-            name = function.scope().name() + ("." + functionName);
+        if (function->mScope)
+            name = function->scope().name() + ("." + functionName);
         if (ImGui::BeginCombo("##functionSelect", name.c_str())) {
             ImGui::InputText("filter", &filter);
             const FunctionTable *current = sFunctionList();
             while (current) {
-                bool is_selected = (function.mFunction.mTable == current);
+                bool is_selected = (function->mFunction.mTable == current);
                 if (ImGui::Selectable(current->mName.data(), is_selected)) {
                     functionName = current->mName;
-                    function.mScope = nullptr;
-                    function.mFunction = current;
+                    function->mScope = nullptr;
+                    function->mFunction = current;
                     changed = true;
                 }
                 if (is_selected)
@@ -94,18 +95,20 @@ namespace Tools {
         }
 
         if (ImGui::BeginDragDropTarget()) {
-            if (ImGui::AcceptDraggableValueType(function)) {
-                functionName = function.mFunction.mTable->mName;
+            BoundApiFunction newFunction;
+            if (ImGui::AcceptDraggableValueType(newFunction)) {
+                functionName = newFunction.mFunction.mTable->mName;
+                function.get() = newFunction;
                 changed = true;
             }
             ImGui::EndDragDropTarget();
         }
         if (changed) {
             args.clear();
-            args.resize(function.argumentsCount(true));
+            args.resize(function->argumentsCount(true));
 
-            for (size_t i = 0; i < function.argumentsCount(true); ++i) {
-                ExtendedValueTypeDesc type = function.mFunction.mTable->mArguments[i + function.isMemberFunction()].mType;
+            for (size_t i = 0; i < function->argumentsCount(true); ++i) {
+                ExtendedValueTypeDesc type = function->mFunction.mTable->mArguments[i + function->isMemberFunction()].mType;
                 if (type.mType.isRegular()) {
                     args[i].setType(type);
                 } else {
@@ -117,9 +120,9 @@ namespace Tools {
         return renderFunctionDetails(function, args);
     }
 
-    bool FunctionTool::renderFunctionDetails(BoundApiFunction &function, ArgumentList &args)
+    bool FunctionTool::renderFunctionDetails(const Traced<BoundApiFunction &> &function, ArgumentList &args)
     {
-        if (function.mFunction) {
+        if (function->mFunction) {
 
             ImGui::SameLine();
             ImGui::Text("(");
@@ -127,26 +130,27 @@ namespace Tools {
 
             if (ImGui::BeginTable("arguments", 2, ImGuiTableFlags_Resizable)) {
 
-                for (size_t i = 0; i < function.argumentsCount(); ++i) {
+                for (size_t i = 0; i < function->argumentsCount(); ++i) {
 
                     ImGui::TableNextRow();
 
-                    ValueType v = i == 0 ? ValueType { function.scope() } : args[i - 1];
-                    bool changed = mInspector->drawValue(function.mFunction.mTable->mArguments[i].mName, v, true, function.mFunction.mTable->mArguments[i].mType).first;
+                    ValueType v = i == 0 ? ValueType { function->scope() } : args[i - 1];
+                    TracedRoot traced { mHistory, v };
+                    bool changed = mInspector->drawValue(function->mFunction.mTable->mArguments[i].mName, traced, true, function->mFunction.mTable->mArguments[i].mType);
 
                     if (ImGui::BeginDragDropTarget()) {
-                        changed |= ImGui::AcceptDraggableValueType(v, [&](const ValueType &dropped) { return function.mFunction.mTable->mArguments[i].mType.canAccept(dropped.type()); });
+                        changed |= ImGui::AcceptDraggableValueType(v, [&](const Traced<const ValueType &> &dropped) { return function->mFunction.mTable->mArguments[i].mType.canAccept(dropped->type()) ? KeyValueResult {} : KEYVALUE_UNKNOWN_ERROR(); });
                         ImGui::EndDragDropTarget();
                     }
                     if (changed) {
                         if (i == 0)
-                            function.mScope = v.as<ScopePtr>().mScope;
+                            function->mScope = v.as<ScopePtr>().mScope;
                         else
                             args[i - 1] = v;
                     }
 
                     if (ImGui::IsItemHovered()) {
-                        ExtendedValueTypeDesc type = function.mFunction.mTable->mArguments[i].mType;
+                        ExtendedValueTypeDesc type = function->mFunction.mTable->mArguments[i].mType;
                         if (type.mType != ExtendedValueTypeEnum::GenericType) {
                             ImGui::SetTooltip("%s", type.toString().c_str());
                         } else {
@@ -162,7 +166,7 @@ namespace Tools {
             ImGui::Text(")");
         }
 
-        ImGui::BeginDisabled(!(function.mFunction && (!function.isMemberFunction() || function.mScope)));
+        ImGui::BeginDisabled(!(function->mFunction && (!function->isMemberFunction() || function->mScope)));
 
         bool call = ImGui::Button("Call");
 
@@ -175,7 +179,8 @@ namespace Tools {
     {
         if (beginToolWindow("FunctionTool", &mVisible)) {
             if (beginContent()) {
-                if (renderFunctionSelect(mCurrentFunction, mCurrentFunctionName, mCurrentArguments)) {
+                TracedRoot<FunctionTool *> traced { mHistory, this };                
+                if (renderFunctionSelect(traced.trace(&FunctionTool::mCurrentFunction), mCurrentFunctionName, mCurrentArguments)) {
                     ValueType result;
                     mCurrentFunction(result, mCurrentArguments);
                 }

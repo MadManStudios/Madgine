@@ -100,7 +100,7 @@ namespace Tools {
                 ImGui::EndMenuBar();
             }
 
-            Behavior::BehaviorHandle behaviorToAdd = SceneEditor::render();
+            Behavior::BehaviorHandle behaviorToAdd = SceneEditor::render(mHistory);
             if (behaviorToAdd) {
                 Execution::access_binding(mSelectedEntity, [&](Scene::Entity::Entity &entity) {
                     entity.behaviors().addBehavior(std::move(behaviorToAdd));

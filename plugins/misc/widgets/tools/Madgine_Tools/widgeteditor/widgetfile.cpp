@@ -20,6 +20,7 @@
 #include "Madgine_Tools/imgui/clientimroot.h"
 #include "Madgine_Tools/imguiicons.h"
 #include "Madgine_Tools/inspector/inspector.h"
+#include "Madgine_Tools/util/trace_imgui.h"
 #include "imgui/imguiaddons.h"
 #include "widgeteditor.h"
 
@@ -81,10 +82,7 @@ namespace Tools {
             if (editor().beginSubPanel("Details", &editor().mWidgetDetailsVisible, ImGuiDir_Right)) {
 
                 if (mSelected) {
-                    if (mSelected->render()) {
-                        throw 0;
-                        //mHistory.addOperation();
-                    }
+                    mSelected->render(mHistory);
                 }
 
                 // io.WantCaptureMouse = true;
@@ -135,10 +133,10 @@ namespace Tools {
                 }
             }
 
-            ImGui::DraggableValueTypeSource(w->mName, w);
+            ImGui::DraggableValueTypeSource<Widgets::WidgetBase *>(w->mName, TracedRoot<Widgets::WidgetBase *const &> { mHistory, w });
             if (ImGui::BeginDragDropTarget()) {
                 Widgets::WidgetBase *newChild = nullptr;
-                if (ImGui::AcceptDraggableValueType(newChild, [](const Widgets::WidgetBase *child) { return child->getParent(); })) {
+                if (ImGui::AcceptDraggableValueType(newChild, [](const Traced<Widgets::WidgetBase *const &> &child) { return child.get()->getParent() ? KeyValueResult {} : KEYVALUE_UNKNOWN_ERROR(); })) {
                     newChild->setParent(w);
                     aborted = true;
                 }

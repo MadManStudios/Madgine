@@ -18,6 +18,7 @@
 #include "Meta/keyvalue/metatable_impl.h"
 
 #include "Madgine_Tools/imgui/clientimroot.h"
+#include "Madgine_Tools/util/trace_imgui.h"
 #include "Madgine_Tools/interactivecamera.h"
 #include "im3d/im3d.h"
 #include "imgui/imgui.h"
@@ -113,7 +114,7 @@ namespace Tools {
             Vector2i iRegion { static_cast<int>(region.x), static_cast<int>(region.y) };
             if (iRegion.x > 0 && iRegion.y > 0)
                 mRenderTarget->resize(iRegion);
-            ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, {0.0f, 0.0f});
+            ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, { 0.0f, 0.0f });
             bool pressed = ImGui::ImageButton("Content", (void *)mRenderTarget->texture()->resourceBlock().mPtr, region, { 0, 0 }, { 1, 1 });
             ImGui::PopStyleVar();
             if (pressed && !mState.mDragging[0])
@@ -176,12 +177,12 @@ namespace Tools {
 
             if (ImGui::BeginDragDropTarget()) {
                 Vector3 pos = ray.point(5.0f);
-                Render::GPUMeshLoader::Resource *resource;
+                UndoStack stack;
+                Render::GPUMeshLoader::Resource *resource = nullptr;
                 if (ImGui::AcceptDraggableValueType(resource)) {
                     mEditor.sceneMgr().container("Default").createEntity("", [=](Scene::Entity::Entity &e) {
                         e.addComponent<Scene::Entity::Transform>()->mPosition = pos;
-                        e.addComponent<Scene::Entity::Mesh>()->set(resource);                        
-                    }, [this](Scene::Entity::EntityPtr ptr) { mEditor.select(std::move(ptr)); });                    
+                        e.addComponent<Scene::Entity::Mesh>()->set(resource); }, [this](Scene::Entity::EntityPtr ptr) { mEditor.select(std::move(ptr)); });
                 } else if (ImGui::IsDraggableValueTypeBeingAccepted(resource)) {
                     Render::GPUMeshLoader::Handle handle = resource->loadData();
                     handle.info()->setPersistent(true);

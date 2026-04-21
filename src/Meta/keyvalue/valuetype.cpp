@@ -159,23 +159,6 @@ std::string ValueType::getTypeString() const
     return type().toString();
 }
 
-bool ValueType::isReference() const
-{
-    return visit(overloaded {
-        [](const ScopePtr &) {
-            return true;
-        },
-        [](const KeyValueVirtualSequenceRange &range) {
-            return range.isReference();
-        },
-        [](const KeyValueVirtualAssociativeRange &range) {
-            return range.isReference();
-        },
-        [](const auto &) {
-            return false;
-        } });
-}
-
 ValueTypeDesc ValueType::type() const
 {
     ValueTypeIndex i = index();

@@ -39,8 +39,8 @@ namespace Tools {
     {
         mContext = &Render::RenderContext::getSingleton();
 
-        getTool<Inspector>().addPreviewDefinition<Render::FontLoader::Resource>([](Render::FontLoader::Resource *font) {
-            Render::FontLoader::Handle handle = font->loadData();
+        getTool<Inspector>().addPreviewDefinition<Render::FontLoader::Resource>([](const Traced<Render::FontLoader::Resource *> &font) {
+            Render::FontLoader::Handle handle = font.get()->loadData();
             handle.info()->setPersistent(true);
             if (handle.available())
                 ImGui::Image((void *)handle->mTexture->resourceBlock(), handle->mTexture->size());

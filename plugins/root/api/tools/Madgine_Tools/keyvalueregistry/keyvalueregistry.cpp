@@ -46,7 +46,9 @@ namespace Tools {
                     ImGui::TableNextRow();
                     ImGui::TableNextColumn();
                     if (ImGui::TreeNode(p.first.data())) {
-                        mInspector->drawMembers(p.second, {});
+                        UndoStack stack;
+                        TracedRoot traced { stack, p.second };
+                        mInspector->drawMembers(traced, {});
                         ImGui::TreePop();
                     }
                 }

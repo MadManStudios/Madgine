@@ -16,6 +16,7 @@
 #include "Meta/keyvalue/metatable_impl.h"
 
 #include "../toolbase.h"
+#include "../util/trace_imgui.h"
 #include "im3d/im3d.h"
 #include "imgui/imgui.h"
 #include "imgui/imgui_internal.h"
@@ -125,6 +126,8 @@ namespace Tools {
 
         ImGui::NewFrame();
         Im3D::NewFrame();
+
+        renderDragDropTooltips();
 
         if (ImGui::BeginMainMenuBar()) {
 
@@ -271,6 +274,23 @@ namespace Tools {
             }
 
             mToolReadTool = nullptr;
+        }
+    }
+
+    void ImRoot::renderDragDropTooltips()
+    {
+        if (const ImGuiPayload *imGuiPayload = ImGui::GetDragDropPayload()) {
+            if (imGuiPayload->IsDataType("ValueType")) {
+                if (ImGui::BeginTooltip()) {
+                    ImGui::ValueTypePayload *payload = *static_cast<ImGui::ValueTypePayload **>(imGuiPayload->Data);
+                    ImGui::Text(payload->mName);
+                    payload->mValue([&](const Engine::Tools::Traced<const Engine::ValueType &> &v) {
+                        ImGui::Text(v.get().getTypeString());
+                        return std::make_pair(Engine::KeyValueResult {}, false);
+                    });
+                    ImGui::EndTooltip();
+                }
+            }
         }
     }
 

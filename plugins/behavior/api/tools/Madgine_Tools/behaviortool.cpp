@@ -62,7 +62,7 @@ namespace Tools {
 
         mInspector = &getTool<Inspector>();
 
-        mInspector->addPreviewDefinition<Behavior::BehaviorList>([this](Behavior::BehaviorList *list) {
+        mInspector->addPreviewDefinition<Behavior::BehaviorList>([this](const Traced<Behavior::BehaviorList *> &list) {
             return drawBehaviorList(*list);
         });
 
@@ -79,28 +79,38 @@ namespace Tools {
         co_await ToolBase::finalize();
     }
 
-    bool BehaviorTool::drawBehaviorList(Behavior::BehaviorList &list)
+    bool BehaviorTool::drawBehaviorList(const Traced<Behavior::BehaviorList &> &list)
     {
-        return std::erase_if(list.mEntries, [this](Behavior::BehaviorList::Entry &entry) {
-            ImGui::BeginGroupPanel(entry.mHandle.name().data());
-            ImGui::BeginTable("Entry", 2, ImGuiTableFlags_Resizable);
-            mInspector->drawMembers(entry.mParameters.customScopePtr());
-            ImGui::EndTable();
+        bool deleted = false;
+        const auto &traced = list.trace(&Behavior::BehaviorList::mEntries);
+        for (auto it = traced.begin(); it != traced.end();) {
+            if ([this](const Traced<Behavior::BehaviorList::Entry &> &entry) {
+                    ImGui::BeginGroupPanel(entry->mHandle.name().data());
+                    ImGui::BeginTable("Entry", 2, ImGuiTableFlags_Resizable);
+                    mInspector->drawMembers(entry.trace(&Behavior::BehaviorList::Entry::mParameters).trace(&Behavior::ParameterTuple::customScopePtr));
+                    ImGui::EndTable();
 
-            ImGui::ItemSize({ ImGui::GetItemRectSize().x, 0 });
+                    ImGui::ItemSize({ ImGui::GetItemRectSize().x, 0 });
 
-            ImGui::EndGroupPanel();
+                    ImGui::EndGroupPanel();
 
-            bool remove = false;
+                    bool remove = false;
 
-            if (ImGui::BeginPopupCompoundContextItem()) {
-                if (ImGui::MenuItem((IMGUI_ICON_X " Delete " + std::string { entry.mHandle.name() }).c_str())) {
-                    remove = true;
-                }
-                ImGui::EndPopup();
+                    if (ImGui::BeginPopupCompoundContextItem()) {
+                        if (ImGui::MenuItem((IMGUI_ICON_X " Delete " + std::string { entry->mHandle.name() }).c_str())) {
+                            remove = true;
+                        }
+                        ImGui::EndPopup();
+                    }
+                    return remove;
+                }(*it)) {
+                it = traced.erase(it);
+                deleted = true;
+            } else {
+                ++it;
             }
-            return remove;
-        }) > 0;
+        }
+        return deleted;
     }
 
     void BehaviorTool::renderMenu()

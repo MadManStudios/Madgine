@@ -83,7 +83,7 @@ KeyValueResult ValueType_call(Callable &&callable, Arg &&arg)
             bool matched = false;
             KeyValueResult result;
             ([&]() {
-                if (ValueType_is<Ty>) {
+                if (ValueType_is<Ty>(arg)) {
                     if (matched) {
                         result = KEYVALUE_UNKNOWN_ERROR() << "More than one variant type could match";
                         return;
@@ -103,6 +103,8 @@ KeyValueResult ValueType_call(Callable &&callable, Arg &&arg)
     } else if constexpr (std::same_as<T, ValueType>) {
         return callable(arg);
     } else if constexpr (ValueTypePrimitive<T>) {
+        if (!ValueType_is<T>(arg))
+            return KEYVALUE_UNKNOWN_ERROR() << "Expected " << typeid(T).name();
         return callable(ValueType_as<ValueTypeStorageSelect<T>>(arg));
     } else if constexpr (std::ranges::range<T> && requires { typename T::iterator; }) {
         if constexpr (std::same_as<KeyType_t<typename T::iterator::value_type>, Void>) {
@@ -124,7 +126,7 @@ KeyValueResult ValueType_call(Callable &&callable, Arg &&arg)
         return callable(ValueType_as<FlagsHolder>(arg).template safe_cast<T>());
     } else if constexpr (Execution::AnyBinding<T>) {
         if (!ValueType_is<KeyValueBinding>(arg))
-            throw 0;
+            return KEYVALUE_UNKNOWN_ERROR() << "No known conversion to Binding";
         return callable(T { ValueType_as<KeyValueBinding>(arg).template unwrap<T>() });
     } else {
         if (ValueType_is<KeyValueBinding>(arg)) {

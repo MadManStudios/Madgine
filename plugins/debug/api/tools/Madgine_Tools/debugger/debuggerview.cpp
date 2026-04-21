@@ -44,8 +44,8 @@ namespace Tools {
 
         mDebugger.addListener(this);
 
-        mInspector->addPreviewDefinition<Debug::ContextInfo>([this](Debug::ContextInfo *context) {
-            renderDebugContext(*context);
+        mInspector->addPreviewDefinition<Debug::ContextInfo>([this](const Traced<Debug::ContextInfo *> &context) {
+            renderDebugContext(*context.get());
             return false;
         });
 

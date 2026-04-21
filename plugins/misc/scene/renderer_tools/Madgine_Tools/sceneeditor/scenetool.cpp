@@ -93,7 +93,7 @@ namespace Tools {
 
             renderMenuBar();
 
-            Behavior::BehaviorHandle behaviorToAdd = SceneEditor::render();
+            Behavior::BehaviorHandle behaviorToAdd = SceneEditor::render(mHistory);
 
             if (behaviorToAdd) {
                 mPendingBehavior.mTargetEntity = mSelectedEntity;
@@ -104,7 +104,8 @@ namespace Tools {
 
             if (ImGui::BeginPopup("BehaviorParameters")) {
                 if (ImGui::BeginTable("columns", 2, ImGuiTableFlags_SizingStretchProp)) {
-                    mInspector->drawMembers(&mPendingBehavior.mParameters);
+                    TracedRoot<ScopePtr> traced { mHistory, &mPendingBehavior.mParameters };
+                    mInspector->drawMembers(traced);
                     ImGui::EndTable();
                 }
                 if (ImGui::Button("Cancel")) {

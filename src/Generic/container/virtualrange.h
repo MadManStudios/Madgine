@@ -64,7 +64,7 @@ namespace __generic_impl__ {
             return std::make_unique<VirtualIteratorImpl<RefT, It, EndIt, Assign>>(mIt, mEnd, this->mRange);
         }
 
-        bool compare(VirtualIteratorBase<RefT> &other) const
+        bool compare(VirtualIteratorBase<RefT> &other) const override
         {
             if (auto *otherImpl = dynamic_cast<VirtualIteratorImpl<RefT, It, EndIt, Assign> *>(&other)) {
                 return mIt == otherImpl->mIt;

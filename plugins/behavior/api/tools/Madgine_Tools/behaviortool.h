@@ -15,7 +15,7 @@ namespace Tools {
         Threading::Task<bool> init() override;
         Threading::Task<void> finalize() override;
 
-        bool drawBehaviorList(Behavior::BehaviorList &list);
+        bool drawBehaviorList(const Traced<Behavior::BehaviorList &> &list);
 
         void renderMenu() override;
 

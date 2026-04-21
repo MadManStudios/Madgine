@@ -15,12 +15,12 @@
 #include "Meta/keyvalue/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
+#include "Madgine_Tools/imguiicons.h"
+#include "Madgine_Tools/util/trace_imgui.h"
 #include "Madgine_Tools/renderer/imroot.h"
 #include "imgui/imgui.h"
 #include "imgui/imguiaddons.h"
 #include "resourceeditor.h"
-
-#include "Madgine_Tools/imguiicons.h"
 
 UNIQUECOMPONENT(Engine::Tools::ResourcesTool);
 
@@ -181,7 +181,9 @@ namespace Tools {
                         if (item_curr_idx_to_focus == item_idx)
                             ImGui::SetKeyboardFocusHere(-1);
 
-                        ImGui::DraggableValueTypeSource("Resource", ScopePtr { resource.mResource, resource.mLoader->resourceTypes().back() });
+                        UndoStack stack;
+                        TracedRoot traced { stack, ScopePtr { resource.mResource, resource.mLoader->resourceTypes().back() } };
+                        ImGui::DraggableValueTypeSource<ScopePtr>("Resource", traced);
 
                         // Render icon (a real app would likely display an image/thumbnail here)
                         // Because we use ImGuiMultiSelectFlags_BoxSelect2d, clipping vertical may occasionally be larger, so we coarse-clip our rendering as well.

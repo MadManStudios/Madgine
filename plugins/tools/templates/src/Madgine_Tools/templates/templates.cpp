@@ -91,13 +91,16 @@ namespace Tools {
 
                 TemplateEngine::Parser parser { path };
 
+                UndoStack history;
+
                 DialogSettings &settings = co_await get_dialog_settings;
                 settings.header = "Generate '" + name + "'";
                 do {
 
                     if (ImGui::BeginTable("fields", 2, ImGuiTableFlags_Resizable)) {
                         for (auto &[key, value] : parser.fields()) {
-                            templates->mInspector->drawValue(key, value, true, value.type());
+                            TracedRoot root { history, value };
+                            templates->mInspector->drawValue(key, root, true, value.type());
                         }
                         ImGui::EndTable();
                     }
@@ -136,6 +139,8 @@ namespace Tools {
                 const Plugins::Plugin *currentPlugin = nullptr;
                 const UniqueComponent::RegistryBase *currentRegistry = nullptr;
 
+                UndoStack history;
+
                 DialogSettings &settings = co_await get_dialog_settings;
                 settings.header = "Generate 'UniqueComponent'";
                 do {
@@ -144,7 +149,8 @@ namespace Tools {
                         for (auto &[key, value] : parser.fields()) {
                             if (key == "prefix" || key == "base" || key == "precompiled" || key == "collector" || key == "plugin")
                                 ImGui::BeginDisabled();
-                            templates->mInspector->drawValue(key, value, true, value.type());
+                            TracedRoot traced {history, value };                            
+                            templates->mInspector->drawValue(key, traced, true, value.type());
                             if (key == "prefix" || key == "base" || key == "precompiled" || key == "collector" || key == "plugin")
                                 ImGui::EndDisabled();
                         }

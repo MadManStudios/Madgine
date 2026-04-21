@@ -2,6 +2,8 @@
 
 #include "widgetsettings.h"
 
+#include "Meta/keyvalue/valuetype.h"
+
 #include "Madgine/behavior/behavior.h"
 #include "Madgine/widgets/geometry.h"
 #include "Madgine/widgets/widget.h"
@@ -10,6 +12,9 @@
 #include "Madgine_Tools/debugger/debuggerview.h"
 #include "Madgine_Tools/imguiicons.h"
 #include "Madgine_Tools/inspector/inspector.h"
+#include "Madgine_Tools/util/trace.h"
+#include "Madgine_Tools/util/keyvaluecustomoperation.h"
+
 #define IMGUI_DEFINE_MATH_OPERATORS
 #include "imgui/imgui.h"
 #include "imgui/imgui_internal.h"
@@ -33,7 +38,7 @@ namespace Tools {
         return mWidget;
     }
 
-    bool WidgetSettings::render()
+    bool WidgetSettings::render(UndoStack &history)
     {
         bool changed = false;
 
@@ -52,7 +57,6 @@ namespace Tools {
                     bool v = ref;
                     if (ImGui::Checkbox(cond->mName.empty() ? "<>" : cond->mName.c_str(), &v)) {
                         ref = v;
-                        changed = true;
                     }
                     selection |= v << i;
                     ++i;
@@ -63,6 +67,7 @@ namespace Tools {
                     mWidget->addConditional(selection);
                     mCurrentConditional = selection;
                     ImGui::CloseCurrentPopup();
+                    //changed = std::make_unique<KeyValueUndoOperation>(Trace { ValueType { mWidget } }, [=](Widgets::WidgetBase *widget) { widget->addConditional(selection); }, [=](Widgets::WidgetBase *widget) { widget->removeConditional(selection); });
                     changed = true;
                 }
                 if (selection == 0)
@@ -235,7 +240,8 @@ namespace Tools {
 
         if (ImGui::CollapsingHeader("WidgetData")) {
             if (ImGui::BeginTable("WidgetData-columns", 2, ImGuiTableFlags_Resizable)) {
-                changed |= mInspector.drawMembers(mWidget, { "Pos", "Size", "Children", "mConditions" });
+                TracedRoot<ScopePtr> traced { history, mWidget };
+                changed |= mInspector.drawMembers(traced, { "Pos", "Size", "Children", "mConditions" });
                 ImGui::EndTable();
             }
         }
@@ -295,7 +301,8 @@ namespace Tools {
                 if (!mPendingBehavior.mParameters)
                     mPendingBehavior.mParameters = mPendingBehavior.mFuture;
                 if (ImGui::BeginTable("columns", 2, ImGuiTableFlags_SizingStretchProp)) {
-                    mInspector.drawMembers(&mPendingBehavior.mParameters);
+                    TracedRoot<ScopePtr> traced { history, &mPendingBehavior.mParameters };
+                    mInspector.drawMembers(traced);
                     ImGui::EndTable();
                 }
                 if (ImGui::Button("Cancel")) {

@@ -14,7 +14,7 @@ namespace Tools {
 
         Widgets::WidgetBase *widget();
 
-        bool render();
+        bool render(UndoStack &history);
 
         void saveGeometry();
         void applyGeometry();

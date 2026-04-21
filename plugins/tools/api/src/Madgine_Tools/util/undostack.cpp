@@ -30,6 +30,24 @@ namespace Tools {
         mBasePointer = mCurrentOperation;
     }
 
+    void UndoStack::addContinuousOperation(std::unique_ptr<UndoableOperation> op)
+    {
+        assert(!mContinuousOperation);
+        mContinuousOperation = std::move(op);
+    }
+
+    UndoableOperation *UndoStack::getContinuousOperation() const
+    {
+        return mContinuousOperation.get();
+    }
+
+    void UndoStack::commitContinuousOperation()
+    {
+        assert(mContinuousOperation);
+        addOperation(std::move(mContinuousOperation));
+        mContinuousOperation.reset();
+    }
+
     void UndoStack::undo()
     {
         if (mCurrentOperation == mOperations.begin()) {
@@ -50,17 +68,31 @@ namespace Tools {
 
     void UndoStack::renderControls()
     {
+        bool canUndo = mCurrentOperation != mOperations.begin();
+        if (!canUndo)
+            ImGui::BeginDisabled();
+        ImGui::SetNextItemShortcut(ImGuiKey_Z | ImGuiMod_Ctrl);
         if (ImGui::Button(IMGUI_ICON_UNDO)) {
             undo();
         }
-        //ImGui::SameLine(); //Assuming in Layout
+        if (ImGui::IsItemHovered() && ImGui::IsKeyDown(ImGuiKey_LeftCtrl)) {
+            ImGui::BeginTooltip();
+            ImGui::Text("Stack Size: %zu", mOperations.size());
+            ImGui::EndTooltip();
+        }
+        if (!canUndo)
+            ImGui::EndDisabled();
+
+        // ImGui::SameLine(); //Assuming in Layout
+        bool canRedo = mCurrentOperation != mOperations.end();
+        if (!canRedo)
+            ImGui::BeginDisabled();
+        ImGui::SetNextItemShortcut(ImGuiKey_Z | ImGuiMod_Ctrl | ImGuiMod_Shift);
         if (ImGui::Button(IMGUI_ICON_REDO)) {
             redo();
         }
-    }
-
-    void UndoStack::handleShortcuts()
-    {
+        if (!canRedo)
+            ImGui::EndDisabled();
     }
 
 }

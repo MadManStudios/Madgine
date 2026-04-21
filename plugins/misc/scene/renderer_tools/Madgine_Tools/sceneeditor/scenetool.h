@@ -67,6 +67,8 @@ namespace Tools {
             Behavior::BehaviorHandle mHandle;
         } mPendingBehavior;
 
+        UndoStack mHistory;
+
         // Settings
         Vector4 mBoneForward = { 1, 0, 0, 0 };
         float mDefaultBoneLength = 1.0f;

@@ -37,15 +37,15 @@ namespace Tools {
         void createView(Render::SceneRenderData &sceneData, Render::PointShadowRenderData &pointShadowRenderData, Im3D::Im3DContext *context);
         void clearViews();
 
-        Behavior::BehaviorHandle render();
+        Behavior::BehaviorHandle render(UndoStack &history);
 
     private:
         void renderToolBar();
 
-        Behavior::BehaviorHandle renderDetails();
-        void renderHierarchy();
-        Behavior::BehaviorHandle renderEntity(Scene::Entity::EntityPtr &entity);
-        void renderHierarchyEntity(const EntityCache::Node &entity, bool visible);
+        Behavior::BehaviorHandle renderDetails(UndoStack &history);
+        void renderHierarchy(UndoStack &history);
+        Behavior::BehaviorHandle renderEntity(Scene::Entity::EntityPtr &entity, UndoStack &history);
+        void renderHierarchyEntity(const EntityCache::Node &entity, bool visible, UndoStack &history);
 
         void handleInputs();
 

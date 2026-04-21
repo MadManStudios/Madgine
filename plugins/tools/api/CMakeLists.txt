@@ -18,7 +18,7 @@ if (MODULES_ENABLE_TASK_TRACKING)
 		FolderSources(sources Madgine_Tools tasktracker tasktracker.cpp tasktracker.h)
 endif()
 		FolderSources(sources Madgine_Tools testtool testtool.cpp testtool.h)
-		FolderSources(sources Madgine_Tools util undostack.cpp undostack.h)
+		FolderSources(sources Madgine_Tools util undostack.cpp undostack.h trace.cpp trace.h trace_imgui.cpp trace_imgui.h)
 	
 
 add_plugin(Tools Madgine Core ${sources} PRECOMPILED_HEADER src/Madgine_Tools/toolslib.h API_PLUGIN)

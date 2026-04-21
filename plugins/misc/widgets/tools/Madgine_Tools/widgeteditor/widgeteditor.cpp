@@ -227,7 +227,9 @@ namespace Tools {
 
                     if (ImGui::BeginPopup("BehaviorParameters")) {
                         if (ImGui::BeginTable("columns", 2, ImGuiTableFlags_SizingStretchProp)) {
-                            mInspector->drawMembers(&mPendingBehavior.mParameters);
+                            UndoStack stack;
+                            TracedRoot<ScopePtr> traced { stack, &mPendingBehavior.mParameters };
+                            mInspector->drawMembers(traced);
                             ImGui::EndTable();
                         }
                         if (ImGui::Button("Cancel")) {

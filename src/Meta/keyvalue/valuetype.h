@@ -131,8 +131,6 @@ struct META_EXPORT ValueType {
         return as<T>();
     }
 
-    bool isReference() const;
-
     ValueTypeIndex index() const;
     ValueTypeDesc type() const;
 

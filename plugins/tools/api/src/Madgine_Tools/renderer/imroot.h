@@ -55,6 +55,8 @@ namespace Tools {
         std::map<unsigned int, size_t> mDockSpaces;
 
     protected:
+        void renderDragDropTooltips();
+
         unsigned int mRootDockSpaceId;
         unsigned int mGameDockSpaceId;
 

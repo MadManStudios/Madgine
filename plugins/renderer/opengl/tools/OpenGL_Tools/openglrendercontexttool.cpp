@@ -35,8 +35,8 @@ namespace Tools {
     {
         mImageTexture = std::make_shared<Render::OpenGLTexture>(Render::TextureType_2D, Render::FORMAT_RGBA8_SRGB);
 
-        getTool<Inspector>().addPreviewDefinition<Resources::ImageLoader::Resource>([this](Resources::ImageLoader::Resource *image) {
-            Resources::ImageLoader::Handle data = image->loadData();
+        getTool<Inspector>().addPreviewDefinition<Resources::ImageLoader::Resource>([this](const Traced<Resources::ImageLoader::Resource *> &image) {
+            Resources::ImageLoader::Handle data = image.get()->loadData();
             data.info()->setPersistent(true);
 
             if (data.available()) {

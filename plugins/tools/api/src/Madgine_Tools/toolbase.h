@@ -76,6 +76,7 @@ namespace Tools {
         bool mEnabled = true;
 
         ImGuiID mDockSpaceId = 0;
+        ImGuiID mCurrentWindowId = 0;
 
         ImRoot &mRoot;
     };

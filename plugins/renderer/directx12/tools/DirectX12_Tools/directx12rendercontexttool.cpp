@@ -38,8 +38,8 @@ namespace Tools {
     Threading::Task<bool> DirectX12RenderContextTool::init()
     {
 
-        getTool<Inspector>().addPreviewDefinition<Resources::ImageLoader::Resource>([this](Resources::ImageLoader::Resource *image) {
-            mRoot.Image(image->path());
+        getTool<Inspector>().addPreviewDefinition<Resources::ImageLoader::Resource>([this](const Traced<Resources::ImageLoader::Resource *> &image) {
+            mRoot.Image(image.get()->path());
             return false;
         });
 

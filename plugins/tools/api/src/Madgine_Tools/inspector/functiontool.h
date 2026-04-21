@@ -5,6 +5,7 @@
 
 #include "../toolbase.h"
 #include "../toolscollector.h"
+#include "../util/undostack.h"
 
 namespace Engine {
 namespace Tools {
@@ -21,11 +22,11 @@ namespace Tools {
 
         void setCurrentFunction(std::string_view name, const BoundApiFunction &method);
 
-        bool renderFunction(BoundApiFunction &function, std::string_view functionName, ArgumentList &args);
-        bool renderFunctionSelect(BoundApiFunction &function, std::string &functionName, ArgumentList &args);
+        bool renderFunction(const Traced<BoundApiFunction &> &function, std::string_view functionName, ArgumentList &args);
+        bool renderFunctionSelect(const Traced<BoundApiFunction &> &function, std::string &functionName, ArgumentList &args);
 
     protected:
-        bool renderFunctionDetails(BoundApiFunction &function, ArgumentList &args);
+        bool renderFunctionDetails(const Traced<BoundApiFunction &> &function, ArgumentList &args);
 
     private:
         std::string mCurrentFunctionName;
@@ -35,6 +36,8 @@ namespace Tools {
         std::vector<std::pair<std::string, BoundApiFunction>> mMethodCache;
 
         Inspector *mInspector;
+
+        UndoStack mHistory;
     };
 
 }

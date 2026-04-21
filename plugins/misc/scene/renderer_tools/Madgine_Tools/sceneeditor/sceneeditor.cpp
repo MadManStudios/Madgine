@@ -29,13 +29,14 @@
 #include "Madgine_Tools/imgui/clientimroot.h"
 #include "Madgine_Tools/imguiicons.h"
 #include "Madgine_Tools/inspector/inspector.h"
+#include "Madgine_Tools/util/trace_imgui.h"
 #include "im3d/im3d.h"
 #include "imgui/imgui.h"
 #include "imgui/imgui_internal.h"
 #include "imgui/imguiaddons.h"
 #include "scenetool.h"
 
-METATABLE_BEGIN(Engine::Tools::SceneEditor) //TODO proper inheritance
+METATABLE_BEGIN(Engine::Tools::SceneEditor) // TODO proper inheritance
 METATABLE_END(Engine::Tools::SceneEditor)
 
 namespace Engine {
@@ -54,14 +55,14 @@ namespace Tools {
     {
     }
 
-    Behavior::BehaviorHandle SceneEditor::render()
+    Behavior::BehaviorHandle SceneEditor::render(UndoStack &history)
     {
         renderToolBar();
 
         auto guard = sceneMgr().mutex().lock(AccessMode::WRITE);
         mEntityCache.update();
-        renderHierarchy();
-        Behavior::BehaviorHandle behaviorToAdd = renderDetails();
+        renderHierarchy(history);
+        Behavior::BehaviorHandle behaviorToAdd = renderDetails(history);
         std::erase_if(mSceneViews, [](const std::unique_ptr<SceneView> &view) { return !view->render(); });
         im3DInteractions();
         handleInputs();
@@ -109,7 +110,7 @@ namespace Tools {
         mSceneViews.clear();
     }
 
-    Behavior::BehaviorHandle SceneEditor::renderDetails()
+    Behavior::BehaviorHandle SceneEditor::renderDetails(UndoStack &history)
     {
         Behavior::BehaviorHandle behaviorToAdd;
 
@@ -117,7 +118,7 @@ namespace Tools {
             if (mTool.beginSubPanel("Details", &mTool.mEntityDetailsVisible, ImGuiDir_Right)) {
 
                 if (mSelectedEntity)
-                    behaviorToAdd = renderEntity(mSelectedEntity);
+                    behaviorToAdd = renderEntity(mSelectedEntity, history);
             }
             ImGui::End();
         }
@@ -125,7 +126,7 @@ namespace Tools {
         return behaviorToAdd;
     }
 
-    void SceneEditor::renderHierarchy()
+    void SceneEditor::renderHierarchy(UndoStack &history)
     {
         if (mTool.mHierarchyVisible) {
             if (mTool.beginSubPanel("Hierarchy", &mTool.mHierarchyVisible, ImGuiDir_Left)) {
@@ -138,13 +139,13 @@ namespace Tools {
                 }
 
                 for (const EntityCache::Node &entity : mEntityCache)
-                    renderHierarchyEntity(entity, true);
+                    renderHierarchyEntity(entity, true, history);
             }
             ImGui::End();
         }
     }
 
-    void SceneEditor::renderHierarchyEntity(const EntityCache::Node &node, bool visible)
+    void SceneEditor::renderHierarchyEntity(const EntityCache::Node &node, bool visible, UndoStack &history)
     {
 
         bool success = Execution::access_binding(node.mEntity, [&](Scene::Entity::Entity &e) {
@@ -172,13 +173,18 @@ namespace Tools {
                     ImGui::EndPopup();
                 }
 
-                ImGui::DraggableValueTypeSource(e.mName, node.mEntity);
+                ImGui::DraggableValueTypeSource<Scene::Entity::EntityPtr>(e.mName, TracedRoot<const Scene::Entity::EntityPtr &> { history, node.mEntity });
 
                 if (transform) {
 
                     if (ImGui::BeginDragDropTarget()) {
                         Scene::Entity::EntityPtr newChild;
-                        if (ImGui::AcceptDraggableValueType(newChild, [](const auto &child) { return Execution::access_binding(child, [](Scene::Entity::Entity &e) { return e.hasComponent<Scene::Entity::Transform>(); }); })) {
+                        if (ImGui::AcceptDraggableValueType(newChild, [&](const auto &child) -> KeyValueResult {
+                                if (&child.undoStack() != &history) {
+                                    return KEYVALUE_UNKNOWN_ERROR() << "Cannot drag/drop Entities from different SceneContainers";
+                                }
+                                return Execution::access_binding(child.get(), [](Scene::Entity::Entity &e) { return e.hasComponent<Scene::Entity::Transform>(); }) ? KeyValueResult {} : KEYVALUE_UNKNOWN_ERROR();
+                            })) {
                             Execution::access_binding(newChild, [&](Scene::Entity::Entity &childEntity) {
                                 Engine::Scene::Entity::Transform *childTransform = childEntity.getComponent<Engine::Scene::Entity::Transform>();
                                 assert(childTransform);
@@ -191,12 +197,12 @@ namespace Tools {
                 }
 
                 for (const EntityCache::Node &node : node.mChildren)
-                    renderHierarchyEntity(node, open);
+                    renderHierarchyEntity(node, open, history);
                 if (open)
                     ImGui::TreePop();
             } else {
                 for (const EntityCache::Node &node : node.mChildren)
-                    renderHierarchyEntity(node, false);
+                    renderHierarchyEntity(node, false, history);
             }
 
             if (transform) {
@@ -222,7 +228,7 @@ namespace Tools {
         }
     }
 
-    Behavior::BehaviorHandle SceneEditor::renderEntity(Scene::Entity::EntityPtr &e)
+    Behavior::BehaviorHandle SceneEditor::renderEntity(Scene::Entity::EntityPtr &e, UndoStack &history)
     {
         Behavior::BehaviorHandle behaviorToAdd;
 
@@ -252,7 +258,8 @@ namespace Tools {
             for (const Scene::Entity::EntityComponentHandle &component : entity.components()) {
                 ImGui::BeginGroupPanel(patchIcon(component.name()).c_str());
                 if (ImGui::BeginTable("columns", 2, ImGuiTableFlags_Resizable)) {
-                    mTool.mInspector->drawMembers(component.getTyped());
+                    TracedRoot<ScopePtr> traced { history, component.getTyped() };
+                    mTool.mInspector->drawMembers(traced);
                     ImGui::EndTable();
                 }
 
@@ -273,7 +280,8 @@ namespace Tools {
 
             mTool.getTool<DebuggerView>().renderLifetime(entity.lifetime());
 
-            mTool.getTool<BehaviorTool>().drawBehaviorList(entity.behaviors());
+            TracedRoot<Scene::Entity::Entity *> entityPtr { history, &entity };
+            mTool.getTool<BehaviorTool>().drawBehaviorList(entityPtr.trace(&Scene::Entity::Entity::behaviors));
 
             if (Scene::Entity::Transform *t = entity.getComponent<Scene::Entity::Transform>()) {
                 constexpr Color4 colors[] = {

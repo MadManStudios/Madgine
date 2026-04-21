@@ -11,7 +11,13 @@ namespace Tools {
     template <typename... T>
     struct Dialog;
         
-    struct DialogPromise;
+    struct DialogPromise;    
+
+    template <typename T>
+    struct Traced;
+    struct Trace;
+
+    struct UndoStack;
 }
 }
 

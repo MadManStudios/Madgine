@@ -427,14 +427,15 @@ namespace Tools {
             if (beginSubPanel("Node Details", &mNodeDetailsVisible, ImGuiDir_Right)) {
                 if (mSelectedInputs) {
                     if (ImGui::BeginTable("inputs", 2, ImGuiTableFlags_Resizable)) {
-                        KeyValueVirtualSequenceRange range { mGraph.mNamedInputs };
+                        TracedRoot<KeyValueVirtualSequenceRange> range { mHistory, KeyValueVirtualSequenceRange { mGraph.mNamedInputs } };
                         getTool<Inspector>().drawValue("Inputs", range, true);
                         ImGui::EndTable();
                     }
                 }
                 if (mSelectedNodeIndex) {
                     if (ImGui::BeginTable("columns", 2, ImGuiTableFlags_Resizable)) {
-                        getTool<Inspector>().drawMembers(mGraph.nodes()[mSelectedNodeIndex].get());
+                        TracedRoot<ScopePtr> traced { mHistory, ScopePtr { mGraph.nodes()[mSelectedNodeIndex].get() } };
+                        getTool<Inspector>().drawMembers(traced);
                         ImGui::EndTable();
                     }
                 }

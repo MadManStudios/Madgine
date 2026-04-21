@@ -12,6 +12,7 @@
 
 #include "../imguiicons.h"
 #include "../renderer/imroot.h"
+#include "../util/trace_imgui.h"
 #include "functiontool.h"
 #include "imgui/imgui.h"
 #include "imgui/imgui_internal.h"
@@ -27,42 +28,6 @@ SERIALIZETABLE_END(Engine::Tools::Inspector)
 
 namespace Engine {
 namespace Tools {
-
-    struct Trace {
-
-        struct TraceHelper {
-            ~TraceHelper()
-            {
-                mTrace.mAccessPath.pop_back();
-            }
-
-            operator Trace &()
-            {
-                return mTrace;
-            }
-
-            Trace &mTrace;
-        };
-
-        TraceHelper trace(ValueType v)
-        {
-            mAccessPath.push_back(std::move(v));
-            return { *this };
-        }
-
-        std::string name()
-        {
-            std::string name;
-            if (mAccessPath.empty()) {
-                return mValue.toShortString();
-            } else {
-                return mAccessPath.back().toShortString();
-            }
-        }
-
-        ValueType mValue;
-        std::vector<ValueType> mAccessPath;
-    };
 
     Inspector::Inspector(ImRoot &root)
         : Tool<Inspector>(root)
@@ -92,14 +57,11 @@ namespace Tools {
             ImGuiID id = ImHashData(&ptr, sizeof(ptr));
             if (ImGui::Begin((trace.name() + "###" + std::format("{:x}", id)).c_str(), &open)) {
                 if (ImGui::BeginTable("Values", 2, ImGuiTableFlags_Resizable)) {
-                    ValueType value;
-                    KeyValueResult result = followTrace(value, trace);
+                    KeyValueResult result = trace.follow();
                     if (result) {
                         std::stringstream ss;
                         ss << result;
                         ImGui::Text(ss.str());
-                    } else {
-                        drawValue(trace.name().c_str(), value, false, value.type());
                     }
                     ImGui::EndTable();
                 }
@@ -117,86 +79,86 @@ namespace Tools {
     {
     }
 
-    bool Inspector::drawRemainingMembers(ScopePtr scope, Trace &trace, std::set<std::string> &drawn)
+    bool Inspector::drawRemainingMembers(const Traced<const ScopePtr &> &scope, std::set<std::string> &drawn)
     {
         bool changed = false;
 
-        for (ScopeIterator it = scope.begin(); it != scope.end(); ++it) {
-            if (drawn.count(it->key()) == 0) {
+        for (auto it = scope.begin(); it != scope.end(); ++it) {
+            if (drawn.count((*it)->key()) == 0) {
                 ImGui::TableNextRow();
-                changed |= drawMember(it, trace.trace(ValueType { std::string_view { it->key() } }));
-                // drawn.insert(it->key());
+                changed |= drawMember(it);
+                drawn.insert((*it)->key());
             }
         }
 
         return changed;
     }
 
-    bool Inspector::drawMember(const ScopeIterator &it, Trace &trace)
+    bool Inspector::drawMember(const Traced<ScopeIterator> &it)
     {
-        ValueType value;
-        if (streq(it->key(), "__proxy")) {
-            it->value(value);
-            return drawMembers(value.as<ScopePtr>(), trace, {});
+        auto f = [&](const ScopeIterator &it) {ValueType v; it->value(v); return v; };
+        const Traced<ValueType> &value = it.traceEx(
+            std::move(f),
+            static_cast<bool(*)(const TracedAccess<ScopeIterator, decltype(f)> &, bool)>([](const TracedAccess<ScopeIterator, decltype(f)> &value, bool modified) {
+                if (modified)
+                    *value.mParent.get() = value.get();
+                return modified;
+            }));
+
+        if (streq(it.get()->key(), "__proxy")) {
+            return drawMembers(ValueType_as<ScopePtr>(value), {});
         }
 
-        std::string_view id = it->key();
-        bool editable = it->isEditable();
+        std::string_view id = it.get()->key();
+        bool editable = it.get()->isEditable();
 
-        it->value(value);
-        std::pair<bool, bool> modified = drawValue(id, value, editable, trace, it->type());
+        bool modified = drawValue(id, value, editable, it.get()->type());
 
-        if (modified.first || (modified.second && !value.isReference()))
-            *it = value;
-        return modified.first || modified.second;
+        if (modified)
+            *it.get() = value.get();
+        return modified;
     }
 
-    std::pair<bool, bool> Inspector::drawValue(std::string_view id, ValueType &value, bool editable, ExtendedValueTypeDesc possibleTypes)
+    bool Inspector::drawValue(std::string_view id, const Traced<ValueType &> &value, bool editable, ExtendedValueTypeDesc possibleTypes)
     {
-        Trace trace { value };
-        return drawValue(id, value, editable, trace, possibleTypes);
-    }
+        ValueTypeDesc actualType = value->type();
 
-    std::pair<bool, bool> Inspector::drawValue(std::string_view id, ValueType &value, bool editable, Trace &trace, ExtendedValueTypeDesc possibleTypes)
-    {
-        ValueTypeDesc actualType = value.type();
-
-        std::pair<bool, bool> modified = value.visit(overloaded {
-            [&](ScopePtr &scope) {
-                return drawValue(id, scope, editable, trace, possibleTypes, &actualType);
+        bool modified = value.visit(overloaded {
+            [&](const Traced<ScopePtr &> &scope) {
+                return drawValue(id, scope, false, editable, possibleTypes, &actualType);
             },
-            [&](OwnedScopePtr scope) {
-                return drawValue(id, scope, editable, trace, possibleTypes, &actualType);
+            [&](const Traced<OwnedScopePtr &> &scope) {
+                return drawValue(id, scope, editable, possibleTypes, &actualType);
             },
-            [&](KeyValueVirtualSequenceRange &range) {
-                return std::make_pair(false, drawValue(id, range, editable, trace));
+            [&](const Traced<KeyValueVirtualSequenceRange &> &range) {
+                return drawValue(id, range, editable);
             },
-            [&](KeyValueVirtualAssociativeRange &range) {
-                return std::make_pair(false, drawValue(id, range, editable, trace));
+            [&](const Traced<KeyValueVirtualAssociativeRange &> &range) {
+                return drawValue(id, range, editable);
             },
-            [&](BoundApiFunction &function) {
-                drawValue(id, function, editable, trace);
-                return std::make_pair(false, false);
+            [&](const Traced<BoundApiFunction &> &function) {
+                drawValue(id, function, editable);
+                return false;
             },
-            [&](ObjectPtr &object) {
-                return drawValue(id, object, editable, trace, possibleTypes, &actualType);
+            [&](const Traced<ObjectPtr &> &object) {
+                return drawValue(id, object, editable, possibleTypes, &actualType);
             },
-            [&](KeyValueBinding &binding) {
-                std::pair<bool, bool> result;
-                if (!Execution::access_binding(binding.mPtr, [&](const ValueType &v) {
-                        ValueType v_copy = v;
-                        result = drawValue(id, v_copy, false, v_copy.type());
+            [&](const Traced<KeyValueBinding &> &binding) {
+                bool result;
+                if (!Execution::access_binding(binding.trace(&KeyValueBinding::mPtr), [&](const Traced<const ValueType &> &v) {
+                        TracedCast<const ValueType &, ValueType> v_copy = v;
+                        result = drawValue(id, v_copy, false, v_copy->type());
                     })) {
-                    ValueType v;
-                    result = drawValue(id, v, false, v.type());
+                    TracedRoot<ValueType> v { binding.undoStack() };
+                    result = drawValue(id, v, false, v->type());
                 }
                 if (!possibleTypes.mType.isRegular()) {
                     ImGui::SameLine(0, 0);
-                    result.first |= drawTypeDecorations(actualType, possibleTypes);
+                    result |= drawTypeDecorations(actualType, possibleTypes);
                 }
                 return result;
             },
-            [&](auto &other) {
+            [&]<typename T>(const Traced<T &> &other) {
                 assert(ImGui::TableGetColumnCount() == 2);
 
                 ImGui::TableNextColumn();
@@ -213,13 +175,13 @@ namespace Tools {
                 ImGui::PushItemWidth(-1.0f - (ImGui::GetFrameHeight() * !possibleTypes.mType.isRegular()));
 
                 ImGui::BeginDisabled(!editable);
-                std::pair<bool, bool> result = std::make_pair(ImGui::ValueTypeDrawer::draw(other), false);
+                bool result = ImGui::ValueTypeDrawer::draw(other);
 
                 ImGui::PopItemWidth();
 
                 if (!possibleTypes.mType.isRegular()) {
                     ImGui::SameLine(0, 0);
-                    result.first |= drawTypeDecorations(actualType, possibleTypes);
+                    result |= drawTypeDecorations(actualType, possibleTypes);
                 }
                 ImGui::EndDisabled();
 
@@ -228,25 +190,19 @@ namespace Tools {
                 return result;
             } });
 
-        if (modified.first && actualType.mType != value.type().mType) {
-            value.setType(actualType);
+        if (modified && actualType.mType != value->type().mType) {
+            value->setType(actualType);
         }
 
         return modified;
     }
 
-    std::pair<bool, bool> Inspector::drawValue(std::string_view id, ScopePtr &scope, bool editable, ExtendedValueTypeDesc possibleTypes, ValueTypeDesc *type)
-    {
-        Trace trace { ValueType { scope } };
-        return drawValue(id, scope, editable, trace, possibleTypes, type);
-    }
-
-    std::pair<bool, bool> Inspector::drawValue(std::string_view id, ScopePtr &scope, bool editable, Trace &trace, ExtendedValueTypeDesc possibleTypes, ValueTypeDesc *type)
+    bool Inspector::drawValue(std::string_view id, const Traced<ScopePtr &> &scope, bool isOwned, bool editable, ExtendedValueTypeDesc possibleTypes, ValueTypeDesc *type)
     {
         bool modified = false;
         bool changed = false;
 
-        auto it = mPtrSuggestionsByType.find(scope.mType);
+        auto it = mPtrSuggestionsByType.find(scope->mType);
         bool hasSuggestions = editable && it != mPtrSuggestionsByType.end();
 
         ImGui::TableNextRow();
@@ -255,7 +211,7 @@ namespace Tools {
         bool hovered = ImGui::TableGetHoveredRow() == ImGui::TableGetRowIndex();
 
         bool open = false;
-        if (scope)
+        if (scope.get())
             open = ImGui::TreeNode(id.data());
         else {
             ImGui::Indent();
@@ -276,14 +232,14 @@ namespace Tools {
         if (hasSuggestions) {
             ImGui::PushID(id.data());
             ImGui::PushItemWidth(-1.0f - (ImGui::GetFrameHeight() * !possibleTypes.mType.isRegular()));
-            if (ImGui::BeginCombo("##suggestions", scope.name().c_str())) {
+            if (ImGui::BeginCombo("##suggestions", scope->name().c_str())) {
                 if (ImGui::Selectable("<None>")) {
-                    scope.mScope = nullptr;
+                    scope->mScope = nullptr;
                     modified = true;
                 }
                 for (std::pair<std::string_view, ScopePtr> p : it->second()) {
                     if (ImGui::Selectable(p.first.data())) {
-                        scope = p.second;
+                        scope.get() = p.second;
                         modified = true;
                     }
                 }
@@ -291,8 +247,8 @@ namespace Tools {
             }
             ImGui::PopItemWidth();
             ImGui::PopID();
-        } else if (scope.mType) {
-            ImGui::TextDisabled("%s", scope.mType->mTypeName);
+        } else if (scope->mType) {
+            ImGui::TextDisabled("%s", scope->mType->mTypeName);
         }
 
         if (!possibleTypes.mType.isRegular() && type) {
@@ -300,11 +256,13 @@ namespace Tools {
             modified |= drawTypeDecorations(*type, possibleTypes);
         }
 
-        ImGui::DraggableValueTypeSource(id, scope, ImGuiDragDropFlags_SourceAllowNullID);
+        ImGui::DraggableValueTypeSource<ScopePtr>(id, scope, ImGuiDragDropFlags_SourceAllowNullID);
         if (editable && ImGui::BeginDragDropTarget()) {
-            if (ImGui::AcceptDraggableValueType(scope, [&](const ScopePtr &ptr) {
-                    return ptr.mType->isDerivedFrom(scope.mType);
+            ScopePtr newScope;
+            if (ImGui::AcceptDraggableValueType(newScope, [&](const Traced<const ScopePtr &> &ptr) {
+                    return ptr->mType->isDerivedFrom(scope->mType) ? KeyValueResult {} : KEYVALUE_UNKNOWN_ERROR();
                 })) {
+                scope.get() = newScope;
                 modified = true;
             }
             /*OwnedScopePtr dummy;
@@ -326,49 +284,38 @@ namespace Tools {
             ImGui::PushStyleVar(ImGuiStyleVar_FrameRounding, 4.0f);
             ImGui::PushStyleColor(ImGuiCol_Button, 0);
             if (ImGui::Button(IMGUI_ICON_EYE, { ImGui::GetTextLineHeight(), ImGui::GetTextLineHeight() })) {
-                mViews.emplace_back(trace);
+                if (ImGui::IsKeyDown(ImGuiKey_LeftCtrl)) {
+                    throw 0;
+                }
+                mViews.push_back({ [trace { scope.build() }, this, isOwned]() { return trace([this, isOwned](const Traced<ScopePtr &> &scope) { return std::make_pair(KeyValueResult {}, drawValue("TODO", scope, false, isOwned)); }); } });
             }
             ImGui::PopStyleColor();
             ImGui::PopStyleVar(3);
             if (ImGui::IsItemHovered() && ImGui::IsKeyDown(ImGuiKey_LeftCtrl)) {
                 ImGui::BeginTooltip();
-                ImGui::Text(trace.mValue.toShortString());
-                for (auto step : trace.mAccessPath) {
-                    ImGui::Text(step.toShortString());
-                }
+                std::stringstream ss;
+                ss << scope;
+                ImGui::Text(ss.str());
                 ImGui::EndTooltip();
             }
         }
 
         if (open) {
-            changed |= drawMembers(scope, trace, {});
+            changed |= drawMembers(scope, {});
             ImGui::TreePop();
         }
-        return std::make_pair(modified, changed);
+        return modified || (changed && isOwned);
     }
 
-    std::pair<bool, bool> Inspector::drawValue(std::string_view id, OwnedScopePtr &scope, bool editable, ExtendedValueTypeDesc possibleTypes, ValueTypeDesc *type)
+    bool Inspector::drawValue(std::string_view id, const Traced<OwnedScopePtr &> &scope, bool editable, ExtendedValueTypeDesc possibleTypes, ValueTypeDesc *type)
     {
-        Trace trace { ValueType { scope } };
-        return drawValue(id, scope, editable, trace, possibleTypes, type);
+        const Traced<ScopePtr> &ptr = scope.trace(&OwnedScopePtr::get);
+        return drawValue(id, ptr, true, editable, possibleTypes, type);
     }
 
-    std::pair<bool, bool> Inspector::drawValue(std::string_view id, OwnedScopePtr &scope, bool editable, Trace &trace, ExtendedValueTypeDesc possibleTypes, ValueTypeDesc *type)
-    {
-        ScopePtr ptr = scope.get();
-        return drawValue(id, ptr, editable, trace, possibleTypes, type);
-    }
-
-    std::pair<bool, bool> Inspector::drawValue(std::string_view id, ObjectPtr &object, bool editable, ExtendedValueTypeDesc possibleTypes, ValueTypeDesc *type)
-    {
-        Trace trace { ValueType { object } };
-        return drawValue(id, object, editable, trace, possibleTypes, type);
-    }
-
-    std::pair<bool, bool> Inspector::drawValue(std::string_view id, ObjectPtr &object, bool editable, Trace &trace, ExtendedValueTypeDesc possibleTypes, ValueTypeDesc *type)
+    bool Inspector::drawValue(std::string_view id, const Traced<ObjectPtr &> &object, bool editable, ExtendedValueTypeDesc possibleTypes, ValueTypeDesc *type)
     {
         bool modified = false;
-        bool changed = false;
 
         ImGui::TableNextRow();
         ImGui::TableNextColumn();
@@ -376,7 +323,7 @@ namespace Tools {
         // ImGui::BeginGroup();
 
         bool open = false;
-        if (object)
+        if (object.get())
             open = ImGui::TreeNode(id.data());
         else {
             ImGui::Indent();
@@ -387,7 +334,7 @@ namespace Tools {
 
         ImGui::TableNextColumn();
 
-        ImGui::Text(object.descriptor());
+        ImGui::Text(object->descriptor());
 
         if (!possibleTypes.mType.isRegular() && type) {
             ImGui::SameLine(0, 0);
@@ -396,9 +343,11 @@ namespace Tools {
 
         // ImGui::EndGroup();
 
-        ImGui::DraggableValueTypeSource(id, object, ImGuiDragDropFlags_SourceAllowNullID);
+        ImGui::DraggableValueTypeSource<ObjectPtr>(id, object, ImGuiDragDropFlags_SourceAllowNullID);
         if (editable && ImGui::BeginDragDropTarget()) {
-            if (ImGui::AcceptDraggableValueType(object)) {
+            ObjectPtr newObject;
+            if (ImGui::AcceptDraggableValueType(newObject)) {
+                object.get() = newObject;
                 modified = true;
             }
             /*OwnedScopePtr dummy;
@@ -413,70 +362,59 @@ namespace Tools {
 
         if (open) {
 
-            for (auto &[key, value] : object.values()) {
-                ValueType v = value;
-                std::pair<bool, bool> p = drawValue(key, v, value.isReference(), trace.trace(ValueType { key }), v.type());
-                changed |= p.first || p.second;
-                if (p.first) {
-                    value = v;
+            for (const auto &[key, value] : object.trace(&ObjectPtr::values)) {
+                TracedCast<ValueType &, ValueType> v = value;
+                bool changed = drawValue(key.get(), v, editable, value->type());
+                if (changed) {
+                    // value = v;
+                    throw 0;
                 }
             }
             ImGui::TreePop();
         }
-        return std::make_pair(modified, changed);
+        return modified;
     }
 
-    bool Inspector::drawValue(std::string_view id, KeyValueVirtualSequenceRange &range, bool editable)
-    {
-        Trace trace { ValueType { range } };
-        return drawValue(id, range, editable, trace);
-    }
-
-    bool Inspector::drawValue(std::string_view id, KeyValueVirtualSequenceRange &range, bool editable, Trace &trace)
+    bool Inspector::drawValue(std::string_view id, const Traced<KeyValueVirtualSequenceRange &> &range, bool editable)
     {
         ImGui::TableNextColumn();
 
         bool changed = false;
         bool b = ImGui::TreeNodeEx(id.data());
-        ImGui::DraggableValueTypeSource(id, range);
+        ImGui::DraggableValueTypeSource<KeyValueVirtualSequenceRange>(id, range);
 
         ImGui::TableNextColumn();
 
-        if (range.canInsert()) {
+        if (range->canInsert()) {
             if (ImGui::Button(IMGUI_ICON_PLUS))
-                range.insert(range.end());
+                range->insert(range->end());
         }
 
         if (b) {
             size_t i = 0;
             for (auto vValue : range) {
                 ImGui::TableNextRow();
-                ValueType value = vValue;
-                std::pair<bool, bool> modified = drawValue("[" + std::to_string(i) + "]", value, editable, trace.trace(ValueType { i }), value.type());
-                if (modified.first)
-                    vValue = value;
-                changed |= modified.first || (modified.second && !range.isReference());
+                bool modified = drawValue("[" + std::to_string(i) + "]", vValue, editable, vValue->type());
+                if (modified) {
+                    throw 0;
+                    // vValue = value;
+                }
+                changed |= modified;
                 ++i;
             }
             ImGui::TreePop();
         }
 
-        return changed;
+        return changed && !range->isReference();
     }
 
-    bool Inspector::drawValue(std::string_view id, KeyValueVirtualAssociativeRange &range, bool editable)
-    {
-        Trace trace { ValueType { range } };
-        return drawValue(id, range, editable, trace);
-    }
-
-    bool Inspector::drawValue(std::string_view id, KeyValueVirtualAssociativeRange &range, bool editable, Trace &trace)
+    bool Inspector::drawValue(std::string_view id, const Traced<KeyValueVirtualAssociativeRange &> &range, bool editable)
     {
         ImGui::TableNextColumn();
 
         bool changed = false;
         bool b = ImGui::TreeNodeEx(id.data());
-        ImGui::DraggableValueTypeSource(id, range);
+        ImGui::DraggableValueTypeSource<KeyValueVirtualAssociativeRange>(id, range);
 
         ImGui::TableNextColumn();
 
@@ -484,49 +422,38 @@ namespace Tools {
             // size_t i = 0;
             for (auto [vKey, vValue] : range) {
                 ImGui::TableNextRow();
-                ValueType value = vValue;
-                std::string key = vKey.toShortString() /* + "##" + std::to_string(i)*/;
-                std::pair<bool, bool> result = drawValue(key, value, editable, trace.trace(vKey), value.type());
-                if (result.first)
-                    vValue = value;
-                changed |= result.second;
+                std::string key = vKey->toShortString() /* + "##" + std::to_string(i)*/;
+                bool modified = drawValue(key, vValue, editable, vValue->type());
+                if (modified) {
+                    throw 0;
+                    // vValue = value;
+                }
+                changed |= modified;
                 //++i;
             }
             ImGui::TreePop();
         }
-        return changed;
+        return changed && !range->isReference();
     }
 
-    void Inspector::drawValue(std::string_view id, BoundApiFunction &function, bool editable)
-    {
-        Trace trace { ValueType { function } };
-        drawValue(id, function, editable, trace);
-    }
-
-    void Inspector::drawValue(std::string_view id, BoundApiFunction &function, bool editable, Trace &trace)
+    void Inspector::drawValue(std::string_view id, const Traced<BoundApiFunction &> &function, bool editable)
     {
         ImGui::TableNextColumn();
         ImGui::TableNextColumn();
         std::string extended = "-> " + std::string { id };
         if (ImGui::Button(extended.c_str())) {
-            getTool<FunctionTool>().setCurrentFunction(id, function);
+            getTool<FunctionTool>().setCurrentFunction(id, function.get());
         }
-        ImGui::DraggableValueTypeSource(id, function);
+        ImGui::DraggableValueTypeSource<BoundApiFunction>(id, function);
     }
 
-    bool Inspector::drawMembers(ScopePtr scope, std::set<std::string> drawn)
+    bool Inspector::drawMembers(const Traced<const ScopePtr &> &scope, std::set<std::string> drawn)
     {
-        Trace trace { ValueType { scope } };
-        return drawMembers(scope, trace, drawn);
-    }
+        assert(scope.get());
 
-    bool Inspector::drawMembers(ScopePtr scope, Trace &trace, std::set<std::string> drawn)
-    {
-        assert(scope);
+        bool changed = drawRemainingMembers(scope, drawn);
 
-        bool changed = drawRemainingMembers(scope, trace, drawn);
-
-        auto it2 = mPreviews.find(scope.mType);
+        auto it2 = mPreviews.find(scope->mType);
         if (it2 != mPreviews.end()) {
             changed |= it2->second(scope);
         }
@@ -563,63 +490,6 @@ namespace Tools {
         return false;
     }
 
-    KeyValueResult Inspector::followTrace(ValueType &retVal, const Trace &trace)
-    {
-        retVal = trace.mValue;
-        for (const auto &step : trace.mAccessPath) {
-
-            KeyValueResult result = retVal.visit(overloaded {
-                [&](ScopePtr &scope) {
-                    return ValueType_unwrap(retVal, [&](ValueType &retVal, std::string_view key) -> KeyValueResult {
-                        ScopeIterator it = scope.find(key);
-                        if (it == scope.end()) {
-                            return KEYVALUE_UNKNOWN_ERROR();
-                        } else {
-                            it->value(retVal);
-                            return {};
-                        } }, step);
-                },
-                [&](OwnedScopePtr &scope) {
-                    return ValueType_unwrap(retVal, [&](ValueType &retVal, std::string_view key) -> KeyValueResult {
-                        ScopeIterator it = scope.get().find(key);
-                        if (it == scope.get().end()) {
-                            return KEYVALUE_UNKNOWN_ERROR();
-                        } else {
-                            it->value(retVal);
-                            return {};
-                        } }, step);
-                },
-                [&](KeyValueVirtualSequenceRange &range) {
-                    return ValueType_unwrap(retVal, [&](ValueType &retVal, size_t index) -> KeyValueResult {
-                        auto it = range.begin();
-                        for (size_t i = 0; i < index; ++i) {
-                            if (it.ended()) {
-                                return KEYVALUE_UNKNOWN_ERROR();
-                            }
-                            ++it;
-                        }
-                        retVal = *it;
-                        return {}; }, step);
-                },
-                [&](KeyValueVirtualAssociativeRange &range) -> KeyValueResult {
-                    auto it = std::ranges::find(range, step, &KeyValuePair::mKey);
-                    if (it == range.end()) {
-                        return KEYVALUE_UNKNOWN_ERROR();
-                    } else {
-                        retVal = it->mValue;
-                        return {};
-                    };
-                },
-                [&](auto &) -> KeyValueResult {
-                    return KEYVALUE_UNKNOWN_ERROR();
-                } });
-
-            if (result)
-                return result;
-        }
-        return {};
-    }
-
     std::string_view Inspector::key() const
     {
         return "Inspector";
@@ -635,7 +505,7 @@ namespace Tools {
         return mPtrSuggestionsByType.contains(type);
     }
 
-    void Inspector::addPreviewDefinition(const MetaTable *type, std::function<bool(ScopePtr)> preview)
+    void Inspector::addPreviewDefinition(const MetaTable *type, std::function<bool(const Traced<const ScopePtr &> &)> preview)
     {
         mPreviews[type] = preview;
     }

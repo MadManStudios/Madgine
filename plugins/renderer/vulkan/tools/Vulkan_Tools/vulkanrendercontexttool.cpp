@@ -36,8 +36,8 @@ namespace Tools {
     {
         mImageTexture = std::make_shared<Render::VulkanTexture>(Render::TextureType_2D, false, Render::FORMAT_RGBA8, Vector2i{ 100, 100 });
 
-        getTool<Inspector>().addPreviewDefinition<Resources::ImageLoader::Resource>([this](Resources::ImageLoader::Resource *image) {
-            Resources::ImageLoader::Handle data = image->loadData();
+        getTool<Inspector>().addPreviewDefinition<Resources::ImageLoader::Resource>([this](const Traced<Resources::ImageLoader::Resource *> &image) {
+            Resources::ImageLoader::Handle data = image.get()->loadData();
             data.info()->setPersistent(true);
 
             mImageTexture = std::make_shared<Render::VulkanTexture>(Render::TextureType_2D, false, Render::FORMAT_RGBA8, data->mSize, 1, data->mBuffer);
