@@ -98,37 +98,6 @@ namespace Tools {
                         }
                         ImGui::PopID();
                     }
-                    ImGui::Separator();
-                    if (ImGui::BeginMenu("Manage")) {
-                        for (Widgets::LayoutWidget &w : mWidgetManager->layoutWidgets()) {
-                            ImGui::PushID(&w);
-                            if (ImGui::BeginMenu((w.mName + "###Layout").c_str())) {
-                                ImGui::PushID(&w);
-                                ImGui::InputText("Name", &w.mName);
-                                ImGui::EnumCombo("Type", &w.mType);
-                                if (ImGui::BeginTable("LayoutWidgetMenuTable", 2, ImGuiTableFlags_SizingStretchProp)) {
-                                    ScopePtr widgetTemplate { &w.mWidgetTemplate };
-                                    if (mInspector->drawValue("Template", widgetTemplate, true).first) {
-                                        w.mWidgetTemplate = scope_cast<Widgets::WidgetLoader::Resource>(widgetTemplate);
-                                        if (w.mWidget.isSet()) {
-                                            mWidgetManager->destroyTopLevel(*w.mWidget);
-                                            w.mWidget.reset();
-                                        }
-                                    }
-                                    ImGui::EndTable();
-                                }
-                                ImGui::Checkbox("Default Visible", &w.mDefaultVisibility);
-                                ImGui::PopID();
-                                ImGui::EndMenu();
-                            }
-                            ImGui::PopID();
-                        }
-                        ImGui::Separator();
-                        if (ImGui::MenuItem("Create Layout")) {
-                            mWidgetManager->createLayout("Unnamed");
-                        }
-                        ImGui::EndMenu();
-                    }
 
                     ImGui::EndMenu();
                 }

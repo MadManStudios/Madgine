@@ -17,6 +17,7 @@
 #include "Meta/serialize/serializetable_impl.h"
 
 #include "Madgine_Tools/imguiicons.h"
+#include "Madgine_Tools/inspector/inspector.h"
 #include "Madgine_Tools/pluginmanager/pluginmanager.h"
 #include "Madgine_Tools/templates/templates.h"
 #include "clientimroot.h"
@@ -56,6 +57,7 @@ namespace Tools {
         mWindow = &static_cast<const ClientImRoot &>(mRoot).window();
 
         mTemplates = &getTool<Templates>();
+        mInspector = &getTool<Inspector>();
 
 #ifndef MADGINE_MAINWINDOW_LAYOUT
         mWindow->taskQueue()->queue([this]() {
@@ -123,7 +125,7 @@ namespace Tools {
                     ImGui::EndHorizontal();
                     ImGui::Spring();
                     ImGui::BeginHorizontal("bLanding");
-                    
+
                     ImGui::EndHorizontal();
                     ImGui::Spring();
                     ImGui::EndVertical();
@@ -230,8 +232,17 @@ namespace Tools {
 
                     ImGui::EndMenu();
                 }
+
+                if (ImGui::BeginMenu("Panels")) {
+
+                    ImGui::MenuItem("Layout - Details", nullptr, &mLayoutDetailsVisible);
+
+                    ImGui::EndMenu();
+                }
                 ImGui::EndMenuBar();
             }
+
+            renderLayoutDetails();
         }
         ImGui::End();
     }
@@ -352,6 +363,33 @@ namespace Tools {
         ImGui::Checkbox("Show Tips on Startup", &mShowTipsOnStartup);
     }
 
+    void ProjectManager::renderLayoutDetails()
+    {
+        if (mLayoutDetailsVisible) {
+            if (beginSubPanel("Layout - Details", &mLayoutDetailsVisible, ImGuiDir_Right, 0.2f, mHistory.isDirty() ? ImGuiWindowFlags_UnsavedDocument : 0)) {
+
+                if (ImGui::BeginToolBar("History")) {
+                    mHistory.renderControls();
+                    ImGui::EndToolBar();
+                }
+
+                if (ImGui::BeginTable("components", 2, ImGuiTableFlags_Resizable)) {
+
+                    for (const std::unique_ptr<Window::MainWindowComponentBase> &component : mWindow->components() | std::views::reverse) {
+
+                        if (component->includeInLayout()) {
+                            TracedRoot<ScopePtr> ptr { mHistory, component.get() };
+                            mInspector->drawValue(component->key(), ptr, false, false);
+                        }
+                    }
+
+                    ImGui::EndTable();
+                }
+            }
+            ImGui::End();
+        }
+    }
+
 #ifndef MADGINE_MAINWINDOW_LAYOUT
     void ProjectManager::loadConfiguration(const Filesystem::Path &config)
     {
@@ -413,6 +451,7 @@ namespace Tools {
     void ProjectManager::save()
     {
         mWindow->saveLayout(mLayout->path());
+        mHistory.onSave();
     }
 
     void ProjectManager::load()

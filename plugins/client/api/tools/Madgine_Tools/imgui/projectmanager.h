@@ -10,6 +10,7 @@
 
 #include "Madgine_Tools/toolbase.h"
 #include "Madgine_Tools/toolscollector.h"
+#include "Madgine_Tools/util/undostack.h"
 
 namespace Engine {
 
@@ -39,6 +40,8 @@ namespace Tools {
         void renderMenu() override;
         bool renderConfiguration(const Filesystem::Path &config) override;
         void renderSettings() override;
+
+        void renderLayoutDetails();
 
         std::vector<Tip> tips() override;
 
@@ -84,6 +87,11 @@ namespace Tools {
     private:
         Window::MainWindow *mWindow = nullptr;
         Templates *mTemplates = nullptr;
+        Inspector *mInspector = nullptr;
+
+        bool mLayoutDetailsVisible = true;
+
+        UndoStack mHistory;
     };
 
 }
