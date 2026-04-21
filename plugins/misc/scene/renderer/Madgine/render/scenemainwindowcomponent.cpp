@@ -21,9 +21,11 @@ NAMED_UNIQUECOMPONENT(SceneMainWindowComponent, Engine::Render::SceneMainWindowC
 
 METATABLE_BEGIN(Engine::Render::SceneMainWindowComponent)
     MEMBER(mCamera)
+    PROPERTY(RenderingEnabled, renderingEnabled, setRenderingEnabled)
 METATABLE_END(Engine::Render::SceneMainWindowComponent)
 
 SERIALIZETABLE_BEGIN(Engine::Render::SceneMainWindowComponent)
+    ENCAPSULATED_FIELD(RenderingEnabled, renderingEnabled, setRenderingEnabled)
 SERIALIZETABLE_END(Engine::Render::SceneMainWindowComponent)
 
 namespace Engine {
@@ -38,17 +40,30 @@ namespace Render {
     {
     }
 
-    Engine::Render::SceneMainWindowComponent::~SceneMainWindowComponent() = default;
+    SceneMainWindowComponent::~SceneMainWindowComponent() = default;
+
+    void SceneMainWindowComponent::render(RenderTarget *target, size_t iteration)
+    {
+        MainWindowComponentBase::render(target, iteration);
+
+        if (mRenderingEnabled) {
+            mPass.render(target, iteration);
+        }
+    }
 
     void SceneMainWindowComponent::setup(RenderTarget *target)
     {
         mPointShadowRenderData.setup(target->context());
 
         mSceneData.setup(target->context());
+
+        mPass.setup(target);
     }
 
     void SceneMainWindowComponent::shutdown(RenderTarget *target)
     {
+        mPass.shutdown(target);
+
         mPointShadowRenderData.shutdown(target->context());
 
         mSceneData.shutdown(target->context());
@@ -69,14 +84,26 @@ namespace Render {
         return mPointShadowRenderData;
     }
 
-    void SceneMainWindowComponent::enableSceneRendering()
+    void SceneMainWindowComponent::setRenderingEnabled(bool enabled)
     {
-        mWindow.getRenderWindow()->addRenderPass(&mPass);
+        if (mRenderingEnabled != enabled) {
+            mRenderingEnabled = enabled;
+
+            if (mRenderingEnabled) {
+                for (RenderData *dependency : mPass.dependencies()) {
+                    addDependency(dependency);
+                }
+            } else {
+                for (RenderData *dependency : mPass.dependencies()) {
+                    removeDependency(dependency);
+                }
+            }
+        }
     }
 
-    void Engine::Render::SceneMainWindowComponent::disableSceneRendering()
+    bool SceneMainWindowComponent::renderingEnabled() const
     {
-        mWindow.getRenderWindow()->removeRenderPass(&mPass);
+        return mRenderingEnabled;
     }
 
 }

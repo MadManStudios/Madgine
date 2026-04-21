@@ -20,16 +20,17 @@ namespace Render {
         SceneMainWindowComponent(Window::MainWindow &window);
         ~SceneMainWindowComponent();
 
-        virtual void setup(RenderTarget *target) override;
-        virtual void shutdown(RenderTarget *target) override;
+        void render(RenderTarget *target, size_t iteration) override;
+        void setup(RenderTarget *target) override;
+        void shutdown(RenderTarget *target) override;
 
         Scene::SceneManager &scene();
 
         SceneRenderData &renderData();
         PointShadowRenderData &pointShadowRenderData();
 
-        void enableSceneRendering();
-        void disableSceneRendering();
+        void setRenderingEnabled(bool enabled);
+        bool renderingEnabled() const;
 
         Camera mCamera;
 
@@ -41,6 +42,8 @@ namespace Render {
         PointShadowRenderData mPointShadowRenderData;
 
         SceneRenderPass mPass;
+
+        bool mRenderingEnabled = false;
     };
 
 }
