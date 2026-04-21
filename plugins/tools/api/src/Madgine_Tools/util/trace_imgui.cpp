@@ -933,7 +933,7 @@ bool AcceptDraggableValueType(Engine::CallableView<Engine::KeyValueResult(const 
         }
         if (error) {
             if (ImGui::BeginTooltip()) {
-                ImGui::TextColored(ImColor(255, 40, 40, 255), error.mError->mMsg.c_str());
+                ImGui::TextColored(ImColor(255, 40, 40, 255), "%s", error.mError->mMsg.c_str());
                 ImGui::EndTooltip();
             }
         } else {
