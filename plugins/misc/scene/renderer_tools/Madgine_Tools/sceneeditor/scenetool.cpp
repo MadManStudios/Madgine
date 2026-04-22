@@ -79,7 +79,10 @@ namespace Tools {
     void SceneTool::update()
     {
         std::erase_if(mFiles, [&](std::pair<Scene::SceneLoader::Resource *const, SceneFile> &p) {
-            return !p.second.render();
+            if (p.second.mCloseRequested)
+                return true;
+            p.second.render();
+            return false;
         });
 
         ResourceEditor::update();
@@ -189,6 +192,14 @@ namespace Tools {
 
             ImGui::EndMenuBar();
         }
+    }
+
+    Dialog<> SceneTool::closeDialog()
+    {
+        for (SceneFile &file : kvValues(mFiles)) {
+            co_await file.closeDialog();
+        }
+        co_return {};
     }
 
 }

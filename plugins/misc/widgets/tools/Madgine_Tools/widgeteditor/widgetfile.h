@@ -14,13 +14,13 @@ namespace Tools {
         WidgetFile(WidgetEditor &editor, Widgets::WidgetLoader::Resource *resource);
         ~WidgetFile();
 
-        void save(const Filesystem::Path &path) override;
+        void saveAs(const Filesystem::Path &path) override;
 
         void renderSelection();
         void renderHierarchy(Widgets::WidgetBase **hoveredWidget = nullptr);
         bool drawWidget(Widgets::WidgetBase *w, Widgets::WidgetBase **hoveredWidget = nullptr);
 
-        bool render();
+        void render();
 
         Widgets::WidgetManager &widgetManager();
 

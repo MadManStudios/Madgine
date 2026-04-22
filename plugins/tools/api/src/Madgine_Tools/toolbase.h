@@ -58,6 +58,8 @@ namespace Tools {
 
         ImGuiID dockSpaceId() const;
 
+        virtual Dialog<> closeDialog();
+
     protected:
         bool beginTool(const char *name, bool *open, ImGuiDir dockingDir, ImGuiWindowFlags flags = 0, const char *docTarget = nullptr, const char *pluginSourceDir = PROJECT_ROOT);
         bool beginToolWindow(const char *name, bool *open, ImGuiWindowFlags flags = 0, const char *docTarget = nullptr, const char *pluginSourceDir = PROJECT_ROOT);

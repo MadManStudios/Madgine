@@ -327,5 +327,20 @@ namespace Tools {
         return mDialogContainer;
     }
 
+    Dialog<> ImRoot::closeDialog()
+    {
+        DialogSettings &settings = co_await get_dialog_settings;
+
+        settings.showCancel = true;
+        settings.allowApplyToAll = true;
+        settings.callbackOnDecline = true;
+
+        for (ToolBase *tool : mCollector | std::views::transform(projectionUniquePtrToPtr)) {
+            co_await tool->closeDialog();
+        }
+
+        co_return {};
+    }
+
 }
 }

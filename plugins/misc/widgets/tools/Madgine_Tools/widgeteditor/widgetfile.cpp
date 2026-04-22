@@ -63,7 +63,7 @@ namespace Tools {
         static_cast<ClientImRoot &>(mEditor.root()).removeRenderTarget(mRenderTarget.get());
     }
 
-    void WidgetFile::save(const Filesystem::Path &path)
+    void WidgetFile::saveAs(const Filesystem::Path &path)
     {
         Filesystem::FileManager mgr { "Widget" };
 
@@ -201,7 +201,7 @@ namespace Tools {
         }
     }
 
-    bool WidgetFile::render()
+    void WidgetFile::render()
     {
         constexpr float borderSize = 10.0f;
 
@@ -460,7 +460,13 @@ namespace Tools {
         }
         ImGui::End();
 
-        return open;
+        if (!open) {
+            if (mHistory.isDirty()) {
+                mEditor.root().dialogs().showGrouped("Close", closeDialog(), [this]() { mCloseRequested = true; });
+            } else {
+                mCloseRequested = true;
+            }
+        }        
     }
 
     Widgets::WidgetManager &WidgetFile::widgetManager()

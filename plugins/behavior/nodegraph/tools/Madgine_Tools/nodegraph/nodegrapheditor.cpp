@@ -74,7 +74,8 @@ namespace Tools {
 
     void NodeGraphEditor::render()
     {
-        if (Begin(&mVisible, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_MenuBar)) {
+        bool open = true;
+        if (Begin(&open, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_MenuBar)) {
 
             if (ImGui::BeginMenuBar()) {
                 if (ImGui::BeginMenu("Dev")) {
@@ -410,6 +411,14 @@ namespace Tools {
             renderSelection();
         }
         ImGui::End();
+
+        if (!open) {
+            if (mHistory.isDirty()) {
+                root().dialogs().showGrouped("Close", closeDialog(), [this]() { mVisible = false; });
+            } else {
+                mVisible = false;
+            }
+        }
     }
 
     void NodeGraphEditor::renderHierarchy()
@@ -474,7 +483,7 @@ namespace Tools {
         return "NodeGraphEditor";
     }
 
-    void NodeGraphEditor::save(const Filesystem::Path &path)
+    void NodeGraphEditor::saveAs(const Filesystem::Path &path)
     {
         mPath = path;
 
@@ -483,7 +492,7 @@ namespace Tools {
         if (!mGraphHandle)
             mGraphHandle.create(path.stem(), path);
 
-        mHistory.onSave();        
+        mHistory.onSave();
     }
 
     void NodeGraphEditor::open(Resources::ResourceBase *res)
@@ -515,6 +524,11 @@ namespace Tools {
         return mPath.stem();
     }
 
+    Dialog<> NodeGraphEditor::closeDialog()
+    {
+        return ResourceFile::closeDialog();
+    }
+
     bool NodeGraphEditor::saveImpl(std::string_view view, ed::SaveReasonFlags reason)
     {
         // verify();
@@ -522,7 +536,7 @@ namespace Tools {
         if (mInitialLoad) {
             mInitialLoad = false;
         } else if ((reason & (ed::SaveReasonFlags::User | ed::SaveReasonFlags::AddNode | ed::SaveReasonFlags::RemoveNode)) != ed::SaveReasonFlags::None) {
-            //mIsDirty = true; //TODO
+            // mIsDirty = true; //TODO
         }
 
         mGraph.mLayoutData = view;

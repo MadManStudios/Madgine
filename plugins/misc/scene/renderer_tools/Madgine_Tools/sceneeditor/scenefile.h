@@ -22,9 +22,9 @@ namespace Tools {
         SceneFile(SceneTool &tool, Scene::SceneLoader::Resource *resource);
         ~SceneFile();
 
-        void save(const Filesystem::Path &path) override;
+        void saveAs(const Filesystem::Path &path) override;
 
-        bool render();
+        void render();
 
         Scene::SceneManager &sceneMgr() override;
 

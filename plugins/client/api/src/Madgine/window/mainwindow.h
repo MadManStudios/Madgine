@@ -97,7 +97,7 @@ namespace Window {
         Threading::TaskQueue *taskQueue();
         void shutdown();
 
-        bool onWindowEvent(const WindowEvent &event);
+        bool onWindowEvent(const WindowEvent &event, MainWindowComponentBase *component = nullptr);
 
         // TESTING
         static void sTestScreens(size_t n);

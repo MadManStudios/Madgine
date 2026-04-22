@@ -14,11 +14,17 @@ namespace Tools {
                 
         bool Begin(bool *open = nullptr, ImGuiWindowFlags flags = 0);
 
-        virtual void save(const Filesystem::Path &path) = 0;
+        void save();
+        virtual void saveAs(const Filesystem::Path &path) = 0;
+
+        
+        Dialog<> closeDialog();
+
 
         ResourceEditor &mEditor;
         Filesystem::Path mPath;
         UndoStack mHistory;
+        bool mCloseRequested = false;
     };
 
     template <typename Editor>

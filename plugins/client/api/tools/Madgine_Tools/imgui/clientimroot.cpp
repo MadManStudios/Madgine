@@ -445,7 +445,7 @@ namespace Tools {
             float B = draw_data->DisplayPos.y + draw_data->DisplaySize.y /* / ImGui::GetIO().DisplayFramebufferScale.y*/;
             *mvp.mData = target->getClipSpaceMatrix() * Matrix4 { 2.0f / (R - L), 0.0f, 0.0f, (R + L) / (L - R), 0.0f, 2.0f / (T - B), 0.0f, (T + B) / (B - T), 0.0f, 0.0f, 0.5f, 0.5f, 0.0f, 0.0f, 0.0f, 1.0f };
         }
-
+        
         using Vertex = Compound<Render::VertexPos2, Render::VertexColor, Render::VertexUV>;
 
         size_t vertexBufferCount = 0;
@@ -575,7 +575,7 @@ namespace Tools {
     {
         return std::visit(overloaded {
                               [&](const Window::ResizeEvent &e) { return false; },
-                              [&](const Window::CloseEvent &e) { return false; },
+                              [&](const Window::CloseEvent &e) { dialogs().show(closeDialog(), [this]() { mWindow.onWindowEvent(Window::CloseEvent {}, this); }); return true; },
                               [&](const Window::RepaintEvent &e) { return false; },
                               [&](const Input::KeyPressEvent &e) { return injectKeyPress(e); },
                               [&](const Input::KeyReleaseEvent &e) { return injectKeyRelease(e); },

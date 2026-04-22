@@ -62,7 +62,7 @@ namespace Tools {
         Im3D::DestroyContext(mIm3DContext);
     }
 
-    void SceneFile::save(const Filesystem::Path &path)
+    void SceneFile::saveAs(const Filesystem::Path &path)
     {
         Filesystem::FileManager mgr { "Scene" };
 
@@ -71,11 +71,11 @@ namespace Tools {
         Serialize::write(stream, mContainer, "Container");
 
         mPath = path;
-        
+
         mHistory.onSave();
     }
 
-    bool SceneFile::render()
+    void SceneFile::render()
     {
         Im3D::Im3DContext *context = Im3D::SetCurrentContext(mIm3DContext);
 
@@ -83,7 +83,7 @@ namespace Tools {
 
         bool open = true;
 
-        //mManager.simulationClock().tick(mManager.clock().now());
+        // mManager.simulationClock().tick(mManager.clock().now());
 
         if (Begin(&open)) {
 
@@ -111,7 +111,13 @@ namespace Tools {
 
         Im3D::SetCurrentContext(context);
 
-        return open;
+        if (!open) {
+            if (mHistory.isDirty()) {
+                mEditor.root().dialogs().showGrouped("Close", closeDialog(), [this]() { mCloseRequested = true; });                
+            } else {
+                mCloseRequested = true;
+            }
+        }
     }
 
     Scene::SceneManager &SceneFile::sceneMgr()

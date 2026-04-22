@@ -45,6 +45,8 @@ namespace Tools {
             });
         }
 
+        Dialog<> closeDialog() override;
+
     private:
         void renderMenuBar();
 

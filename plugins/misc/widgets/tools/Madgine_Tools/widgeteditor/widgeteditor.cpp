@@ -76,7 +76,10 @@ namespace Tools {
     void WidgetEditor::render()
     {
         std::erase_if(mFiles, [&, this](std::pair<Widgets::WidgetLoader::Resource *const, WidgetFile> &p) {
-            return !p.second.render();
+            if (p.second.mCloseRequested)
+                return true;
+            p.second.render();
+            return false;
         });
 
         ResourceEditor::render();
@@ -257,6 +260,14 @@ namespace Tools {
             }
             ImGui::TreePop();
         }
+    }
+
+    Dialog<> WidgetEditor::closeDialog()
+    {
+        for (WidgetFile& file : kvValues(mFiles)) {
+            co_await file.closeDialog();
+        }
+        co_return {};
     }
 
 }

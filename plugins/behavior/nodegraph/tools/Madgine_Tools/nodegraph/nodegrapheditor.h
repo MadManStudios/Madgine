@@ -29,9 +29,11 @@ namespace Tools {
 
         std::string_view key() const override;
 
-        void save(const Filesystem::Path &path) override;
+        void saveAs(const Filesystem::Path &path) override;
         void open(Resources::ResourceBase *res) override;
         std::string_view getCurrentName() const;
+
+        Dialog<> closeDialog() override;
 
     protected:
         bool saveImpl(std::string_view view, ed::SaveReasonFlags reason);

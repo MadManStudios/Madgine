@@ -266,6 +266,11 @@ namespace Tools {
         return mDockSpaceId;
     }
 
+    Dialog<> ToolBase::closeDialog()
+    {
+        co_return {};
+    }
+
 }
 }
 

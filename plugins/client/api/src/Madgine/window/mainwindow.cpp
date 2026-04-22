@@ -381,7 +381,7 @@ namespace Window {
         }
     }
 
-    bool MainWindow::onWindowEvent(const WindowEvent &event)
+    bool MainWindow::onWindowEvent(const WindowEvent &event, MainWindowComponentBase *component)
     {
         return std::visit(overloaded {
                               [this](const ResizeEvent &event) {
@@ -389,14 +389,16 @@ namespace Window {
                                   applyClientSpaceResize();
                                   return true;
                               },
-                              [this](const CloseEvent &event) {
+                              [&, this](const CloseEvent &event) {
                                   for (const std::unique_ptr<MainWindowComponentBase> &comp : components() | std::views::reverse) {
-                                      if (comp->onWindowEvent(event))
-                                          return true;
+                                      if (component) {
+                                          if (component == comp.get())
+                                              component = nullptr;
+                                      } else {
+                                          if (comp->onWindowEvent(event))
+                                              return true;
+                                      }
                                   }
-                                  storeWindowData();
-                                  mOsWindow->destroy();
-                                  mOsWindow = nullptr;
                                   mTaskQueue.stop();
                                   return true;
                               },

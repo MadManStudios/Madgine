@@ -45,6 +45,8 @@ namespace Tools {
         virtual Threading::TaskQueue *taskQueue() const = 0;
 
         DialogContainer &dialogs();
+        
+        Dialog<> closeDialog();
 
         Dialog<Filesystem::Path> directoryPicker(Filesystem::Path path = {}, Filesystem::Path selected = {}, Filesystem::Path base = {});
         Dialog<Filesystem::Path> filePicker(bool allowNewFile = false, Filesystem::Path path = {}, Filesystem::Path selected = {});

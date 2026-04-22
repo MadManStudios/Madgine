@@ -35,6 +35,8 @@ namespace Tools {
         void renderSelection();
         void drawWidget(Widgets::WidgetBase *w, Widgets::WidgetBase **hoveredWidget = nullptr);
 
+        Dialog<> closeDialog() override;
+
     private:
         Widgets::WidgetBase *handleManagerInteractions(Widgets::WidgetManager &manager, const ImVec2 &pos);
 

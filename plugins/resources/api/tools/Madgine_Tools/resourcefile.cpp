@@ -39,10 +39,10 @@ namespace Tools {
             if (ImGui::BeginMenuBar()) {
                 if (ImGui::BeginMenu("File")) {
                     if (ImGui::MenuItem(("Save '"s + mPath.filename().str() + "'").c_str(), "Ctrl+S", false, mHistory.isDirty() && !mPath.empty()))
-                        save(mPath);
+                        saveAs(mPath);
                     if (ImGui::MenuItem("Save as...")) {
                         mEditor.root().dialogs().show(
-                            mEditor.resourceFilePicker(true), [this](const Filesystem::Path &p) { save(p); });
+                            mEditor.resourceFilePicker(true), [this](const Filesystem::Path &p) { saveAs(p); });
                     }
                     ImGui::EndMenu();
                 }
@@ -50,19 +50,14 @@ namespace Tools {
             }
 
             if (ImGui::BeginToolBar("Editor")) {
-
-                if (!mHistory.isDirty())
+                bool enabled = mHistory.isDirty();
+                if (!enabled)
                     ImGui::BeginDisabled();
                 ImGui::SetNextItemShortcut(ImGuiKey_S | ImGuiMod_Ctrl);
                 if (ImGui::Button(IMGUI_ICON_SAVE)) {
-                    if (mPath.empty()) {
-                        mEditor.root().dialogs().show(
-                            mEditor.resourceFilePicker(true), [this](const Filesystem::Path &p) { save(p); });
-                    } else {
-                        save(mPath);
-                    }
+                    save();
                 }
-                if (!mHistory.isDirty())
+                if (!enabled)
                     ImGui::EndDisabled();
 
                 mHistory.renderControls();
@@ -72,6 +67,40 @@ namespace Tools {
         }
         return visible;
     }
+
+    void ResourceFileBase::save()
+    {
+        if (mPath.empty()) {
+            mEditor.root().dialogs().show(
+                mEditor.resourceFilePicker(true), [this](const Filesystem::Path &p) { saveAs(p); });
+        } else {
+            saveAs(mPath);
+        }
+    }
+
+    Dialog<> ResourceFileBase::closeDialog()
+    {
+        DialogSettings &settings = co_await get_dialog_settings;
+
+        settings.callbackOnDecline = true;
+
+        if (mHistory.isDirty()) {            
+
+            std::stringstream ss;
+            ss << "File '" << mPath.filename() << "' has unsaved changes. Save?";
+
+            do {
+                ImGui::Text(ss.str());
+
+            } while (co_yield settings);
+            if (settings.accepted()) {
+                save();
+            }
+        }
+
+        co_return {};
+    }
+
 
 }
 }
