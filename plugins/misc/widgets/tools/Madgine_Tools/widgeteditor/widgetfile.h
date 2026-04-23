@@ -33,9 +33,7 @@ namespace Tools {
         std::map<Widgets::WidgetBase *, WidgetSettings> mSettings;
 
         std::unique_ptr<Render::RenderTarget> mRenderTarget;
-
-        bool mMouseDown = false;
-        bool mDragging = false;
+        
         bool mDraggingLeft = false, mDraggingTop = false, mDraggingRight = false, mDraggingBottom = false;
     };
 

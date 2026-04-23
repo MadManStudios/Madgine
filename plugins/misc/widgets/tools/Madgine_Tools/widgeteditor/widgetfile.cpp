@@ -249,8 +249,13 @@ namespace Tools {
 
                 ImGui::GetWindowDrawList()->PushClipRect(ImGui::GetItemRectMin(), ImGui::GetItemRectMax());
 
+                ImGui::InteractiveViewResultFlags result = ImGui::InteractiveView(ImGui::GetID("View"));
+                int mouseButton = (result & ImGui::InteractiveViewResultFlags_MouseButtonMask_) - 1;
+
+                bool dragging = result & ImGui::InteractiveViewResultFlags_Dragging;
+
                 Widgets::WidgetBase *hoveredWidget = nullptr;
-                if (!mDragging)
+                if (!dragging)
                     hoveredWidget = editor().handleManagerInteractions(mWidgetManager, pos);
                 if (hoveredWidget)
                     mSettings.try_emplace(hoveredWidget, hoveredWidget, mEditor.getTool<Inspector>());
@@ -281,9 +286,9 @@ namespace Tools {
 
                     bool rightBorder = false, leftBorder = false, topBorder = false, bottomBorder = false;
 
-                    bool hoveredWithBorder = selectedWidget->containsPoint(mouse, screenSpace, borderSize) && ImGui::IsWindowHovered();
+                    bool hoveredWithBorder = selectedWidget->containsPoint(mouse, screenSpace, borderSize) && ImGui::IsItemHovered();
 
-                    if (!mDragging && hoveredWithBorder) {
+                    if (!dragging && hoveredWithBorder) {
 
                         leftBorder = abs(mouse.x - bounds.left()) < borderSize;
                         rightBorder = abs(mouse.x - bounds.right()) < borderSize;
@@ -304,9 +309,12 @@ namespace Tools {
                         if (rightBorder || leftBorder || topBorder || bottomBorder) {
                             hoveredWidget = selectedWidget;
                         }
+                    }
 
-                        if (io.MouseClicked[0]) {
-                            mMouseDown = true;
+                    if (ImGui::IsItemActivated()) {
+                        if (!hoveredWithBorder) {
+                            mSelected = nullptr;
+                        } else {
                             mDraggingLeft = leftBorder;
                             mDraggingRight = rightBorder;
                             mDraggingTop = topBorder;
@@ -337,9 +345,8 @@ namespace Tools {
                         }
                     }
 
-                    if (mMouseDown && dragDistance.length() >= io.MouseDragThreshold && !mDragging) {
+                    if (result & ImGui::InteractiveViewResultFlags_DragStarted) {
                         mSelected->saveGeometry();
-                        mDragging = true;
                     }
 
                     enum ResizeMode {
@@ -352,7 +359,7 @@ namespace Tools {
                         resizeMode = ABSOLUTE;
                     }
 
-                    if (mDragging) {
+                    if (dragging) {
 
                         auto [pos, size] = mSelected->savedGeometry();
 
@@ -419,18 +426,9 @@ namespace Tools {
                         mSelected->setSize(size);
                         mSelected->setPos(pos);
 
-                        if (io.MouseReleased[0]) {
+                        if (result & ImGui::InteractiveViewResultFlags_DragStopped) {
                             mSelected->applyGeometry();
-                            mDragging = false;
                         }
-                    }
-
-                    if (io.MouseReleased[0]) {
-                        mMouseDown = false;
-                        mDraggingLeft = false;
-                        mDraggingRight = false;
-                        mDraggingTop = false;
-                        mDraggingBottom = false;
                     }
                 }
 
@@ -445,11 +443,11 @@ namespace Tools {
                 if (hoveredWidget) {
                     WidgetSettings *hoveredSettings = &mSettings.try_emplace(hoveredWidget, hoveredWidget, mEditor.getTool<Inspector>()).first->second;
 
-                    if (!mDragging && hoveredSettings != mSelected) {
+                    if (!dragging && hoveredSettings != mSelected) {
                         WidgetEditor::renderWidgetBorders(hoveredWidget, screenSpace.mTopLeft, IM_COL32(127, 127, 127, 255));
                     }
 
-                    if (io.MouseReleased[0] && !mDragging) {
+                    if ((result & ImGui::InteractiveViewResultFlags_Pressed) && mouseButton == 0) {
                         mSelected = hoveredSettings;
                     }
                 }
@@ -466,7 +464,7 @@ namespace Tools {
             } else {
                 mCloseRequested = true;
             }
-        }        
+        }
     }
 
     Widgets::WidgetManager &WidgetFile::widgetManager()

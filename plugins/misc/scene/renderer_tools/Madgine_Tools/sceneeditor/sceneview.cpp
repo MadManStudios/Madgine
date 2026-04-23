@@ -18,8 +18,8 @@
 #include "Meta/keyvalue/metatable_impl.h"
 
 #include "Madgine_Tools/imgui/clientimroot.h"
-#include "Madgine_Tools/util/trace_imgui.h"
 #include "Madgine_Tools/interactivecamera.h"
+#include "Madgine_Tools/util/trace_imgui.h"
 #include "im3d/im3d.h"
 #include "imgui/imgui.h"
 #include "imgui/imguiaddons.h"
@@ -115,47 +115,45 @@ namespace Tools {
             if (iRegion.x > 0 && iRegion.y > 0)
                 mRenderTarget->resize(iRegion);
             ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, { 0.0f, 0.0f });
-            bool pressed = ImGui::ImageButton("Content", (void *)mRenderTarget->texture()->resourceBlock().mPtr, region, { 0, 0 }, { 1, 1 });
+            ImGui::Image((void *)mRenderTarget->texture()->resourceBlock().mPtr, region, { 0, 0 }, { 1, 1 });
             ImGui::PopStyleVar();
-            if (pressed && !mState.mDragging[0])
-                if (!Im3D::IsAnyObjectHovered())
-                    mEditor.deselect();
+            
+            ImGui::InteractiveViewResultFlags result = ImGui::InteractiveView(ImGui::GetID("View"));
+            InteractiveCamera(result, mCamera);
 
-            if (ImGui::InteractiveView(mState)) {
+            int mouseButton = (result & ImGui::InteractiveViewResultFlags_MouseButtonMask_) - 1;
 
-                if (io.MouseClicked[0]) {
-                    if (mEditor.hoveredAxis() >= 0) {
-                        mDraggedAxis = mEditor.hoveredAxis();
-                        mDragStartRay = ray;
-                        mDragStoredPosition = mEditor.hoveredTransform()->mPosition;
+            if (ImGui::IsItemActivated() && mouseButton == 0) {
+                if (mEditor.hoveredAxis() >= 0) {
+                    mDraggedAxis = mEditor.hoveredAxis();
+                    mDragStartRay = ray;
+                    mDragStoredPosition = mEditor.hoveredTransform()->mPosition;
 
-                        Vector3 axis = axes[mDraggedAxis];
+                    Vector3 axis = axes[mDraggedAxis];
 
-                        Plane plane = cameraPlane(mCamera, mDragStoredPosition, &axis);
+                    Plane plane = cameraPlane(mCamera, mDragStoredPosition, &axis);
 
-                        if (auto intersection = Intersect(mDragStartRay, plane)) {
-                            mDragTransform = mEditor.hoveredTransform();
-                            mDragStoredMatrix = mEditor.hoveredTransform()->matrix();
-                            mDragRelMousePosition = mDragStartRay.point(intersection[0]) - mDragStoredPosition;
-                            mAxisDragging = true;
-                        } else {
-                            mAxisDragging = false;
-                        }
+                    if (auto intersection = Intersect(mDragStartRay, plane)) {
+                        mDragTransform = mEditor.hoveredTransform();
+                        mDragStoredMatrix = mEditor.hoveredTransform()->matrix();
+                        mDragRelMousePosition = mDragStartRay.point(intersection[0]) - mDragStoredPosition;
+                        mAxisDragging = true;
                     } else {
                         mAxisDragging = false;
                     }
+                } else {
+                    mAxisDragging = false;
                 }
+            }
 
+            if (ImGui::IsItemHovered() || ImGui::IsItemActive()) {
                 Vector2 pos = ImGui::GetItemRectMin();
                 Vector2 size = ImGui::GetItemRectSize();
 
                 io3D.mNextFrameMouseRay = mCamera.mousePointToRay(Vector2 { io.MousePos } - pos, size);
             }
 
-            InteractiveCamera(mState, mCamera);
-
-            if (mState.mDragging[0] && mAxisDragging) {
-
+            if (ImGui::IsItemActive() && mouseButton == 0 && mAxisDragging) {
                 Vector3 axis = axes[mDraggedAxis];
 
                 Plane targetPlane = cameraPlane(mCamera, mDragStoredPosition, &axis);
@@ -192,6 +190,10 @@ namespace Tools {
                 }
                 ImGui::EndDragDropTarget();
             }
+
+            if ((result & ImGui::InteractiveViewResultFlags_Pressed) && mouseButton == 0)
+                if (!Im3D::IsAnyObjectHovered())
+                    mEditor.deselect();
         }
         ImGui::End();
 

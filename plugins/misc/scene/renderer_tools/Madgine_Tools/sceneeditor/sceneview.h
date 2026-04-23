@@ -31,7 +31,6 @@ namespace Tools {
 
         SceneEditor &mEditor;
 
-        ImGui::InteractiveViewState mState;
         int mDraggedAxis;
         Ray3 mDragStartRay;
         Scene::Entity::Transform *mDragTransform;

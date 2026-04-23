@@ -39,7 +39,6 @@ static Engine::Threading::WorkgroupLocal<ImVector<GroupPanelData>> sGroupPanelLa
 
 static Engine::Threading::WorkgroupLocal<FilesystemPickerOptions> sFilesystemPickerOptions;
 
-
 void Text(std::string_view s)
 {
     TextUnformatted(s.data(), s.data() + s.size());
@@ -342,7 +341,6 @@ bool LED(const char *label, bool *on, const ImVec2 &size)
     return pressed;
 }
 
-
 bool BeginFilesystemPicker(Engine::Filesystem::Path &path, Engine::Filesystem::Path &selection, const Engine::Filesystem::Path &base)
 {
     bool changed = false;
@@ -446,7 +444,7 @@ bool FilePicker(Engine::Filesystem::Path &path, Engine::Filesystem::Path &select
         file.clear();
 
     float elementHeight = CalcTextSize(file.c_str(), NULL, true).y + style.FramePadding.y * 2.0f;
-    size.y -= elementHeight; //Filename
+    size.y -= elementHeight; // Filename
     if (!options.mExtensions.empty()) {
         size.y -= style.ItemSpacing.y;
         size.y -= elementHeight; // Extension
@@ -516,7 +514,7 @@ bool FilePicker(Engine::Filesystem::Path &path, Engine::Filesystem::Path &select
         file = file.str() + extension;
     }
 
-    std::string baseName { file.stem() };    
+    std::string baseName { file.stem() };
 
     if (InputText("Filename:", &baseName)) {
         Engine::Filesystem::Path p = baseName + extension;
@@ -526,9 +524,9 @@ bool FilePicker(Engine::Filesystem::Path &path, Engine::Filesystem::Path &select
         changed = true;
     }
 
-    if (!options.mExtensions.empty()) {             
+    if (!options.mExtensions.empty()) {
         if (BeginCombo("Extension", extension.c_str())) {
-            for (const std::string& ext : options.mExtensions) {
+            for (const std::string &ext : options.mExtensions) {
                 if (Selectable(ext.c_str(), ext == extension)) {
                     extension = ext;
                     Engine::Filesystem::Path p = baseName + extension;
@@ -545,40 +543,76 @@ bool FilePicker(Engine::Filesystem::Path &path, Engine::Filesystem::Path &select
     return changed;
 }
 
-bool InteractiveView(InteractiveViewState &state)
+InteractiveViewResultFlags InteractiveView(ImGuiID id)
 {
-    state.mActive = ImGui::IsItemHovered(ImGuiHoveredFlags_AllowWhenBlockedByActiveItem);
+    ImGuiContext &g = *GImGui;
 
-    ImGuiIO &io = ImGui::GetIO();
+    ImGui::ItemAdd(g.LastItemData.Rect, id);
 
-    if (state.mActive) {
-        SetItemKeyOwner(ImGuiKey_MouseWheelY);
-        for (int i = 0; i < 3; ++i) {
-            if (io.MouseClicked[i]) {
-                state.mMouseDown[i] = true;
-            }
+    return InteractiveView();
+}
+
+InteractiveViewResultFlags InteractiveView()
+{
+    ImGuiContext &g = *GImGui;
+
+    InteractiveViewResultFlags result = 0;
+
+    int saved_mouse_button = g.ActiveIdMouseButton;
+
+    ImGuiID id = g.LastItemData.ID;
+
+    bool hovered = false;
+    bool held = false;
+    bool pressed = ImGui::ButtonBehavior(g.LastItemData.Rect, id, &hovered, &held, ImGuiButtonFlags_MouseButtonLeft | ImGuiButtonFlags_MouseButtonRight | ImGuiButtonFlags_MouseButtonMiddle | ImGuiButtonFlags_PressedOnClickRelease);
+
+    bool active = IsItemActive();
+
+    bool isDragging = false;
+
+    if (active) {
+        result |= InteractiveViewResultFlags_Active;
+        result |= g.ActiveIdMouseButton + 1;
+        isDragging = IsMouseDragPastThreshold(g.ActiveIdMouseButton, g.IO.MouseDragThreshold * 0.5f);
+        if (isDragging && !WasMouseDragPastThreshold(g.ActiveIdMouseButton, g.IO.MouseDragThreshold * 0.5f)) {
+            result |= InteractiveViewResultFlags_DragStarted;
+        }
+    } else if (IsItemDeactivated()) {
+        result |= saved_mouse_button + 1;
+        isDragging = IsMouseDragPastThreshold(saved_mouse_button, g.IO.MouseDragThreshold * 0.5f);
+        if (isDragging) {
+            result |= InteractiveViewResultFlags_DragStopped;
         }
     }
 
-    for (int i = 0; i < 3; ++i) {
-        state.mMouseClicked[i] = false;
-        if (state.mMouseDown[i]) {
+    if (isDragging)
+        result |= InteractiveViewResultFlags_Dragging;
+    if (pressed && !isDragging)
+        result |= InteractiveViewResultFlags_Pressed;
+    if (IsItemHovered())
+        result |= InteractiveViewResultFlags_Hovered;
 
-            if (Engine::Vector2 { io.MouseDelta }.length() >= io.MouseDragThreshold / 3.0f && !state.mDragging[0] && !state.mDragging[1] && !state.mDragging[2]) {
-                state.mDragging[i] = true;
-            }
+    return result;
+}
 
-            if (io.MouseReleased[i]) {
-                state.mMouseDown[i] = false;
-                if (!state.mDragging[i]) {
-                    state.mMouseClicked[i] = true;
-                }
-                state.mDragging[i] = false;
-            }
-        }
-    }
+bool BeginPopupContextInteractiveView(ImGuiPopupFlags flags)
+{
+    ImGuiContext &g = *GImGui;
+    ImGuiWindow *window = g.CurrentWindow;
+    if (window->SkipItems)
+        return false;
+    ImGuiID id = g.LastItemData.ID; // If user hasn't passed an ID, we can use the LastItem ID. Using LastItem ID as a Popup ID won't conflict!
+    IM_ASSERT(id != 0); // You cannot pass a NULL str_id if the last item has no identifier (e.g. a Text() item)
 
-    return state.mActive;
+    bool open = false;
+    ImGuiMouseButton mouse_button = GetMouseButtonFromPopupFlags(flags);
+    if (IsMouseReleased(mouse_button) && IsItemHovered(ImGuiHoveredFlags_AllowWhenBlockedByPopup) && !IsMouseDragPastThreshold(mouse_button, g.IO.MouseDragThreshold * 0.5f))
+        open = true;
+    if (g.NavOpenContextMenuItemId == id && (IsItemFocused() || id == g.CurrentWindow->MoveId))
+        open = true;
+    if (open)
+        OpenPopupEx(id, flags);
+    return BeginPopupEx(id, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoSavedSettings);
 }
 
 void ImGui::BeginGroupPanel(const char *name, const ImVec2 &size, ImU32 backgroundColor)
@@ -925,7 +959,7 @@ bool BeginToolBar(const char *name)
     const float height = style.FramePadding[ImGuiAxis_Y] * 2.0f + style.WindowPadding[ImGuiAxis_Y] * 2.0f + ImGui::GetFontSize();
 
     if (ImGui::BeginChild("Toolbar", { 0.0f, height }, ImGuiChildFlags_NavFlattened | ImGuiChildFlags_AlwaysUseWindowPadding, ImGuiWindowFlags_NoScrollbar)) {
-       
+
         ImGui::BeginHorizontal(name);
 
         return true;
@@ -946,5 +980,24 @@ void EndToolBar()
     ImGui::EndChild();
 }
 
+bool WasMouseDragPastThreshold(ImGuiMouseButton button, float lock_threshold)
+{
+    ImGuiContext &g = *GImGui;
+
+    ImGuiIO &io = g.IO;
+
+    if (!io.MouseDown[button])
+        return false;
+
+    float MouseDragMaxDistanceSqr;
+
+    ImVec2 delta_from_click_pos = io.MousePosPrev - io.MouseClickedPos[button];
+    MouseDragMaxDistanceSqr = ImLengthSqr(delta_from_click_pos);
+
+    IM_ASSERT(button >= 0 && button < IM_COUNTOF(g.IO.MouseDown));
+    if (lock_threshold < 0.0f)
+        lock_threshold = g.IO.MouseDragThreshold;
+    return MouseDragMaxDistanceSqr >= lock_threshold * lock_threshold;
+}
 
 }

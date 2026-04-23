@@ -11,7 +11,7 @@
 #include "imconfig.h"
 #include "imgui.h"
 
-namespace ImGui {
+namespace ImGui {    
 
 //////// Utility
 
@@ -101,14 +101,26 @@ IMGUI_API bool FilePicker(Engine::Filesystem::Path &path, Engine::Filesystem::Pa
 
 ///////// Interactive View
 
-struct InteractiveViewState {
-    bool mMouseDown[3] = { false, false, false };
-    bool mDragging[3] = { false, false, false };
-    bool mMouseClicked[3] = { false, false, false };
-    bool mActive = false;
-};
+IMGUI_API bool WasMouseDragPastThreshold(ImGuiMouseButton button, float lock_threshold);
 
-IMGUI_API bool InteractiveView(InteractiveViewState &state);
+enum InteractiveViewResultFlags_ {
+    InteractiveViewResultFlags_NoMouseButton = 0,
+    InteractiveViewResultFlags_LeftMouseButton = 1,
+    InteractiveViewResultFlags_MiddleMouseButton = 2,
+    InteractiveViewResultFlags_RightMouseButton = 3,
+    InteractiveViewResultFlags_MouseButtonMask_ = 0x3,
+    InteractiveViewResultFlags_Active = (1 << 2),
+    InteractiveViewResultFlags_Pressed = (1 << 3),
+    InteractiveViewResultFlags_DragStarted = (1 << 4),
+    InteractiveViewResultFlags_DragStopped = (1 << 5),
+    InteractiveViewResultFlags_Dragging = (1 << 6),
+    InteractiveViewResultFlags_Hovered = (1 << 7)
+};
+typedef int InteractiveViewResultFlags;
+
+IMGUI_API InteractiveViewResultFlags InteractiveView();
+IMGUI_API InteractiveViewResultFlags InteractiveView(ImGuiID id);
+IMGUI_API bool BeginPopupContextInteractiveView(ImGuiPopupFlags flags = 0);
 
 /////////// Docking
 
