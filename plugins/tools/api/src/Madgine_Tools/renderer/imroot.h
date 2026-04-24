@@ -54,6 +54,8 @@ namespace Tools {
         virtual void Image(const Filesystem::Path &path, Vector2i image_size = { -1, -1 }) = 0;
         virtual void DrawImage(const Filesystem::Path &path, Vector2i pos, Vector2i image_size = { -1, -1 }, float spinnerRadius = 15) = 0;
 
+        ::ImGuiTestEngine *testEngine() const;
+
         std::map<unsigned int, size_t> mDockSpaces;
 
     protected:
@@ -66,6 +68,8 @@ namespace Tools {
         ToolsContainer<std::vector<Placeholder<0>>> mCollector;
 
         DialogContainer mDialogContainer;
+
+        ::ImGuiTestEngine *mTestEngine = nullptr;         
     };
 
 }

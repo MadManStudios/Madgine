@@ -22,6 +22,9 @@
 #include "imgui/imgui_internal.h"
 #include "imgui/imguiaddons.h"
 
+#include "imgui_test_engine/imgui_test_engine/imgui_te_engine.h"
+#include "imgui_test_engine/imgui_test_engine/imgui_te_coroutine.h"
+
 METATABLE_BEGIN(Engine::Tools::ImRoot)
     READONLY_PROPERTY(Tools, tools)
 METATABLE_END(Engine::Tools::ImRoot)
@@ -81,6 +84,7 @@ namespace Tools {
 
     ImRoot::~ImRoot()
     {
+        ImGuiTestEngine_DestroyContext(mTestEngine);
     }
 
     Threading::Task<bool> ImRoot::init()
@@ -95,16 +99,52 @@ namespace Tools {
         ini_handler.UserData = this;
         GImGui->SettingsHandlers.push_back(ini_handler);
 
+        mTestEngine = ImGuiTestEngine_CreateContext();
+        ImGuiTestEngineIO &test_io = ImGuiTestEngine_GetIO(mTestEngine);
+        test_io.ConfigVerboseLevel = ImGuiTestVerboseLevel_Info;
+        test_io.ConfigVerboseLevelOnError = ImGuiTestVerboseLevel_Debug;
+
+        struct CreateData {
+            void *mData;
+            ImGuiTestCoroutineMainFunc *mFunc;
+            ImGuiContext *mContext;
+        };
+
+        static ImGuiTestCoroutineHandle (*CreateFunc)(ImGuiTestCoroutineMainFunc *func, const char *name, void *data) = test_io.CoroutineFuncs->CreateFunc;
+
+
+
+        test_io.CoroutineFuncs->CreateFunc = [](ImGuiTestCoroutineMainFunc *func, const char *name, void *data) {
+            CreateData *createData = new CreateData;
+            createData->mData = data;
+            createData->mFunc = func;
+            createData->mContext = ImGui::GetCurrentContext();
+
+            return CreateFunc([](void *data) {
+                CreateData *createData = static_cast<CreateData *>(data);
+                ImGui::SetCurrentContext(createData->mContext);
+                createData->mFunc(createData->mData);
+                delete createData;
+            }, name, createData);
+        };
+        
         for (const std::unique_ptr<ToolBase> &tool : mCollector) {
             bool result = co_await tool->callInit();
             tool->setEnabled(result);
         }
+        
+        ImGuiTestEngine_Start(mTestEngine, ImGui::GetCurrentContext());
+
+        //ImGuiTestEngine_InstallCrashHandler();
+        
 
         co_return true;
     }
 
     Threading::Task<void> ImRoot::finalize()
     {
+        ImGuiTestEngine_Stop(mTestEngine);
+
         ImGui::ResetDraggableValueType();
 
         for (const std::unique_ptr<ToolBase> &tool : mCollector) {
@@ -238,6 +278,8 @@ namespace Tools {
 
         ImGui::UpdatePlatformWindows();
 
+        ImGuiTestEngine_PostSwap(mTestEngine);
+
         return gameVisible;
     }
 
@@ -340,6 +382,11 @@ namespace Tools {
         }
 
         co_return {};
+    }
+
+    ImGuiTestEngine *ImRoot::testEngine() const
+    {
+        return mTestEngine;
     }
 
 }

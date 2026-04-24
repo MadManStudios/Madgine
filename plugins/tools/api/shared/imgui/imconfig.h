@@ -15,6 +15,10 @@
 
 #define IMGUI_ENABLE_FREETYPE
 
+#include "../imgui_test_engine/imgui_test_engine/imgui_te_imconfig.h"
+
+#define IMGUI_TEST_ENGINE_ENABLE_COROUTINE_STDTHREAD_IMPL 1
+
 #include "Meta/metalib.h"
 
 #include "Meta/math/vector2.h"

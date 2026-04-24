@@ -25,3 +25,5 @@ namespace tinyxml2 {
 class XMLDocument;
 class XMLElement;
 }
+
+struct ImGuiTestEngine;
