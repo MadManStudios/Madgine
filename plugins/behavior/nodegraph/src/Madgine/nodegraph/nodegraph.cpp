@@ -249,7 +249,7 @@ namespace Behavior {
                 while (pin < size) {
                     const FlowOutPinPrototype &flowOut = node->mFlowOutPins[group][pin];
                     if (flowOut.mTarget) {
-                        disconnectFlow({ index, pin });
+                        disconnectFlow({ index, pin, group });
                         uint32_t newSize = node->mFlowOutPins[group].size();
                         if (size == newSize)
                             ++pin;
@@ -284,7 +284,7 @@ namespace Behavior {
                 while (pin < size) {
                     const DataInPinPrototype &dataIn = node->mDataInPins[group][pin];
                     if (dataIn.mSource) {
-                        disconnectData({ index, pin });
+                        disconnectData({ index, pin, group });
                         uint32_t newSize = node->mDataInPins[group].size();
                         if (size == newSize)
                             ++pin;
