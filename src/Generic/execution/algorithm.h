@@ -1165,12 +1165,24 @@ namespace Execution {
             using inner_rec = receiver<inner_tag<I>, Rec, Sender...>;
 
             template <size_t... Is>
-            static auto stateTupleHelper(std::index_sequence<Is...>) -> std::variant<std::monostate, connect_result_t<Sender, inner_rec<Is>>...> { }
-            using StateVariant = decltype(stateTupleHelper(std::index_sequence_for<Sender...> {}));
+            static auto stateTupleDeducer(std::index_sequence<Is...>) -> std::tuple<connect_result_t<Sender, inner_rec<Is>>...> {
+
+            }
+
+            using StateTuple = decltype(stateTupleDeducer(std::index_sequence_for<Sender...>{}));
+
+            template <size_t... Is>
+            auto stateTupleHelper(std::tuple<Sender...> &&senders, std::index_sequence<Is...>) -> StateTuple
+            {
+                return {
+                    DelayedConstruct<connect_result_t<Sender, inner_rec<Is>>> { [&]() { return connect(std::forward<Sender>(std::get<Is>(senders)), inner_rec<Is> { this }); } }...
+                };
+            }
+            
 
             state(Rec &&rec, std::tuple<Sender...> &&senders)
                 : base_state<Rec> { std::forward<Rec>(rec) }
-                , mSenders(std::move(senders))
+                , mStates(stateTupleHelper(std::move(senders), std::index_sequence_for<Sender...>{}))
             {
             }
 
@@ -1181,39 +1193,24 @@ namespace Execution {
                 if constexpr (sizeof...(Sender) == 0)
                     this->mRec.set_value();
                 else {
-                    mStates.template emplace<1>(
-                               DelayedConstruct<std::variant_alternative_t<1, StateVariant>> {
-                                   [this]() {
-                                       return connect(std::forward<std::tuple_element_t<0, std::tuple<Sender...>>>(std::get<0>(mSenders)), inner_rec<0> { this });
-                                   } })
-                        .start();
+                    mCurrent = 0;
+                    std::get<0>(mStates).start();
                 }
             }
 
             void stop()
             {
-                // TODO
-                std::visit([](auto &state) {
-                    if constexpr (std::same_as<decltype(state), std::monostate &>)
-                        throw 0;
-                    else
-                        state.stop();
-                },
-                    mStates);
+                TupleUnpacker::select(mStates, [](auto &state) { state.stop(); }, mCurrent);
             }
 
             template <size_t I, typename... V>
             void set_value(inner_tag<I>, V &&...values)
             {
+                mCurrent = I + 1;
                 if constexpr (sizeof...(Sender) == I + 1)
                     this->mRec.set_value();
                 else {
-                    mStates.template emplace<I + 1 + 1>(
-                               DelayedConstruct<std::variant_alternative_t<I + 1 + 1, StateVariant>> {
-                                   [this]() {
-                                       return connect(std::forward<std::tuple_element_t<I + 1, std::tuple<Sender...>>>(std::get<I + 1>(mSenders)), inner_rec<I + 1> { this });
-                                   } })
-                        .start();
+                    std::get<I + 1>(mStates).start();
                 }
             }
 
@@ -1230,15 +1227,20 @@ namespace Execution {
             }
 
             friend auto tag_invoke(visit_state_t, state *state, auto &&visitor)
-            {
+            {                
                 [&]<size_t... I>(std::index_sequence<I...>) {
-                    (visit_state(state && state->mStates.index() == I + 1 ? &std::get<I + 1>(state->mStates) : nullptr, visitor), ...);
+                    ([&]() {
+                        if (state && state->mCurrent == I) {
+                            visitor(State::Marker {});
+                        }
+                        visit_state(state ? &std::get<I>(state->mStates) : nullptr, visitor);
+                    }(),
+                        ...);
                 }(std::index_sequence_for<Sender...> {});
             }
 
-            std::tuple<Sender...> mSenders;
-
-            StateVariant mStates;
+            StateTuple mStates;
+            IndexType<uint8_t> mCurrent;
         };
 
         template <typename... Sender>
