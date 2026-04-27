@@ -108,6 +108,7 @@ namespace Scene {
                                                               init(e);
                                                           mPtr = e.pointer();
                                                       } });
+            assert(mPtr);
         }
 
         const EntityPtr &EntityHandle::ptr() const

@@ -8,6 +8,7 @@
 #include "Meta/serialize/container/serializablecontainer.h"
 #include "Meta/serialize/hierarchy/syncableunit.h"
 
+#include "Modules/threading/datamutex.h"
 #include "Modules/uniquecomponent/component_index.h"
 
 #include "Madgine/behavior/behaviorlist.h"
@@ -100,13 +101,14 @@ namespace Scene {
 
             auto lifetimeSender()
             {
-                return mLifetime.tracked([this](auto lifetimePtr) { mSelf = EntityPtr { std::move(lifetimePtr), Execution::ConstantBinding { *this } }; })
-                    | Execution::finally([this]() { dtor(); })
-                    | Behavior::with_named<"Entity">(mSelf);
+                return Execution::sequence(mLifetime.tracked([this](auto lifetimePtr) { mSelf = EntityPtr { std::move(lifetimePtr), Execution::ConstantBinding { *this } }; })
+                        | Behavior::with_named<"Entity">(mSelf),
+                    mutex().locked(AccessMode::WRITE, [this]() { dtor(); }));
             }
 
             void handleEntityEvent(const typename mutable_set<EntityComponentHandle, std::less<>>::iterator &it, int op);
 
+            Threading::DataMutex &mutex() const;
             SceneManager &sceneMgr() const;
 
             SceneContainer &container();

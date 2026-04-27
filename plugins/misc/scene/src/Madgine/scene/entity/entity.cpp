@@ -94,7 +94,7 @@ namespace Scene {
 
         Entity::~Entity()
         {
-            clearComponents();
+            assert(mComponents.empty());
         }
 
         const std::string &Entity::key() const
@@ -239,6 +239,11 @@ namespace Scene {
             }
         }
 
+        Threading::DataMutex &Entity::mutex() const
+        {
+            return sceneMgr().mutex();
+        }
+
         SceneManager &Entity::sceneMgr() const
         {
             return mContainer.sceneMgr();
@@ -279,6 +284,8 @@ namespace Scene {
             }
 
             container().remove(pointer());
+
+            clearComponents();
         }
 
     }
