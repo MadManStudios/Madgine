@@ -33,6 +33,7 @@
 #include "imgui/imguiaddons.h"
 #include "imguihelpers.h"
 #include "nodegrapheditor.h"
+#include "tests/nodegrapheditortests.h"
 
 UNIQUECOMPONENT(Engine::Tools::NodeGraphEditor);
 
@@ -60,6 +61,8 @@ namespace Tools {
         getTool<DebuggerView>().registerDebugLocationVisualizer<visualizeDebugLocation>();
 
         createEditor();
+
+        registerNodeGraphEditorTests(mRoot.testEngine());
 
         co_return co_await ResourceEditor::init(Behavior::NodeGraph::NodeGraphLoader::getSingleton(), "Node Graph");
     }
@@ -517,6 +520,7 @@ namespace Tools {
         }
 
         mVisible = true;
+        ImGui::SetWindowFocus(((res ? res->path().str() : "<unnamed>") + "##NodeGraphEditor").c_str());
     }
 
     std::string_view NodeGraphEditor::getCurrentName() const

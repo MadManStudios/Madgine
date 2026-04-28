@@ -4,7 +4,7 @@
 #include "Madgine/widgets/widgetloader.h"
 #include "Madgine/widgets/widgetmanager.h"
 
-#include "Madgine_Tools/resourcefile.h"
+#include "Madgine_Tools/resources/resourcefile.h"
 
 namespace Engine {
 namespace Tools {

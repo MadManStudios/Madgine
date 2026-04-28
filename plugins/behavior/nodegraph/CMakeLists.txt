@@ -18,6 +18,7 @@ set(sources "")
 FolderSources(sources "" tools)
 	FolderSources(sources tools Madgine_Tools nodegraphtoolsforward.h nodegraphtoolslib.h)
 		FolderSources(sources Madgine_Tools nodegraph debugvisualizer.cpp debugvisualizer.h imguihelpers.cpp imguihelpers.h nodegrapheditor.cpp nodegrapheditor.h nodegraphfile.cpp nodegraphfile.h)
+			FolderSources(sources nodegraph tests nodegrapheditortests.cpp nodegrapheditortests.h)
 
 add_tools(NodeGraph ${sources} PRECOMPILED_HEADER tools/Madgine_Tools/nodegraphtoolslib.h)
 

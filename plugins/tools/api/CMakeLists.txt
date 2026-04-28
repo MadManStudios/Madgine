@@ -17,6 +17,7 @@ FolderSources(sources "" src )
 if (MODULES_ENABLE_TASK_TRACKING)
 		FolderSources(sources Madgine_Tools tasktracker tasktracker.cpp tasktracker.h)
 endif()
+		FolderSources(sources Madgine_Tools tests tooltests.cpp tooltests.h)
 		FolderSources(sources Madgine_Tools testtool testtool.cpp testtool.h)
 		FolderSources(sources Madgine_Tools util undostack.cpp undostack.h trace.cpp trace.h trace_imgui.cpp trace_imgui.h)
 	

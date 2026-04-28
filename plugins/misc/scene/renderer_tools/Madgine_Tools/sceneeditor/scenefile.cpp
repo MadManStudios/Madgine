@@ -91,6 +91,10 @@ namespace Tools {
 
                 if (ImGui::BeginMenu("Panels")) {
 
+                    if (ImGui::MenuItem("Add View")) {
+                        createView(mSceneData, mPointShadowRenderData, mIm3DContext);
+                    }
+
                     ImGui::MenuItem("Hierarchy", nullptr, &tool().mHierarchyVisible);
                     ImGui::MenuItem("Widget Details", nullptr, &tool().mEntityDetailsVisible);
 

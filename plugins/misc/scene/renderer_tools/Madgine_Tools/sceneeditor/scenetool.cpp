@@ -33,6 +33,7 @@
 #include "imgui/imgui.h"
 #include "imgui/imgui_internal.h"
 #include "imgui/imguiaddons.h"
+#include "tests/sceneeditortests.h"
 
 UNIQUECOMPONENT(Engine::Tools::SceneTool);
 
@@ -63,6 +64,8 @@ namespace Tools {
         Render::SceneMainWindowComponent &main = mWindow.getWindowComponent<Render::SceneMainWindowComponent>();
 
         createView(main.renderData(), main.pointShadowRenderData(), Im3D::GetCurrentContext());
+
+        registerSceneEditorTests(mRoot.testEngine());
 
         co_return co_await ResourceEditor::init(Scene::SceneLoader::getSingleton(), "Scene");
     }
@@ -156,6 +159,8 @@ namespace Tools {
         Scene::SceneLoader::Resource *scene = static_cast<Scene::SceneLoader::Resource *>(res);
 
         mFiles.try_emplace(scene, *this, scene);
+
+        ImGui::SetWindowFocus(((res ? res->path().str() : "<unnamed>") + "##Scene").c_str());
     }
 
     Scene::SceneManager &SceneTool::sceneMgr()
@@ -163,26 +168,16 @@ namespace Tools {
         return *mSceneMgr;
     }
 
-    int SceneTool::createViewIndex()
-    {
-        return ++mRunningViewIndex;
-    }
-
     void SceneTool::renderMenuBar()
     {
         if (ImGui::BeginMenuBar()) {
-            if (ImGui::BeginMenu("SceneEditor")) {
+            if (ImGui::BeginMenu("Panels")) {
 
                 if (ImGui::MenuItem("Add View")) {
                     Render::SceneMainWindowComponent &main = mWindow.getWindowComponent<Render::SceneMainWindowComponent>();
 
                     createView(main.renderData(), main.pointShadowRenderData(), Im3D::GetCurrentContext());
                 }
-
-                ImGui::EndMenu();
-            }
-
-            if (ImGui::BeginMenu("Panels")) {
 
                 ImGui::MenuItem("Hierarchy", nullptr, &mHierarchyVisible);
                 ImGui::MenuItem("Entity Details", nullptr, &mEntityDetailsVisible);

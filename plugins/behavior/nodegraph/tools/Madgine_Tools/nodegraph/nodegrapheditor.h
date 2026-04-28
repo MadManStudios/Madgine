@@ -4,8 +4,8 @@
 #include "Madgine/nodegraph/nodegraphloader.h"
 #include "Madgine/nodegraph/pins.h"
 
-#include "Madgine_Tools/resourceeditor.h"
-#include "Madgine_Tools/resourcefile.h"
+#include "Madgine_Tools/resources/resourceeditor.h"
+#include "Madgine_Tools/resources/resourcefile.h"
 #include "Madgine_Tools/toolbase.h"
 #include "Madgine_Tools/toolscollector.h"
 #include "nodegraphfile.h"

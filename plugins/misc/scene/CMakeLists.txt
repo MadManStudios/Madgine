@@ -35,6 +35,7 @@ FolderSources(sources "" renderer_tools)
 	FolderSources(sources renderer_tools Madgine_Tools)
 		FolderSources(sources Madgine_Tools sceneeditor entitycache.cpp entitycache.h gridpass.cpp gridpass.h sceneeditor.cpp sceneeditor.h scenefile.cpp scenefile.h scenetool.cpp scenetool.h sceneview.cpp sceneview.h)
 			FolderSources(sources sceneeditor shaders grid.hlsl)
+			FolderSources(sources sceneeditor tests sceneeditortests.cpp sceneeditortests.h)
 
 add_tools(SceneRenderer ${sources} PRECOMPILED_HEADER renderer_tools/Madgine_Tools/scenerenderertoolslib.h SOURCE_ROOT renderer_tools)
 

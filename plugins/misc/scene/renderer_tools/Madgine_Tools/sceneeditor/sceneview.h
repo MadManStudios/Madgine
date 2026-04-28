@@ -15,7 +15,7 @@ namespace Tools {
 
     struct SceneView {
 
-        SceneView(SceneEditor &editor, Render::SceneRenderData &renderData, Render::PointShadowRenderData &pointShadowRenderData, Im3D::Im3DContext *im3dContext);
+        SceneView(SceneEditor &editor, int index, Render::SceneRenderData &renderData, Render::PointShadowRenderData &pointShadowRenderData, Im3D::Im3DContext *im3dContext);
         SceneView(SceneView &&);
         ~SceneView();
 

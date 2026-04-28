@@ -4,7 +4,7 @@
 #include "Madgine/behavior/parametertuple.h"
 #include "Madgine/scene/sceneloader.h"
 
-#include "Madgine_Tools/resourceeditor.h"
+#include "Madgine_Tools/resources/resourceeditor.h"
 #include "Madgine_Tools/toolbase.h"
 #include "Madgine_Tools/toolscollector.h"
 #include "entitycache.h"
@@ -63,6 +63,8 @@ namespace Tools {
 
         int mHoveredAxis = -1;
         Scene::Entity::Transform *mHoveredTransform;
+
+        int mRunningViewIndex = 0;
     };
 
 }

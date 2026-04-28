@@ -5,7 +5,7 @@
 #include "Madgine/scene/sceneloader.h"
 #include "Madgine/scene/scenemanager.h"
 
-#include "Madgine_Tools/resourcefile.h"
+#include "Madgine_Tools/resources/resourcefile.h"
 #include "entitycache.h"
 #include "sceneeditor.h"
 

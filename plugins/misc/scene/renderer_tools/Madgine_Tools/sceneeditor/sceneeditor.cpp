@@ -102,7 +102,7 @@ namespace Tools {
 
     void SceneEditor::createView(Render::SceneRenderData &sceneData, Render::PointShadowRenderData &pointShadowRenderData, Im3D::Im3DContext *context)
     {
-        mSceneViews.emplace_back(std::make_unique<SceneView>(*this, sceneData, pointShadowRenderData, context));
+        mSceneViews.emplace_back(std::make_unique<SceneView>(*this, ++mRunningViewIndex, sceneData, pointShadowRenderData, context));
     }
 
     void SceneEditor::clearViews()
@@ -375,6 +375,7 @@ namespace Tools {
     {
         if (ImGui::BeginToolBar("Scene")) {
 
+            ImGui::SetNextItemShortcut(ImGuiMod_Ctrl | ImGuiKey_N);
             if (ImGui::Button(IMGUI_ICON_PLUS)) {
                 sceneMgr().container("Editor").createEntity("", {}, [this](Scene::Entity::EntityPtr ptr) { select(std::move(ptr)); });
             }

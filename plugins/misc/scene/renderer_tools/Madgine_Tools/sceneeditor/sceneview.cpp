@@ -56,12 +56,12 @@ namespace Tools {
         return { point, normal };
     }
 
-    SceneView::SceneView(SceneEditor &editor, Render::SceneRenderData &renderData, Render::PointShadowRenderData &pointShadowRenderData, Im3D::Im3DContext *im3dContext)
+    SceneView::SceneView(SceneEditor &editor, int index, Render::SceneRenderData &renderData, Render::PointShadowRenderData &pointShadowRenderData, Im3D::Im3DContext *im3dContext)
         : mEditor(editor)
         , mSceneRenderer(editor.sceneMgr(), renderData, pointShadowRenderData, mCamera, 25)
         , mGridRenderer(&mCamera, 50)
         , mIm3DRenderer(im3dContext, &mCamera, 75)
-        , mIndex(editor.tool().createViewIndex())
+        , mIndex(index)
     {
         mCamera.mPosition = { 0, 0.5, -1 };
 
@@ -97,7 +97,7 @@ namespace Tools {
 
         ImGui::SetNextWindowDockID(mEditor.tool().dockSpaceId(), ImGuiCond_FirstUseEver);
         ImGui::SetNextWindowSizeConstraints({ 100, 100 }, { 1000000, 1000000 });
-        if (ImGui::Begin(("SceneView##SceneView" + std::to_string(mIndex)).c_str(), &open)) {
+        if (mEditor.tool().beginSubPanel(("SceneView" + std::to_string(mIndex)).c_str(), &open, ImGuiDir_Up)){       
 
             constexpr Vector3 axes[3] = {
                 { 1, 0, 0 },

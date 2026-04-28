@@ -1,4 +1,4 @@
-#include "resourcestoolslib.h"
+#include "../resourcestoolslib.h"
 
 #include "resourcefile.h"
 
