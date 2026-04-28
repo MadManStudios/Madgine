@@ -54,6 +54,16 @@ struct Flags : _Representation {
         return mBits == other;
     }
 
+    void set(Representation::EnumType bits)
+    {
+        mBits |= bits;
+    }
+
+    void unset(Representation::EnumType bits)
+    {
+        mBits &= ~bits;
+    }
+
 private:
     Representation::EnumType mBits = static_cast<Representation::EnumType>(0);
 };
