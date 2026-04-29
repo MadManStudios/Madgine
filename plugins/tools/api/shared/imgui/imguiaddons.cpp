@@ -341,6 +341,22 @@ bool LED(const char *label, bool *on, const ImVec2 &size)
     return pressed;
 }
 
+bool InlineButton(const char *text, bool checked)
+{
+    ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(0, 0));
+    ImGui::PushStyleVar(ImGuiStyleVar_FrameBorderSize, 1.0f);
+    ImGui::PushStyleVar(ImGuiStyleVar_FrameRounding, 4.0f);
+    if (!checked) {
+        ImGui::PushStyleColor(ImGuiCol_Button, 0);
+    }
+    bool pressed = ImGui::Button(text, { ImGui::GetTextLineHeight(), ImGui::GetTextLineHeight() });
+    if (!checked) {
+        ImGui::PopStyleColor();
+    }
+    ImGui::PopStyleVar(3);
+    return pressed;
+}
+
 bool BeginFilesystemPicker(Engine::Filesystem::Path &path, Engine::Filesystem::Path &selection, const Engine::Filesystem::Path &base)
 {
     bool changed = false;

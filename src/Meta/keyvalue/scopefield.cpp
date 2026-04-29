@@ -40,4 +40,9 @@ const ExtendedValueTypeDesc &ScopeField::type() const
     return mPointer->mType;
 }
 
+AccessorFlags ScopeField::flags() const
+{
+    return mPointer->mFlags;
+}
+
 }

@@ -110,7 +110,7 @@ namespace Behavior {
 
         static const constexpr auto sMembers = []<size_t... Is>(auto_pack<Is...>) constexpr -> std::array<Accessor, sizeof...(Ty) + 1>
         {
-            return { { { Names::template get<Is>.c_str(), nullptr, &sGetter<Is>, &sSetter<Is, Ty>, toValueTypeDesc<Ty>() }...,
+            return { { { Names::template get<Is>.c_str(), nullptr, &sGetter<Is>, &sSetter<Is, Ty>, toValueTypeDesc<Ty>(), InstanceOfA1<Ty, Named> ? AccessorFlags_Named : AccessorFlags_Default }...,
                 {} } };
         }
         (index_pack_for<Ty...> {});

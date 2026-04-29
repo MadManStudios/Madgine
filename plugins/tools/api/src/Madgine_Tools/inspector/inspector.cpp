@@ -51,6 +51,8 @@ namespace Tools {
     {
         ToolBase::update();
 
+        assert(mAccessorFlagsStack.empty());
+
         std::erase_if(mViews, [this](Trace &trace) {
             bool open = true;
             void *ptr = &trace;
@@ -96,10 +98,15 @@ namespace Tools {
 
     bool Inspector::drawMember(const Traced<ScopeIterator> &it)
     {
-        auto f = [&](const ScopeIterator &it) {ValueType v; it->value(v); return v; };
+        AccessorFlags memberFlags = it.get()->flags();
+        if ((memberFlags & flags()) != memberFlags) {
+            return false;
+        }
+        
+        auto f = [](const ScopeIterator &it) {ValueType v; it->value(v); return v; };
         const Traced<ValueType> &value = it.traceEx(
             std::move(f),
-            static_cast<bool(*)(const TracedAccess<ScopeIterator, decltype(f)> &, bool)>([](const TracedAccess<ScopeIterator, decltype(f)> &value, bool modified) {
+            static_cast<bool (*)(const TracedAccess<ScopeIterator, decltype(f)> &, bool)>([](const TracedAccess<ScopeIterator, decltype(f)> &value, bool modified) {
                 if (modified)
                     *value.mParent.get() = value.get();
                 return modified;
@@ -279,18 +286,12 @@ namespace Tools {
             ImGui::PopClipRect();
             ImGui::SameLine(button_x + ImGui::GetCurrentWindow()->DC.Indent.x - ImGui::GetCurrentWindow()->DC.GroupOffset.x, 0.0f);
             ImGui::GetCurrentWindow()->WorkRect.Max.x += ImGui::GetTextLineHeight();
-            ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(0, 0));
-            ImGui::PushStyleVar(ImGuiStyleVar_FrameBorderSize, 1.0f);
-            ImGui::PushStyleVar(ImGuiStyleVar_FrameRounding, 4.0f);
-            ImGui::PushStyleColor(ImGuiCol_Button, 0);
-            if (ImGui::Button(IMGUI_ICON_EYE, { ImGui::GetTextLineHeight(), ImGui::GetTextLineHeight() })) {
+            if (ImGui::InlineButton(IMGUI_ICON_EYE)) {
                 if (ImGui::IsKeyDown(ImGuiKey_LeftCtrl)) {
                     throw 0;
                 }
                 mViews.push_back({ [trace { scope.build() }, this, isOwned]() { return trace([this, isOwned](const Traced<ScopePtr &> &scope) { return std::make_pair(KeyValueResult {}, drawValue("TODO", scope, false, isOwned)); }); } });
             }
-            ImGui::PopStyleColor();
-            ImGui::PopStyleVar(3);
             if (ImGui::IsItemHovered() && ImGui::IsKeyDown(ImGuiKey_LeftCtrl)) {
                 ImGui::BeginTooltip();
                 std::stringstream ss;
@@ -478,18 +479,18 @@ namespace Tools {
 
             if (first.mType == ValueTypeEnum::NullValue) {
                 if (second.mType != ValueTypeEnum::ScopeValue) {
-            if (ImGui::Checkbox("##Optional", &isSet)) {
-                if (isSet) {
+                    if (ImGui::Checkbox("##Optional", &isSet)) {
+                        if (isSet) {
                             type = second;
-                } else {
-                    type = toValueTypeDesc<std::monostate>();
-                }
-                return true;
-            }
+                        } else {
+                            type = toValueTypeDesc<std::monostate>();
+                        }
+                        return true;
+                    }
                 }
             } else if (first.mType == ValueTypeEnum::BindingValue) {
                 assert(second.mSecondary.mDummy == first.mSecondary.mDummy);
-            if (ImGui::LED("##Bindable", type.mType == ValueTypeEnum::BindingValue, { ImGui::GetFrameHeight(), ImGui::GetFrameHeight() })) {
+                if (ImGui::LED("##Bindable", type.mType == ValueTypeEnum::BindingValue, { ImGui::GetFrameHeight(), ImGui::GetFrameHeight() })) {
                 }
             } else {
                 throw 0;
@@ -520,6 +521,24 @@ namespace Tools {
     void Inspector::addPreviewDefinition(const MetaTable *type, std::function<bool(const Traced<const ScopePtr &> &)> preview)
     {
         mPreviews[type] = preview;
+    }
+
+    void Inspector::pushFlags(AccessorFlags flags)
+    {
+        mAccessorFlagsStack.push_back(flags);
+    }
+
+    void Inspector::popFlags()
+    {
+        assert(!mAccessorFlagsStack.empty());
+        mAccessorFlagsStack.pop_back();
+    }
+
+    AccessorFlags Inspector::flags() const {
+        AccessorFlags flags = AccessorFlags_Default;
+        if (!mAccessorFlagsStack.empty())
+            flags = mAccessorFlagsStack.back();
+        return flags;
     }
 
 }

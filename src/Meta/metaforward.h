@@ -17,6 +17,7 @@ struct ProxyScopeBase;
 struct MetaTable;
 struct ScopeIterator;
 struct Accessor;
+using AccessorFlags = uint32_t;
 struct ScopeField;
 struct ScopePtr;
 struct OwnedScopePtr;

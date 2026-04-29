@@ -16,6 +16,7 @@ struct META_EXPORT ScopeField {
 
     bool isEditable() const;
     const ExtendedValueTypeDesc &type() const;
+    AccessorFlags flags() const;
 
 private:
     ScopePtr mScope;

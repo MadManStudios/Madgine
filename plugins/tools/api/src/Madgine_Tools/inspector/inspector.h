@@ -52,6 +52,10 @@ namespace Tools {
             addPreviewDefinition(table<T>, [preview { forward_capture<F>(preview) }](const Traced<const ScopePtr &> &p) { return preview(p.trace(&scope_cast<T>)); });
         }
 
+        void pushFlags(AccessorFlags flags);
+        void popFlags();
+        AccessorFlags flags() const;
+
     private:
         std::map<const MetaTable *, std::function<std::vector<std::pair<std::string_view, ScopePtr>>()>> mPtrSuggestionsByType;
         std::map<const MetaTable *, std::function<bool(const Traced<const ScopePtr &> &)>> mPreviews;
@@ -59,6 +63,8 @@ namespace Tools {
         static std::map<std::string, bool (Inspector::*)(ScopePtr, std::set<std::string> &, tinyxml2::XMLElement *)> sElements;
 
         std::list<Trace> mViews;
+
+        std::vector<AccessorFlags> mAccessorFlagsStack;
 
         // FunctionTool
         std::string mCurrentPopupFunctionName;
