@@ -188,7 +188,7 @@ namespace Tools {
 
                     drawWidget(root, hoveredWidget);
 
-                    if (ImGui::IsWindowHovered() && ImGui::IsMouseClicked(0)) {
+                    if (ImGui::IsWindowHovered(ImGuiHoveredFlags_AllowWhenBlockedByActiveItem) && ImGui::IsMouseClicked(0)) {
                         if (hoveredWidget && *hoveredWidget)
                             mSelected = &mSettings.try_emplace(*hoveredWidget, *hoveredWidget, mEditor.getTool<Inspector>()).first->second;
                         else
