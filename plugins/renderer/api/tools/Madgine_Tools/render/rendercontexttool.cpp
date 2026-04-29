@@ -13,6 +13,7 @@
 #include "Meta/serialize/serializetable_impl.h"
 
 #include "Madgine_Tools/inspector/inspector.h"
+#include "Madgine_Tools/renderer/imroot.h"
 #include "im3d/im3d.h"
 #include "imgui/imgui.h"
 #include "imgui/imguiaddons.h"
@@ -39,11 +40,11 @@ namespace Tools {
     {
         mContext = &Render::RenderContext::getSingleton();
 
-        getTool<Inspector>().addPreviewDefinition<Render::FontLoader::Resource>([](const Traced<Render::FontLoader::Resource *> &font) {
+        getTool<Inspector>().addPreviewDefinition<Render::FontLoader::Resource>([this](const Traced<Render::FontLoader::Resource *> &font) {
             Render::FontLoader::Handle handle = font.get()->loadData();
             handle.info()->setPersistent(true);
             if (handle.available())
-                ImGui::Image((void *)handle->mTexture->resourceBlock(), handle->mTexture->size());
+                mRoot.Image(handle->mTexture, handle->mTexture->size());
             return false;
         });
 

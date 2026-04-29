@@ -87,7 +87,7 @@ namespace Tools {
             }
 
             if (mGamepadTexture)
-                ImGui::Image((void *)mGamepadTexture->resourceBlock(), Canvas);
+                mRoot.Image(mGamepadTexture, Vector2i { static_cast<int>(Canvas.x), static_cast<int>(Canvas.y) });
 
             size_t i = 0;
             constexpr float offsets[2][2] = {

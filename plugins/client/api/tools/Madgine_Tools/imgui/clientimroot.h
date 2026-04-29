@@ -72,6 +72,7 @@ namespace Tools {
 
         Threading::TaskQueue *taskQueue() const override;
 
+        void Image(Render::ConstTexturePtr tex, Vector2i image_size = { -1, -1 }, const Vector2 &uv0 = { 0, 0 }, const Vector2 &uv1 = { 1, 1 }) override;
         void Image(const Filesystem::Path &path, Vector2i image_size = { -1, -1 }) override;
         void DrawImage(const Filesystem::Path &path, Vector2i pos, Vector2i image_size = { -1, -1 }, float spinnerRadius = 15) override;
 
@@ -92,14 +93,16 @@ namespace Tools {
 
         std::vector<Render::RenderTarget *> mRenderTargets;
 
-        ByteBuffer mIconsData;        
+        ByteBuffer mIconsData;
 
         struct CachedImage {
             Resources::ImageLoader::Handle mHandle;
             Render::TexturePtr mTexture;
         };
         std::map<Filesystem::Path, CachedImage> mImageCache;
+        std::vector<Render::ConstTexturePtr> mTextureCache;
 
+        friend struct ImGuiRenderData;
         ImGuiRenderData mRenderData;
     };
 

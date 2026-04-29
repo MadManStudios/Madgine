@@ -321,6 +321,8 @@ namespace Tools {
             }
         }
 
+        mTextureCache.clear();
+
         removeDependency(&mRenderData);
 
         ImGuiIO &io = ImGui::GetIO();
@@ -445,7 +447,7 @@ namespace Tools {
             float B = draw_data->DisplayPos.y + draw_data->DisplaySize.y /* / ImGui::GetIO().DisplayFramebufferScale.y*/;
             *mvp.mData = target->getClipSpaceMatrix() * Matrix4 { 2.0f / (R - L), 0.0f, 0.0f, (R + L) / (L - R), 0.0f, 2.0f / (T - B), 0.0f, (T + B) / (B - T), 0.0f, 0.0f, 0.5f, 0.5f, 0.0f, 0.0f, 0.0f, 1.0f };
         }
-        
+
         using Vertex = Compound<Render::VertexPos2, Render::VertexColor, Render::VertexUV>;
 
         size_t vertexBufferCount = 0;
@@ -498,7 +500,8 @@ namespace Tools {
                     const Rect2i r = { { (int)(pcmd->ClipRect.x - clip_off.x), (int)(pcmd->ClipRect.y - clip_off.y) }, { (int)(pcmd->ClipRect.z - pcmd->ClipRect.x), (int)(pcmd->ClipRect.w - pcmd->ClipRect.y) } };
                     if (r.bottomRight().x > r.mTopLeft.x && r.bottomRight().y > r.mTopLeft.y) {
                         ImTextureID tex = pcmd->GetTexID();
-                        mPipeline->bindResources(target, 2, reinterpret_cast<Render::ResourceBlock &>(tex));
+                        const Render::Texture *texture = reinterpret_cast<const Render::Texture *>(tex);
+                        mPipeline->bindResources(target, 2, texture->resourceBlock());
 
                         target->setScissorsRect(r);
                         mPipeline->renderRange(target, pcmd->ElemCount, pcmd->VtxOffset + global_vtx_offset, pcmd->IdxOffset + global_idx_offset);
@@ -516,7 +519,7 @@ namespace Tools {
         case ImTextureStatus_WantCreate: {
             Render::TexturePtr ptr = Render::RenderContext::getSingleton().createTexture(Render::TextureType_2D, Render::FORMAT_RGBA8_SRGB, { tex->Width, tex->Height }, { tex->GetPixels(), static_cast<size_t>(tex->Width * tex->Height * 4) });
 
-            tex->SetTexID(ImTextureID { ptr->resourceBlock() });
+            tex->SetTexID(reinterpret_cast<ImTextureID>(ptr.get()));
             tex->BackendUserData = new Render::TexturePtr { std::move(ptr) };
 
             tex->SetStatus(ImTextureStatus_OK);
@@ -724,6 +727,13 @@ namespace Tools {
         return mWindow.taskQueue();
     }
 
+    void ClientImRoot::Image(Render::ConstTexturePtr tex, Vector2i image_size, const Vector2 &uv0, const Vector2 &uv1)
+    {
+        ImGui::Image((void *)tex.get(), image_size, uv0, uv1);
+
+        mTextureCache.push_back(std::move(tex));        
+    }
+
     void ClientImRoot::Image(const Filesystem::Path &path, Vector2i image_size)
     {
         std::string_view name = path.stem();
@@ -744,7 +754,7 @@ namespace Tools {
                 image_size = tex.size();
             }
 
-            ImGui::Image((void *)tex.resourceBlock(), image_size);
+            Image(image.mTexture, image_size);
         } else {
             ImGui::Spinner(path.stem().data(), 15, 6, ImGui::GetColorU32(ImGuiCol_ButtonHovered));
         }
@@ -778,7 +788,7 @@ namespace Tools {
                 }
             }
 
-            ImGui::GetWindowDrawList()->AddImage((void *)tex.resourceBlock(), pos, pos + image_size);
+            ImGui::GetWindowDrawList()->AddImage((void *)&tex, pos, pos + image_size);
         } else {
             ImGui::DrawSpinner(pos, pos + image_size, spinnerRadius, 6, ImGui::GetColorU32(ImGuiCol_ButtonHovered));
         }
@@ -800,6 +810,8 @@ namespace Tools {
         io.DeltaTime = std::chrono::duration_cast<std::chrono::duration<float>>(mFrameClock.tick(std::chrono::steady_clock::now())).count();
 
         io.BackendPlatformUserData = &mRoot.window();
+
+        mRoot.mTextureCache.clear();
 
         if (mRoot.ImRoot::render())
             mRoot.setCentralNode();

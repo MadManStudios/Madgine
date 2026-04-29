@@ -115,7 +115,7 @@ namespace Tools {
             if (iRegion.x > 0 && iRegion.y > 0)
                 mRenderTarget->resize(iRegion);
             ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, { 0.0f, 0.0f });
-            ImGui::Image((void *)mRenderTarget->texture()->resourceBlock().mPtr, region, { 0, 0 }, { 1, 1 });
+            mEditor.tool().root().Image(mRenderTarget->texture(), iRegion, { 0, 0 }, { 1, 1 });
             ImGui::PopStyleVar();
             
             ImGui::InteractiveViewResultFlags result = ImGui::InteractiveView(ImGui::GetID("View"));

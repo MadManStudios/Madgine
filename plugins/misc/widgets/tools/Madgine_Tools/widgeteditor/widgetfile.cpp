@@ -20,6 +20,7 @@
 #include "Madgine_Tools/imgui/clientimroot.h"
 #include "Madgine_Tools/imguiicons.h"
 #include "Madgine_Tools/inspector/inspector.h"
+#include "Madgine_Tools/renderer/imroot.h"
 #include "Madgine_Tools/util/trace_imgui.h"
 #include "imgui/imguiaddons.h"
 #include "widgeteditor.h"
@@ -245,7 +246,7 @@ namespace Tools {
                     mWidgetManager.onResize({ { 0, 0 }, vSize });
                 }
 
-                ImGui::Image((void *)mRenderTarget->texture()->resourceBlock(), size);
+                editor().root().Image(mRenderTarget->texture(), vSize);
 
                 ImGui::GetWindowDrawList()->PushClipRect(ImGui::GetItemRectMin(), ImGui::GetItemRectMax());
 

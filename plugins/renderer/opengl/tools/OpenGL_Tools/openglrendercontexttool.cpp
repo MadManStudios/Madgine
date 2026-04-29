@@ -13,7 +13,9 @@
 #include "Meta/serialize/serializetable_impl.h"
 
 #include "Madgine_Tools/inspector/inspector.h"
+#include "Madgine_Tools/renderer/imroot.h"
 #include "imgui/imgui.h"
+#include "imgui/imguiaddons.h"
 
 UNIQUECOMPONENT(Engine::Tools::OpenGLRenderContextTool);
 
@@ -41,7 +43,7 @@ namespace Tools {
 
             if (data.available()) {
                 mImageTexture = std::make_shared<Render::OpenGLTexture>(Render::TextureType_2D, Render::FORMAT_RGBA8_SRGB, data->mSize, 1, data->mBuffer);
-                ImGui::Image((void *)(uintptr_t)mImageTexture->resourceBlock(), data->mSize);
+                mRoot.Image(mImageTexture, data->mSize);
             }
             return false;
         });
