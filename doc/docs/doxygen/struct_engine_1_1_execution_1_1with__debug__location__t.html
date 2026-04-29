@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Madgine - Doxygen Documentation: Engine::Execution::with_debug_location_t Struct Reference &mdash; Madgine  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
 
   
@@ -213,7 +213,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.5.3</span>
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.6.0</span>
    </div>
   </td>
  </tr>
@@ -260,28 +260,28 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a7541d1ec5296e3092b7db4923f786e9b"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1with__debug__location__t.html#a7541d1ec5296e3092b7db4923f786e9b">operator()</a> (<a class="el" href="struct_engine_1_1_debug_1_1_base_location.html">Debug::BaseLocation</a> &amp;parent) const</td></tr>
-<tr class="separator:a7541d1ec5296e3092b7db4923f786e9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5ceec9755ecbd2db1e1c833c7ba7391f"><td class="memTemplParams" colspan="2">template&lt;Sender Sender&gt; <br />
-requires <a class="el" href="concepttag__invocable.html">tag_invocable</a>&lt;<a class="el" href="struct_engine_1_1_execution_1_1with__debug__location__t.html">with_debug_location_t</a>, Sender, <a class="el" href="struct_engine_1_1_debug_1_1_base_location.html">Debug::BaseLocation</a> &amp;&gt;</td></tr>
-<tr class="memitem:a5ceec9755ecbd2db1e1c833c7ba7391f"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1with__debug__location__t.html#a5ceec9755ecbd2db1e1c833c7ba7391f">operator()</a> (Sender &amp;&amp;<a class="el" href="struct_engine_1_1_execution_1_1with__debug__location__t_1_1sender.html">sender</a>, <a class="el" href="struct_engine_1_1_debug_1_1_base_location.html">Debug::BaseLocation</a> &amp;parent) const noexcept(<a class="el" href="tag__invoke_8h.html#ac9297785bc1cff48dae735a140253041">is_nothrow_tag_invocable_v</a>&lt; <a class="el" href="struct_engine_1_1_execution_1_1with__debug__location__t.html">with_debug_location_t</a>, Sender, <a class="el" href="struct_engine_1_1_debug_1_1_base_location.html">Debug::BaseLocation</a> &amp; &gt;) -&gt; tag_invoke_result_t&lt; <a class="el" href="struct_engine_1_1_execution_1_1with__debug__location__t.html">with_debug_location_t</a>, Sender, <a class="el" href="struct_engine_1_1_debug_1_1_base_location.html">Debug::BaseLocation</a> &amp; &gt;</td></tr>
-<tr class="separator:a5ceec9755ecbd2db1e1c833c7ba7391f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adbfa558964c1438268703683cb1cee4b"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1with__debug__location__t.html#adbfa558964c1438268703683cb1cee4b">operator()</a> (<a class="el" href="struct_engine_1_1_debug_1_1_sender_location.html">Debug::SenderLocation</a> *&amp;parent) const</td></tr>
+<tr class="separator:adbfa558964c1438268703683cb1cee4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa042b24c7b36d711fe51abd578a5c9f1"><td class="memTemplParams" colspan="2">template&lt;AnySender Sender&gt; <br />
+requires <a class="el" href="concepttag__invocable.html">tag_invocable</a>&lt;<a class="el" href="struct_engine_1_1_execution_1_1with__debug__location__t.html">with_debug_location_t</a>, <a class="el" href="struct_engine_1_1_execution_1_1_sender.html">Sender</a>, <a class="el" href="struct_engine_1_1_debug_1_1_sender_location.html">Debug::SenderLocation</a> *&amp;&gt;</td></tr>
+<tr class="memitem:aa042b24c7b36d711fe51abd578a5c9f1"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1with__debug__location__t.html#aa042b24c7b36d711fe51abd578a5c9f1">operator()</a> (<a class="el" href="struct_engine_1_1_execution_1_1_sender.html">Sender</a> &amp;&amp;<a class="el" href="struct_engine_1_1_execution_1_1with__debug__location__t_1_1sender.html">sender</a>, <a class="el" href="struct_engine_1_1_debug_1_1_sender_location.html">Debug::SenderLocation</a> *&amp;parent) const noexcept(<a class="el" href="tag__invoke_8h.html#ac9297785bc1cff48dae735a140253041">is_nothrow_tag_invocable_v</a>&lt; <a class="el" href="struct_engine_1_1_execution_1_1with__debug__location__t.html">with_debug_location_t</a>, <a class="el" href="struct_engine_1_1_execution_1_1_sender.html">Sender</a>, <a class="el" href="struct_engine_1_1_debug_1_1_sender_location.html">Debug::SenderLocation</a> *&amp; &gt;) -&gt; tag_invoke_result_t&lt; <a class="el" href="struct_engine_1_1_execution_1_1with__debug__location__t.html">with_debug_location_t</a>, <a class="el" href="struct_engine_1_1_execution_1_1_sender.html">Sender</a>, <a class="el" href="struct_engine_1_1_debug_1_1_sender_location.html">Debug::SenderLocation</a> *&amp; &gt;</td></tr>
+<tr class="separator:aa042b24c7b36d711fe51abd578a5c9f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
 Friends</h2></td></tr>
-<tr class="memitem:a4beb895918471144deb9a13de65a7950"><td class="memTemplParams" colspan="2">template&lt;Sender Sender&gt; </td></tr>
-<tr class="memitem:a4beb895918471144deb9a13de65a7950"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1with__debug__location__t.html#a4beb895918471144deb9a13de65a7950">tag_invoke</a> (<a class="el" href="struct_engine_1_1_execution_1_1with__debug__location__t.html">with_debug_location_t</a>, Sender &amp;&amp;inner, <a class="el" href="struct_engine_1_1_debug_1_1_base_location.html">Debug::BaseLocation</a> &amp;parent)</td></tr>
-<tr class="separator:a4beb895918471144deb9a13de65a7950"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a65beb0b78abd9c9883985fbc2adb9aff"><td class="memTemplParams" colspan="2">template&lt;AnySender Sender&gt; </td></tr>
+<tr class="memitem:a65beb0b78abd9c9883985fbc2adb9aff"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1with__debug__location__t.html#a65beb0b78abd9c9883985fbc2adb9aff">tag_invoke</a> (<a class="el" href="struct_engine_1_1_execution_1_1with__debug__location__t.html">with_debug_location_t</a>, <a class="el" href="struct_engine_1_1_execution_1_1_sender.html">Sender</a> &amp;&amp;inner, <a class="el" href="struct_engine_1_1_debug_1_1_sender_location.html">Debug::SenderLocation</a> *&amp;parent)</td></tr>
+<tr class="separator:a65beb0b78abd9c9883985fbc2adb9aff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a5ceec9755ecbd2db1e1c833c7ba7391f" name="a5ceec9755ecbd2db1e1c833c7ba7391f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5ceec9755ecbd2db1e1c833c7ba7391f">&#9670;&#160;</a></span>operator()() <span class="overload">[1/2]</span></h2>
+<a id="aa042b24c7b36d711fe51abd578a5c9f1" name="aa042b24c7b36d711fe51abd578a5c9f1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa042b24c7b36d711fe51abd578a5c9f1">&#9670;&#160;</a></span>operator()() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;Sender Sender&gt; <br />
-requires <a class="el" href="concepttag__invocable.html">tag_invocable</a>&lt;<a class="el" href="struct_engine_1_1_execution_1_1with__debug__location__t.html">with_debug_location_t</a>, Sender, <a class="el" href="struct_engine_1_1_debug_1_1_base_location.html">Debug::BaseLocation</a> &amp;&gt;</div>
+template&lt;AnySender Sender&gt; <br />
+requires <a class="el" href="concepttag__invocable.html">tag_invocable</a>&lt;<a class="el" href="struct_engine_1_1_execution_1_1with__debug__location__t.html">with_debug_location_t</a>, <a class="el" href="struct_engine_1_1_execution_1_1_sender.html">Sender</a>, <a class="el" href="struct_engine_1_1_debug_1_1_sender_location.html">Debug::SenderLocation</a> *&amp;&gt;</div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -289,19 +289,19 @@ requires <a class="el" href="concepttag__invocable.html">tag_invocable</a>&lt;<a
         <tr>
           <td class="memname">auto Engine::Execution::with_debug_location_t::operator() </td>
           <td>(</td>
-          <td class="paramtype">Sender &amp;&amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_execution_1_1_sender.html">Sender</a> &amp;&amp;&#160;</td>
           <td class="paramname"><em>sender</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="struct_engine_1_1_debug_1_1_base_location.html">Debug::BaseLocation</a> &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_debug_1_1_sender_location.html">Debug::SenderLocation</a> *&amp;&#160;</td>
           <td class="paramname"><em>parent</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td> const -&gt; tag_invoke_result_t&lt;<a class="el" href="struct_engine_1_1_execution_1_1with__debug__location__t.html">with_debug_location_t</a>, Sender, <a class="el" href="struct_engine_1_1_debug_1_1_base_location.html">Debug::BaseLocation</a> &amp;&gt;
+          <td></td><td> const -&gt; tag_invoke_result_t&lt;<a class="el" href="struct_engine_1_1_execution_1_1with__debug__location__t.html">with_debug_location_t</a>, <a class="el" href="struct_engine_1_1_execution_1_1_sender.html">Sender</a>, <a class="el" href="struct_engine_1_1_debug_1_1_sender_location.html">Debug::SenderLocation</a> *&amp;&gt;
         </td>
         </tr>
       </table>
@@ -314,8 +314,8 @@ requires <a class="el" href="concepttag__invocable.html">tag_invocable</a>&lt;<a
 
 </div>
 </div>
-<a id="a7541d1ec5296e3092b7db4923f786e9b" name="a7541d1ec5296e3092b7db4923f786e9b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7541d1ec5296e3092b7db4923f786e9b">&#9670;&#160;</a></span>operator()() <span class="overload">[2/2]</span></h2>
+<a id="adbfa558964c1438268703683cb1cee4b" name="adbfa558964c1438268703683cb1cee4b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adbfa558964c1438268703683cb1cee4b">&#9670;&#160;</a></span>operator()() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -326,7 +326,7 @@ requires <a class="el" href="concepttag__invocable.html">tag_invocable</a>&lt;<a
         <tr>
           <td class="memname">auto Engine::Execution::with_debug_location_t::operator() </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_engine_1_1_debug_1_1_base_location.html">Debug::BaseLocation</a> &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_debug_1_1_sender_location.html">Debug::SenderLocation</a> *&amp;&#160;</td>
           <td class="paramname"><em>parent</em></td><td>)</td>
           <td> const</td>
         </tr>
@@ -341,13 +341,13 @@ requires <a class="el" href="concepttag__invocable.html">tag_invocable</a>&lt;<a
 </div>
 </div>
 <h2 class="groupheader">Friends And Related Function Documentation</h2>
-<a id="a4beb895918471144deb9a13de65a7950" name="a4beb895918471144deb9a13de65a7950"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4beb895918471144deb9a13de65a7950">&#9670;&#160;</a></span>tag_invoke</h2>
+<a id="a65beb0b78abd9c9883985fbc2adb9aff" name="a65beb0b78abd9c9883985fbc2adb9aff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a65beb0b78abd9c9883985fbc2adb9aff">&#9670;&#160;</a></span>tag_invoke</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;Sender Sender&gt; </div>
+template&lt;AnySender Sender&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -361,13 +361,13 @@ template&lt;Sender Sender&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">Sender &amp;&amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_execution_1_1_sender.html">Sender</a> &amp;&amp;&#160;</td>
           <td class="paramname"><em>inner</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="struct_engine_1_1_debug_1_1_base_location.html">Debug::BaseLocation</a> &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_debug_1_1_sender_location.html">Debug::SenderLocation</a> *&amp;&#160;</td>
           <td class="paramname"><em>parent</em>&#160;</td>
         </tr>
         <tr>
@@ -391,7 +391,7 @@ template&lt;Sender Sender&gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Dec 7 2025 08:43:30 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Wed Apr 29 2026 23:46:53 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

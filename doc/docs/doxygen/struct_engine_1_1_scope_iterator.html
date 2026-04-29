@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Madgine - Doxygen Documentation: Engine::ScopeIterator Struct Reference &mdash; Madgine  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
 
   
@@ -213,7 +213,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.5.3</span>
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.6.0</span>
    </div>
   </td>
  </tr>
@@ -239,6 +239,7 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="struct_engine_1_1_scope_iterator-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">Engine::ScopeIterator Struct Reference</div></div>
@@ -247,26 +248,139 @@ $(function() {
 
 <p><code>#include &lt;scopeiterator.h&gt;</code></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:ad1740aa4006525400e53586916d3c268"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scope_iterator.html#ad1740aa4006525400e53586916d3c268">difference_type</a> = ptrdiff_t</td></tr>
+<tr class="separator:ad1740aa4006525400e53586916d3c268"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae5dec936848793044e224b1d180cb5a7"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scope_iterator.html#ae5dec936848793044e224b1d180cb5a7">iterator_category</a> = std::forward_iterator_tag</td></tr>
+<tr class="separator:ae5dec936848793044e224b1d180cb5a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4817c2a1412176e713cb168cbdda44e"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scope_iterator.html#ae4817c2a1412176e713cb168cbdda44e">pointer</a> = void</td></tr>
+<tr class="separator:ae4817c2a1412176e713cb168cbdda44e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f6e753812ce0b29af90aaffcb822c30"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scope_iterator.html#a2f6e753812ce0b29af90aaffcb822c30">reference</a> = <a class="el" href="struct_engine_1_1_scope_field.html">ScopeField</a></td></tr>
+<tr class="separator:a2f6e753812ce0b29af90aaffcb822c30"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa37749a6b6174e63cacb6fdce246653b"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scope_iterator.html#aa37749a6b6174e63cacb6fdce246653b">value_type</a> = <a class="el" href="struct_engine_1_1_scope_field.html">ScopeField</a></td></tr>
+<tr class="separator:aa37749a6b6174e63cacb6fdce246653b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a9262ac78089cb3dabceb8b61b48f179b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scope_iterator.html#a9262ac78089cb3dabceb8b61b48f179b">ScopeIterator</a> (<a class="el" href="struct_engine_1_1_scope_ptr.html">ScopePtr</a> scope, const <a class="el" href="struct_engine_1_1_accessor.html">Accessor</a> *pointer)</td></tr>
+<tr class="memitem:aa56a36580eaa3f2e307da6a40c9cf0df"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scope_iterator.html#aa56a36580eaa3f2e307da6a40c9cf0df">ScopeIterator</a> ()=default</td></tr>
+<tr class="separator:aa56a36580eaa3f2e307da6a40c9cf0df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9262ac78089cb3dabceb8b61b48f179b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scope_iterator.html#a9262ac78089cb3dabceb8b61b48f179b">ScopeIterator</a> (<a class="el" href="struct_engine_1_1_scope_ptr.html">ScopePtr</a> scope, const <a class="el" href="struct_engine_1_1_accessor.html">Accessor</a> *<a class="el" href="struct_engine_1_1_scope_iterator.html#ae4817c2a1412176e713cb168cbdda44e">pointer</a>)</td></tr>
 <tr class="separator:a9262ac78089cb3dabceb8b61b48f179b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a65f3bf56c290f4e908aeac4241337871"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_scope_iterator.html">ScopeIterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scope_iterator.html#a65f3bf56c290f4e908aeac4241337871">end</a> () const</td></tr>
 <tr class="separator:a65f3bf56c290f4e908aeac4241337871"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aef7d0ad19187544287cae1b1f063a3bc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scope_iterator.html#aef7d0ad19187544287cae1b1f063a3bc">operator!=</a> (const <a class="el" href="struct_engine_1_1_scope_iterator.html">ScopeIterator</a> &amp;other) const</td></tr>
+<tr class="memitem:aef7d0ad19187544287cae1b1f063a3bc"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scope_iterator.html#aef7d0ad19187544287cae1b1f063a3bc">operator!=</a> (const <a class="el" href="struct_engine_1_1_scope_iterator.html">ScopeIterator</a> &amp;other) const</td></tr>
 <tr class="separator:aef7d0ad19187544287cae1b1f063a3bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:affa19bdd543e7d467937dedd27ccffcf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_scope_field.html">ScopeField</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scope_iterator.html#affa19bdd543e7d467937dedd27ccffcf">operator*</a> () const</td></tr>
 <tr class="separator:affa19bdd543e7d467937dedd27ccffcf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a70f18204ea6125095d8177115af5c221"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scope_iterator.html#a70f18204ea6125095d8177115af5c221">operator++</a> ()</td></tr>
-<tr class="separator:a70f18204ea6125095d8177115af5c221"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a47e33900a38c6a1684418455a55a3f77"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_scope_iterator.html">ScopeIterator</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scope_iterator.html#a47e33900a38c6a1684418455a55a3f77">operator++</a> ()</td></tr>
+<tr class="separator:a47e33900a38c6a1684418455a55a3f77"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac50b61179afa67e39fb99f791314de64"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_scope_iterator.html">ScopeIterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scope_iterator.html#ac50b61179afa67e39fb99f791314de64">operator++</a> (int)</td></tr>
+<tr class="separator:ac50b61179afa67e39fb99f791314de64"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aad20797f606dd011e22224b3fb01b1e4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_proxy.html">Proxy</a>&lt; <a class="el" href="struct_engine_1_1_scope_field.html">ScopeField</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scope_iterator.html#aad20797f606dd011e22224b3fb01b1e4">operator-&gt;</a> () const</td></tr>
 <tr class="separator:aad20797f606dd011e22224b3fb01b1e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4ef55c9d6bf0a25426641ae42e376b1d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scope_iterator.html#a4ef55c9d6bf0a25426641ae42e376b1d">operator==</a> (const <a class="el" href="struct_engine_1_1_scope_iterator.html">ScopeIterator</a> &amp;other) const</td></tr>
+<tr class="memitem:a4ef55c9d6bf0a25426641ae42e376b1d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scope_iterator.html#a4ef55c9d6bf0a25426641ae42e376b1d">operator==</a> (const <a class="el" href="struct_engine_1_1_scope_iterator.html">ScopeIterator</a> &amp;other) const</td></tr>
 <tr class="separator:a4ef55c9d6bf0a25426641ae42e376b1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="ae5dec936848793044e224b1d180cb5a7" name="ae5dec936848793044e224b1d180cb5a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae5dec936848793044e224b1d180cb5a7">&#9670;&#160;</a></span>iterator_category</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="struct_engine_1_1_scope_iterator.html#ae5dec936848793044e224b1d180cb5a7">Engine::ScopeIterator::iterator_category</a> =  std::forward_iterator_tag</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa37749a6b6174e63cacb6fdce246653b" name="aa37749a6b6174e63cacb6fdce246653b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa37749a6b6174e63cacb6fdce246653b">&#9670;&#160;</a></span>value_type</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="struct_engine_1_1_scope_iterator.html#aa37749a6b6174e63cacb6fdce246653b">Engine::ScopeIterator::value_type</a> =  <a class="el" href="struct_engine_1_1_scope_field.html">ScopeField</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad1740aa4006525400e53586916d3c268" name="ad1740aa4006525400e53586916d3c268"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad1740aa4006525400e53586916d3c268">&#9670;&#160;</a></span>difference_type</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="struct_engine_1_1_scope_iterator.html#ad1740aa4006525400e53586916d3c268">Engine::ScopeIterator::difference_type</a> =  ptrdiff_t</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae4817c2a1412176e713cb168cbdda44e" name="ae4817c2a1412176e713cb168cbdda44e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae4817c2a1412176e713cb168cbdda44e">&#9670;&#160;</a></span>pointer</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="struct_engine_1_1_scope_iterator.html#ae4817c2a1412176e713cb168cbdda44e">Engine::ScopeIterator::pointer</a> =  void</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2f6e753812ce0b29af90aaffcb822c30" name="a2f6e753812ce0b29af90aaffcb822c30"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f6e753812ce0b29af90aaffcb822c30">&#9670;&#160;</a></span>reference</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="struct_engine_1_1_scope_iterator.html#a2f6e753812ce0b29af90aaffcb822c30">Engine::ScopeIterator::reference</a> =  <a class="el" href="struct_engine_1_1_scope_field.html">ScopeField</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="aa56a36580eaa3f2e307da6a40c9cf0df" name="aa56a36580eaa3f2e307da6a40c9cf0df"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa56a36580eaa3f2e307da6a40c9cf0df">&#9670;&#160;</a></span>ScopeIterator() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::ScopeIterator::ScopeIterator </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a9262ac78089cb3dabceb8b61b48f179b" name="a9262ac78089cb3dabceb8b61b48f179b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9262ac78089cb3dabceb8b61b48f179b">&#9670;&#160;</a></span>ScopeIterator()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a9262ac78089cb3dabceb8b61b48f179b">&#9670;&#160;</a></span>ScopeIterator() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -301,7 +415,7 @@ Public Member Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> Engine::ScopeIterator::operator== </td>
+          <td class="memname">bool Engine::ScopeIterator::operator== </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="struct_engine_1_1_scope_iterator.html">ScopeIterator</a> &amp;&#160;</td>
           <td class="paramname"><em>other</em></td><td>)</td>
@@ -319,7 +433,7 @@ Public Member Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> Engine::ScopeIterator::operator!= </td>
+          <td class="memname">bool Engine::ScopeIterator::operator!= </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="struct_engine_1_1_scope_iterator.html">ScopeIterator</a> &amp;&#160;</td>
           <td class="paramname"><em>other</em></td><td>)</td>
@@ -364,15 +478,33 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a70f18204ea6125095d8177115af5c221" name="a70f18204ea6125095d8177115af5c221"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a70f18204ea6125095d8177115af5c221">&#9670;&#160;</a></span>operator++()</h2>
+<a id="a47e33900a38c6a1684418455a55a3f77" name="a47e33900a38c6a1684418455a55a3f77"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a47e33900a38c6a1684418455a55a3f77">&#9670;&#160;</a></span>operator++() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::ScopeIterator::operator++ </td>
+          <td class="memname"><a class="el" href="struct_engine_1_1_scope_iterator.html">ScopeIterator</a> &amp; Engine::ScopeIterator::operator++ </td>
           <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac50b61179afa67e39fb99f791314de64" name="ac50b61179afa67e39fb99f791314de64"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac50b61179afa67e39fb99f791314de64">&#9670;&#160;</a></span>operator++() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_scope_iterator.html">ScopeIterator</a> Engine::ScopeIterator::operator++ </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
@@ -405,7 +537,7 @@ Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Dec 7 2025 08:43:29 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Wed Apr 29 2026 23:46:52 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

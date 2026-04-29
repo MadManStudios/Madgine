@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Madgine - Doxygen Documentation: plugins/renderer/api/src/Madgine/render/pipelineloader.cpp File Reference &mdash; Madgine  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
 
   
@@ -213,7 +213,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.5.3</span>
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.6.0</span>
    </div>
   </td>
  </tr>
@@ -239,7 +239,9 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#namespaces">Namespaces</a>  </div>
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#define-members">Macros</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle"><div class="title">pipelineloader.cpp File Reference</div></div>
 </div><!--header-->
 <div class="contents">
@@ -257,11 +259,40 @@ Namespaces</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:namespace_engine_1_1_render"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render.html">Engine::Render</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:a64abe90a531b478a491e1088041e6b7e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pipelineloader_8cpp.html#a64abe90a531b478a491e1088041e6b7e">CACHED_SHADER</a>(Object)&#160;&#160;&#160;static <a class="el" href="struct_engine_1_1_guard.html">Engine::Guard</a> sGuard##__LINE__ { []() { <a class="el" href="struct_engine_1_1_render_1_1_shader_cache.html#a89214e02b3a2d6235e323578b72944ed">Engine::Render::ShaderCache::registerShader</a>([]() -&gt; <a class="el" href="struct_engine_1_1_render_1_1_shader_object_ptr.html">Engine::Render::ShaderObjectPtr</a> { return Object; }); } };</td></tr>
+<tr class="separator:a64abe90a531b478a491e1088041e6b7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:ac427f34869c01894c44c605280198689"><td class="memItemLeft" align="right" valign="top">CLI::Parameter&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render.html#ac427f34869c01894c44c605280198689">Engine::Render::shadergenTarget</a> { { &quot;--shadergen-target&quot; }, &quot;&quot;, &quot;Specifies the target format for shader code generation during resource baking.&quot; }</td></tr>
+<tr class="separator:ac427f34869c01894c44c605280198689"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="a64abe90a531b478a491e1088041e6b7e" name="a64abe90a531b478a491e1088041e6b7e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a64abe90a531b478a491e1088041e6b7e">&#9670;&#160;</a></span>CACHED_SHADER</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CACHED_SHADER</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Object</td><td>)</td>
+          <td>&#160;&#160;&#160;static <a class="el" href="struct_engine_1_1_guard.html">Engine::Guard</a> sGuard##__LINE__ { []() { <a class="el" href="struct_engine_1_1_render_1_1_shader_cache.html#a89214e02b3a2d6235e323578b72944ed">Engine::Render::ShaderCache::registerShader</a>([]() -&gt; <a class="el" href="struct_engine_1_1_render_1_1_shader_object_ptr.html">Engine::Render::ShaderObjectPtr</a> { return Object; }); } };</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Dec 7 2025 08:43:27 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Wed Apr 29 2026 23:46:49 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

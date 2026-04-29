@@ -46,7 +46,7 @@ if (edges && edges.length) {
         </defs>
 
 <script type="text/javascript">
-var viewWidth = 506;
+var viewWidth = 509;
 var viewHeight = 93;
 var sectionId = 'dynsection-0';
 </script>
@@ -58,8 +58,8 @@ var sectionId = 'dynsection-0';
 <g id="node1" class="node">
 <title>Node1</title>
 <g id="a_node1"><a xlink:title=" ">
-<polygon fill="#999999" stroke="#666666" points="498,-52 355,-52 355,-33 498,-33 498,-52"/>
-<text text-anchor="middle" x="426.5" y="-40" font-family="Helvetica,sans-Serif" font-size="10.00">Engine::Audio::PlaybackState</text>
+<polygon fill="#999999" stroke="#666666" points="501,-52 358,-52 358,-33 501,-33 501,-52"/>
+<text text-anchor="middle" x="429.5" y="-40" font-family="Helvetica,sans-Serif" font-size="10.00">Engine::Audio::PlaybackState</text>
 </a>
 </g>
 </g>
@@ -67,44 +67,44 @@ var sectionId = 'dynsection-0';
 <g id="node2" class="node">
 <title>Node2</title>
 <g id="a_node2"><a xlink:href="struct_engine_1_1_behavior_1_1_behavior_receiver.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="#666666" points="319,-57.5 188,-57.5 188,-27.5 319,-27.5 319,-57.5"/>
-<text text-anchor="start" x="196" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00">Engine::Behavior::Behavior</text>
-<text text-anchor="middle" x="253.5" y="-34.5" font-family="Helvetica,sans-Serif" font-size="10.00">Receiver</text>
+<polygon fill="white" stroke="#666666" points="322,-57.5 191,-57.5 191,-27.5 322,-27.5 322,-57.5"/>
+<text text-anchor="start" x="199" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00">Engine::Behavior::Behavior</text>
+<text text-anchor="middle" x="256.5" y="-34.5" font-family="Helvetica,sans-Serif" font-size="10.00">Receiver</text>
 </a>
 </g>
 </g>
 <!-- Node2&#45;&gt;Node1 -->
 <g id="edge1" class="edge">
 <title>Node2&#45;&gt;Node1</title>
-<path fill="none" stroke="#63b8ff" d="M330.46,-35.79C338.55,-35.72 346.74,-35.74 354.76,-35.84"/>
-<polygon fill="#63b8ff" stroke="#63b8ff" points="330.62,-32.29 320.66,-35.91 330.71,-39.28 330.62,-32.29"/>
+<path fill="none" stroke="#63b8ff" d="M333.46,-35.79C341.55,-35.72 349.74,-35.74 357.76,-35.84"/>
+<polygon fill="#63b8ff" stroke="#63b8ff" points="333.62,-32.29 323.66,-35.91 333.71,-39.28 333.62,-32.29"/>
 </g>
 <!-- Node2&#45;&gt;Node1 -->
 <g id="edge3" class="edge">
 <title>Node2&#45;&gt;Node1</title>
-<path fill="none" stroke="#63b8ff" d="M330.46,-49.21C338.55,-49.28 346.74,-49.26 354.76,-49.16"/>
-<polygon fill="#63b8ff" stroke="#63b8ff" points="330.71,-45.72 320.66,-49.09 330.62,-52.71 330.71,-45.72"/>
+<path fill="none" stroke="#63b8ff" d="M333.46,-49.21C341.55,-49.28 349.74,-49.26 357.76,-49.16"/>
+<polygon fill="#63b8ff" stroke="#63b8ff" points="333.71,-45.72 323.66,-49.09 333.62,-52.71 333.71,-45.72"/>
 </g>
 <!-- Node3 -->
 <g id="node3" class="node">
 <title>Node3</title>
 <g id="a_node3"><a xlink:href="struct_engine_1_1_execution_1_1_virtual_receiver_base_ex.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="#666666" points="152,-85 0,-85 0,0 152,0 152,-85"/>
+<polygon fill="white" stroke="#666666" points="155,-85 0,-85 0,0 155,0 155,-85"/>
 <text text-anchor="start" x="8" y="-73" font-family="Helvetica,sans-Serif" font-size="10.00">Engine::Execution::</text>
 <text text-anchor="start" x="8" y="-62" font-family="Helvetica,sans-Serif" font-size="10.00">VirtualReceiverBaseEx</text>
-<text text-anchor="start" x="8" y="-51" font-family="Helvetica,sans-Serif" font-size="10.00">&lt; type_pack&lt; BehaviorError</text>
+<text text-anchor="start" x="8" y="-51" font-family="Helvetica,sans-Serif" font-size="10.00">&lt; type_pack&lt; KeyValueError</text>
 <text text-anchor="start" x="8" y="-40" font-family="Helvetica,sans-Serif" font-size="10.00"> &gt;, type_pack&lt; ArgumentList</text>
 <text text-anchor="start" x="8" y="-29" font-family="Helvetica,sans-Serif" font-size="10.00"> &gt;, Execution::get_stop_token,</text>
-<text text-anchor="start" x="8" y="-18" font-family="Helvetica,sans-Serif" font-size="10.00"> Execution::get_debug_location,</text>
-<text text-anchor="middle" x="76" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00"> Log::get_log, get_named_d &gt;</text>
+<text text-anchor="start" x="8" y="-18" font-family="Helvetica,sans-Serif" font-size="10.00"> Debug::get_debug_context, Log</text>
+<text text-anchor="middle" x="77.5" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">::get_log, get_named_d &gt;</text>
 </a>
 </g>
 </g>
 <!-- Node3&#45;&gt;Node2 -->
 <g id="edge2" class="edge">
 <title>Node3&#45;&gt;Node2</title>
-<path fill="none" stroke="#63b8ff" d="M163.76,-42.5C171.78,-42.5 179.82,-42.5 187.6,-42.5"/>
-<polygon fill="#63b8ff" stroke="#63b8ff" points="163.96,-39 153.96,-42.5 163.96,-46 163.96,-39"/>
+<path fill="none" stroke="#63b8ff" d="M166.72,-42.5C174.77,-42.5 182.82,-42.5 190.62,-42.5"/>
+<polygon fill="#63b8ff" stroke="#63b8ff" points="166.88,-39 156.88,-42.5 166.88,-46 166.88,-39"/>
 </g>
 </g>
 </svg>

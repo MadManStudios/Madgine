@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Madgine - Doxygen Documentation: Engine::Process::ProcessState Struct Reference &mdash; Madgine  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
 
   
@@ -213,7 +213,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.5.3</span>
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.6.0</span>
    </div>
   </td>
  </tr>
@@ -268,14 +268,16 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ab0e71c1b23ce9c424c232141e1e87e66"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a47f69735a1b6845d72035984f53bd35b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_process_1_1_process_state.html">ProcessState</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_process_1_1_process_state.html#a47f69735a1b6845d72035984f53bd35b">operator=</a> (<a class="el" href="struct_engine_1_1_process_1_1_process_state.html">ProcessState</a> &amp;&amp;)=delete</td></tr>
 <tr class="separator:a47f69735a1b6845d72035984f53bd35b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a26f47573990184f7fb5cfc7602afd9d7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_process_1_1_process_state.html#a26f47573990184f7fb5cfc7602afd9d7">start</a> ()</td></tr>
+<tr class="memitem:a26f47573990184f7fb5cfc7602afd9d7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_process_1_1_process_state.html#a26f47573990184f7fb5cfc7602afd9d7">start</a> ()</td></tr>
 <tr class="separator:a26f47573990184f7fb5cfc7602afd9d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a062967302031be6dcc6463a069f8909b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_process_1_1_process_state.html#a062967302031be6dcc6463a069f8909b">stop</a> ()</td></tr>
+<tr class="separator:a062967302031be6dcc6463a069f8909b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a32feda8415fced9dc078de7146cefb38"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_process_1_1_process_state.html#a32feda8415fced9dc078de7146cefb38">mCommandLine</a></td></tr>
 <tr class="separator:a32feda8415fced9dc078de7146cefb38"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae9c35d34222ee7bf1836843930b356bf"><td class="memItemLeft" align="right" valign="top">std::unique_ptr&lt; <a class="el" href="struct_engine_1_1_process_1_1_process_auxiliary_data.html">ProcessAuxiliaryData</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_process_1_1_process_state.html#ae9c35d34222ee7bf1836843930b356bf">mData</a></td></tr>
+<tr class="memitem:ae9c35d34222ee7bf1836843930b356bf"><td class="memItemLeft" align="right" valign="top">std::unique_ptr&lt; ProcessAuxiliaryData &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_process_1_1_process_state.html#ae9c35d34222ee7bf1836843930b356bf">mData</a></td></tr>
 <tr class="separator:ae9c35d34222ee7bf1836843930b356bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a181fcad786f15f1ea5a18ac55defe6b2"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_process_1_1_process_state.html#a181fcad786f15f1ea5a18ac55defe6b2">mExecutable</a></td></tr>
 <tr class="separator:a181fcad786f15f1ea5a18ac55defe6b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -374,9 +376,6 @@ Public Attributes</h2></td></tr>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">Engine::Process::ProcessState::~ProcessState </td>
@@ -385,11 +384,6 @@ Public Attributes</h2></td></tr>
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">default</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
 </div>
@@ -454,7 +448,24 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Process::ProcessState::start </td>
+          <td class="memname">void Engine::Process::ProcessState::start </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a062967302031be6dcc6463a069f8909b" name="a062967302031be6dcc6463a069f8909b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a062967302031be6dcc6463a069f8909b">&#9670;&#160;</a></span>stop()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Engine::Process::ProcessState::stop </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -472,7 +483,7 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::unique_ptr&lt;<a class="el" href="struct_engine_1_1_process_1_1_process_auxiliary_data.html">ProcessAuxiliaryData</a>&gt; Engine::Process::ProcessState::mData</td>
+          <td class="memname">std::unique_ptr&lt;ProcessAuxiliaryData&gt; Engine::Process::ProcessState::mData</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -521,14 +532,13 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<hr/>The documentation for this struct was generated from the following files:<ul>
+<hr/>The documentation for this struct was generated from the following file:<ul>
 <li>src/Interfaces/process/<a class="el" href="processapi_8h.html">processapi.h</a></li>
-<li>src/Interfaces/process/<a class="el" href="processapi__unsupported_8cpp.html">processapi_unsupported.cpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Dec 7 2025 08:43:30 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Wed Apr 29 2026 23:46:54 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

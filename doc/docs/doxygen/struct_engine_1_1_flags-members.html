@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Madgine - Doxygen Documentation: Member List &mdash; Madgine  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
 
   
@@ -213,7 +213,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.5.3</span>
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.6.0</span>
    </div>
   </td>
  </tr>
@@ -238,22 +238,28 @@ $(function() {
 </div>
 </div><!-- top -->
 <div class="header">
-  <div class="headertitle"><div class="title">Engine::Flags&lt; Enum &gt; Member List</div></div>
+  <div class="headertitle"><div class="title">Engine::Flags&lt; _Representation &gt; Member List</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>This is the complete list of members for <a class="el" href="struct_engine_1_1_flags.html">Engine::Flags&lt; Enum &gt;</a>, including all inherited members.</p>
+<p>This is the complete list of members for <a class="el" href="struct_engine_1_1_flags.html">Engine::Flags&lt; _Representation &gt;</a>, including all inherited members.</p>
 <table class="directory">
-  <tr class="even"><td class="entry"><a class="el" href="struct_engine_1_1_flags.html#aa6f0a598c7b5c1d124e7a9fc3fb19968">Flags</a>()=default</td><td class="entry"><a class="el" href="struct_engine_1_1_flags.html">Engine::Flags&lt; Enum &gt;</a></td><td class="entry"></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="struct_engine_1_1_flags.html#ad09b2c27e30c04ea1033a6b77f1de2ea">Flags</a>(BitArray&lt; 64 &gt; bits)</td><td class="entry"><a class="el" href="struct_engine_1_1_flags.html">Engine::Flags&lt; Enum &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="struct_engine_1_1_flags.html#a5a734f28ee93bcb0a520461a2ed1fecd">operator&lt;&lt;</a></td><td class="entry"><a class="el" href="struct_engine_1_1_flags.html">Engine::Flags&lt; Enum &gt;</a></td><td class="entry"><span class="mlabel">friend</span></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="struct_engine_1_1_flags.html#a120825b1a06934fade815ef7ec5e9909">operator&gt;&gt;</a></td><td class="entry"><a class="el" href="struct_engine_1_1_flags.html">Engine::Flags&lt; Enum &gt;</a></td><td class="entry"><span class="mlabel">friend</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="struct_engine_1_1_flags.html#ade4edea9f6aefd13694e1f9fc62d0290">Representation</a> typedef</td><td class="entry"><a class="el" href="struct_engine_1_1_flags.html">Engine::Flags&lt; Enum &gt;</a></td><td class="entry"></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="struct_engine_1_1_flags.html#afb312cd97c6a9f6261f5d96a0ea68bdc">values</a>() const</td><td class="entry"><a class="el" href="struct_engine_1_1_flags.html">Engine::Flags&lt; Enum &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="struct_engine_1_1_flags.html#adcefc1656877f719073fba95c661f2f0">Flags</a>()=default</td><td class="entry"><a class="el" href="struct_engine_1_1_flags.html">Engine::Flags&lt; _Representation &gt;</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="struct_engine_1_1_flags.html#a05f051e71aef9dd5704c4513c58ca122">Flags</a>(Representation::EnumType bits)</td><td class="entry"><a class="el" href="struct_engine_1_1_flags.html">Engine::Flags&lt; _Representation &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="struct_engine_1_1_flags.html#a260e9003a87b2d33f89de74d2178109f">operator typename Representation::EnumType</a>() const</td><td class="entry"><a class="el" href="struct_engine_1_1_flags.html">Engine::Flags&lt; _Representation &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="struct_engine_1_1_flags.html#abea400b14f3dec5d283b5e0504d44f67">operator&lt;&lt;</a></td><td class="entry"><a class="el" href="struct_engine_1_1_flags.html">Engine::Flags&lt; _Representation &gt;</a></td><td class="entry"><span class="mlabel">friend</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="struct_engine_1_1_flags.html#a438240d683e47513a4afa2207cef71db">operator&lt;=&gt;</a>(const Flags&lt; Representation &gt; &amp;other) const</td><td class="entry"><a class="el" href="struct_engine_1_1_flags.html">Engine::Flags&lt; _Representation &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="struct_engine_1_1_flags.html#a6ae007234a924b9a7801e1f61027b3db">operator&lt;=&gt;</a>(Representation::EnumType other) const</td><td class="entry"><a class="el" href="struct_engine_1_1_flags.html">Engine::Flags&lt; _Representation &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="struct_engine_1_1_flags.html#afb56061b1fbe9e8bcd4363c0447081eb">operator==</a>(Representation::EnumType other) const</td><td class="entry"><a class="el" href="struct_engine_1_1_flags.html">Engine::Flags&lt; _Representation &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="struct_engine_1_1_flags.html#a44be9d13a3c81430bb6e24e967585996">operator&gt;&gt;</a></td><td class="entry"><a class="el" href="struct_engine_1_1_flags.html">Engine::Flags&lt; _Representation &gt;</a></td><td class="entry"><span class="mlabel">friend</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="struct_engine_1_1_flags.html#a3bf05ff0b4be36a1cd02036011b9566d">Representation</a> typedef</td><td class="entry"><a class="el" href="struct_engine_1_1_flags.html">Engine::Flags&lt; _Representation &gt;</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="struct_engine_1_1_flags.html#a2ffb1f41f1fda6c31e6bd31f4fa13712">set</a>(Representation::EnumType bits)</td><td class="entry"><a class="el" href="struct_engine_1_1_flags.html">Engine::Flags&lt; _Representation &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="struct_engine_1_1_flags.html#a2d83308ca5bef566a96c9ee70a3dfe93">unset</a>(Representation::EnumType bits)</td><td class="entry"><a class="el" href="struct_engine_1_1_flags.html">Engine::Flags&lt; _Representation &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="struct_engine_1_1_flags.html#a0b99193908b1b0331a978f66084ab8fc">value</a>() const</td><td class="entry"><a class="el" href="struct_engine_1_1_flags.html">Engine::Flags&lt; _Representation &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
 </table></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Dec 7 2025 08:43:29 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Wed Apr 29 2026 23:46:52 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

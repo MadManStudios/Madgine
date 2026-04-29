@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Madgine - Doxygen Documentation: src/Generic/virtual_invoke.h File Reference &mdash; Madgine  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
 
   
@@ -213,7 +213,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.5.3</span>
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.6.0</span>
    </div>
   </td>
  </tr>
@@ -261,6 +261,8 @@ This graph shows which files directly or indirectly include this file:</div>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_virtual_c_p_o_base_helper.html">VirtualCPOBaseHelper&lt; CPO_holder, Base, R, T, V &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_virtual_c_p_o_base_wrapper.html">VirtualCPOBaseWrapper&lt; Base &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_virtual_c_p_o_impl_helper.html">VirtualCPOImplHelper&lt; CPO, Base, R, T, V &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -272,9 +274,9 @@ Typedefs</h2></td></tr>
 <tr class="memitem:a842202fc7cad06227e01fd772f4bdf6c"><td class="memTemplParams" colspan="2">template&lt;auto cpo, typename Base &gt; </td></tr>
 <tr class="memitem:a842202fc7cad06227e01fd772f4bdf6c"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="virtual__invoke_8h.html#a842202fc7cad06227e01fd772f4bdf6c">VirtualCPOImpl</a> = typename <a class="el" href="namespace_engine.html#aafd56ca9a2a7711b4878285a3e8f061d">Engine::CallableTraits</a>&lt; typename decltype(cpo)::signature &gt;::template instance&lt; <a class="el" href="struct_virtual_c_p_o_impl_helper.html">VirtualCPOImplHelper</a>, decltype(cpo), Base &gt;</td></tr>
 <tr class="separator:a842202fc7cad06227e01fd772f4bdf6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3deedcf4661ca0c22e87f78e4e55db5b"><td class="memTemplParams" colspan="2">template&lt;typename Base , auto... cpos&gt; </td></tr>
-<tr class="memitem:a3deedcf4661ca0c22e87f78e4e55db5b"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="virtual__invoke_8h.html#a3deedcf4661ca0c22e87f78e4e55db5b">VirtualCPOsBase</a> = typename <a class="el" href="struct_engine_1_1auto__pack.html">Engine::auto_pack</a>&lt; cpos... &gt;::template fold&lt; <a class="el" href="virtual__invoke_8h.html#a28402470951bce11abf1fe61f6c20496">VirtualCPOBase</a>, Base &gt;</td></tr>
-<tr class="separator:a3deedcf4661ca0c22e87f78e4e55db5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a133d86e2290ab668d447929f41da6780"><td class="memTemplParams" colspan="2">template&lt;typename Base , auto... cpos&gt; </td></tr>
+<tr class="memitem:a133d86e2290ab668d447929f41da6780"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="virtual__invoke_8h.html#a133d86e2290ab668d447929f41da6780">VirtualCPOsBase</a> = typename <a class="el" href="struct_engine_1_1auto__pack.html">Engine::auto_pack</a>&lt; cpos... &gt;::template fold&lt; <a class="el" href="virtual__invoke_8h.html#a28402470951bce11abf1fe61f6c20496">VirtualCPOBase</a>, <a class="el" href="struct_virtual_c_p_o_base_wrapper.html">VirtualCPOBaseWrapper</a>&lt; Base &gt; &gt;</td></tr>
+<tr class="separator:a133d86e2290ab668d447929f41da6780"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aad8e0baf213521a183eec772ad527068"><td class="memTemplParams" colspan="2">template&lt;typename Base &gt; </td></tr>
 <tr class="memitem:aad8e0baf213521a183eec772ad527068"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="virtual__invoke_8h.html#aad8e0baf213521a183eec772ad527068">VirtualCPOsImpl</a> = typename Base::mapped_cpos::template fold&lt; <a class="el" href="virtual__invoke_8h.html#a8d089b50a696ae57d38dce8524801b16">VirtualCPOsImplHelper</a>, Base &gt;</td></tr>
 <tr class="separator:aad8e0baf213521a183eec772ad527068"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -331,8 +333,8 @@ template&lt;auto cpo, typename Base &gt; </div>
 
 </div>
 </div>
-<a id="a3deedcf4661ca0c22e87f78e4e55db5b" name="a3deedcf4661ca0c22e87f78e4e55db5b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3deedcf4661ca0c22e87f78e4e55db5b">&#9670;&#160;</a></span>VirtualCPOsBase</h2>
+<a id="a133d86e2290ab668d447929f41da6780" name="a133d86e2290ab668d447929f41da6780"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a133d86e2290ab668d447929f41da6780">&#9670;&#160;</a></span>VirtualCPOsBase</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -340,7 +342,7 @@ template&lt;auto cpo, typename Base &gt; </div>
 template&lt;typename Base , auto... cpos&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="virtual__invoke_8h.html#a3deedcf4661ca0c22e87f78e4e55db5b">VirtualCPOsBase</a> =  typename <a class="el" href="struct_engine_1_1auto__pack.html">Engine::auto_pack</a>&lt;cpos...&gt;::template fold&lt;<a class="el" href="virtual__invoke_8h.html#a28402470951bce11abf1fe61f6c20496">VirtualCPOBase</a>, Base&gt;</td>
+          <td class="memname">using <a class="el" href="virtual__invoke_8h.html#a133d86e2290ab668d447929f41da6780">VirtualCPOsBase</a> =  typename <a class="el" href="struct_engine_1_1auto__pack.html">Engine::auto_pack</a>&lt;cpos...&gt;::template fold&lt;<a class="el" href="virtual__invoke_8h.html#a28402470951bce11abf1fe61f6c20496">VirtualCPOBase</a>, <a class="el" href="struct_virtual_c_p_o_base_wrapper.html">VirtualCPOBaseWrapper</a>&lt;Base&gt; &gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -366,7 +368,7 @@ template&lt;typename Base &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Dec 7 2025 08:43:27 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Wed Apr 29 2026 23:46:50 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

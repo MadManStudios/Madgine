@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Madgine - Doxygen Documentation: Engine::EnumHolder Struct Reference &mdash; Madgine  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
 
   
@@ -213,7 +213,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.5.3</span>
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.6.0</span>
    </div>
   </td>
  </tr>
@@ -255,12 +255,15 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a458a11bda2065d4449389149fc6554c0"><td class="memTemplParams" colspan="2">template&lt;typename Rep , typename... Reps&gt; </td></tr>
 <tr class="memitem:a458a11bda2065d4449389149fc6554c0"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_enum_holder.html#a458a11bda2065d4449389149fc6554c0">EnumHolder</a> (<a class="el" href="struct_engine_1_1_enum_impl.html">EnumImpl</a>&lt; Rep, Reps... &gt; e)</td></tr>
 <tr class="separator:a458a11bda2065d4449389149fc6554c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9a3c2ea8b6a6ab46fb05c62d1a30cc39"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_enum_holder.html#a9a3c2ea8b6a6ab46fb05c62d1a30cc39">operator==</a> (const <a class="el" href="struct_engine_1_1_enum_holder.html">EnumHolder</a> &amp;other) const</td></tr>
+<tr class="memitem:a6b728206704e3fe774670a7803be77dd"><td class="memTemplParams" colspan="2">template&lt;typename Rep , typename... Reps&gt; </td></tr>
+<tr class="memitem:a6b728206704e3fe774670a7803be77dd"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_enum_holder.html#a6b728206704e3fe774670a7803be77dd">operator!=</a> (const <a class="el" href="struct_engine_1_1_enum_impl.html">EnumImpl</a>&lt; Rep, Reps... &gt; &amp;e) const</td></tr>
+<tr class="separator:a6b728206704e3fe774670a7803be77dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a3c2ea8b6a6ab46fb05c62d1a30cc39"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_enum_holder.html#a9a3c2ea8b6a6ab46fb05c62d1a30cc39">operator==</a> (const <a class="el" href="struct_engine_1_1_enum_holder.html">EnumHolder</a> &amp;other) const</td></tr>
 <tr class="separator:a9a3c2ea8b6a6ab46fb05c62d1a30cc39"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acae8aa1ba22d20a79645a418ec9c16cc"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:acae8aa1ba22d20a79645a418ec9c16cc"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_enum_holder.html#acae8aa1ba22d20a79645a418ec9c16cc">safe_cast</a> () const</td></tr>
 <tr class="separator:acae8aa1ba22d20a79645a418ec9c16cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9fe96ee912db67d8066dab07450c5451"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_enum_holder.html#a9fe96ee912db67d8066dab07450c5451">setValue</a> (int32_t val)</td></tr>
+<tr class="memitem:a9fe96ee912db67d8066dab07450c5451"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_enum_holder.html#a9fe96ee912db67d8066dab07450c5451">setValue</a> (int32_t val)</td></tr>
 <tr class="separator:a9fe96ee912db67d8066dab07450c5451"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afdaf68e8669fd48c57863c1b42246ac2"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="struct_engine_1_1_enum_meta_table.html">EnumMetaTable</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_enum_holder.html#afdaf68e8669fd48c57863c1b42246ac2">table</a> () const</td></tr>
 <tr class="separator:afdaf68e8669fd48c57863c1b42246ac2"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -349,13 +352,41 @@ template&lt;typename Rep , typename... Reps&gt; </div>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> Engine::EnumHolder::operator== </td>
+          <td class="memname">bool Engine::EnumHolder::operator== </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="struct_engine_1_1_enum_holder.html">EnumHolder</a> &amp;&#160;</td>
           <td class="paramname"><em>other</em></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6b728206704e3fe774670a7803be77dd" name="a6b728206704e3fe774670a7803be77dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b728206704e3fe774670a7803be77dd">&#9670;&#160;</a></span>operator!=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Rep , typename... Reps&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Engine::EnumHolder::operator!= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_enum_impl.html">EnumImpl</a>&lt; Rep, Reps... &gt; &amp;&#160;</td>
+          <td class="paramname"><em>e</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 </div>
@@ -418,7 +449,7 @@ template&lt;typename Rep , typename... Reps&gt; </div>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::EnumHolder::setValue </td>
+          <td class="memname">void Engine::EnumHolder::setValue </td>
           <td>(</td>
           <td class="paramtype">int32_t&#160;</td>
           <td class="paramname"><em>val</em></td><td>)</td>
@@ -536,7 +567,7 @@ template&lt;typename T &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Dec 7 2025 08:43:29 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Wed Apr 29 2026 23:46:52 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

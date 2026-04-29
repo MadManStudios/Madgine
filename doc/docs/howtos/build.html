@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Build Instructions &mdash; Madgine  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
 
   
@@ -205,33 +205,20 @@ A compiler supporting C++20 is necessary.</p>
 <section id="setup-the-madgine">
 <h2>Setup The Madgine<a class="headerlink" href="#setup-the-madgine" title="Permalink to this heading"></a></h2>
 <p>Download the source code from <a class="reference external" href="https://github.com/MadManRises/Madgine">GitHub</a>.</p>
-<p>There are two ways to use and compile the engine.</p>
-<section id="setup-build-from-the-repository">
-<h3>Setup Build From The Repository<a class="headerlink" href="#setup-build-from-the-repository" title="Permalink to this heading"></a></h3>
-<p>The first one being to build the project using CMake from the top-level folder of the engine. This is useful if you intend to modify the engine code itself. No further CMake scripts are needed.</p>
-</section>
-<section id="setup-build-from-an-external-project">
-<h3>Setup Build From An External Project<a class="headerlink" href="#setup-build-from-an-external-project" title="Permalink to this heading"></a></h3>
-<p>The second method is to create a separate CMake project and reference the engine code from there. This allows you to separate your own work from the engine code, but keeps the benefit of building the engine source code together with your game/plugin code, allowing for better whole program optimization. All the necessary utility scripts for this method are provided. To setup the engine this way, create your own CMakeLists.txt for your game/plugin and add the following:</p>
-<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">include</span><span class="p">(</span><span class="s">&lt;root</span><span class="w"> </span><span class="s">folder</span><span class="w"> </span><span class="s">of</span><span class="w"> </span><span class="s">local</span><span class="w"> </span><span class="s">madgine</span><span class="w"> </span><span class="s">repository&gt;/cmake/MadgineSDK.cmake</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>To create the executable add the following line to the end of your CmakeLists.txt:</p>
-<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">create_launcher</span><span class="p">(</span><span class="s">&lt;name&gt;</span><span class="p">)</span>
-</pre></div>
-</div>
-</section>
 </section>
 <section id="generating-project-files">
 <h2>Generating Project Files<a class="headerlink" href="#generating-project-files" title="Permalink to this heading"></a></h2>
-<p>Generate the build files using CMake for your preferred compiler/IDE or open the folder in IDEs that have direct CMake integration.</p>
+<p>For the first startup build the project using CMake from the top-level folder of the engine. No further CMake scripts are needed.
+Generate the build files using CMake for your preferred compiler/IDE or open the folder in IDEs that have direct CMake integration.</p>
 </section>
 <section id="build-configurations">
 <h2>Build Configurations<a class="headerlink" href="#build-configurations" title="Permalink to this heading"></a></h2>
-<p>The default build settings lead to a project with the following properties:
-* Tools are included
-* Plugins are built as dynamic libraries
-* Plugin selection can be changed at any time</p>
+<p>The default build settings lead to a project with the following properties:</p>
+<ul class="simple">
+<li><p>Tools are included</p></li>
+<li><p>Plugins are built as dynamic libraries</p></li>
+<li><p>Plugin selection can be changed at any time</p></li>
+</ul>
 <p>Once a project needs to be destributed it is likely that some of those properties need to be changed. To do so the Madgine provides a configuration system. Build configurations are folders, that contain all configuration files for a specific build type. The type of files is not restricted and some plugins define their own rules and configuration options. The most common configuration file types are:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">.ini</span></code> files will be converted into CMake variables <code class="docutils literal notranslate"><span class="pre">&lt;filename</span> <span class="pre">without</span> <span class="pre">extension&gt;_&lt;ini</span> <span class="pre">group&gt;_&lt;ini</span> <span class="pre">field</span> <span class="pre">name&gt;</span></code></p></li>

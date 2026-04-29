@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Madgine - Doxygen Documentation: src/Generic/flags.h File Reference &mdash; Madgine  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
 
   
@@ -213,7 +213,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.5.3</span>
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.6.0</span>
    </div>
   </td>
  </tr>
@@ -240,20 +240,27 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#namespaces">Namespaces</a>  </div>
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#define-members">Macros</a>  </div>
   <div class="headertitle"><div class="title">flags.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><div class="dynheader">
 Include dependency graph for flags.h:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="flags_8h__incl.svg" width="142" height="183"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="flags_8h__incl.svg" width="143" height="256"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+</div><div class="textblock"><div class="dynheader">
+This graph shows which files directly or indirectly include this file:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="flags_8h__dep__incl.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_flags.html">Engine::Flags&lt; Enum &gt;</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_flags.html">Engine::Flags&lt; _Representation &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
@@ -261,11 +268,163 @@ Namespaces</h2></td></tr>
 <tr class="memitem:namespace_engine"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine.html">Engine</a></td></tr>
 <tr class="memdesc:namespace_engine"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main namespace for the Madgine. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:a6a0d52fce5a08503b7789e743a7d5e06"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="flags_8h.html#a6a0d52fce5a08503b7789e743a7d5e06">FLAGS</a>(Name, ...)</td></tr>
+<tr class="separator:a6a0d52fce5a08503b7789e743a7d5e06"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac22e699086edfb7ee76289c9acc24ab0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="flags_8h.html#ac22e699086edfb7ee76289c9acc24ab0">FLAGS_EXPAND</a>(offset,  a, ...)&#160;&#160;&#160;a = (1 &lt;&lt; (offset)) __VA_OPT__(, <a class="el" href="flags_8h.html#ae35c131a15ff3d379e69afe29d6564f2">FLAGS_EXPAND_HELPER</a> <a class="el" href="macros_8h.html#a9357f62275c685754a405c064db6ec41">PARENS</a>(offset + 1, __VA_ARGS__))</td></tr>
+<tr class="separator:ac22e699086edfb7ee76289c9acc24ab0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae35c131a15ff3d379e69afe29d6564f2"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="flags_8h.html#ae35c131a15ff3d379e69afe29d6564f2">FLAGS_EXPAND_HELPER</a>()&#160;&#160;&#160;<a class="el" href="flags_8h.html#ac22e699086edfb7ee76289c9acc24ab0">FLAGS_EXPAND</a></td></tr>
+<tr class="separator:ae35c131a15ff3d379e69afe29d6564f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af81dc29baa7b3473288b936a09f17d7b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="flags_8h.html#af81dc29baa7b3473288b936a09f17d7b">FLAGS_REGISTRY</a>(Name, ...)</td></tr>
+<tr class="separator:af81dc29baa7b3473288b936a09f17d7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="ac22e699086edfb7ee76289c9acc24ab0" name="ac22e699086edfb7ee76289c9acc24ab0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac22e699086edfb7ee76289c9acc24ab0">&#9670;&#160;</a></span>FLAGS_EXPAND</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define FLAGS_EXPAND</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">offset, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">a, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>...</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;a = (1 &lt;&lt; (offset)) __VA_OPT__(, <a class="el" href="flags_8h.html#ae35c131a15ff3d379e69afe29d6564f2">FLAGS_EXPAND_HELPER</a> <a class="el" href="macros_8h.html#a9357f62275c685754a405c064db6ec41">PARENS</a>(offset + 1, __VA_ARGS__))</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae35c131a15ff3d379e69afe29d6564f2" name="ae35c131a15ff3d379e69afe29d6564f2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae35c131a15ff3d379e69afe29d6564f2">&#9670;&#160;</a></span>FLAGS_EXPAND_HELPER</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define FLAGS_EXPAND_HELPER</td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>&#160;&#160;&#160;<a class="el" href="flags_8h.html#ac22e699086edfb7ee76289c9acc24ab0">FLAGS_EXPAND</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af81dc29baa7b3473288b936a09f17d7b" name="af81dc29baa7b3473288b936a09f17d7b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af81dc29baa7b3473288b936a09f17d7b">&#9670;&#160;</a></span>FLAGS_REGISTRY</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define FLAGS_REGISTRY</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Name, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>...</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line">    <span class="keyword">struct </span>Name##Representation {                                                                                                      \</div>
+<div class="line">        <span class="keyword">enum</span> EnumType {                                                                                                                \</div>
+<div class="line">            Default = 0,                                                                                                               \</div>
+<div class="line">            EVAL2(<a class="code hl_define" href="flags_8h.html#ac22e699086edfb7ee76289c9acc24ab0">FLAGS_EXPAND</a>(0, __VA_ARGS__))                                                                                        \</div>
+<div class="line">        };                                                                                                                             \</div>
+<div class="line">        <span class="keyword">using </span>underlying_type = std::underlying_type_t&lt;EnumType&gt;;                                                                      \</div>
+<div class="line">        <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keyword">const</span> <span class="keyword">constexpr</span> underlying_type COUNT = <a class="code hl_define" href="macros_8h.html#a8f1bac1b9225d9b290d41c1a85fdc73f">NUM_ARGS</a>(__VA_ARGS__);                                                   \</div>
+<div class="line">        <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keyword">const</span> <span class="keyword">constexpr</span> <span class="keyword">auto</span> sIdentifiers = Engine::StringUtil::tokenize&lt;static_cast&lt;size_t&gt;(COUNT)&gt;(#__VA_ARGS__, <span class="charliteral">&#39;,&#39;</span>); \</div>
+<div class="line">        <span class="keyword">static</span> <span class="keyword">inline</span> <span class="keyword">const</span> <span class="keyword">constexpr</span> <a class="code hl_struct" href="struct_engine_1_1_enum_meta_table.html">Engine::EnumMetaTable</a> sTable {                                                                   \</div>
+<div class="line">            <span class="keyword">nullptr</span>, #Name, sIdentifiers.data(), 0, COUNT                                                                              \</div>
+<div class="line">        };                                                                                                                             \</div>
+<div class="line">    };                                                                                                                                 \</div>
+<div class="line">    <span class="keyword">inline</span> std::ostream &amp;<a class="code hl_function" href="namespace_engine.html#addcb28fcaa4f2ef73ec7f742ebf72665">operator&lt;&lt;</a>(std::ostream &amp;stream, <span class="keyword">typename</span> Name##Representation::EnumType value)                               \</div>
+<div class="line">    {                                                                                                                                  \</div>
+<div class="line">        <span class="keywordflow">return</span> Name##Representation::sTable.print(stream, value, Name##Representation::sTable.mName);                                  \</div>
+<div class="line">    }                                                                                                                                  \</div>
+<div class="line">    <span class="keyword">inline</span> std::istream &amp;<a class="code hl_function" href="namespace_engine.html#a28644ea7c66292f8a6c34e09ea95ccde">operator&gt;&gt;</a>(std::istream &amp;stream, <span class="keyword">typename</span> Name##Representation::EnumType &amp;value)                              \</div>
+<div class="line">    {                                                                                                                                  \</div>
+<div class="line">        int32_t dummy;                                                                                                                 \</div>
+<div class="line">        if (Name##Representation::sTable.<a class="code hl_function" href="namespace_engine_1_1_serialize.html#a39f6d7ce89911e530d4803786b0e0397">read</a>(stream, dummy, Name##Representation::sTable.mName))                                      \</div>
+<div class="line">            value = <span class="keyword">static_cast&lt;</span>typename Name##Representation::EnumType<span class="keyword">&gt;</span>(dummy);                                                       \</div>
+<div class="line">        <span class="keywordflow">return</span> stream;                                                                                                                 \</div>
+<div class="line">    }</div>
+<div class="ttc" id="aflags_8h_html_ac22e699086edfb7ee76289c9acc24ab0"><div class="ttname"><a href="flags_8h.html#ac22e699086edfb7ee76289c9acc24ab0">FLAGS_EXPAND</a></div><div class="ttdeci">#define FLAGS_EXPAND(offset, a,...)</div><div class="ttdef"><b>Definition:</b> flags.h:73</div></div>
+<div class="ttc" id="amacros_8h_html_a8f1bac1b9225d9b290d41c1a85fdc73f"><div class="ttname"><a href="macros_8h.html#a8f1bac1b9225d9b290d41c1a85fdc73f">NUM_ARGS</a></div><div class="ttdeci">#define NUM_ARGS(...)</div><div class="ttdef"><b>Definition:</b> macros.h:48</div></div>
+<div class="ttc" id="anamespace_engine_1_1_serialize_html_a39f6d7ce89911e530d4803786b0e0397"><div class="ttname"><a href="namespace_engine_1_1_serialize.html#a39f6d7ce89911e530d4803786b0e0397">Engine::Serialize::read</a></div><div class="ttdeci">StreamResult read(CallerHierarchyFormattedSerializeStream in, T &amp;t, const char *name)</div><div class="ttdef"><b>Definition:</b> operations.h:282</div></div>
+<div class="ttc" id="anamespace_engine_html_a28644ea7c66292f8a6c34e09ea95ccde"><div class="ttname"><a href="namespace_engine.html#a28644ea7c66292f8a6c34e09ea95ccde">Engine::operator&gt;&gt;</a></div><div class="ttdeci">std::istream &amp; operator&gt;&gt;(std::istream &amp;stream, typename GenericResultRepresentation::EnumType &amp;value)</div><div class="ttdef"><b>Definition:</b> genericresult.h:9</div></div>
+<div class="ttc" id="anamespace_engine_html_addcb28fcaa4f2ef73ec7f742ebf72665"><div class="ttname"><a href="namespace_engine.html#addcb28fcaa4f2ef73ec7f742ebf72665">Engine::operator&lt;&lt;</a></div><div class="ttdeci">std::ostream &amp; operator&lt;&lt;(std::ostream &amp;stream, typename GenericResultRepresentation::EnumType value)</div><div class="ttdef"><b>Definition:</b> genericresult.h:9</div></div>
+<div class="ttc" id="astruct_engine_1_1_enum_meta_table_html"><div class="ttname"><a href="struct_engine_1_1_enum_meta_table.html">Engine::EnumMetaTable</a></div><div class="ttdef"><b>Definition:</b> enum.h:7</div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a6a0d52fce5a08503b7789e743a7d5e06" name="a6a0d52fce5a08503b7789e743a7d5e06"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6a0d52fce5a08503b7789e743a7d5e06">&#9670;&#160;</a></span>FLAGS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define FLAGS</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Name, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>...</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line">    <a class="code hl_define" href="flags_8h.html#af81dc29baa7b3473288b936a09f17d7b">FLAGS_REGISTRY</a>(Name, __VA_ARGS__) \</div>
+<div class="line">    <span class="keyword">using </span>Name = <a class="code hl_struct" href="struct_engine_1_1_flags.html">Engine::Flags&lt;Name##Representation&gt;</a>;</div>
+<div class="ttc" id="aflags_8h_html_af81dc29baa7b3473288b936a09f17d7b"><div class="ttname"><a href="flags_8h.html#af81dc29baa7b3473288b936a09f17d7b">FLAGS_REGISTRY</a></div><div class="ttdeci">#define FLAGS_REGISTRY(Name,...)</div><div class="ttdef"><b>Definition:</b> flags.h:77</div></div>
+<div class="ttc" id="astruct_engine_1_1_flags_html"><div class="ttname"><a href="struct_engine_1_1_flags.html">Engine::Flags</a></div><div class="ttdef"><b>Definition:</b> flags.h:8</div></div>
+</div><!-- fragment -->
+</div>
+</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Dec 7 2025 08:43:27 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Wed Apr 29 2026 23:46:50 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

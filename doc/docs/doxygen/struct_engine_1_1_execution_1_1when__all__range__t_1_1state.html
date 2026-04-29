@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Madgine - Doxygen Documentation: Engine::Execution::when_all_range_t::state&amp;lt; Rec, Sender &amp;gt; Struct Template Reference &mdash; Madgine  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
 
   
@@ -213,7 +213,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.5.3</span>
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.6.0</span>
    </div>
   </td>
  </tr>
@@ -242,6 +242,7 @@ $(function() {
 <a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="#friends">Friends</a> &#124;
 <a href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">Engine::Execution::when_all_range_t::state&lt; Rec, Sender &gt; Struct Template Reference</div></div>
 </div><!--header-->
@@ -257,17 +258,17 @@ Inheritance diagram for Engine::Execution::when_all_range_t::state&lt; Rec, Send
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:afc5f4f3e216b590cc2b6cc6e20b6f37e"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html#afc5f4f3e216b590cc2b6cc6e20b6f37e">inner_state</a> = <a class="el" href="namespace_engine_1_1_execution.html#a0607edaba960b3bfd37ca2e476a3a362">connect_result_t</a>&lt; Sender, <a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1receiver.html">receiver</a>&lt; Rec, Sender &gt; &gt;</td></tr>
+<tr class="memitem:afc5f4f3e216b590cc2b6cc6e20b6f37e"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html#afc5f4f3e216b590cc2b6cc6e20b6f37e">inner_state</a> = <a class="el" href="namespace_engine_1_1_execution.html#a0607edaba960b3bfd37ca2e476a3a362">connect_result_t</a>&lt; <a class="el" href="struct_engine_1_1_execution_1_1_sender.html">Sender</a>, <a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1receiver.html">receiver</a>&lt; Rec, <a class="el" href="struct_engine_1_1_execution_1_1_sender.html">Sender</a> &gt; &gt;</td></tr>
 <tr class="separator:afc5f4f3e216b590cc2b6cc6e20b6f37e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5124e36621fa06f46dde416063750f9e"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html#a5124e36621fa06f46dde416063750f9e">R</a> = typename Sender::result_type</td></tr>
+<tr class="memitem:a5124e36621fa06f46dde416063750f9e"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html#a5124e36621fa06f46dde416063750f9e">R</a> = typename <a class="el" href="struct_engine_1_1_execution_1_1_sender.html#a36dc37b98e4d5b1f07c248ed3c7ae462">Sender::result_type</a></td></tr>
 <tr class="separator:a5124e36621fa06f46dde416063750f9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a40136dc78b3c9b39aaaba59470cd04c5"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html#a40136dc78b3c9b39aaaba59470cd04c5">State</a> { <a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html#a40136dc78b3c9b39aaaba59470cd04c5a83b4f837e1924b89c71e80742f049d58">OK</a>
 , <a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html#a40136dc78b3c9b39aaaba59470cd04c5ab9ef4e795b3de0b3d03f3ce63dce060d">ERROR</a>
 , <a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html#a40136dc78b3c9b39aaaba59470cd04c5abf5f8f28799c870142c45eac62d7e308">DONE</a>
  }</td></tr>
 <tr class="separator:a40136dc78b3c9b39aaaba59470cd04c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a15f962e55a8afb1163749463d5455a4b"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html#a15f962e55a8afb1163749463d5455a4b">Values</a> = std::vector&lt; typename Sender::template value_types&lt; <a class="el" href="namespace_engine.html#ab9aa3cb843e93169f7b654729ddc23a1">identity</a> &gt; &gt;</td></tr>
-<tr class="separator:a15f962e55a8afb1163749463d5455a4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b377f645c429f05f71e4317506d63b9"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html#a3b377f645c429f05f71e4317506d63b9">Values</a> = std::vector&lt; std::optional&lt; typename Sender::template value_types&lt; <a class="el" href="namespace_engine.html#ab9aa3cb843e93169f7b654729ddc23a1">identity</a> &gt; &gt; &gt;</td></tr>
+<tr class="separator:a3b377f645c429f05f71e4317506d63b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -276,34 +277,34 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:abe18900d2d7344b4e3c6a0f67ecd73ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abff9873981c949cc1864c333cc264b1f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html#abff9873981c949cc1864c333cc264b1f">~state</a> ()</td></tr>
 <tr class="separator:abff9873981c949cc1864c333cc264b1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4f04961bff245e20b2d4782d36007131"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html#a4f04961bff245e20b2d4782d36007131">mark_complete</a> ()</td></tr>
+<tr class="memitem:a4f04961bff245e20b2d4782d36007131"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html#a4f04961bff245e20b2d4782d36007131">mark_complete</a> ()</td></tr>
 <tr class="separator:a4f04961bff245e20b2d4782d36007131"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a17b48cddf0efd8fa6583f73f0919e389"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html#a17b48cddf0efd8fa6583f73f0919e389">set_done</a> ()</td></tr>
+<tr class="memitem:a17b48cddf0efd8fa6583f73f0919e389"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html#a17b48cddf0efd8fa6583f73f0919e389">set_done</a> ()</td></tr>
 <tr class="separator:a17b48cddf0efd8fa6583f73f0919e389"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac7d2ea5efbfc99611ab5d42e569b0cdf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html#ac7d2ea5efbfc99611ab5d42e569b0cdf">set_error</a> (<a class="el" href="namespace_engine.html#aab312fc85383cef28fd740f5dd10b369">patch_void_t</a>&lt; <a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html#a5124e36621fa06f46dde416063750f9e">R</a> &gt; result)</td></tr>
+<tr class="memitem:ac7d2ea5efbfc99611ab5d42e569b0cdf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html#ac7d2ea5efbfc99611ab5d42e569b0cdf">set_error</a> (<a class="el" href="namespace_engine.html#aa6923ebc493cfa55cf08a28c061c2924">patch_void_t</a>&lt; <a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html#a5124e36621fa06f46dde416063750f9e">R</a> &gt; result)</td></tr>
 <tr class="separator:ac7d2ea5efbfc99611ab5d42e569b0cdf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae88a5d070449695987d9233a669e91a8"><td class="memTemplParams" colspan="2">template&lt;typename V &gt; </td></tr>
-<tr class="memitem:ae88a5d070449695987d9233a669e91a8"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html#ae88a5d070449695987d9233a669e91a8">set_value</a> (size_t index, V &amp;&amp;value)</td></tr>
+<tr class="memitem:ae88a5d070449695987d9233a669e91a8"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html#ae88a5d070449695987d9233a669e91a8">set_value</a> (size_t index, V &amp;&amp;value)</td></tr>
 <tr class="separator:ae88a5d070449695987d9233a669e91a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af647c397c6b5addfd540f8b3412046d4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html#af647c397c6b5addfd540f8b3412046d4">start</a> ()</td></tr>
+<tr class="memitem:af647c397c6b5addfd540f8b3412046d4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html#af647c397c6b5addfd540f8b3412046d4">start</a> ()</td></tr>
 <tr class="separator:af647c397c6b5addfd540f8b3412046d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_struct_engine_1_1_execution_1_1base__state"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_struct_engine_1_1_execution_1_1base__state')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="struct_engine_1_1_execution_1_1base__state.html">Engine::Execution::base_state&lt; Rec &gt;</a></td></tr>
 <tr class="memitem:ad8a76ab55a3bb4acfbdcd39835627fd5 inherit pub_methods_struct_engine_1_1_execution_1_1base__state"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1base__state.html#ad8a76ab55a3bb4acfbdcd39835627fd5">base_state</a> (Rec &amp;&amp;rec)</td></tr>
 <tr class="separator:ad8a76ab55a3bb4acfbdcd39835627fd5 inherit pub_methods_struct_engine_1_1_execution_1_1base__state"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab7adcfebac83c97785b30d75f212d304 inherit pub_methods_struct_engine_1_1_execution_1_1base__state"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1base__state.html#ab7adcfebac83c97785b30d75f212d304">set_done</a> ()</td></tr>
+<tr class="memitem:ab7adcfebac83c97785b30d75f212d304 inherit pub_methods_struct_engine_1_1_execution_1_1base__state"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1base__state.html#ab7adcfebac83c97785b30d75f212d304">set_done</a> ()</td></tr>
 <tr class="separator:ab7adcfebac83c97785b30d75f212d304 inherit pub_methods_struct_engine_1_1_execution_1_1base__state"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab9bb1d533a9c70474c808981d3b81240 inherit pub_methods_struct_engine_1_1_execution_1_1base__state"><td class="memTemplParams" colspan="2">template&lt;typename... R&gt; </td></tr>
-<tr class="memitem:ab9bb1d533a9c70474c808981d3b81240 inherit pub_methods_struct_engine_1_1_execution_1_1base__state"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1base__state.html#ab9bb1d533a9c70474c808981d3b81240">set_error</a> (R &amp;&amp;...result)</td></tr>
+<tr class="memitem:ab9bb1d533a9c70474c808981d3b81240 inherit pub_methods_struct_engine_1_1_execution_1_1base__state"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1base__state.html#ab9bb1d533a9c70474c808981d3b81240">set_error</a> (R &amp;&amp;...result)</td></tr>
 <tr class="separator:ab9bb1d533a9c70474c808981d3b81240 inherit pub_methods_struct_engine_1_1_execution_1_1base__state"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3eac6816e2ba12f6407771f1bba8c3ac inherit pub_methods_struct_engine_1_1_execution_1_1base__state"><td class="memTemplParams" colspan="2">template&lt;typename... V&gt; </td></tr>
-<tr class="memitem:a3eac6816e2ba12f6407771f1bba8c3ac inherit pub_methods_struct_engine_1_1_execution_1_1base__state"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1base__state.html#a3eac6816e2ba12f6407771f1bba8c3ac">set_value</a> (V &amp;&amp;...value)</td></tr>
+<tr class="memitem:a3eac6816e2ba12f6407771f1bba8c3ac inherit pub_methods_struct_engine_1_1_execution_1_1base__state"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1base__state.html#a3eac6816e2ba12f6407771f1bba8c3ac">set_value</a> (V &amp;&amp;...value)</td></tr>
 <tr class="separator:a3eac6816e2ba12f6407771f1bba8c3ac inherit pub_methods_struct_engine_1_1_execution_1_1base__state"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a78fb4d4f4cbcb0e98e5dfaf605466a9c"><td class="memItemLeft" align="right" valign="top">std::atomic&lt; size_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html#a78fb4d4f4cbcb0e98e5dfaf605466a9c">mCompleteCount</a> = 0</td></tr>
 <tr class="separator:a78fb4d4f4cbcb0e98e5dfaf605466a9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a962410171784900b5357b83aa05d7980"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_engine.html#aab312fc85383cef28fd740f5dd10b369">patch_void_t</a>&lt; <a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html#a5124e36621fa06f46dde416063750f9e">R</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html#a962410171784900b5357b83aa05d7980">mResult</a></td></tr>
+<tr class="memitem:a962410171784900b5357b83aa05d7980"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_engine.html#aa6923ebc493cfa55cf08a28c061c2924">patch_void_t</a>&lt; <a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html#a5124e36621fa06f46dde416063750f9e">R</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html#a962410171784900b5357b83aa05d7980">mResult</a></td></tr>
 <tr class="separator:a962410171784900b5357b83aa05d7980"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac418e56ef891941efac44ec5d098d1bd"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html#ac418e56ef891941efac44ec5d098d1bd">mSize</a></td></tr>
 <tr class="separator:ac418e56ef891941efac44ec5d098d1bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -311,11 +312,16 @@ Public Attributes</h2></td></tr>
 <tr class="separator:a8fb1b7459ff2398aa896d6939e486c19"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abb8d0d8df0462f734efbbbcf8b848eb9"><td class="memItemLeft" align="right" valign="top">std::unique_ptr&lt; <a class="el" href="struct_engine_1_1_manual_lifetime.html">ManualLifetime</a>&lt; <a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html#afc5f4f3e216b590cc2b6cc6e20b6f37e">inner_state</a> &gt;[]&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html#abb8d0d8df0462f734efbbbcf8b848eb9">mStates</a></td></tr>
 <tr class="separator:abb8d0d8df0462f734efbbbcf8b848eb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa24c529875c014bb7ce393315da4bce7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html#a15f962e55a8afb1163749463d5455a4b">Values</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html#aa24c529875c014bb7ce393315da4bce7">mValues</a></td></tr>
+<tr class="memitem:aa24c529875c014bb7ce393315da4bce7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html#a3b377f645c429f05f71e4317506d63b9">Values</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html#aa24c529875c014bb7ce393315da4bce7">mValues</a></td></tr>
 <tr class="separator:aa24c529875c014bb7ce393315da4bce7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_attribs_struct_engine_1_1_execution_1_1base__state"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_struct_engine_1_1_execution_1_1base__state')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="struct_engine_1_1_execution_1_1base__state.html">Engine::Execution::base_state&lt; Rec &gt;</a></td></tr>
 <tr class="memitem:a825a82111d7d26cdf383afdb091f572d inherit pub_attribs_struct_engine_1_1_execution_1_1base__state"><td class="memItemLeft" align="right" valign="top">Rec&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1base__state.html#a825a82111d7d26cdf383afdb091f572d">mRec</a></td></tr>
 <tr class="separator:a825a82111d7d26cdf383afdb091f572d inherit pub_attribs_struct_engine_1_1_execution_1_1base__state"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
+Friends</h2></td></tr>
+<tr class="memitem:a82b75fd01091e4618aefe4bf7fadbbba"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html#a82b75fd01091e4618aefe4bf7fadbbba">tag_invoke</a> (<a class="el" href="struct_engine_1_1_execution_1_1visit__state__t.html">visit_state_t</a>, <a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html">state</a> *<a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html">state</a>, auto &amp;&amp;visitor)</td></tr>
+<tr class="separator:a82b75fd01091e4618aefe4bf7fadbbba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Typedef Documentation</h2>
 <a id="afc5f4f3e216b590cc2b6cc6e20b6f37e" name="afc5f4f3e216b590cc2b6cc6e20b6f37e"></a>
@@ -324,26 +330,26 @@ Public Attributes</h2></td></tr>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Rec , typename Sender &gt; </div>
+template&lt;typename Rec , typename <a class="el" href="struct_engine_1_1_execution_1_1_sender.html">Sender</a> &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html">Engine::Execution::when_all_range_t::state</a>&lt; Rec, Sender &gt;<a class="el" href="classinner__state.html">::inner_state</a> =  <a class="el" href="namespace_engine_1_1_execution.html#a0607edaba960b3bfd37ca2e476a3a362">connect_result_t</a>&lt;Sender, <a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1receiver.html">receiver</a>&lt;Rec, Sender&gt; &gt;</td>
+          <td class="memname">using <a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html">Engine::Execution::when_all_range_t::state</a>&lt; Rec, <a class="el" href="struct_engine_1_1_execution_1_1_sender.html">Sender</a> &gt;<a class="el" href="classinner__state.html">::inner_state</a> =  <a class="el" href="namespace_engine_1_1_execution.html#a0607edaba960b3bfd37ca2e476a3a362">connect_result_t</a>&lt;<a class="el" href="struct_engine_1_1_execution_1_1_sender.html">Sender</a>, <a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1receiver.html">receiver</a>&lt;Rec, <a class="el" href="struct_engine_1_1_execution_1_1_sender.html">Sender</a>&gt; &gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a15f962e55a8afb1163749463d5455a4b" name="a15f962e55a8afb1163749463d5455a4b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a15f962e55a8afb1163749463d5455a4b">&#9670;&#160;</a></span>Values</h2>
+<a id="a3b377f645c429f05f71e4317506d63b9" name="a3b377f645c429f05f71e4317506d63b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b377f645c429f05f71e4317506d63b9">&#9670;&#160;</a></span>Values</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Rec , typename Sender &gt; </div>
+template&lt;typename Rec , typename <a class="el" href="struct_engine_1_1_execution_1_1_sender.html">Sender</a> &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html">Engine::Execution::when_all_range_t::state</a>&lt; Rec, Sender &gt;::Values =  std::vector&lt;typename Sender::template value_types&lt;<a class="el" href="namespace_engine.html#ab9aa3cb843e93169f7b654729ddc23a1">identity</a>&gt; &gt;</td>
+          <td class="memname">using <a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html">Engine::Execution::when_all_range_t::state</a>&lt; Rec, <a class="el" href="struct_engine_1_1_execution_1_1_sender.html">Sender</a> &gt;::Values =  std::vector&lt;std::optional&lt;typename Sender::template value_types&lt;<a class="el" href="namespace_engine.html#ab9aa3cb843e93169f7b654729ddc23a1">identity</a>&gt; &gt;&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -356,10 +362,10 @@ template&lt;typename Rec , typename Sender &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Rec , typename Sender &gt; </div>
+template&lt;typename Rec , typename <a class="el" href="struct_engine_1_1_execution_1_1_sender.html">Sender</a> &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html">Engine::Execution::when_all_range_t::state</a>&lt; Rec, Sender &gt;::R =  typename Sender::result_type</td>
+          <td class="memname">using <a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html">Engine::Execution::when_all_range_t::state</a>&lt; Rec, <a class="el" href="struct_engine_1_1_execution_1_1_sender.html">Sender</a> &gt;::R =  typename <a class="el" href="struct_engine_1_1_execution_1_1_sender.html#a36dc37b98e4d5b1f07c248ed3c7ae462">Sender::result_type</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -373,7 +379,7 @@ template&lt;typename Rec , typename Sender &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Rec , typename Sender &gt; </div>
+template&lt;typename Rec , typename <a class="el" href="struct_engine_1_1_execution_1_1_sender.html">Sender</a> &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">enum <a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html#a40136dc78b3c9b39aaaba59470cd04c5">Engine::Execution::when_all_range_t::state::State</a></td>
@@ -395,7 +401,7 @@ template&lt;typename Rec , typename Sender &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Rec , typename Sender &gt; </div>
+template&lt;typename Rec , typename <a class="el" href="struct_engine_1_1_execution_1_1_sender.html">Sender</a> &gt; </div>
 <div class="memtemplate">
 template&lt;typename <a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html#a5124e36621fa06f46dde416063750f9e">R</a> &gt; </div>
 <table class="mlabels">
@@ -403,7 +409,7 @@ template&lt;typename <a class="el" href="struct_engine_1_1_execution_1_1when__al
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html">Engine::Execution::when_all_range_t::state</a>&lt; Rec, Sender &gt;::state </td>
+          <td class="memname"><a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html">Engine::Execution::when_all_range_t::state</a>&lt; Rec, <a class="el" href="struct_engine_1_1_execution_1_1_sender.html">Sender</a> &gt;::state </td>
           <td>(</td>
           <td class="paramtype">Rec &amp;&amp;&#160;</td>
           <td class="paramname"><em>rec</em>, </td>
@@ -435,13 +441,13 @@ template&lt;typename <a class="el" href="struct_engine_1_1_execution_1_1when__al
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Rec , typename Sender &gt; </div>
+template&lt;typename Rec , typename <a class="el" href="struct_engine_1_1_execution_1_1_sender.html">Sender</a> &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html">Engine::Execution::when_all_range_t::state</a>&lt; Rec, Sender &gt;::~<a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html">state</a> </td>
+          <td class="memname"><a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html">Engine::Execution::when_all_range_t::state</a>&lt; Rec, <a class="el" href="struct_engine_1_1_execution_1_1_sender.html">Sender</a> &gt;::~<a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html">state</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -463,13 +469,13 @@ template&lt;typename Rec , typename Sender &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Rec , typename Sender &gt; </div>
+template&lt;typename Rec , typename <a class="el" href="struct_engine_1_1_execution_1_1_sender.html">Sender</a> &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classvoid.html">void</a> <a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html">Engine::Execution::when_all_range_t::state</a>&lt; Rec, Sender &gt;::start </td>
+          <td class="memname">void <a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html">Engine::Execution::when_all_range_t::state</a>&lt; Rec, <a class="el" href="struct_engine_1_1_execution_1_1_sender.html">Sender</a> &gt;::start </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -490,7 +496,7 @@ template&lt;typename Rec , typename Sender &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Rec , typename Sender &gt; </div>
+template&lt;typename Rec , typename <a class="el" href="struct_engine_1_1_execution_1_1_sender.html">Sender</a> &gt; </div>
 <div class="memtemplate">
 template&lt;typename V &gt; </div>
 <table class="mlabels">
@@ -498,7 +504,7 @@ template&lt;typename V &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classvoid.html">void</a> <a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html">Engine::Execution::when_all_range_t::state</a>&lt; Rec, Sender &gt;::set_value </td>
+          <td class="memname">void <a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html">Engine::Execution::when_all_range_t::state</a>&lt; Rec, <a class="el" href="struct_engine_1_1_execution_1_1_sender.html">Sender</a> &gt;::set_value </td>
           <td>(</td>
           <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>index</em>, </td>
@@ -530,13 +536,13 @@ template&lt;typename V &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Rec , typename Sender &gt; </div>
+template&lt;typename Rec , typename <a class="el" href="struct_engine_1_1_execution_1_1_sender.html">Sender</a> &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classvoid.html">void</a> <a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html">Engine::Execution::when_all_range_t::state</a>&lt; Rec, Sender &gt;::set_done </td>
+          <td class="memname">void <a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html">Engine::Execution::when_all_range_t::state</a>&lt; Rec, <a class="el" href="struct_engine_1_1_execution_1_1_sender.html">Sender</a> &gt;::set_done </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -557,15 +563,15 @@ template&lt;typename Rec , typename Sender &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Rec , typename Sender &gt; </div>
+template&lt;typename Rec , typename <a class="el" href="struct_engine_1_1_execution_1_1_sender.html">Sender</a> &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classvoid.html">void</a> <a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html">Engine::Execution::when_all_range_t::state</a>&lt; Rec, Sender &gt;::set_error </td>
+          <td class="memname">void <a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html">Engine::Execution::when_all_range_t::state</a>&lt; Rec, <a class="el" href="struct_engine_1_1_execution_1_1_sender.html">Sender</a> &gt;::set_error </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespace_engine.html#aab312fc85383cef28fd740f5dd10b369">patch_void_t</a>&lt; <a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html#a5124e36621fa06f46dde416063750f9e">R</a> &gt;&#160;</td>
+          <td class="paramtype"><a class="el" href="namespace_engine.html#aa6923ebc493cfa55cf08a28c061c2924">patch_void_t</a>&lt; <a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html#a5124e36621fa06f46dde416063750f9e">R</a> &gt;&#160;</td>
           <td class="paramname"><em>result</em></td><td>)</td>
           <td></td>
         </tr>
@@ -585,13 +591,13 @@ template&lt;typename Rec , typename Sender &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Rec , typename Sender &gt; </div>
+template&lt;typename Rec , typename <a class="el" href="struct_engine_1_1_execution_1_1_sender.html">Sender</a> &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classvoid.html">void</a> <a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html">Engine::Execution::when_all_range_t::state</a>&lt; Rec, Sender &gt;::mark_complete </td>
+          <td class="memname">void <a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html">Engine::Execution::when_all_range_t::state</a>&lt; Rec, <a class="el" href="struct_engine_1_1_execution_1_1_sender.html">Sender</a> &gt;::mark_complete </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -606,6 +612,51 @@ template&lt;typename Rec , typename Sender &gt; </div>
 
 </div>
 </div>
+<h2 class="groupheader">Friends And Related Function Documentation</h2>
+<a id="a82b75fd01091e4618aefe4bf7fadbbba" name="a82b75fd01091e4618aefe4bf7fadbbba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a82b75fd01091e4618aefe4bf7fadbbba">&#9670;&#160;</a></span>tag_invoke</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Rec , typename <a class="el" href="struct_engine_1_1_execution_1_1_sender.html">Sender</a> &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto tag_invoke </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_execution_1_1visit__state__t.html">visit_state_t</a>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html">state</a>&lt; Rec, <a class="el" href="struct_engine_1_1_execution_1_1_sender.html">Sender</a> &gt; *&#160;</td>
+          <td class="paramname"><em>state</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">auto &amp;&amp;&#160;</td>
+          <td class="paramname"><em>visitor</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <h2 class="groupheader">Member Data Documentation</h2>
 <a id="abb8d0d8df0462f734efbbbcf8b848eb9" name="abb8d0d8df0462f734efbbbcf8b848eb9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#abb8d0d8df0462f734efbbbcf8b848eb9">&#9670;&#160;</a></span>mStates</h2>
@@ -613,10 +664,10 @@ template&lt;typename Rec , typename Sender &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Rec , typename Sender &gt; </div>
+template&lt;typename Rec , typename <a class="el" href="struct_engine_1_1_execution_1_1_sender.html">Sender</a> &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">std::unique_ptr&lt;<a class="el" href="struct_engine_1_1_manual_lifetime.html">ManualLifetime</a>&lt;<a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html#afc5f4f3e216b590cc2b6cc6e20b6f37e">inner_state</a>&gt;[]&gt; <a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html">Engine::Execution::when_all_range_t::state</a>&lt; Rec, Sender &gt;::mStates</td>
+          <td class="memname">std::unique_ptr&lt;<a class="el" href="struct_engine_1_1_manual_lifetime.html">ManualLifetime</a>&lt;<a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html#afc5f4f3e216b590cc2b6cc6e20b6f37e">inner_state</a>&gt;[]&gt; <a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html">Engine::Execution::when_all_range_t::state</a>&lt; Rec, <a class="el" href="struct_engine_1_1_execution_1_1_sender.html">Sender</a> &gt;::mStates</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -629,10 +680,10 @@ template&lt;typename Rec , typename Sender &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Rec , typename Sender &gt; </div>
+template&lt;typename Rec , typename <a class="el" href="struct_engine_1_1_execution_1_1_sender.html">Sender</a> &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespace_engine.html#aab312fc85383cef28fd740f5dd10b369">patch_void_t</a>&lt;<a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html#a5124e36621fa06f46dde416063750f9e">R</a>&gt; <a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html">Engine::Execution::when_all_range_t::state</a>&lt; Rec, Sender &gt;::mResult</td>
+          <td class="memname"><a class="el" href="namespace_engine.html#aa6923ebc493cfa55cf08a28c061c2924">patch_void_t</a>&lt;<a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html#a5124e36621fa06f46dde416063750f9e">R</a>&gt; <a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html">Engine::Execution::when_all_range_t::state</a>&lt; Rec, <a class="el" href="struct_engine_1_1_execution_1_1_sender.html">Sender</a> &gt;::mResult</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -645,10 +696,10 @@ template&lt;typename Rec , typename Sender &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Rec , typename Sender &gt; </div>
+template&lt;typename Rec , typename <a class="el" href="struct_engine_1_1_execution_1_1_sender.html">Sender</a> &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html#a15f962e55a8afb1163749463d5455a4b">Values</a> <a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html">Engine::Execution::when_all_range_t::state</a>&lt; Rec, Sender &gt;::mValues</td>
+          <td class="memname"><a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html#a3b377f645c429f05f71e4317506d63b9">Values</a> <a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html">Engine::Execution::when_all_range_t::state</a>&lt; Rec, <a class="el" href="struct_engine_1_1_execution_1_1_sender.html">Sender</a> &gt;::mValues</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -661,10 +712,10 @@ template&lt;typename Rec , typename Sender &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Rec , typename Sender &gt; </div>
+template&lt;typename Rec , typename <a class="el" href="struct_engine_1_1_execution_1_1_sender.html">Sender</a> &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">size_t <a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html">Engine::Execution::when_all_range_t::state</a>&lt; Rec, Sender &gt;::mSize</td>
+          <td class="memname">size_t <a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html">Engine::Execution::when_all_range_t::state</a>&lt; Rec, <a class="el" href="struct_engine_1_1_execution_1_1_sender.html">Sender</a> &gt;::mSize</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -677,10 +728,10 @@ template&lt;typename Rec , typename Sender &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Rec , typename Sender &gt; </div>
+template&lt;typename Rec , typename <a class="el" href="struct_engine_1_1_execution_1_1_sender.html">Sender</a> &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">std::atomic&lt;<a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html#a40136dc78b3c9b39aaaba59470cd04c5">State</a>&gt; <a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html">Engine::Execution::when_all_range_t::state</a>&lt; Rec, Sender &gt;::mState = <a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html#a40136dc78b3c9b39aaaba59470cd04c5a83b4f837e1924b89c71e80742f049d58">OK</a></td>
+          <td class="memname">std::atomic&lt;<a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html#a40136dc78b3c9b39aaaba59470cd04c5">State</a>&gt; <a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html">Engine::Execution::when_all_range_t::state</a>&lt; Rec, <a class="el" href="struct_engine_1_1_execution_1_1_sender.html">Sender</a> &gt;::mState = <a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html#a40136dc78b3c9b39aaaba59470cd04c5a83b4f837e1924b89c71e80742f049d58">OK</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -693,10 +744,10 @@ template&lt;typename Rec , typename Sender &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Rec , typename Sender &gt; </div>
+template&lt;typename Rec , typename <a class="el" href="struct_engine_1_1_execution_1_1_sender.html">Sender</a> &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">std::atomic&lt;size_t&gt; <a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html">Engine::Execution::when_all_range_t::state</a>&lt; Rec, Sender &gt;::mCompleteCount = 0</td>
+          <td class="memname">std::atomic&lt;size_t&gt; <a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html">Engine::Execution::when_all_range_t::state</a>&lt; Rec, <a class="el" href="struct_engine_1_1_execution_1_1_sender.html">Sender</a> &gt;::mCompleteCount = 0</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -709,7 +760,7 @@ template&lt;typename Rec , typename Sender &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Dec 7 2025 08:43:30 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Wed Apr 29 2026 23:46:53 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

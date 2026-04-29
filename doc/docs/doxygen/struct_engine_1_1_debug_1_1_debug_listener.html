@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Madgine - Doxygen Documentation: Engine::Debug::DebugListener Struct Reference &mdash; Madgine  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
 
   
@@ -213,7 +213,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.5.3</span>
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.6.0</span>
    </div>
   </td>
  </tr>
@@ -249,14 +249,14 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a7b77cc53250d1b4a6b6a6a82c21bd8f0"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_debug_1_1_debug_listener.html#a7b77cc53250d1b4a6b6a6a82c21bd8f0">onSuspend</a> (const <a class="el" href="struct_engine_1_1_debug_1_1_debug_location.html">DebugLocation</a> &amp;location, <a class="el" href="namespace_engine_1_1_debug.html#a67581ff14ecb24a87badb4fe4b01b6c1">ContinuationType</a> type)</td></tr>
-<tr class="separator:a7b77cc53250d1b4a6b6a6a82c21bd8f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ace61ccd0f6b7d951f225283c7c1f61c3"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_debug_1_1_debug_listener.html#ace61ccd0f6b7d951f225283c7c1f61c3">wantsPause</a> (const <a class="el" href="struct_engine_1_1_debug_1_1_debug_location.html">DebugLocation</a> &amp;location, <a class="el" href="namespace_engine_1_1_debug.html#a67581ff14ecb24a87badb4fe4b01b6c1">ContinuationType</a> type, <a class="el" href="struct_engine_1_1_index_type.html">IndexType</a>&lt; size_t &gt; line)</td></tr>
-<tr class="separator:ace61ccd0f6b7d951f225283c7c1f61c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00055dc9620edf8010827c0a3abf9cc1"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_debug_1_1_debug_listener.html#a00055dc9620edf8010827c0a3abf9cc1">onSuspend</a> (<a class="el" href="struct_engine_1_1_debug_1_1_context_info.html">ContextInfo</a> &amp;context, <a class="el" href="struct_engine_1_1_typed_ptr.html">TypedPtr</a> location, <a class="el" href="namespace_engine_1_1_debug.html#a67581ff14ecb24a87badb4fe4b01b6c1">ContinuationType</a> type)</td></tr>
+<tr class="separator:a00055dc9620edf8010827c0a3abf9cc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee71cbc2efa7379c5811d3cf8d00811e"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_debug_1_1_debug_listener.html#aee71cbc2efa7379c5811d3cf8d00811e">wantsPause</a> (<a class="el" href="struct_engine_1_1_debug_1_1_context_info.html">ContextInfo</a> &amp;context, <a class="el" href="struct_engine_1_1_typed_ptr.html">TypedPtr</a> location, <a class="el" href="namespace_engine_1_1_debug.html#a67581ff14ecb24a87badb4fe4b01b6c1">ContinuationType</a> type, <a class="el" href="struct_engine_1_1_index_type.html">IndexType</a>&lt; size_t &gt; line)</td></tr>
+<tr class="separator:aee71cbc2efa7379c5811d3cf8d00811e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="ace61ccd0f6b7d951f225283c7c1f61c3" name="ace61ccd0f6b7d951f225283c7c1f61c3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ace61ccd0f6b7d951f225283c7c1f61c3">&#9670;&#160;</a></span>wantsPause()</h2>
+<a id="aee71cbc2efa7379c5811d3cf8d00811e" name="aee71cbc2efa7379c5811d3cf8d00811e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aee71cbc2efa7379c5811d3cf8d00811e">&#9670;&#160;</a></span>wantsPause()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -265,9 +265,15 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> Engine::Debug::DebugListener::wantsPause </td>
+          <td class="memname">virtual bool Engine::Debug::DebugListener::wantsPause </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="struct_engine_1_1_debug_1_1_debug_location.html">DebugLocation</a> &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_debug_1_1_context_info.html">ContextInfo</a> &amp;&#160;</td>
+          <td class="paramname"><em>context</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_typed_ptr.html">TypedPtr</a>&#160;</td>
           <td class="paramname"><em>location</em>, </td>
         </tr>
         <tr>
@@ -297,8 +303,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a7b77cc53250d1b4a6b6a6a82c21bd8f0" name="a7b77cc53250d1b4a6b6a6a82c21bd8f0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7b77cc53250d1b4a6b6a6a82c21bd8f0">&#9670;&#160;</a></span>onSuspend()</h2>
+<a id="a00055dc9620edf8010827c0a3abf9cc1" name="a00055dc9620edf8010827c0a3abf9cc1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a00055dc9620edf8010827c0a3abf9cc1">&#9670;&#160;</a></span>onSuspend()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -307,9 +313,15 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual <a class="el" href="classvoid.html">void</a> Engine::Debug::DebugListener::onSuspend </td>
+          <td class="memname">virtual void Engine::Debug::DebugListener::onSuspend </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="struct_engine_1_1_debug_1_1_debug_location.html">DebugLocation</a> &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_debug_1_1_context_info.html">ContextInfo</a> &amp;&#160;</td>
+          <td class="paramname"><em>context</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_typed_ptr.html">TypedPtr</a>&#160;</td>
           <td class="paramname"><em>location</em>, </td>
         </tr>
         <tr>
@@ -339,7 +351,7 @@ Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Dec 7 2025 08:43:30 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Wed Apr 29 2026 23:46:53 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Madgine - Doxygen Documentation: Engine::Threading::TaskPromiseBase Struct Reference &mdash; Madgine  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
 
   
@@ -213,7 +213,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.5.3</span>
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.6.0</span>
    </div>
   </td>
  </tr>
@@ -240,7 +240,9 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="#friends">Friends</a> &#124;
 <a href="struct_engine_1_1_threading_1_1_task_promise_base-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">Engine::Threading::TaskPromiseBase Struct Reference</div></div>
 </div><!--header-->
@@ -256,7 +258,7 @@ Inheritance diagram for Engine::Threading::TaskPromiseBase:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a064b6f27409b64f957a65899016c023d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_task_promise_base.html#a064b6f27409b64f957a65899016c023d">TaskPromiseBase</a> (<a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> <a class="el" href="struct_engine_1_1_threading_1_1_task_promise_base.html#a49548cb3bd23d8ffab95f63b74f7dc3c">immediate</a>=false)</td></tr>
+<tr class="memitem:a064b6f27409b64f957a65899016c023d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_task_promise_base.html#a064b6f27409b64f957a65899016c023d">TaskPromiseBase</a> (bool <a class="el" href="struct_engine_1_1_threading_1_1_task_promise_base.html#a49548cb3bd23d8ffab95f63b74f7dc3c">immediate</a>=false)</td></tr>
 <tr class="separator:a064b6f27409b64f957a65899016c023d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a53d30f70555bf73b57824329caef255b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_task_promise_base.html#a53d30f70555bf73b57824329caef255b">~TaskPromiseBase</a> ()</td></tr>
 <tr class="separator:a53d30f70555bf73b57824329caef255b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -265,18 +267,31 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a88e8497e1bb73479b99cd1c38602ebac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2961c38bb115d440a609081d01ffe6f6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_threading_1_1_task_final_suspend.html">TaskFinalSuspend</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_task_promise_base.html#a2961c38bb115d440a609081d01ffe6f6">final_suspend</a> () noexcept</td></tr>
 <tr class="separator:a2961c38bb115d440a609081d01ffe6f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a49548cb3bd23d8ffab95f63b74f7dc3c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_task_promise_base.html#a49548cb3bd23d8ffab95f63b74f7dc3c">immediate</a> () const</td></tr>
+<tr class="memitem:ab020db5758cbfdab2da40d178f280c0b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_engine_1_1_debug.html#ac20923d0c9bf478464418543aa7dc019">Debug::FullStackTrace</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_task_promise_base.html#ab020db5758cbfdab2da40d178f280c0b">getSuspensionPoint</a> ()</td></tr>
+<tr class="separator:ab020db5758cbfdab2da40d178f280c0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a49548cb3bd23d8ffab95f63b74f7dc3c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_task_promise_base.html#a49548cb3bd23d8ffab95f63b74f7dc3c">immediate</a> () const</td></tr>
 <tr class="separator:a49548cb3bd23d8ffab95f63b74f7dc3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac51cbcdb84b05a8b8dd666649587a398"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_threading_1_1_task_initial_suspend.html">TaskInitialSuspend</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_task_promise_base.html#ac51cbcdb84b05a8b8dd666649587a398">initial_suspend</a> () noexcept</td></tr>
 <tr class="separator:ac51cbcdb84b05a8b8dd666649587a398"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab60897153a42d7f2b22150cb11beae25"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_threading_1_1_task_queue.html">TaskQueue</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_task_promise_base.html#ab60897153a42d7f2b22150cb11beae25">queue</a> () const</td></tr>
 <tr class="separator:ab60897153a42d7f2b22150cb11beae25"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4952293bd8d9a538d682788be47da413"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_task_promise_base.html#a4952293bd8d9a538d682788be47da413">setQueue</a> (<a class="el" href="struct_engine_1_1_threading_1_1_task_queue.html">TaskQueue</a> *<a class="el" href="struct_engine_1_1_threading_1_1_task_promise_base.html#ab60897153a42d7f2b22150cb11beae25">queue</a>)</td></tr>
+<tr class="memitem:a8b6a3cbd1be474e7ad0551b68e3d37a9"><td class="memItemLeft" align="right" valign="top">std::bool_constant&lt; false &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_task_promise_base.html#a8b6a3cbd1be474e7ad0551b68e3d37a9">set_done</a> ()</td></tr>
+<tr class="separator:a8b6a3cbd1be474e7ad0551b68e3d37a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac35b243c5ddd15de6abd7ba915ff6490"><td class="memItemLeft" align="right" valign="top">std::bool_constant&lt; false &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_task_promise_base.html#ac35b243c5ddd15de6abd7ba915ff6490">set_error</a> (auto &amp;&amp;)</td></tr>
+<tr class="separator:ac35b243c5ddd15de6abd7ba915ff6490"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab662bbadbe531ae7bf8d4f73fd9ed34f"><td class="memItemLeft" align="right" valign="top">std::bool_constant&lt; false &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_task_promise_base.html#ab662bbadbe531ae7bf8d4f73fd9ed34f">set_value</a> (auto &amp;&amp;...)</td></tr>
+<tr class="separator:ab662bbadbe531ae7bf8d4f73fd9ed34f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4952293bd8d9a538d682788be47da413"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_task_promise_base.html#a4952293bd8d9a538d682788be47da413">setQueue</a> (<a class="el" href="struct_engine_1_1_threading_1_1_task_queue.html">TaskQueue</a> *<a class="el" href="struct_engine_1_1_threading_1_1_task_promise_base.html#ab60897153a42d7f2b22150cb11beae25">queue</a>)</td></tr>
 <tr class="separator:a4952293bd8d9a538d682788be47da413"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a31fc61e643fb9bffb6e48d7cc37fbf02"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_task_promise_base.html#a31fc61e643fb9bffb6e48d7cc37fbf02">then_return</a> (<a class="el" href="struct_engine_1_1_threading_1_1_task_handle.html">TaskHandle</a> handle)</td></tr>
+<tr class="memitem:a31fc61e643fb9bffb6e48d7cc37fbf02"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_task_promise_base.html#a31fc61e643fb9bffb6e48d7cc37fbf02">then_return</a> (<a class="el" href="struct_engine_1_1_threading_1_1_task_handle.html">TaskHandle</a> handle)</td></tr>
 <tr class="separator:a31fc61e643fb9bffb6e48d7cc37fbf02"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8318802f750db01850ccc10f9153524e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_task_promise_base.html#a8318802f750db01850ccc10f9153524e">unhandled_exception</a> ()</td></tr>
+<tr class="memitem:a8318802f750db01850ccc10f9153524e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_task_promise_base.html#a8318802f750db01850ccc10f9153524e">unhandled_exception</a> ()</td></tr>
 <tr class="separator:a8318802f750db01850ccc10f9153524e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a248f385e2d95473be7b329fdf43ef432"><td class="memItemLeft" align="right" valign="top">static auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_task_promise_base.html#a248f385e2d95473be7b329fdf43ef432">unpack_storage</a> (auto &amp;&amp;storage)</td></tr>
+<tr class="separator:a248f385e2d95473be7b329fdf43ef432"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -284,6 +299,11 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:ad5353771222747519603a694e7e2033c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a321a2909c872ef8f8b20dd9049b5abd8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_threading_1_1_task_handle.html">TaskHandle</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_task_promise_base.html#a321a2909c872ef8f8b20dd9049b5abd8">mThenReturn</a></td></tr>
 <tr class="separator:a321a2909c872ef8f8b20dd9049b5abd8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
+Friends</h2></td></tr>
+<tr class="memitem:a09b5a93e7d0d0a6253c9da9397415172"><td class="memItemLeft" align="right" valign="top">MODULES_EXPORT <a class="el" href="namespace_engine_1_1_execution.html#a9d54b0f0d186287e871cb1dff3d4684d">Execution::StopToken</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_task_promise_base.html#a09b5a93e7d0d0a6253c9da9397415172">tag_invoke</a> (<a class="el" href="struct_engine_1_1_execution_1_1get__stop__token__t.html">Execution::get_stop_token_t</a>, <a class="el" href="struct_engine_1_1_threading_1_1_task_promise_base.html">TaskPromiseBase</a> &amp;promise)</td></tr>
+<tr class="separator:a09b5a93e7d0d0a6253c9da9397415172"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a064b6f27409b64f957a65899016c023d" name="a064b6f27409b64f957a65899016c023d"></a>
@@ -295,7 +315,7 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname">Engine::Threading::TaskPromiseBase::TaskPromiseBase </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td>
+          <td class="paramtype">bool&#160;</td>
           <td class="paramname"><em>immediate</em> = <code>false</code></td><td>)</td>
           <td></td>
         </tr>
@@ -382,7 +402,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Threading::TaskPromiseBase::unhandled_exception </td>
+          <td class="memname">void Engine::Threading::TaskPromiseBase::unhandled_exception </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -407,7 +427,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Threading::TaskPromiseBase::then_return </td>
+          <td class="memname">void Engine::Threading::TaskPromiseBase::then_return </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="struct_engine_1_1_threading_1_1_task_handle.html">TaskHandle</a>&#160;</td>
           <td class="paramname"><em>handle</em></td><td>)</td>
@@ -417,6 +437,32 @@ Protected Attributes</h2></td></tr>
   </td>
   <td class="mlabels-right">
 <span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a248f385e2d95473be7b329fdf43ef432" name="a248f385e2d95473be7b329fdf43ef432"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a248f385e2d95473be7b329fdf43ef432">&#9670;&#160;</a></span>unpack_storage()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static auto Engine::Threading::TaskPromiseBase::unpack_storage </td>
+          <td>(</td>
+          <td class="paramtype">auto &amp;&amp;&#160;</td>
+          <td class="paramname"><em>storage</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -458,7 +504,7 @@ template&lt;typename T &gt; </div>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Threading::TaskPromiseBase::setQueue </td>
+          <td class="memname">void Engine::Threading::TaskPromiseBase::setQueue </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="struct_engine_1_1_threading_1_1_task_queue.html">TaskQueue</a> *&#160;</td>
           <td class="paramname"><em>queue</em></td><td>)</td>
@@ -493,12 +539,135 @@ template&lt;typename T &gt; </div>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> Engine::Threading::TaskPromiseBase::immediate </td>
+          <td class="memname">bool Engine::Threading::TaskPromiseBase::immediate </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8b6a3cbd1be474e7ad0551b68e3d37a9" name="a8b6a3cbd1be474e7ad0551b68e3d37a9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8b6a3cbd1be474e7ad0551b68e3d37a9">&#9670;&#160;</a></span>set_done()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::bool_constant&lt; false &gt; Engine::Threading::TaskPromiseBase::set_done </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab662bbadbe531ae7bf8d4f73fd9ed34f" name="ab662bbadbe531ae7bf8d4f73fd9ed34f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab662bbadbe531ae7bf8d4f73fd9ed34f">&#9670;&#160;</a></span>set_value()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::bool_constant&lt; false &gt; Engine::Threading::TaskPromiseBase::set_value </td>
+          <td>(</td>
+          <td class="paramtype">auto &amp;&amp;&#160;</td>
+          <td class="paramname"><em>...</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac35b243c5ddd15de6abd7ba915ff6490" name="ac35b243c5ddd15de6abd7ba915ff6490"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac35b243c5ddd15de6abd7ba915ff6490">&#9670;&#160;</a></span>set_error()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::bool_constant&lt; false &gt; Engine::Threading::TaskPromiseBase::set_error </td>
+          <td>(</td>
+          <td class="paramtype">auto &amp;&amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab020db5758cbfdab2da40d178f280c0b" name="ab020db5758cbfdab2da40d178f280c0b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab020db5758cbfdab2da40d178f280c0b">&#9670;&#160;</a></span>getSuspensionPoint()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespace_engine_1_1_debug.html#ac20923d0c9bf478464418543aa7dc019">Debug::FullStackTrace</a> Engine::Threading::TaskPromiseBase::getSuspensionPoint </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Friends And Related Function Documentation</h2>
+<a id="a09b5a93e7d0d0a6253c9da9397415172" name="a09b5a93e7d0d0a6253c9da9397415172"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a09b5a93e7d0d0a6253c9da9397415172">&#9670;&#160;</a></span>tag_invoke</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">MODULES_EXPORT <a class="el" href="namespace_engine_1_1_execution.html#a9d54b0f0d186287e871cb1dff3d4684d">Execution::StopToken</a> tag_invoke </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_execution_1_1get__stop__token__t.html">Execution::get_stop_token_t</a>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_threading_1_1_task_promise_base.html">TaskPromiseBase</a> &amp;&#160;</td>
+          <td class="paramname"><em>promise</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 </div>
@@ -555,7 +724,7 @@ template&lt;typename T &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Dec 7 2025 08:43:31 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Wed Apr 29 2026 23:46:55 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

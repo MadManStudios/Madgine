@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Madgine - Doxygen Documentation: src/Generic/macros.h File Reference &mdash; Madgine  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
 
   
@@ -213,7 +213,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.5.3</span>
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.6.0</span>
    </div>
   </td>
  </tr>
@@ -264,8 +264,10 @@ Macros</h2></td></tr>
 <tr class="separator:afe142cb0616361126e8015a8da018ef4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6aadb0f3180238c2c04dc8af624f7b3c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="macros_8h.html#a6aadb0f3180238c2c04dc8af624f7b3c">DEBUG_MACRO2</a>(...)&#160;&#160;&#160;static_assert(false, #__VA_ARGS__);</td></tr>
 <tr class="separator:a6aadb0f3180238c2c04dc8af624f7b3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aef3aefec14ac7b093adc5f297f0a7c30"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="macros_8h.html#aef3aefec14ac7b093adc5f297f0a7c30">EVAL</a>(x)&#160;&#160;&#160;x</td></tr>
-<tr class="separator:aef3aefec14ac7b093adc5f297f0a7c30"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa0f8200acd4827bc9d2df09270b66c38"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="macros_8h.html#aa0f8200acd4827bc9d2df09270b66c38">EVAL</a>(...)&#160;&#160;&#160;__VA_ARGS__</td></tr>
+<tr class="separator:aa0f8200acd4827bc9d2df09270b66c38"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1da5ee0b8ba77ab31d29e01e5dd4d9aa"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="macros_8h.html#a1da5ee0b8ba77ab31d29e01e5dd4d9aa">EVAL2</a>(...)&#160;&#160;&#160;<a class="el" href="macros_8h.html#aa0f8200acd4827bc9d2df09270b66c38">EVAL</a>(<a class="el" href="macros_8h.html#aa0f8200acd4827bc9d2df09270b66c38">EVAL</a>(__VA_ARGS__))</td></tr>
+<tr class="separator:a1da5ee0b8ba77ab31d29e01e5dd4d9aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a95dfc80599f592f262b6d72516d365a9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="macros_8h.html#a95dfc80599f592f262b6d72516d365a9">FIRST</a>(...)&#160;&#160;&#160;<a class="el" href="macros_8h.html#a1416b1a0b8676441a1b439b8586b09a8">SELECT_0</a>(__VA_ARGS__)</td></tr>
 <tr class="separator:a95dfc80599f592f262b6d72516d365a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a613ffca246d79b0fcd5dc2407777ad5c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="macros_8h.html#a613ffca246d79b0fcd5dc2407777ad5c">FOR_EACH</a>(f,  sep, ...)&#160;&#160;&#160;<a class="el" href="macros_8h.html#afa8e2e3e810314fe1640a87fd3cfb943">APPLY</a>(<a class="el" href="macros_8h.html#a2fef427b1927dac8bf612d1384f00503">CONCAT2</a>(FOR_EACH, <a class="el" href="macros_8h.html#a8f1bac1b9225d9b290d41c1a85fdc73f">NUM_ARGS</a>(__VA_ARGS__)), f, sep, __VA_ARGS__)</td></tr>
@@ -282,6 +284,8 @@ Macros</h2></td></tr>
 <tr class="separator:a6c2d551e4a273aebff76cc9dcd843f20"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8f1bac1b9225d9b290d41c1a85fdc73f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="macros_8h.html#a8f1bac1b9225d9b290d41c1a85fdc73f">NUM_ARGS</a>(...)&#160;&#160;&#160;<a class="el" href="macros_8h.html#a7d7bfef3fc018977d59da345c603b4db">SELECT_10</a>(__VA_ARGS__ __VA_OPT__(, ) 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0)</td></tr>
 <tr class="separator:a8f1bac1b9225d9b290d41c1a85fdc73f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9357f62275c685754a405c064db6ec41"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="macros_8h.html#a9357f62275c685754a405c064db6ec41">PARENS</a>&#160;&#160;&#160;()</td></tr>
+<tr class="separator:a9357f62275c685754a405c064db6ec41"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7e8f64b2cdcc4bb3f81e0c0776bd3802"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="macros_8h.html#a7e8f64b2cdcc4bb3f81e0c0776bd3802">SELECT</a>(n, ...)&#160;&#160;&#160;<a class="el" href="macros_8h.html#afa8e2e3e810314fe1640a87fd3cfb943">APPLY</a>(<a class="el" href="macros_8h.html#a2fef427b1927dac8bf612d1384f00503">CONCAT2</a>(SELECT_, n), __VA_ARGS__)</td></tr>
 <tr class="separator:a7e8f64b2cdcc4bb3f81e0c0776bd3802"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1416b1a0b8676441a1b439b8586b09a8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="macros_8h.html#a1416b1a0b8676441a1b439b8586b09a8">SELECT_0</a>(a, ...)&#160;&#160;&#160;a</td></tr>
@@ -352,8 +356,8 @@ Macros</h2></td></tr>
 
 </div>
 </div>
-<a id="aef3aefec14ac7b093adc5f297f0a7c30" name="aef3aefec14ac7b093adc5f297f0a7c30"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aef3aefec14ac7b093adc5f297f0a7c30">&#9670;&#160;</a></span>EVAL</h2>
+<a id="aa0f8200acd4827bc9d2df09270b66c38" name="aa0f8200acd4827bc9d2df09270b66c38"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa0f8200acd4827bc9d2df09270b66c38">&#9670;&#160;</a></span>EVAL</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -362,8 +366,40 @@ Macros</h2></td></tr>
           <td class="memname">#define EVAL</td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname">x</td><td>)</td>
-          <td>&#160;&#160;&#160;x</td>
+          <td class="paramname"><em>...</em></td><td>)</td>
+          <td>&#160;&#160;&#160;__VA_ARGS__</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1da5ee0b8ba77ab31d29e01e5dd4d9aa" name="a1da5ee0b8ba77ab31d29e01e5dd4d9aa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1da5ee0b8ba77ab31d29e01e5dd4d9aa">&#9670;&#160;</a></span>EVAL2</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EVAL2</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>...</em></td><td>)</td>
+          <td>&#160;&#160;&#160;<a class="el" href="macros_8h.html#aa0f8200acd4827bc9d2df09270b66c38">EVAL</a>(<a class="el" href="macros_8h.html#aa0f8200acd4827bc9d2df09270b66c38">EVAL</a>(__VA_ARGS__))</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9357f62275c685754a405c064db6ec41" name="a9357f62275c685754a405c064db6ec41"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9357f62275c685754a405c064db6ec41">&#9670;&#160;</a></span>PARENS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PARENS&#160;&#160;&#160;()</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1501,7 +1537,7 @@ Macros</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Dec 7 2025 08:43:27 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Wed Apr 29 2026 23:46:50 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

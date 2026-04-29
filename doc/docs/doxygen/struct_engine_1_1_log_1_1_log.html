@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Madgine - Doxygen Documentation: Engine::Log::Log Struct Reference &mdash; Madgine  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
 
   
@@ -213,7 +213,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.5.3</span>
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.6.0</span>
    </div>
   </td>
  </tr>
@@ -260,14 +260,14 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:aae01f69496e1c0023c5a103df5d684c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac4c3a4fb15e696a217f85a7937628ca2"><td class="memItemLeft" align="right" valign="top">virtual std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_log_1_1_log.html#ac4c3a4fb15e696a217f85a7937628ca2">getName</a> ()=0</td></tr>
 <tr class="separator:ac4c3a4fb15e696a217f85a7937628ca2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a545614c47137d12e63613fee2d023885"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_log_1_1_log.html#a545614c47137d12e63613fee2d023885">log</a> (std::string_view msg, MessageType lvl, const char *file=nullptr, size_t line=0)</td></tr>
+<tr class="memitem:a545614c47137d12e63613fee2d023885"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_log_1_1_log.html#a545614c47137d12e63613fee2d023885">log</a> (std::string_view msg, MessageType lvl, const char *file=nullptr, size_t line=0)</td></tr>
 <tr class="separator:a545614c47137d12e63613fee2d023885"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a9b76d7b8e9a7adead0308339622639cc"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_log_1_1_log.html#a9b76d7b8e9a7adead0308339622639cc">addListener</a> (<a class="el" href="struct_engine_1_1_log_1_1_log_listener.html">LogListener</a> *listener)</td></tr>
+<tr class="memitem:a9b76d7b8e9a7adead0308339622639cc"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_log_1_1_log.html#a9b76d7b8e9a7adead0308339622639cc">addListener</a> (<a class="el" href="struct_engine_1_1_log_1_1_log_listener.html">LogListener</a> *listener)</td></tr>
 <tr class="separator:a9b76d7b8e9a7adead0308339622639cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8fa56799f71585422d5d2818851430b4"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_log_1_1_log.html#a8fa56799f71585422d5d2818851430b4">removeListener</a> (<a class="el" href="struct_engine_1_1_log_1_1_log_listener.html">LogListener</a> *listener)</td></tr>
+<tr class="memitem:a8fa56799f71585422d5d2818851430b4"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_log_1_1_log.html#a8fa56799f71585422d5d2818851430b4">removeListener</a> (<a class="el" href="struct_engine_1_1_log_1_1_log_listener.html">LogListener</a> *listener)</td></tr>
 <tr class="separator:a8fa56799f71585422d5d2818851430b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
@@ -307,7 +307,7 @@ Static Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Log::Log::log </td>
+          <td class="memname">void Engine::Log::Log::log </td>
           <td>(</td>
           <td class="paramtype">std::string_view&#160;</td>
           <td class="paramname"><em>msg</em>, </td>
@@ -384,7 +384,7 @@ Static Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Log::Log::addListener </td>
+          <td class="memname">void Engine::Log::Log::addListener </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="struct_engine_1_1_log_1_1_log_listener.html">LogListener</a> *&#160;</td>
           <td class="paramname"><em>listener</em></td><td>)</td>
@@ -410,7 +410,7 @@ Static Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Log::Log::removeListener </td>
+          <td class="memname">void Engine::Log::Log::removeListener </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="struct_engine_1_1_log_1_1_log_listener.html">LogListener</a> *&#160;</td>
           <td class="paramname"><em>listener</em></td><td>)</td>
@@ -433,7 +433,7 @@ Static Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Dec 7 2025 08:43:30 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Wed Apr 29 2026 23:46:54 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

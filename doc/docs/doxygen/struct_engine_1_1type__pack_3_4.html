@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Madgine - Doxygen Documentation: Engine::type_pack&amp;lt;&amp;gt; Struct Reference &mdash; Madgine  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
 
   
@@ -213,7 +213,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.5.3</span>
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.6.0</span>
    </div>
   </td>
  </tr>
@@ -239,6 +239,7 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-static-attribs">Static Public Attributes</a> &#124;
 <a href="struct_engine_1_1type__pack_3_4-members.html">List of all members</a>  </div>
@@ -248,6 +249,11 @@ $(function() {
 
 <p><code>#include &lt;type_pack.h&gt;</code></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1type__pack_3_4_1_1helpers.html">helpers</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
 Public Types</h2></td></tr>
 <tr class="memitem:a3d171d1b1e8adc1bc336996c35c48eb1"><td class="memTemplParams" colspan="2">template&lt;typename... T&gt; </td></tr>
@@ -272,9 +278,12 @@ Public Types</h2></td></tr>
 <tr class="memitem:ade6d67484f3db3cb31e2406d3ec62dd5"><td class="memTemplParams" colspan="2">template&lt;typename... T&gt; </td></tr>
 <tr class="memitem:ade6d67484f3db3cb31e2406d3ec62dd5"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1type__pack_3_4.html#ade6d67484f3db3cb31e2406d3ec62dd5">prepend</a> = <a class="el" href="struct_engine_1_1type__pack.html">type_pack</a>&lt; T... &gt;</td></tr>
 <tr class="separator:ade6d67484f3db3cb31e2406d3ec62dd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afe4e968d0ddeadc236d83478e56ec9cd"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> Cond, typename T &gt; </td></tr>
+<tr class="memitem:afe4e968d0ddeadc236d83478e56ec9cd"><td class="memTemplParams" colspan="2">template&lt;bool Cond, typename T &gt; </td></tr>
 <tr class="memitem:afe4e968d0ddeadc236d83478e56ec9cd"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1type__pack_3_4.html#afe4e968d0ddeadc236d83478e56ec9cd">prepend_if</a> = std::conditional_t&lt; Cond, <a class="el" href="struct_engine_1_1type__pack.html">type_pack</a>&lt; T &gt;, <a class="el" href="struct_engine_1_1type__pack.html">type_pack</a>&lt;&gt; &gt;</td></tr>
 <tr class="separator:afe4e968d0ddeadc236d83478e56ec9cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adef3e87e077b8b24342636e28fab292b"><td class="memTemplParams" colspan="2">template&lt;size_t n, typename Fill  = void&gt; </td></tr>
+<tr class="memitem:adef3e87e077b8b24342636e28fab292b"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1type__pack_3_4.html#adef3e87e077b8b24342636e28fab292b">resize</a> = helpers::resize_helper&lt; n, Fill &gt;</td></tr>
+<tr class="separator:adef3e87e077b8b24342636e28fab292b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0eaa13879e4fe5c4d88a52a0e806e1c0"><td class="memTemplParams" colspan="2">template&lt;size_t I&gt; </td></tr>
 <tr class="memitem:a0eaa13879e4fe5c4d88a52a0e806e1c0"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1type__pack_3_4.html#a0eaa13879e4fe5c4d88a52a0e806e1c0">select</a> = std::enable_if_t&lt; <a class="el" href="struct_engine_1_1dependent__bool.html">dependent_bool</a>&lt; std::integral_constant&lt; size_t, I &gt;, false &gt;::value &gt;</td></tr>
 <tr class="separator:a0eaa13879e4fe5c4d88a52a0e806e1c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -296,6 +305,9 @@ Public Types</h2></td></tr>
 <tr class="memitem:a978c040b2a9dd4b09cfbae3fc793b73d"><td class="memTemplParams" colspan="2">template&lt;template&lt; typename &gt; typename F&gt; </td></tr>
 <tr class="memitem:a978c040b2a9dd4b09cfbae3fc793b73d"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1type__pack_3_4.html#a978c040b2a9dd4b09cfbae3fc793b73d">value_transform</a> = <a class="el" href="struct_engine_1_1auto__pack.html">auto_pack</a>&lt;&gt;</td></tr>
 <tr class="separator:a978c040b2a9dd4b09cfbae3fc793b73d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a12256800982f04c5ed822a7d59f40be1"><td class="memTemplParams" colspan="2">template&lt;template&lt; typename, typename &gt; typename F, typename OtherPack &gt; </td></tr>
+<tr class="memitem:a12256800982f04c5ed822a7d59f40be1"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1type__pack_3_4.html#a12256800982f04c5ed822a7d59f40be1">zip</a> = std::enable_if_t&lt; OtherPack::size==0, <a class="el" href="struct_engine_1_1type__pack.html">type_pack</a>&lt;&gt; &gt;</td></tr>
+<tr class="separator:a12256800982f04c5ed822a7d59f40be1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
@@ -355,7 +367,7 @@ template&lt;typename... T&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> Cond, typename T &gt; </div>
+template&lt;bool Cond, typename T &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">using <a class="el" href="struct_engine_1_1type__pack.html">Engine::type_pack</a>&lt;&gt;::prepend_if =  std::conditional_t&lt;Cond, <a class="el" href="struct_engine_1_1type__pack.html">type_pack</a>&lt;T&gt;, <a class="el" href="struct_engine_1_1type__pack.html">type_pack</a>&lt;&gt; &gt;</td>
@@ -375,6 +387,22 @@ template&lt;typename Pack2 &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">using <a class="el" href="struct_engine_1_1type__pack.html">Engine::type_pack</a>&lt;&gt;::concat =  Pack2</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="adef3e87e077b8b24342636e28fab292b" name="adef3e87e077b8b24342636e28fab292b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adef3e87e077b8b24342636e28fab292b">&#9670;&#160;</a></span>resize</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;size_t n, typename Fill  = void&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="struct_engine_1_1type__pack.html">Engine::type_pack</a>&lt;&gt;::resize =  helpers::resize_helper&lt;n, Fill&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -507,6 +535,22 @@ template&lt;template&lt; typename &gt; typename F&gt; </div>
 
 </div>
 </div>
+<a id="a12256800982f04c5ed822a7d59f40be1" name="a12256800982f04c5ed822a7d59f40be1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a12256800982f04c5ed822a7d59f40be1">&#9670;&#160;</a></span>zip</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;template&lt; typename, typename &gt; typename F, typename OtherPack &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="struct_engine_1_1type__pack.html">Engine::type_pack</a>&lt;&gt;::zip =  std::enable_if_t&lt;OtherPack::size == 0, <a class="el" href="struct_engine_1_1type__pack.html">type_pack</a>&lt;&gt; &gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a7b633cec3cf1c9d322d697970c5f670d" name="a7b633cec3cf1c9d322d697970c5f670d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7b633cec3cf1c9d322d697970c5f670d">&#9670;&#160;</a></span>unique</h2>
 
@@ -584,7 +628,7 @@ template&lt;size_t I&gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Dec 7 2025 08:43:29 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Wed Apr 29 2026 23:46:52 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

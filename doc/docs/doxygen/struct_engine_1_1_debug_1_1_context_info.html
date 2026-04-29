@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Madgine - Doxygen Documentation: Engine::Debug::ContextInfo Struct Reference &mdash; Madgine  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
 
   
@@ -213,7 +213,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.5.3</span>
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.6.0</span>
    </div>
   </td>
  </tr>
@@ -241,160 +241,94 @@ $(function() {
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
-<a href="#friends">Friends</a> &#124;
 <a href="struct_engine_1_1_debug_1_1_context_info-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">Engine::Debug::ContextInfo Struct Reference</div></div>
+  <div class="headertitle"><div class="title">Engine::Debug::ContextInfo Struct Reference<span class="mlabels"><span class="mlabel">final</span></span></div></div>
 </div><!--header-->
 <div class="contents">
 
-<p><code>#include &lt;debugger.h&gt;</code></p>
-<div class="dynheader">
-Inheritance diagram for Engine::Debug::ContextInfo:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="struct_engine_1_1_debug_1_1_context_info__inherit__graph.svg" width="202" height="110"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
-<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<p><code>#include &lt;contextinfo.h&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a5332413c9275c2d2385721147f2d0ee3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_debug_1_1_context_info.html#a5332413c9275c2d2385721147f2d0ee3">ContextInfo</a> ()</td></tr>
-<tr class="separator:a5332413c9275c2d2385721147f2d0ee3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5a982c8b9a1fe0d625a93611913dbf2b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_debug_1_1_context_info.html#a5a982c8b9a1fe0d625a93611913dbf2b">alive</a> () const</td></tr>
+<tr class="memitem:a5a982c8b9a1fe0d625a93611913dbf2b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_debug_1_1_context_info.html#a5a982c8b9a1fe0d625a93611913dbf2b">alive</a> () const</td></tr>
 <tr class="separator:a5a982c8b9a1fe0d625a93611913dbf2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1fa9590ccb09c5a39718101521d6ae7f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_debug_1_1_context_info.html#a1fa9590ccb09c5a39718101521d6ae7f">continueExecution</a> (<a class="el" href="namespace_engine_1_1_debug.html#aab90867d6b661aa591a3e4818086d976">ContinuationMode</a> mode)</td></tr>
-<tr class="separator:a1fa9590ccb09c5a39718101521d6ae7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7f162460777e9fb161a233eea7febef8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_debug_1_1_context_info.html#a7f162460777e9fb161a233eea7febef8">isPaused</a> () const</td></tr>
+<tr class="memitem:ad60d795b712ca709d2b7de49d422cb4f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_debug_1_1_context_info.html#ad60d795b712ca709d2b7de49d422cb4f">getBreakpoint</a> (const void *location, size_t index) const</td></tr>
+<tr class="separator:ad60d795b712ca709d2b7de49d422cb4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f162460777e9fb161a233eea7febef8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_debug_1_1_context_info.html#a7f162460777e9fb161a233eea7febef8">isPaused</a> () const</td></tr>
 <tr class="separator:a7f162460777e9fb161a233eea7febef8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d08166858cdf746d103c35614509736"><td class="memTemplParams" colspan="2">template&lt;typename Rec , typename F , typename... Args&gt; </td></tr>
+<tr class="memitem:a0d08166858cdf746d103c35614509736"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_debug_1_1_context_info.html#a0d08166858cdf746d103c35614509736">pass</a> (<a class="el" href="struct_engine_1_1_typed_ptr.html">TypedPtr</a> location, Rec &amp;rec, F &amp;&amp;callback, <a class="el" href="struct_engine_1_1_debug_1_1_continuation.html">Continuation</a> &amp;outContinuation, <a class="el" href="namespace_engine_1_1_debug.html#a67581ff14ecb24a87badb4fe4b01b6c1">ContinuationType</a> type, <a class="el" href="struct_engine_1_1_index_type.html">IndexType</a>&lt; size_t &gt; line={}, Args &amp;&amp;...args)</td></tr>
+<tr class="separator:a0d08166858cdf746d103c35614509736"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a721f4455cf153cb66c3e6329c5663013"><td class="memItemLeft" align="right" valign="top">std::nullopt_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_debug_1_1_context_info.html#a721f4455cf153cb66c3e6329c5663013">pause</a> ()</td></tr>
 <tr class="separator:a721f4455cf153cb66c3e6329c5663013"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aadac7c727452a0c3f70bef4c54c512cb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_engine_1_1_debug.html#aab90867d6b661aa591a3e4818086d976">ContinuationMode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_debug_1_1_context_info.html#aadac7c727452a0c3f70bef4c54c512cb">resume</a> ()</td></tr>
 <tr class="separator:aadac7c727452a0c3f70bef4c54c512cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a401355fec290500b2514ae5014cd0c85"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_debug_1_1_context_info.html#a401355fec290500b2514ae5014cd0c85">setBreakpoint</a> (const void *location, size_t index, bool set) const</td></tr>
+<tr class="separator:a401355fec290500b2514ae5014cd0c85"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2cbb916094b38d6a5d523d15f761932d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_engine_1_1_debug.html#aab90867d6b661aa591a3e4818086d976">ContinuationMode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_debug_1_1_context_info.html#a2cbb916094b38d6a5d523d15f761932d">step</a> ()</td></tr>
 <tr class="separator:a2cbb916094b38d6a5d523d15f761932d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a432be284becdf0c6e4ae9c937c0bd93f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_debug_1_1_context_info.html#a432be284becdf0c6e4ae9c937c0bd93f">stepInto</a> (<a class="el" href="struct_engine_1_1_debug_1_1_debug_location.html">DebugLocation</a> &amp;child) override</td></tr>
-<tr class="separator:a432be284becdf0c6e4ae9c937c0bd93f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2623bb2c298529965ed879348294dced"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_debug_1_1_context_info.html#a2623bb2c298529965ed879348294dced">stepOut</a> (<a class="el" href="struct_engine_1_1_debug_1_1_debug_location.html">DebugLocation</a> &amp;child) override</td></tr>
-<tr class="separator:a2623bb2c298529965ed879348294dced"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac21194ea8f4f51d8bac40ec17b3e64e4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_engine_1_1_debug.html#aab90867d6b661aa591a3e4818086d976">ContinuationMode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_debug_1_1_context_info.html#ac21194ea8f4f51d8bac40ec17b3e64e4">stop</a> ()</td></tr>
 <tr class="separator:ac21194ea8f4f51d8bac40ec17b3e64e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adcf708e77ac44a57ae7a46ead9beb7c2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_debug_1_1_context_info.html#adcf708e77ac44a57ae7a46ead9beb7c2">suspend</a> (const <a class="el" href="struct_engine_1_1_debug_1_1_debug_location.html">DebugLocation</a> &amp;location, <a class="el" href="struct_engine_1_1_debug_1_1_continuation.html">Continuation</a> callback, <a class="el" href="struct_engine_1_1_debug_1_1_continuation.html">Continuation</a> &amp;outContinuation, <a class="el" href="namespace_engine_1_1_execution.html#a9d54b0f0d186287e871cb1dff3d4684d">Execution::StopToken</a> st)</td></tr>
-<tr class="separator:adcf708e77ac44a57ae7a46ead9beb7c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_methods_struct_engine_1_1_debug_1_1_base_location"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_struct_engine_1_1_debug_1_1_base_location')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="struct_engine_1_1_debug_1_1_base_location.html">Engine::Debug::BaseLocation</a></td></tr>
-<tr class="memitem:a8506e6659dd71055a77953a55fb649fa inherit pub_methods_struct_engine_1_1_debug_1_1_base_location"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_debug_1_1_base_location.html#a8506e6659dd71055a77953a55fb649fa">BaseLocation</a> (<a class="el" href="struct_engine_1_1_debug_1_1_context_info.html">ContextInfo</a> *context=nullptr)</td></tr>
-<tr class="separator:a8506e6659dd71055a77953a55fb649fa inherit pub_methods_struct_engine_1_1_debug_1_1_base_location"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4612aa3cc2ae2e5b462c359d21f6fbc5 inherit pub_methods_struct_engine_1_1_debug_1_1_base_location"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_debug_1_1_base_location.html#a4612aa3cc2ae2e5b462c359d21f6fbc5">stepInto</a> (<a class="el" href="struct_engine_1_1_debug_1_1_debug_location.html">DebugLocation</a> &amp;child)=0</td></tr>
-<tr class="separator:a4612aa3cc2ae2e5b462c359d21f6fbc5 inherit pub_methods_struct_engine_1_1_debug_1_1_base_location"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acabe09c2090a58087cdcf46c632ff6b9 inherit pub_methods_struct_engine_1_1_debug_1_1_base_location"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_debug_1_1_base_location.html#acabe09c2090a58087cdcf46c632ff6b9">stepOut</a> (<a class="el" href="struct_engine_1_1_debug_1_1_debug_location.html">DebugLocation</a> &amp;child)=0</td></tr>
-<tr class="separator:acabe09c2090a58087cdcf46c632ff6b9 inherit pub_methods_struct_engine_1_1_debug_1_1_base_location"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab4726fb8cb308d89805fea15ecda44ef"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_debug_1_1_context_info.html#ab4726fb8cb308d89805fea15ecda44ef">suspend</a> (<a class="el" href="struct_engine_1_1_typed_ptr.html">TypedPtr</a> location, <a class="el" href="struct_engine_1_1_debug_1_1_continuation.html">Continuation</a> callback, <a class="el" href="struct_engine_1_1_debug_1_1_continuation.html">Continuation</a> &amp;outContinuation, <a class="el" href="namespace_engine_1_1_execution.html#a9d54b0f0d186287e871cb1dff3d4684d">Execution::StopToken</a> st)</td></tr>
+<tr class="separator:ab4726fb8cb308d89805fea15ecda44ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab54942ef4e43fce43e78d5b798a061ee"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_debug_1_1_context_info.html#ab54942ef4e43fce43e78d5b798a061ee">wantsPause</a> (<a class="el" href="struct_engine_1_1_typed_ptr.html">TypedPtr</a> location, <a class="el" href="namespace_engine_1_1_debug.html#a67581ff14ecb24a87badb4fe4b01b6c1">ContinuationType</a> type, <a class="el" href="struct_engine_1_1_index_type.html">IndexType</a>&lt; size_t &gt; line)</td></tr>
+<tr class="separator:ab54942ef4e43fce43e78d5b798a061ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a49bc2664274dfdd501cf9049b23a23"><td class="memTemplParams" colspan="2">template&lt;typename Rec , typename F , typename... Args&gt; </td></tr>
+<tr class="memitem:a0a49bc2664274dfdd501cf9049b23a23"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_debug_1_1_context_info.html#a0a49bc2664274dfdd501cf9049b23a23">yield</a> (<a class="el" href="struct_engine_1_1_typed_ptr.html">TypedPtr</a> location, Rec &amp;rec, F &amp;&amp;callback, <a class="el" href="struct_engine_1_1_debug_1_1_continuation.html">Continuation</a> &amp;outContinuation, <a class="el" href="namespace_engine_1_1_debug.html#a67581ff14ecb24a87badb4fe4b01b6c1">ContinuationType</a> type, Args &amp;&amp;...args)</td></tr>
+<tr class="separator:a0a49bc2664274dfdd501cf9049b23a23"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a6a3cbcb56e09314ce479fcccc0ea7207"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_debug_1_1_debug_location.html">DebugLocation</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_debug_1_1_context_info.html#a6a3cbcb56e09314ce479fcccc0ea7207">mChild</a> = nullptr</td></tr>
-<tr class="separator:a6a3cbcb56e09314ce479fcccc0ea7207"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ed2f752dc63c73089b5a827bb2c277d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_debug_1_1_sender_location.html">Debug::SenderLocation</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_debug_1_1_context_info.html#a4ed2f752dc63c73089b5a827bb2c277d">mChild</a> = nullptr</td></tr>
+<tr class="separator:a4ed2f752dc63c73089b5a827bb2c277d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaee7421ad832e949972ae393300b624e"><td class="memItemLeft" align="right" valign="top">std::mutex&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_debug_1_1_context_info.html#aaee7421ad832e949972ae393300b624e">mMutex</a></td></tr>
 <tr class="separator:aaee7421ad832e949972ae393300b624e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_attribs_struct_engine_1_1_debug_1_1_base_location"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_struct_engine_1_1_debug_1_1_base_location')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="struct_engine_1_1_debug_1_1_base_location.html">Engine::Debug::BaseLocation</a></td></tr>
-<tr class="memitem:a5f171f948d61d76cba293a17d8a50414 inherit pub_attribs_struct_engine_1_1_debug_1_1_base_location"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_debug_1_1_context_info.html">ContextInfo</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_debug_1_1_base_location.html#a5f171f948d61d76cba293a17d8a50414">mContext</a> = nullptr</td></tr>
-<tr class="separator:a5f171f948d61d76cba293a17d8a50414 inherit pub_attribs_struct_engine_1_1_debug_1_1_base_location"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
-Friends</h2></td></tr>
-<tr class="memitem:a6a60c70c35469c44c97b20483675aade"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#acbd926fd8f1e36f51be1bdfea840b62a">struct</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_debug_1_1_context_info.html#a6a60c70c35469c44c97b20483675aade">Debugger</a></td></tr>
-<tr class="separator:a6a60c70c35469c44c97b20483675aade"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a5332413c9275c2d2385721147f2d0ee3" name="a5332413c9275c2d2385721147f2d0ee3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5332413c9275c2d2385721147f2d0ee3">&#9670;&#160;</a></span>ContextInfo()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">Engine::Debug::ContextInfo::ContextInfo </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a432be284becdf0c6e4ae9c937c0bd93f" name="a432be284becdf0c6e4ae9c937c0bd93f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a432be284becdf0c6e4ae9c937c0bd93f">&#9670;&#160;</a></span>stepInto()</h2>
+<a id="ab54942ef4e43fce43e78d5b798a061ee" name="ab54942ef4e43fce43e78d5b798a061ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab54942ef4e43fce43e78d5b798a061ee">&#9670;&#160;</a></span>wantsPause()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Debug::ContextInfo::stepInto </td>
+          <td class="memname">bool Engine::Debug::ContextInfo::wantsPause </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_engine_1_1_debug_1_1_debug_location.html">DebugLocation</a> &amp;&#160;</td>
-          <td class="paramname"><em>child</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_typed_ptr.html">TypedPtr</a>&#160;</td>
+          <td class="paramname"><em>location</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype"><a class="el" href="namespace_engine_1_1_debug.html#a67581ff14ecb24a87badb4fe4b01b6c1">ContinuationType</a>&#160;</td>
+          <td class="paramname"><em>type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_index_type.html">IndexType</a>&lt; size_t &gt;&#160;</td>
+          <td class="paramname"><em>line</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
-<p>Implements <a class="el" href="struct_engine_1_1_debug_1_1_base_location.html#a4612aa3cc2ae2e5b462c359d21f6fbc5">Engine::Debug::BaseLocation</a>.</p>
-
 </div>
 </div>
-<a id="a2623bb2c298529965ed879348294dced" name="a2623bb2c298529965ed879348294dced"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2623bb2c298529965ed879348294dced">&#9670;&#160;</a></span>stepOut()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Debug::ContextInfo::stepOut </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_engine_1_1_debug_1_1_debug_location.html">DebugLocation</a> &amp;&#160;</td>
-          <td class="paramname"><em>child</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Implements <a class="el" href="struct_engine_1_1_debug_1_1_base_location.html#acabe09c2090a58087cdcf46c632ff6b9">Engine::Debug::BaseLocation</a>.</p>
-
-</div>
-</div>
-<a id="adcf708e77ac44a57ae7a46ead9beb7c2" name="adcf708e77ac44a57ae7a46ead9beb7c2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adcf708e77ac44a57ae7a46ead9beb7c2">&#9670;&#160;</a></span>suspend()</h2>
+<a id="ab4726fb8cb308d89805fea15ecda44ef" name="ab4726fb8cb308d89805fea15ecda44ef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab4726fb8cb308d89805fea15ecda44ef">&#9670;&#160;</a></span>suspend()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Debug::ContextInfo::suspend </td>
+          <td class="memname">void Engine::Debug::ContextInfo::suspend </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="struct_engine_1_1_debug_1_1_debug_location.html">DebugLocation</a> &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_typed_ptr.html">TypedPtr</a>&#160;</td>
           <td class="paramname"><em>location</em>, </td>
         </tr>
         <tr>
@@ -419,24 +353,6 @@ Friends</h2></td></tr>
           <td></td>
           <td>)</td>
           <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a1fa9590ccb09c5a39718101521d6ae7f" name="a1fa9590ccb09c5a39718101521d6ae7f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1fa9590ccb09c5a39718101521d6ae7f">&#9670;&#160;</a></span>continueExecution()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Debug::ContextInfo::continueExecution </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="namespace_engine_1_1_debug.html#aab90867d6b661aa591a3e4818086d976">ContinuationMode</a>&#160;</td>
-          <td class="paramname"><em>mode</em></td><td>)</td>
-          <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -518,7 +434,7 @@ Friends</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> Engine::Debug::ContextInfo::alive </td>
+          <td class="memname">bool Engine::Debug::ContextInfo::alive </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -535,7 +451,7 @@ Friends</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> Engine::Debug::ContextInfo::isPaused </td>
+          <td class="memname">bool Engine::Debug::ContextInfo::isPaused </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -545,23 +461,192 @@ Friends</h2></td></tr>
 
 </div>
 </div>
-<h2 class="groupheader">Friends And Related Function Documentation</h2>
-<a id="a6a60c70c35469c44c97b20483675aade" name="a6a60c70c35469c44c97b20483675aade"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6a60c70c35469c44c97b20483675aade">&#9670;&#160;</a></span>Debugger</h2>
+<a id="a401355fec290500b2514ae5014cd0c85" name="a401355fec290500b2514ae5014cd0c85"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a401355fec290500b2514ae5014cd0c85">&#9670;&#160;</a></span>setBreakpoint()</h2>
 
 <div class="memitem">
 <div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Engine::Debug::ContextInfo::setBreakpoint </td>
+          <td>(</td>
+          <td class="paramtype">const void *&#160;</td>
+          <td class="paramname"><em>location</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>set</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad60d795b712ca709d2b7de49d422cb4f" name="ad60d795b712ca709d2b7de49d422cb4f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad60d795b712ca709d2b7de49d422cb4f">&#9670;&#160;</a></span>getBreakpoint()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Engine::Debug::ContextInfo::getBreakpoint </td>
+          <td>(</td>
+          <td class="paramtype">const void *&#160;</td>
+          <td class="paramname"><em>location</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>index</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0a49bc2664274dfdd501cf9049b23a23" name="a0a49bc2664274dfdd501cf9049b23a23"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0a49bc2664274dfdd501cf9049b23a23">&#9670;&#160;</a></span>yield()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Rec , typename F , typename... Args&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">friend <a class="el" href="sl__support__begin_8h.html#acbd926fd8f1e36f51be1bdfea840b62a">struct</a> <a class="el" href="struct_engine_1_1_debug_1_1_debugger.html">Debugger</a></td>
+          <td class="memname">void Engine::Debug::ContextInfo::yield </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_typed_ptr.html">TypedPtr</a>&#160;</td>
+          <td class="paramname"><em>location</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Rec &amp;&#160;</td>
+          <td class="paramname"><em>rec</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">F &amp;&amp;&#160;</td>
+          <td class="paramname"><em>callback</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_debug_1_1_continuation.html">Continuation</a> &amp;&#160;</td>
+          <td class="paramname"><em>outContinuation</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespace_engine_1_1_debug.html#a67581ff14ecb24a87badb4fe4b01b6c1">ContinuationType</a>&#160;</td>
+          <td class="paramname"><em>type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Args &amp;&amp;...&#160;</td>
+          <td class="paramname"><em>args</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0d08166858cdf746d103c35614509736" name="a0d08166858cdf746d103c35614509736"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d08166858cdf746d103c35614509736">&#9670;&#160;</a></span>pass()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Rec , typename F , typename... Args&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Engine::Debug::ContextInfo::pass </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_typed_ptr.html">TypedPtr</a>&#160;</td>
+          <td class="paramname"><em>location</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Rec &amp;&#160;</td>
+          <td class="paramname"><em>rec</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">F &amp;&amp;&#160;</td>
+          <td class="paramname"><em>callback</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_debug_1_1_continuation.html">Continuation</a> &amp;&#160;</td>
+          <td class="paramname"><em>outContinuation</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespace_engine_1_1_debug.html#a67581ff14ecb24a87badb4fe4b01b6c1">ContinuationType</a>&#160;</td>
+          <td class="paramname"><em>type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_index_type.html">IndexType</a>&lt; size_t &gt;&#160;</td>
+          <td class="paramname"><em>line</em> = <code>{}</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Args &amp;&amp;...&#160;</td>
+          <td class="paramname"><em>args</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -591,14 +676,14 @@ Friends</h2></td></tr>
 
 </div>
 </div>
-<a id="a6a3cbcb56e09314ce479fcccc0ea7207" name="a6a3cbcb56e09314ce479fcccc0ea7207"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6a3cbcb56e09314ce479fcccc0ea7207">&#9670;&#160;</a></span>mChild</h2>
+<a id="a4ed2f752dc63c73089b5a827bb2c277d" name="a4ed2f752dc63c73089b5a827bb2c277d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4ed2f752dc63c73089b5a827bb2c277d">&#9670;&#160;</a></span>mChild</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="struct_engine_1_1_debug_1_1_debug_location.html">DebugLocation</a>* Engine::Debug::ContextInfo::mChild = nullptr</td>
+          <td class="memname"><a class="el" href="struct_engine_1_1_debug_1_1_sender_location.html">Debug::SenderLocation</a>* Engine::Debug::ContextInfo::mChild = nullptr</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -606,13 +691,13 @@ Friends</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this struct was generated from the following files:<ul>
-<li>plugins/debug/api/src/Madgine/debug/<a class="el" href="debugger_8h.html">debugger.h</a></li>
-<li>plugins/debug/api/src/Madgine/debug/<a class="el" href="debugger_8cpp.html">debugger.cpp</a></li>
+<li>plugins/debug/api/src/Madgine/debug/<a class="el" href="contextinfo_8h.html">contextinfo.h</a></li>
+<li>plugins/debug/api/src/Madgine/debug/<a class="el" href="contextinfo_8cpp.html">contextinfo.cpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Dec 7 2025 08:43:30 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Wed Apr 29 2026 23:46:53 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

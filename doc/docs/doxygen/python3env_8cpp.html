@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Madgine - Doxygen Documentation: plugins/behavior/python3/src/Python3/python3env.cpp File Reference &mdash; Madgine  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
 
   
@@ -213,7 +213,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.5.3</span>
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.6.0</span>
    </div>
   </td>
  </tr>
@@ -240,6 +240,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#namespaces">Namespaces</a> &#124;
+<a href="#define-members">Macros</a> &#124;
 <a href="#func-members">Functions</a> &#124;
 <a href="#var-members">Variables</a>  </div>
   <div class="headertitle"><div class="title">python3env.cpp File Reference</div></div>
@@ -262,11 +263,16 @@ Namespaces</h2></td></tr>
 <tr class="memitem:namespace_engine_1_1_behavior_1_1_python3"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html">Engine::Behavior::Python3</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:a5a333fdc508eb5b42b3061e7308382c7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="python3env_8cpp.html#a5a333fdc508eb5b42b3061e7308382c7">HANDLE_STATUS</a>()</td></tr>
+<tr class="separator:a5a333fdc508eb5b42b3061e7308382c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a29931e58d378754f2140a7a27937f63d"><td class="memItemLeft" align="right" valign="top">PyMODINIT_FUNC&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#a29931e58d378754f2140a7a27937f63d">Engine::Behavior::Python3::PyInit_Engine</a> (<a class="el" href="classvoid.html">void</a>)</td></tr>
+<tr class="memitem:a29931e58d378754f2140a7a27937f63d"><td class="memItemLeft" align="right" valign="top">PyMODINIT_FUNC&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#a29931e58d378754f2140a7a27937f63d">Engine::Behavior::Python3::PyInit_Engine</a> (void)</td></tr>
 <tr class="separator:a29931e58d378754f2140a7a27937f63d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad9d841f0359c0f726e5f3506192df3e4"><td class="memItemLeft" align="right" valign="top">PyMODINIT_FUNC&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#ad9d841f0359c0f726e5f3506192df3e4">Engine::Behavior::Python3::PyInit_Environment</a> (<a class="el" href="classvoid.html">void</a>)</td></tr>
+<tr class="memitem:ad9d841f0359c0f726e5f3506192df3e4"><td class="memItemLeft" align="right" valign="top">PyMODINIT_FUNC&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#ad9d841f0359c0f726e5f3506192df3e4">Engine::Behavior::Python3::PyInit_Environment</a> (void)</td></tr>
 <tr class="separator:ad9d841f0359c0f726e5f3506192df3e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
@@ -276,10 +282,35 @@ Variables</h2></td></tr>
 <tr class="memitem:ab0cc31d8faa7d5c29cd73f35d284dbea"><td class="memItemLeft" align="right" valign="top">PyFrameObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#ab0cc31d8faa7d5c29cd73f35d284dbea">Engine::Behavior::Python3::sFrame</a></td></tr>
 <tr class="separator:ab0cc31d8faa7d5c29cd73f35d284dbea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="a5a333fdc508eb5b42b3061e7308382c7" name="a5a333fdc508eb5b42b3061e7308382c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5a333fdc508eb5b42b3061e7308382c7">&#9670;&#160;</a></span>HANDLE_STATUS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define HANDLE_STATUS</td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line">    <span class="keywordflow">if</span> (PyStatus_IsError(status)) { \</div>
+<div class="line">        LOG_ERROR(status.err_msg);  \</div>
+<div class="line">    }                               \</div>
+<div class="line">    if (PyStatus_IsExit(status)) {  \</div>
+<div class="line">        PyConfig_Clear(&amp;config);    \</div>
+<div class="line">        <span class="keyword">co_return</span> <span class="keyword">false</span>;            \</div>
+<div class="line">    }</div>
+</div><!-- fragment -->
+</div>
+</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Dec 7 2025 08:43:26 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Wed Apr 29 2026 23:46:48 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Madgine - Doxygen Documentation: Engine::Resources::ResourceManager Struct Reference &mdash; Madgine  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
 
   
@@ -213,7 +213,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.5.3</span>
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.6.0</span>
    </div>
   </td>
  </tr>
@@ -262,9 +262,9 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a2040166a63853bfe304ae8c0a53648fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a649c78ca45fbf3f5d428cc0a816996c5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_resource_manager.html#a649c78ca45fbf3f5d428cc0a816996c5">~ResourceManager</a> ()</td></tr>
 <tr class="separator:a649c78ca45fbf3f5d428cc0a816996c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a06e7cb818963ddbdfebc756925648f3f"><td class="memItemLeft" align="right" valign="top">std::map&lt; <a class="el" href="struct_engine_1_1_filesystem_1_1_path.html">Filesystem::Path</a>, std::vector&lt; <a class="el" href="struct_engine_1_1_resources_1_1_resource_base.html">ResourceBase</a> * &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_resource_manager.html#a06e7cb818963ddbdfebc756925648f3f">buildResourceList</a> ()</td></tr>
-<tr class="separator:a06e7cb818963ddbdfebc756925648f3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abef82f4a735ca3470a93ca39557324fa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_threading_1_1_task.html">Threading::Task</a>&lt; <a class="el" href="classvoid.html">void</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_resource_manager.html#abef82f4a735ca3470a93ca39557324fa">finalize</a> ()</td></tr>
+<tr class="memitem:ac7950a5fcb811614d582216a5b503816"><td class="memItemLeft" align="right" valign="top">std::map&lt; std::pair&lt; std::string, <a class="el" href="struct_engine_1_1_filesystem_1_1_path.html">Filesystem::Path</a> &gt;, std::vector&lt; <a class="el" href="struct_engine_1_1_resources_1_1_resource_base.html">ResourceBase</a> * &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_resource_manager.html#ac7950a5fcb811614d582216a5b503816">buildResourceList</a> ()</td></tr>
+<tr class="separator:ac7950a5fcb811614d582216a5b503816"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abef82f4a735ca3470a93ca39557324fa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_threading_1_1_task.html">Threading::Task</a>&lt; void &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_resource_manager.html#abef82f4a735ca3470a93ca39557324fa">finalize</a> ()</td></tr>
 <tr class="separator:abef82f4a735ca3470a93ca39557324fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6f71cdebd0dd0bc1cb609554f5d9975a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_filesystem_1_1_path.html">Filesystem::Path</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_resource_manager.html#a6f71cdebd0dd0bc1cb609554f5d9975a">findResourceFile</a> (std::string_view fileName)</td></tr>
 <tr class="separator:a6f71cdebd0dd0bc1cb609554f5d9975a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -276,19 +276,21 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a68027586188b162ee5222be8eafb6506"><td class="memTemplParams" colspan="2">template&lt;typename Loader &gt; </td></tr>
 <tr class="memitem:a68027586188b162ee5222be8eafb6506"><td class="memTemplItemLeft" align="right" valign="top">Loader::Resource *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_resource_manager.html#a68027586188b162ee5222be8eafb6506">getResource</a> (const std::string &amp;name)</td></tr>
 <tr class="separator:a68027586188b162ee5222be8eafb6506"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a78eb3dab648a42a701cbcee9922146a3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_threading_1_1_task.html">Threading::Task</a>&lt; <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_resource_manager.html#a78eb3dab648a42a701cbcee9922146a3">init</a> ()</td></tr>
+<tr class="memitem:a78eb3dab648a42a701cbcee9922146a3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_threading_1_1_task.html">Threading::Task</a>&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_resource_manager.html#a78eb3dab648a42a701cbcee9922146a3">init</a> ()</td></tr>
 <tr class="separator:a78eb3dab648a42a701cbcee9922146a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a00e83ebfcb546994e4b94dcd2bae1747"><td class="memItemLeft" align="right" valign="top">virtual std::string_view&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_resource_manager.html#a00e83ebfcb546994e4b94dcd2bae1747">key</a> () const override</td></tr>
 <tr class="separator:a00e83ebfcb546994e4b94dcd2bae1747"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa868120656a32d87a1411cbf9e35e23e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_resource_manager.html#aa868120656a32d87a1411cbf9e35e23e">registerResourceLocation</a> (const <a class="el" href="struct_engine_1_1_filesystem_1_1_path.html">Filesystem::Path</a> &amp;path, int priority)</td></tr>
-<tr class="separator:aa868120656a32d87a1411cbf9e35e23e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae629e0d1b857d785bd86d3b72a026869"><td class="memItemLeft" align="right" valign="top">std::pair&lt; std::string, <a class="el" href="struct_engine_1_1_filesystem_1_1_path.html">Filesystem::Path</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_resource_manager.html#ae629e0d1b857d785bd86d3b72a026869">makeRelative</a> (const <a class="el" href="struct_engine_1_1_filesystem_1_1_path.html">Filesystem::Path</a> &amp;path) const</td></tr>
+<tr class="separator:ae629e0d1b857d785bd86d3b72a026869"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d6bb5d668b2686e4d711cf71a8e4909"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_resource_manager.html#a5d6bb5d668b2686e4d711cf71a8e4909">registerResourceLocation</a> (const <a class="el" href="struct_engine_1_1_filesystem_1_1_path.html">Filesystem::Path</a> &amp;path, std::string_view identifier, int priority)</td></tr>
+<tr class="separator:a5d6bb5d668b2686e4d711cf71a8e4909"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acc8ba7885962f98db050196e77eaf091"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_threading_1_1_task.html">Threading::Task</a>&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_resource_manager.html#acc8ba7885962f98db050196e77eaf091">runTools</a> () override</td></tr>
 <tr class="separator:acc8ba7885962f98db050196e77eaf091"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ada8f8ca09ce1019bd6350817259e25aa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_threading_1_1_task_queue.html">Threading::TaskQueue</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_resource_manager.html#ada8f8ca09ce1019bd6350817259e25aa">taskQueue</a> ()</td></tr>
 <tr class="separator:ada8f8ca09ce1019bd6350817259e25aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad332c5181f6c08780875dda1fa0e93d4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_threading_1_1_task.html">Threading::Task</a>&lt; <a class="el" href="classvoid.html">void</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_resource_manager.html#ad332c5181f6c08780875dda1fa0e93d4">update</a> ()</td></tr>
+<tr class="memitem:ad332c5181f6c08780875dda1fa0e93d4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_threading_1_1_task.html">Threading::Task</a>&lt; void &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_resource_manager.html#ad332c5181f6c08780875dda1fa0e93d4">update</a> ()</td></tr>
 <tr class="separator:ad332c5181f6c08780875dda1fa0e93d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6302d9bd0e6964e34e7148a2e21c475c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_resource_manager.html#a6302d9bd0e6964e34e7148a2e21c475c">waitForInit</a> ()</td></tr>
+<tr class="memitem:a6302d9bd0e6964e34e7148a2e21c475c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_resource_manager.html#a6302d9bd0e6964e34e7148a2e21c475c">waitForInit</a> ()</td></tr>
 <tr class="separator:a6302d9bd0e6964e34e7148a2e21c475c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_struct_engine_1_1_virtual_scope"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_struct_engine_1_1_virtual_scope')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="struct_engine_1_1_virtual_scope.html">Engine::VirtualScope&lt; T, Base &gt;</a></td></tr>
 <tr class="memitem:a8eb04bc90993a62dde2f6e5acc85619e inherit pub_methods_struct_engine_1_1_virtual_scope"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_scope_ptr.html">ScopePtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_virtual_scope.html#a8eb04bc90993a62dde2f6e5acc85619e">customScopePtr</a> () override</td></tr>
@@ -296,14 +298,14 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ae14d52eebaa3e94377d7a5b1f6ca688e"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_scope_ptr.html">ScopePtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_virtual_scope_base.html#ae14d52eebaa3e94377d7a5b1f6ca688e">customScopePtr</a> ()=0</td></tr>
 <tr class="separator:ae14d52eebaa3e94377d7a5b1f6ca688e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_struct_engine_1_1_threading_1_1_madgine_object"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_struct_engine_1_1_threading_1_1_madgine_object')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="struct_engine_1_1_threading_1_1_madgine_object.html">Engine::Threading::MadgineObject&lt; ResourceManager &gt;</a></td></tr>
-<tr class="memitem:a7f961a0e1fb888abeefec69330433b0b inherit pub_methods_struct_engine_1_1_threading_1_1_madgine_object"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_threading_1_1_task.html">Threading::Task</a>&lt; <a class="el" href="classvoid.html">void</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_madgine_object.html#a7f961a0e1fb888abeefec69330433b0b">callFinalize</a> ()</td></tr>
+<tr class="memitem:a7f961a0e1fb888abeefec69330433b0b inherit pub_methods_struct_engine_1_1_threading_1_1_madgine_object"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_threading_1_1_task.html">Threading::Task</a>&lt; void &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_madgine_object.html#a7f961a0e1fb888abeefec69330433b0b">callFinalize</a> ()</td></tr>
 <tr class="separator:a7f961a0e1fb888abeefec69330433b0b inherit pub_methods_struct_engine_1_1_threading_1_1_madgine_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8b7e2b8dcec964a2e0c63914970ead44 inherit pub_methods_struct_engine_1_1_threading_1_1_madgine_object"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_threading_1_1_task.html">Threading::Task</a>&lt; <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_madgine_object.html#a8b7e2b8dcec964a2e0c63914970ead44">callInit</a> ()</td></tr>
+<tr class="memitem:a8b7e2b8dcec964a2e0c63914970ead44 inherit pub_methods_struct_engine_1_1_threading_1_1_madgine_object"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_threading_1_1_task.html">Threading::Task</a>&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_madgine_object.html#a8b7e2b8dcec964a2e0c63914970ead44">callInit</a> ()</td></tr>
 <tr class="separator:a8b7e2b8dcec964a2e0c63914970ead44 inherit pub_methods_struct_engine_1_1_threading_1_1_madgine_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_struct_engine_1_1_threading_1_1_madgine_object_state"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_struct_engine_1_1_threading_1_1_madgine_object_state')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="struct_engine_1_1_threading_1_1_madgine_object_state.html">Engine::Threading::MadgineObjectState</a></td></tr>
-<tr class="memitem:a58fd57e0dc3b8883599040a374216065 inherit pub_methods_struct_engine_1_1_threading_1_1_madgine_object_state"><td class="memItemLeft" align="right" valign="top"><a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_madgine_object_state.html#a58fd57e0dc3b8883599040a374216065">isInitialized</a> ()</td></tr>
+<tr class="memitem:a58fd57e0dc3b8883599040a374216065 inherit pub_methods_struct_engine_1_1_threading_1_1_madgine_object_state"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_madgine_object_state.html#a58fd57e0dc3b8883599040a374216065">isInitialized</a> ()</td></tr>
 <tr class="separator:a58fd57e0dc3b8883599040a374216065 inherit pub_methods_struct_engine_1_1_threading_1_1_madgine_object_state"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2ddeebc3ec5f65954475998971698894 inherit pub_methods_struct_engine_1_1_threading_1_1_madgine_object_state"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_threading_1_1_task_future.html">Threading::TaskFuture</a>&lt; <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_madgine_object_state.html#a2ddeebc3ec5f65954475998971698894">state</a> ()</td></tr>
+<tr class="memitem:a2ddeebc3ec5f65954475998971698894 inherit pub_methods_struct_engine_1_1_threading_1_1_madgine_object_state"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_threading_1_1_task_future.html">Threading::TaskFuture</a>&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_madgine_object_state.html#a2ddeebc3ec5f65954475998971698894">state</a> ()</td></tr>
 <tr class="separator:a2ddeebc3ec5f65954475998971698894 inherit pub_methods_struct_engine_1_1_threading_1_1_madgine_object_state"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
@@ -325,7 +327,7 @@ Additional Inherited Members</h2></td></tr>
 <tr class="memitem:adc0d30618c88b1348697944a0409a8ff inherit pro_methods_struct_engine_1_1_threading_1_1_madgine_object_state"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_madgine_object_state.html#adc0d30618c88b1348697944a0409a8ff">~MadgineObjectState</a> ()</td></tr>
 <tr class="separator:adc0d30618c88b1348697944a0409a8ff inherit pro_methods_struct_engine_1_1_threading_1_1_madgine_object_state"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_struct_engine_1_1_threading_1_1_madgine_object_state"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_struct_engine_1_1_threading_1_1_madgine_object_state')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="struct_engine_1_1_threading_1_1_madgine_object_state.html">Engine::Threading::MadgineObjectState</a></td></tr>
-<tr class="memitem:a973f1761d25a9970ccf6f48c019927f0 inherit pro_attribs_struct_engine_1_1_threading_1_1_madgine_object_state"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_threading_1_1_atomic_task_future.html">Threading::AtomicTaskFuture</a>&lt; <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_madgine_object_state.html#a973f1761d25a9970ccf6f48c019927f0">mState</a></td></tr>
+<tr class="memitem:a973f1761d25a9970ccf6f48c019927f0 inherit pro_attribs_struct_engine_1_1_threading_1_1_madgine_object_state"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_threading_1_1_atomic_task_future.html">Threading::AtomicTaskFuture</a>&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_madgine_object_state.html#a973f1761d25a9970ccf6f48c019927f0">mState</a></td></tr>
 <tr class="separator:a973f1761d25a9970ccf6f48c019927f0 inherit pro_attribs_struct_engine_1_1_threading_1_1_madgine_object_state"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9dc0b798d3cdd9d075bef9d161d9419c inherit pro_attribs_struct_engine_1_1_threading_1_1_madgine_object_state"><td class="memItemLeft" align="right" valign="top">const std::type_info *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_madgine_object_state.html#a9dc0b798d3cdd9d075bef9d161d9419c">mTypeInfo</a> = nullptr</td></tr>
 <tr class="separator:a9dc0b798d3cdd9d075bef9d161d9419c inherit pro_attribs_struct_engine_1_1_threading_1_1_madgine_object_state"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -442,17 +444,23 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a id="aa868120656a32d87a1411cbf9e35e23e" name="aa868120656a32d87a1411cbf9e35e23e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa868120656a32d87a1411cbf9e35e23e">&#9670;&#160;</a></span>registerResourceLocation()</h2>
+<a id="a5d6bb5d668b2686e4d711cf71a8e4909" name="a5d6bb5d668b2686e4d711cf71a8e4909"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5d6bb5d668b2686e4d711cf71a8e4909">&#9670;&#160;</a></span>registerResourceLocation()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Resources::ResourceManager::registerResourceLocation </td>
+          <td class="memname">void Engine::Resources::ResourceManager::registerResourceLocation </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="struct_engine_1_1_filesystem_1_1_path.html">Filesystem::Path</a> &amp;&#160;</td>
           <td class="paramname"><em>path</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>identifier</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -558,7 +566,7 @@ template&lt;typename Loader &gt; </div>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="struct_engine_1_1_threading_1_1_task.html">Threading::Task</a>&lt; <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> &gt; Engine::Resources::ResourceManager::init </td>
+          <td class="memname"><a class="el" href="struct_engine_1_1_threading_1_1_task.html">Threading::Task</a>&lt; bool &gt; Engine::Resources::ResourceManager::init </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -575,7 +583,7 @@ template&lt;typename Loader &gt; </div>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="struct_engine_1_1_threading_1_1_task.html">Threading::Task</a>&lt; <a class="el" href="classvoid.html">void</a> &gt; Engine::Resources::ResourceManager::finalize </td>
+          <td class="memname"><a class="el" href="struct_engine_1_1_threading_1_1_task.html">Threading::Task</a>&lt; void &gt; Engine::Resources::ResourceManager::finalize </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -610,7 +618,7 @@ template&lt;typename Loader &gt; </div>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="struct_engine_1_1_threading_1_1_task.html">Threading::Task</a>&lt; <a class="el" href="classvoid.html">void</a> &gt; Engine::Resources::ResourceManager::update </td>
+          <td class="memname"><a class="el" href="struct_engine_1_1_threading_1_1_task.html">Threading::Task</a>&lt; void &gt; Engine::Resources::ResourceManager::update </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -627,7 +635,7 @@ template&lt;typename Loader &gt; </div>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Resources::ResourceManager::waitForInit </td>
+          <td class="memname">void Engine::Resources::ResourceManager::waitForInit </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -654,17 +662,35 @@ template&lt;typename Loader &gt; </div>
 
 </div>
 </div>
-<a id="a06e7cb818963ddbdfebc756925648f3f" name="a06e7cb818963ddbdfebc756925648f3f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a06e7cb818963ddbdfebc756925648f3f">&#9670;&#160;</a></span>buildResourceList()</h2>
+<a id="ac7950a5fcb811614d582216a5b503816" name="ac7950a5fcb811614d582216a5b503816"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac7950a5fcb811614d582216a5b503816">&#9670;&#160;</a></span>buildResourceList()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::map&lt; <a class="el" href="struct_engine_1_1_filesystem_1_1_path.html">Filesystem::Path</a>, std::vector&lt; <a class="el" href="struct_engine_1_1_resources_1_1_resource_base.html">ResourceBase</a> * &gt; &gt; Engine::Resources::ResourceManager::buildResourceList </td>
+          <td class="memname">std::map&lt; std::pair&lt; std::string, <a class="el" href="struct_engine_1_1_filesystem_1_1_path.html">Filesystem::Path</a> &gt;, std::vector&lt; <a class="el" href="struct_engine_1_1_resources_1_1_resource_base.html">ResourceBase</a> * &gt; &gt; Engine::Resources::ResourceManager::buildResourceList </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae629e0d1b857d785bd86d3b72a026869" name="ae629e0d1b857d785bd86d3b72a026869"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae629e0d1b857d785bd86d3b72a026869">&#9670;&#160;</a></span>makeRelative()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::pair&lt; std::string, <a class="el" href="struct_engine_1_1_filesystem_1_1_path.html">Filesystem::Path</a> &gt; Engine::Resources::ResourceManager::makeRelative </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_filesystem_1_1_path.html">Filesystem::Path</a> &amp;&#160;</td>
+          <td class="paramname"><em>path</em></td><td>)</td>
+          <td> const</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -693,7 +719,7 @@ template&lt;typename Loader &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Dec 7 2025 08:43:31 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Wed Apr 29 2026 23:46:54 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

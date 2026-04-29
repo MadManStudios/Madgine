@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Madgine - Doxygen Documentation: Engine::Behavior::NativeBehavior&amp;lt; T, Factory, Arguments &amp;gt; Struct Template Reference &mdash; Madgine  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
 
   
@@ -213,7 +213,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.5.3</span>
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.6.0</span>
    </div>
   </td>
  </tr>
@@ -265,7 +265,7 @@ Public Types</h2></td></tr>
 <tr class="separator:a3113573befd2df1826004c60ace0c1df"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa51d5a345f0c228f39535b20e711a295"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_native_behavior.html#aa51d5a345f0c228f39535b20e711a295">parameter_argument_tuple</a> = typename parameter_arguments::template transform&lt; <a class="el" href="namespace_engine_1_1_behavior.html#a65248f3392b0fb6bed335e3780c7cbe3">get_type_t</a> &gt;::template instantiate&lt; std::tuple &gt;</td></tr>
 <tr class="separator:aa51d5a345f0c228f39535b20e711a295"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a454055b15155e662c46538224c7fb0a4"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_native_behavior.html#a454055b15155e662c46538224c7fb0a4">parameter_arguments</a> = typename argument_types::template filter&lt; <a class="el" href="namespace_engine_1_1_behavior.html#a09ec1e77bbf6002867b32a6251bf8c8e">is_parameter</a> &gt;</td></tr>
+<tr class="memitem:a454055b15155e662c46538224c7fb0a4"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_native_behavior.html#a454055b15155e662c46538224c7fb0a4">parameter_arguments</a> = typename argument_types::template filter&lt; <a class="el" href="namespace_engine_1_1_behavior.html#a720f4e0049cfc10c7c337b701cbc9abf">is_parameter</a> &gt;</td></tr>
 <tr class="separator:a454055b15155e662c46538224c7fb0a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8999a985ebd1baef6d37607f2a2bdd15"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_native_behavior.html#a8999a985ebd1baef6d37607f2a2bdd15">Sender</a> = decltype(<a class="el" href="struct_engine_1_1_behavior_1_1_native_behavior.html#a67e1cf85be78514c0d58b06b5b0a4f19">buildSender</a>(std::declval&lt; <a class="el" href="struct_engine_1_1_behavior_1_1_native_behavior.html#aa51d5a345f0c228f39535b20e711a295">parameter_argument_tuple</a> &gt;(), std::declval&lt; std::vector&lt; <a class="el" href="struct_engine_1_1_behavior_1_1_behavior.html">Behavior</a> &gt; &gt;()))</td></tr>
 <tr class="separator:a8999a985ebd1baef6d37607f2a2bdd15"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -286,10 +286,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:aef94730c45201ae77dd298721cd7ded0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4a8af2275348033e75ff495537cc4092"><td class="memItemLeft" align="right" valign="top">std::span&lt; const <a class="el" href="struct_engine_1_1_behavior_1_1_named_descriptor.html">NamedDescriptor</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_native_behavior.html#a4a8af2275348033e75ff495537cc4092">namedInputs</a> () const override</td></tr>
 <tr class="separator:a4a8af2275348033e75ff495537cc4092"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa2b1ad1ec4f9a11c67e688cd03f45c4a"><td class="memItemLeft" align="right" valign="top">virtual std::span&lt; const <a class="el" href="struct_engine_1_1_value_type_desc.html">ValueTypeDesc</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_native_behavior.html#aa2b1ad1ec4f9a11c67e688cd03f45c4a">parameterTypes</a> () const override</td></tr>
-<tr class="separator:aa2b1ad1ec4f9a11c67e688cd03f45c4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1e63b0c72a5cc7e139797c7e641b3b57"><td class="memItemLeft" align="right" valign="top">virtual std::span&lt; const <a class="el" href="struct_engine_1_1_value_type_desc.html">ValueTypeDesc</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_native_behavior.html#a1e63b0c72a5cc7e139797c7e641b3b57">resultTypes</a> () const override</td></tr>
-<tr class="separator:a1e63b0c72a5cc7e139797c7e641b3b57"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f079e85a6c110f155bf6d4f1101e140"><td class="memItemLeft" align="right" valign="top">virtual std::span&lt; const <a class="el" href="struct_engine_1_1_extended_value_type_desc.html">ExtendedValueTypeDesc</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_native_behavior.html#a6f079e85a6c110f155bf6d4f1101e140">parameterTypes</a> () const override</td></tr>
+<tr class="separator:a6f079e85a6c110f155bf6d4f1101e140"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2da3334e43aec47099e878f93b2ee06d"><td class="memItemLeft" align="right" valign="top">virtual std::span&lt; const <a class="el" href="struct_engine_1_1_extended_value_type_desc.html">ExtendedValueTypeDesc</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_native_behavior.html#a2da3334e43aec47099e878f93b2ee06d">resultTypes</a> () const override</td></tr>
+<tr class="separator:a2da3334e43aec47099e878f93b2ee06d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac525eebc77ef047d53f76a12d6545582"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_native_behavior.html#ac525eebc77ef047d53f76a12d6545582">subBehaviorCount</a> () const override</td></tr>
 <tr class="separator:ac525eebc77ef047d53f76a12d6545582"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -344,7 +344,7 @@ template&lt;typename T , auto Factory, typename... Arguments&gt; </div>
 template&lt;typename T , auto Factory, typename... Arguments&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="struct_engine_1_1_behavior_1_1_native_behavior.html">Engine::Behavior::NativeBehavior</a>&lt; T, Factory, Arguments &gt;::parameter_arguments =  typename argument_types::template filter&lt;<a class="el" href="namespace_engine_1_1_behavior.html#a09ec1e77bbf6002867b32a6251bf8c8e">is_parameter</a>&gt;</td>
+          <td class="memname">using <a class="el" href="struct_engine_1_1_behavior_1_1_native_behavior.html">Engine::Behavior::NativeBehavior</a>&lt; T, Factory, Arguments &gt;::parameter_arguments =  typename argument_types::template filter&lt;<a class="el" href="namespace_engine_1_1_behavior.html#a720f4e0049cfc10c7c337b701cbc9abf">is_parameter</a>&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -683,8 +683,8 @@ template&lt;typename T , auto Factory, typename... Arguments&gt; </div>
 
 </div>
 </div>
-<a id="aa2b1ad1ec4f9a11c67e688cd03f45c4a" name="aa2b1ad1ec4f9a11c67e688cd03f45c4a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa2b1ad1ec4f9a11c67e688cd03f45c4a">&#9670;&#160;</a></span>parameterTypes()</h2>
+<a id="a6f079e85a6c110f155bf6d4f1101e140" name="a6f079e85a6c110f155bf6d4f1101e140"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f079e85a6c110f155bf6d4f1101e140">&#9670;&#160;</a></span>parameterTypes()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -695,7 +695,7 @@ template&lt;typename T , auto Factory, typename... Arguments&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual std::span&lt; const <a class="el" href="struct_engine_1_1_value_type_desc.html">ValueTypeDesc</a> &gt; <a class="el" href="struct_engine_1_1_behavior_1_1_native_behavior.html">Engine::Behavior::NativeBehavior</a>&lt; T, Factory, Arguments &gt;::parameterTypes </td>
+          <td class="memname">virtual std::span&lt; const <a class="el" href="struct_engine_1_1_extended_value_type_desc.html">ExtendedValueTypeDesc</a> &gt; <a class="el" href="struct_engine_1_1_behavior_1_1_native_behavior.html">Engine::Behavior::NativeBehavior</a>&lt; T, Factory, Arguments &gt;::parameterTypes </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -710,8 +710,8 @@ template&lt;typename T , auto Factory, typename... Arguments&gt; </div>
 
 </div>
 </div>
-<a id="a1e63b0c72a5cc7e139797c7e641b3b57" name="a1e63b0c72a5cc7e139797c7e641b3b57"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1e63b0c72a5cc7e139797c7e641b3b57">&#9670;&#160;</a></span>resultTypes()</h2>
+<a id="a2da3334e43aec47099e878f93b2ee06d" name="a2da3334e43aec47099e878f93b2ee06d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2da3334e43aec47099e878f93b2ee06d">&#9670;&#160;</a></span>resultTypes()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -722,7 +722,7 @@ template&lt;typename T , auto Factory, typename... Arguments&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual std::span&lt; const <a class="el" href="struct_engine_1_1_value_type_desc.html">ValueTypeDesc</a> &gt; <a class="el" href="struct_engine_1_1_behavior_1_1_native_behavior.html">Engine::Behavior::NativeBehavior</a>&lt; T, Factory, Arguments &gt;::resultTypes </td>
+          <td class="memname">virtual std::span&lt; const <a class="el" href="struct_engine_1_1_extended_value_type_desc.html">ExtendedValueTypeDesc</a> &gt; <a class="el" href="struct_engine_1_1_behavior_1_1_native_behavior.html">Engine::Behavior::NativeBehavior</a>&lt; T, Factory, Arguments &gt;::resultTypes </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -815,17 +815,17 @@ template&lt;typename T , auto Factory, typename... Arguments&gt; </div>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line">= []() {</div>
 <div class="line">            <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (<a class="code hl_concept" href="conceptstd_1_1same__as.html">std::same_as&lt;parameter_arguments, type_pack&lt;&gt;</a>&gt;) {</div>
-<div class="line">                <span class="keywordflow">return</span> std::span&lt;const ValueTypeDesc&gt; {};</div>
+<div class="line">                <span class="keywordflow">return</span> std::span&lt;const ExtendedValueTypeDesc&gt; {};</div>
 <div class="line">            } <span class="keywordflow">else</span> {</div>
 <div class="line">                <span class="keywordflow">return</span> []&lt;<span class="keyword">typename</span>... P&gt;(<a class="code hl_struct" href="struct_engine_1_1type__pack.html">type_pack</a>&lt;P...&gt;) {</div>
-<div class="line">                    <span class="keywordflow">return</span> std::array&lt;<a class="code hl_struct" href="struct_engine_1_1_value_type_desc.html">ValueTypeDesc</a>, <span class="keyword">sizeof</span>...(P)&gt; {</div>
+<div class="line">                    <span class="keywordflow">return</span> std::array&lt;<a class="code hl_struct" href="struct_engine_1_1_extended_value_type_desc.html">ExtendedValueTypeDesc</a>, <span class="keyword">sizeof</span>...(P)&gt; {</div>
 <div class="line">                        toValueTypeDesc&lt;P&gt;()...</div>
 <div class="line">                    };</div>
 <div class="line">                }(<span class="keyword">typename</span> parameter_arguments::template transform&lt;get_type_t&gt; {});</div>
 <div class="line">            }</div>
 <div class="line">        }()</div>
 <div class="ttc" id="aconceptstd_1_1same__as_html"><div class="ttname"><a href="conceptstd_1_1same__as.html">std::same_as</a></div><div class="ttdef"><b>Definition:</b> concepts.h:11</div></div>
-<div class="ttc" id="astruct_engine_1_1_value_type_desc_html"><div class="ttname"><a href="struct_engine_1_1_value_type_desc.html">Engine::ValueTypeDesc</a></div><div class="ttdef"><b>Definition:</b> valuetype_desc.h:244</div></div>
+<div class="ttc" id="astruct_engine_1_1_extended_value_type_desc_html"><div class="ttname"><a href="struct_engine_1_1_extended_value_type_desc.html">Engine::ExtendedValueTypeDesc</a></div><div class="ttdef"><b>Definition:</b> valuetype_desc.h:285</div></div>
 <div class="ttc" id="astruct_engine_1_1type__pack_html"><div class="ttname"><a href="struct_engine_1_1type__pack.html">Engine::type_pack</a></div><div class="ttdef"><b>Definition:</b> genericforward.h:12</div></div>
 </div><!-- fragment -->
 </div>
@@ -853,12 +853,12 @@ template&lt;typename T , auto Factory, typename... Arguments&gt; </div>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line">= []() {</div>
 <div class="line">            <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (<a class="code hl_concept" href="conceptstd_1_1same__as.html">std::same_as&lt;typename Sender::template value_types&lt;type_pack&gt;</a>, type_pack&lt;&gt;&gt;) {</div>
-<div class="line">                <span class="keywordflow">return</span> std::span&lt;const ValueTypeDesc&gt; {};</div>
+<div class="line">                <span class="keywordflow">return</span> std::span&lt;const ExtendedValueTypeDesc&gt; {};</div>
 <div class="line">            } <span class="keywordflow">else</span> <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (<a class="code hl_concept" href="conceptstd_1_1same__as.html">std::same_as&lt;typename Sender::template value_types&lt;type_pack&gt;</a>, <a class="code hl_struct" href="struct_engine_1_1type__pack.html">type_pack&lt;ArgumentList&gt;</a>&gt;) {</div>
-<div class="line">                <span class="keywordflow">return</span> std::span&lt;const ValueTypeDesc&gt; {};</div>
+<div class="line">                <span class="keywordflow">return</span> std::span&lt;const ExtendedValueTypeDesc&gt; {};</div>
 <div class="line">            } <span class="keywordflow">else</span> {</div>
 <div class="line">                <span class="keywordflow">return</span> []&lt;<span class="keyword">typename</span>... P&gt;(type_pack&lt;P...&gt;) {</div>
-<div class="line">                    <span class="keywordflow">return</span> std::array&lt;ValueTypeDesc, <span class="keyword">sizeof</span>...(P)&gt; {</div>
+<div class="line">                    <span class="keywordflow">return</span> std::array&lt;ExtendedValueTypeDesc, <span class="keyword">sizeof</span>...(P)&gt; {</div>
 <div class="line">                        toValueTypeDesc&lt;P&gt;()...</div>
 <div class="line">                    };</div>
 <div class="line">                }(<span class="keyword">typename</span> Sender::template value_types&lt;type_pack&gt; {});</div>
@@ -916,7 +916,7 @@ template&lt;typename T , auto Factory, typename... Arguments&gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Dec 7 2025 08:43:29 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Wed Apr 29 2026 23:46:52 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

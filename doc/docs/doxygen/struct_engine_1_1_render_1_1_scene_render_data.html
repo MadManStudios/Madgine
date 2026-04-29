@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Madgine - Doxygen Documentation: Engine::Render::SceneRenderData Struct Reference &mdash; Madgine  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
 
   
@@ -213,7 +213,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.5.3</span>
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.6.0</span>
    </div>
   </td>
  </tr>
@@ -257,8 +257,14 @@ Inheritance diagram for Engine::Render::SceneRenderData:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ae4ac1daaf6f676683231682d28ccf1c5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_scene_render_data.html#ae4ac1daaf6f676683231682d28ccf1c5">SceneRenderData</a> (<a class="el" href="struct_engine_1_1_scene_1_1_scene_manager.html">Scene::SceneManager</a> &amp;scene)</td></tr>
 <tr class="separator:ae4ac1daaf6f676683231682d28ccf1c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea6543e1031325ca0abe7424025ca874"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_render_1_1_resource_block.html">ResourceBlock</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_scene_render_data.html#aea6543e1031325ca0abe7424025ca874">defaultMaterial</a> ()</td></tr>
+<tr class="separator:aea6543e1031325ca0abe7424025ca874"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a36edd5b16a148923946d04c46ad18f2e"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespace_engine_1_1_threading.html#a19fdd8ee5e722502a18f3a0bfc61873a">Threading::ImmediateTask</a>&lt; <a class="el" href="struct_engine_1_1_render_1_1_render_future.html">RenderFuture</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_scene_render_data.html#a36edd5b16a148923946d04c46ad18f2e">render</a> (<a class="el" href="struct_engine_1_1_render_1_1_render_context.html">RenderContext</a> *context) override</td></tr>
 <tr class="separator:a36edd5b16a148923946d04c46ad18f2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a38dddd8b4750323a62040a2988319776"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_scene_render_data.html#a38dddd8b4750323a62040a2988319776">setup</a> (<a class="el" href="struct_engine_1_1_render_1_1_render_context.html">RenderContext</a> *context)</td></tr>
+<tr class="separator:a38dddd8b4750323a62040a2988319776"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3df487d09077a3e68383672575f005ec"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_scene_render_data.html#a3df487d09077a3e68383672575f005ec">shutdown</a> (<a class="el" href="struct_engine_1_1_render_1_1_render_context.html">RenderContext</a> *context)</td></tr>
+<tr class="separator:a3df487d09077a3e68383672575f005ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_struct_engine_1_1_render_1_1_render_data"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_struct_engine_1_1_render_1_1_render_data')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="struct_engine_1_1_render_1_1_render_data.html">Engine::Render::RenderData</a></td></tr>
 <tr class="memitem:a263068e2788bfd71831464a93054bdc3 inherit pub_methods_struct_engine_1_1_render_1_1_render_data"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_render_1_1_render_future.html">RenderFuture</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_data.html#a263068e2788bfd71831464a93054bdc3">lastFrame</a> () const</td></tr>
 <tr class="separator:a263068e2788bfd71831464a93054bdc3 inherit pub_methods_struct_engine_1_1_render_1_1_render_data"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -318,6 +324,59 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
+<a id="a38dddd8b4750323a62040a2988319776" name="a38dddd8b4750323a62040a2988319776"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a38dddd8b4750323a62040a2988319776">&#9670;&#160;</a></span>setup()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Engine::Render::SceneRenderData::setup </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_render_1_1_render_context.html">RenderContext</a> *&#160;</td>
+          <td class="paramname"><em>context</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3df487d09077a3e68383672575f005ec" name="a3df487d09077a3e68383672575f005ec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3df487d09077a3e68383672575f005ec">&#9670;&#160;</a></span>shutdown()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Engine::Render::SceneRenderData::shutdown </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_render_1_1_render_context.html">RenderContext</a> *&#160;</td>
+          <td class="paramname"><em>context</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aea6543e1031325ca0abe7424025ca874" name="aea6543e1031325ca0abe7424025ca874"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aea6543e1031325ca0abe7424025ca874">&#9670;&#160;</a></span>defaultMaterial()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_render_1_1_resource_block.html">ResourceBlock</a> Engine::Render::SceneRenderData::defaultMaterial </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <hr/>The documentation for this struct was generated from the following files:<ul>
 <li>plugins/misc/scene/renderer/Madgine/render/<a class="el" href="scenerenderdata_8h.html">scenerenderdata.h</a></li>
 <li>plugins/misc/scene/renderer/Madgine/render/<a class="el" href="scenerenderdata_8cpp.html">scenerenderdata.cpp</a></li>
@@ -325,7 +384,7 @@ Additional Inherited Members</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Dec 7 2025 08:43:30 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Wed Apr 29 2026 23:46:54 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

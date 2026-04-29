@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Madgine - Doxygen Documentation: src/Generic/templates.h File Reference &mdash; Madgine  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=eafc0fe6" />
 
   
@@ -213,7 +213,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.5.3</span>
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.6.0</span>
    </div>
   </td>
  </tr>
@@ -303,7 +303,7 @@ Concepts</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:a1be2849dc09877d8fb424f23b8ceabee"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> b, typename T &gt; </td></tr>
+<tr class="memitem:a1be2849dc09877d8fb424f23b8ceabee"><td class="memTemplParams" colspan="2">template&lt;bool b, typename T &gt; </td></tr>
 <tr class="memitem:a1be2849dc09877d8fb424f23b8ceabee"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#a1be2849dc09877d8fb424f23b8ceabee">Engine::const_if</a> = std::conditional_t&lt; b, const T, T &gt;</td></tr>
 <tr class="separator:a1be2849dc09877d8fb424f23b8ceabee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad9cd0ed4ed941104ef491ce29a68966c"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
@@ -315,23 +315,23 @@ Typedefs</h2></td></tr>
 <tr class="memitem:a590a6c83bb0c787fc76087a4bc0bf486"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; </td></tr>
 <tr class="memitem:a590a6c83bb0c787fc76087a4bc0bf486"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#a590a6c83bb0c787fc76087a4bc0bf486">Engine::first_t</a> = typename first&lt; Args... &gt;::type</td></tr>
 <tr class="separator:a590a6c83bb0c787fc76087a4bc0bf486"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a16dabd9159ebbe731d389c1bb77263fa"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:a16dabd9159ebbe731d389c1bb77263fa"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#a16dabd9159ebbe731d389c1bb77263fa">Engine::forward_ref_t</a> = std::conditional_t&lt; std::is_lvalue_reference_v&lt; T &gt;, std::reference_wrapper&lt; std::remove_reference_t&lt; T &gt; &gt;, T &gt;</td></tr>
-<tr class="separator:a16dabd9159ebbe731d389c1bb77263fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1ea2ca5e8f96e113be72baa7a9a703ed"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a1ea2ca5e8f96e113be72baa7a9a703ed"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#a1ea2ca5e8f96e113be72baa7a9a703ed">Engine::forward_ref_t</a> = std::conditional_t&lt; std::is_lvalue_reference_v&lt; T &gt; &amp;&amp;!std::is_const_v&lt; std::remove_reference_t&lt; T &gt; &gt;, std::reference_wrapper&lt; std::remove_reference_t&lt; T &gt; &gt;, std::remove_const_t&lt; std::remove_reference_t&lt; T &gt; &gt; &gt;</td></tr>
+<tr class="separator:a1ea2ca5e8f96e113be72baa7a9a703ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab9aa3cb843e93169f7b654729ddc23a1"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:ab9aa3cb843e93169f7b654729ddc23a1"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#ab9aa3cb843e93169f7b654729ddc23a1">Engine::identity</a> = T</td></tr>
 <tr class="separator:ab9aa3cb843e93169f7b654729ddc23a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a29bf38a152ccf34bfe9c5b62165a8490"><td class="memTemplParams" colspan="2">template&lt;size_t from, size_t to&gt; </td></tr>
 <tr class="memitem:a29bf38a152ccf34bfe9c5b62165a8490"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#a29bf38a152ccf34bfe9c5b62165a8490">Engine::make_index_range</a> = typename index_range_add&lt; from, std::make_index_sequence&lt; to - from &gt; &gt;::type</td></tr>
 <tr class="separator:a29bf38a152ccf34bfe9c5b62165a8490"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aab312fc85383cef28fd740f5dd10b369"><td class="memTemplParams" colspan="2">template&lt;typename T , typename R  = Void&gt; </td></tr>
-<tr class="memitem:aab312fc85383cef28fd740f5dd10b369"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#aab312fc85383cef28fd740f5dd10b369">Engine::patch_void_t</a> = std::conditional_t&lt; <a class="el" href="conceptstd_1_1same__as.html">std::same_as</a>&lt; T, <a class="el" href="classvoid.html">void</a> &gt;, R, T &gt;</td></tr>
-<tr class="separator:aab312fc85383cef28fd740f5dd10b369"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1e434c35a04086f44e4ff0633ffea04e"><td class="memTemplParams" colspan="2">template&lt;template&lt; typename &gt; typename F, typename T , <a class="el" href="sl__support__begin_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> b&gt; </td></tr>
+<tr class="memitem:aa6923ebc493cfa55cf08a28c061c2924"><td class="memTemplParams" colspan="2">template&lt;typename T , typename R  = Void&gt; </td></tr>
+<tr class="memitem:aa6923ebc493cfa55cf08a28c061c2924"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#aa6923ebc493cfa55cf08a28c061c2924">Engine::patch_void_t</a> = std::conditional_t&lt; std::is_void_v&lt; T &gt;, R, T &gt;</td></tr>
+<tr class="separator:aa6923ebc493cfa55cf08a28c061c2924"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e434c35a04086f44e4ff0633ffea04e"><td class="memTemplParams" colspan="2">template&lt;template&lt; typename &gt; typename F, typename T , bool b&gt; </td></tr>
 <tr class="memitem:a1e434c35a04086f44e4ff0633ffea04e"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#a1e434c35a04086f44e4ff0633ffea04e">Engine::transform_if_t</a> = typename transform_if&lt; F, T, b &gt;::type</td></tr>
 <tr class="separator:a1e434c35a04086f44e4ff0633ffea04e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7ffa43baeb2eb6db45932beb44c8cc6c"><td class="memTemplParams" colspan="2">template&lt;typename... &gt; </td></tr>
-<tr class="memitem:a7ffa43baeb2eb6db45932beb44c8cc6c"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#a7ffa43baeb2eb6db45932beb44c8cc6c">Engine::void_t</a> = <a class="el" href="classvoid.html">void</a></td></tr>
+<tr class="memitem:a7ffa43baeb2eb6db45932beb44c8cc6c"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#a7ffa43baeb2eb6db45932beb44c8cc6c">Engine::void_t</a> = void</td></tr>
 <tr class="separator:a7ffa43baeb2eb6db45932beb44c8cc6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
@@ -367,7 +367,7 @@ Variables</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Dec 7 2025 08:43:27 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Wed Apr 29 2026 23:46:50 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>
