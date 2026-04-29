@@ -32,9 +32,9 @@ namespace Memory {
         return stream;
     }
 
-    Serialize::FormattedSerializeStream MemoryManager::openWrite(WritableByteBuffer buffer, Serialize::Format format)
+    Serialize::FormattedSerializeStream MemoryManager::openWrite(WritableByteBuffer &buffer, Serialize::Format format)
     {
-        return { format(), wrapStream(Stream { std::make_unique<MemoryWriteBuffer>(std::move(buffer)) }) };
+        return { format(), wrapStream(Stream { std::make_unique<MemoryWriteBuffer>(buffer) }) };
     }
 
 }

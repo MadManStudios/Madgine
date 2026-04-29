@@ -16,7 +16,7 @@ namespace Memory {
         void operator=(const MemoryManager &) = delete;
 
         Serialize::FormattedSerializeStream openRead(ByteBuffer buffer, Serialize::Format format);
-        Serialize::FormattedSerializeStream openWrite(WritableByteBuffer buffer, Serialize::Format format);
+        Serialize::FormattedSerializeStream openWrite(WritableByteBuffer &buffer, Serialize::Format format);
     };
 }
 }

@@ -5,7 +5,7 @@
 namespace Engine {
 namespace Memory {
     struct MADGINE_MEMORY_SERIALIZE_EXPORT MemoryWriteBuffer : std::basic_streambuf<char> {
-        MemoryWriteBuffer(WritableByteBuffer buffer);
+        MemoryWriteBuffer(WritableByteBuffer &buffer);
         MemoryWriteBuffer(const MemoryWriteBuffer &) = delete;
         MemoryWriteBuffer(MemoryWriteBuffer &&other) noexcept;
         virtual ~MemoryWriteBuffer();
@@ -14,7 +14,7 @@ namespace Memory {
         int_type overflow(int c = EOF) override;
 
     private:
-        WritableByteBuffer mWriteBuffer;
+        WritableByteBuffer &mWriteBuffer;
     };
 
     struct MADGINE_MEMORY_SERIALIZE_EXPORT MemoryReadBuffer : std::basic_streambuf<char> {

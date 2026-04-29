@@ -4,8 +4,8 @@
 
 namespace Engine {
 namespace Memory {
-    MemoryWriteBuffer::MemoryWriteBuffer(WritableByteBuffer buffer)
-        : mWriteBuffer(std::move(buffer))
+    MemoryWriteBuffer::MemoryWriteBuffer(WritableByteBuffer &buffer)
+        : mWriteBuffer(buffer)
     {
         setp(static_cast<char *>(buffer.mData), static_cast<char *>(buffer.mData) + buffer.mSize);
     }
@@ -21,7 +21,7 @@ namespace Memory {
 
     MemoryWriteBuffer::MemoryWriteBuffer(MemoryWriteBuffer &&other) noexcept
         : std::basic_streambuf<char>(std::move(other))
-        , mWriteBuffer(std::move(other.mWriteBuffer))
+        , mWriteBuffer(other.mWriteBuffer)
     {
     }
 
