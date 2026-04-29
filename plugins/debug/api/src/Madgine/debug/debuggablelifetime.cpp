@@ -32,16 +32,19 @@ namespace Debug {
                 child.startLifetime();
             }
         }
+
         void endLifetime() override
         {
             for (DebuggableLifetimeBase &child : children()) {
                 child.endLifetime();
             }
         }
+
         ScopePtr owner() override
         {
             return {};
         }
+
         bool running() override
         {
             for (DebuggableLifetimeBase &child : children()) {
@@ -94,6 +97,11 @@ namespace Debug {
 
     DebuggableLifetimeBase::DebuggableLifetimeBase(std::nullopt_t)
     {
+    }
+
+    DebuggableLifetimeBase *DebuggableLifetimeBase::parent() const
+    {
+        return mParent;
     }
 
     std::ranges::subrange<DebuggableLifetimeBase::iterator, DebuggableLifetimeBase::iterator> DebuggableLifetimeBase::children()

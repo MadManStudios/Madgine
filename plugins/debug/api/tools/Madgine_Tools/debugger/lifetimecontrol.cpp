@@ -159,6 +159,17 @@ namespace Tools {
         });
     }
 
+    void LifetimeControl::start()
+    {
+        Debug::getRootLifetime().endLifetime();
+        Debug::getRootLifetime().startLifetime();
+    }
+
+    void LifetimeControl::stop()
+    {
+        Debug::getRootLifetime().endLifetime();
+    }
+
     std::string_view LifetimeControl::key() const
     {
         return "Lifetime Control";

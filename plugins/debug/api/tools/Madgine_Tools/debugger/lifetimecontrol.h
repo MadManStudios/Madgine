@@ -24,6 +24,9 @@ namespace Tools {
 
         void format();
 
+        void start();
+        void stop();
+
         std::string_view key() const override;
 
         void renderTreeView();

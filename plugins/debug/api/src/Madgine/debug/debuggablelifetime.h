@@ -12,6 +12,7 @@ namespace Debug {
 
     struct MADGINE_DEBUGGER_EXPORT DebuggableLifetimeBase {
         DebuggableLifetimeBase(DebuggableLifetimeBase *parent = nullptr);
+        DebuggableLifetimeBase(std::nullopt_t);
         ~DebuggableLifetimeBase();
 
         virtual void startLifetime() = 0;
@@ -38,6 +39,7 @@ namespace Debug {
 
             DebuggableLifetimeBase *mCurrent = nullptr;
         };
+        DebuggableLifetimeBase *parent() const;
         std::ranges::subrange<iterator, iterator> children();
 
         virtual ScopePtr owner() = 0;
@@ -45,7 +47,6 @@ namespace Debug {
         const std::vector<std::reference_wrapper<ContextInfo>> &debugContexts();
 
     protected:
-        DebuggableLifetimeBase(std::nullopt_t);
 
         ContextInfo &createContext();
 
