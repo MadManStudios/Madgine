@@ -17,11 +17,6 @@ namespace Tools {
 
         SceneEditor(SceneTool &tool);
 
-        std::vector<std::unique_ptr<SceneView>> &views()
-        {
-            return mSceneViews;
-        }
-
         int hoveredAxis() const;
         Scene::Entity::Transform *const &hoveredTransform() const;
 
@@ -34,10 +29,7 @@ namespace Tools {
 
         std::string patchIcon(std::string_view label);
 
-        void createView(Render::SceneRenderData &sceneData, Render::PointShadowRenderData &pointShadowRenderData, Im3D::Im3DContext *context);
-        void clearViews();
-
-        Behavior::BehaviorHandle render(UndoStack &history);
+        Behavior::BehaviorHandle render(UndoStack &history, std::vector<std::unique_ptr<SceneView>> &views);
 
     private:
         void renderToolBar();
@@ -56,15 +48,13 @@ namespace Tools {
 
         EntityCache mEntityCache;
 
-    private:
-        std::vector<std::unique_ptr<SceneView>> mSceneViews;
+        int mRunningViewIndex = 0;
 
+    private:
         SceneTool &mTool;
 
         int mHoveredAxis = -1;
-        Scene::Entity::Transform *mHoveredTransform;
-
-        int mRunningViewIndex = 0;
+        Scene::Entity::Transform *mHoveredTransform;        
         
     };
 

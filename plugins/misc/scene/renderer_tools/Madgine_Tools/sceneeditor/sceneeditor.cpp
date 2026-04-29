@@ -36,9 +36,6 @@
 #include "imgui/imguiaddons.h"
 #include "scenetool.h"
 
-METATABLE_BEGIN(Engine::Tools::SceneEditor) // TODO proper inheritance
-METATABLE_END(Engine::Tools::SceneEditor)
-
 namespace Engine {
 namespace Tools {
 
@@ -55,7 +52,7 @@ namespace Tools {
     {
     }
 
-    Behavior::BehaviorHandle SceneEditor::render(UndoStack &history)
+    Behavior::BehaviorHandle SceneEditor::render(UndoStack &history, std::vector<std::unique_ptr<SceneView>> &views)
     {
         renderToolBar();
 
@@ -63,7 +60,7 @@ namespace Tools {
         mEntityCache.update();
         renderHierarchy(history);
         Behavior::BehaviorHandle behaviorToAdd = renderDetails(history);
-        std::erase_if(mSceneViews, [](const std::unique_ptr<SceneView> &view) { return !view->render(); });
+        std::erase_if(views, [](const std::unique_ptr<SceneView> &view) { return !view->render(); });
         im3DInteractions();
         handleInputs();
         return behaviorToAdd;
@@ -100,16 +97,6 @@ namespace Tools {
         return label;
     }
 
-    void SceneEditor::createView(Render::SceneRenderData &sceneData, Render::PointShadowRenderData &pointShadowRenderData, Im3D::Im3DContext *context)
-    {
-        mSceneViews.emplace_back(std::make_unique<SceneView>(*this, ++mRunningViewIndex, sceneData, pointShadowRenderData, context));
-    }
-
-    void SceneEditor::clearViews()
-    {
-        mSceneViews.clear();
-    }
-
     Behavior::BehaviorHandle SceneEditor::renderDetails(UndoStack &history)
     {
         Behavior::BehaviorHandle behaviorToAdd;
@@ -130,7 +117,7 @@ namespace Tools {
     {
         if (mTool.mHierarchyVisible) {
             if (mTool.beginSubPanel("Hierarchy", &mTool.mHierarchyVisible, ImGuiDir_Left)) {
-                
+
                 if (ImGui::BeginPopupCompoundContextWindow()) {
                     if (ImGui::MenuItem(IMGUI_ICON_PLUS " New Entity")) {
                         sceneMgr().container("Editor").createEntity("", {}, [this](Scene::Entity::EntityPtr ptr) { select(std::move(ptr)); });
@@ -269,34 +256,53 @@ namespace Tools {
                 ImGui::EndPopup();
             }
 
-            IndexType<uint32_t> componentToRemove;
-            for (const Scene::Entity::EntityComponentHandle &component : entity.components()) {
-                ImGui::BeginGroupPanel(patchIcon(component.name()).c_str());
-                if (ImGui::BeginTable("columns", 2, ImGuiTableFlags_Resizable)) {
-                    TracedRoot<ScopePtr> traced { history, component.getTyped() };
-                    mTool.mInspector->drawMembers(traced);
-                    ImGui::EndTable();
-                }
-
-                ImGui::ItemSize({ ImGui::GetItemRectSize().x, 0 });
-
-                ImGui::EndGroupPanel();
-
-                if (ImGui::BeginPopupCompoundContextItem()) {
-                    if (ImGui::MenuItem((IMGUI_ICON_X " Delete " + std::string { component.name() }).c_str())) {
-                        componentToRemove = component.mType;
+            if (ImGui::CollapsingHeader("Components")) {
+                IndexType<uint32_t> componentToRemove;
+                for (const Scene::Entity::EntityComponentHandle &component : entity.components()) {
+                    ImGui::BeginGroupPanel(patchIcon(component.name()).c_str());
+                    if (ImGui::BeginTable("columns", 2, ImGuiTableFlags_Resizable)) {
+                        TracedRoot<ScopePtr> traced { history, component.getTyped() };
+                        mTool.mInspector->drawMembers(traced);
+                        ImGui::EndTable();
                     }
-                    ImGui::EndPopup();
+
+                    ImGui::ItemSize({ ImGui::GetItemRectSize().x, 0 });
+
+                    ImGui::EndGroupPanel();
+
+                    if (ImGui::BeginPopupCompoundContextItem()) {
+                        if (ImGui::MenuItem((IMGUI_ICON_X " Delete " + std::string { component.name() }).c_str())) {
+                            componentToRemove = component.mType;
+                        }
+                        ImGui::EndPopup();
+                    }
+                }
+                if (componentToRemove) {
+                    entity.removeComponent(componentToRemove);
                 }
             }
-            if (componentToRemove) {
-                entity.removeComponent(componentToRemove);
+
+            if (ImGui::CollapsingHeader("Lifetime")) {
+                mTool.getTool<DebuggerView>().renderLifetime(entity.lifetime());
             }
 
-            mTool.getTool<DebuggerView>().renderLifetime(entity.lifetime());
+            if (ImGui::CollapsingHeader("Behaviors")) {
 
-            TracedRoot<Scene::Entity::Entity *> entityPtr { history, &entity };
-            mTool.getTool<BehaviorTool>().drawBehaviorList(entityPtr.trace(&Scene::Entity::Entity::behaviors));
+                ImGui::BeginHorizontal("Toggles", { ImGui::GetContentRegionAvail().x, 0.0f });
+                ImGui::Spring();
+                if (ImGui::InlineButton("N", mTool.mBehaviorFlags & AccessorFlags_Named)) {
+                    mTool.mBehaviorFlags ^= AccessorFlags_Named;
+                }
+                ImGui::SetItemTooltip("Show Named Parameters");                
+                ImGui::EndHorizontal();                
+
+                mTool.mInspector->pushFlags(mTool.mBehaviorFlags);
+
+                TracedRoot<Scene::Entity::Entity *> entityPtr { history, &entity };
+                mTool.getTool<BehaviorTool>().drawBehaviorList(entityPtr.trace(&Scene::Entity::Entity::behaviors));
+
+                mTool.mInspector->popFlags();
+            }
 
             if (Scene::Entity::Transform *t = entity.getComponent<Scene::Entity::Transform>()) {
                 constexpr Color4 colors[] = {

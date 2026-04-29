@@ -48,7 +48,7 @@ namespace Tools {
 
         mSceneData.setup(tool.mWindow.getRenderer());
 
-        createView(mSceneData, mPointShadowRenderData, mIm3DContext);
+        mSceneViews.push_back(std::make_unique<SceneView>(*this, ++mRunningViewIndex, mSceneData, mPointShadowRenderData, mIm3DContext));
     }
 
     SceneFile::~SceneFile()
@@ -92,7 +92,7 @@ namespace Tools {
                 if (ImGui::BeginMenu("Panels")) {
 
                     if (ImGui::MenuItem("Add View")) {
-                        createView(mSceneData, mPointShadowRenderData, mIm3DContext);
+                        mSceneViews.push_back(std::make_unique<SceneView>(*this, ++mRunningViewIndex, mSceneData, mPointShadowRenderData, mIm3DContext));
                     }
 
                     ImGui::MenuItem("Hierarchy", nullptr, &tool().mHierarchyVisible);
@@ -112,7 +112,7 @@ namespace Tools {
                 ImGui::EndToolBar();
             }
 
-            Behavior::BehaviorHandle behaviorToAdd = SceneEditor::render(mHistory);
+            Behavior::BehaviorHandle behaviorToAdd = SceneEditor::render(mHistory, mSceneViews);
             if (behaviorToAdd) {
                 Execution::access_binding(mSelectedEntity, [&](Scene::Entity::Entity &entity) {
                     entity.behaviors().addBehavior(std::move(behaviorToAdd));
@@ -135,6 +135,11 @@ namespace Tools {
     Scene::SceneManager &SceneFile::sceneMgr()
     {
         return mManager;
+    }
+
+    std::vector<std::unique_ptr<SceneView>> &SceneFile::views()
+    {
+        return mSceneViews;
     }
 
 }

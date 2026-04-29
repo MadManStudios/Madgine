@@ -66,7 +66,7 @@ namespace Tools {
 
         Render::SceneMainWindowComponent &main = mWindow.getWindowComponent<Render::SceneMainWindowComponent>();
 
-        createView(main.renderData(), main.pointShadowRenderData(), Im3D::GetCurrentContext());
+        mSceneViews.push_back(std::make_unique<SceneView>(*this, ++mRunningViewIndex, main.renderData(), main.pointShadowRenderData(), Im3D::GetCurrentContext()));
 
         registerSceneEditorTests(mRoot.testEngine());
 
@@ -75,7 +75,7 @@ namespace Tools {
 
     Threading::Task<void> SceneTool::finalize()
     {
-        clearViews();
+        mSceneViews.clear();
 
         mFiles.clear();
 
@@ -102,7 +102,7 @@ namespace Tools {
 
             renderMenuBar();
 
-            Behavior::BehaviorHandle behaviorToAdd = SceneEditor::render(mHistory);
+            Behavior::BehaviorHandle behaviorToAdd = SceneEditor::render(mHistory, mSceneViews);
 
             if (behaviorToAdd) {
                 mPendingBehavior.mTargetEntity = mSelectedEntity;
@@ -177,6 +177,11 @@ namespace Tools {
         return *mSceneMgr;
     }
 
+    std::vector<std::unique_ptr<SceneView>> &SceneTool::views()
+    {
+        return mSceneViews;
+    }
+
     void SceneTool::renderMenuBar()
     {
         if (ImGui::BeginMenuBar()) {
@@ -185,7 +190,7 @@ namespace Tools {
                 if (ImGui::MenuItem("Add View")) {
                     Render::SceneMainWindowComponent &main = mWindow.getWindowComponent<Render::SceneMainWindowComponent>();
 
-                    createView(main.renderData(), main.pointShadowRenderData(), Im3D::GetCurrentContext());
+                    mSceneViews.push_back(std::make_unique<SceneView>(*this, ++mRunningViewIndex, main.renderData(), main.pointShadowRenderData(), Im3D::GetCurrentContext()));
                 }
 
                 ImGui::MenuItem("Hierarchy", nullptr, &mHierarchyVisible);

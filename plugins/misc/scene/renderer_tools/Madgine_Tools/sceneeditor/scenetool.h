@@ -38,6 +38,8 @@ namespace Tools {
 
         Scene::SceneManager &sceneMgr() override;
 
+        std::vector<std::unique_ptr<SceneView>> &views();
+
         auto files()
         {
             return mFiles | std::views::transform([](std::pair<Scene::SceneLoader::Resource *const, SceneFile> &file) {
@@ -46,6 +48,8 @@ namespace Tools {
         }
 
         Dialog<> closeDialog() override;
+
+        AccessorFlags mBehaviorFlags = AccessorFlags_Default;
 
     private:
         void renderMenuBar();
@@ -77,6 +81,8 @@ namespace Tools {
         float mDefaultBoneLength = 1.0f;
         bool mShowBoneNames = true;
         bool mRender3DCursor = false;
+
+        std::vector<std::unique_ptr<SceneView>> mSceneViews;
     };
 
 }

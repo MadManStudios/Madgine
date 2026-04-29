@@ -28,6 +28,8 @@ namespace Tools {
 
         Scene::SceneManager &sceneMgr() override;
 
+        std::vector<std::unique_ptr<SceneView>> &views();
+
     protected:
         void renderEntity(Scene::Entity::EntityPtr &entity);
         void renderHierarchyEntity(const EntityCache::Node &entity);
@@ -42,6 +44,8 @@ namespace Tools {
         Render::PointShadowRenderData mPointShadowRenderData;
 
         Im3D::Im3DContext *mIm3DContext;
+
+        std::vector<std::unique_ptr<SceneView>> mSceneViews;
     };
 
 }
