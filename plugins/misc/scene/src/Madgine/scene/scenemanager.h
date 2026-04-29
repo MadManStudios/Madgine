@@ -26,6 +26,7 @@ namespace Scene {
         using Self = SceneManager;
 
         SceneManager(App::Application &app);
+        SceneManager(App::Application &app, std::nullopt_t);
         SceneManager(const SceneManager &) = delete;
         ~SceneManager();
 
@@ -90,6 +91,8 @@ namespace Scene {
         {
             return *mEntityComponentLists.at(index);
         }
+
+        std::string_view containerName(const SceneContainer *container) const;
 
     protected:
         virtual Threading::Task<bool> init() final;

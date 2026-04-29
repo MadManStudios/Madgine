@@ -130,16 +130,31 @@ namespace Tools {
     {
         if (mTool.mHierarchyVisible) {
             if (mTool.beginSubPanel("Hierarchy", &mTool.mHierarchyVisible, ImGuiDir_Left)) {
-
+                
                 if (ImGui::BeginPopupCompoundContextWindow()) {
                     if (ImGui::MenuItem(IMGUI_ICON_PLUS " New Entity")) {
-                        sceneMgr().container("Default").createEntity("", {}, [this](Scene::Entity::EntityPtr ptr) { select(std::move(ptr)); });
+                        sceneMgr().container("Editor").createEntity("", {}, [this](Scene::Entity::EntityPtr ptr) { select(std::move(ptr)); });
                     }
                     ImGui::EndPopup();
                 }
 
-                for (const EntityCache::Node &entity : mEntityCache)
-                    renderHierarchyEntity(entity, true, history);
+                bool mCurrentContainerVisible = true;
+                Scene::SceneContainer *currentContainer = nullptr;
+
+                for (const EntityCache::Node &entity : mEntityCache) {
+
+                    if (mEntityCache.sortingFlags() & EntityCacheSortingFlags::GroupByContainer) {
+                        Execution::access_binding(entity.mEntity, [&](Scene::Entity::Entity &e) {
+                            if (&e.container() != currentContainer) {
+                                currentContainer = &e.container();
+                                mCurrentContainerVisible = ImGui::CollapsingHeader(currentContainer->name().data());
+                            }
+                        });
+                    }
+
+                    if (mCurrentContainerVisible)
+                        renderHierarchyEntity(entity, true, history);
+                }
             }
             ImGui::End();
         }

@@ -26,6 +26,8 @@ namespace Scene {
         void startLifetime();
         void endLifetime();
 
+        void copy(const SceneContainer &other);
+
         Debug::DebuggableLifetime<Behavior::get_named_d> &lifetime();
 
         Entity::EntityPtr findEntity(const std::string &name);
@@ -35,6 +37,8 @@ namespace Scene {
         Execution::SignalStub<void, const EntityContainer::iterator &, int> &entitiesSignal();
 
         static std::string generateUniqueName();
+
+        std::string_view name() const;
 
         auto entities()
         {

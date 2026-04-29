@@ -34,6 +34,8 @@ namespace Tools {
 
         void open(Resources::ResourceBase *res) override;
 
+        void run(const Scene::SceneContainer &container);
+
         Scene::SceneManager &sceneMgr() override;
 
         auto files()

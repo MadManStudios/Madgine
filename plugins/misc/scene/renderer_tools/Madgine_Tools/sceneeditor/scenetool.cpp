@@ -10,6 +10,7 @@
 #include "Madgine/app/application.h"
 #include "Madgine/behavior/behaviorcollector.h"
 #include "Madgine/behavior/parametertuple.h"
+#include "Madgine/debug/debuggablelifetime.h"
 #include "Madgine/render/scenemainwindowcomponent.h"
 #include "Madgine/scene/entity/components/mesh.h"
 #include "Madgine/scene/entity/components/skeleton.h"
@@ -26,6 +27,7 @@
 
 #include "Madgine_Tools/behaviortool.h"
 #include "Madgine_Tools/debugger/debuggerview.h"
+#include "Madgine_Tools/debugger/lifetimecontrol.h"
 #include "Madgine_Tools/imgui/clientimroot.h"
 #include "Madgine_Tools/imguiicons.h"
 #include "Madgine_Tools/inspector/inspector.h"
@@ -53,6 +55,7 @@ namespace Tools {
         , SceneEditor(*this)
         , mWindow(static_cast<const ClientImRoot &>(root).window())
     {
+        mEntityCache.setSortingFlags(EntityCacheSortingFlags::GroupByContainer);
     }
 
     Threading::Task<bool> SceneTool::init()
@@ -161,6 +164,12 @@ namespace Tools {
         mFiles.try_emplace(scene, *this, scene);
 
         ImGui::SetWindowFocus(((res ? res->path().str() : "<unnamed>") + "##Scene").c_str());
+    }
+
+    void SceneTool::run(const Scene::SceneContainer &container)
+    {
+        getTool<LifetimeControl>().start();
+        mSceneMgr->container("Current").copy(container);
     }
 
     Scene::SceneManager &SceneTool::sceneMgr()

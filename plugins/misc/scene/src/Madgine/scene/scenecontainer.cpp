@@ -1,4 +1,5 @@
 #include "../scenelib.h"
+#include "Madgine/serialize/memory/memorylib.h"
 
 #include "scenecontainer.h"
 
@@ -7,6 +8,9 @@
 #include "Generic/projections.h"
 
 #include "Meta/serialize/container/noparent.h"
+#include "Meta/serialize/formats.h"
+
+#include "Madgine/serialize/memory/memorymanager.h"
 
 #include "Meta/keyvalue/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
@@ -132,6 +136,23 @@ namespace Scene {
         mLifetime.end();
     }
 
+    void SceneContainer::copy(const SceneContainer &other)
+    {
+        Memory::MemoryManager mgr { "SceneCopy" };
+
+        WritableByteBuffer buffer;
+
+        Serialize::FormattedSerializeStream out = mgr.openWrite(buffer, Serialize::Formats::xml);
+
+        Serialize::write(out, other, "Scene");
+
+        ByteBuffer readBuffer { buffer.mData, buffer.mSize };
+
+        Serialize::FormattedSerializeStream in = mgr.openRead(std::move(readBuffer), Serialize::Formats::xml);
+
+        Serialize::readState(in, *this, "Scene");
+    }
+
     Debug::DebuggableLifetime<Behavior::get_named_d> &SceneContainer::lifetime()
     {
         return mLifetime;
@@ -140,6 +161,11 @@ namespace Scene {
     Execution::SignalStub<void, const SceneContainer::EntityContainer::iterator &, int> &SceneContainer::entitiesSignal()
     {
         return mEntities.observer().signal();
+    }
+
+    std::string_view SceneContainer::name() const
+    {
+        return mManager.containerName(this);
     }
 
 }

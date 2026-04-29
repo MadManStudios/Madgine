@@ -2,6 +2,8 @@
 
 #include "scenemanager.h"
 
+#include "Generic/execution/execution.h"
+
 #include "Meta/serialize/configs/controlled.h"
 #include "Meta/serialize/configs/guard.h"
 
@@ -51,6 +53,18 @@ namespace Scene {
         : VirtualScope(app)
         , mMutex("SceneData")
         , mLifetime(&app.lifetime())
+        , mSimulationClock(mClock.now())
+        , mAnimationClock(mClock.now())
+        , mFrameClock(std::chrono::steady_clock::now())
+        , mSceneComponents(*this)
+    {
+        pause();
+    }
+
+    SceneManager::SceneManager(App::Application &app, std::nullopt_t)
+        : VirtualScope(app)
+        , mMutex("SceneData")
+        , mLifetime(std::nullopt)
         , mSimulationClock(mClock.now())
         , mAnimationClock(mClock.now())
         , mFrameClock(std::chrono::steady_clock::now())
@@ -181,6 +195,7 @@ namespace Scene {
 
     bool SceneManager::unpause()
     {
+        assert(mClock.mPauseStack > 0);
         if (--mClock.mPauseStack == 0) {
             mClock.mPauseAcc += std::chrono::steady_clock::now() - mClock.mPauseStart;
             return true;
@@ -237,7 +252,11 @@ namespace Scene {
 
     void SceneManager::startLifetime()
     {
-        mApp.lifetime().attach(mLifetime | Execution::after([this]() { unpause(); }) | Execution::finally([this]() { pause(); }) | Behavior::with_named<"Scene">(this));
+        if (mLifetime.parent()) {
+            mApp.lifetime().attach(mLifetime | Execution::after([this]() { unpause(); }) | Execution::finally([this]() { pause(); }) | Behavior::with_named<"Scene">(this));
+        } else {
+            Execution::detach(mLifetime | Behavior::with_named<"Scene">(this));
+        }
         for (ContainerData &container : kvValues(mContainers)) {
             container.mContainer.startLifetime();
         }
@@ -252,5 +271,12 @@ namespace Scene {
     {
         return mLifetime;
     }
+
+    std::string_view SceneManager::containerName(const SceneContainer *container) const
+    {
+        auto it = std::ranges::find_if(mContainers, [=](const std::pair<const std::string, ContainerData> &p) { return container == &p.second.mContainer; });
+        return it->first;
+    }
+
 }
 }

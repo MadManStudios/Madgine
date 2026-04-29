@@ -32,7 +32,7 @@ namespace Tools {
     SceneFile::SceneFile(SceneTool &tool, Scene::SceneLoader::Resource *resource)
         : SceneEditor(tool)
         , ResourceFile(tool, resource ? resource->path() : "")
-        , mManager(tool.sceneMgr().app())
+        , mManager(tool.sceneMgr().app(), std::nullopt)
         , mContainer(mManager.container("Editor"))
         , mSceneData(mManager)
         , mPointShadowRenderData(mManager, mSceneData)
@@ -104,6 +104,14 @@ namespace Tools {
                 ImGui::EndMenuBar();
             }
 
+            if (ImGui::BeginToolBar("Play")) {
+                ImGui::SetNextItemShortcut(ImGuiKey_F5);
+                if (ImGui::Button(IMGUI_ICON_PLAY)) {
+                    tool().run(mContainer);
+                }
+                ImGui::EndToolBar();
+            }
+
             Behavior::BehaviorHandle behaviorToAdd = SceneEditor::render(mHistory);
             if (behaviorToAdd) {
                 Execution::access_binding(mSelectedEntity, [&](Scene::Entity::Entity &entity) {
@@ -117,7 +125,7 @@ namespace Tools {
 
         if (!open) {
             if (mHistory.isDirty()) {
-                mEditor.root().dialogs().showGrouped("Close", closeDialog(), [this]() { mCloseRequested = true; });                
+                mEditor.root().dialogs().showGrouped("Close", closeDialog(), [this]() { mCloseRequested = true; });
             } else {
                 mCloseRequested = true;
             }

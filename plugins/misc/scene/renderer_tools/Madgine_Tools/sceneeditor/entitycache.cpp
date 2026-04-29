@@ -82,5 +82,15 @@ namespace Tools {
         return mEntityCache.end();
     }
 
+    void EntityCache::setSortingFlags(EntityCacheSortingFlags flags)
+    {
+        mSortingFlags = flags;
+    }
+
+    EntityCacheSortingFlags EntityCache::sortingFlags() const
+    {
+        return mSortingFlags;
+    }
+
 }
 }

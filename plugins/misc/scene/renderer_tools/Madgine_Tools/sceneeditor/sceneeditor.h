@@ -54,10 +54,10 @@ namespace Tools {
     protected:
         Scene::Entity::EntityPtr mSelectedEntity;
 
+        EntityCache mEntityCache;
+
     private:
         std::vector<std::unique_ptr<SceneView>> mSceneViews;
-
-        EntityCache mEntityCache;
 
         SceneTool &mTool;
 
@@ -65,6 +65,7 @@ namespace Tools {
         Scene::Entity::Transform *mHoveredTransform;
 
         int mRunningViewIndex = 0;
+        
     };
 
 }
