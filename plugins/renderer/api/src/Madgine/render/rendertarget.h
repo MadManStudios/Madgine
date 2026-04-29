@@ -58,9 +58,6 @@ namespace Render {
 
         const RenderTarget *blitSource() const;
 
-        void addPostProcessing(std::string_view processing);
-        const std::vector<std::string> &postProcessing() const;
-
     protected:
         virtual Threading::ImmediateTask<RenderFuture> render(RenderContext *context) override;
 

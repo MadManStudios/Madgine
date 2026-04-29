@@ -60,8 +60,6 @@ namespace Render {
 
         mSurface = eglCreateWindowSurface(sDisplay, config, (ANativeWindow *)w->mHandle, 0);
         assert(mSurface);
-#    else
-        addPostProcessing("gammaCorrection");
 #    endif
 
 #endif
