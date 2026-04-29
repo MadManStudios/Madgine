@@ -229,7 +229,7 @@ namespace Tools {
         ImVec2 cursor = ImGui::GetCursorPos();
         ImGui::SetCursorScreenPos(ImGui::GetMousePos());
         if (type.mType == ExtendedValueTypeEnum::VariantType) {
-            ShowLabel(type.unwrap().toString());
+            ShowLabel(type.unwrapVariant().first.toString());
         } else {
             ShowLabel(type.toString());
         }

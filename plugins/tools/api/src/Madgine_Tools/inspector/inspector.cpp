@@ -470,20 +470,32 @@ namespace Tools {
             }
             break;
         case ExtendedValueTypeEnum::VariantType: // Very hacky
+        {
+            auto [first, second] = possibleTypes.unwrapVariant();
+            if (second.mType == ValueTypeEnum::NullValue || second.mType == ValueTypeEnum::BindingValue) {
+                std::swap(first, second);
+            }
+
+            if (first.mType == ValueTypeEnum::NullValue) {
+                if (second.mType != ValueTypeEnum::ScopeValue) {
             if (ImGui::Checkbox("##Optional", &isSet)) {
                 if (isSet) {
-                    type = possibleTypes.unwrap();
+                            type = second;
                 } else {
                     type = toValueTypeDesc<std::monostate>();
                 }
                 return true;
             }
-            break;
-        /* case ExtendedValueTypeEnum::BindableType:
+                }
+            } else if (first.mType == ValueTypeEnum::BindingValue) {
+                assert(second.mSecondary.mDummy == first.mSecondary.mDummy);
             if (ImGui::LED("##Bindable", type.mType == ValueTypeEnum::BindingValue, { ImGui::GetFrameHeight(), ImGui::GetFrameHeight() })) {
-
+                }
+            } else {
+                throw 0;
             }
-            break;*/
+        } break;
+
         default:
             throw 0;
         }

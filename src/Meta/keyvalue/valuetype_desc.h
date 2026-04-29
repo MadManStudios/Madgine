@@ -143,27 +143,33 @@ struct META_EXPORT ExtendedValueTypeIndex {
         return static_cast<ValueTypeEnum>(static_cast<ExtendedValueTypeEnum>(mTypeList[level])) < ValueTypeEnum::MAX_VALUETYPE_TYPE;
     }
 
-    constexpr ExtendedValueTypeIndex unwrap()
+    constexpr std::pair<ExtendedValueTypeIndex, ExtendedValueTypeIndex> unwrapVariant()
     {
-        assert(mTypeList[0] == static_cast<ExtendedValueTypeEnum>(ValueTypeEnum::KeyValueVirtualSequenceRangeValue) || mTypeList[0] == ExtendedValueTypeEnum::VariantType);
+        assert(mTypeList[0] == ExtendedValueTypeEnum::VariantType);
 
-        ExtendedValueTypeIndex result;
-        int i = 0;
+        std::pair<ExtendedValueTypeIndex, ExtendedValueTypeIndex> result { {}, {} };
+        int i = 1;
 
-        int mark = 1;
-        do {
-            --mark;
-            result.mTypeList[i] = mTypeList[i + 1];
-            if (result.mTypeList[i] == static_cast<ExtendedValueTypeEnum>(ValueTypeEnum::KeyValueVirtualAssociativeRangeValue) || mTypeList[i] == ExtendedValueTypeEnum::VariantType) {
-                assert(mark == 0);
-                mark = 2;
-            }
-            if (result.mTypeList[i] == static_cast<ExtendedValueTypeEnum>(ValueTypeEnum::KeyValueVirtualSequenceRangeValue)) {
-                assert(mark == 0);
-                mark = 1;
-            }
-            ++i;
-        } while (mark > 0);
+        for (int j = 0; j < 2; ++j) {
+            ExtendedValueTypeIndex &current = (&result.first)[j];
+
+            int mark = 1;
+            int out = 0;
+            do {
+                --mark;
+                current.mTypeList[out] = mTypeList[i];
+                if (current.mTypeList[out] == static_cast<ExtendedValueTypeEnum>(ValueTypeEnum::KeyValueVirtualAssociativeRangeValue) || current.mTypeList[out] == ExtendedValueTypeEnum::VariantType) {
+                    assert(mark == 0);
+                    mark = 2;
+                }
+                if (current.mTypeList[out] == static_cast<ExtendedValueTypeEnum>(ValueTypeEnum::KeyValueVirtualSequenceRangeValue) || current.mTypeList[out] == static_cast<ExtendedValueTypeEnum>(ValueTypeEnum::BindingValue)) {
+                    assert(mark == 0);
+                    mark = 1;
+                }
+                ++i;
+                ++out;
+            } while (mark > 0);
+        }
 
         return result;
     }
@@ -315,9 +321,10 @@ struct META_EXPORT ExtendedValueTypeDesc {
         return mType == valueType.mType;
     }
 
-    constexpr ExtendedValueTypeDesc unwrap()
+    constexpr std::pair<ExtendedValueTypeDesc, ExtendedValueTypeDesc> unwrapVariant()
     {
-        return { mType.unwrap(), mSecondary };
+        std::pair<ExtendedValueTypeIndex, ExtendedValueTypeIndex> indices = mType.unwrapVariant();
+        return { { indices.first, mSecondary }, { indices.second, mSecondary } };
     }
 
     constexpr operator ValueTypeDesc() const
