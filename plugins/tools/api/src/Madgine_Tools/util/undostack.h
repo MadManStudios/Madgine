@@ -5,8 +5,8 @@ namespace Tools {
 
     struct UndoableOperation {
         virtual ~UndoableOperation() = default;
-        virtual void undo() = 0;
-        virtual void redo() = 0;
+        virtual KeyValueResult undo() = 0;
+        virtual KeyValueResult redo() = 0;
     };
 
     struct MADGINE_TOOLS_EXPORT UndoStack {
@@ -27,8 +27,8 @@ namespace Tools {
         UndoableOperation *getContinuousOperation() const;
         void commitContinuousOperation();
         
-        void undo();
-        void redo();
+        KeyValueResult undo();
+        KeyValueResult redo();
 
         void renderControls();
 

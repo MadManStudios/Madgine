@@ -15,8 +15,8 @@ namespace Tools {
         {
         }
 
-        void undo() override;
-        void redo() override;
+        KeyValueResult undo() override;
+        KeyValueResult redo() override;
 
     private:
         Closure<KeyValueResult(const Traced<T> &)> mTrace;

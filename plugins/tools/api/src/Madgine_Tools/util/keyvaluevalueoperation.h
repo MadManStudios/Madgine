@@ -14,16 +14,16 @@ namespace Tools {
         {
         }
 
-        void undo() override
+        KeyValueResult undo() override
         {
-            mTrace([&](const Traced<T &> &t) {
+            return mTrace([&](const Traced<T &> &t) {
                 std::swap(t.get(), mValue);
                 return std::make_pair(KeyValueResult {}, true);
             });
         }
-        void redo() override
+        KeyValueResult redo() override
         {
-            mTrace([&](const Traced<T &> &t) {
+            return mTrace([&](const Traced<T &> &t) {
                 std::swap(t.get(), mValue);
                 return std::make_pair(KeyValueResult {}, true);
             });

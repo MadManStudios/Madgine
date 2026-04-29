@@ -2,6 +2,8 @@
 
 #include "undostack.h"
 
+#include "Meta/keyvalue/keyvalueresult.h"
+
 #include "../imguiicons.h"
 #include "imgui/imgui.h"
 
@@ -48,22 +50,21 @@ namespace Tools {
         mContinuousOperation.reset();
     }
 
-    void UndoStack::undo()
+    KeyValueResult UndoStack::undo()
     {
         if (mCurrentOperation == mOperations.begin()) {
-            return;
+            return {};
         }
         --mCurrentOperation;
-        (*mCurrentOperation)->undo();
+        return (*mCurrentOperation)->undo();
     }
 
-    void UndoStack::redo()
+    KeyValueResult UndoStack::redo()
     {
         if (mCurrentOperation == mOperations.end()) {
-            return;
+            return {};
         }
-        (*mCurrentOperation)->redo();
-        ++mCurrentOperation;
+        return (*mCurrentOperation++)->redo();
     }
 
     void UndoStack::renderControls()
