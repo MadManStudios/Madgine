@@ -151,12 +151,9 @@ namespace Tools {
                                    name = trace.mFunction;
                                    details = detailsStr.c_str();
 #endif
-                                   ImGui::PushID(f.mId);
-                                   if (ImGui::TreeNode(name)) {
-                                       ImGui::TextWrapped("%s", details);
-                                       ImGui::TreePop();
-                                   }
-                                   ImGui::PopID();
+
+                                   ImGui::Text(name);
+                                   ImGui::SetItemTooltip("%s", details);
                                } },
                     desc);
 
