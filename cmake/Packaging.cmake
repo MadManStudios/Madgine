@@ -53,7 +53,7 @@ endmacro()
 
 macro(packaging)
 
-	if (EXISTS LICENSE.rst)
+	if (EXISTS ${CMAKE_SOURCE_DIR}/LICENSE.rst)
 		install(FILES LICENSE.rst DESTINATION . RENAME LICENSE)
 		set(CPACK_RESOURCE_FILE_LICENSE ${CMAKE_CURRENT_SOURCE_DIR}/LICENSE.rst)	
 	endif()
