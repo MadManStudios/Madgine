@@ -341,19 +341,24 @@ bool LED(const char *label, bool *on, const ImVec2 &size)
     return pressed;
 }
 
-bool InlineButton(const char *text, bool checked)
+bool InlineContextButton(const char *text, bool checked)
 {
+    ImGui::SameLine(ImGui::GetColumnWidth() - ImGui::GetTextLineHeight() + ImGui::GetCurrentWindow()->DC.Indent.x - ImGui::GetCurrentWindow()->DC.GroupOffset.x, 0.0f);
+
     ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(0, 0));
     ImGui::PushStyleVar(ImGuiStyleVar_FrameBorderSize, 1.0f);
     ImGui::PushStyleVar(ImGuiStyleVar_FrameRounding, 4.0f);
     if (!checked) {
-        ImGui::PushStyleColor(ImGuiCol_Button, 0);
+        ImGui::PushStyleColor(ImGuiCol_Button, ImGui::GetStyleColorVec4(ImGuiCol_WindowBg));
     }
     bool pressed = ImGui::Button(text, { ImGui::GetTextLineHeight(), ImGui::GetTextLineHeight() });
     if (!checked) {
         ImGui::PopStyleColor();
     }
     ImGui::PopStyleVar(3);
+
+    ImGui::GetCurrentWindow()->WorkRect.Max.x -= ImGui::GetTextLineHeight();
+
     return pressed;
 }
 

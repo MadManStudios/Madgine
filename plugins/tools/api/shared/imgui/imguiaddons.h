@@ -86,7 +86,7 @@ bool EnumCombo(const char *name, E *val)
 IMGUI_API bool LED(const char *label, bool on, const ImVec2 &size = ImVec2(12, 12));
 IMGUI_API bool LED(const char *label, bool *on, const ImVec2 &size = ImVec2(12, 12));
 
-IMGUI_API bool InlineButton(const char *text, bool checked = false);
+IMGUI_API bool InlineContextButton(const char *text, bool checked = false);
 
 ///////// Filepicker
 

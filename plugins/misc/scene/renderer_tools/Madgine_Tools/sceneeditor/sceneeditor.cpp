@@ -287,14 +287,11 @@ namespace Tools {
             }
 
             if (ImGui::CollapsingHeader("Behaviors")) {
-
-                ImGui::BeginHorizontal("Toggles", { ImGui::GetContentRegionAvail().x, 0.0f });
-                ImGui::Spring();
-                if (ImGui::InlineButton("N", mTool.mBehaviorFlags & AccessorFlags_Named)) {
+                ImGui::Dummy({0,0});
+                if (ImGui::InlineContextButton("N", mTool.mBehaviorFlags & AccessorFlags_Named)) {
                     mTool.mBehaviorFlags ^= AccessorFlags_Named;
                 }
                 ImGui::SetItemTooltip("Show Named Parameters");                
-                ImGui::EndHorizontal();                
 
                 mTool.mInspector->pushFlags(mTool.mBehaviorFlags);
 

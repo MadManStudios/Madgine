@@ -102,7 +102,7 @@ namespace Tools {
         if ((memberFlags & flags()) != memberFlags) {
             return false;
         }
-        
+
         auto f = [](const ScopeIterator &it) {ValueType v; it->value(v); return v; };
         const Traced<ValueType> &value = it.traceEx(
             std::move(f),
@@ -229,13 +229,6 @@ namespace Tools {
 
         ImGui::TableNextColumn();
 
-        float button_x = ImGui::GetColumnWidth() - ImGui::GetTextLineHeight();
-
-        if (hovered) {
-            ImGui::GetCurrentWindow()->WorkRect.Max.x -= ImGui::GetTextLineHeight();
-            ImGui::PushClipRect(ImGui::GetCurrentWindow()->WorkRect.Min, ImGui::GetCurrentWindow()->WorkRect.Max, false);
-        }
-
         if (hasSuggestions) {
             ImGui::PushID(id.data());
             ImGui::PushItemWidth(-1.0f - (ImGui::GetFrameHeight() * !possibleTypes.mType.isRegular()));
@@ -283,10 +276,8 @@ namespace Tools {
         }
 
         if (hovered) {
-            ImGui::PopClipRect();
-            ImGui::SameLine(button_x + ImGui::GetCurrentWindow()->DC.Indent.x - ImGui::GetCurrentWindow()->DC.GroupOffset.x, 0.0f);
-            ImGui::GetCurrentWindow()->WorkRect.Max.x += ImGui::GetTextLineHeight();
-            if (ImGui::InlineButton(IMGUI_ICON_EYE)) {
+
+            if (ImGui::InlineContextButton(IMGUI_ICON_EYE)) {
                 if (ImGui::IsKeyDown(ImGuiKey_LeftCtrl)) {
                     throw 0;
                 }
@@ -534,7 +525,8 @@ namespace Tools {
         mAccessorFlagsStack.pop_back();
     }
 
-    AccessorFlags Inspector::flags() const {
+    AccessorFlags Inspector::flags() const
+    {
         AccessorFlags flags = AccessorFlags_Default;
         if (!mAccessorFlagsStack.empty())
             flags = mAccessorFlagsStack.back();
