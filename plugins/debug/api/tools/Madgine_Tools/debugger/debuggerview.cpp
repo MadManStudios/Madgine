@@ -152,7 +152,7 @@ namespace Tools {
                                    details = detailsStr.c_str();
 #endif
 
-                                   ImGui::Text(name);
+                                   ImGui::Text("%s", name);
                                    ImGui::SetItemTooltip("%s", details);
                                } },
                     desc);

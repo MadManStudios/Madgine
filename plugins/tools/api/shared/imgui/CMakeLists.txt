@@ -14,4 +14,6 @@ target_link_libraries(ImGui PRIVATE freetype)
 
 target_include_directories(ImGui PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
+target_compile_definitions(ImGui PRIVATE STB_IMAGE_WRITE_STATIC)
+
 install_to_workspace(ImGui TARGETS ImGui)
