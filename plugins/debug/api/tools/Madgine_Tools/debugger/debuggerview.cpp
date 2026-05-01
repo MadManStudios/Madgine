@@ -366,11 +366,11 @@ namespace Tools {
         return "DebuggerView";
     }
 
-    static float sDebugStartX;
+    static std::vector<float> sDebugStartX;
 
     bool BeginDebuggablePanel(const char *name)
     {
-        sDebugStartX = ImGui::GetCursorScreenPos().x;
+        sDebugStartX.push_back(ImGui::GetCursorScreenPos().x);
         ImGui::Indent();
         return true;
     }
@@ -378,12 +378,13 @@ namespace Tools {
     void EndDebuggablePanel()
     {
         ImGui::Unindent();
+        sDebugStartX.pop_back();
     }
 
     void DrawDebugMarker(float y)
     {
         ImDrawList *draw_list = ImGui::GetWindowDrawList();
-        float x = sDebugStartX;
+        float x = sDebugStartX.back();
         draw_list->AddRectFilled({ x + 3.0f, y - 2.0f }, { x + 12.0f, y + 3.0f }, IM_COL32(255, 200, 10, 255));
         draw_list->AddTriangleFilled({ x + 12.0f, y - 5.0f }, { x + 12.0f, y + 5.0f }, { x + 17.0f, y }, IM_COL32(255, 200, 10, 255));
     }
@@ -391,7 +392,7 @@ namespace Tools {
     bool Breakpoint(float startY, float endY, bool *set)
     {
         const float radius = 7.0f;
-        float x = sDebugStartX + radius + 3.0f;
+        float x = sDebugStartX.back() + radius + 3.0f;
         float y = 0.5f * (endY + startY);
 
         bool hovered = false;

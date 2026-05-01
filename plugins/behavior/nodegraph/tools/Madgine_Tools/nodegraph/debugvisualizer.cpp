@@ -74,7 +74,12 @@ namespace Tools {
 
                         if (childLocation->mChild) {
                             ImGui::BeginVertical("child");
-                            std::ranges::move(view.visualizeDebugLocation(context, childLocation->mChild, location), std::back_inserter(newChildren));
+                            if (BeginDebuggablePanel("Node")) {
+                                ImGui::PushTextWrapPos(ImGui::GetCursorPosX() + 300.0f);
+                                std::ranges::move(view.visualizeDebugLocation(context, childLocation->mChild, location), std::back_inserter(newChildren));
+                                ImGui::PopTextWrapPos();
+                                EndDebuggablePanel();
+                            }
                             ImGui::EndVertical();
                         }
 
@@ -87,7 +92,7 @@ namespace Tools {
                 if (newChildren.empty())
                     break;
 
-                std::ranges::move(newChildren, std::back_inserter(children));   
+                std::ranges::move(newChildren, std::back_inserter(children));
             }
 
             ed::NodeId ids[256];
@@ -143,7 +148,7 @@ namespace Tools {
             ImGui::PopID();
         }
 
-        for (const TypedPtr &child : children)        
+        for (const TypedPtr &child : children)
             view.visualizeDebugLocation(context, child, {});
 
         return {};

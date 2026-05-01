@@ -12,8 +12,8 @@ struct ImDrawList;
 namespace Engine {
 namespace Tools {
 
-    bool BeginDebuggablePanel(const char *name);
-    void EndDebuggablePanel();
+    MADGINE_DEBUGGER_TOOLS_EXPORT bool BeginDebuggablePanel(const char *name);
+    MADGINE_DEBUGGER_TOOLS_EXPORT void EndDebuggablePanel();
     MADGINE_DEBUGGER_TOOLS_EXPORT void DrawDebugMarker(float y);
     MADGINE_DEBUGGER_TOOLS_EXPORT bool Breakpoint(float startY, float endY, bool *set);
 
