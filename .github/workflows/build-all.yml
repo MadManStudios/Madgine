@@ -61,7 +61,7 @@ jobs:
       fail-fast: false
 
       matrix:
-        platform: [ubuntu-latest, windows-latest] #, macos-latest] 
+        platform: [ubuntu-latest, windows-latest, macos-latest] 
 
     steps:
     - uses: actions/checkout@v4
@@ -89,18 +89,18 @@ jobs:
       working-directory: ${{ github.workspace }}/out/build/RelWithDebInfo
       run: ctest --build-config RelWithDebInfo --output-on-failure
 
-    - name: Package
-      working-directory: ${{ github.workspace }}/out/build/RelWithDebInfo
-      run: cpack
+    #- name: Package
+    #  working-directory: ${{ github.workspace }}/out/build/RelWithDebInfo
+    #  run: cpack
 
-    - name: Pushing Artifacts
-      uses: actions/upload-artifact@v4
-      with:
-        name: release-${{ matrix.platform }}
-        path: |
-            ${{ github.workspace }}/out/build/RelWithDebInfo/packages/*
-            !${{ github.workspace }}/out/build/RelWithDebInfo/packages/_CPack_Packages/
-        overwrite: true
+    #- name: Pushing Artifacts
+    #  uses: actions/upload-artifact@v4
+    #  with:
+    #    name: release-${{ matrix.platform }}
+    #    path: |
+    #        ${{ github.workspace }}/out/build/RelWithDebInfo/packages/*
+    #        !${{ github.workspace }}/out/build/RelWithDebInfo/packages/_CPack_Packages/
+    #    overwrite: true
 
     - name: Pushing Artifacts
       uses: actions/upload-artifact@v4
@@ -119,7 +119,7 @@ jobs:
       fail-fast: false
 
       matrix:
-        platform: [Linux, Android_arm64, Android_x64, Emscripten, Windows] #, macOS, iOS]
+        platform: [Linux, Android_arm64, Android_x64, Emscripten, Windows, macOS, iOS]
         exclude:          
           - platform: iOS
 
