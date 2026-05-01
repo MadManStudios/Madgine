@@ -31,7 +31,7 @@ if (ENVIRONMENT_IS_NODE) {
 
 // --pre-jses are emitted after the Module integration code, so that they can
 // refer to Module (if they choose; they can also define Module)
-// include: /tmp/tmpvcx7dowy.js
+// include: /tmp/tmpxsi634n6.js
 
   Module['expectedDataFileDownloads'] ??= 0;
   Module['expectedDataFileDownloads']++;
@@ -213,7 +213,7 @@ Module['FS_createPath']("/", "shadercache", true, true);
 
   })();
 
-// end include: /tmp/tmpvcx7dowy.js
+// end include: /tmp/tmpxsi634n6.js
 // include: /home/runner/work/Madgine/Madgine/out/build/Emscripten-RelWithDebInfo-OpenGL/_deps/madginesentry-build/js/header.js
 
 /**
@@ -4413,6 +4413,67 @@ async function createWasm() {
   var __abort_js = () =>
       abort('');
 
+  var __emscripten_system = (command) => {
+      if (ENVIRONMENT_IS_NODE) {
+        if (!command) return 1; // shell is available
+  
+        var cmdstr = UTF8ToString(command);
+        if (!cmdstr.length) return 0; // this is what glibc seems to do (shell works test?)
+  
+        var cp = require('child_process');
+        var ret = cp.spawnSync(cmdstr, [], {shell:true, stdio:'inherit'});
+  
+        var _W_EXITCODE = (ret, sig) => ((ret) << 8 | (sig));
+  
+        // this really only can happen if process is killed by signal
+        if (ret.status === null) {
+          // sadly node doesn't expose such function
+          var signalToNumber = (sig) => {
+            // implement only the most common ones, and fallback to SIGINT
+            switch (sig) {
+              case 'SIGHUP': return 1;
+              case 'SIGQUIT': return 3;
+              case 'SIGFPE': return 8;
+              case 'SIGKILL': return 9;
+              case 'SIGALRM': return 14;
+              case 'SIGTERM': return 15;
+              default: return 2;
+            }
+          }
+          return _W_EXITCODE(0, signalToNumber(ret.signal));
+        }
+  
+        return _W_EXITCODE(ret.status, 0);
+      }
+      // int system(const char *command);
+      // http://pubs.opengroup.org/onlinepubs/000095399/functions/system.html
+      // Can't call external programs.
+      if (!command) return 0; // no shell available
+      return -52;
+    };
+
+  var INT53_MAX = 9007199254740992;
+  
+  var INT53_MIN = -9007199254740992;
+  var bigintToI53Checked = (num) => (num < INT53_MIN || num > INT53_MAX) ? NaN : Number(num);
+  function __gmtime_js(time, tmPtr) {
+    time = bigintToI53Checked(time);
+  
+  
+      var date = new Date(time * 1000);
+      HEAP32[((tmPtr)>>2)] = date.getUTCSeconds();
+      HEAP32[(((tmPtr)+(4))>>2)] = date.getUTCMinutes();
+      HEAP32[(((tmPtr)+(8))>>2)] = date.getUTCHours();
+      HEAP32[(((tmPtr)+(12))>>2)] = date.getUTCDate();
+      HEAP32[(((tmPtr)+(16))>>2)] = date.getUTCMonth();
+      HEAP32[(((tmPtr)+(20))>>2)] = date.getUTCFullYear()-1900;
+      HEAP32[(((tmPtr)+(24))>>2)] = date.getUTCDay();
+      var start = Date.UTC(date.getUTCFullYear(), 0, 1, 0, 0, 0, 0);
+      var yday = ((date.getTime() - start) / (1000 * 60 * 60 * 24))|0;
+      HEAP32[(((tmPtr)+(28))>>2)] = yday;
+    ;
+  }
+
   var isLeapYear = (year) => year%4 === 0 && (year%100 !== 0 || year%400 === 0);
   
   var MONTH_DAYS_LEAP_CUMULATIVE = [0,31,60,91,121,152,182,213,244,274,305,335];
@@ -4426,10 +4487,6 @@ async function createWasm() {
       return yday;
     };
   
-  var INT53_MAX = 9007199254740992;
-  
-  var INT53_MIN = -9007199254740992;
-  var bigintToI53Checked = (num) => (num < INT53_MIN || num > INT53_MAX) ? NaN : Number(num);
   function __localtime_js(time, tmPtr) {
     time = bigintToI53Checked(time);
   
@@ -6212,6 +6269,7 @@ async function createWasm() {
       MainLoop.func = null;
     };
 
+
   function _emscripten_fetch_free(id) {
     if (Fetch.xhrs.has(id)) {
       var xhr = Fetch.xhrs.get(id);
@@ -6250,6 +6308,7 @@ async function createWasm() {
   
       return 0;
     };
+
 
   var _emscripten_is_main_browser_thread = () =>
       !ENVIRONMENT_IS_WORKER;
@@ -8360,22 +8419,22 @@ if (Module['wasmBinary']) wasmBinary = Module['wasmBinary'];
 // end include: postlibrary.js
 
 var ASM_CONSTS = {
-  1405912: ($0) => { Module.sentry_capture_event(UTF8ToString($0)) },  
- 1405958: () => { FS.syncfs( false, function(err) { assert(!err); }); },  
- 1406010: () => { FS.mkdir('/cwd'); FS.mount(IDBFS, {}, '/cwd'); FS.syncfs( true, function(err) { assert(!err); _setupDoneImpl(); }); },  
- 1406126: () => { if (document.activeElement == Module.canvas) { Module.input.focus(); } },  
- 1406197: () => { if (document.activeElement == Module.input) { Module.canvas.focus(); } },  
- 1406268: () => { document.body.style.cursor = 'default'; },  
- 1406308: () => { document.body.style.cursor = 'text'; },  
- 1406345: () => { document.body.style.cursor = 'move'; },  
- 1406382: () => { document.body.style.cursor = 'ns-resize'; },  
- 1406424: () => { document.body.style.cursor = 'ew-resize'; },  
- 1406466: () => { document.body.style.cursor = 'nesw-resize'; },  
- 1406510: () => { document.body.style.cursor = 'nwse-resize'; },  
- 1406554: () => { document.body.style.cursor = 'grab'; },  
- 1406591: () => { document.body.style.cursor = 'not-allowed'; },  
- 1406635: () => { Module.input.focus(); },  
- 1406657: () => { Module.canvas.focus(); }
+  1433124: ($0) => { Module.sentry_capture_event(UTF8ToString($0)) },  
+ 1433170: () => { FS.syncfs( false, function(err) { assert(!err); }); },  
+ 1433222: () => { FS.mkdir('/cwd'); FS.mount(IDBFS, {}, '/cwd'); FS.syncfs( true, function(err) { assert(!err); _setupDoneImpl(); }); },  
+ 1433338: () => { if (document.activeElement == Module.canvas) { Module.input.focus(); } },  
+ 1433409: () => { if (document.activeElement == Module.input) { Module.canvas.focus(); } },  
+ 1433480: () => { document.body.style.cursor = 'default'; },  
+ 1433520: () => { document.body.style.cursor = 'text'; },  
+ 1433557: () => { document.body.style.cursor = 'move'; },  
+ 1433594: () => { document.body.style.cursor = 'ns-resize'; },  
+ 1433636: () => { document.body.style.cursor = 'ew-resize'; },  
+ 1433678: () => { document.body.style.cursor = 'nesw-resize'; },  
+ 1433722: () => { document.body.style.cursor = 'nwse-resize'; },  
+ 1433766: () => { document.body.style.cursor = 'grab'; },  
+ 1433803: () => { document.body.style.cursor = 'not-allowed'; },  
+ 1433847: () => { Module.input.focus(); },  
+ 1433869: () => { Module.canvas.focus(); }
 };
 var wasmImports = {
   /** @export */
@@ -8414,6 +8473,10 @@ var wasmImports = {
   __throw_exception_with_stack_trace: ___throw_exception_with_stack_trace,
   /** @export */
   _abort_js: __abort_js,
+  /** @export */
+  _emscripten_system: __emscripten_system,
+  /** @export */
+  _gmtime_js: __gmtime_js,
   /** @export */
   _localtime_js: __localtime_js,
   /** @export */
@@ -8459,9 +8522,13 @@ var wasmImports = {
   /** @export */
   emscripten_cancel_main_loop: _emscripten_cancel_main_loop,
   /** @export */
+  emscripten_date_now: _emscripten_date_now,
+  /** @export */
   emscripten_fetch_free: _emscripten_fetch_free,
   /** @export */
   emscripten_get_element_css_size: _emscripten_get_element_css_size,
+  /** @export */
+  emscripten_get_now: _emscripten_get_now,
   /** @export */
   emscripten_is_main_browser_thread: _emscripten_is_main_browser_thread,
   /** @export */
