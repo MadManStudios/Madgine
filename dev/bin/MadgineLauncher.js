@@ -46,7 +46,7 @@ if (ENVIRONMENT_IS_NODE) {
 
 // --pre-jses are emitted after the Module integration code, so that they can
 // refer to Module (if they choose; they can also define Module)
-// include: /tmp/tmpcuynczzu.js
+// include: /tmp/tmp_d5uqudk.js
 Module["expectedDataFileDownloads"] ??= 0;
 
 Module["expectedDataFileDownloads"]++;
@@ -272,97 +272,105 @@ Module["expectedDataFileDownloads"]++;
     }, {
       "filename": "/data/icons.ttf",
       "start": 17640369,
-      "end": 17644569
+      "end": 17644853
     }, {
       "filename": "/data/ingame.widget",
-      "start": 17644569,
-      "end": 17647501
+      "start": 17644853,
+      "end": 17647785
     }, {
       "filename": "/data/mage.fbx",
-      "start": 17647501,
-      "end": 17750297
+      "start": 17647785,
+      "end": 17750581
     }, {
       "filename": "/data/mage_animated.fbx",
-      "start": 17750297,
-      "end": 20501717
+      "start": 17750581,
+      "end": 20502001
     }, {
       "filename": "/data/mage_attack.fbx",
-      "start": 20501717,
-      "end": 20748709
+      "start": 20502001,
+      "end": 20748993
     }, {
       "filename": "/data/mainmenu.widget",
-      "start": 20748709,
-      "end": 20751934
+      "start": 20748993,
+      "end": 20752218
+    }, {
+      "filename": "/data/test.scene",
+      "start": 20752218,
+      "end": 20758035
+    }, {
+      "filename": "/data/widgetstestgraph.ngp",
+      "start": 20758035,
+      "end": 20768696
     }, {
       "filename": "/shadercache/bloom_PS.glsl_es",
-      "start": 20751934,
-      "end": 20752764
+      "start": 20768696,
+      "end": 20769526
     }, {
       "filename": "/shadercache/bloom_VS.glsl_es",
-      "start": 20752764,
-      "end": 20753070
+      "start": 20769526,
+      "end": 20769832
     }, {
       "filename": "/shadercache/blur_PS.glsl_es",
-      "start": 20753070,
-      "end": 20754642
+      "start": 20769832,
+      "end": 20771404
     }, {
       "filename": "/shadercache/blur_VS.glsl_es",
-      "start": 20754642,
-      "end": 20754948
+      "start": 20771404,
+      "end": 20771710
     }, {
       "filename": "/shadercache/grid_PS.glsl_es",
-      "start": 20754948,
-      "end": 20756118
+      "start": 20771710,
+      "end": 20772880
     }, {
       "filename": "/shadercache/grid_VS.glsl_es",
-      "start": 20756118,
-      "end": 20756716
+      "start": 20772880,
+      "end": 20773478
     }, {
       "filename": "/shadercache/im3d_PS.glsl_es",
-      "start": 20756716,
-      "end": 20757779
+      "start": 20773478,
+      "end": 20774541
     }, {
       "filename": "/shadercache/im3d_VS.glsl_es",
-      "start": 20757779,
-      "end": 20758791
+      "start": 20774541,
+      "end": 20775553
     }, {
       "filename": "/shadercache/imgui_PS.glsl_es",
-      "start": 20758791,
-      "end": 20759228
+      "start": 20775553,
+      "end": 20775990
     }, {
       "filename": "/shadercache/imgui_VS.glsl_es",
-      "start": 20759228,
-      "end": 20759915
+      "start": 20775990,
+      "end": 20776677
     }, {
       "filename": "/shadercache/pointshadow_PS.glsl_es",
-      "start": 20759915,
-      "end": 20760202
+      "start": 20776677,
+      "end": 20776964
     }, {
       "filename": "/shadercache/pointshadow_VS.glsl_es",
-      "start": 20760202,
-      "end": 20761309
+      "start": 20776964,
+      "end": 20778071
     }, {
       "filename": "/shadercache/scene_VS.glsl_es",
-      "start": 20761309,
-      "end": 20763128
+      "start": 20778071,
+      "end": 20779890
     }, {
       "filename": "/shadercache/scene_lighting.glsl_es",
-      "start": 20763128,
-      "end": 20769421
+      "start": 20779890,
+      "end": 20786183
     }, {
       "filename": "/shadercache/widgets_PS.glsl_es",
-      "start": 20769421,
-      "end": 20770705
+      "start": 20786183,
+      "end": 20787467
     }, {
       "filename": "/shadercache/widgets_VS.glsl_es",
-      "start": 20770705,
-      "end": 20771623
+      "start": 20787467,
+      "end": 20788385
     } ],
-    "remote_package_size": 20771623
+    "remote_package_size": 20788385
   });
 })();
 
-// end include: /tmp/tmpcuynczzu.js
+// end include: /tmp/tmp_d5uqudk.js
 // include: /home/runner/work/Madgine/Madgine/out/build/Emscripten-RelWithDebInfo-OpenGL/_deps/madginesentry-build/js/header.js
 /**
  * Minified by jsDelivr using Terser v5.39.0.
@@ -9252,15 +9260,15 @@ Module["decrementExceptionRefcount"] = decrementExceptionRefcount;
 var proxiedFunctionTable = [ _proc_exit, exitOnMainThread, pthreadCreateProxied, ___syscall_chdir, ___syscall_faccessat, ___syscall_fcntl64, ___syscall_fstat64, ___syscall_getcwd, ___syscall_getdents64, ___syscall_ioctl, ___syscall_lstat64, ___syscall_mkdirat, ___syscall_newfstatat, ___syscall_openat, ___syscall_readlinkat, ___syscall_rmdir, ___syscall_stat64, ___syscall_unlinkat, __mmap_js, __munmap_js, _eglChooseConfig, _eglCreateContext, _eglCreateWindowSurface, _eglDestroyContext, _eglDestroySurface, _eglGetConfigAttrib, _eglGetConfigs, _eglGetDisplay, _eglGetError, _eglInitialize, _eglMakeCurrent, _eglQuerySurface, _eglSwapBuffers, _eglTerminate, _emscripten_get_element_css_size, setCanvasElementSizeMainThread, _emscripten_set_keydown_callback_on_thread, _emscripten_set_keyup_callback_on_thread, _emscripten_set_mousedown_callback_on_thread, _emscripten_set_mousemove_callback_on_thread, _emscripten_set_mouseup_callback_on_thread, _emscripten_set_resize_callback_on_thread, _emscripten_set_touchend_callback_on_thread, _emscripten_set_touchmove_callback_on_thread, _emscripten_set_touchstart_callback_on_thread, _emscripten_set_wheel_callback_on_thread, _environ_get, _environ_sizes_get, _fd_close, _fd_read, _fd_seek, _fd_write ];
 
 var ASM_CONSTS = {
-  1433640: $0 => {
+  1438568: $0 => {
     Module.sentry_capture_event(UTF8ToString($0));
   },
-  1433686: () => {
+  1438614: () => {
     FS.syncfs(false, function(err) {
       assert(!err);
     });
   },
-  1433738: () => {
+  1438666: () => {
     FS.mkdir("/cwd");
     FS.mount(IDBFS, {}, "/cwd");
     FS.syncfs(true, function(err) {
@@ -9268,47 +9276,47 @@ var ASM_CONSTS = {
       _setupDoneImpl();
     });
   },
-  1433854: () => {
+  1438782: () => {
     if (document.activeElement == Module.canvas) {
       Module.input.focus();
     }
   },
-  1433925: () => {
+  1438853: () => {
     if (document.activeElement == Module.input) {
       Module.canvas.focus();
     }
   },
-  1433996: () => {
+  1438924: () => {
     document.body.style.cursor = "default";
   },
-  1434036: () => {
+  1438964: () => {
     document.body.style.cursor = "text";
   },
-  1434073: () => {
+  1439001: () => {
     document.body.style.cursor = "move";
   },
-  1434110: () => {
+  1439038: () => {
     document.body.style.cursor = "ns-resize";
   },
-  1434152: () => {
+  1439080: () => {
     document.body.style.cursor = "ew-resize";
   },
-  1434194: () => {
+  1439122: () => {
     document.body.style.cursor = "nesw-resize";
   },
-  1434238: () => {
+  1439166: () => {
     document.body.style.cursor = "nwse-resize";
   },
-  1434282: () => {
+  1439210: () => {
     document.body.style.cursor = "grab";
   },
-  1434319: () => {
+  1439247: () => {
     document.body.style.cursor = "not-allowed";
   },
-  1434363: () => {
+  1439291: () => {
     Module.input.focus();
   },
-  1434385: () => {
+  1439313: () => {
     Module.canvas.focus();
   }
 };
