@@ -5,6 +5,7 @@
 #include "../pipable.h"
 #include "concepts.h"
 #include "stop_source.h"
+#include "stoppable.h"
 #include "storage.h"
 
 #undef ERROR
@@ -143,7 +144,7 @@ namespace Execution {
                     auto f = &T::operator();
                     fPtr = *(void **)&f;
                 }
-                visitor(State::FunctionPtr { state, fPtr, typeid(T).name() });
+                //visitor(State::FunctionPtr { state, fPtr, typeid(T).name() });
             }
         };
 
@@ -727,7 +728,7 @@ namespace Execution {
 
             friend auto tag_invoke(visit_state_t, state *state, auto &&visitor)
             {
-                visitor(State::BeginBlock { "Repeat" });
+                visitor(State::BeginBlock { "\xef\x84\x8f" " Repeat" });
                 visit_state(state ? &state->mState : nullptr, std::forward<decltype(visitor)>(visitor));
                 visitor(State::EndBlock {});
             }
@@ -1165,11 +1166,11 @@ namespace Execution {
             using inner_rec = receiver<inner_tag<I>, Rec, Sender...>;
 
             template <size_t... Is>
-            static auto stateTupleDeducer(std::index_sequence<Is...>) -> std::tuple<connect_result_t<Sender, inner_rec<Is>>...> {
-
+            static auto stateTupleDeducer(std::index_sequence<Is...>) -> std::tuple<connect_result_t<Sender, inner_rec<Is>>...>
+            {
             }
 
-            using StateTuple = decltype(stateTupleDeducer(std::index_sequence_for<Sender...>{}));
+            using StateTuple = decltype(stateTupleDeducer(std::index_sequence_for<Sender...> {}));
 
             template <size_t... Is>
             auto stateTupleHelper(std::tuple<Sender...> &&senders, std::index_sequence<Is...>) -> StateTuple
@@ -1178,11 +1179,10 @@ namespace Execution {
                     DelayedConstruct<connect_result_t<Sender, inner_rec<Is>>> { [&]() { return connect(std::forward<Sender>(std::get<Is>(senders)), inner_rec<Is> { this }); } }...
                 };
             }
-            
 
             state(Rec &&rec, std::tuple<Sender...> &&senders)
                 : base_state<Rec> { std::forward<Rec>(rec) }
-                , mStates(stateTupleHelper(std::move(senders), std::index_sequence_for<Sender...>{}))
+                , mStates(stateTupleHelper(std::move(senders), std::index_sequence_for<Sender...> {}))
             {
             }
 
@@ -1227,7 +1227,7 @@ namespace Execution {
             }
 
             friend auto tag_invoke(visit_state_t, state *state, auto &&visitor)
-            {                
+            {
                 [&]<size_t... I>(std::index_sequence<I...>) {
                     ([&]() {
                         if (state && state->mCurrent == I) {
@@ -1725,7 +1725,7 @@ namespace Execution {
                 return f(rec.mState->mRec, std::forward<Args>(args)...);
             }
 
-            friend auto tag_invoke(get_stop_token_t, receiver &rec)
+            friend StopToken tag_invoke(get_stop_token_t, receiver &rec)
             {
                 return rec.mState->mStopSource.get_token();
             }
@@ -1758,7 +1758,7 @@ namespace Execution {
                 return f(rec.mState->mRec, std::forward<Args>(args)...);
             }
 
-            friend auto tag_invoke(get_stop_token_t, stop_receiver &rec)
+            friend StopToken tag_invoke(get_stop_token_t, stop_receiver &rec)
             {
                 return rec.mState->mStopSource.get_token();
             }
@@ -1769,13 +1769,13 @@ namespace Execution {
         template <typename Rec, typename Inner, typename Trigger>
         struct state {
 
-            using inner_state = connect_result_t<Inner, receiver<Rec, Inner, Trigger>>;
-            using stop_state = connect_result_t<Trigger, stop_receiver<Rec, Inner, Trigger>>;
+            using inner_state = connect_result_t<stoppable_t::sender<Inner>, receiver<Rec, Inner, Trigger>>;
+            using stop_state = connect_result_t<stoppable_t::sender<Trigger>, stop_receiver<Rec, Inner, Trigger>>;
 
             state(Rec &&rec, Inner &&sender, Trigger &&trigger)
                 : mRec(std::forward<Rec>(rec))
-                , mInnerState(connect(std::forward<Inner>(sender), receiver<Rec, Inner, Trigger> { this }))
-                , mStopState(connect(std::forward<Trigger>(trigger), stop_receiver<Rec, Inner, Trigger> { this }))
+                , mInnerState(connect(std::forward<Inner>(sender) | stoppable, receiver<Rec, Inner, Trigger> { this }))
+                , mStopState(connect(std::forward<Trigger>(trigger) | stoppable, stop_receiver<Rec, Inner, Trigger> { this }))
             {
             }
 

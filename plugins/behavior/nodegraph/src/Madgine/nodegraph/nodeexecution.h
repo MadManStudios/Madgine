@@ -128,7 +128,8 @@ namespace Behavior {
 
             void stop()
             {
-                throw 0;
+                const auto &handle = Execution::get_context(this->mRec);
+                handle.mInterpreter.stop();
             }
 
             friend void tag_invoke(Execution::visit_state_t visit_state, NodeState *s, auto &&visitor)
@@ -211,7 +212,8 @@ namespace Behavior {
 
                 friend void tag_invoke(Execution::visit_state_t, state *s, auto &&visitor)
                 {
-                    visitor(Execution::State::Text { "NodeReader" });
+                    //Not helpful to show
+                    //visitor(Execution::State::Text { "NodeReader" });
                 }
 
                 size_t mBaseIndex;
@@ -294,6 +296,7 @@ namespace Behavior {
                 }
 
                 void start() {
+                    mPassed = false;
                     mInnerState.start();
                 }
 

@@ -5,14 +5,16 @@
 namespace Engine {
 namespace Execution {
 
-    template <typename R, typename... _Ty>
-    struct Signal : SignalStub<R, _Ty...> {
+    template <typename R, typename... Ty>
+    struct Signal : SignalStub<R, Ty...> {
 
-        void emit(_Ty... args)
+        using SignalStub<R, Ty...>::SignalStub;
+
+        void emit(Ty... args)
         {
-            ConnectionStack<Connection<SignalStub<R, _Ty...>>> stack = std::move(this->mStack);
+            ConnectionStack<Connection<SignalStub<R, Ty...>>> stack = std::move(this->mStack);
 
-            while (Connection<SignalStub<R, _Ty...>> *current = stack.pop()) {
+            while (Connection<SignalStub<R, Ty...>> *current = stack.pop()) {
                 current->set_value(args...);
             }
         }

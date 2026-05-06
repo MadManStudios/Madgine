@@ -103,6 +103,10 @@ namespace Execution {
                     mRec.set_error(std::forward<R>(result)...);
             }
 
+            friend void tag_invoke(visit_state_t, state* state, auto&& visitor) {
+                visit_state(state ? &state->mState : nullptr, visitor);
+            }
+
         protected:
             bool finish()
             {

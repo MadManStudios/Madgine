@@ -11,6 +11,11 @@ namespace Execution {
     struct SignalStub : ConnectionSender<SignalStub<R, Ty...>, R, Ty...> {
         SignalStub() = default;
 
+        SignalStub(std::string name)
+            : mName(std::move(name))
+        {
+        }
+
         SignalStub(const SignalStub<R, Ty...> &other)
         {
         }
@@ -43,8 +48,15 @@ namespace Execution {
             return mStack.extract(con);
         }
 
+        const std::string &name() const
+        {
+            return mName;
+        }
+
     protected:
         ConnectionStack<Connection<SignalStub<R, Ty...>>> mStack;
+
+        std::string mName;
     };
 
 }

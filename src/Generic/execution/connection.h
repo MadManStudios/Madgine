@@ -32,7 +32,14 @@ namespace Execution {
             if (con) {
                 visitor(State::Marker {});
             }
-            visitor(State::Text { typeid(Stub).name() });
+            std::string name;
+            if constexpr (requires { con->mStub.name(); }) {
+                name = con->mStub.name();
+            }
+            if (name.empty()) {
+                name = typeid(Stub).name();
+            }
+            visitor(State::Text { std::move(name) });
         }
 
     protected:

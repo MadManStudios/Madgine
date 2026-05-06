@@ -44,6 +44,17 @@ namespace Widgets {
         , mParent(parent)
         , mAcceptsPointerEvents(config.acceptsPointerEvents || !parent)
         , mAllowsDragging(config.allowsDragging)
+        , mPointerClickSignal("\xef\x84\x89" " Click")
+        , mPointerMoveSignal("\xef\x84\x89" " Pointer Move")
+        , mPointerEnterSignal("\xef\x84\x89" " Pointer Enter")
+        , mPointerLeaveSignal("\xef\x84\x89" " Pointer Leave")
+        , mDragBeginSignal("\xef\x84\x89" " Drag Begin")
+        , mDragMoveSignal("\xef\x84\x89" " Drag Move")
+        , mDragAbortSignal("\xef\x84\x89" " Drag Abort")
+        , mDragEndSignal("\xef\x84\x89" " Drag End")
+        , mAxisEventSignal("\xef\x84\x89" " Axis Event")
+        , mKeyPressSignal("\xef\x84\x89" " Key Event")
+        , mKeyReleaseSignal("\xef\x84\x89" " Key Release")
     {
         mManager.registerWidget(this);
 

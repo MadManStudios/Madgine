@@ -306,7 +306,7 @@ namespace Tools {
             LOG_ERROR("Reading icons.ttf failed!");
         }
 
-        io.FontGlobalScale = 1.0f / Window::platformCapabilities.mScalingFactor;
+        //io.FontGlobalScale = 1.0f / Window::platformCapabilities.mScalingFactor;
 
         addDependency(&mRenderData);
 

@@ -14,6 +14,7 @@ using KeyValueReceiver = Execution::VirtualReceiverBaseEx<type_pack<KeyValueErro
 struct KeyValueSenderStateBase {
     virtual void connect(KeyValueReceiver &receiver) = 0;
     virtual void start() = 0;
+    virtual void stop() = 0;
 
     virtual void visitState(CallableView<void(const Execution::StateDescriptor &)> visitor) = 0;
 };
@@ -37,6 +38,11 @@ struct KeyValueSenderState : KeyValueSenderStateBase {
     void start() override
     {
         std::get<State>(mState).start();
+    }
+
+    void stop() override
+    {
+        std::get<State>(mState).stop();
     }
 
     void visitState(CallableView<void(const Execution::StateDescriptor &)> visitor) override
@@ -80,6 +86,11 @@ struct KeyValueSender {
         void start()
         {
             mState->start();
+        }
+
+        void stop()
+        {
+            mState->stop();
         }
 
         friend void tag_invoke(Execution::visit_state_t, state *s, auto &&visitor)
