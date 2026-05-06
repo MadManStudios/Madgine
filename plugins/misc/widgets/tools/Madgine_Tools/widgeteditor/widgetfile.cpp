@@ -22,6 +22,7 @@
 #include "Madgine_Tools/inspector/inspector.h"
 #include "Madgine_Tools/renderer/imroot.h"
 #include "Madgine_Tools/util/trace_imgui.h"
+#include "imgui/imgui_internal.h"
 #include "imgui/imguiaddons.h"
 #include "widgeteditor.h"
 
@@ -238,7 +239,7 @@ namespace Tools {
                 ImVec2 mousePos = ImGui::GetMousePos();
                 ImVec2 windowPos = mousePos - ImGui::GetWindowPos();
 
-                Vector2i vSize { static_cast<int>(size.x), static_cast<int>(size.y) };
+                Vector2i vSize { static_cast<int>(size.x * ImGui::GetIO().DisplayFramebufferScale.x), static_cast<int>(size.y * ImGui::GetIO().DisplayFramebufferScale.y) };
 
                 mWidgetManager.injectPointerMove({ { static_cast<int>(windowPos.x), static_cast<int>(windowPos.y) }, { static_cast<int>(mousePos.x), static_cast<int>(mousePos.y) }, { 0, 0 } });
 
