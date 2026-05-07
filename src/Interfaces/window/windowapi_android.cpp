@@ -9,6 +9,7 @@
 #    include "Generic/systemvariable.h"
 
 #    include "../helpers/android_jni.h"
+#    include "../helpers/android_utility.h"
 #    include "../input/inputevents.h"
 #    include "../log/logmethods.h"
 #    include "windowapi.h"
@@ -47,6 +48,10 @@ namespace Window {
                 static_cast<int>(AMotionEvent_getX(event, pointer_index)),
                 static_cast<int>(AMotionEvent_getY(event, pointer_index))
             };
+            int64_t nanoseconds = AMotionEvent_getEventTime(event) - mTouchStartTimestamp;
+            bool longEvent = nanoseconds > sTouchRightclickThreshold;
+            Input::MouseButton::MouseButton button = longEvent && mPendingStart ? Input::MouseButton::RIGHT_BUTTON : Input::MouseButton::LEFT_BUTTON;
+            int32_t count = AMotionEvent_getPointerCount(event);
 
             bool handled = true;
 
@@ -54,39 +59,79 @@ namespace Window {
             case AMOTION_EVENT_ACTION_DOWN:
                 mTouchStartPosition = position;
                 mTouchStartTimestamp = AMotionEvent_getEventTime(event);
-                mPendingTouch = true;
+                mPendingStart = true;
+                mPressCancelled = false;
+                mPinching = false;
+                mRumbleTriggered = false;
                 onEvent(Input::PointerMoveEvent { position, position, position - mLastKnownMousePos });
                 break;
             case AMOTION_EVENT_ACTION_UP: {
-                int64_t nanoseconds = AMotionEvent_getEventTime(event) - mTouchStartTimestamp;
-                Input::MouseButton::MouseButton button = nanoseconds > sTouchRightclickThreshold && mPendingTouch ? Input::MouseButton::RIGHT_BUTTON : Input::MouseButton::LEFT_BUTTON;
-                if (mPendingTouch) {
+                if (mPendingStart) {
                     onEvent(Input::PointerPressEvent { mTouchStartPosition, mTouchStartPosition, button });
-                    mPendingTouch = false;
+                    mPendingStart = false;
+                    mCurrentButton = button;
                 }
-                onEvent(Input::PointerReleaseEvent { position, position, button });
+                if (!mPressCancelled) {
+                    onEvent(Input::PointerReleaseEvent { position, position, mCurrentButton });
+                }
             } break;
             case AMOTION_EVENT_ACTION_MOVE:
-                if (mPendingTouch && std::abs(mTouchStartPosition.x - position.x) + std::abs(mTouchStartPosition.y - position.y) > sTouchMoveThreshold) {
-                    onEvent(Input::PointerPressEvent { mTouchStartPosition, mTouchStartPosition, Input::MouseButton::LEFT_BUTTON });
-                    mPendingTouch = false;
+                if (mPendingStart && std::abs(mTouchStartPosition.x - position.x) + std::abs(mTouchStartPosition.y - position.y) > sTouchMoveThreshold) {
+                    onEvent(Input::PointerPressEvent { mTouchStartPosition, mTouchStartPosition, button });
+                    mCurrentButton = button;
+                    mPendingStart = false;
                 }
-                onEvent(Input::PointerMoveEvent { position, position, position - mLastKnownMousePos });
+                if (mPinching) {
+                    if (count != 2)
+                        break;
+                    assert(pointer_index == 0);
+                    InterfacesVector position1 {
+                        static_cast<int>(AMotionEvent_getX(event, 1)),
+                        static_cast<int>(AMotionEvent_getY(event, 1))
+                    };
+                    float oldDist = std::sqrt(std::pow(mLastPinchPosition.x - mLastKnownMousePos.x, 2) + std::pow(mLastPinchPosition.y - mLastKnownMousePos.y, 2));
+                    float newDist = std::sqrt(std::pow(position1.x - position.x, 2) + std::pow(position1.y - position.y, 2));
+                    onEvent(Input::AxisEvent { Input::AxisEvent::WHEEL, (newDist - oldDist) / 5.0f });
+                    mLastPinchPosition = position1;
+                } else {
+                    onEvent(Input::PointerMoveEvent { position, position, position - mLastKnownMousePos });
+                }
                 break;
             case AMOTION_EVENT_ACTION_CANCEL:
-                LOG("Motion Cancel");
+                if (mPendingStart) {
+                    mPendingStart = false;
+                    mPressCancelled = true;
+                } else if (!mPressCancelled) {
+                    onEvent(Input::PointerReleaseEvent { position, position, mCurrentButton });
+                }
                 break;
             case AMOTION_EVENT_ACTION_OUTSIDE:
                 LOG("Motion Outside");
                 break;
             case AMOTION_EVENT_ACTION_POINTER_DOWN:
-                LOG("Motion Pointer Down");
+                if (mPendingStart) {
+                    mPendingStart = false;
+                    mPressCancelled = true;
+                } else if (!mPressCancelled) {
+                    onEvent(Input::PointerReleaseEvent { position, position, mCurrentButton });
+                }
+                if (count == 2) {
+                    mLastPinchPosition = position;
+                    mPinching = true;
+                } else {
+                    mPinching = false;
+                }
+
                 break;
             case AMOTION_EVENT_ACTION_POINTER_UP:
-                LOG("Motion Pointer Up");
+                if (count == 2) {
+                    mPinching = true;
+                } else {
+                    mPinching = false;
+                }
                 break;
             case AMOTION_EVENT_ACTION_HOVER_MOVE:
-                LOG("Motion Hover Move");
+                onEvent(Input::PointerMoveEvent { position, position, position - mLastKnownMousePos });
                 break;
             case AMOTION_EVENT_ACTION_SCROLL:
                 LOG("Motion Scroll");
@@ -103,7 +148,8 @@ namespace Window {
                 break;
             }
 
-            mLastKnownMousePos = position;
+            if (pointer_index == 0)
+                mLastKnownMousePos = position;
             return handled;
         }
 
@@ -309,10 +355,15 @@ namespace Window {
 
         // Input
         InterfacesVector mLastKnownMousePos;
+        InterfacesVector mLastPinchPosition;
 
         InterfacesVector mTouchStartScreenPosition;
         InterfacesVector mTouchStartPosition;
-        bool mPendingTouch = false;
+        bool mPendingStart = false;
+        bool mPressCancelled = false;
+        bool mPinching = false;
+        bool mRumbleTriggered = false;
+        Input::MouseButton::MouseButton mCurrentButton;
         int64_t mTouchStartTimestamp;
 
         std::atomic_flag mResizeNeeded;
@@ -351,8 +402,10 @@ namespace Window {
 
     void OSWindow::updateImpl()
     {
-        if (static_cast<AndroidWindow *>(this)->mResizeNeeded.test() && sWindow->mHandle != 0) {
-            static_cast<AndroidWindow *>(this)->mResizeNeeded.clear();
+        AndroidWindow *self = static_cast<AndroidWindow *>(this);
+
+        if (self->mResizeNeeded.test() && sWindow->mHandle != 0) {
+            self->mResizeNeeded.clear();
             onEvent(ResizeEvent { renderSize() });
         }
         if (sQueue) {
@@ -364,10 +417,10 @@ namespace Window {
                 bool handled = false;
                 switch (AInputEvent_getType(event)) {
                 case AINPUT_EVENT_TYPE_KEY:
-                    handled = static_cast<AndroidWindow *>(this)->handleKeyEvent(event);
+                    handled = self->handleKeyEvent(event);
                     break;
                 case AINPUT_EVENT_TYPE_MOTION:
-                    handled = static_cast<AndroidWindow *>(this)->handleMotionEvent(event);
+                    handled = self->handleMotionEvent(event);
                     break;
                 default:
                     LOG_ERROR("Unknown Event Type: " << AInputEvent_getType(event));
@@ -375,6 +428,17 @@ namespace Window {
                 }
                 AInputQueue_finishEvent(sQueue, event, handled);
             }
+
+            timespec ts;
+            clock_gettime(CLOCK_MONOTONIC, &ts);
+            int64_t nanoseconds = ts.tv_sec * 1000000000 + ts.tv_nsec - self->mTouchStartTimestamp;
+            bool longEvent = nanoseconds > sTouchRightclickThreshold;
+
+            if (self->mPendingStart && !self->mRumbleTriggered && longEvent) {
+                self->mRumbleTriggered = true;
+                Android::triggerRumble(70ms);
+            }
+
         }
     }
 
