@@ -49,7 +49,9 @@ namespace Tools {
 
             ImGui::PushID(location);
 
-            ImRect oldViewport = BeginNodeEditor(location->mEditorContext.get(), { 0, 250 });
+            ed::SetCurrentEditor(location->mEditorContext.get());
+
+            ed::Begin("Node editor", { 0, 250 });
 
             ed::NodeId selectedNodes[256];
             auto selectedNodesCount = ed::GetSelectedNodes(selectedNodes, 256);
@@ -143,7 +145,9 @@ namespace Tools {
             if (recenter && false)
                 ed::NavigateToSelection(true);
 
-            EndNodeEditor(oldViewport);
+            ed::End();
+
+            ed::SetCurrentEditor(nullptr);
 
             ImGui::PopID();
         }

@@ -236,32 +236,6 @@ namespace Tools {
         ImGui::SetCursorPos(cursor);
     }
 
-    ImRect BeginNodeEditor(ed::EditorContext *editor, const ImVec2 &size)
-    {
-        // Probably set this in the implementation to the exact Canvas-View area
-        ImVec2 oldViewportPos = ImGui::GetCurrentContext()->MouseViewport->Pos;
-        ImVec2 oldViewportSize = ImGui::GetCurrentContext()->MouseViewport->Size;
-
-        ImGui::GetCurrentContext()->MouseViewport->Pos = { -10000, -10000 };
-        ImGui::GetCurrentContext()->MouseViewport->Size = { 20000, 20000 };
-
-        ed::SetCurrentEditor(editor);
-
-        ed::Begin("Node editor", size);
-
-        return { oldViewportPos, oldViewportPos + oldViewportSize };
-    }
-
-    void EndNodeEditor(ImRect oldViewport)
-    {
-        ed::End();
-
-        ed::SetCurrentEditor(nullptr);
-
-        ImGui::GetCurrentContext()->MouseViewport->Pos = oldViewport.Min;
-        ImGui::GetCurrentContext()->MouseViewport->Size = oldViewport.GetSize();
-    }
-
     std::optional<ExtendedValueTypeDesc> BeginNode(const Behavior::NodeGraph::NodeBase *node, uint32_t nodeId, std::optional<Behavior::NodeGraph::PinDesc> dragPin, std::optional<ExtendedValueTypeDesc> dragType)
     {
         ed::BeginNode(60000 * nodeId);

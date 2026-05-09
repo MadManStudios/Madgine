@@ -555,6 +555,7 @@ namespace Render {
         mHeapDescriptorSetLayout.reset();
         mTempBufferDescriptorSetLayout.reset();
         mPipelineLayouts.clear();
+        mResourceBlockDescriptorSetLayouts.clear();
         mSamplerDescriptorSetLayout.reset();
 
         mSamplers[0].reset();
@@ -571,6 +572,7 @@ namespace Render {
 
         mCommandPool.reset();
         mDescriptorPool.reset();
+        
 
         sDevice->reset();
 
@@ -731,6 +733,7 @@ namespace Render {
                                auto [vkBuffer, memory, offset] = mBufferMemoryHeap.resolve(buffer.get());
                                bufferDescriptorInfo.buffer = vkBuffer;
                                bufferDescriptorInfo.offset = offset;
+                               bufferDescriptorInfo.range = buffer.size();
                            },
                            [&](const GPUPtr<void> &buffer) {
                                descriptorWrite.descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
@@ -740,6 +743,7 @@ namespace Render {
                                auto [vkBuffer, memory, offset] = mBufferMemoryHeap.resolve(buffer.get());
                                bufferDescriptorInfo.buffer = vkBuffer;
                                bufferDescriptorInfo.offset = offset;
+                               bufferDescriptorInfo.range = buffer.size();
                            } },
                 data[i]);
 

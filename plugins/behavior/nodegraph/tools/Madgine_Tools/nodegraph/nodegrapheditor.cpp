@@ -108,7 +108,9 @@ namespace Tools {
 
                 ImVec2 topLeftScreen = ImGui::GetCursorScreenPos();
 
-                ImRect oldViewport = BeginNodeEditor(mEditor.get());
+                ed::SetCurrentEditor(mEditor.get());
+
+                ed::Begin("Node editor");                
 
                 std::optional<ExtendedValueTypeDesc> hoveredPin;
 
@@ -403,7 +405,9 @@ namespace Tools {
 
                 ed::Resume();
 
-                EndNodeEditor(oldViewport);
+                ed::End();
+
+                ed::SetCurrentEditor(nullptr);
 
                 if (hoveredPin)
                     HoverPin(*hoveredPin);

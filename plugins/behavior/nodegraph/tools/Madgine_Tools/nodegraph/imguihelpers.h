@@ -30,9 +30,6 @@ namespace Tools {
 
     void HoverPin(ExtendedValueTypeDesc type);
 
-    ImRect BeginNodeEditor(ed::EditorContext *editor, const ImVec2 &size = ImVec2(0, 0));
-    void EndNodeEditor(ImRect oldViewport);
-
     std::optional<ExtendedValueTypeDesc> BeginNode(const Behavior::NodeGraph::NodeBase *node, uint32_t nodeId, std::optional<Behavior::NodeGraph::PinDesc> dragPin = {}, std::optional<ExtendedValueTypeDesc> dragType = {});
     void EndNode();
 
