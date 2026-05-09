@@ -46,7 +46,7 @@ if (ENVIRONMENT_IS_NODE) {
 
 // --pre-jses are emitted after the Module integration code, so that they can
 // refer to Module (if they choose; they can also define Module)
-// include: /tmp/tmph9l6x9ph.js
+// include: /tmp/tmp0499z13d.js
 Module["expectedDataFileDownloads"] ??= 0;
 
 Module["expectedDataFileDownloads"]++;
@@ -370,7 +370,7 @@ Module["expectedDataFileDownloads"]++;
   });
 })();
 
-// end include: /tmp/tmph9l6x9ph.js
+// end include: /tmp/tmp0499z13d.js
 // include: /home/runner/work/Madgine/Madgine/out/build/Emscripten-RelWithDebInfo-OpenGL/_deps/madginesentry-build/js/header.js
 /**
  * Minified by jsDelivr using Terser v5.39.0.
