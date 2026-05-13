@@ -12,6 +12,8 @@
 #    define MODULES_EXPORT DLL_IMPORT
 #endif
 
+#define MODULES_HAS_THREADS !EMSCRIPTEN
+
 #include <regex>
 #include <shared_mutex>
 #include <stack>

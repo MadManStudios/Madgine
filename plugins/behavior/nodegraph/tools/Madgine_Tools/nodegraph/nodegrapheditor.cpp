@@ -62,7 +62,9 @@ namespace Tools {
 
         createEditor();
 
+#if MODULES_HAS_THREADS
         registerNodeGraphEditorTests(mRoot.testEngine());
+#endif
 
         co_return co_await ResourceEditor::init(Behavior::NodeGraph::NodeGraphLoader::getSingleton(), "Node Graph");
     }
@@ -110,7 +112,7 @@ namespace Tools {
 
                 ed::SetCurrentEditor(mEditor.get());
 
-                ed::Begin("Node editor");                
+                ed::Begin("Node editor");
 
                 std::optional<ExtendedValueTypeDesc> hoveredPin;
 

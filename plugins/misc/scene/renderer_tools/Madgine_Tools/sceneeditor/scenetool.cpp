@@ -68,7 +68,9 @@ namespace Tools {
 
         mSceneViews.push_back(std::make_unique<SceneView>(*this, ++mRunningViewIndex, main.renderData(), main.pointShadowRenderData(), Im3D::GetCurrentContext()));
 
+#if MODULES_HAS_THREADS
         registerSceneEditorTests(mRoot.testEngine());
+#endif
 
         co_return co_await ResourceEditor::init(Scene::SceneLoader::getSingleton(), "Scene");
     }

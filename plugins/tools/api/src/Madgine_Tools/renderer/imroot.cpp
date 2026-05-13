@@ -21,9 +21,8 @@
 #include "imgui/imgui.h"
 #include "imgui/imgui_internal.h"
 #include "imgui/imguiaddons.h"
-
-#include "imgui_test_engine/imgui_test_engine/imgui_te_engine.h"
 #include "imgui_test_engine/imgui_test_engine/imgui_te_coroutine.h"
+#include "imgui_test_engine/imgui_test_engine/imgui_te_engine.h"
 
 METATABLE_BEGIN(Engine::Tools::ImRoot)
     READONLY_PROPERTY(Tools, tools)
@@ -84,7 +83,9 @@ namespace Tools {
 
     ImRoot::~ImRoot()
     {
+#if MODULES_HAS_THREADS
         ImGuiTestEngine_DestroyContext(mTestEngine);
+#endif
     }
 
     Threading::Task<bool> ImRoot::init()
@@ -99,6 +100,7 @@ namespace Tools {
         ini_handler.UserData = this;
         GImGui->SettingsHandlers.push_back(ini_handler);
 
+#if MODULES_HAS_THREADS
         mTestEngine = ImGuiTestEngine_CreateContext();
         ImGuiTestEngineIO &test_io = ImGuiTestEngine_GetIO(mTestEngine);
         test_io.ConfigVerboseLevel = ImGuiTestVerboseLevel_Info;
@@ -112,8 +114,6 @@ namespace Tools {
 
         static ImGuiTestCoroutineHandle (*CreateFunc)(ImGuiTestCoroutineMainFunc *func, const char *name, void *data) = test_io.CoroutineFuncs->CreateFunc;
 
-
-
         test_io.CoroutineFuncs->CreateFunc = [](ImGuiTestCoroutineMainFunc *func, const char *name, void *data) {
             CreateData *createData = new CreateData;
             createData->mData = data;
@@ -125,25 +125,30 @@ namespace Tools {
                 ImGui::SetCurrentContext(createData->mContext);
                 createData->mFunc(createData->mData);
                 delete createData;
-            }, name, createData);
+            },
+                name, createData);
         };
-        
+#endif
+
         for (const std::unique_ptr<ToolBase> &tool : mCollector) {
             bool result = co_await tool->callInit();
             tool->setEnabled(result);
         }
-        
+
+#if MODULES_HAS_THREADS
         ImGuiTestEngine_Start(mTestEngine, ImGui::GetCurrentContext());
 
-        //ImGuiTestEngine_InstallCrashHandler();
-        
+// ImGuiTestEngine_InstallCrashHandler();
+#endif
 
         co_return true;
     }
 
     Threading::Task<void> ImRoot::finalize()
     {
+#if MODULES_HAS_THREADS
         ImGuiTestEngine_Stop(mTestEngine);
+#endif
 
         ImGui::ResetDraggableValueType();
 
@@ -278,7 +283,9 @@ namespace Tools {
 
         ImGui::UpdatePlatformWindows();
 
+#if MODULES_HAS_THREADS
         ImGuiTestEngine_PostSwap(mTestEngine);
+#endif
 
         return gameVisible;
     }

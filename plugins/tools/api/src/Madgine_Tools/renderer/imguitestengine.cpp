@@ -30,14 +30,16 @@ namespace Tools {
     void ImGuiTestEngine::renderMenu()
     {
         if (ImGui::BeginMenu("Dev")) {
-            ImGui::MenuItem("ImGui TestEngine", nullptr, &mVisible);
+            ImGui::MenuItem("ImGui TestEngine", nullptr, &mVisible, MODULES_HAS_THREADS);
             ImGui::EndMenu();
         }
     }
 
     void ImGuiTestEngine::render()
     {
+#if MODULES_HAS_THREADS
         ImGuiTestEngine_ShowTestEngineWindows(root().testEngine(), &mVisible);
+#endif
     }
 
     std::string_view ImGuiTestEngine::key() const
