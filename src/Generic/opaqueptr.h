@@ -36,6 +36,7 @@ struct UniqueOpaquePtr {
     template <typename T>
     T &setupAs()
     {
+        static_assert(sizeof(T) <= sizeof(uintptr_t));
         assert(!mPtr);
         return reinterpret_cast<T &>(mPtr);
     }

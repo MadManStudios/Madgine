@@ -8,7 +8,7 @@ namespace Engine {
 
 ArgumentList::ArgumentList() = default;
 
-ArgumentList::ArgumentList(size_t size)
+ArgumentList::ArgumentList(std::true_type, size_t size)
     : mElements(size)
 {
 }

@@ -109,7 +109,7 @@ namespace Behavior {
         KeyValueResult AccessorNode::interpretRead(NodeInterpreterStateBase &interpreter, ValueType &retVal, std::unique_ptr<NodeInterpreterData> &data, uint32_t providerIndex, uint32_t group) const
         {
             if (accessor()->mType.mType == ValueTypeEnum::ApiFunctionValue || accessor()->mType.mType == ValueTypeEnum::BoundApiFunctionValue) {
-                ArgumentList arguments { dataInCount() };
+                ArgumentList arguments { std::true_type {}, dataInCount() };
                 for (size_t i = 0; i < dataInCount(); ++i) {
                     KEYVALUE_PROPAGATE_ERROR(NodeInterpretHandle<NodeBase> { { interpreter }, *this }.read(arguments[i], i));
                 }

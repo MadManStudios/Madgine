@@ -18,7 +18,7 @@ namespace Behavior {
         PyApiFunction_call(PyApiFunction *self, PyObject *args, PyObject *kwargs)
         {
             size_t argCount = PyTuple_Size(args);
-            ArgumentList arguments { argCount };
+            ArgumentList arguments { std::true_type {}, argCount };
 
             for (size_t i = 0; i < argCount; ++i) {
                 PYTHON3_PROPAGATE_ERROR(fromPyObject(arguments[i], PyTuple_GetItem(args, i)));

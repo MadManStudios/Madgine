@@ -195,7 +195,7 @@ namespace Behavior {
                     if (handle.mNode.dataInCount() == mBaseIndex) {
                         this->set_done();
                     } else {
-                        ArgumentList data { sizeof...(T) };
+                        ArgumentList data { std::true_type {}, sizeof...(T) };
                         for (size_t index = 0; index < sizeof...(T); ++index) {
                             KeyValueResult error = handle.read(data[index], index + mBaseIndex);
                             if (error) {

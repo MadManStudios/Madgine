@@ -207,7 +207,7 @@ namespace Tools {
             if (it != mDebugLocationVisualizers.end()) {
                 return it->second(*this, context, location.ptr(), inlineLocation);
             }
-            ImGui::Text("Unknown ["s + location.type().name() + "]");
+            ImGui::TextWrapped("Unknown [%s]", location.type().name());
             return {};
         }
     }
@@ -383,10 +383,12 @@ namespace Tools {
 
     void DrawDebugMarker(float y)
     {
+        ImGui::PushClipRect({-1000, -1000}, {10000, 10000}, false);
         ImDrawList *draw_list = ImGui::GetWindowDrawList();
         float x = sDebugStartX.back();
         draw_list->AddRectFilled({ x + 3.0f, y - 2.0f }, { x + 12.0f, y + 3.0f }, IM_COL32(255, 200, 10, 255));
         draw_list->AddTriangleFilled({ x + 12.0f, y - 5.0f }, { x + 12.0f, y + 5.0f }, { x + 17.0f, y }, IM_COL32(255, 200, 10, 255));
+        ImGui::PopClipRect();
     }
 
     bool Breakpoint(float startY, float endY, bool *set)

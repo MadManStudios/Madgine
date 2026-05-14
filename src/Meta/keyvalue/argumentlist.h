@@ -7,11 +7,11 @@ struct META_EXPORT ArgumentList {
     using value_type = ValueType;
 
     ArgumentList();
-    ArgumentList(size_t size);
+    ArgumentList(std::true_type, size_t size);
 
-    template <DecayedNoneOf<ArgumentList>... Args>
+    template <DecayedNoneOf<ArgumentList, std::true_type>... Args>
     explicit ArgumentList(Args &&...args)
-        : ArgumentList(sizeof...(args))
+        : ArgumentList(std::true_type {}, sizeof...(args))
     {
         size_t i = 0;
         (to_ValueType((*this)[i++], std::forward<Args>(args)), ...);

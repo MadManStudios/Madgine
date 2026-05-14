@@ -9,7 +9,14 @@
 
 namespace Engine {
 
-using KeyValueReceiver = Execution::VirtualReceiverBaseEx<type_pack<KeyValueError>, type_pack<const ArgumentList &>, Execution::get_stop_token>;
+struct KeyValueReceiver : Execution::VirtualReceiverBaseEx<type_pack<KeyValueError>, type_pack<const ArgumentList &>, Execution::get_stop_token> {
+    template <typename... Args>
+    void set_value(Args &&...args)
+    {
+        static_cast<Execution::VirtualReceiverBase<KeyValueError, const ArgumentList &> *>(this)->set_value(ArgumentList { std::forward<Args>(args)... });
+    }
+};
+
 
 struct KeyValueSenderStateBase {
     virtual void connect(KeyValueReceiver &receiver) = 0;
@@ -58,7 +65,7 @@ struct KeyValueSender {
     using is_sender = void;
     using result_type = KeyValueError;
     template <template <typename...> typename Tuple>
-    using value_types = Tuple<>;
+    using value_types = Tuple<const ArgumentList &>;
 
     template <Execution::AnySender Sender>
         requires DecayedNoneOf<Sender, KeyValueSender>
