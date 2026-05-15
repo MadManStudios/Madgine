@@ -107,29 +107,11 @@ namespace Tools {
             Behavior::BehaviorHandle behaviorToAdd = SceneEditor::render(mHistory, mSceneViews);
 
             if (behaviorToAdd) {
-                mPendingBehavior.mTargetEntity = mSelectedEntity;
-                mPendingBehavior.mHandle = behaviorToAdd;
-                mPendingBehavior.mParameters = behaviorToAdd.createParameters();
-                ImGui::OpenPopup("BehaviorParameters");
-            }
-
-            if (ImGui::BeginPopup("BehaviorParameters")) {
-                if (ImGui::BeginTable("columns", 2, ImGuiTableFlags_SizingStretchProp)) {
-                    TracedRoot<ScopePtr> traced { mHistory, &mPendingBehavior.mParameters };
-                    mInspector->drawMembers(traced);
-                    ImGui::EndTable();
-                }
-                if (ImGui::Button("Cancel")) {
-                    ImGui::CloseCurrentPopup();
-                }
-                ImGui::SameLine();
-                if (ImGui::Button("Create Behavior")) {
-                    Execution::access_binding(mPendingBehavior.mTargetEntity, [&](Scene::Entity::Entity &e) {
-                        e.addBehavior(mPendingBehavior.mHandle.create(mPendingBehavior.mParameters));
+                mRoot.dialogs().show(BehaviorParameterDialog(std::move(behaviorToAdd), *mInspector), [this](Behavior::Behavior behavior) {
+                    Execution::access_binding(mSelectedEntity, [&](Scene::Entity::Entity &e) {
+                        e.addBehavior(std::move(behavior));
                     });
-                    ImGui::CloseCurrentPopup();
-                }
-                ImGui::EndPopup();
+                });
             }
         }
         ImGui::End();

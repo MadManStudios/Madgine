@@ -179,39 +179,17 @@ namespace Tools {
                 if (mSelected) {
                     mInspector->getTool<DebuggerView>().renderLifetime(mSelected->lifetime());
 
-                    bool showParameters = false;
                     if (ImGui::BeginPopupCompoundContextWindow()) {
 
                         if (ImGui::BeginMenu(IMGUI_ICON_PLUS " Add Behavior")) {
                             if (Behavior::BehaviorHandle behavior = BehaviorSelector()) {
-                                mPendingBehavior.mHandle = std::move(behavior);
-                                mPendingBehavior.mParameters = mPendingBehavior.mHandle.createParameters();
-                                showParameters = true;
+                                mRoot.dialogs().show(BehaviorParameterDialog(std::move(behavior), *mInspector), [&](Behavior::Behavior behavior) {
+                                    mSelected->addBehavior(std::move(behavior));
+                                    });
                             }
                             ImGui::EndMenu();
                         }
 
-                        ImGui::EndPopup();
-                    }
-
-                    if (showParameters)
-                        ImGui::OpenPopup("BehaviorParameters");
-
-                    if (ImGui::BeginPopup("BehaviorParameters")) {
-                        if (ImGui::BeginTable("columns", 2, ImGuiTableFlags_SizingStretchProp)) {
-                            UndoStack stack;
-                            TracedRoot<ScopePtr> traced { stack, &mPendingBehavior.mParameters };
-                            mInspector->drawMembers(traced);
-                            ImGui::EndTable();
-                        }
-                        if (ImGui::Button("Cancel")) {
-                            ImGui::CloseCurrentPopup();
-                        }
-                        ImGui::SameLine();
-                        if (ImGui::Button("Create Behavior")) {
-                            mSelected->addBehavior(mPendingBehavior.mHandle.create(mPendingBehavior.mParameters));
-                            ImGui::CloseCurrentPopup();
-                        }
                         ImGui::EndPopup();
                     }
                 }
@@ -264,7 +242,7 @@ namespace Tools {
 
     Dialog<> WidgetEditor::closeDialog()
     {
-        for (WidgetFile& file : kvValues(mFiles)) {
+        for (WidgetFile &file : kvValues(mFiles)) {
             co_await file.closeDialog();
         }
         co_return {};

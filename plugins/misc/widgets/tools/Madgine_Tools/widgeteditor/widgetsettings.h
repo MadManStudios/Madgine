@@ -41,12 +41,6 @@ namespace Tools {
 
         uint16_t mCurrentConditional = 0;
         std::vector<bool> mBoolBuffer;
-
-        struct {
-            Threading::TaskFuture<Behavior::ParameterTuple> mFuture;
-            Behavior::ParameterTuple mParameters;
-            Behavior::BehaviorHandle mHandle;
-        } mPendingBehavior;
     };
 
 }

@@ -276,7 +276,7 @@ namespace Tools {
                 if (!mSettings.completed())
                     mSettings.accept();
                 if (mCallback && (mSettings.accepted() || (mSettings.callbackOnDecline && mSettings.declined())))
-                    TupleUnpacker::invokeFromTuple(mCallback, value);
+                    TupleUnpacker::invokeFromTuple(mCallback, std::move(value));
             }
 
             template <typename A>

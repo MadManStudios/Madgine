@@ -53,11 +53,6 @@ namespace Tools {
         bool mWidgetDetailsVisible = true;
         bool mGameHierarchyVisible = true;
         bool mGameDetailsVisible = true;
-
-        struct {
-            Behavior::ParameterTuple mParameters;
-            Behavior::BehaviorHandle mHandle;
-        } mPendingBehavior;
     };
 
 }

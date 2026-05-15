@@ -12,8 +12,9 @@
 #include "Madgine_Tools/debugger/debuggerview.h"
 #include "Madgine_Tools/imguiicons.h"
 #include "Madgine_Tools/inspector/inspector.h"
-#include "Madgine_Tools/util/trace.h"
+#include "Madgine_Tools/renderer/imroot.h"
 #include "Madgine_Tools/util/keyvaluecustomoperation.h"
+#include "Madgine_Tools/util/trace.h"
 
 #define IMGUI_DEFINE_MATH_OPERATORS
 #include "imgui/imgui.h"
@@ -67,7 +68,7 @@ namespace Tools {
                     mWidget->addConditional(selection);
                     mCurrentConditional = selection;
                     ImGui::CloseCurrentPopup();
-                    //changed = std::make_unique<KeyValueUndoOperation>(Trace { ValueType { mWidget } }, [=](Widgets::WidgetBase *widget) { widget->addConditional(selection); }, [=](Widgets::WidgetBase *widget) { widget->removeConditional(selection); });
+                    // changed = std::make_unique<KeyValueUndoOperation>(Trace { ValueType { mWidget } }, [=](Widgets::WidgetBase *widget) { widget->addConditional(selection); }, [=](Widgets::WidgetBase *widget) { widget->removeConditional(selection); });
                     changed = true;
                 }
                 if (selection == 0)
@@ -275,15 +276,13 @@ namespace Tools {
             mInspector.getTool<DebuggerView>().renderLifetime(mWidget->lifetime());
         }
 
-        bool showParameters = false;
         if (ImGui::BeginPopupCompoundContextWindow()) {
 
             if (ImGui::BeginMenu(IMGUI_ICON_PLUS " Add Behavior")) {
                 if (Behavior::BehaviorHandle behavior = BehaviorSelector()) {
-                    mPendingBehavior.mHandle = std::move(behavior);
-                    mPendingBehavior.mFuture = mPendingBehavior.mHandle.createParameters();
-                    mPendingBehavior.mParameters.reset();
-                    showParameters = true;
+                    mInspector.root().dialogs().show(BehaviorParameterDialog(std::move(behavior), mInspector), [&](Behavior::Behavior behavior) {
+                        mWidget->addBehavior(std::move(behavior));
+                    });
                 }
                 ImGui::EndMenu();
             }
@@ -291,32 +290,6 @@ namespace Tools {
             ImGui::EndPopup();
         }
 
-        if (showParameters)
-            ImGui::OpenPopup("BehaviorParameters");
-
-        if (ImGui::BeginPopup("BehaviorParameters")) {
-            if (!mPendingBehavior.mFuture.is_ready()) {
-                ImGui::Text("Loading...");
-            } else {
-                if (!mPendingBehavior.mParameters)
-                    mPendingBehavior.mParameters = mPendingBehavior.mFuture;
-                if (ImGui::BeginTable("columns", 2, ImGuiTableFlags_SizingStretchProp)) {
-                    TracedRoot<ScopePtr> traced { history, &mPendingBehavior.mParameters };
-                    mInspector.drawMembers(traced);
-                    ImGui::EndTable();
-                }
-                if (ImGui::Button("Cancel")) {
-                    ImGui::CloseCurrentPopup();
-                }
-                ImGui::SameLine();
-                if (ImGui::Button("Create Behavior")) {
-                    mWidget->addBehavior(mPendingBehavior.mHandle.create(mPendingBehavior.mParameters));
-                    ImGui::CloseCurrentPopup();
-                    changed = true;
-                }
-            }
-            ImGui::EndPopup();
-        }
         return changed;
     }
 

@@ -26,6 +26,7 @@ namespace Tools {
     };
 
     MADGINE_BEHAVIOR_TOOLS_EXPORT Behavior::BehaviorHandle BehaviorSelector(ImGuiTextFilter **outFilter = nullptr);
+    MADGINE_BEHAVIOR_TOOLS_EXPORT Dialog<Behavior::Behavior> BehaviorParameterDialog(Behavior::BehaviorHandle handle, Inspector &inspector);
 
 }
 }

@@ -31,6 +31,7 @@ namespace Tools {
         KeyValueResult redo();
 
         void renderControls();
+        void handleShortcuts();
 
     private:
         std::list<std::unique_ptr<UndoableOperation>> mOperations;

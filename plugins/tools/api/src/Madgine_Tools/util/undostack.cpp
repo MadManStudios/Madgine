@@ -96,5 +96,19 @@ namespace Tools {
             ImGui::EndDisabled();
     }
 
+    void UndoStack::handleShortcuts()
+    {
+        if (mCurrentOperation != mOperations.begin()) {
+            if (ImGui::Shortcut(ImGuiKey_Z | ImGuiMod_Ctrl)) {
+                undo();
+            }
+        }
+        if (mCurrentOperation != mOperations.end()) {
+            if (ImGui::Shortcut(ImGuiKey_Z | ImGuiMod_Ctrl | ImGuiMod_Shift)) {
+                redo();
+            }
+        }
+    }
+
 }
 }

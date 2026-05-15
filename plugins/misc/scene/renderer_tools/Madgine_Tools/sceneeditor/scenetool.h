@@ -68,12 +68,6 @@ namespace Tools {
         Inspector *mInspector;
         Scene::SceneManager *mSceneMgr;
 
-        struct {
-            Scene::Entity::EntityPtr mTargetEntity;
-            Behavior::ParameterTuple mParameters;
-            Behavior::BehaviorHandle mHandle;
-        } mPendingBehavior;
-
         UndoStack mHistory;
 
         // Settings

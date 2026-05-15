@@ -14,6 +14,8 @@
 #include "Madgine_Tools/debugger/debuggerview.h"
 #include "Madgine_Tools/imguiicons.h"
 #include "Madgine_Tools/inspector/inspector.h"
+#include "Madgine_Tools/renderer/dialogs.h"
+
 #define IMGUI_DEFINE_MATH_OPERATORS
 #include "imgui/imgui.h"
 #include "imgui/imgui_internal.h"
@@ -152,6 +154,29 @@ namespace Tools {
         }
 
         return result;
+    }
+
+    Dialog<Behavior::Behavior> BehaviorParameterDialog(Behavior::BehaviorHandle handle, Inspector &inspector)
+    {
+        UndoStack history;
+
+        Behavior::ParameterTuple parameters = handle.createParameters();        
+
+        DialogSettings &settings = co_await get_dialog_settings;
+
+        settings.acceptText = "Create Behavior";
+
+        do {
+            history.handleShortcuts();
+
+            if (ImGui::BeginTable("columns", 2, ImGuiTableFlags_SizingStretchProp)) {
+                TracedRoot<ScopePtr> traced { history, &parameters };
+                inspector.drawMembers(traced);
+                ImGui::EndTable();
+            }
+        } while (co_yield settings);
+
+        co_return handle.create(parameters);
     }
 
 }
