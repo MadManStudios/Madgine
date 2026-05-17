@@ -115,11 +115,6 @@ namespace Execution {
             return mPtr.alive();
         }
 
-        auto &finished()
-        {
-            return mPtr.mBlock->mFinished;
-        }
-
         template <typename F>
         struct sender : Execution::base_sender {
 
@@ -222,7 +217,6 @@ namespace Execution {
             {
                 if (mStrongRefCount.fetch_sub(1) == 1) {
                     mState.set_value();
-                    mFinished.set_value();
                     decreaseWeakCount();
                 }
             }
@@ -257,7 +251,6 @@ namespace Execution {
             state &mState;
             std::atomic<uint32_t> mStrongRefCount = 1;
             std::atomic<uint32_t> mWeakRefCount = 1;
-            Flag<void> mFinished;
         };
 
         template <typename Sender>

@@ -12,6 +12,7 @@
 #    include "Modules/plugins/plugin.h"
 #    include "Modules/plugins/pluginmanager.h"
 #    include "Modules/plugins/pluginsection.h"
+#    include "Modules/threading/taskqueue.h"
 #    include "Modules/uniquecomponent/uniquecomponentcollector.h"
 
 #    include "Meta/keyvalue/metatable_impl.h"
@@ -240,9 +241,9 @@ namespace Tools {
 
         Ini::IniFile &file = isConfiguration ? mCurrentConfiguration : mManager.selection();
 
-        for (auto &section : mManager) {            
-            if (ImGui::CollapsingHeader(section.name().c_str())) {                
-                
+        for (auto &section : mManager) {
+            if (ImGui::CollapsingHeader(section.name().c_str())) {
+
                 if (isConfiguration) {
                     ImGui::Indent();
                 }
@@ -258,7 +259,7 @@ namespace Tools {
                     if (ImGui::RadioButton("<None>", noneLoaded)) {
                         section.unload(file);
                         changed = true;
-                    }                    
+                    }
                 }
 
                 for (auto &plugin : section) {
@@ -328,7 +329,9 @@ namespace Tools {
         if (!co_await ToolBase::init())
             co_return false;
 
-        Execution::detach(mLifetime);
+        mRoot.taskQueue()->queue([this]() -> Threading::ImmediateTask<void> {
+            co_await mLifetime;
+        });
 
         if (Filesystem::exists(SOURCE_DIR "/dependencies.txt")) {
             std::ifstream in { SOURCE_DIR "/dependencies.txt" };
@@ -343,9 +346,6 @@ namespace Tools {
 
     Threading::Task<void> PluginManager::finalize()
     {
-        mLifetime.end();
-        co_await mLifetime.finished();
-
         co_await ToolBase::finalize();
     }
 

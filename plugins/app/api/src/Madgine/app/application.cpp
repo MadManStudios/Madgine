@@ -62,9 +62,6 @@ namespace App {
      */
     Threading::Task<void> Application::finalize()
     {
-        endLifetime();
-        co_await mLifetime.finished();
-
         for (const std::unique_ptr<GlobalAPIBase> &api : mGlobalAPIs) {
             co_await api->callFinalize();
         }
@@ -96,7 +93,9 @@ namespace App {
 
     void Application::startLifetime()
     {
-        Execution::detach(mLifetime);
+        mTaskQueue.queue([this]() -> Threading::ImmediateTask<void> {
+            co_await mLifetime;
+        });
 
         for (const std::unique_ptr<GlobalAPIBase> &api : mGlobalAPIs) {
             api->startLifetime();

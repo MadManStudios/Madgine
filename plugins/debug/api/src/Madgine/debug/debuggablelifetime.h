@@ -82,11 +82,6 @@ namespace Debug {
             return mLifetime.running();
         }
 
-        auto &finished()
-        {
-            return mLifetime.finished();
-        }
-
         template <typename F>
         auto tracked(F &&callback)
         {
