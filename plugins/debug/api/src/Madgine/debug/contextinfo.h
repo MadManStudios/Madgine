@@ -33,7 +33,20 @@ namespace Debug {
         template <typename Rec, typename F, typename... Args>
         void yield(TypedPtr location, Rec &rec, F &&callback, Continuation &outContinuation, ContinuationType type, Args &&...args)
         {
-            suspend(location, { rec, std::forward<F>(callback), type, std::forward<Args>(args)... }, outContinuation, Execution::get_stop_token(rec));
+            suspend(location, { [&rec, callback { forward_capture<F>(callback) }](ContinuationMode mode, Args &&...args) mutable {
+                                   switch (mode) {
+                                   case Debug::ContinuationMode::Continue:
+                                       std::forward<F>(callback)(rec, std::forward<Args>(args)...);
+                                       break;
+                                   case Debug::ContinuationMode::Abort:
+                                       rec.set_done();
+                                       break;
+                                   default:
+                                       throw 0;
+                                   }
+                               },
+                                  type, std::forward<Args>(args)... },
+                outContinuation, Execution::get_stop_token(rec));
         }
 
         template <typename Rec, typename F, typename... Args>
