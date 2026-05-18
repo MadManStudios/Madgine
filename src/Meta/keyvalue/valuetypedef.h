@@ -59,3 +59,5 @@ VALUETYPE_SEP
 VALUETYPE_TYPE(Type, ExtendedValueTypeDesc, const ExtendedValueTypeDesc &, const ValueTypeDesc &)
 VALUETYPE_SEP
 VALUETYPE_TYPE(Binding, KeyValueBinding, const KeyValueBinding &)
+VALUETYPE_SEP
+VALUETYPE_TYPE(ScopeBinding, KeyValueScopeBinding, const KeyValueScopeBinding &)

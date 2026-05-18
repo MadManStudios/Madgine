@@ -21,23 +21,23 @@ ScopeField ScopePtr::operator[](std::string_view key) const
 
 ScopeIterator ScopePtr::find(std::string_view key) const
 {
-    return mType->find(key, *this);
+    return mType->find(key, ValueType { *this });
 }
 
 ScopeIterator ScopePtr::begin() const
 {
-    return { *this, mType ? mType->mMembers : nullptr };
+    return { ValueType { *this }, mType ? mType->mMembers : nullptr };
 }
 
 ScopeIterator ScopePtr::end() const
 {
-    return { *this, nullptr };
+    return { ValueType { *this }, nullptr };
 }
 
 std::string ScopePtr::name() const
 {
     if (mScope)
-        return mType->name(*this);
+        return mType->name(ValueType { *this });
     else
         return "<NULL>";
 }
@@ -49,7 +49,7 @@ void ScopePtr::moveAssign(ScopePtr other) const
 
 KeyValueResult ScopePtr::call(ValueType &retVal, const ArgumentList &args) const
 {
-    return mType->call(*this, retVal, args);
+    return mType->call(ValueType { *this }, retVal, args);
 }
 
 }

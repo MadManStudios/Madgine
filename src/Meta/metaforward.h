@@ -31,11 +31,18 @@ struct KeyValueFunction;
 struct EnumHolder;
 struct FlagsHolder;
 struct KeyValueSender;
-struct KeyValueBinding;
+
+
 struct ArgumentList;
 
 struct ExtendedValueTypeDesc;
+struct ValueTypeIndex;
 struct ValueTypeDesc;
+
+template <typename TypeInfo>
+struct KeyValueBindingBase;
+using KeyValueBinding = KeyValueBindingBase<ValueTypeIndex>;
+using KeyValueScopeBinding = KeyValueBindingBase<const MetaTable*>;
 
 struct ObjectInstance;
 struct ObjectPtr;

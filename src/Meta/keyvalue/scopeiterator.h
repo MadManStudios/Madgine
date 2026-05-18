@@ -15,7 +15,7 @@ struct META_EXPORT ScopeIterator {
     using reference = ScopeField;
 
     ScopeIterator() = default;
-    ScopeIterator(ScopePtr scope, const Accessor *pointer);
+    ScopeIterator(const ValueType &scope, const Accessor *pointer);
 
     bool operator==(const ScopeIterator &other) const;
 
@@ -32,7 +32,7 @@ struct META_EXPORT ScopeIterator {
 private:
     void check();
 
-    ScopePtr mScope;
+    ValueType mScope;
     const MetaTable *mCurrentTable = nullptr;
     const Accessor *mPointer = nullptr;
 };

@@ -6,6 +6,8 @@
 
 #include "metatable.h"
 
+#include "scopeiterator.h"
+
 namespace Engine {
 
 ValueType::ValueType()
@@ -143,6 +145,9 @@ std::string ValueType::toShortString() const
         [](const KeyValueBinding &b) {
             return "<binding>"s;
         },
+        [](const KeyValueScopeBinding &b) {
+            return "<binding>"s;
+        },
         [](std::chrono::duration<uint64_t, std::nano> dur) {
             return "<duration>"s;
         },
@@ -165,6 +170,10 @@ ValueTypeDesc ValueType::type() const
     switch (i) {
     case ValueTypeEnum::ScopeValue: {
         const MetaTable *table = as<ScopePtr>().mType;
+        return { i, table ? table->mSelf : nullptr };
+    }
+    case ValueTypeEnum::ScopeBindingValue: {
+        const MetaTable *table = as<KeyValueScopeBinding>().mType;
         return { i, table ? table->mSelf : nullptr };
     }
     default:
@@ -237,6 +246,11 @@ KeyValueResult ValueType::call(ValueType &retVal, const ArgumentList &args) cons
                               throw "calling operator is not supported";
                           } },
         mUnion);
+}
+
+ScopeIterator ValueType::end() const
+{
+    return { *this, nullptr };
 }
 
 DERIVE_OPERATOR(StreamOut, <<)

@@ -143,6 +143,8 @@ struct META_EXPORT ValueType {
         return call(retVal, { ValueType { std::forward<Args>(args) }... });
     }
 
+    ScopeIterator end() const;
+
 private:
     Union mUnion;
 };

@@ -90,6 +90,7 @@ struct MADGINE_TOOLS_EXPORT ValueTypeDrawer {
     static bool draw(const Engine::Tools::Traced<const Engine::Color4 &> &c);
     static bool draw(const Engine::Tools::Traced<const Engine::KeyValueSender &> &s);
     static bool draw(const Engine::Tools::Traced<const Engine::KeyValueBinding &> &b);
+    static bool draw(const Engine::Tools::Traced<const Engine::KeyValueScopeBinding &> &b);
     template <typename Rep, typename Ratio>
     static bool draw(const Engine::Tools::Traced<std::chrono::duration<Rep, Ratio> &> &d)
     {

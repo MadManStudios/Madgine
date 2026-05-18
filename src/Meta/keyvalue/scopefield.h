@@ -2,11 +2,13 @@
 
 #include "scopeptr.h"
 
+#include "valuetype.h"
+
 namespace Engine {
 
 struct META_EXPORT ScopeField {
 
-    ScopeField(const ScopePtr &ptr, const Accessor *pointer);
+    ScopeField(const ValueType &ptr, const Accessor *pointer);
 
     KeyValueResult value(ValueType &retVal) const;
 
@@ -19,7 +21,7 @@ struct META_EXPORT ScopeField {
     AccessorFlags flags() const;
 
 private:
-    ScopePtr mScope;
+    ValueType mScope;
     const Accessor *mPointer;
 };
 

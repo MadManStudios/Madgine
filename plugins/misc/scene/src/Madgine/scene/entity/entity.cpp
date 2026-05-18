@@ -33,8 +33,11 @@ void componentInit(std::array<Accessor, 32> &accessors)
         size_t i = 0;
         for (const auto &[name, index] : Scene::Entity::EntityComponentRegistry::sComponentsByName()) {
             accessors[i] = { name.data(),
-                [](const Accessor *self, const ScopePtr &entity) {
-                    return scope_cast<Scene::Entity::Entity>(entity)->hasComponent(self->mName);
+                [](const Accessor *self, const ValueType &entity) {
+                    uint32_t index = Scene::Entity::EntityComponentRegistry::sComponentsByName().at(self->mName);
+                    bool found = false;
+                    KeyValueResult result = ValueType_unwrap([&](Scene::Entity::Entity &entity) { found = entity.hasComponent(index); }, entity);
+                    return !result && found;
                 },
                 [](const Accessor *self, ValueType &ret, const ValueType &entity) -> KeyValueResult {
                     uint32_t index = Scene::Entity::EntityComponentRegistry::sComponentsByName().at(self->mName);

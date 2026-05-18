@@ -674,6 +674,12 @@ bool ValueTypeDrawer::draw(const Engine::Tools::Traced<const Engine::KeyValueBin
     return false;
 }
 
+bool ValueTypeDrawer::draw(const Engine::Tools::Traced<const Engine::KeyValueScopeBinding &> &b)
+{
+    Text("<binding>");
+    return false;
+}
+
 bool ValueTypeDrawer::draw(const Engine::Tools::Traced<std::chrono::nanoseconds &> &d)
 {
     auto count = d.traceEx(&std::chrono::nanoseconds::count, static_cast<bool (*)(const Engine::Tools::TracedAccess<std::chrono::nanoseconds &, decltype(&std::chrono::nanoseconds::count)> &, bool)>([](const auto &count, bool modified) {

@@ -137,6 +137,14 @@ KeyValueResult ValueType_call(Callable &&callable, Arg &&arg)
                 throw 0;
             }
             return result;
+        } else if (ValueType_is<KeyValueScopeBinding>(arg)) {
+            KeyValueResult result;
+            if (!Execution::access_binding(ValueType_as<KeyValueScopeBinding>(arg), [&](const ValueType &v) {
+                    result = ValueType_call(std::forward<Callable>(callable), v);
+                })) {
+                throw 0;
+            }
+            return result;
         } else if (ValueType_is<ScopePtr>(arg)) {
             using Ty = resolveCustomScopePtr_t<T, true>;
             ScopePtr scope = ValueType_as<ScopePtr>(arg);

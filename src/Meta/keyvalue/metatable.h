@@ -65,9 +65,9 @@ struct META_EXPORT MetaTable {
     {
     }
 
-    ScopeIterator find(std::string_view key, ScopePtr scope) const;
+    ScopeIterator find(std::string_view key, const ValueType &scope) const;
 
-    KeyValueResult call(ScopePtr scope, ValueType &retVal, const ArgumentList &args) const;
+    KeyValueResult call(const ValueType &scope, ValueType &retVal, const ArgumentList &args) const;
 
     void moveAssign(ScopePtr scope, ScopePtr other) const;
 
@@ -78,7 +78,7 @@ struct META_EXPORT MetaTable {
     }
     bool isDerivedFrom(const MetaTable *baseType, OffsetPtr *offset = nullptr) const;
 
-    std::string name(ScopePtr scope) const;
+    std::string name(const ValueType &scope) const;
 
     const MetaTable **mSelf;
     const char *mTypeName;

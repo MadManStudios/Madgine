@@ -339,6 +339,7 @@ namespace Execution {
         }
 
         auto operator<=>(const BindingPtr &) const = default;
+        bool operator==(const BindingPtr &) const = default;
 
     private:
         BindingBridgeBase<T> *mPtr = nullptr;

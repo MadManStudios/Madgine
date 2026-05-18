@@ -8,11 +8,11 @@
 
 namespace Engine {
 
-ScopeField::ScopeField(const ScopePtr &ptr, const Accessor *pointer)
+ScopeField::ScopeField(const ValueType &ptr, const Accessor *pointer)
     : mScope(ptr)
     , mPointer(pointer)
 {
-    assert(ptr);
+    assert(!ptr.is<std::monostate>());
 }
 
 KeyValueResult ScopeField::value(ValueType &retVal) const

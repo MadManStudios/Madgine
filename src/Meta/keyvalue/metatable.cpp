@@ -9,7 +9,7 @@
 
 namespace Engine {
 
-ScopeIterator MetaTable::find(std::string_view key, ScopePtr scope) const
+ScopeIterator MetaTable::find(std::string_view key, const ValueType &scope) const
 {
     for (const Accessor *p = mMembers; p->mName; ++p) {
         if (key == p->mName) {
@@ -23,7 +23,7 @@ ScopeIterator MetaTable::find(std::string_view key, ScopePtr scope) const
     }
 }
 
-KeyValueResult MetaTable::call(ScopePtr scope, ValueType &retVal, const ArgumentList &args) const
+KeyValueResult MetaTable::call(const ValueType &scope, ValueType &retVal, const ArgumentList &args) const
 {
     ScopeIterator op = find("__call", scope);
     if (op == scope.end())
@@ -47,7 +47,7 @@ bool MetaTable::isDerivedFrom(const MetaTable *baseType, OffsetPtr *offset) cons
     return mBase && (*mBase)->isDerivedFrom(baseType, offset);
 }
 
-std::string MetaTable::name(ScopePtr scope) const
+std::string MetaTable::name(const ValueType &scope) const
 {
     ScopeIterator nameIt = find("Name", scope);
     if (nameIt != scope.end()) {

@@ -327,6 +327,12 @@ namespace Behavior {
             return nullptr;
         }
 
+        PyObject *toPyObject(const KeyValueScopeBinding &b)
+        {
+            PyErr_SetString(PyExc_NotImplementedError, "Can't convert type <KeyValueScopeBinding> yet");
+            return nullptr;
+        }
+
         struct Functor_to_KeyValuePair {
             void operator()(KeyValuePair &p, const std::pair<PyObject *, PyObject *> &o)
             {

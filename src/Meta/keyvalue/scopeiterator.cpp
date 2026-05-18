@@ -8,10 +8,10 @@
 
 namespace Engine {
 
-ScopeIterator::ScopeIterator(ScopePtr scope, const Accessor *pointer)
+ScopeIterator::ScopeIterator(const ValueType &scope, const Accessor *pointer)
     : mScope(scope)
-    , mCurrentTable(scope.mType)
-    , mPointer(scope ? pointer : nullptr)
+    , mCurrentTable(*scope.type().mSecondary.mMetaTable)
+    , mPointer(!scope.is<std::monostate>() ? pointer : nullptr)
 {
     if (mPointer) {
         check();
@@ -31,7 +31,7 @@ bool ScopeIterator::operator==(const ScopeIterator &other) const
 
 bool ScopeIterator::operator!=(const ScopeIterator &other) const
 {
-    assert(mScope.mScope == other.mScope.mScope);
+    assert(mScope == other.mScope);
     if (mPointer == other.mPointer)
         return false;
     if (!mPointer)

@@ -1,12 +1,17 @@
 #pragma once
 
+#include "Generic/callable_view.h"
+#include "Generic/execution/binding.h"
+
 #include "keyvalueresult.h"
+#include "valuetype_desc.h"
 
 namespace Engine {
 
 META_EXPORT void ValueType_erased(CallableView<void(ValueType &)> cb);
 
-struct KeyValueBinding {
+template <typename TypeInfo>
+struct KeyValueBindingBase {
 
     template <Execution::AnyBinding Binding>
     struct InnerBinding {
@@ -30,12 +35,13 @@ struct KeyValueBinding {
         std::remove_reference_t<Binding> mBinding;
     };
 
-    KeyValueBinding() = default;
+    KeyValueBindingBase() = default;
 
-    template <DecayedNoneOf<KeyValueBinding> Binding>
+    template <DecayedNoneOf<KeyValueBindingBase> Binding>
         requires Execution::AnyBinding<Binding>
-    KeyValueBinding(Binding &&binding)
+    KeyValueBindingBase(Binding &&binding, TypeInfo info)
         : mPtr(InnerBinding<Binding> { std::forward<Binding>(binding) })
+        , mType(info)
     {
     }
 
@@ -45,7 +51,7 @@ struct KeyValueBinding {
         return mPtr->*std::forward<P>(right);
     }
 
-    template <typename F, std::same_as<KeyValueBinding> T>
+    template <typename F, std::derived_from<KeyValueBindingBase<TypeInfo>> T>
     friend bool tag_invoke(Execution::access_binding_t access, const T &binding, F &&callback)
     {
         return tag_invoke(access, binding.mPtr, std::forward<F>(callback));
@@ -81,7 +87,15 @@ struct KeyValueBinding {
         return { mPtr };
     }
 
+    auto operator<=>(const KeyValueBindingBase &) const = default;
+    bool operator==(const KeyValueBindingBase &) const = default;
+
     Execution::BindingPtr<const ValueType &> mPtr;
+    TypeInfo mType;
 };
+
+using KeyValueBinding = KeyValueBindingBase<ValueTypeIndex>;
+
+using KeyValueScopeBinding = KeyValueBindingBase<const MetaTable*>;
 
 }
