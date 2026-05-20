@@ -5,7 +5,7 @@ namespace Behavior {
     namespace Python3 {
 
         struct MADGINE_PYTHON3_EXPORT Python3Lock {
-            Python3Lock(Log::Log *log = nullptr, Execution::StopToken st = {});
+            Python3Lock(BehaviorReceiver *rec = nullptr);
             Python3Lock(const Python3Lock &) = delete;
             ~Python3Lock();
         };
@@ -25,12 +25,10 @@ namespace Behavior {
             Python3Unlock(const Python3Unlock &) = delete;
             ~Python3Unlock();
 
-            Log::Log *log();
-            Execution::StopToken st();
+            BehaviorReceiver *receiver() const;
 
         private:
-            Log::Log *mLog;
-            Execution::StopToken mStopToken;
+            BehaviorReceiver *mReceiver;
         };
     }
 }

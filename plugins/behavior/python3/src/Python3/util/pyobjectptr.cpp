@@ -8,9 +8,7 @@
 #include "Meta/keyvalue/argumentlist.h"
 #include "Meta/keyvalue/valuetype.h"
 
-#include "../python3debugger.h"
 #include "pydictptr.h"
-#include "pyexecution.h"
 #include "pymoduleptr.h"
 #include "pyobjectiter.h"
 #include "pyobjectutil.h"
@@ -68,12 +66,7 @@ namespace Behavior {
 
         PyObjectPtr PyObjectPtr::call(const ArgumentList &args) const
         {
-            PyObjectPtr tuple = PyTuple_New(args.size());
-            for (size_t i = 0; i < args.size(); ++i) {
-                PyTuple_SetItem(tuple, i, toPyObject(args[i]));
-            }
-
-            return call(tuple, PyObjectPtr {});
+            return call(toPyTuple(args), PyObjectPtr {});
         }
 
         PyObjectPtr PyObjectPtr::call(const char *format, ...) const
@@ -97,11 +90,6 @@ namespace Behavior {
         PyObjectPtr PyObjectPtr::call(const PyObjectPtr &args, const PyObjectPtr &kwargs) const
         {
             return PyObject_Call(mObject, args, kwargs);
-        }
-
-        ExecutionSender PyObjectPtr::callAsync() const
-        {
-            return { {}, CodeObject { PyFunction_GetCode(mObject), PyFunction_GetGlobals(mObject), PyDict_New() } };
         }
 
         PyObjectFieldAccessor PyObjectPtr::operator[](const PyObjectPtr &name) const

@@ -124,6 +124,8 @@ namespace Behavior {
         {
         }
 
+        ParameterTuple(std::unique_ptr<ParameterTupleBase> tuple);
+
         template <typename... Ty, auto... Names>
         ParameterTuple(std::tuple<Ty...> parameters, auto_pack<Names...>)
             : mTuple(std::make_unique<TypedParameterTupleInstance<auto_pack<Names...>, Ty...>>(std::move(parameters)))
@@ -146,6 +148,11 @@ namespace Behavior {
                 out = instance->mTuple;
             }
             return instance;
+        }
+
+        template <typename T>
+        const T& get() const {
+            return *static_cast<T *>(mTuple.get());
         }
 
         size_t size() const

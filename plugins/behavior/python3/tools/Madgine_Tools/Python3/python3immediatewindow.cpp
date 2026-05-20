@@ -7,6 +7,8 @@
 
 #include "Interfaces/log/logsenders.h"
 
+#include "Meta/keyvalue/valuetype.h"
+
 #include "Modules/uniquecomponent/uniquecomponentcollector.h"
 
 #include "Madgine/debug/debugger.h"
@@ -17,12 +19,8 @@
 #include "Madgine_Tools/debugger/debuggerview.h"
 #include "Madgine_Tools/texteditor/textdocument.h"
 #include "Madgine_Tools/texteditor/texteditor.h"
-#include "Python3/python3debugger.h"
+#include "Python3/python3behaviors.h"
 #include "Python3/python3env.h"
-#include "Python3/util/pyexecution.h"
-#include "Python3/util/pylistptr.h"
-#include "Python3/util/pymoduleptr.h"
-#include "Python3/util/python3lock.h"
 #include "imgui/imgui.h"
 #include "imgui/imguiaddons.h"
 
@@ -44,52 +42,7 @@ UNIQUECOMPONENT(Engine::Tools::Python3ImmediateWindow)
 namespace Engine {
 namespace Tools {
 
-    std::vector<TypedPtr> visualizeDebugLocation(DebuggerView &view, const Debug::ContextInfo &context, const Behavior::Python3::Python3DebugLocation *location, TypedPtr inlineLocation)
-    {
-        Behavior::Python3::Python3Lock lock;
-        ImGui::BeginGroupPanel(PyUnicode_AsUTF8(PyFrame_GetCode(location->mFrame)->co_filename));
-        if (ImGui::TreeNode("Code")) {
-
-            if (ImGui::BeginTable("Code", 2, ImGuiTableFlags_BordersOuter | ImGuiTableFlags_SizingFixedFit)) {
-
-                ImGui::TableSetupColumn("Line", 0);
-                ImGui::TableSetupColumn("Source", ImGuiTableColumnFlags_WidthStretch);
-
-                Behavior::Python3::PyModulePtr inspect { "inspect" };
-                Behavior::Python3::PyObjectPtr sourcelines = PyObject_CallFunctionObjArgs(inspect.get("getsourcelines"), location->mFrame, NULL);
-                Behavior::Python3::PyListPtr sources = Behavior::Python3::PyListPtr::fromBorrowed(PyTuple_GetItem(sourcelines, 0));
-                size_t baseLine = PyLong_AsLong(PyTuple_GetItem(sourcelines, 1));
-
-                ImGui::PushFont(view.getTool<TextEditor>().font());
-
-                for (PyObject *line : sources) {
-                    ImGui::TableNextRow();
-                    ImGui::TableNextColumn();
-                    ImGui::Text(std::to_string(baseLine));
-                    ImGui::TableNextColumn();
-
-                    float startY = ImGui::GetCursorScreenPos().y;
-
-                    ImGui::Text("%s", PyUnicode_AsUTF8(line));
-
-                    if (baseLine == location->lineNr()) {
-                        DrawDebugMarker(0.5f * (ImGui::GetCursorScreenPos().y + startY) - 7.0f);
-                    }
-
-                    baseLine++;
-                }
-
-                ImGui::PopFont();
-            }
-            ImGui::EndTable();
-
-            ImGui::TreePop();
-        }
-
-        ImGui::EndGroupPanel();
-
-        return {};
-    }
+    std::vector<TypedPtr> visualizeBehaviorDebugLocation(ContinuationList &continuations, DebuggerView &view, const Debug::ContextInfo &context, const PyObject *location, TypedPtr inlineLocation);
 
     Python3ImmediateWindow::Python3ImmediateWindow(ImRoot &root)
         : Tool<Python3ImmediateWindow>(root)
@@ -103,7 +56,7 @@ namespace Tools {
 
     Threading::Task<bool> Python3ImmediateWindow::init()
     {
-        getTool<DebuggerView>().registerDebugLocationVisualizer<visualizeDebugLocation>();
+        getTool<DebuggerView>().registerDebugLocationVisualizer<visualizeBehaviorDebugLocation>();
 
         Debug::Debugger::getSingleton().addListener(this);
 
@@ -143,7 +96,7 @@ namespace Tools {
 
     bool Python3ImmediateWindow::wantsPause(Debug::ContextInfo &context, TypedPtr location, Debug::ContinuationType type, IndexType<size_t> line)
     {
-        if (const Behavior::Python3::Python3DebugLocation *pyLocation = location.as<const Behavior::Python3::Python3DebugLocation>()) {
+        /*if (const Behavior::Python3::Python3DebugLocation *pyLocation = location.as<const Behavior::Python3::Python3DebugLocation>()) {
 
             const Filesystem::Path &path = pyLocation->file();
 
@@ -154,14 +107,14 @@ namespace Tools {
                     return true;
                 }
             }
-        }
+        }*/
 
         return false;
     }
 
     void Python3ImmediateWindow::onSuspend(Debug::ContextInfo &context, TypedPtr location, Debug::ContinuationType type)
     {
-        if (const Behavior::Python3::Python3DebugLocation *pyLocation = location.as<const Behavior::Python3::Python3DebugLocation>()) {
+        /* if (const Behavior::Python3::Python3DebugLocation *pyLocation = location.as<const Behavior::Python3::Python3DebugLocation>()) {
 
             const Filesystem::Path &path = pyLocation->file();
 
@@ -169,20 +122,22 @@ namespace Tools {
                 TextDocument &doc = getTool<TextEditor>().openDocument(path);
                 doc.goToLine(pyLocation->lineNr());
             }
-        }
+        }*/
     }
 
     bool Python3ImmediateWindow::interpret(std::string_view command)
     {
         Debug::ContextInfo &context = Debug::Debugger::getSingleton().createContext();
-        Execution::detach(mEnv->execute(command)
-            | Log::log_result()
-            | Execution::finally([this]() {
-                  mPrompt->resume();
-              })
-            | Log::with_log(mPrompt.get())
-            | Execution::with_debug_location(context.mChild)
-            | Debug::with_debug_context(context));
+        Log::setLog(mPrompt.get());
+        ValueType retVal;
+        KeyValueResult result = mEnv->execute(retVal, command);
+        if (result) {
+            LOG_ERROR(result);
+        } else {
+            LOG(retVal);
+        }
+        mPrompt->resume();
+        Log::setLog(nullptr);
         return false;
     }
 

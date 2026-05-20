@@ -8,9 +8,9 @@ namespace Engine {
 namespace Behavior {
     namespace Python3 {
 
-        Python3Lock::Python3Lock(Log::Log *log, Execution::StopToken st)
+        Python3Lock::Python3Lock(BehaviorReceiver *rec)
         {
-            Python3Environment::lock(log, std::move(st));
+            Python3Environment::lock(rec);
         }
 
         Python3Lock::~Python3Lock()
@@ -36,22 +36,17 @@ namespace Behavior {
 
         Python3Unlock::Python3Unlock()
         {
-            std::tie(mLog, mStopToken) = Python3Environment::unlock();
+            mReceiver = Python3Environment::unlock();
         }
 
         Python3Unlock::~Python3Unlock()
         {
-            Python3Environment::lock(mLog, std::move(mStopToken));
+            Python3Environment::lock(mReceiver);
         }
 
-        Log::Log *Python3Unlock::log()
+        BehaviorReceiver *Python3Unlock::receiver() const
         {
-            return mLog;
-        }
-
-        Execution::StopToken Python3Unlock::st()
-        {
-            return std::move(mStopToken);
+            return mReceiver;
         }
 
     }

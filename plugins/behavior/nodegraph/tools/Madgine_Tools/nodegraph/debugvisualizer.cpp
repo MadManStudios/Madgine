@@ -19,7 +19,7 @@
 namespace Engine {
 namespace Tools {
 
-    std::vector<TypedPtr> visualizeDebugLocation(DebuggerView &view, const Debug::ContextInfo &context, const Behavior::NodeGraph::NodeDebugLocation *location, TypedPtr inlineLocation)
+    std::vector<TypedPtr> visualizeDebugLocation(ContinuationList &continuations, DebuggerView &view, const Debug::ContextInfo &context, const Behavior::NodeGraph::NodeDebugLocation *location, TypedPtr inlineLocation)
     {
         if (!location)
             return {};
@@ -78,7 +78,7 @@ namespace Tools {
                             ImGui::BeginVertical("child");
                             if (BeginDebuggablePanel("Node")) {
                                 ImGui::PushTextWrapPos(ImGui::GetCursorPosX() + 300.0f);
-                                std::ranges::move(view.visualizeDebugLocation(context, childLocation->mChild, location), std::back_inserter(newChildren));
+                                std::ranges::move(view.visualizeDebugLocation(continuations, context, childLocation->mChild, location), std::back_inserter(newChildren));
                                 ImGui::PopTextWrapPos();
                                 EndDebuggablePanel();
                             }
@@ -153,7 +153,7 @@ namespace Tools {
         }
 
         for (const TypedPtr &child : children)
-            view.visualizeDebugLocation(context, child, {});
+            view.visualizeDebugLocation(continuations, context, child, {});
 
         return {};
     }

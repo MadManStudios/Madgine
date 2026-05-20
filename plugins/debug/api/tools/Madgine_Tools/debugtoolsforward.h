@@ -12,6 +12,8 @@ namespace Engine {
 namespace Tools {
 
     struct DebuggerView;
+    struct ContinuationList;
+    enum class ControlButton;
 
 }
 }

@@ -32,7 +32,7 @@ SERIALIZETABLE_END(Engine::Tools::BehaviorTool)
 namespace Engine {
 namespace Tools {
 
-    std::vector<TypedPtr> visualizeCoroutineLocation(DebuggerView &view, const Debug::ContextInfo &context, const Behavior::CoroutineLocation *location, TypedPtr inlineLocation)
+    std::vector<TypedPtr> visualizeCoroutineLocation(ContinuationList &continuations, DebuggerView &view, const Debug::ContextInfo &context, const Behavior::CoroutineLocation *location, TypedPtr inlineLocation)
     {
         if (!location)
             return {};
@@ -46,8 +46,12 @@ namespace Tools {
 #endif
         ImGui::BeginGroupPanel(name);
         std::vector<TypedPtr> content;
-        if (location->mChild)
-            content = view.visualizeDebugLocation(context, location->mChild, inlineLocation);
+        if (location->mChild) {
+            if (BeginDebuggablePanel("Sender")) {
+                content = view.visualizeDebugLocation(continuations, context, location->mChild, inlineLocation);
+                EndDebuggablePanel();
+            }
+        }
         ImGui::EndGroupPanel();
 
         return content;

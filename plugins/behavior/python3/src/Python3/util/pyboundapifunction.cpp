@@ -2,10 +2,10 @@
 
 #include "pyboundapifunction.h"
 
+#include "Meta/keyvalue/argumentlist.h"
 #include "Meta/keyvalue/functiontable.h"
 #include "Meta/keyvalue/valuetype.h"
 
-#include "pyexecution.h"
 #include "pyobjectutil.h"
 #include "python3lock.h"
 
@@ -26,11 +26,11 @@ namespace Behavior {
             ValueType retVal;
             KeyValueResult result;
             Py_BEGIN_ALLOW_THREADS
-                 result = self->mFunction(retVal, arguments);
+                result = self->mFunction(retVal, arguments);
             Py_END_ALLOW_THREADS
                 PYTHON3_PROPAGATE_ERROR(std::move(result));
 
-                return toPyObject(retVal);
+            return toPyObject(retVal);
         }
 
         PyTypeObject PyBoundApiFunctionType = {

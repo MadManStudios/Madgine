@@ -70,11 +70,18 @@ namespace Behavior {
         MADGINE_PYTHON3_EXPORT PyObject *toPyObject(const KeyValueScopeBinding &b);
 
         MADGINE_PYTHON3_EXPORT KeyValueResult fromPyObject(ValueType &result, PyObject *obj);
-        MADGINE_PYTHON3_EXPORT void fromPyObject(BehaviorReceiver &receiver, PyObject *obj);
+        MADGINE_PYTHON3_EXPORT void handlePyObject(PyObject *obj);
+        MADGINE_PYTHON3_EXPORT void handleKeyValueError(KeyValueError error);
+        MADGINE_PYTHON3_EXPORT void resumeCoroutine(PyObject *coroutine, PyObject *value);
 
         MADGINE_PYTHON3_EXPORT PyObject *toPyError(const KeyValueError &);
+        MADGINE_PYTHON3_EXPORT KeyValueError fromPyError(PyObject *exc, PyObject *traceback = nullptr);
+
+        MADGINE_PYTHON3_EXPORT KeyValueError fetchError();
 
         MADGINE_PYTHON3_EXPORT ExtendedValueTypeDesc PyToValueTypeDesc(PyObject *obj);
+
+        MADGINE_PYTHON3_EXPORT PyObject *toPyTuple(const ArgumentList &args); 
 
     }
 }

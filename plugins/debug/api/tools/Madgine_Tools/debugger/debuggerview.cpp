@@ -17,6 +17,7 @@
 
 #include "Madgine_Tools/imguiicons.h"
 #include "Madgine_Tools/inspector/inspector.h"
+#include "continuationlist.h"
 #include "imgui/imgui.h"
 #include "imgui/imgui_internal.h"
 #include "imgui/imguiaddons.h"
@@ -59,7 +60,7 @@ namespace Tools {
         co_await ToolBase::finalize();
     }
 
-    std::vector<TypedPtr> DebuggerView::visualizeDebugLocation(const Debug::ContextInfo &context, TypedPtr location, TypedPtr inlineLocation)
+    std::vector<TypedPtr> DebuggerView::visualizeDebugLocation(ContinuationList &continuations, const Debug::ContextInfo &context, TypedPtr location, TypedPtr inlineLocation)
     {
         if (const Debug::SenderLocation *senderLocation = location.as<const Debug::SenderLocation>()) {
             std::vector<TypedPtr> subLocations;
@@ -101,7 +102,7 @@ namespace Tools {
                                    ImGui::EndDisabled();
                                },
                                [&, inlineLocation](const Execution::State::DebugLocation &subLoc) {
-                                   std::ranges::move(visualizeDebugLocation(context, subLoc.mLocation, inlineLocation), std::back_inserter(subLocations));
+                                   std::ranges::move(visualizeDebugLocation(continuations, context, subLoc.mLocation, inlineLocation), std::back_inserter(subLocations));
                                    actualContent = true;
                                },
                                [&](const Execution::State::Breakpoint &bp) {
@@ -170,26 +171,7 @@ namespace Tools {
                         if (continuation) {
                             DrawDebugMarker(0.5f * (ImGui::GetCursorScreenPos().y + startY));
 
-                            ImGui::PushID(continuation);
-                            ControlButton button = contextControls(false);
-                            ImGui::PopID();
-                            switch (button) {
-                            case ControlButton::PLAY:
-                                (*continuation)(const_cast<Debug::ContextInfo &>(context).resume());
-                                break;
-                            case ControlButton::STEP:
-                                (*continuation)(const_cast<Debug::ContextInfo &>(context).step());
-                                break;
-                            case ControlButton::STOP:
-                                (*continuation)(Debug::ContinuationMode::Abort);
-                                break;
-                            case ControlButton::PAUSE:
-                                throw 0;
-                                break;
-                            case ControlButton::NONE:
-                                break;
-                            }
-
+                            continuations.controls(*continuation);
                             continuation = nullptr;
                         }
                     }
@@ -205,14 +187,14 @@ namespace Tools {
         } else {
             auto it = mDebugLocationVisualizers.find(location.type());
             if (it != mDebugLocationVisualizers.end()) {
-                return it->second(*this, context, location.ptr(), inlineLocation);
+                return it->second(continuations, *this, context, location.ptr(), inlineLocation);
             }
             ImGui::TextWrapped("Unknown [%s]", location.type().name());
             return {};
         }
     }
 
-    DebuggerView::ControlButton DebuggerView::contextControls(bool running)
+    ControlButton DebuggerView::contextControls(bool running)
     {
         ControlButton button = ControlButton::NONE;
         if (running)
@@ -276,20 +258,6 @@ namespace Tools {
                 if (!mSelectedContext) {
                     ImGui::Text("No context selected!");
                 } else {
-                    ControlButton button = contextControls(!mSelectedContext->isPaused());
-                    switch (button) {
-                    }
-
-                    // TODO: Build tree
-                    /* Debug::DebugLocation *location = mSelectedContext->mChild;
-                    while (location) {
-                        if (!mSelectedLocation && prevSelected == location)
-                            mSelectedLocation = location;
-                        if (ImGui::Selectable(location->toString().c_str(), mSelectedLocation == location))
-                            mSelectedLocation = location;
-                        location = location->mChild;
-                    }*/
-
                     renderDebugContext(*mSelectedContext);
                 }
             }
@@ -328,10 +296,13 @@ namespace Tools {
 
     void DebuggerView::renderDebugContext(const Debug::ContextInfo &context)
     {
+        ControlButton control = contextControls(!context.isPaused());
+        ContinuationList continuations { control };
+
         std::unique_lock guard { context.mMutex };
         if (context.mChild) {
             if (BeginDebuggablePanel("Debug Context")) {
-                [[maybe_unused]] std::vector<TypedPtr> children = visualizeDebugLocation(context, context.mChild, {});
+                [[maybe_unused]] std::vector<TypedPtr> children = visualizeDebugLocation(continuations, context, context.mChild, {});
                 assert(children.empty()); // Parents that allow inline rendering need to take care of child rendering.
                 EndDebuggablePanel();
             }
@@ -341,7 +312,6 @@ namespace Tools {
     void DebuggerView::renderLifetime(Debug::DebuggableLifetimeBase &lifetime)
     {
         for (Debug::ContextInfo &context : lifetime.debugContexts()) {
-            ControlButton control = contextControls(!context.isPaused());
             renderDebugContext(context);
         }
     }
@@ -383,7 +353,7 @@ namespace Tools {
 
     void DrawDebugMarker(float y)
     {
-        ImGui::PushClipRect({-1000, -1000}, {10000, 10000}, false);
+        ImGui::PushClipRect({ -1000, -1000 }, { 10000, 10000 }, false);
         ImDrawList *draw_list = ImGui::GetWindowDrawList();
         float x = sDebugStartX.back();
         draw_list->AddRectFilled({ x + 3.0f, y - 2.0f }, { x + 12.0f, y + 3.0f }, IM_COL32(255, 200, 10, 255));
@@ -393,6 +363,7 @@ namespace Tools {
 
     bool Breakpoint(float startY, float endY, bool *set)
     {
+        ImGui::PushClipRect({ -1000, -1000 }, { 10000, 10000 }, false);
         const float radius = 7.0f;
         float x = sDebugStartX.back() + radius + 3.0f;
         float y = 0.5f * (endY + startY);
@@ -414,6 +385,8 @@ namespace Tools {
         } else {
             draw_list->AddCircleFilled({ x, y }, 7.0f, IM_COL32(255, 100, 100, 255));
         }
+
+        ImGui::PopClipRect();
 
         return clicked;
     }

@@ -5,7 +5,6 @@
 #include "Madgine/root/rootcomponentbase.h"
 #include "Madgine/root/rootcomponentcollector.h"
 
-#include "python3debugger.h"
 
 namespace Engine {
 namespace Behavior {
@@ -19,17 +18,15 @@ namespace Behavior {
 
             std::string_view key() const override;
 
-            ExecutionSender execute(std::string_view command);
+            KeyValueResult execute(ValueType &retVal, std::string_view command);
 
             static PyGILState_STATE lock();
             static Log::Log *unlock(PyGILState_STATE state);
-            static void lock(Log::Log *log, Execution::StopToken st);
-            static std::pair<Log::Log *, Execution::StopToken> unlock();
+            static void lock(BehaviorReceiver *);
+            static BehaviorReceiver *unlock();
 
             static size_t totalRefCount();
 
-        private:
-            Python3Debugger mDebugger;
         };
 
     }

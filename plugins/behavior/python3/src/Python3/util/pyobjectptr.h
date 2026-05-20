@@ -28,8 +28,6 @@ namespace Behavior {
             PyObjectPtr call(const PyDictPtr &kwargs, const char *format, ...) const;
             PyObjectPtr call(const PyObjectPtr &args, const PyObjectPtr &kwargs) const;
 
-            ExecutionSender callAsync() const;
-
             PyObjectFieldAccessor operator[](const PyObjectPtr &name) const;
 
             void reset();

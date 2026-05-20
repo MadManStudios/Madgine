@@ -10,6 +10,11 @@ METATABLE_END(Engine::Behavior::ParameterTuple)
 namespace Engine {
 namespace Behavior {
 
+    ParameterTuple::ParameterTuple(std::unique_ptr<ParameterTupleBase> tuple)
+        : mTuple(std::move(tuple))
+    {
+    }
+
     ScopePtr ParameterTuple::customScopePtr()
     {
         return mTuple->customScopePtr();

@@ -11,6 +11,7 @@
 
 #include "Meta/keyvalue/metatable_impl.h"
 
+#include "python3behaviors.h"
 #include "python3fileloader.h"
 #include "python3streamredirect.h"
 #include "util/math/pymatrix3.h"
@@ -20,10 +21,10 @@
 #include "util/math/pyvector3.h"
 #include "util/math/pyvector4.h"
 #include "util/pyapifunction.h"
+#include "util/pybinding.h"
 #include "util/pyboundapifunction.h"
 #include "util/pydictptr.h"
 #include "util/pyenum.h"
-#include "util/pyexecution.h"
 #include "util/pyflags.h"
 #include "util/pyframeptr.h"
 #include "util/pylistptr.h"
@@ -33,6 +34,7 @@
 #include "util/pyscopeptr.h"
 #include "util/pysender.h"
 #include "util/python3lock.h"
+#include "util/pytype.h"
 #include "util/pyvirtualiterator.h"
 #include "util/pyvirtualrange.h"
 
@@ -51,12 +53,6 @@ METATABLE_END(Engine::Behavior::Python3::Python3Environment)
 namespace Engine {
 namespace Behavior {
     namespace Python3 {
-
-        extern PyTypeObject PySuspendExceptionType;
-
-        extern PyTypeObject PyDebugLocationType;
-
-        extern PyTypeObject PyBehaviorScopeType;
 
         static PyObject *
         PyEnvironment_get(PyObject *self, PyObject *args)
@@ -96,8 +92,7 @@ namespace Behavior {
         }
 
         static PyMethodDef PyEnvironmentMethods[] = {
-            { "__getattr__", PyEnvironment_get, METH_VARARGS,
-                "Execute a shell command." },
+            { "__getattr__", PyEnvironment_get, METH_VARARGS, "" },
             { "__dir__", PyEnvironment_dir, METH_NOARGS, "List all Environment globals" },
             { NULL, NULL, 0, NULL } /* Sentinel */
         };
@@ -111,7 +106,61 @@ namespace Behavior {
             PyEnvironmentMethods
         };
 
+        static PyObject *PyNamespace_get(PyObject *self, PyObject *args);
+
+        static PyMethodDef PyNamespaceMethods[] = {
+            { "__getattr__", PyNamespace_get, METH_VARARGS, "" },
+            { NULL, NULL, 0, NULL } /* Sentinel */
+        };
+
+        static PyObject *PyNamespace_get(PyObject *self, PyObject *args)
+        {
+            const char *name;
+
+            if (!PyArg_ParseTuple(args, "s", &name))
+                return NULL;
+
+            std::string fullName = std::string { PyModule_GetName(self) } + "::" + name;
+            std::string namespaceName = fullName + "::";
+
+            const MetaTable *list = sTypeList();
+            while (list) {
+
+                if (fullName == list->mTypeName) {
+                    PyObject *type = PyObject_CallObject((PyObject *)&PyTypeType, NULL);
+                    if (!type)
+                        return NULL;
+                    reinterpret_cast<PyType *>(type)->mType = list;
+                    int result = PyModule_AddObjectRef(self, name, type);
+                    assert(result == 0);
+                    return type;
+                } else if (StringUtil::startsWith(list->mTypeName, namespaceName)) {
+                    PyModuleDef PyNamespace_module = {
+                        PyModuleDef_HEAD_INIT,
+                        fullName.c_str(), /* name of module */
+                        "test", /* module documentation, may be NULL */
+                        -1, /* size of per-interpreter state of the module,
+                             or -1 if the module keeps state in global variables. */
+                        PyNamespaceMethods
+                    };
+                    PyObject *module = PyModule_Create(&PyNamespace_module);
+                    if (!module)
+                        return NULL;
+                    int result = PyModule_AddObjectRef(self, name, module);
+                    assert(result == 0);
+                    return module;
+                }
+
+                list = list->mNext;
+            }
+
+            PyErr_Format(PyExc_AttributeError, "Could not find attribute '%s' in %s!", name, PyModule_GetName(self));
+            return NULL;
+        }
+
         static PyMethodDef PyEngineMethods[] = {
+            { "__getattr__", PyNamespace_get, METH_VARARGS, "" },
+            { "Behavior", (PyCFunction)PyEngine_Behavior_decorator, METH_FASTCALL, "Decorator for Behavior functions" },
             { NULL, NULL, 0, NULL } /* Sentinel */
         };
 
@@ -157,17 +206,23 @@ namespace Behavior {
                 return NULL;
             if (PyType_Ready(&PyQuaternionType) < 0)
                 return NULL;
-            if (PyType_Ready(&PySuspendExceptionType) < 0)
-                return NULL;
-            if (PyType_Ready(&PyDebugLocationType) < 0)
-                return NULL;
-            if (PyType_Ready(&PyBehaviorScopeType) < 0)
-                return NULL;
             if (PyType_Ready(&PySenderType) < 0)
+                return NULL;
+            if (PyType_Ready(&PySenderStateType) < 0)
                 return NULL;
             if (PyType_Ready(&PyFlagsType) < 0)
                 return NULL;
             if (PyType_Ready(&PyEnumType) < 0)
+                return NULL;
+            if (PyType_Ready(&PyTypeType) < 0)
+                return NULL;
+            if (PyType_Ready(&PyDebugLineType) < 0)
+                return NULL;
+            if (PyType_Ready(&PyNamedType) < 0)
+                return NULL;
+            if (PyType_Ready(&PyBindingType) < 0)
+                return NULL;
+            if (PyType_Ready(&PyScopeBindingType) < 0)
                 return NULL;
 
             PyObject *m = PyModule_Create(&PyEngine_module);
@@ -198,6 +253,18 @@ namespace Behavior {
                 Py_DECREF(m);
                 return NULL;
             }
+            Py_INCREF(&PyDebugLineType);
+            if (PyModule_AddObject(m, "DebugLine", (PyObject *)&PyDebugLineType) < 0) {
+                Py_DECREF(&PyDebugLineType);
+                Py_DECREF(m);
+                return NULL;
+            }
+            Py_INCREF(&PyNamedType);
+            if (PyModule_AddObject(m, "Named", (PyObject *)&PyNamedType) < 0) {
+                Py_DECREF(&PyNamedType);
+                Py_DECREF(m);
+                return NULL;
+            }
 
             return m;
         }
@@ -213,7 +280,7 @@ namespace Behavior {
         }
 
         static Python3StreamRedirect sStream;
-        static Execution::StopToken sStopToken;
+        BehaviorReceiver *sReceiver = nullptr;
 
         Python3Environment::Python3Environment(Root::Root &root)
             : RootComponent(root)
@@ -273,8 +340,6 @@ namespace Behavior {
 
             PyRun_SimpleString("import importlib");
 
-            setupExecution();
-
             PyRun_SimpleString("import Environment");
             PyRun_SimpleString("import Engine");
             sStream.redirect("stdout");
@@ -295,8 +360,9 @@ namespace Behavior {
                 co_await res.second.forceUnload();
             }
 
-            lock(nullptr, Execution::unstoppable_token {});
+            lock(nullptr);
 
+            Python3BehaviorFactory::sFactory.mBehaviorObjects.clear();
             loader.cleanup();
 
             sStream.reset("stdout");
@@ -311,22 +377,14 @@ namespace Behavior {
             return "Python3Environment";
         }
 
-        extern PyFrameObject *sFrame;
-
-        ExecutionSender Python3Environment::execute(std::string_view command)
+        KeyValueResult Python3Environment::execute(ValueType &retVal, std::string_view command)
         {
             Python3Lock lock;
 
-            PyObjectPtr code = Py_CompileString(command.data(), "<eval>", Py_eval_input);
-            if (code) {
-                PyModulePtr main { "__main__" };
+            PyModulePtr main { "__main__" };
 
-                return { {}, CodeObject { std::move(code), main.getDict(), main.getDict() } };
-            } else {
-                return { {}, fetchError() };
-            }
-
-            throw 0;
+            PyObjectPtr result = PyRun_String(command.data(), Py_eval_input, main.getDict(), main.getDict());
+            return fromPyObject(retVal, result);
         }
 
         PyGILState_STATE Python3Environment::lock()
@@ -345,19 +403,19 @@ namespace Behavior {
             return result;
         }
 
-        void Python3Environment::lock(Log::Log *log, Execution::StopToken st)
+        void Python3Environment::lock(BehaviorReceiver *rec)
         {
             // assert(PyGILState_Check() == 0);
             PyGILState_STATE handle = PyGILState_Ensure();
             assert(PyGILState_Check() == 1);
             assert(handle == PyGILState_UNLOCKED);
-            sStream.setLog(log);
-            sStopToken = std::move(st);
+            sStream.setLog(rec ? Log::get_log(*rec) : nullptr);
+            sReceiver = rec;
         }
 
-        std::pair<Log::Log *, Execution::StopToken> Python3Environment::unlock()
+        BehaviorReceiver *Python3Environment::unlock()
         {
-            std::pair<Log::Log *, Execution::StopToken> result { sStream.log(), std::move(sStopToken) };
+            BehaviorReceiver *result = std::exchange(sReceiver, nullptr);
             sStream.setLog({});
             assert(PyGILState_Check() == 1);
             PyGILState_Release(PyGILState_UNLOCKED);

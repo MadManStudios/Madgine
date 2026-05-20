@@ -1,0 +1,42 @@
+<Graph serId=1>
+    <mNodes>
+        <Node type="Python3/TestBehavior" serId=2>
+            <mDefaultParameters>
+                <input type=1>Foo</input>
+            </mDefaultParameters>
+            <mFlowOutPins>
+                <Item>
+                    <Item serId=3>
+                        <mTarget serId=4>
+                            <mNode>-1</mNode>
+                            <mIndex>-1</mIndex>
+                            <mGroup>0</mGroup>
+                        </mTarget>
+                    </Item>
+                </Item>
+                <Item>
+                </Item>
+            </mFlowOutPins>
+            <mDataInPins>
+                <Item>
+                </Item>
+                <Item>
+                    <Item serId=5>
+                        <mSource serId=6>
+                            <mNode>-1</mNode>
+                            <mIndex>-1</mIndex>
+                            <mGroup>0</mGroup>
+                        </mSource>
+                    </Item>
+                </Item>
+            </mDataInPins>
+        </Node>
+    </mNodes>
+    <mFlowOutPins>
+    </mFlowOutPins>
+    <mDataInPins>
+    </mDataInPins>
+    <mLayoutData>{"nodes":{"node:2147483645":{"location":{"x":1150,"y":0}},"node:2147483646":{"location":{"x":323,"y":0}},"node:60000":{"location":{"x":425,"y":168}}},"selection":["node:60000"],"view":{"scroll":{"x":337.259368896484375,"y":0},"visible_rect":{"max":{"x":1174.873291015625,"y":503},"min":{"x":323.1265869140625,"y":0}},"zoom":1.04373753070831299}}</mLayoutData>
+    <mNamedInputs>
+    </mNamedInputs>
+</Graph>

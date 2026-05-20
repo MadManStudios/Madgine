@@ -11,8 +11,7 @@ namespace Engine {
 namespace Behavior {
     namespace Python3 {
 
-        static PyObject *
-        PyTypedScopePtr_get(PyTypedScopePtr *self, PyObject *args)
+        static PyObject *PyTypedScopePtr_get(PyTypedScopePtr *self, PyObject *args)
         {
             const char *name;
 
@@ -47,14 +46,12 @@ namespace Behavior {
             return toPyObject(p.begin());
         }
 
-        static PyObject *
-        PyTypedScopePtr_iter(PyTypedScopePtr *self)
+        static PyObject *PyTypedScopePtr_iter(PyTypedScopePtr *self)
         {
             return TypedScopePtr_iter(self->mPtr);
         }
 
-        static PyObject *
-        PyTypedScopePtr_str(PyTypedScopePtr *self)
+        static PyObject *PyTypedScopePtr_str(PyTypedScopePtr *self)
         {
             return PyUnicode_FromString(self->mPtr.name().c_str());
         }

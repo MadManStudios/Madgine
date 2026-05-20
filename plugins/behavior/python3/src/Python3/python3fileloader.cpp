@@ -2,20 +2,14 @@
 
 #include "python3fileloader.h"
 
-#include <iostream>
-
 #include "Generic/execution/algorithm.h"
 
 #include "Meta/keyvalue/valuetype.h"
-
-#include "Madgine/behavior/behavior.h"
-#include "Madgine/behavior/parametertuple.h"
 
 #include "Meta/keyvalue/metatable_impl.h"
 
 #include "python3env.h"
 #include "util/pydictptr.h"
-#include "util/pyexecution.h"
 #include "util/pymoduleptr.h"
 #include "util/pyobjectutil.h"
 #include "util/python3lock.h"
@@ -36,8 +30,6 @@ METATABLE_END(Engine::Behavior::Python3::Python3FileLoader::Resource)
 METATABLE_BEGIN(Engine::Behavior::Python3::Python3FileLoader::Handle)
 // READONLY_PROPERTY(Data, dataPtr)
 METATABLE_END(Engine::Behavior::Python3::Python3FileLoader::Handle)
-
-BEHAVIOR_FACTORY(Python3, Engine::Behavior::Python3::Python3BehaviorFactory)
 
 namespace Engine {
 namespace Behavior {
@@ -85,33 +77,19 @@ namespace Behavior {
         Python3FileLoader::Python3FunctionTable::Python3FunctionTable(PyObjectPtr fn)
             : mFunctionObject(fn)
         {
+            PythonFunctionInfo info = functionInfo(fn);
 
-            PyObjectPtr signature = PyModulePtr { "inspect" }.get("signature").call("(O)", (PyObject *)fn);
-            PyObjectPtr parameters = signature.get("parameters");
+            auto transformed = info.mArguments | std::views::transform([](const PythonFunctionArgument &arg) {
+                return FunctionArgument { arg.mType, arg.mName };
+            });
+            mArgumentsHolder = { transformed.begin(), transformed.end() };
 
-            PyObject *key = NULL, *value = NULL;
-            Py_ssize_t pos = 0;
-
-            PyObjectPtr iter = PyObject_GetIter(parameters);
-
-            while (PyObjectPtr key = PyIter_Next(iter)) {
-                PyObjectPtr parameter = PyObject_GetItem(parameters, key);
-                PyObjectPtr type = parameter.get("annotation");
-
-                PyObjectPtr ascii = PyUnicode_AsASCIIString(key);
-                mArgumentsNames.emplace_back(PyBytes_AsString(ascii));
-                mArgumentsHolder.push_back({ PyToValueTypeDesc(type), mArgumentsNames.back() });
-            }
             mArguments = mArgumentsHolder.data();
             mArgumentsCount = mArgumentsHolder.size();
 
             mIsMemberFunction = false;
 
-            mReturnType = PyToValueTypeDesc(signature.get("return_annotation"));
-            PyObjectPtr name = fn.get("__name__");
-            PyObjectPtr ascii_name = PyUnicode_AsASCIIString(name);
-            mNameHolder = PyBytes_AsString(ascii_name);
-            mName = mNameHolder;
+            mName = info.mName;
 
             mFunctionPtr = [](const FunctionTable *self, ValueType &retVal, const ArgumentList &args) {
                 Python3InnerLock lock;
@@ -126,7 +104,7 @@ namespace Behavior {
             unregisterFunction(*this);
         }
 
-        KeyValueResult Python3FileLoader::find_spec(ValueType &result, std::string_view name, std::optional<std::string_view> import_path, ObjectPtr target_module)
+        KeyValueResult Python3FileLoader::find_spec(ValueType &result, std::string_view name, std::optional<std::string_view> import_path, std::optional<ObjectPtr> target_module)
         {
             Resource *res = get(name, this);
             if (!res)
@@ -182,72 +160,41 @@ namespace Behavior {
             return {};
         }
 
-        std::vector<std::string_view> Python3BehaviorFactory::names() const
+        PythonFunctionInfo Engine::Behavior::Python3::Python3FileLoader::functionInfo(PyObject *fn)
         {
-            const auto &names = Python3FileLoader::getSingleton().resources() | std::ranges::views::transform([](Resources::ResourceBase *resource) { return resource->name(); });
-            return { names.begin(), names.end() };
-        }
 
-        UniqueOpaquePtr Python3BehaviorFactory::load(std::string_view name) const
-        {
-            UniqueOpaquePtr ptr;
-            ptr.setupAs<Python3FileLoader::Handle>() = Python3FileLoader::load(name);
-            return ptr;
-        }
+            PyObjectPtr signature = PyModulePtr { "inspect" }.get("signature").call("(O)", (PyObject *)fn);
 
-        Threading::TaskFuture<bool> Python3BehaviorFactory::state(const UniqueOpaquePtr &handle) const
-        {
-            return handle.as<Python3FileLoader::Handle>().info()->loadingTask();
-        }
+            PyObjectPtr name = PyObject_GetAttrString(fn, "__name__");
+            PyObjectPtr ascii_name = PyUnicode_AsASCIIString(name);
 
-        void Python3BehaviorFactory::release(UniqueOpaquePtr &ptr) const
-        {
-            ptr.release<Python3FileLoader::Handle>();
-        }
+            PythonFunctionInfo result { PyBytes_AsString(ascii_name), PyToValueTypeDesc(signature.get("return_annotation")) };
 
-        std::string_view Python3BehaviorFactory::name(const UniqueOpaquePtr &handle) const
-        {
-            const Python3FileLoader::Handle &file = handle.as<Python3FileLoader::Handle>();
-            return file.name();
-        }
+            PyObjectPtr parameters = signature.get("parameters");
 
-        Behavior Python3BehaviorFactory::create(const UniqueOpaquePtr &handle, const ParameterTuple &args, std::vector<Behavior> behaviors) const
-        {
-            const Python3FileLoader::Handle &file = handle.as<Python3FileLoader::Handle>();
-            Python3Lock lock;
-            PyObjectPtr main = file->get("main");
-            if (!main)
-                return Execution::just_error(fetchError());
-            return main.callAsync();
-        }
+            PyObject *key = NULL, *value = NULL;
+            Py_ssize_t pos = 0;
 
-        ParameterTuple Python3BehaviorFactory::createParameters(const UniqueOpaquePtr &handle) const
-        {
-            const Python3FileLoader::Handle &file = handle.as<Python3FileLoader::Handle>();
-            return ParameterTuple { std::make_tuple(), auto_pack<> {} };
-        }
+            PyObjectPtr iter = PyObject_GetIter(parameters);
 
-        std::vector<ExtendedValueTypeDesc> Python3BehaviorFactory::parameterTypes(const UniqueOpaquePtr &handle) const
-        {
-            const Python3FileLoader::Handle &file = handle.as<Python3FileLoader::Handle>();
-            return {};
-        }
+            while (PyObjectPtr key = PyIter_Next(iter)) {
+                PyObjectPtr parameter = PyObject_GetItem(parameters, key);
+                PyObjectPtr type = parameter.get("annotation");
 
-        std::vector<ExtendedValueTypeDesc> Python3BehaviorFactory::resultTypes(const UniqueOpaquePtr &handle) const
-        {
-            const Python3FileLoader::Handle &file = handle.as<Python3FileLoader::Handle>();
-            return {};
-        }
+                PyObjectPtr ascii = PyUnicode_AsASCIIString(key);
 
-        std::vector<NamedDescriptor> Python3BehaviorFactory::namedInputs(const UniqueOpaquePtr &handle) const
-        {
-            const Python3FileLoader::Handle &file = handle.as<Python3FileLoader::Handle>();
-            return {};
-        }
 
-        size_t Python3BehaviorFactory::subBehaviorCount(const UniqueOpaquePtr &handle) const
-        {
-            return 0;
+                if (Py_IS_TYPE(type, &Py_GenericAliasType)) {
+                    type = PyTuple_GetItem(type.get("__args__"), 0);                    
+                    result.mArguments.push_back({ PyBytes_AsString(ascii), ExtendedValueTypeDesc { ExtendedValueTypeEnum::VariantType, { toValueTypeDesc<std::monostate>(), PyToValueTypeDesc(type) } }, AccessorFlags_Named });
+                } else {
+                    result.mArguments.push_back({ PyBytes_AsString(ascii), PyToValueTypeDesc(type) });
+                }
+
+                
+            }
+
+            return result;
         }
 
     }
