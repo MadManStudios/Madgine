@@ -277,11 +277,11 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a349cd1d2a6d0ec47fc16e84a57fc1448"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a72777a1171bcff899add8d30711a29d4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_threading_1_1_task.html#ad4e6d0e81657fff24c7f29178d23ca55">T</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_task.html#a72777a1171bcff899add8d30711a29d4">await_resume</a> () noexcept</td></tr>
 <tr class="separator:a72777a1171bcff899add8d30711a29d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a31d194004e37b267d77fd335eeca7718"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structstd_1_1coroutine__handle.html">std::coroutine_handle</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_task.html#a31d194004e37b267d77fd335eeca7718">await_suspend</a> (<a class="el" href="struct_engine_1_1_threading_1_1_task_handle.html">TaskHandle</a> handle) noexcept</td></tr>
+<tr class="memitem:a31d194004e37b267d77fd335eeca7718"><td class="memItemLeft" align="right" valign="top">std::coroutine_handle&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_task.html#a31d194004e37b267d77fd335eeca7718">await_suspend</a> (<a class="el" href="struct_engine_1_1_threading_1_1_task_handle.html">TaskHandle</a> handle) noexcept</td></tr>
 <tr class="separator:a31d194004e37b267d77fd335eeca7718"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a95c885e03f6126f44de307a39b702085"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_threading_1_1_task_future.html">TaskFuture</a>&lt; <a class="el" href="struct_engine_1_1_threading_1_1_task.html#ad4e6d0e81657fff24c7f29178d23ca55">T</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_task.html#a95c885e03f6126f44de307a39b702085">get_future</a> ()</td></tr>
 <tr class="separator:a95c885e03f6126f44de307a39b702085"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abebed827ded4084f525653ff73beba68"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_task.html#abebed827ded4084f525653ff73beba68">set_future</a> (<a class="el" href="struct_engine_1_1_threading_1_1_task_future.html">TaskFuture</a>&lt; <a class="el" href="struct_engine_1_1_threading_1_1_task.html#ad4e6d0e81657fff24c7f29178d23ca55">T</a> &gt; fut)</td></tr>
+<tr class="memitem:abebed827ded4084f525653ff73beba68"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_task.html#abebed827ded4084f525653ff73beba68">set_future</a> (<a class="el" href="struct_engine_1_1_threading_1_1_task_future.html">TaskFuture</a>&lt; <a class="el" href="struct_engine_1_1_threading_1_1_task.html#ad4e6d0e81657fff24c7f29178d23ca55">T</a> &gt; fut)</td></tr>
 <tr class="separator:abebed827ded4084f525653ff73beba68"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8e57badb5183de9f5f6bfc9fcd297908"><td class="memTemplParams" colspan="2">template&lt;typename F &gt; </td></tr>
 <tr class="memitem:a8e57badb5183de9f5f6bfc9fcd297908"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_threading_1_1_task.html">Task</a>&lt; std::invoke_result_t&lt; F &gt;, Immediate &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_task.html#a8e57badb5183de9f5f6bfc9fcd297908">then</a> (F &amp;&amp;f) &amp;&amp;</td></tr>
@@ -464,7 +464,7 @@ template&lt;typename _T , bool Immediate&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="struct_engine_1_1_threading_1_1_task.html">Engine::Threading::Task</a>&lt; _T, Immediate &gt;::set_future </td>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> <a class="el" href="struct_engine_1_1_threading_1_1_task.html">Engine::Threading::Task</a>&lt; _T, Immediate &gt;::set_future </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="struct_engine_1_1_threading_1_1_task_future.html">TaskFuture</a>&lt; <a class="el" href="struct_engine_1_1_threading_1_1_task.html#ad4e6d0e81657fff24c7f29178d23ca55">T</a> &gt;&#160;</td>
           <td class="paramname"><em>fut</em></td><td>)</td>
@@ -547,7 +547,7 @@ template&lt;typename _T , bool Immediate&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structstd_1_1coroutine__handle.html">std::coroutine_handle</a> <a class="el" href="struct_engine_1_1_threading_1_1_task.html">Engine::Threading::Task</a>&lt; _T, Immediate &gt;::await_suspend </td>
+          <td class="memname">std::coroutine_handle <a class="el" href="struct_engine_1_1_threading_1_1_task.html">Engine::Threading::Task</a>&lt; _T, Immediate &gt;::await_suspend </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="struct_engine_1_1_threading_1_1_task_handle.html">TaskHandle</a>&#160;</td>
           <td class="paramname"><em>handle</em></td><td>)</td>
@@ -654,7 +654,7 @@ template&lt;typename T2 , bool I&gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu May 21 2026 17:44:03 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Thu May 21 2026 19:49:41 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

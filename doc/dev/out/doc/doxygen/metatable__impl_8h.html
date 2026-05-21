@@ -287,13 +287,13 @@ Macros</h2></td></tr>
 <tr class="separator:aaa5d0a488a7eb3cc4eac6edda121fb1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7437ca71bab7d29fccf28d990b09dbe1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="metatable__impl_8h.html#a7437ca71bab7d29fccf28d990b09dbe1">MEMBER_EX</a>(Idx,  M)&#160;&#160;&#160;    <a class="el" href="metatable__impl_8h.html#a15b028fdc6c6100dd55ed655baf6383c">NAMED_MEMBER_EX</a>(Idx, M, M)</td></tr>
 <tr class="separator:a7437ca71bab7d29fccf28d990b09dbe1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a88e567b1b7603ee46a1d7a70c78fda29"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="metatable__impl_8h.html#a88e567b1b7603ee46a1d7a70c78fda29">METATABLE_BEGIN</a>(T)&#160;&#160;&#160;    <a class="el" href="metatable__impl_8h.html#aac07617ba0c206bbe3d8c5090fc67524">METATABLE_BEGIN_BASE</a>(T, void)</td></tr>
+<tr class="memitem:a88e567b1b7603ee46a1d7a70c78fda29"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="metatable__impl_8h.html#a88e567b1b7603ee46a1d7a70c78fda29">METATABLE_BEGIN</a>(T)&#160;&#160;&#160;    <a class="el" href="metatable__impl_8h.html#aac07617ba0c206bbe3d8c5090fc67524">METATABLE_BEGIN_BASE</a>(T, <a class="el" href="classvoid.html">void</a>)</td></tr>
 <tr class="separator:a88e567b1b7603ee46a1d7a70c78fda29"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aac07617ba0c206bbe3d8c5090fc67524"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="metatable__impl_8h.html#aac07617ba0c206bbe3d8c5090fc67524">METATABLE_BEGIN_BASE</a>(T,  Base)&#160;&#160;&#160;    <a class="el" href="metatable__impl_8h.html#a80972e7a74edd2b6bd6720b2558cd9a1">METATABLE_BEGIN_BASE_EX</a>(, T, Base)</td></tr>
 <tr class="separator:aac07617ba0c206bbe3d8c5090fc67524"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a80972e7a74edd2b6bd6720b2558cd9a1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="metatable__impl_8h.html#a80972e7a74edd2b6bd6720b2558cd9a1">METATABLE_BEGIN_BASE_EX</a>(Idx,  T,  Base)</td></tr>
 <tr class="separator:a80972e7a74edd2b6bd6720b2558cd9a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a52c659aeb085c1618de0f742f6271086"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="metatable__impl_8h.html#a52c659aeb085c1618de0f742f6271086">METATABLE_BEGIN_EX</a>(Idx,  T)&#160;&#160;&#160;    <a class="el" href="metatable__impl_8h.html#a80972e7a74edd2b6bd6720b2558cd9a1">METATABLE_BEGIN_BASE_EX</a>(Idx, T, void)</td></tr>
+<tr class="memitem:a52c659aeb085c1618de0f742f6271086"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="metatable__impl_8h.html#a52c659aeb085c1618de0f742f6271086">METATABLE_BEGIN_EX</a>(Idx,  T)&#160;&#160;&#160;    <a class="el" href="metatable__impl_8h.html#a80972e7a74edd2b6bd6720b2558cd9a1">METATABLE_BEGIN_BASE_EX</a>(Idx, T, <a class="el" href="classvoid.html">void</a>)</td></tr>
 <tr class="separator:a52c659aeb085c1618de0f742f6271086"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad560d52ce35d05b91635c74e915565af"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="metatable__impl_8h.html#ad560d52ce35d05b91635c74e915565af">METATABLE_DYNAMIC_END</a>(Builder,  Init,  T)</td></tr>
 <tr class="separator:ad560d52ce35d05b91635c74e915565af"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -346,7 +346,7 @@ Functions</h2></td></tr>
 <tr class="memitem:aa46525599f72c9ca7229efe248c9eb3d"><td class="memTemplItemLeft" align="right" valign="top">constexpr Accessor&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#aa46525599f72c9ca7229efe248c9eb3d">Engine::property</a> (const char *name)</td></tr>
 <tr class="separator:aa46525599f72c9ca7229efe248c9eb3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a681ff4fcd3e6e5ce78247f305ebc5bb2"><td class="memTemplParams" colspan="2">template&lt;auto P, typename Scope , typename T &gt; </td></tr>
-<tr class="memitem:a681ff4fcd3e6e5ce78247f305ebc5bb2"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#a681ff4fcd3e6e5ce78247f305ebc5bb2">Engine::setField</a> (Scope *s, const T &amp;t)</td></tr>
+<tr class="memitem:a681ff4fcd3e6e5ce78247f305ebc5bb2"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#a681ff4fcd3e6e5ce78247f305ebc5bb2">Engine::setField</a> (Scope *s, const T &amp;t)</td></tr>
 <tr class="separator:a681ff4fcd3e6e5ce78247f305ebc5bb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
@@ -361,7 +361,7 @@ Functions</h2></td></tr>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">T</td><td>)</td>
-          <td>&#160;&#160;&#160;    <a class="el" href="metatable__impl_8h.html#aac07617ba0c206bbe3d8c5090fc67524">METATABLE_BEGIN_BASE</a>(T, void)</td>
+          <td>&#160;&#160;&#160;    <a class="el" href="metatable__impl_8h.html#aac07617ba0c206bbe3d8c5090fc67524">METATABLE_BEGIN_BASE</a>(T, <a class="el" href="classvoid.html">void</a>)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -417,7 +417,7 @@ Functions</h2></td></tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;    <a class="el" href="metatable__impl_8h.html#a80972e7a74edd2b6bd6720b2558cd9a1">METATABLE_BEGIN_BASE_EX</a>(Idx, T, void)</td>
+          <td></td><td>&#160;&#160;&#160;    <a class="el" href="metatable__impl_8h.html#a80972e7a74edd2b6bd6720b2558cd9a1">METATABLE_BEGIN_BASE_EX</a>(Idx, T, <a class="el" href="classvoid.html">void</a>)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -831,7 +831,7 @@ Functions</h2></td></tr>
 <div class="ttc" id="alinestruct_8h_html_a4ae633e4399b0687c9bdf030cbf5b2a2"><div class="ttname"><a href="linestruct_8h.html#a4ae633e4399b0687c9bdf030cbf5b2a2">GET_STRUCT</a></div><div class="ttdeci">#define GET_STRUCT(Tag,...)</div><div class="ttdef"><b>Definition:</b> linestruct.h:31</div></div>
 <div class="ttc" id="amacros_8h_html_afa8624400132dca5f52f93deec70706b"><div class="ttname"><a href="macros_8h.html#afa8624400132dca5f52f93deec70706b">SINGLE_ARG</a></div><div class="ttdeci">#define SINGLE_ARG(...)</div><div class="ttdef"><b>Definition:</b> macros.h:16</div></div>
 <div class="ttc" id="anamespace_engine_1_1_input_1_1_key_html_ac2138c44352d486427576a0561382001a5be4eda2709b93ac0ddb6366c913c002"><div class="ttname"><a href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a5be4eda2709b93ac0ddb6366c913c002">Engine::Input::Key::T</a></div><div class="ttdeci">@ T</div><div class="ttdef"><b>Definition:</b> inputevents.h:65</div></div>
-<div class="ttc" id="anamespace_engine_html_a6638c07372d57d8a8da119203ae1e419"><div class="ttname"><a href="namespace_engine.html#a6638c07372d57d8a8da119203ae1e419">Engine::type_holder</a></div><div class="ttdeci">const constexpr type_holder_t&lt; T &gt; type_holder</div><div class="ttdef"><b>Definition:</b> templates.h:155</div></div>
+<div class="ttc" id="anamespace_engine_html_a6638c07372d57d8a8da119203ae1e419"><div class="ttname"><a href="namespace_engine.html#a6638c07372d57d8a8da119203ae1e419">Engine::type_holder</a></div><div class="ttdeci">const constexpr type_holder_t&lt; T &gt; type_holder</div><div class="ttdef"><b>Definition:</b> templates.h:135</div></div>
 <div class="ttc" id="anamespace_meta___engine_1_1_function_table_html_affba173fcf5a9b367fb5bb3b16975206"><div class="ttname"><a href="namespace_meta___engine_1_1_function_table.html#affba173fcf5a9b367fb5bb3b16975206">Meta_Engine::FunctionTable::__reg</a></div><div class="ttdeci">static ::Engine::MetaTableRegistrator&lt; Engine::FunctionTable &gt; __reg</div><div class="ttdef"><b>Definition:</b> functiontable.cpp:8</div></div>
 </div><!-- fragment -->
 </div>
@@ -1317,7 +1317,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu May 21 2026 17:44:00 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Thu May 21 2026 19:49:37 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

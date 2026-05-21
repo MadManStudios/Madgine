@@ -264,7 +264,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ab7edffd21b5ae57f680dec24b691d09e"><td class="memTemplItemLeft" align="right" valign="top">constexpr const T &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_bit_variant.html#ab7edffd21b5ae57f680dec24b691d09e">as</a> () const</td></tr>
 <tr class="separator:ab7edffd21b5ae57f680dec24b691d09e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab4d7b033d2813af1dd6b53405bfa7b61"><td class="memTemplParams" colspan="2">template&lt;size_t I, typename... Args&gt; </td></tr>
-<tr class="memitem:ab4d7b033d2813af1dd6b53405bfa7b61"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_bit_variant.html#ab4d7b033d2813af1dd6b53405bfa7b61">emplace</a> (Args &amp;&amp;...args)</td></tr>
+<tr class="memitem:ab4d7b033d2813af1dd6b53405bfa7b61"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_bit_variant.html#ab4d7b033d2813af1dd6b53405bfa7b61">emplace</a> (Args &amp;&amp;...args)</td></tr>
 <tr class="separator:ab4d7b033d2813af1dd6b53405bfa7b61"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac4af37917bc8c3c82bccf709f4b1e9ff"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:ac4af37917bc8c3c82bccf709f4b1e9ff"><td class="memTemplItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_bit_variant.html#ac4af37917bc8c3c82bccf709f4b1e9ff">is</a> () const</td></tr>
@@ -282,7 +282,7 @@ Public Member Functions</h2></td></tr>
 Static Public Attributes</h2></td></tr>
 <tr class="memitem:a7de6a51d1c8af0d277d93984a58e53f5"><td class="memItemLeft" align="right" valign="top">static constexpr size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_bit_variant.html#a7de6a51d1c8af0d277d93984a58e53f5">FreeBitCount</a> = sizeof(<a class="el" href="struct_engine_1_1_bit_variant.html#aa70df8214952ead69220bfc01b3a62a7">type</a>) * 8 - <a class="el" href="struct_engine_1_1_bit_variant.html#aa786ff483126a6035b95b0ae33f649eb">TotalBitCount</a></td></tr>
 <tr class="separator:a7de6a51d1c8af0d277d93984a58e53f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a34069d533ba9a5f6fdf9f01ced00b2ec"><td class="memItemLeft" align="right" valign="top">static constexpr size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_bit_variant.html#a34069d533ba9a5f6fdf9f01ced00b2ec">NeededBitCount</a> = <a class="el" href="namespacestd.html#a39bd73d98b6159c1a131b53e664ee6c9">std::bit_width</a>(sizeof...(<a class="el" href="class_engine_1_1_ty.html">Ty</a>) + 1 - 1)</td></tr>
+<tr class="memitem:a34069d533ba9a5f6fdf9f01ced00b2ec"><td class="memItemLeft" align="right" valign="top">static constexpr size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_bit_variant.html#a34069d533ba9a5f6fdf9f01ced00b2ec">NeededBitCount</a> = std::bit_width(sizeof...(<a class="el" href="class_engine_1_1_ty.html">Ty</a>) + 1 - 1)</td></tr>
 <tr class="separator:a34069d533ba9a5f6fdf9f01ced00b2ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa786ff483126a6035b95b0ae33f649eb"><td class="memItemLeft" align="right" valign="top">static constexpr size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_bit_variant.html#aa786ff483126a6035b95b0ae33f649eb">TotalBitCount</a> = std::max({ sizeof(<a class="el" href="class_engine_1_1_ty.html">Ty</a>) * 8 - <a class="el" href="namespace_engine.html#a2e2a837c1f380637fb8ffd7713271066">FreeBitCount_v</a>&lt;<a class="el" href="class_engine_1_1_ty.html">Ty</a>&gt;... }) + <a class="el" href="struct_engine_1_1_bit_variant.html#a34069d533ba9a5f6fdf9f01ced00b2ec">NeededBitCount</a></td></tr>
 <tr class="separator:aa786ff483126a6035b95b0ae33f649eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -490,7 +490,7 @@ template&lt;size_t I, typename... Args&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="struct_engine_1_1_bit_variant.html">Engine::BitVariant</a>&lt; <a class="el" href="class_engine_1_1_ty.html">Ty</a> &gt;::emplace </td>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> <a class="el" href="struct_engine_1_1_bit_variant.html">Engine::BitVariant</a>&lt; <a class="el" href="class_engine_1_1_ty.html">Ty</a> &gt;::emplace </td>
           <td>(</td>
           <td class="paramtype">Args &amp;&amp;...&#160;</td>
           <td class="paramname"><em>args</em></td><td>)</td>
@@ -549,7 +549,7 @@ template&lt;typename... Ty&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr size_t <a class="el" href="struct_engine_1_1_bit_variant.html">Engine::BitVariant</a>&lt; <a class="el" href="class_engine_1_1_ty.html">Ty</a> &gt;::NeededBitCount = <a class="el" href="namespacestd.html#a39bd73d98b6159c1a131b53e664ee6c9">std::bit_width</a>(sizeof...(<a class="el" href="class_engine_1_1_ty.html">Ty</a>) + 1 - 1)</td>
+          <td class="memname">constexpr size_t <a class="el" href="struct_engine_1_1_bit_variant.html">Engine::BitVariant</a>&lt; <a class="el" href="class_engine_1_1_ty.html">Ty</a> &gt;::NeededBitCount = std::bit_width(sizeof...(<a class="el" href="class_engine_1_1_ty.html">Ty</a>) + 1 - 1)</td>
         </tr>
       </table>
   </td>
@@ -647,7 +647,7 @@ template&lt;typename... Ty&gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu May 21 2026 17:44:00 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Thu May 21 2026 19:49:38 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

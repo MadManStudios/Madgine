@@ -276,13 +276,13 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ab6350b18b9eddd8b9b7e8de27297eff7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4e8b7c580f65c4bb0abc27ccda6239c4"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_resources_1_1_resource_loader_interface.html#abbfbdb55d2443fa8aca1cfd5246a97aa">Base::Handle</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_virtual_resource_loader_base.html#a4e8b7c580f65c4bb0abc27ccda6239c4">refreshHandleVImpl</a> (const typename <a class="el" href="struct_engine_1_1_resources_1_1_resource_loader_interface.html#abbfbdb55d2443fa8aca1cfd5246a97aa">Base::Handle</a> &amp;handle)=0</td></tr>
 <tr class="separator:a4e8b7c580f65c4bb0abc27ccda6239c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a088f942e4df63c5f8b5c7f0e2261a043"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_virtual_resource_loader_base.html#a088f942e4df63c5f8b5c7f0e2261a043">resetHandleVImpl</a> (const typename <a class="el" href="struct_engine_1_1_resources_1_1_resource_loader_interface.html#abbfbdb55d2443fa8aca1cfd5246a97aa">Base::Handle</a> &amp;handle)=0</td></tr>
+<tr class="memitem:a088f942e4df63c5f8b5c7f0e2261a043"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_virtual_resource_loader_base.html#a088f942e4df63c5f8b5c7f0e2261a043">resetHandleVImpl</a> (const typename <a class="el" href="struct_engine_1_1_resources_1_1_resource_loader_interface.html#abbfbdb55d2443fa8aca1cfd5246a97aa">Base::Handle</a> &amp;handle)=0</td></tr>
 <tr class="separator:a088f942e4df63c5f8b5c7f0e2261a043"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6a4ccbd577a9e9beecdb6061e6cb9d8a"><td class="memItemLeft" align="right" valign="top">virtual std::vector&lt; const <a class="el" href="struct_engine_1_1_meta_table.html">MetaTable</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_virtual_resource_loader_base.html#a6a4ccbd577a9e9beecdb6061e6cb9d8a">resourceTypes</a> () const override</td></tr>
 <tr class="separator:a6a4ccbd577a9e9beecdb6061e6cb9d8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af1d7960096361c9f67de8b1992b60f13"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_virtual_resource_loader_base.html#af1d7960096361c9f67de8b1992b60f13">unloadVImpl</a> (std::unique_ptr&lt; _Data &gt; ptr)=0</td></tr>
+<tr class="memitem:af1d7960096361c9f67de8b1992b60f13"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_virtual_resource_loader_base.html#af1d7960096361c9f67de8b1992b60f13">unloadVImpl</a> (std::unique_ptr&lt; _Data &gt; ptr)=0</td></tr>
 <tr class="separator:af1d7960096361c9f67de8b1992b60f13"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2b6f258d0a449dcb81983dcc42ccc020"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_threading_1_1_task_future.html">Threading::TaskFuture</a>&lt; void &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_virtual_resource_loader_base.html#a2b6f258d0a449dcb81983dcc42ccc020">unloadVImpl</a> (typename <a class="el" href="struct_engine_1_1_resources_1_1_resource_loader_interface_1_1_resource.html">Base::Resource</a> *resource)=0</td></tr>
+<tr class="memitem:a2b6f258d0a449dcb81983dcc42ccc020"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_threading_1_1_task_future.html">Threading::TaskFuture</a>&lt; <a class="el" href="classvoid.html">void</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_virtual_resource_loader_base.html#a2b6f258d0a449dcb81983dcc42ccc020">unloadVImpl</a> (typename <a class="el" href="struct_engine_1_1_resources_1_1_resource_loader_interface_1_1_resource.html">Base::Resource</a> *resource)=0</td></tr>
 <tr class="separator:a2b6f258d0a449dcb81983dcc42ccc020"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
@@ -306,11 +306,11 @@ Static Public Member Functions</h2></td></tr>
 <tr class="separator:a3163797c997696a295a9ada27490ad02"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a17d72048330342d0fdac4e7001006c93"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="struct_engine_1_1_resources_1_1_resource_loader_interface.html#abbfbdb55d2443fa8aca1cfd5246a97aa">Base::Handle</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_virtual_resource_loader_base.html#a17d72048330342d0fdac4e7001006c93">refreshHandle</a> (const typename <a class="el" href="struct_engine_1_1_resources_1_1_resource_loader_interface.html#abbfbdb55d2443fa8aca1cfd5246a97aa">Base::Handle</a> &amp;handle, T *loader=&amp;<a class="el" href="struct_engine_1_1_resources_1_1_resource_loader_interface.html#a4864a12e80d8a1dd24d1c23464dbe4ac">Base::getSingleton</a>())</td></tr>
 <tr class="separator:a17d72048330342d0fdac4e7001006c93"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad717a90f8fd2d2071d467955258a3a68"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_virtual_resource_loader_base.html#ad717a90f8fd2d2071d467955258a3a68">resetHandle</a> (const typename <a class="el" href="struct_engine_1_1_resources_1_1_resource_loader_interface.html#abbfbdb55d2443fa8aca1cfd5246a97aa">Base::Handle</a> &amp;handle, T *loader=&amp;<a class="el" href="struct_engine_1_1_resources_1_1_resource_loader_interface.html#a4864a12e80d8a1dd24d1c23464dbe4ac">Base::getSingleton</a>())</td></tr>
+<tr class="memitem:ad717a90f8fd2d2071d467955258a3a68"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_virtual_resource_loader_base.html#ad717a90f8fd2d2071d467955258a3a68">resetHandle</a> (const typename <a class="el" href="struct_engine_1_1_resources_1_1_resource_loader_interface.html#abbfbdb55d2443fa8aca1cfd5246a97aa">Base::Handle</a> &amp;handle, T *loader=&amp;<a class="el" href="struct_engine_1_1_resources_1_1_resource_loader_interface.html#a4864a12e80d8a1dd24d1c23464dbe4ac">Base::getSingleton</a>())</td></tr>
 <tr class="separator:ad717a90f8fd2d2071d467955258a3a68"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5fc26ae2a8c34ddecf243bfb76b1038d"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_virtual_resource_loader_base.html#a5fc26ae2a8c34ddecf243bfb76b1038d">unload</a> (std::unique_ptr&lt; _Data &gt; ptr, T *loader=&amp;<a class="el" href="struct_engine_1_1_resources_1_1_resource_loader_interface.html#a4864a12e80d8a1dd24d1c23464dbe4ac">Base::getSingleton</a>())</td></tr>
+<tr class="memitem:a5fc26ae2a8c34ddecf243bfb76b1038d"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_virtual_resource_loader_base.html#a5fc26ae2a8c34ddecf243bfb76b1038d">unload</a> (std::unique_ptr&lt; _Data &gt; ptr, T *loader=&amp;<a class="el" href="struct_engine_1_1_resources_1_1_resource_loader_interface.html#a4864a12e80d8a1dd24d1c23464dbe4ac">Base::getSingleton</a>())</td></tr>
 <tr class="separator:a5fc26ae2a8c34ddecf243bfb76b1038d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a54a4294381c8910ac0842fb70a63b24c"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="struct_engine_1_1_threading_1_1_task_future.html">Threading::TaskFuture</a>&lt; void &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_virtual_resource_loader_base.html#a54a4294381c8910ac0842fb70a63b24c">unload</a> (typename <a class="el" href="struct_engine_1_1_resources_1_1_resource_loader_interface_1_1_resource.html">Base::Resource</a> *resource, T *loader=&amp;<a class="el" href="struct_engine_1_1_resources_1_1_resource_loader_interface.html#a4864a12e80d8a1dd24d1c23464dbe4ac">Base::getSingleton</a>())</td></tr>
+<tr class="memitem:a54a4294381c8910ac0842fb70a63b24c"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="struct_engine_1_1_threading_1_1_task_future.html">Threading::TaskFuture</a>&lt; <a class="el" href="classvoid.html">void</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_virtual_resource_loader_base.html#a54a4294381c8910ac0842fb70a63b24c">unload</a> (typename <a class="el" href="struct_engine_1_1_resources_1_1_resource_loader_interface_1_1_resource.html">Base::Resource</a> *resource, T *loader=&amp;<a class="el" href="struct_engine_1_1_resources_1_1_resource_loader_interface.html#a4864a12e80d8a1dd24d1c23464dbe4ac">Base::getSingleton</a>())</td></tr>
 <tr class="separator:a54a4294381c8910ac0842fb70a63b24c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Typedef Documentation</h2>
@@ -419,7 +419,7 @@ template&lt;typename T , typename _Data , typename _Container  = std::list&lt;Pl
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="struct_engine_1_1_threading_1_1_task_future.html">Threading::TaskFuture</a>&lt; void &gt; <a class="el" href="struct_engine_1_1_resources_1_1_virtual_resource_loader_base.html">Engine::Resources::VirtualResourceLoaderBase</a>&lt; T, _Data, _Container, _Storage &gt;::unload </td>
+          <td class="memname">static <a class="el" href="struct_engine_1_1_threading_1_1_task_future.html">Threading::TaskFuture</a>&lt; <a class="el" href="classvoid.html">void</a> &gt; <a class="el" href="struct_engine_1_1_resources_1_1_virtual_resource_loader_base.html">Engine::Resources::VirtualResourceLoaderBase</a>&lt; T, _Data, _Container, _Storage &gt;::unload </td>
           <td>(</td>
           <td class="paramtype">typename <a class="el" href="struct_engine_1_1_resources_1_1_resource_loader_interface_1_1_resource.html">Base::Resource</a> *&#160;</td>
           <td class="paramname"><em>resource</em>, </td>
@@ -457,7 +457,7 @@ template&lt;typename T , typename _Data , typename _Container  = std::list&lt;Pl
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static void <a class="el" href="struct_engine_1_1_resources_1_1_virtual_resource_loader_base.html">Engine::Resources::VirtualResourceLoaderBase</a>&lt; T, _Data, _Container, _Storage &gt;::unload </td>
+          <td class="memname">static <a class="el" href="classvoid.html">void</a> <a class="el" href="struct_engine_1_1_resources_1_1_virtual_resource_loader_base.html">Engine::Resources::VirtualResourceLoaderBase</a>&lt; T, _Data, _Container, _Storage &gt;::unload </td>
           <td>(</td>
           <td class="paramtype">std::unique_ptr&lt; _Data &gt;&#160;</td>
           <td class="paramname"><em>ptr</em>, </td>
@@ -495,7 +495,7 @@ template&lt;typename T , typename _Data , typename _Container  = std::list&lt;Pl
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static void <a class="el" href="struct_engine_1_1_resources_1_1_virtual_resource_loader_base.html">Engine::Resources::VirtualResourceLoaderBase</a>&lt; T, _Data, _Container, _Storage &gt;::resetHandle </td>
+          <td class="memname">static <a class="el" href="classvoid.html">void</a> <a class="el" href="struct_engine_1_1_resources_1_1_virtual_resource_loader_base.html">Engine::Resources::VirtualResourceLoaderBase</a>&lt; T, _Data, _Container, _Storage &gt;::resetHandle </td>
           <td>(</td>
           <td class="paramtype">const typename <a class="el" href="struct_engine_1_1_resources_1_1_resource_loader_interface.html#abbfbdb55d2443fa8aca1cfd5246a97aa">Base::Handle</a> &amp;&#160;</td>
           <td class="paramname"><em>handle</em>, </td>
@@ -951,7 +951,7 @@ template&lt;typename T , typename _Data , typename _Container  = std::list&lt;Pl
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual <a class="el" href="struct_engine_1_1_threading_1_1_task_future.html">Threading::TaskFuture</a>&lt; void &gt; <a class="el" href="struct_engine_1_1_resources_1_1_virtual_resource_loader_base.html">Engine::Resources::VirtualResourceLoaderBase</a>&lt; T, _Data, _Container, _Storage &gt;::unloadVImpl </td>
+          <td class="memname">virtual <a class="el" href="struct_engine_1_1_threading_1_1_task_future.html">Threading::TaskFuture</a>&lt; <a class="el" href="classvoid.html">void</a> &gt; <a class="el" href="struct_engine_1_1_resources_1_1_virtual_resource_loader_base.html">Engine::Resources::VirtualResourceLoaderBase</a>&lt; T, _Data, _Container, _Storage &gt;::unloadVImpl </td>
           <td>(</td>
           <td class="paramtype">typename <a class="el" href="struct_engine_1_1_resources_1_1_resource_loader_interface_1_1_resource.html">Base::Resource</a> *&#160;</td>
           <td class="paramname"><em>resource</em></td><td>)</td>
@@ -979,7 +979,7 @@ template&lt;typename T , typename _Data , typename _Container  = std::list&lt;Pl
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual void <a class="el" href="struct_engine_1_1_resources_1_1_virtual_resource_loader_base.html">Engine::Resources::VirtualResourceLoaderBase</a>&lt; T, _Data, _Container, _Storage &gt;::unloadVImpl </td>
+          <td class="memname">virtual <a class="el" href="classvoid.html">void</a> <a class="el" href="struct_engine_1_1_resources_1_1_virtual_resource_loader_base.html">Engine::Resources::VirtualResourceLoaderBase</a>&lt; T, _Data, _Container, _Storage &gt;::unloadVImpl </td>
           <td>(</td>
           <td class="paramtype">std::unique_ptr&lt; _Data &gt;&#160;</td>
           <td class="paramname"><em>ptr</em></td><td>)</td>
@@ -1007,7 +1007,7 @@ template&lt;typename T , typename _Data , typename _Container  = std::list&lt;Pl
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual void <a class="el" href="struct_engine_1_1_resources_1_1_virtual_resource_loader_base.html">Engine::Resources::VirtualResourceLoaderBase</a>&lt; T, _Data, _Container, _Storage &gt;::resetHandleVImpl </td>
+          <td class="memname">virtual <a class="el" href="classvoid.html">void</a> <a class="el" href="struct_engine_1_1_resources_1_1_virtual_resource_loader_base.html">Engine::Resources::VirtualResourceLoaderBase</a>&lt; T, _Data, _Container, _Storage &gt;::resetHandleVImpl </td>
           <td>(</td>
           <td class="paramtype">const typename <a class="el" href="struct_engine_1_1_resources_1_1_resource_loader_interface.html#abbfbdb55d2443fa8aca1cfd5246a97aa">Base::Handle</a> &amp;&#160;</td>
           <td class="paramname"><em>handle</em></td><td>)</td>
@@ -1123,7 +1123,7 @@ template&lt;typename T , typename _Data , typename _Container  = std::list&lt;Pl
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu May 21 2026 17:44:03 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Thu May 21 2026 19:49:40 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

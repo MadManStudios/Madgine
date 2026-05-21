@@ -265,16 +265,16 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a946d8f282d9b43882c8b4414ffbe4419"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_awaitable_sender.html#a946d8f282d9b43882c8b4414ffbe4419">await_suspend</a> (Handle handle)</td></tr>
 <tr class="separator:a946d8f282d9b43882c8b4414ffbe4419"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5be3e45c662c861b9b4ba906f75e4d48"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; <br />
-requires (InstanceOf&lt;Handle, <a class="el" href="structstd_1_1coroutine__handle.html">std::coroutine_handle</a>&gt;)</td></tr>
-<tr class="memitem:a5be3e45c662c861b9b4ba906f75e4d48"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_awaitable_sender.html#a5be3e45c662c861b9b4ba906f75e4d48">await_suspend</a> (<a class="el" href="structstd_1_1coroutine__handle.html">std::coroutine_handle</a>&lt; T &gt; handle)</td></tr>
+requires (InstanceOf&lt;Handle, std::coroutine_handle&gt;)</td></tr>
+<tr class="memitem:a5be3e45c662c861b9b4ba906f75e4d48"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_awaitable_sender.html#a5be3e45c662c861b9b4ba906f75e4d48">await_suspend</a> (std::coroutine_handle&lt; T &gt; handle)</td></tr>
 <tr class="separator:a5be3e45c662c861b9b4ba906f75e4d48"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a67835b95651c5d2b6df0932379be3952"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_awaitable_sender.html#a67835b95651c5d2b6df0932379be3952">set_done</a> ()</td></tr>
+<tr class="memitem:a67835b95651c5d2b6df0932379be3952"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_awaitable_sender.html#a67835b95651c5d2b6df0932379be3952">set_done</a> ()</td></tr>
 <tr class="separator:a67835b95651c5d2b6df0932379be3952"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a23ecfa4b03ebce4b6af3499968bffc18"><td class="memTemplParams" colspan="2">template&lt;typename... R&gt; </td></tr>
-<tr class="memitem:a23ecfa4b03ebce4b6af3499968bffc18"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_awaitable_sender.html#a23ecfa4b03ebce4b6af3499968bffc18">set_error</a> (R &amp;&amp;...error)</td></tr>
+<tr class="memitem:a23ecfa4b03ebce4b6af3499968bffc18"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_awaitable_sender.html#a23ecfa4b03ebce4b6af3499968bffc18">set_error</a> (R &amp;&amp;...error)</td></tr>
 <tr class="separator:a23ecfa4b03ebce4b6af3499968bffc18"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abaa4370067ef278d3f62a2664b6b71d0"><td class="memTemplParams" colspan="2">template&lt;typename... V&gt; </td></tr>
-<tr class="memitem:abaa4370067ef278d3f62a2664b6b71d0"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_awaitable_sender.html#abaa4370067ef278d3f62a2664b6b71d0">set_value</a> (V &amp;&amp;...v)</td></tr>
+<tr class="memitem:abaa4370067ef278d3f62a2664b6b71d0"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_awaitable_sender.html#abaa4370067ef278d3f62a2664b6b71d0">set_value</a> (V &amp;&amp;...v)</td></tr>
 <tr class="separator:abaa4370067ef278d3f62a2664b6b71d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
@@ -419,7 +419,7 @@ template&lt;typename <a class="el" href="struct_engine_1_1_execution_1_1_sender.
 template&lt;typename <a class="el" href="struct_engine_1_1_execution_1_1_sender.html">Sender</a> , typename Context , typename Handle &gt; </div>
 <div class="memtemplate">
 template&lt;typename T &gt; <br />
-requires (InstanceOf&lt;Handle, <a class="el" href="structstd_1_1coroutine__handle.html">std::coroutine_handle</a>&gt;)</div>
+requires (InstanceOf&lt;Handle, std::coroutine_handle&gt;)</div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -427,7 +427,7 @@ requires (InstanceOf&lt;Handle, <a class="el" href="structstd_1_1coroutine__hand
         <tr>
           <td class="memname">bool <a class="el" href="struct_engine_1_1_execution_1_1_awaitable_sender.html">Engine::Execution::AwaitableSender</a>&lt; <a class="el" href="struct_engine_1_1_execution_1_1_sender.html">Sender</a>, Context, Handle &gt;::await_suspend </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structstd_1_1coroutine__handle.html">std::coroutine_handle</a>&lt; T &gt;&#160;</td>
+          <td class="paramtype">std::coroutine_handle&lt; T &gt;&#160;</td>
           <td class="paramname"><em>handle</em></td><td>)</td>
           <td></td>
         </tr>
@@ -510,7 +510,7 @@ template&lt;typename... V&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="struct_engine_1_1_execution_1_1_awaitable_sender.html">Engine::Execution::AwaitableSender</a>&lt; <a class="el" href="struct_engine_1_1_execution_1_1_sender.html">Sender</a>, Context, Handle &gt;::set_value </td>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> <a class="el" href="struct_engine_1_1_execution_1_1_awaitable_sender.html">Engine::Execution::AwaitableSender</a>&lt; <a class="el" href="struct_engine_1_1_execution_1_1_sender.html">Sender</a>, Context, Handle &gt;::set_value </td>
           <td>(</td>
           <td class="paramtype">V &amp;&amp;...&#160;</td>
           <td class="paramname"><em>v</em></td><td>)</td>
@@ -538,7 +538,7 @@ template&lt;typename <a class="el" href="struct_engine_1_1_execution_1_1_sender.
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="struct_engine_1_1_execution_1_1_awaitable_sender.html">Engine::Execution::AwaitableSender</a>&lt; <a class="el" href="struct_engine_1_1_execution_1_1_sender.html">Sender</a>, Context, Handle &gt;::set_done </td>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> <a class="el" href="struct_engine_1_1_execution_1_1_awaitable_sender.html">Engine::Execution::AwaitableSender</a>&lt; <a class="el" href="struct_engine_1_1_execution_1_1_sender.html">Sender</a>, Context, Handle &gt;::set_done </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -567,7 +567,7 @@ template&lt;typename... R&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="struct_engine_1_1_execution_1_1_awaitable_sender.html">Engine::Execution::AwaitableSender</a>&lt; <a class="el" href="struct_engine_1_1_execution_1_1_sender.html">Sender</a>, Context, Handle &gt;::set_error </td>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> <a class="el" href="struct_engine_1_1_execution_1_1_awaitable_sender.html">Engine::Execution::AwaitableSender</a>&lt; <a class="el" href="struct_engine_1_1_execution_1_1_sender.html">Sender</a>, Context, Handle &gt;::set_error </td>
           <td>(</td>
           <td class="paramtype">R &amp;&amp;...&#160;</td>
           <td class="paramname"><em>error</em></td><td>)</td>
@@ -589,7 +589,7 @@ template&lt;typename... R&gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu May 21 2026 17:44:02 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Thu May 21 2026 19:49:39 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

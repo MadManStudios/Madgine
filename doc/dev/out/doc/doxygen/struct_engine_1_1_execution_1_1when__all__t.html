@@ -258,7 +258,7 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1when__all__t_1_1state.html">state</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1when__all__t_1_1state_3_01_rec_00_01std_1_1index__sequence_3_01_i5deeaae98a74e3d08cd766130b7ce970.html">state&lt; Rec, std::index_sequence&lt; Is... &gt;, Sender... &gt;</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><b>state&lt; Rec, std::index_sequence&lt; Is... &gt;, Sender... &gt;</b></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
@@ -267,7 +267,7 @@ Public Types</h2></td></tr>
 <tr class="memitem:a895f45708617613eef2db60540294714"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1when__all__t.html#a895f45708617613eef2db60540294714">common_result_type_t</a> = typename <a class="el" href="struct_engine_1_1type__pack.html">type_pack</a>&lt; typename Sender::result_type... &gt;::template filter&lt; <a class="el" href="struct_engine_1_1_execution_1_1when__all__t.html#a7aa68d56a1318244e37b52e4d6138b4a">helper</a> &gt;::template instantiate&lt; std::common_type_t &gt;</td></tr>
 <tr class="separator:a895f45708617613eef2db60540294714"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7aa68d56a1318244e37b52e4d6138b4a"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:a7aa68d56a1318244e37b52e4d6138b4a"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1when__all__t.html#a7aa68d56a1318244e37b52e4d6138b4a">helper</a> = std::negation&lt; std::is_same&lt; T, void &gt; &gt;</td></tr>
+<tr class="memitem:a7aa68d56a1318244e37b52e4d6138b4a"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1when__all__t.html#a7aa68d56a1318244e37b52e4d6138b4a">helper</a> = std::negation&lt; std::is_same&lt; T, <a class="el" href="classvoid.html">void</a> &gt; &gt;</td></tr>
 <tr class="separator:a7aa68d56a1318244e37b52e4d6138b4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a67c937a06e12115105355969f3508735"><td class="memTemplParams" colspan="2">template&lt;size_t I, typename <a class="el" href="struct_engine_1_1_execution_1_1_sender.html">Sender</a> , typename Rec , typename Is , typename... Senders&gt; </td></tr>
 <tr class="memitem:a67c937a06e12115105355969f3508735"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1when__all__t.html#a67c937a06e12115105355969f3508735">inner_state</a> = <a class="el" href="namespace_engine_1_1_execution.html#a0607edaba960b3bfd37ca2e476a3a362">connect_result_t</a>&lt; <a class="el" href="struct_engine_1_1_execution_1_1_sender.html">Sender</a>, <a class="el" href="struct_engine_1_1_execution_1_1when__all__t_1_1receiver.html">receiver</a>&lt; I, Rec, Is, Senders... &gt; &gt;</td></tr>
@@ -296,7 +296,7 @@ Friends</h2></td></tr>
 template&lt;typename T &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="struct_engine_1_1_execution_1_1when__all__t.html#a7aa68d56a1318244e37b52e4d6138b4a">Engine::Execution::when_all_t::helper</a> =  std::negation&lt;std::is_same&lt;T, void&gt; &gt;</td>
+          <td class="memname">using <a class="el" href="struct_engine_1_1_execution_1_1when__all__t.html#a7aa68d56a1318244e37b52e4d6138b4a">Engine::Execution::when_all_t::helper</a> =  std::negation&lt;std::is_same&lt;T, <a class="el" href="classvoid.html">void</a>&gt; &gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -411,7 +411,7 @@ template&lt;typename... Sender&gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu May 21 2026 17:44:02 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Thu May 21 2026 19:49:40 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

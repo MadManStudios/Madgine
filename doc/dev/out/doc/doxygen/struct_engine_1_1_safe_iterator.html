@@ -256,43 +256,29 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:af9a7d506d30cc26d1776dc5db7e08f57"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_safe_iterator.html#af9a7d506d30cc26d1776dc5db7e08f57">const_iterator</a> = <a class="el" href="struct_engine_1_1_safe_iterator_1_1_iterator_impl.html">IteratorImpl</a>&lt; typename <a class="el" href="struct_engine_1_1derive__iterator.html#a1754201fb28ba51f6c34210d658f7f2d">traits::const_iterator</a> &gt;</td></tr>
-<tr class="separator:af9a7d506d30cc26d1776dc5db7e08f57"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae83cf0d989e376003e116d40bc0d4032"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_safe_iterator.html#ae83cf0d989e376003e116d40bc0d4032">const_reverse_iterator</a> = <a class="el" href="struct_engine_1_1_safe_iterator_1_1_iterator_impl.html">IteratorImpl</a>&lt; typename <a class="el" href="struct_engine_1_1derive__iterator.html#a987a1cde882c91709ce5ef3975ba4161">traits::const_reverse_iterator</a> &gt;</td></tr>
-<tr class="separator:ae83cf0d989e376003e116d40bc0d4032"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acc024a5bba2942389021fc602a5e11fc"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_safe_iterator.html#acc024a5bba2942389021fc602a5e11fc">iterator</a> = <a class="el" href="struct_engine_1_1_safe_iterator_1_1_iterator_impl.html">IteratorImpl</a>&lt; typename <a class="el" href="struct_engine_1_1derive__iterator.html#a1754201fb28ba51f6c34210d658f7f2d">traits::const_iterator</a> &gt;</td></tr>
-<tr class="separator:acc024a5bba2942389021fc602a5e11fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa58b66a139d7c37ea35e38e29d324f81"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_safe_iterator.html#aa58b66a139d7c37ea35e38e29d324f81">reverse_iterator</a> = <a class="el" href="struct_engine_1_1_safe_iterator_1_1_iterator_impl.html">IteratorImpl</a>&lt; typename <a class="el" href="struct_engine_1_1derive__iterator.html#a7b9330bfb9bf0f52918c244ea98e8297">traits::reverse_iterator</a> &gt;</td></tr>
-<tr class="separator:aa58b66a139d7c37ea35e38e29d324f81"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae2ce21838d4084fe858f12441da2c8d3"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_safe_iterator.html#ae2ce21838d4084fe858f12441da2c8d3">traits</a> = <a class="el" href="struct_engine_1_1derive__iterator.html">derive_iterator</a>&lt; std::vector&lt; <a class="el" href="struct_engine_1_1_safe_iterator.html#a21abe5f4941a29dad1f8e14efed64053">value_type</a> &gt; &gt;</td></tr>
-<tr class="separator:ae2ce21838d4084fe858f12441da2c8d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a21abe5f4941a29dad1f8e14efed64053"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_safe_iterator.html#a21abe5f4941a29dad1f8e14efed64053">value_type</a> = typename <a class="el" href="struct_engine_1_1derive__iterator.html">derive_iterator</a>&lt; T &gt;::iterator::value_type</td></tr>
-<tr class="separator:a21abe5f4941a29dad1f8e14efed64053"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2cc42e1a0b6483303c6b5e91d4dfd544"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_safe_iterator.html#a2cc42e1a0b6483303c6b5e91d4dfd544">const_iterator</a> = <a class="el" href="struct_engine_1_1_safe_iterator_1_1_iterator_impl.html">IteratorImpl</a>&lt; std::ranges::const_iterator_t&lt; T &gt; &gt;</td></tr>
+<tr class="separator:a2cc42e1a0b6483303c6b5e91d4dfd544"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a767076ef5d2a8c650e9acd47defe5e00"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_safe_iterator.html#a767076ef5d2a8c650e9acd47defe5e00">iterator</a> = <a class="el" href="struct_engine_1_1_safe_iterator_1_1_iterator_impl.html">IteratorImpl</a>&lt; std::ranges::iterator_t&lt; T &gt; &gt;</td></tr>
+<tr class="separator:a767076ef5d2a8c650e9acd47defe5e00"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad688fdec41400e2bfb63bad464b6fa49"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_safe_iterator.html#ad688fdec41400e2bfb63bad464b6fa49">value_type</a> = std::ranges::range_value_t&lt; T &gt;</td></tr>
+<tr class="separator:ad688fdec41400e2bfb63bad464b6fa49"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a56f9b88d7d556fdcd38651f048f45709"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_safe_iterator.html#a56f9b88d7d556fdcd38651f048f45709">SafeIterator</a> (T &amp;&amp;t)</td></tr>
 <tr class="separator:a56f9b88d7d556fdcd38651f048f45709"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7bdc20d84810db84a43a5e538ebd800b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_safe_iterator.html#acc024a5bba2942389021fc602a5e11fc">iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_safe_iterator.html#a7bdc20d84810db84a43a5e538ebd800b">begin</a> ()</td></tr>
+<tr class="memitem:a7bdc20d84810db84a43a5e538ebd800b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_safe_iterator.html#a767076ef5d2a8c650e9acd47defe5e00">iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_safe_iterator.html#a7bdc20d84810db84a43a5e538ebd800b">begin</a> ()</td></tr>
 <tr class="separator:a7bdc20d84810db84a43a5e538ebd800b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0c60bcd1658c51a2dee54440afe35b04"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_safe_iterator.html#af9a7d506d30cc26d1776dc5db7e08f57">const_iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_safe_iterator.html#a0c60bcd1658c51a2dee54440afe35b04">begin</a> () const</td></tr>
+<tr class="memitem:a0c60bcd1658c51a2dee54440afe35b04"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_safe_iterator.html#a2cc42e1a0b6483303c6b5e91d4dfd544">const_iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_safe_iterator.html#a0c60bcd1658c51a2dee54440afe35b04">begin</a> () const</td></tr>
 <tr class="separator:a0c60bcd1658c51a2dee54440afe35b04"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2c74d264bc449801a97299a5403ac9a8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_safe_iterator.html#acc024a5bba2942389021fc602a5e11fc">iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_safe_iterator.html#a2c74d264bc449801a97299a5403ac9a8">end</a> ()</td></tr>
+<tr class="memitem:a2c74d264bc449801a97299a5403ac9a8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_safe_iterator.html#a767076ef5d2a8c650e9acd47defe5e00">iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_safe_iterator.html#a2c74d264bc449801a97299a5403ac9a8">end</a> ()</td></tr>
 <tr class="separator:a2c74d264bc449801a97299a5403ac9a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a12738ab49aff0484e6eafc70cd034714"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_safe_iterator.html#af9a7d506d30cc26d1776dc5db7e08f57">const_iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_safe_iterator.html#a12738ab49aff0484e6eafc70cd034714">end</a> () const</td></tr>
+<tr class="memitem:a12738ab49aff0484e6eafc70cd034714"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_safe_iterator.html#a2cc42e1a0b6483303c6b5e91d4dfd544">const_iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_safe_iterator.html#a12738ab49aff0484e6eafc70cd034714">end</a> () const</td></tr>
 <tr class="separator:a12738ab49aff0484e6eafc70cd034714"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0031b05c831ccc458a575d95871e9600"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_safe_iterator.html#aa58b66a139d7c37ea35e38e29d324f81">reverse_iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_safe_iterator.html#a0031b05c831ccc458a575d95871e9600">rbegin</a> ()</td></tr>
-<tr class="separator:a0031b05c831ccc458a575d95871e9600"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9d532800ab091e6033a3bc394d7795e9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_safe_iterator.html#ae83cf0d989e376003e116d40bc0d4032">const_reverse_iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_safe_iterator.html#a9d532800ab091e6033a3bc394d7795e9">rbegin</a> () const</td></tr>
-<tr class="separator:a9d532800ab091e6033a3bc394d7795e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a18bf85468e7ae1c305875facce8da121"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_safe_iterator.html#aa58b66a139d7c37ea35e38e29d324f81">reverse_iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_safe_iterator.html#a18bf85468e7ae1c305875facce8da121">rend</a> ()</td></tr>
-<tr class="separator:a18bf85468e7ae1c305875facce8da121"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2c9ebd389b01ac35ab19eefb90fd8007"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_safe_iterator.html#ae83cf0d989e376003e116d40bc0d4032">const_reverse_iterator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_safe_iterator.html#a2c9ebd389b01ac35ab19eefb90fd8007">rend</a> () const</td></tr>
-<tr class="separator:a2c9ebd389b01ac35ab19eefb90fd8007"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Typedef Documentation</h2>
-<a id="a21abe5f4941a29dad1f8e14efed64053" name="a21abe5f4941a29dad1f8e14efed64053"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a21abe5f4941a29dad1f8e14efed64053">&#9670;&#160;</a></span>value_type</h2>
+<a id="ad688fdec41400e2bfb63bad464b6fa49" name="ad688fdec41400e2bfb63bad464b6fa49"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad688fdec41400e2bfb63bad464b6fa49">&#9670;&#160;</a></span>value_type</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -300,15 +286,15 @@ Public Member Functions</h2></td></tr>
 template&lt;typename T &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="struct_engine_1_1_safe_iterator.html">Engine::SafeIterator</a>&lt; T &gt;::value_type =  typename <a class="el" href="struct_engine_1_1derive__iterator.html">derive_iterator</a>&lt;T&gt;::iterator::value_type</td>
+          <td class="memname">using <a class="el" href="struct_engine_1_1_safe_iterator.html">Engine::SafeIterator</a>&lt; T &gt;::value_type =  std::ranges::range_value_t&lt;T&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="ae2ce21838d4084fe858f12441da2c8d3" name="ae2ce21838d4084fe858f12441da2c8d3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae2ce21838d4084fe858f12441da2c8d3">&#9670;&#160;</a></span>traits</h2>
+<a id="a767076ef5d2a8c650e9acd47defe5e00" name="a767076ef5d2a8c650e9acd47defe5e00"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a767076ef5d2a8c650e9acd47defe5e00">&#9670;&#160;</a></span>iterator</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -316,15 +302,15 @@ template&lt;typename T &gt; </div>
 template&lt;typename T &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="struct_engine_1_1_safe_iterator.html">Engine::SafeIterator</a>&lt; T &gt;::traits =  <a class="el" href="struct_engine_1_1derive__iterator.html">derive_iterator</a>&lt;std::vector&lt;<a class="el" href="struct_engine_1_1_safe_iterator.html#a21abe5f4941a29dad1f8e14efed64053">value_type</a>&gt; &gt;</td>
+          <td class="memname">using <a class="el" href="struct_engine_1_1_safe_iterator.html">Engine::SafeIterator</a>&lt; T &gt;::iterator =  <a class="el" href="struct_engine_1_1_safe_iterator_1_1_iterator_impl.html">IteratorImpl</a>&lt;std::ranges::iterator_t&lt;T&gt; &gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="acc024a5bba2942389021fc602a5e11fc" name="acc024a5bba2942389021fc602a5e11fc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acc024a5bba2942389021fc602a5e11fc">&#9670;&#160;</a></span>iterator</h2>
+<a id="a2cc42e1a0b6483303c6b5e91d4dfd544" name="a2cc42e1a0b6483303c6b5e91d4dfd544"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2cc42e1a0b6483303c6b5e91d4dfd544">&#9670;&#160;</a></span>const_iterator</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -332,55 +318,7 @@ template&lt;typename T &gt; </div>
 template&lt;typename T &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="struct_engine_1_1_safe_iterator.html">Engine::SafeIterator</a>&lt; T &gt;::iterator =  <a class="el" href="struct_engine_1_1_safe_iterator_1_1_iterator_impl.html">IteratorImpl</a>&lt;typename <a class="el" href="struct_engine_1_1derive__iterator.html#a1754201fb28ba51f6c34210d658f7f2d">traits::const_iterator</a>&gt;</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="af9a7d506d30cc26d1776dc5db7e08f57" name="af9a7d506d30cc26d1776dc5db7e08f57"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af9a7d506d30cc26d1776dc5db7e08f57">&#9670;&#160;</a></span>const_iterator</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">using <a class="el" href="struct_engine_1_1_safe_iterator.html">Engine::SafeIterator</a>&lt; T &gt;::const_iterator =  <a class="el" href="struct_engine_1_1_safe_iterator_1_1_iterator_impl.html">IteratorImpl</a>&lt;typename <a class="el" href="struct_engine_1_1derive__iterator.html#a1754201fb28ba51f6c34210d658f7f2d">traits::const_iterator</a>&gt;</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="aa58b66a139d7c37ea35e38e29d324f81" name="aa58b66a139d7c37ea35e38e29d324f81"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa58b66a139d7c37ea35e38e29d324f81">&#9670;&#160;</a></span>reverse_iterator</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">using <a class="el" href="struct_engine_1_1_safe_iterator.html">Engine::SafeIterator</a>&lt; T &gt;::reverse_iterator =  <a class="el" href="struct_engine_1_1_safe_iterator_1_1_iterator_impl.html">IteratorImpl</a>&lt;typename <a class="el" href="struct_engine_1_1derive__iterator.html#a7b9330bfb9bf0f52918c244ea98e8297">traits::reverse_iterator</a>&gt;</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="ae83cf0d989e376003e116d40bc0d4032" name="ae83cf0d989e376003e116d40bc0d4032"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae83cf0d989e376003e116d40bc0d4032">&#9670;&#160;</a></span>const_reverse_iterator</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">using <a class="el" href="struct_engine_1_1_safe_iterator.html">Engine::SafeIterator</a>&lt; T &gt;::const_reverse_iterator =  <a class="el" href="struct_engine_1_1_safe_iterator_1_1_iterator_impl.html">IteratorImpl</a>&lt;typename <a class="el" href="struct_engine_1_1derive__iterator.html#a987a1cde882c91709ce5ef3975ba4161">traits::const_reverse_iterator</a>&gt;</td>
+          <td class="memname">using <a class="el" href="struct_engine_1_1_safe_iterator.html">Engine::SafeIterator</a>&lt; T &gt;::const_iterator =  <a class="el" href="struct_engine_1_1_safe_iterator_1_1_iterator_impl.html">IteratorImpl</a>&lt;std::ranges::const_iterator_t&lt;T&gt; &gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -429,7 +367,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="struct_engine_1_1_safe_iterator.html#acc024a5bba2942389021fc602a5e11fc">iterator</a> <a class="el" href="struct_engine_1_1_safe_iterator.html">Engine::SafeIterator</a>&lt; T &gt;::begin </td>
+          <td class="memname"><a class="el" href="struct_engine_1_1_safe_iterator.html#a767076ef5d2a8c650e9acd47defe5e00">iterator</a> <a class="el" href="struct_engine_1_1_safe_iterator.html">Engine::SafeIterator</a>&lt; T &gt;::begin </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -456,61 +394,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="struct_engine_1_1_safe_iterator.html#acc024a5bba2942389021fc602a5e11fc">iterator</a> <a class="el" href="struct_engine_1_1_safe_iterator.html">Engine::SafeIterator</a>&lt; T &gt;::end </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a0031b05c831ccc458a575d95871e9600" name="a0031b05c831ccc458a575d95871e9600"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0031b05c831ccc458a575d95871e9600">&#9670;&#160;</a></span>rbegin() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="struct_engine_1_1_safe_iterator.html#aa58b66a139d7c37ea35e38e29d324f81">reverse_iterator</a> <a class="el" href="struct_engine_1_1_safe_iterator.html">Engine::SafeIterator</a>&lt; T &gt;::rbegin </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a18bf85468e7ae1c305875facce8da121" name="a18bf85468e7ae1c305875facce8da121"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a18bf85468e7ae1c305875facce8da121">&#9670;&#160;</a></span>rend() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="struct_engine_1_1_safe_iterator.html#aa58b66a139d7c37ea35e38e29d324f81">reverse_iterator</a> <a class="el" href="struct_engine_1_1_safe_iterator.html">Engine::SafeIterator</a>&lt; T &gt;::rend </td>
+          <td class="memname"><a class="el" href="struct_engine_1_1_safe_iterator.html#a767076ef5d2a8c650e9acd47defe5e00">iterator</a> <a class="el" href="struct_engine_1_1_safe_iterator.html">Engine::SafeIterator</a>&lt; T &gt;::end </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -537,7 +421,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="struct_engine_1_1_safe_iterator.html#af9a7d506d30cc26d1776dc5db7e08f57">const_iterator</a> <a class="el" href="struct_engine_1_1_safe_iterator.html">Engine::SafeIterator</a>&lt; T &gt;::begin </td>
+          <td class="memname"><a class="el" href="struct_engine_1_1_safe_iterator.html#a2cc42e1a0b6483303c6b5e91d4dfd544">const_iterator</a> <a class="el" href="struct_engine_1_1_safe_iterator.html">Engine::SafeIterator</a>&lt; T &gt;::begin </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -564,61 +448,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="struct_engine_1_1_safe_iterator.html#af9a7d506d30cc26d1776dc5db7e08f57">const_iterator</a> <a class="el" href="struct_engine_1_1_safe_iterator.html">Engine::SafeIterator</a>&lt; T &gt;::end </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a9d532800ab091e6033a3bc394d7795e9" name="a9d532800ab091e6033a3bc394d7795e9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9d532800ab091e6033a3bc394d7795e9">&#9670;&#160;</a></span>rbegin() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="struct_engine_1_1_safe_iterator.html#ae83cf0d989e376003e116d40bc0d4032">const_reverse_iterator</a> <a class="el" href="struct_engine_1_1_safe_iterator.html">Engine::SafeIterator</a>&lt; T &gt;::rbegin </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a2c9ebd389b01ac35ab19eefb90fd8007" name="a2c9ebd389b01ac35ab19eefb90fd8007"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2c9ebd389b01ac35ab19eefb90fd8007">&#9670;&#160;</a></span>rend() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="struct_engine_1_1_safe_iterator.html#ae83cf0d989e376003e116d40bc0d4032">const_reverse_iterator</a> <a class="el" href="struct_engine_1_1_safe_iterator.html">Engine::SafeIterator</a>&lt; T &gt;::rend </td>
+          <td class="memname"><a class="el" href="struct_engine_1_1_safe_iterator.html#a2cc42e1a0b6483303c6b5e91d4dfd544">const_iterator</a> <a class="el" href="struct_engine_1_1_safe_iterator.html">Engine::SafeIterator</a>&lt; T &gt;::end </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -639,7 +469,7 @@ template&lt;typename T &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu May 21 2026 17:44:01 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Thu May 21 2026 19:49:38 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

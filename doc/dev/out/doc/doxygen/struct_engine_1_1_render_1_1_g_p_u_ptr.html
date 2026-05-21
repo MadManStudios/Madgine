@@ -253,7 +253,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a08f3a6437175cc7c34e63eae0866d6e9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_g_p_u_ptr.html#a08f3a6437175cc7c34e63eae0866d6e9">GPUPtr</a> ()=default</td></tr>
 <tr class="separator:a08f3a6437175cc7c34e63eae0866d6e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9cc97e6a279e0090b0077570aab9e56b"><td class="memTemplParams" colspan="2">template&lt;typename U &gt; <br />
-requires (<a class="el" href="conceptstd_1_1convertible__to.html">std::convertible_to</a>&lt;U *, T *&gt; &amp;&amp; !std::is_array_v&lt;U&gt;)</td></tr>
+requires (std::convertible_to&lt;U *, T *&gt; &amp;&amp; !std::is_array_v&lt;U&gt;)</td></tr>
 <tr class="memitem:a9cc97e6a279e0090b0077570aab9e56b"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_g_p_u_ptr.html#a9cc97e6a279e0090b0077570aab9e56b">GPUPtr</a> (<a class="el" href="struct_engine_1_1_render_1_1_g_p_u_ptr.html">GPUPtr</a>&lt; U &gt; other)</td></tr>
 <tr class="separator:a9cc97e6a279e0090b0077570aab9e56b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a218bb74bb6adeeee8cd4614680c81627"><td class="memTemplParams" colspan="2">template&lt;typename U &gt; </td></tr>
@@ -262,7 +262,7 @@ requires (<a class="el" href="conceptstd_1_1convertible__to.html">std::convertib
 <tr class="memitem:a3029888b3a43f958a72682ef61824384"><td class="memTemplParams" colspan="2">template&lt;typename Deleter &gt; </td></tr>
 <tr class="memitem:a3029888b3a43f958a72682ef61824384"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_g_p_u_ptr.html#a3029888b3a43f958a72682ef61824384">GPUPtr</a> (T *ptr, Deleter &amp;&amp;deleter)</td></tr>
 <tr class="separator:a3029888b3a43f958a72682ef61824384"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab163b5a0d4b4617aa39518751735fb82"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_g_p_u_ptr.html#ab163b5a0d4b4617aa39518751735fb82">get</a> () const</td></tr>
+<tr class="memitem:ab163b5a0d4b4617aa39518751735fb82"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_g_p_u_ptr.html#ab163b5a0d4b4617aa39518751735fb82">get</a> () const</td></tr>
 <tr class="separator:ab163b5a0d4b4617aa39518751735fb82"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a76994dc9e08fee9ac74e6952b330bbd3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_g_p_u_ptr.html#a76994dc9e08fee9ac74e6952b330bbd3">operator bool</a> () const</td></tr>
 <tr class="separator:a76994dc9e08fee9ac74e6952b330bbd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -312,7 +312,7 @@ template&lt;typename T &gt; </div>
 template&lt;typename T &gt; </div>
 <div class="memtemplate">
 template&lt;typename U &gt; <br />
-requires (<a class="el" href="conceptstd_1_1convertible__to.html">std::convertible_to</a>&lt;U *, T *&gt; &amp;&amp; !std::is_array_v&lt;U&gt;)</div>
+requires (std::convertible_to&lt;U *, T *&gt; &amp;&amp; !std::is_array_v&lt;U&gt;)</div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -444,7 +444,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void * <a class="el" href="struct_engine_1_1_render_1_1_g_p_u_ptr.html">Engine::Render::GPUPtr</a>&lt; T &gt;::get </td>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> * <a class="el" href="struct_engine_1_1_render_1_1_g_p_u_ptr.html">Engine::Render::GPUPtr</a>&lt; T &gt;::get </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -519,7 +519,7 @@ template&lt;typename U &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu May 21 2026 17:44:02 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Thu May 21 2026 19:49:40 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

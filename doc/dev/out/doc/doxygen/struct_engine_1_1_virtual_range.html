@@ -259,7 +259,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a3e7496dff0b54605636db560686be868"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_virtual_range.html#a3e7496dff0b54605636db560686be868">VirtualRange</a> (<a class="el" href="struct_engine_1_1_virtual_range.html">VirtualRange</a> &amp;&amp;)=default</td></tr>
 <tr class="separator:a3e7496dff0b54605636db560686be868"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab21f9cd22da474c24af3d9c263ff8264"><td class="memTemplParams" colspan="2">template&lt;typename Assign , typename C &gt; </td></tr>
-<tr class="memitem:ab21f9cd22da474c24af3d9c263ff8264"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_virtual_range.html#ab21f9cd22da474c24af3d9c263ff8264">assign</a> (C &amp;&amp;c)</td></tr>
+<tr class="memitem:ab21f9cd22da474c24af3d9c263ff8264"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_virtual_range.html#ab21f9cd22da474c24af3d9c263ff8264">assign</a> (C &amp;&amp;c)</td></tr>
 <tr class="separator:ab21f9cd22da474c24af3d9c263ff8264"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a514f13e4925ae65e4b06a0b0df495bc0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_virtual_iterator.html">VirtualIterator</a>&lt; RefT &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_virtual_range.html#a514f13e4925ae65e4b06a0b0df495bc0">begin</a> () const</td></tr>
 <tr class="separator:a514f13e4925ae65e4b06a0b0df495bc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -274,7 +274,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a07ceec4e33655e9e7d618da398e07205"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_virtual_range.html#a07ceec4e33655e9e7d618da398e07205">isReference</a> () const</td></tr>
 <tr class="separator:a07ceec4e33655e9e7d618da398e07205"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a21b9b681c9da53803c57397f5a9d2ef2"><td class="memTemplParams" colspan="2">template&lt;typename C &gt; <br />
-requires (!<a class="el" href="conceptstd_1_1same__as.html">std::same_as</a>&lt;std::decay_t&lt;C&gt;, <a class="el" href="struct_engine_1_1_virtual_range.html">VirtualRange</a>&lt;RefT, AssignDefault&gt;&gt;)</td></tr>
+requires (!std::same_as&lt;std::decay_t&lt;C&gt;, <a class="el" href="struct_engine_1_1_virtual_range.html">VirtualRange</a>&lt;RefT, AssignDefault&gt;&gt;)</td></tr>
 <tr class="memitem:a21b9b681c9da53803c57397f5a9d2ef2"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_virtual_range.html">VirtualRange</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_virtual_range.html#a21b9b681c9da53803c57397f5a9d2ef2">operator=</a> (C &amp;&amp;c)</td></tr>
 <tr class="separator:a21b9b681c9da53803c57397f5a9d2ef2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae6c9a9e901c7add975918d765cd154be"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_virtual_range.html">VirtualRange</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_virtual_range.html#ae6c9a9e901c7add975918d765cd154be">operator=</a> (const <a class="el" href="struct_engine_1_1_virtual_range.html">VirtualRange</a> &amp;)=default</td></tr>
@@ -436,7 +436,7 @@ template&lt;typename Assign , typename C &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="struct_engine_1_1_virtual_range.html">Engine::VirtualRange</a>&lt; RefT, AssignDefault &gt;::assign </td>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> <a class="el" href="struct_engine_1_1_virtual_range.html">Engine::VirtualRange</a>&lt; RefT, AssignDefault &gt;::assign </td>
           <td>(</td>
           <td class="paramtype">C &amp;&amp;&#160;</td>
           <td class="paramname"><em>c</em></td><td>)</td>
@@ -461,7 +461,7 @@ template&lt;typename Assign , typename C &gt; </div>
 template&lt;typename RefT , typename AssignDefault &gt; </div>
 <div class="memtemplate">
 template&lt;typename C &gt; <br />
-requires (!<a class="el" href="conceptstd_1_1same__as.html">std::same_as</a>&lt;std::decay_t&lt;C&gt;, <a class="el" href="struct_engine_1_1_virtual_range.html">VirtualRange</a>&lt;RefT, AssignDefault&gt;&gt;)</div>
+requires (!std::same_as&lt;std::decay_t&lt;C&gt;, <a class="el" href="struct_engine_1_1_virtual_range.html">VirtualRange</a>&lt;RefT, AssignDefault&gt;&gt;)</div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -853,7 +853,7 @@ template&lt;typename RefT , typename AssignDefault &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu May 21 2026 17:44:01 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Thu May 21 2026 19:49:38 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

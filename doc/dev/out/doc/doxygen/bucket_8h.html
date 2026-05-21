@@ -239,7 +239,6 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
 <a href="#namespaces">Namespaces</a> &#124;
 <a href="#typedef-members">Typedefs</a>  </div>
   <div class="headertitle"><div class="title">bucket.h File Reference</div></div>
@@ -258,19 +257,6 @@ This graph shows which files directly or indirectly include this file:</div>
 </div>
 </div>
 </div><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_bucket_allocator_impl.html">Engine::BucketAllocatorImpl&lt; Parent, BucketStrategy &gt;</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_bucket_strategy_linear.html">Engine::BucketStrategyLinear&lt; BucketSizeBegin, BucketSizeEnd, BucketSizeStep, condition &gt;</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_bucket_strategy_linear_3_01_bucket_size_begin_00_01_bucket_size_end_00_01_bucket_size_step_00_01true_01_4.html">Engine::BucketStrategyLinear&lt; BucketSizeBegin, BucketSizeEnd, BucketSizeStep, true &gt;</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_bucket_strategy_log.html">Engine::BucketStrategyLog&lt; BucketSizeBegin, BucketSizeEnd, BucketSizeFactor, condition &gt;</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_bucket_strategy_log_3_01_bucket_size_begin_00_01_bucket_size_end_00_01_bucket_size_step_00_01true_01_4.html">Engine::BucketStrategyLog&lt; BucketSizeBegin, BucketSizeEnd, BucketSizeStep, true &gt;</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
 Namespaces</h2></td></tr>
 <tr class="memitem:namespace_engine"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine.html">Engine</a></td></tr>
@@ -279,17 +265,17 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:ab44a58bbcc5fcde2dc5e86d4b3150506"><td class="memTemplParams" colspan="2">template&lt;typename Parent , size_t BucketSizeBegin, size_t BucketSizeEnd, size_t BucketSizeStep&gt; </td></tr>
-<tr class="memitem:ab44a58bbcc5fcde2dc5e86d4b3150506"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#ab44a58bbcc5fcde2dc5e86d4b3150506">Engine::BucketAllocator</a> = BucketAllocatorImpl&lt; Parent, BucketStrategyLinear&lt; BucketSizeBegin, BucketSizeEnd, BucketSizeStep &gt; &gt;</td></tr>
-<tr class="separator:ab44a58bbcc5fcde2dc5e86d4b3150506"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6ed0e2a0aa8ea2bb8341cf01aaa69bd3"><td class="memTemplParams" colspan="2">template&lt;typename Parent , size_t BucketSizeBegin, size_t BucketSizeEnd, size_t BucketSizeFactor&gt; </td></tr>
-<tr class="memitem:a6ed0e2a0aa8ea2bb8341cf01aaa69bd3"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#a6ed0e2a0aa8ea2bb8341cf01aaa69bd3">Engine::LogBucketAllocator</a> = BucketAllocatorImpl&lt; Parent, BucketStrategyLog&lt; BucketSizeBegin, BucketSizeEnd, BucketSizeFactor &gt; &gt;</td></tr>
-<tr class="separator:a6ed0e2a0aa8ea2bb8341cf01aaa69bd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac15b8d2ae403549086a5638a1ba11d77"><td class="memTemplParams" colspan="2">template&lt;typename Parent , size_t BucketSizeBegin, size_t BucketSizeEnd, size_t BucketSizeStep&gt; </td></tr>
+<tr class="memitem:ac15b8d2ae403549086a5638a1ba11d77"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#ac15b8d2ae403549086a5638a1ba11d77">Engine::BucketAllocator</a> = __generic_impl__::BucketAllocatorImpl&lt; Parent, __generic_impl__::BucketStrategyLinear&lt; BucketSizeBegin, BucketSizeEnd, BucketSizeStep &gt; &gt;</td></tr>
+<tr class="separator:ac15b8d2ae403549086a5638a1ba11d77"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a928f7b8c279392452988aa0a4bb049"><td class="memTemplParams" colspan="2">template&lt;typename Parent , size_t BucketSizeBegin, size_t BucketSizeEnd, size_t BucketSizeFactor&gt; </td></tr>
+<tr class="memitem:a9a928f7b8c279392452988aa0a4bb049"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#a9a928f7b8c279392452988aa0a4bb049">Engine::LogBucketAllocator</a> = __generic_impl__::BucketAllocatorImpl&lt; Parent, __generic_impl__::BucketStrategyLog&lt; BucketSizeBegin, BucketSizeEnd, BucketSizeFactor &gt; &gt;</td></tr>
+<tr class="separator:a9a928f7b8c279392452988aa0a4bb049"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu May 21 2026 17:43:59 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Thu May 21 2026 19:49:37 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

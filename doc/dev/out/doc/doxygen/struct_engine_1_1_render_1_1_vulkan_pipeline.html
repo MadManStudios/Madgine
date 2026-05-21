@@ -255,17 +255,17 @@ Inheritance diagram for Engine::Render::VulkanPipeline:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:af9d78fdd93acf56ba746bf1c2508ce8f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vulkan_8h.html#ab751804468423c5c3658eb1f0691abe5">VkPipeline</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_pipeline.html#af9d78fdd93acf56ba746bf1c2508ce8f">get</a> (<a class="el" href="struct_engine_1_1_render_1_1_vertex_format.html">VertexFormat</a> format, size_t groupSize, size_t samples, <a class="el" href="vulkan_8h.html#a1ed8a086d10fc50ad658d810b08475b5">VkRenderPass</a> renderpass, bool depthChecking=true) const</td></tr>
+<tr class="memitem:af9d78fdd93acf56ba746bf1c2508ce8f"><td class="memItemLeft" align="right" valign="top">VkPipeline&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_pipeline.html#af9d78fdd93acf56ba746bf1c2508ce8f">get</a> (<a class="el" href="struct_engine_1_1_render_1_1_vertex_format.html">VertexFormat</a> format, size_t groupSize, size_t samples, VkRenderPass renderpass, bool depthChecking=true) const</td></tr>
 <tr class="separator:af9d78fdd93acf56ba746bf1c2508ce8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab4c3fb49433a455cdee9053d775487e9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="vulkan_8h.html#a8a6f8a2828afcedf2137378443f739e4">VkPipelineLayout</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_pipeline.html#ab4c3fb49433a455cdee9053d775487e9">layout</a> () const</td></tr>
+<tr class="memitem:ab4c3fb49433a455cdee9053d775487e9"><td class="memItemLeft" align="right" valign="top">VkPipelineLayout&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_pipeline.html#ab4c3fb49433a455cdee9053d775487e9">layout</a> () const</td></tr>
 <tr class="separator:ab4c3fb49433a455cdee9053d775487e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a085517748e9649378f2e0a70c6ce902a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_pipeline.html#a085517748e9649378f2e0a70c6ce902a">link</a> (<a class="el" href="struct_engine_1_1_render_1_1_pipeline_signature.html">PipelineSignature</a> signature, typename <a class="el" href="struct_engine_1_1_render_1_1_vulkan_shader_loader_1_1_handle.html">VulkanShaderLoader::Handle</a> vertexShader, std::string vs_entrypoint, typename <a class="el" href="struct_engine_1_1_render_1_1_vulkan_shader_loader_1_1_handle.html">VulkanShaderLoader::Handle</a> pixelShader, std::string ps_entrypoint)</td></tr>
 <tr class="separator:a085517748e9649378f2e0a70c6ce902a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a667c58d11040cf65640f515f943c8376"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_pipeline.html#a667c58d11040cf65640f515f943c8376">link</a> (<a class="el" href="struct_engine_1_1_render_1_1_pipeline_signature.html">PipelineSignature</a> signature, typename VulkanShaderLoader::Ptr vertexShader, std::string vs_entrypoint, typename VulkanShaderLoader::Ptr pixelShader, std::string ps_entrypoint)</td></tr>
 <tr class="separator:a667c58d11040cf65640f515f943c8376"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7b6748566f8fa4bc8c97ed083d73dbbd"><td class="memItemLeft" align="right" valign="top">const std::array&lt; std::array&lt; <a class="el" href="struct_engine_1_1_render_1_1_vulkan_ptr.html">VulkanPtr</a>&lt; <a class="el" href="vulkan_8h.html#ab751804468423c5c3658eb1f0691abe5">VkPipeline</a>, &amp;<a class="el" href="vulkan_8h.html#a2f5eb377a4a368fda90280e0e254bff6">vkDestroyPipeline</a> &gt;, 3 &gt;, 3 &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_pipeline.html#a7b6748566f8fa4bc8c97ed083d73dbbd">ptr</a> () const</td></tr>
+<tr class="memitem:a7b6748566f8fa4bc8c97ed083d73dbbd"><td class="memItemLeft" align="right" valign="top">const std::array&lt; std::array&lt; <a class="el" href="struct_engine_1_1_render_1_1_vulkan_ptr.html">VulkanPtr</a>&lt; VkPipeline, &amp;vkDestroyPipeline &gt;, 3 &gt;, 3 &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_pipeline.html#a7b6748566f8fa4bc8c97ed083d73dbbd">ptr</a> () const</td></tr>
 <tr class="separator:a7b6748566f8fa4bc8c97ed083d73dbbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a26167d89d70ec910529e88a516a481b3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_pipeline.html#a26167d89d70ec910529e88a516a481b3">reset</a> ()</td></tr>
+<tr class="memitem:a26167d89d70ec910529e88a516a481b3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_pipeline.html#a26167d89d70ec910529e88a516a481b3">reset</a> ()</td></tr>
 <tr class="separator:a26167d89d70ec910529e88a516a481b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
@@ -368,7 +368,7 @@ Public Member Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="vulkan_8h.html#ab751804468423c5c3658eb1f0691abe5">VkPipeline</a> Engine::Render::VulkanPipeline::get </td>
+          <td class="memname">VkPipeline Engine::Render::VulkanPipeline::get </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="struct_engine_1_1_render_1_1_vertex_format.html">VertexFormat</a>&#160;</td>
           <td class="paramname"><em>format</em>, </td>
@@ -388,7 +388,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="vulkan_8h.html#a1ed8a086d10fc50ad658d810b08475b5">VkRenderPass</a>&#160;</td>
+          <td class="paramtype">VkRenderPass&#160;</td>
           <td class="paramname"><em>renderpass</em>, </td>
         </tr>
         <tr>
@@ -414,7 +414,7 @@ Public Member Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const std::array&lt; std::array&lt; <a class="el" href="struct_engine_1_1_render_1_1_vulkan_ptr.html">VulkanPtr</a>&lt; <a class="el" href="vulkan_8h.html#ab751804468423c5c3658eb1f0691abe5">VkPipeline</a>, &amp;<a class="el" href="vulkan_8h.html#a2f5eb377a4a368fda90280e0e254bff6">vkDestroyPipeline</a> &gt;, 3 &gt;, 3 &gt; * Engine::Render::VulkanPipeline::ptr </td>
+          <td class="memname">const std::array&lt; std::array&lt; <a class="el" href="struct_engine_1_1_render_1_1_vulkan_ptr.html">VulkanPtr</a>&lt; VkPipeline, &amp;vkDestroyPipeline &gt;, 3 &gt;, 3 &gt; * Engine::Render::VulkanPipeline::ptr </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -431,7 +431,7 @@ Public Member Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void Engine::Render::VulkanPipeline::reset </td>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Render::VulkanPipeline::reset </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -448,7 +448,7 @@ Public Member Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="vulkan_8h.html#a8a6f8a2828afcedf2137378443f739e4">VkPipelineLayout</a> Engine::Render::VulkanPipeline::layout </td>
+          <td class="memname">VkPipelineLayout Engine::Render::VulkanPipeline::layout </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -465,7 +465,7 @@ Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu May 21 2026 17:44:02 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Thu May 21 2026 19:49:40 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

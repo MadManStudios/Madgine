@@ -263,11 +263,11 @@ This graph shows which files directly or indirectly include this file:</div>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_byte_buffer_data_accessor.html">Engine::ByteBufferDataAccessor</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_byte_buffer_impl.html">Engine::ByteBufferImpl&lt; Data &gt;</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_byte_buffer_impl_3_01_data_0f_0e_4.html">Engine::ByteBufferImpl&lt; Data[]&gt;</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_byte_buffer_size_accessor.html">Engine::ByteBufferSizeAccessor</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_typed_byte_buffer.html">Engine::TypedByteBuffer&lt; Data &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_typed_byte_buffer_3_01_data_0f_0e_4.html">Engine::TypedByteBuffer&lt; Data[]&gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
@@ -278,21 +278,21 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:a5484e3f78b8c473d3e80caae957fba1d"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine.html#a5484e3f78b8c473d3e80caae957fba1d">Engine::ByteBuffer</a> = ByteBufferImpl&lt; const void &gt;</td></tr>
-<tr class="separator:a5484e3f78b8c473d3e80caae957fba1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af0bde6800209497d0a279e6fc7fba43f"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine.html#af0bde6800209497d0a279e6fc7fba43f">Engine::WritableByteBuffer</a> = ByteBufferImpl&lt; void &gt;</td></tr>
-<tr class="separator:af0bde6800209497d0a279e6fc7fba43f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a887943bc4724416349d3201b8e183c49"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine.html#a887943bc4724416349d3201b8e183c49">Engine::ByteBuffer</a> = TypedByteBuffer&lt; const <a class="el" href="classvoid.html">void</a> &gt;</td></tr>
+<tr class="separator:a887943bc4724416349d3201b8e183c49"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21c5817736858b7eb80c75c9b92aff02"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine.html#a21c5817736858b7eb80c75c9b92aff02">Engine::WritableByteBuffer</a> = TypedByteBuffer&lt; <a class="el" href="classvoid.html">void</a> &gt;</td></tr>
+<tr class="separator:a21c5817736858b7eb80c75c9b92aff02"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ae9e8c7909bd4dc34fc2bef9583d69c85"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:ae9e8c7909bd4dc34fc2bef9583d69c85"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#ae9e8c7909bd4dc34fc2bef9583d69c85">Engine::ByteBufferImpl</a> (std::vector&lt; T &gt;) -&gt; ByteBufferImpl&lt; T[]&gt;</td></tr>
-<tr class="separator:ae9e8c7909bd4dc34fc2bef9583d69c85"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab93ea6229fb2f78335654d00d5dfe871"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:ab93ea6229fb2f78335654d00d5dfe871"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#ab93ea6229fb2f78335654d00d5dfe871">Engine::TypedByteBuffer</a> (std::vector&lt; T &gt;) -&gt; TypedByteBuffer&lt; T[]&gt;</td></tr>
+<tr class="separator:ab93ea6229fb2f78335654d00d5dfe871"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu May 21 2026 17:43:59 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Thu May 21 2026 19:49:37 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>
