@@ -340,7 +340,7 @@ namespace Render {
 #endif
     }
 
-    ByteBufferImpl<uint32_t> OpenGLPipelineInstance::mapIndices(RenderTarget *target, size_t count) const
+    TypedByteBuffer<uint32_t> OpenGLPipelineInstance::mapIndices(RenderTarget *target, size_t count) const
     {
         size_t size = sizeof(uint32_t) * count;
 

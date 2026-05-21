@@ -169,7 +169,7 @@ namespace Widgets {
         }
         size_t imageSize = mSize * 2048;
         size_t bufferSize = imageSize * imageSize;
-        ByteBufferImpl<uint32_t> atlasBuffer { std::make_unique<uint32_t[]>(bufferSize), bufferSize };
+        TypedByteBuffer<uint32_t> atlasBuffer { std::make_unique<uint32_t[]>(bufferSize), bufferSize };
         AreaView<uint32_t, 2> bufferView { atlasBuffer.mData, { imageSize, imageSize } };
         for (const auto &[name, entry] : mEntries) {
 

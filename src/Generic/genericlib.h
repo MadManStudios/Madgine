@@ -45,7 +45,6 @@
 #include "stringutil.h"
 
 #include "container/container_traits.h"
-#include "container/iterator_traits.h"
 #include "tupleunpacker.h"
 #include "typeunpacker.h"
 // clang-format on

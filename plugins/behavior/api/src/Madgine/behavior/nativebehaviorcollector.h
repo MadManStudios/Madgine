@@ -208,29 +208,31 @@ namespace Behavior {
 }
 }
 
-#define NATIVE_BEHAVIOR(Name, Sender, ...)                                                                                                         \
-    struct Name##NativeBehavior;                                                                                                                   \
-    struct Name##Linkage {                                                                                                                         \
-        template <typename... Args>                                                                                                                \
-        auto operator()(Args &&...args) const                                                                                                      \
-        {                                                                                                                                          \
-            return Sender(std::forward<Args>(args)...);                                                                                            \
-        }                                                                                                                                          \
-    };                                                                                                                                             \
-                                                                                                                                                   \
-    using Name##NativeBehaviorType = Engine::Behavior::NativeBehavior < Name##NativeBehavior, Name##Linkage                                        \
-    {                                                                                                                                              \
-    }                                                                                                                                              \
-    __VA_OPT__(, )                                                                                                                                 \
-    __VA_ARGS__                                                                                                                                    \
-        > ;                                                                                                                                        \
-                                                                                                                                                   \
-    struct Name##NativeBehavior : Name##NativeBehaviorType {                                                                                       \
-        using Name##NativeBehaviorType::Name##NativeBehaviorType;                                                                                  \
-    };                                                                                                                                             \
-                                                                                                                                                   \
-    static const Name##NativeBehavior Name##Info { #Name };                                                                                        \
-                                                                                                                                                   \
-    DLL_EXPORT_VARIABLE(, const Engine::Behavior::NativeBehaviorInfo *, Engine::Behavior::, nativeBehaviorInfo, &Name##Info, Name##NativeBehavior) \
-                                                                                                                                                   \
-    NAMED_UNIQUECOMPONENT(Name, Name##NativeBehavior)
+#define NATIVE_BEHAVIOR(Name, Sender, ...)                                                                                                                                               \
+    namespace __behavior_impl__ {                                                                                                                                                        \
+        struct Name##NativeBehavior;                                                                                                                                                     \
+        struct Name##Linkage {                                                                                                                                                           \
+            template <typename... Args>                                                                                                                                                  \
+            auto operator()(Args &&...args) const                                                                                                                                        \
+            {                                                                                                                                                                            \
+                return Sender(std::forward<Args>(args)...);                                                                                                                              \
+            }                                                                                                                                                                            \
+        };                                                                                                                                                                               \
+                                                                                                                                                                                         \
+        using Name##NativeBehaviorType = Engine::Behavior::NativeBehavior < Name##NativeBehavior, Name##Linkage                                                                          \
+        {                                                                                                                                                                                \
+        }                                                                                                                                                                                \
+        __VA_OPT__(, )                                                                                                                                                                   \
+        __VA_ARGS__                                                                                                                                                                      \
+            > ;                                                                                                                                                                          \
+                                                                                                                                                                                         \
+        struct Name##NativeBehavior : Name##NativeBehaviorType {                                                                                                                         \
+            using Name##NativeBehaviorType::Name##NativeBehaviorType;                                                                                                                    \
+        };                                                                                                                                                                               \
+                                                                                                                                                                                         \
+        static const Name##NativeBehavior Name##Info { #Name };                                                                                                                          \
+    }                                                                                                                                                                                    \
+                                                                                                                                                                                         \
+    DLL_EXPORT_VARIABLE(, const Engine::Behavior::NativeBehaviorInfo *, Engine::Behavior::, nativeBehaviorInfo, &__behavior_impl__::Name##Info, __behavior_impl__::Name##NativeBehavior) \
+                                                                                                                                                                                         \
+    NAMED_UNIQUECOMPONENT(Name, __behavior_impl__::Name##NativeBehavior)

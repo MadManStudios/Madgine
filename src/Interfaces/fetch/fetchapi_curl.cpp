@@ -11,67 +11,71 @@
 
 namespace Engine {
 
-struct CurlManager {
-    CurlManager()
-    {
-        curl_global_init(0);
+    namespace __interfaces_impl__ {
 
-        mHandle = curl_multi_init();
+    struct CurlManager {
+        CurlManager()
+        {
+            curl_global_init(0);
 
-        mThread = std::thread { &CurlManager::update, this };
-    }
+            mHandle = curl_multi_init();
 
-    ~CurlManager()
-    {
-        mStopSource.request_stop();
-
-        curl_multi_wakeup(mHandle);
-
-        mThread.join();
-
-        curl_multi_cleanup(mHandle);
-
-        curl_global_cleanup();
-    }
-
-    void update()
-    {
-        while (!mStopSource.stop_requested()) {
-            int runningHandles = 0;
-
-            CURLMcode mc = curl_multi_perform(mHandle, &runningHandles);
-            if (mc)
-                throw 0;
-
-            int messagesInQueue = 0;
-
-            while (CURLMsg *msg = curl_multi_info_read(mHandle, &messagesInQueue)) {
-                if (msg->msg != CURLMSG_DONE)
-                    throw 0;
-                CURL *handle = msg->easy_handle;
-                if (msg->data.result)
-                    throw 0;
-                void *pointer;
-                curl_easy_getinfo(handle, CURLINFO_PRIVATE, &pointer);
-                static_cast<FetchStateBase *>(pointer)->set_value();
-            }
-
-            mc = curl_multi_poll(mHandle, nullptr, 0, 200000000, nullptr);
-            if (mc)
-                throw 0;
+            mThread = std::thread { &CurlManager::update, this };
         }
+
+        ~CurlManager()
+        {
+            mStopSource.request_stop();
+
+            curl_multi_wakeup(mHandle);
+
+            mThread.join();
+
+            curl_multi_cleanup(mHandle);
+
+            curl_global_cleanup();
+        }
+
+        void update()
+        {
+            while (!mStopSource.stop_requested()) {
+                int runningHandles = 0;
+
+                CURLMcode mc = curl_multi_perform(mHandle, &runningHandles);
+                if (mc)
+                    throw 0;
+
+                int messagesInQueue = 0;
+
+                while (CURLMsg *msg = curl_multi_info_read(mHandle, &messagesInQueue)) {
+                    if (msg->msg != CURLMSG_DONE)
+                        throw 0;
+                    CURL *handle = msg->easy_handle;
+                    if (msg->data.result)
+                        throw 0;
+                    void *pointer;
+                    curl_easy_getinfo(handle, CURLINFO_PRIVATE, &pointer);
+                    static_cast<FetchStateBase *>(pointer)->set_value();
+                }
+
+                mc = curl_multi_poll(mHandle, nullptr, 0, 200000000, nullptr);
+                if (mc)
+                    throw 0;
+            }
+        }
+
+        CURLM *mHandle = nullptr;
+        std::thread mThread;
+        Execution::StopSource mStopSource;
+    };
+
+    static CURLM *sHandle()
+    {
+        static CurlManager mgr;
+
+        return mgr.mHandle;
     }
 
-    CURLM *mHandle = nullptr;
-    std::thread mThread;
-    Execution::StopSource mStopSource;
-};
-
-static CURLM *sHandle()
-{
-    static CurlManager mgr;
-
-    return mgr.mHandle;
 }
 
 FetchStateBase::FetchStateBase(std::string url, std::vector<std::string> headers)
@@ -110,7 +114,7 @@ FetchStateBase::~FetchStateBase()
     if (mPtr1) {
         CURL *handle = mPtr1.release<CURL *>();
 
-        curl_multi_remove_handle(sHandle(), handle);
+        curl_multi_remove_handle(__interfaces_impl__::sHandle(), handle);
 
         curl_easy_cleanup(handle);
     }
@@ -118,8 +122,8 @@ FetchStateBase::~FetchStateBase()
 
 void FetchStateBase::start()
 {
-    curl_multi_add_handle(sHandle(), mPtr1.as<CURL *>());
-    curl_multi_wakeup(sHandle());
+    curl_multi_add_handle(__interfaces_impl__::sHandle(), mPtr1.as<CURL *>());
+    curl_multi_wakeup(__interfaces_impl__::sHandle());
 }
 
 void FetchStateBase::stop()

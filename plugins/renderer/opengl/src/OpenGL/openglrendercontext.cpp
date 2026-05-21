@@ -14,7 +14,7 @@
 #include "openglshaderloader.h"
 
 #if WINDOWS
-#    include "wglext.h"
+#    include "../glad/wglext.h"
 
 static PFNWGLCREATECONTEXTATTRIBSARBPROC wglCreateContextAttribsARB = nullptr;
 static PFNWGLCHOOSEPIXELFORMATARBPROC wglChoosePixelFormatARB = nullptr;

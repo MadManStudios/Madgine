@@ -1,4 +1,6 @@
 
+/// @cond
+
 #include <array>
 #include <assert.h>
 #include <comdef.h>
@@ -252,3 +254,5 @@ int main()
     testCreateHeap(device);
     testCreateCommitedResource(device);
 }
+
+/// @endcond

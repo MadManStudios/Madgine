@@ -211,7 +211,7 @@ namespace Render {
         return { block.mAddress, block.mSize };
     }
 
-    ByteBufferImpl<uint32_t> DirectX12PipelineInstance::mapIndices(RenderTarget *_target, size_t count) const
+    TypedByteBuffer<uint32_t> DirectX12PipelineInstance::mapIndices(RenderTarget *_target, size_t count) const
     {
         DirectX12RenderTarget *target = static_cast<DirectX12RenderTarget *>(_target);
 

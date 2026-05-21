@@ -4,9 +4,7 @@ namespace Engine {
 
 template <typename T>
 struct SafeIterator {
-    using value_type = typename derive_iterator<T>::iterator::value_type;
-
-    using traits = derive_iterator<std::vector<value_type>>;
+    using value_type = std::ranges::range_value_t<T>;    
 
     SafeIterator(T &&t)
         : mContainer(std::forward<T>(t))
@@ -60,10 +58,8 @@ struct SafeIterator {
         }
     };
 
-    using iterator = IteratorImpl<typename traits::const_iterator>;
-    using const_iterator = IteratorImpl<typename traits::const_iterator>;
-    using reverse_iterator = IteratorImpl<typename traits::reverse_iterator>;
-    using const_reverse_iterator = IteratorImpl<typename traits::const_reverse_iterator>;
+    using iterator = IteratorImpl<std::ranges::iterator_t<T>>;
+    using const_iterator = IteratorImpl<std::ranges::const_iterator_t<T>>;
 
     iterator begin()
     {
@@ -75,16 +71,6 @@ struct SafeIterator {
         return { mData.end(), mData.end(), mData, mContainer };
     };
 
-    reverse_iterator rbegin()
-    {
-        return { mData.rbegin(), mData.rend(), mData, mContainer };
-    }
-
-    reverse_iterator rend()
-    {
-        return { mData.rend(), mData.rend(), mData, mContainer };
-    };
-
     const_iterator begin() const
     {
         return { mData.begin(), mData.end(), mData, mContainer };
@@ -93,16 +79,6 @@ struct SafeIterator {
     const_iterator end() const
     {
         return { mData.end(), mData.end(), mData, mContainer };
-    };
-
-    const_reverse_iterator rbegin() const
-    {
-        return { mData.rbegin(), mData.rend(), mData, mContainer };
-    }
-
-    const_reverse_iterator rend() const
-    {
-        return { mData.rend(), mData.rend(), mData, mContainer };
     };
 
 private:

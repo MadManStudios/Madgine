@@ -32,7 +32,7 @@ namespace Scene {
 
         virtual std::string_view key() const override;
 
-        void updateFrame(Closure<ByteBufferImpl<Matrix4[]>(Entity::Skeleton *)> callback);
+        void updateFrame(Closure<TypedByteBuffer<Matrix4[]>(Entity::Skeleton *)> callback);
 
         void clear();
 

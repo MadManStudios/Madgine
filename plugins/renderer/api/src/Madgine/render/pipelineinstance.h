@@ -31,7 +31,7 @@ namespace Render {
 
         virtual WritableByteBuffer mapParameters(size_t index) = 0;
         template <typename T>
-        ByteBufferImpl<T> mapParameters(size_t index)
+        TypedByteBuffer<T> mapParameters(size_t index)
         {
             return mapParameters(index).cast<T>();
         }
@@ -39,17 +39,17 @@ namespace Render {
         virtual WritableByteBuffer mapTempBuffer(size_t space, size_t elementSize, size_t count) const = 0;
         template <typename T>
             requires std::is_unbounded_array_v<T>
-        ByteBufferImpl<T> mapTempBuffer(size_t space, size_t count)
+        TypedByteBuffer<T> mapTempBuffer(size_t space, size_t count)
         {
             return mapTempBuffer(space, sizeof(std::remove_extent_t<T>), count).cast<T>();
         }
 
         virtual void bindMesh(RenderTarget *target, const GPUMeshData &mesh) const = 0;
-        virtual ByteBufferImpl<uint32_t> mapIndices(RenderTarget *target, size_t count) const = 0;
+        virtual TypedByteBuffer<uint32_t> mapIndices(RenderTarget *target, size_t count) const = 0;
         virtual WritableByteBuffer mapVertices(RenderTarget *target, VertexFormat format, size_t count) const = 0;
         template <typename T>
             requires std::is_unbounded_array_v<T>
-        ByteBufferImpl<T> mapVertices(RenderTarget *target, size_t count)
+        TypedByteBuffer<T> mapVertices(RenderTarget *target, size_t count)
         {
             return mapVertices(target, type_holder<std::remove_extent_t<T>>, count).template cast<T>();
         }
@@ -61,7 +61,7 @@ namespace Render {
         template <typename T>
         void renderInstanced(RenderTarget *target, T &&instanceData) const
         {
-            ByteBufferImpl buffer { std::forward<T>(instanceData) };
+            TypedByteBuffer buffer { std::forward<T>(instanceData) };
             renderInstanced(target, buffer.elementCount(), std::move(buffer).template cast<const void>());
         }
 

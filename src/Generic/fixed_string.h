@@ -44,7 +44,7 @@ struct fixed_string {
 template <size_t Size>
 fixed_string(const char (&data)[Size]) -> fixed_string<Size - 1>;
 
-namespace detail {
+namespace __generic_impl__ {
     template <unsigned... digits>
     struct to_chars {
         static constexpr const char value[] = { ('0' + digits)..., 0 };
@@ -58,6 +58,6 @@ namespace detail {
 }
 
 template <size_t I>
-constexpr fixed_string to_fixed_string = detail::to_fixed_string_helper<I>::value;
+constexpr fixed_string to_fixed_string = __generic_impl__::to_fixed_string_helper<I>::value;
 
 }

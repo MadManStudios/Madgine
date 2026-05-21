@@ -20,9 +20,8 @@ namespace __generic_impl__ {
         T data;
     };
 
+    template <typename T>
+    using Inheritable = std::conditional_t<std::is_class_v<T>, T, __generic_impl__::FundamentalWrapper<T>>;
+
 }
-
-template <typename T>
-using Inheritable = std::conditional_t<std::is_class_v<T>, T, __generic_impl__::FundamentalWrapper<T>>;
-
 }

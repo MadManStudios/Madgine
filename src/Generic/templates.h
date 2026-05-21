@@ -48,30 +48,6 @@ constexpr size_t array_size(T (&)[S])
     return S;
 }
 
-template <template <typename> typename F, typename T, bool b>
-struct transform_if {
-    using type = T;
-};
-
-template <template <typename> typename F, typename T>
-struct transform_if<F, T, true> {
-    using type = F<T>;
-};
-
-template <template <typename> typename F, typename T, bool b>
-using transform_if_t = typename transform_if<F, T, b>::type;
-
-template <size_t add, typename Sequence>
-struct index_range_add;
-
-template <size_t add, size_t... Is>
-struct index_range_add<add, std::index_sequence<Is...>> {
-    using type = std::index_sequence<(Is + add)...>;
-};
-
-template <size_t from, size_t to>
-using make_index_range = typename index_range_add<from, std::make_index_sequence<to - from>>::type;
-
 template <typename T>
 struct OutRef {
 
@@ -99,28 +75,32 @@ struct OutRef {
 struct Void {
 };
 
-template <typename T>
-struct CaptureHelper {
-    template <typename... Args>
-    decltype(auto) operator()(Args &&...args) const
-    {
-        return mT(std::forward<Args>(args)...);
-    }
-    operator T &()
-    {
-        return mT;
-    }
-    T mT;
-};
+namespace __generic_impl__ {
+
+    template <typename T>
+    struct CaptureHelper {
+        template <typename... Args>
+        decltype(auto) operator()(Args &&...args) const
+        {
+            return mT(std::forward<Args>(args)...);
+        }
+        operator T &()
+        {
+            return mT;
+        }
+        T mT;
+    };
+
+}
 
 template <typename T>
-CaptureHelper<T> forward_capture(T &&t)
+__generic_impl__::CaptureHelper<T> forward_capture(T &&t)
 {
     return { std::forward<T>(t) };
 }
 
 template <typename T>
-CaptureHelper<T> forward_capture(T &t)
+__generic_impl__::CaptureHelper<T> forward_capture(T &t)
 {
     return { std::forward<T>(t) };
 }
@@ -167,19 +147,6 @@ using forward_ref_t = std::conditional_t<
     std::remove_const_t<std::remove_reference_t<T>>>;
 
 template <typename T>
-struct decay_ref {
-    using type = T;
-};
-
-template <InstanceOf<std::reference_wrapper> T>
-struct decay_ref<T> {
-    using type = T::type &;
-};
-
-template <typename T>
-using decay_ref_t = decay_ref<T>::type;
-
-template <typename T>
 decltype(auto) forward_ref(std::remove_reference_t<T> &t)
 {
     if constexpr (Reference<T>) {
@@ -198,17 +165,5 @@ decltype(auto) forward_ref(std::remove_reference_t<T> &&t)
         return std::forward<T>(t);
     }
 }
-
-template <template <typename> typename Inner>
-struct Not {
-    template <typename T>
-    struct type : std::bool_constant<!Inner<T>::value> {
-    };
-};
-
-template <typename T>
-struct declval_helper {
-    static T value;
-};
 
 }

@@ -43,9 +43,9 @@ struct TaggedPlaceholder;
 struct Any;
 
 template <typename>
-struct ByteBufferImpl;
-using ByteBuffer = ByteBufferImpl<const void>;
-using WritableByteBuffer = ByteBufferImpl<void>;
+struct TypedByteBuffer;
+using ByteBuffer = TypedByteBuffer<const void>;
+using WritableByteBuffer = TypedByteBuffer<void>;
 
 struct CoWString;
 template <typename T>

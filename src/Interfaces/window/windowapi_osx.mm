@@ -9,6 +9,8 @@
 #error "ARC is on!"
 #endif
 
+/// @cond
+
 namespace Engine{
 namespace Window{
 struct OSXWindow;
@@ -21,6 +23,8 @@ struct OSXWindow;
 
 - (void)listen:(Engine::Window::OSXWindow *)window;
 @end
+
+/// @endcond
 
 namespace Engine {
 namespace Window {

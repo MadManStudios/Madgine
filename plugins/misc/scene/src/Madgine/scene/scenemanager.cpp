@@ -126,7 +126,7 @@ namespace Scene {
         return mMutex;
     }
 
-    void SceneManager::updateFrame(Closure<ByteBufferImpl<Matrix4[]>(Entity::Skeleton *)> callback)
+    void SceneManager::updateFrame(Closure<TypedByteBuffer<Matrix4[]>(Entity::Skeleton *)> callback)
     {
         std::chrono::microseconds frameTimeSinceLastFrame = mFrameClock.tick(std::chrono::steady_clock::now());
         std::chrono::microseconds sceneTimeSinceLastFrame = mAnimationClock.tick(mClock.now());

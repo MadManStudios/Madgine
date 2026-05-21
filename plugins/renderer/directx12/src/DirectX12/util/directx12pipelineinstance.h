@@ -19,7 +19,7 @@ namespace Render {
 
         virtual void bindMesh(RenderTarget *target, const GPUMeshData &mesh) const override;
         virtual WritableByteBuffer mapVertices(RenderTarget *target, VertexFormat format, size_t count) const override;
-        virtual ByteBufferImpl<uint32_t> mapIndices(RenderTarget *target, size_t count) const override;
+        virtual TypedByteBuffer<uint32_t> mapIndices(RenderTarget *target, size_t count) const override;
         virtual void setGroupSize(size_t groupSize) const override;
 
         virtual void render(RenderTarget *target) const override;

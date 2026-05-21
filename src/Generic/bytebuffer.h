@@ -30,16 +30,16 @@ struct ByteBufferSizeAccessor {
  * @tparam Data
  */
 template <typename Data>
-struct ByteBufferImpl {
+struct TypedByteBuffer {
 
-    ByteBufferImpl() = default;
+    TypedByteBuffer() = default;
 
     template <typename T>
         requires(requires(T &t) {
             ByteBufferSizeAccessor {}(t);
             ByteBufferDataAccessor {}(t);
         })
-    ByteBufferImpl(T &&t)
+    TypedByteBuffer(T &&t)
         : mKeep(std::forward<T>(t))
         , mSize(ByteBufferSizeAccessor {}(mKeep.as<T>()))
         , mData(ByteBufferDataAccessor {}(mKeep.as<T>()))
@@ -50,7 +50,7 @@ struct ByteBufferImpl {
         requires(requires(T &t) {
             ByteBufferDataAccessor {}(t);
         })
-    ByteBufferImpl(T &&t, size_t size)
+    TypedByteBuffer(T &&t, size_t size)
         : mKeep(std::forward<T>(t))
         , mSize(size)
         , mData(ByteBufferDataAccessor {}(mKeep.as<T>()))
@@ -59,14 +59,14 @@ struct ByteBufferImpl {
 
     template <typename T>
         requires(!Pointer<std::remove_reference_t<T>>)
-    ByteBufferImpl(T &&t, size_t size, Data *data)
+    TypedByteBuffer(T &&t, size_t size, Data *data)
         : mKeep(std::forward<T>(t))
         , mSize(size)
         , mData(data)
     {
     }
 
-    ByteBufferImpl(Data *data, size_t size)
+    TypedByteBuffer(Data *data, size_t size)
         : mSize(size)
         , mData(data)
     {
@@ -80,7 +80,7 @@ struct ByteBufferImpl {
     }
 
     template <typename T>
-    ByteBufferImpl<T> cast() &&
+    TypedByteBuffer<T> cast() &&
     {
         return {
             std::move(mKeep),
@@ -113,7 +113,7 @@ struct ByteBufferImpl {
         return *mData;
     }
 
-    bool operator==(const ByteBufferImpl &other) const
+    bool operator==(const TypedByteBuffer &other) const
     {
         if (mSize != other.mSize)
             return false;
@@ -129,9 +129,9 @@ public:
 };
 
 template <typename Data>
-struct ByteBufferImpl<Data[]> : ByteBufferImpl<Data> {
+struct TypedByteBuffer<Data[]> : TypedByteBuffer<Data> {
 
-    using ByteBufferImpl<Data>::ByteBufferImpl;
+    using TypedByteBuffer<Data>::TypedByteBuffer;
 
     Data &operator[](size_t index)
     {
@@ -145,10 +145,12 @@ struct ByteBufferImpl<Data[]> : ByteBufferImpl<Data> {
     }
 };
 
-using ByteBuffer = ByteBufferImpl<const void>;
-using WritableByteBuffer = ByteBufferImpl<void>;
 
 template <typename T>
-ByteBufferImpl(std::vector<T>) -> ByteBufferImpl<T[]>;
+TypedByteBuffer(std::vector<T>)->TypedByteBuffer<T[]>;
+
+using ByteBuffer = TypedByteBuffer<const void>;
+using WritableByteBuffer = TypedByteBuffer<void>;
+
 
 }

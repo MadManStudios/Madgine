@@ -239,7 +239,7 @@ namespace Render {
         return { block.mAddress, block.mSize };
     }
 
-    ByteBufferImpl<uint32_t> VulkanPipelineInstance::mapIndices(RenderTarget *_target, size_t count) const
+    TypedByteBuffer<uint32_t> VulkanPipelineInstance::mapIndices(RenderTarget *_target, size_t count) const
     {
         VulkanRenderTarget *target = static_cast<VulkanRenderTarget *>(_target);
 

@@ -21,7 +21,11 @@
 
 BEHAVIOR_FACTORY(Python3, Engine::Behavior::Python3::Python3BehaviorFactory)
 
+///  @cond
+
 struct _frame { }; // HACK for TypedPtr
+
+///  @endcond
 
 namespace Engine {
 namespace Behavior {

@@ -8,6 +8,8 @@
 
 #include "functors.h"
 
+/// @cond
+
 DEFAULT_SENDER_NODE_BEGIN(ForEach, Engine::Execution::for_each, std::vector<int>, Engine::Behavior::NodeGraph::NodeRouter<1, Engine::ValueType>)
     ARGUMENT(Arguments, 0)
 SENDER_NODE_END(ForEach)
@@ -93,3 +95,5 @@ METATABLE_END(SequenceNode)
 
 SERIALIZETABLE_INHERIT_BEGIN(SequenceNode, Engine::NodeGraph::NodeBase)
 SERIALIZETABLE_END(SequenceNode)*/
+
+/// @endcond

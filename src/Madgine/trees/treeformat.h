@@ -2,76 +2,79 @@
 
 namespace Engine {
 
-struct MADGINE_TREES_EXPORT FormatNode {
+namespace __madgine_impl__ {
 
-    FormatNode(void *id, FormatNode *parent = nullptr, size_t number = 1);
+    struct MADGINE_TREES_EXPORT FormatNode {
 
-    FormatNode &addChild(void *id);
+        FormatNode(void *id, FormatNode *parent = nullptr, size_t number = 1);
 
-    void visitPreOrder(const std::function<void(void *, float, float)> &visitor);
+        FormatNode &addChild(void *id);
 
-    void visitPostOrder(const std::function<void(void *, float, float)> &visitor);
+        void visitPreOrder(const std::function<void(void *, float, float)> &visitor);
 
-private:
-    FormatNode *left_brother();
+        void visitPostOrder(const std::function<void(void *, float, float)> &visitor);
 
-    FormatNode *get_lmost_sibling();
+    private:
+        FormatNode *left_brother();
 
-    FormatNode *left();
+        FormatNode *get_lmost_sibling();
 
-    FormatNode *right();
+        FormatNode *left();
 
-    FormatNode *ancestor(FormatNode &v, FormatNode *defaultAncestor);
+        FormatNode *right();
 
-    void execute_shifts();
+        FormatNode *ancestor(FormatNode &v, FormatNode *defaultAncestor);
 
-private:
-    friend struct FormatTreeBase;
+        void execute_shifts();
 
-    void *mId;
+    private:
+        friend struct FormatTreeBase;
 
-    float mX;
-    float mY;
+        void *mId;
 
-    std::list<FormatNode> mChildren;
+        float mX;
+        float mY;
 
-    FormatNode *mParent = nullptr;
-    FormatNode *mThread = nullptr;
-    FormatNode *mAncestor = this;
-    FormatNode *mLMostSibling = nullptr;
+        std::list<FormatNode> mChildren;
 
-    size_t mNumber;
-    float mMod = 0;
-    float mChange = 0;
-    float mShift = 0;
-};
+        FormatNode *mParent = nullptr;
+        FormatNode *mThread = nullptr;
+        FormatNode *mAncestor = this;
+        FormatNode *mLMostSibling = nullptr;
 
-struct MADGINE_TREES_EXPORT FormatTreeBase {
-
-    void format(float distance = 1);
-
-    enum class Order {
-        PreOrder,
-        PostOrder
+        size_t mNumber;
+        float mMod = 0;
+        float mChange = 0;
+        float mShift = 0;
     };
 
-    void visit(const std::function<void(void *, float, float)> &visitor, Order order = Order::PreOrder);
+    struct MADGINE_TREES_EXPORT FormatTreeBase {
 
-private:
-    static void move_subtree(FormatNode &wl, FormatNode &wr, float shift);
+        void format(float distance = 1);
 
-    static FormatNode *apportion(FormatNode &dt, FormatNode *defaultAncestor, float distance);
+        enum class Order {
+            PreOrder,
+            PostOrder
+        };
 
-    static void first_walk(FormatNode &dt, float distance = 1);
+        void visit(const std::function<void(void *, float, float)> &visitor, Order order = Order::PreOrder);
 
-    static void second_walk(FormatNode &dt, float m = 0, int depth = 0);
+    private:
+        static void move_subtree(FormatNode &wl, FormatNode &wr, float shift);
 
-protected:
-    FormatNode mRoot = nullptr;
-};
+        static FormatNode *apportion(FormatNode &dt, FormatNode *defaultAncestor, float distance);
+
+        static void first_walk(FormatNode &dt, float distance = 1);
+
+        static void second_walk(FormatNode &dt, float m = 0, int depth = 0);
+
+    protected:
+        FormatNode mRoot = nullptr;
+    };
+}
 
 template <typename T>
-struct FormatTree : FormatTreeBase {
+struct FormatTree : __madgine_impl__::FormatTreeBase {
 
     template <typename F>
     FormatTree(T &t, F &&childrenAccessor)
@@ -89,7 +92,7 @@ struct FormatTree : FormatTreeBase {
 
 private:
     template <typename F>
-    void filler(T &t, FormatNode &node, F &&childrenAccessor)
+    void filler(T &t, __madgine_impl__::FormatNode &node, F &&childrenAccessor)
     {
         for (T &child : std::invoke(childrenAccessor, t)) {
             filler(child, node.addChild(&child), std::forward<F>(childrenAccessor));

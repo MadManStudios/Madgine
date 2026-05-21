@@ -1,5 +1,7 @@
 #pragma once
 
+namespace Engine {
+
 struct ReleaseDeleter {
     template <typename T>
     void operator()(T *ptr)
@@ -78,3 +80,5 @@ struct INTERFACES_EXPORT UniqueHandle {
 private:
     HANDLE mHandle = INVALID_HANDLE_VALUE;
 };
+
+}
