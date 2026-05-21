@@ -29,8 +29,6 @@ namespace Behavior {
 
             KeyValueResult interpretRead(NodeInterpreterStateBase &interpreter, ValueType &retVal, std::unique_ptr<NodeInterpreterData> &data, uint32_t providerIndex, uint32_t group) const override;
 
-            CodeGen::Statement generateRead(CodeGenerator &generator, std::unique_ptr<CodeGeneratorData> &data, uint32_t providerIndex, uint32_t group = 0) const override;
-
         protected:
             const MetaTable *type() const;
             const Accessor *accessor() const;

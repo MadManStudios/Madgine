@@ -334,16 +334,6 @@ namespace Behavior {
             throw 0;
         }
 
-        void NodeBase::generate(CodeGenerator &generator, std::unique_ptr<CodeGeneratorData> &data, uint32_t flowIn, uint32_t group) const
-        {
-            throw 0;
-        }
-
-        CodeGen::Statement NodeBase::generateRead(CodeGenerator &generator, std::unique_ptr<CodeGeneratorData> &data, uint32_t providerIndex, uint32_t group) const
-        {
-            throw 0;
-        }
-
         void NodeBase::refresh()
         {
             mFlowInPins.resize(flowInGroupCount());

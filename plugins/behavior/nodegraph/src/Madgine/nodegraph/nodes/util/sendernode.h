@@ -445,23 +445,6 @@ namespace Behavior {
                 return {};
             }
 
-            virtual CodeGen::Statement generateRead(CodeGenerator &generator, std::unique_ptr<CodeGeneratorData> &data, uint32_t providerIndex, uint32_t group) const override
-            {
-
-                /* auto result = CodeGen::generatorFromSender(buildSender(value_argument_tuple { mArguments }), NodeCodegenReceiver { 0, this, generator }).generate();
-                if constexpr (std::tuple_size_v<decltype(result)> < 1)
-                    throw 0;
-                else {
-                    CodeGen::Statement current = TupleUnpacker::select(
-                        TupleUnpacker::ensureTuple(std::get<0>(result)),
-                        [](auto&& val) { return CodeGen::Statement { std::forward<decltype(val)>(val) }; },
-                        providerIndex);
-
-                    return current;
-                }*/
-                throw 0;
-            }
-
             value_argument_tuple mArguments;
             template <size_t I>
             const meta_decayed_t<std::tuple_element_t<I, value_argument_tuple>> &getArguments() const

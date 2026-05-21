@@ -11,7 +11,6 @@
 #include "Meta/keyvalue/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
-#include "../codegenerator.h"
 #include "../nodeexecution.h"
 #include "../nodeinterpreter.h"
 
@@ -120,11 +119,6 @@ namespace Behavior {
 
                 return accessor()->mGetter(accessor(), retVal, scope);
             }
-        }
-
-        CodeGen::Statement AccessorNode::generateRead(CodeGenerator &generator, std::unique_ptr<CodeGeneratorData> &data, uint32_t providerIndex, uint32_t group) const
-        {
-            throw 0;
         }
 
         const MetaTable *AccessorNode::type() const

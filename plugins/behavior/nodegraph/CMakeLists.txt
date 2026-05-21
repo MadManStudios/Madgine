@@ -3,14 +3,14 @@ Project(NodeGraph)
 set(sources "")
 FolderSources(sources "" src)
 	FolderSources(sources src Madgine nodegraphforward.h nodegraphlib.h)
-		FolderSources(sources Madgine nodegraph codegenerator.cpp codegenerator.h nodegraph.cpp nodegraph.h nodegraphloader.cpp nodegraphloader.h nodeexecution.cpp nodeexecution.h nodebase.cpp nodebase.h nodecollector.cpp nodecollector.h nodeinterpreter.cpp nodeinterpreter.h pins.cpp pins.h)
+		FolderSources(sources Madgine nodegraph nodegraph.cpp nodegraph.h nodegraphloader.cpp nodegraphloader.h nodeexecution.cpp nodeexecution.h nodebase.cpp nodebase.h nodecollector.cpp nodecollector.h nodeinterpreter.cpp nodeinterpreter.h pins.cpp pins.h)
 			FolderSources(sources nodegraph nodes accessornode.cpp accessornode.h behaviornode.cpp behaviornode.h)
 				FolderSources(sources nodes util sendernode.cpp)
 			
 add_plugin(NodeGraph Madgine Behavior ${sources} PRECOMPILED_HEADER src/Madgine/nodegraphlib.h)
 
 target_link_plugins(NodeGraph Resources Behavior)
-target_link_libraries(NodeGraph PUBLIC FilesystemSerialize CodeGen )
+target_link_libraries(NodeGraph PUBLIC FilesystemSerialize)
 
 
 

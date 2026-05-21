@@ -14,9 +14,6 @@ namespace Behavior {
         struct NodeInterpreterStateBase;
         struct NodeInterpreterSender;
 
-        struct CodeGenerator;
-        struct CodeGeneratorData;
-
         struct Pin;
 
         struct FlowOutPinPrototype;
