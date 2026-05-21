@@ -4,7 +4,7 @@ name: Build documentation
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "master", "dev" ]
 
 jobs:
   docs:
@@ -19,6 +19,7 @@ jobs:
         fetch-depth: 0
   
     - uses: paulhatch/semantic-version@v5.4.0
+      if: github.ref_name == 'master'
       id: version
       with:
         major_pattern: "(MAJOR)"
@@ -28,19 +29,29 @@ jobs:
         enable_prerelease_mode: true
         debug: false          
 
+    - name: setup
+      id: setup
+      run: |
+        mkdir -p out/doc/doxygen
+        if [[ "$GITHUB_REF_NAME" == "dev" ]]; then
+          echo "version=dev" >> $GITHUB_OUTPUT
+        else
+          echo "version=${{ steps.version.outputs.version }}" >> $GITHUB_OUTPUT
+        fi
+
     - uses: mattnotmitt/doxygen-action@v1.9.5
       env:
-        MADGINE_VERSION: ${{ steps.version.outputs.version }}
+        MADGINE_VERSION: ${{ steps.setup.outputs.version }}
       with:
         doxyfile-path: 'docs/Doxyfile'
 
     - uses: ammaraskar/sphinx-action@master
       env:
-        MADGINE_VERSION: ${{ steps.version.outputs.version }}
+        MADGINE_VERSION: ${{ steps.setup.outputs.version }}
       with:
         docs-folder: "."
-        pre-build-command: "pip install sphinx_rtd_theme doxysphinx;doxysphinx build docs doc/docs docs/doxygen"
-        build-command: "sphinx-build -b html . doc -c docs"
+        pre-build-command: "pip install sphinx_rtd_theme doxysphinx;doxysphinx build . out/doc/html out/doc/doxygen"
+        build-command: "sphinx-build -b html . out/doc/html -c docs"
 
     - uses: actions/checkout@v4
       with:
@@ -49,10 +60,22 @@ jobs:
 
     - name: Copy static files into repository
       run: |
-        rm -rf gh-pages/doc
-        cp -r doc gh-pages
+        rm -rf gh-pages/doc/${{ steps.setup.outputs.version }}
+        mkdir -p gh-pages/doc
+        cp -r out/doc/html gh-pages/doc/${{ steps.setup.outputs.version }}
+
+        DIRS=$(find "gh-pages/doc" -mindepth 1 -maxdepth 1 -type d -printf '"%f",\n')
+
+        rm -f gh-pages/doc/versions.js
+        {
+          echo "const versions = ["
+          echo "$DIRS"
+          echo "];"
+          cat docs/versions.js
+        } > gh-pages/doc/versions.js        
 
     - name: "Updating gh-pages branch"
+      if: ${{ !env.ACT }}
       run: |
         cd gh-pages
         git config user.name github-actions

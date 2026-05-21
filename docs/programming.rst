@@ -4,5 +4,8 @@ Programmers Guide
 .. toctree::
    howtos
    core/features
-   /docs/doxygen/index
+
+.. toctree::
+   /out/doc/doxygen/index   
+
    
