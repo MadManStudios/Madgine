@@ -320,8 +320,6 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a54749c682186a8610c78fda6ef2a8f0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae1029c73d7d6740e9abb819193701d00"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_sender_node.html#ae1029c73d7d6740e9abb819193701d00">flowOutVariadic</a> (uint32_t group=0) const override</td></tr>
 <tr class="separator:ae1029c73d7d6740e9abb819193701d00"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a02067026e3d770d71a5315ba2197ee38"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespace_code_gen.html#a32f6d03c2564685c24ef7284bacc5652">CodeGen::Statement</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_sender_node.html#a02067026e3d770d71a5315ba2197ee38">generateRead</a> (<a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_code_generator.html">CodeGenerator</a> &amp;generator, std::unique_ptr&lt; <a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_code_generator_data.html">CodeGeneratorData</a> &gt; &amp;data, uint32_t providerIndex, uint32_t group) const override</td></tr>
-<tr class="separator:a02067026e3d770d71a5315ba2197ee38"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8b2bfb900a663a9c888d899520a7117d"><td class="memTemplParams" colspan="2">template&lt;size_t I&gt; </td></tr>
 <tr class="memitem:a8b2bfb900a663a9c888d899520a7117d"><td class="memTemplItemLeft" align="right" valign="top">const <a class="el" href="namespace_engine.html#a6ff33f434fd0deb508ab19a9de61b1c7">meta_decayed_t</a>&lt; std::tuple_element_t&lt; I, <a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_sender_node.html#a50488df11e7381908bd5073bf36dbe94">value_argument_tuple</a> &gt; &gt; &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_sender_node.html#a8b2bfb900a663a9c888d899520a7117d">getArguments</a> () const</td></tr>
 <tr class="separator:a8b2bfb900a663a9c888d899520a7117d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1414,56 +1412,6 @@ template&lt;typename T , typename Config , auto Algorithm, typename... Arguments
 
 </div>
 </div>
-<a id="a02067026e3d770d71a5315ba2197ee38" name="a02067026e3d770d71a5315ba2197ee38"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a02067026e3d770d71a5315ba2197ee38">&#9670;&#160;</a></span>generateRead()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T , typename Config , auto Algorithm, typename... Arguments&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual <a class="el" href="namespace_code_gen.html#a32f6d03c2564685c24ef7284bacc5652">CodeGen::Statement</a> <a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_sender_node.html">Engine::Behavior::NodeGraph::SenderNode</a>&lt; T, Config, Algorithm, Arguments &gt;::generateRead </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_code_generator.html">CodeGenerator</a> &amp;&#160;</td>
-          <td class="paramname"><em>generator</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::unique_ptr&lt; <a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_code_generator_data.html">CodeGeneratorData</a> &gt; &amp;&#160;</td>
-          <td class="paramname"><em>data</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint32_t&#160;</td>
-          <td class="paramname"><em>providerIndex</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint32_t&#160;</td>
-          <td class="paramname"><em>group</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="a8b2bfb900a663a9c888d899520a7117d" name="a8b2bfb900a663a9c888d899520a7117d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8b2bfb900a663a9c888d899520a7117d">&#9670;&#160;</a></span>getArguments()</h2>
 
@@ -1570,7 +1518,7 @@ template&lt;typename T , typename Config , auto Algorithm, typename... Arguments
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu May 21 2026 19:49:39 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Thu May 21 2026 21:57:30 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

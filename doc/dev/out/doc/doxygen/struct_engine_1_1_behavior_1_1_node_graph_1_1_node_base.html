@@ -323,10 +323,6 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a6e804953f1dea643f9ba2c3914711c3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae2b899fadbd9f62a3af767eb36a202fb"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_node_base.html#ae2b899fadbd9f62a3af767eb36a202fb">flowOutVariadic</a> (uint32_t group=0) const</td></tr>
 <tr class="separator:ae2b899fadbd9f62a3af767eb36a202fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a39ac99601acec1e3ceb250f7d6987a4b"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_node_base.html#a39ac99601acec1e3ceb250f7d6987a4b">generate</a> (<a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_code_generator.html">CodeGenerator</a> &amp;generator, std::unique_ptr&lt; <a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_code_generator_data.html">CodeGeneratorData</a> &gt; &amp;data, uint32_t flowIn, uint32_t group=0) const</td></tr>
-<tr class="separator:a39ac99601acec1e3ceb250f7d6987a4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a13f9d18eead1e2718c814fdacf27bcfc"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespace_code_gen.html#a32f6d03c2564685c24ef7284bacc5652">CodeGen::Statement</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_node_base.html#a13f9d18eead1e2718c814fdacf27bcfc">generateRead</a> (<a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_code_generator.html">CodeGenerator</a> &amp;generator, std::unique_ptr&lt; <a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_code_generator_data.html">CodeGeneratorData</a> &gt; &amp;data, uint32_t providerIndex, uint32_t group=0) const</td></tr>
-<tr class="separator:a13f9d18eead1e2718c814fdacf27bcfc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5d8ae4d3c0b009f5f2366863702abac5"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_node_base.html#a5d8ae4d3c0b009f5f2366863702abac5">interpret</a> (<a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_node_receiver.html">NodeReceiver</a>&lt; <a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_node_base.html">NodeBase</a> &gt; receiver, std::unique_ptr&lt; <a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_node_interpreter_data.html">NodeInterpreterData</a> &gt; &amp;data, uint32_t flowIn, uint32_t group=0) const</td></tr>
 <tr class="separator:a5d8ae4d3c0b009f5f2366863702abac5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a25eb345e23b57ef2caab10945fe9f5a7"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_key_value_result.html">KeyValueResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_node_base.html#a25eb345e23b57ef2caab10945fe9f5a7">interpretRead</a> (<a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_node_interpreter_state_base.html">NodeInterpreterStateBase</a> &amp;interpreter, <a class="el" href="struct_engine_1_1_value_type.html">ValueType</a> &amp;retVal, std::unique_ptr&lt; <a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_node_interpreter_data.html">NodeInterpreterData</a> &gt; &amp;data, uint32_t providerIndex, uint32_t group=0) const</td></tr>
@@ -2027,102 +2023,6 @@ Friends</h2></td></tr>
 
 </div>
 </div>
-<a id="a39ac99601acec1e3ceb250f7d6987a4b" name="a39ac99601acec1e3ceb250f7d6987a4b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a39ac99601acec1e3ceb250f7d6987a4b">&#9670;&#160;</a></span>generate()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classvoid.html">void</a> NodeBase::generate </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_code_generator.html">CodeGenerator</a> &amp;&#160;</td>
-          <td class="paramname"><em>generator</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::unique_ptr&lt; <a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_code_generator_data.html">CodeGeneratorData</a> &gt; &amp;&#160;</td>
-          <td class="paramname"><em>data</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint32_t&#160;</td>
-          <td class="paramname"><em>flowIn</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint32_t&#160;</td>
-          <td class="paramname"><em>group</em> = <code>0</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a13f9d18eead1e2718c814fdacf27bcfc" name="a13f9d18eead1e2718c814fdacf27bcfc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a13f9d18eead1e2718c814fdacf27bcfc">&#9670;&#160;</a></span>generateRead()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="namespace_code_gen.html#a32f6d03c2564685c24ef7284bacc5652">CodeGen::Statement</a> NodeBase::generateRead </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_code_generator.html">CodeGenerator</a> &amp;&#160;</td>
-          <td class="paramname"><em>generator</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::unique_ptr&lt; <a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_code_generator_data.html">CodeGeneratorData</a> &gt; &amp;&#160;</td>
-          <td class="paramname"><em>data</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint32_t&#160;</td>
-          <td class="paramname"><em>providerIndex</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint32_t&#160;</td>
-          <td class="paramname"><em>group</em> = <code>0</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="af690b30eba55a77590b71c99022e72f8" name="af690b30eba55a77590b71c99022e72f8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af690b30eba55a77590b71c99022e72f8">&#9670;&#160;</a></span>clone()</h2>
 
@@ -2385,7 +2285,7 @@ Friends</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu May 21 2026 19:49:39 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Thu May 21 2026 21:57:30 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>
