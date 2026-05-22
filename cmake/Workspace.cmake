@@ -48,6 +48,9 @@ function(install_to_workspace name)
 
 endfunction(install_to_workspace)
 
+function(install_runtime_artifacts component)
+	install(IMPORTED_RUNTIME_ARTIFACTS ${ARGN} RUNTIME DESTINATION bin COMPONENT ${component})
+endfunction(install_runtime_artifacts)
 
 #Customization-point for different platforms (e.g. Android)
 macro(add_workspace_application name)

@@ -98,4 +98,8 @@ if (ANDROID)
 
 	endfunction(install_to_workspace)
 
+	function(install_runtime_artifacts component)
+		install(IMPORTED_RUNTIME_ARTIFACTS ${ARGN} LIBRARY DESTINATION bin/${CMAKE_ANDROID_ARCH_ABI} COMPONENT ${component})
+	endfunction(install_runtime_artifacts)
+
 endif()
