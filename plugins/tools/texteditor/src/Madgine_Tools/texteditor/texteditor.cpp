@@ -2,6 +2,8 @@
 
 #include "texteditor.h"
 
+#include "Interfaces/filesystem/async.h"
+
 #include "Modules/uniquecomponent/uniquecomponentcollector.h"
 
 #include "Meta/keyvalue/metatable_impl.h"
@@ -53,20 +55,28 @@ namespace Tools {
 
         mFontPixelHeight = (int)dpi_pixel_height_from_point_size(sFontSize, sPixelScale().y);
 
-        auto &io = ImGui::GetIO();
-        static ImVector<ImWchar> ranges;
-        ranges.clear();
-        ImFontGlyphRangesBuilder builder;
-        builder.AddRanges(io.Fonts->GetGlyphRangesDefault()); // Add one of the default ranges
-        builder.AddRanges(io.Fonts->GetGlyphRangesCyrillic()); // Add one of the default ranges
-        builder.AddRanges(Zep::greek_range);
-        builder.BuildRanges(&ranges); // Build the final result (ordered ranges with all the unique characters submitted)
+        auto fontResult = co_await Filesystem::readFileAsync(fontPath);
+        if (fontResult.is_value()) {
+            mFontData = std::move(fontResult).value().get();
 
-        ImFontConfig cfg;
-        cfg.OversampleH = 4;
-        cfg.OversampleV = 4;
+            auto &io = ImGui::GetIO();
+            static ImVector<ImWchar> ranges;
+            ranges.clear();
+            ImFontGlyphRangesBuilder builder;
+            builder.AddRanges(io.Fonts->GetGlyphRangesDefault()); // Add one of the default ranges
+            builder.AddRanges(io.Fonts->GetGlyphRangesCyrillic()); // Add one of the default ranges
+            builder.AddRanges(Zep::greek_range);
+            builder.BuildRanges(&ranges); // Build the final result (ordered ranges with all the unique characters submitted)
 
-        mFont = io.Fonts->AddFontFromFileTTF(fontPath.c_str(), float(mFontPixelHeight), &cfg, ranges.Data);
+            ImFontConfig cfg;
+            cfg.OversampleH = 4;
+            cfg.OversampleV = 4;
+
+            mFont = io.Fonts->AddFontFromMemoryTTF(const_cast<void *>(mFontData.mData), mFontData.mSize, float(mFontPixelHeight), &cfg, ranges.Data);
+        } else {
+            LOG_ERROR("Reading CascadiaMono.ttf failed!");
+            co_return false;
+        }
 
         co_return true;
     }

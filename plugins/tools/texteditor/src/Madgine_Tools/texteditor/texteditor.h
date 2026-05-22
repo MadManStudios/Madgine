@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Generic/bytebuffer.h"
+
 #include "Madgine_Tools/toolbase.h"
 #include "Madgine_Tools/toolscollector.h"
 #include "textdocument.h"
@@ -30,6 +32,8 @@ namespace Tools {
 
         int mFontPixelHeight;
         ImFont *mFont;
+
+        ByteBuffer mFontData;
     };
 
 }
