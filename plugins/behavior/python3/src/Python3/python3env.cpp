@@ -403,20 +403,21 @@ namespace Behavior {
             return result;
         }
 
-        void Python3Environment::lock(BehaviorReceiver *rec)
+        void Python3Environment::lock(BehaviorReceiver *rec, Log::Log *log)
         {
+            if (rec && !log)
+                log = Log::get_log(*rec);
             // assert(PyGILState_Check() == 0);
             PyGILState_STATE handle = PyGILState_Ensure();
             assert(PyGILState_Check() == 1);
             assert(handle == PyGILState_UNLOCKED);
-            sStream.setLog(rec ? Log::get_log(*rec) : nullptr);
+            sStream.setLog(log);
             sReceiver = rec;
         }
 
-        BehaviorReceiver *Python3Environment::unlock()
+        std::pair<BehaviorReceiver *, Log::Log*> Python3Environment::unlock()
         {
-            BehaviorReceiver *result = std::exchange(sReceiver, nullptr);
-            sStream.setLog({});
+            std::pair<BehaviorReceiver *, Log::Log *> result = { std::exchange(sReceiver, nullptr), sStream.setLog(nullptr) };            
             assert(PyGILState_Check() == 1);
             PyGILState_Release(PyGILState_UNLOCKED);
             return result;

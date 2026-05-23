@@ -26,6 +26,14 @@ KeyValueError::KeyValueError(EnumHolder state, const std::string &msg, const cha
     mStackTrace.emplace_back(StackEntry { function, file, sourceLine });
 }
 
+KeyValueError::KeyValueError(EnumHolder state, const std::string &msg, std::vector<StackEntry> stack)
+    : mState(state)
+    , mMsg(msg)
+    , mStackTrace(std::move(stack))
+{
+
+}
+
 std::ostream &operator<<(std::ostream &out, const KeyValueError &error)
 {
     out << error.mState << '\n';

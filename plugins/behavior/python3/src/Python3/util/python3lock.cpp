@@ -8,9 +8,14 @@ namespace Engine {
 namespace Behavior {
     namespace Python3 {
 
-        Python3Lock::Python3Lock(BehaviorReceiver *rec)
+        Python3Lock::Python3Lock(BehaviorReceiver *rec, Log::Log *log)
         {
-            Python3Environment::lock(rec);
+            Python3Environment::lock(rec, log);
+        }
+
+        Python3Lock::Python3Lock(Log::Log *log)
+        {
+            Python3Environment::lock(nullptr, log);
         }
 
         Python3Lock::~Python3Lock()
@@ -36,17 +41,24 @@ namespace Behavior {
 
         Python3Unlock::Python3Unlock()
         {
-            mReceiver = Python3Environment::unlock();
+            std::tie(mReceiver, mLog) = Python3Environment::unlock();
         }
 
         Python3Unlock::~Python3Unlock()
         {
-            Python3Environment::lock(mReceiver);
+            Python3Environment::lock(mReceiver, mLog);
         }
 
-        BehaviorReceiver *Python3Unlock::receiver() const
+        BehaviorReceiver *Python3Unlock::fetchReceiver() 
         {
-            return mReceiver;
+            if (mLog == Log::get_log(mReceiver))
+                mLog = nullptr;
+            return std::exchange(mReceiver, nullptr);
+        }
+
+        Log::Log *Python3Unlock::log() const
+        {
+            return mLog;
         }
 
     }

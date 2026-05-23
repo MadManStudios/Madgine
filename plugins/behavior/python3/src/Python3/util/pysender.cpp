@@ -64,7 +64,7 @@ namespace Behavior {
             PyObject *obj = PyObject_CallObject((PyObject *)&PySenderStateType, NULL);
             Python3Unlock unlock;
             SenderState *state = &reinterpret_cast<PySenderState *>(obj)->mState;
-            new (state) SenderState { *unlock.receiver() };
+            new (state) SenderState { *unlock.fetchReceiver() };
 
             construct(state->mInnerState, DelayedConstruct<SenderState::Inner> { [&]() { return Execution::connect(std::move(sender) | Execution::stoppable | Execution::with_debug_location(state->mChild), SenderReceiver { *state }); } });
             state->mInnerState->start();

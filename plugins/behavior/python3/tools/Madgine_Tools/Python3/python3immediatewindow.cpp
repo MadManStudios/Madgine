@@ -127,17 +127,14 @@ namespace Tools {
 
     bool Python3ImmediateWindow::interpret(std::string_view command)
     {
-        Debug::ContextInfo &context = Debug::Debugger::getSingleton().createContext();
-        Log::setLog(mPrompt.get());
         ValueType retVal;
-        KeyValueResult result = mEnv->execute(retVal, command);
+        KeyValueResult result = mEnv->execute(retVal, command, mPrompt.get());
         if (result) {
-            LOG_ERROR(result);
+            Log::LogDummy { Log::MessageType::ERROR_TYPE, __FILE__, __LINE__, mPrompt.get() } << result;                        
         } else {
-            LOG(retVal);
+            Log::LogDummy { Log::MessageType::INFO_TYPE, __FILE__, __LINE__, mPrompt.get() } << retVal;     
         }
         mPrompt->resume();
-        Log::setLog(nullptr);
         return false;
     }
 

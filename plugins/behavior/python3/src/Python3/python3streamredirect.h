@@ -15,7 +15,7 @@ namespace Behavior {
 
             int write(std::string_view text);
 
-            void setLog(Log::Log *log);
+            Log::Log *setLog(Log::Log *log);
             Log::Log *log();
 
         private:

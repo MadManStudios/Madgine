@@ -61,9 +61,9 @@ namespace Behavior {
             }
         }
 
-        void Python3StreamRedirect::setLog(Log::Log *log)
+        Log::Log *Python3StreamRedirect::setLog(Log::Log *log)
         {
-            mLog = log;
+            return std::exchange(mLog, log);
         }
 
         Log::Log *Python3StreamRedirect::log()

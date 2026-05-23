@@ -7,6 +7,12 @@
 namespace Engine {
 
 struct META_EXPORT KeyValueError {
+    struct StackEntry {
+        std::string mFunction;
+        std::string mFile;
+        size_t mLineNr;
+    };
+
     template <typename Rep, typename... Reps>
     KeyValueError(EnumImpl<Rep, Reps...> state, const std::string &msg = "")
         : KeyValueError(EnumHolder { state }, msg)
@@ -14,15 +20,11 @@ struct META_EXPORT KeyValueError {
     }
     KeyValueError(EnumHolder state = GenericResult { GenericResult::UNKNOWN_ERROR }, const std::string &msg = "");
     KeyValueError(EnumHolder state, const std::string &msg, const char *function, const char *file, size_t sourceLine);
+    KeyValueError(EnumHolder state, const std::string &msg, std::vector<StackEntry> stack);
 
     META_EXPORT friend std::ostream &operator<<(std::ostream &out, const KeyValueError &error);
 
     std::string mMsg;
-    struct StackEntry {
-        std::string mFunction;
-        std::string mFile;
-        size_t mLineNr;
-    };
     std::vector<StackEntry> mStackTrace;
 
     EnumHolder mState;
@@ -74,10 +76,10 @@ struct META_EXPORT KeyValueResultBuilder {
 #define KEYVALUE_ERROR(Type) \
     ::Engine::KeyValueResultBuilder { Type, __func__, __FILE__, __LINE__ }
 
-#define KEYVALUE_UNKNOWN_ERROR() KEYVALUE_ERROR(::Engine::GenericResult{::Engine::GenericResult::UNKNOWN_ERROR})
+#define KEYVALUE_UNKNOWN_ERROR() KEYVALUE_ERROR(::Engine::GenericResult { ::Engine::GenericResult::UNKNOWN_ERROR })
 
 #define KEYVALUE_PROPAGATE_ERROR(...)                     \
     if (::Engine::KeyValueResult _result = (__VA_ARGS__)) \
-    return _result
+        return (_result.mError->mStackTrace.emplace_back(__func__, __FILE__, __LINE__), _result)
 
 }
