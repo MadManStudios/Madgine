@@ -71,6 +71,7 @@ namespace Tools {
             ImFontConfig cfg;
             cfg.OversampleH = 4;
             cfg.OversampleV = 4;
+            cfg.FontDataOwnedByAtlas = false;
 
             mFont = io.Fonts->AddFontFromMemoryTTF(const_cast<void *>(mFontData.mData), mFontData.mSize, float(mFontPixelHeight), &cfg, ranges.Data);
         } else {
