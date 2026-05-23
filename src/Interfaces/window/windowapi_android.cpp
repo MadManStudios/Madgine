@@ -329,6 +329,7 @@ namespace Window {
                 rect->right - rect->left,
                 rect->bottom - rect->top
             };
+            onEvent(ResizeEvent { mContentSize });
         }
 
         void onPause()
