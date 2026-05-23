@@ -85,8 +85,9 @@ namespace Filesystem {
             return false;
 
         struct stat statbuffer;
-        [[maybe_unused]] auto result = stat(p.c_str(), &statbuffer);
-        assert(result != -1);
+        auto result = stat(p.c_str(), &statbuffer);
+        if (result == -1)
+            return false;
         return (statbuffer.st_mode & S_IFMT) == S_IFDIR;
     }
 
