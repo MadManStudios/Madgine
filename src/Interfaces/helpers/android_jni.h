@@ -22,7 +22,7 @@ namespace JNI {
 
     INTERFACES_EXPORT int callMemberFunction(jobject object, const char *functionName);
     INTERFACES_EXPORT bool callMemberFunction2(jobject object, const char *functionName);
-    INTERFACES_EXPORT bool callMemberFunction3(jobject object, const char *functionName, jint v);
+    INTERFACES_EXPORT int callMemberFunction3(jobject object, const char *functionName, jint v);
 
     INTERFACES_EXPORT void registerNatives(const char *className, std::span<const JNINativeMethod> methods);
 

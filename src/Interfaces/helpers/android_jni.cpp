@@ -119,7 +119,7 @@ namespace JNI {
         return sEnv->CallBooleanMethod(object, method);
     }
 
-    bool callMemberFunction3(jobject object, const char *functionName, jint v)
+    int callMemberFunction3(jobject object, const char *functionName, jint v)
     {
         jclass clazz = sEnv->GetObjectClass(object);
         jmethodID method = sEnv->GetMethodID(clazz, functionName, "(I)I");
