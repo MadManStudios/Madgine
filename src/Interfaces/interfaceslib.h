@@ -12,6 +12,14 @@
 #    define INTERFACES_EXPORT DLL_IMPORT
 #endif
 
+
+#if EMSCRIPTEN
+#    define EMSCRIPTEN_WORKAROUND(x) const x &
+#else
+#    define EMSCRIPTEN_WORKAROUND(x) x
+#endif
+
+
 #include <array>
 #include <cstring>
 #include <fstream>

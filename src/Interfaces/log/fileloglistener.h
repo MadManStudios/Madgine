@@ -9,7 +9,7 @@ namespace Log {
 
         FileLogListener(const std::string &fileName);
 
-        virtual void messageLogged(std::string_view message, MessageType lml, const char *file, size_t line, Log *log) override;
+        virtual void messageLogged(EMSCRIPTEN_WORKAROUND(std::string_view) message, MessageType lml, const char *file, size_t line, Log *log) override;
 
     private:
         std::ofstream mFile;

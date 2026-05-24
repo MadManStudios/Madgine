@@ -192,7 +192,7 @@ namespace Tools {
         }
     }
 
-    void LogViewer::messageLogged(std::string_view message, Log::MessageType lml, const char *file, size_t line, Log::Log *log)
+    void LogViewer::messageLogged(EMSCRIPTEN_WORKAROUND(std::string_view) message, Log::MessageType lml, const char *file, size_t line, Log::Log *log)
     {
         if (Threading::WorkGroup::isInitialized() && mWorkgroup != &Threading::WorkGroup::self())
             return;

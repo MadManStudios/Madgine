@@ -12,7 +12,7 @@ namespace Log {
     {
     }
 
-    void FileLogListener::messageLogged(std::string_view message, MessageType lml, const char *file, size_t line, Log *log)
+    void FileLogListener::messageLogged(EMSCRIPTEN_WORKAROUND(std::string_view) message, MessageType lml, const char *file, size_t line, Log *log)
     {
         mFile << message << std::endl;
     }

@@ -125,7 +125,7 @@ namespace Tools {
         }*/
     }
 
-    bool Python3ImmediateWindow::interpret(std::string_view command)
+    bool Python3ImmediateWindow::interpret(EMSCRIPTEN_WORKAROUND(std::string_view) command)
     {
         ValueType retVal;
         KeyValueResult result = mEnv->execute(retVal, command, mPrompt.get());

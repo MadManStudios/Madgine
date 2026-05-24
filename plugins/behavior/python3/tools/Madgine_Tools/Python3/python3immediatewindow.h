@@ -27,8 +27,7 @@ namespace Tools {
         bool wantsPause(Debug::ContextInfo &context, TypedPtr location, Debug::ContinuationType type, IndexType<size_t> line) override;
         void onSuspend(Debug::ContextInfo &context, TypedPtr location, Debug::ContinuationType type) override;
 
-        bool interpret(std::string_view command) override;
-        Behavior::Behavior run(std::string_view command);
+        bool interpret(EMSCRIPTEN_WORKAROUND(std::string_view) command) override;        
 
     private:
         std::string mCommandBuffer;

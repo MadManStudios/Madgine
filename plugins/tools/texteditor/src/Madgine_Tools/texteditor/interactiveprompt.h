@@ -12,7 +12,7 @@ namespace Tools {
     struct Interpreter {
         virtual std::string_view name() = 0;
 
-        virtual bool interpret(std::string_view command) = 0;
+        virtual bool interpret(EMSCRIPTEN_WORKAROUND(std::string_view) command) = 0;
     };
 
     struct Highlighter;

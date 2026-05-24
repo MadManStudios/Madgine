@@ -16,7 +16,7 @@ namespace Tools {
 
         virtual void render() override;
 
-        virtual void messageLogged(std::string_view message, Log::MessageType lml, const char *file, size_t line, Log::Log *log) override;
+        virtual void messageLogged(EMSCRIPTEN_WORKAROUND(std::string_view) message, Log::MessageType lml, const char *file, size_t line, Log::Log *log) override;
 
         std::string_view key() const override;
 
