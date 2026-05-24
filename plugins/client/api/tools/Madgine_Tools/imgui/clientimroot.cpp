@@ -595,13 +595,12 @@ namespace Tools {
 
         auto it = sKeyMap.find(arg.mScancode);
         if (it == sKeyMap.end()) {
-            LOG_ERROR("Unhandled Keycode encountered in ClientImRoot: " << arg.mScancode << ", text: " << arg.mText);
+            LOG_ERROR("Unhandled Keycode encountered in ClientImRoot: " << (int)arg.mScancode << ", text: " << arg.mText);
         } else {
             io.AddKeyEvent(it->second, true);
-
-            if (arg.mText > 0)
-                io.AddInputCharacter(arg.mText);
         }
+        if (arg.mText > 0)
+            io.AddInputCharacter(arg.mText);
 
         io.AddKeyEvent(ImGuiMod_Ctrl, arg.mControlKeys.mCtrl);
         io.AddKeyEvent(ImGuiMod_Shift, arg.mControlKeys.mShift);
