@@ -281,7 +281,7 @@ Macros</h2></td></tr>
 <tr class="separator:aed0234cb94ffc9ad22fab6c05c45eaef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a771527fb659ebf7918792fade5937cbf"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="keyvalueresult_8h.html#a771527fb659ebf7918792fade5937cbf">KEYVALUE_PROPAGATE_ERROR</a>(...)</td></tr>
 <tr class="separator:a771527fb659ebf7918792fade5937cbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a961f84b7867560f853e957e4d43a3e9f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="keyvalueresult_8h.html#a961f84b7867560f853e957e4d43a3e9f">KEYVALUE_UNKNOWN_ERROR</a>()&#160;&#160;&#160;<a class="el" href="keyvalueresult_8h.html#aed0234cb94ffc9ad22fab6c05c45eaef">KEYVALUE_ERROR</a>(<a class="el" href="namespace_engine.html#a22ca8ad17f9fa1466d02653e6bd26d87">::Engine::GenericResult</a>{::Engine::GenericResult::UNKNOWN_ERROR})</td></tr>
+<tr class="memitem:a961f84b7867560f853e957e4d43a3e9f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="keyvalueresult_8h.html#a961f84b7867560f853e957e4d43a3e9f">KEYVALUE_UNKNOWN_ERROR</a>()&#160;&#160;&#160;<a class="el" href="keyvalueresult_8h.html#aed0234cb94ffc9ad22fab6c05c45eaef">KEYVALUE_ERROR</a>(<a class="el" href="namespace_engine.html#a22ca8ad17f9fa1466d02653e6bd26d87">::Engine::GenericResult</a> { ::Engine::GenericResult::UNKNOWN_ERROR })</td></tr>
 <tr class="separator:a961f84b7867560f853e957e4d43a3e9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
@@ -313,7 +313,7 @@ Macros</h2></td></tr>
           <td class="memname">#define KEYVALUE_UNKNOWN_ERROR</td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td>&#160;&#160;&#160;<a class="el" href="keyvalueresult_8h.html#aed0234cb94ffc9ad22fab6c05c45eaef">KEYVALUE_ERROR</a>(<a class="el" href="namespace_engine.html#a22ca8ad17f9fa1466d02653e6bd26d87">::Engine::GenericResult</a>{::Engine::GenericResult::UNKNOWN_ERROR})</td>
+          <td>&#160;&#160;&#160;<a class="el" href="keyvalueresult_8h.html#aed0234cb94ffc9ad22fab6c05c45eaef">KEYVALUE_ERROR</a>(<a class="el" href="namespace_engine.html#a22ca8ad17f9fa1466d02653e6bd26d87">::Engine::GenericResult</a> { ::Engine::GenericResult::UNKNOWN_ERROR })</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -336,15 +336,15 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line">    <span class="keywordflow">if</span> (<a class="code hl_struct" href="struct_engine_1_1_key_value_result.html">::Engine::KeyValueResult</a> _result = (__VA_ARGS__)) \</div>
-<div class="line">    <span class="keywordflow">return</span> _result</div>
-<div class="ttc" id="astruct_engine_1_1_key_value_result_html"><div class="ttname"><a href="struct_engine_1_1_key_value_result.html">Engine::KeyValueResult</a></div><div class="ttdef"><b>Definition:</b> keyvalueresult.h:31</div></div>
+<div class="line">        return (_result.mError-&gt;mStackTrace.emplace_back(__func__, __FILE__, __LINE__), _result)</div>
+<div class="ttc" id="astruct_engine_1_1_key_value_result_html"><div class="ttname"><a href="struct_engine_1_1_key_value_result.html">Engine::KeyValueResult</a></div><div class="ttdef"><b>Definition:</b> keyvalueresult.h:33</div></div>
 </div><!-- fragment -->
 </div>
 </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri May 22 2026 00:45:06 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Sun May 24 2026 11:35:00 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>
