@@ -377,9 +377,9 @@ namespace Behavior {
             return "Python3Environment";
         }
 
-        KeyValueResult Python3Environment::execute(ValueType &retVal, std::string_view command)
+        KeyValueResult Python3Environment::execute(ValueType &retVal, std::string_view command, Log::Log *log)
         {
-            Python3Lock lock;
+            Python3Lock lock { log };
 
             PyModulePtr main { "__main__" };
 
@@ -415,7 +415,7 @@ namespace Behavior {
             sReceiver = rec;
         }
 
-        std::pair<BehaviorReceiver *, Log::Log*> Python3Environment::unlock()
+        std::pair<BehaviorReceiver *, Log::Log *> Python3Environment::unlock()
         {
             std::pair<BehaviorReceiver *, Log::Log *> result = { std::exchange(sReceiver, nullptr), sStream.setLog(nullptr) };            
             assert(PyGILState_Check() == 1);
