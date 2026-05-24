@@ -5,6 +5,7 @@
 #include <zep/mode_repl.h>
 
 #include "imgui/imgui.h"
+#include "imgui/imgui_internal.h"
 #include "texteditor.h"
 
 namespace Engine {
@@ -112,8 +113,16 @@ namespace Tools {
 
         mEditor.Display();
 
-        if (ImGui::IsWindowFocused())
+        if (ImGui::IsWindowFocused()) {
             mEditor.HandleInput();
+
+            ImGuiPlatformImeData *ime_data = &ImGui::GetCurrentContext()->PlatformImeData; // (this is a public struct, passed to io.Platform_SetImeDataFn() handler)
+            ime_data->WantVisible = true;
+            ime_data->WantTextInput = true;
+            ime_data->InputPos = min /* ImVec2(cursor_screen_pos.x - 1.0f, cursor_screen_pos.y - g.FontSize)*/;
+            ime_data->InputLineHeight = ImGui::GetFontSize();
+            ime_data->ViewportId = ImGui::GetCurrentWindow()->Viewport->ID;
+        }
     }
 
     bool InteractivePrompt::handleKeyPress(uint32_t key, uint32_t modifier)
@@ -121,7 +130,7 @@ namespace Tools {
         if (key == Zep::ExtKeys::RETURN && modifier == 0) {
             Zep::ChangeRecord record;
             auto &buffer = mWindow->GetBuffer();
-            std::string str = std::string(buffer.GetWorkingBuffer().begin() + mStartLocation.Index(), buffer.GetWorkingBuffer().end());
+            std::string str = std::string(buffer.GetWorkingBuffer().begin() + mStartLocation.Index(), buffer.GetWorkingBuffer().end() - 1);
             if (str.size() <= 1) {
                 moveToEnd();
                 buffer.GetMode()->SwitchMode(Zep::EditorMode::Insert);
