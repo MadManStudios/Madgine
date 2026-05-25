@@ -45,6 +45,11 @@
 #    include "internal/pycore_frame.h"
 #endif
 
+#if EMSCRIPTEN
+/// VERY VERY hacky
+extern "C" int pthread_kill(int, int) { throw 0; }
+#endif
+
 UNIQUECOMPONENT(Engine::Behavior::Python3::Python3Environment)
 
 METATABLE_BEGIN(Engine::Behavior::Python3::Python3Environment)
@@ -135,7 +140,7 @@ namespace Behavior {
                     assert(result == 0);
                     return type;
                 } else if (StringUtil::startsWith(list->mTypeName, namespaceName)) {
-                    PyModuleDef PyNamespace_module = {
+                    PyModuleDef *PyNamespace_module = new PyModuleDef {
                         PyModuleDef_HEAD_INIT,
                         fullName.c_str(), /* name of module */
                         "test", /* module documentation, may be NULL */
@@ -143,7 +148,7 @@ namespace Behavior {
                              or -1 if the module keeps state in global variables. */
                         PyNamespaceMethods
                     };
-                    PyObject *module = PyModule_Create(&PyNamespace_module);
+                    PyObject *module = PyModule_Create(PyNamespace_module);
                     if (!module)
                         return NULL;
                     int result = PyModule_AddObjectRef(self, name, module);
@@ -308,6 +313,25 @@ namespace Behavior {
 
             std::string path = Filesystem::shippingPath() / PYTHON3_STDLIB_ZIP;
 
+#if ANDROID
+            std::string newPath = Filesystem::appDataPath() / PYTHON3_STDLIB_ZIP;
+            Filesystem::copyFile(path, newPath);
+            path = newPath;
+
+            std::string lib_dynloadPath = Filesystem::appDataPath() / "lib-dynload";
+            Filesystem::createDirectory(lib_dynloadPath);
+            for (const Filesystem::Path &p : Filesystem::listFiles(Filesystem::shippingPath() / "lib-dynload")) {
+                Filesystem::copyFile(p, lib_dynloadPath);
+            }
+
+            wchar_t *lib_dynload = nullptr;
+            status = PyConfig_SetBytesString(&config, &lib_dynload, lib_dynloadPath.c_str());
+            HANDLE_STATUS();
+
+            status = PyWideStringList_Append(&config.module_search_paths, lib_dynload);
+            HANDLE_STATUS();
+#endif
+
             status = PyConfig_SetBytesString(&config, &config.pythonpath_env, path.c_str());
             HANDLE_STATUS();
 
@@ -335,8 +359,17 @@ namespace Behavior {
             config.site_import = false;
 
             status = Py_InitializeFromConfig(&config);
-            HANDLE_STATUS();
             PyConfig_Clear(&config);
+            if (PyStatus_IsError(status)) {
+                LOG_ERROR(status.err_msg);
+                Py_FinalizeEx();
+                co_return false;
+            }
+            if (PyStatus_IsExit(status)) {
+                Py_FinalizeEx();
+                co_return false;
+            }
+            
 
             PyRun_SimpleString("import importlib");
 
@@ -354,6 +387,9 @@ namespace Behavior {
 
         Threading::Task<void> Python3Environment::finalize()
         {
+            if (!Py_IsInitialized())
+                co_return;
+
             Python3FileLoader &loader = Python3FileLoader::getSingleton();
 
             for (std::pair<const std::string, Python3FileLoader::Resource> &res : loader) {
@@ -417,7 +453,7 @@ namespace Behavior {
 
         std::pair<BehaviorReceiver *, Log::Log *> Python3Environment::unlock()
         {
-            std::pair<BehaviorReceiver *, Log::Log *> result = { std::exchange(sReceiver, nullptr), sStream.setLog(nullptr) };            
+            std::pair<BehaviorReceiver *, Log::Log *> result = { std::exchange(sReceiver, nullptr), sStream.setLog(nullptr) };
             assert(PyGILState_Check() == 1);
             PyGILState_Release(PyGILState_UNLOCKED);
             return result;

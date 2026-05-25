@@ -53,6 +53,9 @@ namespace Behavior {
 
         Threading::Task<bool> Python3FileLoader::loadImpl(PyModulePtr &module, ResourceDataInfo &info, Filesystem::FileEventType event)
         {
+            if (!co_await Python3Environment::getSingleton().state())
+                co_return false;
+
             Python3Lock lock {};
 
             if (!module) {
@@ -141,14 +144,19 @@ namespace Behavior {
             KEYVALUE_PROPAGATE_ERROR(fromPyObject(resourcePtr, moduleObject.get("__spec__").get("loader_state")));
             Resource *res = scope_cast<Resource>(resourcePtr.as<ScopePtr>());
 
-            PyModulePtr importlib { "importlib.util" };
-
-            PyObjectPtr spec = importlib.get("spec_from_file_location").call("ss", res->name().data(), res->path().c_str());
-
-            KEYVALUE_PROPAGATE_ERROR(fromPyObject(result, spec.get("loader").get("exec_module").call("(O)", (PyObject *)moduleObject)));
+            std::string sourceCode = res->readAsText();
+            PyObjectPtr code = Py_CompileString(sourceCode.c_str(), res->path().c_str(), Py_file_input);
+            if (!code) {
+                return std::make_unique<KeyValueError>(fetchError());
+            }
 
             PyObject *dict = PyModule_GetDict(moduleObject);
 
+            PyObjectPtr status = PyEval_EvalCode(code, dict, dict);
+            if (!status) {
+                return std::make_unique<KeyValueError>(fetchError());
+            }
+            
             PyObject *key, *value = NULL;
             Py_ssize_t pos = 0;
 
