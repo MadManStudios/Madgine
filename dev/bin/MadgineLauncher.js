@@ -31,7 +31,7 @@ if (ENVIRONMENT_IS_NODE) {
 
 // --pre-jses are emitted after the Module integration code, so that they can
 // refer to Module (if they choose; they can also define Module)
-// include: /tmp/tmp147enl7f.js
+// include: /tmp/tmpt3wy5uax.js
 
   Module['expectedDataFileDownloads'] ??= 0;
   Module['expectedDataFileDownloads']++;
@@ -209,11 +209,13 @@ Module['FS_createPath']("/", "shadercache", true, true);
     }
 
     }
-    loadPackage({"files": [{"filename": "/data/Band.png", "start": 0, "end": 279834}, {"filename": "/data/Band20.fbx", "start": 279834, "end": 319254}, {"filename": "/data/Brick.fbx", "start": 319254, "end": 349346}, {"filename": "/data/CascadiaMono.ttf", "start": 349346, "end": 974238}, {"filename": "/data/Data-LICENSES.txt", "start": 974238, "end": 978692}, {"filename": "/data/Gamepad.jpg", "start": 978692, "end": 1087148}, {"filename": "/data/NodeGraph.png", "start": 1087148, "end": 1089394}, {"filename": "/data/OpenSans.msdf", "start": 1089394, "end": 17936026}, {"filename": "/data/Planes.fbx", "start": 17936026, "end": 17970022}, {"filename": "/data/Rock_034_Base_Color.jpg", "start": 17970022, "end": 18260855}, {"filename": "/data/blank_white.png", "start": 18260855, "end": 18260974}, {"filename": "/data/default.atl", "start": 18260974, "end": 18261059}, {"filename": "/data/default.layout", "start": 18261059, "end": 18262733}, {"filename": "/data/default_tex.png", "start": 18262733, "end": 18262938}, {"filename": "/data/gameover.widget", "start": 18262938, "end": 18265109}, {"filename": "/data/grid.png", "start": 18265109, "end": 18265261}, {"filename": "/data/icons.ttf", "start": 18265261, "end": 18269745}, {"filename": "/data/ingame.widget", "start": 18269745, "end": 18272677}, {"filename": "/data/mage.fbx", "start": 18272677, "end": 18375473}, {"filename": "/data/mage_animated.fbx", "start": 18375473, "end": 21126893}, {"filename": "/data/mage_attack.fbx", "start": 21126893, "end": 21373885}, {"filename": "/data/mainmenu.widget", "start": 21373885, "end": 21377110}, {"filename": "/data/test.scene", "start": 21377110, "end": 21382927}, {"filename": "/data/widgetstestgraph.ngp", "start": 21382927, "end": 21393588}, {"filename": "/shadercache/bloom_PS.glsl_es", "start": 21393588, "end": 21394418}, {"filename": "/shadercache/bloom_VS.glsl_es", "start": 21394418, "end": 21394724}, {"filename": "/shadercache/blur_PS.glsl_es", "start": 21394724, "end": 21396296}, {"filename": "/shadercache/blur_VS.glsl_es", "start": 21396296, "end": 21396602}, {"filename": "/shadercache/grid_PS.glsl_es", "start": 21396602, "end": 21397772}, {"filename": "/shadercache/grid_VS.glsl_es", "start": 21397772, "end": 21398370}, {"filename": "/shadercache/im3d_PS.glsl_es", "start": 21398370, "end": 21399433}, {"filename": "/shadercache/im3d_VS.glsl_es", "start": 21399433, "end": 21400445}, {"filename": "/shadercache/imgui_PS.glsl_es", "start": 21400445, "end": 21400882}, {"filename": "/shadercache/imgui_VS.glsl_es", "start": 21400882, "end": 21401569}, {"filename": "/shadercache/pointshadow_PS.glsl_es", "start": 21401569, "end": 21401856}, {"filename": "/shadercache/pointshadow_VS.glsl_es", "start": 21401856, "end": 21402963}, {"filename": "/shadercache/scene_VS.glsl_es", "start": 21402963, "end": 21404782}, {"filename": "/shadercache/scene_lighting.glsl_es", "start": 21404782, "end": 21411075}, {"filename": "/shadercache/widgets_PS.glsl_es", "start": 21411075, "end": 21412359}, {"filename": "/shadercache/widgets_VS.glsl_es", "start": 21412359, "end": 21413277}], "remote_package_size": 21413277});
+    loadPackage({"files": [{"filename": "/data/Band.png", "start": 0, "end": 279834}, {"filename": "/data/Band20.fbx", "start": 279834, "end": 319254}, {"filename": "/data/Brick.fbx", "start": 319254, "end": 349346}, {"filename": "/data/CascadiaMono.ttf", "start": 349346, "end": 974238}, {"filename": "/data/Data-LICENSES.txt", "start": 974238, "end": 978692}, {"filename": "/data/Gamepad.jpg", "start": 978692, "end": 1087148}, {"filename": "/data/NodeGraph.png", "start": 1087148, "end": 1089394}, {"filename": "/data/OpenSans.msdf", "start": 1089394, "end": 17936026}, {"filename": "/data/Planes.fbx", "start": 17936026, "end": 17970022}, {"filename": "/data/Rock_034_Base_Color.jpg", "start": 17970022, "end": 18260855}, {"filename": "/data/blank_white.png", "start": 18260855, "end": 18260974}, {"filename": "/data/default.atl", "start": 18260974, "end": 18261059}, {"filename": "/data/default.layout", "start": 18261059, "end": 18262733}, {"filename": "/data/default_tex.png", "start": 18262733, "end": 18262938}, {"filename": "/data/gameover.widget", "start": 18262938, "end": 18265109}, {"filename": "/data/grid.png", "start": 18265109, "end": 18265261}, {"filename": "/data/icons.ttf", "start": 18265261, "end": 18269745}, {"filename": "/data/ingame.widget", "start": 18269745, "end": 18272677}, {"filename": "/data/mage.fbx", "start": 18272677, "end": 18375473}, {"filename": "/data/mage_animated.fbx", "start": 18375473, "end": 21126893}, {"filename": "/data/mage_attack.fbx", "start": 21126893, "end": 21373885}, {"filename": "/data/mainmenu.widget", "start": 21373885, "end": 21377110}, {"filename": "/data/test.scene", "start": 21377110, "end": 21382927}, {"filename": "/data/widgetstestgraph.ngp", "start": 21382927, "end": 21393588}, {"filename": "/python.zip", "start": 21393588, "end": 25181716}, {"filename": "/shadercache/bloom_PS.glsl_es", "start": 25181716, "end": 25182546}, {"filename": "/shadercache/bloom_VS.glsl_es", "start": 25182546, "end": 25182852}, {"filename": "/shadercache/blur_PS.glsl_es", "start": 25182852, "end": 25184424}, {"filename": "/shadercache/blur_VS.glsl_es", "start": 25184424, "end": 25184730}, {"filename": "/shadercache/grid_PS.glsl_es", "start": 25184730, "end": 25185900}, {"filename": "/shadercache/grid_VS.glsl_es", "start": 25185900, "end": 25186498}, {"filename": "/shadercache/im3d_PS.glsl_es", "start": 25186498, "end": 25187561}, {"filename": "/shadercache/im3d_VS.glsl_es", "start": 25187561, "end": 25188573}, {"filename": "/shadercache/imgui_PS.glsl_es", "start": 25188573, "end": 25189010}, {"filename": "/shadercache/imgui_VS.glsl_es", "start": 25189010, "end": 25189697}, {"filename": "/shadercache/pointshadow_PS.glsl_es", "start": 25189697, "end": 25189984}, {"filename": "/shadercache/pointshadow_VS.glsl_es", "start": 25189984, "end": 25191091}, {"filename": "/shadercache/scene_VS.glsl_es", "start": 25191091, "end": 25192910}, {"filename": "/shadercache/scene_lighting.glsl_es", "start": 25192910, "end": 25199203}, {"filename": "/shadercache/widgets_PS.glsl_es", "start": 25199203, "end": 25200487}, {"filename": "/shadercache/widgets_VS.glsl_es", "start": 25200487, "end": 25201405}], "remote_package_size": 25201405});
 
   })();
 
-// end include: /tmp/tmp147enl7f.js
+// end include: /tmp/tmpt3wy5uax.js
+// include: /home/runner/work/Madgine/Madgine/plugins/behavior/python3/patch.js
+WebAssembly.promising = null// end include: /home/runner/work/Madgine/Madgine/plugins/behavior/python3/patch.js
 // include: /home/runner/work/Madgine/Madgine/out/build/Emscripten-RelWithDebInfo-OpenGL/_deps/madginesentry-build/js/header.js
 
 /**
@@ -1086,6 +1088,20 @@ async function createWasm() {
     };
   var ___assert_fail = (condition, filename, line, func) =>
       abort(`Assertion failed: ${UTF8ToString(condition)}, at: ` + [filename ? UTF8ToString(filename) : 'unknown filename', line, func ? UTF8ToString(func) : 'unknown function']);
+
+  var wasmTableMirror = [];
+  
+  /** @type {WebAssembly.Table} */
+  var wasmTable;
+  var getWasmTableEntry = (funcPtr) => {
+      var func = wasmTableMirror[funcPtr];
+      if (!func) {
+        /** @suppress {checkTypes} */
+        wasmTableMirror[funcPtr] = func = wasmTable.get(funcPtr);
+      }
+      return func;
+    };
+  var ___call_sighandler = (fp, sig) => getWasmTableEntry(fp)(sig);
 
   var PATH = {
   isAbs:(path) => path.charAt(0) === '/',
@@ -4413,6 +4429,12 @@ async function createWasm() {
   var __abort_js = () =>
       abort('');
 
+  var runtimeKeepaliveCounter = 0;
+  var __emscripten_runtime_keepalive_clear = () => {
+      noExitRuntime = false;
+      runtimeKeepaliveCounter = 0;
+    };
+
   var isLeapYear = (year) => year%4 === 0 && (year%100 !== 0 || year%400 === 0);
   
   var MONTH_DAYS_LEAP_CUMULATIVE = [0,31,60,91,121,152,182,213,244,274,305,335];
@@ -4498,6 +4520,88 @@ async function createWasm() {
   ;
   }
 
+  var timers = {
+  };
+  
+  var handleException = (e) => {
+      // Certain exception types we do not treat as errors since they are used for
+      // internal control flow.
+      // 1. ExitStatus, which is thrown by exit()
+      // 2. "unwind", which is thrown by emscripten_unwind_to_js_event_loop() and others
+      //    that wish to return to JS event loop.
+      if (e instanceof ExitStatus || e == 'unwind') {
+        dbg(`handleException: unwinding: EXITSTATUS=${EXITSTATUS}`);
+        return EXITSTATUS;
+      }
+      quit_(1, e);
+    };
+  
+  
+  var keepRuntimeAlive = () => noExitRuntime || runtimeKeepaliveCounter > 0;
+  var _proc_exit = (code) => {
+      dbg(`proc_exit: ${code}`);
+      EXITSTATUS = code;
+      if (!keepRuntimeAlive()) {
+        Module['onExit']?.(code);
+        ABORT = true;
+      }
+      quit_(code, new ExitStatus(code));
+    };
+  /** @suppress {duplicate } */
+  /** @param {boolean|number=} implicit */
+  var exitJS = (status, implicit) => {
+      EXITSTATUS = status;
+  
+      _proc_exit(status);
+    };
+  var _exit = exitJS;
+  
+  
+  var maybeExit = () => {
+      if (!keepRuntimeAlive()) {
+        dbg(`maybeExit: calling exit() implicitly after user callback completed: ${EXITSTATUS}`);
+        try {
+          _exit(EXITSTATUS);
+        } catch (e) {
+          handleException(e);
+        }
+      }
+    };
+  var callUserCallback = (func) => {
+      if (ABORT) {
+        return;
+      }
+      try {
+        func();
+        maybeExit();
+      } catch (e) {
+        handleException(e);
+      }
+    };
+  
+  
+  var _emscripten_get_now = () => performance.now();
+  var __setitimer_js = (which, timeout_ms) => {
+      dbg(`setitimer_js ${which} timeout=${timeout_ms}`);
+      // First, clear any existing timer.
+      if (timers[which]) {
+        clearTimeout(timers[which].id);
+        delete timers[which];
+      }
+  
+      // A timeout of zero simply cancels the current timeout so we have nothing
+      // more to do.
+      if (!timeout_ms) return 0;
+  
+      var id = setTimeout(() => {
+        delete timers[which];
+        dbg(`itimer fired: ${which}`);
+        callUserCallback(() => __emscripten_timeout(which, _emscripten_get_now()));
+      }, timeout_ms);
+      timers[which] = { id, timeout_ms };
+      return 0;
+    };
+
   var __tzset_js = (timezone, daylight, std_name, dst_name) => {
       // TODO: Use (malleable) environment variables instead of system settings.
       var currentYear = new Date().getFullYear();
@@ -4547,7 +4651,6 @@ async function createWasm() {
       }
     };
 
-  var _emscripten_get_now = () => performance.now();
   
   var _emscripten_date_now = () => Date.now();
   
@@ -4578,62 +4681,6 @@ async function createWasm() {
     ;
   }
 
-  var handleException = (e) => {
-      // Certain exception types we do not treat as errors since they are used for
-      // internal control flow.
-      // 1. ExitStatus, which is thrown by exit()
-      // 2. "unwind", which is thrown by emscripten_unwind_to_js_event_loop() and others
-      //    that wish to return to JS event loop.
-      if (e instanceof ExitStatus || e == 'unwind') {
-        dbg(`handleException: unwinding: EXITSTATUS=${EXITSTATUS}`);
-        return EXITSTATUS;
-      }
-      quit_(1, e);
-    };
-  
-  
-  var runtimeKeepaliveCounter = 0;
-  var keepRuntimeAlive = () => noExitRuntime || runtimeKeepaliveCounter > 0;
-  var _proc_exit = (code) => {
-      dbg(`proc_exit: ${code}`);
-      EXITSTATUS = code;
-      if (!keepRuntimeAlive()) {
-        Module['onExit']?.(code);
-        ABORT = true;
-      }
-      quit_(code, new ExitStatus(code));
-    };
-  /** @suppress {duplicate } */
-  /** @param {boolean|number=} implicit */
-  var exitJS = (status, implicit) => {
-      EXITSTATUS = status;
-  
-      _proc_exit(status);
-    };
-  var _exit = exitJS;
-  
-  
-  var maybeExit = () => {
-      if (!keepRuntimeAlive()) {
-        dbg(`maybeExit: calling exit() implicitly after user callback completed: ${EXITSTATUS}`);
-        try {
-          _exit(EXITSTATUS);
-        } catch (e) {
-          handleException(e);
-        }
-      }
-    };
-  var callUserCallback = (func) => {
-      if (ABORT) {
-        return;
-      }
-      try {
-        func();
-        maybeExit();
-      } catch (e) {
-        handleException(e);
-      }
-    };
   
   /** @param {number=} timeout */
   var safeSetTimeout = (func, timeout) => {
@@ -6182,18 +6229,6 @@ async function createWasm() {
       });
     };
   
-  var wasmTableMirror = [];
-  
-  /** @type {WebAssembly.Table} */
-  var wasmTable;
-  var getWasmTableEntry = (funcPtr) => {
-      var func = wasmTableMirror[funcPtr];
-      if (!func) {
-        /** @suppress {checkTypes} */
-        wasmTableMirror[funcPtr] = func = wasmTable.get(funcPtr);
-      }
-      return func;
-    };
   var _emscripten_async_call = (func, arg, millis) => {
       var wrapper = () => getWasmTableEntry(func)(arg);
   
@@ -6250,6 +6285,7 @@ async function createWasm() {
   
       return 0;
     };
+
 
   var _emscripten_is_main_browser_thread = () =>
       !ENVIRONMENT_IS_WORKER;
@@ -7266,6 +7302,32 @@ async function createWasm() {
   }
   }
 
+  function _fd_fdstat_get(fd, pbuf) {
+  try {
+  
+      var rightsBase = 0;
+      var rightsInheriting = 0;
+      var flags = 0;
+      {
+        var stream = SYSCALLS.getStreamFromFD(fd);
+        // All character devices are terminals (other things a Linux system would
+        // assume is a character device, like the mouse, we have special APIs for).
+        var type = stream.tty ? 2 :
+                   FS.isDir(stream.mode) ? 3 :
+                   FS.isLink(stream.mode) ? 7 :
+                   4;
+      }
+      HEAP8[pbuf] = type;
+      HEAP16[(((pbuf)+(2))>>1)] = flags;
+      HEAP64[(((pbuf)+(8))>>3)] = BigInt(rightsBase);
+      HEAP64[(((pbuf)+(16))>>3)] = BigInt(rightsInheriting);
+      return 0;
+    } catch (e) {
+    if (typeof FS == 'undefined' || !(e.name === 'ErrnoError')) throw e;
+    return e.errno;
+  }
+  }
+
   /** @param {number=} offset */
   var doReadv = (stream, iov, iovcnt, offset) => {
       var ret = 0;
@@ -8271,6 +8333,7 @@ async function createWasm() {
 
 
 
+
   
   
   var stringToUTF8OnStack = (str) => {
@@ -8278,6 +8341,137 @@ async function createWasm() {
       var ret = stackAlloc(size);
       stringToUTF8(str, ret, size);
       return ret;
+    };
+
+
+  
+  var setWasmTableEntry = (idx, func) => {
+      /** @suppress {checkTypes} */
+      wasmTable.set(idx, func);
+      // With ABORT_ON_WASM_EXCEPTIONS wasmTable.get is overridden to return wrapped
+      // functions so we need to call it here to retrieve the potential wrapper correctly
+      // instead of just storing 'func' directly into wasmTableMirror
+      /** @suppress {checkTypes} */
+      wasmTableMirror[idx] = wasmTable.get(idx);
+    };
+
+  var freeTableIndexes = [];
+  
+  var getEmptyTableSlot = () => {
+      // Reuse a free index if there is one, otherwise grow.
+      if (freeTableIndexes.length) {
+        return freeTableIndexes.pop();
+      }
+      // Grow the table
+      try {
+        /** @suppress {checkTypes} */
+        wasmTable.grow(1);
+      } catch (err) {
+        if (!(err instanceof RangeError)) {
+          throw err;
+        }
+        throw 'Unable to grow wasm table. Set ALLOW_TABLE_GROWTH.';
+      }
+      return wasmTable.length - 1;
+    };
+
+  var uleb128Encode = (n, target) => {
+      if (n < 128) {
+        target.push(n);
+      } else {
+        target.push((n % 128) | 128, n >> 7);
+      }
+    };
+  
+  var sigToWasmTypes = (sig) => {
+      var typeNames = {
+        'i': 'i32',
+        'j': 'i64',
+        'f': 'f32',
+        'd': 'f64',
+        'e': 'externref',
+        'p': 'i32',
+      };
+      var type = {
+        parameters: [],
+        results: sig[0] == 'v' ? [] : [typeNames[sig[0]]]
+      };
+      for (var i = 1; i < sig.length; ++i) {
+        type.parameters.push(typeNames[sig[i]]);
+      }
+      return type;
+    };
+  
+  var generateFuncType = (sig, target) => {
+      var sigRet = sig.slice(0, 1);
+      var sigParam = sig.slice(1);
+      var typeCodes = {
+        'i': 0x7f, // i32
+        'p': 0x7f, // i32
+        'j': 0x7e, // i64
+        'f': 0x7d, // f32
+        'd': 0x7c, // f64
+        'e': 0x6f, // externref
+      };
+  
+      // Parameters, length + signatures
+      target.push(0x60 /* form: func */);
+      uleb128Encode(sigParam.length, target);
+      for (var paramType of sigParam) {
+        target.push(typeCodes[paramType]);
+      }
+  
+      // Return values, length + signatures
+      // With no multi-return in MVP, either 0 (void) or 1 (anything else)
+      if (sigRet == 'v') {
+        target.push(0x00);
+      } else {
+        target.push(0x01, typeCodes[sigRet]);
+      }
+    };
+  var convertJsFunctionToWasm = (func, sig) => {
+  
+      // If the type reflection proposal is available, use the new
+      // "WebAssembly.Function" constructor.
+      // Otherwise, construct a minimal wasm module importing the JS function and
+      // re-exporting it.
+      if (typeof WebAssembly.Function == "function") {
+        return new WebAssembly.Function(sigToWasmTypes(sig), func);
+      }
+  
+      // The module is static, with the exception of the type section, which is
+      // generated based on the signature passed in.
+      var typeSectionBody = [
+        0x01, // count: 1
+      ];
+      generateFuncType(sig, typeSectionBody);
+  
+      // Rest of the module is static
+      var bytes = [
+        0x00, 0x61, 0x73, 0x6d, // magic ("\0asm")
+        0x01, 0x00, 0x00, 0x00, // version: 1
+        0x01, // Type section code
+      ];
+      // Write the overall length of the type section followed by the body
+      uleb128Encode(typeSectionBody.length, bytes);
+      bytes.push(...typeSectionBody);
+  
+      // The rest of the module is static
+      bytes.push(
+        0x02, 0x07, // import section
+          // (import "e" "f" (func 0 (type 0)))
+          0x01, 0x01, 0x65, 0x01, 0x66, 0x00, 0x00,
+        0x07, 0x05, // export section
+          // (export "f" (func 0 (type 0)))
+          0x01, 0x01, 0x66, 0x00, 0x00,
+      );
+  
+      // We can compile this wasm module synchronously because it is very small.
+      // This accepts an import (at "e.f"), that it reroutes to an export (at "f")
+      var module = new WebAssembly.Module(new Uint8Array(bytes));
+      var instance = new WebAssembly.Instance(module, { 'e': { 'f': func } });
+      var wrappedFunc = instance.exports['f'];
+      return wrappedFunc;
     };
 
 
@@ -8360,26 +8554,52 @@ if (Module['wasmBinary']) wasmBinary = Module['wasmBinary'];
 // end include: postlibrary.js
 
 var ASM_CONSTS = {
-  1475500: ($0) => { Module.sentry_capture_event(UTF8ToString($0)) },  
- 1475546: () => { FS.syncfs( false, function(err) { assert(!err); }); },  
- 1475598: () => { FS.mkdir('/cwd'); FS.mount(IDBFS, {}, '/cwd'); FS.syncfs( true, function(err) { assert(!err); _setupDoneImpl(); }); },  
- 1475714: () => { if (document.activeElement == Module.canvas) { Module.input.focus(); } },  
- 1475785: () => { if (document.activeElement == Module.input) { Module.canvas.focus(); } },  
- 1475856: () => { document.body.style.cursor = 'default'; },  
- 1475896: () => { document.body.style.cursor = 'text'; },  
- 1475933: () => { document.body.style.cursor = 'move'; },  
- 1475970: () => { document.body.style.cursor = 'ns-resize'; },  
- 1476012: () => { document.body.style.cursor = 'ew-resize'; },  
- 1476054: () => { document.body.style.cursor = 'nesw-resize'; },  
- 1476098: () => { document.body.style.cursor = 'nwse-resize'; },  
- 1476142: () => { document.body.style.cursor = 'grab'; },  
- 1476179: () => { document.body.style.cursor = 'not-allowed'; },  
- 1476223: () => { Module.input.focus(); },  
- 1476245: () => { Module.canvas.focus(); }
+  2150064: ($0) => { Module.sentry_capture_event(UTF8ToString($0)) },  
+ 2150110: () => { FS.syncfs( false, function(err) { assert(!err); }); },  
+ 2150162: () => { FS.mkdir('/cwd'); FS.mount(IDBFS, {}, '/cwd'); FS.syncfs( true, function(err) { assert(!err); _setupDoneImpl(); }); },  
+ 2150278: () => { if (document.activeElement == Module.canvas) { Module.input.focus(); } },  
+ 2150349: () => { if (document.activeElement == Module.input) { Module.canvas.focus(); } },  
+ 2150420: () => { document.body.style.cursor = 'default'; },  
+ 2150460: () => { document.body.style.cursor = 'text'; },  
+ 2150497: () => { document.body.style.cursor = 'move'; },  
+ 2150534: () => { document.body.style.cursor = 'ns-resize'; },  
+ 2150576: () => { document.body.style.cursor = 'ew-resize'; },  
+ 2150618: () => { document.body.style.cursor = 'nesw-resize'; },  
+ 2150662: () => { document.body.style.cursor = 'nwse-resize'; },  
+ 2150706: () => { document.body.style.cursor = 'grab'; },  
+ 2150743: () => { document.body.style.cursor = 'not-allowed'; },  
+ 2150787: () => { Module.input.focus(); },  
+ 2150809: () => { Module.canvas.focus(); }
 };
+function _Py_emscripten_runtime() { var info; if (typeof navigator == 'object') { info = navigator.userAgent; } else if (typeof process == 'object') { info = "Node.js ".concat(process.version); } else { info = "UNKNOWN"; } var len = lengthBytesUTF8(info) + 1; var res = _malloc(len); if (res) stringToUTF8(info, res, len); return res; }
+function _Py_CheckEmscriptenSignals_Helper() { if (!Module.Py_EmscriptenSignalBuffer) { return 0; } try { let result = Module.Py_EmscriptenSignalBuffer[0]; Module.Py_EmscriptenSignalBuffer[0] = 0; return result; } catch(e) { return 0; } }
+function _PyEM_TrampolineCall_JS(func,arg1,arg2,arg3) { return wasmTable.get(func)(arg1, arg2, arg3); } function getPyEMTrampolinePtr() { let isIOS = globalThis.navigator && ( /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && typeof navigator.maxTouchPoints !== 'undefined' && navigator.maxTouchPoints > 1) ); if (isIOS) { return 0; } let trampolineModule; try { trampolineModule = getWasmTrampolineModule(); } catch (e) { return 0; } const trampolineInstance = new WebAssembly.Instance(trampolineModule, { env: { __indirect_function_table: wasmTable, memory: wasmMemory }, }); return addFunction(trampolineInstance.exports.trampoline_call); } addOnPreRun(function setEmscriptenTrampoline() { const ptr = getPyEMTrampolinePtr(); const offset = HEAP32[__PyEM_EMSCRIPTEN_TRAMPOLINE_OFFSET / 4]; HEAP32[(__PyRuntime + offset) / 4] = ptr; });
+function __syscall_getuid32_js() { if (ENVIRONMENT_IS_NODE) { return process.getuid(); } return 0; }
+function __syscall_umask_js(mask) { if (ENVIRONMENT_IS_NODE) { try { return process.umask(mask); } catch(e) { return 0; } } return 0; }
+function _emscripten_promising_main_js() { FS.createAsyncInputDevice = function(parent, name, input) { parent = typeof parent == 'string' ? parent : FS.getPath(parent); var path = PATH.join2(parent, name); var mode = FS_getMode((!!1), (!!0)); FS.createDevice.major ||= 64; var dev = FS.makedev(FS.createDevice.major++, 0); async function getDataBuf() { var buf; try { buf = await input(); } catch (e) { throw new FS.ErrnoError((29)); } if (!buf?.byteLength) { throw new FS.ErrnoError((6)); } ops._dataBuf = buf; } var ops = { _dataBuf: new Uint8Array(0), open(stream) { stream.seekable = (!!0); }, async readAsync(stream, buffer, offset, length, pos ) { buffer = buffer.subarray(offset, offset + length); if (!ops._dataBuf.byteLength) { await getDataBuf(); } var toRead = Math.min(ops._dataBuf.byteLength, buffer.byteLength); buffer.subarray(0, toRead).set(ops._dataBuf); buffer = buffer.subarray(toRead); ops._dataBuf = ops._dataBuf.subarray(toRead); if (toRead) { stream.node.atime = Date.now(); } return toRead; }, }; FS.registerDevice(dev, ops); return FS.mkdev(path, mode, dev); }; if (!WebAssembly.promising) { return; } const origResolveGlobalSymbol = resolveGlobalSymbol; if (ENVIRONMENT_IS_NODE && !Module.onExit) { Module.onExit = (code) => process.exit(code); } resolveGlobalSymbol = function (name, direct = (!!0)) { const orig = origResolveGlobalSymbol(name, direct); if (name === "main") { const main = WebAssembly.promising(orig.sym); orig.sym = (...args) => { (async () => { const ret = await main(...args); Module.onExit?.(ret); })(); _emscripten_exit_with_live_runtime(); }; } return orig; }; }
+function __maybe_fd_read_async(fd,iovs,iovcnt,nread) { if (!WebAssembly.promising) { return null; } var stream; try { stream = SYSCALLS.getStreamFromFD(fd); } catch (e) { return null; } if (!stream.stream_ops.readAsync) { return null; } return (async () => { try { var ret = 0; for (var i = 0; i < iovcnt; i++) { var ptr = HEAP32[(iovs + 0)/4]; var len = HEAP32[(iovs + 4)/4]; iovs += 8; var curr = await stream.stream_ops.readAsync(stream, HEAP8, ptr, len); if (curr < 0) return -1; ret += curr; if (curr < len) break; } HEAP32[nread/4] = ret; return 0; } catch (e) { if (e.name !== 'ErrnoError') { throw e; } return e["errno"]; } })(); };
+function __block_for_int(p) { return p; } if (WebAssembly.Suspending) { __block_for_int = new WebAssembly.Suspending(__block_for_int); }
+function __maybe_poll_async(fds,nfds,timeout) { if (!WebAssembly.promising) { return null; } return (async function() { try { var nonzero = 0; var promises = []; for (var i = 0; i < nfds; i++) { var pollfd = fds + 8 * i; var fd = HEAP32[(pollfd + 0)/4]; var events = HEAP16[(pollfd + 4)/2]; var mask = 0x020; var stream = FS.getStream(fd); if (stream) { mask = 0x001 | 0x004; if (stream.stream_ops.pollAsync) { promises.push(stream.stream_ops.pollAsync(stream, timeout).then((mask) => { mask &= events | 0x008 | 0x010; HEAP16[(pollfd + 6)/2] = mask; if (mask) { nonzero ++; } })); } else if (stream.stream_ops.poll) { var mask = stream.stream_ops.poll(stream, timeout); mask &= events | 0x008 | 0x010; HEAP16[(pollfd + 6)/2] = mask; if (mask) { nonzero ++; } } } } await Promise.all(promises); return nonzero; } catch(e) { if (e?.name !== "ErrnoError") throw e; return -e["errno"]; } })(); }
+function emscripten_set_up_async_input_device_js() { let idx = 0; const encoder = new TextEncoder(); const bufs = [ encoder.encode("ab\n"), encoder.encode("fi\n"), encoder.encode("xy\n"), ]; function sleep(t) { return new Promise(res => setTimeout(res, t)); } FS.createAsyncInputDevice("/dev", "blah", async () => { await sleep(5); return bufs[(idx ++) % 3]; }); return !!WebAssembly.promising; }
+function emscripten_log_impl_js(arg) { console.warn(UTF8ToString(arg)); }
+function unbox_small_structs(type_ptr) { var type_id = HEAPU16[(type_ptr + 6 >> 1) + 0]; while (type_id === 13) { if (HEAPU32[(type_ptr >> 2) + 0] > 16) { break; } var elements = HEAPU32[(type_ptr + 8 >> 2) + 0]; var first_element = HEAPU32[(elements >> 2) + 0]; if (first_element === 0) { type_id = 0; break; } else if (HEAPU32[(elements >> 2) + 1] === 0) { type_ptr = first_element; type_id = HEAPU16[(first_element + 6 >> 1) + 0]; } else { break; } } return [type_ptr, type_id]; }
+function ffi_call_js(cif,fn,rvalue,avalue) { var abi = HEAPU32[(cif >> 2) + 0]; var nargs = HEAPU32[(cif >> 2) + 1]; var nfixedargs = HEAPU32[(cif >> 2) + 6]; var arg_types_ptr = HEAPU32[(cif >> 2) + 2]; var rtype_unboxed = unbox_small_structs(HEAPU32[(cif >> 2) + 3]); var rtype_ptr = rtype_unboxed[0]; var rtype_id = rtype_unboxed[1]; var orig_stack_ptr = stackSave(); var cur_stack_ptr = orig_stack_ptr; var args = []; var ret_by_arg = (!!0); if (rtype_id === 15) { throw new Error('complex ret marshalling nyi'); } if (rtype_id < 0 || rtype_id > 15) { throw new Error('Unexpected rtype ' + rtype_id); } if (rtype_id === 4 || rtype_id === 13) { args.push(rvalue); ret_by_arg = (!!1); } ; for (var i = 0; i < nfixedargs; i++) { var arg_ptr = HEAPU32[(avalue >> 2) + i]; var arg_unboxed = unbox_small_structs(HEAPU32[(arg_types_ptr >> 2) + i]); var arg_type_ptr = arg_unboxed[0]; var arg_type_id = arg_unboxed[1]; switch (arg_type_id) { case 1: case 10: case 9: case 14: args.push(HEAPU32[(arg_ptr >> 2) + 0]); ; break; case 2: args.push(HEAPF32[(arg_ptr >> 2) + 0]); ; break; case 3: args.push(HEAPF64[(arg_ptr >> 3) + 0]); ; break; case 5: args.push(HEAPU8[arg_ptr + 0]); ; break; case 6: args.push(HEAP8[arg_ptr + 0]); ; break; case 7: args.push(HEAPU16[(arg_ptr >> 1) + 0]); ; break; case 8: args.push(HEAP16[(arg_ptr >> 1) + 0]); ; break; case 11: case 12: args.push(HEAPU64[(arg_ptr >> 3) + 0]); ; break; case 4: args.push(HEAPU64[(arg_ptr >> 3) + 0]); args.push(HEAPU64[(arg_ptr >> 3) + 1]); ; break; case 13: var size = HEAPU32[(arg_type_ptr >> 2) + 0]; var align = HEAPU16[(arg_type_ptr + 4 >> 1) + 0]; ((cur_stack_ptr -= (size)), (cur_stack_ptr &= (~((align) - 1)))); HEAP8.subarray(cur_stack_ptr, cur_stack_ptr+size).set(HEAP8.subarray(arg_ptr, arg_ptr + size)); args.push(cur_stack_ptr); ; break; case 15: throw new Error('complex marshalling nyi'); default: throw new Error('Unexpected type ' + arg_type_id); } } if (nfixedargs != nargs) { ; var struct_arg_info = []; for (var i = nargs - 1; i >= nfixedargs; i--) { var arg_ptr = HEAPU32[(avalue >> 2) + i]; var arg_unboxed = unbox_small_structs(HEAPU32[(arg_types_ptr >> 2) + i]); var arg_type_ptr = arg_unboxed[0]; var arg_type_id = arg_unboxed[1]; switch (arg_type_id) { case 5: case 6: ((cur_stack_ptr -= (1)), (cur_stack_ptr &= (~((1) - 1)))); HEAPU8[cur_stack_ptr + 0] = HEAPU8[arg_ptr + 0]; break; case 7: case 8: ((cur_stack_ptr -= (2)), (cur_stack_ptr &= (~((2) - 1)))); HEAPU16[(cur_stack_ptr >> 1) + 0] = HEAPU16[(arg_ptr >> 1) + 0]; break; case 1: case 9: case 10: case 14: case 2: ((cur_stack_ptr -= (4)), (cur_stack_ptr &= (~((4) - 1)))); HEAPU32[(cur_stack_ptr >> 2) + 0] = HEAPU32[(arg_ptr >> 2) + 0]; break; case 3: case 11: case 12: ((cur_stack_ptr -= (8)), (cur_stack_ptr &= (~((8) - 1)))); HEAPU32[(cur_stack_ptr >> 2) + 0] = HEAPU32[(arg_ptr >> 2) + 0]; HEAPU32[(cur_stack_ptr >> 2) + 1] = HEAPU32[(arg_ptr >> 2) + 1]; break; case 4: ((cur_stack_ptr -= (16)), (cur_stack_ptr &= (~((8) - 1)))); HEAPU32[(cur_stack_ptr >> 2) + 0] = HEAPU32[(arg_ptr >> 2) + 0]; HEAPU32[(cur_stack_ptr >> 2) + 1] = HEAPU32[(arg_ptr >> 2) + 1]; HEAPU32[(cur_stack_ptr >> 2) + 2] = HEAPU32[(arg_ptr >> 2) + 2]; HEAPU32[(cur_stack_ptr >> 2) + 3] = HEAPU32[(arg_ptr >> 2) + 3]; break; case 13: ((cur_stack_ptr -= (4)), (cur_stack_ptr &= (~((4) - 1)))); struct_arg_info.push([cur_stack_ptr, arg_ptr, HEAPU32[(arg_type_ptr >> 2) + 0], HEAPU16[(arg_type_ptr + 4 >> 1) + 0]]); break; case 15: throw new Error('complex arg marshalling nyi'); default: throw new Error('Unexpected argtype ' + arg_type_id); } } args.push(cur_stack_ptr); for (var i = 0; i < struct_arg_info.length; i++) { var struct_info = struct_arg_info[i]; var arg_target = struct_info[0]; var arg_ptr = struct_info[1]; var size = struct_info[2]; var align = struct_info[3]; ((cur_stack_ptr -= (size)), (cur_stack_ptr &= (~((align) - 1)))); HEAP8.subarray(cur_stack_ptr, cur_stack_ptr+size).set(HEAP8.subarray(arg_ptr, arg_ptr + size)); HEAPU32[(arg_target >> 2) + 0] = cur_stack_ptr; } } stackRestore(cur_stack_ptr); stackAlloc(0); var result = (0, getWasmTableEntry(fn).apply(null, args)); stackRestore(orig_stack_ptr); if (ret_by_arg) { return; } switch (rtype_id) { case 0: break; case 1: case 9: case 10: case 14: HEAPU32[(rvalue >> 2) + 0] = result; break; case 2: HEAPF32[(rvalue >> 2) + 0] = result; break; case 3: HEAPF64[(rvalue >> 3) + 0] = result; break; case 5: case 6: HEAPU8[rvalue + 0] = result; break; case 7: case 8: HEAPU16[(rvalue >> 1) + 0] = result; break; case 11: case 12: HEAPU64[(rvalue >> 3) + 0] = result; break; case 15: throw new Error('complex ret marshalling nyi'); default: throw new Error('Unexpected rtype ' + rtype_id); } }
+function ffi_closure_alloc_js(size,code) { var closure = _malloc(size); var index = getEmptyTableSlot(); HEAPU32[(code >> 2) + 0] = index; HEAPU32[(closure >> 2) + 0] = index; return closure; }
+function ffi_closure_free_js(closure) { var index = HEAPU32[(closure >> 2) + 0]; freeTableIndexes.push(index); _free(closure); }
+function ffi_prep_closure_loc_js(closure,cif,fun,user_data,codeloc) { var abi = HEAPU32[(cif >> 2) + 0]; var nargs = HEAPU32[(cif >> 2) + 1]; var nfixedargs = HEAPU32[(cif >> 2) + 6]; var arg_types_ptr = HEAPU32[(cif >> 2) + 2]; var rtype_unboxed = unbox_small_structs(HEAPU32[(cif >> 2) + 3]); var rtype_ptr = rtype_unboxed[0]; var rtype_id = rtype_unboxed[1]; var sig; var ret_by_arg = (!!0); switch (rtype_id) { case 0: sig = 'v'; break; case 13: case 4: sig = 'vi'; ret_by_arg = (!!1); break; case 1: case 5: case 6: case 7: case 8: case 9: case 10: case 14: sig = 'i'; break; case 2: sig = 'f'; break; case 3: sig = 'd'; break; case 11: case 12: sig = 'j'; break; case 15: throw new Error('complex ret marshalling nyi'); default: throw new Error('Unexpected rtype ' + rtype_id); } var unboxed_arg_type_id_list = []; var unboxed_arg_type_info_list = []; for (var i = 0; i < nargs; i++) { var arg_unboxed = unbox_small_structs(HEAPU32[(arg_types_ptr >> 2) + i]); var arg_type_ptr = arg_unboxed[0]; var arg_type_id = arg_unboxed[1]; unboxed_arg_type_id_list.push(arg_type_id); unboxed_arg_type_info_list.push([HEAPU32[(arg_type_ptr >> 2) + 0], HEAPU16[(arg_type_ptr + 4 >> 1) + 0]]); } for (var i = 0; i < nfixedargs; i++) { switch (unboxed_arg_type_id_list[i]) { case 1: case 5: case 6: case 7: case 8: case 9: case 10: case 14: case 13: sig += 'i'; break; case 2: sig += 'f'; break; case 3: sig += 'd'; break; case 4: sig += 'jj'; break; case 11: case 12: sig += 'j'; break; case 15: throw new Error('complex marshalling nyi'); default: throw new Error('Unexpected argtype ' + arg_type_id); } } if (nfixedargs < nargs) { sig += "i"; } 0; function trampoline() { var args = Array.prototype.slice.call(arguments); var size = 0; var orig_stack_ptr = stackSave(); var cur_ptr = orig_stack_ptr; var ret_ptr; var jsarg_idx = 0; if (ret_by_arg) { ret_ptr = args[jsarg_idx++]; } else { ((cur_ptr -= (8)), (cur_ptr &= (~((8) - 1)))); ret_ptr = cur_ptr; } cur_ptr -= 4 * nargs; var args_ptr = cur_ptr; var carg_idx = 0; for (; carg_idx < nfixedargs; carg_idx++) { var cur_arg = args[jsarg_idx++]; var arg_type_info = unboxed_arg_type_info_list[carg_idx]; var arg_size = arg_type_info[0]; var arg_align = arg_type_info[1]; var arg_type_id = unboxed_arg_type_id_list[carg_idx]; switch (arg_type_id) { case 5: case 6: ((cur_ptr -= (1)), (cur_ptr &= (~((4) - 1)))); HEAPU32[(args_ptr >> 2) + carg_idx] = cur_ptr; HEAPU8[cur_ptr + 0] = cur_arg; break; case 7: case 8: ((cur_ptr -= (2)), (cur_ptr &= (~((4) - 1)))); HEAPU32[(args_ptr >> 2) + carg_idx] = cur_ptr; HEAPU16[(cur_ptr >> 1) + 0] = cur_arg; break; case 1: case 9: case 10: case 14: ((cur_ptr -= (4)), (cur_ptr &= (~((4) - 1)))); HEAPU32[(args_ptr >> 2) + carg_idx] = cur_ptr; HEAPU32[(cur_ptr >> 2) + 0] = cur_arg; break; case 13: ((cur_ptr -= (arg_size)), (cur_ptr &= (~((arg_align) - 1)))); HEAP8.subarray(cur_ptr, cur_ptr + arg_size).set(HEAP8.subarray(cur_arg, cur_arg + arg_size)); HEAPU32[(args_ptr >> 2) + carg_idx] = cur_ptr; break; case 2: ((cur_ptr -= (4)), (cur_ptr &= (~((4) - 1)))); HEAPU32[(args_ptr >> 2) + carg_idx] = cur_ptr; HEAPF32[(cur_ptr >> 2) + 0] = cur_arg; break; case 3: ((cur_ptr -= (8)), (cur_ptr &= (~((8) - 1)))); HEAPU32[(args_ptr >> 2) + carg_idx] = cur_ptr; HEAPF64[(cur_ptr >> 3) + 0] = cur_arg; break; case 11: case 12: ((cur_ptr -= (8)), (cur_ptr &= (~((8) - 1)))); HEAPU32[(args_ptr >> 2) + carg_idx] = cur_ptr; HEAPU64[(cur_ptr >> 3) + 0] = cur_arg; break; case 4: ((cur_ptr -= (16)), (cur_ptr &= (~((8) - 1)))); HEAPU32[(args_ptr >> 2) + carg_idx] = cur_ptr; HEAPU64[(cur_ptr >> 3) + 0] = cur_arg; cur_arg = args[jsarg_idx++]; HEAPU64[(cur_ptr >> 3) + 1] = cur_arg; break; } } var varargs = args[args.length - 1]; for (; carg_idx < nargs; carg_idx++) { var arg_type_id = unboxed_arg_type_id_list[carg_idx]; var arg_type_info = unboxed_arg_type_info_list[carg_idx]; var arg_size = arg_type_info[0]; var arg_align = arg_type_info[1]; if (arg_type_id === 13) { var struct_ptr = HEAPU32[(varargs >> 2) + 0]; ((cur_ptr -= (arg_size)), (cur_ptr &= (~((arg_align) - 1)))); HEAP8.subarray(cur_ptr, cur_ptr + arg_size).set(HEAP8.subarray(struct_ptr, struct_ptr + arg_size)); HEAPU32[(args_ptr >> 2) + carg_idx] = cur_ptr; } else { HEAPU32[(args_ptr >> 2) + carg_idx] = varargs; } varargs += 4; } stackRestore(cur_ptr); stackAlloc(0); 0; getWasmTableEntry(HEAPU32[(closure >> 2) + 2])( HEAPU32[(closure >> 2) + 1], ret_ptr, args_ptr, HEAPU32[(closure >> 2) + 3] ); stackRestore(orig_stack_ptr); if (!ret_by_arg) { switch (sig[0]) { case "i": return HEAPU32[(ret_ptr >> 2) + 0]; case "j": return HEAPU64[(ret_ptr >> 3) + 0]; case "d": return HEAPF64[(ret_ptr >> 3) + 0]; case "f": return HEAPF32[(ret_ptr >> 2) + 0]; } } } try { var wasm_trampoline = convertJsFunctionToWasm(trampoline, sig); } catch(e) { return 1; } setWasmTableEntry(codeloc, wasm_trampoline); HEAPU32[(closure >> 2) + 1] = cif; HEAPU32[(closure >> 2) + 2] = fun; HEAPU32[(closure >> 2) + 3] = user_data; return 0; }
 var wasmImports = {
   /** @export */
+  _PyEM_TrampolineCall_JS,
+  /** @export */
+  _Py_CheckEmscriptenSignals_Helper,
+  /** @export */
   __assert_fail: ___assert_fail,
+  /** @export */
+  __block_for_int,
+  /** @export */
+  __call_sighandler: ___call_sighandler,
+  /** @export */
+  __maybe_fd_read_async,
   /** @export */
   __syscall_chdir: ___syscall_chdir,
   /** @export */
@@ -8415,11 +8635,17 @@ var wasmImports = {
   /** @export */
   _abort_js: __abort_js,
   /** @export */
+  _emscripten_promising_main_js,
+  /** @export */
+  _emscripten_runtime_keepalive_clear: __emscripten_runtime_keepalive_clear,
+  /** @export */
   _localtime_js: __localtime_js,
   /** @export */
   _mmap_js: __mmap_js,
   /** @export */
   _munmap_js: __munmap_js,
+  /** @export */
+  _setitimer_js: __setitimer_js,
   /** @export */
   _tzset_js: __tzset_js,
   /** @export */
@@ -8463,6 +8689,8 @@ var wasmImports = {
   /** @export */
   emscripten_get_element_css_size: _emscripten_get_element_css_size,
   /** @export */
+  emscripten_get_now: _emscripten_get_now,
+  /** @export */
   emscripten_is_main_browser_thread: _emscripten_is_main_browser_thread,
   /** @export */
   emscripten_resize_heap: _emscripten_resize_heap,
@@ -8502,6 +8730,8 @@ var wasmImports = {
   exit: _exit,
   /** @export */
   fd_close: _fd_close,
+  /** @export */
+  fd_fdstat_get: _fd_fdstat_get,
   /** @export */
   fd_read: _fd_read,
   /** @export */
@@ -8645,7 +8875,9 @@ var wasmImports = {
   /** @export */
   glVertexAttribPointer: _glVertexAttribPointer,
   /** @export */
-  glViewport: _glViewport
+  glViewport: _glViewport,
+  /** @export */
+  proc_exit: _proc_exit
 };
 var wasmExports;
 createWasm();
@@ -8655,7 +8887,11 @@ var _main = Module['_main'] = (a0, a1) => (_main = Module['_main'] = wasmExports
 var _free = (a0) => (_free = wasmExports['free'])(a0);
 var _malloc = (a0) => (_malloc = wasmExports['malloc'])(a0);
 var _setupDoneImpl = Module['_setupDoneImpl'] = () => (_setupDoneImpl = Module['_setupDoneImpl'] = wasmExports['setupDoneImpl'])();
+var _htonl = (a0) => (_htonl = wasmExports['htonl'])(a0);
+var _htons = (a0) => (_htons = wasmExports['htons'])(a0);
 var _emscripten_builtin_memalign = (a0, a1) => (_emscripten_builtin_memalign = wasmExports['emscripten_builtin_memalign'])(a0, a1);
+var _ntohs = (a0) => (_ntohs = wasmExports['ntohs'])(a0);
+var __emscripten_timeout = (a0, a1) => (__emscripten_timeout = wasmExports['_emscripten_timeout'])(a0, a1);
 var ___trap = () => (___trap = wasmExports['__trap'])();
 var __emscripten_stack_restore = (a0) => (__emscripten_stack_restore = wasmExports['_emscripten_stack_restore'])(a0);
 var __emscripten_stack_alloc = (a0) => (__emscripten_stack_alloc = wasmExports['_emscripten_stack_alloc'])(a0);
@@ -8664,7 +8900,9 @@ var ___cxa_decrement_exception_refcount = (a0) => (___cxa_decrement_exception_re
 var ___cxa_increment_exception_refcount = (a0) => (___cxa_increment_exception_refcount = wasmExports['__cxa_increment_exception_refcount'])(a0);
 var ___thrown_object_from_unwind_exception = (a0) => (___thrown_object_from_unwind_exception = wasmExports['__thrown_object_from_unwind_exception'])(a0);
 var ___get_exception_message = (a0, a1, a2) => (___get_exception_message = wasmExports['__get_exception_message'])(a0, a1, a2);
-var ___cpp_exception;
+var __PyRuntime = Module['__PyRuntime'] = 1983408;
+var _Py_EMSCRIPTEN_SIGNAL_HANDLING = Module['_Py_EMSCRIPTEN_SIGNAL_HANDLING'] = 2205752;
+var __PyEM_EMSCRIPTEN_TRAMPOLINE_OFFSET = Module['__PyEM_EMSCRIPTEN_TRAMPOLINE_OFFSET'] = 1524872;var ___cpp_exception;
 
 // include: postamble.js
 // === Auto-generated postamble setup entry stuff ===
