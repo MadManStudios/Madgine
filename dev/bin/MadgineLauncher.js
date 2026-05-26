@@ -31,7 +31,7 @@ if (ENVIRONMENT_IS_NODE) {
 
 // --pre-jses are emitted after the Module integration code, so that they can
 // refer to Module (if they choose; they can also define Module)
-// include: /tmp/tmp7ihfi7a_.js
+// include: /tmp/tmpui8ct2_h.js
 
   Module['expectedDataFileDownloads'] ??= 0;
   Module['expectedDataFileDownloads']++;
@@ -213,7 +213,7 @@ Module['FS_createPath']("/", "shadercache", true, true);
 
   })();
 
-// end include: /tmp/tmp7ihfi7a_.js
+// end include: /tmp/tmpui8ct2_h.js
 // include: /home/runner/work/Madgine/Madgine/plugins/behavior/python3/patch.js
 WebAssembly.promising = null// end include: /home/runner/work/Madgine/Madgine/plugins/behavior/python3/patch.js
 // include: /home/runner/work/Madgine/Madgine/out/build/Emscripten-RelWithDebInfo-OpenGL/_deps/madginesentry-build/js/header.js
@@ -10877,22 +10877,22 @@ if (Module['wasmBinary']) wasmBinary = Module['wasmBinary'];
 // end include: postlibrary.js
 
 var ASM_CONSTS = {
-  4878844: ($0) => { Module.sentry_capture_event(UTF8ToString($0)) },  
- 4878890: () => { FS.syncfs( false, function(err) { assert(!err); }); },  
- 4878942: () => { FS.mkdir('/cwd'); FS.mount(IDBFS, {}, '/cwd'); FS.syncfs( true, function(err) { assert(!err); _setupDoneImpl(); }); },  
- 4879058: () => { if (document.activeElement == Module.canvas) { Module.input.focus(); } },  
- 4879129: () => { if (document.activeElement == Module.input) { Module.canvas.focus(); } },  
- 4879200: () => { document.body.style.cursor = 'default'; },  
- 4879240: () => { document.body.style.cursor = 'text'; },  
- 4879277: () => { document.body.style.cursor = 'move'; },  
- 4879314: () => { document.body.style.cursor = 'ns-resize'; },  
- 4879356: () => { document.body.style.cursor = 'ew-resize'; },  
- 4879398: () => { document.body.style.cursor = 'nesw-resize'; },  
- 4879442: () => { document.body.style.cursor = 'nwse-resize'; },  
- 4879486: () => { document.body.style.cursor = 'grab'; },  
- 4879523: () => { document.body.style.cursor = 'not-allowed'; },  
- 4879567: () => { Module.input.focus(); },  
- 4879589: () => { Module.canvas.focus(); }
+  4878972: ($0) => { Module.sentry_capture_event(UTF8ToString($0)) },  
+ 4879018: () => { FS.syncfs( false, function(err) { assert(!err); }); },  
+ 4879070: () => { FS.mkdir('/cwd'); FS.mount(IDBFS, {}, '/cwd'); FS.syncfs( true, function(err) { assert(!err); _setupDoneImpl(); }); },  
+ 4879186: () => { if (document.activeElement == Module.canvas) { Module.input.focus(); } },  
+ 4879257: () => { if (document.activeElement == Module.input) { Module.canvas.focus(); } },  
+ 4879328: () => { document.body.style.cursor = 'default'; },  
+ 4879368: () => { document.body.style.cursor = 'text'; },  
+ 4879405: () => { document.body.style.cursor = 'move'; },  
+ 4879442: () => { document.body.style.cursor = 'ns-resize'; },  
+ 4879484: () => { document.body.style.cursor = 'ew-resize'; },  
+ 4879526: () => { document.body.style.cursor = 'nesw-resize'; },  
+ 4879570: () => { document.body.style.cursor = 'nwse-resize'; },  
+ 4879614: () => { document.body.style.cursor = 'grab'; },  
+ 4879651: () => { document.body.style.cursor = 'not-allowed'; },  
+ 4879695: () => { Module.input.focus(); },  
+ 4879717: () => { Module.canvas.focus(); }
 };
 function _Py_emscripten_runtime() { var info; if (typeof navigator == 'object') { info = navigator.userAgent; } else if (typeof process == 'object') { info = "Node.js ".concat(process.version); } else { info = "UNKNOWN"; } var len = lengthBytesUTF8(info) + 1; var res = _malloc(len); if (res) stringToUTF8(info, res, len); return res; }
 function _Py_CheckEmscriptenSignals_Helper() { if (!Module.Py_EmscriptenSignalBuffer) { return 0; } try { let result = Module.Py_EmscriptenSignalBuffer[0]; Module.Py_EmscriptenSignalBuffer[0] = 0; return result; } catch(e) { return 0; } }
@@ -11339,9 +11339,9 @@ var ___cxa_decrement_exception_refcount = (a0) => (___cxa_decrement_exception_re
 var ___cxa_increment_exception_refcount = (a0) => (___cxa_increment_exception_refcount = wasmExports['__cxa_increment_exception_refcount'])(a0);
 var ___thrown_object_from_unwind_exception = (a0) => (___thrown_object_from_unwind_exception = wasmExports['__thrown_object_from_unwind_exception'])(a0);
 var ___get_exception_message = (a0, a1, a2) => (___get_exception_message = wasmExports['__get_exception_message'])(a0, a1, a2);
-var __PyRuntime = Module['__PyRuntime'] = 4309488;
-var _Py_EMSCRIPTEN_SIGNAL_HANDLING = Module['_Py_EMSCRIPTEN_SIGNAL_HANDLING'] = 4951128;
-var __PyEM_EMSCRIPTEN_TRAMPOLINE_OFFSET = Module['__PyEM_EMSCRIPTEN_TRAMPOLINE_OFFSET'] = 1773640;var ___cpp_exception;
+var __PyRuntime = Module['__PyRuntime'] = 4309616;
+var _Py_EMSCRIPTEN_SIGNAL_HANDLING = Module['_Py_EMSCRIPTEN_SIGNAL_HANDLING'] = 4951256;
+var __PyEM_EMSCRIPTEN_TRAMPOLINE_OFFSET = Module['__PyEM_EMSCRIPTEN_TRAMPOLINE_OFFSET'] = 1773768;var ___cpp_exception;
 
 // include: postamble.js
 // === Auto-generated postamble setup entry stuff ===
