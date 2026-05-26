@@ -41,6 +41,8 @@ namespace Behavior {
             KeyValueResult create_module(ValueType &result, ObjectPtr spec);
             KeyValueResult exec_module(ValueType &result, ObjectPtr module);
 
+            KeyValueResult get_source(ValueType &result, std::string_view name);
+
             static PythonFunctionInfo functionInfo(PyObject *fn);
 
         private:

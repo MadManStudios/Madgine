@@ -21,6 +21,7 @@ METATABLE_BEGIN(Engine::Behavior::Python3::Python3FileLoader)
     FUNCTION(find_spec, name, import_path, target_module)
     FUNCTION(create_module, spec)
     FUNCTION(exec_module, module)
+    FUNCTION(get_source, name)
 METATABLE_END(Engine::Behavior::Python3::Python3FileLoader)
 
 METATABLE_BEGIN_BASE(Engine::Behavior::Python3::Python3FileLoader::Resource, Engine::Resources::ResourceBase)
@@ -168,7 +169,16 @@ namespace Behavior {
             return {};
         }
 
-        PythonFunctionInfo Engine::Behavior::Python3::Python3FileLoader::functionInfo(PyObject *fn)
+        KeyValueResult Python3FileLoader::get_source(ValueType &result, std::string_view name)
+        {
+            Resource *res = get(name, this);
+            if (!res)
+                return {};
+            to_ValueType(result, res->readAsText());
+            return {};
+        }
+
+        PythonFunctionInfo Python3FileLoader::functionInfo(PyObject *fn)
         {
 
             PyObjectPtr signature = PyModulePtr { "inspect" }.get("signature").call("(O)", (PyObject *)fn);
