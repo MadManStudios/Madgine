@@ -40,9 +40,9 @@ namespace Tools {
 
         bool filter(const LogEntry &entry);
 
-        void addFilteredMessage(size_t index, std::string_view text);
+        void addFilteredMessage(size_t index, const LogEntry &entry);
 
-        float calculateTextHeight(std::string_view text);
+        float calculateTextHeight(const LogEntry &entry);
 
     private:
         Threading::WorkGroup *mWorkgroup;
@@ -60,7 +60,7 @@ namespace Tools {
         std::vector<Lookup> mLookup;
         float mFilteredOffsetAcc = 0.0f;
         bool mIsDirty = true;
-        float mCachedWidth = 0.0f;
+        float mCachedWidth[3] = {};
     };
 
 }

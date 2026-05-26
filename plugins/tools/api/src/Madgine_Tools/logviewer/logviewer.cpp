@@ -102,11 +102,13 @@ namespace Tools {
                 ImGui::TableHeadersRow();
 
                 ImGui::TableNextRow();
-                ImGui::TableSetColumnIndex(1);
-                float messageWidth = ImGui::GetContentRegionAvail().x;
-                if (messageWidth != mCachedWidth) {
-                    mCachedWidth = messageWidth;
-                    mIsDirty = true;
+                for (size_t i = 0; i < 3; ++i) {
+                    ImGui::TableSetColumnIndex(1 + i);
+                    float messageWidth = ImGui::GetContentRegionAvail().x;
+                    if (messageWidth != mCachedWidth[i]) {
+                        mCachedWidth[i] = messageWidth;
+                        mIsDirty = true;
+                    }
                 }
 
                 if (mIsDirty) {
@@ -117,7 +119,7 @@ namespace Tools {
                     size_t i = 0;
                     for (LogEntry &entry : mEntries) {
                         if (filter(entry))
-                            addFilteredMessage(i, entry.mMsg);
+                            addFilteredMessage(i, entry);
                         ++i;
                     }
                 }
@@ -145,7 +147,7 @@ namespace Tools {
                     size_t count = (end - begin) * sLookupStep;
 
                     auto it = mEntries.begin() + lookup.mIndex;
-                    SeekCursorAndSetupPrevLine(startPos + lookup.mOffset + lossyness, calculateTextHeight(it->mMsg));
+                    SeekCursorAndSetupPrevLine(startPos + lookup.mOffset + lossyness, calculateTextHeight(*it));
 
                     for (; it != mEntries.end() && count > 0; ++it) {
                         const LogEntry &entry = *it;
@@ -198,8 +200,9 @@ namespace Tools {
             return;
         ++mMsgCounts[lml];
         std::lock_guard guard { mMutex };
-        if (filter(mEntries.emplace_back(std::string { message }, lml, file, line, log)))
-            addFilteredMessage(mEntries.size() - 1, message);
+        LogEntry &entry = mEntries.emplace_back(std::string { message }, lml, file, line, log);
+        if (filter(entry))
+            addFilteredMessage(mEntries.size() - 1, entry);
     }
 
     std::string_view LogViewer::key() const
@@ -212,22 +215,29 @@ namespace Tools {
         return mMsgFilters[entry.mType] && (mMessageWordFilter.empty() || StringUtil::contains(entry.mMsg, mMessageWordFilter));
     }
 
-    void LogViewer::addFilteredMessage(size_t index, std::string_view text)
+    void LogViewer::addFilteredMessage(size_t index, const LogEntry &entry)
     {
         if (mFilteredMsgCount % sLookupStep == 0) {
             mLookup.push_back({ index, mFilteredOffsetAcc });
         }
         ++mFilteredMsgCount;
         if (Threading::WorkGroup::isInitialized() && ImGui::GetCurrentContext() && ImGui::GetCurrentContext()->Font)
-            mFilteredOffsetAcc += calculateTextHeight(text);
+            mFilteredOffsetAcc += calculateTextHeight(entry);
         else
             mIsDirty = true;
     }
 
-    float LogViewer::calculateTextHeight(std::string_view text)
+    float LogViewer::calculateTextHeight(const LogEntry &entry)
     {
+        std::string_view msg = entry.mMsg;
+        std::string_view file;
+        if (entry.mFile)
+            file = entry.mFile;
 
-        return ImGui::CalcTextSize(text.data(), text.data() + text.size(), false, mCachedWidth).y + ImGui::GetCurrentContext()->Style.ItemSpacing.y;
+        return std::max(
+                   ImGui::CalcTextSize(msg.data(), msg.data() + msg.size(), false, mCachedWidth[0]).y,
+                   ImGui::CalcTextSize(file.data(), file.data() + file.size(), false, mCachedWidth[2]).y)
+            + ImGui::GetCurrentContext()->Style.ItemSpacing.y;
     }
 
 }
