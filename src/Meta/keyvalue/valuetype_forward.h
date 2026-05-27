@@ -125,9 +125,16 @@ KeyValueResult ValueType_call(Callable &&callable, Arg &&arg)
             throw 0;
         return callable(ValueType_as<FlagsHolder>(arg).template safe_cast<T>());
     } else if constexpr (Execution::AnyBinding<T>) {
-        if (!ValueType_is<KeyValueBinding>(arg))
-            return KEYVALUE_UNKNOWN_ERROR() << "No known conversion to Binding";
-        return callable(T { ValueType_as<KeyValueBinding>(arg).template unwrap<T>() });
+        using Inner = decltype(convert_ValueType_t<false> {}(std::declval<forward_ref_t<typename std::decay_t<T>::type>>()));
+        if constexpr (OneOf<Inner, ScopePtr, OwnedScopePtr>) {
+            if (!ValueType_is<KeyValueScopeBinding>(arg))
+                return KEYVALUE_UNKNOWN_ERROR() << "No known conversion to ScopeBinding";
+            return callable(T { ValueType_as<KeyValueScopeBinding>(arg).template unwrap<T>() });
+        } else {
+            if (!ValueType_is<KeyValueBinding>(arg))
+                return KEYVALUE_UNKNOWN_ERROR() << "No known conversion to Binding";
+            return callable(T { ValueType_as<KeyValueBinding>(arg).template unwrap<T>() });
+        }
     } else {
         if (ValueType_is<KeyValueBinding>(arg)) {
             KeyValueResult result;

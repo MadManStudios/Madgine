@@ -40,21 +40,21 @@ namespace Widgets {
 
     WidgetBase::WidgetBase(WidgetManager &manager, WidgetBase *parent, const WidgetConfig &config)
         : mVisible(parent)
-        , mManager(manager)
-        , mParent(parent)
-        , mAcceptsPointerEvents(config.acceptsPointerEvents || !parent)
-        , mAllowsDragging(config.allowsDragging)
-        , mPointerClickSignal("\xef\x84\x89" " Click")
         , mPointerMoveSignal("\xef\x84\x89" " Pointer Move")
+        , mPointerClickSignal("\xef\x84\x89" " Click")
         , mPointerEnterSignal("\xef\x84\x89" " Pointer Enter")
         , mPointerLeaveSignal("\xef\x84\x89" " Pointer Leave")
         , mDragBeginSignal("\xef\x84\x89" " Drag Begin")
         , mDragMoveSignal("\xef\x84\x89" " Drag Move")
-        , mDragAbortSignal("\xef\x84\x89" " Drag Abort")
         , mDragEndSignal("\xef\x84\x89" " Drag End")
+        , mDragAbortSignal("\xef\x84\x89" " Drag Abort")
         , mAxisEventSignal("\xef\x84\x89" " Axis Event")
         , mKeyPressSignal("\xef\x84\x89" " Key Event")
         , mKeyReleaseSignal("\xef\x84\x89" " Key Release")
+        , mManager(manager)
+        , mParent(parent)
+        , mAcceptsPointerEvents(config.acceptsPointerEvents || !parent)
+        , mAllowsDragging(config.allowsDragging)
     {
         mManager.registerWidget(this);
 

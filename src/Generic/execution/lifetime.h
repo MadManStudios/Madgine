@@ -264,18 +264,11 @@ namespace Execution {
             {
             }
 
-            void set_value()
-            {
-                mState->mPtr.mBlock->decreaseStrongCount();
-                delete mState;
-            }
-
             template <typename... V>
-            [[nodiscard]] std::monostate set_value(V &&...)
+            void set_value(V &&...)
             {
                 mState->mPtr.mBlock->decreaseStrongCount();
                 delete mState;
-                return {};
             }
             void set_done()
             {
@@ -283,11 +276,10 @@ namespace Execution {
                 delete mState;
             }
             template <typename... R>
-            [[nodiscard]] std::monostate set_error(R &&...)
+            void set_error(R &&...)
             {
                 mState->mPtr.mBlock->decreaseStrongCount();
                 delete mState;
-                return {};
             }
 
             friend StopToken tag_invoke(get_stop_token_t, attach_receiver<Sender> &rec)

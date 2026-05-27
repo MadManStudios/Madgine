@@ -12,13 +12,13 @@ namespace Engine {
 namespace Behavior {
 
     struct get_named_d_t {
-        using signature = bool(std::string_view, ValueTypeRef);
+        using signature = KeyValueResult(std::string_view, ValueTypeRef);
 
         template <typename T>
             requires(!is_tag_invocable_v<get_named_d_t, T &, std::string_view, ValueTypeRef>)
         auto operator()(T &t, std::string_view name, ValueTypeRef out) const
         {
-            return false;
+            return KEYVALUE_UNKNOWN_ERROR() << "Named value '" << name << "' not found";
         }
 
         template <typename T>
@@ -38,13 +38,13 @@ namespace Behavior {
 
         template <typename T, typename O>
             requires(!is_tag_invocable_v<get_named_t, T, O>)
-        bool operator()(T &&context, O &o) const
+        KeyValueResult operator()(T &&context, O &o) const
         {
-            bool result;
+            KeyValueResult result;
             auto f = [&](ValueType &v) {
                 result = get_named_d(std::forward<T>(context), Name, v);
-                if (result)
-                    ValueType_unwrap(v, [&](const V &v) { o = v; }, v);
+                if (!result)
+                    result = ValueType_unwrap(v, [&](const V &v) { o = v; }, v);
             };
             ValueType_erased(CallableView<void(ValueType &)> { f });
             return result;
@@ -76,8 +76,9 @@ namespace Behavior {
         void start()
         {
             if (!mValue.mValue) {
-                if (!mValue.resolve(this->mRec)) {
-                    this->mRec.set_error(KEYVALUE_UNKNOWN_ERROR() << "Named value '" << std::string(Name) << "' not found");
+                KeyValueResult result = mValue.resolve(this->mRec);
+                if (result) {
+                    this->mRec.set_error(std::move(*result.mError));
                     return;
                 }
             }
@@ -117,12 +118,12 @@ namespace Behavior {
         template <template <typename...> typename Tuple>
         using value_types = Tuple<T &>;
 
-        bool resolve(auto &context)
+        KeyValueResult resolve(auto &context)
         {
             if (!mValue) {
-                get_named<Name, T>(context, mValue);
+                return get_named<Name, T>(context, mValue);
             }
-            return static_cast<bool>(mValue);
+            return {};
         }
 
         T &operator->()
@@ -186,11 +187,11 @@ namespace Behavior {
             {
             }
 
-            friend auto tag_invoke(get_named_d_t, receiver &rec, std::string_view name, ValueTypeRef out)
+            friend KeyValueResult tag_invoke(get_named_d_t, receiver &rec, std::string_view name, ValueTypeRef out)
             {
                 if (name == Name) {
                     to_ValueType(out, rec.mValue);
-                    return true;
+                    return {};
                 } else {
                     return get_named_d(rec.mRec, name, out);
                 }

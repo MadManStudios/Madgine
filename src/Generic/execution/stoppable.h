@@ -63,6 +63,11 @@ namespace Execution {
 
             void start()
             {
+                [[maybe_unused]] uint8_t state = mFlags.exchange(0);
+                assert(!(state & FINISH_STARTED) == !(state & FINISH_ENDED));
+                assert(!(state & STOP_STARTED) == !(state & STOP_ENDED));
+
+
                 if (get_stop_token(mRec)->registerCallback(this))
                     this->mState.start();
                 else

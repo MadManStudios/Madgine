@@ -395,7 +395,12 @@ constexpr ExtendedValueTypeDesc toValueTypeDesc()
     } else if constexpr (InstanceOf<std::decay_t<T>, EnumImpl>) {
         return { { ValueTypeEnum::EnumValue }, &T::Representation::sTable };
     } else if constexpr (Execution::AnyBinding<T>) {
-        return { { ValueTypeEnum::BindingValue }, { toValueTypeDesc<std::decay_t<typename T::type>>() } };
+        constexpr ExtendedValueTypeDesc inner = toValueTypeDesc<std::decay_t<typename std::decay_t<T>::type>, true>();
+        if constexpr (inner.mType == ValueTypeEnum::ScopeValue || inner.mType == ValueTypeEnum::OwnedScopeValue) {
+            return { { ValueTypeEnum::ScopeBindingValue }, &table<std::remove_pointer_t<std::decay_t<typename std::decay_t<T>::type>>> };
+        } else {
+            return { { ValueTypeEnum::BindingValue }, { inner } };
+        }
     } else if constexpr (Execution::AnySender<T>) {
         return { { ValueTypeEnum::SenderValue }, nullptr };
     } else if constexpr (std::same_as<T, ScopePtr>) {
@@ -423,7 +428,6 @@ constexpr ExtendedValueTypeDesc toValueTypeDesc()
         return { { ValueTypeEnum::OwnedScopeValue }, &table<meta_decayed_t<resolveCustomScopePtr_t<T>>> };
     }
 }
-
 
 template <bool isReferenceWrapped>
 struct convert_ValueType_t {
@@ -507,6 +511,5 @@ struct convert_ValueType_t {
 };
 
 inline constexpr convert_ValueType_t<false> convert_ValueType {};
-
 
 }

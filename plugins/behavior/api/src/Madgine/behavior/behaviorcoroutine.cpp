@@ -22,8 +22,10 @@ namespace Behavior {
     void CoroutineBehaviorState::start()
     {
         if (mResolveNames) {
-            if (!mResolveNames(*mReceiver)) {
-                throw 0;
+            KeyValueResult result = mResolveNames(*mReceiver);
+            if (result) {
+                mReceiver->set_error(std::move(*result.mError));
+                return;
             }
         }
         std::coroutine_handle<CoroutineBehaviorState>::from_promise(*this).resume();

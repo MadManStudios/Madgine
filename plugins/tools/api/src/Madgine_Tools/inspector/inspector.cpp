@@ -53,7 +53,7 @@ namespace Tools {
 
         assert(mAccessorFlagsStack.empty());
 
-        std::erase_if(mViews, [this](Trace &trace) {
+        std::erase_if(mViews, [](Trace &trace) {
             bool open = true;
             void *ptr = &trace;
             ImGuiID id = ImHashData(&ptr, sizeof(ptr));

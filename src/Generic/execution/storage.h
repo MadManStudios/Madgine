@@ -11,7 +11,12 @@ namespace Execution {
         {
         }
 
-        auto reproduce(auto &rec)
+        auto reproduce(auto &rec) &&
+        {
+            return TupleUnpacker::invokeExpand(LIFT(rec.set_value, &), std::move(mValues));
+        }
+
+        auto reproduce(auto &rec) &
         {
             return TupleUnpacker::invokeExpand(LIFT(rec.set_value, &), mValues);
         }
@@ -38,7 +43,12 @@ namespace Execution {
         {
         }
 
-        auto reproduce(auto &rec)
+        auto reproduce(auto &rec) &&
+        {
+            return rec.set_value(std::move(std::get<0>(mValues)));
+        }
+
+        auto reproduce(auto &rec) &
         {
             return rec.set_value(std::get<0>(mValues));
         }
@@ -77,7 +87,12 @@ namespace Execution {
         {
         }
 
-        auto reproduce(auto &rec)
+        auto reproduce(auto &rec) &&
+        {
+            return rec.set_error(std::move(mError));
+        }
+
+        auto reproduce(auto &rec) &
         {
             return rec.set_error(mError);
         }
@@ -122,7 +137,20 @@ namespace Execution {
 
         static constexpr bool can_have_error = !Error::is_void;
 
-        auto reproduce(auto &rec)
+        auto reproduce(auto &rec) &&
+        {
+            return std::visit([&](auto &&storage) {
+                using R = decltype(std::move(storage).reproduce(rec));
+                if constexpr (std::same_as<R, std::bool_constant<true>> || std::same_as<R, std::bool_constant<false>>) {
+                    return bool { std::move(storage).reproduce(rec) };
+                } else {
+                    return std::move(storage).reproduce(rec);
+                }
+            },
+                std::move(mState));
+        }
+
+        auto reproduce(auto &rec) &
         {
             return std::visit([&](auto &storage) {
                 using R = decltype(storage.reproduce(rec));

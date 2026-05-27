@@ -130,9 +130,9 @@ void GameManager::spawnBrick()
         brick.addComponent<Engine::Scene::Entity::Mesh>()->setName("Brick");
         brick.getComponent<Engine::Scene::Entity::Mesh>()->handle().info()->setPersistent(true);
 
-        return true; }, [=](Engine::Scene::Entity::EntityPtr brick) {
+        return true; }, [=, this](Engine::Scene::Entity::EntityPtr brick) {
         float speed = rand() / float(RAND_MAX) * 2.0f + 1.0f;
-        Engine::Execution::access_binding(brick, [&](Engine::Scene::Entity::Entity &e) { e.addBehavior(Brick(speed, dir, q, *this)); });
+        Engine::Execution::access_binding(brick, [&, this](Engine::Scene::Entity::Entity &e) { e.addBehavior(Brick(speed, dir, q, *this)); });
             mBricks.push_back(brick); });
 }
 

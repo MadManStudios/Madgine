@@ -136,7 +136,7 @@ namespace Render {
         for (aiBone *bone : bones) {
             aiNode *node = scene->mRootNode->FindNode(bone->mName);
 
-            bool newBone = boneIndices.try_emplace(node, boneIndices.size()).second;
+            [[maybe_unused]] bool newBone = boneIndices.try_emplace(node, boneIndices.size()).second;
             assert(newBone);
         }
 

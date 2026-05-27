@@ -45,7 +45,7 @@ namespace Tools {
         void registerDebugLocationVisualizer()
         {
             using T = std::remove_reference_t<typename CallableTraits<decltype(Visualizer)>::argument_types::template select<3>>;
-            auto [it, b] = mDebugLocationVisualizers.try_emplace(typeid(std::remove_pointer_t<T>), [](ContinuationList &continuations, DebuggerView &view, const Debug::ContextInfo &context, const void *location, TypedPtr inlineLocation) -> std::vector<TypedPtr> {
+            [[maybe_unused]] auto [it, b] = mDebugLocationVisualizers.try_emplace(typeid(std::remove_pointer_t<T>), [](ContinuationList &continuations, DebuggerView &view, const Debug::ContextInfo &context, const void *location, TypedPtr inlineLocation) -> std::vector<TypedPtr> {
                 T typedLocation = static_cast<T>(location);
                 return Visualizer(continuations, view, context, typedLocation, inlineLocation);
             });

@@ -1,7 +1,5 @@
 #pragma once
 
-#include <functional>
-
 #include "Generic/closure.h"
 
 namespace Engine {

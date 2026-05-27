@@ -57,8 +57,11 @@ namespace Widgets {
     void TempWidgetState::start()
     {
         WidgetManager *mgr;
-        [[maybe_unused]] bool result = Behavior::get_named<"WidgetManager", WidgetManager *>(*this, mgr);
-        assert(result);
+        KeyValueResult result = Behavior::get_named<"WidgetManager", WidgetManager *>(*this, mgr);
+        if (result) {
+            set_error(std::move(*result.mError));
+            return;
+        }
 
         assert(!mWidget);
         mWidget = mDesc.create(*mgr);
@@ -81,8 +84,8 @@ namespace Widgets {
     void TempWidgetState::receiver::set_value(ArgumentList args)
     {
         WidgetManager *mgr;
-        [[maybe_unused]] bool result = Behavior::get_named<"WidgetManager", WidgetManager *>(*this, mgr);
-        assert(result);
+        [[maybe_unused]] KeyValueResult result = Behavior::get_named<"WidgetManager", WidgetManager *>(*this, mgr);
+        assert(!result);
 
         mgr->closeOverlay(mState.mWidget.get());
         algorithm_receiver::set_value(std::move(args));
@@ -91,8 +94,8 @@ namespace Widgets {
     void TempWidgetState::receiver::set_error(KeyValueError error)
     {
         WidgetManager *mgr;
-        [[maybe_unused]] bool result = Behavior::get_named<"WidgetManager", WidgetManager *>(*this, mgr);
-        assert(result);
+        [[maybe_unused]] KeyValueResult result = Behavior::get_named<"WidgetManager", WidgetManager *>(*this, mgr);
+        assert(!result);
 
         mgr->closeOverlay(mState.mWidget.get());
         algorithm_receiver::set_error(std::move(error));
@@ -101,8 +104,8 @@ namespace Widgets {
     void TempWidgetState::receiver::set_done()
     {
         WidgetManager *mgr;
-        [[maybe_unused]] bool result = Behavior::get_named<"WidgetManager", WidgetManager *>(*this, mgr);
-        assert(result);
+        [[maybe_unused]] KeyValueResult result = Behavior::get_named<"WidgetManager", WidgetManager *>(*this, mgr);
+        assert(!result);
 
         mgr->closeOverlay(mState.mWidget.get());
         algorithm_receiver::set_done();

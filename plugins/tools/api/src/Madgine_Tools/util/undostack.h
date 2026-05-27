@@ -27,8 +27,8 @@ namespace Tools {
         UndoableOperation *getContinuousOperation() const;
         void commitContinuousOperation();
         
-        KeyValueResult undo();
-        KeyValueResult redo();
+        void undo();
+        void redo();
 
         void renderControls();
         void handleShortcuts();

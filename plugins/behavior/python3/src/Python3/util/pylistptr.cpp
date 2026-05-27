@@ -17,7 +17,7 @@ namespace Behavior {
         {
             size_t i = 0;
             for (auto &value : values) {
-                auto result = PyList_SetItem(mObject, i++, value);
+                [[maybe_unused]] auto result = PyList_SetItem(mObject, i++, value);
                 assert(result == 0);
             }
         }

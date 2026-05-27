@@ -56,11 +56,7 @@ namespace Behavior {
                     return {};
                 } else {
                     std::string_view name = mGraph->mNamedInputs[pin.mIndex].mDescriptor.mName;
-                    if (get_named_d(*this, name, retVal)) {
-                        return {};
-                    } else {
-                        return KEYVALUE_UNKNOWN_ERROR() << "No input named '" << name << "' found";
-                    }
+                    return get_named_d(*this, name, retVal);
                 }
             } else {
                 return mGraph->node(pin.mNode)->interpretRead(*this, retVal, mData[pin.mNode - 1], pin.mIndex, pin.mGroup);

@@ -37,11 +37,6 @@ namespace Audio {
         const void *mEnd;
     };
 
-    template <typename Rec>
-    struct PlaybackStateImpl : Behavior::VirtualBehaviorState<Rec, PlaybackState> {
-        using Behavior::VirtualBehaviorState<Rec, PlaybackState>::VirtualBehaviorState;
-    };
-
     struct PlaybackSender : Execution::base_sender {
         using result_type = KeyValueError;
         template <template <typename...> typename Tuple>
@@ -50,13 +45,13 @@ namespace Audio {
         template <typename Rec>
         friend auto tag_invoke(Execution::connect_t, PlaybackSender &&sender, Rec &&rec)
         {
-            return PlaybackStateImpl<Rec> { std::forward<Rec>(rec), std::move(sender.mBuffer), sender.mApi };
+            return Behavior::VirtualBehaviorState<Rec, PlaybackState> { std::forward<Rec>(rec), std::move(sender.mBuffer), sender.mApi };
         }
 
         template <typename Rec>
         friend auto tag_invoke(Execution::connect_t, PlaybackSender &sender, Rec &&rec)
         {
-            return PlaybackStateImpl<Rec> { std::forward<Rec>(rec), sender.mBuffer, sender.mApi };
+            return Behavior::VirtualBehaviorState<Rec, PlaybackState> { std::forward<Rec>(rec), sender.mBuffer, sender.mApi };
         }
 
         AudioLoader::Handle mBuffer;

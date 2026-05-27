@@ -50,21 +50,21 @@ namespace Tools {
         mContinuousOperation.reset();
     }
 
-    KeyValueResult UndoStack::undo()
+    void UndoStack::undo()
     {
         if (mCurrentOperation == mOperations.begin()) {
-            return {};
+            return;
         }
         --mCurrentOperation;
-        return (*mCurrentOperation)->undo();
+        (*mCurrentOperation)->undo();
     }
 
-    KeyValueResult UndoStack::redo()
+    void UndoStack::redo()
     {
         if (mCurrentOperation == mOperations.end()) {
-            return {};
+            return;
         }
-        return (*mCurrentOperation++)->redo();
+        (*mCurrentOperation++)->redo();
     }
 
     void UndoStack::renderControls()

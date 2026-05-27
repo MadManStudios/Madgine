@@ -188,6 +188,9 @@ namespace Behavior {
                 {
                     helper(std::index_sequence_for<T...> {});
                 }
+                void stop()
+                {
+                }
                 template <size_t... I>
                 void helper(std::index_sequence<I...>)
                 {
@@ -280,6 +283,14 @@ namespace Behavior {
                     mState->set_done();
                 }
 
+                template <typename CPO, typename... Args>
+                    requires(is_tag_invocable_v<CPO, Rec &, Args...>)
+                friend auto tag_invoke(CPO f, receiver &rec, Args &&...args) noexcept(is_nothrow_tag_invocable_v<CPO, Rec &, Args...>)
+                    -> tag_invoke_result_t<CPO, Rec &, Args...>
+                {
+                    return tag_invoke(f, rec.mState->mRec, std::forward<Args>(args)...);
+                }
+
                 state<Inner, Rec> *mState;
                 std::vector<NodeResults> &mResults;
             };
@@ -287,11 +298,11 @@ namespace Behavior {
             template <typename Inner, typename Rec>
             struct state : NodeState<flowOutGroup, Rec> {
 
-                using inner_state = Execution::connect_result_t<Inner, receiver<Inner, Rec>>;
+                using inner_state = Execution::connect_result_t<Execution::stoppable_t::sender<Inner>, receiver<Inner, Rec>>;
 
                 state(Inner &&inner, Rec &&rec, std::vector<NodeResults> &results)
                     : NodeState<flowOutGroup, Rec>(std::forward<Rec>(rec), 0)
-                    , mInnerState(Execution::connect(std::forward<Inner>(inner), receiver<Inner, Rec> { this, results }))
+                    , mInnerState(Execution::connect(std::forward<Inner>(inner) | Execution::stoppable, receiver<Inner, Rec> { this, results }))
                 {
                 }
 

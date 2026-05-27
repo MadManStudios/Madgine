@@ -19,26 +19,26 @@ namespace Scene {
     namespace Entity {
 
         template <typename Rec>
-        struct AnimationStateImpl : Behavior::VirtualBehaviorState<Rec, AnimationState> {
-
-            friend auto tag_invoke(Execution::visit_state_t, AnimationStateImpl *state, auto &&visitor)
-            {
-                visitor(Execution::State::BeginBlock { "Play '"s + state->mAnimationList->mAnimations[state->mCurrentAnimation].mName + "'" });
-
-                float progress = 0.0f;
-
-                if (state) {
-                    float duration = state->mAnimationList->mAnimations[state->mCurrentAnimation].mDuration;
-                    progress = fmodf(state->mCurrentStep, duration) / duration;
-                }
-
-                visitor(Execution::State::Progress { progress });
-
-                visitor(Execution::State::EndBlock {});
-            }
+        struct AnimationStateImpl final : Behavior::VirtualBehaviorState<Rec, AnimationState> {        
 
             using Behavior::VirtualBehaviorState<Rec, AnimationState>::VirtualBehaviorState;
         };
+
+        auto tag_invoke(Execution::visit_state_t, AnimationState *state, auto &&visitor)
+        {
+            visitor(Execution::State::BeginBlock { "Play '"s + state->mAnimationList->mAnimations[state->mCurrentAnimation].mName + "'" });
+
+            float progress = 0.0f;
+
+            if (state) {
+                float duration = state->mAnimationList->mAnimations[state->mCurrentAnimation].mDuration;
+                progress = fmodf(state->mCurrentStep, duration) / duration;
+            }
+
+            visitor(Execution::State::Progress { progress });
+
+            visitor(Execution::State::EndBlock {});
+        }
 
         struct AnimationSender : Execution::base_sender {
             using result_type = KeyValueError;

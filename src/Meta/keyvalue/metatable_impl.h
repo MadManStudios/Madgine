@@ -29,7 +29,6 @@ template <typename Scope, auto Getter, auto Setter>
 constexpr Accessor property(const char *name)
 {
     using getter_traits = CallableTraits<decltype(Getter)>;
-    using GetterScope = typename getter_traits::class_type;
     using T = typename getter_traits::return_type;
 
     KeyValueResult (*setter)(const Accessor *, const ValueType &, const ValueType &) = nullptr;

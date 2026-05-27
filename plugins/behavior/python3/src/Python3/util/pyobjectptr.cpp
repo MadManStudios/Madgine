@@ -141,7 +141,7 @@ namespace Behavior {
 
         PyObjectFieldAccessor &PyObjectFieldAccessor::operator=(const PyObjectPtr &value)
         {
-            auto result = PyObject_SetItem(mObject, mKey, value);
+            [[maybe_unused]] auto result = PyObject_SetItem(mObject, mKey, value);
             assert(result == 0);
             return *this;
         }

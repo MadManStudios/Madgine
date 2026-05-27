@@ -94,7 +94,7 @@ namespace Behavior {
             PyObject *const *args,
             Py_ssize_t nargs)
         {
-            SenderState &state = reinterpret_cast<PySenderState *>(self)->mState;
+            [[maybe_unused]] SenderState &state = reinterpret_cast<PySenderState *>(self)->mState;
             assert(state.mFlag.test());
 
             PyObjectPtr emptyTuple = PyTuple_New(0);

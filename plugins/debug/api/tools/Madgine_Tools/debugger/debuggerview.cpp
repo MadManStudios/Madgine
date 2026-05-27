@@ -251,7 +251,6 @@ namespace Tools {
             }
             ImGui::End();
 
-            Debug::DebugLocation *prevSelected = mSelectedLocation;
             mSelectedLocation = nullptr;
 
             if (beginContent()) {

@@ -16,7 +16,6 @@
 #include "coroutine.h"
 #include "memory_resource.h"
 #include "ranges.h"
-#include "spaceship.h"
 
 #if __cpp_lib_constexpr_algorithms >= 201806L
 #    define CONSTEXPR_ALGORITHM constexpr

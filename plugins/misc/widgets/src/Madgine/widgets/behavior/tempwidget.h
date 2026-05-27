@@ -30,11 +30,11 @@ namespace Widgets {
             void set_error(KeyValueError error);
             void set_done();
 
-            friend bool tag_invoke(Behavior::get_named_d_t, receiver &rec, std::string_view name, ValueTypeRef &out)
+            friend KeyValueResult tag_invoke(Behavior::get_named_d_t, receiver &rec, std::string_view name, ValueTypeRef &out)
             {
                 if (name == "Widget") {
                     out = Execution::ConstantBinding { rec.mState.widget() };
-                    return true;
+                    return {};
                 } else {
                     return Behavior::get_named_d(rec.mRec, name, out);
                 }

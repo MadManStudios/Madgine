@@ -75,7 +75,7 @@ namespace Tools {
 
     void WidgetEditor::render()
     {
-        std::erase_if(mFiles, [&, this](std::pair<Widgets::WidgetLoader::Resource *const, WidgetFile> &p) {
+        std::erase_if(mFiles, [&](std::pair<Widgets::WidgetLoader::Resource *const, WidgetFile> &p) {
             if (p.second.mCloseRequested)
                 return true;
             p.second.render();

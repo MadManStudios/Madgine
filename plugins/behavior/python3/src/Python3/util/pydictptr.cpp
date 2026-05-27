@@ -16,7 +16,7 @@ namespace Behavior {
             : PyObjectPtr(PyDict_New())
         {
             for (auto &[key, value] : values) {
-                auto result = PyDict_SetItemString(mObject, key.c_str(), value);
+                [[maybe_unused]] auto result = PyDict_SetItemString(mObject, key.c_str(), value);
                 assert(result == 0);
             }
         }

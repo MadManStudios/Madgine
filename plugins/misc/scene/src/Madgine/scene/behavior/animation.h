@@ -26,6 +26,8 @@ namespace Scene {
             Entity *entity();
             SceneManager *scene();
 
+            friend auto tag_invoke(Execution::visit_state_t, AnimationState *state, auto &&visitor);
+
             Render::AnimationLoader::Handle mAnimationList;
 
             int *mBoneIndexMapping = nullptr;

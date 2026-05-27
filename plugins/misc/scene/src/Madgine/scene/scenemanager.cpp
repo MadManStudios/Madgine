@@ -147,7 +147,7 @@ namespace Scene {
 
                 const Render::SkeletonDescriptor *data = skeleton->data();
                 if (data) {
-                    size_t boneCount = data->mBones.size();
+                    //size_t boneCount = data->mBones.size();
                     auto buffer = callback(skeleton);
 
                     if (animation->updateRender(frameTimeSinceLastFrame, sceneTimeSinceLastFrame, buffer.mData)) {

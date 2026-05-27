@@ -51,19 +51,28 @@ namespace Behavior {
 
 
     struct MADGINE_BEHAVIOR_EXPORT CoroutineBehaviorState : BehaviorStateBase, BoundValueBase {
+        
+        static KeyValueResult resolveNames(BehaviorReceiver &rec)
+        {
+            return {};
+        }
+
+        template <typename Arg, typename... Args>
+        static KeyValueResult resolveNames(BehaviorReceiver& rec, Arg &&arg, Args &&...args) {
+            if constexpr (requires { arg.resolve(rec); }) {
+                KeyValueResult result = arg.resolve(rec);
+                if (result)
+                    return result;
+            } 
+            return resolveNames(rec, std::forward<Args>(args)...);
+        }
 
         template <typename... Args>
         CoroutineBehaviorState(Args &&...args)
             : BoundValueBase(this)
         {
             mResolveNames = [&](BehaviorReceiver &rec) {
-                return ([&]() {
-                    if constexpr (requires { args.resolve(rec); }) {
-                        return args.resolve(rec);
-                    } else {
-                        return true;
-                    }
-                }() && ...);
+                return resolveNames(rec, args...);
             };
         }
 
@@ -132,7 +141,7 @@ namespace Behavior {
 
         BehaviorReceiver *mReceiver = nullptr;
 
-        Closure<bool(BehaviorReceiver &)> mResolveNames;
+        Closure<KeyValueResult(BehaviorReceiver &)> mResolveNames;
     };
 
     template <typename Awaiter>

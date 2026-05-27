@@ -15,8 +15,8 @@ KeyValueResult::KeyValueResult(const KeyValueResult &other)
 }
 
 KeyValueError::KeyValueError(EnumHolder state, const std::string &msg)
-    : mState(state)
-    , mMsg(msg)
+    : mMsg(msg)
+    , mState(state)
 {
 }
 
@@ -27,11 +27,10 @@ KeyValueError::KeyValueError(EnumHolder state, const std::string &msg, const cha
 }
 
 KeyValueError::KeyValueError(EnumHolder state, const std::string &msg, std::vector<StackEntry> stack)
-    : mState(state)
-    , mMsg(msg)
+    : mMsg(msg)
     , mStackTrace(std::move(stack))
+    , mState(state)    
 {
-
 }
 
 std::ostream &operator<<(std::ostream &out, const KeyValueError &error)

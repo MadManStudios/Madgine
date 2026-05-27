@@ -138,13 +138,6 @@ namespace Execution {
             friend auto tag_invoke(visit_state_t, state *state, auto &&visitor)
             {
                 visit_state(state ? &state->mState : nullptr, std::forward<decltype(visitor)>(visitor));
-
-                void *fPtr = nullptr;
-                if constexpr (requires { {&T::operator()}; }) {
-                    auto f = &T::operator();
-                    fPtr = *(void **)&f;
-                }
-                //visitor(State::FunctionPtr { state, fPtr, typeid(T).name() });
             }
         };
 
@@ -307,7 +300,7 @@ namespace Execution {
             template <typename Rec>
             friend auto tag_invoke(connect_t, sender &&sender, Rec &&rec)
             {
-                return algorithm_state<Sender, receiver<Rec, T>> { std::forward<Sender>(sender.mSender), { std::forward<Rec>(rec), std::forward<T>(sender.mOnError) } };
+                return algorithm_state<Sender, receiver<Rec, T>> { std::forward<Sender>(sender.mSender), { { std::forward<Rec>(rec) }, std::forward<T>(sender.mOnError) } };
             }
 
             T mOnError;
@@ -379,6 +372,11 @@ namespace Execution {
                 construct(mState,
                     DelayedConstruct<State> { [this]() { return connect(mStream.next(), receiver { this }); } });
                 mState->start();
+            }
+
+            void stop()
+            {
+                mState->stop();
             }
 
             void done()
@@ -588,6 +586,11 @@ namespace Execution {
                 loop(this->mRec);
             }
 
+            void stop()
+            {
+                throw 0;
+            }
+
             void stopInner()
             {
                 destruct(mState);
@@ -728,7 +731,8 @@ namespace Execution {
 
             friend auto tag_invoke(visit_state_t, state *state, auto &&visitor)
             {
-                visitor(State::BeginBlock { "\xef\x84\x8f" " Repeat" });
+                visitor(State::BeginBlock { "\xef\x84\x8f"
+                                            " Repeat" });
                 visit_state(state ? &state->mState : nullptr, std::forward<decltype(visitor)>(visitor));
                 visitor(State::EndBlock {});
             }
@@ -1019,6 +1023,11 @@ namespace Execution {
                 mState = OK;
                 std::ranges::for_each(std::span { mStates.get(), mSize }, [](auto &state) { state->start(); });
                 mark_complete();
+            }
+
+            void stop()
+            {
+                std::ranges::for_each(std::span { mStates.get(), mSize }, [](auto &state) { state->stop(); });
             }
 
             template <typename V>
@@ -1823,7 +1832,7 @@ namespace Execution {
                     if (mResult.is_null()) {
                         mRec.set_value();
                     } else {
-                        mResult.reproduce(mRec);
+                        ResultStorage<Inner> { std::move(mResult) }.reproduce(mRec);
                     }
                 }
             }

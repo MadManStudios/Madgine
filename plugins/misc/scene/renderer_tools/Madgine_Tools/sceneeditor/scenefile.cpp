@@ -30,8 +30,8 @@ namespace Engine {
 namespace Tools {
 
     SceneFile::SceneFile(SceneTool &tool, Scene::SceneLoader::Resource *resource)
-        : SceneEditor(tool)
-        , ResourceFile(tool, resource ? resource->path() : "")
+        : ResourceFile(tool, resource ? resource->path() : "")
+        , SceneEditor(tool)
         , mManager(tool.sceneMgr().app(), std::nullopt)
         , mContainer(mManager.container("Editor"))
         , mSceneData(mManager)

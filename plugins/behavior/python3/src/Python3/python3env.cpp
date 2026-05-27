@@ -136,7 +136,7 @@ namespace Behavior {
                     if (!type)
                         return NULL;
                     reinterpret_cast<PyType *>(type)->mType = list;
-                    int result = PyModule_AddObjectRef(self, name, type);
+                    [[maybe_unused]] int result = PyModule_AddObjectRef(self, name, type);
                     assert(result == 0);
                     return type;
                 } else if (StringUtil::startsWith(list->mTypeName, namespaceName)) {
@@ -151,7 +151,7 @@ namespace Behavior {
                     PyObject *module = PyModule_Create(PyNamespace_module);
                     if (!module)
                         return NULL;
-                    int result = PyModule_AddObjectRef(self, name, module);
+                    [[maybe_unused]] int result = PyModule_AddObjectRef(self, name, module);
                     assert(result == 0);
                     return module;
                 }
@@ -369,7 +369,6 @@ namespace Behavior {
                 Py_FinalizeEx();
                 co_return false;
             }
-            
 
             PyRun_SimpleString("import importlib");
 
@@ -404,7 +403,7 @@ namespace Behavior {
             sStream.reset("stdout");
             sStream.reset("stderr");
 
-            auto result = Py_FinalizeEx();
+            [[maybe_unused]] auto result = Py_FinalizeEx();
             assert(result == 0);
         }
 
@@ -444,7 +443,7 @@ namespace Behavior {
             if (rec && !log)
                 log = Log::get_log(*rec);
             // assert(PyGILState_Check() == 0);
-            PyGILState_STATE handle = PyGILState_Ensure();
+            [[maybe_unused]] PyGILState_STATE handle = PyGILState_Ensure();
             assert(PyGILState_Check() == 1);
             assert(handle == PyGILState_UNLOCKED);
             sStream.setLog(log);

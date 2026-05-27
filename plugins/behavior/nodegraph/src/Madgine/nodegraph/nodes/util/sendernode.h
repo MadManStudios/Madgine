@@ -361,7 +361,7 @@ namespace Behavior {
                     {
                         NodeReceiver<T> rec = std::move(mReceiver);
                         mData->cleanup();
-                        rec.set_error(result);
+                        rec.set_error(std::move(result));
                     }
 
                     template <typename CPO, typename... Args>
@@ -372,7 +372,7 @@ namespace Behavior {
                     }
                 };
 
-                using State = Execution::connect_result_t<Execution::with_debug_location_t::sender<Sender>, Receiver>;
+                using State = Execution::connect_result_t<Execution::with_debug_location_t::sender<Execution::stoppable_t::sender<Sender>>, Receiver>;
 
                 InterpretData()
                 {
@@ -386,7 +386,7 @@ namespace Behavior {
                 {
                     const NodeBase &node = Execution::get_context(receiver).mNode;
                     construct(mState,
-                        DelayedConstruct<State> { [&]() { return Execution::connect(buildSender(node, std::move(args), &mResults) | Execution::with_debug_location(receiver.mDebugLocation.mChild), Receiver { this, std::move(receiver) }); } });
+                        DelayedConstruct<State> { [&]() { return Execution::connect(buildSender(node, std::move(args), &mResults) | Execution::stoppable | Execution::with_debug_location(receiver.mDebugLocation.mChild), Receiver { this, std::move(receiver) }); } });
                     mState->start();
                 }
 

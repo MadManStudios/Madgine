@@ -43,7 +43,7 @@ namespace Behavior {
 
         void Python3FileLoader::setup()
         {
-            auto result = PyList_Append(PyModulePtr { "sys" }.get("meta_path"), toPyObject(ScopePtr { this }));
+            [[maybe_unused]] auto result = PyList_Append(PyModulePtr { "sys" }.get("meta_path"), toPyObject(ScopePtr { this }));
             assert(result == 0);
         }
 
@@ -163,7 +163,7 @@ namespace Behavior {
 
             while (PyDict_Next(dict, &pos, &key, &value)) {
                 if (PyFunction_Check(value)) {
-                    Python3FunctionTable &table = mTables.emplace_back(PyObjectPtr::fromBorrowed(value));
+                    mTables.emplace_back(PyObjectPtr::fromBorrowed(value));
                 }
             }
             return {};
@@ -188,10 +188,7 @@ namespace Behavior {
 
             PythonFunctionInfo result { PyBytes_AsString(ascii_name), PyToValueTypeDesc(signature.get("return_annotation")) };
 
-            PyObjectPtr parameters = signature.get("parameters");
-
-            PyObject *key = NULL, *value = NULL;
-            Py_ssize_t pos = 0;
+            PyObjectPtr parameters = signature.get("parameters");            
 
             PyObjectPtr iter = PyObject_GetIter(parameters);
 

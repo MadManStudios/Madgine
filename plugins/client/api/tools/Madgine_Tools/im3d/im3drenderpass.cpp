@@ -54,7 +54,7 @@ namespace Render {
             perApplication->p = target->getClipSpaceMatrix() * mCamera->getProjectionMatrix(aspectRatio);
         }
 
-        for (const std::pair<Im3DNativeMesh, std::vector<Matrix4>> &p : mContext->mNativeMeshes) {
+        for (const std::pair<const Im3DNativeMesh, std::vector<Matrix4>> &p : mContext->mNativeMeshes) {
             mPipeline->bindMesh(target, *p.first);
 
             for (const Matrix4 &m : p.second) {

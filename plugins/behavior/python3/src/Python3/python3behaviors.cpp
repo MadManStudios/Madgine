@@ -95,10 +95,9 @@ namespace Behavior {
             }
             const char *name = PyUnicode_AsUTF8(nameObj);
             ValueType v;
-            if (!get_named_d(*sReceiver, name, v)) {
-                std::string errorMsg = "Named value '"s + name + "' not found";
-                PyErr_SetString(PyExc_NameError, errorMsg.c_str());
-                return nullptr;
+            KeyValueResult result = get_named_d(*sReceiver, name, v);
+            if (result) {
+                return toPyError(std::move(*result.mError));
             }
             return toPyObject(v);
         }

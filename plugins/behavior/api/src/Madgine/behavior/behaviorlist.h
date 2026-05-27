@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Interfaces/log/logsenders.h"
+
 #include "behavior.h"
 #include "behaviorhandle.h"
 #include "parametertuple.h"
@@ -15,7 +17,7 @@ namespace Behavior {
         void instantiate(Lifetime &lifetime)
         {
             for (const Entry &entry : mEntries) {
-                lifetime.attach(entry.mHandle.create(entry.mParameters));
+                lifetime.attach(entry.mHandle.create(entry.mParameters) | Log::log_result());
             }
         }
 

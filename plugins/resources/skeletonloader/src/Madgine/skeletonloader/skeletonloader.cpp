@@ -121,7 +121,7 @@ namespace Render {
             }
         }
 
-        bool matrixSet = false;
+        //bool matrixSet = false;
         skeleton.mMatrix = Matrix4::IDENTITY;
 
         std::set<size_t> parentTransformToDos;

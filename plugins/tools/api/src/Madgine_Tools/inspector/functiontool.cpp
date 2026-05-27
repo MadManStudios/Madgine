@@ -182,7 +182,12 @@ namespace Tools {
                 TracedRoot<FunctionTool *> traced { mHistory, this };                
                 if (renderFunctionSelect(traced.trace(&FunctionTool::mCurrentFunction), mCurrentFunctionName, mCurrentArguments)) {
                     ValueType result;
-                    mCurrentFunction(result, mCurrentArguments);
+                    KeyValueResult error = mCurrentFunction(result, mCurrentArguments);
+                    if (error) {
+                        LOG_ERROR(error);
+                    } else {
+                        LOG(result);
+                    }
                 }
             }
             ImGui::End();

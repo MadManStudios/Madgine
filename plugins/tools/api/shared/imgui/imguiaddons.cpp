@@ -449,9 +449,6 @@ bool FilePicker(Engine::Filesystem::Path &path, Engine::Filesystem::Path &select
 {
     bool changed = BeginFilesystemPicker(path, selection, options.mBase);
 
-    bool selectedIsFile = false;
-    bool selectedIsDir = false;
-
     ImVec2 size = ImGui::GetContentRegionAvail();
     size.x -= 4.0f;
     size.y -= 4.0f;
@@ -495,12 +492,6 @@ bool FilePicker(Engine::Filesystem::Path &path, Engine::Filesystem::Path &select
             ImGui::TableNextColumn();
 
             bool selected = selection == file.mPath;
-            if (selected) {
-                if (file.mIsDir)
-                    selectedIsDir = true;
-                else
-                    selectedIsFile = true;
-            }
 
             auto iconLookup = options.mIconLookup ? options.mIconLookup : sFilesystemPickerOptions->mIconLookup;
 
