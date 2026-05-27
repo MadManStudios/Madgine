@@ -241,6 +241,7 @@ $(function() {
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="#friends">Friends</a> &#124;
 <a href="struct_engine_1_1_behavior_1_1_node_graph_1_1_node_algorithm_1_1receiver-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">Engine::Behavior::NodeGraph::NodeAlgorithm&lt; flowOutGroup &gt;::receiver&lt; Inner, Rec &gt; Struct Template Reference</div></div>
 </div><!--header-->
@@ -266,6 +267,13 @@ Public Attributes</h2></td></tr>
 <tr class="separator:ad06be3b54e9678375c86ea16a8d5e73d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0d8dbb28b13ec82906d1d0050ccbba6c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_node_algorithm_1_1state.html">state</a>&lt; Inner, Rec &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_node_algorithm_1_1receiver.html#a0d8dbb28b13ec82906d1d0050ccbba6c">mState</a></td></tr>
 <tr class="separator:a0d8dbb28b13ec82906d1d0050ccbba6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
+Friends</h2></td></tr>
+<tr class="memitem:a5400cd155be6ad738e52ce507f632a83"><td class="memTemplParams" colspan="2">template&lt;typename CPO , typename... Args&gt; <br />
+requires (<a class="el" href="tag__invoke_8h.html#a8d6152fc933c4e17119094e28bb953d1">is_tag_invocable_v</a>&lt;CPO, Rec &amp;, Args...&gt;)</td></tr>
+<tr class="memitem:a5400cd155be6ad738e52ce507f632a83"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_node_algorithm_1_1receiver.html#a5400cd155be6ad738e52ce507f632a83">tag_invoke</a> (CPO f, <a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_node_algorithm_1_1receiver.html">receiver</a> &amp;rec, Args &amp;&amp;...args) noexcept(<a class="el" href="tag__invoke_8h.html#ac9297785bc1cff48dae735a140253041">is_nothrow_tag_invocable_v</a>&lt; CPO, Rec &amp;, Args... &gt;) -&gt; tag_invoke_result_t&lt; CPO, Rec &amp;, Args... &gt;</td></tr>
+<tr class="separator:a5400cd155be6ad738e52ce507f632a83"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a334e69776ac3df97991824a6b37e49dc" name="a334e69776ac3df97991824a6b37e49dc"></a>
@@ -400,6 +408,57 @@ template&lt;typename Inner , typename Rec &gt; </div>
 
 </div>
 </div>
+<h2 class="groupheader">Friends And Related Function Documentation</h2>
+<a id="a5400cd155be6ad738e52ce507f632a83" name="a5400cd155be6ad738e52ce507f632a83"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5400cd155be6ad738e52ce507f632a83">&#9670;&#160;</a></span>tag_invoke</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;uint32_t flowOutGroup&gt; </div>
+<div class="memtemplate">
+template&lt;typename Inner , typename Rec &gt; </div>
+<div class="memtemplate">
+template&lt;typename CPO , typename... Args&gt; <br />
+requires (<a class="el" href="tag__invoke_8h.html#a8d6152fc933c4e17119094e28bb953d1">is_tag_invocable_v</a>&lt;CPO, Rec &amp;, Args...&gt;)</div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto tag_invoke </td>
+          <td>(</td>
+          <td class="paramtype">CPO&#160;</td>
+          <td class="paramname"><em>f</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_node_algorithm_1_1receiver.html">receiver</a>&lt; Inner, Rec &gt; &amp;&#160;</td>
+          <td class="paramname"><em>rec</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Args &amp;&amp;...&#160;</td>
+          <td class="paramname"><em>args</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> -&gt; tag_invoke_result_t&lt;CPO, Rec &amp;, Args...&gt;
+                </td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <h2 class="groupheader">Member Data Documentation</h2>
 <a id="a0d8dbb28b13ec82906d1d0050ccbba6c" name="a0d8dbb28b13ec82906d1d0050ccbba6c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0d8dbb28b13ec82906d1d0050ccbba6c">&#9670;&#160;</a></span>mState</h2>
@@ -443,7 +502,7 @@ template&lt;typename Inner , typename Rec &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue May 26 2026 20:59:00 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Wed May 27 2026 12:12:22 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

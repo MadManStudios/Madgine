@@ -271,8 +271,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a78d988f1890337a6d5f6d9aba21fcd6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7a2328bfce940a8a1b038c647ffe702f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_result_storage_impl.html#a7a2328bfce940a8a1b038c647ffe702f">is_value</a> () const</td></tr>
 <tr class="separator:a7a2328bfce940a8a1b038c647ffe702f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acbed5f82fa2c20cfd017e0768c325122"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_result_storage_impl.html#acbed5f82fa2c20cfd017e0768c325122">reproduce</a> (auto &amp;rec)</td></tr>
-<tr class="separator:acbed5f82fa2c20cfd017e0768c325122"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a202254d6e720a9de6abbec60fdb8cf46"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_result_storage_impl.html#a202254d6e720a9de6abbec60fdb8cf46">reproduce</a> (auto &amp;rec) &amp;</td></tr>
+<tr class="separator:a202254d6e720a9de6abbec60fdb8cf46"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa830f3023fabd8ba737af11364a6c3cb"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_result_storage_impl.html#aa830f3023fabd8ba737af11364a6c3cb">reproduce</a> (auto &amp;rec) &amp;&amp;</td></tr>
+<tr class="separator:aa830f3023fabd8ba737af11364a6c3cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a11015649afcae2239890b8c42e14ae2c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_result_storage_impl.html#a11015649afcae2239890b8c42e14ae2c">reset</a> ()</td></tr>
 <tr class="separator:a11015649afcae2239890b8c42e14ae2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4898ef2888d4d89c9bccbedd64033307"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_result_storage_impl.html#a4898ef2888d4d89c9bccbedd64033307">set_done</a> ()</td></tr>
@@ -301,8 +303,8 @@ Static Public Attributes</h2></td></tr>
 <tr class="separator:ac753a8ae9c45a5b5cee1b5c4ccf51f02"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="acbed5f82fa2c20cfd017e0768c325122" name="acbed5f82fa2c20cfd017e0768c325122"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acbed5f82fa2c20cfd017e0768c325122">&#9670;&#160;</a></span>reproduce()</h2>
+<a id="aa830f3023fabd8ba737af11364a6c3cb" name="aa830f3023fabd8ba737af11364a6c3cb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa830f3023fabd8ba737af11364a6c3cb">&#9670;&#160;</a></span>reproduce() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -317,7 +319,35 @@ template&lt;typename <a class="el" href="struct_engine_1_1_execution_1_1_value.h
           <td>(</td>
           <td class="paramtype">auto &amp;&#160;</td>
           <td class="paramname"><em>rec</em></td><td>)</td>
-          <td></td>
+          <td> &amp;&amp;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a202254d6e720a9de6abbec60fdb8cf46" name="a202254d6e720a9de6abbec60fdb8cf46"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a202254d6e720a9de6abbec60fdb8cf46">&#9670;&#160;</a></span>reproduce() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename <a class="el" href="struct_engine_1_1_execution_1_1_value.html">Value</a> , typename Error &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto <a class="el" href="struct_engine_1_1_execution_1_1_result_storage_impl.html">Engine::Execution::ResultStorageImpl</a>&lt; <a class="el" href="struct_engine_1_1_execution_1_1_value.html">Value</a>, Error &gt;::reproduce </td>
+          <td>(</td>
+          <td class="paramtype">auto &amp;&#160;</td>
+          <td class="paramname"><em>rec</em></td><td>)</td>
+          <td> &amp;</td>
         </tr>
       </table>
   </td>
@@ -841,7 +871,7 @@ template&lt;typename <a class="el" href="struct_engine_1_1_execution_1_1_value.h
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue May 26 2026 20:59:00 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Wed May 27 2026 12:12:22 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>
