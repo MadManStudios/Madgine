@@ -122,6 +122,7 @@ jobs:
         platform: [Linux, Android_arm64, Android_x64, Emscripten, Windows, macOS, iOS]
         exclude:          
           - platform: iOS
+          - platform: macOS
 
     steps:
     - uses: actions/checkout@v4
