@@ -428,25 +428,23 @@ Macros</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">    <span class="keyword">namespace </span><a class="code hl_namespace" href="namespace_engine.html">Engine</a> {                                             \</div>
-<div class="line">        <span class="keyword">namespace </span>Reflect {                                        \</div>
-<div class="line">            <span class="keyword">namespace </span>__Reflect_impl__ {                           \</div>
-<div class="line">                START_STRUCT(MetaTableTag, Idx)                    \</div>
-<div class="line">                {                                                  \</div>
-<div class="line">                    <span class="keyword">using </span>BaseT = Base;                            \</div>
-<div class="line">                    <span class="keyword">using </span>Ty = T;                                  \</div>
-<div class="line">                    <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keyword">const</span> <span class="keywordtype">bool</span> base = <span class="keyword">true</span>;       \</div>
-<div class="line">                    <span class="keyword">constexpr</span> <span class="keyword">const</span> Accessor *data() <span class="keyword">const</span>;        \</div>
-<div class="line">                    <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keyword">const</span> fixed_string name = #T; \</div>
-<div class="line">                };                                                 \</div>
-<div class="line">                START_STRUCT(MetaTableCtorTag, Idx)                \</div>
-<div class="line">                {                                                  \</div>
-<div class="line">                    <span class="keyword">using </span>Ty = T;                                  \</div>
-<div class="line">                    <span class="keyword">constexpr</span> <span class="keyword">const</span> <a class="code hl_typedef" href="namespace_engine_1_1_reflect.html#ab4b947e08c7eac9b6c55bd24b8c9f1de">Constructor</a> *data() <span class="keyword">const</span>;     \</div>
-<div class="line">                    <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keyword">const</span> <span class="keywordtype">bool</span> base = <span class="keyword">true</span>;       \</div>
-<div class="line">                };                                                 \</div>
-<div class="line">            }                                                      \</div>
-<div class="line">        }                                                          \</div>
+<b>Value:</b><div class="fragment"><div class="line">    <span class="keyword">namespace </span><a class="code hl_namespace" href="namespace_engine.html">Engine</a> {                                                     \</div>
+<div class="line">        <span class="keyword">namespace </span>__generic_impl__ {                                       \</div>
+<div class="line">            START_STRUCT(Reflect::__Reflect_impl__::MetaTableTag, Idx)     \</div>
+<div class="line">            {                                                              \</div>
+<div class="line">                <span class="keyword">using </span>BaseT = Base;                                        \</div>
+<div class="line">                <span class="keyword">using </span>Ty = T;                                              \</div>
+<div class="line">                <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keyword">const</span> <span class="keywordtype">bool</span> base = <span class="keyword">true</span>;                   \</div>
+<div class="line">                <span class="keyword">constexpr</span> <span class="keyword">const</span> Reflect::Accessor *data() <span class="keyword">const</span>;           \</div>
+<div class="line">                <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keyword">const</span> fixed_string name = #T;             \</div>
+<div class="line">            };                                                             \</div>
+<div class="line">            START_STRUCT(Reflect::__Reflect_impl__::MetaTableCtorTag, Idx) \</div>
+<div class="line">            {                                                              \</div>
+<div class="line">                <span class="keyword">using </span>Ty = T;                                              \</div>
+<div class="line">                <span class="keyword">constexpr</span> <span class="keyword">const</span> <a class="code hl_typedef" href="namespace_engine_1_1_reflect.html#ab4b947e08c7eac9b6c55bd24b8c9f1de">Reflect::Constructor</a> *data() <span class="keyword">const</span>;        \</div>
+<div class="line">                <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keyword">const</span> <span class="keywordtype">bool</span> base = <span class="keyword">true</span>;                   \</div>
+<div class="line">            };                                                             \</div>
+<div class="line">        }                                                                  \</div>
 <div class="line">    }</div>
 <div class="ttc" id="anamespace_engine_1_1_reflect_html_ab4b947e08c7eac9b6c55bd24b8c9f1de"><div class="ttname"><a href="namespace_engine_1_1_reflect.html#ab4b947e08c7eac9b6c55bd24b8c9f1de">Engine::Reflect::Constructor</a></div><div class="ttdeci">OwnedScopePtr(*)() Constructor</div><div class="ttdef"><b>Definition:</b> metatable.h:16</div></div>
 <div class="ttc" id="anamespace_engine_html"><div class="ttname"><a href="namespace_engine.html">Engine</a></div><div class="ttdoc">Main namespace for the Madgine.</div><div class="ttdef"><b>Definition:</b> align.h:3</div></div>
@@ -478,23 +476,21 @@ Macros</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">    <span class="keyword">namespace </span><a class="code hl_namespace" href="namespace_engine.html">Engine</a> {                                                      \</div>
-<div class="line">        <span class="keyword">namespace </span>Reflect {                                                 \</div>
-<div class="line">            <span class="keyword">namespace </span>__Reflect_impl__ {                                    \</div>
-<div class="line">                LINE_STRUCT(MetaTableTag, Idx)                              \</div>
-<div class="line">                {                                                           \</div>
-<div class="line">                    <span class="keyword">constexpr</span> <span class="keyword">const</span> Accessor *data() const                  \</div>
-<div class="line">                    {                                                       \</div>
-<div class="line">                        <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (<a class="code hl_define" href="linestruct_8h.html#aa403e73e5efd940c1deb0a802ef9ed7a">BASE_STRUCT</a>(MetaTableTag, Idx)::base) \</div>
-<div class="line">                            return &amp;mData;                                  \</div>
-<div class="line">                        else                                                \</div>
-<div class="line">                            return <a class="code hl_define" href="linestruct_8h.html#aa403e73e5efd940c1deb0a802ef9ed7a">BASE_STRUCT</a>(MetaTableTag, Idx)::data();  \</div>
-<div class="line">                    }                                                       \</div>
-<div class="line">                    <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keyword">const</span> <span class="keywordtype">bool</span> base = <span class="keyword">false</span>;               \</div>
-<div class="line">                    Accessor mData = Acc;                                   \</div>
-<div class="line">                };                                                          \</div>
-<div class="line">            }                                                               \</div>
-<div class="line">        }                                                                   \</div>
+<b>Value:</b><div class="fragment"><div class="line">    <span class="keyword">namespace </span><a class="code hl_namespace" href="namespace_engine.html">Engine</a> {                                                                             \</div>
+<div class="line">        <span class="keyword">namespace </span>__generic_impl__ {                                                               \</div>
+<div class="line">            LINE_STRUCT(Reflect::__Reflect_impl__::MetaTableTag, Idx)                              \</div>
+<div class="line">            {                                                                                      \</div>
+<div class="line">                <span class="keyword">constexpr</span> <span class="keyword">const</span> Reflect::Accessor *data() const                                    \</div>
+<div class="line">                {                                                                                  \</div>
+<div class="line">                    <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (<a class="code hl_define" href="linestruct_8h.html#aa403e73e5efd940c1deb0a802ef9ed7a">BASE_STRUCT</a>(Reflect::__Reflect_impl__::MetaTableTag, Idx)::base) \</div>
+<div class="line">                        return &amp;mData;                                                             \</div>
+<div class="line">                    else                                                                           \</div>
+<div class="line">                        return <a class="code hl_define" href="linestruct_8h.html#aa403e73e5efd940c1deb0a802ef9ed7a">BASE_STRUCT</a>(Reflect::__Reflect_impl__::MetaTableTag, Idx)::data();  \</div>
+<div class="line">                }                                                                                  \</div>
+<div class="line">                <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keyword">const</span> <span class="keywordtype">bool</span> base = <span class="keyword">false</span>;                                          \</div>
+<div class="line">                Reflect::Accessor mData = Acc;                                                     \</div>
+<div class="line">            };                                                                                     \</div>
+<div class="line">        }                                                                                          \</div>
 <div class="line">    }</div>
 <div class="ttc" id="alinestruct_8h_html_aa403e73e5efd940c1deb0a802ef9ed7a"><div class="ttname"><a href="linestruct_8h.html#aa403e73e5efd940c1deb0a802ef9ed7a">BASE_STRUCT</a></div><div class="ttdeci">#define BASE_STRUCT(Tag,...)</div><div class="ttdef"><b>Definition:</b> linestruct.h:30</div></div>
 </div><!-- fragment -->
@@ -531,28 +527,26 @@ Macros</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">    <span class="keyword">namespace </span><a class="code hl_namespace" href="namespace_engine.html">Engine</a> {                                                      \</div>
-<div class="line">        <span class="keyword">namespace </span>Reflect {                                                 \</div>
-<div class="line">            <span class="keyword">namespace </span>__Reflect_impl__ {                                    \</div>
-<div class="line">                LINE_STRUCT(MetaTableTag, Idx)                              \</div>
-<div class="line">                {                                                           \</div>
-<div class="line">                    <span class="keywordtype">void</span> init() const                                       \</div>
-<div class="line">                    {                                                       \</div>
-<div class="line">                        mData.init();                                       \</div>
-<div class="line">                    }                                                       \</div>
-<div class="line">                                                                            \</div>
-<div class="line">                    <span class="keyword">constexpr</span> <span class="keyword">const</span> Accessor *data() const                  \</div>
-<div class="line">                    {                                                       \</div>
-<div class="line">                        <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (<a class="code hl_define" href="linestruct_8h.html#aa403e73e5efd940c1deb0a802ef9ed7a">BASE_STRUCT</a>(MetaTableTag, Idx)::base) \</div>
-<div class="line">                            return mData.data();                            \</div>
-<div class="line">                        else                                                \</div>
-<div class="line">                            return <a class="code hl_define" href="linestruct_8h.html#aa403e73e5efd940c1deb0a802ef9ed7a">BASE_STRUCT</a>(MetaTableTag, Idx)::data();  \</div>
-<div class="line">                    }                                                       \</div>
-<div class="line">                    <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keyword">const</span> <span class="keywordtype">bool</span> base = <span class="keyword">false</span>;               \</div>
-<div class="line">                    <span class="keyword">mutable</span> DynamicAccessorList&lt;Builder, Init&gt; mData;       \</div>
-<div class="line">                };                                                          \</div>
-<div class="line">            }                                                               \</div>
-<div class="line">        }                                                                   \</div>
+<b>Value:</b><div class="fragment"><div class="line">    <span class="keyword">namespace </span><a class="code hl_namespace" href="namespace_engine.html">Engine</a> {                                                                             \</div>
+<div class="line">        <span class="keyword">namespace </span>__generic_impl__ {                                                               \</div>
+<div class="line">            LINE_STRUCT(Reflect::__Reflect_impl__::MetaTableTag, Idx)                              \</div>
+<div class="line">            {                                                                                      \</div>
+<div class="line">                <span class="keywordtype">void</span> init() const                                                                  \</div>
+<div class="line">                {                                                                                  \</div>
+<div class="line">                    mData.init();                                                                  \</div>
+<div class="line">                }                                                                                  \</div>
+<div class="line">                                                                                                   \</div>
+<div class="line">                <span class="keyword">constexpr</span> <span class="keyword">const</span> Reflect::Accessor *data() const                                    \</div>
+<div class="line">                {                                                                                  \</div>
+<div class="line">                    <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (<a class="code hl_define" href="linestruct_8h.html#aa403e73e5efd940c1deb0a802ef9ed7a">BASE_STRUCT</a>(Reflect::__Reflect_impl__::MetaTableTag, Idx)::base) \</div>
+<div class="line">                        return mData.data();                                                       \</div>
+<div class="line">                    else                                                                           \</div>
+<div class="line">                        return <a class="code hl_define" href="linestruct_8h.html#aa403e73e5efd940c1deb0a802ef9ed7a">BASE_STRUCT</a>(Reflect::__Reflect_impl__::MetaTableTag, Idx)::data();  \</div>
+<div class="line">                }                                                                                  \</div>
+<div class="line">                <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keyword">const</span> <span class="keywordtype">bool</span> base = <span class="keyword">false</span>;                                          \</div>
+<div class="line">                <span class="keyword">mutable</span> Reflect::DynamicAccessorList&lt;Builder, Init&gt; mData;                                  \</div>
+<div class="line">            };                                                                                     \</div>
+<div class="line">        }                                                                                          \</div>
 <div class="line">    }</div>
 </div><!-- fragment -->
 </div>
@@ -607,23 +601,21 @@ Macros</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">    <span class="keyword">namespace </span><a class="code hl_namespace" href="namespace_engine.html">Engine</a> {                                                          \</div>
-<div class="line">        <span class="keyword">namespace </span>Reflect {                                                     \</div>
-<div class="line">            <span class="keyword">namespace </span>__Reflect_impl__ {                                        \</div>
-<div class="line">                LINE_STRUCT(MetaTableCtorTag, Idx)                              \</div>
-<div class="line">                {                                                               \</div>
-<div class="line">                    <span class="keyword">constexpr</span> <span class="keyword">const</span> <a class="code hl_typedef" href="namespace_engine_1_1_reflect.html#ab4b947e08c7eac9b6c55bd24b8c9f1de">Constructor</a> *data() const                   \</div>
-<div class="line">                    {                                                           \</div>
-<div class="line">                        <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (<a class="code hl_define" href="linestruct_8h.html#aa403e73e5efd940c1deb0a802ef9ed7a">BASE_STRUCT</a>(MetaTableCtorTag, Idx)::base) \</div>
-<div class="line">                            return &amp;mData;                                      \</div>
-<div class="line">                        else                                                    \</div>
-<div class="line">                            return <a class="code hl_define" href="linestruct_8h.html#aa403e73e5efd940c1deb0a802ef9ed7a">BASE_STRUCT</a>(MetaTableCtorTag, Idx)::data();  \</div>
-<div class="line">                    }                                                           \</div>
-<div class="line">                    <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keyword">const</span> <span class="keywordtype">bool</span> base = <span class="keyword">false</span>;                   \</div>
-<div class="line">                    <a class="code hl_typedef" href="namespace_engine_1_1_reflect.html#ab4b947e08c7eac9b6c55bd24b8c9f1de">Constructor</a> mData = ctorHelper&lt;Ty&gt;::ctor&lt;__VA_ARGS__&gt;();    \</div>
-<div class="line">                };                                                              \</div>
-<div class="line">            }                                                                   \</div>
-<div class="line">        }                                                                       \</div>
+<b>Value:</b><div class="fragment"><div class="line">    <span class="keyword">namespace </span><a class="code hl_namespace" href="namespace_engine.html">Engine</a> {                                                                                       \</div>
+<div class="line">        <span class="keyword">namespace </span>__generic_impl__ {                                                                         \</div>
+<div class="line">            LINE_STRUCT(Reflect::__Reflect_impl__::MetaTableCtorTag, Idx)                                    \</div>
+<div class="line">            {                                                                                                \</div>
+<div class="line">                <span class="keyword">constexpr</span> <span class="keyword">const</span> <a class="code hl_typedef" href="namespace_engine_1_1_reflect.html#ab4b947e08c7eac9b6c55bd24b8c9f1de">Reflect::Constructor</a> *data() const                                           \</div>
+<div class="line">                {                                                                                            \</div>
+<div class="line">                    <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (<a class="code hl_define" href="linestruct_8h.html#aa403e73e5efd940c1deb0a802ef9ed7a">BASE_STRUCT</a>(Reflect::__Reflect_impl__::MetaTableCtorTag, Idx)::base)       \</div>
+<div class="line">                        return &amp;mData;                                                                       \</div>
+<div class="line">                    else                                                                                     \</div>
+<div class="line">                        return <a class="code hl_define" href="linestruct_8h.html#aa403e73e5efd940c1deb0a802ef9ed7a">BASE_STRUCT</a>(Reflect::__Reflect_impl__::MetaTableCtorTag, Idx)::data();        \</div>
+<div class="line">                }                                                                                            \</div>
+<div class="line">                <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keyword">const</span> <span class="keywordtype">bool</span> base = <span class="keyword">false</span>;                                                    \</div>
+<div class="line">                <a class="code hl_typedef" href="namespace_engine_1_1_reflect.html#ab4b947e08c7eac9b6c55bd24b8c9f1de">Reflect::Constructor</a> mData = Reflect::__Reflect_impl__::ctorHelper&lt;Ty&gt;::ctor&lt;__VA_ARGS__&gt;(); \</div>
+<div class="line">            };                                                                                               \</div>
+<div class="line">        }                                                                                                    \</div>
 <div class="line">    }</div>
 </div><!-- fragment -->
 </div>
@@ -663,7 +655,7 @@ Macros</h2></td></tr>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line">    <a class="code hl_define" href="metatable__impl_8h.html#ad0c124b26252fef1385e7a29191b0e30">METATABLE_END_EX</a>     \</div>
 <div class="line">    (, T)</div>
-<div class="ttc" id="ametatable__impl_8h_html_ad0c124b26252fef1385e7a29191b0e30"><div class="ttname"><a href="metatable__impl_8h.html#ad0c124b26252fef1385e7a29191b0e30">METATABLE_END_EX</a></div><div class="ttdeci">#define METATABLE_END_EX(Idx, T)</div><div class="ttdef"><b>Definition:</b> metatable_impl.h:212</div></div>
+<div class="ttc" id="ametatable__impl_8h_html_ad0c124b26252fef1385e7a29191b0e30"><div class="ttname"><a href="metatable__impl_8h.html#ad0c124b26252fef1385e7a29191b0e30">METATABLE_END_EX</a></div><div class="ttdeci">#define METATABLE_END_EX(Idx, T)</div><div class="ttdef"><b>Definition:</b> metatable_impl.h:204</div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -700,7 +692,7 @@ Macros</h2></td></tr>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line">    <a class="code hl_define" href="metatable__impl_8h.html#aa0e408af4f87b833851c9331acd5cb8a">METATABLE_DYNAMIC_END_EX</a>                    \</div>
 <div class="line">    (, Builder, Init, T)</div>
-<div class="ttc" id="ametatable__impl_8h_html_aa0e408af4f87b833851c9331acd5cb8a"><div class="ttname"><a href="metatable__impl_8h.html#aa0e408af4f87b833851c9331acd5cb8a">METATABLE_DYNAMIC_END_EX</a></div><div class="ttdeci">#define METATABLE_DYNAMIC_END_EX(Idx, Builder, Init, T)</div><div class="ttdef"><b>Definition:</b> metatable_impl.h:217</div></div>
+<div class="ttc" id="ametatable__impl_8h_html_aa0e408af4f87b833851c9331acd5cb8a"><div class="ttname"><a href="metatable__impl_8h.html#aa0e408af4f87b833851c9331acd5cb8a">METATABLE_DYNAMIC_END_EX</a></div><div class="ttdeci">#define METATABLE_DYNAMIC_END_EX(Idx, Builder, Init, T)</div><div class="ttdef"><b>Definition:</b> metatable_impl.h:209</div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -729,11 +721,11 @@ Macros</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">    <a class="code hl_define" href="metatable__impl_8h.html#a32dc03f7cd2e739aab50a794c2bc7349">METATABLE_ENTRY_EX</a>(Idx, Accessor {}) \</div>
-<div class="line">    <a class="code hl_define" href="metatable__impl_8h.html#afaf1f69d5782c5aaeef902fabcbd9b5d">CONSTRUCTOR_EX</a>(Idx, <span class="keywordtype">void</span>)            \</div>
+<b>Value:</b><div class="fragment"><div class="line">    <a class="code hl_define" href="metatable__impl_8h.html#a32dc03f7cd2e739aab50a794c2bc7349">METATABLE_ENTRY_EX</a>(Idx, Reflect::Accessor {}) \</div>
+<div class="line">    <a class="code hl_define" href="metatable__impl_8h.html#afaf1f69d5782c5aaeef902fabcbd9b5d">CONSTRUCTOR_EX</a>(Idx, <span class="keywordtype">void</span>)                     \</div>
 <div class="line">    METATABLE_INSTANTIATION(Idx, T)</div>
-<div class="ttc" id="ametatable__impl_8h_html_a32dc03f7cd2e739aab50a794c2bc7349"><div class="ttname"><a href="metatable__impl_8h.html#a32dc03f7cd2e739aab50a794c2bc7349">METATABLE_ENTRY_EX</a></div><div class="ttdeci">#define METATABLE_ENTRY_EX(Idx, Acc)</div><div class="ttdef"><b>Definition:</b> metatable_impl.h:129</div></div>
-<div class="ttc" id="ametatable__impl_8h_html_afaf1f69d5782c5aaeef902fabcbd9b5d"><div class="ttname"><a href="metatable__impl_8h.html#afaf1f69d5782c5aaeef902fabcbd9b5d">CONSTRUCTOR_EX</a></div><div class="ttdeci">#define CONSTRUCTOR_EX(Idx,...)</div><div class="ttdef"><b>Definition:</b> metatable_impl.h:182</div></div>
+<div class="ttc" id="ametatable__impl_8h_html_a32dc03f7cd2e739aab50a794c2bc7349"><div class="ttname"><a href="metatable__impl_8h.html#a32dc03f7cd2e739aab50a794c2bc7349">METATABLE_ENTRY_EX</a></div><div class="ttdeci">#define METATABLE_ENTRY_EX(Idx, Acc)</div><div class="ttdef"><b>Definition:</b> metatable_impl.h:127</div></div>
+<div class="ttc" id="ametatable__impl_8h_html_afaf1f69d5782c5aaeef902fabcbd9b5d"><div class="ttname"><a href="metatable__impl_8h.html#afaf1f69d5782c5aaeef902fabcbd9b5d">CONSTRUCTOR_EX</a></div><div class="ttdeci">#define CONSTRUCTOR_EX(Idx,...)</div><div class="ttdef"><b>Definition:</b> metatable_impl.h:176</div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -778,7 +770,7 @@ Macros</h2></td></tr>
 <div class="line">    CONSTRUCTOR_EX(Idx, <span class="keywordtype">void</span>)                           \</div>
 <div class="line">    METATABLE_INSTANTIATION(Idx, T)                     \</div>
 <div class="line">    DYNAMIC_INITIALIZATION(T)</div>
-<div class="ttc" id="ametatable__impl_8h_html_aae5a2910456767bcb075ebb799e75416"><div class="ttname"><a href="metatable__impl_8h.html#aae5a2910456767bcb075ebb799e75416">DYNAMIC_ENTRY_EX</a></div><div class="ttdeci">#define DYNAMIC_ENTRY_EX(Idx, Builder, Init)</div><div class="ttdef"><b>Definition:</b> metatable_impl.h:149</div></div>
+<div class="ttc" id="ametatable__impl_8h_html_aae5a2910456767bcb075ebb799e75416"><div class="ttname"><a href="metatable__impl_8h.html#aae5a2910456767bcb075ebb799e75416">DYNAMIC_ENTRY_EX</a></div><div class="ttdeci">#define DYNAMIC_ENTRY_EX(Idx, Builder, Init)</div><div class="ttdef"><b>Definition:</b> metatable_impl.h:145</div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1304,7 +1296,7 @@ Macros</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Jun 5 2026 23:45:49 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Fri Jun 5 2026 23:53:40 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>
