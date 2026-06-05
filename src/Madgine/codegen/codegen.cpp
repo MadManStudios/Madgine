@@ -31,22 +31,22 @@ void File::endCondition(std::string_view cond)
         mConditionalsBitMask[index] = false;
 }
 
-bool File::openCStyleGuard(std::ostream &stream, const Engine::TinyVector<Engine::BitArray<62>> &conditionals) const
+bool File::openCStyleGuard(std::ostream &stream, const Engine::Containers::TinyVector<Engine::Containers::BitArray<62>> &conditionals) const
 {
-    if (std::ranges::all_of(conditionals, [](const Engine::BitArray<62> &cond) { return cond == Engine::BitArray<62> {}; }))
+    if (std::ranges::all_of(conditionals, [](const Engine::Containers::BitArray<62> &cond) { return cond == Engine::Containers::BitArray<62> {}; }))
         return false;
 
     stream << "#if ";
 
     bool outerFirst = true;
 
-    for (Engine::BitArray<62> cond : conditionals) {
+    for (Engine::Containers::BitArray<62> cond : conditionals) {
         if (outerFirst)
             outerFirst = false;
         else
             stream << " || ";
 
-        if (cond == Engine::BitArray<62> {}) {
+        if (cond == Engine::Containers::BitArray<62> {}) {
             stream << "1";
             continue;
         }

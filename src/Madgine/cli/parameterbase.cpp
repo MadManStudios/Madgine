@@ -5,7 +5,7 @@
 #include "cli.h"
 
 namespace Engine {
-namespace CLI {
+namespace Core {
 
     ParameterBase::ParameterBase(size_t minArgumentCount, size_t maxArgumentCount, std::vector<const char *> options, const char *help)
         : mOptions(std::move(options))

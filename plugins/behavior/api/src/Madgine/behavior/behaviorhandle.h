@@ -25,8 +25,8 @@ namespace Behavior {
         Behavior create(const ParameterTuple &args, std::vector<Behavior> behaviors = {}) const;
         Threading::TaskFuture<bool> state() const;
         ParameterTuple createParameters() const;
-        std::vector<ExtendedValueTypeDesc> parameterTypes() const;
-        std::vector<ExtendedValueTypeDesc> resultTypes() const;
+        std::vector<Reflect::ExtendedType> parameterTypes() const;
+        std::vector<Reflect::ExtendedType> resultTypes() const;
         std::vector<NamedDescriptor> namedInputs() const;
         size_t subBehaviorCount() const;
 

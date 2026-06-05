@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Generic/container/containerevent.h"
+#include "Generic/containers/containerevent.h"
 #include "Generic/execution/future.h"
 
 #include "serializablecontainer.h"
@@ -12,7 +12,7 @@ namespace Serialize {
     template <typename C, typename Observer = NoOpFunctor, typename OffsetPtr = TaggedPlaceholder<MemberOffsetPtrTag, 0>>
     struct SyncableContainerImpl : SerializableContainerImpl<C, Observer, OffsetPtr>, Syncable<OffsetPtr> {
 
-        using _traits = container_traits<C>;
+        using _traits = Containers::container_traits<C>;
         using container_t = SyncableContainerImpl<C, Observer, OffsetPtr>;
 
         typedef SerializableContainerImpl<C, Observer, OffsetPtr> Base;
@@ -76,11 +76,11 @@ namespace Serialize {
         }
 
         template <typename... Ty>
-        friend iterator tag_invoke(emplace_t, bool &success, SyncableContainerImpl<C, Observer, OffsetPtr> &self, const iterator &where, Ty &&...args)
+        friend iterator tag_invoke(Containers::emplace_t, bool &success, SyncableContainerImpl<C, Observer, OffsetPtr> &self, const iterator &where, Ty &&...args)
         {
             assert(self.isMaster());
             InsertOperation op { self, where };
-            return Engine::emplace(success, op, where, std::forward<Ty>(args)...);
+            return Containers::emplace(success, op, where, std::forward<Ty>(args)...);
         }
 
         template <typename... _Ty>
@@ -89,7 +89,7 @@ namespace Serialize {
             Execution::Promise<MessageResult, iterator> promise;
             Execution::Future<MessageResult, iterator> future = promise.getFuture();
             if (this->isMaster()) {
-                promise.set_value(Engine::emplace(*this, where, std::forward<_Ty>(args)...));
+                promise.set_value(Containers::emplace(*this, where, std::forward<_Ty>(args)...));
             } else {
                 dummy_t temp { std::forward<_Ty>(args)... };
                 this->writeRequest(std::move(promise), emplace_request_t { where, temp });
@@ -217,22 +217,22 @@ namespace Serialize {
             MessageId mAnswerId;
         };
 
-        using InsertOperation = AtomicContainerOperation<_InsertOperation>;
-        using RemoveOperation = AtomicContainerOperation<_RemoveOperation>;
-        using RemoveRangeOperation = AtomicContainerOperation<_RemoveRangeOperation>;
-        using ResetOperation = AtomicContainerOperation<_ResetOperation>;
+        using InsertOperation = Containers::AtomicContainerOperation<_InsertOperation>;
+        using RemoveOperation = Containers::AtomicContainerOperation<_RemoveOperation>;
+        using RemoveRangeOperation = Containers::AtomicContainerOperation<_RemoveRangeOperation>;
+        using ResetOperation = Containers::AtomicContainerOperation<_ResetOperation>;
         // TODO: MultiInsertOperation
     };
 
     template <typename C, typename Observer = NoOpFunctor, typename OffsetPtr = TaggedPlaceholder<MemberOffsetPtrTag, 0>>
-    using SyncableContainer = container_api<SyncableContainerImpl<C, Observer, OffsetPtr>>;
+    using SyncableContainer = Containers::container_api<SyncableContainerImpl<C, Observer, OffsetPtr>>;
 
 #define SYNCABLE_CONTAINER(Name, ...) MEMBER_OFFSET_CONTAINER(Name, , ::Engine::Serialize::SyncableContainer<__VA_ARGS__>)
 
 }
 
 template <typename C, typename Observer, typename _OffsetPtr>
-struct underlying_container<Serialize::SyncableContainerImpl<C, Observer, _OffsetPtr>> {
+struct Containers::underlying_container<Serialize::SyncableContainerImpl<C, Observer, _OffsetPtr>> {
     typedef C type;
 };
 

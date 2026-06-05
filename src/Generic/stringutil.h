@@ -1,6 +1,6 @@
 #pragma once
 
-#include "coroutines/generator.h"
+#include "containers/generator.h"
 
 namespace Engine {
 namespace StringUtil {
@@ -165,7 +165,7 @@ namespace StringUtil {
         return result;
     }
 
-    inline Generator<std::string_view> tokenize(std::string_view string, char token)
+    inline Containers::Generator<std::string_view> tokenize(std::string_view string, char token)
     {
         size_t pivot = 0;
         while (pivot < string.size()) {
@@ -182,7 +182,8 @@ namespace StringUtil {
         }
     }
 
-    inline Generator<char32_t> parseUTF8(std::string_view string) {
+    inline Containers::Generator<char32_t> parseUTF8(std::string_view string)
+    {
         size_t expected = 0;
         char32_t current;
         for (unsigned char c : string) {

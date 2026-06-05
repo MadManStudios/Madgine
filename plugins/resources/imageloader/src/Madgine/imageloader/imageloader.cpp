@@ -2,7 +2,7 @@
 
 #include "imageloader.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
 #include "imagedata.h"
@@ -36,7 +36,7 @@ namespace Resources {
             co_return false;
         }
 
-        ByteBuffer buffer = std::move(bufferResult).value();
+        Memory::ByteBuffer buffer = std::move(bufferResult).value();
 
         data.mChannels = 4;
 
@@ -51,12 +51,12 @@ namespace Resources {
         co_return;
     }
 
-    const Filesystem::Path &ImageLoader::iconPath(ResourceBase *res) const
+    const Platform::Filesystem::Path &ImageLoader::iconPath(ResourceBase *res) const
     {
         return res->path();
     }
 
-    ByteBuffer ImageLoader::convertFromPNG(const ByteBuffer &data, Vector2i &outSize)
+    Memory::ByteBuffer ImageLoader::convertFromPNG(const Memory::ByteBuffer &data, Math::Vector2i &outSize)
     {
         stbi_uc *ptr = stbi_load_from_memory(static_cast<const stbi_uc *>(data.mData), data.mSize,
             &outSize.x,
@@ -67,13 +67,13 @@ namespace Resources {
         return { std::unique_ptr<stbi_uc, Functor<&stbi_image_free>> { ptr }, static_cast<size_t>(outSize.x) * outSize.y * 4 };
     }
 
-    ByteBuffer ImageLoader::convertToPNG(const ByteBuffer &data, Vector2i size)
+    Memory::ByteBuffer ImageLoader::convertToPNG(const Memory::ByteBuffer &data, Math::Vector2i size)
     {
-        ByteBuffer image;
+        Memory::ByteBuffer image;
         [[maybe_unused]] int result = stbi_write_png_to_func([](void *context, void *data, int size) {
-            WritableByteBuffer output { std::make_unique<std::byte[]>(size), static_cast<size_t>(size) };
+            Memory::WritableByteBuffer output { std::make_unique<std::byte[]>(size), static_cast<size_t>(size) };
             std::memcpy(output.mData, data, size);
-            *static_cast<ByteBuffer *>(context) = std::move(output).cast<const void>();
+            *static_cast<Memory::ByteBuffer *>(context) = std::move(output).cast<const void>();
         },
             &image, size.x, size.y, STBI_rgb_alpha, data.mData, 4 * size.x);
         assert(result);

@@ -15,8 +15,8 @@ namespace Render {
 #endif
         );
 
-        Block allocate(size_t size, size_t alignment = 1);
-        void deallocate(Block block);
+        Memory::Block allocate(size_t size, size_t alignment = 1);
+        void deallocate(Memory::Block block);
 
         std::pair<GLuint, size_t> resolve(void *ptr);
 
@@ -36,8 +36,8 @@ namespace Render {
 #endif
         );
 
-        Block allocate(size_t size, size_t alignment = 1);
-        void deallocate(Block block);
+        Memory::Block allocate(size_t size, size_t alignment = 1);
+        void deallocate(Memory::Block block);
 
         std::pair<GLuint, size_t> resolve(void *ptr);
 

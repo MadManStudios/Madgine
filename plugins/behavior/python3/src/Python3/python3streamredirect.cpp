@@ -2,9 +2,9 @@
 
 #include "python3streamredirect.h"
 
-#include "Interfaces/log/log.h"
+#include "Platform/log/log.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 
 #include "util/pyobjectutil.h"
 
@@ -16,7 +16,7 @@ namespace Engine {
 namespace Behavior {
     namespace Python3 {
 
-        Python3StreamRedirect::Python3StreamRedirect(Log::Log *log)
+        Python3StreamRedirect::Python3StreamRedirect(Platform::Log::Log *log)
             : mLog(log)
         {
         }
@@ -34,7 +34,7 @@ namespace Behavior {
                 mOldStreams[name] = PySys_GetObject(name.data()); // borrowed
             }
 
-            PySys_SetObject(name.data(), toPyObject(ScopePtr { this }));
+            PySys_SetObject(name.data(), toPyObject(Reflect::ScopePtr { this }));
         }
 
         void Python3StreamRedirect::reset(std::string_view name)
@@ -53,7 +53,7 @@ namespace Behavior {
                 return 0;
 
             if (mLog) {
-                mLog->log(text, Log::MessageType::INFO_TYPE);
+                mLog->log(text, Platform::Log::MessageType::INFO_TYPE);
                 return text.size();
             } else {
                 LOG(text);
@@ -61,12 +61,12 @@ namespace Behavior {
             }
         }
 
-        Log::Log *Python3StreamRedirect::setLog(Log::Log *log)
+        Platform::Log::Log *Python3StreamRedirect::setLog(Platform::Log::Log *log)
         {
             return std::exchange(mLog, log);
         }
 
-        Log::Log *Python3StreamRedirect::log()
+        Platform::Log::Log *Python3StreamRedirect::log()
         {
             return mLog;
         }

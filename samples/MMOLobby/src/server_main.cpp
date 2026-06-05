@@ -12,7 +12,7 @@
 
 #include "Madgine/app/application.h"
 
-#include "Interfaces/window/windowsettings.h"
+#include "Platform/window/windowsettings.h"
 
 int main() {
 

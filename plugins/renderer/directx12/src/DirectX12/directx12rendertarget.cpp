@@ -27,7 +27,7 @@ namespace Render {
     {
     }
 
-    void DirectX12RenderTarget::setup(std::vector<std::array<OffsetPtr, 6>> targetViews, const Vector2i &size)
+    void DirectX12RenderTarget::setup(std::vector<std::array<OffsetPtr, 6>> targetViews, const Math::Vector2i &size)
     {
         mTargetViews = targetViews;
 
@@ -86,7 +86,7 @@ namespace Render {
             }
         }
 
-        const Vector2i &screenSize = size();
+        const Math::Vector2i &screenSize = size();
 
         D3D12_VIEWPORT viewport;
         viewport.Width = static_cast<float>(screenSize.x);
@@ -153,7 +153,7 @@ namespace Render {
         RenderTarget::endIteration(targetIndex, targetCount, targetSubresourceIndex);
     }
 
-    void DirectX12RenderTarget::setRenderSpace(const Rect2i &space)
+    void DirectX12RenderTarget::setRenderSpace(const Math::Rect2i &space)
     {
         RenderTarget::setRenderSpace(space);
 
@@ -175,7 +175,7 @@ namespace Render {
         mCommandList->RSSetScissorRects(1, &scissorRect);
     }
 
-    void DirectX12RenderTarget::setScissorsRect(const Rect2i &space)
+    void DirectX12RenderTarget::setScissorsRect(const Math::Rect2i &space)
     {
         D3D12_RECT scissorRect;
         scissorRect.left = static_cast<float>(space.mTopLeft.x);

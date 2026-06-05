@@ -2,7 +2,7 @@
 
 #include "widgettemplate.h"
 
-#include "Meta/keyvalue/accessor.h"
+#include "Meta/reflect/accessor.h"
 
 #include "compoundwidget.h"
 
@@ -17,27 +17,27 @@ namespace Widgets {
     {
         mMetaTable.mBase = &table<CompoundWidget>;
 
-        registerType(mMetaTable);
+        Reflect::__Reflect_impl__::registerType(mMetaTable);
     }
 
     WidgetTemplate::~WidgetTemplate()
     {
-        unregisterType(mMetaTable);
+        Reflect::__Reflect_impl__::unregisterType(mMetaTable);
     }
 
-    std::unique_ptr<Accessor[]> WidgetTemplate::accessors(const std::vector<WidgetData> &widgets)
+    std::unique_ptr<Reflect::Accessor[]> WidgetTemplate::accessors(const std::vector<WidgetData> &widgets)
     {
-        std::unique_ptr<Accessor[]> accessors = std::make_unique<Accessor[]>(widgets.size() + 1);
+        std::unique_ptr<Reflect::Accessor[]> accessors = std::make_unique<Reflect::Accessor[]>(widgets.size() + 1);
 
         for (size_t i = 0; i < widgets.size(); i++) {
             accessors[i] = {
                 widgets[i].mName.c_str(),
                 nullptr,
-                [](const Accessor *self, ValueType &out, const ValueType &scope) -> KeyValueResult {
-                    return ValueType_unwrap(out, [self](CompoundWidget &widget) { return widget.getTemplateWidget(self->mName); }, scope);
+                [](const Reflect::Accessor *self, Reflect::Value &out, const Reflect::Value &scope) -> Reflect::Result {
+                    return invoke(out, [self](CompoundWidget &widget) { return widget.getTemplateWidget(self->mName); }, scope);
                 },
                 nullptr,
-                { { ValueTypeEnum::ScopeValue }, WidgetLoader::load(widgets[i].mType)->metaTable()->mSelf }
+                { { Reflect::TypeEnum::ScopeValue }, WidgetLoader::load(widgets[i].mType)->metaTable()->mSelf }
             };
         }
 

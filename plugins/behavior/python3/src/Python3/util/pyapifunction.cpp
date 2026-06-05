@@ -2,9 +2,9 @@
 
 #include "pyapifunction.h"
 
-#include "Meta/keyvalue/argumentlist.h"
-#include "Meta/keyvalue/functiontable.h"
-#include "Meta/keyvalue/valuetype.h"
+#include "Meta/reflect/argumentlist.h"
+#include "Meta/reflect/functiontable.h"
+#include "Meta/reflect/value.h"
 
 #include "../python3env.h"
 #include "pyobjectutil.h"
@@ -18,14 +18,14 @@ namespace Behavior {
         PyApiFunction_call(PyApiFunction *self, PyObject *args, PyObject *kwargs)
         {
             size_t argCount = PyTuple_Size(args);
-            ArgumentList arguments { std::true_type {}, argCount };
+            Reflect::ArgumentList arguments { std::true_type {}, argCount };
 
             for (size_t i = 0; i < argCount; ++i) {
                 PYTHON3_PROPAGATE_ERROR(fromPyObject(arguments[i], PyTuple_GetItem(args, i)));
             }
 
-            ValueType retVal;
-            KeyValueResult result;
+            Reflect::Value retVal;
+            Reflect::Result result;
             Py_BEGIN_ALLOW_THREADS;
             result = self->mFunction(retVal, arguments);
             Py_END_ALLOW_THREADS;

@@ -23,11 +23,11 @@ namespace Scene {
             Render::SkeletonLoader::Resource *get() const;
             const Render::SkeletonLoader::Handle &handle() const;
 
-            void resetMatrices(Matrix4 *matrices);
+            void resetMatrices(Math::Matrix4 *matrices);
 
-            Render::GPUPtr<Matrix4[]> mBoneMatrices;
+            Render::GPUPtr<Math::Matrix4[]> mBoneMatrices;
 
-            std::vector<Matrix4> mLocalMatrices;
+            std::vector<Math::Matrix4> mLocalMatrices;
 
         private:
             typename Render::SkeletonLoader::Handle mSkeleton;

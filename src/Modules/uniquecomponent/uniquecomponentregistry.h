@@ -7,7 +7,7 @@
 #include "typeinfo.h"
 
 namespace Engine {
-namespace UniqueComponent {
+namespace Plugins {
 
     DERIVE_TYPENAME(VBase)
 
@@ -17,7 +17,7 @@ namespace UniqueComponent {
 #if ENABLE_PLUGINS
 
 namespace Engine {
-namespace UniqueComponent {
+namespace Plugins {
 
     struct MODULES_EXPORT CollectorInfoBase {
         CollectorInfoBase() = default;
@@ -271,7 +271,7 @@ namespace UniqueComponent {
 #else
 
 namespace Engine {
-namespace UniqueComponent {
+namespace Plugins {
 
     template <fixed_string ti, fixed_string namedTi, const auto &header, typename _Base, typename... _Annotations>
     struct Registry {

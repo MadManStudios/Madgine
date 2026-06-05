@@ -37,7 +37,7 @@ namespace Render {
         VK_CHECK(result);
 
         context.mTempAllocator.allocate(1);
-        Block block = context.mTempAllocator.parent().parent().getBlock();
+        Memory::Block block = context.mTempAllocator.parent().parent().getBlock();
         VkBuffer buffer = context.mTempMemoryHeap.resolve(block.mAddress).first;
 
         for (size_t i = 0; i < std::min(config.bufferSizes.size(), size_t { 3 }); ++i) {
@@ -96,9 +96,9 @@ namespace Render {
         return true;
     }
 
-    WritableByteBuffer VulkanPipelineInstance::mapParameters(size_t index)
+    Memory::WritableByteBuffer VulkanPipelineInstance::mapParameters(size_t index)
     {
-        Block block = VulkanRenderContext::getSingleton().mTempAllocator.allocate(mConstantBufferSizes[index], 256);
+        Memory::Block block = VulkanRenderContext::getSingleton().mTempAllocator.allocate(mConstantBufferSizes[index], 256);
         mConstantGPUBufferOffsets[index] = VulkanRenderContext::getSingleton().mTempMemoryHeap.resolve(block.mAddress).second;
 
         return { block.mAddress, block.mSize };
@@ -154,7 +154,7 @@ namespace Render {
         mHasIndices = false;
     }
 
-    WritableByteBuffer VulkanPipelineInstance::mapTempBuffer(size_t space, size_t elementSize, size_t count) const
+    Memory::WritableByteBuffer VulkanPipelineInstance::mapTempBuffer(size_t space, size_t elementSize, size_t count) const
     {
         size_t size = elementSize * count;
 
@@ -164,7 +164,7 @@ namespace Render {
 
         VkDescriptorSet set = VulkanRenderContext::getSingleton().fetchTempDescriptorSet();
 
-        Block block = VulkanRenderContext::getSingleton().mTempAllocator.allocate(size, 256);
+        Memory::Block block = VulkanRenderContext::getSingleton().mTempAllocator.allocate(size, 256);
         auto [buffer, offset] = VulkanRenderContext::getSingleton().mTempMemoryHeap.resolve(block.mAddress);
 
         VkDescriptorBufferInfo bufferInfo {};
@@ -218,12 +218,12 @@ namespace Render {
         mElementCount = mesh.mElementCount;
     }
 
-    WritableByteBuffer VulkanPipelineInstance::mapVertices(RenderTarget *_target, VertexFormat format, size_t count) const
+    Memory::WritableByteBuffer VulkanPipelineInstance::mapVertices(RenderTarget *_target, VertexFormat format, size_t count) const
     {
         VulkanRenderTarget *target = static_cast<VulkanRenderTarget *>(_target);
         VkCommandBuffer commandList = target->mCommandList;
 
-        Block block = VulkanRenderContext::getSingleton().mTempAllocator.allocate(format.stride() * count);
+        Memory::Block block = VulkanRenderContext::getSingleton().mTempAllocator.allocate(format.stride() * count);
         auto [buffer, offset] = VulkanRenderContext::getSingleton().mTempMemoryHeap.resolve(block.mAddress);
         VkDeviceSize vOffset = offset;
 
@@ -239,11 +239,11 @@ namespace Render {
         return { block.mAddress, block.mSize };
     }
 
-    TypedByteBuffer<uint32_t> VulkanPipelineInstance::mapIndices(RenderTarget *_target, size_t count) const
+    Memory::TypedByteBuffer<uint32_t> VulkanPipelineInstance::mapIndices(RenderTarget *_target, size_t count) const
     {
         VulkanRenderTarget *target = static_cast<VulkanRenderTarget *>(_target);
 
-        Block block = VulkanRenderContext::getSingleton().mTempAllocator.allocate(sizeof(uint32_t) * count);
+        Memory::Block block = VulkanRenderContext::getSingleton().mTempAllocator.allocate(sizeof(uint32_t) * count);
         auto [buffer, offset] = VulkanRenderContext::getSingleton().mTempMemoryHeap.resolve(block.mAddress);
 
         vkCmdBindIndexBuffer(target->mCommandList, buffer, offset, VK_INDEX_TYPE_UINT32);

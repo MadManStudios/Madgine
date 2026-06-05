@@ -4,7 +4,7 @@
 
 #include "Meta/math/atlas2.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
 #include "widgetmanager.h"
@@ -24,15 +24,15 @@ namespace Widgets {
 
     void Bar::render(WidgetsRenderData &renderData)
     {
-        Vector2 pos = getAbsolutePosition();
-        Vector3 size = getAbsoluteSize();
+        Math::Vector2 pos = getAbsolutePosition();
+        Math::Vector3 size = getAbsoluteSize();
 
-        Color4 color = mColor;
+        Math::Color4 color = mColor;
 
-        const Atlas2::Entry *blankEntry = manager().lookUpImage("blank_white");
+        const Math::Atlas2::Entry *blankEntry = manager().lookUpImage("blank_white");
 
         if (blankEntry) {
-            renderData.renderQuadUV(pos, { clamp(mRatio.get(), 0.0f, 1.0f) * size.x, size.y }, ColorRenderData { color }.frame(pos, size.xy()), {}, blankEntry->mArea, { 2048, 2048 }, blankEntry->mFlipped);
+            renderData.renderQuadUV(pos, { Math::clamp(mRatio.get(), 0.0f, 1.0f) * size.x, size.y }, ColorRenderData { color }.frame(pos, size.xy()), {}, blankEntry->mArea, { 2048, 2048 }, blankEntry->mFlipped);
         }
 
         WidgetBase::render(renderData);

@@ -2,7 +2,7 @@
 
 namespace Engine {
 
-template <Unsigned T, T invalid = std::numeric_limits<T>::max()>
+template <Concepts::Unsigned T, T invalid = std::numeric_limits<T>::max()>
 struct IndexType {
 
     using value_type = T;

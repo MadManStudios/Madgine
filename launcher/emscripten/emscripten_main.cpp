@@ -2,7 +2,7 @@
 
 #include <emscripten.h>
 
-#include "Interfaces/filesystem/fsapi.h"
+#include "Platform/filesystem/fsapi.h"
 
 #include "Modules/threading/workgroup.h"
 
@@ -11,23 +11,23 @@
 
 #include "../launcher.h"
 
-std::unique_ptr<Engine::CLI::CLICore> sTempCLI;
+std::unique_ptr<Engine::Core::CLICore> sTempCLI;
 
 void mainImpl()
 {
     emscripten_cancel_main_loop();
     static Engine::Threading::WorkGroup workGroup { "Launcher" };
 
-    static Engine::Root::Root root { std::move(sTempCLI) };
+    static Engine::Core::Root root { std::move(sTempCLI) };
     launch();
 }
 
 DLL_EXPORT_TAG int main(int argc, char **argv)
 {
-    sTempCLI = std::make_unique<Engine::CLI::CLICore>(argc, argv);
+    sTempCLI = std::make_unique<Engine::Core::CLICore>(argc, argv);
 
     void (*callback)() = &mainImpl;
-    Engine::Filesystem::setup(&callback);
+    Engine::Platform::Filesystem::setup(&callback);
 
     emscripten_set_main_loop_arg([](void *) { }, nullptr, 0, false);
     return 0;

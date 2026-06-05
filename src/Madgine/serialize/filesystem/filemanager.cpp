@@ -2,8 +2,8 @@
 
 #include "filemanager.h"
 
-#include "Interfaces/filesystem/fsapi.h"
-#include "Interfaces/filesystem/path.h"
+#include "Platform/filesystem/fsapi.h"
+#include "Platform/filesystem/path.h"
 
 #include "Meta/serialize/streams/formattedserializestream.h"
 #include "Meta/serialize/streams/formatter.h"
@@ -11,20 +11,20 @@
 #include "Meta/serialize/streams/serializestreamdata.h"
 
 namespace Engine {
-namespace Filesystem {
+namespace Serialize {
 
     FileManager::FileManager(const std::string &name)
         : SerializeManager(name)
     {
     }
 
-    Serialize::FormattedSerializeStream FileManager::openRead(const Path &path, Serialize::Format format)
+    Serialize::FormattedSerializeStream FileManager::openRead(const Platform::Filesystem::Path &path, Format format)
     {
         assert(!getSlaveStreamData());
 
         std::unique_ptr<Serialize::Formatter> formatter = format();
 
-        Stream stream = openFileRead(path, formatter->mBinary);
+        Stream stream = Platform::Filesystem::openFileRead(path, formatter->mBinary);
         if (stream) {
             return Serialize::FormattedSerializeStream {
                 std::move(formatter),
@@ -35,11 +35,11 @@ namespace Filesystem {
         }
     }
 
-    Serialize::FormattedSerializeStream FileManager::openWrite(const Path &path, Serialize::Format format)
+    Serialize::FormattedSerializeStream FileManager::openWrite(const Platform::Filesystem::Path &path, Format format)
     {
         std::unique_ptr<Serialize::Formatter> formatter = format();
 
-        Stream stream = openFileWrite(path, formatter->mBinary);
+        Stream stream = Platform::Filesystem::openFileWrite(path, formatter->mBinary);
         if (stream) {
             return Serialize::FormattedSerializeStream {
                 std::move(formatter),

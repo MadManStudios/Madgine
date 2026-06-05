@@ -4,7 +4,7 @@
 
 #include "Modules/uniquecomponent/uniquecomponentregistry.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 
 #include "behavior.h"
 #include "behaviorcollector.h"
@@ -73,12 +73,12 @@ namespace Behavior {
         return BehaviorFactoryRegistry::get(mIndex).mFactory->createParameters(mHandle);
     }
 
-    std::vector<ExtendedValueTypeDesc> BehaviorHandle::parameterTypes() const
+    std::vector<Reflect::ExtendedType> BehaviorHandle::parameterTypes() const
     {
         return BehaviorFactoryRegistry::get(mIndex).mFactory->parameterTypes(mHandle);
     }
 
-    std::vector<ExtendedValueTypeDesc> BehaviorHandle::resultTypes() const
+    std::vector<Reflect::ExtendedType> BehaviorHandle::resultTypes() const
     {
         return BehaviorFactoryRegistry::get(mIndex).mFactory->resultTypes(mHandle);
     }

@@ -6,7 +6,7 @@ namespace Behavior {
 
         struct Python3StreamRedirect {
 
-            Python3StreamRedirect(Log::Log *log = nullptr);
+            Python3StreamRedirect(Platform::Log::Log *log = nullptr);
             Python3StreamRedirect(const Python3StreamRedirect &) = delete;
             ~Python3StreamRedirect();
 
@@ -15,11 +15,11 @@ namespace Behavior {
 
             int write(std::string_view text);
 
-            Log::Log *setLog(Log::Log *log);
-            Log::Log *log();
+            Platform::Log::Log *setLog(Platform::Log::Log *log);
+            Platform::Log::Log *log();
 
         private:
-            Log::Log *mLog;
+            Platform::Log::Log *mLog;
             std::map<std::string_view, PyObject *> mOldStreams;
         };
 

@@ -33,8 +33,8 @@ namespace Widgets {
         Behavior::Bindable<std::string> mText;
 
     protected:
-        void injectPointerEnter(const Input::PointerMoveEvent &arg) override;
-        void injectPointerLeave(const Input::PointerMoveEvent &arg) override;
+        void injectPointerEnter(const Platform::Input::PointerMoveEvent &arg) override;
+        void injectPointerLeave(const Platform::Input::PointerMoveEvent &arg) override;
 
         void injectPointerClick(const PointerClickEvent &arg) override;
 

@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Generic/container/compactcontainer.h"
-#include "Generic/container/freelistcontainer.h"
+#include "Generic/containers/compactcontainer.h"
+#include "Generic/containers/freelistcontainer.h"
 #include "Generic/offsetptr.h"
 
 #include "Meta/serialize/hierarchy/serializableunit.h"
@@ -23,7 +23,7 @@ namespace Scene {
         };
 
         struct MADGINE_SCENE_EXPORT EntityComponentBase {
-            using Container = FreeListContainer<std::deque<Placeholder<0>>, EntityComponentFreeListConfig<Placeholder<0>>>;
+            using Container = Containers::FreeListContainer<std::deque<Placeholder<0>>, EntityComponentFreeListConfig<Placeholder<0>>>;
 
             EntityComponentBase(Entity &entity);
 
@@ -36,7 +36,7 @@ namespace Scene {
         };
 
         struct MADGINE_SCENE_EXPORT SyncableEntityComponentBase : EntityComponentBase, Serialize::SerializableUnitBase {
-            using Container = FreeListContainer<std::deque<Placeholder<0>>, EntityComponentFreeListConfig<Placeholder<0>>>;
+            using Container = Containers::FreeListContainer<std::deque<Placeholder<0>>, EntityComponentFreeListConfig<Placeholder<0>>>;
 
             using EntityComponentBase::EntityComponentBase;
 

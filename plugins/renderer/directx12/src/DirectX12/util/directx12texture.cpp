@@ -10,7 +10,7 @@
 namespace Engine {
 namespace Render {
 
-    DirectX12Texture::DirectX12Texture(TextureType type, bool isRenderTarget, TextureFormat format, Vector2i size, size_t samples, const ByteBuffer &data)
+    DirectX12Texture::DirectX12Texture(TextureType type, bool isRenderTarget, TextureFormat format, Math::Vector2i size, size_t samples, const Memory::ByteBuffer &data)
         : Texture(type, format, size)
         , mIsRenderTarget(isRenderTarget)
         , mSamples(samples)
@@ -100,7 +100,7 @@ namespace Render {
 
             heapDesc = CD3DX12_HEAP_PROPERTIES(D3D12_HEAP_TYPE_UPLOAD);
             auto resourceDesc = CD3DX12_RESOURCE_DESC::Buffer(uploadBufferSize);
-            ReleasePtr<ID3D12Resource> uploadHeap;
+            Platform::ReleasePtr<ID3D12Resource> uploadHeap;
             hr = GetDevice()->CreateCommittedResource(
                 &heapDesc,
                 D3D12_HEAP_FLAG_NONE,
@@ -153,7 +153,7 @@ namespace Render {
         }
     }
 
-    void DirectX12Texture::setSubData(Vector2i offset, Vector2i size, const ByteBuffer &data)
+    void DirectX12Texture::setSubData(Math::Vector2i offset, Math::Vector2i size, const Memory::ByteBuffer &data)
     {
         DXGI_FORMAT xFormat;
         size_t byteCount;
@@ -184,7 +184,7 @@ namespace Render {
 
         auto heapDesc = CD3DX12_HEAP_PROPERTIES(D3D12_HEAP_TYPE_UPLOAD);
         auto resourceDesc = CD3DX12_RESOURCE_DESC::Buffer(totalSize);
-        ReleasePtr<ID3D12Resource> uploadHeap;
+        Platform::ReleasePtr<ID3D12Resource> uploadHeap;
         HRESULT hr = GetDevice()->CreateCommittedResource(
             &heapDesc,
             D3D12_HEAP_FLAG_NONE,
@@ -276,7 +276,7 @@ namespace Render {
         return mResource;
     }
 
-    const ReleasePtr<ID3D12Resource> &DirectX12Texture::resourcePtr() const
+    const Platform::ReleasePtr<ID3D12Resource> &DirectX12Texture::resourcePtr() const
     {
         return mResource;
     }

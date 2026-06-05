@@ -7,7 +7,7 @@
 #include "Madgine/widgets/widgetmanager.h"
 #include "Madgine/window/mainwindow.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 
 METATABLE_BEGIN_BASE(Engine::Widgets::WidgetHandlerBase, Engine::Behavior::HandlerBase)
     PROPERTY(Widget, widget, setWidget)
@@ -46,7 +46,7 @@ namespace Widgets {
             (*mWidget->mWidget)->abortDrag();
     }
 
-    void WidgetHandlerBase::onPointerMove(const Input::PointerMoveEvent &me)
+    void WidgetHandlerBase::onPointerMove(const Platform::Input::PointerMoveEvent &me)
     {
     }
 
@@ -70,15 +70,15 @@ namespace Widgets {
     {
     }
 
-    void WidgetHandlerBase::onKeyPress(const Input::KeyPressEvent &evt)
+    void WidgetHandlerBase::onKeyPress(const Platform::Input::KeyPressEvent &evt)
     {
     }
 
-    void WidgetHandlerBase::onKeyRelease(const Input::KeyReleaseEvent &evt)
+    void WidgetHandlerBase::onKeyRelease(const Platform::Input::KeyReleaseEvent &evt)
     {        
     }
 
-    void WidgetHandlerBase::onAxisEvent(const Input::AxisEvent &evt)
+    void WidgetHandlerBase::onAxisEvent(const Platform::Input::AxisEvent &evt)
     {
     }
 

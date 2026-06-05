@@ -2,14 +2,14 @@
 
 #include "launchertool.h"
 
-#include "Interfaces/window/windowapi.h"
+#include "Platform/window/windowapi.h"
 
 #include "Modules/uniquecomponent/uniquecomponentcollector.h"
 
 #include "Madgine/serialize/filesystem/filemanager.h"
 #include "Madgine/window/mainwindow.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
 #include "Madgine_Tools/imgui/clientimroot.h"
@@ -36,7 +36,7 @@ namespace Tools {
     {
     }
 
-    bool LauncherTool::renderConfiguration(const Filesystem::Path &config)
+    bool LauncherTool::renderConfiguration(const Platform::Filesystem::Path &config)
     {
         bool changed = false;
 
@@ -50,12 +50,12 @@ namespace Tools {
         return changed;
     }
 
-    void LauncherTool::loadConfiguration(const Filesystem::Path &config)
+    void LauncherTool::loadConfiguration(const Platform::Filesystem::Path &config)
     {
         mConfiguration.loadFromDisk(config / "launcher.ini");
     }
 
-    void LauncherTool::saveConfiguration(const Filesystem::Path &config)
+    void LauncherTool::saveConfiguration(const Platform::Filesystem::Path &config)
     {
         mConfiguration.saveToDisk(config / "launcher.ini");
     }

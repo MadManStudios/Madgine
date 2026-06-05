@@ -18,13 +18,13 @@ namespace Render {
 
         virtual void clearDepthBuffer() override;
 
-        virtual void setRenderSpace(const Rect2i &space) override;
-        virtual void setScissorsRect(const Rect2i &space) override;
+        virtual void setRenderSpace(const Math::Rect2i &space) override;
+        virtual void setScissorsRect(const Math::Rect2i &space) override;
 
         virtual void pushAnnotation(const char *tag) override;
         virtual void popAnnotation() override;
 
-        virtual Matrix4 getClipSpaceMatrix() const override;
+        virtual Math::Matrix4 getClipSpaceMatrix() const override;
 
         OpenGLRenderContext *context() const;
 

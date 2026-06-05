@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Generic/container/emplace.h"
+#include "Generic/containers/emplace.h"
 
 #include "uniquecomponent.h"
 #include "uniquecomponentregistry.h"
 
 namespace Engine {
-namespace UniqueComponent {
+namespace Plugins {
 
     template <typename C, typename Registry, typename Base>
     struct Container : C {
@@ -17,13 +17,13 @@ namespace UniqueComponent {
         {
             size_t count = Registry::sComponents().size();
             mSortedComponents.reserve(count);
-            if constexpr (InstanceOf<C, std::vector>) {
+            if constexpr (Concepts::InstanceOf<C, std::vector>) {
                 this->reserve(count);
             }
             for (const auto &annotations : Registry::sComponents()) {
                 auto p = construct(annotations, arg...);
                 mSortedComponents.push_back(p.get());
-                Engine::emplace(static_cast<C &>(*this), C::end(), std::move(p));
+                Containers::emplace(static_cast<C &>(*this), C::end(), std::move(p));
             }
         }
 
@@ -47,7 +47,7 @@ namespace UniqueComponent {
 }
 
 template <typename C, typename Registry, typename Base>
-struct underlying_container<UniqueComponent::Container<C, Registry, Base>> {
+struct Containers::underlying_container<Plugins::Container<C, Registry, Base>> {
     typedef C type;
 };
 

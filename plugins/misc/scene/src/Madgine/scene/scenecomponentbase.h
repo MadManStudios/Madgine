@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Meta/keyvalue/virtualscope.h"
+#include "Meta/reflect/virtualscope.h"
 #include "Meta/serialize/hierarchy/syncableunit.h"
 
 #include "Modules/threading/madgineobject.h"
@@ -9,7 +9,7 @@
 namespace Engine {
 namespace Scene {
 
-    struct MADGINE_SCENE_EXPORT SceneComponentBase : VirtualScopeBase<>, Serialize::SyncableUnitBase, Threading::MadgineObject<SceneComponentBase> {
+    struct MADGINE_SCENE_EXPORT SceneComponentBase : Reflect::VirtualScopeBase<>, Serialize::SyncableUnitBase, Threading::MadgineObject<SceneComponentBase> {
         virtual ~SceneComponentBase() = default;
 
         SceneComponentBase(SceneManager &sceneMgr);
@@ -33,7 +33,7 @@ namespace Scene {
             return static_cast<T &>(getGlobalAPIComponent(component_index<T>()));
         }
 
-        App::GlobalAPIBase &getGlobalAPIComponent(size_t i);
+        Core::GlobalAPIBase &getGlobalAPIComponent(size_t i);
 
         Threading::TaskQueue *taskQueue() const;
 

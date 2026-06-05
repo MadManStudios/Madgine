@@ -21,19 +21,19 @@ namespace Tools {
 
         std::string_view key() const override;
 
-        TextDocument &openDocument(const Filesystem::Path &path);
-        TextDocument *getDocument(const Filesystem::Path &path);
+        TextDocument &openDocument(const Platform::Filesystem::Path &path);
+        TextDocument *getDocument(const Platform::Filesystem::Path &path);
 
         ImFont *font() const;
         int fontPixelHeight() const;
 
     private:
-        std::map<Filesystem::Path, TextDocument> mDocuments;
+        std::map<Platform::Filesystem::Path, TextDocument> mDocuments;
 
         int mFontPixelHeight;
         ImFont *mFont;
 
-        ByteBuffer mFontData;
+        Memory::ByteBuffer mFontData;
     };
 
 }

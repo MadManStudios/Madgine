@@ -1,27 +1,27 @@
 #include <gtest/gtest.h>
 
-#include "Interfaces/interfaceslib.h"
+#include "Platform/platformlib.h"
 
-#include "Generic/bits/array.h"
-#include "Generic/bits/variant.h"
-#include "Generic/bits/ptr.h"
+#include "Generic/containers/bits/array.h"
+#include "Generic/containers/bits/variant.h"
+#include "Generic/containers/bits/ptr.h"
 
 #include "../logContainer.h"
 
 TEST(Bits, Basic)
 {
-    constexpr bool b1 = std::same_as<Engine::MinimalHoldingUIntType_t<1>, bool>;
+    constexpr bool b1 = std::same_as<Engine::Containers::MinimalHoldingUIntType_t<1>, bool>;
     ASSERT_TRUE(b1);
-    constexpr bool b2 = std::same_as<Engine::MinimalHoldingUIntType_t<5>, uint8_t>;
+    constexpr bool b2 = std::same_as<Engine::Containers::MinimalHoldingUIntType_t<5>, uint8_t>;
     ASSERT_TRUE(b2);
-    constexpr bool b3 = std::same_as<Engine::MinimalHoldingUIntType_t<63>, uint64_t>;
+    constexpr bool b3 = std::same_as<Engine::Containers::MinimalHoldingUIntType_t<63>, uint64_t>;
     ASSERT_TRUE(b3);
 }
 
 TEST(Bits, BitArray)
 {
 
-    Engine::BitArray<10, 11> data;
+    Engine::Containers::BitArray<10, 11> data;
 
     size_t i = 1;
     for (auto field : data) {
@@ -54,18 +54,18 @@ TEST(Bits, BitVariant)
 
         size_t *mCounter;
     };
-    Engine::BitVariant<Engine::BitPtr<int>, Engine::BitArray<2, 15>, Engine::BitUniquePtr<Test>> v;
+    Engine::Containers::BitVariant<Engine::Containers::BitPtr<int>, Engine::Containers::BitArray<2, 15>, Engine::Containers::BitUniquePtr<Test>> v;
 
-    ASSERT_TRUE(v.is<Engine::BitPtr<int>>());
-    ASSERT_EQ(v.as<Engine::BitPtr<int>>(), nullptr);
+    ASSERT_TRUE(v.is<Engine::Containers::BitPtr<int>>());
+    ASSERT_EQ(v.as<Engine::Containers::BitPtr<int>>(), nullptr);
 
-    Engine::BitArray<2, 15> ba;
+    Engine::Containers::BitArray<2, 15> ba;
     ba[0] = 23;
     ba[1] = 53;
 
     v = ba;
 
-    Engine::BitArray<2, 15> ba2 = v.as<Engine::BitArray<2, 15>>();
+    Engine::Containers::BitArray<2, 15> ba2 = v.as<Engine::Containers::BitArray<2, 15>>();
     logContainer(ba2);
     ASSERT_EQ(ba, ba2);
 

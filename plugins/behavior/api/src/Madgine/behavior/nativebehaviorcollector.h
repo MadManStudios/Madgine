@@ -11,8 +11,8 @@ namespace Behavior {
         virtual Behavior create(const ParameterTuple &args, std::vector<Behavior> behaviors) const = 0;
         virtual ParameterTuple createParameters() const = 0;
         virtual std::string_view name() const = 0;
-        virtual std::span<const ExtendedValueTypeDesc> parameterTypes() const = 0;
-        virtual std::span<const ExtendedValueTypeDesc> resultTypes() const = 0;
+        virtual std::span<const Reflect::ExtendedType> parameterTypes() const = 0;
+        virtual std::span<const Reflect::ExtendedType> resultTypes() const = 0;
         virtual std::span<const NamedDescriptor> namedInputs() const = 0;
         virtual size_t subBehaviorCount() const = 0;
     };
@@ -45,7 +45,7 @@ namespace Behavior {
     };
 
     template <typename T>
-    using is_parameter = is_instance_auto1<meta_decayed_t<T>, InputParameter>;
+    using is_parameter = Concepts::is_instance_auto1<meta_decayed_t<T>, InputParameter>;
 
     template <typename T>
     using is_sub_behavior = std::is_same<T, SubBehavior>;
@@ -143,34 +143,34 @@ namespace Behavior {
 
         static constexpr auto sParameterTypes = []() {
             if constexpr (std::same_as<parameter_arguments, type_pack<>>) {
-                return std::span<const ExtendedValueTypeDesc> {};
+                return std::span<const Reflect::ExtendedType> {};
             } else {
                 return []<typename... P>(type_pack<P...>) {
-                    return std::array<ExtendedValueTypeDesc, sizeof...(P)> {
-                        toValueTypeDesc<P>()...
+                    return std::array<Reflect::ExtendedType, sizeof...(P)> {
+                        Reflect::toType<P>()...
                     };
                 }(typename parameter_arguments::template transform<get_type_t> {});
             }
         }();
-        virtual std::span<const ExtendedValueTypeDesc> parameterTypes() const override
+        virtual std::span<const Reflect::ExtendedType> parameterTypes() const override
         {
             return sParameterTypes;
         }
 
         static constexpr auto sResultTypes = []() {
             if constexpr (std::same_as<typename Sender::template value_types<type_pack>, type_pack<>>) {
-                return std::span<const ExtendedValueTypeDesc> {};
-            } else if constexpr (std::same_as<typename Sender::template value_types<type_pack>, type_pack<ArgumentList>>) {
-                return std::span<const ExtendedValueTypeDesc> {};
+                return std::span<const Reflect::ExtendedType> {};
+            } else if constexpr (std::same_as<typename Sender::template value_types<type_pack>, type_pack<Reflect::ArgumentList>>) {
+                return std::span<const Reflect::ExtendedType> {};
             } else {
                 return []<typename... P>(type_pack<P...>) {
-                    return std::array<ExtendedValueTypeDesc, sizeof...(P)> {
-                        toValueTypeDesc<P>()...
+                    return std::array<Reflect::ExtendedType, sizeof...(P)> {
+                        Reflect::toType<P>()...
                     };
                 }(typename Sender::template value_types<type_pack> {});
             }
         }();
-        virtual std::span<const ExtendedValueTypeDesc> resultTypes() const override
+        virtual std::span<const Reflect::ExtendedType> resultTypes() const override
         {
             return sResultTypes;
         }
@@ -199,8 +199,8 @@ namespace Behavior {
         std::string_view name(const UniqueOpaquePtr &handle) const override;
         Behavior create(const UniqueOpaquePtr &handle, const ParameterTuple &args, std::vector<Behavior> behaviors) const override;
         ParameterTuple createParameters(const UniqueOpaquePtr &handle) const override;
-        std::vector<ExtendedValueTypeDesc> parameterTypes(const UniqueOpaquePtr &handle) const override;
-        std::vector<ExtendedValueTypeDesc> resultTypes(const UniqueOpaquePtr &handle) const override;
+        std::vector<Reflect::ExtendedType> parameterTypes(const UniqueOpaquePtr &handle) const override;
+        std::vector<Reflect::ExtendedType> resultTypes(const UniqueOpaquePtr &handle) const override;
         std::vector<NamedDescriptor> namedInputs(const UniqueOpaquePtr &handle) const override;
         size_t subBehaviorCount(const UniqueOpaquePtr &handle) const override;
     };

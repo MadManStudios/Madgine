@@ -10,11 +10,11 @@
 namespace Engine {
 namespace Widgets {
 
-    MADGINE_WIDGETS_EXPORT Behavior::Behavior tempWidget(WidgetLoader::Handle desc, const Matrix3 &pos, const Matrix3 &size, Behavior::Behavior behavior);
+    MADGINE_WIDGETS_EXPORT Behavior::Behavior tempWidget(WidgetLoader::Handle desc, const Math::Matrix3 &pos, const Math::Matrix3 &size, Behavior::Behavior behavior);
 
     struct TempWidgetState : Behavior::BehaviorReceiver {
 
-        TempWidgetState(WidgetLoader::Handle desc, Matrix3 pos, Matrix3 size, Behavior::Behavior behavior);
+        TempWidgetState(WidgetLoader::Handle desc, Math::Matrix3 pos, Math::Matrix3 size, Behavior::Behavior behavior);
         ~TempWidgetState();
 
         void start();
@@ -26,11 +26,11 @@ namespace Widgets {
         WidgetLoader::Handle mDesc;
 
         struct receiver : Execution::algorithm_receiver<Behavior::BehaviorReceiver &> {
-            void set_value(ArgumentList args);
-            void set_error(KeyValueError error);
+            void set_value(Reflect::ArgumentList args);
+            void set_error(Reflect::Error error);
             void set_done();
 
-            friend KeyValueResult tag_invoke(Behavior::get_named_d_t, receiver &rec, std::string_view name, ValueTypeRef &out)
+            friend Reflect::Result tag_invoke(Behavior::get_named_d_t, receiver &rec, std::string_view name, Reflect::ValueRef &out)
             {
                 if (name == "Widget") {
                     out = Execution::ConstantBinding { rec.mState.widget() };
@@ -56,8 +56,8 @@ namespace Widgets {
         }
 
         std::unique_ptr<WidgetBase> mWidget;
-        Matrix3 mPos;
-        Matrix3 mSize;
+        Math::Matrix3 mPos;
+        Math::Matrix3 mSize;
     };
 
 }

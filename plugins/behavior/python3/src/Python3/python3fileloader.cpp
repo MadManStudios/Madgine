@@ -4,9 +4,9 @@
 
 #include "Generic/execution/algorithm.h"
 
-#include "Meta/keyvalue/valuetype.h"
+#include "Meta/reflect/value.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 
 #include "python3env.h"
 #include "util/pydictptr.h"
@@ -43,7 +43,7 @@ namespace Behavior {
 
         void Python3FileLoader::setup()
         {
-            [[maybe_unused]] auto result = PyList_Append(PyModulePtr { "sys" }.get("meta_path"), toPyObject(ScopePtr { this }));
+            [[maybe_unused]] auto result = PyList_Append(PyModulePtr { "sys" }.get("meta_path"), toPyObject(Reflect::ScopePtr { this }));
             assert(result == 0);
         }
 
@@ -52,7 +52,7 @@ namespace Behavior {
             mTables.clear();
         }
 
-        Threading::Task<bool> Python3FileLoader::loadImpl(PyModulePtr &module, ResourceDataInfo &info, Filesystem::FileEventType event)
+        Threading::Task<bool> Python3FileLoader::loadImpl(PyModulePtr &module, ResourceDataInfo &info, Platform::Filesystem::FileEventType event)
         {
             if (!co_await Python3Environment::getSingleton().state())
                 co_return false;
@@ -84,7 +84,7 @@ namespace Behavior {
             PythonFunctionInfo info = functionInfo(fn);
 
             auto transformed = info.mArguments | std::views::transform([](const PythonFunctionArgument &arg) {
-                return FunctionArgument { arg.mType, arg.mName };
+                return Reflect::FunctionArgument { arg.mType, arg.mName };
             });
             mArgumentsHolder = { transformed.begin(), transformed.end() };
 
@@ -95,20 +95,20 @@ namespace Behavior {
 
             mName = info.mName;
 
-            mFunctionPtr = [](const FunctionTable *self, ValueType &retVal, const ArgumentList &args) {
+            mFunctionPtr = [](const FunctionTable *self, Reflect::Value &retVal, const Reflect::ArgumentList &args) {
                 Python3InnerLock lock;
                 return fromPyObject(retVal, static_cast<const Python3FunctionTable *>(self)->mFunctionObject.call(args));
             };
 
-            registerFunction(*this);
+            Reflect::__Reflect_impl__::registerFunction(*this);
         }
 
         Python3FileLoader::Python3FunctionTable::~Python3FunctionTable()
         {
-            unregisterFunction(*this);
+            Reflect::__Reflect_impl__::unregisterFunction(*this);
         }
 
-        KeyValueResult Python3FileLoader::find_spec(ValueType &result, std::string_view name, std::optional<std::string_view> import_path, std::optional<ObjectPtr> target_module)
+        Reflect::Result Python3FileLoader::find_spec(Reflect::Value &result, std::string_view name, std::optional<std::string_view> import_path, std::optional<Reflect::ObjectPtr> target_module)
         {
             Resource *res = get(name, this);
             if (!res)
@@ -116,19 +116,19 @@ namespace Behavior {
             Python3InnerLock lock;
             PyModulePtr module { "importlib.machinery" };
             if (!module) {
-                return std::make_unique<KeyValueError>(fetchError());
+                return std::make_unique<Reflect::Error>(fetchError());
             }
-            PyObjectPtr spec = module.get("ModuleSpec").call({ { { "loader_state", toPyObject(ScopePtr { res }) } } }, "sO", res->name().data(), toPyObject(ScopePtr { this }));
+            PyObjectPtr spec = module.get("ModuleSpec").call({ { { "loader_state", toPyObject(Reflect::ScopePtr { res }) } } }, "sO", res->name().data(), toPyObject(Reflect::ScopePtr { this }));
             return fromPyObject(result, spec);
         }
 
-        KeyValueResult Python3FileLoader::create_module(ValueType &result, ObjectPtr spec)
+        Reflect::Result Python3FileLoader::create_module(Reflect::Value &result, Reflect::ObjectPtr spec)
         {
             Python3InnerLock lock;
-            ValueType resourcePtr;
-            KEYVALUE_PROPAGATE_ERROR(fromPyObject(resourcePtr, PyObjectPtr { toPyObject(spec) }.get("loader_state")));
-            Resource *res = scope_cast<Resource>(resourcePtr.as<ScopePtr>());
-            Handle handle = create(res, Filesystem::FileEventType::FILE_CREATED, this);
+            Reflect::Value resourcePtr;
+            REFLECT_PROPAGATE_ERROR(fromPyObject(resourcePtr, PyObjectPtr { toPyObject(spec) }.get("loader_state")));
+            Resource *res = scope_cast<Resource>(resourcePtr.as<Reflect::ScopePtr>());
+            Handle handle = create(res, Platform::Filesystem::FileEventType::FILE_CREATED, this);
             handle.info()->setPersistent(true);
             PyModulePtr &module = *getDataPtr(handle, this, false);
             assert(!module);
@@ -136,26 +136,26 @@ namespace Behavior {
             return fromPyObject(result, module);
         }
 
-        KeyValueResult Python3FileLoader::exec_module(ValueType &result, ObjectPtr module)
+        Reflect::Result Python3FileLoader::exec_module(Reflect::Value &result, Reflect::ObjectPtr module)
         {
             Python3InnerLock lock;
 
             PyObjectPtr moduleObject { toPyObject(module) };
-            ValueType resourcePtr;
-            KEYVALUE_PROPAGATE_ERROR(fromPyObject(resourcePtr, moduleObject.get("__spec__").get("loader_state")));
-            Resource *res = scope_cast<Resource>(resourcePtr.as<ScopePtr>());
+            Reflect::Value resourcePtr;
+            REFLECT_PROPAGATE_ERROR(fromPyObject(resourcePtr, moduleObject.get("__spec__").get("loader_state")));
+            Resource *res = scope_cast<Resource>(resourcePtr.as<Reflect::ScopePtr>());
 
             std::string sourceCode = res->readAsText();
             PyObjectPtr code = Py_CompileString(sourceCode.c_str(), res->path().c_str(), Py_file_input);
             if (!code) {
-                return std::make_unique<KeyValueError>(fetchError());
+                return std::make_unique<Reflect::Error>(fetchError());
             }
 
             PyObject *dict = PyModule_GetDict(moduleObject);
 
             PyObjectPtr status = PyEval_EvalCode(code, dict, dict);
             if (!status) {
-                return std::make_unique<KeyValueError>(fetchError());
+                return std::make_unique<Reflect::Error>(fetchError());
             }
             
             PyObject *key, *value = NULL;
@@ -169,12 +169,12 @@ namespace Behavior {
             return {};
         }
 
-        KeyValueResult Python3FileLoader::get_source(ValueType &result, std::string_view name)
+        Reflect::Result Python3FileLoader::get_source(Reflect::Value &result, std::string_view name)
         {
             Resource *res = get(name, this);
             if (!res)
                 return {};
-            to_ValueType(result, res->readAsText());
+            toValue(result, res->readAsText());
             return {};
         }
 
@@ -201,7 +201,7 @@ namespace Behavior {
 
                 if (Py_IS_TYPE(type, &Py_GenericAliasType)) {
                     type = PyTuple_GetItem(type.get("__args__"), 0);                    
-                    result.mArguments.push_back({ PyBytes_AsString(ascii), ExtendedValueTypeDesc { ExtendedValueTypeEnum::VariantType, { toValueTypeDesc<std::monostate>(), PyToValueTypeDesc(type) } }, AccessorFlags_Named });
+                    result.mArguments.push_back({ PyBytes_AsString(ascii), Reflect::ExtendedType { Reflect::ExtendedTypeEnum::VariantType, { Reflect::toType<std::monostate>(), PyToValueTypeDesc(type) } }, Reflect::AccessorFlags_Named });
                 } else {
                     result.mArguments.push_back({ PyBytes_AsString(ascii), PyToValueTypeDesc(type) });
                 }

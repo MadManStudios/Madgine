@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Meta/keyvalue/scopeptr.h"
+#include "Meta/reflect/scopeptr.h"
 
 namespace Engine {
 namespace Behavior {
@@ -10,7 +10,7 @@ namespace Behavior {
 
         struct PyTypedScopePtr {
             PyObject_HEAD
-                ScopePtr mPtr;
+                Reflect::ScopePtr mPtr;
         };
 
     }

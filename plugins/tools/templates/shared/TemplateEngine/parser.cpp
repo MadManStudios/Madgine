@@ -2,20 +2,22 @@
 
 #include "parser.h"
 
-#include "Interfaces/filesystem/fsapi.h"
+#include "Platform/filesystem/fsapi.h"
+
+#include "Meta/reflect/value.h"
 
 namespace TemplateEngine {
 
-Parser::Parser(Engine::Filesystem::Path source)
+Parser::Parser(Engine::Platform::Filesystem::Path source)
     : mSource(source)
 {
-    if (!Engine::Filesystem::isDir(source))
+    if (!Engine::Platform::Filesystem::isDir(source))
         throw 0;
 
-    for (Engine::Filesystem::FileQueryResult fileOrDir : Engine::Filesystem::listFilesAndDirsRecursive(source)) {
+    for (Engine::Platform::Filesystem::FileQueryResult fileOrDir : Engine::Platform::Filesystem::listFilesAndDirsRecursive(source)) {
         parse(fileOrDir.path().filename().str());
         if (!fileOrDir.isDir()) {
-            Engine::Stream contentStream = Engine::Filesystem::openFileRead(fileOrDir);
+            Engine::Stream contentStream = Engine::Platform::Filesystem::openFileRead(fileOrDir);
             parse(contentStream);
         }
     }
@@ -65,17 +67,17 @@ void Parser::parse(Engine::Stream &s)
     }
 }
 
-void Parser::generateFiles(const Engine::Filesystem::Path &target) const
+void Parser::generateFiles(const Engine::Platform::Filesystem::Path &target) const
 {
-    for (Engine::Filesystem::FileQueryResult fileOrDir : Engine::Filesystem::listFilesAndDirsRecursive(mSource)) {
+    for (Engine::Platform::Filesystem::FileQueryResult fileOrDir : Engine::Platform::Filesystem::listFilesAndDirsRecursive(mSource)) {
 
-        Engine::Filesystem::Path path = target / fileOrDir.path().parentPath().relative(mSource) / generate(fileOrDir.path().filename().str());
+        Engine::Platform::Filesystem::Path path = target / fileOrDir.path().parentPath().relative(mSource) / generate(fileOrDir.path().filename().str());
 
         if (fileOrDir.isDir()) {
-            Engine::Filesystem::createDirectories(path);
+            Engine::Platform::Filesystem::createDirectories(path);
         } else {
-            Engine::Stream contentStream = Engine::Filesystem::openFileRead(fileOrDir);
-            Engine::Stream outStream = Engine::Filesystem::openFileWrite(path);
+            Engine::Stream contentStream = Engine::Platform::Filesystem::openFileRead(fileOrDir);
+            Engine::Stream outStream = Engine::Platform::Filesystem::openFileWrite(path);
             generate(contentStream, outStream);
         }
     }
@@ -83,15 +85,15 @@ void Parser::generateFiles(const Engine::Filesystem::Path &target) const
 
 void Parser::registerField(std::string name, std::string type)
 {
-    Engine::ValueType &field = mFields[name];
-    Engine::ValueTypeDesc targetType;
+    Engine::Reflect::Value &field = mFields[name];
+    Engine::Reflect::Type targetType;
     if (type.empty() || type == "lc_string" || type == "uc_string" || type == "string") {
-        targetType = Engine::toValueTypeDesc<std::string>();
+        targetType = Engine::Reflect::toType<std::string>();
     } else {
         LOG_ERROR("Unknown type: " << type);
         return;
     }
-    if (field.type().mType != Engine::ValueTypeEnum::NullValue && !field.type().canAccept(targetType))
+    if (field.type().mType != Engine::Reflect::TypeEnum::NullValue && !field.type().canAccept(targetType))
         LOG_ERROR("Incompatible types: " << field.type().toString() << " and " << targetType.toString());
     field.setType(targetType);
 }
@@ -157,7 +159,7 @@ void Parser::generate(Engine::Stream &in, Engine::Stream &out) const
     }
 }
 
-std::map<std::string, Engine::ValueType> &Parser::fields()
+std::map<std::string, Engine::Reflect::Value> &Parser::fields()
 {
     return mFields;
 }

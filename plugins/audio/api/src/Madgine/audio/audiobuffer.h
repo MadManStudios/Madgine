@@ -9,7 +9,7 @@ namespace Audio {
 
     struct AudioBuffer {
         AudioInfo mInfo;
-        ByteBuffer mBuffer;
+        Memory::ByteBuffer mBuffer;
     };
 
 }

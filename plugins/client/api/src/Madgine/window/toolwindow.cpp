@@ -2,7 +2,7 @@
 
 #include "toolwindow.h"
 
-#include "Interfaces/window/windowapi.h"
+#include "Platform/window/windowapi.h"
 
 #include "Madgine/render/rendercontext.h"
 #include "Madgine/render/rendertarget.h"
@@ -10,8 +10,8 @@
 #include "mainwindow.h"
 
 namespace Engine {
-namespace Window {
-    ToolWindow::ToolWindow(MainWindow &parent, const WindowSettings &settings)
+namespace Core {
+    ToolWindow::ToolWindow(MainWindow &parent, const Platform::Window::WindowSettings &settings)
         : mParent(parent)
     {
         mOsWindow = sCreateWindow(settings);
@@ -29,7 +29,7 @@ namespace Window {
         mParent.destroyToolWindow(this);
     }
 
-    OSWindow *ToolWindow::osWindow()
+    Platform::Window::OSWindow *ToolWindow::osWindow()
     {
         return mOsWindow;
     }
@@ -39,17 +39,17 @@ namespace Window {
         return mRenderWindow.get();
     }
 
-    bool ToolWindow::onWindowEvent(const WindowEvent &event)
+    bool ToolWindow::onWindowEvent(const Platform::Window::WindowEvent &event)
     {
         return std::visit(overloaded {
-                              [this](const CloseEvent &) {
+                              [this](const Platform::Window::CloseEvent &) {
                                   close();
                                   return true;
                               },
-                              [](const RepaintEvent &) {
+                              [](const Platform::Window::RepaintEvent &) {
                                   return true;
                               },
-                              [this](const ResizeEvent &e) {
+                              [this](const Platform::Window::ResizeEvent &e) {
                                   mRenderWindow->resize({ e.mSize.x, e.mSize.y });
                                   return true;
                               },

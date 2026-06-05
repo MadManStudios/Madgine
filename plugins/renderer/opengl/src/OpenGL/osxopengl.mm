@@ -4,13 +4,13 @@
 
 #include <Cocoa/Cocoa.h>
 
-#include "Interfaces/window/windowapi.h"
+#include "Platform/window/windowapi.h"
 
 namespace Engine{
 namespace Render{
 namespace OSXBridge{
 
-ContextHandle createContext(Window::OSWindow *window){
+ContextHandle createContext(Platform::Window::OSWindow *window){
     #define PixelFormatAttrib(...) __VA_ARGS__
       NSOpenGLPixelFormatAttribute attributes[] = {
         PixelFormatAttrib(NSOpenGLPFADoubleBuffer),

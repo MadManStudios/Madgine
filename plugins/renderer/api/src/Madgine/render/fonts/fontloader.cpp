@@ -5,7 +5,7 @@
 #include "Generic/areaview.h"
 #include "Generic/bytebuffer.h"
 
-#include "Interfaces/filesystem/fsapi.h"
+#include "Platform/filesystem/fsapi.h"
 
 #include "Meta/math/atlas2.h"
 #include "Meta/math/vector2i.h"
@@ -18,7 +18,7 @@
 #include "Madgine/serialize/filesystem/filemanager.h"
 #include "Madgine/serialize/memory/memorymanager.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
 #undef INFINITE
@@ -41,15 +41,15 @@
 
 RESOURCELOADER(Engine::Render::FontLoader)
 
-SERIALIZETABLE_BEGIN(Engine::Rect2i)
+SERIALIZETABLE_BEGIN(Engine::Math::Rect2i)
     FIELD(mTopLeft)
     FIELD(mSize)
-SERIALIZETABLE_END(Engine::Rect2i)
+SERIALIZETABLE_END(Engine::Math::Rect2i)
 
-SERIALIZETABLE_BEGIN(Engine::Atlas2::Entry)
+SERIALIZETABLE_BEGIN(Engine::Math::Atlas2::Entry)
     FIELD(mArea)
     FIELD(mFlipped)
-SERIALIZETABLE_END(Engine::Atlas2::Entry)
+SERIALIZETABLE_END(Engine::Math::Atlas2::Entry)
 
 namespace Engine {
 namespace Render {
@@ -148,13 +148,13 @@ namespace Render {
             auto fileBufferResult = co_await info.resource()->readAsync();
             std::stringstream errorReason;
             if (fileBufferResult.is_value()) {
-                ByteBuffer fileBuffer = std::move(fileBufferResult).value();
+                Memory::ByteBuffer fileBuffer = std::move(fileBufferResult).value();
 
-                Memory::MemoryManager cache("msdf_cache");
+                Serialize::MemoryManager cache("msdf_cache");
                 Serialize::FormattedSerializeStream in = cache.openRead(std::move(fileBuffer), Serialize::Formats::safebinary);
                 assert(in);
-                ByteBuffer b;
-                Vector2i textureSize;
+                Memory::ByteBuffer b;
+                Math::Vector2i textureSize;
                 Serialize::StreamResult result = [&]() {
                     STREAM_PROPAGATE_ERROR(read(in, typeFace.mFonts, nullptr));
                     STREAM_PROPAGATE_ERROR(read(in, textureSize, nullptr));
@@ -176,7 +176,7 @@ namespace Render {
                                           << errorReason.str());
             LOG("Falling back to .ttf file load");
         }
-        Filesystem::Path path = info.resource()->path();
+        Platform::Filesystem::Path path = info.resource()->path();
         if (path.extension() == ".msdf") {
             path = path.parentPath() / (std::string { path.stem() } + ".ttf");
         }
@@ -186,7 +186,7 @@ namespace Render {
 
         constexpr int UNIT_SIZE = 256;
 
-        Atlas2 atlas({ UNIT_SIZE, UNIT_SIZE });
+        Math::Atlas2 atlas({ UNIT_SIZE, UNIT_SIZE });
         atlas.addBin({ 0, 0 });
 
         int areaSize = 1;
@@ -203,12 +203,12 @@ namespace Render {
         };
 
         struct TempData {
-            std::array<Vector2i, TypeFace::sFontGlyphCount> mSizes;
-            std::array<Vector2i, TypeFace::sFontGlyphCount> mLowResSizes;
-            std::vector<Atlas2::Entry> mEntries;
-            std::vector<Atlas2::Entry> mLowResEntries;
+            std::array<Math::Vector2i, TypeFace::sFontGlyphCount> mSizes;
+            std::array<Math::Vector2i, TypeFace::sFontGlyphCount> mLowResSizes;
+            std::vector<Math::Atlas2::Entry> mEntries;
+            std::vector<Math::Atlas2::Entry> mLowResEntries;
             FT_Face mFace;
-            ByteBuffer mBuffer;
+            Memory::ByteBuffer mBuffer;
         };
 
         std::map<FontStyle, TempData> tempData;
@@ -225,11 +225,11 @@ namespace Render {
             if (styleName.empty())
                 styleName = "Regular";
 
-            Filesystem::Path stylePath = path.parentPath() / (std::string { path.stem() } + "-" + styleName + std::string { path.extension() });
+            Platform::Filesystem::Path stylePath = path.parentPath() / (std::string { path.stem() } + "-" + styleName + std::string { path.extension() });
 
-            if (!Filesystem::exists(stylePath)) {
+            if (!Platform::Filesystem::exists(stylePath)) {
                 if (style == FontStyle::Default) {
-                    if (Filesystem::exists(path)) {
+                    if (Platform::Filesystem::exists(path)) {
                         stylePath = path;
                     } else {
                         LOG_ERROR("FREETYPE: Regular Font file does not exist: " << path);
@@ -241,7 +241,7 @@ namespace Render {
             }
 
             TempData &data = tempData[style];
-            data.mBuffer = (co_await Filesystem::readFileAsync(stylePath)).value().get();
+            data.mBuffer = (co_await Platform::Filesystem::readFileAsync(stylePath)).value().get();
 
             if (FT_New_Memory_Face(mFreeType, static_cast<const FT_Byte *>(data.mBuffer.mData), data.mBuffer.mSize, 0, &data.mFace)) {
                 LOG_ERROR("FREETYPE: Failed to load font");
@@ -254,7 +254,7 @@ namespace Render {
             typeFace.mAscender = data.mFace->size->metrics.ascender;
             typeFace.mDescender = data.mFace->size->metrics.descender;
 
-            std::array<Vector2i, TypeFace::sFontGlyphCount> extendedSizes;
+            std::array<Math::Vector2i, TypeFace::sFontGlyphCount> extendedSizes;
 
             for (unsigned char c = 0; c < TypeFace::sFontGlyphCount; c++) {
                 if (ignore(c))
@@ -294,7 +294,7 @@ namespace Render {
                 extendedSizes, expand, true);
         }
 
-        Vector2i textureSize = { areaSize * UNIT_SIZE,
+        Math::Vector2i textureSize = { areaSize * UNIT_SIZE,
             areaSize * UNIT_SIZE };
         size_t byteSize = textureSize.x * textureSize.y;
         std::unique_ptr<std::array<unsigned char, 4>[]> texBuffer = std::make_unique<std::array<unsigned char, 4>[]>(byteSize);
@@ -316,8 +316,8 @@ namespace Render {
                     continue;
                 }
 
-                std::unique_ptr<Vector3[]> buffer = std::make_unique<Vector3[]>(data.mSizes[c].x * data.mSizes[c].y);
-                AreaView<Vector3, 2> bufferView { buffer.get(), { static_cast<size_t>(data.mSizes[c].x), static_cast<size_t>(data.mSizes[c].y) } };
+                std::unique_ptr<Math::Vector3[]> buffer = std::make_unique<Math::Vector3[]>(data.mSizes[c].x * data.mSizes[c].y);
+                AreaView<Math::Vector3, 2> bufferView { buffer.get(), { static_cast<size_t>(data.mSizes[c].x), static_cast<size_t>(data.mSizes[c].y) } };
 
                 ::msdfgen::BitmapRef<float, 3>
                     bm { buffer[0].ptr(), data.mSizes[c].x, data.mSizes[c].y };
@@ -346,21 +346,21 @@ namespace Render {
                 font[c].mBearing.x = data.mFace->glyph->bitmap_left - 1;
                 font[c].mBearing.y = data.mFace->glyph->bitmap_top - 1;
 
-                Vector2i size = data.mSizes[c];
+                Math::Vector2i size = data.mSizes[c];
                 if (data.mEntries[c].mFlipped)
                     std::swap(size.x, size.y);
-                Vector2i pos = { data.mEntries[c].mArea.mTopLeft.x, data.mEntries[c].mArea.mTopLeft.y };
+                Math::Vector2i pos = { data.mEntries[c].mArea.mTopLeft.x, data.mEntries[c].mArea.mTopLeft.y };
 
                 AreaView<std::array<unsigned char, 4>, 2> targetView = tex.subArea({ static_cast<size_t>(pos.x), static_cast<size_t>(pos.y) }, { static_cast<size_t>(size.x), static_cast<size_t>(size.y) });
                 if (data.mEntries[c].mFlipped)
                     targetView.swapAxis(0, 1);
 
                 std::ranges::transform(bufferView, targetView.begin(),
-                    [](const Vector3 &v) {
+                    [](const Math::Vector3 &v) {
                         return std::array<unsigned char, 4> {
-                            static_cast<unsigned char>(clamp(v.x, 0.0f, 1.0f) * 255),
-                            static_cast<unsigned char>(clamp(v.y, 0.0f, 1.0f) * 255),
-                            static_cast<unsigned char>(clamp(v.z, 0.0f, 1.0f) * 255),
+                            static_cast<unsigned char>(Math::clamp(v.x, 0.0f, 1.0f) * 255),
+                            static_cast<unsigned char>(Math::clamp(v.y, 0.0f, 1.0f) * 255),
+                            static_cast<unsigned char>(Math::clamp(v.z, 0.0f, 1.0f) * 255),
                             255
                         };
                     });
@@ -385,14 +385,14 @@ namespace Render {
 
                 AreaView<unsigned char, 2> bufferView { data.mFace->glyph->bitmap.buffer, { static_cast<size_t>(data.mLowResSizes[c].x), static_cast<size_t>(data.mLowResSizes[c].y) } };
 
-                font[c].mSize2 = data.mLowResSizes[c] + Vector2i(2, 2);
-                font[c].mUV2 = data.mLowResEntries[c].mArea.mTopLeft - Vector2i(1, 1);
+                font[c].mSize2 = data.mLowResSizes[c] + Math::Vector2i(2, 2);
+                font[c].mUV2 = data.mLowResEntries[c].mArea.mTopLeft - Math::Vector2i(1, 1);
                 font[c].mFlipped2 = data.mLowResEntries[c].mFlipped;
 
-                Vector2i size = data.mLowResSizes[c];
+                Math::Vector2i size = data.mLowResSizes[c];
                 if (data.mLowResEntries[c].mFlipped)
                     std::swap(size.x, size.y);
-                Vector2i pos = { data.mLowResEntries[c].mArea.mTopLeft.x, data.mLowResEntries[c].mArea.mTopLeft.y };
+                Math::Vector2i pos = { data.mLowResEntries[c].mArea.mTopLeft.x, data.mLowResEntries[c].mArea.mTopLeft.y };
 
                 AreaView<std::array<unsigned char, 4>, 2> targetView = tex.subArea({ static_cast<size_t>(pos.x), static_cast<size_t>(pos.y) }, { static_cast<size_t>(size.x), static_cast<size_t>(size.y) });
                 if (data.mLowResEntries[c].mFlipped)
@@ -414,14 +414,14 @@ namespace Render {
 
         typeFace.mTexture = RenderContext::getSingleton().createTexture(TextureType_2D, FORMAT_RGBA8, textureSize, { texBuffer.get(), 4 * byteSize });
 
-        Filesystem::FileManager cache("msdf_cache");
+        Serialize::FileManager cache("msdf_cache");
         Serialize::FormattedSerializeStream out = cache.openWrite(info.resource()->path().parentPath() / (std::string { info.resource()->name() } + ".msdf"), Serialize::Formats::safebinary);
         if (out) {
             write(out, typeFace.mFonts, "fonts");
             write(out, textureSize, "size");
             write(out, typeFace.mAscender, "ascender");
             write(out, typeFace.mDescender, "descender");
-            write(out, ByteBuffer { texBuffer.get(), 4 * byteSize }, "texture");
+            write(out, Memory::ByteBuffer { texBuffer.get(), 4 * byteSize }, "texture");
         }
 
         co_return true;
@@ -437,7 +437,7 @@ namespace Render {
         return RenderContext::renderQueue();
     }
 
-    std::pair<Resources::ResourceBase *, bool> FontLoader::addResource(const Filesystem::Path &path, std::string_view name)
+    std::pair<Resources::ResourceBase *, bool> FontLoader::addResource(const Platform::Filesystem::Path &path, std::string_view name)
     {
         if (path.extension() == ".msdf") {
             return ResourceLoader::addResource(path, name);

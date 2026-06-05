@@ -19,7 +19,7 @@ bool checkDevice(HRESULT &result)
 void dx12Dump(HRESULT result, const char *file, size_t line)
 {
 
-    Engine::Log::LogDummy cout { Engine::Log::MessageType::FATAL_TYPE, file, line };
+    Engine::Platform::Log::LogDummy cout { Engine::Platform::Log::MessageType::FATAL_TYPE, file, line };
 
     if (file) {
         cout << "  at " << file << "(" << line << ")\n";

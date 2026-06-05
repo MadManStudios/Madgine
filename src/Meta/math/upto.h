@@ -1,63 +1,65 @@
 #pragma once
 
 namespace Engine {
+namespace Math {
 
-template <typename T, size_t Count>
-struct UpTo {
+    template <typename T, size_t Count>
+    struct UpTo {
 
-    UpTo() { };
+        UpTo() { };
 
-    UpTo(std::initializer_list<T> elements)
-    {
-        for (const T &t : elements)
-            push_back(t);
-    }
-
-    ~UpTo()
-    {
-        while (mCount > 0) {
-            --mCount;
-            mData[mCount].~T();
+        UpTo(std::initializer_list<T> elements)
+        {
+            for (const T &t : elements)
+                push_back(t);
         }
-    }
 
-    void push_back(const T &t)
-    {
-        assert(mCount < Count);
-        new (mData + mCount) T(t);
-        ++mCount;
-    }
+        ~UpTo()
+        {
+            while (mCount > 0) {
+                --mCount;
+                mData[mCount].~T();
+            }
+        }
 
-    T &operator[](size_t i)
-    {
-        assert(i < Count);
-        assert(i < mCount);
-        return mData[i];
-    }
+        void push_back(const T &t)
+        {
+            assert(mCount < Count);
+            new (mData + mCount) T(t);
+            ++mCount;
+        }
 
-    const T &operator[](size_t i) const
-    {
-        assert(i < Count);
-        assert(i < mCount);
-        return mData[i];
-    }
+        T &operator[](size_t i)
+        {
+            assert(i < Count);
+            assert(i < mCount);
+            return mData[i];
+        }
 
-    explicit operator bool() const
-    {
-        return mCount > 0;
-    }
+        const T &operator[](size_t i) const
+        {
+            assert(i < Count);
+            assert(i < mCount);
+            return mData[i];
+        }
 
-    size_t size() const
-    {
-        return mCount;
-    }
+        explicit operator bool() const
+        {
+            return mCount > 0;
+        }
 
-private:
-    union {
-        T mData[Count];
+        size_t size() const
+        {
+            return mCount;
+        }
+
+    private:
+        union {
+            T mData[Count];
+        };
+
+        size_t mCount = 0;
     };
 
-    size_t mCount = 0;
-};
-
+}
 }

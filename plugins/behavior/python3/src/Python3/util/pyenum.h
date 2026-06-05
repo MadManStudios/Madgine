@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Meta/enumholder.h"
+#include "Meta/reflect/enum.h"
 
 namespace Engine {
 namespace Behavior {
@@ -10,7 +10,7 @@ namespace Behavior {
 
         struct PyEnum {
             PyObject_HEAD
-                EnumHolder mEnum;
+                Reflect::Enum mEnum;
         };
 
     }

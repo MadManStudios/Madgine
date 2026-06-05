@@ -2,11 +2,11 @@
 
 #include "openglrendercontext.h"
 
-#include "Interfaces/window/windowapi.h"
+#include "Platform/window/windowapi.h"
 
 #include "Modules/uniquecomponent/uniquecomponentcollector.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 
 #include "openglpipelineloader.h"
 #include "openglrendertexture.h"
@@ -24,8 +24,10 @@ static PFNWGLSWAPINTERVALEXTPROC wglSwapIntervalEXT = nullptr;
 #    include <GL/glx.h>
 #    include <X11/Xlib.h>
 namespace Engine {
-namespace Window {
-    extern Display *sDisplay();
+namespace Platform {
+    namespace Window {
+        extern Display *sDisplay();
+    }
 }
 }
 #elif ANDROID || EMSCRIPTEN
@@ -113,23 +115,23 @@ namespace Render {
         if (id == 131169 || id == 131185 || id == 131218 || id == 131204)
             return;
 
-        Log::MessageType lvl;
+        Platform::Log::MessageType lvl;
         switch (severity) {
         case GL_DEBUG_SEVERITY_HIGH:
-            lvl = Log::MessageType::ERROR_TYPE;
+            lvl = Platform::Log::MessageType::ERROR_TYPE;
             break;
         case GL_DEBUG_SEVERITY_MEDIUM:
-            lvl = Log::MessageType::WARNING_TYPE;
+            lvl = Platform::Log::MessageType::WARNING_TYPE;
             break;
         case GL_DEBUG_SEVERITY_LOW:
-            lvl = Log::MessageType::INFO_TYPE;
+            lvl = Platform::Log::MessageType::INFO_TYPE;
             break;
         case GL_DEBUG_SEVERITY_NOTIFICATION:
-            lvl = Log::MessageType::DEBUG_TYPE;
+            lvl = Platform::Log::MessageType::DEBUG_TYPE;
             break;
         }
 
-        Log::LogDummy cout(lvl);
+        Platform::Log::LogDummy cout(lvl);
         cout << "Debug message (" << id << "): " << message << "\n";
 
         switch (source) {
@@ -193,7 +195,7 @@ namespace Render {
 #if WINDOWS
         wglMakeCurrent(NULL, NULL);
 #elif LINUX
-        glXMakeCurrent(Window::sDisplay(), None, NULL);
+        glXMakeCurrent(Platform::Window::sDisplay(), None, NULL);
 #elif ANDROID || EMSCRIPTEN
         eglMakeCurrent(sDisplay, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT);
 #elif OSX
@@ -212,7 +214,7 @@ namespace Render {
             std::terminate();
         }
 #elif LINUX
-        if (!glXMakeCurrent(Window::sDisplay(), surface, context)) {
+        if (!glXMakeCurrent(Platform::Window::sDisplay(), surface, context)) {
             LOG_ERROR("Error-Code: " << errno);
             std::terminate();
         }
@@ -233,7 +235,7 @@ namespace Render {
 #if WINDOWS
         SwapBuffers(surface);
 #elif LINUX
-        glXSwapBuffers(Window::sDisplay(), surface);
+        glXSwapBuffers(Platform::Window::sDisplay(), surface);
 #elif ANDROID || EMSCRIPTEN
         eglSwapBuffers(sDisplay, context);
 #elif OSX
@@ -341,10 +343,10 @@ namespace Render {
         } else {
             static GLint att[] = { GLX_RGBA, GLX_DEPTH_SIZE, 24, GLX_DOUBLEBUFFER, None };
 
-            static XVisualInfo *vi = glXChooseVisual(Window::sDisplay(), 0, att);
+            static XVisualInfo *vi = glXChooseVisual(Platform::Window::sDisplay(), 0, att);
             assert(vi);
 
-            context = glXCreateContext(Window::sDisplay(), vi, /*sharedContext*/ nullptr, GL_TRUE);
+            context = glXCreateContext(Platform::Window::sDisplay(), vi, /*sharedContext*/ nullptr, GL_TRUE);
         }
 
 #elif ANDROID || EMSCRIPTEN
@@ -388,7 +390,7 @@ namespace Render {
                 assert(result);
 
                 for (int i = 0; i < numConfigs; i++) {
-                    Log::LogDummy out { Log::MessageType::INFO_TYPE };
+                    Platform::Log::LogDummy out { Platform::Log::MessageType::INFO_TYPE };
                     out << "Configuration:\n";
                     EGLConfig config = configs[i];
                     for (int j = 0; j < sizeof(eglAttributeNames) / sizeof(eglAttributeNames[0]); j++) {
@@ -402,7 +404,7 @@ namespace Render {
                 std::terminate();
             }
 
-            Log::LogDummy out { Log::MessageType::DEBUG_TYPE };
+            Platform::Log::LogDummy out { Platform::Log::MessageType::DEBUG_TYPE };
             out << "Configuration:\n";
             for (int j = 0; j < sizeof(eglAttributeNames) / sizeof(eglAttributeNames[0]); j++) {
                 EGLint value = -1;
@@ -531,7 +533,7 @@ namespace Render {
             wglDeleteContext(context);
 #elif LINUX
         if (!reusedContext)
-            glXDestroyContext(Window::sDisplay(), context);
+            glXDestroyContext(Platform::Window::sDisplay(), context);
 #elif ANDROID || EMSCRIPTEN
         if (!reusedContext)
             eglDestroyContext(sDisplay, context);
@@ -548,9 +550,9 @@ namespace Render {
             static std::once_flag once;
 
             std::call_once(once, []() {
-                Engine::Window::WindowSettings settings;
+                Platform::Window::WindowSettings settings;
                 settings.mHidden = true;
-                Window::OSWindow *tmp = Window::sCreateWindow(settings);
+                Platform::Window::OSWindow *tmp = Platform::Window::sCreateWindow(settings);
 #    if WINDOWS
                 SurfaceHandle surface = GetDC((HWND)tmp->ptrHandle());
 #    elif LINUX
@@ -600,7 +602,7 @@ namespace Render {
     {
     }
 
-    std::unique_ptr<RenderTarget> OpenGLRenderContext::createRenderTexture(const Vector2i &size, const RenderTextureConfig &config)
+    std::unique_ptr<RenderTarget> OpenGLRenderContext::createRenderTexture(const Math::Vector2i &size, const RenderTextureConfig &config)
     {
         return std::make_unique<OpenGLRenderTexture>(this, size, config);
     }
@@ -610,7 +612,7 @@ namespace Render {
         return static_cast<OpenGLRenderContext &>(RenderContext::getSingleton());
     }
 
-    std::unique_ptr<RenderTarget> OpenGLRenderContext::createRenderWindow(Window::OSWindow *w, size_t samples)
+    std::unique_ptr<RenderTarget> OpenGLRenderContext::createRenderWindow(Platform::Window::OSWindow *w, size_t samples)
     {
         checkThread();
 
@@ -646,7 +648,7 @@ namespace Render {
 
     GPUPtr<void> OpenGLRenderContext::allocateBufferImpl(size_t size, UsageHint hint)
     {
-        Block allocation;
+        Memory::Block allocation;
 
 #if EMSCRIPTEN
         if (hint == UsageHint::USAGE_INDEX)
@@ -663,7 +665,7 @@ namespace Render {
 
     GPUPtr<Void[]> Engine::Render::OpenGLRenderContext::allocateBufferImpl(size_t elementSize, size_t count, UsageHint hint)
     {
-        Block allocation;
+        Memory::Block allocation;
 
 #if EMSCRIPTEN
         if (hint == UsageHint::USAGE_INDEX)
@@ -678,7 +680,7 @@ namespace Render {
         return { allocation.mAddress, elementSize, count, [=, this](void *address) { mBufferAllocator.deallocate(allocation); } };
     }
 
-    WritableByteBuffer OpenGLRenderContext::mapBufferImpl(const GPUPtr<void> &buffer)
+    Memory::WritableByteBuffer OpenGLRenderContext::mapBufferImpl(const GPUPtr<void> &buffer)
     {
         auto [glBuffer, offset] = mBufferMemoryHeap.resolve(buffer.get());
 
@@ -717,7 +719,7 @@ namespace Render {
 #endif
     }
 
-    WritableByteBuffer OpenGLRenderContext::mapBufferImpl(const GPUPtr<Void[]> &buffer)
+    Memory::WritableByteBuffer OpenGLRenderContext::mapBufferImpl(const GPUPtr<Void[]> &buffer)
     {
         auto [glBuffer, offset] = mBufferMemoryHeap.resolve(buffer.get());
 
@@ -756,12 +758,12 @@ namespace Render {
 #endif
     }
 
-    TexturePtr OpenGLRenderContext::createTexture(TextureType type, TextureFormat format, Vector2i size, const ByteBuffer &data)
+    TexturePtr OpenGLRenderContext::createTexture(TextureType type, TextureFormat format, Math::Vector2i size, const Memory::ByteBuffer &data)
     {
         return std::make_shared<OpenGLTexture>(type, format, size, 1, data);
     }
 
-    void OpenGLRenderContext::setTextureSubData(const TexturePtr &tex, Vector2i offset, Vector2i size, const ByteBuffer &data)
+    void OpenGLRenderContext::setTextureSubData(const TexturePtr &tex, Math::Vector2i offset, Math::Vector2i size, const Memory::ByteBuffer &data)
     {
         static_cast<OpenGLTexture &>(*tex).setSubData(offset, size, data);
     }

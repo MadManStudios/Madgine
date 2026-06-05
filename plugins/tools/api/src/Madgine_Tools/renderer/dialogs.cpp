@@ -52,17 +52,17 @@ namespace Tools {
         return (mResult && *mResult == DialogResult::Canceled) || (root().mResult && *root().mResult == DialogResult::Canceled);
     }
 
-    void DialogSettings::open(CoroutineHandle<DialogPromise> handle)
+    void DialogSettings::open(Execution::CoroutineHandle<DialogPromise> handle)
     {
         mSubDialogs.push_back(std::move(handle));
     }
 
-    void DialogContainer::show(CoroutineHandle<DialogPromise> dialog)
+    void DialogContainer::show(Execution::CoroutineHandle<DialogPromise> dialog)
     {
         mDialogs.push_back(std::move(dialog));
     }
 
-    void DialogContainer::showGrouped(std::string_view name, CoroutineHandle<DialogPromise> dialog)
+    void DialogContainer::showGrouped(std::string_view name, Execution::CoroutineHandle<DialogPromise> dialog)
     {
         mDialogGroups.try_emplace(std::string { name }, *this).first->second.addDialog(std::move(dialog));
     }
@@ -74,7 +74,7 @@ namespace Tools {
         mSettings.allowApplyToAll = true;
     }
 
-    void DialogContainer::DialogGroup::addDialog(CoroutineHandle<DialogPromise> dialog)
+    void DialogContainer::DialogGroup::addDialog(Execution::CoroutineHandle<DialogPromise> dialog)
     {
         if (mDialogs.empty()) {
             mSettings.mResult.reset();
@@ -110,11 +110,11 @@ namespace Tools {
         }
     }
 
-    void DialogContainer::handleDialogs(std::vector<CoroutineHandle<DialogPromise>> &dialogs)
+    void DialogContainer::handleDialogs(std::vector<Execution::CoroutineHandle<DialogPromise>> &dialogs)
     {
-        std::vector<CoroutineHandle<DialogPromise>> localDialogs = std::move(dialogs);
+        std::vector<Execution::CoroutineHandle<DialogPromise>> localDialogs = std::move(dialogs);
 
-        for (CoroutineHandle<DialogPromise> &dialog : localDialogs) {
+        for (Execution::CoroutineHandle<DialogPromise> &dialog : localDialogs) {
             if (renderHeader(dialog->mSettings)) {
                 assert(!dialog->mContainer);
                 dialog->mContainer = &dialog;

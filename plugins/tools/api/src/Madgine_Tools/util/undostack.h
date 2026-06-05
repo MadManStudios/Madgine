@@ -5,8 +5,8 @@ namespace Tools {
 
     struct UndoableOperation {
         virtual ~UndoableOperation() = default;
-        virtual KeyValueResult undo() = 0;
-        virtual KeyValueResult redo() = 0;
+        virtual Reflect::Result undo() = 0;
+        virtual Reflect::Result redo() = 0;
     };
 
     struct MADGINE_TOOLS_EXPORT UndoStack {

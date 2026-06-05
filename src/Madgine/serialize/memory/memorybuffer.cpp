@@ -3,14 +3,14 @@
 #include "memorybuffer.h"
 
 namespace Engine {
-namespace Memory {
-    MemoryWriteBuffer::MemoryWriteBuffer(WritableByteBuffer &buffer)
+namespace Serialize {
+    MemoryWriteBuffer::MemoryWriteBuffer(Memory::WritableByteBuffer &buffer)
         : mWriteBuffer(buffer)
     {
         setp(static_cast<char *>(buffer.mData), static_cast<char *>(buffer.mData) + buffer.mSize);
     }
 
-    MemoryReadBuffer::MemoryReadBuffer(ByteBuffer buffer)
+    MemoryReadBuffer::MemoryReadBuffer(Memory::ByteBuffer buffer)
         : mReadBuffer(std::move(buffer))
     {
         setg(

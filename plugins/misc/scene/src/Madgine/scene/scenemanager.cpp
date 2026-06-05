@@ -12,7 +12,7 @@
 
 #include "Madgine/app/application.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
 #include "behavior/animation.h"
@@ -49,7 +49,7 @@ namespace Scene {
     {
     }
 
-    SceneManager::SceneManager(App::Application &app)
+    SceneManager::SceneManager(Core::Application &app)
         : VirtualScope(app)
         , mMutex("SceneData")
         , mLifetime(&app.lifetime())
@@ -61,7 +61,7 @@ namespace Scene {
         pause();
     }
 
-    SceneManager::SceneManager(App::Application &app, std::nullopt_t)
+    SceneManager::SceneManager(Core::Application &app, std::nullopt_t)
         : VirtualScope(app)
         , mMutex("SceneData")
         , mLifetime(std::nullopt)
@@ -126,7 +126,7 @@ namespace Scene {
         return mMutex;
     }
 
-    void SceneManager::updateFrame(Closure<TypedByteBuffer<Matrix4[]>(Entity::Skeleton *)> callback)
+    void SceneManager::updateFrame(Closure<Memory::TypedByteBuffer<Math::Matrix4[]>(Entity::Skeleton *)> callback)
     {
         std::chrono::microseconds frameTimeSinceLastFrame = mFrameClock.tick(std::chrono::steady_clock::now());
         std::chrono::microseconds sceneTimeSinceLastFrame = mAnimationClock.tick(mClock.now());
@@ -213,12 +213,12 @@ namespace Scene {
         return mClock;
     }
 
-    IntervalClock<Threading::CustomTimepoint> &SceneManager::simulationClock()
+    Execution::IntervalClock<Threading::CustomTimepoint> &SceneManager::simulationClock()
     {
         return mSimulationClock;
     }
 
-    IntervalClock<Threading::CustomTimepoint> &SceneManager::animationClock()
+    Execution::IntervalClock<Threading::CustomTimepoint> &SceneManager::animationClock()
     {
         return mAnimationClock;
     }

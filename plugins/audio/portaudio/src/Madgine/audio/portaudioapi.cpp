@@ -11,7 +11,7 @@
 #include "Madgine/resources/sender.h"
 #include "Madgine/root/root.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 
 #include "portaudio.h"
 
@@ -64,7 +64,7 @@ namespace Audio {
     };
 
     struct PlaybackSender : Execution::base_sender {
-        using result_type = KeyValueError;
+        using result_type = Reflect::Error;
         template <template <typename...> typename Tuple>
         using value_types = Tuple<>;
 
@@ -132,7 +132,7 @@ namespace Audio {
             if (err != paNoError) {
                 PortAudioApi &api = state.mApi;
                 mState = nullptr;
-                state.set_error(KEYVALUE_UNKNOWN_ERROR() << "PortAudio Error: " << err);
+                state.set_error(REFLECT_UNKNOWN_ERROR() << "PortAudio Error: " << err);
                 api.reuseStream(*this);
             }
         }
@@ -230,7 +230,7 @@ namespace Audio {
     {
     }
 
-    PortAudioApi::PortAudioApi(Root::Root &root)
+    PortAudioApi::PortAudioApi(Core::Root &root)
         : AudioApiImpl<PortAudioApi>(root)
     {
         root.taskQueue()->addSetupSteps([this]() { return callInit(); }, [this]() { return callFinalize(); });
@@ -262,7 +262,7 @@ namespace Audio {
 
         for (PaHostApiIndex i = 0; i < apiCount; ++i) {
             const PaHostApiInfo *apiInfo = Pa_GetHostApiInfo(i);
-            Log::LogDummy out { Log::MessageType::DEBUG_TYPE };
+            Platform::Log::LogDummy out { Platform::Log::MessageType::DEBUG_TYPE };
             out << "Considering Audio-API: " << apiInfo->name << " (" << apiInfo->type << ")...";
             if (apiInfo->type == PaHostApiTypeId::paWDMKS) {
                 out << "Skipping WDMKS.";

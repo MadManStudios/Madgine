@@ -29,7 +29,7 @@ namespace Tools {
 
         std::string_view key() const override;
 
-        void saveAs(const Filesystem::Path &path) override;
+        void saveAs(const Platform::Filesystem::Path &path) override;
         void open(Resources::ResourceBase *res) override;
         std::string_view getCurrentName() const;
 
@@ -66,12 +66,12 @@ namespace Tools {
         IndexType<uint32_t> mSelectedNodeIndex;
         bool mSelectedInputs = false;
 
-        Vector2 mPopupPosition;
+        Math::Vector2 mPopupPosition;
 
         Behavior::BehaviorHandle mPendingLibraryBehavior;
 
         std::optional<Behavior::NodeGraph::PinDesc> mDragPin;
-        std::optional<ExtendedValueTypeDesc> mDragType;
+        std::optional<Reflect::ExtendedType> mDragType;
         uint32_t mDragMask;
         
         bool mInitialLoad = false;

@@ -4,9 +4,9 @@
 
 #    include "Generic/keyvalue.h"
 
-#    include "Interfaces/dl/runtime.h"
+#    include "Platform/dl/runtime.h"
 
-#    include "../ini/inisection.h"
+#    include "inisection.h"
 #    include "../threading/workgroup.h"
 #    include "binaryinfo.h"
 #    include "plugin.h"
@@ -24,7 +24,7 @@ namespace Plugins {
     {
         const std::regex e { SHARED_LIB_PREFIX "Plugin_([a-zA-Z0-9]*)_" + mName + "_([a-zA-Z0-9]*)\\" SHARED_LIB_SUFFIX };
         std::smatch match;
-        for (auto result : Dl::listSharedLibraries()) {
+        for (auto result : Platform::Dl::listSharedLibraries()) {
             auto file = result.path().filename();
             if (std::regex_match(file.str(), match, e)) {
                 std::string project = match[1];
@@ -55,7 +55,7 @@ namespace Plugins {
         return mExclusive;
     }
 
-    bool PluginSection::load(Ini::IniFile &file)
+    bool PluginSection::load(IniFile &file)
     {
         if (mAtleastOne) {
             if (mPlugins.empty()) {
@@ -71,7 +71,7 @@ namespace Plugins {
         return true;
     }
 
-    bool PluginSection::unload(Ini::IniFile &file)
+    bool PluginSection::unload(IniFile &file)
     {
         for (Plugin *p : mDependents) {
             if (!p->section()->unloadPlugin(p, file))
@@ -86,7 +86,7 @@ namespace Plugins {
         return false;
     }
 
-    bool PluginSection::isLoaded(std::string_view name, Ini::IniFile &file)
+    bool PluginSection::isLoaded(std::string_view name, IniFile &file)
     {
         auto it = mPlugins.find(name);
         if (it != mPlugins.end()) {
@@ -95,7 +95,7 @@ namespace Plugins {
         return false;
     }
 
-    bool PluginSection::loadPlugin(std::string_view name, Ini::IniFile &file)
+    bool PluginSection::loadPlugin(std::string_view name, IniFile &file)
     {
         Plugin *plugin = getPlugin(name);
         if (!plugin)
@@ -103,7 +103,7 @@ namespace Plugins {
         return loadPlugin(plugin, file);
     }
 
-    bool PluginSection::unloadPlugin(std::string_view name, Ini::IniFile &file)
+    bool PluginSection::unloadPlugin(std::string_view name, IniFile &file)
     {
         Plugin *plugin = getPlugin(name);
         if (!plugin)
@@ -111,7 +111,7 @@ namespace Plugins {
         return unloadPlugin(plugin, file);
     }
 
-    bool PluginSection::loadPluginByFilename(std::string_view name, Ini::IniFile &file)
+    bool PluginSection::loadPluginByFilename(std::string_view name, IniFile &file)
     {
         [[maybe_unused]] auto pib = mPlugins.emplace(name);
         assert(pib.second);
@@ -126,7 +126,7 @@ namespace Plugins {
         return &*it;
     }
 
-    bool PluginSection::loadPlugin(Plugin *p, Ini::IniFile &file, bool autoLoadTools)
+    bool PluginSection::loadPlugin(Plugin *p, IniFile &file, bool autoLoadTools)
     {
         assert(p->section() == this);
 
@@ -158,7 +158,7 @@ namespace Plugins {
         }
     }
 
-    bool PluginSection::unloadPlugin(Plugin *p, Ini::IniFile &file)
+    bool PluginSection::unloadPlugin(Plugin *p, IniFile &file)
     {
         assert(!mAtleastOne);
 
@@ -169,27 +169,27 @@ namespace Plugins {
         return false;
     }
 
-    mutable_set<Plugin, NameCompare>::const_iterator PluginSection::begin() const
+    Containers::mutable_set<Plugin, NameCompare>::const_iterator PluginSection::begin() const
     {
         return mPlugins.begin();
     }
 
-    mutable_set<Plugin, NameCompare>::const_iterator PluginSection::end() const
+    Containers::mutable_set<Plugin, NameCompare>::const_iterator PluginSection::end() const
     {
         return mPlugins.end();
     }
 
-    mutable_set<Plugin, NameCompare>::iterator PluginSection::begin()
+    Containers::mutable_set<Plugin, NameCompare>::iterator PluginSection::begin()
     {
         return mPlugins.begin();
     }
 
-    mutable_set<Plugin, NameCompare>::iterator PluginSection::end()
+    Containers::mutable_set<Plugin, NameCompare>::iterator PluginSection::end()
     {
         return mPlugins.end();
     }
 
-    void PluginSection::loadAllDependencies(Ini::IniFile &file)
+    void PluginSection::loadAllDependencies(IniFile &file)
     {
         for (Plugin &p : kvValues(mPlugins)) {
             if (p.isLoaded(file))

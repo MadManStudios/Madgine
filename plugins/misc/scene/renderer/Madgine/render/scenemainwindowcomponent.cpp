@@ -12,7 +12,7 @@
 #include "Madgine/scene/scenemanager.h"
 #include "Madgine/window/mainwindow.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
 #include "scenerenderdata.h"
@@ -31,7 +31,7 @@ SERIALIZETABLE_END(Engine::Render::SceneMainWindowComponent)
 namespace Engine {
 namespace Render {
 
-    SceneMainWindowComponent::SceneMainWindowComponent(Window::MainWindow &window)
+    SceneMainWindowComponent::SceneMainWindowComponent(Core::MainWindow &window)
         : MainWindowComponent(window, 5)
         , mScene(window.app().getGlobalAPIComponent<Engine::Scene::SceneManager>())
         , mSceneData(mScene)

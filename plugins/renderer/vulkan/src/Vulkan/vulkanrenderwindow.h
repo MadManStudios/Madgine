@@ -8,7 +8,7 @@ namespace Engine {
 namespace Render {
 
     struct MADGINE_VULKAN_EXPORT VulkanRenderWindow : VulkanRenderTarget {
-        VulkanRenderWindow(VulkanRenderContext *context, Window::OSWindow *w, size_t samples);
+        VulkanRenderWindow(VulkanRenderContext *context, Platform::Window::OSWindow *w, size_t samples);
         VulkanRenderWindow(const VulkanRenderWindow &) = delete;
         ~VulkanRenderWindow();
 
@@ -19,12 +19,12 @@ namespace Render {
         virtual void beginIteration(size_t targetIndex, size_t targetCount, size_t targetSubresourceIndex) const override;
         virtual void endIteration(size_t targetIndex, size_t targetCount, size_t targetSubresourceIndex) const override;
 
-        virtual bool resizeImpl(const Vector2i &size) override;
-        virtual Vector2i size() const override;
+        virtual bool resizeImpl(const Math::Vector2i &size) override;
+        virtual Math::Vector2i size() const override;
 
-        virtual Matrix4 getClipSpaceMatrix() const override;
-        virtual void setRenderSpace(const Rect2i &space) override;
-        virtual void setScissorsRect(const Rect2i &space) override;
+        virtual Math::Matrix4 getClipSpaceMatrix() const override;
+        virtual void setRenderSpace(const Math::Rect2i &space) override;
+        virtual void setScissorsRect(const Math::Rect2i &space) override;
 
         uint32_t imageCount() const;
         uint32_t minImageCount() const;
@@ -32,16 +32,16 @@ namespace Render {
         VkSurfaceKHR surface() const;
 
     protected:
-        void create(const Vector2i &size);
+        void create(const Math::Vector2i &size);
         void createSurface();
 
     private:
-        Window::OSWindow *mWindow;
+        Platform::Window::OSWindow *mWindow;
 
         uint64_t mResizeFence;
-        Vector2i mResizeTarget;
+        Math::Vector2i mResizeTarget;
 
-        Matrix4 mClipSpaceRotation;
+        Math::Matrix4 mClipSpaceRotation;
 
         VulkanPtr<VkSemaphore, &vkDestroySemaphore> mImageSemaphore;
 

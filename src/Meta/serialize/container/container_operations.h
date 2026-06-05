@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Generic/container/containerevent.h"
+#include "Generic/containers/containerevent.h"
 
 #include "../configs/creator.h"
 #include "../configs/filter.h"
@@ -25,9 +25,9 @@ namespace Serialize {
         template <typename Op>
         static StreamResult readOp(CallerHierarchyFormattedSerializeStream in, Op &op, const char *name)
         {
-            STREAM_PROPAGATE_ERROR(in.mStream.beginContainerRead(name, !container_traits<C>::is_fixed_size));
+            STREAM_PROPAGATE_ERROR(in.mStream.beginContainerRead(name, !Containers::container_traits<C>::is_fixed_size));
 
-            if constexpr (!container_traits<C>::is_fixed_size) {
+            if constexpr (!Containers::container_traits<C>::is_fixed_size) {
                 TupleUnpacker::invoke(&Creator::template clear<Op>, op, in.mHierarchy);
 
                 while (in.mStream.hasContainerItem()) {
@@ -46,13 +46,13 @@ namespace Serialize {
 
         static StreamResult read(CallerHierarchyFormattedSerializeStream in, C &container, const char *name)
         {
-            decltype(auto) op = resetOperation(container, Creator::controlled);
+            decltype(auto) op = Containers::resetOperation(container, Creator::controlled);
             return readOp(in, op, name);
         }
 
         static void write(CallerHierarchyFormattedSerializeStream out, const C &container, const char *name)
         {
-            if constexpr (container_traits<C>::is_fixed_size)
+            if constexpr (Containers::container_traits<C>::is_fixed_size)
                 out.mStream.beginContainerWrite(name);
             else {
                 size_t size;
@@ -76,7 +76,7 @@ namespace Serialize {
 
         static StreamResult visitStream(CallerHierarchyFormattedSerializeStream in, const char *name, const StreamVisitor &visitor, size_t depth)
         {
-            STREAM_PROPAGATE_ERROR(in.mStream.beginContainerRead(name, !container_traits<C>::is_fixed_size));
+            STREAM_PROPAGATE_ERROR(in.mStream.beginContainerRead(name, !Containers::container_traits<C>::is_fixed_size));
 
             while (in.mStream.hasContainerItem()) {
                 STREAM_PROPAGATE_ERROR(Creator::template visitStream<C>(in, visitor, depth + 1));
@@ -105,11 +105,11 @@ namespace Serialize {
 
     template <typename C>
     concept SerializeWrappedRange = SerializeRange<C> && requires {
-        typename underlying_container<C>::type;
+        typename Containers::underlying_container<C>::type;
     };
 
     template <SerializeWrappedRange C, typename... Configs>
-    struct Operations<C, Configs...> : Operations<typename underlying_container<C>::type, Configs...> {
+    struct Operations<C, Configs...> : Operations<typename Containers::underlying_container<C>::type, Configs...> {
     };
 
     template <typename C, typename Observer, typename OffsetPtr>
@@ -135,20 +135,20 @@ namespace Serialize {
         using RequestPolicy = RequestPolicySelector<Configs...>;
         using Creator = CreatorSelector<Configs...>;
 
-        static StreamResult performOperation(C &c, ContainerEvent op, CallerHierarchyFormattedSerializeStream in, std::ranges::iterator_t<C> &it, ParticipantId answerTarget, MessageId answerId)
+        static StreamResult performOperation(C &c, Containers::ContainerEvent op, CallerHierarchyFormattedSerializeStream in, std::ranges::iterator_t<C> &it, ParticipantId answerTarget, MessageId answerId)
         {
             it = c.end();
             switch (op) {
-            case EMPLACE: {
-                if constexpr (!container_traits<C>::sorted) {
+            case Containers::EMPLACE: {
+                if constexpr (!Containers::container_traits<C>::sorted) {
                     STREAM_PROPAGATE_ERROR(Base::readIterator(in, c, it));
                 }
-                decltype(auto) op = insertOperation(c, it, answerTarget, answerId);
+                decltype(auto) op = Containers::insertOperation(c, it, answerTarget, answerId);
                 return TupleUnpacker::invoke(&Creator::template readItem<decltype(op)>, in, op, it, it);
             }
-            case ERASE:
+            case Containers::ERASE:
                 STREAM_PROPAGATE_ERROR(Base::readIterator(in, c, it));
-                it = removeOperation(c, it, answerTarget, answerId).erase(it);
+                it = Containers::removeOperation(c, it, answerTarget, answerId).erase(it);
                 return {};
                 /*case REMOVE_RANGE: {
                 iterator from = this->read_iterator(in);
@@ -156,7 +156,7 @@ namespace Serialize {
                 it = erase_impl(from, to, answerTarget, answerId);
                 break;
             }*/
-            case RESET:
+            case Containers::RESET:
                 return Base::read(in, c, "content");
             default:
                 throw 0;
@@ -169,23 +169,23 @@ namespace Serialize {
             for (FormattedMessageStream &out : outStreams) {
                 std::visit(overloaded {
                                [&](typename C::emplace_action_t &&emplace) {
-                                   Serialize::write(out, EMPLACE, "operation");
-                                   if constexpr (!container_traits<C>::sorted) {
+                                   Serialize::write(out, Containers::EMPLACE, "operation");
+                                   if constexpr (!Containers::container_traits<C>::sorted) {
                                        Base::writeIterator(out, c, emplace.mIt);
                                    }
                                    TupleUnpacker::invoke(&Creator::template writeItem<C>, CallerHierarchyFormattedSerializeStream { out, hierarchy }, *emplace.mIt);
                                },
                                [&](typename C::erase_t &&erase) {
-                                   Serialize::write({ out, hierarchy }, ERASE, "operation");
+                                   Serialize::write({ out, hierarchy }, Containers::ERASE, "operation");
                                    Base::writeIterator({ out, hierarchy }, c, erase.mWhere);
                                },
                                [&](typename C::erase_range_t &&erase) {
-                                   Serialize::write({ out, hierarchy }, ERASE_RANGE, "operation");
+                                   Serialize::write({ out, hierarchy }, Containers::ERASE_RANGE, "operation");
                                    Base::writeIterator({ out, hierarchy }, c, erase.mFrom);
                                    Base::writeIterator({ out, hierarchy }, c, erase.mTo);
                                },
                                [&](typename C::reset_t &&reset) {
-                                   Serialize::write({ out, hierarchy }, RESET, "operation");
+                                   Serialize::write({ out, hierarchy }, Containers::RESET, "operation");
                                    Base::write({ out, hierarchy }, c, "content");
                                } },
                     std::move(payload));
@@ -194,10 +194,10 @@ namespace Serialize {
 
         static StreamResult readAction(C &c, CallerHierarchyFormattedSerializeStream in, PendingRequest &request)
         {
-            ContainerEvent op;
+            Containers::ContainerEvent op;
             STREAM_PROPAGATE_ERROR(Serialize::read(in, op, "operation"));
 
-            bool accepted = (op & ~MASK) != ABORTED;
+            bool accepted = (op & ~Containers::MASK) != Containers::ABORTED;
 
             if (accepted) {
                 std::ranges::iterator_t<C> it;
@@ -220,27 +220,27 @@ namespace Serialize {
 
             std::visit(overloaded {
                            [&](typename C::emplace_request_t &&emplace) {
-                               Serialize::write(out, EMPLACE, "operation");
-                               if constexpr (!container_traits<C>::sorted) {
+                               Serialize::write(out, Containers::EMPLACE, "operation");
+                               if constexpr (!Containers::container_traits<C>::sorted) {
                                    Base::writeIterator(out, c, emplace.mWhere);
                                }
                                TupleUnpacker::invoke(&Creator::template writeItem<C>, out, emplace.mDummy);
                            },
                            [&](typename C::erase_t &&erase) {
-                               Serialize::write(out, ERASE, "operation");
+                               Serialize::write(out, Containers::ERASE, "operation");
                                Base::writeIterator(out, c, erase.mWhere);
                            },
                            [&](typename C::erase_range_t &&erase) {
-                               Serialize::write(out, ERASE_RANGE, "operation");
+                               Serialize::write(out, Containers::ERASE_RANGE, "operation");
                                Base::writeIterator(out, c, erase.mFrom);
                                Base::writeIterator(out, c, erase.mTo);
                            },
                            [&](typename C::reset_t &&reset) {
-                               Serialize::write(out, RESET, "operation");
+                               Serialize::write(out, Containers::RESET, "operation");
                                Base::write(out, c, "content");
                            },
                            [&](typename C::reset_to_request_t &&reset) {
-                               Serialize::write(out, RESET, "operation");
+                               Serialize::write(out, Containers::RESET, "operation");
                                // Base::write(out, reset.mNewData, "content", hierarchy);
                                throw "TODO";
                            } },
@@ -251,13 +251,13 @@ namespace Serialize {
         {
             bool accepted = !RequestPolicy::sCallByMasterOnly;
 
-            ContainerEvent op;
+            Containers::ContainerEvent op;
             STREAM_PROPAGATE_ERROR(Serialize::read(inout, op, "operation"));
 
             if (!accepted) {
                 if (id) {
                     auto msg = beginRequestResponseMessage(&c, inout, id);
-                    Serialize::write(msg, op | ABORTED, "operation");
+                    Serialize::write(msg, op | Containers::ABORTED, "operation");
                 }
             } else {
                 if (c.isMaster()) {

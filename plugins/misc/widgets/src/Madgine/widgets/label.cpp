@@ -2,7 +2,7 @@
 
 #include "label.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
 NAMED_UNIQUECOMPONENT(Label, Engine::Widgets::Label);
@@ -24,8 +24,8 @@ namespace Widgets {
     {
         if (mTextRenderData.available()) {
 
-            Vector2 pos = getAbsolutePosition();
-            Vector3 size = getAbsoluteSize();
+            Math::Vector2 pos = getAbsolutePosition();
+            Math::Vector3 size = getAbsoluteSize();
 
             mTextRenderData.render(renderData, mText.get(), pos, size);
         }

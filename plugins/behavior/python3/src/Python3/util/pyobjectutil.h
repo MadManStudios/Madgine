@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Meta/keyvalue/keyvalueresult.h"
+#include "Meta/reflect/result.h"
 
 namespace Engine {
 namespace Behavior {
@@ -29,7 +29,7 @@ namespace Behavior {
             return PyUnicode_FromString(ss.str().c_str());
         }
 
-        MADGINE_PYTHON3_EXPORT PyObject *toPyObject(const ValueType &val);
+        MADGINE_PYTHON3_EXPORT PyObject *toPyObject(const Reflect::Value &val);
 
         MADGINE_PYTHON3_EXPORT PyObject *toPyObject(std::monostate);
 
@@ -39,54 +39,54 @@ namespace Behavior {
         MADGINE_PYTHON3_EXPORT PyObject *toPyObject(float f);
         MADGINE_PYTHON3_EXPORT PyObject *toPyObject(std::chrono::nanoseconds d);
 
-        MADGINE_PYTHON3_EXPORT PyObject *toPyObject(const ScopePtr &scope);
-        MADGINE_PYTHON3_EXPORT PyObject *toPyObject(const OwnedScopePtr &scope);
-        MADGINE_PYTHON3_EXPORT PyObject *toPyObject(const ScopeIterator &it);
-        MADGINE_PYTHON3_EXPORT PyObject *toPyObject(const ApiFunction &function);
-        MADGINE_PYTHON3_EXPORT PyObject *toPyObject(const BoundApiFunction &function);
-        MADGINE_PYTHON3_EXPORT PyObject *toPyObject(const KeyValueVirtualSequenceRange &range);
-        MADGINE_PYTHON3_EXPORT PyObject *toPyObject(const KeyValueVirtualAssociativeRange &range);
-        MADGINE_PYTHON3_EXPORT PyObject *toPyObject(const VirtualIterator<KeyValuePair> &it);
-        MADGINE_PYTHON3_EXPORT PyObject *toPyObject(const VirtualIterator<ValueType> &it);
+        MADGINE_PYTHON3_EXPORT PyObject *toPyObject(const Reflect::ScopePtr &scope);
+        MADGINE_PYTHON3_EXPORT PyObject *toPyObject(const Reflect::OwnedScopePtr &scope);
+        MADGINE_PYTHON3_EXPORT PyObject *toPyObject(const Reflect::ScopeIterator &it);
+        MADGINE_PYTHON3_EXPORT PyObject *toPyObject(const Reflect::ApiFunction &function);
+        MADGINE_PYTHON3_EXPORT PyObject *toPyObject(const Reflect::BoundApiFunction &function);
+        MADGINE_PYTHON3_EXPORT PyObject *toPyObject(const Reflect::SequenceRange &range);
+        MADGINE_PYTHON3_EXPORT PyObject *toPyObject(const Reflect::AssociativeRange &range);
+        MADGINE_PYTHON3_EXPORT PyObject *toPyObject(const Reflect::AssociativeIterator &it);
+        MADGINE_PYTHON3_EXPORT PyObject *toPyObject(const Reflect::SequenceIterator &it);
         MADGINE_PYTHON3_EXPORT PyObject *toPyObject(const CoWString &s);
-        MADGINE_PYTHON3_EXPORT PyObject *toPyObject(const Vector4 &v);
-        MADGINE_PYTHON3_EXPORT PyObject *toPyObject(const Vector3 &v);
-        MADGINE_PYTHON3_EXPORT PyObject *toPyObject(const Vector2 &v);
-        MADGINE_PYTHON3_EXPORT PyObject *toPyObject(const Vector4i &v);
-        MADGINE_PYTHON3_EXPORT PyObject *toPyObject(const Vector3i &v);
-        MADGINE_PYTHON3_EXPORT PyObject *toPyObject(const Vector2i &v);
-        MADGINE_PYTHON3_EXPORT PyObject *toPyObject(const Color3 &v);
-        MADGINE_PYTHON3_EXPORT PyObject *toPyObject(const Color4 &v);
-        MADGINE_PYTHON3_EXPORT PyObject *toPyObject(const Quaternion &v);
-        MADGINE_PYTHON3_EXPORT PyObject *toPyObject(const ObjectPtr &o);
-        MADGINE_PYTHON3_EXPORT PyObject *toPyObject(const CoW<Matrix3> &m);
-        MADGINE_PYTHON3_EXPORT PyObject *toPyObject(const CoW<Matrix4> &m);
-        MADGINE_PYTHON3_EXPORT PyObject *toPyObject(const EnumHolder &e);
-        MADGINE_PYTHON3_EXPORT PyObject *toPyObject(const FlagsHolder &f);
-        MADGINE_PYTHON3_EXPORT PyObject *toPyObject(const KeyValueFunction &f);
-        MADGINE_PYTHON3_EXPORT PyObject *toPyObject(const KeyValueSender &s);
-        MADGINE_PYTHON3_EXPORT PyObject *toPyObject(const ValueTypeDesc &t);
-        MADGINE_PYTHON3_EXPORT PyObject *toPyObject(const KeyValueBinding &b);
-        MADGINE_PYTHON3_EXPORT PyObject *toPyObject(const KeyValueScopeBinding &b);
+        MADGINE_PYTHON3_EXPORT PyObject *toPyObject(const Math::Vector4 &v);
+        MADGINE_PYTHON3_EXPORT PyObject *toPyObject(const Math::Vector3 &v);
+        MADGINE_PYTHON3_EXPORT PyObject *toPyObject(const Math::Vector2 &v);
+        MADGINE_PYTHON3_EXPORT PyObject *toPyObject(const Math::Vector4i &v);
+        MADGINE_PYTHON3_EXPORT PyObject *toPyObject(const Math::Vector3i &v);
+        MADGINE_PYTHON3_EXPORT PyObject *toPyObject(const Math::Vector2i &v);
+        MADGINE_PYTHON3_EXPORT PyObject *toPyObject(const Math::Color3 &v);
+        MADGINE_PYTHON3_EXPORT PyObject *toPyObject(const Math::Color4 &v);
+        MADGINE_PYTHON3_EXPORT PyObject *toPyObject(const Math::Quaternion &v);
+        MADGINE_PYTHON3_EXPORT PyObject *toPyObject(const Reflect::ObjectPtr &o);
+        MADGINE_PYTHON3_EXPORT PyObject *toPyObject(const CoW<Math::Matrix3> &m);
+        MADGINE_PYTHON3_EXPORT PyObject *toPyObject(const CoW<Math::Matrix4> &m);
+        MADGINE_PYTHON3_EXPORT PyObject *toPyObject(const Reflect::Enum &e);
+        MADGINE_PYTHON3_EXPORT PyObject *toPyObject(const Reflect::Flags &f);
+        MADGINE_PYTHON3_EXPORT PyObject *toPyObject(const Reflect::Function &f);
+        MADGINE_PYTHON3_EXPORT PyObject *toPyObject(const Reflect::Sender &s);
+        MADGINE_PYTHON3_EXPORT PyObject *toPyObject(const Reflect::Type &t);
+        MADGINE_PYTHON3_EXPORT PyObject *toPyObject(const Reflect::Binding &b);
+        MADGINE_PYTHON3_EXPORT PyObject *toPyObject(const Reflect::ScopeBinding &b);
 
-        MADGINE_PYTHON3_EXPORT KeyValueResult fromPyObject(ValueType &result, PyObject *obj);
+        MADGINE_PYTHON3_EXPORT Reflect::Result fromPyObject(Reflect::Value &result, PyObject *obj);
         MADGINE_PYTHON3_EXPORT void handlePyObject(PyObject *obj);
-        MADGINE_PYTHON3_EXPORT void handleKeyValueError(KeyValueError error);
+        MADGINE_PYTHON3_EXPORT void handleKeyValueError(Reflect::Error error);
         MADGINE_PYTHON3_EXPORT void resumeCoroutine(PyObject *coroutine, PyObject *value);
 
-        MADGINE_PYTHON3_EXPORT PyObject *toPyError(const KeyValueError &);
-        MADGINE_PYTHON3_EXPORT KeyValueError fromPyError(PyObject *exc, PyObject *traceback = nullptr);
+        MADGINE_PYTHON3_EXPORT PyObject *toPyError(const Reflect::Error &);
+        MADGINE_PYTHON3_EXPORT Reflect::Error fromPyError(PyObject *exc, PyObject *traceback = nullptr);
 
-        MADGINE_PYTHON3_EXPORT KeyValueError fetchError();
+        MADGINE_PYTHON3_EXPORT Reflect::Error fetchError();
 
-        MADGINE_PYTHON3_EXPORT ExtendedValueTypeDesc PyToValueTypeDesc(PyObject *obj);
+        MADGINE_PYTHON3_EXPORT Reflect::ExtendedType PyToValueTypeDesc(PyObject *obj);
 
-        MADGINE_PYTHON3_EXPORT PyObject *toPyTuple(const ArgumentList &args); 
+        MADGINE_PYTHON3_EXPORT PyObject *toPyTuple(const Reflect::ArgumentList &args); 
 
     }
 }
 }
 
 #define PYTHON3_PROPAGATE_ERROR(...)                      \
-    if (::Engine::KeyValueResult _result = (__VA_ARGS__)) \
+    if (::Engine::Reflect::Result _result = (__VA_ARGS__)) \
     return toPyError(*_result.mError)

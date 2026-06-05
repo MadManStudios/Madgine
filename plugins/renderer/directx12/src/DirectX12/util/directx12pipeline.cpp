@@ -32,7 +32,7 @@ namespace Render {
         return true;
     }
 
-    const ReleasePtr<ID3D12PipelineState> &DirectX12Pipeline::get(VertexFormat vertexFormat, size_t groupSize, DirectX12RenderTarget *target, bool depthChecking) const
+    const Platform::ReleasePtr<ID3D12PipelineState> &DirectX12Pipeline::get(VertexFormat vertexFormat, size_t groupSize, DirectX12RenderTarget *target, bool depthChecking) const
     {
         size_t samplesBits = sqrt(target->samples());
         assert(samplesBits * samplesBits == target->samples());
@@ -46,7 +46,7 @@ namespace Render {
             formats,
             target->samples()
         };
-        ReleasePtr<ID3D12PipelineState> &pipeline = mPipelines[desc];
+        Platform::ReleasePtr<ID3D12PipelineState> &pipeline = mPipelines[desc];
 
         if (!pipeline) {
 

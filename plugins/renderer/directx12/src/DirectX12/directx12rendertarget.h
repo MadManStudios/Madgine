@@ -13,7 +13,7 @@ namespace Render {
         DirectX12RenderTarget(DirectX12RenderContext *context, bool global, std::string name, TextureType type, size_t samples = 1, bool flipFlop = false, RenderTarget *blitSource = nullptr);
         ~DirectX12RenderTarget();
 
-        void setup(std::vector<std::array<OffsetPtr, 6>> targetViews, const Vector2i &size);
+        void setup(std::vector<std::array<OffsetPtr, 6>> targetViews, const Math::Vector2i &size);
 
         void beginFrame() override;
         RenderFuture endFrame() override;
@@ -24,8 +24,8 @@ namespace Render {
         virtual void pushAnnotation(const char *tag) override;
         virtual void popAnnotation() override;
 
-        virtual void setRenderSpace(const Rect2i &space) override;
-        virtual void setScissorsRect(const Rect2i &space) override;
+        virtual void setRenderSpace(const Math::Rect2i &space) override;
+        virtual void setScissorsRect(const Math::Rect2i &space) override;
 
         virtual void clearDepthBuffer() override;
 

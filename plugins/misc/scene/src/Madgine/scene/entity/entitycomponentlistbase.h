@@ -7,7 +7,7 @@ namespace Scene {
         struct MADGINE_SCENE_EXPORT EntityComponentListBase {
             virtual ~EntityComponentListBase() = default;
 
-            virtual ScopePtr getTyped(EntityComponentBase &comp) = 0;
+            virtual Reflect::ScopePtr getTyped(EntityComponentBase &comp) = 0;
             virtual Serialize::SerializableDataPtr getSerialized(EntityComponentBase &comp) = 0;
             virtual Serialize::SerializableDataConstPtr getSerialized(const EntityComponentBase &comp) const = 0;
             virtual const Serialize::SerializeTable *serializeTable() const = 0;

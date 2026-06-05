@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Interfaces/log/fileloglistener.h"
+#include "Platform/log/fileloglistener.h"
 
 #include "Modules/threading/taskqueue.h"
 #include "Modules/uniquecomponent/uniquecomponentcontainer.h"
@@ -8,11 +8,11 @@
 #include "rootcomponentcollector.h"
 
 namespace Engine {
-namespace Root {
+namespace Core {
 
     struct MADGINE_ROOT_EXPORT Root {
         Root(int argc = 0, char **argv = nullptr);
-        Root(std::unique_ptr<CLI::CLICore> cli);
+        Root(std::unique_ptr<CLICore> cli);
         ~Root();
 
         int errorCode();
@@ -22,7 +22,7 @@ namespace Root {
         template <typename T>
         T &getComponent()
         {
-            return static_cast<T &>(getComponent(UniqueComponent::component_index<T>()));
+            return static_cast<T &>(getComponent(Plugins::component_index<T>()));
         }
 
         RootComponentBase &getComponent(size_t i);
@@ -38,12 +38,12 @@ namespace Root {
     private:
         int mErrorCode = 0;
 
-        std::unique_ptr<CLI::CLICore> mCLI;
-        Log::FileLogListener mFileLogListener;
+        std::unique_ptr<CLICore> mCLI;
+        Platform::Log::FileLogListener mFileLogListener;
 
 #if ENABLE_PLUGINS
         std::unique_ptr<Plugins::PluginManager> mPluginManager;
-        std::unique_ptr<UniqueComponent::CollectorManager> mCollectorManager;
+        std::unique_ptr<Plugins::CollectorManager> mCollectorManager;
 #endif
 
 #if ENABLE_MEMTRACKING

@@ -6,9 +6,9 @@
 #include "Generic/execution/execution.h"
 #include "Generic/projections.h"
 
-#include "Interfaces/filesystem/fsapi.h"
-#include "Interfaces/window/windowapi.h"
-#include "Interfaces/window/windowsettings.h"
+#include "Platform/filesystem/fsapi.h"
+#include "Platform/window/windowapi.h"
+#include "Platform/window/windowsettings.h"
 
 #include "Meta/serialize/configs/controlled.h"
 #include "Meta/serialize/formats.h"
@@ -21,7 +21,7 @@
 #include "Madgine/resources/resourcemanager.h"
 #include "Madgine/serialize/filesystem/filemanager.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
 #include "layoutloader.h"
@@ -29,7 +29,7 @@
 #include "toolwindow.h"
 
 namespace Engine {
-namespace Window {
+namespace Core {
     static bool filterComponent(const std::unique_ptr<MainWindowComponentBase> &comp)
     {
         return comp->includeInLayout();
@@ -42,33 +42,33 @@ namespace Window {
 }
 }
 
-METATABLE_BEGIN(Engine::Window::MainWindow)
+METATABLE_BEGIN(Engine::Core::MainWindow)
     READONLY_PROPERTY(Components, components)
-METATABLE_END(Engine::Window::MainWindow)
+METATABLE_END(Engine::Core::MainWindow)
 
-SERIALIZETABLE_BEGIN(Engine::Window::MainWindow)
+SERIALIZETABLE_BEGIN(Engine::Core::MainWindow)
     FIELD(mComponents,
         Serialize::ControlledConfig<
-            KeyCompare<std::unique_ptr<Engine::Window::MainWindowComponentBase>>,
-            Engine::Window::staticTypeResolve>,
-        Serialize::CustomFilter<Engine::Window::filterComponent>)
-SERIALIZETABLE_END(Engine::Window::MainWindow)
+            KeyCompare<std::unique_ptr<Engine::Core::MainWindowComponentBase>>,
+            Engine::Core::staticTypeResolve>,
+        Serialize::CustomFilter<Engine::Core::filterComponent>)
+SERIALIZETABLE_END(Engine::Core::MainWindow)
 
-SERIALIZETABLE_BEGIN(Engine::Window::WindowData)
+SERIALIZETABLE_BEGIN(Engine::Platform::Window::WindowData)
     FIELD(mPosition)
     FIELD(mSize)
     FIELD(mMaximized)
-SERIALIZETABLE_END(Engine::Window::WindowData)
+SERIALIZETABLE_END(Engine::Platform::Window::WindowData)
 
-SERIALIZETABLE_BEGIN(Engine::InterfacesVector)
+SERIALIZETABLE_BEGIN(Engine::Platform::PlatformVector)
     FIELD(x)
     FIELD(y)
-SERIALIZETABLE_END(Engine::InterfacesVector)
+SERIALIZETABLE_END(Engine::Platform::PlatformVector)
 
 namespace Engine {
-namespace Window {
+namespace Core {
 
-    static std::queue<WindowData> sTestPositions;
+    static std::queue<Platform::Window::WindowData> sTestPositions;
     static std::mutex sTestPositionMutex;
 
     bool MainWindowComponentComparator::operator()(const std::unique_ptr<MainWindowComponentBase> &first, const std::unique_ptr<MainWindowComponentBase> &second) const
@@ -90,7 +90,7 @@ namespace Window {
      * setup steps in the TaskQueue. render() is registered as repeated task to the
      * TaskQueue.
      */
-    MainWindow::MainWindow(App::Application &app, const WindowSettings &settings)
+    MainWindow::MainWindow(Application &app, const Platform::Window::WindowSettings &settings)
         : mApp(app)
         , mSettings(settings)
         , mTaskQueue("FrameLoop", true)
@@ -107,9 +107,9 @@ namespace Window {
      */
     MainWindow::~MainWindow() = default;
 
-    void MainWindow::saveLayout(const Filesystem::Path &path)
+    void MainWindow::saveLayout(const Platform::Filesystem::Path &path)
     {
-        Filesystem::FileManager mgr { "Layout" };
+        Serialize::FileManager mgr { "Layout" };
         Serialize::FormattedSerializeStream file = mgr.openWrite(path, Serialize::Formats::xml);
 
         if (file) {
@@ -119,7 +119,7 @@ namespace Window {
         }
     }
 
-    Threading::Task<bool> MainWindow::loadLayout(Window::LayoutLoader::Resource *res)
+    Threading::Task<bool> MainWindow::loadLayout(LayoutLoader::Resource *res)
     {
         return res->loadTask(*this);
     }
@@ -130,16 +130,16 @@ namespace Window {
      */
     Threading::Task<bool> MainWindow::init()
     {
-        WindowSettings settings = mSettings;
+        Platform::Window::WindowSettings settings = mSettings;
 
         if (!sTestPositions.empty()) {
             std::unique_lock lock { sTestPositionMutex };
             settings.mData = sTestPositions.front();
             sTestPositions.pop();
         } else if (settings.mRestoreGeometry) {
-            Filesystem::FileManager mgr { "MainWindow-Geometry" };
+            Serialize::FileManager mgr { "MainWindow-Geometry" };
 
-            Filesystem::Path path = Filesystem::appDataPath() / "mainwindow.ini";
+            Platform::Filesystem::Path path = Platform::Filesystem::appDataPath() / "mainwindow.ini";
 
             if (Serialize::FormattedSerializeStream in = mgr.openRead(path, Serialize::Formats::ini)) {
                 Serialize::StreamResult result = read(in, settings.mData, nullptr);
@@ -150,7 +150,7 @@ namespace Window {
             }
         }
 
-        mOsWindow = sCreateWindow(settings);
+        mOsWindow = Platform::Window::sCreateWindow(settings);
         mRenderWindow = mRenderContext->createRenderWindow(mOsWindow);
 
         for (const std::unique_ptr<MainWindowComponentBase> &comp : components()) {
@@ -222,12 +222,12 @@ namespace Window {
             co_await mRenderContext->render();
             {
                 PROFILE_NAMED("Window Update");
-                while (std::optional<WindowEvent> event = mOsWindow ? mOsWindow->update() : std::nullopt) {
+                while (std::optional<Platform::Window::WindowEvent> event = mOsWindow ? mOsWindow->update() : std::nullopt) {
                     onWindowEvent(*event);
                 }
             }
             for (ToolWindow &window : mToolWindows)
-                while (std::optional<WindowEvent> event = window.osWindow()->update()) {
+                while (std::optional<Platform::Window::WindowEvent> event = window.osWindow()->update()) {
                     window.onWindowEvent(*event);
                 }
             now += (1000000us / 1200);
@@ -255,7 +255,7 @@ namespace Window {
         return mLifetime;
     }
 
-    App::Application &MainWindow::app() const
+    Application &MainWindow::app() const
     {
         return mApp;
     }
@@ -275,7 +275,7 @@ namespace Window {
      * @param settings
      * @return
      */
-    ToolWindow *MainWindow::createToolWindow(const WindowSettings &settings)
+    ToolWindow *MainWindow::createToolWindow(const Platform::Window::WindowSettings &settings)
     {
         return &mToolWindows.emplace_back(*this, settings);
     }
@@ -295,7 +295,7 @@ namespace Window {
      * @brief Returns a pointer to the OSWindow
      * @return the OSWindow
      */
-    OSWindow *MainWindow::osWindow() const
+    Platform::Window::OSWindow *MainWindow::osWindow() const
     {
         return mOsWindow;
     }
@@ -339,12 +339,12 @@ namespace Window {
      * @brief
      * @return
      */
-    Rect2i MainWindow::getScreenSpace()
+    Math::Rect2i MainWindow::getScreenSpace()
     {
         if (!mOsWindow)
             return { { 0, 0 }, { 0, 0 } };
-        InterfacesVector pos = mOsWindow->renderPos();
-        InterfacesVector size = mOsWindow->renderSize();
+        Platform::PlatformVector pos = mOsWindow->renderPos();
+        Platform::PlatformVector size = mOsWindow->renderSize();
         return {
             { pos.x, pos.y }, { size.x, size.y }
         };
@@ -359,9 +359,9 @@ namespace Window {
         if (!mOsWindow)
             return;
 
-        Rect2i space;
+        Math::Rect2i space;
         if (!component) {
-            InterfacesVector size = mOsWindow->renderSize();
+            Platform::PlatformVector size = mOsWindow->renderSize();
             space = {
                 { 0, 0 }, { size.x, size.y }
             };
@@ -380,15 +380,15 @@ namespace Window {
         }
     }
 
-    bool MainWindow::onWindowEvent(const WindowEvent &event, MainWindowComponentBase *component)
+    bool MainWindow::onWindowEvent(const Platform::Window::WindowEvent &event, MainWindowComponentBase *component)
     {
         return std::visit(overloaded {
-                              [this](const ResizeEvent &event) {
+                              [this](const Platform::Window::ResizeEvent &event) {
                                   mRenderWindow->resize({ event.mSize.x, event.mSize.y });
                                   applyClientSpaceResize();
                                   return true;
                               },
-                              [&, this](const CloseEvent &event) {
+                              [&, this](const Platform::Window::CloseEvent &event) {
                                   for (const std::unique_ptr<MainWindowComponentBase> &comp : components() | std::views::reverse) {
                                       if (component) {
                                           if (component == comp.get())
@@ -401,20 +401,20 @@ namespace Window {
                                   mTaskQueue.stop();
                                   return true;
                               },
-                              [this](const RepaintEvent &event) {
+                              [this](const Platform::Window::RepaintEvent &event) {
                                   for (const std::unique_ptr<MainWindowComponentBase> &comp : components() | std::views::reverse) {
                                       comp->onWindowEvent(event);
                                   }
                                   return false;
                               },
                               [this](const auto &event) {
-                                  InterfacesVector storedWindowPosition;
+                                  Platform::PlatformVector storedWindowPosition;
                                   if constexpr (requires { event.mWindowPosition; }) {
                                       storedWindowPosition = event.mWindowPosition;
                                   }
                                   for (const std::unique_ptr<MainWindowComponentBase> &comp : components() | std::views::reverse) {
                                       if constexpr (requires { event.mWindowPosition; }) {
-                                          event.mWindowPosition = storedWindowPosition - InterfacesVector { comp->getClientSpace().mTopLeft.x, comp->getClientSpace().mTopLeft.y };
+                                          event.mWindowPosition = storedWindowPosition - Platform::PlatformVector { comp->getClientSpace().mTopLeft.x, comp->getClientSpace().mTopLeft.y };
                                       }
                                       if (comp->onWindowEvent(event))
                                           return true;
@@ -429,9 +429,9 @@ namespace Window {
      */
     void MainWindow::storeWindowData()
     {
-        Filesystem::FileManager mgr { "MainWindow-Layout" };
+        Serialize::FileManager mgr { "MainWindow-Layout" };
 
-        if (Serialize::FormattedSerializeStream out = mgr.openWrite(Filesystem::appDataPath() / "mainwindow.ini", Serialize::Formats::ini)) {
+        if (Serialize::FormattedSerializeStream out = mgr.openWrite(Platform::Filesystem::appDataPath() / "mainwindow.ini", Serialize::Formats::ini)) {
             write(out, mOsWindow->data(), "data");
         }
     }
@@ -455,9 +455,9 @@ namespace Window {
         int rows = ceil(sqrt(n + 0.25f) - 0.5f);
         int cols = (n - 1) / rows + 1;
 
-        InterfacesVector monitorSize = listMonitors().front().mSize;
+        Platform::PlatformVector monitorSize = Platform::Window::listMonitors().front().mSize;
 
-        InterfacesVector size = { monitorSize.x / cols, monitorSize.y / rows };
+        Platform::PlatformVector size = { monitorSize.x / cols, monitorSize.y / rows };
 
         std::unique_lock lock { sTestPositionMutex };
 
@@ -465,7 +465,7 @@ namespace Window {
             for (int col = 0; col < cols; ++col) {
                 if (row * cols + col == n)
                     break;
-                sTestPositions.emplace(WindowData { { col * size.x, row * size.y }, size });
+                sTestPositions.emplace(Platform::Window::WindowData { { col * size.x, row * size.y }, size });
             }
         }
     }

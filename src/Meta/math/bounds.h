@@ -1,31 +1,35 @@
 #pragma once
 
 namespace Engine {
-struct META_EXPORT Bounds {
-    Bounds(float left = 0.f, float bottom = 0.f, float right = 0.f, float top = 0.f);
+namespace Math {
 
-    float left() const;
-    float top() const;
-    float right() const;
-    float bottom() const;
+    struct META_EXPORT Bounds {
+        Bounds(float left = 0.f, float bottom = 0.f, float right = 0.f, float top = 0.f);
 
-    float width() const;
-    float height() const;
+        float left() const;
+        float top() const;
+        float right() const;
+        float bottom() const;
 
-    Vector2 size() const;
+        float width() const;
+        float height() const;
 
-    Vector2 bottomLeft() const;
-    Vector2 topLeft() const;
-    Vector2 bottomRight() const;
-    Vector2 topRight() const;
+        Vector2 size() const;
 
-    std::array<Vector2, 4> corners() const;
+        Vector2 bottomLeft() const;
+        Vector2 topLeft() const;
+        Vector2 bottomRight() const;
+        Vector2 topRight() const;
 
-    Vector2 operator*(const Vector2 &v) const;
+        std::array<Vector2, 4> corners() const;
 
-    bool isNull() const;
+        Vector2 operator*(const Vector2 &v) const;
 
-private:
-    float mLeft, mBottom, mRight, mTop;
-};
+        bool isNull() const;
+
+    private:
+        float mLeft, mBottom, mRight, mTop;
+    };
+
+}
 }

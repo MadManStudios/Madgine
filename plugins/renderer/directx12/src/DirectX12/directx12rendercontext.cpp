@@ -7,7 +7,7 @@
 
 #include "Madgine/render/constantvalues.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 
 #include "directx12pipelineloader.h"
 #include "directx12rendertexture.h"
@@ -28,33 +28,33 @@ namespace Render {
         void *context)
     {
 
-        Log::MessageType lvl;
+        Platform::Log::MessageType lvl;
         switch (severity) {
         case D3D12_MESSAGE_SEVERITY_CORRUPTION:
-            lvl = Log::MessageType::FATAL_TYPE;
+            lvl = Platform::Log::MessageType::FATAL_TYPE;
             break;
         case D3D12_MESSAGE_SEVERITY_ERROR:
-            lvl = Log::MessageType::ERROR_TYPE;
+            lvl = Platform::Log::MessageType::ERROR_TYPE;
             break;
         case D3D12_MESSAGE_SEVERITY_WARNING:
-            lvl = Log::MessageType::WARNING_TYPE;
+            lvl = Platform::Log::MessageType::WARNING_TYPE;
             break;
         case D3D12_MESSAGE_SEVERITY_INFO:
-            lvl = Log::MessageType::INFO_TYPE;
+            lvl = Platform::Log::MessageType::INFO_TYPE;
             break;
         case D3D12_MESSAGE_SEVERITY_MESSAGE:
-            lvl = Log::MessageType::DEBUG_TYPE;
+            lvl = Platform::Log::MessageType::DEBUG_TYPE;
             break;
         }
 
-        Log::LogDummy cout(lvl);
+        Platform::Log::LogDummy cout(lvl);
         cout << "Debug message (" << id << "): " << message << "\n";
     }
 
-    static ReleasePtr<IDXGIAdapter1> GetHardwareAdapter(IDXGIFactory4 *pFactory)
+    static Platform::ReleasePtr<IDXGIAdapter1> GetHardwareAdapter(IDXGIFactory4 *pFactory)
     {
         for (UINT adapterIndex = 0;; ++adapterIndex) {
-            ReleasePtr<IDXGIAdapter1> pAdapter;
+            Platform::ReleasePtr<IDXGIAdapter1> pAdapter;
             if (DXGI_ERROR_NOT_FOUND == pFactory->EnumAdapters1(adapterIndex, &pAdapter)) {
                 // No more adapters to enumerate.
                 break;
@@ -69,7 +69,7 @@ namespace Render {
         return {};
     }
 
-    Threading::WorkgroupLocal<ReleasePtr<ID3D12Device>> sDevice;
+    Threading::WorkgroupLocal<Platform::ReleasePtr<ID3D12Device>> sDevice;
 
     Threading::WorkgroupLocal<DirectX12RenderContext *> sSingleton = nullptr;
 
@@ -100,10 +100,10 @@ namespace Render {
         HRESULT hr;
 
         {
-            ReleasePtr<ID3D12Debug> debugController;
+            Platform::ReleasePtr<ID3D12Debug> debugController;
             if (SUCCEEDED(D3D12GetDebugInterface(IID_PPV_ARGS(&debugController)))) {
                 debugController->EnableDebugLayer();
-                ReleasePtr<ID3D12Debug1> debugController1;
+                Platform::ReleasePtr<ID3D12Debug1> debugController1;
                 if (SUCCEEDED(debugController->QueryInterface(IID_PPV_ARGS(&debugController1)))) {
                     debugController1->SetEnableGPUBasedValidation(true);
                     DX12_LOG("Enabled Debug Layer");
@@ -116,7 +116,7 @@ namespace Render {
         hr = CreateDXGIFactory1(IID_PPV_ARGS(&mFactory));
         DX12_CHECK(hr);
 
-        ReleasePtr<IDXGIAdapter1> hardwareAdapter = GetHardwareAdapter(mFactory);
+        Platform::ReleasePtr<IDXGIAdapter1> hardwareAdapter = GetHardwareAdapter(mFactory);
 
         DX12_LOG("Creating Device...");
         hr = D3D12CreateDevice(hardwareAdapter, D3D_FEATURE_LEVEL_12_1, IID_PPV_ARGS(&*sDevice));
@@ -124,7 +124,7 @@ namespace Render {
         DX12_LOG("Success");
 
         {
-            ReleasePtr<ID3D12InfoQueue1> infoQueue;
+            Platform::ReleasePtr<ID3D12InfoQueue1> infoQueue;
             hr = GetDevice()->QueryInterface(IID_PPV_ARGS(&infoQueue));
 
             if (SUCCEEDED(hr)) {
@@ -160,7 +160,7 @@ namespace Render {
 
     DirectX12RenderContext::~DirectX12RenderContext()
     {
-        ReleasePtr<ID3D12InfoQueue1> infoQueue;
+        Platform::ReleasePtr<ID3D12InfoQueue1> infoQueue;
         HRESULT hr = GetDevice()->QueryInterface(IID_PPV_ARGS(&infoQueue));
 
         if (SUCCEEDED(hr)) {
@@ -185,7 +185,7 @@ namespace Render {
         sSingleton = nullptr;
     }
 
-    std::unique_ptr<RenderTarget> DirectX12RenderContext::createRenderTexture(const Vector2i &size, const RenderTextureConfig &config)
+    std::unique_ptr<RenderTarget> DirectX12RenderContext::createRenderTexture(const Math::Vector2i &size, const RenderTextureConfig &config)
     {
         return std::make_unique<DirectX12RenderTexture>(this, size, config);
     }
@@ -283,8 +283,8 @@ namespace Render {
 
             rootSignatureDesc.Init(5 + signature.mResourceBlocks.size(), rootParameters, 2, samplerDesc, rootSignatureFlags);
 
-            ReleasePtr<ID3DBlob> signature;
-            ReleasePtr<ID3DBlob> error;
+            Platform::ReleasePtr<ID3DBlob> signature;
+            Platform::ReleasePtr<ID3DBlob> error;
             HRESULT hr = D3D12SerializeRootSignature(&rootSignatureDesc, D3D_ROOT_SIGNATURE_VERSION_1, &signature, &error);
             DX12_CHECK(hr);
             hr = GetDevice()->CreateRootSignature(0, signature->GetBufferPointer(), signature->GetBufferSize(), IID_PPV_ARGS(&it->second));
@@ -318,7 +318,7 @@ namespace Render {
         return &mGraphicsQueue;
     }
 
-    std::unique_ptr<RenderTarget> DirectX12RenderContext::createRenderWindow(Window::OSWindow *w, size_t samples)
+    std::unique_ptr<RenderTarget> DirectX12RenderContext::createRenderWindow(Platform::Window::OSWindow *w, size_t samples)
     {
         checkThread();
 
@@ -345,7 +345,7 @@ namespace Render {
 
     GPUPtr<void> DirectX12RenderContext::allocateBufferImpl(size_t size, UsageHint hint)
     {
-        Block allocation = mBufferAllocator.allocate(size);
+        Memory::Block allocation = mBufferAllocator.allocate(size);
 
         if (!allocation.mAddress)
             return {};
@@ -355,7 +355,7 @@ namespace Render {
 
     GPUPtr<Void[]> Engine::Render::DirectX12RenderContext::allocateBufferImpl(size_t elementSize, size_t count, UsageHint hint)
     {
-        Block allocation = mBufferAllocator.allocate(elementSize * count);
+        Memory::Block allocation = mBufferAllocator.allocate(elementSize * count);
 
         if (!allocation.mAddress)
             return {};
@@ -363,9 +363,9 @@ namespace Render {
         return { allocation.mAddress, elementSize, count, [=, this](void *address) { mBufferAllocator.deallocate(allocation); } };
     }
 
-    WritableByteBuffer DirectX12RenderContext::mapBufferImpl(const GPUPtr<void> &buffer)
+    Memory::WritableByteBuffer DirectX12RenderContext::mapBufferImpl(const GPUPtr<void> &buffer)
     {
-        Block uploadAllocation = mUploadAllocator.allocate(buffer.size());
+        Memory::Block uploadAllocation = mUploadAllocator.allocate(buffer.size());
 
         struct Deleter {
             void operator()(void *ptr)
@@ -395,9 +395,9 @@ namespace Render {
         };
     }
 
-     WritableByteBuffer DirectX12RenderContext::mapBufferImpl(const GPUPtr<Void[]> &buffer)
+     Memory::WritableByteBuffer DirectX12RenderContext::mapBufferImpl(const GPUPtr<Void[]> &buffer)
     {
-        Block uploadAllocation = mUploadAllocator.allocate(buffer.size());
+         Memory::Block uploadAllocation = mUploadAllocator.allocate(buffer.size());
 
         struct Deleter {
             void operator()(void *ptr)
@@ -498,12 +498,12 @@ namespace Render {
         mDescriptorHeap.deallocate(data->mHandle);
     }
 
-    TexturePtr DirectX12RenderContext::createTexture(TextureType type, TextureFormat format, Vector2i size, const ByteBuffer &data)
+    TexturePtr DirectX12RenderContext::createTexture(TextureType type, TextureFormat format, Math::Vector2i size, const Memory::ByteBuffer &data)
     {
         return std::make_shared<DirectX12Texture>(type, false, format, size, 1, data);
     }
 
-    void DirectX12RenderContext::setTextureSubData(const TexturePtr &tex, Vector2i offset, Vector2i size, const ByteBuffer &data)
+    void DirectX12RenderContext::setTextureSubData(const TexturePtr &tex, Math::Vector2i offset, Math::Vector2i size, const Memory::ByteBuffer &data)
     {
         static_cast<DirectX12Texture &>(*tex).setSubData(offset, size, data);
     }

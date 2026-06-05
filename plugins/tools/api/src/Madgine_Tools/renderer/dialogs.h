@@ -54,7 +54,7 @@ namespace Tools {
             open(std::move(dialog.mHandle));
         }
 
-        void open(CoroutineHandle<DialogPromise> handle);
+        void open(Execution::CoroutineHandle<DialogPromise> handle);
 
         void setParent(DialogSettings &parent);
 
@@ -65,7 +65,7 @@ namespace Tools {
         DialogSettings *mParent = nullptr;
 
         std::optional<DialogResult> mResult;
-        std::vector<CoroutineHandle<DialogPromise>> mSubDialogs;
+        std::vector<Execution::CoroutineHandle<DialogPromise>> mSubDialogs;
 
         size_t mModalLayers = 0;
     };
@@ -79,7 +79,7 @@ namespace Tools {
 
         DialogContainer &operator=(const DialogContainer &) = delete;
 
-        void show(CoroutineHandle<DialogPromise> dialog);
+        void show(Execution::CoroutineHandle<DialogPromise> dialog);
 
         template <typename Dialog, typename F>
         void show(Dialog dialog, F &&f)
@@ -88,7 +88,7 @@ namespace Tools {
             show(std::move(dialog.mHandle));
         }
 
-        void showGrouped(std::string_view name, CoroutineHandle<DialogPromise> dialog);
+        void showGrouped(std::string_view name, Execution::CoroutineHandle<DialogPromise> dialog);
 
         template <typename Dialog, typename F>
         void showGrouped(std::string_view name, Dialog dialog, F &&f)
@@ -103,21 +103,21 @@ namespace Tools {
         bool renderHeader(DialogSettings &settings);
         void renderFooter(DialogSettings &settings);
 
-        void handleDialogs(std::vector<CoroutineHandle<DialogPromise>> &dialogs);
+        void handleDialogs(std::vector<Execution::CoroutineHandle<DialogPromise>> &dialogs);
 
         struct DialogGroup {
             DialogGroup(DialogContainer &);
 
             void render();
-            void addDialog(CoroutineHandle<DialogPromise> dialog);
+            void addDialog(Execution::CoroutineHandle<DialogPromise> dialog);
 
             DialogContainer &mContainer;
             DialogSettings mSettings;     
-            std::deque<std::vector<CoroutineHandle<DialogPromise>>> mDialogs;
+            std::deque<std::vector<Execution::CoroutineHandle<DialogPromise>>> mDialogs;
         };
 
     private:
-        std::vector<CoroutineHandle<DialogPromise>> mDialogs;
+        std::vector<Execution::CoroutineHandle<DialogPromise>> mDialogs;
 
         std::map<std::string, DialogGroup> mDialogGroups;
     };
@@ -148,7 +148,7 @@ namespace Tools {
                 return mPromise.mSettings.completed();
             }
 
-            void await_suspend(CoroutineHandle<DialogPromise> self) const noexcept
+            void await_suspend(Execution::CoroutineHandle<DialogPromise> self) const noexcept
             {
                 assert(mPromise.mContainer && &self.promise() == &mPromise);
                 *mPromise.mContainer = std::move(self);
@@ -165,7 +165,7 @@ namespace Tools {
                 return false;
             }
 
-            std::coroutine_handle<> await_suspend(CoroutineHandle<DialogPromise> self) noexcept
+            std::coroutine_handle<> await_suspend(Execution::CoroutineHandle<DialogPromise> self) noexcept
             {
                 if (mResumer) {
                     std::swap(self->mContainer, mResumer.promise().mContainer);
@@ -180,7 +180,7 @@ namespace Tools {
                 std::terminate();
             }
 
-            CoroutineHandle<DialogPromise> mResumer;
+            Execution::CoroutineHandle<DialogPromise> mResumer;
         };
 
         FinalAwaiter final_suspend() noexcept
@@ -200,7 +200,7 @@ namespace Tools {
             throw;
         }
 
-        void suspend(CoroutineHandle<DialogPromise> resumer)
+        void suspend(Execution::CoroutineHandle<DialogPromise> resumer)
         {
             std::swap(resumer.promise().mContainer, mContainer);
             mSettings.setParent(resumer.promise().mSettings);
@@ -208,8 +208,8 @@ namespace Tools {
         }
 
         DialogSettings mSettings;
-        CoroutineHandle<DialogPromise> mResumer;
-        CoroutineHandle<DialogPromise> *mContainer = nullptr;
+        Execution::CoroutineHandle<DialogPromise> mResumer;
+        Execution::CoroutineHandle<DialogPromise> *mContainer = nullptr;
     };
 
     struct get_dialog_settings_t {
@@ -246,7 +246,7 @@ namespace Tools {
             return false;
         }
 
-        std::coroutine_handle<> await_suspend(CoroutineHandle<DialogPromise> handle) noexcept
+        std::coroutine_handle<> await_suspend(Execution::CoroutineHandle<DialogPromise> handle) noexcept
         {
             mDialog.mHandle.promise().suspend(std::move(handle));
             mDialog.setCallback([this](T... result) { mResult.emplace(result...); });
@@ -268,7 +268,7 @@ namespace Tools {
 
             Dialog<T...> get_return_object()
             {
-                return { CoroutineHandle<promise_type>::fromPromise(*this) };
+                return { Execution::CoroutineHandle<promise_type>::fromPromise(*this) };
             }
 
             void return_value(std::tuple<T...> value)
@@ -284,7 +284,7 @@ namespace Tools {
             {
                 if constexpr (std::same_as<A, const get_dialog_settings_t &>) {
                     return get_dialog_settings_helper_t { *this };
-                } else if constexpr (InstanceOf<A, Dialog>) {
+                } else if constexpr (Concepts::InstanceOf<A, Dialog>) {
                     return AwaitableDialog(std::forward<A>(a));
                 } else {
                     return std::forward<A>(a);
@@ -301,7 +301,7 @@ namespace Tools {
             mHandle->mCallback = std::forward<F>(f);
         }
 
-        CoroutineHandle<promise_type> mHandle;
+        Execution::CoroutineHandle<promise_type> mHandle;
     };
 
 }

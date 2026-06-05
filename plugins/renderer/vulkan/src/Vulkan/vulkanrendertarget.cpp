@@ -88,7 +88,7 @@ namespace Render {
         VK_CHECK(result);
     }
 
-    void VulkanRenderTarget::setup(const Vector2i &framebufferSize, const Vector2i &size, bool createDepthBufferView)
+    void VulkanRenderTarget::setup(const Math::Vector2i &framebufferSize, const Math::Vector2i &size, bool createDepthBufferView)
     {
         mBufferSize = framebufferSize;
         mSize = size;
@@ -126,9 +126,9 @@ namespace Render {
         return mCommandList.reset();
     }
 
-    Matrix4 VulkanRenderTarget::getClipSpaceMatrix() const
+    Math::Matrix4 VulkanRenderTarget::getClipSpaceMatrix() const
     {
-        return Matrix4 { 1, 0, 0, 0,
+        return Math::Matrix4 { 1, 0, 0, 0,
             0, -1, 0, 0,
             0, 0, 1, 0,
             0, 0, 0, 1 };
@@ -144,7 +144,7 @@ namespace Render {
         RenderTarget::endIteration(targetIndex, targetCount, targetSubresourceIndex);
     }
 
-    void VulkanRenderTarget::setRenderSpace(const Rect2i &space)
+    void VulkanRenderTarget::setRenderSpace(const Math::Rect2i &space)
     {
         RenderTarget::setRenderSpace(space);
 
@@ -163,7 +163,7 @@ namespace Render {
         vkCmdSetScissor(mCommandList, 0, 1, &scissor);
     }
 
-    void VulkanRenderTarget::setScissorsRect(const Rect2i &space)
+    void VulkanRenderTarget::setScissorsRect(const Math::Rect2i &space)
     {
         VkRect2D scissor {};
         scissor.offset = { space.mTopLeft.x, space.mTopLeft.y };

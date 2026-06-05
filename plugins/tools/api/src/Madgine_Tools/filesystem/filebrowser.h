@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Interfaces/filesystem/path.h"
+#include "Platform/filesystem/path.h"
 
 #include "../toolbase.h"
 #include "../toolscollector.h"
@@ -18,8 +18,8 @@ namespace Tools {
         std::string_view key() const override;
 
     private:
-        Engine::Filesystem::Path mCurrentPath = Engine::Filesystem::Path { "." }.absolute();
-        Engine::Filesystem::Path mSelectedPath = Engine::Filesystem::Path { "." }.absolute();
+        Platform::Filesystem::Path mCurrentPath = Platform::Filesystem::Path { "." }.absolute();
+        Platform::Filesystem::Path mSelectedPath = Platform::Filesystem::Path { "." }.absolute();
     };
 
 }

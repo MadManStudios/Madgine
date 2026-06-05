@@ -2,7 +2,7 @@
 
 #include "resourcemanager.h"
 
-#include "Interfaces/filesystem/fsapi.h"
+#include "Platform/filesystem/fsapi.h"
 
 #include "Modules/plugins/plugin.h"
 #include "Modules/plugins/pluginmanager.h"
@@ -13,7 +13,7 @@
 #include "Madgine/cli/parameter.h"
 #include "Madgine/root/root.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 
 #include "resourcebase.h"
 #include "resourceloaderbase.h"
@@ -27,12 +27,12 @@ METATABLE_END(Engine::Resources::ResourceManager)
 namespace Engine {
 namespace Resources {
 
-    CLI::Parameter<Filesystem::Path> exportResources { { "--export-resources", "-er" }, "", "If set, the resource manager will write all available resources to the specified list file." };
-    CLI::Parameter<Filesystem::Path> bakeResources { { "--bake" }, "", "If set, all resources listed in the specified list file will be baked." };
-    CLI::Parameter<Filesystem::Path> bakeOutputList { { "--bake-output-list" }, "", "If set, all baked resources will be written to a list file at the specified location." };
+    Core::Parameter<Platform::Filesystem::Path> exportResources { { "--export-resources", "-er" }, "", "If set, the resource manager will write all available resources to the specified list file." };
+    Core::Parameter<Platform::Filesystem::Path> bakeResources { { "--bake" }, "", "If set, all resources listed in the specified list file will be baked." };
+    Core::Parameter<Platform::Filesystem::Path> bakeOutputList { { "--bake-output-list" }, "", "If set, all baked resources will be written to a list file at the specified location." };
 
 #if ENABLE_PLUGINS
-    CLI::Parameter<Filesystem::Path> sourceDirPath { { "--source-dir" }, SOURCE_DIR, "Set source root folder." };
+    Core::Parameter<Platform::Filesystem::Path> sourceDirPath { { "--source-dir" }, SOURCE_DIR, "Set source root folder." };
 #endif
 
     static ResourceManager *sSingleton = nullptr;
@@ -43,7 +43,7 @@ namespace Resources {
         return *sSingleton;
     }
 
-    ResourceManager::ResourceManager(Root::Root &root)
+    ResourceManager::ResourceManager(Core::Root &root)
         : RootComponent(root)
     {
         assert(!sSingleton);
@@ -67,7 +67,7 @@ namespace Resources {
     {
         if (!exportResources->empty()) {
 
-            std::map<std::pair<std::string, Filesystem::Path>, std::vector<ResourceBase *>> resourceList = buildResourceList();
+            std::map<std::pair<std::string, Platform::Filesystem::Path>, std::vector<ResourceBase *>> resourceList = buildResourceList();
             std::ofstream out { *exportResources };
             if (!out) {
                 LOG_ERROR("Error opening for writing: " << *exportResources);
@@ -90,7 +90,7 @@ namespace Resources {
                 co_return -1;
             }
             LOG("Baking resources in " << bakeResources << ".");
-            std::vector<Filesystem::Path> resourcesToBake;
+            std::vector<Platform::Filesystem::Path> resourcesToBake;
             std::string line;
             while (std::getline(list, line)) {
                 line = StringUtil::trim(line);
@@ -98,7 +98,7 @@ namespace Resources {
                 std::string project;
                 if (it != std::string::npos) {
                     project = line.substr(0, it);
-                    Filesystem::Path path = getProjectPath(project);
+                    Platform::Filesystem::Path path = getProjectPath(project);
                     if (path.empty()) {
                         LOG_WARNING("Project " << project << " not found for resource " << line << ", skipping.");
                         continue;
@@ -124,7 +124,7 @@ namespace Resources {
                 LOG_ERROR("Error opening for writing: " << *bakeOutputList);
                 co_return -1;
             }
-            for (const Filesystem::Path &resource : resourcesToBake) {
+            for (const Platform::Filesystem::Path &resource : resourcesToBake) {
                 const auto &[project, path] = makeRelative(resource);
                 if (project.empty()) {
                     LOG_WARNING("Resource " << resource << " is not in a registered resource location, skipping writing it to the output list.");
@@ -136,9 +136,9 @@ namespace Resources {
         co_return 0;
     }
 
-    void ResourceManager::registerResourceLocation(const Filesystem::Path &path, std::string_view identifier, int priority)
+    void ResourceManager::registerResourceLocation(const Platform::Filesystem::Path &path, std::string_view identifier, int priority)
     {
-        Filesystem::Path absolutePath = path.absolute();
+        Platform::Filesystem::Path absolutePath = path.absolute();
 
         if (!exists(absolutePath))
             return;
@@ -151,7 +151,7 @@ namespace Resources {
             mFileWatcher.addWatch(absolutePath);
 
             if (mEnumerated) {
-                updateResources(Filesystem::FileEventType::FILE_CREATED, path, priority);
+                updateResources(Platform::Filesystem::FileEventType::FILE_CREATED, path, priority);
             }
         }
     }
@@ -169,7 +169,7 @@ namespace Resources {
                 const Plugins::BinaryInfo *info = p.info();
                 if (info->mDataPath.empty())
                     continue;
-                Filesystem::Path path = info->mDataPath;
+                Platform::Filesystem::Path path = info->mDataPath;
                 if (path.isRelative()) {
                     path = *sourceDirPath / path;
                 }
@@ -182,29 +182,29 @@ namespace Resources {
         }
 
 #else
-        registerResourceLocation(Filesystem::shippingPath() / "data", "Game", 80);
+        registerResourceLocation(Platform::Filesystem::shippingPath() / "data", "Game", 80);
 #endif
 
         std::map<std::string, std::vector<ResourceLoaderBase *>, std::less<>> loaderByExtension = getLoaderByExtension();
 
-        for (const std::pair<const Filesystem::Path, PathProperties> &p : mResourcePaths) {
-            updateResources(Filesystem::FileEventType::FILE_CREATED, p.first, p.second.mPriority, loaderByExtension);
+        for (const std::pair<const Platform::Filesystem::Path, PathProperties> &p : mResourcePaths) {
+            updateResources(Platform::Filesystem::FileEventType::FILE_CREATED, p.first, p.second.mPriority, loaderByExtension);
         }
 
         mEnumerated = true;
     }
 
-    std::pair<std::string, Filesystem::Path> ResourceManager::makeRelative(const Filesystem::Path &path) const
+    std::pair<std::string, Platform::Filesystem::Path> ResourceManager::makeRelative(const Platform::Filesystem::Path &path) const
     {
-        for (const std::pair<const Filesystem::Path, PathProperties> &p : mResourcePaths) {
-            Filesystem::Path relative = path.relative(p.first);
+        for (const std::pair<const Platform::Filesystem::Path, PathProperties> &p : mResourcePaths) {
+            Platform::Filesystem::Path relative = path.relative(p.first);
             if (!relative.empty()) {
                 return { p.second.mIdentifier, std::move(relative) };
             }
         }
 
         if (!bakeOutputList->empty()) {
-            Filesystem::Path relative = path.relative(bakeOutputList->parentPath());
+            Platform::Filesystem::Path relative = path.relative(bakeOutputList->parentPath());
             if (!relative.empty()) {
                 return { "Generated", std::move(relative) };
             }
@@ -213,9 +213,9 @@ namespace Resources {
         return std::make_pair("", "");
     }
 
-    Filesystem::Path ResourceManager::getProjectPath(std::string_view name) const
+    Platform::Filesystem::Path ResourceManager::getProjectPath(std::string_view name) const
     {
-        auto it = std::ranges::find(mResourcePaths, name, [](const std::pair<const Filesystem::Path, PathProperties> &p) { return p.second.mIdentifier; });
+        auto it = std::ranges::find(mResourcePaths, name, [](const std::pair<const Platform::Filesystem::Path, PathProperties> &p) { return p.second.mIdentifier; });
         if (it == mResourcePaths.end())
             return {};
         return it->first;
@@ -229,7 +229,7 @@ namespace Resources {
             co_await loader->callInit();
         }
 
-        if (!Root::Root::getSingleton().toolMode())
+        if (!Core::Root::getSingleton().toolMode())
             taskQueue()->queueTask(update());
 
         co_return true;
@@ -244,10 +244,10 @@ namespace Resources {
         }
     }
 
-    Filesystem::Path ResourceManager::findResourceFile(std::string_view fileName)
+    Platform::Filesystem::Path ResourceManager::findResourceFile(std::string_view fileName)
     {
-        for (const std::pair<const Filesystem::Path, PathProperties> &p : mResourcePaths) {
-            for (Filesystem::Path p : Filesystem::listFilesRecursive(p.first)) {
+        for (const std::pair<const Platform::Filesystem::Path, PathProperties> &p : mResourcePaths) {
+            for (Platform::Filesystem::Path p : Platform::Filesystem::listFilesRecursive(p.first)) {
                 if (p.filename().str() == fileName)
                     return p;
             }
@@ -258,11 +258,11 @@ namespace Resources {
     Threading::Task<void> ResourceManager::update()
     {
         while (taskQueue()->running()) {
-            std::vector<Filesystem::FileEvent> events = mFileWatcher.fetchChangesReduced();
+            std::vector<Platform::Filesystem::FileEvent> events = mFileWatcher.fetchChangesReduced();
 
             std::map<std::string, std::vector<ResourceLoaderBase *>, std::less<>> loaderByExtension = getLoaderByExtension();
 
-            for (const Filesystem::FileEvent &event : events) {
+            for (const Platform::Filesystem::FileEvent &event : events) {
                 updateResource(event.mType, event.mPath, mResourcePaths.at(event.mPath).mPriority, loaderByExtension);
             }
 
@@ -280,21 +280,21 @@ namespace Resources {
         return mRoot.taskQueue();
     }
 
-    void ResourceManager::updateResources(Filesystem::FileEventType event, const Filesystem::Path &path, int priority)
+    void ResourceManager::updateResources(Platform::Filesystem::FileEventType event, const Platform::Filesystem::Path &path, int priority)
     {
         updateResources(event, path, priority, getLoaderByExtension());
     }
 
-    void ResourceManager::updateResources(Filesystem::FileEventType event, const Filesystem::Path &path, int priority, const std::map<std::string, std::vector<ResourceLoaderBase *>, std::less<>> &loaderByExtension)
+    void ResourceManager::updateResources(Platform::Filesystem::FileEventType event, const Platform::Filesystem::Path &path, int priority, const std::map<std::string, std::vector<ResourceLoaderBase *>, std::less<>> &loaderByExtension)
     {
         LOG_DEBUG("Scanning for Resources in: " << path);
 
-        for (Filesystem::Path p : Filesystem::listFilesRecursive(path)) {
+        for (Platform::Filesystem::Path p : Platform::Filesystem::listFilesRecursive(path)) {
             updateResource(event, p, priority, loaderByExtension);
         }
     }
 
-    void ResourceManager::updateResource(Filesystem::FileEventType event, const Filesystem::Path &path, int priority, const std::map<std::string, std::vector<ResourceLoaderBase *>, std::less<>> &loaderByExtension)
+    void ResourceManager::updateResource(Platform::Filesystem::FileEventType event, const Platform::Filesystem::Path &path, int priority, const std::map<std::string, std::vector<ResourceLoaderBase *>, std::less<>> &loaderByExtension)
     {
         LOG_DEBUG("Updating Resource: " << path << " (" << event << ")");
 
@@ -306,7 +306,7 @@ namespace Resources {
                 auto [resource, created] = loader->addResource(path);
 
                 switch (event) {
-                case Filesystem::FileEventType::FILE_CREATED:
+                case Platform::Filesystem::FileEventType::FILE_CREATED:
                     if (!created && path != resource->path()) {
                         int otherPriority = mResourcePaths.at(resource->path()).mPriority;
                         if (priority > otherPriority || (priority == otherPriority && loader->extensionIndex(extension) < loader->extensionIndex(resource->path().extension()))) {
@@ -315,7 +315,7 @@ namespace Resources {
                         }
                     }
                     break;
-                case Filesystem::FileEventType::FILE_MODIFIED:
+                case Platform::Filesystem::FileEventType::FILE_MODIFIED:
                     if (!created)
                         loader->updateResourceData(resource);
                     break;
@@ -336,12 +336,12 @@ namespace Resources {
         return loaderByExtension;
     }
 
-    std::map<std::pair<std::string, Filesystem::Path>, std::vector<ResourceBase *>> ResourceManager::buildResourceList()
+    std::map<std::pair<std::string, Platform::Filesystem::Path>, std::vector<ResourceBase *>> ResourceManager::buildResourceList()
     {
-        std::map<std::pair<std::string, Filesystem::Path>, std::vector<ResourceBase *>> result;
+        std::map<std::pair<std::string, Platform::Filesystem::Path>, std::vector<ResourceBase *>> result;
         for (const std::unique_ptr<ResourceLoaderBase> &loader : mCollector) {
             for (ResourceBase *res : loader->resources()) {
-                Filesystem::Path path = res->path();
+                Platform::Filesystem::Path path = res->path();
                 if (!path.empty()) {
                     const auto &[project, relPath] = makeRelative(path);
                     if (project.empty()) {
@@ -355,7 +355,7 @@ namespace Resources {
         return result;
     }
 
-    bool ResourceManager::SubDirCompare::operator()(const Filesystem::Path &first, const Filesystem::Path &second) const
+    bool ResourceManager::SubDirCompare::operator()(const Platform::Filesystem::Path &first, const Platform::Filesystem::Path &second) const
     {
         auto [firstEnd, secondEnd] = std::mismatch(first.str().begin(), first.str().end(), second.str().begin(), second.str().end());
         if (firstEnd == first.str().end() || secondEnd == second.str().end())

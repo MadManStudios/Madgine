@@ -3,16 +3,19 @@
 #include "vector3.h"
 
 namespace Engine {
+namespace Math {
 
-struct Plane {
+    struct Plane {
 
-    Plane(const Vector3 &point, const Vector3 &normal)
-        : mNormal(normal)
-        , mDistance(mNormal.dotProduct(point))
-    {
-    }
+        Plane(const Vector3 &point, const Vector3 &normal)
+            : mNormal(normal)
+            , mDistance(mNormal.dotProduct(point))
+        {
+        }
 
-    NormalizedVector3 mNormal;
-    float mDistance;
-};
+        NormalizedVector3 mNormal;
+        float mDistance;
+    };
+
+}
 }

@@ -2,7 +2,7 @@
 
 #include "vulkanrenderwindow.h"
 
-#include "Interfaces/window/windowapi.h"
+#include "Platform/window/windowapi.h"
 
 #include "Meta/math/rect2i.h"
 
@@ -13,16 +13,20 @@
 #elif LINUX
 #    include <X11/Xlib.h>
 namespace Engine {
-namespace Window {
-    extern Display *sDisplay();
+namespace Platform {
+    namespace Window {
+        extern Display *sDisplay();
+    }
 }
 }
 #endif
 
 namespace Engine {
 
-namespace Window {
-    extern void forceResize();
+namespace Platform {
+    namespace Window {
+        extern void forceResize();
+    }
 }
 
 namespace Render {
@@ -69,7 +73,7 @@ namespace Render {
         return availableFormats[0];
     }
 
-    VkExtent2D chooseSwapExtent(const VkSurfaceCapabilitiesKHR &capabilities, const Vector2i &size)
+    VkExtent2D chooseSwapExtent(const VkSurfaceCapabilitiesKHR &capabilities, const Math::Vector2i &size)
     {
         if (capabilities.currentExtent.width != std::numeric_limits<uint32_t>::max()) {
             return capabilities.currentExtent;
@@ -92,7 +96,7 @@ namespace Render {
         return VK_PRESENT_MODE_FIFO_KHR;
     }
 
-    VulkanRenderWindow::VulkanRenderWindow(VulkanRenderContext *context, Window::OSWindow *w, size_t samples)
+    VulkanRenderWindow::VulkanRenderWindow(VulkanRenderContext *context, Platform::Window::OSWindow *w, size_t samples)
         : VulkanRenderTarget(context, true, w->title(), TextureType_2D, samples)
         , mWindow(w)
     {
@@ -158,7 +162,7 @@ namespace Render {
         switch (result) {
 #if ANDROID
         case VK_SUBOPTIMAL_KHR:
-            Window::forceResize();
+            Platform::Window::forceResize();
             break;
 #endif
         case VK_ERROR_OUT_OF_DATE_KHR:
@@ -180,18 +184,18 @@ namespace Render {
         VulkanRenderTarget::endIteration(targetIndex, targetCount, targetSubresourceIndex);
     }
 
-    Vector2i VulkanRenderWindow::size() const
+    Math::Vector2i VulkanRenderWindow::size() const
     {
-        InterfacesVector size = mWindow->renderSize();
+        Platform::PlatformVector size = mWindow->renderSize();
         return { size.x, size.y };
     }
 
-    Matrix4 VulkanRenderWindow::getClipSpaceMatrix() const
+    Math::Matrix4 VulkanRenderWindow::getClipSpaceMatrix() const
     {
         return VulkanRenderTarget::getClipSpaceMatrix() * mClipSpaceRotation;
     }
 
-    void VulkanRenderWindow::setRenderSpace(const Rect2i &space)
+    void VulkanRenderWindow::setRenderSpace(const Math::Rect2i &space)
     {
         RenderTarget::setRenderSpace(space);
 
@@ -221,7 +225,7 @@ namespace Render {
         vkCmdSetScissor(mCommandList, 0, 1, &scissor);
     }
 
-    void VulkanRenderWindow::setScissorsRect(const Rect2i &space)
+    void VulkanRenderWindow::setScissorsRect(const Math::Rect2i &space)
     {
         int x = mClipSpaceRotation[0][0] * space.mTopLeft.x + mClipSpaceRotation[1][0] * space.mTopLeft.y;
         int y = mClipSpaceRotation[0][1] * space.mTopLeft.x + mClipSpaceRotation[1][1] * space.mTopLeft.y;
@@ -255,7 +259,7 @@ namespace Render {
         return mSurface;
     }
 
-    void VulkanRenderWindow::create(const Vector2i &size)
+    void VulkanRenderWindow::create(const Math::Vector2i &size)
     {
         mSurfaceCapabilities = querySwapChainSupport(GetPhysicalDevice(), mSurface).capabilities;
         VkExtent2D extent = chooseSwapExtent(mSurfaceCapabilities, size);
@@ -278,19 +282,19 @@ namespace Render {
         createInfo2.pQueueFamilyIndices = nullptr; // Optional
         createInfo2.preTransform = mSurfaceCapabilities.currentTransform;
 
-        mClipSpaceRotation = Matrix4::IDENTITY;
+        mClipSpaceRotation = Math::Matrix4::IDENTITY;
 
         if (mSurfaceCapabilities.currentTransform & VK_SURFACE_TRANSFORM_ROTATE_90_BIT_KHR) {
-            mClipSpaceRotation = mClipSpaceRotation * Matrix4 { 0, 1, 0, 0, -1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1 };
+            mClipSpaceRotation = mClipSpaceRotation * Math::Matrix4 { 0, 1, 0, 0, -1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1 };
             std::swap(extent.width, extent.height);
         }
 
         if (mSurfaceCapabilities.currentTransform & VK_SURFACE_TRANSFORM_ROTATE_180_BIT_KHR) {
-            mClipSpaceRotation = mClipSpaceRotation * Matrix4 { -1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1 };
+            mClipSpaceRotation = mClipSpaceRotation * Math::Matrix4 { -1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1 };
         }
 
         if (mSurfaceCapabilities.currentTransform & VK_SURFACE_TRANSFORM_ROTATE_270_BIT_KHR) {
-            mClipSpaceRotation = mClipSpaceRotation * Matrix4 { 0, -1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1 };
+            mClipSpaceRotation = mClipSpaceRotation * Math::Matrix4 { 0, -1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1 };
             std::swap(extent.width, extent.height);
         }
 
@@ -377,7 +381,7 @@ namespace Render {
 #elif LINUX
         VkXlibSurfaceCreateInfoKHR createInfo {};
         createInfo.sType = VK_STRUCTURE_TYPE_XLIB_SURFACE_CREATE_INFO_KHR;
-        createInfo.dpy = Window::sDisplay();
+        createInfo.dpy = Platform::Window::sDisplay();
         createInfo.window = mWindow->intHandle();
 
         VkResult result = vkCreateXlibSurfaceKHR(GetInstance(), &createInfo, nullptr, &mSurface);
@@ -402,11 +406,11 @@ namespace Render {
         dependency.dstAccessMask = VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT;
         createRenderPass(1, mFormat.format, VK_IMAGE_LAYOUT_PRESENT_SRC_KHR, false, { &dependency, 1 });
 
-        InterfacesVector size = mWindow->renderSize();
+        Platform::PlatformVector size = mWindow->renderSize();
         create({ size.x, size.y });
     }
 
-    bool VulkanRenderWindow::resizeImpl(const Vector2i &size)
+    bool VulkanRenderWindow::resizeImpl(const Math::Vector2i &size)
     {
         mSwapChainImages.clear();
 

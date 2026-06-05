@@ -4,16 +4,16 @@
 
 #include "Modules/threading/awaitables/awaitabletimepoint.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 
 #include "serverapibase.h"
 
-METATABLE_BEGIN(Engine::Server::Server)
-METATABLE_END(Engine::Server::Server)
+METATABLE_BEGIN(Engine::Core::Server)
+METATABLE_END(Engine::Core::Server)
 
 namespace Engine {
-namespace Server {
-    Server::Server(std::function<int(Closure<void(Engine::App::Application &, Engine::Window::MainWindow &)>)> entrypoint)
+namespace Core {
+    Server::Server(std::function<int(Closure<void(Application &, MainWindow &)>)> entrypoint)
         : mTaskQueue("Server")
         , mEntrypoint(entrypoint)
         , mServerAPIs(*this)
@@ -48,7 +48,7 @@ namespace Server {
         co_return;
     }
 
-    void Server::spawnInstance(std::string_view name, Closure<void(Engine::App::Application &, Engine::Window::MainWindow &)> callback)
+    void Server::spawnInstance(std::string_view name, Closure<void(Application &, MainWindow &)> callback)
     {
         mInstances.emplace_back(name, [this, callback { std::move(callback) }]() mutable { return mEntrypoint(std::move(callback)); });
     }

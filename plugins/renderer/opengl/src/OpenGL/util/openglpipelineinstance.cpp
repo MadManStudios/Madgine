@@ -8,7 +8,7 @@
 
 #include "Madgine/meshloader/gpumeshdata.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 
 #include "../openglrendercontext.h"
 #include "../openglrendertarget.h"
@@ -64,11 +64,11 @@ namespace Render {
         return true;
     }
 
-    WritableByteBuffer OpenGLPipelineInstance::mapParameters(size_t index)
+    Memory::WritableByteBuffer OpenGLPipelineInstance::mapParameters(size_t index)
     {
         size_t size = mConstantBufferSizes[index];
 
-        Block block = OpenGLRenderContext::getSingleton().mTempAllocator.allocate(size, uniformAlignment());
+        Memory::Block block = OpenGLRenderContext::getSingleton().mTempAllocator.allocate(size, uniformAlignment());
         auto [buffer, offset] = OpenGLRenderContext::getSingleton().mTempMemoryHeap.resolve(block.mAddress);
 #if !OPENGL_ES
         glBindBufferRange(GL_UNIFORM_BUFFER, index, buffer, offset, alignTo(block.mSize, 16));
@@ -206,11 +206,11 @@ namespace Render {
         mHasIndices = false;
     }
 
-    WritableByteBuffer OpenGLPipelineInstance::mapTempBuffer(size_t space, size_t elementSize, size_t count) const
+    Memory::WritableByteBuffer OpenGLPipelineInstance::mapTempBuffer(size_t space, size_t elementSize, size_t count) const
     {
         size_t size = elementSize * count;
 
-        Block block = OpenGLRenderContext::getSingleton().mTempAllocator.allocate(size, uniformAlignment());
+        Memory::Block block = OpenGLRenderContext::getSingleton().mTempAllocator.allocate(size, uniformAlignment());
         auto [buffer, offset] = OpenGLRenderContext::getSingleton().mTempMemoryHeap.resolve(block.mAddress);
 
 #if !OPENGL_ES
@@ -293,11 +293,11 @@ namespace Render {
         mElementCount = mesh.mElementCount;        
     }
 
-    WritableByteBuffer OpenGLPipelineInstance::mapVertices(RenderTarget *target, VertexFormat format, size_t count) const
+    Memory::WritableByteBuffer OpenGLPipelineInstance::mapVertices(RenderTarget *target, VertexFormat format, size_t count) const
     {
         size_t size = format.stride() * count;
 
-        Block block = OpenGLRenderContext::getSingleton().mTempAllocator.allocate(size);
+        Memory::Block block = OpenGLRenderContext::getSingleton().mTempAllocator.allocate(size);
         auto [buffer, offset] = OpenGLRenderContext::getSingleton().mTempMemoryHeap.resolve(block.mAddress);
 
         if (!bind(format, offset))
@@ -340,15 +340,15 @@ namespace Render {
 #endif
     }
 
-    TypedByteBuffer<uint32_t> OpenGLPipelineInstance::mapIndices(RenderTarget *target, size_t count) const
+    Memory::TypedByteBuffer<uint32_t> OpenGLPipelineInstance::mapIndices(RenderTarget *target, size_t count) const
     {
         size_t size = sizeof(uint32_t) * count;
 
 #if !EMSCRIPTEN
-        Block block = OpenGLRenderContext::getSingleton().mTempAllocator.allocate(size);
+        Memory::Block block = OpenGLRenderContext::getSingleton().mTempAllocator.allocate(size);
         auto [buffer, offset] = OpenGLRenderContext::getSingleton().mTempMemoryHeap.resolve(block.mAddress);
 #else
-        Block block = OpenGLRenderContext::getSingleton().mTempIndexAllocator.allocate(size);
+        Memory::Block block = OpenGLRenderContext::getSingleton().mTempIndexAllocator.allocate(size);
         auto [buffer, offset] = OpenGLRenderContext::getSingleton().mTempIndexMemoryHeap.resolve(block.mAddress);
 #endif
 

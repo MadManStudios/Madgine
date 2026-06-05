@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Modules/ini/inifile.h"
+#include "Modules/plugins/inifile.h"
 
 #include "Madgine_Tools/toolbase.h"
 #include "Madgine_Tools/toolscollector.h"
@@ -13,9 +13,9 @@ namespace Tools {
         LauncherTool(ImRoot &root);
 
         void renderMenu() override;
-        bool renderConfiguration(const Filesystem::Path &config) override;
-        void loadConfiguration(const Filesystem::Path &config) override;
-        void saveConfiguration(const Filesystem::Path &config) override;
+        bool renderConfiguration(const Platform::Filesystem::Path &config) override;
+        void loadConfiguration(const Platform::Filesystem::Path &config) override;
+        void saveConfiguration(const Platform::Filesystem::Path &config) override;
 
         std::string_view key() const override;
 
@@ -24,9 +24,9 @@ namespace Tools {
         Threading::Task<void> finalize() override;
 
     private:
-        Window::MainWindow *mMainWindow;
+        Core::MainWindow *mMainWindow;
 
-        Ini::IniFile mConfiguration;
+        Plugins::IniFile mConfiguration;
     };
 
 }

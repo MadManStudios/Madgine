@@ -8,11 +8,11 @@ namespace Render {
 
     struct MADGINE_VULKAN_EXPORT VulkanRenderTexture : VulkanRenderTarget {
 
-        VulkanRenderTexture(VulkanRenderContext *context, const Vector2i &size, const RenderTextureConfig &config);
+        VulkanRenderTexture(VulkanRenderContext *context, const Math::Vector2i &size, const RenderTextureConfig &config);
         ~VulkanRenderTexture();
 
-        bool resizeImpl(const Vector2i &size) override;
-        Vector2i size() const override;
+        bool resizeImpl(const Math::Vector2i &size) override;
+        Math::Vector2i size() const override;
 
         virtual void beginFrame() override;
         virtual RenderFuture endFrame() override;
@@ -33,7 +33,7 @@ namespace Render {
     private:
         std::vector<std::shared_ptr<VulkanTexture>> mTextures;
 
-        Vector2i mSize;
+        Math::Vector2i mSize;
 
         VulkanPtr<VkFramebuffer, &vkDestroyFramebuffer> mTextureFramebuffer;
 

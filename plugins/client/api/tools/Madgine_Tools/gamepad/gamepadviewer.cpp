@@ -2,14 +2,14 @@
 
 #include "gamepadviewer.h"
 
-#include "Interfaces/input/inputevents.h"
+#include "Platform/input/inputevents.h"
 
 #include "Modules/uniquecomponent/uniquecomponentcollector.h"
 
 #include "Madgine/render/rendercontext.h"
 #include "Madgine/render/texture.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
 #include "../imgui/clientimroot.h"
@@ -70,7 +70,7 @@ namespace Tools {
             constexpr const float ratio = 1350.0f / 759.0f;
             const float dimX = avail.x;
             const float dimY = avail.y * ratio;
-            const float dim = max(20.0f, min(dimX, dimY));
+            const float dim = Math::max(20.0f, Math::min(dimX, dimY));
             ImVec2 Canvas { dim, dim / ratio };
 
             const float size = dim / 12.0f;
@@ -87,7 +87,7 @@ namespace Tools {
             }
 
             if (mGamepadTexture)
-                mRoot.Image(mGamepadTexture, Vector2i { static_cast<int>(Canvas.x), static_cast<int>(Canvas.y) });
+                mRoot.Image(mGamepadTexture, Math::Vector2i { static_cast<int>(Canvas.x), static_cast<int>(Canvas.y) });
 
             size_t i = 0;
             constexpr float offsets[2][2] = {
@@ -95,7 +95,7 @@ namespace Tools {
                 { 0.553f, 0.235f }
             };
 
-            for (Vector2 axis : { root.mLeftControllerStick, root.mRightControllerStick }) {
+            for (Math::Vector2 axis : { root.mLeftControllerStick, root.mRightControllerStick }) {
 
                 ImVec2 topLeft = cursor + ImVec2 { offsets[i][0] * dim, offsets[i][1] * dim };
                 ++i;
@@ -142,24 +142,24 @@ namespace Tools {
                 x = root.mDPadState > 3 && root.mDPadState < 7 ? 7 - root.mDPadState : (root.mDPadState + 2) % 8 - 1;
                 y = root.mDPadState > 5 ? 9 - root.mDPadState : root.mDPadState - 1;
             }
-            float x_off = sqrtf(fabs(x - 2) / 2) * sign(x - 2);
-            float y_off = sqrtf(fabs(y - 2) / 2) * sign(y - 2);
+            float x_off = sqrtf(fabs(x - 2) / 2) * Math::sign(x - 2);
+            float y_off = sqrtf(fabs(y - 2) / 2) * Math::sign(y - 2);
             renderCircle(DPadOffset + ImVec2 { x_off, y_off } * 0.038f, 0.013f);
 
-            auto button = [&](Input::Key::Key key, ImVec2 off, float radius) {
+            auto button = [&](Platform::Input::Key::Key key, ImVec2 off, float radius) {
                 if (ImGui::IsKeyDown(static_cast<ImGuiKey>(key)))
                     renderCircle(off, radius);
             };
-            button(Input::Key::GP_A, { 0.68f, 0.215f }, 0.02f);
-            button(Input::Key::GP_B, { 0.73f, 0.165f }, 0.02f);
-            button(Input::Key::GP_X, { 0.63f, 0.165f }, 0.02f);
-            button(Input::Key::GP_Y, { 0.68f, 0.12f }, 0.02f);
-            button(Input::Key::GP_LB, { 0.3f, 0.06f }, 0.02f);
-            button(Input::Key::GP_RB, { 0.7f, 0.06f }, 0.02f);
-            button(Input::Key::GP_LSB, { 0.315f, 0.165f }, 0.02f);
-            button(Input::Key::GP_RSB, { 0.595f, 0.275f }, 0.02f);
-            button(Input::Key::GP_B1, { 0.45f, 0.166f }, 0.01f);
-            button(Input::Key::GP_B2, { 0.55f, 0.166f }, 0.01f);
+            button(Platform::Input::Key::GP_A, { 0.68f, 0.215f }, 0.02f);
+            button(Platform::Input::Key::GP_B, { 0.73f, 0.165f }, 0.02f);
+            button(Platform::Input::Key::GP_X, { 0.63f, 0.165f }, 0.02f);
+            button(Platform::Input::Key::GP_Y, { 0.68f, 0.12f }, 0.02f);
+            button(Platform::Input::Key::GP_LB, { 0.3f, 0.06f }, 0.02f);
+            button(Platform::Input::Key::GP_RB, { 0.7f, 0.06f }, 0.02f);
+            button(Platform::Input::Key::GP_LSB, { 0.315f, 0.165f }, 0.02f);
+            button(Platform::Input::Key::GP_RSB, { 0.595f, 0.275f }, 0.02f);
+            button(Platform::Input::Key::GP_B1, { 0.45f, 0.166f }, 0.01f);
+            button(Platform::Input::Key::GP_B2, { 0.55f, 0.166f }, 0.01f);
         }
         ImGui::End();
     }

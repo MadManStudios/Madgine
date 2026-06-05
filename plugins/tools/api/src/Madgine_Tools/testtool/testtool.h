@@ -3,7 +3,7 @@
 #include "Generic/flags.h"
 #include "Generic/genericresult.h"
 
-#include "Meta/keyvalue/valuetype.h"
+#include "Meta/reflect/value.h"
 
 #include "../toolbase.h"
 #include "../toolscollector.h"
@@ -21,10 +21,10 @@ namespace Tools {
         std::string_view key() const override;
 
         void logTest();
-        void logValue(const ValueType &v);
+        void logValue(const Reflect::Value &v);
         int dummy();
 
-        ValueType mV;
+        Reflect::Value mV;
 
         Flags<GenericResult::Representation> mFlags;
 

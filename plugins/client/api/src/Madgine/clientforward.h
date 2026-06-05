@@ -2,11 +2,8 @@
 
 namespace Engine {
 
-namespace App {
+namespace Core {
     struct Application;
-}
-
-namespace Window {
 
     struct MainWindow;
     struct ToolWindow;

@@ -31,12 +31,16 @@ namespace Render {
         , mStats("Execution")
 #endif
     {
+#if ENABLE_PROFILER
         Debug::Profiler::Profiler::getCurrent().registerThread(&mProfiler);
+#endif
     }
 
     DirectX12CommandAllocator::~DirectX12CommandAllocator()
     {
+#if ENABLE_PROFILER
         Debug::Profiler::Profiler::getCurrent().unregisterThread(&mProfiler);
+#endif
     }
 
     void DirectX12CommandAllocator::setup()
@@ -76,7 +80,7 @@ namespace Render {
 
     DirectX12CommandList DirectX12CommandAllocator::fetchCommandList()
     {
-        ReleasePtr<ID3D12CommandAllocator> alloc;
+        Platform::ReleasePtr<ID3D12CommandAllocator> alloc;
 
         if (!mAllocatorPool.empty()) {
             auto &[fenceValue, allocator, discard] = mAllocatorPool.front();
@@ -94,7 +98,7 @@ namespace Render {
             DX12_CHECK(hr);
         }
 
-        ReleasePtr<ID3D12GraphicsCommandList> list;
+        Platform::ReleasePtr<ID3D12GraphicsCommandList> list;
 
         if (!mCommandListPool.empty()) {
             list = std::move(mCommandListPool.back());
@@ -124,7 +128,7 @@ namespace Render {
         return { this, std::move(list), std::move(alloc) };
     }
 
-    RenderFuture DirectX12CommandAllocator::ExecuteCommandList(ReleasePtr<ID3D12GraphicsCommandList> list, ReleasePtr<ID3D12CommandAllocator> allocator, std::vector<Any> discardResources)
+    RenderFuture DirectX12CommandAllocator::ExecuteCommandList(Platform::ReleasePtr<ID3D12GraphicsCommandList> list, Platform::ReleasePtr<ID3D12CommandAllocator> allocator, std::vector<Any> discardResources)
     {
 #if ENABLE_PROFILER
         if (mType != D3D12_COMMAND_LIST_TYPE_COPY) {

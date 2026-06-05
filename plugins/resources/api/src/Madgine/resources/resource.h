@@ -123,13 +123,13 @@ namespace Resources {
 
         typename Loader::ResourceDataInfo mInfo;
         typename Loader::Data mData;
-        typename container_traits<typename Loader::DataContainer>::position_handle mHolder;
+        typename Containers::container_traits<typename Loader::DataContainer>::position_handle mHolder;
     };
 
     template <typename Loader>
     struct Resource : Loader::Interface::Resource {
 
-        Resource(const std::string &name, const Filesystem::Path &path = {}, typename Loader::Ctor ctor = {})
+        Resource(const std::string &name, const Platform::Filesystem::Path &path = {}, typename Loader::Ctor ctor = {})
             : Loader::Interface::Resource(name, path)
             , mCtor(ctor ? std::move(ctor) : Loader::Interface::template toCtor<Loader>(&Loader::loadImpl))
         {

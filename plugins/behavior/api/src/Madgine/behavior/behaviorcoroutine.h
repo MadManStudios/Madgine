@@ -3,9 +3,9 @@
 #include "Generic/closure.h"
 #include "Generic/execution/awaitablesender.h"
 
-#include "Interfaces/debug/stacktrace.h"
+#include "Platform/debug/stacktrace.h"
 
-#include "Meta/keyvalue/keyvalueresult.h"
+#include "Meta/reflect/result.h"
 
 #include "Madgine/debug/debuggablesender.h"
 #include "Madgine/debug/debuglocation.h"
@@ -52,15 +52,16 @@ namespace Behavior {
 
     struct MADGINE_BEHAVIOR_EXPORT CoroutineBehaviorState : BehaviorStateBase, BoundValueBase {
         
-        static KeyValueResult resolveNames(BehaviorReceiver &rec)
+        static Reflect::Result resolveNames(BehaviorReceiver &rec)
         {
             return {};
         }
 
         template <typename Arg, typename... Args>
-        static KeyValueResult resolveNames(BehaviorReceiver& rec, Arg &&arg, Args &&...args) {
+        static Reflect::Result resolveNames(BehaviorReceiver &rec, Arg &&arg, Args &&...args)
+        {
             if constexpr (requires { arg.resolve(rec); }) {
-                KeyValueResult result = arg.resolve(rec);
+                Reflect::Result result = arg.resolve(rec);
                 if (result)
                     return result;
             } 
@@ -107,7 +108,7 @@ namespace Behavior {
         {
             return {};
         }
-        std::bool_constant<true> set_error(KeyValueError result);
+        std::bool_constant<true> set_error(Reflect::Error result);
         std::bool_constant<true> set_done();
 
         static decltype(auto) unpack_storage(auto &&result)
@@ -141,7 +142,7 @@ namespace Behavior {
 
         BehaviorReceiver *mReceiver = nullptr;
 
-        Closure<KeyValueResult(BehaviorReceiver &)> mResolveNames;
+        Closure<Reflect::Result(BehaviorReceiver &)> mResolveNames;
     };
 
     template <typename Awaiter>

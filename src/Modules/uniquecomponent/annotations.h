@@ -3,7 +3,7 @@
 #include "Generic/replace.h"
 
 namespace Engine {
-namespace UniqueComponent {
+namespace Plugins {
 
     template <typename... Annotations>
     struct GroupedAnnotation : Annotations... {

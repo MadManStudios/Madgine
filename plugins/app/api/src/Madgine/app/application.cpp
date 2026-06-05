@@ -6,17 +6,16 @@
 
 #include "Modules/threading/workgroupstorage.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 
 #include "globalapibase.h"
 
-METATABLE_BEGIN(Engine::App::Application)
+METATABLE_BEGIN(Engine::Core::Application)
     MEMBER(mGlobalAPIs)
-METATABLE_END(Engine::App::Application)
+METATABLE_END(Engine::Core::Application)
 
 namespace Engine {
-
-namespace App {
+namespace Core {
 
     /**
      * @brief Creates an Application and sets up its TaskQueue
@@ -106,6 +105,6 @@ namespace App {
     {
         mLifetime.end();
     }
-}
 
+}
 }

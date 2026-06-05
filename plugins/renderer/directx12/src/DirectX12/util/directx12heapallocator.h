@@ -14,8 +14,8 @@ namespace Render {
         void setup(size_t count);
         void reset();
 
-        Block allocate(size_t size, size_t alignment = 1);
-        void deallocate(Block block);
+        Memory::Block allocate(size_t size, size_t alignment = 1);
+        void deallocate(Memory::Block block);
 
         ID3D12Heap *heap(size_t index);
         std::pair<ID3D12Resource *, size_t> resolve(void *ptr);
@@ -24,8 +24,8 @@ namespace Render {
 
     private:
         struct Heap {
-            ReleasePtr<ID3D12Heap> mHeap;
-            ReleasePtr<ID3D12Resource> mReservedResource;
+            Platform::ReleasePtr<ID3D12Heap> mHeap;
+            Platform::ReleasePtr<ID3D12Resource> mReservedResource;
         };
         std::vector<Heap> mHeaps;
         OffsetPtr mDescriptors;
@@ -40,15 +40,15 @@ namespace Render {
 
         void reset();
 
-        Block allocate(size_t size, size_t alignment = 1);
-        void deallocate(Block block);
+        Memory::Block allocate(size_t size, size_t alignment = 1);
+        void deallocate(Memory::Block block);
 
         std::pair<ID3D12Resource *, size_t> resolve(void *ptr);
 
     private:
         D3D12_HEAP_TYPE mType;
         struct Page {
-            ReleasePtr<ID3D12Resource> mResource;
+            Platform::ReleasePtr<ID3D12Resource> mResource;
             void *mMappedAddress;
         };
         std::vector<Page> mPages;

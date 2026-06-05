@@ -3,21 +3,21 @@
 #include "Modules/uniquecomponent/uniquecomponent.h"
 #include "Modules/uniquecomponent/uniquecomponentdefine.h"
 
-DECLARE_UNIQUE_COMPONENT(Engine::Root, RootComponent, RootComponentBase, Engine::UniqueComponent::Constructor<Engine::Root::Root &>)
+DECLARE_UNIQUE_COMPONENT(Engine::Core, RootComponent, RootComponentBase, Engine::Plugins::Constructor<Engine::Core::Root &>)
 
 namespace Engine {
-namespace Root {
+namespace Core {
 
     MADGINE_ROOT_EXPORT RootComponentBase &getRootComponent(size_t i);
 
     template <typename T>
-    struct RootComponent : VirtualScope<T, RootComponentComponent<T>> {
+    struct RootComponent : Reflect::VirtualScope<T, RootComponentComponent<T>> {
 
-        using VirtualScope<T, RootComponentComponent<T>>::VirtualScope;
+        using Reflect::VirtualScope<T, RootComponentComponent<T>>::VirtualScope;
 
         static T &getSingleton()
         {
-            return static_cast<T &>(getRootComponent(Engine::UniqueComponent::component_index<T>()));
+            return static_cast<T &>(getRootComponent(Engine::Plugins::component_index<T>()));
         }
     };
 
@@ -27,7 +27,7 @@ namespace Root {
 
         static T &getSingleton()
         {
-            return static_cast<T &>(getRootComponent(Engine::UniqueComponent::component_index<T>()));
+            return static_cast<T &>(getRootComponent(Engine::Plugins::component_index<T>()));
         }
     };
 }

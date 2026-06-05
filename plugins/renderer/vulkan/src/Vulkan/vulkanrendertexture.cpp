@@ -9,7 +9,7 @@
 namespace Engine {
 namespace Render {
 
-    VulkanRenderTexture::VulkanRenderTexture(VulkanRenderContext *context, const Vector2i &size, const RenderTextureConfig &config)
+    VulkanRenderTexture::VulkanRenderTexture(VulkanRenderContext *context, const Math::Vector2i &size, const RenderTextureConfig &config)
         : VulkanRenderTarget(context, false, config.mName, config.mType, config.mSamples, config.mBlitSource)
         , mSize { 0, 0 }
         , mCreateDepthBufferView(config.mCreateDepthBufferView)
@@ -33,7 +33,7 @@ namespace Render {
     {
     }
 
-    bool VulkanRenderTexture::resizeImpl(const Vector2i &size)
+    bool VulkanRenderTexture::resizeImpl(const Math::Vector2i &size)
     {
         if (mSize == size)
             return false;
@@ -117,7 +117,7 @@ namespace Render {
         return mTextures;
     }
 
-    Vector2i VulkanRenderTexture::size() const
+    Math::Vector2i VulkanRenderTexture::size() const
     {
         return mSize;
     }

@@ -14,10 +14,10 @@ namespace Resources {
         Threading::Task<bool> loadImpl(ImageData &data, ResourceDataInfo &info);
         Threading::Task<void> unloadImpl(ImageData &data);
 
-        const Filesystem::Path &iconPath(ResourceBase *res) const override;
+        const Platform::Filesystem::Path &iconPath(ResourceBase *res) const override;
 
-        static ByteBuffer convertFromPNG(const ByteBuffer &data, Vector2i &outSize);
-        static ByteBuffer convertToPNG(const ByteBuffer &data, Vector2i size);
+        static Memory::ByteBuffer convertFromPNG(const Memory::ByteBuffer &data, Math::Vector2i &outSize);
+        static Memory::ByteBuffer convertToPNG(const Memory::ByteBuffer &data, Math::Vector2i size);
     };
 
 }

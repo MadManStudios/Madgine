@@ -4,7 +4,17 @@
 
 namespace Engine {
 
-namespace UniqueComponent {
+namespace Plugins {
+
+    struct IniFile;
+    struct IniSection;
+
+    struct PluginManager;
+    struct Plugin;
+    struct PluginSection;
+
+    struct BinaryInfo;
+
     struct IndexHolder;
 
     struct CollectorManager;
@@ -56,14 +66,6 @@ namespace Debug {
     struct HistoryData;
 }
 
-namespace Plugins {
-    struct PluginManager;
-    struct Plugin;
-    struct PluginSection;
-
-    struct BinaryInfo;
-}
-
 namespace Threading {
     struct TaskQueue;
     struct TaskHandle;
@@ -82,11 +84,6 @@ namespace Threading {
 
     struct CustomClock;
     struct CustomTimepoint;
-}
-
-namespace Ini {
-    struct IniFile;
-    struct IniSection;
 }
 
 }

@@ -2,12 +2,12 @@
 
 #include "inspector.h"
 
-#include "Meta/keyvalue/keyvaluepair.h"
-#include "Meta/keyvalue/scopeiterator.h"
+#include "Meta/reflect/keyvaluepair.h"
+#include "Meta/reflect/scopeiterator.h"
 
 #include "Modules/uniquecomponent/uniquecomponentcollector.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
 #include "../imguiicons.h"
@@ -32,11 +32,11 @@ namespace Tools {
     Inspector::Inspector(ImRoot &root)
         : Tool<Inspector>(root)
     {
-        addPtrSuggestion<FunctionTable>([]() {
-            std::vector<std::pair<std::string_view, ScopePtr>> result;
-            const FunctionTable *table = sFunctionList();
+        addPtrSuggestion<Reflect::FunctionTable>([]() {
+            std::vector<std::pair<std::string_view, Reflect::ScopePtr>> result;
+            const Reflect::FunctionTable *table = Reflect::sFunctionList();
             while (table) {
-                result.emplace_back(table->mName, const_cast<FunctionTable *>(table));
+                result.emplace_back(table->mName, const_cast<Reflect::FunctionTable *>(table));
                 table = table->mNext;
             }
             return result;
@@ -59,7 +59,7 @@ namespace Tools {
             ImGuiID id = ImHashData(&ptr, sizeof(ptr));
             if (ImGui::Begin((trace.name() + "###" + std::format("{:x}", id)).c_str(), &open)) {
                 if (ImGui::BeginTable("Values", 2, ImGuiTableFlags_Resizable)) {
-                    KeyValueResult result = trace.follow();
+                    Reflect::Result result = trace.follow();
                     if (result) {
                         std::stringstream ss;
                         ss << result;
@@ -81,7 +81,7 @@ namespace Tools {
     {
     }
 
-    bool Inspector::drawRemainingMembers(const Traced<const ScopePtr &> &scope, std::set<std::string> &drawn)
+    bool Inspector::drawRemainingMembers(const Traced<const Reflect::ScopePtr &> &scope, std::set<std::string> &drawn)
     {
         bool changed = false;
 
@@ -96,24 +96,24 @@ namespace Tools {
         return changed;
     }
 
-    bool Inspector::drawMember(const Traced<ScopeIterator> &it)
+    bool Inspector::drawMember(const Traced<Reflect::ScopeIterator> &it)
     {
-        AccessorFlags memberFlags = it.get()->flags();
+        Reflect::AccessorFlags memberFlags = it.get()->flags();
         if ((memberFlags & flags()) != memberFlags) {
             return false;
         }
 
-        auto f = [](const ScopeIterator &it) {ValueType v; it->value(v); return v; };
-        const Traced<ValueType> &value = it.traceEx(
+        auto f = [](const Reflect::ScopeIterator &it) {Reflect::Value v; it->value(v); return v; };
+        const Traced<Reflect::Value> &value = it.traceEx(
             std::move(f),
-            static_cast<bool (*)(const TracedAccess<ScopeIterator, decltype(f)> &, bool)>([](const TracedAccess<ScopeIterator, decltype(f)> &value, bool modified) {
+            static_cast<bool (*)(const TracedAccess<Reflect::ScopeIterator, decltype(f)> &, bool)>([](const TracedAccess<Reflect::ScopeIterator, decltype(f)> &value, bool modified) {
                 if (modified)
                     *value.mParent.get() = value.get();
                 return modified;
             }));
 
         if (streq(it.get()->key(), "__proxy")) {
-            return drawMembers(ValueType_as<ScopePtr>(value), {});
+            return drawMembers(Value_as<Reflect::ScopePtr>(value), {});
         }
 
         std::string_view id = it.get()->key();
@@ -126,37 +126,37 @@ namespace Tools {
         return modified;
     }
 
-    bool Inspector::drawValue(std::string_view id, const Traced<ValueType &> &value, bool editable, ExtendedValueTypeDesc possibleTypes)
+    bool Inspector::drawValue(std::string_view id, const Traced<Reflect::Value &> &value, bool editable, Reflect::ExtendedType possibleTypes)
     {
-        ValueTypeDesc actualType = value->type();
+        Reflect::Type actualType = value->type();
 
         bool modified = value.visit(overloaded {
-            [&](const Traced<ScopePtr &> &scope) {
+            [&](const Traced<Reflect::ScopePtr &> &scope) {
                 return drawValue(id, scope, false, editable, possibleTypes, &actualType);
             },
-            [&](const Traced<OwnedScopePtr &> &scope) {
+            [&](const Traced<Reflect::OwnedScopePtr &> &scope) {
                 return drawValue(id, scope, editable, possibleTypes, &actualType);
             },
-            [&](const Traced<KeyValueVirtualSequenceRange &> &range) {
+            [&](const Traced<Reflect::SequenceRange &> &range) {
                 return drawValue(id, range, editable);
             },
-            [&](const Traced<KeyValueVirtualAssociativeRange &> &range) {
+            [&](const Traced<Reflect::AssociativeRange &> &range) {
                 return drawValue(id, range, editable);
             },
-            [&](const Traced<BoundApiFunction &> &function) {
+            [&](const Traced<Reflect::BoundApiFunction &> &function) {
                 drawValue(id, function, editable);
                 return false;
             },
-            [&](const Traced<ObjectPtr &> &object) {
+            [&](const Traced<Reflect::ObjectPtr &> &object) {
                 return drawValue(id, object, editable, possibleTypes, &actualType);
             },
-            [&](const Traced<KeyValueBinding &> &binding) {
+            [&](const Traced<Reflect::Binding &> &binding) {
                 bool result;
-                if (!Execution::access_binding(binding.trace(&KeyValueBinding::mPtr), [&](const Traced<const ValueType &> &v) {
-                        TracedCast<const ValueType &, ValueType> v_copy = v;
+                if (!Execution::access_binding(binding.trace(&Reflect::Binding::mPtr), [&](const Traced<const Reflect::Value &> &v) {
+                        TracedCast<const Reflect::Value &, Reflect::Value> v_copy = v;
                         result = drawValue(id, v_copy, false, v_copy->type());
                     })) {
-                    TracedRoot<ValueType> v { binding.undoStack() };
+                    TracedRoot<Reflect::Value> v { binding.undoStack() };
                     result = drawValue(id, v, false, v->type());
                 }
                 if (!possibleTypes.mType.isRegular()) {
@@ -204,7 +204,7 @@ namespace Tools {
         return modified;
     }
 
-    bool Inspector::drawValue(std::string_view id, const Traced<ScopePtr &> &scope, bool isOwned, bool editable, ExtendedValueTypeDesc possibleTypes, ValueTypeDesc *type)
+    bool Inspector::drawValue(std::string_view id, const Traced<Reflect::ScopePtr &> &scope, bool isOwned, bool editable, Reflect::ExtendedType possibleTypes, Reflect::Type *type)
     {
         bool modified = false;
         bool changed = false;
@@ -237,7 +237,7 @@ namespace Tools {
                     scope->mScope = nullptr;
                     modified = true;
                 }
-                for (std::pair<std::string_view, ScopePtr> p : it->second()) {
+                for (std::pair<std::string_view, Reflect::ScopePtr> p : it->second()) {
                     if (ImGui::Selectable(p.first.data())) {
                         scope.get() = p.second;
                         modified = true;
@@ -256,11 +256,11 @@ namespace Tools {
             modified |= drawTypeDecorations(*type, possibleTypes);
         }
 
-        ImGui::DraggableValueTypeSource<ScopePtr>(id, scope, ImGuiDragDropFlags_SourceAllowNullID);
+        ImGui::DraggableValueTypeSource<Reflect::ScopePtr>(id, scope, ImGuiDragDropFlags_SourceAllowNullID);
         if (editable && ImGui::BeginDragDropTarget()) {
-            ScopePtr newScope;
-            if (ImGui::AcceptDraggableValueType(newScope, [&](const Traced<const ScopePtr &> &ptr) {
-                    return ptr->mType->isDerivedFrom(scope->mType) ? KeyValueResult {} : KEYVALUE_UNKNOWN_ERROR();
+            Reflect::ScopePtr newScope;
+            if (ImGui::AcceptDraggableValueType(newScope, [&](const Traced<const Reflect::ScopePtr &> &ptr) {
+                    return ptr->mType->isDerivedFrom(scope->mType) ? Reflect::Result {} : REFLECT_UNKNOWN_ERROR();
                 })) {
                 scope.get() = newScope;
                 modified = true;
@@ -281,7 +281,7 @@ namespace Tools {
                 if (ImGui::IsKeyDown(ImGuiKey_LeftCtrl)) {
                     throw 0;
                 }
-                mViews.push_back({ [trace { scope.build() }, this, isOwned]() { return trace([this, isOwned](const Traced<ScopePtr &> &scope) { return std::make_pair(KeyValueResult {}, drawValue("TODO", scope, false, isOwned)); }); } });
+                mViews.push_back({ [trace { scope.build() }, this, isOwned]() { return trace([this, isOwned](const Traced<Reflect::ScopePtr &> &scope) { return std::make_pair(Reflect::Result {}, drawValue("TODO", scope, false, isOwned)); }); } });
             }
             if (ImGui::IsItemHovered() && ImGui::IsKeyDown(ImGuiKey_LeftCtrl)) {
                 ImGui::BeginTooltip();
@@ -299,13 +299,13 @@ namespace Tools {
         return modified || (changed && isOwned);
     }
 
-    bool Inspector::drawValue(std::string_view id, const Traced<OwnedScopePtr &> &scope, bool editable, ExtendedValueTypeDesc possibleTypes, ValueTypeDesc *type)
+    bool Inspector::drawValue(std::string_view id, const Traced<Reflect::OwnedScopePtr &> &scope, bool editable, Reflect::ExtendedType possibleTypes, Reflect::Type *type)
     {
-        const Traced<ScopePtr> &ptr = scope.trace(&OwnedScopePtr::get);
+        const Traced<Reflect::ScopePtr> &ptr = scope.trace(&Reflect::OwnedScopePtr::get);
         return drawValue(id, ptr, true, editable, possibleTypes, type);
     }
 
-    bool Inspector::drawValue(std::string_view id, const Traced<ObjectPtr &> &object, bool editable, ExtendedValueTypeDesc possibleTypes, ValueTypeDesc *type)
+    bool Inspector::drawValue(std::string_view id, const Traced<Reflect::ObjectPtr &> &object, bool editable, Reflect::ExtendedType possibleTypes, Reflect::Type *type)
     {
         bool modified = false;
 
@@ -335,9 +335,9 @@ namespace Tools {
 
         // ImGui::EndGroup();
 
-        ImGui::DraggableValueTypeSource<ObjectPtr>(id, object, ImGuiDragDropFlags_SourceAllowNullID);
+        ImGui::DraggableValueTypeSource<Reflect::ObjectPtr>(id, object, ImGuiDragDropFlags_SourceAllowNullID);
         if (editable && ImGui::BeginDragDropTarget()) {
-            ObjectPtr newObject;
+            Reflect::ObjectPtr newObject;
             if (ImGui::AcceptDraggableValueType(newObject)) {
                 object.get() = newObject;
                 modified = true;
@@ -354,8 +354,8 @@ namespace Tools {
 
         if (open) {
 
-            for (const auto &[key, value] : object.trace(&ObjectPtr::values)) {
-                TracedCast<ValueType &, ValueType> v = value;
+            for (const auto &[key, value] : object.trace(&Reflect::ObjectPtr::values)) {
+                TracedCast<Reflect::Value &, Reflect::Value> v = value;
                 bool changed = drawValue(key.get(), v, editable, value->type());
                 if (changed) {
                     // value = v;
@@ -367,13 +367,13 @@ namespace Tools {
         return modified;
     }
 
-    bool Inspector::drawValue(std::string_view id, const Traced<KeyValueVirtualSequenceRange &> &range, bool editable)
+    bool Inspector::drawValue(std::string_view id, const Traced<Reflect::SequenceRange &> &range, bool editable)
     {
         ImGui::TableNextColumn();
 
         bool changed = false;
         bool b = ImGui::TreeNodeEx(id.data());
-        ImGui::DraggableValueTypeSource<KeyValueVirtualSequenceRange>(id, range);
+        ImGui::DraggableValueTypeSource<Reflect::SequenceRange>(id, range);
 
         ImGui::TableNextColumn();
 
@@ -400,13 +400,13 @@ namespace Tools {
         return changed && !range->isReference();
     }
 
-    bool Inspector::drawValue(std::string_view id, const Traced<KeyValueVirtualAssociativeRange &> &range, bool editable)
+    bool Inspector::drawValue(std::string_view id, const Traced<Reflect::AssociativeRange &> &range, bool editable)
     {
         ImGui::TableNextColumn();
 
         bool changed = false;
         bool b = ImGui::TreeNodeEx(id.data());
-        ImGui::DraggableValueTypeSource<KeyValueVirtualAssociativeRange>(id, range);
+        ImGui::DraggableValueTypeSource<Reflect::AssociativeRange>(id, range);
 
         ImGui::TableNextColumn();
 
@@ -428,7 +428,7 @@ namespace Tools {
         return changed && !range->isReference();
     }
 
-    void Inspector::drawValue(std::string_view id, const Traced<BoundApiFunction &> &function, bool editable)
+    void Inspector::drawValue(std::string_view id, const Traced<Reflect::BoundApiFunction &> &function, bool editable)
     {
         ImGui::TableNextColumn();
         ImGui::TableNextColumn();
@@ -436,10 +436,10 @@ namespace Tools {
         if (ImGui::Button(extended.c_str())) {
             getTool<FunctionTool>().setCurrentFunction(id, function.get());
         }
-        ImGui::DraggableValueTypeSource<BoundApiFunction>(id, function);
+        ImGui::DraggableValueTypeSource<Reflect::BoundApiFunction>(id, function);
     }
 
-    bool Inspector::drawMembers(const Traced<const ScopePtr &> &scope, std::set<std::string> drawn)
+    bool Inspector::drawMembers(const Traced<const Reflect::ScopePtr &> &scope, std::set<std::string> drawn)
     {
         assert(scope.get());
 
@@ -452,36 +452,36 @@ namespace Tools {
         return changed;
     }
 
-    bool Inspector::drawTypeDecorations(ValueTypeDesc &type, ExtendedValueTypeDesc possibleTypes)
+    bool Inspector::drawTypeDecorations(Reflect::Type &type, Reflect::ExtendedType possibleTypes)
     {
-        bool isSet = type != static_cast<ValueTypeDesc>(toValueTypeDesc<std::monostate>());
+        bool isSet = type != static_cast<Reflect::Type>(Reflect::toType<std::monostate>());
         switch (possibleTypes.mType) {
-        case ExtendedValueTypeEnum::GenericType:
+        case Reflect::ExtendedTypeEnum::GenericType:
             if (ImGui::ValueTypeTypePicker(type)) {
                 return true;
             }
             break;
-        case ExtendedValueTypeEnum::VariantType: // Very hacky
+        case Reflect::ExtendedTypeEnum::VariantType: // Very hacky
         {
             auto [first, second] = possibleTypes.unwrapVariant();
-            if (second.mType == ValueTypeEnum::NullValue || second.mType == ValueTypeEnum::BindingValue) {
+            if (second.mType == Reflect::TypeEnum::NullValue || second.mType == Reflect::TypeEnum::BindingValue) {
                 std::swap(first, second);
             }
 
-            if (first.mType == ValueTypeEnum::NullValue) {
-                if (second.mType != ValueTypeEnum::ScopeValue) {
+            if (first.mType == Reflect::TypeEnum::NullValue) {
+                if (second.mType != Reflect::TypeEnum::ScopeValue) {
                     if (ImGui::Checkbox("##Optional", &isSet)) {
                         if (isSet) {
                             type = second;
                         } else {
-                            type = toValueTypeDesc<std::monostate>();
+                            type = Reflect::toType<std::monostate>();
                         }
                         return true;
                     }
                 }
-            } else if (first.mType == ValueTypeEnum::BindingValue) {
+            } else if (first.mType == Reflect::TypeEnum::BindingValue) {
                 assert(second.mSecondary.mDummy == first.mSecondary.mDummy);
-                if (ImGui::LED("##Bindable", type.mType == ValueTypeEnum::BindingValue, { ImGui::GetFrameHeight(), ImGui::GetFrameHeight() })) {
+                if (ImGui::LED("##Bindable", type.mType == Reflect::TypeEnum::BindingValue, { ImGui::GetFrameHeight(), ImGui::GetFrameHeight() })) {
                 }
             } else {
                 throw 0;
@@ -499,22 +499,22 @@ namespace Tools {
         return "Inspector";
     }
 
-    void Inspector::addPtrSuggestion(const MetaTable *type, std::function<std::vector<std::pair<std::string_view, ScopePtr>>()> getter)
+    void Inspector::addPtrSuggestion(const Reflect::MetaTable *type, std::function<std::vector<std::pair<std::string_view, Reflect::ScopePtr>>()> getter)
     {
         mPtrSuggestionsByType[type] = getter;
     }
 
-    bool Inspector::hasPtrSuggestion(const MetaTable *type) const
+    bool Inspector::hasPtrSuggestion(const Reflect::MetaTable *type) const
     {
         return mPtrSuggestionsByType.contains(type);
     }
 
-    void Inspector::addPreviewDefinition(const MetaTable *type, std::function<bool(const Traced<const ScopePtr &> &)> preview)
+    void Inspector::addPreviewDefinition(const Reflect::MetaTable *type, std::function<bool(const Traced<const Reflect::ScopePtr &> &)> preview)
     {
         mPreviews[type] = preview;
     }
 
-    void Inspector::pushFlags(AccessorFlags flags)
+    void Inspector::pushFlags(Reflect::AccessorFlags flags)
     {
         mAccessorFlagsStack.push_back(flags);
     }
@@ -525,9 +525,9 @@ namespace Tools {
         mAccessorFlagsStack.pop_back();
     }
 
-    AccessorFlags Inspector::flags() const
+    Reflect::AccessorFlags Inspector::flags() const
     {
-        AccessorFlags flags = AccessorFlags_Default;
+        Reflect::AccessorFlags flags = Reflect::AccessorFlags_Default;
         if (!mAccessorFlagsStack.empty())
             flags = mAccessorFlagsStack.back();
         return flags;

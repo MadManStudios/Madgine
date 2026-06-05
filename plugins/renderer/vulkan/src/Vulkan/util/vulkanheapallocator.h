@@ -13,8 +13,8 @@ namespace Render {
 
         void setup(size_t count);
 
-        Block allocate(size_t size, size_t alignment = 1);
-        void deallocate(Block block);
+        Memory::Block allocate(size_t size, size_t alignment = 1);
+        void deallocate(Memory::Block block);
 
         /* ID3D12Heap *heap(size_t index);*/
         std::tuple<VkBuffer, VkDeviceMemory, size_t> resolve(void *ptr);
@@ -38,8 +38,8 @@ namespace Render {
 
         VulkanMappedHeapAllocator(std::string_view name);
 
-        Block allocate(size_t size, size_t alignment = 1);
-        void deallocate(Block block);
+        Memory::Block allocate(size_t size, size_t alignment = 1);
+        void deallocate(Memory::Block block);
 
         std::pair<VkBuffer, size_t> resolve(void *ptr);
 

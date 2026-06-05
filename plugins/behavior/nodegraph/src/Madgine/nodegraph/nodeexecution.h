@@ -16,14 +16,14 @@ namespace Behavior {
         struct MADGINE_NODEGRAPH_EXPORT NodeInterpretHandleBase {
             NodeInterpreterStateBase &mInterpreter;
 
-            KeyValueResult read(const NodeBase &node, ValueType &retVal, uint32_t dataInIndex, uint32_t group = 0);
+            Reflect::Result read(const NodeBase &node, Reflect::Value &retVal, uint32_t dataInIndex, uint32_t group = 0);
         };
 
         template <typename Node>
         struct NodeInterpretHandle : NodeInterpretHandleBase {
             const Node &mNode;
 
-            KeyValueResult read(ValueType &retVal, uint32_t dataInIndex, uint32_t group = 0)
+            Reflect::Result read(Reflect::Value &retVal, uint32_t dataInIndex, uint32_t group = 0)
             {
                 return NodeInterpretHandleBase::read(mNode, retVal, dataInIndex, group);
             }
@@ -55,7 +55,7 @@ namespace Behavior {
             {
                 mReceiver.set_done();
             }
-            void set_error(KeyValueError result)
+            void set_error(Reflect::Error result)
             {
                 mReceiver.set_error(std::move(result));
             }
@@ -145,9 +145,9 @@ namespace Behavior {
         struct NodeSender {
             using is_sender = void;
 
-            using result_type = KeyValueError;
+            using result_type = Reflect::Error;
             template <template <typename...> typename Tuple>
-            using value_types = Tuple<ArgumentList>;
+            using value_types = Tuple<Reflect::ArgumentList>;
 
             template <typename Rec>
             friend auto tag_invoke(Execution::connect_t, NodeSender &&sender, Rec &&rec)
@@ -170,7 +170,7 @@ namespace Behavior {
 
             using is_sender = void;
 
-            using result_type = KeyValueError;
+            using result_type = Reflect::Error;
             template <template <typename...> typename Tuple>
             using value_types = Tuple<meta_decayed_t<T>...>;
 
@@ -198,16 +198,16 @@ namespace Behavior {
                     if (handle.mNode.dataInCount() == mBaseIndex) {
                         this->set_done();
                     } else {
-                        ArgumentList data { std::true_type {}, sizeof...(T) };
+                        Reflect::ArgumentList data { std::true_type {}, sizeof...(T) };
                         for (size_t index = 0; index < sizeof...(T); ++index) {
-                            KeyValueResult error = handle.read(data[index], index + mBaseIndex);
+                            Reflect::Result error = handle.read(data[index], index + mBaseIndex);
                             if (error) {
                                 this->set_error(std::move(*error.mError));
                                 return;
                             }
                         }
 
-                        KeyValueResult error = ValueType_unwrap([this](meta_decayed_t<T>... val) { this->set_value(std::forward<meta_decayed_t<T>>(val)...); }, data.at(I)...);
+                        Reflect::Result error = invoke([this](meta_decayed_t<T>... val) { this->set_value(std::forward<meta_decayed_t<T>>(val)...); }, data.at(I)...);
                         if (error)
                             this->set_error(std::move(*error.mError));
                     }
@@ -241,7 +241,7 @@ namespace Behavior {
             {
                 if (mResults.size() <= flowOutGroup)
                     mResults.resize(flowOutGroup + 1);
-                mResults[flowOutGroup] = ArgumentList { std::forward<Args>(args)... };
+                mResults[flowOutGroup] = Reflect::ArgumentList { std::forward<Args>(args)... };
                 return NodeSender<flowOutGroup> {};
             }
             std::vector<NodeResults> &mResults;
@@ -273,7 +273,7 @@ namespace Behavior {
                     mState->startAlgorithm();
                 }
 
-                void set_error(KeyValueError result)
+                void set_error(Reflect::Error result)
                 {
                     mState->set_error(std::move(result));
                 }

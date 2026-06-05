@@ -5,8 +5,8 @@ namespace Behavior {
     namespace Python3 {
 
         struct MADGINE_PYTHON3_EXPORT Python3Lock {
-            Python3Lock(BehaviorReceiver *rec = nullptr, Log::Log *log = nullptr);
-            Python3Lock(Log::Log *log);
+            Python3Lock(BehaviorReceiver *rec = nullptr, Platform::Log::Log *log = nullptr);
+            Python3Lock(Platform::Log::Log *log);
             Python3Lock(const Python3Lock &) = delete;
             ~Python3Lock();
         };
@@ -27,11 +27,11 @@ namespace Behavior {
             ~Python3Unlock();
 
             BehaviorReceiver *fetchReceiver();
-            Log::Log *log() const;
+            Platform::Log::Log *log() const;
 
         private:
             BehaviorReceiver *mReceiver;
-            Log::Log *mLog;
+            Platform::Log::Log *mLog;
         };
     }
 }

@@ -4,19 +4,19 @@
 
 #include "Madgine/render/rendertarget.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
 #include "mainwindow.h"
 
-METATABLE_BEGIN(Engine::Window::MainWindowComponentBase)
-METATABLE_END(Engine::Window::MainWindowComponentBase)
+METATABLE_BEGIN(Engine::Core::MainWindowComponentBase)
+METATABLE_END(Engine::Core::MainWindowComponentBase)
 
-SERIALIZETABLE_BEGIN(Engine::Window::MainWindowComponentBase)
-SERIALIZETABLE_END(Engine::Window::MainWindowComponentBase)
+SERIALIZETABLE_BEGIN(Engine::Core::MainWindowComponentBase)
+SERIALIZETABLE_END(Engine::Core::MainWindowComponentBase)
 
 namespace Engine {
-namespace Window {
+namespace Core {
 
     MainWindowComponentBase::MainWindowComponentBase(MainWindow &window, int priority)
         : mPriority(priority)
@@ -57,7 +57,7 @@ namespace Window {
         co_return;
     }
 
-    void MainWindowComponentBase::onResize(const Rect2i &space)
+    void MainWindowComponentBase::onResize(const Math::Rect2i &space)
     {
         mClientSpace = space;
     }
@@ -67,12 +67,12 @@ namespace Window {
         target->setRenderSpace(mClientSpace);
     }
 
-    Rect2i MainWindowComponentBase::getScreenSpace() const
+    Math::Rect2i MainWindowComponentBase::getScreenSpace() const
     {
         return mWindow.getScreenSpace();
     }
 
-    const Rect2i &MainWindowComponentBase::getClientSpace() const
+    const Math::Rect2i &MainWindowComponentBase::getClientSpace() const
     {
         return mClientSpace;
     }
@@ -82,7 +82,7 @@ namespace Window {
         return mWindow.getWindowComponent(i);
     }
 
-    Rect2i MainWindowComponentBase::getChildClientSpace()
+    Math::Rect2i MainWindowComponentBase::getChildClientSpace()
     {
         return mClientSpace;
     }

@@ -1,14 +1,14 @@
 #pragma once
 
-#include "Generic/bits/array.h"
-#include "Generic/container/tinyvector.h"
+#include "Generic/containers/bits/array.h"
+#include "Generic/containers/tinyvector.h"
 
-#include "Meta/keyvalue/valuetype_desc.h"
+#include "Meta/reflect/type.h"
 
 namespace CodeGen {
 
 struct Type {
-    std::variant<Engine::ExtendedValueTypeDesc, Struct *> mBaseType;
+    std::variant<Engine::Reflect::ExtendedType, Struct *> mBaseType;
     bool mIsReference = false;
 };
 
@@ -41,7 +41,7 @@ struct MADGINE_CODEGEN_EXPORT StatementPtr {
 };
 
 struct FullStatement {
-    Engine::TinyVector<Engine::BitArray<62>> mConditionals;
+    Engine::Containers::TinyVector<Engine::Containers::BitArray<62>> mConditionals;
 };
 
 template <typename T>
@@ -82,7 +82,7 @@ struct VariableAccess {
 struct MADGINE_CODEGEN_EXPORT VariableDefinition : FullStatement {
     VariableDefinition(Variable variable);
     VariableDefinition(Variable variable, Statement initializer);
-    VariableDefinition(Engine::TinyVector<Engine::BitArray<62>> conditionals, Variable variable);
+    VariableDefinition(Engine::Containers::TinyVector<Engine::Containers::BitArray<62>> conditionals, Variable variable);
     VariableDefinition(const VariableDefinition &other);
 
     VariableDefinition &operator=(const VariableDefinition &other);

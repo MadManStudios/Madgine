@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Meta/keyvalue/argumentlist.h"
+#include "Meta/reflect/argumentlist.h"
 
 #include "Madgine/behavior/behavior.h"
 #include "Madgine/behavior/behaviorcollector.h"
@@ -52,13 +52,13 @@ namespace Behavior {
             void branch(BehaviorReceiver &receiver, uint32_t flowIn, NodeDebugLocation &location);
             void branch(BehaviorReceiver &receiver, Pin pin, NodeDebugLocation &location);
 
-            KeyValueResult read(ValueType &retVal, Pin pin);
+            Reflect::Result read(Reflect::Value &retVal, Pin pin);
 
-            KeyValueResult read(ValueType &retVal, uint32_t dataProvider);
+            Reflect::Result read(Reflect::Value &retVal, uint32_t dataProvider);
 
             const NodeGraph *graph() const;
 
-            const ArgumentList &arguments() const;
+            const Reflect::ArgumentList &arguments() const;
 
             std::unique_ptr<NodeInterpreterData> &data(uint32_t index);
 
@@ -80,7 +80,7 @@ namespace Behavior {
             Debug::Continuation mContinuation;
 
         private:
-            ArgumentList mArguments;
+            Reflect::ArgumentList mArguments;
 
             const NodeGraph *mGraph;
 
@@ -105,9 +105,9 @@ namespace Behavior {
             {
             }
 
-            using result_type = KeyValueError;
+            using result_type = Reflect::Error;
             template <template <typename...> typename Tuple>
-            using value_types = Tuple<ArgumentList>;
+            using value_types = Tuple<Reflect::ArgumentList>;
 
             template <typename Rec>
             friend auto tag_invoke(Execution::connect_t, NodeInterpreterSender &&sender, Rec &&rec)

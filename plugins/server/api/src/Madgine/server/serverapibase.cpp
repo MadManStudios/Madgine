@@ -2,15 +2,15 @@
 
 #include "serverapibase.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 
 #include "server.h"
 
-METATABLE_BEGIN(Engine::Server::ServerAPIBase)
-METATABLE_END(Engine::Server::ServerAPIBase)
+METATABLE_BEGIN(Engine::Core::ServerAPIBase)
+METATABLE_END(Engine::Core::ServerAPIBase)
 
 namespace Engine {
-namespace Server {
+namespace Core {
     ServerAPIBase::ServerAPIBase(Server &server)
         : mServer(server)
     {

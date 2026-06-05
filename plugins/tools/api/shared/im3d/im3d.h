@@ -40,13 +40,13 @@ enum Im3DBoundingObjectFlags_ {
 
 struct Im3DFont {
     Im3DTextureId mTexture = 0;
-    Vector2i mTextureSize;
+    Math::Vector2i mTextureSize;
 
     Render::Glyph *mGlyphs = nullptr;
 };
 
 struct Im3DIO {
-    Ray3 mNextFrameMouseRay;
+    Math::Ray3 mNextFrameMouseRay;
 
     Im3DFont (*mFetchFont)(const char *) = nullptr;
     void (*mReleaseFont)(Im3DFont &) = nullptr;
@@ -74,7 +74,7 @@ namespace Im3D {
 
     MADGINE_IM3D_EXPORT Im3DIO &GetIO();
 
-    MADGINE_IM3D_EXPORT const Ray3 &GetMouseRay();
+    MADGINE_IM3D_EXPORT const Math::Ray3 &GetMouseRay();
 
     MADGINE_IM3D_EXPORT void NewFrame();
 
@@ -84,28 +84,28 @@ namespace Im3D {
     MADGINE_IM3D_EXPORT void Mesh(Im3DMeshType type, const Vertex *vertices, size_t vertexCount, const MeshParameters &param = {}, const uint32_t *indices = nullptr, size_t indexCount = 0);
     MADGINE_IM3D_EXPORT void Mesh(Im3DMeshType type, Render::RenderPassFlags flags, const Vertex2 *vertices, size_t vertexCount, const MeshParameters &param = {}, const uint32_t *indices = nullptr, size_t indexCount = 0, Im3DTextureId texId = 0);
 
-    MADGINE_IM3D_EXPORT void NativeMesh(Im3DNativeMesh mesh, const AABB &bb, const Matrix4 &transform = Matrix4::IDENTITY);
+    MADGINE_IM3D_EXPORT void NativeMesh(Im3DNativeMesh mesh, const Math::AABB &bb, const Math::Matrix4 &transform = Math::Matrix4::IDENTITY);
 
     MADGINE_IM3D_EXPORT void Text(const char *text, const TextParameters &param);
 
-    MADGINE_IM3D_EXPORT void Line(const Vector3 &a, const Vector3 &b, const LineParameters &param = {});
-    MADGINE_IM3D_EXPORT void Arrow(float radius, const Vector3 &a, const Vector3 &b, const Parameters &param = {});
-    MADGINE_IM3D_EXPORT void Arrow3D(Im3DMeshType type, float radius, const Vector3 &a, const Vector3 &b, const Parameters &param = {});
-    MADGINE_IM3D_EXPORT void Sphere(const Vector3 &center, float radius, const SphereParameters &param = {});
-    MADGINE_IM3D_EXPORT void Frustum(const Engine::Frustum &frustum, const Parameters &param = {});
+    MADGINE_IM3D_EXPORT void Line(const Math::Vector3 &a, const Math::Vector3 &b, const LineParameters &param = {});
+    MADGINE_IM3D_EXPORT void Arrow(float radius, const Math::Vector3 &a, const Math::Vector3 &b, const Parameters &param = {});
+    MADGINE_IM3D_EXPORT void Arrow3D(Im3DMeshType type, float radius, const Math::Vector3 &a, const Math::Vector3 &b, const Parameters &param = {});
+    MADGINE_IM3D_EXPORT void Sphere(const Math::Vector3 &center, float radius, const SphereParameters &param = {});
+    MADGINE_IM3D_EXPORT void Frustum(const Math::Frustum &frustum, const Parameters &param = {});
 
     MADGINE_IM3D_EXPORT bool BoundingSphere(const char *name, Im3DBoundingObjectFlags flags = 0, size_t priority = 1);
     MADGINE_IM3D_EXPORT bool BoundingSphere(Im3DID id, Im3DBoundingObjectFlags flags = 0, size_t priority = 1);
-    MADGINE_IM3D_EXPORT bool BoundingSphere(const char *name, const AABB &bb, const Matrix4 &transform = Matrix4::IDENTITY, Im3DBoundingObjectFlags flags = 0, size_t priority = 1);
-    MADGINE_IM3D_EXPORT bool BoundingSphere(Im3DID id, const AABB &bb, const Matrix4 &transform = Matrix4::IDENTITY, Im3DBoundingObjectFlags flags = 0, size_t priority = 1);
+    MADGINE_IM3D_EXPORT bool BoundingSphere(const char *name, const Math::AABB &bb, const Math::Matrix4 &transform = Math::Matrix4::IDENTITY, Im3DBoundingObjectFlags flags = 0, size_t priority = 1);
+    MADGINE_IM3D_EXPORT bool BoundingSphere(Im3DID id, const Math::AABB &bb, const Math::Matrix4 &transform = Math::Matrix4::IDENTITY, Im3DBoundingObjectFlags flags = 0, size_t priority = 1);
 
     MADGINE_IM3D_EXPORT bool BoundingBox(const char *name, Im3DBoundingObjectFlags flags = 0, size_t priority = 1);
     MADGINE_IM3D_EXPORT bool BoundingBox(Im3DID id, Im3DBoundingObjectFlags flags = 0, size_t priority = 1);
-    MADGINE_IM3D_EXPORT bool BoundingBox(const char *name, const AABB &bb, const Matrix4 &transform = Matrix4::IDENTITY, Im3DBoundingObjectFlags flags = 0, size_t priority = 1);
-    MADGINE_IM3D_EXPORT bool BoundingBox(Im3DID id, const AABB &bb, const Matrix4 &transform = Matrix4::IDENTITY, Im3DBoundingObjectFlags flags = 0, size_t priority = 1);
+    MADGINE_IM3D_EXPORT bool BoundingBox(const char *name, const Math::AABB &bb, const Math::Matrix4 &transform = Math::Matrix4::IDENTITY, Im3DBoundingObjectFlags flags = 0, size_t priority = 1);
+    MADGINE_IM3D_EXPORT bool BoundingBox(Im3DID id, const Math::AABB &bb, const Math::Matrix4 &transform = Math::Matrix4::IDENTITY, Im3DBoundingObjectFlags flags = 0, size_t priority = 1);
 
-    MADGINE_IM3D_EXPORT bool BoundingFrustum(const char *name, const Engine::Frustum &frustum, Im3DBoundingObjectFlags flags = 0, size_t priority = 1);
-    MADGINE_IM3D_EXPORT bool BoundingFrustum(Im3DID id, const Engine::Frustum &frustum, Im3DBoundingObjectFlags flags = 0, size_t priority = 1);
+    MADGINE_IM3D_EXPORT bool BoundingFrustum(const char *name, const Math::Frustum &frustum, Im3DBoundingObjectFlags flags = 0, size_t priority = 1);
+    MADGINE_IM3D_EXPORT bool BoundingFrustum(Im3DID id, const Math::Frustum &frustum, Im3DBoundingObjectFlags flags = 0, size_t priority = 1);
 
     MADGINE_IM3D_EXPORT bool BoundingObject(Im3DID id, float distance = 0.0f, Im3DBoundingObjectFlags flags = 0, size_t priority = 1);
 

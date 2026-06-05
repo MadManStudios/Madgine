@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Meta/flagsholder.h"
+#include "Meta/reflect/flags.h"
 
 namespace Engine {
 namespace Behavior {
@@ -10,7 +10,7 @@ namespace Behavior {
 
         struct PyFlags {
             PyObject_HEAD
-                FlagsHolder mFlags;
+                Reflect::Flags mFlags;
         };
 
     }

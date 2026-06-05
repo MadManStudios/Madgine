@@ -5,7 +5,7 @@
 namespace Engine {
 namespace Tools {
 
-    KeyValueResult Trace::follow()
+    Reflect::Result Trace::follow()
     {
         return mTrace();
     }

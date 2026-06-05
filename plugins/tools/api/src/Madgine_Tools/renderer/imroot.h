@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Interfaces/filesystem/path.h"
+#include "Platform/filesystem/path.h"
 
 #include "Meta/math/vector2.h"
 
@@ -29,7 +29,7 @@ namespace Tools {
         template <typename T>
         T &getTool()
         {
-            return static_cast<T &>(getTool(::Engine::UniqueComponent::component_index<T>()));
+            return static_cast<T &>(getTool(::Engine::Plugins::component_index<T>()));
         }
 
         bool render();
@@ -42,7 +42,7 @@ namespace Tools {
 
         void finishToolRead();
 
-        virtual Filesystem::Path findDataFile(std::string_view name) const = 0;
+        virtual Platform::Filesystem::Path findDataFile(std::string_view name) const = 0;
 
         virtual Threading::TaskQueue *taskQueue() const = 0;
 
@@ -50,12 +50,12 @@ namespace Tools {
 
         Dialog<> closeDialog();
 
-        Dialog<Filesystem::Path> directoryPicker(Filesystem::Path path = {}, Filesystem::Path selected = {}, Filesystem::Path base = {});
-        Dialog<Filesystem::Path> filePicker(bool allowNewFile = false, Filesystem::Path path = {}, Filesystem::Path selected = {});
+        Dialog<Platform::Filesystem::Path> directoryPicker(Platform::Filesystem::Path path = {}, Platform::Filesystem::Path selected = {}, Platform::Filesystem::Path base = {});
+        Dialog<Platform::Filesystem::Path> filePicker(bool allowNewFile = false, Platform::Filesystem::Path path = {}, Platform::Filesystem::Path selected = {});
 
-        virtual void Image(Render::ConstTexturePtr tex, Vector2i image_size = { -1, -1 }, const Vector2 &uv0 = { 0, 0 }, const Vector2 &uv1 = { 1, 1 }) = 0;
-        virtual void Image(const Filesystem::Path &path, Vector2i image_size = { -1, -1 }) = 0;
-        virtual void DrawImage(const Filesystem::Path &path, Vector2i pos, Vector2i image_size = { -1, -1 }, float spinnerRadius = 15) = 0;
+        virtual void Image(Render::ConstTexturePtr tex, Math::Vector2i image_size = { -1, -1 }, const Math::Vector2 &uv0 = { 0, 0 }, const Math::Vector2 &uv1 = { 1, 1 }) = 0;
+        virtual void Image(const Platform::Filesystem::Path &path, Math::Vector2i image_size = { -1, -1 }) = 0;
+        virtual void DrawImage(const Platform::Filesystem::Path &path, Math::Vector2i pos, Math::Vector2i image_size = { -1, -1 }, float spinnerRadius = 15) = 0;
 
         ::ImGuiTestEngine *testEngine() const;
 

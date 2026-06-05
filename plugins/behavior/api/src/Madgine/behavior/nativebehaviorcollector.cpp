@@ -60,14 +60,14 @@ namespace Behavior {
         return info->createParameters();
     }
 
-    std::vector<ExtendedValueTypeDesc> NativeBehaviorFactory::parameterTypes(const UniqueOpaquePtr &handle) const
+    std::vector<Reflect::ExtendedType> NativeBehaviorFactory::parameterTypes(const UniqueOpaquePtr &handle) const
     {
         const NativeBehaviorInfo *info = handle.as<const NativeBehaviorInfo *>();
         auto types = info->parameterTypes();
         return { types.begin(), types.end() };
     }
 
-    std::vector<ExtendedValueTypeDesc> NativeBehaviorFactory::resultTypes(const UniqueOpaquePtr &handle) const
+    std::vector<Reflect::ExtendedType> NativeBehaviorFactory::resultTypes(const UniqueOpaquePtr &handle) const
     {
         const NativeBehaviorInfo *info = handle.as<const NativeBehaviorInfo *>();
         auto types = info->resultTypes();

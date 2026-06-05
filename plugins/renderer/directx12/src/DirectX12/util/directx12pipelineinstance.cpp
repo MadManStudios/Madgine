@@ -39,7 +39,7 @@ namespace Render {
         size_t samplesBits = sqrt(target->samples());
         assert(samplesBits * samplesBits == target->samples());
 
-        ReleasePtr<ID3D12PipelineState> pipeline = mPipeline->get(vertexFormat, groupSize, target, mDepthChecking);
+        Platform::ReleasePtr<ID3D12PipelineState> pipeline = mPipeline->get(vertexFormat, groupSize, target, mDepthChecking);
         if (!pipeline) {
             return false;
         }
@@ -70,9 +70,9 @@ namespace Render {
         target->context()->setupRootSignature(mPipeline->rootSignature(), target->mCommandList);
     }
 
-    WritableByteBuffer DirectX12PipelineInstance::mapParameters(size_t index)
+    Memory::WritableByteBuffer DirectX12PipelineInstance::mapParameters(size_t index)
     {
-        Block block = DirectX12RenderContext::getSingleton().mTempAllocator.allocate(mConstantBufferSizes[index], 256);
+        Memory::Block block = DirectX12RenderContext::getSingleton().mTempAllocator.allocate(mConstantBufferSizes[index], 256);
         auto [res, offset] = DirectX12RenderContext::getSingleton().mTempMemoryHeap.resolve(block.mAddress);
         mConstantGPUAddresses[index] = res->GetGPUVirtualAddress() + offset;
 
@@ -131,7 +131,7 @@ namespace Render {
         mHasIndices = false;
     }
 
-    WritableByteBuffer DirectX12PipelineInstance::mapTempBuffer(size_t space, size_t elementSize, size_t count) const
+    Memory::WritableByteBuffer DirectX12PipelineInstance::mapTempBuffer(size_t space, size_t elementSize, size_t count) const
     {
         size_t size = elementSize * count;
 
@@ -139,7 +139,7 @@ namespace Render {
         if (mTempGPUAddresses.size() <= space - 1)
             mTempGPUAddresses.resize(space);
 
-        Block block = DirectX12RenderContext::getSingleton().mTempAllocator.allocate(alignTo(size, 256));
+        Memory::Block block = DirectX12RenderContext::getSingleton().mTempAllocator.allocate(alignTo(size, 256));
         auto [res, offset] = DirectX12RenderContext::getSingleton().mTempMemoryHeap.resolve(block.mAddress);
         mTempGPUAddresses[space - 1] = res->GetGPUVirtualAddress() + offset;
 
@@ -189,13 +189,13 @@ namespace Render {
         mElementCount = mesh.mElementCount;
     }
 
-    WritableByteBuffer DirectX12PipelineInstance::mapVertices(RenderTarget *_target, VertexFormat format, size_t count) const
+    Memory::WritableByteBuffer DirectX12PipelineInstance::mapVertices(RenderTarget *_target, VertexFormat format, size_t count) const
     {
         DirectX12RenderTarget *target = static_cast<DirectX12RenderTarget *>(_target);
 
         ID3D12GraphicsCommandList *commandList = target->mCommandList;
 
-        Block block = DirectX12RenderContext::getSingleton().mTempAllocator.allocate(alignTo(format.stride() * count, 256));
+        Memory::Block block = DirectX12RenderContext::getSingleton().mTempAllocator.allocate(alignTo(format.stride() * count, 256));
         auto [res, offset] = DirectX12RenderContext::getSingleton().mTempMemoryHeap.resolve(block.mAddress);
 
         D3D12_VERTEX_BUFFER_VIEW view;
@@ -211,13 +211,13 @@ namespace Render {
         return { block.mAddress, block.mSize };
     }
 
-    TypedByteBuffer<uint32_t> DirectX12PipelineInstance::mapIndices(RenderTarget *_target, size_t count) const
+    Memory::TypedByteBuffer<uint32_t> DirectX12PipelineInstance::mapIndices(RenderTarget *_target, size_t count) const
     {
         DirectX12RenderTarget *target = static_cast<DirectX12RenderTarget *>(_target);
 
         ID3D12GraphicsCommandList *commandList = target->mCommandList;
 
-        Block block = DirectX12RenderContext::getSingleton().mTempAllocator.allocate(alignTo(sizeof(uint32_t) * count, 256));
+        Memory::Block block = DirectX12RenderContext::getSingleton().mTempAllocator.allocate(alignTo(sizeof(uint32_t) * count, 256));
         auto [res, offset] = DirectX12RenderContext::getSingleton().mTempMemoryHeap.resolve(block.mAddress);
 
         D3D12_INDEX_BUFFER_VIEW view;

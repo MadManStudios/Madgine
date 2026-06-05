@@ -14,32 +14,32 @@ namespace Widgets {
     struct WidgetsVertexData {
         std::vector<Vertex> mTriangleVertices;
 
-        void renderQuad(Vector3 pos, Vector2 size, const Rect2 &clipRect, ColorFrame color = {}, Vector2 topLeftUV = { 0.0f, 0.0f }, Vector2 bottomRightUV = { 1.0f, 1.0f }, bool flippedUV = false);
-        void renderQuadUV(Vector3 pos, Vector2 size, const Rect2 &clipRect, ColorFrame color, Rect2i rect, Vector2i textureSize, bool flippedUV = false);
+        void renderQuad(Math::Vector3 pos, Math::Vector2 size, const Math::Rect2 &clipRect, ColorFrame color = {}, Math::Vector2 topLeftUV = { 0.0f, 0.0f }, Math::Vector2 bottomRightUV = { 1.0f, 1.0f }, bool flippedUV = false);
+        void renderQuadUV(Math::Vector3 pos, Math::Vector2 size, const Math::Rect2 &clipRect, ColorFrame color, Math::Rect2i rect, Math::Vector2i textureSize, bool flippedUV = false);
     };
 
     struct WidgetsLinesData {
         std::vector<Vertex> mLineVertices;
 
-        void renderLine(Line3 line, const Rect2 &clipRect, Color4 color = { 1.0f, 1.0f, 1.0f, 1.0f });
+        void renderLine(Math::Line3 line, const Math::Rect2 &clipRect, Math::Color4 color = { 1.0f, 1.0f, 1.0f, 1.0f });
     };
 
     struct MADGINE_WIDGETS_EXPORT WidgetsRenderData {
 
-        void renderQuad(Vector2 pos, Vector2 size, ColorFrame color = {}, TextureSettings tex = {}, Vector2 topLeftUV = { 0.0f, 0.0f }, Vector2 bottomRightUV = { 1.0f, 1.0f }, bool flippedUV = false, bool transparentContent = false);
-        void renderQuadUV(Vector2 pos, Vector2 size, ColorFrame color, TextureSettings tex, Rect2i rect, Vector2i textureSize, bool flippedUV = false, bool transparentContent = false);
+        void renderQuad(Math::Vector2 pos, Math::Vector2 size, ColorFrame color = {}, TextureSettings tex = {}, Math::Vector2 topLeftUV = { 0.0f, 0.0f }, Math::Vector2 bottomRightUV = { 1.0f, 1.0f }, bool flippedUV = false, bool transparentContent = false);
+        void renderQuadUV(Math::Vector2 pos, Math::Vector2 size, ColorFrame color, TextureSettings tex, Math::Rect2i rect, Math::Vector2i textureSize, bool flippedUV = false, bool transparentContent = false);
 
-        void renderLine(const Line2 &line, Color4 color = { 1.0f, 1.0f, 1.0f, 1.0f });
+        void renderLine(const Math::Line2 &line, Math::Color4 color = { 1.0f, 1.0f, 1.0f, 1.0f });
 
         const std::map<size_t, std::map<TextureSettings, WidgetsVertexData>> &vertexData() const;
         const std::vector<Vertex> &lineVertices() const;
 
         struct WidgetsRenderDataClipRectKeep {
             ~WidgetsRenderDataClipRectKeep();
-            Rect2 mOldRect;
+            Math::Rect2 mOldRect;
             WidgetsRenderData &mRenderData;
         };
-        WidgetsRenderDataClipRectKeep pushClipRect(Vector2 pos, Vector2 size);
+        WidgetsRenderDataClipRectKeep pushClipRect(Math::Vector2 pos, Math::Vector2 size);
 
         void setAlpha(float alpha);
         float alpha() const;
@@ -56,7 +56,7 @@ namespace Widgets {
     private:
         std::map<size_t, std::map<TextureSettings, WidgetsVertexData>> mVertexData;
         WidgetsLinesData mLineData;
-        Rect2 mClipRect {
+        Math::Rect2 mClipRect {
             { 0.0f, 0.0f },
             { std::numeric_limits<float>::max(), std::numeric_limits<float>::max() }
         };

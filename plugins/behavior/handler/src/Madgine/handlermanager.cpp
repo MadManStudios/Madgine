@@ -13,7 +13,7 @@
 #include "Madgine/app/application.h"
 #include "Madgine/window/mainwindow.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
 #include "handler.h"
@@ -30,7 +30,7 @@ NAMED_UNIQUECOMPONENT(HandlerManager, Engine::Behavior::HandlerManager)
 namespace Engine {
 namespace Behavior {
 
-    HandlerManager::HandlerManager(Window::MainWindow &window)
+    HandlerManager::HandlerManager(Core::MainWindow &window)
         : MainWindowComponent(window, 100)
         , mApp(window.app())
         , mHandlers(*this)
@@ -80,7 +80,7 @@ namespace Behavior {
         return mLifetime;
     }
 
-    App::Application &HandlerManager::app() const
+    Core::Application &HandlerManager::app() const
     {
         return mApp;
     }

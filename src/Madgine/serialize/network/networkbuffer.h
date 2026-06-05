@@ -1,16 +1,16 @@
 #pragma once
 
-#include "Interfaces/socket/socketapi.h"
+#include "Platform/socket/socketapi.h"
 
 namespace Engine {
-namespace Network {
+namespace Serialize {
     struct MADGINE_NETWORK_SERIALIZE_EXPORT NetworkBuffer : std::basic_streambuf<char> {
-        NetworkBuffer(Socket socket);
+        NetworkBuffer(Platform::Socket socket);
         NetworkBuffer(const NetworkBuffer &) = delete;
         NetworkBuffer(NetworkBuffer &&other) noexcept = delete;
         virtual ~NetworkBuffer();
 
-        SocketAddress getAddress() const;
+        Platform::SocketAddress getAddress() const;
 
     protected:
         // void handleError() override;
@@ -22,7 +22,7 @@ namespace Network {
         std::streamsize showmanyc() override;
 
     private:
-        Socket mSocket; // = SOCKET
+        Platform::Socket mSocket; // = SOCKET
     };
 }
 }

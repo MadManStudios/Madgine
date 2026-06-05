@@ -20,7 +20,7 @@ namespace Scene {
             void setMaterial(uint32_t index);
             // void setMaterialName(std::string_view name);
 
-            AABB aabb() const;
+            Math::AABB aabb() const;
 
             void set(Render::GPUMeshLoader::Handle handle);
 

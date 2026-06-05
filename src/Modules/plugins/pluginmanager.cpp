@@ -4,11 +4,11 @@
 
 #    include "Generic/keyvalue.h"
 
-#    include "Interfaces/dl/runtime.h"
-#    include "Interfaces/filesystem/fsapi.h"
+#    include "Platform/dl/runtime.h"
+#    include "Platform/filesystem/fsapi.h"
 
-#    include "../ini/inifile.h"
-#    include "../ini/inisection.h"
+#    include "inifile.h"
+#    include "inisection.h"
 #    include "../threading/workgroup.h"
 #    include "binaryinfo.h"
 #    include "plugin.h"
@@ -18,9 +18,9 @@
 namespace Engine {
 namespace Plugins {
 
-    static Filesystem::Path cacheFileName()
+    static Platform::Filesystem::Path cacheFileName()
     {
-        return Filesystem::appDataPath() / ("plugins.ini");
+        return Platform::Filesystem::appDataPath() / ("plugins.ini");
     }
 
     static PluginManager *sSingleton = nullptr;
@@ -40,7 +40,7 @@ namespace Plugins {
 
         const std::regex e { SHARED_LIB_PREFIX "Plugin_[a-zA-Z0-9]*_([a-zA-Z0-9]*)_[a-zA-Z0-9]*\\" SHARED_LIB_SUFFIX };
         std::smatch match;
-        for (auto result : Dl::listSharedLibraries()) {
+        for (auto result : Platform::Dl::listSharedLibraries()) {
             auto file = result.path().filename();
             if (std::regex_match(file.str(), match, e)) {
                 std::string section = match[1];
@@ -49,16 +49,16 @@ namespace Plugins {
         }
     }
 
-    int PluginManager::setup(bool loadCache, std::string_view programName, const Filesystem::Path &configFile)
+    int PluginManager::setup(bool loadCache, std::string_view programName, const Platform::Filesystem::Path &configFile)
     {
         mUseCache = loadCache;
 
         assert(Threading::WorkGroup::self().singleThreaded());
 
         if (loadCache || !configFile.empty()) {
-            Filesystem::Path pluginFile = !configFile.empty() ? Filesystem::Path { configFile } : cacheFileName();
+            Platform::Filesystem::Path pluginFile = !configFile.empty() ? Platform::Filesystem::Path { configFile } : cacheFileName();
 
-            Ini::IniFile file;
+            IniFile file;
             if (file.loadFromDisk(pluginFile)) {
                 LOG("Loading Plugins from '" << pluginFile << "'");
                 bool result = loadSelection(file, true);
@@ -133,34 +133,34 @@ namespace Plugins {
         return nullptr;
     }
 
-    mutable_set<PluginSection, NameCompare>::const_iterator PluginManager::begin() const
+    Containers::mutable_set<PluginSection, NameCompare>::const_iterator PluginManager::begin() const
     {
         return mSections.begin();
     }
 
-    mutable_set<PluginSection, NameCompare>::const_iterator PluginManager::end() const
+    Containers::mutable_set<PluginSection, NameCompare>::const_iterator PluginManager::end() const
     {
         return mSections.end();
     }
 
-    mutable_set<PluginSection, NameCompare>::iterator PluginManager::begin()
+    Containers::mutable_set<PluginSection, NameCompare>::iterator PluginManager::begin()
     {
         return mSections.begin();
     }
 
-    mutable_set<PluginSection, NameCompare>::iterator PluginManager::end()
+    Containers::mutable_set<PluginSection, NameCompare>::iterator PluginManager::end()
     {
         return mSections.end();
     }
 
-    void PluginManager::saveSelection(Ini::IniFile &file, bool withTools)
+    void PluginManager::saveSelection(IniFile &file, bool withTools)
     {
         file = mCurrentSelection;
         if (!withTools)
             file.removeSection("Tools");
     }
 
-    bool PluginManager::loadSelection(const Ini::IniFile &file, bool withTools)
+    bool PluginManager::loadSelection(const IniFile &file, bool withTools)
     {
         mCurrentSelection = file;
         for (const auto &[sectionName, section] : file) {
@@ -194,28 +194,28 @@ namespace Plugins {
     void PluginManager::onUpdate()
     {
         if (mUseCache) {
-            Ini::IniFile file;
+            IniFile file;
             saveSelection(file, false);
             file.saveToDisk(cacheFileName());
         }
     }
 
-    bool PluginManager::loadFromFile(const Filesystem::Path &p, bool withTools)
+    bool PluginManager::loadFromFile(const Platform::Filesystem::Path &p, bool withTools)
     {
         LOG("Loading Plugins: " << p);
-        if (!Filesystem::exists(p))
+        if (!Platform::Filesystem::exists(p))
             return false;
-        Ini::IniFile file;
+        IniFile file;
         if (!file.loadFromDisk(p)) {
             return false;
         }
         return loadSelection(file, withTools);
     }
 
-    void PluginManager::saveToFile(const Filesystem::Path &p, bool withTools)
+    void PluginManager::saveToFile(const Platform::Filesystem::Path &p, bool withTools)
     {
         LOG("Writing Plugins: " << p);
-        Ini::IniFile file;
+        IniFile file;
         saveSelection(file, withTools);
         file.saveToDisk(p);
     }
@@ -226,12 +226,12 @@ namespace Plugins {
         assert(pib.second);
     }
 
-    const Ini::IniFile &PluginManager::selection() const
+    const IniFile &PluginManager::selection() const
     {
         return mCurrentSelection;
     }
 
-    Ini::IniFile &PluginManager::selection()
+    IniFile &PluginManager::selection()
     {
         return mCurrentSelection;
     }

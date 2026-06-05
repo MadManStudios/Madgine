@@ -2,8 +2,6 @@
 
 #include "behaviorcoroutine.h"
 
-#include "Meta/keyvalue/valuetype.h"
-
 #include "behavior.h"
 
 namespace Engine {
@@ -22,7 +20,7 @@ namespace Behavior {
     void CoroutineBehaviorState::start()
     {
         if (mResolveNames) {
-            KeyValueResult result = mResolveNames(*mReceiver);
+            Reflect::Result result = mResolveNames(*mReceiver);
             if (result) {
                 mReceiver->set_error(std::move(*result.mError));
                 return;
@@ -80,7 +78,7 @@ namespace Behavior {
         throw;
     }
 
-    std::bool_constant<true> CoroutineBehaviorState::set_error(KeyValueError result)
+    std::bool_constant<true> CoroutineBehaviorState::set_error(Reflect::Error result)
     {
         mReceiver->set_error(result);
         return {};
@@ -139,7 +137,7 @@ namespace Behavior {
     void BehaviorCoroutineHandle::resume()
     {
         if (!promise().mNext->resumeImpl()) {
-            promise().set_error(KeyValueError { GenericResult { GenericResult::UNKNOWN_ERROR }, "A bound object has become unavailable" });
+            promise().set_error(Reflect::Error { GenericResult { GenericResult::UNKNOWN_ERROR }, "A bound object has become unavailable" });
         }
     }
 

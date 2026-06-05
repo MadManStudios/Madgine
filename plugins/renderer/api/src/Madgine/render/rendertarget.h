@@ -23,11 +23,11 @@ namespace Render {
         virtual size_t textureCount() const;
         virtual ConstTexturePtr depthTexture() const;
 
-        virtual Matrix4 getClipSpaceMatrix() const;
+        virtual Math::Matrix4 getClipSpaceMatrix() const;
 
-        virtual bool resizeImpl(const Vector2i &size) = 0;
-        bool resize(const Vector2i &size);
-        virtual Vector2i size() const = 0;
+        virtual bool resizeImpl(const Math::Vector2i &size) = 0;
+        bool resize(const Math::Vector2i &size);
+        virtual Math::Vector2i size() const = 0;
 
         void addRenderPass(RenderPass *pass);
         void removeRenderPass(RenderPass *pass);
@@ -46,9 +46,9 @@ namespace Render {
         virtual void pushAnnotation(const char *tag) = 0;
         virtual void popAnnotation() = 0;
 
-        const Rect2i &renderSpace() const;
-        virtual void setRenderSpace(const Rect2i &space);
-        virtual void setScissorsRect(const Rect2i &space) = 0;
+        const Math::Rect2i &renderSpace() const;
+        virtual void setRenderSpace(const Math::Rect2i &space);
+        virtual void setScissorsRect(const Math::Rect2i &space) = 0;
 
         bool canFlipFlop() const;
 
@@ -67,7 +67,7 @@ namespace Render {
 
         RenderContext *mContext;
 
-        BitArray<4> mFlipFlopIndices;
+        Containers::BitArray<4> mFlipFlopIndices;
 
     private:
         std::vector<RenderPass *> mRenderPasses;
@@ -80,7 +80,7 @@ namespace Render {
 
         std::vector<std::string> mPostProcessing;
 
-        Rect2i mRenderSpace;
+        Math::Rect2i mRenderSpace;
     };
 
 }

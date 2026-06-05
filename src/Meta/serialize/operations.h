@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Generic/container/atomiccontaineroperation.h"
+#include "Generic/containers/atomiccontaineroperation.h"
 
 #include "configs/configselector.h"
 #include "configs/creator.h"
@@ -329,7 +329,7 @@ namespace Serialize {
     }
 
     template <typename Compound, typename Primitive, typename F>
-        requires(!Reference<F> && PrimitiveType<Primitive>)
+        requires(!Concepts::Reference<F> && PrimitiveType<Primitive>)
     StreamResult scanPrimitive(FormattedSerializeStream &in, const char *name, F &&callback, size_t depth = 0)
     {
         return visitStream<Compound>(in, name, StreamVisitorImpl { [callback { std::move(callback) }](PrimitiveHolder<Primitive>, CallerHierarchyFormattedSerializeStream stream, const char *name, std::span<std::string_view> tags, size_t depth) -> StreamResult {
@@ -342,7 +342,7 @@ namespace Serialize {
     }
 
     template <typename Primitive, typename F, typename T>
-        requires(!Reference<F> && PrimitiveType<Primitive>)
+        requires(!Concepts::Reference<F> && PrimitiveType<Primitive>)
     StreamResult scanPrimitive(PrimitiveHolder<T> holder, FormattedSerializeStream &in, const char *name, F &&callback, size_t depth = 0)
     {
         return visitStream(holder, in, name, StreamVisitorImpl { [callback { std::move(callback) }](PrimitiveHolder<Primitive>, CallerHierarchyFormattedSerializeStream stream, const char *name, std::span<std::string_view> tags, size_t depth) -> StreamResult {
@@ -355,7 +355,7 @@ namespace Serialize {
     }
 
     template <typename Compound, typename TargetCompound, typename... Configs, typename F>
-        requires(!Reference<F> && !PrimitiveType<TargetCompound>)
+        requires(!Concepts::Reference<F> && !PrimitiveType<TargetCompound>)
     StreamResult scanCompound(FormattedSerializeStream &in, const char *name, F &&callback, size_t depth = 0)
     {
         using BaseType = std::conditional_t<std::derived_from<TargetCompound, SyncableUnitBase>, SyncableUnitBase, DataTag>;
@@ -408,9 +408,9 @@ namespace Serialize {
             if constexpr (std::is_const_v<T>) {
                 // Don't do anything here
                 return {};
-            } else if constexpr (InstanceOf<T, EnumImpl>) {
+            } else if constexpr (Concepts::InstanceOf<T, EnumImpl>) {
                 return visitor.visit(PrimitiveHolder<EnumTag> { &T::Representation::sTable }, in, name, tags, depth);
-            } else if constexpr (InstanceOf<T, Flags>) {
+            } else if constexpr (Concepts::InstanceOf<T, Flags>) {
                 return visitor.visit(PrimitiveHolder<FlagsTag> { &T::Representation::sTable }, in, name, tags, depth);
             } else if constexpr (PrimitiveType<T>) {
                 return visitor.visit(PrimitiveHolder<typename PrimitiveReducer<T>::type> {}, in, name, tags, depth);

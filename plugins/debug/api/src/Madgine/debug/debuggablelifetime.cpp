@@ -6,7 +6,7 @@
 
 #include "Madgine/root/keyvalueregistry.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 
 #include "debugger.h"
 
@@ -40,7 +40,7 @@ namespace Debug {
             }
         }
 
-        ScopePtr owner() override
+        Reflect::ScopePtr owner() override
         {
             return {};
         }
@@ -62,7 +62,7 @@ namespace Debug {
     {
         if (!sInitialized) {
             sInitialized = true;
-            KeyValueRegistry::registerWorkGroupLocal("Lifetimes", &sRoot);
+            Core::KeyValueRegistry::registerWorkGroupLocal("Lifetimes", &sRoot);
         }
         return sRoot;
     }

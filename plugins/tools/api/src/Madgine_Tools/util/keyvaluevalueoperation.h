@@ -6,31 +6,31 @@ namespace Engine {
 namespace Tools {
     template <typename T>
         requires(!std::is_reference_v<T>)
-    struct KeyValueValueOperation : UndoableOperation {
+    struct ReflectValueOperation : UndoableOperation {
 
-        KeyValueValueOperation(Closure<KeyValueResult(CallableView<std::pair<KeyValueResult, bool>(const Traced<T &> &)>)> trace, T value)
+        ReflectValueOperation(Closure<Reflect::Result(CallableView<std::pair<Reflect::Result, bool>(const Traced<T &> &)>)> trace, T value)
             : mTrace(std::move(trace))
             , mValue(std::forward<T>(value))
         {
         }
 
-        KeyValueResult undo() override
+        Reflect::Result undo() override
         {
             return mTrace([&](const Traced<T &> &t) {
                 std::swap(t.get(), mValue);
-                return std::make_pair(KeyValueResult {}, true);
+                return std::make_pair(Reflect::Result {}, true);
             });
         }
-        KeyValueResult redo() override
+        Reflect::Result redo() override
         {
             return mTrace([&](const Traced<T &> &t) {
                 std::swap(t.get(), mValue);
-                return std::make_pair(KeyValueResult {}, true);
+                return std::make_pair(Reflect::Result {}, true);
             });
         }
 
     private:
-        Closure<KeyValueResult(CallableView<std::pair<KeyValueResult, bool>(const Traced<T &> &)>)> mTrace;
+        Closure<Reflect::Result(CallableView<std::pair<Reflect::Result, bool>(const Traced<T &> &)>)> mTrace;
         T mValue;
     };
 }

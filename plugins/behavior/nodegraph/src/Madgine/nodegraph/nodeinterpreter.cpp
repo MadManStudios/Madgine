@@ -2,8 +2,6 @@
 
 #include "nodeinterpreter.h"
 
-#include "Meta/keyvalue/valuetype.h"
-
 #include "Madgine/debug/debugger.h"
 
 #include "nodeexecution.h"
@@ -40,20 +38,17 @@ namespace Behavior {
                     node->interpret({ { { { *this }, *node } }, receiver, location }, mData[pin.mNode - 1], pin.mIndex, pin.mGroup);
                 } else {
                     receiver.set_value();
-                }
-            },
-                mContinuation, Debug::ContinuationType::Flow);
+                } }, mContinuation, Debug::ContinuationType::Flow);
         }
 
-        KeyValueResult NodeInterpreterStateBase::read(ValueType &retVal, Pin pin)
+        Reflect::Result NodeInterpreterStateBase::read(Reflect::Value &retVal, Pin pin)
         {
             if (!pin) {
                 throw 0;
             } else if (!pin.mNode) {
                 assert(pin.mGroup < 2);
                 if (pin.mGroup == 0) {
-                    retVal = mArguments.at(pin.mIndex);
-                    return {};
+                    return mArguments.get(retVal, pin.mIndex);
                 } else {
                     std::string_view name = mGraph->mNamedInputs[pin.mIndex].mDescriptor.mName;
                     return get_named_d(*this, name, retVal);
@@ -63,7 +58,7 @@ namespace Behavior {
             }
         }
 
-        KeyValueResult NodeInterpreterStateBase::read(ValueType &retVal, uint32_t dataProvider)
+        Reflect::Result NodeInterpreterStateBase::read(Reflect::Value &retVal, uint32_t dataProvider)
         {
             return read(retVal, mGraph->mDataInPins[dataProvider].mSource);
         }
@@ -132,7 +127,7 @@ namespace Behavior {
 
         void NodeInterpreterStateBase::stop()
         {
-            //Nothing to do. It is the responsibility of child behaviors to listen to the stop source.
+            // Nothing to do. It is the responsibility of child behaviors to listen to the stop source.
         }
 
     }

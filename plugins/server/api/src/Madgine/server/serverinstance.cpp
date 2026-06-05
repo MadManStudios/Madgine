@@ -3,7 +3,7 @@
 #include "serverinstance.h"
 
 namespace Engine {
-namespace Server {
+namespace Core {
     size_t ServerInstance::sInstanceCounter = 0;
 
     ServerInstance::ServerInstance(std::string_view name, Closure<int()> entrypoint)

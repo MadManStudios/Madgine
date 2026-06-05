@@ -2,8 +2,8 @@
 
 #include "python3behaviors.h"
 
-#include "Meta/keyvalue/valuetype.h"
-#include "Meta/keyvalueutil/valuetypeserialize.h"
+#include "Meta/reflect/value.h"
+#include "Meta/reflectserialize/valuetypeserialize.h"
 
 #include "Modules/uniquecomponent/uniquecomponentcollector.h"
 
@@ -12,7 +12,7 @@
 #include "Madgine/behavior/parametertuple.h"
 #include "Madgine/debug/debuglocation.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 
 #include "python3env.h"
 #include "util/pyobjectutil.h"
@@ -81,10 +81,10 @@ namespace Behavior {
             .tp_dealloc = &PyDealloc<PyDebugLine, &PyDebugLine::mLine>,
             .tp_as_async = &PyDebugLineAsyncMethods,
             .tp_flags = Py_TPFLAGS_DEFAULT,
-            .tp_doc = "Python helper for debugging",            
-            .tp_iternext = (iternextfunc)PyDebugLine_next,                
+            .tp_doc = "Python helper for debugging",
+            .tp_iternext = (iternextfunc)PyDebugLine_next,
             .tp_init = (initproc)PyDebugLine_init,
-            .tp_new = PyType_GenericNew,        
+            .tp_new = PyType_GenericNew,
         };
 
         PyObject *PyNamed_resolve(PyObject *cls, PyObject *nameObj)
@@ -94,8 +94,8 @@ namespace Behavior {
                 return nullptr;
             }
             const char *name = PyUnicode_AsUTF8(nameObj);
-            ValueType v;
-            KeyValueResult result = get_named_d(*sReceiver, name, v);
+            Reflect::Value v;
+            Reflect::Result result = get_named_d(*sReceiver, name, v);
             if (result) {
                 return toPyError(std::move(*result.mError));
             }
@@ -126,8 +126,8 @@ namespace Behavior {
                 , mValues(std::true_type {}, entry.mInfo.mArguments.size())
             {
                 for (size_t i = 0; i < mValues.size(); ++i) {
-                    ExtendedValueTypeDesc type = entry.mInfo.mArguments[i].mType;
-                    if (type.mType == ExtendedValueTypeEnum::VariantType) {
+                    Reflect::ExtendedType type = entry.mInfo.mArguments[i].mType;
+                    if (type.mType == Reflect::ExtendedTypeEnum::VariantType) {
                         mValues[i].setType(type.unwrapVariant().first);
                     } else {
                         mValues[i].setType(type);
@@ -145,7 +145,7 @@ namespace Behavior {
                 return mEntry.mInfo.mArguments[index].mName;
             }
 
-            ExtendedValueTypeDesc type(size_t index) const override
+            Reflect::ExtendedType type(size_t index) const override
             {
                 return mEntry.mInfo.mArguments[index].mType;
             }
@@ -155,7 +155,7 @@ namespace Behavior {
                 return std::make_unique<Python3ParameterTuple>(*this);
             }
 
-            ScopePtr customScopePtr() override
+            Reflect::ScopePtr customScopePtr() override
             {
                 return { this, &mEntry.mMetaTable };
             }
@@ -176,24 +176,24 @@ namespace Behavior {
             }
 
             const Python3BehaviorFactory::Entry &mEntry;
-            ArgumentList mValues;
+            Reflect::ArgumentList mValues;
         };
 
-        std::unique_ptr<Accessor[]> Python3BehaviorFactory::Entry::accessors(const PythonFunctionInfo &info)
+        std::unique_ptr<Reflect::Accessor[]> Python3BehaviorFactory::Entry::accessors(const PythonFunctionInfo &info)
         {
-            std::unique_ptr<Accessor[]> accessors = std::make_unique<Accessor[]>(info.mArguments.size() + 1);
+            std::unique_ptr<Reflect::Accessor[]> accessors = std::make_unique<Reflect::Accessor[]>(info.mArguments.size() + 1);
 
             for (size_t i = 0; i < info.mArguments.size(); ++i) {
-                accessors[i] = Accessor {
+                accessors[i] = Reflect::Accessor {
                     info.mArguments[i].mName.data(),
                     nullptr,
-                    [](const Accessor *self, ValueType &out, const ValueType &scope) -> KeyValueResult {
+                    [](const Reflect::Accessor *self, Reflect::Value &out, const Reflect::Value &scope) -> Reflect::Result {
                         size_t index = self - (*scope.type().mSecondary.mMetaTable)->mMembers;
-                        return ValueType_unwrap(out, [index](Python3ParameterTuple &tuple) { return tuple.mValues[index]; }, scope);
+                        return invoke(out, [index](Python3ParameterTuple &tuple) { return tuple.mValues[index]; }, scope);
                     },
-                    [](const Accessor *self, const ValueType &scope, const ValueType &val) -> KeyValueResult {
+                    [](const Reflect::Accessor *self, const Reflect::Value &scope, const Reflect::Value &val) -> Reflect::Result {
                         size_t index = self - (*scope.type().mSecondary.mMetaTable)->mMembers;
-                        return ValueType_unwrap([&](Python3ParameterTuple &tuple) { tuple.mValues[index] = val; }, scope);
+                        return invoke([&](Python3ParameterTuple &tuple) { tuple.mValues[index] = val; }, scope);
                     },
                     info.mArguments[i].mType,
                     info.mArguments[i].mFlags
@@ -214,7 +214,7 @@ namespace Behavior {
         }
 
         struct Python3BehaviorState : BehaviorReceiver {
-            Python3BehaviorState(PyObjectPtr function, const ArgumentList &args)
+            Python3BehaviorState(PyObjectPtr function, const Reflect::ArgumentList &args)
             {
                 Python3Lock lock;
                 mCoroutine = function.call(args);
@@ -237,7 +237,7 @@ namespace Behavior {
                     return;
                 }
 
-                resumeCoroutine(mCoroutine, toPyTuple(ArgumentList { std::monostate {} }));
+                resumeCoroutine(mCoroutine, toPyTuple(Reflect::ArgumentList { std::monostate {} }));
             }
 
             void stop()
@@ -254,9 +254,9 @@ namespace Behavior {
 
         struct Python3BehaviorSender : Execution::base_sender {
 
-            using result_type = KeyValueError;
+            using result_type = Reflect::Error;
             template <template <typename...> typename Tuple>
-            using value_types = Tuple<ArgumentList>;
+            using value_types = Tuple<Reflect::ArgumentList>;
 
             template <typename Rec>
             friend auto tag_invoke(Execution::connect_t, Python3BehaviorSender &&sender, Rec &&rec)
@@ -265,7 +265,7 @@ namespace Behavior {
             }
 
             PyObjectPtr mFunction;
-            ArgumentList mArguments;
+            Reflect::ArgumentList mArguments;
         };
 
         PyObject *PyEngine_Behavior_decorator(PyObject *self,
@@ -356,14 +356,14 @@ namespace Behavior {
             return ParameterTuple { std::make_unique<Python3ParameterTuple>(fn->second) };
         }
 
-        std::vector<ExtendedValueTypeDesc> Python3BehaviorFactory::parameterTypes(const UniqueOpaquePtr &handle) const
+        std::vector<Reflect::ExtendedType> Python3BehaviorFactory::parameterTypes(const UniqueOpaquePtr &handle) const
         {
             const std::pair<const std::string_view, Entry> *fn = handle.as<std::pair<const std::string_view, Entry> *>();
             auto types = fn->second.mInfo.mArguments | std::views::transform(&PythonFunctionArgument::mType);
             return { types.begin(), types.end() };
         }
 
-        std::vector<ExtendedValueTypeDesc> Python3BehaviorFactory::resultTypes(const UniqueOpaquePtr &handle) const
+        std::vector<Reflect::ExtendedType> Python3BehaviorFactory::resultTypes(const UniqueOpaquePtr &handle) const
         {
             // const Python3FileLoader::Handle &file = handle.as<Python3FileLoader::Handle>();
             return {};

@@ -16,7 +16,7 @@
 #include "Madgine/serialize/filesystem/filemanager.h"
 #include "Madgine/window/mainwindow.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
 #include "compoundwidget.h"
@@ -63,7 +63,7 @@ namespace Widgets {
         return Resources::ImageLoader::get(name);
     }
 
-    const Atlas2::Entry *UIAtlas::lookUpImage(Resources::ImageLoader::Resource *image)
+    const Math::Atlas2::Entry *UIAtlas::lookUpImage(Resources::ImageLoader::Resource *image)
     {
         if (!image)
             return nullptr;
@@ -78,7 +78,7 @@ namespace Widgets {
                 size_t width = data->mSize.x;
                 size_t height = data->mSize.y;
 
-                Atlas2::Entry entry = mAtlas.insert(data->mSize + Vector2i { 2, 2 }, [this]() { expand(); });
+                Math::Atlas2::Entry entry = mAtlas.insert(data->mSize + Math::Vector2i { 2, 2 }, [this]() { expand(); });
 
                 assert(data->mChannels == 4);
 
@@ -119,7 +119,7 @@ namespace Widgets {
         return &it->second;
     }
 
-    const Atlas2::Entry *UIAtlas::lookUpImage(std::string_view name)
+    const Math::Atlas2::Entry *UIAtlas::lookUpImage(std::string_view name)
     {
         return lookUpImage(Resources::ImageLoader::get(name));
     }
@@ -155,13 +155,13 @@ namespace Widgets {
 
     void PreprocessedUIAtlas::insert(const std::map<std::string, Resources::ImageLoader::Handle> &images)
     {
-        std::vector<Vector2i> sizes { images.size() };
+        std::vector<Math::Vector2i> sizes { images.size() };
         size_t i = 0;
         for (const auto &[name, handle] : images) {
-            sizes[i] = handle->mSize + Vector2i { 2, 2 };
+            sizes[i] = handle->mSize + Math::Vector2i { 2, 2 };
             ++i;
         }
-        std::vector<Atlas2::Entry> entries = mAtlas.insert({ sizes.data(), sizes.size() }, [this]() { expand(); });
+        std::vector<Math::Atlas2::Entry> entries = mAtlas.insert({ sizes.data(), sizes.size() }, [this]() { expand(); });
         i = 0;
         for (const auto &[name, handle] : images) {
             mEntries[name] = entries[i];
@@ -169,7 +169,7 @@ namespace Widgets {
         }
         size_t imageSize = mSize * 2048;
         size_t bufferSize = imageSize * imageSize;
-        TypedByteBuffer<uint32_t> atlasBuffer { std::make_unique<uint32_t[]>(bufferSize), bufferSize };
+        Memory::TypedByteBuffer<uint32_t> atlasBuffer { std::make_unique<uint32_t[]>(bufferSize), bufferSize };
         AreaView<uint32_t, 2> bufferView { atlasBuffer.mData, { imageSize, imageSize } };
         for (const auto &[name, entry] : mEntries) {
 
@@ -196,17 +196,17 @@ namespace Widgets {
         mBuffer = std::move(atlasBuffer).cast<const void>();
     }
 
-    const Atlas2 &PreprocessedUIAtlas::atlas() const
+    const Math::Atlas2 &PreprocessedUIAtlas::atlas() const
     {
         return mAtlas;
     }
 
-    const ByteBuffer &PreprocessedUIAtlas::buffer() const
+    const Memory::ByteBuffer &PreprocessedUIAtlas::buffer() const
     {
         return mBuffer;
     }
 
-    const std::map<std::string, Atlas2::Entry, std::less<>> &PreprocessedUIAtlas::entries() const
+    const std::map<std::string, Math::Atlas2::Entry, std::less<>> &PreprocessedUIAtlas::entries() const
     {
         return mEntries;
     }
@@ -216,19 +216,19 @@ namespace Widgets {
         return mSize;
     }
 
-    Vector2i PreprocessedUIAtlas::imageSize() const
+    Math::Vector2i PreprocessedUIAtlas::imageSize() const
     {
         return { mSize * 2048, mSize * 2048 };
     }
 
-    ByteBuffer PreprocessedUIAtlas::toPNG() const
+    Memory::ByteBuffer PreprocessedUIAtlas::toPNG() const
     {
         return Resources::ImageLoader::convertToPNG(mBuffer, imageSize());
     }
 
-    void PreprocessedUIAtlas::fromPNG(const ByteBuffer &buffer)
+    void PreprocessedUIAtlas::fromPNG(const Memory::ByteBuffer &buffer)
     {
-        Vector2i size;
+        Math::Vector2i size;
         mBuffer = Resources::ImageLoader::convertFromPNG(buffer, size);
     }
 
@@ -236,9 +236,9 @@ namespace Widgets {
     {
         mAtlas.clear();
         mAtlas.addBin({ 0, 0 });
-        Vector2i furthestCorner { 0, 0 };
-        for (const Atlas2::Entry &entry : kvValues(mEntries)) {
-            Vector2i bottomRight = entry.mArea.bottomRight();
+        Math::Vector2i furthestCorner { 0, 0 };
+        for (const Math::Atlas2::Entry &entry : kvValues(mEntries)) {
+            Math::Vector2i bottomRight = entry.mArea.bottomRight();
             furthestCorner = { std::max(bottomRight.x, furthestCorner.x),
                 std::max(bottomRight.y, furthestCorner.y) };
         }
@@ -292,7 +292,7 @@ namespace Widgets {
         co_return;
     }
 
-    Threading::Task<Resources::BakeResult> AtlasLoader::bakeResources(std::vector<Filesystem::Path> &resourcesToBake, const Filesystem::Path &intermediateDir)
+    Threading::Task<Resources::BakeResult> AtlasLoader::bakeResources(std::vector<Platform::Filesystem::Path> &resourcesToBake, const Platform::Filesystem::Path &intermediateDir)
     {
 
         for (auto &[name, res] : WidgetLoader::getSingleton()) {
@@ -301,7 +301,7 @@ namespace Widgets {
 
         std::map<std::string, Resources::ImageLoader::Handle> images;
 
-        for (Filesystem::Path path : resourcesToBake) {
+        for (Platform::Filesystem::Path path : resourcesToBake) {
             if (path.extension() == ".widget") {
                 WidgetLoader::Resource res { "", path };
                 Serialize::SerializeManager mgr { "Widget" };
@@ -336,8 +336,8 @@ namespace Widgets {
 
         PreprocessedUIAtlas atlas;
         atlas.insert(images);
-        Filesystem::FileManager outMgr { "Atlas" };
-        Filesystem::Path outPath = intermediateDir / "default.atl";
+        Serialize::FileManager outMgr { "Atlas" };
+        Platform::Filesystem::Path outPath = intermediateDir / "default.atl";
         Serialize::FormattedSerializeStream out = outMgr.openWrite(outPath, Serialize::Formats::safebinary);
 
         Serialize::write(out, atlas, "Atlas");

@@ -27,9 +27,9 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#include "Interfaces/interfaceslib.h"
+#include "Platform/platformlib.h"
 #include "Madgine/cli/clilib.h"
-#include "Interfaces/filesystem/fsapi.h"
+#include "Platform/filesystem/fsapi.h"
 #include "Madgine/cli/cli.h"
 #include "gtest/gtest.h"
 #include <stdio.h>
@@ -53,8 +53,8 @@ int main(int argc, char **argv)
         FS.mkdir('/cwd');
         FS.mount(NODEFS, { root : '.' }, '/cwd'););
 
-    for (const Engine::Filesystem::Path &p : Engine::Filesystem::listFiles("."))
-        assert(Engine::Filesystem::copyFile(p, "/cwd"));
+    for (const Engine::Platform::Filesystem::Path &p : Engine::Platform::Filesystem::listFiles("."))
+        assert(Engine::Platform::Filesystem::copyFile(p, "/cwd"));
 
     printf("Done\n");
 

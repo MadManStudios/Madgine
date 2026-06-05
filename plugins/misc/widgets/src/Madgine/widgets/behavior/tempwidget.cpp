@@ -14,7 +14,7 @@ namespace Engine {
 namespace Widgets {
 
     struct TempWidgetSender : Execution::base_sender {
-        using result_type = KeyValueError;
+        using result_type = Reflect::Error;
         template <template <typename...> typename Tuple>
         using value_types = Tuple<>;
 
@@ -32,17 +32,17 @@ namespace Widgets {
         }
 
         WidgetLoader::Handle mDesc;
-        Matrix3 mPos;
-        Matrix3 mSize;
+        Math::Matrix3 mPos;
+        Math::Matrix3 mSize;
         Behavior::Behavior mBehavior;
     };
 
-    Behavior::Behavior tempWidget(WidgetLoader::Handle desc, const Matrix3 &pos, const Matrix3 &size, Behavior::Behavior behavior)
+    Behavior::Behavior tempWidget(WidgetLoader::Handle desc, const Math::Matrix3 &pos, const Math::Matrix3 &size, Behavior::Behavior behavior)
     {
         return TempWidgetSender { {}, WidgetLoader::Handle { desc }, pos, size, std::move(behavior) } | Resources::with_handle(WidgetLoader::Handle { desc });
     }
 
-    TempWidgetState::TempWidgetState(WidgetLoader::Handle desc, Matrix3 pos, Matrix3 size, Behavior::Behavior behavior)
+    TempWidgetState::TempWidgetState(WidgetLoader::Handle desc, Math::Matrix3 pos, Math::Matrix3 size, Behavior::Behavior behavior)
         : mDesc(std::move(desc))
         , mState(Execution::connect(std::move(behavior), receiver { { *this }, *this }))
         , mPos(std::move(pos))
@@ -57,7 +57,7 @@ namespace Widgets {
     void TempWidgetState::start()
     {
         WidgetManager *mgr;
-        KeyValueResult result = Behavior::get_named<"WidgetManager", WidgetManager *>(*this, mgr);
+        Reflect::Result result = Behavior::get_named<"WidgetManager", WidgetManager *>(*this, mgr);
         if (result) {
             set_error(std::move(*result.mError));
             return;
@@ -81,20 +81,20 @@ namespace Widgets {
         return mWidget.get();
     }
 
-    void TempWidgetState::receiver::set_value(ArgumentList args)
+    void TempWidgetState::receiver::set_value(Reflect::ArgumentList args)
     {
         WidgetManager *mgr;
-        [[maybe_unused]] KeyValueResult result = Behavior::get_named<"WidgetManager", WidgetManager *>(*this, mgr);
+        [[maybe_unused]] Reflect::Result result = Behavior::get_named<"WidgetManager", WidgetManager *>(*this, mgr);
         assert(!result);
 
         mgr->closeOverlay(mState.mWidget.get());
         algorithm_receiver::set_value(std::move(args));
     }
 
-    void TempWidgetState::receiver::set_error(KeyValueError error)
+    void TempWidgetState::receiver::set_error(Reflect::Error error)
     {
         WidgetManager *mgr;
-        [[maybe_unused]] KeyValueResult result = Behavior::get_named<"WidgetManager", WidgetManager *>(*this, mgr);
+        [[maybe_unused]] Reflect::Result result = Behavior::get_named<"WidgetManager", WidgetManager *>(*this, mgr);
         assert(!result);
 
         mgr->closeOverlay(mState.mWidget.get());
@@ -104,7 +104,7 @@ namespace Widgets {
     void TempWidgetState::receiver::set_done()
     {
         WidgetManager *mgr;
-        [[maybe_unused]] KeyValueResult result = Behavior::get_named<"WidgetManager", WidgetManager *>(*this, mgr);
+        [[maybe_unused]] Reflect::Result result = Behavior::get_named<"WidgetManager", WidgetManager *>(*this, mgr);
         assert(!result);
 
         mgr->closeOverlay(mState.mWidget.get());
@@ -114,4 +114,4 @@ namespace Widgets {
 }
 }
 
-NATIVE_BEHAVIOR(temp_widget, Engine::Widgets::tempWidget, Engine::Behavior::InputParameter<"Class", Engine::Widgets::WidgetLoader::Handle>, Engine::Behavior::InputParameter<"Position", Engine::Matrix3>, Engine::Behavior::InputParameter<"Size", Engine::Matrix3>, Engine::Behavior::SubBehavior)
+NATIVE_BEHAVIOR(temp_widget, Engine::Widgets::tempWidget, Engine::Behavior::InputParameter<"Class", Engine::Widgets::WidgetLoader::Handle>, Engine::Behavior::InputParameter<"Position", Engine::Math::Matrix3>, Engine::Behavior::InputParameter<"Size", Engine::Math::Matrix3>, Engine::Behavior::SubBehavior)

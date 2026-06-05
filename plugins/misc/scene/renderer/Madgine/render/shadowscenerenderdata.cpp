@@ -44,7 +44,7 @@ namespace Render {
                     continue;
 
                 Scene::Entity::Skeleton *skeleton = mesh.entity().getComponent<Scene::Entity::Skeleton>();
-                Engine::Render::GPUPtr<Matrix4[]> bones;
+                Engine::Render::GPUPtr<Math::Matrix4[]> bones;
                 if (skeleton)
                     bones = skeleton->mBoneMatrices;
 

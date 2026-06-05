@@ -10,4 +10,4 @@ FolderSources(sources "" "" Generic_gtest_main.cc)
 
 add_gtest(Generic_Test ${sources})
 
-target_link_libraries(Generic_Test PRIVATE Interfaces CLI)
+target_link_libraries(Generic_Test PRIVATE Platform CLI)

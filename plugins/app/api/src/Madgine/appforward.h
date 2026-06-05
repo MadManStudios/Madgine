@@ -2,7 +2,7 @@
 
 namespace Engine {
 
-namespace App {
+namespace Core {
     struct Application;
     struct GlobalAPIBase;
 }

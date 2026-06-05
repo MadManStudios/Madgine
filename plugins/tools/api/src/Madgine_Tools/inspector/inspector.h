@@ -1,7 +1,7 @@
 #pragma once
-#include "Meta/keyvalue/argumentlist.h"
-#include "Meta/keyvalue/boundapifunction.h"
-#include "Meta/keyvalue/scopeptr.h"
+#include "Meta/reflect/argumentlist.h"
+#include "Meta/reflect/boundapifunction.h"
+#include "Meta/reflect/scopeptr.h"
 
 #include "../toolbase.h"
 #include "../toolscollector.h"
@@ -21,55 +21,55 @@ namespace Tools {
         void render() override;
         void renderMenu() override;
 
-        bool drawRemainingMembers(const Traced<const ScopePtr &> &scope, std::set<std::string> &drawn);
-        bool drawMember(const Traced<ScopeIterator> &it);
-        bool drawValue(std::string_view id, const Traced<ValueType &> &value, bool editable, ExtendedValueTypeDesc possibleType = { ExtendedValueTypeEnum::GenericType });
-        bool drawValue(std::string_view id, const Traced<ScopePtr &> &scope, bool isOwned, bool editable, ExtendedValueTypeDesc possibleTypes = { ExtendedValueTypeEnum::GenericType }, ValueTypeDesc *type = nullptr);
-        bool drawValue(std::string_view id, const Traced<OwnedScopePtr &> &scope, bool editable, ExtendedValueTypeDesc possibleTypes = { ExtendedValueTypeEnum::GenericType }, ValueTypeDesc *type = nullptr);
-        bool drawValue(std::string_view id, const Traced<ObjectPtr &> &object, bool editable, ExtendedValueTypeDesc possibleTypes = { ExtendedValueTypeEnum::GenericType }, ValueTypeDesc *type = nullptr);
-        bool drawValue(std::string_view id, const Traced<KeyValueVirtualSequenceRange &> &range, bool editable);
-        bool drawValue(std::string_view id, const Traced<KeyValueVirtualAssociativeRange &> &range, bool editable);
-        void drawValue(std::string_view id, const Traced<BoundApiFunction &> &function, bool editable);
+        bool drawRemainingMembers(const Traced<const Reflect::ScopePtr &> &scope, std::set<std::string> &drawn);
+        bool drawMember(const Traced<Reflect::ScopeIterator> &it);
+        bool drawValue(std::string_view id, const Traced<Reflect::Value &> &value, bool editable, Reflect::ExtendedType possibleType = { Reflect::ExtendedTypeEnum::GenericType });
+        bool drawValue(std::string_view id, const Traced<Reflect::ScopePtr &> &scope, bool isOwned, bool editable, Reflect::ExtendedType possibleTypes = { Reflect::ExtendedTypeEnum::GenericType }, Reflect::Type *type = nullptr);
+        bool drawValue(std::string_view id, const Traced<Reflect::OwnedScopePtr &> &scope, bool editable, Reflect::ExtendedType possibleTypes = { Reflect::ExtendedTypeEnum::GenericType }, Reflect::Type *type = nullptr);
+        bool drawValue(std::string_view id, const Traced<Reflect::ObjectPtr &> &object, bool editable, Reflect::ExtendedType possibleTypes = { Reflect::ExtendedTypeEnum::GenericType }, Reflect::Type *type = nullptr);
+        bool drawValue(std::string_view id, const Traced<Reflect::SequenceRange &> &range, bool editable);
+        bool drawValue(std::string_view id, const Traced<Reflect::AssociativeRange &> &range, bool editable);
+        void drawValue(std::string_view id, const Traced<Reflect::BoundApiFunction &> &function, bool editable);
 
-        bool drawMembers(const Traced<const ScopePtr &> &scope, std::set<std::string> drawn = {});
+        bool drawMembers(const Traced<const Reflect::ScopePtr &> &scope, std::set<std::string> drawn = {});
 
-        bool drawTypeDecorations(ValueTypeDesc &type, ExtendedValueTypeDesc possibleTypes);
+        bool drawTypeDecorations(Reflect::Type &type, Reflect::ExtendedType possibleTypes);
 
         std::string_view key() const override;
 
-        void addPtrSuggestion(const MetaTable *type, std::function<std::vector<std::pair<std::string_view, ScopePtr>>()> getter);
+        void addPtrSuggestion(const Reflect::MetaTable *type, std::function<std::vector<std::pair<std::string_view, Reflect::ScopePtr>>()> getter);
         template <typename T>
-        void addPtrSuggestion(std::function<std::vector<std::pair<std::string_view, ScopePtr>>()> getter)
+        void addPtrSuggestion(std::function<std::vector<std::pair<std::string_view, Reflect::ScopePtr>>()> getter)
         {
             addPtrSuggestion(table<T>, std::move(getter));
         }
-        bool hasPtrSuggestion(const MetaTable *type) const;
+        bool hasPtrSuggestion(const Reflect::MetaTable *type) const;
 
-        void addPreviewDefinition(const MetaTable *type, std::function<bool(const Traced<const ScopePtr &> &)> preview);
+        void addPreviewDefinition(const Reflect::MetaTable *type, std::function<bool(const Traced<const Reflect::ScopePtr &> &)> preview);
         template <typename T, typename F>
         void addPreviewDefinition(F &&preview)
         {
-            addPreviewDefinition(table<T>, [preview { forward_capture<F>(preview) }](const Traced<const ScopePtr &> &p) { return preview(p.trace(&scope_cast<T>)); });
+            addPreviewDefinition(table<T>, [preview { forward_capture<F>(preview) }](const Traced<const Reflect::ScopePtr &> &p) { return preview(p.trace(&Reflect::scope_cast<T>)); });
         }
 
-        void pushFlags(AccessorFlags flags);
+        void pushFlags(Reflect::AccessorFlags flags);
         void popFlags();
-        AccessorFlags flags() const;
+        Reflect::AccessorFlags flags() const;
 
     private:
-        std::map<const MetaTable *, std::function<std::vector<std::pair<std::string_view, ScopePtr>>()>> mPtrSuggestionsByType;
-        std::map<const MetaTable *, std::function<bool(const Traced<const ScopePtr &> &)>> mPreviews;
+        std::map<const Reflect::MetaTable *, std::function<std::vector<std::pair<std::string_view, Reflect::ScopePtr>>()>> mPtrSuggestionsByType;
+        std::map<const Reflect::MetaTable *, std::function<bool(const Traced<const Reflect::ScopePtr &> &)>> mPreviews;
 
-        static std::map<std::string, bool (Inspector::*)(ScopePtr, std::set<std::string> &, tinyxml2::XMLElement *)> sElements;
+        static std::map<std::string, bool (Inspector::*)(Reflect::ScopePtr, std::set<std::string> &, tinyxml2::XMLElement *)> sElements;
 
         std::list<Trace> mViews;
 
-        std::vector<AccessorFlags> mAccessorFlagsStack;
+        std::vector<Reflect::AccessorFlags> mAccessorFlagsStack;
 
         // FunctionTool
         std::string mCurrentPopupFunctionName;
-        BoundApiFunction mCurrentPopupFunction;
-        ArgumentList mCurrentPopupArguments;
+        Reflect::BoundApiFunction mCurrentPopupFunction;
+        Reflect::ArgumentList mCurrentPopupArguments;
     };
 }
 }

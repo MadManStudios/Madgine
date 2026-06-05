@@ -5,11 +5,11 @@
 #include "Generic/execution/algorithm.h"
 #include "Generic/execution/execution.h"
 
-#include "Interfaces/fetch/fetchapi.h"
-#include "Interfaces/filesystem/async.h"
-#include "Interfaces/filesystem/fsapi.h"
+#include "Platform/fetch/fetchapi.h"
+#include "Platform/filesystem/async.h"
+#include "Platform/filesystem/fsapi.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 
 #include "resourcemanager.h"
 
@@ -19,18 +19,18 @@ METATABLE_END(Engine::Resources::ResourceBase)
 
 namespace Engine {
 namespace Resources {
-    ResourceBase::ResourceBase(const std::string &name, Filesystem::Path path)
+    ResourceBase::ResourceBase(const std::string &name, Platform::Filesystem::Path path)
         : mName(name)
         , mPath(std::move(path))
     {
     }
 
-    void ResourceBase::setPath(const Filesystem::Path &path)
+    void ResourceBase::setPath(const Platform::Filesystem::Path &path)
     {
         mPath = path;
     }
 
-    const Filesystem::Path &ResourceBase::path() const
+    const Platform::Filesystem::Path &ResourceBase::path() const
     {
         return mPath;
     }
@@ -47,7 +47,7 @@ namespace Resources {
 
     Stream ResourceBase::readAsStream(bool isBinary) const
     {
-        return Filesystem::openFileRead(mPath, isBinary);
+        return Platform::Filesystem::openFileRead(mPath, isBinary);
     }
 
     std::string ResourceBase::readAsText() const
@@ -62,17 +62,17 @@ namespace Resources {
         return std::vector<unsigned char> { buffer.iterator(), buffer.end() };
     }
 
-    Execution::Sender<GenericResult, ByteBuffer> ResourceBase::readAsync() const
+    Execution::Sender<GenericResult, Memory::ByteBuffer> ResourceBase::readAsync() const
     {
         std::string_view protocol = mPath.protocol();
 
         if (protocol == "http" || protocol == "https" || protocol == "ftp") {
-            co_return co_await FetchSender<std::vector<std::byte>>(mPath, { mPath });
+            co_return co_await Platform::Fetch::FetchSender<std::vector<std::byte>>(mPath, { mPath });
         } else if (!protocol.empty()) {
             LOG_WARNING("Unrecognized file protocol '" << protocol << "'");
         }
 
-        co_return co_await Filesystem::readFileAsync(mPath);
+        co_return co_await Platform::Filesystem::readFileAsync(mPath);
     }
 
     std::string ResourceBase::plugin() const

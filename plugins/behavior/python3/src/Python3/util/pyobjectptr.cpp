@@ -5,8 +5,7 @@
 #include <frameobject.h>
 #include <traceback.h>
 
-#include "Meta/keyvalue/argumentlist.h"
-#include "Meta/keyvalue/valuetype.h"
+#include "Meta/reflect/argumentlist.h"
 
 #include "pydictptr.h"
 #include "pymoduleptr.h"
@@ -64,7 +63,7 @@ namespace Behavior {
             return PyObject_GetAttrString(mObject, name.data());
         }
 
-        PyObjectPtr PyObjectPtr::call(const ArgumentList &args) const
+        PyObjectPtr PyObjectPtr::call(const Reflect::ArgumentList &args) const
         {
             return call(toPyTuple(args), PyObjectPtr {});
         }

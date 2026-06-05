@@ -5,67 +5,61 @@
 
 namespace Engine {
 
-struct ValueType;
-struct KeyValuePair;
-struct KeyValueResult;
+namespace Reflect {
+    struct Value;
+    struct KeyValuePair;
+    struct Result;
 
-template <typename T, typename Base>
-struct VirtualScope;
-template <typename Base>
-struct VirtualScopeBase;
-struct ProxyScopeBase;
-struct MetaTable;
-struct ScopeIterator;
-struct Accessor;
-using AccessorFlags = uint32_t;
-struct ScopeField;
-struct ScopePtr;
-struct OwnedScopePtr;
-struct ApiFunction;
-struct BoundApiFunction;
-template <auto f>
-struct TypedBoundApiFunction;
-struct FunctionTable;
-struct FunctionArgument;
-struct KeyValueFunction;
-struct EnumHolder;
-struct FlagsHolder;
-struct KeyValueSender;
+    template <typename T, typename Base>
+    struct VirtualScope;
+    template <typename Base>
+    struct VirtualScopeBase;
+    struct ProxyScopeBase;
+    struct MetaTable;
+    struct ScopeIterator;
+    struct Accessor;
+    using AccessorFlags = uint32_t;
+    struct ScopeField;
+    struct ScopePtr;
+    struct OwnedScopePtr;
+    struct ApiFunction;
+    struct BoundApiFunction;
+    template <auto f>
+    struct TypedBoundApiFunction;
+    struct FunctionTable;
+    struct FunctionArgument;
+    struct Function;
+    struct Sender;
+    struct Enum;
+    struct Flags;
 
+    struct ArgumentList;
 
-struct ArgumentList;
+    struct ExtendedType;
+    struct TypeIndex;
+    struct Type;
 
-struct ExtendedValueTypeDesc;
-struct ValueTypeIndex;
-struct ValueTypeDesc;
+    template <typename TypeInfo>
+    struct BindingBase;
+    using Binding = BindingBase<TypeIndex>;
+    using ScopeBinding = BindingBase<const MetaTable *>;
 
-template <typename TypeInfo>
-struct KeyValueBindingBase;
-using KeyValueBinding = KeyValueBindingBase<ValueTypeIndex>;
-using KeyValueScopeBinding = KeyValueBindingBase<const MetaTable*>;
+    struct ObjectInstance;
+    struct ObjectPtr;
 
-struct ObjectInstance;
-struct ObjectPtr;
+    struct Functor_toKeyValuePair;
+    struct Functor_toValue;
 
-template <typename RefT>
-struct VirtualIterator;
-template <typename RefT, typename AssignDefault = DefaultAssign>
-struct VirtualRange;
+    template <bool isReferenceWrapped>
+    struct convert_Value_t;
 
-enum KeyValueValueFlags : uint8_t;
+    using AssociativeIterator = Containers::VirtualIterator<KeyValuePair>;
+    using AssociativeRange = Containers::VirtualRange<KeyValuePair, Functor_toKeyValuePair>;
+    using SequenceIterator = Containers::VirtualIterator<Value>;
+    using SequenceRange = Containers::VirtualRange<Value, Functor_toValue>;
 
-struct Functor_to_KeyValuePair;
-struct Functor_to_ValueType;
-
-template <bool isReferenceWrapped>
-struct convert_ValueType_t;
-
-using KeyValueVirtualAssociativeIterator = VirtualIterator<KeyValuePair>;
-using KeyValueVirtualAssociativeRange = VirtualRange<KeyValuePair, Functor_to_KeyValuePair>;
-using KeyValueVirtualSequenceIterator = VirtualIterator<ValueType>;
-using KeyValueVirtualSequenceRange = VirtualRange<ValueType, Functor_to_ValueType>;
-
-using Duration64 = std::chrono::duration<uint64_t, std::nano>;
+    using Duration64 = std::chrono::duration<uint64_t, std::nano>;
+}
 
 namespace Serialize {
     struct SerializeStream;
@@ -209,36 +203,38 @@ namespace Serialize {
     StreamResult read(CallerHierarchyFormattedSerializeStream in, T &t, const char *name);
 }
 
-struct Vector2;
-struct Vector3;
-struct Vector4;
+namespace Math {
+    struct Vector2;
+    struct Vector3;
+    struct Vector4;
 
-struct NormalizedVector3;
+    struct NormalizedVector3;
 
-struct Vector2i;
-struct Vector3i;
-struct Vector4i;
+    struct Vector2i;
+    struct Vector3i;
+    struct Vector4i;
 
-struct Color3;
-struct Color4;
+    struct Color3;
+    struct Color4;
 
-struct Rect2;
-struct Rect2i;
+    struct Rect2;
+    struct Rect2i;
 
-struct Matrix3;
-struct Matrix4;
+    struct Matrix3;
+    struct Matrix4;
 
-struct Quaternion;
+    struct Quaternion;
 
-struct Line3;
-struct Line2;
+    struct Line3;
+    struct Line2;
 
-struct Ray2;
-struct Ray3;
+    struct Ray2;
+    struct Ray3;
 
-struct Frustum;
-struct Sphere;
-struct Plane;
-struct AABB;
-struct BoundingBox;
+    struct Frustum;
+    struct Sphere;
+    struct Plane;
+    struct AABB;
+    struct BoundingBox;
+}
 }

@@ -9,7 +9,7 @@ namespace Scene {
     namespace Entity {
 
         template <typename T, typename Base>
-        using VirtualEntityComponentImpl = VirtualScope<T, UniqueComponent::VirtualComponentImpl<T, Base>>;
+        using VirtualEntityComponentImpl = Reflect::VirtualScope<T, Plugins::VirtualComponentImpl<T, Base>>;
 
         template <typename T>
         using VirtualEntityComponentBase = EntityComponentVirtualBase<T>;

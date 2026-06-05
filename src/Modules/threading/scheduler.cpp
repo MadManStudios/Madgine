@@ -2,7 +2,7 @@
 
 #include "scheduler.h"
 
-#include "Interfaces/threading/threadapi.h"
+#include "Platform/threading/threadapi.h"
 
 #include "taskqueue.h"
 #include "workgroup.h"
@@ -67,7 +67,7 @@ namespace Threading {
 #if MODULES_ENABLE_TASK_TRACKING
         queue->mTracker.mThread = std::this_thread::get_id();
 #endif
-        setCurrentThreadName(mWorkgroup.name() + "_" + queue->name() + tags);
+        Platform::Threading::setCurrentThreadName(mWorkgroup.name() + "_" + queue->name() + tags);
     }
 
 }

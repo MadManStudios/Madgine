@@ -2,15 +2,15 @@
 
 #include "logviewer.h"
 
-#include "Generic/coroutines/generator.h"
+#include "Generic/containers/generator.h"
 
-#include "Interfaces/filesystem/path.h"
-#include "Interfaces/log/standardlog.h"
+#include "Platform/filesystem/path.h"
+#include "Platform/log/standardlog.h"
 
 #include "Modules/threading/workgroup.h"
 #include "Modules/uniquecomponent/uniquecomponentcollector.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
 #include "../imguiicons.h"
@@ -65,23 +65,23 @@ namespace Tools {
     {
         mVisible = true;
 
-        for (Log::MessageType type : Log::MessageType::values()) {
+        for (Platform::Log::MessageType type : Platform::Log::MessageType::values()) {
             mMsgCounts[type] = 0;
             mMsgFilters[type] = true;
         }
-        Log::Log::addListener(this);
+        Platform::Log::Log::addListener(this);
     }
 
     LogViewer::~LogViewer()
     {
-        Log::Log::removeListener(this);
+        Platform::Log::Log::removeListener(this);
     }
 
     void LogViewer::render()
     {
         if (beginToolPanel("Log Viewer", &mVisible, ImGuiDir_Down, ImGuiWindowFlags_None, "tools.html#log-viewer")) {
 
-            for (Log::MessageType type : Log::MessageType::values()) {
+            for (Platform::Log::MessageType type : Platform::Log::MessageType::values()) {
                 ImGui::PushStyleColor(ImGuiCol_Text, sColors[type].Value);
                 mIsDirty |= ImGui::Checkbox(sIcons[type], &mMsgFilters[type]);
                 ImGui::PopStyleColor();
@@ -165,7 +165,7 @@ namespace Tools {
                                 ImGui::TextWrapped("%s", entry.mLog->getName().c_str());
                                 ImGui::TableNextColumn();
                                 if (entry.mFile) {
-                                    Filesystem::Path file = entry.mFile;
+                                    Platform::Filesystem::Path file = entry.mFile;
                                     ImGui::TextWrapped("%s", file.c_str());
                                 }
                                 ImGui::TableNextColumn();
@@ -185,7 +185,7 @@ namespace Tools {
         ImGui::End();
 
         if (ImGui::BeginStatus()) {
-            for (Log::MessageType type : Log::MessageType::values()) {
+            for (Platform::Log::MessageType type : Platform::Log::MessageType::values()) {
                 if (mMsgCounts[type] > 0) {
                     ImGui::TextColored(sColors[type], "%s %d", sIcons[type], static_cast<int>(mMsgCounts[type]));
                 }
@@ -194,7 +194,7 @@ namespace Tools {
         }
     }
 
-    void LogViewer::messageLogged(EMSCRIPTEN_WORKAROUND(std::string_view) message, Log::MessageType lml, const char *file, size_t line, Log::Log *log)
+    void LogViewer::messageLogged(EMSCRIPTEN_WORKAROUND(std::string_view) message, Platform::Log::MessageType lml, const char *file, size_t line, Platform::Log::Log *log)
     {
         if (Threading::WorkGroup::isInitialized() && mWorkgroup != &Threading::WorkGroup::self())
             return;

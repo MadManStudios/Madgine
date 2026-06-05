@@ -2,7 +2,7 @@
 
 #include "resourceloaderbase.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 
 #include "resourcemanager.h"
 
@@ -31,7 +31,7 @@ namespace Resources {
         co_return;
     }
 
-    Threading::Task<BakeResult> ResourceLoaderBase::bakeResources(std::vector<Filesystem::Path> &resources, const Filesystem::Path &intermediateDir)
+    Threading::Task<BakeResult> ResourceLoaderBase::bakeResources(std::vector<Platform::Filesystem::Path> &resources, const Platform::Filesystem::Path &intermediateDir)
     {
         co_return BakeResult::NOTHING_TO_DO;
     }
@@ -46,7 +46,7 @@ namespace Resources {
         return std::ranges::find(mExtensions, ext) - mExtensions.begin();
     }
 
-    std::vector<const MetaTable *> ResourceLoaderBase::resourceTypes() const
+    std::vector<const Reflect::MetaTable *> ResourceLoaderBase::resourceTypes() const
     {
         return {};
     }

@@ -2,7 +2,7 @@
 
 #include "multilinetextrenderdata.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
 #include "widgetsrenderdata.h"
@@ -21,17 +21,17 @@ namespace Widgets {
         return mLines;
     }
 
-    void MultilineTextRenderData::render(WidgetsRenderData &renderData, Vector2 pos, Vector3 size, int cursorIndex) const
+    void MultilineTextRenderData::render(WidgetsRenderData &renderData, Math::Vector2 pos, Math::Vector3 size, int cursorIndex) const
     {
         renderText(renderData, mLines, pos, size.xy(), mFont, mStyle, size.z * mFontSize, mColor.frame(pos, size.xy()), mPivot, mShadowOffset, cursorIndex);
     }
 
-    void MultilineTextRenderData::renderSelection(WidgetsRenderData &renderData, Vector2 pos, Vector3 size, const Atlas2::Entry &entry, int selectionStart, int selectionEnd, ColorFrame color)
+    void MultilineTextRenderData::renderSelection(WidgetsRenderData &renderData, Math::Vector2 pos, Math::Vector3 size, const Math::Atlas2::Entry &entry, int selectionStart, int selectionEnd, ColorFrame color)
     {
         renderSelection(renderData, mLines, pos, size.xy(), mFont, mStyle, size.z * mFontSize, mPivot, entry, selectionStart, selectionEnd, color);
     }
 
-    void MultilineTextRenderData::updateText(std::string_view text, Vector3 size, std::locale loc)
+    void MultilineTextRenderData::updateText(std::string_view text, Math::Vector3 size, std::locale loc)
     {
         mLines = calculateLines(text, size.xy(), mFont, mStyle, size.z * mFontSize, loc);
     }
@@ -41,7 +41,7 @@ namespace Widgets {
         return calculateTotalHeight(mLines.size(), mFont, z * mFontSize);
     }
 
-    void MultilineTextRenderData::renderText(WidgetsRenderData &renderData, const std::vector<Line> &lines, Vector2 pos, Vector2 size, const Render::TypeFace *typeFace, Render::FontStyle style, float fontSize, ColorFrame color, Vector2 pivot, Vector2 shadowOffset, int cursorIndex)
+    void MultilineTextRenderData::renderText(WidgetsRenderData &renderData, const std::vector<Line> &lines, Math::Vector2 pos, Math::Vector2 size, const Render::TypeFace *typeFace, Render::FontStyle style, float fontSize, ColorFrame color, Math::Vector2 pivot, Math::Vector2 shadowOffset, int cursorIndex)
     {
         float scale = fontSize / Render::FontLoader::sFontSize;
 
@@ -58,7 +58,7 @@ namespace Widgets {
         }
     }
 
-    void MultilineTextRenderData::renderSelection(WidgetsRenderData &renderData, const std::vector<Line> &lines, Vector2 pos, Vector2 size, const Render::TypeFace *typeFace, Render::FontStyle style, float fontSize, Vector2 pivot, const Atlas2::Entry &entry, int selectionStart, int selectionEnd, ColorFrame color)
+    void MultilineTextRenderData::renderSelection(WidgetsRenderData &renderData, const std::vector<Line> &lines, Math::Vector2 pos, Math::Vector2 size, const Render::TypeFace *typeFace, Render::FontStyle style, float fontSize, Math::Vector2 pivot, const Math::Atlas2::Entry &entry, int selectionStart, int selectionEnd, ColorFrame color)
     {
         if (selectionStart > selectionEnd)
             std::swap(selectionStart, selectionEnd);
@@ -118,7 +118,7 @@ namespace Widgets {
         }
     }
 
-    std::vector<TextRenderData::Line> MultilineTextRenderData::calculateLines(std::string_view text, Vector2 size, const Render::TypeFace *typeFace, Render::FontStyle style, float fontSize, std::locale loc)
+    std::vector<TextRenderData::Line> MultilineTextRenderData::calculateLines(std::string_view text, Math::Vector2 size, const Render::TypeFace *typeFace, Render::FontStyle style, float fontSize, std::locale loc)
     {
         if (!typeFace)
             return {};

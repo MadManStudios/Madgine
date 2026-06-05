@@ -21,18 +21,18 @@ namespace Serialize {
         SyncableUnitBase *,
         SerializableDataPtr,
         std::string,
-        ByteBuffer,
+        Memory::ByteBuffer,
         Void,
-        Vector2,
-        Vector3,
-        Vector4,
-        Vector2i,
-        Matrix3,
+        Math::Vector2,
+        Math::Vector3,
+        Math::Vector4,
+        Math::Vector2i,
+        Math::Matrix3,
         EnumTag,
         FlagsTag,
-        Color3,
-        Color4,
-        Quaternion,
+        Math::Color3,
+        Math::Color4,
+        Math::Quaternion,
         std::chrono::nanoseconds>;
 
     template <typename T, typename = void>
@@ -58,7 +58,7 @@ namespace Serialize {
         typedef SerializableDataPtr type;
     };
 
-    template <Enum T>
+    template <Concepts::Enum T>
     struct PrimitiveReducer<T> {
         typedef std::underlying_type_t<T> type;
     };
@@ -68,18 +68,8 @@ namespace Serialize {
         typedef EnumTag type;
     };
 
-    template <>
-    struct PrimitiveReducer<EnumHolder> {
-        typedef EnumTag type;
-    };
-
     template <typename T>
     struct PrimitiveReducer<Flags<T>> {
-        typedef FlagsTag type;
-    };
-
-    template <>
-    struct PrimitiveReducer<FlagsHolder> {
         typedef FlagsTag type;
     };
 
@@ -88,7 +78,7 @@ namespace Serialize {
         typedef T type;
     };
 
-    template <String S>
+    template <Concepts::String S>
     struct PrimitiveReducer<S> {
         typedef std::string type;
     };

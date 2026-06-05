@@ -4,10 +4,8 @@
 #include "Generic/execution/execution.h"
 #include "Generic/projections.h"
 
-#include "Interfaces/filesystem/fsapi.h"
-#include "Interfaces/log/logsenders.h"
-
-#include "Meta/keyvalue/valuetype.h"
+#include "Platform/filesystem/fsapi.h"
+#include "Platform/log/logsenders.h"
 
 #include "Madgine/behavior/behavior.h"
 #include "Madgine/codegen/codegen_cpp.h"
@@ -17,7 +15,7 @@
 #include "Madgine/nodegraph/nodes/accessornode.h"
 #include "Madgine/nodegraph/nodes/behaviornode.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
 #include "Madgine_Tools/behaviortool.h"
@@ -89,10 +87,10 @@ namespace Tools {
                         Debug::ContextInfo &context = Debug::Debugger::getSingleton().createContext();
                         Execution::detach(
                             Behavior::Behavior { mGraph.interpret() }
-                            | Execution::then([](ArgumentList) { LOG("SUCCESS"); })
+                            | Execution::then([](Reflect::ArgumentList) { LOG("SUCCESS"); })
                             | Execution::with_debug_location(context.mChild)
                             | Debug::with_debug_context(context)
-                            | Log::log_result());
+                            | Platform::Log::log_result());
                     }
                     ImGui::EndMenu();
                 }
@@ -114,7 +112,7 @@ namespace Tools {
 
                 ed::Begin("Node editor");
 
-                std::optional<ExtendedValueTypeDesc> hoveredPin;
+                std::optional<Reflect::ExtendedType> hoveredPin;
 
                 ed::PushStyleVar(ed::StyleVar_NodePadding, { 0, 0, 0, 0 });
                 ImVec2 specialPosition = ed::ScreenToCanvas(topLeftScreen);
@@ -134,7 +132,7 @@ namespace Tools {
                 pinId = 0;
                 for (Behavior::NodeGraph::DataOutPinPrototype &dataPin : mGraph.mDataOutPins) {
                     Behavior::NodeGraph::NodeBase *node = mGraph.node(dataPin.mTargets.front().mNode);
-                    ExtendedValueTypeDesc type = mGraph.dataOutType({ 0, pinId });
+                    Reflect::ExtendedType type = mGraph.dataOutType({ 0, pinId });
                     if (DataOutPin(nullptr, 0, pinId, 0, type, node->dataInMask(dataPin.mTargets.front().mIndex), true))
                         hoveredPin = type;
                     ++pinId;
@@ -171,7 +169,7 @@ namespace Tools {
                 for (Behavior::NodeGraph::DataInPinPrototype &dataPin : mGraph.mDataInPins) {
                     assert(dataPin.mSource && dataPin.mSource.mNode);
                     Behavior::NodeGraph::NodeBase *node = mGraph.node(dataPin.mSource.mNode);
-                    ExtendedValueTypeDesc type = node->dataOutType(dataPin.mSource.mIndex);
+                    Reflect::ExtendedType type = node->dataOutType(dataPin.mSource.mIndex);
 
                     if (DataInPin(nullptr, 0, pinId, 0, type, node->dataOutMask(dataPin.mSource.mIndex), static_cast<bool>(dataPin.mSource)))
                         hoveredPin = type;
@@ -188,7 +186,7 @@ namespace Tools {
                 Behavior::NodeGraph::NodeBase *hoveredNode = nullptr;
                 for (Behavior::NodeGraph::NodeBase *node : mGraph.nodes() | std::views::transform(projectionUniquePtrToPtr)) {
 
-                    if (std::optional<ExtendedValueTypeDesc> hovered = BeginNode(node, nodeId, mDragPin, mDragType))
+                    if (std::optional<Reflect::ExtendedType> hovered = BeginNode(node, nodeId, mDragPin, mDragType))
                         hoveredPin = hovered;
 
                     EndNode();
@@ -349,11 +347,11 @@ namespace Tools {
                                 ImGui::EndMenu();
 
                             if (ImGui::BeginMenu("Accessors")) {
-                                const MetaTable *type = sTypeList();
+                                const Reflect::MetaTable *type = Reflect::sTypeList();
                                 while (type) {
 
                                     bool hasMenu = false;
-                                    for (const Accessor *accessor = type->mMembers; accessor->mName; ++accessor) {
+                                    for (const Reflect::Accessor *accessor = type->mMembers; accessor->mName; ++accessor) {
 
                                         if (filter->PassFilter(type->mTypeName) || filter->PassFilter(accessor->mName)) {
 
@@ -445,14 +443,14 @@ namespace Tools {
             if (beginSubPanel("Node Details", &mNodeDetailsVisible, ImGuiDir_Right)) {
                 if (mSelectedInputs) {
                     if (ImGui::BeginTable("inputs", 2, ImGuiTableFlags_Resizable)) {
-                        TracedRoot<KeyValueVirtualSequenceRange> range { mHistory, KeyValueVirtualSequenceRange { mGraph.mNamedInputs } };
+                        TracedRoot<Reflect::SequenceRange> range { mHistory, Reflect::SequenceRange { mGraph.mNamedInputs } };
                         getTool<Inspector>().drawValue("Inputs", range, true);
                         ImGui::EndTable();
                     }
                 }
                 if (mSelectedNodeIndex) {
                     if (ImGui::BeginTable("columns", 2, ImGuiTableFlags_Resizable)) {
-                        TracedRoot<ScopePtr> traced { mHistory, ScopePtr { mGraph.nodes()[mSelectedNodeIndex].get() } };
+                        TracedRoot<Reflect::ScopePtr> traced { mHistory, Reflect::ScopePtr { mGraph.nodes()[mSelectedNodeIndex].get() } };
                         getTool<Inspector>().drawMembers(traced);
                         ImGui::EndTable();
                     }
@@ -492,7 +490,7 @@ namespace Tools {
         return "NodeGraphEditor";
     }
 
-    void NodeGraphEditor::saveAs(const Filesystem::Path &path)
+    void NodeGraphEditor::saveAs(const Platform::Filesystem::Path &path)
     {
         mPath = path;
 
@@ -622,8 +620,8 @@ namespace Tools {
 
             uint32_t inputMask, outputMask;
             if (outputPin.mType == Behavior::NodeGraph::PinType::Data) {
-                ExtendedValueTypeDesc inputType = mGraph.dataInType(inputPin.mPin);
-                ExtendedValueTypeDesc outputType = mGraph.dataOutType(outputPin.mPin);
+                Reflect::ExtendedType inputType = mGraph.dataInType(inputPin.mPin);
+                Reflect::ExtendedType outputType = mGraph.dataOutType(outputPin.mPin);
 
                 if (!inputType.isCompatible(outputType)) {
                     ShowLabel("x Incompatible Pin Type", ImColor(45, 32, 32, 180));

@@ -5,15 +5,15 @@
 #include "Modules/uniquecomponent/uniquecomponent.h"
 #include "Modules/uniquecomponent/uniquecomponentdefine.h"
 
-DECLARE_NAMED_UNIQUE_COMPONENT(Engine::Behavior::NodeGraph, Node, NodeBase, Engine::UniqueComponent::Constructor<NodeGraph &>);
+DECLARE_NAMED_UNIQUE_COMPONENT(Engine::Behavior::NodeGraph, Node, NodeBase, Engine::Plugins::Constructor<NodeGraph &>);
 
 namespace Engine {
 namespace Behavior {
     namespace NodeGraph {
 
         template <typename T, typename Base = NodeBase>
-        struct Node : Serialize::VirtualData<T, VirtualScope<T, NodeComponent<T, Base>>> {
-            using Serialize::VirtualData<T, VirtualScope<T, NodeComponent<T, Base>>>::VirtualData;
+        struct Node : Serialize::VirtualData<T, Reflect::VirtualScope<T, NodeComponent<T, Base>>> {
+            using Serialize::VirtualData<T, Reflect::VirtualScope<T, NodeComponent<T, Base>>>::VirtualData;
 
             virtual std::string_view className() const override final
             {

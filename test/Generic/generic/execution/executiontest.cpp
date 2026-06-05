@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-#include "Interfaces/interfaceslib.h"
+#include "Platform/platformlib.h"
 
 /*#include "Generic/execution/algorithm.h"
 #include "Generic/execution/promise.h"

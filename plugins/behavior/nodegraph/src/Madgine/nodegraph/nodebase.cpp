@@ -2,7 +2,7 @@
 
 #include "nodebase.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
 #include "nodegraph.h"
@@ -72,7 +72,7 @@ namespace Behavior {
             return mDataInPins[group].size();
         }
 
-        ValueType NodeBase::dataInDefault(uint32_t index, uint32_t group) const
+        Reflect::Value NodeBase::dataInDefault(uint32_t index, uint32_t group) const
         {
             return {};
         }
@@ -329,7 +329,7 @@ namespace Behavior {
             throw 0;
         }
 
-        KeyValueResult NodeBase::interpretRead(NodeInterpreterStateBase &interpreter, ValueType &retVal, std::unique_ptr<NodeInterpreterData> &data, uint32_t providerIndex, uint32_t group) const
+        Reflect::Result NodeBase::interpretRead(NodeInterpreterStateBase &interpreter, Reflect::Value &retVal, std::unique_ptr<NodeInterpreterData> &data, uint32_t providerIndex, uint32_t group) const
         {
             throw 0;
         }

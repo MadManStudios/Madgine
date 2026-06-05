@@ -7,7 +7,7 @@
 #include "Madgine/behavior/nativebehaviorcollector.h"
 #include "Madgine/root/root.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 
 METATABLE_BEGIN(Engine::Audio::AudioApi)
 METATABLE_END(Engine::Audio::AudioApi)
@@ -17,7 +17,7 @@ VIRTUALUNIQUECOMPONENTBASE(Engine::Audio::AudioApi)
 namespace Engine {
 namespace Audio {
 
-    AudioApi::AudioApi(Root::Root &root)
+    AudioApi::AudioApi(Core::Root &root)
         : VirtualRootComponentBase(root)
     {
     }

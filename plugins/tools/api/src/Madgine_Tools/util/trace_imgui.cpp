@@ -242,13 +242,13 @@ bool InputText(const char *label, const Engine::Tools::Traced<Engine::CoWString 
     return changed;
 }
 
-bool ValueTypeDrawer::draw(const Engine::Tools::Traced<Engine::ScopePtr &> &scope)
+bool ValueTypeDrawer::draw(const Engine::Tools::Traced<Engine::Reflect::ScopePtr &> &scope)
 {
     Text("<scope>");
     return false;
 }
 
-bool ValueTypeDrawer::draw(const Engine::Tools::Traced<const Engine::ScopePtr &> &scope)
+bool ValueTypeDrawer::draw(const Engine::Tools::Traced<const Engine::Reflect::ScopePtr &> &scope)
 {
     Text("<scope>");
     return false;
@@ -327,211 +327,211 @@ bool ValueTypeDrawer::draw(const Engine::Tools::Traced<const float &> &f)
     return false;
 }
 
-bool ValueTypeDrawer::draw(const Engine::Tools::Traced<Engine::CoW<Engine::Matrix3> &> &m)
+bool ValueTypeDrawer::draw(const Engine::Tools::Traced<Engine::CoW<Engine::Math::Matrix3> &> &m)
 {
     return DragMatrix3("##ValueTypeDrawer", &m, 0.15f);
 }
 
-bool ValueTypeDrawer::draw(const Engine::Tools::Traced<const Engine::CoW<Engine::Matrix3> &> &m)
+bool ValueTypeDrawer::draw(const Engine::Tools::Traced<const Engine::CoW<Engine::Math::Matrix3> &> &m)
 {
     BeginDisabled();
     auto ptr = &m;
-    DragMatrix3("##ValueTypeDrawer", reinterpret_cast<const Engine::Tools::Traced<Engine::Matrix3 *> &>(ptr), 0.15f);
+    DragMatrix3("##ValueTypeDrawer", reinterpret_cast<const Engine::Tools::Traced<Engine::Math::Matrix3 *> &>(ptr), 0.15f);
     EndDisabled();
     return false;
 }
 
-bool ValueTypeDrawer::draw(const Engine::Tools::Traced<Engine::Matrix3 *> &m)
+bool ValueTypeDrawer::draw(const Engine::Tools::Traced<Engine::Math::Matrix3 *> &m)
 {
     return DragMatrix3("##ValueTypeDrawer", m, 0.15f);
 }
 
-bool ValueTypeDrawer::draw(const Engine::Tools::Traced<const Engine::Matrix3 *> &m)
+bool ValueTypeDrawer::draw(const Engine::Tools::Traced<const Engine::Math::Matrix3 *> &m)
 {
     BeginDisabled();
-    DragMatrix3("##ValueTypeDrawer", reinterpret_cast<const Engine::Tools::Traced<Engine::Matrix3 *> &>(m), 0.15f);
+    DragMatrix3("##ValueTypeDrawer", reinterpret_cast<const Engine::Tools::Traced<Engine::Math::Matrix3 *> &>(m), 0.15f);
     EndDisabled();
     return false;
 }
 
-bool ValueTypeDrawer::draw(const Engine::Tools::Traced<Engine::CoW<Engine::Matrix4> &> &m)
+bool ValueTypeDrawer::draw(const Engine::Tools::Traced<Engine::CoW<Engine::Math::Matrix4> &> &m)
 {
     return DragMatrix4("##ValueTypeDrawer", &m, 0.15f);
 }
 
-bool ValueTypeDrawer::draw(const Engine::Tools::Traced<const Engine::CoW<Engine::Matrix4> &> &m)
+bool ValueTypeDrawer::draw(const Engine::Tools::Traced<const Engine::CoW<Engine::Math::Matrix4> &> &m)
 {
     BeginDisabled();
     auto ptr = &m;
-    DragMatrix4("##ValueTypeDrawer", reinterpret_cast<const Engine::Tools::Traced<Engine::Matrix4 *> &>(ptr), 0.15f);
+    DragMatrix4("##ValueTypeDrawer", reinterpret_cast<const Engine::Tools::Traced<Engine::Math::Matrix4 *> &>(ptr), 0.15f);
     EndDisabled();
     return false;
 }
 
-bool ValueTypeDrawer::draw(const Engine::Tools::Traced<Engine::Matrix4 *> &m)
+bool ValueTypeDrawer::draw(const Engine::Tools::Traced<Engine::Math::Matrix4 *> &m)
 {
     return DragMatrix4("##ValueTypeDrawer", m, 0.15f);
 }
 
-bool ValueTypeDrawer::draw(const Engine::Tools::Traced<const Engine::Matrix4 *> &m)
+bool ValueTypeDrawer::draw(const Engine::Tools::Traced<const Engine::Math::Matrix4 *> &m)
 {
     BeginDisabled();
-    DragMatrix4("##ValueTypeDrawer", reinterpret_cast<const Engine::Tools::Traced<Engine::Matrix4 *> &>(m), 0.15f);
+    DragMatrix4("##ValueTypeDrawer", reinterpret_cast<const Engine::Tools::Traced<Engine::Math::Matrix4 *> &>(m), 0.15f);
     EndDisabled();
     return false;
 }
 
-bool ValueTypeDrawer::draw(const Engine::Tools::Traced<Engine::Vector2 &> &v)
+bool ValueTypeDrawer::draw(const Engine::Tools::Traced<Engine::Math::Vector2 &> &v)
 {
     PushItemWidth(100);
-    return DragFloat2("##ValueTypeDrawer", v.trace(&Engine::Vector2::ptr), 0.15f);
+    return DragFloat2("##ValueTypeDrawer", v.trace(&Engine::Math::Vector2::ptr), 0.15f);
 }
 
-bool ValueTypeDrawer::draw(const Engine::Tools::Traced<const Engine::Vector2 &> &v)
+bool ValueTypeDrawer::draw(const Engine::Tools::Traced<const Engine::Math::Vector2 &> &v)
 {
     BeginDisabled();
     PushItemWidth(100);
-    auto ptr = v.trace(&Engine::Vector2::ptr);
+    auto ptr = v.trace(&Engine::Math::Vector2::ptr);
     DragFloat2("##ValueTypeDrawer", reinterpret_cast<const Engine::Tools::Traced<float *> &>(ptr), 0.15f);
     EndDisabled();
     return false;
 }
 
-bool ValueTypeDrawer::draw(const Engine::Tools::Traced<Engine::Vector3 &> &v)
+bool ValueTypeDrawer::draw(const Engine::Tools::Traced<Engine::Math::Vector3 &> &v)
 {
     PushItemWidth(100);
-    return DragFloat3("##ValueTypeDrawer", v.trace(&Engine::Vector3::ptr), 0.15f);
+    return DragFloat3("##ValueTypeDrawer", v.trace(&Engine::Math::Vector3::ptr), 0.15f);
 }
 
-bool ValueTypeDrawer::draw(const Engine::Tools::Traced<const Engine::Vector3 &> &v)
+bool ValueTypeDrawer::draw(const Engine::Tools::Traced<const Engine::Math::Vector3 &> &v)
 {
     BeginDisabled();
     PushItemWidth(100);
-    auto ptr = v.trace(&Engine::Vector3::ptr);
+    auto ptr = v.trace(&Engine::Math::Vector3::ptr);
     DragFloat3("##ValueTypeDrawer", reinterpret_cast<const Engine::Tools::Traced<float *> &>(ptr), 0.15f);
     EndDisabled();
     return false;
 }
 
-bool ValueTypeDrawer::draw(const Engine::Tools::Traced<Engine::Vector4 &> &v)
+bool ValueTypeDrawer::draw(const Engine::Tools::Traced<Engine::Math::Vector4 &> &v)
 {
     PushItemWidth(100);
-    return DragFloat4("##ValueTypeDrawer", v.trace(&Engine::Vector4::ptr), 0.15f);
+    return DragFloat4("##ValueTypeDrawer", v.trace(&Engine::Math::Vector4::ptr), 0.15f);
 }
 
-bool ValueTypeDrawer::draw(const Engine::Tools::Traced<const Engine::Vector4 &> &v)
+bool ValueTypeDrawer::draw(const Engine::Tools::Traced<const Engine::Math::Vector4 &> &v)
 {
     BeginDisabled();
     PushItemWidth(100);
-    auto ptr = v.trace(&Engine::Vector4::ptr);
+    auto ptr = v.trace(&Engine::Math::Vector4::ptr);
     DragFloat4("##ValueTypeDrawer", reinterpret_cast<const Engine::Tools::Traced<float *> &>(ptr), 0.15f);
     EndDisabled();
     return false;
 }
 
-bool ValueTypeDrawer::draw(const Engine::Tools::Traced<Engine::Vector2i &> &v)
+bool ValueTypeDrawer::draw(const Engine::Tools::Traced<Engine::Math::Vector2i &> &v)
 {
     PushItemWidth(100);
-    return DragInt2("##ValueTypeDrawer", v.trace(&Engine::Vector2i::ptr));
+    return DragInt2("##ValueTypeDrawer", v.trace(&Engine::Math::Vector2i::ptr));
 }
 
-bool ValueTypeDrawer::draw(const Engine::Tools::Traced<const Engine::Vector2i &> &v)
+bool ValueTypeDrawer::draw(const Engine::Tools::Traced<const Engine::Math::Vector2i &> &v)
 {
     BeginDisabled();
     PushItemWidth(100);
-    auto ptr = v.trace(&Engine::Vector2i::ptr);
+    auto ptr = v.trace(&Engine::Math::Vector2i::ptr);
     DragInt2("##ValueTypeDrawer", reinterpret_cast<const Engine::Tools::Traced<int *> &>(ptr));
     EndDisabled();
     return false;
 }
 
-bool ValueTypeDrawer::draw(const Engine::Tools::Traced<Engine::Vector3i &> &v)
+bool ValueTypeDrawer::draw(const Engine::Tools::Traced<Engine::Math::Vector3i &> &v)
 {
     PushItemWidth(100);
-    return DragInt3("##ValueTypeDrawer", v.trace(&Engine::Vector3i::ptr));
+    return DragInt3("##ValueTypeDrawer", v.trace(&Engine::Math::Vector3i::ptr));
 }
 
-bool ValueTypeDrawer::draw(const Engine::Tools::Traced<const Engine::Vector3i &> &v)
+bool ValueTypeDrawer::draw(const Engine::Tools::Traced<const Engine::Math::Vector3i &> &v)
 {
     BeginDisabled();
     PushItemWidth(100);
-    auto ptr = v.trace(&Engine::Vector3i::ptr);
+    auto ptr = v.trace(&Engine::Math::Vector3i::ptr);
     DragInt3("##ValueTypeDrawer", reinterpret_cast<const Engine::Tools::Traced<int *> &>(ptr));
     EndDisabled();
     return false;
 }
 
-bool ValueTypeDrawer::draw(const Engine::Tools::Traced<Engine::Vector4i &> &v)
+bool ValueTypeDrawer::draw(const Engine::Tools::Traced<Engine::Math::Vector4i &> &v)
 {
     PushItemWidth(100);
-    return DragInt4("##ValueTypeDrawer", v.trace(&Engine::Vector4i::ptr));
+    return DragInt4("##ValueTypeDrawer", v.trace(&Engine::Math::Vector4i::ptr));
 }
 
-bool ValueTypeDrawer::draw(const Engine::Tools::Traced<const Engine::Vector4i &> &v)
+bool ValueTypeDrawer::draw(const Engine::Tools::Traced<const Engine::Math::Vector4i &> &v)
 {
     BeginDisabled();
     PushItemWidth(100);
-    auto ptr = v.trace(&Engine::Vector4i::ptr);
+    auto ptr = v.trace(&Engine::Math::Vector4i::ptr);
     DragInt4("##ValueTypeDrawer", reinterpret_cast<const Engine::Tools::Traced<int *> &>(ptr));
     EndDisabled();
     return false;
 }
 
-bool ValueTypeDrawer::draw(const Engine::Tools::Traced<Engine::KeyValueVirtualSequenceRange &> &it)
+bool ValueTypeDrawer::draw(const Engine::Tools::Traced<Engine::Reflect::SequenceRange &> &it)
 {
     Text("<range>");
     return false;
 }
 
-bool ValueTypeDrawer::draw(const Engine::Tools::Traced<const Engine::KeyValueVirtualSequenceRange &> &it)
+bool ValueTypeDrawer::draw(const Engine::Tools::Traced<const Engine::Reflect::SequenceRange &> &it)
 {
     Text("<range>");
     return false;
 }
 
-bool ValueTypeDrawer::draw(const Engine::Tools::Traced<Engine::KeyValueVirtualAssociativeRange &> &it)
+bool ValueTypeDrawer::draw(const Engine::Tools::Traced<Engine::Reflect::AssociativeRange &> &it)
 {
     Text("<map>");
     return false;
 }
 
-bool ValueTypeDrawer::draw(const Engine::Tools::Traced<const Engine::KeyValueVirtualAssociativeRange &> &it)
+bool ValueTypeDrawer::draw(const Engine::Tools::Traced<const Engine::Reflect::AssociativeRange &> &it)
 {
     Text("<map>");
     return false;
 }
 
-bool ValueTypeDrawer::draw(const Engine::Tools::Traced<Engine::KeyValueFunction &> &m)
+bool ValueTypeDrawer::draw(const Engine::Tools::Traced<Engine::Reflect::Function &> &m)
 {
     Text("<function>");
     return false;
 }
 
-bool ValueTypeDrawer::draw(const Engine::Tools::Traced<const Engine::KeyValueFunction &> &m)
+bool ValueTypeDrawer::draw(const Engine::Tools::Traced<const Engine::Reflect::Function &> &m)
 {
     Text("<function>");
     return false;
 }
 
-bool ValueTypeDrawer::draw(const Engine::Tools::Traced<Engine::ApiFunction &> &m)
+bool ValueTypeDrawer::draw(const Engine::Tools::Traced<Engine::Reflect::ApiFunction &> &m)
 {
     Text("<api-function>");
     return false;
 }
 
-bool ValueTypeDrawer::draw(const Engine::Tools::Traced<const Engine::ApiFunction &> &m)
+bool ValueTypeDrawer::draw(const Engine::Tools::Traced<const Engine::Reflect::ApiFunction &> &m)
 {
     Text("<api-function>");
     return false;
 }
 
-bool ValueTypeDrawer::draw(const Engine::Tools::Traced<Engine::BoundApiFunction &> &m)
+bool ValueTypeDrawer::draw(const Engine::Tools::Traced<Engine::Reflect::BoundApiFunction &> &m)
 {
     Text("<bound api-function>");
     return false;
 }
 
-bool ValueTypeDrawer::draw(const Engine::Tools::Traced<const Engine::BoundApiFunction &> &m)
+bool ValueTypeDrawer::draw(const Engine::Tools::Traced<const Engine::Reflect::BoundApiFunction &> &m)
 {
     Text("<bound api-function>");
     return false;
@@ -549,48 +549,48 @@ bool ValueTypeDrawer::draw(const Engine::Tools::Traced<const std::monostate &> &
     return false;
 }
 
-bool ValueTypeDrawer::draw(const Engine::Tools::Traced<Engine::Quaternion &> &q)
+bool ValueTypeDrawer::draw(const Engine::Tools::Traced<Engine::Math::Quaternion &> &q)
 {
-    const Engine::Tools::Traced<Engine::Vector3 &> &v = q.traceEx(&Engine::Quaternion::toDegrees, static_cast<bool (*)(const Engine::Tools::TracedAccess<Engine::Quaternion &, decltype(&Engine::Quaternion::toDegrees)> &, bool)>([](const Engine::Tools::TracedAccess<Engine::Quaternion &, decltype(&Engine::Quaternion::toDegrees)> &degrees, bool changed) {
+    const Engine::Tools::Traced<Engine::Math::Vector3 &> &v = q.traceEx(&Engine::Math::Quaternion::toDegrees, static_cast<bool (*)(const Engine::Tools::TracedAccess<Engine::Math::Quaternion &, decltype(&Engine::Math::Quaternion::toDegrees)> &, bool)>([](const Engine::Tools::TracedAccess<Engine::Math::Quaternion &, decltype(&Engine::Math::Quaternion::toDegrees)> &degrees, bool changed) {
         if (changed)
-            degrees.mParent.get() = Engine::Quaternion::FromDegrees(degrees.get());
+            degrees.mParent.get() = Engine::Math::Quaternion::FromDegrees(degrees.get());
         return changed;
     }));
 
     return draw(v);
 }
 
-bool ValueTypeDrawer::draw(const Engine::Tools::Traced<const Engine::Quaternion &> &q)
+bool ValueTypeDrawer::draw(const Engine::Tools::Traced<const Engine::Math::Quaternion &> &q)
 {
-    const Engine::Vector3 v = q->toDegrees();
-    return draw(static_cast<const Engine::Tools::Traced<const Engine::Vector3 &> &>(Engine::Tools::TracedRoot { q.undoStack(), v }));
+    const Engine::Math::Vector3 v = q->toDegrees();
+    return draw(static_cast<const Engine::Tools::Traced<const Engine::Math::Vector3 &> &>(Engine::Tools::TracedRoot { q.undoStack(), v }));
 }
 
-bool ValueTypeDrawer::draw(const Engine::Tools::Traced<Engine::ObjectPtr &> &o)
-{
-    Text(o.get().descriptor());
-    return false;
-}
-
-bool ValueTypeDrawer::draw(const Engine::Tools::Traced<const Engine::ObjectPtr &> &o)
+bool ValueTypeDrawer::draw(const Engine::Tools::Traced<Engine::Reflect::ObjectPtr &> &o)
 {
     Text(o.get().descriptor());
     return false;
 }
 
-bool ValueTypeDrawer::draw(const Engine::Tools::Traced<Engine::Filesystem::Path &> &p)
+bool ValueTypeDrawer::draw(const Engine::Tools::Traced<const Engine::Reflect::ObjectPtr &> &o)
+{
+    Text(o.get().descriptor());
+    return false;
+}
+
+bool ValueTypeDrawer::draw(const Engine::Tools::Traced<Engine::Platform::Filesystem::Path &> &p)
 {
     Text(p.get());
     return false;
 }
 
-bool ValueTypeDrawer::draw(const Engine::Tools::Traced<const Engine::Filesystem::Path &> &p)
+bool ValueTypeDrawer::draw(const Engine::Tools::Traced<const Engine::Platform::Filesystem::Path &> &p)
 {
     Text(p.get());
     return false;
 }
 
-bool ValueTypeDrawer::draw(const Engine::Tools::Traced<Engine::EnumHolder &> &e)
+bool ValueTypeDrawer::draw(const Engine::Tools::Traced<Engine::Reflect::Enum &> &e)
 {
     bool changed = false;
     std::string name { e->toString() };
@@ -610,13 +610,13 @@ bool ValueTypeDrawer::draw(const Engine::Tools::Traced<Engine::EnumHolder &> &e)
     return changed;
 }
 
-bool ValueTypeDrawer::draw(const Engine::Tools::Traced<const Engine::EnumHolder &> &e)
+bool ValueTypeDrawer::draw(const Engine::Tools::Traced<const Engine::Reflect::Enum &> &e)
 {
     Text(e->toString());
     return false;
 }
 
-bool ValueTypeDrawer::draw(const Engine::Tools::Traced<Engine::FlagsHolder &> &f)
+bool ValueTypeDrawer::draw(const Engine::Tools::Traced<Engine::Reflect::Flags &> &f)
 {
     bool changed = false;
     std::string name { "<flags>" };
@@ -634,47 +634,47 @@ bool ValueTypeDrawer::draw(const Engine::Tools::Traced<Engine::FlagsHolder &> &f
     return changed;
 }
 
-bool ValueTypeDrawer::draw(const Engine::Tools::Traced<const Engine::FlagsHolder &> &f)
+bool ValueTypeDrawer::draw(const Engine::Tools::Traced<const Engine::Reflect::Flags &> &f)
 {
     Text("<flags>");
     return false;
 }
 
-bool ValueTypeDrawer::draw(const Engine::Tools::Traced<Engine::Color3 &> &c)
+bool ValueTypeDrawer::draw(const Engine::Tools::Traced<Engine::Math::Color3 &> &c)
 {
-    return ColorEdit3("##ValueTypeDrawer", &c.trace(&Engine::Color3::r), ImGuiColorEditFlags_NoInputs);
+    return ColorEdit3("##ValueTypeDrawer", &c.trace(&Engine::Math::Color3::r), ImGuiColorEditFlags_NoInputs);
 }
 
-bool ValueTypeDrawer::draw(const Engine::Tools::Traced<const Engine::Color3 &> &c)
+bool ValueTypeDrawer::draw(const Engine::Tools::Traced<const Engine::Math::Color3 &> &c)
 {
-    auto ptr = &c.trace(&Engine::Color3::r);
+    auto ptr = &c.trace(&Engine::Math::Color3::r);
     return ColorEdit3("##ValueTypeDrawer", reinterpret_cast<const Engine::Tools::Traced<float *> &>(ptr), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoPicker);
 }
 
-bool ValueTypeDrawer::draw(const Engine::Tools::Traced<Engine::Color4 &> &c)
+bool ValueTypeDrawer::draw(const Engine::Tools::Traced<Engine::Math::Color4 &> &c)
 {
-    return ColorEdit4("##ValueTypeDrawer", &c.trace(&Engine::Color4::r), ImGuiColorEditFlags_NoInputs);
+    return ColorEdit4("##ValueTypeDrawer", &c.trace(&Engine::Math::Color4::r), ImGuiColorEditFlags_NoInputs);
 }
 
-bool ValueTypeDrawer::draw(const Engine::Tools::Traced<const Engine::Color4 &> &c)
+bool ValueTypeDrawer::draw(const Engine::Tools::Traced<const Engine::Math::Color4 &> &c)
 {
-    auto ptr = &c.trace(&Engine::Color4::r);
+    auto ptr = &c.trace(&Engine::Math::Color4::r);
     return ColorEdit4("##ValueTypeDrawer", reinterpret_cast<const Engine::Tools::Traced<float *> &>(ptr), ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoPicker);
 }
 
-bool ValueTypeDrawer::draw(const Engine::Tools::Traced<const Engine::KeyValueSender &> &s)
+bool ValueTypeDrawer::draw(const Engine::Tools::Traced<const Engine::Reflect::Sender &> &s)
 {
     Text("<sender>");
     return false;
 }
 
-bool ValueTypeDrawer::draw(const Engine::Tools::Traced<const Engine::KeyValueBinding &> &b)
+bool ValueTypeDrawer::draw(const Engine::Tools::Traced<const Engine::Reflect::Binding &> &b)
 {
     Text("<binding>");
     return false;
 }
 
-bool ValueTypeDrawer::draw(const Engine::Tools::Traced<const Engine::KeyValueScopeBinding &> &b)
+bool ValueTypeDrawer::draw(const Engine::Tools::Traced<const Engine::Reflect::ScopeBinding &> &b)
 {
     Text("<binding>");
     return false;
@@ -701,20 +701,20 @@ bool ValueTypeDrawer::draw(const Engine::Tools::Traced<const std::chrono::nanose
     return false;
 }
 
-bool ValueTypeDrawer::draw(const Engine::Tools::Traced<Engine::ExtendedValueTypeDesc &> &t)
+bool ValueTypeDrawer::draw(const Engine::Tools::Traced<Engine::Reflect::ExtendedType &> &t)
 {
     return ValueTypeTypePicker(t.get());
 }
 
-bool ValueTypeDrawer::draw(const Engine::Tools::Traced<const Engine::ExtendedValueTypeDesc &> &t)
+bool ValueTypeDrawer::draw(const Engine::Tools::Traced<const Engine::Reflect::ExtendedType &> &t)
 {
     Text(t->toString());
     return false;
 }
 
-bool ScopeTypePicker(const Engine::MetaTable *&t)
+bool ScopeTypePicker(const Engine::Reflect::MetaTable *&t)
 {
-    const Engine::MetaTable *type = Engine::sTypeList();
+    const Engine::Reflect::MetaTable *type = Engine::Reflect::sTypeList();
     while (type) {
         if (Selectable(type->mTypeName)) {
             t = type;
@@ -728,24 +728,24 @@ bool ScopeTypePicker(const Engine::MetaTable *&t)
 template <typename Ty, typename T>
 bool SelectValueTypeType(T &t)
 {
-    T desc = Engine::toValueTypeDesc<Ty>();
+    T desc = Engine::Reflect::toType<Ty>();
 
     bool result = false;
 
-    if constexpr (std::same_as<Ty, Engine::OwnedScopePtr>) {
+    if constexpr (std::same_as<Ty, Engine::Reflect::OwnedScopePtr>) {
         if (ImGui::BeginMenu("OwnedScopePtr")) {
-            const Engine::MetaTable *type;
+            const Engine::Reflect::MetaTable *type;
             result = ScopeTypePicker(type);
             if (result)
-                desc = Engine::ValueTypeDesc { Engine::ValueTypeEnum::OwnedScopeValue, type->mSelf };
+                desc = Engine::Reflect::Type { Engine::Reflect::TypeEnum::OwnedScopeValue, type->mSelf };
             ImGui::EndMenu();
         }
-    } else if constexpr (std::same_as<Ty, Engine::ScopePtr>) {
+    } else if constexpr (std::same_as<Ty, Engine::Reflect::ScopePtr>) {
         if (ImGui::BeginMenu("ScopePtr")) {
-            const Engine::MetaTable *type;
+            const Engine::Reflect::MetaTable *type;
             result = ScopeTypePicker(type);
             if (result)
-                desc = Engine::ValueTypeDesc { Engine::ValueTypeEnum::ScopeValue, type->mSelf };
+                desc = Engine::Reflect::Type { Engine::Reflect::TypeEnum::ScopeValue, type->mSelf };
             ImGui::EndMenu();
         }
     } else {
@@ -762,27 +762,27 @@ bool SelectValueTypeTypes(Engine::type_pack<Ty...>, T &t)
     return (SelectValueTypeType<Ty>(t) || ...);
 }
 
-bool ValueTypeTypePicker(Engine::ValueTypeDesc &t)
+bool ValueTypeTypePicker(Engine::Reflect::Type &t)
 {
     bool changed = false;
     if (ImGui::BeginCombo("##combo", "", ImGuiComboFlags_NoPreview | ImGuiComboFlags_PopupAlignLeft)) {
-        changed |= SelectValueTypeTypes(Engine::ValueTypeList::transform<Engine::type_pack_first> {}, t);
+        changed |= SelectValueTypeTypes(Engine::Reflect::TypeList::transform<Engine::type_pack_first> {}, t);
         ImGui::EndCombo();
     }
     return changed;
 }
 
-bool ValueTypeTypePicker(Engine::ExtendedValueTypeDesc &t)
+bool ValueTypeTypePicker(Engine::Reflect::ExtendedType &t)
 {
     bool changed = false;
     if (ImGui::BeginCombo("##combo", "", ImGuiComboFlags_NoPreview | ImGuiComboFlags_PopupAlignLeft)) {
-        changed |= SelectValueTypeTypes(Engine::ValueTypeList::transform<Engine::type_pack_first> {}, t);
+        changed |= SelectValueTypeTypes(Engine::Reflect::TypeList::transform<Engine::type_pack_first> {}, t);
         ImGui::EndCombo();
     }
     return changed;
 }
 
-bool DragMatrix3(const char *label, const Engine::Tools::Traced<Engine::Matrix3 *> &m, float *v_speeds)
+bool DragMatrix3(const char *label, const Engine::Tools::Traced<Engine::Math::Matrix3 *> &m, float *v_speeds)
 {
     ImGuiWindow *window = GetCurrentWindow();
     if (window->SkipItems)
@@ -817,14 +817,14 @@ bool DragMatrix3(const char *label, const Engine::Tools::Traced<Engine::Matrix3 
     return value_changed;
 }
 
-bool DragMatrix3(const char *label, const Engine::Tools::Traced<Engine::Matrix3 *> &m, float v_speed)
+bool DragMatrix3(const char *label, const Engine::Tools::Traced<Engine::Math::Matrix3 *> &m, float v_speed)
 {
     float speeds[9];
     std::fill_n(speeds, 9, v_speed);
     return DragMatrix3(label, m, speeds);
 }
 
-bool DragMatrix4(const char *label, const Engine::Tools::Traced<Engine::Matrix4 *> &m, float *v_speeds)
+bool DragMatrix4(const char *label, const Engine::Tools::Traced<Engine::Math::Matrix4 *> &m, float *v_speeds)
 {
     ImGuiWindow *window = GetCurrentWindow();
     if (window->SkipItems)
@@ -858,14 +858,14 @@ bool DragMatrix4(const char *label, const Engine::Tools::Traced<Engine::Matrix4 
     return value_changed;
 }
 
-bool DragMatrix4(const char *label, const Engine::Tools::Traced<Engine::Matrix4 *> &m, float v_speed)
+bool DragMatrix4(const char *label, const Engine::Tools::Traced<Engine::Math::Matrix4 *> &m, float v_speed)
 {
     float speeds[16];
     std::fill_n(speeds, 16, v_speed);
     return DragMatrix4(label, m, speeds);
 }
 
-bool MethodPicker(const char *label, const std::vector<std::pair<std::string, Engine::BoundApiFunction>> &methods, Engine::BoundApiFunction *m, std::string *currentName, std::string *filter, int expectedArgumentCount)
+bool MethodPicker(const char *label, const std::vector<std::pair<std::string, Engine::Reflect::BoundApiFunction>> &methods, Engine::Reflect::BoundApiFunction *m, std::string *currentName, std::string *filter, int expectedArgumentCount)
 {
     bool result = false;
 
@@ -905,7 +905,7 @@ void ResetDraggableValueType()
     sPayload.mValue = {};
 }
 
-void DraggableValueTypeSourceEx(std::string_view name, const Engine::Tools::Traced<const Engine::ValueType &> &value, ImGuiDragDropFlags flags)
+void DraggableValueTypeSourceEx(std::string_view name, const Engine::Tools::Traced<const Engine::Reflect::Value &> &value, ImGuiDragDropFlags flags)
 {
     if (ImGui::BeginDragDropSource(flags | ImGuiDragDropFlags_SourceNoPreviewTooltip)) {
         ValueTypePayload *payload = &sPayload;
@@ -929,13 +929,13 @@ const ValueTypePayload *GetValuetypePayload()
     return nullptr;
 }
 
-bool AcceptDraggableValueType(Engine::CallableView<Engine::KeyValueResult(const Engine::Tools::Traced<const Engine::ValueType &> &)> output, Engine::CallableView<Engine::KeyValueResult(const Engine::Tools::Traced<const Engine::ValueType &> &)> validate)
+bool AcceptDraggableValueType(Engine::CallableView<Engine::Reflect::Result(const Engine::Tools::Traced<const Engine::Reflect::Value &> &)> output, Engine::CallableView<Engine::Reflect::Result(const Engine::Tools::Traced<const Engine::Reflect::Value &> &)> validate)
 {
     const ValueTypePayload *payload = GetValuetypePayload();
     if (payload) {
-        Engine::KeyValueResult error = payload->mValue([&](const Engine::Tools::Traced<const Engine::ValueType &> &v) { return std::make_pair(validate(v), false); });
+        Engine::Reflect::Result error = payload->mValue([&](const Engine::Tools::Traced<const Engine::Reflect::Value &> &v) { return std::make_pair(validate(v), false); });
         if (!error) {
-            error = payload->mValue([&](const Engine::Tools::Traced<const Engine::ValueType &> &v) { return std::make_pair(output(v), false); });
+            error = payload->mValue([&](const Engine::Tools::Traced<const Engine::Reflect::Value &> &v) { return std::make_pair(output(v), false); });
         }
         if (error) {
             if (ImGui::BeginTooltip()) {
@@ -949,13 +949,13 @@ bool AcceptDraggableValueType(Engine::CallableView<Engine::KeyValueResult(const 
     return false;
 }
 
-bool IsDraggableValueTypeBeingAccepted(Engine::CallableView<Engine::KeyValueResult(const Engine::Tools::Traced<const Engine::ValueType &> &)> output)
+bool IsDraggableValueTypeBeingAccepted(Engine::CallableView<Engine::Reflect::Result(const Engine::Tools::Traced<const Engine::Reflect::Value &> &)> output)
 {
     if (IsDragDropPayloadBeingAccepted()) {
         const ValueTypePayload *payload = GetValuetypePayload();
         if (!payload)
             return false;
-        Engine::KeyValueResult error = payload->mValue([&](const Engine::Tools::Traced<const Engine::ValueType &> &v) { return std::make_pair(output(v), false); });
+        Engine::Reflect::Result error = payload->mValue([&](const Engine::Tools::Traced<const Engine::Reflect::Value &> &v) { return std::make_pair(output(v), false); });
         if (error) {
         } else {
             return true;

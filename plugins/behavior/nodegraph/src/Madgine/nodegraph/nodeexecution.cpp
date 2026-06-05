@@ -9,7 +9,7 @@ namespace Engine {
 namespace Behavior {
     namespace NodeGraph {
 
-        KeyValueResult NodeInterpretHandleBase::read(const NodeBase &node, ValueType &retVal, uint32_t dataInIndex, uint32_t group)
+        Reflect::Result NodeInterpretHandleBase::read(const NodeBase &node, Reflect::Value &retVal, uint32_t dataInIndex, uint32_t group)
         {
             Pin pin = node.dataInSource(dataInIndex, group);
             return mInterpreter.read(retVal, pin);

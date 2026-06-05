@@ -236,7 +236,7 @@ namespace Execution {
         BindingPtr() = default;
 
         template <Binding<T> Binding>
-            requires(!InstanceOf<std::decay_t<Binding>, BindingPtr>)
+            requires(!Concepts::InstanceOf<std::decay_t<Binding>, BindingPtr>)
         explicit BindingPtr(Binding &&binding)
             : mPtr(new BindingBridge<T, Binding> { std::forward<Binding>(binding) })
         {
@@ -294,7 +294,7 @@ namespace Execution {
         }
 
         template <Binding<T> Binding>
-            requires(!InstanceOf<std::decay_t<Binding>, BindingPtr>)
+            requires(!Concepts::InstanceOf<std::decay_t<Binding>, BindingPtr>)
         BindingPtr &operator=(Binding &&binding)
         {
             if (mPtr && mPtr->mRefCount.fetch_sub(1, std::memory_order_acq_rel) == 1) {

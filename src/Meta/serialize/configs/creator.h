@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Generic/container/emplace.h"
+#include "Generic/containers/emplace.h"
 #include "Generic/customfunctors.h"
 #include "Generic/functor.h"
 #include "Generic/makeowning.h"
@@ -42,7 +42,7 @@ namespace Serialize {
         static void writeItem(CallerHierarchyFormattedSerializeStream out, const std::ranges::range_value_t<C> &t)
         {
             using T = std::ranges::range_value_t<C>;
-            if constexpr (InstanceOf<T, std::pair>) {
+            if constexpr (Concepts::InstanceOf<T, std::pair>) {
                 out.mStream.beginCompoundWrite("Item");
                 writeCreationData<typename T::first_type>(out, t.first, "Key");
                 writeCreationData<typename T::second_type>(out, t.second, "Value");
@@ -59,13 +59,13 @@ namespace Serialize {
         static StreamResult readItem(CallerHierarchyFormattedSerializeStream in, Op &op, std::ranges::iterator_t<Op> &it, const std::ranges::const_iterator_t<Op> &where)
         {
             using T = std::remove_reference_t<std::ranges::range_reference_t<Op>>;
-            if constexpr (InstanceOf<T, std::pair>) {
+            if constexpr (Concepts::InstanceOf<T, std::pair>) {
                 STREAM_PROPAGATE_ERROR(in.mStream.beginCompoundRead("Item"));
                 std::tuple<std::piecewise_construct_t, ArgsTuple<typename T::first_type>, ArgsTuple<typename T::second_type>> tuple;
                 STREAM_PROPAGATE_ERROR(readCreationData<typename T::first_type>(in, std::get<1>(tuple), "Key"));
                 STREAM_PROPAGATE_ERROR(readCreationData<typename T::second_type>(in, std::get<2>(tuple), "Value"));
                 bool success;
-                it = TupleUnpacker::invokeExpand(emplace, success, op, where, std::move(tuple));
+                it = TupleUnpacker::invokeExpand(Containers::emplace, success, op, where, std::move(tuple));
                 assert(success);
                 STREAM_PROPAGATE_ERROR(read(in, it->first, "Key"));
                 STREAM_PROPAGATE_ERROR(read(in, it->second, "Value"));
@@ -75,7 +75,7 @@ namespace Serialize {
                 ArgsTuple<T> tuple;
                 STREAM_PROPAGATE_ERROR(readCreationData<T>(in, tuple));
                 bool success;
-                it = TupleUnpacker::invokeExpand(emplace, success, op, where, std::move(tuple));
+                it = TupleUnpacker::invokeExpand(Containers::emplace, success, op, where, std::move(tuple));
                 assert(success);
                 STREAM_PROPAGATE_ERROR(read(in, *it, "Item"));
                 return {};
@@ -128,7 +128,7 @@ namespace Serialize {
             ArgsTuple<T> tuple;
             STREAM_PROPAGATE_ERROR(readCreationData<T>(in, tuple));
             bool success;
-            it = TupleUnpacker::invokeExpand(emplace, success, op, where, std::move(tuple));
+            it = TupleUnpacker::invokeExpand(Containers::emplace, success, op, where, std::move(tuple));
             assert(success);
             STREAM_PROPAGATE_ERROR(read<typename T::first_type>(in, it->first, "Key"));
             STREAM_PROPAGATE_ERROR(read<typename T::second_type>(in, it->second, "Value"));
@@ -183,7 +183,7 @@ namespace Serialize {
             }
         };
 
-        template <auto reader, typename WriteFunctor, typename ClearFunctor, typename Scan, OneOf<void, StreamResult> R, typename T, typename Stream, typename... _Ty>
+        template <auto reader, typename WriteFunctor, typename ClearFunctor, typename Scan, Concepts::OneOf<void, StreamResult> R, typename T, typename Stream, typename... _Ty>
         struct _CustomCreator {
 
             using Category = CreatorCategory;
@@ -214,7 +214,7 @@ namespace Serialize {
                     STREAM_PROPAGATE_ERROR(read(in, temp, nullptr));
                     it = emplace(success, op, where, std::move(temp));
                 } else {
-                    it = TupleUnpacker::invokeExpand(emplace, success, op, where, std::move(tuple));
+                    it = TupleUnpacker::invokeExpand(Containers::emplace, success, op, where, std::move(tuple));
                     STREAM_PROPAGATE_ERROR(read(in, *it, nullptr));
                 }
                 assert(success);
@@ -256,7 +256,7 @@ namespace Serialize {
             }
         };
 
-        template <auto reader, typename WriteFunctor, typename ClearFunctor, typename Scan, OneOf<void, StreamResult> R, typename T, typename Stream, typename... _Ty>
+        template <auto reader, typename WriteFunctor, typename ClearFunctor, typename Scan, Concepts::OneOf<void, StreamResult> R, typename T, typename Stream, typename... _Ty>
         struct _ParentCreator {
 
             using Category = CreatorCategory;
@@ -288,7 +288,7 @@ namespace Serialize {
                     STREAM_PROPAGATE_ERROR(read(in, temp, nullptr));
                     it = emplace(success, op, where, std::move(temp));
                 } else {
-                    it = TupleUnpacker::invokeFlatten(emplace, success, op, where, std::move(tuple));
+                    it = TupleUnpacker::invokeFlatten(Containers::emplace, success, op, where, std::move(tuple));
                     STREAM_PROPAGATE_ERROR(read(in, *it, nullptr));
                 }
                 assert(success);

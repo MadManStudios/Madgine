@@ -37,7 +37,7 @@ struct Stream {
             /* std::underlying_type_t<T> */ int64_t val;
             mStream >> val;
             t = static_cast<T>(val);
-        } else if constexpr (InstanceOf<T, std::chrono::duration>) {
+        } else if constexpr (Concepts::InstanceOf<T, std::chrono::duration>) {
             std::string rep;
             mStream >> rep;
             if (rep.back() != 's') {

@@ -71,5 +71,5 @@ struct TestUnit : TopLevelUnit<TestUnit> {
     SERIALIZABLE_CONTAINER(complexList2, std::list<ComplexDataType>);
     SERIALIZABLE_CONTAINER(complexList3, std::list<ComplexDataType>);
 
-    Engine::ByteBuffer bytes;
+    Engine::Memory::ByteBuffer bytes;
 };

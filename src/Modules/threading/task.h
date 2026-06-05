@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Generic/coroutines/handle.h"
+#include "Generic/execution/handle.h"
 
 #include "taskfuture.h"
 #include "taskpromise.h"
@@ -35,7 +35,7 @@ namespace Threading {
 
             Task<T, Immediate> get_return_object()
             {
-                return { CoroutineHandle<promise_type>::fromPromise(*this) };
+                return { Execution::CoroutineHandle<promise_type>::fromPromise(*this) };
             }
         };
 
@@ -56,7 +56,7 @@ namespace Threading {
         {
         }
 
-        Task(CoroutineHandle<promise_type> handle)
+        Task(Execution::CoroutineHandle<promise_type> handle)
             : mHandle(std::move(handle))
         {
         }
@@ -119,7 +119,7 @@ namespace Threading {
         }
 
     private:
-        CoroutineHandle<TaskPromise<T>> mHandle;
+        Execution::CoroutineHandle<TaskPromise<T>> mHandle;
         std::shared_ptr<TaskPromiseSharedState<T>> mState;
     };
 

@@ -4,51 +4,53 @@
 #include "concepts.h"
 
 namespace Engine {
+namespace Memory {
 
-template <typename Parent>
-struct BumpAllocator {
+    template <typename Parent>
+    struct BumpAllocator {
 
-    static constexpr size_t goodSize = Parent::goodSize;
+        static constexpr size_t goodSize = Parent::goodSize;
 
-    template <typename... Args>
-    BumpAllocator(Args &&...args)
-        : mParent(std::forward<Args>(args)...)
-    {
-    }
-
-    Block allocate(size_t size, size_t alignment = 1)
-    {
-        assert(size <= Parent::goodSize);
-        mOffset = alignTo(mOffset, alignment);
-        if (mCurrentBlock.mSize < mOffset + size) {
-            mCurrentBlock = mParent.allocate(Parent::goodSize, alignment);
-            mOffset = 0;
+        template <typename... Args>
+        BumpAllocator(Args &&...args)
+            : mParent(std::forward<Args>(args)...)
+        {
         }
-        Block result;
-        result.mAddress = static_cast<std::byte *>(mCurrentBlock.mAddress) + mOffset;
-        result.mSize = size;
-        mOffset += size;
-        return result;
-    }
 
-    void deallocate(Block block)
-    {
-    }
+        Block allocate(size_t size, size_t alignment = 1)
+        {
+            assert(size <= Parent::goodSize);
+            mOffset = alignTo(mOffset, alignment);
+            if (mCurrentBlock.mSize < mOffset + size) {
+                mCurrentBlock = mParent.allocate(Parent::goodSize, alignment);
+                mOffset = 0;
+            }
+            Block result;
+            result.mAddress = static_cast<std::byte *>(mCurrentBlock.mAddress) + mOffset;
+            result.mSize = size;
+            mOffset += size;
+            return result;
+        }
 
-    void deallocateAll()
-    {
-        mParent.deallocateAll();
-    }
+        void deallocate(Block block)
+        {
+        }
 
-    Parent &parent()
-    {
-        return mParent;
-    }
+        void deallocateAll()
+        {
+            mParent.deallocateAll();
+        }
 
-private:
-    Parent mParent;
-    Block mCurrentBlock;
-    size_t mOffset = 0;
-};
+        Parent &parent()
+        {
+            return mParent;
+        }
 
+    private:
+        Parent mParent;
+        Block mCurrentBlock;
+        size_t mOffset = 0;
+    };
+
+}
 }

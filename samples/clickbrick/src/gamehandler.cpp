@@ -2,7 +2,7 @@
 
 #include "gamehandler.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 
 #include "Modules/uniquecomponent/uniquecomponentcollector.h"
 

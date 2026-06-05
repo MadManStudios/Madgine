@@ -53,14 +53,14 @@ namespace Render {
                     material = &meshData->mMaterials[mesh.material()];
                 }
                 ResourceBlock resource;
-                Vector4 diffuseColor { 1.0f, 1.0f, 1.0f, 1.0f };
+                Math::Vector4 diffuseColor { 1.0f, 1.0f, 1.0f, 1.0f };
                 if (material) {
                     resource = material->mResourceBlock;
                     diffuseColor = material->mDiffuseColor;
                 }
 
                 Scene::Entity::Skeleton *skeleton = mesh.entity().getComponent<Scene::Entity::Skeleton>();
-                Engine::Render::GPUPtr<Matrix4[]> bones;
+                Engine::Render::GPUPtr<Math::Matrix4[]> bones;
                 if (skeleton)
                     bones = skeleton->mBoneMatrices;
 

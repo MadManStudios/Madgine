@@ -2,7 +2,7 @@
 
 #include "scenecomponentbase.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
 #include "scenemanager.h"
@@ -46,7 +46,7 @@ namespace Scene {
         return mSceneMgr.getComponent(i);
     }
 
-    App::GlobalAPIBase &SceneComponentBase::getGlobalAPIComponent(size_t i)
+    Core::GlobalAPIBase &SceneComponentBase::getGlobalAPIComponent(size_t i)
     {
         return mSceneMgr.getGlobalAPIComponent(i);
     }

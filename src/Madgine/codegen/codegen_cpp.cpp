@@ -40,10 +40,10 @@ void CppFile::statement(Statement statement)
 void CppFile::generate(std::ostream &stream)
 {
     assert(mNamespaceStack.size() == 1);
-    assert(mConditionalsBitMask == Engine::BitArray<62> {});
+    assert(mConditionalsBitMask == Engine::Containers::BitArray<62> {});
 
-    for (std::map<Engine::BitArray<62>, std::set<std::string>> &includeMap : mIncludes) {
-        for (std::pair<const Engine::BitArray<62>, std::set<std::string>> &p : includeMap) {
+    for (std::map<Engine::Containers::BitArray<62>, std::set<std::string>> &includeMap : mIncludes) {
+        for (std::pair<const Engine::Containers::BitArray<62>, std::set<std::string>> &p : includeMap) {
             bool hasGuard = openCStyleGuard(stream, { p.first });
 
             for (const std::string &file : p.second) {
@@ -178,9 +178,9 @@ void CppFile::generate(std::ostream &stream, const Type &t)
     std::visit(Engine::overloaded { [&](Struct *s) {
                                        stream << s->mName;
                                    },
-                   [&](const Engine::ExtendedValueTypeDesc &desc) {
+                   [&](const Engine::Reflect::ExtendedType &desc) {
                        if (desc.mType.isRegular())
-                           stream << static_cast<Engine::ValueTypeDesc>(desc).toTypeName();
+                           stream << static_cast<Engine::Reflect::Type>(desc).toTypeName();
                        else
                            stream << "auto";
                    } },

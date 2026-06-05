@@ -44,7 +44,7 @@ namespace Render {
 
         target->clearDepthBuffer();
 
-        Vector2i size = target->size();
+        Math::Vector2i size = target->size();
 
         float aspectRatio = float(size.x) / size.y;
 
@@ -54,10 +54,10 @@ namespace Render {
             perApplication->p = target->getClipSpaceMatrix() * mCamera->getProjectionMatrix(aspectRatio);
         }
 
-        for (const std::pair<const Im3DNativeMesh, std::vector<Matrix4>> &p : mContext->mNativeMeshes) {
+        for (const std::pair<const Im3DNativeMesh, std::vector<Math::Matrix4>> &p : mContext->mNativeMeshes) {
             mPipeline->bindMesh(target, *p.first);
 
-            for (const Matrix4 &m : p.second) {
+            for (const Math::Matrix4 &m : p.second) {
                 {
                     auto perObject = mPipeline->mapParameters<HLSL::Im3DPerObject>(2);
 

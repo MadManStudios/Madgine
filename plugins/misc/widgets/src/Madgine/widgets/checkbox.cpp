@@ -2,7 +2,7 @@
 
 #include "checkbox.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
 NAMED_UNIQUECOMPONENT(Checkbox, Engine::Widgets::Checkbox);

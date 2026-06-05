@@ -158,7 +158,7 @@ struct ManualLifetime<T &> {
     {
     }
 
-    template <DecayedNoneOf<ManualLifetime<T>> Arg>
+    template <Concepts::DecayedNoneOf<ManualLifetime<T>> Arg>
         requires std::convertible_to<Arg, T &>
     ManualLifetime(Arg &&arg)
         : mData(static_cast<T &>(std::forward<Arg>(arg)))

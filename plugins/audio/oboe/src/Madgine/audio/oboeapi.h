@@ -10,7 +10,7 @@ namespace Audio {
 
     struct OboeApi : AudioApiImpl<OboeApi> {
 
-        OboeApi(Root::Root &root);
+        OboeApi(Core::Root &root);
         ~OboeApi();
 
         virtual std::string_view key() const override;

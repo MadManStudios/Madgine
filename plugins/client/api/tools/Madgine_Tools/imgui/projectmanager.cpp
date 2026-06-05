@@ -4,8 +4,8 @@
 
 #include "Generic/projections.h"
 
-#include "Interfaces/filesystem/fsapi.h"
-#include "Interfaces/window/windowapi.h"
+#include "Platform/filesystem/fsapi.h"
+#include "Platform/window/windowapi.h"
 
 #include "Modules/uniquecomponent/uniquecomponentcollector.h"
 
@@ -13,7 +13,7 @@
 #include "Madgine/window/layoutloader.h"
 #include "Madgine/window/mainwindow.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
 #include "Madgine_Tools/imguiicons.h"
@@ -85,7 +85,7 @@ namespace Tools {
 #ifndef MADGINE_MAINWINDOW_LAYOUT
     void ProjectManager::renderLandingPage()
     {
-        if (Window::LayoutLoader::getSingleton().resources().empty()) {
+        if (Core::LayoutLoader::getSingleton().resources().empty()) {
 
             if (beginGame()) {
 
@@ -145,7 +145,7 @@ namespace Tools {
 
                 if (ImGui::BeginCombo("##CurrentConfig", mCurrentConfig.c_str())) {
 
-                    for (const Filesystem::Path &config : mConfigs)
+                    for (const Platform::Filesystem::Path &config : mConfigs)
                         if (ImGui::Selectable(config.c_str(), mCurrentConfig == config))
                             setCurrentConfig(config);
 
@@ -181,7 +181,7 @@ namespace Tools {
                     if (ImGui::MenuItem("Open Existing")) {
                         mRoot.dialogs().show(
                             mRoot.directoryPicker(),
-                            [this](const Filesystem::Path &path) {
+                            [this](const Platform::Filesystem::Path &path) {
                                 setCurrentConfig(path);
                             });
                     }
@@ -224,9 +224,9 @@ namespace Tools {
 
                     ImGui::Separator();
 
-                    for (const auto &[name, res] : Window::LayoutLoader::getSingleton()) {
+                    for (const auto &[name, res] : Core::LayoutLoader::getSingleton()) {
                         if (ImGui::MenuItem(name.data(), nullptr, mLayout == &res)) {
-                            setLayout(Window::LayoutLoader::get(name));
+                            setLayout(Core::LayoutLoader::get(name));
                         }
                     }
 
@@ -330,7 +330,7 @@ namespace Tools {
         }
     }
 
-    bool ProjectManager::renderConfiguration(const Filesystem::Path &config)
+    bool ProjectManager::renderConfiguration(const Platform::Filesystem::Path &config)
     {
         bool changed = false;
 #ifndef MADGINE_MAINWINDOW_LAYOUT
@@ -339,7 +339,7 @@ namespace Tools {
 
             std::string layout = mConfiguration["General"]["LAYOUT"];
             if (ImGui::BeginCombo("Layout", layout.c_str())) {
-                for (Resources::ResourceBase *res : Window::LayoutLoader::getSingleton().resources()) {
+                for (Resources::ResourceBase *res : Core::LayoutLoader::getSingleton().resources()) {
                     auto p = Resources::ResourceManager::getSingleton().makeRelative(res->path());
                     std::string relativePath = p.first + ":" + std::string { p.second.stem() };
                     if (ImGui::Selectable(relativePath.c_str(), relativePath == layout)) {
@@ -375,10 +375,10 @@ namespace Tools {
 
                 if (ImGui::BeginTable("components", 2, ImGuiTableFlags_Resizable)) {
 
-                    for (const std::unique_ptr<Window::MainWindowComponentBase> &component : mWindow->components() | std::views::reverse) {
+                    for (const std::unique_ptr<Core::MainWindowComponentBase> &component : mWindow->components() | std::views::reverse) {
 
                         if (component->includeInLayout()) {
-                            TracedRoot<ScopePtr> ptr { mHistory, component.get() };
+                            TracedRoot<Reflect::ScopePtr> ptr { mHistory, component.get() };
                             mInspector->drawValue(component->key(), ptr, false, false);
                         }
                     }
@@ -391,17 +391,17 @@ namespace Tools {
     }
 
 #ifndef MADGINE_MAINWINDOW_LAYOUT
-    void ProjectManager::loadConfiguration(const Filesystem::Path &config)
+    void ProjectManager::loadConfiguration(const Platform::Filesystem::Path &config)
     {
         mConfiguration.loadFromDisk(config / "client.ini");
     }
 
-    void ProjectManager::saveConfiguration(const Filesystem::Path &config)
+    void ProjectManager::saveConfiguration(const Platform::Filesystem::Path &config)
     {
         mConfiguration.saveToDisk(config / "client.ini");
     }
 
-    void ProjectManager::setCurrentConfig(const Filesystem::Path &config)
+    void ProjectManager::setCurrentConfig(const Platform::Filesystem::Path &config)
     {
         mCurrentConfig = config;
         mConfigs.insert(mCurrentConfig);
@@ -413,19 +413,19 @@ namespace Tools {
 
     void ProjectManager::createProjectDialog()
     {
-        mTemplates->showTemplateDialog("NewProject", [this](const Filesystem::Path &path) {
+        mTemplates->showTemplateDialog("NewProject", [this](const Platform::Filesystem::Path &path) {
             // TODO Show success message
         });
     }
 
     void ProjectManager::createPluginDialog()
     {
-        mTemplates->showTemplateDialog("NewPlugin", [this](const Filesystem::Path &path) {
+        mTemplates->showTemplateDialog("NewPlugin", [this](const Platform::Filesystem::Path &path) {
             // TODO Show success message
         });
     }
 
-    void ProjectManager::setLayout(Window::LayoutLoader::Resource *layout)
+    void ProjectManager::setLayout(Core::LayoutLoader::Resource *layout)
     {
         if (mLayout != layout) {
             mLayout = layout;
@@ -433,7 +433,7 @@ namespace Tools {
         }
     }
 
-    Window::LayoutLoader::Resource *ProjectManager::layout() const
+    Core::LayoutLoader::Resource *ProjectManager::layout() const
     {
         return mLayout;
     }
@@ -445,7 +445,7 @@ namespace Tools {
 
     void ProjectManager::setLayoutString(std::string_view name)
     {
-        setLayout(Window::LayoutLoader::get(name));
+        setLayout(Core::LayoutLoader::get(name));
     }
 
     void ProjectManager::save()

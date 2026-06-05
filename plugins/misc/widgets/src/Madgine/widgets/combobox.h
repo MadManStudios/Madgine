@@ -37,11 +37,11 @@ namespace Widgets {
         float mSpacing = 2.0f;
 
     protected:
-        bool containsPoint(const Vector2 &point, const Rect2i &screenSpace, float extend) const override;
+        bool containsPoint(const Math::Vector2 &point, const Math::Rect2i &screenSpace, float extend) const override;
 
-        void injectPointerEnter(const Input::PointerMoveEvent &arg) override;
-        void injectPointerLeave(const Input::PointerMoveEvent &arg) override;
-        void injectPointerMove(const Input::PointerMoveEvent &arg) override;
+        void injectPointerEnter(const Platform::Input::PointerMoveEvent &arg) override;
+        void injectPointerLeave(const Platform::Input::PointerMoveEvent &arg) override;
+        void injectPointerMove(const Platform::Input::PointerMoveEvent &arg) override;
 
         void injectPointerClick(const PointerClickEvent &arg) override;
 

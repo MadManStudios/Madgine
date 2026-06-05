@@ -8,7 +8,7 @@
 #include "Madgine/behavior/behaviorcollector.h"
 #include "Madgine/behavior/behaviorlist.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
 #include "Madgine_Tools/debugger/debuggerview.h"
@@ -174,7 +174,7 @@ namespace Tools {
             history.handleShortcuts();
 
             if (ImGui::BeginTable("columns", 2, ImGuiTableFlags_SizingStretchProp)) {
-                TracedRoot<ScopePtr> traced { history, &parameters };
+                TracedRoot<Reflect::ScopePtr> traced { history, &parameters };
                 inspector.drawMembers(traced);
                 ImGui::EndTable();
             }

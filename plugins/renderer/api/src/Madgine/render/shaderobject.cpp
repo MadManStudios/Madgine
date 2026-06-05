@@ -2,8 +2,8 @@
 
 #include "shaderobject.h"
 
-#include "Interfaces/filesystem/fsapi.h"
-#include "Interfaces/filesystem/path.h"
+#include "Platform/filesystem/fsapi.h"
+#include "Platform/filesystem/path.h"
 
 #include "Madgine/render/ptr.h"
 
@@ -103,13 +103,13 @@ namespace Render {
 
     void ShaderObjectBase::generate() const
     {
-        Filesystem::Path p = metadata().mPath;
+        Platform::Filesystem::Path p = metadata().mPath;
 
         if (p.isRelative()) {
             p = ShaderCache::directory() / p;
         }
 
-        bool needsToRegenerate = !Filesystem::exists(p);
+        bool needsToRegenerate = !Platform::Filesystem::exists(p);
 
         std::chrono::file_clock::time_point time = needsToRegenerate ? std::chrono::file_clock::time_point::min() : timestamp();
 
@@ -122,7 +122,7 @@ namespace Render {
             std::ofstream of { p };
             if (!of.is_open()) {
                 LOG_ERROR("Failed to open shader file for writing: " << p);
-                if (!Filesystem::exists(ShaderCache::directory())) {
+                if (!Platform::Filesystem::exists(ShaderCache::directory())) {
                     LOG_ERROR("note: shadercache folder missing");
                 }
             }
@@ -132,13 +132,13 @@ namespace Render {
 
     std::chrono::file_clock::time_point ShaderObjectBase::timestamp() const
     {
-        Filesystem::Path p = metadata().mPath;
+        Platform::Filesystem::Path p = metadata().mPath;
 
         if (p.isRelative()) {
             p = ShaderCache::directory() / p;
         }
 
-        return Filesystem::exists(p) ? Filesystem::fileInfo(p).mLastModified : std::chrono::file_clock::time_point::min();
+        return Platform::Filesystem::exists(p) ? Platform::Filesystem::fileInfo(p).mLastModified : std::chrono::file_clock::time_point::min();
     }
 
     std::chrono::file_clock::time_point ShaderObjectBase::chainTimestamp() const

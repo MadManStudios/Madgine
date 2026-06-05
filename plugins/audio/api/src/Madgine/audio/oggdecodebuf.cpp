@@ -52,7 +52,7 @@ namespace Audio {
         auto result = ov_open_callbacks(this, &mFile, nullptr, -1, callbacks);
         if (result) {
             {
-                Log::LogDummy out { Log::MessageType::ERROR_TYPE };
+                Platform::Log::LogDummy out { Platform::Log::MessageType::ERROR_TYPE };
                 out << "Vorbis Error: ";
                 switch (result) {
                     CONSTANT_CASE(OV_EREAD, out)

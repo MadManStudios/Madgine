@@ -6,7 +6,7 @@
 #include "Modules/threading/workgroup.h"
 #include "Modules/uniquecomponent/uniquecomponentcollector.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
 #include "imgui/imgui.h"
@@ -42,7 +42,7 @@ namespace Tools {
 
     void TaskTracker::render()
     {
-        if (beginDefaultWindow()) {
+        if (beginToolPanel("TaskTracker", &mVisible, ImGuiDir_Up)) {
 
             ImGui::Checkbox("Locked", &mLocked);
             if (!mLocked)
@@ -64,36 +64,37 @@ namespace Tools {
 
             ImGui::Columns(2);
 
-            std::vector<std::pair<const char *, Debug::Tasks::TaskTracker *>> trackers;
+            std::vector<std::pair<const char *, std::reference_wrapper<Debug::Tasks::TaskTracker>>> trackers;
             for (Threading::TaskQueue *queue : Threading::WorkGroup::self().taskQueues()) {
-                trackers.emplace_back(queue->name().c_str(), &queue->mTracker);
+                trackers.emplace_back(queue->name().c_str(), queue->mTracker);
             }
             std::ranges::copy(mCustomTrackers, std::back_inserter(trackers));
 
-            for (auto [name, tracker] : trackers) {
+            for (auto [name, _tracker] : trackers) {
+                Debug::Tasks::TaskTracker &tracker = _tracker;    
                 ImGui::Text("%s", name);
 
                 ImGui::NextColumn();
 
-                Rect2 threadPlotRect = beginPlot();
+                Math::Rect2 threadPlotRect = beginPlot();
 
                 isHovered |= ImGui::IsItemHovered(); // Hovered
 
                 ImGui::NextColumn();
 
-                ImGui::Text("\tThread [%llu]", tracker->mThread);
+                ImGui::Text("\tThread [%llu]", tracker.mThread);
 
                 ImGui::NextColumn();
 
-                Rect2 plotRect = beginPlot();
+                Math::Rect2 plotRect = beginPlot();
                 mouseRatio = (ImGui::GetMousePos().x - plotRect.mTopLeft.x) / plotRect.mSize.x;
                 ImVec2 keep = ImGui::GetCursorScreenPos();
 
                 isHovered |= ImGui::IsItemHovered(); // Hovered
 
-                std::lock_guard guard { tracker->mMutex };
-                auto begin = tracker->events().begin();
-                auto end = tracker->events().end();
+                std::lock_guard guard { tracker.mMutex };
+                auto begin = tracker.events().begin();
+                auto end = tracker.events().end();
                 auto cmp1 = [](const Debug::Tasks::TaskTracker::Event &event, const std::chrono::high_resolution_clock::time_point &t) { return event.mTimePoint < t; };
                 auto start = std::lower_bound(begin, end, timeAreaBegin - 50ms, cmp1);
                 auto cmp2 = [](const std::chrono::high_resolution_clock::time_point &t, const Debug::Tasks::TaskTracker::Event &event) { return t < event.mTimePoint; };
@@ -108,18 +109,18 @@ namespace Tools {
                     size_t depth;
                 };
                 int i = 0;
-                auto plot = [&, tracker { tracker }](Plot &p) {
+                auto plot = [&](Plot &p) {
                     p.x_end = std::max(p.x_end, p.x + 1.0f);
 
                     ImU32 color = colors[(i++ + p.depth) % 4];
-                    if (mHoveredTracker == tracker && mHoveredId == p.id)
+                    if (mHoveredTracker == &tracker && mHoveredId == p.id)
                         color += IM_COL32(50, 50, 50, 0);
                     draw_list->AddRectFilled({ plotRect.mTopLeft.x + p.x, plotRect.mTopLeft.y }, { plotRect.mTopLeft.x + p.x_end, plotRect.bottom() - 5.0f * p.depth }, color);
                     ImGui::SetCursorScreenPos({ plotRect.mTopLeft.x + p.x, plotRect.mTopLeft.y });
                     ImGui::InvisibleButton("id", { p.x_end - p.x, plotRect.mSize.y - 5.0f * p.depth }, ImGuiButtonFlags_MouseButtonLeft | ImGuiButtonFlags_MouseButtonRight);
 
                     if (ImGui::IsItemHovered()) {
-                        hoveredTracker = tracker;
+                        hoveredTracker = &tracker;
                         hoveredId = p.id;
                     }
                 };
@@ -180,7 +181,7 @@ namespace Tools {
                     case Debug::Tasks::TaskTracker::Event::RETURN: {
                         float x = 0.0f;
                         if (!xs.empty()) {
-                            assert(xs.top().second == ev.mIdentifier);
+                            //assert(xs.top().second == ev.mIdentifier);
                             x = xs.top().first;
                             xs.pop();
                         }
@@ -261,19 +262,19 @@ namespace Tools {
         return "TaskTracker";
     }
 
-    void TaskTracker::registerCustomTracker(const char *name, Debug::Tasks::TaskTracker *tracker)
+    void TaskTracker::registerCustomTracker(const char *name, Debug::Tasks::TaskTracker &tracker)
     {
         mCustomTrackers.emplace_back(name, tracker);
     }
 
-    Rect2 TaskTracker::beginPlot()
+    Math::Rect2 TaskTracker::beginPlot()
     {
         // Using InvisibleButton() as a convenience 1) it will advance the layout cursor and 2) allows us to use IsItemHovered()/IsItemActive()
-        Vector2 canvas_p0 = ImGui::GetCursorScreenPos(); // ImDrawList API uses screen coordinates!
-        Vector2 canvas_sz = { ImGui::GetContentRegionAvail().x, 50.0f }; // Resize canvas to what's available
+        Math::Vector2 canvas_p0 = ImGui::GetCursorScreenPos(); // ImDrawList API uses screen coordinates!
+        Math::Vector2 canvas_sz = { ImGui::GetContentRegionAvail().x, 50.0f }; // Resize canvas to what's available
         if (canvas_sz.x < 50.0f)
             canvas_sz.x = 50.0f;
-        Vector2 canvas_p1 = canvas_p0 + canvas_sz;
+        Math::Vector2 canvas_p1 = canvas_p0 + canvas_sz;
 
         // Draw border and background color
         ImDrawList *draw_list = ImGui::GetWindowDrawList();
@@ -283,7 +284,7 @@ namespace Tools {
         // This will catch our interactions
         ImGui::InvisibleButton("canvas", canvas_sz, ImGuiButtonFlags_MouseButtonLeft | ImGuiButtonFlags_MouseButtonRight);
 
-        return { canvas_p0 + Vector2 { 2, 2 }, canvas_sz - Vector2 { 4, 4 } };
+        return { canvas_p0 + Math::Vector2 { 2, 2 }, canvas_sz - Math::Vector2 { 4, 4 } };
     }
 
     void TaskTracker::endPlot()

@@ -8,11 +8,11 @@ namespace Render {
 
     struct MADGINE_DIRECTX12_EXPORT DirectX12RenderTexture : DirectX12RenderTarget {
 
-        DirectX12RenderTexture(DirectX12RenderContext *context, const Vector2i &size, const RenderTextureConfig &config);
+        DirectX12RenderTexture(DirectX12RenderContext *context, const Math::Vector2i &size, const RenderTextureConfig &config);
         ~DirectX12RenderTexture();
 
-        bool resizeImpl(const Vector2i &size) override;
-        Vector2i size() const override;
+        bool resizeImpl(const Math::Vector2i &size) override;
+        Math::Vector2i size() const override;
 
         virtual bool skipFrame() override;
         virtual void beginFrame() override;
@@ -30,7 +30,7 @@ namespace Render {
         const std::vector<std::shared_ptr<DirectX12Texture>> &textures() const;
 
     protected:
-        void resizeBuffers(const Vector2i &size);
+        void resizeBuffers(const Math::Vector2i &size);
 
         void flipTextures(size_t startIndex, size_t count) override;
 
@@ -38,7 +38,7 @@ namespace Render {
         std::vector<std::shared_ptr<DirectX12Texture>> mTextures;
 
         RenderFuture mResizeFence;
-        Vector2i mResizeTarget;
+        Math::Vector2i mResizeTarget;
         bool mResizePending = false;
     };
 

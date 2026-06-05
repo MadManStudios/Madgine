@@ -29,8 +29,8 @@ namespace Render {
 
         OpenGLRenderContext &operator=(const OpenGLRenderContext &) = delete;
 
-        std::unique_ptr<RenderTarget> createRenderWindow(Window::OSWindow *w, size_t samples) override;
-        std::unique_ptr<RenderTarget> createRenderTexture(const Vector2i &size = { 1, 1 }, const RenderTextureConfig &config = {}) override;
+        std::unique_ptr<RenderTarget> createRenderWindow(Platform::Window::OSWindow *w, size_t samples) override;
+        std::unique_ptr<RenderTarget> createRenderTexture(const Math::Vector2i &size = { 1, 1 }, const RenderTextureConfig &config = {}) override;
 
         Threading::Task<void> unloadAllResources() override;
 
@@ -40,12 +40,12 @@ namespace Render {
 
         GPUPtr<void> allocateBufferImpl(size_t size, UsageHint hint = UsageHint::USAGE_DEFAULT) override;
         GPUPtr<Void[]> allocateBufferImpl(size_t elementSize, size_t count, UsageHint hint = UsageHint::USAGE_DEFAULT) override;
-        WritableByteBuffer mapBufferImpl(const GPUPtr<void> &buffer) override;
-        WritableByteBuffer mapBufferImpl(const GPUPtr<Void[]> &buffer) override;
+        Memory::WritableByteBuffer mapBufferImpl(const GPUPtr<void> &buffer) override;
+        Memory::WritableByteBuffer mapBufferImpl(const GPUPtr<Void[]> &buffer) override;
 
-        TexturePtr createTexture(TextureType type, TextureFormat format, Vector2i size, const ByteBuffer &data) override;
+        TexturePtr createTexture(TextureType type, TextureFormat format, Math::Vector2i size, const Memory::ByteBuffer &data) override;
 
-        void setTextureSubData(const TexturePtr &tex, Vector2i offset, Vector2i size, const ByteBuffer &data) override;
+        void setTextureSubData(const TexturePtr &tex, Math::Vector2i offset, Math::Vector2i size, const Memory::ByteBuffer &data) override;
 
         UniqueResourceBlock createResourceBlock(std::vector<std::variant<ConstTexturePtr, GPUPtr<void>, GPUPtr<Void[]>>> textures) override;
         void destroyResourceBlock(UniqueResourceBlock &block) override;
@@ -54,17 +54,17 @@ namespace Render {
         void unbindFormat();
 
         OpenGLHeapAllocator mBufferMemoryHeap;
-        LogBucketAllocator<HeapAllocator<OpenGLHeapAllocator &>, 64, 4096, 4> mBufferAllocator;
+        Memory::LogBucketAllocator<Memory::HeapAllocator<OpenGLHeapAllocator &>, 64, 4096, 4> mBufferAllocator;
 
         OpenGLMappedHeapAllocator mTempMemoryHeap;
-        BumpAllocator<FixedAllocator<OpenGLMappedHeapAllocator &>> mTempAllocator;
+        Memory::BumpAllocator<Memory::FixedAllocator<OpenGLMappedHeapAllocator &>> mTempAllocator;
 
 #if EMSCRIPTEN
         OpenGLMappedHeapAllocator mTempIndexMemoryHeap;
-        BumpAllocator<FixedAllocator<OpenGLMappedHeapAllocator &>> mTempIndexAllocator;
+        Memory::BumpAllocator<Memory::FixedAllocator<OpenGLMappedHeapAllocator &>> mTempIndexAllocator;
 
         OpenGLHeapAllocator mIndexMemoryHeap;
-        LogBucketAllocator<HeapAllocator<OpenGLHeapAllocator &>, 64, 4096, 4> mIndexAllocator;
+        Memory::LogBucketAllocator<Memory::HeapAllocator<OpenGLHeapAllocator &>, 64, 4096, 4> mIndexAllocator;
 #endif
 
     private:

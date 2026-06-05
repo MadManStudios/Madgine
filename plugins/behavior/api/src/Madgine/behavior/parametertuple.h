@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Meta/keyvalue/accessor.h"
-#include "Meta/keyvalue/metatable.h"
-#include "Meta/keyvalue/scopeptr.h"
+#include "Meta/reflect/accessor.h"
+#include "Meta/reflect/metatable.h"
+#include "Meta/reflect/scopeptr.h"
 #include "Meta/serialize/operations.h"
 #include "Meta/serialize/streams/streamresult.h"
 
@@ -12,10 +12,10 @@ namespace Behavior {
     struct ParameterTupleBase {
         virtual size_t size() const = 0;
         virtual std::string_view name(size_t index) const = 0;
-        virtual ExtendedValueTypeDesc type(size_t index) const = 0;
+        virtual Reflect::ExtendedType type(size_t index) const = 0;
 
         virtual std::unique_ptr<ParameterTupleBase> clone() = 0;
-        virtual ScopePtr customScopePtr() = 0;
+        virtual Reflect::ScopePtr customScopePtr() = 0;
 
         virtual Serialize::StreamResult read(Serialize::CallerHierarchyFormattedSerializeStream in) = 0;
         virtual void write(Serialize::CallerHierarchyFormattedSerializeStream out) = 0;
@@ -35,12 +35,12 @@ namespace Behavior {
             return sizeof...(Ty);
         }
 
-        ExtendedValueTypeDesc type(size_t index) const override
+        Reflect::ExtendedType type(size_t index) const override
         {
             if constexpr (sizeof...(Ty) == 0) {
                 throw 0;
             } else {
-                return TupleUnpacker::select(mTuple, [](auto &&a) { return toValueTypeDesc<std::decay_t<decltype(a)>>(); }, index);
+                return TupleUnpacker::select(mTuple, [](auto &&a) { return Reflect::toType<std::decay_t<decltype(a)>>(); }, index);
             }
         }
 
@@ -70,7 +70,7 @@ namespace Behavior {
             return std::make_unique<TypedParameterTupleInstance<Names, Ty...>>(this->mTuple);
         }
 
-        ScopePtr customScopePtr() override
+        Reflect::ScopePtr customScopePtr() override
         {
             return { this, sMetaTablePtr };
         }
@@ -94,23 +94,23 @@ namespace Behavior {
             }(index_pack_for<Ty...> {});
         }
 
-        static const MetaTable *sMetaTablePtr;
+        static const Reflect::MetaTable *sMetaTablePtr;
 
         template <size_t I>
-        static KeyValueResult sGetter(const Accessor *, ValueType &retVal, const ValueType &scope)
+        static Reflect::Result sGetter(const Reflect::Accessor *, Reflect::Value &retVal, const Reflect::Value &scope)
         {
-            return ValueType_unwrap(retVal, [](TypedParameterTupleInstance &instance) -> decltype(auto) { return std::get<I>(instance.mTuple); }, scope);
+            return invoke(retVal, [](TypedParameterTupleInstance &instance) -> decltype(auto) { return std::get<I>(instance.mTuple); }, scope);
         }
 
         template <size_t I, typename T>
-        static KeyValueResult sSetter(const Accessor *, const ValueType &scope, const ValueType &val)
+        static Reflect::Result sSetter(const Reflect::Accessor *, const Reflect::Value &scope, const Reflect::Value &val)
         {
-            return ValueType_unwrap([](TypedParameterTupleInstance &instance, T value) { std::get<I>(instance.mTuple) = std::move(value); }, scope, val);
+            return invoke([](TypedParameterTupleInstance &instance, T value) { std::get<I>(instance.mTuple) = std::move(value); }, scope, val);
         }
 
-        static const constexpr auto sMembers = []<size_t... Is>(auto_pack<Is...>) constexpr -> std::array<Accessor, sizeof...(Ty) + 1>
+        static const constexpr auto sMembers = []<size_t... Is>(auto_pack<Is...>) constexpr -> std::array<Reflect::Accessor, sizeof...(Ty) + 1>
         {
-            return { { { Names::template get<Is>.c_str(), nullptr, &sGetter<Is>, &sSetter<Is, Ty>, toValueTypeDesc<Ty>(), InstanceOfA1<Ty, Named> ? AccessorFlags_Named : AccessorFlags_Default }...,
+            return { { { Names::template get<Is>.c_str(), nullptr, &sGetter<Is>, &sSetter<Is, Ty>, Reflect::toType<Ty>(), Concepts::InstanceOfA1<Ty, Named> ? Reflect::AccessorFlags_Named : Reflect::AccessorFlags_Default }...,
                 {} } };
         }
         (index_pack_for<Ty...> {});
@@ -138,7 +138,7 @@ namespace Behavior {
             return *this;
         }
 
-        ScopePtr customScopePtr();
+        Reflect::ScopePtr customScopePtr();
 
         template <typename... Ty>
         bool get(std::tuple<Ty...> &out) const
@@ -151,7 +151,8 @@ namespace Behavior {
         }
 
         template <typename T>
-        const T& get() const {
+        const T &get() const
+        {
             return *static_cast<T *>(mTuple.get());
         }
 
@@ -165,7 +166,7 @@ namespace Behavior {
             return mTuple->name(index);
         }
 
-        ExtendedValueTypeDesc type(size_t index) const
+        Reflect::ExtendedType type(size_t index) const
         {
             return mTuple->type(index);
         }
@@ -210,11 +211,11 @@ namespace Serialize {
 }
 
 template <typename Names, typename... Ty>
-constexpr const Engine::MetaTable table_instance<Engine::Behavior::TypedParameterTupleInstance<Names, Ty...>> = {
+constexpr const Engine::Reflect::MetaTable table_instance<Engine::Behavior::TypedParameterTupleInstance<Names, Ty...>> = {
     &Engine::Behavior::TypedParameterTupleInstance<Names, Ty...>::sMetaTablePtr,
     "<ParameterTuple>",
     Engine::Behavior::TypedParameterTupleInstance<Names, Ty...>::sMembers.data()
 };
 
 template <typename Names, typename... Ty>
-const Engine::MetaTable *Engine::Behavior::TypedParameterTupleInstance<Names, Ty...>::sMetaTablePtr = &table_instance<Engine::Behavior::TypedParameterTupleInstance<Names, Ty...>>;
+const Engine::Reflect::MetaTable *Engine::Behavior::TypedParameterTupleInstance<Names, Ty...>::sMetaTablePtr = &table_instance<Engine::Behavior::TypedParameterTupleInstance<Names, Ty...>>;

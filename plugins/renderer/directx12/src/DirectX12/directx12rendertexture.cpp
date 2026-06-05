@@ -7,7 +7,7 @@
 namespace Engine {
 namespace Render {
 
-    DirectX12RenderTexture::DirectX12RenderTexture(DirectX12RenderContext *context, const Vector2i &size, const RenderTextureConfig &config)
+    DirectX12RenderTexture::DirectX12RenderTexture(DirectX12RenderContext *context, const Math::Vector2i &size, const RenderTextureConfig &config)
         : DirectX12RenderTarget(context, false, config.mName, config.mType, config.mSamples, config.mFlipFlop, config.mBlitSource)
     {
         size_t bufferCount = config.mFlipFlop ? 2 : 1;
@@ -29,7 +29,7 @@ namespace Render {
     {
     }
 
-    bool DirectX12RenderTexture::resizeImpl(const Vector2i &size)
+    bool DirectX12RenderTexture::resizeImpl(const Math::Vector2i &size)
     {
         if (mDepthTexture->size() == size)
             return false;
@@ -80,7 +80,7 @@ namespace Render {
         return mTextures;
     }
 
-    void DirectX12RenderTexture::resizeBuffers(const Vector2i &size)
+    void DirectX12RenderTexture::resizeBuffers(const Math::Vector2i &size)
     {
         size_t count = 1;
         size_t i = 0;
@@ -140,7 +140,7 @@ namespace Render {
         DirectX12RenderTarget::flipTextures(startIndex, count);
     }
 
-    Vector2i DirectX12RenderTexture::size() const
+    Math::Vector2i DirectX12RenderTexture::size() const
     {
         return mDepthTexture->size();
     }

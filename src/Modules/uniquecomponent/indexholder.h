@@ -3,7 +3,7 @@
 #include "Generic/indextype.h"
 
 namespace Engine {
-namespace UniqueComponent {
+namespace Plugins {
 
     struct IndexHolder {
 

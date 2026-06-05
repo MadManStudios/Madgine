@@ -7,8 +7,8 @@
 
 #include "Generic/systemvariable.h"
 
-#include "Interfaces/filesystem/fsapi.h"
-#include "Interfaces/helpers/android_jni.h"
+#include "Platform/filesystem/fsapi.h"
+#include "Platform/helpers/android_jni.h"
 
 #include "Madgine/root/root.h"
 #include "Madgine/window/mainwindow.h"
@@ -17,8 +17,10 @@
 
 namespace Engine {
 
-namespace Window {
-    void setup(ANativeActivity *activity);
+namespace Platform {
+    namespace Window {
+        void setup(ANativeActivity *activity);
+    }
 }
 
 namespace Android {
@@ -36,10 +38,10 @@ namespace Android {
 
         activity->callbacks->onDestroy = delegate<&AndroidLauncher::onDestroy>;
 
-        Window::setup(activity);
+        Platform::Window::setup(activity);
 
-        JNI::setVM(activity->vm, activity->env, activity->clazz);
-        Threading::WorkGroup::addStaticThreadGuards(JNI::initThread, JNI::finalizeThread);
+        Platform::JNI::setVM(activity->vm, activity->env, activity->clazz);
+        Threading::WorkGroup::addStaticThreadGuards(Platform::JNI::initThread, Platform::JNI::finalizeThread);
 
         mThread = Threading::WorkGroupHandle("Madgine", &AndroidLauncher::go, this);
     }
@@ -48,11 +50,11 @@ namespace Android {
     {
         ANativeActivity *activity = mActivity;
 
-        Filesystem::setup(activity);
+        Platform::Filesystem::setup(activity);
 
-        static Engine::Root::Root root;
+        static Engine::Core::Root root;
 
-        launch([this](Engine::App::Application &, Engine::Window::MainWindow &mainWindow) { mWindow = &mainWindow; });
+        launch([this](Engine::Core::Application &, Engine::Core::MainWindow &mainWindow) { mWindow = &mainWindow; });
 
         ANativeActivity_finish(activity);
     }

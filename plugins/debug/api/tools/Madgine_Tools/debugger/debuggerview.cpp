@@ -2,9 +2,7 @@
 
 #include "debuggerview.h"
 
-#include "Interfaces/debug/stacktrace.h"
-
-#include "Meta/keyvalue/valuetype.h"
+#include "Platform/debug/stacktrace.h"
 
 #include "Modules/uniquecomponent/uniquecomponentcollector.h"
 
@@ -12,7 +10,7 @@
 #include "Madgine/debug/debuggablesender.h"
 #include "Madgine/debug/debugger.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
 #include "Madgine_Tools/imguiicons.h"

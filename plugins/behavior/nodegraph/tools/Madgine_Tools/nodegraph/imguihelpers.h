@@ -13,24 +13,24 @@ namespace Tools {
 
     void ShowLabel(std::string_view label, ImColor color = { 0.0f, 0.0f, 0.0f });
 
-    ImColor DataColor(uint32_t mask, ExtendedValueTypeDesc type = ExtendedValueTypeIndex { ExtendedValueTypeEnum::GenericType });
+    ImColor DataColor(uint32_t mask, Reflect::ExtendedType type = Reflect::ExtendedTypeIndex { Reflect::ExtendedTypeEnum::GenericType });
     ImColor FlowColor(uint32_t mask);
 
-    void DataPinIcon(ExtendedValueTypeDesc type, uint32_t mask, bool connected);
+    void DataPinIcon(Reflect::ExtendedType type, uint32_t mask, bool connected);
     void FlowPinIcon(uint32_t mask, bool connected);
 
     void FlowOutPin(const char *name, uint32_t mask, bool connected);
     void FlowOutPin(const char *name, uint32_t nodeId, uint32_t pinId, uint32_t group, uint32_t mask, bool connected);
     void FlowInPin(const char *name, uint32_t mask, bool connected);
     void FlowInPin(const char *name, uint32_t nodeId, uint32_t pinId, uint32_t group, uint32_t mask, bool connected);
-    void DataOutPin(const char *name, ExtendedValueTypeDesc type, uint32_t mask, bool connected);
-    bool DataOutPin(const char *name, uint32_t nodeId, uint32_t pinId, uint32_t group, ExtendedValueTypeDesc type, uint32_t mask, bool connected);
-    void DataInPin(const char *name, ExtendedValueTypeDesc type, uint32_t mask, bool connected);
-    bool DataInPin(const char *name, uint32_t nodeId, uint32_t pinId, uint32_t group, ExtendedValueTypeDesc type, uint32_t mask, bool connected);
+    void DataOutPin(const char *name, Reflect::ExtendedType type, uint32_t mask, bool connected);
+    bool DataOutPin(const char *name, uint32_t nodeId, uint32_t pinId, uint32_t group, Reflect::ExtendedType type, uint32_t mask, bool connected);
+    void DataInPin(const char *name, Reflect::ExtendedType type, uint32_t mask, bool connected);
+    bool DataInPin(const char *name, uint32_t nodeId, uint32_t pinId, uint32_t group, Reflect::ExtendedType type, uint32_t mask, bool connected);
 
-    void HoverPin(ExtendedValueTypeDesc type);
+    void HoverPin(Reflect::ExtendedType type);
 
-    std::optional<ExtendedValueTypeDesc> BeginNode(const Behavior::NodeGraph::NodeBase *node, uint32_t nodeId, std::optional<Behavior::NodeGraph::PinDesc> dragPin = {}, std::optional<ExtendedValueTypeDesc> dragType = {});
+    std::optional<Reflect::ExtendedType> BeginNode(const Behavior::NodeGraph::NodeBase *node, uint32_t nodeId, std::optional<Behavior::NodeGraph::PinDesc> dragPin = {}, std::optional<Reflect::ExtendedType> dragType = {});
     void EndNode();
 
     void NodeLinks(const Behavior::NodeGraph::NodeBase *node, uint32_t nodeId);

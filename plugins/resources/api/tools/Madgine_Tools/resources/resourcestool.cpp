@@ -4,7 +4,7 @@
 
 #include "Generic/projections.h"
 
-#include "Interfaces/process/processapi.h"
+#include "Platform/process/processapi.h"
 
 #include "Modules/uniquecomponent/uniquecomponentcollector.h"
 
@@ -12,7 +12,7 @@
 #include "Madgine/resources/resourceloaderbase.h"
 #include "Madgine/resources/resourcemanager.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
 #include "Madgine_Tools/imguiicons.h"
@@ -182,8 +182,8 @@ namespace Tools {
                             ImGui::SetKeyboardFocusHere(-1);
 
                         UndoStack stack;
-                        TracedRoot traced { stack, ScopePtr { resource.mResource, resource.mLoader->resourceTypes().back() } };
-                        ImGui::DraggableValueTypeSource<ScopePtr>("Resource", traced);
+                        TracedRoot traced { stack, Reflect::ScopePtr { resource.mResource, resource.mLoader->resourceTypes().back() } };
+                        ImGui::DraggableValueTypeSource<Reflect::ScopePtr>("Resource", traced);
 
                         // Render icon (a real app would likely display an image/thumbnail here)
                         // Because we use ImGuiMultiSelectFlags_BoxSelect2d, clipping vertical may occasionally be larger, so we coarse-clip our rendering as well.
@@ -289,7 +289,7 @@ namespace Tools {
         if (it != mEditors.end()) {
             it->second->open(res);
         } else {
-            Process::execute(res->path());
+            Platform::Process::execute(res->path());
         }
     }
 

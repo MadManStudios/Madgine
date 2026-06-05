@@ -37,7 +37,7 @@ struct CallerHierarchyBasePtr {
     }
 
     template <typename U>
-        requires(!InstanceOf<U, CallerHierarchy>)
+        requires(!Concepts::InstanceOf<U, CallerHierarchy>)
     operator const U &() const
     {
         const CallerHierarchyBase *ptr = mPtr;

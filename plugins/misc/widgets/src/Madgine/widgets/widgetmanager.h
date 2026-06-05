@@ -1,11 +1,11 @@
 #pragma once
 
-#include "Generic/coroutines/generator.h"
+#include "Generic/containers/generator.h"
 #include "Generic/execution/signal.h"
-#include "Generic/intervalclock.h"
+#include "Generic/execution/intervalclock.h"
 #include "Generic/projections.h"
 
-#include "Interfaces/input/inputevents.h"
+#include "Platform/input/inputevents.h"
 
 #include "Meta/math/atlas2.h"
 
@@ -22,11 +22,11 @@
 namespace Engine {
 namespace Widgets {
 
-    struct MADGINE_WIDGETS_EXPORT WidgetManager : Window::MainWindowComponent<WidgetManager> {
+    struct MADGINE_WIDGETS_EXPORT WidgetManager : Core::MainWindowComponent<WidgetManager> {
 
         SERIALIZABLEUNIT(WidgetManager)
 
-        WidgetManager(Window::MainWindow &window);
+        WidgetManager(Core::MainWindow &window);
         WidgetManager(const WidgetManager &sharedInstance);
         ~WidgetManager();
 
@@ -74,31 +74,31 @@ namespace Widgets {
             return mTopLevelWidgets | std::views::transform(projectionUniquePtrToPtr);
         }
 
-        bool onWindowEvent(const Window::WindowEvent &arg) override;
-        bool injectPointerPress(const Input::PointerPressEvent &arg);
-        bool injectPointerRelease(const Input::PointerReleaseEvent &arg);
-        bool injectPointerMove(const Input::PointerMoveEvent &arg);
-        bool injectAxisEvent(const Input::AxisEvent &arg);
-        bool injectKeyPress(const Input::KeyPressEvent &arg);
-        bool injectKeyRelease(const Input::KeyReleaseEvent &arg);
+        bool onWindowEvent(const Platform::Window::WindowEvent &arg) override;
+        bool injectPointerPress(const Platform::Input::PointerPressEvent &arg);
+        bool injectPointerRelease(const Platform::Input::PointerReleaseEvent &arg);
+        bool injectPointerMove(const Platform::Input::PointerMoveEvent &arg);
+        bool injectAxisEvent(const Platform::Input::AxisEvent &arg);
+        bool injectKeyPress(const Platform::Input::KeyPressEvent &arg);
+        bool injectKeyRelease(const Platform::Input::KeyReleaseEvent &arg);
 
-        void onResize(const Rect2i &space) override;
+        void onResize(const Math::Rect2i &space) override;
         void setup(Render::RenderTarget *target) override;
         void render(Render::RenderTarget *target, size_t iteration) override;
 
-        void render(Render::RenderTarget *target, const WidgetsRenderData &renderData, const Vector2i &size);
+        void render(Render::RenderTarget *target, const WidgetsRenderData &renderData, const Math::Vector2i &size);
 
         Resources::ImageLoader::Resource *getImage(std::string_view name);
 
-        const Atlas2::Entry *lookUpImage(Resources::ImageLoader::Resource *image);
-        const Atlas2::Entry *lookUpImage(std::string_view name);
+        const Math::Atlas2::Entry *lookUpImage(Resources::ImageLoader::Resource *image);
+        const Math::Atlas2::Entry *lookUpImage(std::string_view name);
 
         bool dragging(const WidgetBase *widget);
         void abortDrag(WidgetBase *widget);
 
         Debug::DebuggableLifetime<Behavior::get_named_d> &lifetime();
 
-        IntervalClock<> &clock();
+        Execution::IntervalClock<> &clock();
 
         using RenderPass::addDependency;
         using RenderPass::removeDependency;
@@ -106,9 +106,9 @@ namespace Widgets {
         static Serialize::StreamResult scanWidget(const Serialize::SerializeTable *&out, Serialize::CallerHierarchyFormattedSerializeStream &in);
 
     protected:
-        WidgetBase *getHoveredWidget(const Vector2 &pos, WidgetBase *current);
-        WidgetBase *getHoveredWidgetUp(const Vector2 &pos, WidgetBase *current);
-        WidgetBase *getHoveredWidgetDown(const Vector2 &pos, WidgetBase *current);
+        WidgetBase *getHoveredWidget(const Math::Vector2 &pos, WidgetBase *current);
+        WidgetBase *getHoveredWidgetUp(const Math::Vector2 &pos, WidgetBase *current);
+        WidgetBase *getHoveredWidgetDown(const Math::Vector2 &pos, WidgetBase *current);
 
         void resetPointerState();
 
@@ -139,18 +139,18 @@ namespace Widgets {
 
         DEBUGGABLE_LIFETIME(mLifetime, Behavior::get_named_d);
 
-        IntervalClock<> mFrameClock = std::chrono::steady_clock::now();
+        Execution::IntervalClock<> mFrameClock = std::chrono::steady_clock::now();
 
         struct WidgetManagerData;
         std::shared_ptr<WidgetManagerData> mData;
 
         // Dragging
-        DragBeginEvent mDragStartEvent { { 0, 0 }, { 0, 0 }, Input::MouseButton::NO_BUTTON };
+        DragBeginEvent mDragStartEvent { { 0, 0 }, { 0, 0 }, Platform::Input::MouseButton::NO_BUTTON };
         bool mDragging = false;
         bool mDraggingAborted = false;
         std::chrono::steady_clock::time_point mDragStartTime;
 
-        Vector2 mShadowOffset = { 0, 0 };
+        Math::Vector2 mShadowOffset = { 0, 0 };
     };
 
 }

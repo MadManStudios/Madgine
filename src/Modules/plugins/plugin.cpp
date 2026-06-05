@@ -25,7 +25,7 @@ namespace Plugins {
         assert(!mName.empty());
     }
 
-    Plugin::Plugin(std::string_view name, PluginSection *section, std::string_view project, Filesystem::Path path)
+    Plugin::Plugin(std::string_view name, PluginSection *section, std::string_view project, Platform::Filesystem::Path path)
         : mProject(project)
         , mSection(section)
         , mName(name)
@@ -45,8 +45,8 @@ namespace Plugins {
     {
         if (!mModule) {
             std::string errorMsg;
-            Dl::DlAPIResult result = mModule.open(mPath);
-            if (result == Dl::DlAPIResult::SUCCESS) {
+            Platform::Dl::DlAPIResult result = mModule.open(mPath);
+            if (result == Platform::Dl::DlAPIResult::SUCCESS) {
                 const BinaryInfo *bin = info();
                 if (bin) {
                     for (const char **dep = bin->mPluginDependencies; *dep; ++dep) {
@@ -68,7 +68,7 @@ namespace Plugins {
         }
     }
 
-    void Plugin::loadDependencies(PluginManager &manager, Ini::IniFile &file)
+    void Plugin::loadDependencies(PluginManager &manager, IniFile &file)
     {
         ensureModule(manager);
         for (Plugin *dep : mDependencies) {
@@ -85,7 +85,7 @@ namespace Plugins {
         }
     }
 
-    void Plugin::unloadDependents(PluginManager &manager, Ini::IniFile &file)
+    void Plugin::unloadDependents(PluginManager &manager, IniFile &file)
     {
         ensureModule(manager);
         for (Plugin *dep : mDependents) {
@@ -102,7 +102,7 @@ namespace Plugins {
         return mModule.getSymbol(fullName);
     }
 
-    Filesystem::Path Plugin::fullPath() const
+    Platform::Filesystem::Path Plugin::fullPath() const
     {
 
         std::string fullName = "binaryInfo_" + mName;
@@ -141,14 +141,14 @@ namespace Plugins {
         return mSection;
     }
 
-    bool Plugin::isLoaded(const Ini::IniFile &file) const
+    bool Plugin::isLoaded(const IniFile &file) const
     {
         if (!file.hasSection(mSection->name()))
             return false;
         return !file.at(mSection->name())[mName].empty();
     }
 
-    void Plugin::setLoaded(bool loaded, Ini::IniFile &file)
+    void Plugin::setLoaded(bool loaded, IniFile &file)
     {
         std::string &value = file[mSection->name()][mName];
         if (!value.empty() != loaded) {

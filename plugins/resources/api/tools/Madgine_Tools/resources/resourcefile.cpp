@@ -13,7 +13,7 @@ namespace Tools {
 
     MADGINE_TOOLS_EXPORT extern const ImGuiWindowClass windowClass;
 
-    ResourceFileBase::ResourceFileBase(ResourceEditor &editor, Filesystem::Path path)
+    ResourceFileBase::ResourceFileBase(ResourceEditor &editor, Platform::Filesystem::Path path)
         : mEditor(editor)
         , mPath(std::move(path))
     {
@@ -42,7 +42,7 @@ namespace Tools {
                         saveAs(mPath);
                     if (ImGui::MenuItem("Save as...")) {
                         mEditor.root().dialogs().show(
-                            mEditor.resourceFilePicker(true), [this](const Filesystem::Path &p) { saveAs(p); });
+                            mEditor.resourceFilePicker(true), [this](const Platform::Filesystem::Path &p) { saveAs(p); });
                     }
                     ImGui::EndMenu();
                 }
@@ -72,7 +72,7 @@ namespace Tools {
     {
         if (mPath.empty()) {
             mEditor.root().dialogs().show(
-                mEditor.resourceFilePicker(true), [this](const Filesystem::Path &p) { saveAs(p); });
+                mEditor.resourceFilePicker(true), [this](const Platform::Filesystem::Path &p) { saveAs(p); });
         } else {
             saveAs(mPath);
         }

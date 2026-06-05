@@ -11,7 +11,7 @@
 namespace Engine {
 namespace Render {
 
-    struct DirectX12PixelShaderLoader : Resources::ResourceLoader<DirectX12PixelShaderLoader, ReleasePtr<IDxcBlob>, std::list<Placeholder<0>>, Threading::WorkGroupStorage> {
+    struct DirectX12PixelShaderLoader : Resources::ResourceLoader<DirectX12PixelShaderLoader, Platform::ReleasePtr<IDxcBlob>, std::list<Placeholder<0>>, Threading::WorkGroupStorage> {
         DirectX12PixelShaderLoader();
 
         struct Handle : Base::Handle {
@@ -26,17 +26,17 @@ namespace Render {
         };
 
 
-        Threading::Task<bool> loadImpl(ReleasePtr<IDxcBlob> &shader, ResourceDataInfo &info);
-        Threading::Task<bool> generate(ReleasePtr<IDxcBlob> &shader, ResourceDataInfo &info, ShaderObjectPtr object = {});
-        void unloadImpl(ReleasePtr<IDxcBlob> &shader);
+        Threading::Task<bool> loadImpl(Platform::ReleasePtr<IDxcBlob> &shader, ResourceDataInfo &info);
+        Threading::Task<bool> generate(Platform::ReleasePtr<IDxcBlob> &shader, ResourceDataInfo &info, ShaderObjectPtr object = {});
+        void unloadImpl(Platform::ReleasePtr<IDxcBlob> &shader);
 
-        bool loadFromSource(ReleasePtr<IDxcBlob> &shader, std::string_view name, std::string source, std::string entrypoint);
+        bool loadFromSource(Platform::ReleasePtr<IDxcBlob> &shader, std::string_view name, std::string source, std::string entrypoint);
 
         virtual Threading::TaskQueue *loadingTaskQueue() const override;
 
     private:
-        ReleasePtr<IDxcLibrary> mLibrary;
-        ReleasePtr<IDxcCompiler3> mCompiler;
+        Platform::ReleasePtr<IDxcLibrary> mLibrary;
+        Platform::ReleasePtr<IDxcCompiler3> mCompiler;
     };
 
 }

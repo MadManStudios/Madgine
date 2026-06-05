@@ -2,9 +2,9 @@
 
 #include "toolbase.h"
 
-#include "Interfaces/process/processapi.h"
+#include "Platform/process/processapi.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
 #include "imgui/imgui.h"
@@ -44,7 +44,7 @@ namespace Tools {
         }
     }
 
-    bool ToolBase::renderConfiguration(const Filesystem::Path &config)
+    bool ToolBase::renderConfiguration(const Platform::Filesystem::Path &config)
     {
         return false;
     }
@@ -63,11 +63,11 @@ namespace Tools {
             render();
     }
 
-    void ToolBase::loadConfiguration(const Filesystem::Path &config)
+    void ToolBase::loadConfiguration(const Platform::Filesystem::Path &config)
     {
     }
 
-    void ToolBase::saveConfiguration(const Filesystem::Path &config)
+    void ToolBase::saveConfiguration(const Platform::Filesystem::Path &config)
     {
     }
 
@@ -139,13 +139,13 @@ namespace Tools {
             if (docTarget) {
                 if ((flags & ImGuiWindowFlags_MenuBar) ? ImGui::BeginMenuBar() : ImGui::BeginPopupCompoundContextWindow()) {
                     if (ImGui::MenuItem("?")) {
-                        Filesystem::Path path { "https://madmanstudios.github.io/Madgine/doc" };
-                        Filesystem::Path pluginDir { pluginSourceDir };
+                        Platform::Filesystem::Path path { "https://madmanstudios.github.io/Madgine/doc" };
+                        Platform::Filesystem::Path pluginDir { pluginSourceDir };
                         path /= pluginDir.relative(SOURCE_DIR);
                         path /= "docs";
                         path /= docTarget;
 
-                        Process::execute(path);
+                        Platform::Process::execute(path);
                     }
                     (flags & ImGuiWindowFlags_MenuBar) ? ImGui::EndMenuBar() : ImGui::EndPopup();
                 }

@@ -2,12 +2,12 @@
 
 #include "directx12vertexshaderloader.h"
 
-#include "Interfaces/filesystem/fsapi.h"
-#include "Interfaces/process/processapi.h"
+#include "Platform/filesystem/fsapi.h"
+#include "Platform/process/processapi.h"
 
 #include "Madgine/render/shadercache.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
 #include "directx12rendercontext.h"
@@ -32,14 +32,14 @@ namespace Render {
         // if(FAILED(hr)) Handle error
     }
 
-    Threading::Task<bool> DirectX12VertexShaderLoader::loadImpl(ReleasePtr<IDxcBlob> &shader, ResourceDataInfo &info)
+    Threading::Task<bool> DirectX12VertexShaderLoader::loadImpl(Platform::ReleasePtr<IDxcBlob> &shader, ResourceDataInfo &info)
     {
         return generate(shader, info);
     }
 
-    Threading::Task<bool> DirectX12VertexShaderLoader::generate(ReleasePtr<IDxcBlob> &shader, ResourceDataInfo &info, ShaderObjectPtr object)
+    Threading::Task<bool> DirectX12VertexShaderLoader::generate(Platform::ReleasePtr<IDxcBlob> &shader, ResourceDataInfo &info, ShaderObjectPtr object)
     {
-        const Filesystem::Path &p = info.resource()->path();
+        const Platform::Filesystem::Path &p = info.resource()->path();
 
         std::string entrypoint = "main";
         if (object) {
@@ -49,7 +49,7 @@ namespace Render {
             co_await ShaderCache::generate(p, object, "HLSL", ShaderType::VertexShader);
         }
 
-        if (!Filesystem::exists(p))
+        if (!Platform::Filesystem::exists(p))
             co_return false;
 
         std::string source = info.resource()->readAsText();
@@ -57,12 +57,12 @@ namespace Render {
         co_return loadFromSource(shader, info.resource()->path().stem(), source, entrypoint);
     }
 
-    void DirectX12VertexShaderLoader::unloadImpl(ReleasePtr<IDxcBlob> &shader)
+    void DirectX12VertexShaderLoader::unloadImpl(Platform::ReleasePtr<IDxcBlob> &shader)
     {
         shader.reset();
     }
 
-    bool DirectX12VertexShaderLoader::loadFromSource(ReleasePtr<IDxcBlob> &shader, std::string_view name, std::string source, std::string entrypoint)
+    bool DirectX12VertexShaderLoader::loadFromSource(Platform::ReleasePtr<IDxcBlob> &shader, std::string_view name, std::string source, std::string entrypoint)
     {
         std::wstring profile = L"latest";
         if (profile == L"latest")
@@ -86,7 +86,7 @@ namespace Render {
 
         arguments.push_back(L"/Zi");
 
-        ReleasePtr<IDxcResult> result;
+        Platform::ReleasePtr<IDxcResult> result;
         HRESULT hr = mCompiler->Compile(
             &sourceBuffer,
             arguments.data(),
@@ -99,7 +99,7 @@ namespace Render {
             LOG_FATAL("Loading of Shader '" << name << "' failed:");
 
             if (result) {
-                ReleasePtr<IDxcBlobUtf8> pErrorBlob;
+                Platform::ReleasePtr<IDxcBlobUtf8> pErrorBlob;
                 hr = result->GetOutput(DXC_OUT_ERRORS, IID_PPV_ARGS(&pErrorBlob), nullptr);
                 if (SUCCEEDED(hr) && pErrorBlob) {
                     LOG_FATAL((char *)pErrorBlob->GetBufferPointer());
@@ -109,8 +109,8 @@ namespace Render {
         }
         result->GetOutput(DXC_OUT_OBJECT, IID_PPV_ARGS(&shader), nullptr);
 
-        ReleasePtr<IDxcBlob> pDebugData;
-        ReleasePtr<IDxcBlobUtf16> pDebugDataPath;
+        Platform::ReleasePtr<IDxcBlob> pDebugData;
+        Platform::ReleasePtr<IDxcBlobUtf16> pDebugDataPath;
         result->GetOutput(DXC_OUT_PDB, IID_PPV_ARGS(&pDebugData), &pDebugDataPath);
 
         std::ofstream pdbFile { BINARY_DIR "/bin/" + StringUtil::fromWString(pDebugDataPath->GetStringPointer()), std::ios::out | std::ios::binary };
@@ -126,7 +126,7 @@ namespace Render {
 
     Threading::TaskFuture<bool> DirectX12VertexShaderLoader::Handle::load(ShaderObjectPtr object, DirectX12VertexShaderLoader *loader)
     {
-        return Base::Handle::create(object->name(), ShaderCache::directory() / (object->entrypoint() + ".vs_hlsl"), [object](DirectX12VertexShaderLoader *loader, ReleasePtr<IDxcBlob> &shader, ResourceDataInfo &info) { return loader->generate(shader, info, object); }, loader);
+        return Base::Handle::create(object->name(), ShaderCache::directory() / (object->entrypoint() + ".vs_hlsl"), [object](DirectX12VertexShaderLoader *loader, Platform::ReleasePtr<IDxcBlob> &shader, ResourceDataInfo &info) { return loader->generate(shader, info, object); }, loader);
     }
 }
 }

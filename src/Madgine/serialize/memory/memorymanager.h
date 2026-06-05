@@ -5,7 +5,7 @@
 #include "Meta/serialize/serializemanager.h"
 
 namespace Engine {
-namespace Memory {
+namespace Serialize {
 
     struct MADGINE_MEMORY_SERIALIZE_EXPORT MemoryManager : Serialize::SerializeManager {
         MemoryManager(const std::string &name);
@@ -15,8 +15,8 @@ namespace Memory {
 
         void operator=(const MemoryManager &) = delete;
 
-        Serialize::FormattedSerializeStream openRead(ByteBuffer buffer, Serialize::Format format);
-        Serialize::FormattedSerializeStream openWrite(WritableByteBuffer &buffer, Serialize::Format format);
+        Serialize::FormattedSerializeStream openRead(Memory::ByteBuffer buffer, Serialize::Format format);
+        Serialize::FormattedSerializeStream openWrite(Memory::WritableByteBuffer &buffer, Serialize::Format format);
     };
 }
 }

@@ -230,7 +230,7 @@ namespace Execution {
     struct stream;
 
     template <typename T>
-    using is_stream = is_instance<T, stream>;
+    using is_stream = Concepts::is_instance<T, stream>;
 
     struct access_binding_t {
 

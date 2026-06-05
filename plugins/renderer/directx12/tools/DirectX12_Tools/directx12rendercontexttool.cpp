@@ -7,7 +7,7 @@
 #include "Madgine/imageloader/imageloader.h"
 #include "Madgine/render/fonts/fontloader.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
 #include "DirectX12/directx12rendercontext.h"
@@ -44,7 +44,7 @@ namespace Tools {
         });
 
 #if ENABLE_TASK_TRACKING
-        getTool<TaskTracker>().registerCustomTracker("Graphics Queue", &static_cast<Render::DirectX12RenderContext *>(static_cast<ClientImRoot &>(mRoot).window().getRenderer())->mGraphicsQueue.mTracker);
+        getTool<TaskTracker>().registerCustomTracker("Graphics Queue", Render::DirectX12RenderContext::getSingleton().mGraphicsQueue.mTracker);
 #endif
 
         co_return co_await RenderContextTool::init();

@@ -7,7 +7,7 @@
 #include "Madgine/render/rendertarget.h"
 #include "Madgine/render/texture.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
 #include "util/renderdata.h"
@@ -39,8 +39,8 @@ namespace Widgets {
     {
         if (mSource) {
 
-            Vector2 pos = getAbsolutePosition();
-            Vector3 size = getAbsoluteSize();
+            Math::Vector2 pos = getAbsolutePosition();
+            Math::Vector3 size = getAbsoluteSize();
 
             renderData.renderQuad(pos, size.xy(), {}, { mSource->texture()->resourceBlock() });
         }
@@ -58,7 +58,7 @@ namespace Widgets {
         mSource->resize(getAbsoluteSize().xy().floor());
     }
 
-    void SceneWindow::sizeChanged(const Vector3 &pixelSize)
+    void SceneWindow::sizeChanged(const Math::Vector3 &pixelSize)
     {
         if (mSource)
             mSource->resize(pixelSize.xy().floor());

@@ -6,7 +6,7 @@
 
 #include "Meta/math/matrix4.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 
 #include "openglshader.h"
 #include "openglvertexarray.h"

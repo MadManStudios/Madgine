@@ -9,7 +9,7 @@ namespace Render {
 
     struct MADGINE_DIRECTX12_EXPORT DirectX12CommandList {
         DirectX12CommandList() = default;
-        DirectX12CommandList(DirectX12CommandAllocator *manager, ReleasePtr<ID3D12GraphicsCommandList> list, ReleasePtr<ID3D12CommandAllocator> allocator);
+        DirectX12CommandList(DirectX12CommandAllocator *manager, Platform::ReleasePtr<ID3D12GraphicsCommandList> list, Platform::ReleasePtr<ID3D12CommandAllocator> allocator);
         ~DirectX12CommandList();
 
         DirectX12CommandList &operator=(DirectX12CommandList &&);
@@ -30,8 +30,8 @@ namespace Render {
 
     private:
         DirectX12CommandAllocator *mManager;
-        ReleasePtr<ID3D12GraphicsCommandList> mList;
-        ReleasePtr<ID3D12CommandAllocator> mAllocator;
+        Platform::ReleasePtr<ID3D12GraphicsCommandList> mList;
+        Platform::ReleasePtr<ID3D12CommandAllocator> mAllocator;
         std::vector<Any> mAttachedResources;
     };
 

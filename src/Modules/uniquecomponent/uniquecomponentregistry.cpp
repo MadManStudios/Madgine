@@ -5,7 +5,7 @@
 #    include "uniquecomponentregistry.h"
 
 namespace Engine {
-namespace UniqueComponent {
+namespace Plugins {
 
     MODULES_EXPORT std::vector<RegistryBase *> &
     registryRegistry()

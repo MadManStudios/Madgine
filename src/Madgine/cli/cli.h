@@ -1,10 +1,9 @@
 ﻿#pragma once
 
-#include "Interfaces/filesystem/path.h"
+#include "Platform/filesystem/path.h"
 
 namespace Engine {
-
-namespace CLI {
+namespace Core {
 
     struct CLI_EXPORT CLICore {
         CLICore(int argc, char **argv);
@@ -17,7 +16,7 @@ namespace CLI {
         static std::vector<ParameterBase *> &parameters();
 
         std::map<std::string_view, std::vector<std::string_view>> mArguments;
-        Filesystem::Path mProgramPath;
+        Platform::Filesystem::Path mProgramPath;
     };
 }
 }

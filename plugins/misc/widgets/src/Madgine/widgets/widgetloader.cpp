@@ -6,7 +6,7 @@
 #include "Meta/serialize/helper/typedobjectserialize.h"
 #include "Meta/serialize/serializemanager.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
 #include "button.h"
@@ -108,7 +108,7 @@ namespace Widgets {
 
     WidgetDescriptor &WidgetDescriptor::operator=(WidgetDescriptor &&) noexcept = default;
 
-    const MetaTable *WidgetDescriptor::metaTable()
+    const Reflect::MetaTable *WidgetDescriptor::metaTable()
     {
         return mMetaTable;
     }

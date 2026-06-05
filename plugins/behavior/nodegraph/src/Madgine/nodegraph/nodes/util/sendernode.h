@@ -6,7 +6,7 @@
 #include "Generic/execution/execution.h"
 #include "Generic/manuallifetime.h"
 
-#include "Meta/keyvalue/valuetype.h"
+#include "Meta/reflect/value.h"
 
 #include "../../nodecollector.h"
 #include "../../nodeexecution.h"
@@ -20,19 +20,19 @@ namespace Behavior {
     namespace NodeGraph {
 
         template <typename T>
-        using is_router = is_instance_auto1<meta_decayed_t<T>, NodeRouter>;
+        using is_router = Concepts::is_instance_auto1<meta_decayed_t<T>, NodeRouter>;
 
         template <typename T>
-        using is_algorithm = is_instance_auto1<meta_decayed_t<T>, NodeAlgorithm>;
+        using is_algorithm = Concepts::is_instance_auto1<meta_decayed_t<T>, NodeAlgorithm>;
 
         template <typename T>
-        using is_pred_sender = std::bool_constant<is_instance<meta_decayed_t<T>, NodeReader>::value || is_instance<meta_decayed_t<T>, NodeStream>::value>;
+        using is_pred_sender = std::bool_constant<Concepts::is_instance<meta_decayed_t<T>, NodeReader>::value || Concepts::is_instance<meta_decayed_t<T>, NodeStream>::value>;
 
         template <typename T>
-        using is_succ_sender = is_instance_auto1<meta_decayed_t<T>, NodeSender>;
+        using is_succ_sender = Concepts::is_instance_auto1<meta_decayed_t<T>, NodeSender>;
 
         template <typename T>
-        using is_range = is_instance_auto1<meta_decayed_t<T>, NodeRange>;
+        using is_range = Concepts::is_instance_auto1<meta_decayed_t<T>, NodeRange>;
 
         template <typename T>
         using is_value = std::negation<std::disjunction<is_algorithm<T>, is_pred_sender<T>, is_succ_sender<T>, is_algorithm<T>, is_router<T>, is_range<T>>>;
@@ -46,16 +46,16 @@ namespace Behavior {
         };
 
         template <size_t I>
-        struct dynamic_value_type : ValueType {
+        struct dynamic_value_type : Reflect::Value {
             static constexpr size_t index = I;
-            using meta_t = ValueType;
-            using ValueType::operator=;
+            using meta_t = Value;
+            using Value::operator=;
             using no_value_type = void;
         };
 
         template <size_t I>
-        struct remove_deductors_impl<ValueType, I> {
-            using type = /*dynamic_value_type<I>*/ ValueType;
+        struct remove_deductors_impl<Reflect::Value, I> {
+            using type = /*dynamic_value_type<I>*/ Reflect::Value;
         };
 
         template <typename T, size_t I>
@@ -120,34 +120,34 @@ namespace Behavior {
             }
 
             template <typename Ty>
-            ExtendedValueTypeDesc resolveType() const
+            Reflect::ExtendedType resolveType() const
             {
                 using decayedT = std::decay_t<Ty>;
-                if constexpr (InstanceOfA<decayedT, dynamic_value_type>) {
+                if constexpr (Concepts::InstanceOfA<decayedT, dynamic_value_type>) {
                     return getArguments<Ty::index>().type();
                 } else {
-                    return toValueTypeDesc<std::remove_reference_t<meta_decayed_t<Ty>>>();
+                    return Reflect::toType<std::remove_reference_t<meta_decayed_t<Ty>>>();
                 }
             }
 
             template <typename Signature>
-            ExtendedValueTypeDesc signature_type(uint32_t index) const
+            Reflect::ExtendedType signature_type(uint32_t index) const
             {
                 if constexpr (Signature::size == 0) {
                     throw 0;
                 } else {
                     return [this, index]<typename... Ty>(type_pack<Ty...>) {
-                        ExtendedValueTypeDesc types[] = { resolveType<Ty>()... };
+                        Reflect::ExtendedType types[] = { resolveType<Ty>()... };
                         return types[index];
                     }(Signature {});
                 }
             }
 
             template <typename Signature>
-            ExtendedValueTypeDesc stream_type(uint32_t index) const
+            Reflect::ExtendedType stream_type(uint32_t index) const
             {
                 return [this, index]<typename... Ty>(type_pack<Ty...>) {
-                    ExtendedValueTypeDesc types[] = {
+                    Reflect::ExtendedType types[] = {
                         resolveType<Ty>()...
                     };
                     return types[index % Signature::size];
@@ -254,7 +254,7 @@ namespace Behavior {
             template <typename Inner>
             static constexpr auto dataInBaseCountHelper()
             {
-                if constexpr (InstanceOf<Inner, NodeReader>) {
+                if constexpr (Concepts::InstanceOf<Inner, NodeReader>) {
                     return Inner::Signature::size;
                 } else {
                     return 0;
@@ -275,17 +275,17 @@ namespace Behavior {
             template <typename Inner>
             static constexpr auto dataInTypeHelper()
             {
-                if constexpr (InstanceOf<Inner, NodeReader>) {
+                if constexpr (Concepts::InstanceOf<Inner, NodeReader>) {
                     return &SenderNode::signature_type<typename Inner::Signature>;
                 } else {
                     return &SenderNode::stream_type<typename Inner::Signature>;
                 }
             };
 
-            ExtendedValueTypeDesc dataInType(uint32_t index, uint32_t group, bool bidir = true) const override
+            Reflect::ExtendedType dataInType(uint32_t index, uint32_t group, bool bidir = true) const override
             {
                 static constexpr auto types = []<typename... Inner>(type_pack<Inner...>) {
-                    return std::array<ExtendedValueTypeDesc (SenderNode::*)(uint32_t) const, in_types::size> {
+                    return std::array<Reflect::ExtendedType (SenderNode::*)(uint32_t) const, in_types::size> {
                         dataInTypeHelper<Inner>()...
                     };
                 }(in_types {});
@@ -296,7 +296,7 @@ namespace Behavior {
             {
                 static constexpr auto variadic = []<typename... Inner>(type_pack<Inner...>) {
                     return std::array<bool, in_types::size> {
-                        InstanceOf<Inner, NodeStream>...
+                        Concepts::InstanceOf<Inner, NodeStream>...
                     };
                 }(in_types {});
 
@@ -322,7 +322,7 @@ namespace Behavior {
                 return sizes[group];
             }
 
-            ExtendedValueTypeDesc dataOutType(uint32_t index, uint32_t group, bool bidir = true) const override
+            Reflect::ExtendedType dataOutType(uint32_t index, uint32_t group, bool bidir = true) const override
             {
                 static constexpr auto types = []<typename... InnerAlg>(type_pack<InnerAlg...>) {
                     return std::array {
@@ -344,7 +344,7 @@ namespace Behavior {
                     {
                         if (mData->mResults.empty())
                             mData->mResults.emplace_back();
-                        mData->mResults.front() = ArgumentList { std::forward<Args>(args)... };
+                        mData->mResults.front() = Reflect::ArgumentList { std::forward<Args>(args)... };
                         NodeReceiver<T> rec = std::move(mReceiver);
                         mData->cleanup();
                         rec.set_value();
@@ -357,7 +357,7 @@ namespace Behavior {
                         rec.set_done();
                     }
 
-                    void set_error(KeyValueError result)
+                    void set_error(Reflect::Error result)
                     {
                         NodeReceiver<T> rec = std::move(mReceiver);
                         mData->cleanup();
@@ -395,9 +395,9 @@ namespace Behavior {
                     destruct(mState);
                 }
 
-                ValueType read(uint32_t providerIndex, uint32_t group) const
+                Reflect::Result read(Reflect::Value &retVal, uint32_t providerIndex, uint32_t group) const
                 {
-                    return mResults[group][providerIndex];
+                    return mResults[group].get(retVal, providerIndex);
                 }
 
                 std::vector<NodeResults> mResults;
@@ -416,7 +416,7 @@ namespace Behavior {
                 }
             }
 
-            KeyValueResult interpretRead(NodeInterpreterStateBase &interpreter, ValueType &retVal, std::unique_ptr<NodeInterpreterData> &data, uint32_t providerIndex, uint32_t group) const override
+            Reflect::Result interpretRead(NodeInterpreterStateBase &interpreter, Reflect::Value &retVal, std::unique_ptr<NodeInterpreterData> &data, uint32_t providerIndex, uint32_t group) const override
             {
                 if constexpr (Config::constant) {
 
@@ -429,18 +429,18 @@ namespace Behavior {
                     assert(!rec.mStorage.is_null());
                     if constexpr (rec.mStorage.can_have_error) {
                         if (rec.mStorage.is_error()) {
-                            return std::make_unique<KeyValueError>(std::move(rec.mStorage).error().mError);
+                            return std::make_unique<Reflect::Error>(std::move(rec.mStorage).error().mError);
                         }
                     }
                     retVal = TupleUnpacker::select(
                         std::move(rec.mStorage).value().mValues,
-                        [](auto &&v) -> ValueType {
-                            return ValueType { std::forward<decltype(v)>(v) };
+                        [](auto &&v) -> Reflect::Value {
+                            return Reflect::Value { std::forward<decltype(v)>(v) };
                         },
                         providerIndex);
                 } else {
                     assert(data);
-                    retVal = static_cast<InterpretData *>(data.get())->read(providerIndex, group);
+                    return static_cast<InterpretData *>(data.get())->read(retVal, providerIndex, group);
                 }
                 return {};
             }

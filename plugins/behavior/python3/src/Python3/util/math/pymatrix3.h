@@ -10,7 +10,7 @@ namespace Behavior {
 
         struct PyMatrix3 {
             PyObject_HEAD
-                Matrix3 mMatrix;
+                Math::Matrix3 mMatrix;
         };
 
     }

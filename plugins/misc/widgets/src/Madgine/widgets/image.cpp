@@ -4,7 +4,7 @@
 
 #include "Madgine/imageloader/imageloader.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
 #include "widgetmanager.h"
@@ -26,11 +26,11 @@ namespace Widgets {
 
     void Image::render(WidgetsRenderData &renderData)
     {
-        const Atlas2::Entry *entry = manager().lookUpImage(mImageRenderData.image());
+        const Math::Atlas2::Entry *entry = manager().lookUpImage(mImageRenderData.image());
 
         if (entry) {
-            Vector2 pos = getAbsolutePosition();
-            Vector3 size = getAbsoluteSize();
+            Math::Vector2 pos = getAbsolutePosition();
+            Math::Vector3 size = getAbsoluteSize();
 
             mImageRenderData.renderImage(renderData, pos, size, *entry, mColor.frame(pos, size.xy()));
         }

@@ -2,8 +2,6 @@
 
 #include "widgetsettings.h"
 
-#include "Meta/keyvalue/valuetype.h"
-
 #include "Madgine/behavior/behavior.h"
 #include "Madgine/widgets/geometry.h"
 #include "Madgine/widgets/widget.h"
@@ -241,7 +239,7 @@ namespace Tools {
 
         if (ImGui::CollapsingHeader("WidgetData")) {
             if (ImGui::BeginTable("WidgetData-columns", 2, ImGuiTableFlags_Resizable)) {
-                TracedRoot<ScopePtr> traced { history, mWidget };
+                TracedRoot<Reflect::ScopePtr> traced { history, mWidget };
                 changed |= mInspector.drawMembers(traced, { "Pos", "Size", "Children", "mConditions" });
                 ImGui::EndTable();
             }
@@ -309,18 +307,18 @@ namespace Tools {
         mWidget->setSize(mSavedSize);
     }
 
-    void WidgetSettings::setSize(const Matrix3 &size)
+    void WidgetSettings::setSize(const Math::Matrix3 &size)
     {
         mWidget->setSize(size);
         enforceAspectRatio();
     }
 
-    void WidgetSettings::setPos(const Matrix3 &pos)
+    void WidgetSettings::setPos(const Math::Matrix3 &pos)
     {
         mWidget->setPos(pos);
     }
 
-    std::pair<Matrix3, Matrix3> WidgetSettings::savedGeometry()
+    std::pair<Math::Matrix3, Math::Matrix3> WidgetSettings::savedGeometry()
     {
         return { mSavedPos, mSavedSize };
     }
@@ -340,7 +338,7 @@ namespace Tools {
     void WidgetSettings::enforceAspectRatio()
     {
         if (mEnforceAspectRatio) {
-            Matrix3 size = mWidget->getSize();
+            Math::Matrix3 size = mWidget->getSize();
             for (int i = 0; i < 3; ++i)
                 size[1][i] = size[0][i] / mAspectRatio;
             mWidget->setSize(size);

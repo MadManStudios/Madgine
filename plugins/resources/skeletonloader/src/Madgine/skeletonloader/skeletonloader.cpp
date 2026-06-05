@@ -8,7 +8,7 @@
 
 #include "Meta/math/transformation.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
 #include "../assimptools.h"
@@ -50,7 +50,7 @@ namespace Render {
             co_return false;
         }
 
-        ByteBuffer buffer = std::move(bufferResult).value();
+        Memory::ByteBuffer buffer = std::move(bufferResult).value();
 
         Assimp::Importer importer;
 
@@ -96,7 +96,7 @@ namespace Render {
             skeleton.mBones.push_back(Bone { bone->mName.C_Str() });
             skeleton.mBones.back().mTTransform = assimpConvertMatrix(node->mTransformation);
             skeleton.mBones.back().mPreTransform = assimpConvertMatrix(node->mTransformation);
-            skeleton.mBones.back().mPreTransform = Matrix4 { ExtractScalingMatrix(assimpConvertMatrix(node->mTransformation).ToMat3()) };
+            skeleton.mBones.back().mPreTransform = Math::Matrix4 { ExtractScalingMatrix(assimpConvertMatrix(node->mTransformation).ToMat3()) };
         }
 
         for (aiBone *bone : bones) {
@@ -122,7 +122,7 @@ namespace Render {
         }
 
         //bool matrixSet = false;
-        skeleton.mMatrix = Matrix4::IDENTITY;
+        skeleton.mMatrix = Math::Matrix4::IDENTITY;
 
         std::set<size_t> parentTransformToDos;
 

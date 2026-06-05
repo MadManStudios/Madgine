@@ -25,7 +25,7 @@ namespace Widgets {
         void injectPointerClick(const PointerClickEvent &arg) override;
         void injectDragBegin(const DragBeginEvent &arg) override;
         void injectDragMove(const DragMoveEvent &arg) override;
-        bool injectKeyPress(const Input::KeyPressEvent &arg) override;
+        bool injectKeyPress(const Platform::Input::KeyPressEvent &arg) override;
 
         void layoutRow(StbTexteditRow *row, size_t i);
         float calculateWidth(size_t i, size_t n);

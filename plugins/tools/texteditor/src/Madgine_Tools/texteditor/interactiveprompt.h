@@ -3,8 +3,8 @@
 #include <zep.h>
 #include <zep/mode_repl.h>
 
-#include "Interfaces/filesystem/path.h"
-#include "Interfaces/log/log.h"
+#include "Platform/filesystem/path.h"
+#include "Platform/log/log.h"
 
 namespace Engine {
 namespace Tools {
@@ -17,7 +17,7 @@ namespace Tools {
 
     struct Highlighter;
 
-    struct MADGINE_TEXTEDITOR_EXPORT InteractivePrompt : Log::Log {
+    struct MADGINE_TEXTEDITOR_EXPORT InteractivePrompt : Platform::Log::Log {
 
         InteractivePrompt(TextEditor *editor, Interpreter *interpreter);
 
@@ -26,7 +26,7 @@ namespace Tools {
         void resume();
 
         std::string getName() override;
-        void log(std::string_view msg, Engine::Log::MessageType lvl, const char *file = nullptr, size_t line = 0) override;
+        void log(std::string_view msg, Platform::Log::MessageType lvl, const char *file = nullptr, size_t line = 0) override;
 
     protected:
         bool handleKeyPress(uint32_t key, uint32_t modifier);

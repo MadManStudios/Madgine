@@ -9,18 +9,18 @@
 
 NATIVE_BEHAVIOR(Yield_Frame, Engine::Widgets::yield_frame)
 NATIVE_BEHAVIOR(Wait_Frame, Engine::Widgets::wait_frame, Engine::Behavior::InputParameter<"Duration", std::chrono::steady_clock::duration>)
-NATIVE_BEHAVIOR(Animate_Move, Engine::Widgets::animate_move, Engine::Behavior::InputParameter<"Distance", Engine::Matrix3>, Engine::Behavior::InputParameter<"Duration", std::chrono::nanoseconds>)
+NATIVE_BEHAVIOR(Animate_Move, Engine::Widgets::animate_move, Engine::Behavior::InputParameter<"Distance", Engine::Math::Matrix3>, Engine::Behavior::InputParameter<"Duration", std::chrono::nanoseconds>)
 NATIVE_BEHAVIOR(Animate_Opacity, Engine::Widgets::animate_opacity, Engine::Behavior::InputParameter<"Delta", float>, Engine::Behavior::InputParameter<"Duration", std::chrono::nanoseconds>)
 
 namespace Engine {
 namespace Widgets {
 
-    Behavior::Behavior animate_move(Matrix3 dist, std::chrono::nanoseconds duration, WidgetBinding widgetBinding)
+    Behavior::Behavior animate_move(Math::Matrix3 dist, std::chrono::nanoseconds duration, WidgetBinding widgetBinding)
     {
         auto widget = co_await *widgetBinding;
 
-        Matrix3 start = widget->getPos();
-        Matrix3 end = start + dist;
+        Math::Matrix3 start = widget->getPos();
+        Math::Matrix3 end = start + dist;
 
         std::chrono::microseconds acc = 0ms;
 
@@ -42,7 +42,7 @@ namespace Widgets {
         std::chrono::microseconds acc = 0ms;
 
         while (acc < duration) {
-            widget->setOpacity(lerp(start, end, std::chrono::duration_cast<std::chrono::duration<float, std::nano>>(acc) / duration));
+            widget->setOpacity(Math::lerp(start, end, std::chrono::duration_cast<std::chrono::duration<float, std::nano>>(acc) / duration));
             acc += co_await yield_frame({}, duration, acc);
         }
 

@@ -10,8 +10,8 @@
 
 // #include "Modules/math/math.h"
 
-#    include "Interfaces/debug/memory/memory.h"
-#    include "Interfaces/debug/memory/untrackedmemoryresource.h"
+#    include "Platform/debug/memory/memory.h"
+#    include "Platform/debug/memory/untrackedmemoryresource.h"
 
 #    include "Modules/uniquecomponent/uniquecomponentcollector.h"
 

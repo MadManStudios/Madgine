@@ -25,7 +25,7 @@ namespace Behavior {
             DISCONNECT
         };
 
-        using NodeResults = ArgumentList;
+        using NodeResults = Reflect::ArgumentList;
 
         struct NodeDebugLocation;
 

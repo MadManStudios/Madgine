@@ -1,20 +1,20 @@
 #pragma once
 
-#include "Interfaces/socket/socketapi.h"
+#include "Platform/socket/socketapi.h"
 
 #include "Meta/serialize/syncmanager.h"
 
 #undef SOCKET_ERROR
 
 namespace Engine {
-namespace Network {
+namespace Serialize {
 
-    ENUM_BASE(NetworkManagerResult, Serialize::SyncManagerResult,
+    ENUM_BASE(NetworkManagerResult, SyncManagerResult,
         ALREADY_CONNECTED,
         NO_SERVER,
         SOCKET_ERROR)
 
-    struct MADGINE_NETWORK_SERIALIZE_EXPORT NetworkManager : Serialize::SyncManager {
+    struct MADGINE_NETWORK_SERIALIZE_EXPORT NetworkManager : SyncManager {
         NetworkManager(const std::string &name);
         NetworkManager(const NetworkManager &) = delete;
         NetworkManager(NetworkManager &&) noexcept;
@@ -23,9 +23,9 @@ namespace Network {
         void operator=(const NetworkManager &) = delete;
 
         NetworkManagerResult startServer(int port);
-        Execution::Future<NetworkManagerResult> connect(std::string_view url, int portNr, Serialize::Format format, TimeOut timeout = {});
+        Execution::Future<NetworkManagerResult> connect(std::string_view url, int portNr, Format format, TimeOut timeout = {});
 
-        SocketAddress getAddress(Serialize::ParticipantId id);
+        Platform::SocketAddress getAddress(Serialize::ParticipantId id);
 
         void close();
 
@@ -38,15 +38,15 @@ namespace Network {
         NetworkManagerResult moveMasterStream(Serialize::ParticipantId streamId,
             NetworkManager *target);
 
-        SocketAPIResult getSocketAPIError() const;
+        Platform::SocketAPIResult getSocketAPIError() const;
 
     protected:
-        NetworkManagerResult recordSocketError(SocketAPIResult error);
+        NetworkManagerResult recordSocketError(Platform::SocketAPIResult error);
 
     private:
-        Socket mServerSocket;
+        Platform::Socket mServerSocket;
 
-        SocketAPIResult mSocketAPIError = SocketAPIResult::SUCCESS;
+        Platform::SocketAPIResult mSocketAPIError = Platform::SocketAPIResult::SUCCESS;
     };
 }
 }

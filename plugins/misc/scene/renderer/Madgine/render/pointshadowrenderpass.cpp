@@ -64,9 +64,9 @@ namespace Render {
         {
             auto perApplication = mPipeline->mapParameters<HLSL::PointShadowPerApplication>(0);
 
-            Frustum f {
-                Vector3::ZERO,
-                Quaternion {},
+            Math::Frustum f {
+                Math::Vector3::ZERO,
+                Math::Quaternion {},
                 0.01f, 0.01f,
                 0.01f, 100.0f,
                 false
@@ -79,7 +79,7 @@ namespace Render {
 
             std::vector<HLSL::PointShadowInstanceData> instanceData;
 
-            static constexpr Matrix4 rotationMatrices[] = {
+            static constexpr Math::Matrix4 rotationMatrices[] = {
                 { 0, 0, -1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1 },
                 { 0, 0, 1, 0, 0, 1, 0, 0, -1, 0, 0, 0, 0, 0, 0, 1 },
                 { 1, 0, 0, 0, 0, 0, -1, 0, 0, 1, 0, 0, 0, 0, 0, 1 },
@@ -88,13 +88,13 @@ namespace Render {
                 { -1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1 }
             };
 
-            Matrix4 v = rotationMatrices[iteration] * TranslationMatrix(-transform->mPosition);
+            Math::Matrix4 v = rotationMatrices[iteration] * TranslationMatrix(-transform->mPosition);
 
             {
                 auto instanceData = mPipeline->mapTempBuffer<HLSL::PointShadowInstanceData[]>(1, instance.second.size());
 
                 std::ranges::transform(instance.second, instanceData.mData, [&](const ShadowSceneRenderData::ObjectData &o) {
-                    Matrix4 mv = v * o.mTransform;
+                    Math::Matrix4 mv = v * o.mTransform;
                     return HLSL::PointShadowInstanceData {
                         mv.Transpose(),
                         //o.mBones

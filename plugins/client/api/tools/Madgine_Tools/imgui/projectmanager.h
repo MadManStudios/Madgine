@@ -2,9 +2,9 @@
 
 #include "Generic/execution/signal.h"
 
-#include "Interfaces/filesystem/path.h"
+#include "Platform/filesystem/path.h"
 
-#include "Modules/ini/inifile.h"
+#include "Modules/plugins/inifile.h"
 
 #include "Madgine/window/layoutloader.h"
 
@@ -30,15 +30,15 @@ namespace Tools {
         void renderConfigurations();
         void renderGameMenu();
 
-        void loadConfiguration(const Filesystem::Path &config) override;
-        void saveConfiguration(const Filesystem::Path &config) override;
+        void loadConfiguration(const Platform::Filesystem::Path &config) override;
+        void saveConfiguration(const Platform::Filesystem::Path &config) override;
 
 #endif
         void renderTips();
         void renderSettingsPage();
         void render() override;
         void renderMenu() override;
-        bool renderConfiguration(const Filesystem::Path &config) override;
+        bool renderConfiguration(const Platform::Filesystem::Path &config) override;
         void renderSettings() override;
 
         void renderLayoutDetails();
@@ -53,28 +53,28 @@ namespace Tools {
         void save();
         void load();
 
-        Window::LayoutLoader::Resource *layout() const;
+        Core::LayoutLoader::Resource *layout() const;
         std::string_view layoutString() const;
         void setLayoutString(std::string_view name);
-        void setLayout(Window::LayoutLoader::Resource *layout);
+        void setLayout(Core::LayoutLoader::Resource *layout);
 
-        void setCurrentConfig(const Filesystem::Path &config);
+        void setCurrentConfig(const Platform::Filesystem::Path &config);
 
     protected:
         void createProjectDialog();
         void createPluginDialog();
 
     private:
-        Window::LayoutLoader::Resource *mLayout = nullptr;
+        Core::LayoutLoader::Resource *mLayout = nullptr;
 
         bool mShowConfigurations = false;
 
-        std::set<Filesystem::Path> mConfigs;
-        Filesystem::Path mCurrentConfig;
+        std::set<Platform::Filesystem::Path> mConfigs;
+        Platform::Filesystem::Path mCurrentConfig;
 
         bool mUnsavedConfiguration = false;
 
-        Ini::IniFile mConfiguration;
+        Plugins::IniFile mConfiguration;
 #endif
 
     private:
@@ -85,7 +85,7 @@ namespace Tools {
         size_t mTipIndex = 0;
 
     private:
-        Window::MainWindow *mWindow = nullptr;
+        Core::MainWindow *mWindow = nullptr;
         Templates *mTemplates = nullptr;
         Inspector *mInspector = nullptr;
 

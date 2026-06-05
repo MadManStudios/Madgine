@@ -7,10 +7,10 @@
 #    include "indexholder.h"
 
 namespace Engine {
-namespace UniqueComponent {
+namespace Plugins {
 
-    DLL_IMPORT_VARIABLE2(Engine::UniqueComponent::IndexHolder, _reg, typename T);
-    DLL_IMPORT_VARIABLE2(Engine::UniqueComponent::IndexHolder *, _preg, typename T);
+    DLL_IMPORT_VARIABLE2(IndexHolder, _reg, typename T);
+    DLL_IMPORT_VARIABLE2(IndexHolder *, _preg, typename T);
 
     template <typename _T, typename _Base, typename _VBase>
     struct VirtualComponentImpl : _Base {
@@ -80,13 +80,13 @@ namespace UniqueComponent {
         using Registrator = typename ActualType::Collector::template ComponentRegistrator<T, ActualType>;
     };
 
-#    define UNIQUECOMPONENT(Type) DLL_EXPORT_VARIABLE3(, Engine::UniqueComponent::IndexHolder, Type::Registrator<Type>, Engine::UniqueComponent::, _reg, , SINGLE_ARG({ TYPE_INFO(Type), TYPE_INFO(Type) }), Type::T)
-#    define UNIQUECOMPONENT2(Type, ext) DLL_EXPORT_VARIABLE3(, Engine::UniqueComponent::IndexHolder, Type::Registrator<Type>, Engine::UniqueComponent::, _reg, ext, SINGLE_ARG({ TYPE_INFO(Type), TYPE_INFO(Type) }), Type::T)
-#    define UNIQUECOMPONENT3(Type, ActualType) DLL_EXPORT_VARIABLE3(, Engine::UniqueComponent::IndexHolder, Type::Registrator<ActualType>, Engine::UniqueComponent::, _reg, , SINGLE_ARG({ TYPE_INFO(Type), TYPE_INFO(ActualType) }), Type::T)
+#    define UNIQUECOMPONENT(Type) DLL_EXPORT_VARIABLE3(, Engine::Plugins::IndexHolder, Type::Registrator<Type>, Engine::Plugins::, _reg, , SINGLE_ARG({ TYPE_INFO(Type), TYPE_INFO(Type) }), Type::T)
+#    define UNIQUECOMPONENT2(Type, ext) DLL_EXPORT_VARIABLE3(, Engine::Plugins::IndexHolder, Type::Registrator<Type>, Engine::Plugins::, _reg, ext, SINGLE_ARG({ TYPE_INFO(Type), TYPE_INFO(Type) }), Type::T)
+#    define UNIQUECOMPONENT3(Type, ActualType) DLL_EXPORT_VARIABLE3(, Engine::Plugins::IndexHolder, Type::Registrator<ActualType>, Engine::Plugins::, _reg, , SINGLE_ARG({ TYPE_INFO(Type), TYPE_INFO(ActualType) }), Type::T)
 
 #    define VIRTUALUNIQUECOMPONENTBASE(Name)                                                                            \
-        DLL_EXPORT_VARIABLE2(, Engine::UniqueComponent::IndexHolder *, Engine::UniqueComponent::, _preg, nullptr, Name) \
-        DLL_EXPORT_VARIABLE2(constexpr, const Engine::UniqueComponent::TypeInfo, , typeInfo, TYPE_INFO(Name), Name)
+        DLL_EXPORT_VARIABLE2(, Engine::Plugins::IndexHolder *, Engine::Plugins::, _preg, nullptr, Name) \
+        DLL_EXPORT_VARIABLE2(constexpr, const Engine::Plugins::TypeInfo, , typeInfo, TYPE_INFO(Name), Name)
 
 }
 }
@@ -94,7 +94,7 @@ namespace UniqueComponent {
 #else
 
 namespace Engine {
-namespace UniqueComponent {
+namespace Plugins {
     template <typename _T, typename _Base, typename _VBase>
     struct VirtualComponentImpl : _Base {
         using _Base::_Base;
@@ -134,7 +134,7 @@ namespace UniqueComponent {
 #endif
 
 namespace Engine {
-namespace UniqueComponent {
+namespace Plugins {
 
     DLL_IMPORT_VARIABLE2(const std::string_view, _componentName, typename T);
 
@@ -152,7 +152,7 @@ namespace UniqueComponent {
 }
 
 #define COMPONENT_NAME(Name, FrontendType) \
-    DLL_EXPORT_VARIABLE2(constexpr, const std::string_view, Engine::UniqueComponent::, _componentName, #Name, FrontendType);
+    DLL_EXPORT_VARIABLE2(constexpr, const std::string_view, Engine::Plugins::, _componentName, #Name, FrontendType);
 
 #define NAMED_UNIQUECOMPONENT(Name, Type) \
     COMPONENT_NAME(Name, Type)            \

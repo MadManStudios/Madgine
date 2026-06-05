@@ -20,7 +20,7 @@ namespace Render {
 
     struct MADGINE_VULKAN_EXPORT VulkanTexture : Texture {
 
-        VulkanTexture(TextureType type, bool isRenderTarget, TextureFormat format, Vector2i size, size_t samples = 1, const ByteBuffer &data = {});
+        VulkanTexture(TextureType type, bool isRenderTarget, TextureFormat format, Math::Vector2i size, size_t samples = 1, const Memory::ByteBuffer &data = {});
         VulkanTexture(TextureType type = TextureType_2D, bool isRenderTarget = false, TextureFormat format = FORMAT_RGBA8, size_t samples = 1);
         VulkanTexture(const VulkanTexture &) = delete;
         VulkanTexture(VulkanTexture &&);
@@ -30,7 +30,7 @@ namespace Render {
 
         void reset();
 
-        void setSubData(Vector2i offset, Vector2i size, const ByteBuffer &data);
+        void setSubData(Math::Vector2i offset, Math::Vector2i size, const Memory::ByteBuffer &data);
 
         VkImageView view() const;
         VkImage image() const;

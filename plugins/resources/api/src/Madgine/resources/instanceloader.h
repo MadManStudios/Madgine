@@ -1,11 +1,11 @@
 #pragma once
 
 #include "Generic/closure.h"
-#include "Generic/container/emplace.h"
+#include "Generic/containers/emplace.h"
 
-#include "Interfaces/filesystem/filewatcher.h"
+#include "Platform/filesystem/filewatcher.h"
 
-#include "Meta/keyvalue/ownedscopeptr.h"
+#include "Meta/reflect/ownedscopeptr.h"
 
 #include "Modules/threading/globalstorage.h"
 #include "Modules/uniquecomponent/uniquecomponent.h"
@@ -79,7 +79,7 @@ namespace Resources {
 
         static T &getSingleton()
         {
-            return static_cast<T &>(getLoaderByIndex(UniqueComponent::component_index<T>()));
+            return static_cast<T &>(getLoaderByIndex(Plugins::component_index<T>()));
         }
     };
 
@@ -100,7 +100,7 @@ namespace Resources {
 
         static T &getSingleton()
         {
-            return static_cast<T &>(getLoaderByIndex(UniqueComponent::component_index<T>()));
+            return static_cast<T &>(getLoaderByIndex(Plugins::component_index<T>()));
         }
 
         static Threading::TaskFuture<bool> load(std::string_view name, Data &data, T *loader = &getSingleton())
@@ -125,7 +125,7 @@ namespace Resources {
         }
 
         template <typename C = Ctor>
-        static Resource *getOrCreateManual(std::string_view name, const Filesystem::Path &path = {}, C &&ctor = {}, T *loader = &getSingleton())
+        static Resource *getOrCreateManual(std::string_view name, const Platform::Filesystem::Path &path = {}, C &&ctor = {}, T *loader = &getSingleton())
         {
             auto pib = loader->mResources.try_emplace(
                 std::string { name }, std::string { name }, path, Interface::template toCtor<T>(std::forward<C>(ctor)));
@@ -146,7 +146,7 @@ namespace Resources {
         }
 
         template <typename C = Ctor>
-        static Threading::TaskFuture<bool> loadManual(std::string_view name, const Filesystem::Path &path = {}, C &&ctor = {}, T *loader = &getSingleton())
+        static Threading::TaskFuture<bool> loadManual(std::string_view name, const Platform::Filesystem::Path &path = {}, C &&ctor = {}, T *loader = &getSingleton())
         {
             return load(getOrCreateManual(
                             name, path, std::forward<C>(ctor),
@@ -154,7 +154,7 @@ namespace Resources {
                 loader);
         }
 
-        std::pair<ResourceBase *, bool> addResource(const Filesystem::Path &path, std::string_view name = {}) override
+        std::pair<ResourceBase *, bool> addResource(const Platform::Filesystem::Path &path, std::string_view name = {}) override
         {
             std::string actualName { name.empty() ? path.stem() : name };
             auto pib = mResources.try_emplace(actualName, actualName, path);
@@ -185,18 +185,18 @@ namespace Resources {
             return result;
         }
 
-        virtual std::vector<std::pair<std::string_view, ScopePtr>> typedResources() override
+        virtual std::vector<std::pair<std::string_view, Reflect::ScopePtr>> typedResources() override
         {
-            std::vector<std::pair<std::string_view, ScopePtr>> result;
+            std::vector<std::pair<std::string_view, Reflect::ScopePtr>> result;
             std::ranges::transform(mResources, std::back_inserter(result), [](std::pair<const std::string, Resource> &p) {
                 return std::make_pair(std::string_view { p.first }, &p.second);
             });
             return result;
         }
 
-        virtual std::vector<const MetaTable *> resourceTypes() const override
+        virtual std::vector<const Reflect::MetaTable *> resourceTypes() const override
         {
-            std::vector<const MetaTable *> result = Base::resourceTypes();
+            std::vector<const Reflect::MetaTable *> result = Base::resourceTypes();
             result.push_back(table<meta_decayed_t<Resource>>);
             return result;
         }
@@ -205,9 +205,9 @@ namespace Resources {
     };
 
     template <typename T, typename _Data>
-    struct InstanceLoader : ResourceLoaderComponent<T, VirtualScope<T, InstanceLoaderImpl<T, _Data, InstanceLoaderInterface<T, _Data>>>> {
+    struct InstanceLoader : ResourceLoaderComponent<T, Reflect::VirtualScope<T, InstanceLoaderImpl<T, _Data, InstanceLoaderInterface<T, _Data>>>> {
 
-        using ResourceLoaderComponent<T, VirtualScope<T, InstanceLoaderImpl<T, _Data, InstanceLoaderInterface<T, _Data>>>>::ResourceLoaderComponent;
+        using ResourceLoaderComponent<T, Reflect::VirtualScope<T, InstanceLoaderImpl<T, _Data, InstanceLoaderInterface<T, _Data>>>>::ResourceLoaderComponent;
     };
 
 }

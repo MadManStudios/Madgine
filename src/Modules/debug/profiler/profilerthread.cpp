@@ -6,7 +6,7 @@
 #include "profiler.h"
 
 #if ENABLE_THREADING
-#    include "Interfaces/threading/threadapi.h"
+#    include "Platform/threading/threadapi.h"
 #endif
 
 namespace Engine {
@@ -43,7 +43,7 @@ namespace Debug {
         void ProfilerThread::updateName()
         {
 #if ENABLE_THREADING
-            mId = Threading::getCurrentThreadName();
+            mId = Platform::Threading::getCurrentThreadName();
 #else
             mId = "Main";
 #endif

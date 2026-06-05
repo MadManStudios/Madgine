@@ -5,27 +5,28 @@
 #include "Generic/execution/storage.h"
 #include "Generic/fixed_string.h"
 
-#include "Meta/keyvalue/valuetype_forward.h"
+#include "Meta/reflect/ref.h"
+#include "Meta/reflect/util.h"
 #include "Meta/serialize/streams/streamresult.h"
 
 namespace Engine {
 namespace Behavior {
 
     struct get_named_d_t {
-        using signature = KeyValueResult(std::string_view, ValueTypeRef);
+        using signature = Reflect::Result(std::string_view, Reflect::ValueRef);
 
         template <typename T>
-            requires(!is_tag_invocable_v<get_named_d_t, T &, std::string_view, ValueTypeRef>)
-        auto operator()(T &t, std::string_view name, ValueTypeRef out) const
+            requires(!is_tag_invocable_v<get_named_d_t, T &, std::string_view, Reflect::ValueRef>)
+        auto operator()(T &t, std::string_view name, Reflect::ValueRef out) const
         {
-            return KEYVALUE_UNKNOWN_ERROR() << "Named value '" << name << "' not found";
+            return REFLECT_UNKNOWN_ERROR() << "Named value '" << name << "' not found";
         }
 
         template <typename T>
-            requires(is_tag_invocable_v<get_named_d_t, T &, std::string_view, ValueTypeRef>)
-        auto operator()(T &t, std::string_view name, ValueTypeRef out) const
-            noexcept(is_nothrow_tag_invocable_v<get_named_d_t, T &, std::string_view, ValueTypeRef>)
-                -> tag_invoke_result_t<get_named_d_t, T &, std::string_view, ValueTypeRef>
+            requires(is_tag_invocable_v<get_named_d_t, T &, std::string_view, Reflect::ValueRef>)
+        auto operator()(T &t, std::string_view name, Reflect::ValueRef out) const
+            noexcept(is_nothrow_tag_invocable_v<get_named_d_t, T &, std::string_view, Reflect::ValueRef>)
+                -> tag_invoke_result_t<get_named_d_t, T &, std::string_view, Reflect::ValueRef>
         {
             return tag_invoke(*this, t, name, out);
         }
@@ -38,15 +39,15 @@ namespace Behavior {
 
         template <typename T, typename O>
             requires(!is_tag_invocable_v<get_named_t, T, O>)
-        KeyValueResult operator()(T &&context, O &o) const
+        Reflect::Result operator()(T &&context, O &o) const
         {
-            KeyValueResult result;
-            auto f = [&](ValueType &v) {
+            Reflect::Result result;
+            auto f = [&](Reflect::Value &v) {
                 result = get_named_d(std::forward<T>(context), Name, v);
                 if (!result)
-                    result = ValueType_unwrap(v, [&](const V &v) { o = v; }, v);
+                    result = invoke(v, [&](const V &v) { o = v; }, v);
             };
-            ValueType_erased(CallableView<void(ValueType &)> { f });
+            Value_erased(CallableView<void(Reflect::Value &)> { f });
             return result;
         }
 
@@ -76,7 +77,7 @@ namespace Behavior {
         void start()
         {
             if (!mValue.mValue) {
-                KeyValueResult result = mValue.resolve(this->mRec);
+                Reflect::Result result = mValue.resolve(this->mRec);
                 if (result) {
                     this->mRec.set_error(std::move(*result.mError));
                     return;
@@ -114,11 +115,11 @@ namespace Behavior {
 
         using is_sender = void;
 
-        using result_type = KeyValueError;
+        using result_type = Reflect::Error;
         template <template <typename...> typename Tuple>
         using value_types = Tuple<T &>;
 
-        KeyValueResult resolve(auto &context)
+        Reflect::Result resolve(auto &context)
         {
             if (!mValue) {
                 return get_named<Name, T>(context, mValue);
@@ -156,13 +157,13 @@ namespace Behavior {
         using meta_t = std::optional<forward_ref_t<T>>;
 
         template <bool isReferenceWrapped>
-        friend decltype(auto) tag_invoke(convert_ValueType_t<isReferenceWrapped> convert_ValueType, Named<Name, T> &named)
+        friend decltype(auto) tag_invoke(Reflect::convert_Value_t<isReferenceWrapped> convert_ValueType, Named<Name, T> &named)
         {
             return convert_ValueType(named.mValue);
         }
 
         template <bool isReferenceWrapped>
-        friend decltype(auto) tag_invoke(convert_ValueType_t<isReferenceWrapped> convert_ValueType, Named<Name, T> &&named)
+        friend decltype(auto) tag_invoke(Reflect::convert_Value_t<isReferenceWrapped> convert_ValueType, Named<Name, T> &&named)
         {
             return convert_ValueType(std::move(named.mValue));
         }
@@ -172,7 +173,7 @@ namespace Behavior {
 
     struct NamedDescriptor {
         std::string mName;
-        ExtendedValueTypeDesc mType;
+        Reflect::ExtendedType mType;
     };
 
     template <fixed_string Name>
@@ -187,10 +188,10 @@ namespace Behavior {
             {
             }
 
-            friend KeyValueResult tag_invoke(get_named_d_t, receiver &rec, std::string_view name, ValueTypeRef out)
+            friend Reflect::Result tag_invoke(get_named_d_t, receiver &rec, std::string_view name, Reflect::ValueRef out)
             {
                 if (name == Name) {
-                    to_ValueType(out, rec.mValue);
+                    toValue(out, rec.mValue);
                     return {};
                 } else {
                     return get_named_d(rec.mRec, name, out);

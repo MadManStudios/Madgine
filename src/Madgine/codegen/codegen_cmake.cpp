@@ -27,7 +27,7 @@ void CMakeFile::statement(Statement statement)
 
 void CMakeFile::generate(std::ostream &stream)
 {
-    assert(mConditionalsBitMask == Engine::BitArray<62> {});
+    assert(mConditionalsBitMask == Engine::Containers::BitArray<62> {});
 
     for (Statement &statement : mStatements) {
         generate(stream, statement);

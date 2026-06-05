@@ -2,15 +2,16 @@
 
 #include "globalapibase.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 
 #include "application.h"
 
-METATABLE_BEGIN(Engine::App::GlobalAPIBase)
-METATABLE_END(Engine::App::GlobalAPIBase)
+METATABLE_BEGIN(Engine::Core::GlobalAPIBase)
+METATABLE_END(Engine::Core::GlobalAPIBase)
 
 namespace Engine {
-namespace App {
+namespace Core {
+
     GlobalAPIBase::GlobalAPIBase(Application &app)
         : mApp(app)
     {

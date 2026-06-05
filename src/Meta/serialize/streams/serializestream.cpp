@@ -192,17 +192,17 @@ namespace Serialize {
         return {};
     }
 
-    StreamResult SerializeStream::read(ByteBuffer &b)
+    StreamResult SerializeStream::read(Memory::ByteBuffer &b)
     {
         uint32_t size;
         STREAM_PROPAGATE_ERROR(read(size));
         std::unique_ptr<std::byte[]> buffer = std::make_unique<std::byte[]>(size);
         STREAM_PROPAGATE_ERROR(read(buffer.get(), size));
-        b = ByteBuffer { std::move(buffer), size };
+        b = Memory::ByteBuffer { std::move(buffer), size };
         return {};
     }
 
-    StreamResult SerializeStream::operator>>(ByteBuffer &b)
+    StreamResult SerializeStream::operator>>(Memory::ByteBuffer &b)
     {
         std::string base64Encoded;
         STREAM_PROPAGATE_ERROR(operator>>(base64Encoded));
@@ -266,13 +266,13 @@ namespace Serialize {
         return *this;
     }
 
-    void SerializeStream::write(const ByteBuffer &b)
+    void SerializeStream::write(const Memory::ByteBuffer &b)
     {
         Stream::write<uint32_t>(b.mSize);
         Stream::write(b.mData, b.mSize);
     }
 
-    SerializeStream &SerializeStream::operator<<(const ByteBuffer &b)
+    SerializeStream &SerializeStream::operator<<(const Memory::ByteBuffer &b)
     {
         return operator<<(Base64::encode(b));
     }

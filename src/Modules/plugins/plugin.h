@@ -2,19 +2,19 @@
 
 #if ENABLE_PLUGINS
 
-#    include "Interfaces/dl/dlapi.h"
-#    include "Interfaces/filesystem/path.h"
+#    include "Platform/dl/dlapi.h"
+#    include "Platform/filesystem/path.h"
 
 namespace Engine {
 namespace Plugins {
     struct MODULES_EXPORT Plugin {
         Plugin(std::string_view name, PluginSection *section = nullptr, std::string_view project = {});
-        Plugin(std::string_view name, PluginSection *section, std::string_view project, Filesystem::Path path);
+        Plugin(std::string_view name, PluginSection *section, std::string_view project, Platform::Filesystem::Path path);
         ~Plugin();
 
         const void *getSymbol(std::string_view name) const;
 
-        Filesystem::Path fullPath() const;
+        Platform::Filesystem::Path fullPath() const;
 
         const std::string &project() const;
 
@@ -28,11 +28,11 @@ namespace Plugins {
 
         void ensureModule(PluginManager &manager);
 
-        void setLoaded(bool loaded, Ini::IniFile &file);
-        bool isLoaded(const Ini::IniFile &file) const;
+        void setLoaded(bool loaded, IniFile &file);
+        bool isLoaded(const IniFile &file) const;
 
-        void loadDependencies(PluginManager &manager, Ini::IniFile &file);
-        void unloadDependents(PluginManager &manager, Ini::IniFile &file);
+        void loadDependencies(PluginManager &manager, IniFile &file);
+        void unloadDependents(PluginManager &manager, IniFile &file);
 
         std::vector<std::reference_wrapper<const Plugin>> dependencies() const;
         std::vector<std::reference_wrapper<const Plugin>> dependents() const;
@@ -50,12 +50,12 @@ namespace Plugins {
         bool checkCircularDependency(Plugin *dependency, std::vector<std::string_view> &trace);
 
     private:
-        Dl::DlHandle mModule;
+        Platform::Dl::DlHandle mModule;
 
         std::string mProject;
         PluginSection *mSection;
         std::string mName;
-        Filesystem::Path mPath;
+        Platform::Filesystem::Path mPath;
 
         std::vector<Plugin *> mDependencies;
         std::vector<Plugin *> mDependents;

@@ -10,7 +10,7 @@
 namespace Engine {
 namespace Render {
 
-    struct DirectX12VertexShaderLoader : Resources::ResourceLoader<DirectX12VertexShaderLoader, ReleasePtr<IDxcBlob>, std::list<Placeholder<0>>, Threading::WorkGroupStorage> {
+    struct DirectX12VertexShaderLoader : Resources::ResourceLoader<DirectX12VertexShaderLoader, Platform::ReleasePtr<IDxcBlob>, std::list<Placeholder<0>>, Threading::WorkGroupStorage> {
         DirectX12VertexShaderLoader();
 
         struct Handle : Base::Handle {
@@ -24,17 +24,17 @@ namespace Render {
             Threading::TaskFuture<bool> load(ShaderObjectPtr object, DirectX12VertexShaderLoader *loader = &DirectX12VertexShaderLoader::getSingleton());
         };
 
-        Threading::Task<bool> loadImpl(ReleasePtr<IDxcBlob> &shader, ResourceDataInfo &info);
-        Threading::Task<bool> generate(ReleasePtr<IDxcBlob> &shader, ResourceDataInfo &info, ShaderObjectPtr object = {});
-        void unloadImpl(ReleasePtr<IDxcBlob> &shader);
+        Threading::Task<bool> loadImpl(Platform::ReleasePtr<IDxcBlob> &shader, ResourceDataInfo &info);
+        Threading::Task<bool> generate(Platform::ReleasePtr<IDxcBlob> &shader, ResourceDataInfo &info, ShaderObjectPtr object = {});
+        void unloadImpl(Platform::ReleasePtr<IDxcBlob> &shader);
 
-        bool loadFromSource(ReleasePtr<IDxcBlob> &shader, std::string_view name, std::string source, std::string entrypoint);
+        bool loadFromSource(Platform::ReleasePtr<IDxcBlob> &shader, std::string_view name, std::string source, std::string entrypoint);
 
         virtual Threading::TaskQueue *loadingTaskQueue() const override;
 
     private:
-        ReleasePtr<IDxcLibrary> mLibrary;
-        ReleasePtr<IDxcCompiler3> mCompiler;
+        Platform::ReleasePtr<IDxcLibrary> mLibrary;
+        Platform::ReleasePtr<IDxcCompiler3> mCompiler;
     };
 
 }

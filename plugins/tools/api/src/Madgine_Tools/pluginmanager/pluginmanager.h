@@ -4,7 +4,7 @@
 
 #    include "Generic/execution/lifetime.h"
 
-#    include "Modules/ini/inifile.h"
+#    include "Modules/plugins/inifile.h"
 
 #    include "../toolbase.h"
 #    include "../toolscollector.h"
@@ -18,9 +18,9 @@ namespace Tools {
         PluginManager(ImRoot &root);
 
         void render() override;
-        bool renderConfiguration(const Filesystem::Path &config) override;
-        void loadConfiguration(const Filesystem::Path &config) override;
-        void saveConfiguration(const Filesystem::Path &config) override;
+        bool renderConfiguration(const Platform::Filesystem::Path &config) override;
+        void loadConfiguration(const Platform::Filesystem::Path &config) override;
+        void saveConfiguration(const Platform::Filesystem::Path &config) override;
 
         bool renderPluginSelection(bool isConfiguration);
 
@@ -31,10 +31,10 @@ namespace Tools {
 
     private:
         Plugins::PluginManager &mManager;
-        Ini::IniFile mCurrentConfiguration;
+        Plugins::IniFile mCurrentConfiguration;
 
         struct PluginSource {
-            Filesystem::Path mIcon;
+            Platform::Filesystem::Path mIcon;
             std::string mName;
             std::string mUrl;
         };
@@ -52,7 +52,7 @@ namespace Tools {
         std::vector<std::string> mCurrentDependencies;
 
         std::string mCustomDependencyInput;
-        Filesystem::Path mLocalDependencyInput;
+        Platform::Filesystem::Path mLocalDependencyInput;
     };
 
     MADGINE_TOOLS_EXPORT bool PluginSelector(const char *label, const Plugins::Plugin *&plugin, bool requiresData = false);

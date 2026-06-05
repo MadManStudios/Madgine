@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Interfaces/filesystem/path.h"
+#include "Platform/filesystem/path.h"
 
 #include "parameterbase.h"
 
 namespace Engine {
 
-namespace CLI {
+namespace Core {
 
     template <typename T>
     struct ParameterImpl : ParameterBase {
@@ -85,7 +85,7 @@ namespace CLI {
     }
 
     template <>
-    inline bool ParameterImpl<Filesystem::Path>::parse(const std::vector<std::string_view> &args)
+    inline bool ParameterImpl<Platform::Filesystem::Path>::parse(const std::vector<std::string_view> &args)
     {
         mValue = args.front();
         return true;

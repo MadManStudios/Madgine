@@ -2,8 +2,8 @@
 
 #include "pyownedscopeptr.h"
 
-#include "Meta/keyvalue/scopeiterator.h"
-#include "Meta/keyvalue/valuetype.h"
+#include "Meta/reflect/scopeiterator.h"
+#include "Meta/reflect/value.h"
 
 #include "pyobjectutil.h"
 
@@ -19,29 +19,29 @@ namespace Behavior {
             if (!PyArg_Parse(args, "s", &name))
                 return NULL;
 
-            ScopeIterator it = self->mPtr.get().find(name);
+            Reflect::ScopeIterator it = self->mPtr.get().find(name);
 
             if (it == self->mPtr.get().end()) {
                 PyErr_Format(PyExc_AttributeError, "Could not find attribute '%s' in %R!", name, self);
                 return NULL;
             }
-            ValueType v;
+            Reflect::Value v;
             PYTHON3_PROPAGATE_ERROR(it->value(v));
             return toPyObject(v);
         }
 
-        static PyObject *OwnedScopePtr_iter(const ScopePtr &p)
+        static PyObject *OwnedScopePtr_iter(const Reflect::ScopePtr &p)
         {
             if (!p) {
                 PyErr_SetString(PyExc_TypeError, "Nullptr is not iterable!");
                 return NULL;
             }
-            ScopeIterator proxyIt = p.find("__proxy");
+            Reflect::ScopeIterator proxyIt = p.find("__proxy");
             if (proxyIt != p.end()) {
-                ValueType proxy;
+                Reflect::Value proxy;
                 PYTHON3_PROPAGATE_ERROR(proxyIt->value(proxy));
-                if (proxy.is<ScopePtr>()) {
-                    return OwnedScopePtr_iter(proxy.as<ScopePtr>());
+                if (proxy.is<Reflect::ScopePtr>()) {
+                    return OwnedScopePtr_iter(proxy.as<Reflect::ScopePtr>());
                 }
             }
             return toPyObject(p.begin());

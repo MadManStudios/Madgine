@@ -2,7 +2,7 @@
 
 namespace Engine {
 
-namespace Server {
+namespace Core {
     struct Server;
     struct ServerAPIBase;
 }

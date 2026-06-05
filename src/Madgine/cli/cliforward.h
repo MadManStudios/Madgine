@@ -1,7 +1,7 @@
 #pragma once
 
 namespace Engine {
-namespace CLI {
+namespace Core {
     struct CLICore;
     struct ParameterBase;
 }

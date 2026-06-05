@@ -9,7 +9,6 @@
 
 #include "../../../test/Meta/serialize/testManager.h"
 
-using namespace Engine::Network;
 using namespace Engine::Serialize;
 
 TEST(NetworkManager, Connect)

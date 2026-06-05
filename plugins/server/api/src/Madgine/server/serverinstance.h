@@ -5,7 +5,7 @@
 #include "Modules/threading/workgrouphandle.h"
 
 namespace Engine {
-namespace Server {
+namespace Core {
     struct MADGINE_SERVER_EXPORT ServerInstance {
 
         ServerInstance(std::string_view name, Closure<int()> callback);

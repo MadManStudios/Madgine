@@ -18,8 +18,8 @@ namespace Im3D {
 
     struct Im3DObjectTempData {
         Im3DObject *mLastObject;
-        AABB mLastAABB;
-        Matrix4 mLastTransform;
+        Math::AABB mLastAABB;
+        Math::Matrix4 mLastTransform;
     };
 
     struct Im3DContext {
@@ -38,12 +38,12 @@ namespace Im3D {
         };
         std::map<Im3DTextureId, RenderData> mRenderData;
 
-        std::map<Im3DNativeMesh, std::vector<Matrix4>> mNativeMeshes;
+        std::map<Im3DNativeMesh, std::vector<Math::Matrix4>> mNativeMeshes;
 
         std::map<Im3DID, Im3DObject> mObjects;
         std::vector<Im3DID> mIDStack;
 
-        Ray3 mMouseRay;
+        Math::Ray3 mMouseRay;
         Im3DObject *mHoveredObject;
         Im3DObject *mNextHoveredObject;
         float mNextHoveredDistance;

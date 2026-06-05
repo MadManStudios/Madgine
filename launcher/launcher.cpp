@@ -3,8 +3,8 @@
 
 #include "launcher.h"
 
-#include "Interfaces/filesystem/path.h"
-#include "Interfaces/window/windowsettings.h"
+#include "Platform/filesystem/path.h"
+#include "Platform/window/windowsettings.h"
 
 #include "Modules/threading/scheduler.h"
 
@@ -24,14 +24,14 @@
 #    define MADGINE_LAUNCHER_WINDOW_TITLE "Maditor"
 #endif
 
-int launch(Engine::Closure<void(Engine::App::Application &, Engine::Window::MainWindow &)> callback)
+int launch(Engine::Closure<void(Engine::Core::Application &, Engine::Core::MainWindow &)> callback)
 {
-    FIX_LOCAL Engine::KeyValueWorkGroupLocal<Engine::App::Application> app { "Application" };
+    FIX_LOCAL Engine::Core::KeyValueWorkGroupLocal<Engine::Core::Application> app { "Application" };
 
-    FIX_LOCAL Engine::Window::WindowSettings windowSettings;
+    FIX_LOCAL Engine::Platform::Window::WindowSettings windowSettings;
     windowSettings.mTitle = MADGINE_LAUNCHER_WINDOW_TITLE;
     windowSettings.mIcon = MADGINE_LAUNCHER_ICON;
-    FIX_LOCAL Engine::KeyValueWorkGroupLocal<Engine::Window::MainWindow> window { "MainWindow", app, windowSettings };
+    FIX_LOCAL Engine::Core::KeyValueWorkGroupLocal<Engine::Core::MainWindow> window { "MainWindow", app, windowSettings };
 
     if (callback)
         callback(app, window);

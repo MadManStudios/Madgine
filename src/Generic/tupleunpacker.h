@@ -9,7 +9,7 @@ namespace TupleUnpacker {
     template <typename T>
     decltype(auto) ensureTuple(T &&value)
     {
-        if constexpr (InstanceOf<std::decay_t<T>, std::tuple>)
+        if constexpr (Concepts::InstanceOf<std::decay_t<T>, std::tuple>)
             return T { std::forward<T>(value) };
         else
             return std::make_tuple(std::forward<T>(value));
@@ -103,7 +103,7 @@ namespace TupleUnpacker {
         return std::forward_as_tuple(std::forward<NonTuple>(t));
     }
 
-    template <Tuple Tuple>
+    template <Concepts::Tuple Tuple>
     decltype(auto) flatten(Tuple &&tuple)
     {
         return flatten(std::forward<Tuple>(tuple), std::make_index_sequence<std::tuple_size_v<Tuple>>());

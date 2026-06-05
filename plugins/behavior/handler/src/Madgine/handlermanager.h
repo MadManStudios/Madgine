@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Generic/intervalclock.h"
+#include "Generic/execution/intervalclock.h"
 #include "Generic/keyvalue.h"
 
 #include "Meta/math/vector2.h"
@@ -18,11 +18,11 @@
 namespace Engine {
 namespace Behavior {
 
-    struct MADGINE_HANDLER_EXPORT HandlerManager : Window::MainWindowComponent<HandlerManager> {
+    struct MADGINE_HANDLER_EXPORT HandlerManager : Core::MainWindowComponent<HandlerManager> {
 
         using Self = HandlerManager;
 
-        HandlerManager(Window::MainWindow &window);
+        HandlerManager(Core::MainWindow &window);
         HandlerManager(const HandlerManager &) = delete;
 
         ~HandlerManager();
@@ -36,7 +36,7 @@ namespace Behavior {
         template <typename T>
         T &getHandler()
         {
-            return static_cast<T &>(getHandler(UniqueComponent::component_index<T>()));
+            return static_cast<T &>(getHandler(Plugins::component_index<T>()));
         }
 
         HandlerBase &getHandler(size_t i);
@@ -53,12 +53,12 @@ namespace Behavior {
 
         Debug::DebuggableLifetime<> &lifetime();
 
-        App::Application &app() const;        
+        Core::Application &app() const;
 
         bool includeInLayout() const override;
 
     private:
-        App::Application &mApp;
+        Core::Application &mApp;
 
         DEBUGGABLE_LIFETIME(mLifetime);
 
@@ -66,7 +66,7 @@ namespace Behavior {
         HandlerContainer<std::set<Placeholder<0>, KeyCompare<Placeholder<0>>>> mHandlers;
 
     private:
-        Vector2 mKeptCursorPosition;
+        Math::Vector2 mKeptCursorPosition;
         bool mKeepingCursorPos = false;
     };
 }

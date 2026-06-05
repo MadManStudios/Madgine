@@ -8,7 +8,7 @@
 
 #include "Modules/uniquecomponent/uniquecomponentcollector.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
 #include "../scenemanager.h"
@@ -20,12 +20,12 @@ namespace Engine {
 
 constexpr auto componentBuilder()
 {
-    std::array<Accessor, 32> accessors;
+    std::array<Reflect::Accessor, 32> accessors;
 
     return accessors;
 }
 
-void componentInit(std::array<Accessor, 32> &accessors)
+void componentInit(std::array<Reflect::Accessor, 32> &accessors)
 {
 #if ENABLE_PLUGINS
     Scene::Entity::EntityComponentCollector::addInitializer([&]() {
@@ -33,19 +33,19 @@ void componentInit(std::array<Accessor, 32> &accessors)
         size_t i = 0;
         for (const auto &[name, index] : Scene::Entity::EntityComponentRegistry::sComponentsByName()) {
             accessors[i] = { name.data(),
-                [](const Accessor *self, const ValueType &entity) {
+                [](const Reflect::Accessor *self, const Reflect::Value &entity) {
                     uint32_t index = Scene::Entity::EntityComponentRegistry::sComponentsByName().at(self->mName);
                     bool found = false;
-                    KeyValueResult result = ValueType_unwrap([&](Scene::Entity::Entity &entity) { found = entity.hasComponent(index); }, entity);
+                    Reflect::Result result = invoke([&](Scene::Entity::Entity &entity) { found = entity.hasComponent(index); }, entity);
                     return !result && found;
                 },
-                [](const Accessor *self, ValueType &ret, const ValueType &entity) -> KeyValueResult {
+                [](const Reflect::Accessor *self, Reflect::Value &ret, const Reflect::Value &entity) -> Reflect::Result {
                     uint32_t index = Scene::Entity::EntityComponentRegistry::sComponentsByName().at(self->mName);
-                    return ValueType_unwrap(ret, [&](Scene::Entity::Entity &entity) { return ScopePtr { entity.getComponent(index), *Scene::Entity::EntityComponentRegistry::get(index).mType }; }, entity);
+                    return invoke(ret, [&](Scene::Entity::Entity &entity) { return Reflect::ScopePtr { entity.getComponent(index), *Scene::Entity::EntityComponentRegistry::get(index).mType }; }, entity);
                 },
                 nullptr,
-                ExtendedValueTypeDesc {
-                    ExtendedValueTypeIndex { ValueTypeEnum::ScopeValue }, Scene::Entity::EntityComponentRegistry::get(index).mType } };
+                Reflect::ExtendedType {
+                    Reflect::ExtendedTypeIndex { Reflect::TypeEnum::ScopeValue }, Scene::Entity::EntityComponentRegistry::get(index).mType } };
             i++;
         }
 #if ENABLE_PLUGINS
@@ -226,17 +226,17 @@ namespace Scene {
             return Serialize::beginExtendedTypedWrite(out, EntityComponentRegistry::sComponentName(p.mType));
         }
 
-        void Entity::handleEntityEvent(const typename mutable_set<EntityComponentHandle, std::less<>>::iterator &it, int op)
+        void Entity::handleEntityEvent(const typename Containers::mutable_set<EntityComponentHandle, std::less<>>::iterator &it, int op)
         {
             switch (op) {
-            case BEFORE | RESET:
+            case Containers::BEFORE | Containers::RESET:
                 throw "TODO";
-            case AFTER | RESET:
+            case Containers::AFTER | Containers::RESET:
                 throw "TODO";
-            case AFTER | EMPLACE:
+            case Containers::AFTER | Containers::EMPLACE:
                 sceneMgr().entityComponentList(it->mType).init(it->mComponent);
                 break;
-            case BEFORE | ERASE:
+            case Containers::BEFORE | Containers::ERASE:
                 sceneMgr().entityComponentList(it->mType).finalize(it->mComponent);
                 break;
             }

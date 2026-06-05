@@ -31,7 +31,7 @@ namespace Android {
     private:
         ANativeActivity *mActivity;
         Threading::WorkGroupHandle mThread;
-        Window::MainWindow *mWindow = nullptr;
+        Core::MainWindow *mWindow = nullptr;
     };
 
 }

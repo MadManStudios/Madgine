@@ -73,7 +73,7 @@ namespace Execution {
         }
 
         template <typename T>
-            requires(InstanceOf<Handle, std::coroutine_handle>)
+            requires(Concepts::InstanceOf<Handle, std::coroutine_handle>)
         bool await_suspend(std::coroutine_handle<T> handle)
         {
             return await_suspend(Handle::from_promise(handle.promise()));

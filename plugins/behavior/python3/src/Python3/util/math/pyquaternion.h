@@ -10,7 +10,7 @@ namespace Behavior {
 
         struct PyQuaternion {
             PyObject_HEAD
-                Quaternion mQuaternion;
+                Math::Quaternion mQuaternion;
         };
 
     }

@@ -30,7 +30,7 @@ namespace __generic_impl__ {
 
         ClosureImpl() = default;
 
-        template <DecayedNoneOf<ClosureImpl> F>
+        template <Concepts::DecayedNoneOf<ClosureImpl> F>
             requires requires(F &f) {
                 f(std::declval<Args>()...);
             }

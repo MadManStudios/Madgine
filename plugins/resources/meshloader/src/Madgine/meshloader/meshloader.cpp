@@ -6,11 +6,11 @@
 #include <assimp/postprocess.h>
 #include <assimp/scene.h>
 
-#include "Interfaces/filesystem/fsapi.h"
+#include "Platform/filesystem/fsapi.h"
 
 #include "Madgine/render/vertex.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
 #include "../assimptools.h"
@@ -143,8 +143,8 @@ namespace Render {
         bool warnOnce = true;
 
         assimpTraverseTree(
-            scene, [&](const aiNode *node, const Matrix4 &t) {
-                Matrix3 transform_anti = t.ToMat3().Inverse().Transpose();
+            scene, [&](const aiNode *node, const Math::Matrix4 &t) {
+                Math::Matrix3 transform_anti = t.ToMat3().Inverse().Transpose();
 
                 for (size_t meshIndex = 0; meshIndex < node->mNumMeshes; ++meshIndex) {
                     uint32_t baseVertexIndex = vertices.size();
@@ -153,17 +153,17 @@ namespace Render {
                     for (size_t vertexIndex = 0; vertexIndex < mesh->mNumVertices; ++vertexIndex) {
                         V &vertex = vertices.emplace_back();
                         aiVector3D v = mesh->mVertices[vertexIndex];
-                        vertex.mPos = (t * Vector4 { v.x, v.y, v.z, 1.0f }).xyz();
+                        vertex.mPos = (t * Math::Vector4 { v.x, v.y, v.z, 1.0f }).xyz();
                         if constexpr (V::template holds<VertexNormal>) {
                             aiVector3D n = mesh->mNormals[vertexIndex];
-                            vertex.mNormal = transform_anti * Vector3 { n.x, n.y, n.z };
+                            vertex.mNormal = transform_anti * Math::Vector3 { n.x, n.y, n.z };
                         }
                         if constexpr (V::template holds<VertexColor>) {
                             if (mesh->mColors[0]) {
                                 aiColor4D &c = mesh->mColors[0][vertexIndex];
-                                vertex.mColor = Vector4 { Color4 { &c.r } };
+                                vertex.mColor = Math::Vector4 { Math::Color4 { &c.r } };
                             } else {
-                                vertex.mColor = Vector4::UNIT_SCALE;
+                                vertex.mColor = Math::Vector4::UNIT_SCALE;
                             }
                         }
                         if constexpr (V::template holds<VertexUV>) {
@@ -236,7 +236,7 @@ namespace Render {
             co_return false;
         }
 
-        ByteBuffer buffer = std::move(bufferResult).value();
+        Memory::ByteBuffer buffer = std::move(bufferResult).value();
 
         const aiScene *scene = importer.ReadFileFromMemory(buffer.mData, buffer.mSize, aiProcess_MakeLeftHanded | aiProcess_Triangulate | aiProcess_LimitBoneWeights);
 
@@ -267,11 +267,11 @@ namespace Render {
                 aiString diffuseTexturePath;
                 if (mat->GetTexture(aiTextureType_DIFFUSE, i, &diffuseTexturePath) == AI_SUCCESS && diffuseTexturePath.length > 0) {
                     std::string_view diffuseName { diffuseTexturePath.C_Str() };
-                    auto it = std::ranges::find_if(diffuseName | std::views::reverse, Filesystem::isSeparator).base();
+                    auto it = std::ranges::find_if(diffuseName | std::views::reverse, Platform::Filesystem::isSeparator).base();
                     diffuseName = diffuseName.substr(std::distance(diffuseName.begin(), it));
                     if (!targetMat.mDiffuseName.empty() && targetMat.mDiffuseName != diffuseName)
                         throw "Only one diffuse texture is allowed at the moment!";
-                    targetMat.mDiffuseName = Filesystem::Path { diffuseName }.stem();
+                    targetMat.mDiffuseName = Platform::Filesystem::Path { diffuseName }.stem();
                 }
             }
 
@@ -280,11 +280,11 @@ namespace Render {
                 aiString emissiveTexturePath;
                 if (mat->GetTexture(aiTextureType_EMISSIVE, i, &emissiveTexturePath) == AI_SUCCESS && emissiveTexturePath.length > 0) {
                     std::string_view emissiveName { emissiveTexturePath.C_Str() };
-                    auto it = std::ranges::find_if(emissiveName | std::views::reverse, Filesystem::isSeparator).base();
+                    auto it = std::ranges::find_if(emissiveName | std::views::reverse, Platform::Filesystem::isSeparator).base();
                     emissiveName = emissiveName.substr(std::distance(emissiveName.begin(), it));
                     if (!targetMat.mEmissiveName.empty() && targetMat.mEmissiveName != emissiveName)
                         throw "Only one emissive texture is allowed at the moment!";
-                    targetMat.mEmissiveName = Filesystem::Path { emissiveName }.stem();
+                    targetMat.mEmissiveName = Platform::Filesystem::Path { emissiveName }.stem();
                 }
             }
         }

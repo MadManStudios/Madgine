@@ -12,7 +12,7 @@ namespace Engine {
 namespace Behavior {
     namespace Python3 {
 
-        void SenderReceiver::set_value(const ArgumentList &values)
+        void SenderReceiver::set_value(const Reflect::ArgumentList &values)
         {
             SenderState &state = mState;
             destruct(state.mInnerState);
@@ -23,7 +23,7 @@ namespace Behavior {
             state.resume();
         }
 
-        void SenderReceiver::set_error(KeyValueError error)
+        void SenderReceiver::set_error(Reflect::Error error)
         {
             SenderState &state = mState;
             destruct(state.mInnerState);
@@ -59,7 +59,7 @@ namespace Behavior {
 
         PyObject *PySender_await(PyObject *self)
         {
-            KeyValueSender sender = reinterpret_cast<PySender *>(self)->mSender;
+            Reflect::Sender sender = reinterpret_cast<PySender *>(self)->mSender;
 
             PyObject *obj = PyObject_CallObject((PyObject *)&PySenderStateType, NULL);
             Python3Unlock unlock;

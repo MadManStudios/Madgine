@@ -47,7 +47,7 @@ VariableDefinition::VariableDefinition(Variable variable, Statement initializer)
 {
 }
 
-VariableDefinition::VariableDefinition(Engine::TinyVector<Engine::BitArray<62>> conditionals, Variable variable)
+VariableDefinition::VariableDefinition(Engine::Containers::TinyVector<Engine::Containers::BitArray<62>> conditionals, Variable variable)
     : FullStatement { conditionals }
     , mVariable(variable)
 {

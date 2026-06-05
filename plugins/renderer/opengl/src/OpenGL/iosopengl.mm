@@ -13,7 +13,7 @@ namespace IOSBridge{
 
 ContextHandle createContext(Window::OSWindow *window){
     EAGLContext *context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES3];
-    InterfacesVector renderSize = window->renderSize();
+    PlatformVector renderSize = window->renderSize();
     CGRect rect = CGRectMake(0, 0, static_cast<double>(renderSize.x), static_cast<double>(renderSize.y));
     GLKView *view = [[GLKView alloc] initWithFrame:rect context:context];
     GLKViewController *viewController = [[GLKViewController alloc] init];

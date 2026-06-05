@@ -25,8 +25,8 @@ namespace Render {
 
     private:
         D3D12_DESCRIPTOR_HEAP_TYPE mType;
-        ReleasePtr<ID3D12DescriptorHeap> mHeap;
-        ReleasePtr<ID3D12DescriptorHeap> mUploadHeap;
+        Platform::ReleasePtr<ID3D12DescriptorHeap> mHeap;
+        Platform::ReleasePtr<ID3D12DescriptorHeap> mUploadHeap;
         size_t mIndex = 0;
         std::vector<size_t> mFreeList;
     };

@@ -3,7 +3,7 @@
 #include "uniquecomponentregistry.h"
 
 namespace Engine {
-namespace UniqueComponent {
+namespace Plugins {
 
     template <typename Registry>
     struct Selector {

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Interfaces/filesystem/path.h"
+#include "Platform/filesystem/path.h"
 
 #include "Madgine_Tools/renderer/dialogs.h"
 #include "Madgine_Tools/toolbase.h"
@@ -17,7 +17,7 @@ namespace Tools {
 
         virtual void open(Resources::ResourceBase *res) = 0;
 
-        Dialog<Filesystem::Path> resourceFilePicker(bool allowNewFile = false, Filesystem::Path path = {}, Filesystem::Path selected = {});
+        Dialog<Platform::Filesystem::Path> resourceFilePicker(bool allowNewFile = false, Platform::Filesystem::Path path = {}, Platform::Filesystem::Path selected = {});
 
         friend struct ResourceFileBase;
 
@@ -28,7 +28,7 @@ namespace Tools {
         ResourcesTool *mManager = nullptr;
         std::string mType;        
 
-        Dialog<Filesystem::Path> mSaveAsDialog;
+        Dialog<Platform::Filesystem::Path> mSaveAsDialog;
     };
 
 }

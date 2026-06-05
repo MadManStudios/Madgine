@@ -9,7 +9,7 @@
 #include "Madgine/render/rendertarget.h"
 #include "Madgine/render/texture.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
 #include "Madgine_Tools/inspector/inspector.h"
@@ -88,7 +88,7 @@ namespace Tools {
         if (target->blitSource())
             debugDraw(target->blitSource());
 
-        Vector2i size = target->size();
+        Math::Vector2i size = target->size();
 
         Im3D::PushID(target);
         for (const Render::RenderPass *pass : target->renderPasses()) {
@@ -110,7 +110,7 @@ namespace Tools {
 
     void RenderContextTool::debugDrawImpl(const Render::RenderDebuggable *debuggable, float aspectRatio)
     {
-        auto debugFrustum = [&](const Frustum &frustum, std::string_view name) {
+        auto debugFrustum = [&](const Math::Frustum &frustum, std::string_view name) {
             Im3D::Frustum(frustum);
 
             if (Im3D::BoundingFrustum(name.data(), frustum)) {
@@ -120,7 +120,7 @@ namespace Tools {
                 }
             }
         };
-        debuggable->debugFrustums(CallableView<void(const Frustum &, std::string_view)> { debugFrustum });
+        debuggable->debugFrustums(CallableView<void(const Math::Frustum &, std::string_view)> { debugFrustum });
         auto debugCamera = [=](const Render::Camera &camera, std::string_view name) {
             Im3D::Frustum(camera.getFrustum(aspectRatio), { .mColor = { 0.0f, 1.0f, 0.0f, 1.0f } });
         };

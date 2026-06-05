@@ -2,7 +2,7 @@
 
 #include "Generic/execution/virtualstate.h"
 
-#include "Meta/keyvalue/argumentlist.h"
+#include "Meta/reflect/argumentlist.h"
 
 #include "Madgine/debug/debuggablesender.h"
 
@@ -11,11 +11,11 @@
 namespace Engine {
 namespace Behavior {
 
-    struct MADGINE_BEHAVIOR_EXPORT BehaviorReceiver : Execution::VirtualReceiverBaseEx<type_pack<KeyValueError>, type_pack<ArgumentList>, Execution::get_stop_token, Debug::get_debug_context, Log::get_log, get_named_d> {
+    struct MADGINE_BEHAVIOR_EXPORT BehaviorReceiver : Execution::VirtualReceiverBaseEx<type_pack<Reflect::Error>, type_pack<Reflect::ArgumentList>, Execution::get_stop_token, Debug::get_debug_context, Platform::Log::get_log, get_named_d> {
         template <typename... Args>
         void set_value(Args &&...args)
         {
-            static_cast<Execution::VirtualReceiverBase<KeyValueError, ArgumentList> *>(this)->set_value(ArgumentList { std::forward<Args>(args)... });
+            static_cast<Execution::VirtualReceiverBase<Reflect::Error, Reflect::ArgumentList> *>(this)->set_value(Reflect::ArgumentList { std::forward<Args>(args)... });
         }
     };
 

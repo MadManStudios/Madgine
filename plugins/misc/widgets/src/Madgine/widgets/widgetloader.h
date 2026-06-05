@@ -40,13 +40,13 @@ namespace Widgets {
 
         WidgetDescriptor &operator=(WidgetDescriptor &&) noexcept;
 
-        const MetaTable *metaTable();
+        const Reflect::MetaTable *metaTable();
 
         const std::unique_ptr<WidgetTemplate> &widgetTemplate() const;
         std::unique_ptr<WidgetBase> create(WidgetManager &manager, WidgetLoader::Handle handle, WidgetBase *parent = nullptr) const;
 
     private:
-        const MetaTable *mMetaTable = nullptr;
+        const Reflect::MetaTable *mMetaTable = nullptr;
 
         std::unique_ptr<WidgetBase> (*mCtor)(WidgetManager &, WidgetBase *, WidgetLoader::Handle) = nullptr;
 

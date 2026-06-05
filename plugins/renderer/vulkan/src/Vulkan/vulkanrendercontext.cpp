@@ -10,7 +10,7 @@
 
 #include "Madgine/render/constantvalues.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 
 #include "vulkanpipelineloader.h"
 #include "vulkanrendertexture.h"
@@ -21,8 +21,10 @@
 #elif LINUX
 #    include <X11/Xlib.h>
 namespace Engine {
-namespace Window {
-    extern Display *sDisplay();
+namespace Platform {
+    namespace Window {
+        extern Display *sDisplay();
+    }
 }
 }
 #endif
@@ -187,19 +189,19 @@ namespace Render {
         const VkDebugUtilsMessengerCallbackDataEXT *pCallbackData,
         void *pUserData)
     {
-        Log::MessageType lvl;
+        Platform::Log::MessageType lvl;
         switch (messageSeverity) {
         case VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT:
-            lvl = Log::MessageType::FATAL_TYPE;
+            lvl = Platform::Log::MessageType::FATAL_TYPE;
             break;
         case VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT:
-            lvl = Log::MessageType::WARNING_TYPE;
+            lvl = Platform::Log::MessageType::WARNING_TYPE;
             break;
         case VK_DEBUG_UTILS_MESSAGE_SEVERITY_INFO_BIT_EXT:
-            lvl = Log::MessageType::INFO_TYPE;
+            lvl = Platform::Log::MessageType::INFO_TYPE;
             break;
         case VK_DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT:
-            lvl = Log::MessageType::DEBUG_TYPE;
+            lvl = Platform::Log::MessageType::DEBUG_TYPE;
             break;
         }
 
@@ -210,7 +212,7 @@ namespace Render {
         }
         cout << ": " << pCallbackData->pMessage;
 
-        Log::LogDummy { lvl } << cout.str();
+        Platform::Log::LogDummy { lvl } << cout.str();
 
         return VK_FALSE;
     }
@@ -306,7 +308,7 @@ namespace Render {
         vkGetPhysicalDeviceQueueFamilyProperties(device, &queueFamilyCount, queueFamilies.data());
 
 #if LINUX
-        Display *display = Window::sDisplay();
+        Display *display = Platform::Window::sDisplay();
         VisualID visualId = XVisualIDFromVisual(DefaultVisual(display, DefaultScreen(display)));
 #endif
 
@@ -580,7 +582,7 @@ namespace Render {
         sSingleton = nullptr;
     }
 
-    std::unique_ptr<RenderTarget> VulkanRenderContext::createRenderTexture(const Vector2i &size, const RenderTextureConfig &config)
+    std::unique_ptr<RenderTarget> VulkanRenderContext::createRenderTexture(const Math::Vector2i &size, const RenderTextureConfig &config)
     {
         return std::make_unique<VulkanRenderTexture>(this, size, config);
     }
@@ -599,7 +601,7 @@ namespace Render {
 
     GPUPtr<void> VulkanRenderContext::allocateBufferImpl(size_t size, UsageHint hint)
     {
-        Block allocation = mBufferAllocator.allocate(size);
+        Memory::Block allocation = mBufferAllocator.allocate(size);
 
         if (!allocation.mAddress)
             return {};
@@ -609,7 +611,7 @@ namespace Render {
 
     GPUPtr<Void[]> VulkanRenderContext::allocateBufferImpl(size_t elementSize, size_t count, UsageHint hint)
     {
-        Block allocation = mBufferAllocator.allocate(elementSize * count);
+        Memory::Block allocation = mBufferAllocator.allocate(elementSize * count);
 
         if (!allocation.mAddress)
             return {};
@@ -617,7 +619,7 @@ namespace Render {
         return { allocation.mAddress, elementSize, count, [=, this](void *address) { mBufferAllocator.deallocate(allocation); } };
     }
 
-    WritableByteBuffer VulkanRenderContext::mapBufferImpl(const GPUPtr<void> &buffer)
+    Memory::WritableByteBuffer VulkanRenderContext::mapBufferImpl(const GPUPtr<void> &buffer)
     {
         auto [vkBuffer, memory, offset] = mBufferMemoryHeap.resolve(buffer.get());
 
@@ -640,7 +642,7 @@ namespace Render {
         return { std::move(dataBuffer), buffer.size() };
     }
 
-    WritableByteBuffer VulkanRenderContext::mapBufferImpl(const GPUPtr<Void[]> &buffer)
+    Memory::WritableByteBuffer VulkanRenderContext::mapBufferImpl(const GPUPtr<Void[]> &buffer)
     {
         auto [vkBuffer, memory, offset] = mBufferMemoryHeap.resolve(buffer.get());
 
@@ -663,12 +665,12 @@ namespace Render {
         return { std::move(dataBuffer), buffer.size() };
     }
 
-    TexturePtr VulkanRenderContext::createTexture(TextureType type, TextureFormat format, Vector2i size, const ByteBuffer &data)
+    TexturePtr VulkanRenderContext::createTexture(TextureType type, TextureFormat format, Math::Vector2i size, const Memory::ByteBuffer &data)
     {
         return std::make_shared<VulkanTexture>(type, false, format, size, 1, data);
     }
 
-    void VulkanRenderContext::setTextureSubData(const TexturePtr &tex, Vector2i offset, Vector2i size, const ByteBuffer &data)
+    void VulkanRenderContext::setTextureSubData(const TexturePtr &tex, Math::Vector2i offset, Math::Vector2i size, const Memory::ByteBuffer &data)
     {
         static_cast<VulkanTexture &>(*tex).setSubData(offset, size, data);
     }
@@ -785,7 +787,7 @@ namespace Render {
         return *sSingleton;
     }
 
-    std::unique_ptr<RenderTarget> VulkanRenderContext::createRenderWindow(Window::OSWindow *w, size_t samples)
+    std::unique_ptr<RenderTarget> VulkanRenderContext::createRenderWindow(Platform::Window::OSWindow *w, size_t samples)
     {
         return std::make_unique<VulkanRenderWindow>(this, w, samples);
     }
@@ -1063,7 +1065,7 @@ namespace Render {
         result = vkSetDebugUtilsObjectNameEXT(GetDevice(), &nameInfo);
         VK_CHECK(result);
 
-        mDefaultTexture = std::make_shared<VulkanTexture>(TextureType_2D, false, TextureFormat::FORMAT_RGBA8_SRGB, Vector2i { 64, 64 }, 1, sUnboundDefaultTexture);
+        mDefaultTexture = std::make_shared<VulkanTexture>(TextureType_2D, false, TextureFormat::FORMAT_RGBA8_SRGB, Math::Vector2i { 64, 64 }, 1, sUnboundDefaultTexture);
     }
 
     VkPipelineLayout VulkanRenderContext::fetchLayout(const PipelineSignature &signature)

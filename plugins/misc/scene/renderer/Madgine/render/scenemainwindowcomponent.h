@@ -13,11 +13,11 @@
 namespace Engine {
 namespace Render {
 
-    struct MADGINE_SCENE_RENDERER_EXPORT SceneMainWindowComponent : Window::MainWindowComponent<SceneMainWindowComponent> {
+    struct MADGINE_SCENE_RENDERER_EXPORT SceneMainWindowComponent : Core::MainWindowComponent<SceneMainWindowComponent> {
 
         SERIALIZABLEUNIT(SceneMainWindowComponent)
 
-        SceneMainWindowComponent(Window::MainWindow &window);
+        SceneMainWindowComponent(Core::MainWindow &window);
         ~SceneMainWindowComponent();
 
         void render(RenderTarget *target, size_t iteration) override;

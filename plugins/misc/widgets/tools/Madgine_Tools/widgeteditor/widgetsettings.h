@@ -20,10 +20,10 @@ namespace Tools {
         void applyGeometry();
         void resetGeometry();
 
-        void setSize(const Matrix3 &size);
-        void setPos(const Matrix3 &pos);
+        void setSize(const Math::Matrix3 &size);
+        void setPos(const Math::Matrix3 &pos);
 
-        std::pair<Matrix3, Matrix3> savedGeometry();
+        std::pair<Math::Matrix3, Math::Matrix3> savedGeometry();
 
         std::optional<float> aspectRatio();
         void setAspectRatio(std::optional<float> ratio);
@@ -34,7 +34,7 @@ namespace Tools {
         Widgets::WidgetBase *mWidget;
         Inspector &mInspector;
 
-        Matrix3 mSavedPos, mSavedSize;
+        Math::Matrix3 mSavedPos, mSavedSize;
 
         bool mEnforceAspectRatio = false;
         float mAspectRatio = 1.0f;

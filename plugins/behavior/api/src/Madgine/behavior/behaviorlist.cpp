@@ -4,7 +4,7 @@
 
 #include "Meta/serialize/helper/typedobjectserialize.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
 Engine::Serialize::StreamResult readBehavior(Engine::Serialize::CallerHierarchyFormattedSerializeStream in, Engine::Behavior::BehaviorHandle &handle)

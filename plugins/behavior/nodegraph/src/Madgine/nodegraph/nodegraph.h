@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Interfaces/filesystem/path.h"
+#include "Platform/filesystem/path.h"
 
 #include "Madgine/behavior/named.h"
 
@@ -26,8 +26,8 @@ namespace Behavior {
 
             NodeGraph &operator=(const NodeGraph &other);
 
-            Threading::Task<Serialize::StreamResult> loadFromFile(const Filesystem::Path &path);
-            void saveToFile(const Filesystem::Path &path);
+            Threading::Task<Serialize::StreamResult> loadFromFile(const Platform::Filesystem::Path &path);
+            void saveToFile(const Platform::Filesystem::Path &path);
 
             NodeBase *addNode(std::unique_ptr<NodeBase> node);
             NodeBase *addNode(std::string_view name);
@@ -41,8 +41,8 @@ namespace Behavior {
             Pin flowOutTarget(Pin source);
             Pin dataInSource(Pin target);
 
-            ExtendedValueTypeDesc dataInType(Pin source, bool bidir = true);
-            ExtendedValueTypeDesc dataOutType(Pin target, bool bidir = true);
+            Reflect::ExtendedType dataInType(Pin source, bool bidir = true);
+            Reflect::ExtendedType dataOutType(Pin target, bool bidir = true);
 
             uint32_t flowInMask(Pin target, bool bidir = true);
             uint32_t flowOutMask(Pin source, bool bidir = true);
@@ -54,7 +54,7 @@ namespace Behavior {
             std::string_view dataInName(Pin source);
             std::string_view dataOutName(Pin target);
 
-            ExtendedValueTypeDesc resolveVariableType(std::string_view name) const;
+            Reflect::ExtendedType resolveVariableType(std::string_view name) const;
 
             void connectFlow(Pin source, Pin target);
             void connectData(Pin target, Pin source);
@@ -75,7 +75,7 @@ namespace Behavior {
             std::string mLayoutData;
 
             struct NamedInput {
-                NamedDescriptor mDescriptor { "Unnamed", ExtendedValueTypeIndex { ExtendedValueTypeEnum::GenericType } };
+                NamedDescriptor mDescriptor { "Unnamed", Reflect::ExtendedTypeIndex { Reflect::ExtendedTypeEnum::GenericType } };
                 std::vector<Pin> mTargets;
             };
             std::vector<NamedInput> mNamedInputs;

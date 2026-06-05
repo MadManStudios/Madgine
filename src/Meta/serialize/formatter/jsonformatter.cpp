@@ -193,7 +193,7 @@ namespace Serialize {
                 name = "Element";
             mStream << indent() << "\"" << name << "\" : ";
         }
-        if (typeId == Serialize::PrimitiveTypeIndex_v<std::string> || typeId == Serialize::PrimitiveTypeIndex_v<ByteBuffer>)
+        if (typeId == Serialize::PrimitiveTypeIndex_v<std::string> || typeId == Serialize::PrimitiveTypeIndex_v<Memory::ByteBuffer>)
             mStream << "\"";
     }
 
@@ -222,7 +222,7 @@ namespace Serialize {
                 mAfterItemRead = false;
             }
         }
-        if (typeId == Serialize::PrimitiveTypeIndex_v<std::string> || typeId == Serialize::PrimitiveTypeIndex_v<ByteBuffer>) {
+        if (typeId == Serialize::PrimitiveTypeIndex_v<std::string> || typeId == Serialize::PrimitiveTypeIndex_v<Memory::ByteBuffer>) {
             FORMATTER_EXPECT("\"");
             pushLocale(sLocaleQuote, false);
         }
@@ -231,7 +231,7 @@ namespace Serialize {
 
     void JSONFormatter::endPrimitiveWrite(const char *name, uint8_t typeId)
     {
-        if (typeId == Serialize::PrimitiveTypeIndex_v<std::string> || typeId == Serialize::PrimitiveTypeIndex_v<ByteBuffer>)
+        if (typeId == Serialize::PrimitiveTypeIndex_v<std::string> || typeId == Serialize::PrimitiveTypeIndex_v<Memory::ByteBuffer>)
             mStream << "\"";
         mAfterItemWrite = true;
         mLastPrimitive = true;
@@ -239,7 +239,7 @@ namespace Serialize {
 
     StreamResult JSONFormatter::endPrimitiveRead(const char *name, uint8_t typeId)
     {
-        if (typeId == Serialize::PrimitiveTypeIndex_v<std::string> || typeId == Serialize::PrimitiveTypeIndex_v<ByteBuffer>) {
+        if (typeId == Serialize::PrimitiveTypeIndex_v<std::string> || typeId == Serialize::PrimitiveTypeIndex_v<Memory::ByteBuffer>) {
             popLocale();
             FORMATTER_EXPECT("\"");
         }

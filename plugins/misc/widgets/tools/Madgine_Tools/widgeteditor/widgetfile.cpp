@@ -15,7 +15,7 @@
 #include "Madgine/widgets/widgetmanager.h"
 #include "Madgine/window/mainwindow.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 
 #include "Madgine_Tools/imgui/clientimroot.h"
 #include "Madgine_Tools/imguiicons.h"
@@ -65,9 +65,9 @@ namespace Tools {
         static_cast<ClientImRoot &>(mEditor.root()).removeRenderTarget(mRenderTarget.get());
     }
 
-    void WidgetFile::saveAs(const Filesystem::Path &path)
+    void WidgetFile::saveAs(const Platform::Filesystem::Path &path)
     {
-        Filesystem::FileManager mgr { "Widget" };
+        Serialize::FileManager mgr { "Widget" };
 
         Serialize::FormattedSerializeStream stream = mgr.openWrite(path, Serialize::Formats::xml);
 
@@ -138,7 +138,7 @@ namespace Tools {
             ImGui::DraggableValueTypeSource<Widgets::WidgetBase *>(w->mName, TracedRoot<Widgets::WidgetBase *const &> { mHistory, w });
             if (ImGui::BeginDragDropTarget()) {
                 Widgets::WidgetBase *newChild = nullptr;
-                if (ImGui::AcceptDraggableValueType(newChild, [](const Traced<Widgets::WidgetBase *const &> &child) { return child.get()->getParent() ? KeyValueResult {} : KEYVALUE_UNKNOWN_ERROR(); })) {
+                if (ImGui::AcceptDraggableValueType(newChild, [](const Traced<Widgets::WidgetBase *const &> &child) { return child.get()->getParent() ? Reflect::Result {} : REFLECT_UNKNOWN_ERROR(); })) {
                     newChild->setParent(w);
                     aborted = true;
                 }
@@ -239,7 +239,7 @@ namespace Tools {
                 ImVec2 mousePos = ImGui::GetMousePos();
                 ImVec2 windowPos = mousePos - ImGui::GetWindowPos();
 
-                Vector2i vSize { static_cast<int>(size.x * ImGui::GetIO().DisplayFramebufferScale.x), static_cast<int>(size.y * ImGui::GetIO().DisplayFramebufferScale.y) };
+                Math::Vector2i vSize { static_cast<int>(size.x * ImGui::GetIO().DisplayFramebufferScale.x), static_cast<int>(size.y * ImGui::GetIO().DisplayFramebufferScale.y) };
 
                 mWidgetManager.injectPointerMove({ { static_cast<int>(windowPos.x), static_cast<int>(windowPos.y) }, { static_cast<int>(mousePos.x), static_cast<int>(mousePos.y) }, { 0, 0 } });
 
@@ -266,7 +266,7 @@ namespace Tools {
 
                 ImGuiIO &io = ImGui::GetIO();
 
-                Rect2i screenSpace = mWidgetManager.getClientSpace();
+                Math::Rect2i screenSpace = mWidgetManager.getClientSpace();
                 screenSpace.mTopLeft = { static_cast<int>(pos.x), static_cast<int>(pos.y) };
 
                 if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
@@ -274,17 +274,17 @@ namespace Tools {
 
                 if (mSelected) {
 
-                    Vector2 mouse = ImGui::GetMousePos();
-                    Vector2 dragDistance = mouse - Vector2 { io.MouseClickedPos[0] };
+                    Math::Vector2 mouse = ImGui::GetMousePos();
+                    Math::Vector2 dragDistance = mouse - Math::Vector2 { io.MouseClickedPos[0] };
 
                     Widgets::WidgetBase *selectedWidget = mSelected->widget();
 
                     editor().renderWidgetBorders(selectedWidget, screenSpace.mTopLeft, IM_COL32(255, 255, 255, 255));
 
-                    Vector3 absoluteSize = selectedWidget->getAbsoluteSize();
-                    Vector2 absolutePos = selectedWidget->getAbsolutePosition() + Vector2 { screenSpace.mTopLeft };
+                    Math::Vector3 absoluteSize = selectedWidget->getAbsoluteSize();
+                    Math::Vector2 absolutePos = selectedWidget->getAbsolutePosition() + Math::Vector2 { screenSpace.mTopLeft };
 
-                    Bounds bounds(absolutePos.x, absolutePos.y + absoluteSize.y, absolutePos.x + absoluteSize.x, absolutePos.y);
+                    Math::Bounds bounds(absolutePos.x, absolutePos.y + absoluteSize.y, absolutePos.x + absoluteSize.x, absolutePos.y);
 
                     bool rightBorder = false, leftBorder = false, topBorder = false, bottomBorder = false;
 
@@ -365,22 +365,22 @@ namespace Tools {
 
                         auto [pos, size] = mSelected->savedGeometry();
 
-                        Vector3 parentSize = mSelected->widget()->getParent() ? mSelected->widget()->getParent()->getAbsoluteSize() : Vector3 { Vector2 { screenSpace.mSize }, 1.0f };
+                        Math::Vector3 parentSize = mSelected->widget()->getParent() ? mSelected->widget()->getParent()->getAbsoluteSize() : Math::Vector3 { Math::Vector2 { screenSpace.mSize }, 1.0f };
 
-                        Vector2 relDragDistance = dragDistance / parentSize.xy();
+                        Math::Vector2 relDragDistance = dragDistance / parentSize.xy();
 
-                        Matrix3 dragDistanceSize;
+                        Math::Matrix3 dragDistanceSize;
 
                         switch (resizeMode) {
                         case RELATIVE:
-                            dragDistanceSize = Matrix3 {
+                            dragDistanceSize = Math::Matrix3 {
                                 relDragDistance.x, 0, 0,
                                 0, relDragDistance.y, 0,
                                 0, 0, 0
                             };
                             break;
                         case ABSOLUTE:
-                            dragDistanceSize = Matrix3 {
+                            dragDistanceSize = Math::Matrix3 {
                                 0, 0, dragDistance.x / parentSize.z,
                                 0, 0, dragDistance.y / parentSize.z,
                                 0, 0, 0
@@ -391,7 +391,7 @@ namespace Tools {
                         if (!mDraggingLeft && !mDraggingRight && !mDraggingTop && !mDraggingBottom) {
                             pos += dragDistanceSize;
                         } else {
-                            Matrix3 dragDistancePos { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+                            Math::Matrix3 dragDistancePos { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
                             if (!mDraggingLeft && !mDraggingRight) {
                                 dragDistanceSize[0][0] = 0.0f;
                                 dragDistanceSize[0][2] = 0.0f;

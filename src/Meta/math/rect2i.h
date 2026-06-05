@@ -3,14 +3,16 @@
 #include "vector2i.h"
 
 namespace Engine {
+namespace Math {
 
-struct Rect2i {
-    Vector2i mTopLeft, mSize;
+    struct Rect2i {
+        Vector2i mTopLeft, mSize;
 
-    Vector2i bottomRight() const
-    {
-        return mTopLeft + mSize;
-    }
-};
+        Vector2i bottomRight() const
+        {
+            return mTopLeft + mSize;
+        }
+    };
 
+}
 }

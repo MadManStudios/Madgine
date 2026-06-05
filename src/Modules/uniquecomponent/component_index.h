@@ -1,7 +1,7 @@
 #pragma once
 
 namespace Engine {
-namespace UniqueComponent {
+namespace Plugins {
 
 #if ENABLE_PLUGINS
 

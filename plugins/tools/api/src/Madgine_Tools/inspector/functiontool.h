@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Meta/keyvalue/argumentlist.h"
-#include "Meta/keyvalue/boundapifunction.h"
+#include "Meta/reflect/argumentlist.h"
+#include "Meta/reflect/boundapifunction.h"
 
 #include "../toolbase.h"
 #include "../toolscollector.h"
@@ -20,20 +20,20 @@ namespace Tools {
 
         virtual void render() override;
 
-        void setCurrentFunction(std::string_view name, const BoundApiFunction &method);
+        void setCurrentFunction(std::string_view name, const Reflect::BoundApiFunction &method);
 
-        bool renderFunction(const Traced<BoundApiFunction &> &function, std::string_view functionName, ArgumentList &args);
-        bool renderFunctionSelect(const Traced<BoundApiFunction &> &function, std::string &functionName, ArgumentList &args);
+        bool renderFunction(const Traced<Reflect::BoundApiFunction &> &function, std::string_view functionName, Reflect::ArgumentList &args);
+        bool renderFunctionSelect(const Traced<Reflect::BoundApiFunction &> &function, std::string &functionName, Reflect::ArgumentList &args);
 
     protected:
-        bool renderFunctionDetails(const Traced<BoundApiFunction &> &function, ArgumentList &args);
+        bool renderFunctionDetails(const Traced<Reflect::BoundApiFunction &> &function, Reflect::ArgumentList &args);
 
     private:
         std::string mCurrentFunctionName;
-        BoundApiFunction mCurrentFunction;
-        ArgumentList mCurrentArguments;
+        Reflect::BoundApiFunction mCurrentFunction;
+        Reflect::ArgumentList mCurrentArguments;
 
-        std::vector<std::pair<std::string, BoundApiFunction>> mMethodCache;
+        std::vector<std::pair<std::string, Reflect::BoundApiFunction>> mMethodCache;
 
         Inspector *mInspector;
 

@@ -30,7 +30,7 @@ namespace Scene {
             EntityComponentBase &mComponent;
 
             std::string_view name() const;
-            ScopePtr getTyped() const;
+            Reflect::ScopePtr getTyped() const;
 
             auto operator<=>(const EntityComponentHandle &other) const
             {

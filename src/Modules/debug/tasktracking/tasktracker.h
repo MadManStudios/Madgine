@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Interfaces/debug/stacktrace.h"
+#include "Platform/debug/stacktrace.h"
 
 namespace Engine {
 namespace Debug {
@@ -8,7 +8,7 @@ namespace Debug {
     namespace Tasks {
 
         MODULES_EXPORT void onAssign(const std::coroutine_handle<> &handle, Engine::Threading::TaskQueue *queue, StackTrace<1> stacktrace);
-        MODULES_EXPORT void onDestroy(Engine::Threading::TaskSuspendablePromiseTypeBase &promise);
+        MODULES_EXPORT void onDestroy(Engine::Threading::TaskPromiseBase &promise);
 
         MODULES_EXPORT void onResume(const Engine::Threading::TaskHandle &handle);
         MODULES_EXPORT void onSuspend(Engine::Threading::TaskQueue *queue);

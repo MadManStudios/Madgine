@@ -40,7 +40,7 @@ struct MADGINE_CODEGEN_EXPORT CppFile : File {
     void generate(std::ostream &stream, const Type &t);
 
 private:
-    std::vector<std::map<Engine::BitArray<62>, std::set<std::string>>> mIncludes;
+    std::vector<std::map<Engine::Containers::BitArray<62>, std::set<std::string>>> mIncludes;
 
     Namespace mGlobalNamespace;
     std::stack<Namespace *> mNamespaceStack;

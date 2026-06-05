@@ -21,16 +21,16 @@ namespace Scene {
 
             Transform &operator=(Transform &&) = default;
 
-            Matrix4 matrix() const;
-            Matrix4 worldMatrix() const;
-            Matrix4 parentMatrix() const;
+            Math::Matrix4 matrix() const;
+            Math::Matrix4 worldMatrix() const;
+            Math::Matrix4 parentMatrix() const;
 
             void setParent(EntityPtr parent);
             const EntityPtr &parent() const;
 
-            Vector3 mPosition;
-            Vector3 mScale = Vector3::UNIT_SCALE;
-            Quaternion mOrientation;
+            Math::Vector3 mPosition;
+            Math::Vector3 mScale = Math::Vector3::UNIT_SCALE;
+            Math::Quaternion mOrientation;
 
         private:
             EntityPtr mParent;

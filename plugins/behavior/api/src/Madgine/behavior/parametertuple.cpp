@@ -2,7 +2,7 @@
 
 #include "parametertuple.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 
 METATABLE_BEGIN(Engine::Behavior::ParameterTuple)
 METATABLE_END(Engine::Behavior::ParameterTuple)
@@ -15,7 +15,7 @@ namespace Behavior {
     {
     }
 
-    ScopePtr ParameterTuple::customScopePtr()
+    Reflect::ScopePtr ParameterTuple::customScopePtr()
     {
         return mTuple->customScopePtr();
     }

@@ -6,11 +6,11 @@ namespace Engine {
 namespace Render {
 
     struct Glyph {
-        Vector2i mSize;
-        Vector2i mSize2;
-        Vector2i mUV;
-        Vector2i mUV2;
-        Vector2i mBearing;
+        Math::Vector2i mSize;
+        Math::Vector2i mSize2;
+        Math::Vector2i mUV;
+        Math::Vector2i mUV2;
+        Math::Vector2i mBearing;
         int mAdvance;
         bool mFlipped;
         bool mFlipped2;

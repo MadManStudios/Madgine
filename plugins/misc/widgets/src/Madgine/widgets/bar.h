@@ -13,7 +13,7 @@ namespace Widgets {
         void render(WidgetsRenderData &renderData) override;
 
         Behavior::Bindable<float> mRatio = 0.0f;
-        Behavior::Bindable<Color4> mColor;
+        Behavior::Bindable<Math::Color4> mColor;
     };
 }
 }

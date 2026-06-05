@@ -2,7 +2,7 @@
 
 #include "tabbar.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
 #include "widgetmanager.h"
@@ -41,21 +41,21 @@ namespace Widgets {
     {
         if (mTextRenderData.available()) {
 
-            const Atlas2::Entry *entry = manager().lookUpImage(mImageRenderData.image());
+            const Math::Atlas2::Entry *entry = manager().lookUpImage(mImageRenderData.image());
             if (entry) {
 
-                Vector2 pos = getAbsolutePosition();
-                Vector3 size = getAbsoluteSize();
+                Math::Vector2 pos = getAbsolutePosition();
+                Math::Vector3 size = getAbsoluteSize();
 
                 for (size_t tabIndex = 0; tabIndex < tabCount(); ++tabIndex) {
 
                     auto [xPos, xSize] = mTabBarRenderData.getElementDimensions(tabIndex);
 
-                    Vector2 tabPos {
+                    Math::Vector2 tabPos {
                         pos.x + xPos,
                         pos.y
                     };
-                    Vector3 tabSize {
+                    Math::Vector3 tabSize {
                         xSize,
                         size.y,
                         size.z
@@ -94,19 +94,19 @@ namespace Widgets {
         return mSelectedTab;
     }
 
-    void TabBar::sizeChanged(const Vector3 &pixelSize)
+    void TabBar::sizeChanged(const Math::Vector3 &pixelSize)
     {
         mTabBarRenderData.update(tabCount(), { 0.0f, 1.0f, 100000.0f }, pixelSize.x);
     }
 
-    void TabBar::injectPointerMove(const Input::PointerMoveEvent &arg)
+    void TabBar::injectPointerMove(const Platform::Input::PointerMoveEvent &arg)
     {
         float x = arg.mWindowPosition.x;
         mHoveredTab = mTabBarRenderData.elementIndex(x);
         WidgetBase::injectPointerMove(arg);
     }
 
-    void TabBar::injectPointerLeave(const Input::PointerMoveEvent &arg)
+    void TabBar::injectPointerLeave(const Platform::Input::PointerMoveEvent &arg)
     {
         mHoveredTab.reset();
         WidgetBase::injectPointerLeave(arg);

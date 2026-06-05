@@ -9,20 +9,20 @@ namespace Engine {
 namespace Behavior {
     namespace Python3 {
 
-        struct MADGINE_PYTHON3_EXPORT Python3Environment : Root::RootComponent<Python3Environment>, Threading::MadgineObject<Python3Environment> {
-            Python3Environment(Root::Root &root);
+        struct MADGINE_PYTHON3_EXPORT Python3Environment : Core::RootComponent<Python3Environment>, Threading::MadgineObject<Python3Environment> {
+            Python3Environment(Core::Root &root);
 
             Threading::Task<bool> init();
             Threading::Task<void> finalize();
 
             std::string_view key() const override;
 
-            KeyValueResult execute(ValueType &retVal, std::string_view command, Log::Log *log);
+            Reflect::Result execute(Reflect::Value &retVal, std::string_view command, Platform::Log::Log *log);
 
             static PyGILState_STATE lock();
-            static Log::Log *unlock(PyGILState_STATE state);
-            static void lock(BehaviorReceiver *, Log::Log * = nullptr);
-            static std::pair<BehaviorReceiver *, Log::Log *> unlock();
+            static Platform::Log::Log *unlock(PyGILState_STATE state);
+            static void lock(BehaviorReceiver *, Platform::Log::Log * = nullptr);
+            static std::pair<BehaviorReceiver *, Platform::Log::Log *> unlock();
 
             static size_t totalRefCount();
         };

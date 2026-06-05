@@ -32,6 +32,8 @@ THE SOFTWARE.
 // Adapted from Matrix math by Wild Magic http://www.geometrictools.com/
 
 namespace Engine {
+namespace Math {
+
 const Matrix3 Matrix3::ZERO(0, 0, 0, 0, 0, 0, 0, 0, 0);
 const Matrix3 Matrix3::IDENTITY(1, 0, 0, 0, 1, 0, 0, 0, 1);
 /*const float Matrix3::msSvdEpsilon = 1e-04f;
@@ -1485,4 +1487,6 @@ float Matrix3::Determinant() const
         }
     }*/
 //-----------------------------------------------------------------------
+
+}
 }

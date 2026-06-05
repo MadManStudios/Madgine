@@ -6,10 +6,10 @@
 
 #include "root.h"
 
-DEFINE_UNIQUE_COMPONENT(Engine::Root, RootComponent)
+DEFINE_UNIQUE_COMPONENT(Engine::Core, RootComponent)
 
 namespace Engine {
-namespace Root {
+namespace Core {
 
     RootComponentBase &getRootComponent(size_t i)
     {

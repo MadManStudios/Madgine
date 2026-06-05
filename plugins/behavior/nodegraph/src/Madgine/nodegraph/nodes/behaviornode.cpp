@@ -2,12 +2,11 @@
 
 #include "behaviornode.h"
 
-#include "Meta/keyvalue/valuetype.h"
-#include "Meta/keyvalueutil/valuetypeserialize.h"
+#include "Meta/reflectserialize/valuetypeserialize.h"
 
 #include "Madgine/resources/resourcemanager.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
 #include "../nodeexecution.h"
@@ -53,7 +52,7 @@ namespace Behavior {
                 mState->mBehavior->start();
             }
 
-            void set_value(ArgumentList values)
+            void set_value(Reflect::ArgumentList values)
             {
                 mResult = std::move(values);
                 NodeReceiver<NodeBase> receiver = std::move(mState->mReceiver);
@@ -61,7 +60,7 @@ namespace Behavior {
                 receiver.set_value();
             }
 
-            void set_error(KeyValueError result)
+            void set_error(Reflect::Error result)
             {
                 NodeReceiver<NodeBase> receiver = std::move(mState->mReceiver);
                 destruct(mState);
@@ -88,7 +87,7 @@ namespace Behavior {
             }
 
             BehaviorHandle mType;
-            ArgumentList mResult;
+            Reflect::ArgumentList mResult;
 
             struct state {
 
@@ -213,13 +212,13 @@ namespace Behavior {
             }
         }
 
-        ExtendedValueTypeDesc BehaviorNode::dataInType(uint32_t index, uint32_t group, bool bidir) const
+        Reflect::ExtendedType BehaviorNode::dataInType(uint32_t index, uint32_t group, bool bidir) const
         {
             if (group == 0) {
                 throw 0;
             } else {
                 if (index >= mDefaultParameters.size())
-                    return { ExtendedValueTypeEnum::GenericType };
+                    return { Reflect::ExtendedTypeEnum::GenericType };
                 return mDefaultParameters.type(index);
             }
         }
@@ -229,7 +228,7 @@ namespace Behavior {
             return mBehavior.resultTypes().size();
         }
 
-        ExtendedValueTypeDesc BehaviorNode::dataOutType(uint32_t index, uint32_t group, bool bidir) const
+        Reflect::ExtendedType BehaviorNode::dataOutType(uint32_t index, uint32_t group, bool bidir) const
         {
             return mBehavior.resultTypes()[index];
         }
@@ -244,10 +243,9 @@ namespace Behavior {
             static_cast<BehaviorInterpretData *>(data.get())->start(std::move(receiver), mDefaultParameters);
         }
 
-        KeyValueResult BehaviorNode::interpretRead(NodeInterpreterStateBase &interpreter, ValueType &retVal, std::unique_ptr<NodeInterpreterData> &data, uint32_t providerIndex, uint32_t group) const
+        Reflect::Result BehaviorNode::interpretRead(NodeInterpreterStateBase &interpreter, Reflect::Value &retVal, std::unique_ptr<NodeInterpreterData> &data, uint32_t providerIndex, uint32_t group) const
         {
-            retVal = static_cast<BehaviorInterpretData *>(data.get())->mRec.mResult[providerIndex];
-            return {};
+            return static_cast<BehaviorInterpretData *>(data.get())->mRec.mResult.get(retVal, providerIndex);
         }
 
     }

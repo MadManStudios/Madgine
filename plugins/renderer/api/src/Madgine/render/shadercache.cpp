@@ -4,36 +4,36 @@
 
 #include "Generic/guard.h"
 
-#include "Interfaces/filesystem/fsapi.h"
-#include "Interfaces/process/processapi.h"
+#include "Platform/filesystem/fsapi.h"
+#include "Platform/process/processapi.h"
 
 #include "Madgine/cli/parameter.h"
 #include "Madgine/root/root.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
 namespace Engine {
 namespace Render {
 
 #ifdef SHADERGEN_LOCATION
-    CLI::Parameter<Filesystem::Path> shaderGenPath { { "--shadergen" }, SHADERGEN_LOCATION, "Overwrite ShaderGen location." };
+    Core::Parameter<Platform::Filesystem::Path> shaderGenPath { { "--shadergen" }, SHADERGEN_LOCATION, "Overwrite ShaderGen location." };
 #endif
 
-    Filesystem::Path ShaderCache::directory()
+    Platform::Filesystem::Path ShaderCache::directory()
     {
-        return Filesystem::shippingPath() / "shadercache";
+        return Platform::Filesystem::shippingPath() / "shadercache";
     }
 
-    Threading::Task<bool> ShaderCache::generate(const Filesystem::Path &path, ShaderObjectPtr object, std::string_view target, ShaderType type)
+    Threading::Task<bool> ShaderCache::generate(const Platform::Filesystem::Path &path, ShaderObjectPtr object, std::string_view target, ShaderType type)
     {
-        bool exists = Filesystem::exists(path);
+        bool exists = Platform::Filesystem::exists(path);
 #ifdef SHADERGEN_LOCATION
 
-        if (!exists || Filesystem::fileInfo(path).mLastModified < object->chainTimestamp()) {
+        if (!exists || Platform::Filesystem::fileInfo(path).mLastModified < object->chainTimestamp()) {
             object->generate();
 
-            Filesystem::Path p = object->metadata().mPath;
+            Platform::Filesystem::Path p = object->metadata().mPath;
             if (p.isRelative()) {
                 p = directory() / p;
             }
@@ -48,7 +48,7 @@ namespace Render {
                 object->entrypoint()
             };
 
-            if (Root::Root::getSingleton().debug()) {
+            if (Core::Root::getSingleton().debug()) {
                 commandLine.push_back("-g");
             }
 
@@ -57,7 +57,7 @@ namespace Render {
                 commandLine.push_back(include);
             }
 
-            auto resultStorage = co_await Process::runAsync(*shaderGenPath, commandLine, 2s);
+            auto resultStorage = co_await Platform::Process::runAsync(*shaderGenPath, commandLine, 2s);
 
             if (!resultStorage.is_value()) {
                 if (resultStorage.is_error()) {

@@ -48,7 +48,7 @@ namespace Render {
         bool link(const PipelineSignature &signature, typename DirectX12VertexShaderLoader::Handle vertexShader, typename DirectX12PixelShaderLoader::Handle pixelShader);
         bool link(const PipelineSignature &signature, typename DirectX12VertexShaderLoader::Ptr vertexShader, typename DirectX12PixelShaderLoader::Ptr pixelShader);
 
-        const ReleasePtr<ID3D12PipelineState> &get(VertexFormat vertexFormat, size_t groupSize, DirectX12RenderTarget *target, bool depthChecking = true) const;
+        const Platform::ReleasePtr<ID3D12PipelineState> &get(VertexFormat vertexFormat, size_t groupSize, DirectX12RenderTarget *target, bool depthChecking = true) const;
 
         // const std::array<std::array<std::array<ReleasePtr<ID3D12PipelineState>, 3>, 3>, 3> *ptr() const;
 
@@ -59,7 +59,7 @@ namespace Render {
         ID3D12RootSignature *rootSignature() const;
 
     private:
-        mutable std::unordered_map<PipelineDescriptor, ReleasePtr<ID3D12PipelineState>> mPipelines;
+        mutable std::unordered_map<PipelineDescriptor, Platform::ReleasePtr<ID3D12PipelineState>> mPipelines;
 
         std::variant<typename DirectX12VertexShaderLoader::Handle, typename DirectX12VertexShaderLoader::Ptr> mVertexShader;
         std::variant<typename DirectX12PixelShaderLoader::Handle, typename DirectX12PixelShaderLoader::Ptr> mPixelShader;

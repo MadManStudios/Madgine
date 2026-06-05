@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Generic/container/virtualrange.h"
+#include "Generic/containers/virtualrange.h"
 
 namespace Engine {
 namespace Behavior {
@@ -10,14 +10,14 @@ namespace Behavior {
 
         struct PyVirtualAssociativeRange {
             PyObject_HEAD
-                KeyValueVirtualAssociativeRange mRange;
+                Reflect::AssociativeRange mRange;
         };
 
         extern PyTypeObject PyVirtualSequenceRangeType;
 
         struct PyVirtualSequenceRange {
             PyObject_HEAD
-                KeyValueVirtualSequenceRange mRange;
+                Reflect::SequenceRange mRange;
         };
 
     }

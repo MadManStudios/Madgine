@@ -2,19 +2,17 @@
 
 #include "functiontool.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
 #include "../renderer/imroot.h"
 #include "imgui/imgui.h"
 #include "imgui/imguiaddons.h"
 
-// #include "Madgine/app/application.h"
-
 #include "Generic/execution/execution.h"
 
-#include "Meta/keyvalue/functionargument.h"
-#include "Meta/keyvalue/valuetype.h"
+#include "Meta/reflect/functionargument.h"
+#include "Meta/reflect/value.h"
 
 #include "Modules/uniquecomponent/uniquecomponentcollector.h"
 
@@ -23,6 +21,13 @@
 #include "inspector.h"
 
 UNIQUECOMPONENT(Engine::Tools::FunctionTool);
+
+METATABLE_BEGIN_BASE(Engine::Tools::FunctionTool, Engine::Tools::ToolBase)
+METATABLE_END(Engine::Tools::FunctionTool)
+
+SERIALIZETABLE_INHERIT_BEGIN(Engine::Tools::FunctionTool, Engine::Tools::ToolBase)
+SERIALIZETABLE_END(Engine::Tools::FunctionTool)
+
 
 namespace Engine {
 namespace Tools {
@@ -47,7 +52,7 @@ namespace Tools {
         co_return co_await ToolBase::init();
     }
 
-    void FunctionTool::setCurrentFunction(std::string_view name, const BoundApiFunction &method)
+    void FunctionTool::setCurrentFunction(std::string_view name, const Reflect::BoundApiFunction &method)
     {
         mVisible = true;
         mCurrentFunctionName = name;
@@ -60,13 +65,13 @@ namespace Tools {
         }
     }
 
-    bool FunctionTool::renderFunction(const Traced<BoundApiFunction &> &function, std::string_view functionName, ArgumentList &args)
+    bool FunctionTool::renderFunction(const Traced<Reflect::BoundApiFunction &> &function, std::string_view functionName, Reflect::ArgumentList &args)
     {
         ImGui::Text(functionName);
         return renderFunctionDetails(function, args);
     }
 
-    bool FunctionTool::renderFunctionSelect(const Traced<BoundApiFunction &> &function, std::string &functionName, ArgumentList &args)
+    bool FunctionTool::renderFunctionSelect(const Traced<Reflect::BoundApiFunction &> &function, std::string &functionName, Reflect::ArgumentList &args)
     {
         bool changed = false;
 
@@ -78,7 +83,7 @@ namespace Tools {
             name = function->scope().name() + ("." + functionName);
         if (ImGui::BeginCombo("##functionSelect", name.c_str())) {
             ImGui::InputText("filter", &filter);
-            const FunctionTable *current = sFunctionList();
+            const Reflect::FunctionTable *current = Reflect::sFunctionList();
             while (current) {
                 bool is_selected = (function->mFunction.mTable == current);
                 if (ImGui::Selectable(current->mName.data(), is_selected)) {
@@ -95,7 +100,7 @@ namespace Tools {
         }
 
         if (ImGui::BeginDragDropTarget()) {
-            BoundApiFunction newFunction;
+            Reflect::BoundApiFunction newFunction;
             if (ImGui::AcceptDraggableValueType(newFunction)) {
                 functionName = newFunction.mFunction.mTable->mName;
                 function.get() = newFunction;
@@ -108,11 +113,11 @@ namespace Tools {
             args.resize(function->argumentsCount(true));
 
             for (size_t i = 0; i < function->argumentsCount(true); ++i) {
-                ExtendedValueTypeDesc type = function->mFunction.mTable->mArguments[i + function->isMemberFunction()].mType;
+                Reflect::ExtendedType type = function->mFunction.mTable->mArguments[i + function->isMemberFunction()].mType;
                 if (type.mType.isRegular()) {
                     args[i].setType(type);
                 } else {
-                    assert(type.mType == ExtendedValueTypeEnum::GenericType);
+                    assert(type.mType == Reflect::ExtendedTypeEnum::GenericType);
                 }
             }
         }
@@ -120,7 +125,7 @@ namespace Tools {
         return renderFunctionDetails(function, args);
     }
 
-    bool FunctionTool::renderFunctionDetails(const Traced<BoundApiFunction &> &function, ArgumentList &args)
+    bool FunctionTool::renderFunctionDetails(const Traced<Reflect::BoundApiFunction &> &function, Reflect::ArgumentList &args)
     {
         if (function->mFunction) {
 
@@ -134,24 +139,24 @@ namespace Tools {
 
                     ImGui::TableNextRow();
 
-                    ValueType v = i == 0 ? ValueType { function->scope() } : args[i - 1];
+                    Reflect::Value v = i == 0 ? Reflect::Value { function->scope() } : args[i - 1];
                     TracedRoot traced { mHistory, v };
                     bool changed = mInspector->drawValue(function->mFunction.mTable->mArguments[i].mName, traced, true, function->mFunction.mTable->mArguments[i].mType);
 
                     if (ImGui::BeginDragDropTarget()) {
-                        changed |= ImGui::AcceptDraggableValueType(v, [&](const Traced<const ValueType &> &dropped) { return function->mFunction.mTable->mArguments[i].mType.canAccept(dropped->type()) ? KeyValueResult {} : KEYVALUE_UNKNOWN_ERROR(); });
+                        changed |= ImGui::AcceptDraggableValueType(v, [&](const Traced<const Reflect::Value &> &dropped) { return function->mFunction.mTable->mArguments[i].mType.canAccept(dropped->type()) ? Reflect::Result {} : REFLECT_UNKNOWN_ERROR(); });
                         ImGui::EndDragDropTarget();
                     }
                     if (changed) {
                         if (i == 0)
-                            function->mScope = v.as<ScopePtr>().mScope;
+                            function->mScope = v.as<Reflect::ScopePtr>().mScope;
                         else
                             args[i - 1] = v;
                     }
 
                     if (ImGui::IsItemHovered()) {
-                        ExtendedValueTypeDesc type = function->mFunction.mTable->mArguments[i].mType;
-                        if (type.mType != ExtendedValueTypeEnum::GenericType) {
+                        Reflect::ExtendedType type = function->mFunction.mTable->mArguments[i].mType;
+                        if (type.mType != Reflect::ExtendedTypeEnum::GenericType) {
                             ImGui::SetTooltip("%s", type.toString().c_str());
                         } else {
                             assert(i > 0);
@@ -179,10 +184,10 @@ namespace Tools {
     {
         if (beginToolWindow("FunctionTool", &mVisible)) {
             if (beginContent()) {
-                TracedRoot<FunctionTool *> traced { mHistory, this };                
+                TracedRoot<FunctionTool *> traced { mHistory, this };
                 if (renderFunctionSelect(traced.trace(&FunctionTool::mCurrentFunction), mCurrentFunctionName, mCurrentArguments)) {
-                    ValueType result;
-                    KeyValueResult error = mCurrentFunction(result, mCurrentArguments);
+                    Reflect::Value result;
+                    Reflect::Result error = mCurrentFunction(result, mCurrentArguments);
                     if (error) {
                         LOG_ERROR(error);
                     } else {
@@ -196,9 +201,3 @@ namespace Tools {
     }
 }
 }
-
-METATABLE_BEGIN_BASE(Engine::Tools::FunctionTool, Engine::Tools::ToolBase)
-METATABLE_END(Engine::Tools::FunctionTool)
-
-SERIALIZETABLE_INHERIT_BEGIN(Engine::Tools::FunctionTool, Engine::Tools::ToolBase)
-SERIALIZETABLE_END(Engine::Tools::FunctionTool)

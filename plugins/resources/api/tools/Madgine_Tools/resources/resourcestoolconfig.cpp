@@ -4,15 +4,12 @@
 
 #include "Generic/projections.h"
 
-#include "Meta/keyvalue/scopefield.h"
-#include "Meta/keyvalue/valuetype.h"
-
 #include "Modules/uniquecomponent/uniquecomponentcollector.h"
 
 #include "Madgine/resources/resourceloaderbase.h"
 #include "Madgine/resources/resourcemanager.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
 #include "Madgine_Tools/inspector/inspector.h"
@@ -43,7 +40,7 @@ namespace Tools {
         Inspector &inspector = mRoot.getTool<Inspector>();
 
         for (std::unique_ptr<Resources::ResourceLoaderBase> &loader : mgr.mCollector) {
-            for (const MetaTable *type : loader->resourceTypes()) {
+            for (const Reflect::MetaTable *type : loader->resourceTypes()) {
                 inspector.addPtrSuggestion(type, [&]() {
                     return loader->typedResources();
                 });
@@ -59,7 +56,7 @@ namespace Tools {
     {
     }
 
-    bool ResourcesToolConfig::renderConfiguration(const Filesystem::Path &config)
+    bool ResourcesToolConfig::renderConfiguration(const Platform::Filesystem::Path &config)
     {
         if (ImGui::CollapsingHeader("Resources")) {
 
@@ -100,7 +97,7 @@ namespace Tools {
         return false;
     }
 
-    void ResourcesToolConfig::loadConfiguration(const Filesystem::Path &config)
+    void ResourcesToolConfig::loadConfiguration(const Platform::Filesystem::Path &config)
     {
         mResourceConfig.clear();
         std::ifstream in { config / "resources.list" };
@@ -113,7 +110,7 @@ namespace Tools {
         }
     }
 
-    void ResourcesToolConfig::saveConfiguration(const Filesystem::Path &config)
+    void ResourcesToolConfig::saveConfiguration(const Platform::Filesystem::Path &config)
     {
         std::ofstream out { config / "resources.list" };
         for (const auto &[name, path] : mResourceConfig)

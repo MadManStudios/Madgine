@@ -43,8 +43,8 @@ inline void dx12Check(const char *file, size_t line, HRESULT result = 0)
 
 #include "Generic/offsetptr.h"
 
-#include "Interfaces/helpers/win_ptrs.h"
-#include "Interfaces/helpers/win_wstring.h"
+#include "Platform/helpers/win_ptrs.h"
+#include "Platform/helpers/win_wstring.h"
 
 constexpr D3D12_CPU_DESCRIPTOR_HANDLE operator+(D3D12_CPU_DESCRIPTOR_HANDLE handle, Engine::OffsetPtr offset)
 {

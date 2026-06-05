@@ -9,7 +9,7 @@
 #include "globalapicollector.h"
 
 namespace Engine {
-namespace App {
+namespace Core {
 
     /**
      * @brief The Application manages all GlobalAPIComponents
@@ -26,7 +26,7 @@ namespace App {
         template <typename T>
         T &getGlobalAPIComponent()
         {
-            return static_cast<T &>(getGlobalAPIComponent(UniqueComponent::component_index<T>()));
+            return static_cast<T &>(getGlobalAPIComponent(Plugins::component_index<T>()));
         }
 
         GlobalAPIBase &getGlobalAPIComponent(size_t i);

@@ -33,9 +33,9 @@ namespace Tools {
         drawList->AddText(labelPos, IM_COL32(255, 255, 255, 255), label.data(), label.data() + label.size());
     };
 
-    ImColor DataColor(uint32_t mask, ExtendedValueTypeDesc type)
+    ImColor DataColor(uint32_t mask, Reflect::ExtendedType type)
     {
-        if (type.mType == ValueTypeEnum::SenderValue) {
+        if (type.mType == Reflect::TypeEnum::SenderValue) {
             return FlowColor(mask);
         }
         switch (mask) {
@@ -76,10 +76,10 @@ namespace Tools {
         }
     }
 
-    void DataPinIcon(ExtendedValueTypeDesc type, uint32_t mask, bool connected)
+    void DataPinIcon(Reflect::ExtendedType type, uint32_t mask, bool connected)
     {
         IconType icon = IconType::Circle;
-        if (type.mType == ValueTypeEnum::SenderValue)
+        if (type.mType == Reflect::TypeEnum::SenderValue)
             icon = IconType::Diamond;
 
         Icon(ImVec2(sPinIconSize, sPinIconSize), icon, connected, DataColor(mask, type), ImColor(32, 32, 32, 255));
@@ -155,7 +155,7 @@ namespace Tools {
         ed::EndPin();
     }
 
-    void DataOutPin(const char *name, ExtendedValueTypeDesc type, uint32_t mask, bool connected)
+    void DataOutPin(const char *name, Reflect::ExtendedType type, uint32_t mask, bool connected)
     {
         ImGui::Spring();
         if (name) {
@@ -165,7 +165,7 @@ namespace Tools {
         DataPinIcon(type, mask, connected);
     }
 
-    bool DataOutPin(const char *name, uint32_t nodeId, uint32_t pinId, uint32_t group, ExtendedValueTypeDesc type, uint32_t mask, bool connected)
+    bool DataOutPin(const char *name, uint32_t nodeId, uint32_t pinId, uint32_t group, Reflect::ExtendedType type, uint32_t mask, bool connected)
     {
         int id = 60000 * nodeId + Behavior::NodeGraph::NodeBase::dataOutId(pinId, group);
 
@@ -189,7 +189,7 @@ namespace Tools {
         return ImGui::IsItemHovered();
     }
 
-    void DataInPin(const char *name, ExtendedValueTypeDesc type, uint32_t mask, bool connected)
+    void DataInPin(const char *name, Reflect::ExtendedType type, uint32_t mask, bool connected)
     {
         DataPinIcon(type, mask, connected);
         if (name) {
@@ -199,7 +199,7 @@ namespace Tools {
         ImGui::Spring();        
     }
 
-    bool DataInPin(const char *name, uint32_t nodeId, uint32_t pinId, uint32_t group, ExtendedValueTypeDesc type, uint32_t mask, bool connected)
+    bool DataInPin(const char *name, uint32_t nodeId, uint32_t pinId, uint32_t group, Reflect::ExtendedType type, uint32_t mask, bool connected)
     {
         int id = 60000 * nodeId + Behavior::NodeGraph::NodeBase::dataInId(pinId, group);
         
@@ -224,11 +224,11 @@ namespace Tools {
         return ImGui::IsItemHovered();
     }
 
-    void HoverPin(ExtendedValueTypeDesc type)
+    void HoverPin(Reflect::ExtendedType type)
     {
         ImVec2 cursor = ImGui::GetCursorPos();
         ImGui::SetCursorScreenPos(ImGui::GetMousePos());
-        if (type.mType == ExtendedValueTypeEnum::VariantType) {
+        if (type.mType == Reflect::ExtendedTypeEnum::VariantType) {
             ShowLabel(type.unwrapVariant().first.toString());
         } else {
             ShowLabel(type.toString());
@@ -236,13 +236,13 @@ namespace Tools {
         ImGui::SetCursorPos(cursor);
     }
 
-    std::optional<ExtendedValueTypeDesc> BeginNode(const Behavior::NodeGraph::NodeBase *node, uint32_t nodeId, std::optional<Behavior::NodeGraph::PinDesc> dragPin, std::optional<ExtendedValueTypeDesc> dragType)
+    std::optional<Reflect::ExtendedType> BeginNode(const Behavior::NodeGraph::NodeBase *node, uint32_t nodeId, std::optional<Behavior::NodeGraph::PinDesc> dragPin, std::optional<Reflect::ExtendedType> dragType)
     {
         ed::BeginNode(60000 * nodeId);
 
         ImGui::PushID(node);
 
-        std::optional<ExtendedValueTypeDesc> hoveredPin;
+        std::optional<Reflect::ExtendedType> hoveredPin;
 
         ImGui::BeginVertical("node");
 
@@ -272,7 +272,7 @@ namespace Tools {
             for (uint32_t index = 0; index < node->dataInCount(group); ++index) {
                 Behavior::NodeGraph::Pin source = node->dataInSource(index, group);
 
-                ExtendedValueTypeDesc type = node->dataInType(index, group);
+                Reflect::ExtendedType type = node->dataInType(index, group);
 
                 if (DataInPin(node->dataInName(index, group).data(), nodeId, index, group, type, node->dataInMask(index, group), static_cast<bool>(source)))
                     hoveredPin = type;
@@ -311,7 +311,7 @@ namespace Tools {
 
         for (uint32_t group = 0; group < node->dataOutGroupCount(); ++group) {
             for (uint32_t index = 0; index < node->dataOutCount(group); ++index) {
-                ExtendedValueTypeDesc type = node->dataOutType(index, group);
+                Reflect::ExtendedType type = node->dataOutType(index, group);
 
                 if (DataOutPin(node->dataOutName(index, group).data(), nodeId, index, group, type, node->dataOutMask(index, group), !node->dataOutTargets(index, group).empty()))
                     hoveredPin = type;

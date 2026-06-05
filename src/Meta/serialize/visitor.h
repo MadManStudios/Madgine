@@ -9,7 +9,7 @@ namespace Engine {
 namespace Serialize {
 
     template <typename T>
-    META_EXPORT StreamResult visitSkipPrimitive(CallerHierarchyFormattedSerializeStream in, const char *name);
+    META_EXPORT StreamResult visitSkipPrimitive(PrimitiveHolder<T>, CallerHierarchyFormattedSerializeStream in, const char *name);
 
     META_EXPORT StreamResult visitSkipEnum(const EnumMetaTable *table, CallerHierarchyFormattedSerializeStream in, const char *name);
     META_EXPORT StreamResult visitSkipFlags(const EnumMetaTable *table, CallerHierarchyFormattedSerializeStream in, const char *name);
@@ -78,13 +78,7 @@ namespace Serialize {
                 if (result)
                     return std::move(*result);
             }
-            if constexpr (std::same_as<T, EnumTag>) {
-                return visitSkipEnum(holder.mTable, in, name);
-            } else if constexpr (std::same_as<T, FlagsTag>) {
-                return visitSkipFlags(holder.mTable, in, name);
-            } else {
-                return visitSkipPrimitive<T>(in, name);
-            }
+            return visitSkipPrimitive<T>(holder, in, name);
         }
 
         using StreamVisitorImplHelper<F, Ty...>::visit;

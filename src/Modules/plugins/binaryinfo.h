@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Interfaces/filesystem/path.h"
+#include "Platform/filesystem/path.h"
 
 #include "pluginlocal.h"
 
@@ -27,7 +27,7 @@ namespace Plugins {
         const char **mPluginGroupDependencies;
 
         bool mIsStub;
-        Filesystem::Path mDataPath;
+        Platform::Filesystem::Path mDataPath;
     };
 
 #if ENABLE_PLUGINS

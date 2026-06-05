@@ -8,23 +8,20 @@
 #include "serverinstance.h"
 
 namespace Engine {
-namespace App {
+namespace Core {
     struct Application;
-}
-namespace Window {
     struct MainWindow;
-}
-namespace Server {
+
     struct MADGINE_SERVER_EXPORT Server : Threading::MadgineObject<Server> {
-        Server(std::function<int(Closure<void(Engine::App::Application &, Engine::Window::MainWindow &)>)> entrypoint);
+        Server(std::function<int(Closure<void(Application &, MainWindow &)>)> entrypoint);
         ~Server();
 
-        void spawnInstance(std::string_view name, Closure<void(Engine::App::Application &, Engine::Window::MainWindow &)>);
+        void spawnInstance(std::string_view name, Closure<void(Application &, MainWindow &)>);
 
         template <typename T>
         T &getServerAPIComponent()
         {
-            return static_cast<T &>(getServerAPIComponent(UniqueComponent::component_index<T>()));
+            return static_cast<T &>(getServerAPIComponent(Plugins::component_index<T>()));
         }
 
         ServerAPIBase &getServerAPIComponent(size_t i);
@@ -41,7 +38,7 @@ namespace Server {
 
         Threading::TaskQueue mTaskQueue;
 
-        std::function<int(Closure<void(Engine::App::Application &, Engine::Window::MainWindow &)>)> mEntrypoint;
+        std::function<int(Closure<void(Core::Application &, Core::MainWindow &)>)> mEntrypoint;
 
     public:
         ServerAPIContainer<std::vector<Placeholder<0>>> mServerAPIs;

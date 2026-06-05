@@ -8,7 +8,7 @@
 namespace Engine {
 namespace Widgets {
 
-    void WidgetsVertexData::renderQuad(Vector3 pos, Vector2 size, const Rect2 &clipRect, ColorFrame color, Vector2 topLeftUV, Vector2 bottomRightUV, bool flippedUV)
+    void WidgetsVertexData::renderQuad(Math::Vector3 pos, Math::Vector2 size, const Math::Rect2 &clipRect, ColorFrame color, Math::Vector2 topLeftUV, Math::Vector2 bottomRightUV, bool flippedUV)
     {
         if (flippedUV) {
             std::swap(topLeftUV.x, topLeftUV.y);
@@ -57,15 +57,15 @@ namespace Widgets {
             std::swap(bottomRightUV.x, bottomRightUV.y);
         }
 
-        Vector2 topRightUV = { bottomRightUV.x, topLeftUV.y };
-        Vector2 bottomLeftUV = { topLeftUV.x, bottomRightUV.y };
+        Math::Vector2 topRightUV = { bottomRightUV.x, topLeftUV.y };
+        Math::Vector2 bottomLeftUV = { topLeftUV.x, bottomRightUV.y };
 
         if (flippedUV)
             std::swap(topRightUV, bottomLeftUV);
 
         ColorQuad quad = color.toQuad(pos.xy(), size);
 
-        Vector3 v = pos;
+        Math::Vector3 v = pos;
         mTriangleVertices.push_back({ v, quad.mTopLeft, topLeftUV });
         v.x += size.x;
         mTriangleVertices.push_back({ v, quad.mTopRight, topRightUV });
@@ -78,25 +78,25 @@ namespace Widgets {
         mTriangleVertices.push_back({ v, quad.mTopLeft, topLeftUV });
     }
 
-    void WidgetsVertexData::renderQuadUV(Vector3 pos, Vector2 size, const Rect2 &clipRect, ColorFrame color, Rect2i rect, Vector2i textureSize, bool flippedUV)
+    void WidgetsVertexData::renderQuadUV(Math::Vector3 pos, Math::Vector2 size, const Math::Rect2 &clipRect, ColorFrame color, Math::Rect2i rect, Math::Vector2i textureSize, bool flippedUV)
     {
         if (flippedUV)
             std::swap(rect.mSize.x, rect.mSize.y);
 
-        Vector2 topLeftUV = Vector2 { rect.mTopLeft + Vector2i { 1, 1 } } / Vector2 { textureSize };
-        Vector2 bottomRightUV = Vector2 { rect.mTopLeft + rect.mSize - Vector2i { 1, 1 } } / Vector2 { textureSize };
+        Math::Vector2 topLeftUV = Math::Vector2 { rect.mTopLeft + Math::Vector2i { 1, 1 } } / Math::Vector2 { textureSize };
+        Math::Vector2 bottomRightUV = Math::Vector2 { rect.mTopLeft + rect.mSize - Math::Vector2i { 1, 1 } } / Math::Vector2 { textureSize };
 
         renderQuad(pos, size, clipRect, color, topLeftUV, bottomRightUV, flippedUV);
     }
 
-    void WidgetsLinesData::renderLine(Line3 line, const Rect2 &clipRect, Color4 color)
+    void WidgetsLinesData::renderLine(Math::Line3 line, const Math::Rect2 &clipRect, Math::Color4 color)
     {
-        Line2 line2 = line.xy();
+        Math::Line2 line2 = line.xy();
         bool aIsInClipRect = clipRect.contains(line2.mPointA, true);
         if (auto result = Intersect(line2, clipRect)) {
-            Vector2 lineStart = line2.point(result[0]);
-            Vector2 lineEnd = result.size() > 1 ? line2.point(result[1]) : (aIsInClipRect ? line2.mPointA : line2.mPointB);
-            line = { Vector3 { lineStart, line.mPointA.z }, Vector3 { lineEnd, line.mPointB.z } };
+            Math::Vector2 lineStart = line2.point(result[0]);
+            Math::Vector2 lineEnd = result.size() > 1 ? line2.point(result[1]) : (aIsInClipRect ? line2.mPointA : line2.mPointB);
+            line = { Math::Vector3 { lineStart, line.mPointA.z }, Math::Vector3 { lineEnd, line.mPointB.z } };
         } else {
             if (!aIsInClipRect)
                 return;
@@ -106,22 +106,22 @@ namespace Widgets {
         mLineVertices.push_back({ line.mPointB, color, { 0, 0 } });
     }
 
-    void WidgetsRenderData::renderQuad(Vector2 pos, Vector2 size, ColorFrame color, TextureSettings tex, Vector2 topLeftUV, Vector2 bottomRightUV, bool flippedUV, bool transparentContent)
+    void WidgetsRenderData::renderQuad(Math::Vector2 pos, Math::Vector2 size, ColorFrame color, TextureSettings tex, Math::Vector2 topLeftUV, Math::Vector2 bottomRightUV, bool flippedUV, bool transparentContent)
     {
         color.mRenderData.mColor.a *= mAlpha;
-        vertexData(tex, transparentContent || color.mRenderData.mColor.a < 1.0f).renderQuad(Vector3 { pos, 10.0f * mLayer + mSubLayer }, size, mClipRect, color, topLeftUV, bottomRightUV, flippedUV);
+        vertexData(tex, transparentContent || color.mRenderData.mColor.a < 1.0f).renderQuad(Math::Vector3 { pos, 10.0f * mLayer + mSubLayer }, size, mClipRect, color, topLeftUV, bottomRightUV, flippedUV);
     }
 
-    void WidgetsRenderData::renderQuadUV(Vector2 pos, Vector2 size, ColorFrame color, TextureSettings tex, Rect2i rect, Vector2i textureSize, bool flippedUV, bool transparentContent)
+    void WidgetsRenderData::renderQuadUV(Math::Vector2 pos, Math::Vector2 size, ColorFrame color, TextureSettings tex, Math::Rect2i rect, Math::Vector2i textureSize, bool flippedUV, bool transparentContent)
     {
         color.mRenderData.mColor.a *= mAlpha;
-        vertexData(tex, transparentContent || color.mRenderData.mColor.a < 1.0f).renderQuadUV(Vector3 { pos, 10.0f * mLayer + mSubLayer }, size, mClipRect, color, rect, textureSize, flippedUV);
+        vertexData(tex, transparentContent || color.mRenderData.mColor.a < 1.0f).renderQuadUV(Math::Vector3 { pos, 10.0f * mLayer + mSubLayer }, size, mClipRect, color, rect, textureSize, flippedUV);
     }
 
-    void WidgetsRenderData::renderLine(const Line2 &line, Color4 color)
+    void WidgetsRenderData::renderLine(const Math::Line2 &line, Math::Color4 color)
     {
         color.a *= mAlpha;
-        mLineData.renderLine({ Vector3 { line.mPointA, 10.0f * mLayer + mSubLayer }, Vector3 { line.mPointB, 10.0f * mLayer + mSubLayer } }, mClipRect, color);
+        mLineData.renderLine({ Math::Vector3 { line.mPointA, 10.0f * mLayer + mSubLayer }, Math::Vector3 { line.mPointB, 10.0f * mLayer + mSubLayer } }, mClipRect, color);
     }
 
     const std::map<size_t, std::map<TextureSettings, WidgetsVertexData>> &WidgetsRenderData::vertexData() const
@@ -139,7 +139,7 @@ namespace Widgets {
         mRenderData.mClipRect = mOldRect;
     }
 
-    WidgetsRenderData::WidgetsRenderDataClipRectKeep WidgetsRenderData::pushClipRect(Vector2 pos, Vector2 size)
+    WidgetsRenderData::WidgetsRenderDataClipRectKeep WidgetsRenderData::pushClipRect(Math::Vector2 pos, Math::Vector2 size)
     {
         WidgetsRenderDataClipRectKeep keep {
             mClipRect,

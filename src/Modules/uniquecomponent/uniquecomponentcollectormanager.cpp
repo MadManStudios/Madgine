@@ -9,7 +9,7 @@
 #    include "uniquecomponentregistry.h"
 
 namespace Engine {
-namespace UniqueComponent {
+namespace Plugins {
 
     CollectorManager::CollectorManager(Plugins::PluginManager &pluginMgr)
     {

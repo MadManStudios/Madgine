@@ -8,7 +8,7 @@
 
 #include "Madgine/render/rendertarget.h"
 
-#include "Generic/intervalclock.h"
+#include "Generic/execution/intervalclock.h"
 
 #include "Madgine/behavior/nativebehaviorcollector.h"
 
@@ -54,7 +54,7 @@ namespace ClickBrick {
 
         Engine::Scene::SceneManager &mSceneMgr;
 
-        Engine::IntervalClock<Engine::Threading::CustomTimepoint> mSceneClock;
+        Engine::Execution::IntervalClock<Engine::Threading::CustomTimepoint> mSceneClock;
         
         Engine::ManualLifetime<Engine::Render::SceneRenderPass> mSceneRenderer;
         std::unique_ptr<Engine::Render::RenderTarget> mGameRenderTarget;
@@ -62,6 +62,6 @@ namespace ClickBrick {
         std::vector<Engine::Scene::Entity::EntityPtr> mBricks;
     };
 
-    Engine::Behavior::Behavior Brick(float speed, Engine::Vector3 dir, Engine::Quaternion q, GameManager &manager, Engine::Scene::EntityBinding entity = {});
+    Engine::Behavior::Behavior Brick(float speed, Engine::Math::Vector3 dir, Engine::Math::Quaternion q, GameManager &manager, Engine::Scene::EntityBinding entity = {});
 
 }

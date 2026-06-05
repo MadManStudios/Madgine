@@ -2,7 +2,7 @@
 
 #include "rendercontext.h"
 
-#include "Generic/container/safeiterator.h"
+#include "Generic/containers/safeiterator.h"
 
 #include "Modules/debug/profiler/profile.h"
 #include "Modules/threading/workgroupstorage.h"
@@ -62,7 +62,7 @@ namespace Render {
         if (beginFrame()) {
             PROFILE();
             std::vector<Threading::TaskFuture<RenderFuture>> targets;
-            for (RenderTarget *target : safeIterate(mRenderTargets))
+            for (RenderTarget *target : Containers::safeIterate(mRenderTargets))
                 targets.push_back(target->update(this));
             for (Threading::TaskFuture<RenderFuture> &wait : targets)
                 co_await wait;

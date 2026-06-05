@@ -11,7 +11,7 @@
 #endif
 
 #ifndef NDEBUG
-#    include "Interfaces/debug/stacktrace.h"
+#    include "Platform/debug/stacktrace.h"
 #endif
 
 namespace Engine {

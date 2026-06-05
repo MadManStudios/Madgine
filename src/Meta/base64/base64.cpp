@@ -20,7 +20,7 @@ namespace Base64 {
         return result;
     }();
 
-    std::string encode(const ByteBuffer &data)
+    std::string encode(const Memory::ByteBuffer &data)
     {
         std::string result;
         result.reserve((data.mSize + 2) / 3 * 4);
@@ -49,7 +49,7 @@ namespace Base64 {
         return result;
     }
 
-    bool decode(ByteBuffer &b, std::string_view string)
+    bool decode(Memory::ByteBuffer &b, std::string_view string)
     {
         if (string.size() % 4 != 0)
             return false;

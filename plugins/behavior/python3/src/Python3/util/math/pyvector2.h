@@ -10,7 +10,7 @@ namespace Behavior {
 
         struct PyVector2 {
             PyObject_HEAD
-                Vector2 mVector;
+                Math::Vector2 mVector;
         };
 
     }

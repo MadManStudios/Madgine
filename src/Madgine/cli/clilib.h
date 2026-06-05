@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Interfaces/interfaceslib.h"
+#include "Platform/platformlib.h"
 
 #if defined(CLI_EXPORTS)
 #    define CLI_EXPORT DLL_EXPORT

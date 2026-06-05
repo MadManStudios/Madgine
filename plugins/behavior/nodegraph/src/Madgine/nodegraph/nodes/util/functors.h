@@ -17,7 +17,7 @@ namespace Behavior {
         struct Log {
             void operator()(const auto &...v) const
             {
-                (Engine::Log::LogDummy { Engine::Log::MessageType::INFO_TYPE } << ... << v);
+                (Engine::Platform::Log::LogDummy { Engine::Platform::Log::MessageType::INFO_TYPE } << ... << v);
             }
             CodeGen::Statement operator()(const CodeGen::Statement &s) const
             {
@@ -26,18 +26,18 @@ namespace Behavior {
         };
 
         struct Vector3To4 {
-            Vector4 operator()(Vector3 v, float w) const
+            Math::Vector4 operator()(Math::Vector3 v, float w) const
             {
                 return { v, w };
             }
             CodeGen::Statement operator()(const CodeGen::Statement &v, const CodeGen::Statement &w) const
             {
-                return CodeGen::Constructor { {}, { toValueTypeDesc<Vector4>() }, { v, w } };
+                return CodeGen::Constructor { {}, { Reflect::toType<Math::Vector4>() }, { v, w } };
             }
         };
 
         struct BreakVector3 {
-            std::tuple<float, float, float> operator()(Vector3 v) const
+            std::tuple<float, float, float> operator()(Math::Vector3 v) const
             {
                 return { v.x, v.y, v.z };
             }
@@ -48,7 +48,7 @@ namespace Behavior {
         };
 
         struct BreakVector4 {
-            std::tuple<float, float, float, float> operator()(Vector4 v) const
+            std::tuple<float, float, float, float> operator()(Math::Vector4 v) const
             {
                 return { v.x, v.y, v.z, v.w };
             }
@@ -59,13 +59,13 @@ namespace Behavior {
         };
 
         struct MakeVector3 {
-            Vector3 operator()(float x, float y, float z) const
+            Math::Vector3 operator()(float x, float y, float z) const
             {
                 return { x, y, z };
             }
             CodeGen::Statement operator()(const CodeGen::Statement &x, const CodeGen::Statement &y, const CodeGen::Statement &z) const
             {
-                return CodeGen::Constructor { {}, { toValueTypeDesc<Vector3>() }, { x, y, z } };
+                return CodeGen::Constructor { {}, { Reflect::toType<Math::Vector3>() }, { x, y, z } };
             };
         };
 

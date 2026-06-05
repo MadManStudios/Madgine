@@ -15,15 +15,15 @@ namespace Tools {
         virtual Threading::Task<bool> init() override;
 
         virtual void renderMenu() override;
-        virtual bool renderConfiguration(const Filesystem::Path &config) override;
-        virtual void loadConfiguration(const Filesystem::Path &config) override;
-        virtual void saveConfiguration(const Filesystem::Path &config) override;
+        virtual bool renderConfiguration(const Platform::Filesystem::Path &config) override;
+        virtual void loadConfiguration(const Platform::Filesystem::Path &config) override;
+        virtual void saveConfiguration(const Platform::Filesystem::Path &config) override;
 
         std::string_view key() const override;
 
     private:
-        std::map<std::pair<std::string, Filesystem::Path>, std::vector<Resources::ResourceBase *>> mResourceCache;
-        std::set<std::pair<std::string, Filesystem::Path>> mResourceConfig;
+        std::map<std::pair<std::string, Platform::Filesystem::Path>, std::vector<Resources::ResourceBase *>> mResourceCache;
+        std::set<std::pair<std::string, Platform::Filesystem::Path>> mResourceConfig;
     };
 
 }

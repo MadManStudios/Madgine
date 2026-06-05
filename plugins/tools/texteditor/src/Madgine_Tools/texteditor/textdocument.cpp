@@ -2,7 +2,7 @@
 
 #include "textdocument.h"
 
-#include "Interfaces/filesystem/fsapi.h"
+#include "Platform/filesystem/fsapi.h"
 
 #include "imgui/imgui.h"
 #include "texteditor.h"
@@ -10,7 +10,7 @@
 namespace Engine {
 namespace Tools {
 
-    TextDocument::TextDocument(Filesystem::Path path, TextEditor *editor)
+    TextDocument::TextDocument(Platform::Filesystem::Path path, TextEditor *editor)
         : mPath(std::move(path))
         , mEditor("C:\\Users\\Bub\\Desktop\\GitHub\\Madgine\\plugins\\tools\\texteditor\\data\\zep.cfg", sPixelScale())
     {
@@ -27,8 +27,8 @@ namespace Tools {
 
         std::string content;
 
-        if (Filesystem::exists(mPath)) {
-            Stream stream = Filesystem::openFileRead(mPath);
+        if (Platform::Filesystem::exists(mPath)) {
+            Stream stream = Platform::Filesystem::openFileRead(mPath);
             content = { stream.iterator(), stream.end() };
         }
 

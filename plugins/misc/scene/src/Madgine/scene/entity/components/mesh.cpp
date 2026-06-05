@@ -4,7 +4,7 @@
 
 #include "Meta/math/boundingbox.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
 NAMED_UNIQUECOMPONENT(Mesh, Engine::Scene::Entity::Mesh);
@@ -69,7 +69,7 @@ namespace Scene {
             return mIsVisible;
         }
 
-        AABB Mesh::aabb() const
+        Math::AABB Mesh::aabb() const
         {
             return mMesh->mAABB;
         }

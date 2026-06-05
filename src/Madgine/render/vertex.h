@@ -8,8 +8,8 @@ namespace Engine {
 namespace Render {
 
     struct VertexPos {
-        using ctor = Vector3;
-        Vector3 mPos;
+        using ctor = Math::Vector3;
+        Math::Vector3 mPos;
     };
 
     struct VertexPosW {
@@ -18,29 +18,29 @@ namespace Render {
     };
 
     struct VertexPos2 {
-        using ctor = Vector2;
-        Vector2 mPos2;
+        using ctor = Math::Vector2;
+        Math::Vector2 mPos2;
     };
 
     struct VertexNormal {
-        using ctor = Vector3;
-        Vector3 mNormal;
+        using ctor = Math::Vector3;
+        Math::Vector3 mNormal;
     };
 
     struct VertexColor {
         VertexColor() = default;
-        VertexColor(Color4 color)
+        VertexColor(Math::Color4 color)
             : mColor(color)
         {
         }
 
-        using ctor = Color4;
-        Vector4 mColor;
+        using ctor = Math::Color4;
+        Math::Vector4 mColor;
     };
 
     struct VertexUV {
-        using ctor = Vector2;
-        Vector2 mUV;
+        using ctor = Math::Vector2;
+        Math::Vector2 mUV;
     };
 
     struct VertexBoneIndices {

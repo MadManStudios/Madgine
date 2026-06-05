@@ -7,8 +7,8 @@ namespace Behavior {
         extern PyTypeObject PyTypeType;
 
         struct PyType {
-            PyObject_HEAD
-                const MetaTable *mType;
+            PyObject_HEAD 
+                const Reflect::MetaTable *mType;
         };
 
     }

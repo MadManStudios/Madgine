@@ -35,7 +35,7 @@ namespace Render {
     {
         RenderTarget::beginFrame();
 
-        Vector2i screenSize = size();
+        Math::Vector2i screenSize = size();
 
         glViewport(0, 0, static_cast<GLsizei>(screenSize.x), static_cast<GLsizei>(screenSize.y));
         GL_CHECK();
@@ -68,11 +68,11 @@ namespace Render {
         return RenderTarget::endFrame();
     }
 
-    void OpenGLRenderTarget::setRenderSpace(const Rect2i &space)
+    void OpenGLRenderTarget::setRenderSpace(const Math::Rect2i &space)
     {
         RenderTarget::setRenderSpace(space);
 
-        const Vector2i &screenSize = size();
+        const Math::Vector2i &screenSize = size();
 
         glViewport(space.mTopLeft.x, screenSize.y - (space.mTopLeft.y + space.mSize.y), space.mSize.x, space.mSize.y);
         GL_CHECK();
@@ -81,17 +81,17 @@ namespace Render {
         GL_CHECK();
     }
 
-    void OpenGLRenderTarget::setScissorsRect(const Rect2i &space)
+    void OpenGLRenderTarget::setScissorsRect(const Math::Rect2i &space)
     {
-        const Vector2i &screenSize = size();
+        const Math::Vector2i &screenSize = size();
 
         glScissor(space.mTopLeft.x, screenSize.y - (space.mTopLeft.y + space.mSize.y), space.mSize.x, space.mSize.y);
         GL_CHECK();
     }
 
-    Matrix4 OpenGLRenderTarget::getClipSpaceMatrix() const
+    Math::Matrix4 OpenGLRenderTarget::getClipSpaceMatrix() const
     {
-        return Matrix4 { 1, 0, 0, 0,
+        return Math::Matrix4 { 1, 0, 0, 0,
             0, 1, 0, 0,
             0, 0, 2, -1,
             0, 0, 0, 1 };

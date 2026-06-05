@@ -2,15 +2,14 @@
 #include "Modules/moduleslib.h"
 
 #define IMGUI_DEFINE_MATH_OPERATORS
-#include "Generic/coroutines/generator.h"
+#include "Generic/containers/generator.h"
 #include "Generic/enum.h"
 
-#include "Interfaces/filesystem/fsapi.h"
-#include "Interfaces/filesystem/path.h"
+#include "Platform/filesystem/fsapi.h"
+#include "Platform/filesystem/path.h"
 
-#include "Meta/keyvalue/boundapifunction.h"
-#include "Meta/keyvalue/scopeptr.h"
-#include "Meta/keyvalue/valuetype.h"
+#include "Meta/reflect/boundapifunction.h"
+#include "Meta/reflect/scopeptr.h"
 #include "Meta/math/matrix3.h"
 
 #include "Modules/threading/threadlocal.h"
@@ -362,7 +361,7 @@ bool InlineContextButton(const char *text, bool checked)
     return pressed;
 }
 
-bool BeginFilesystemPicker(Engine::Filesystem::Path &path, Engine::Filesystem::Path &selection, const Engine::Filesystem::Path &base)
+bool BeginFilesystemPicker(Engine::Platform::Filesystem::Path &path, Engine::Platform::Filesystem::Path &selection, const Engine::Platform::Filesystem::Path &base)
 {
     bool changed = false;
 
@@ -373,9 +372,9 @@ bool BeginFilesystemPicker(Engine::Filesystem::Path &path, Engine::Filesystem::P
             selection = base.absolute();
     } else {
         if (path.empty())
-            path = Engine::Filesystem::Path { "." }.absolute();
+            path = Engine::Platform::Filesystem::Path { "." }.absolute();
         if (selection.empty())
-            selection = Engine::Filesystem::Path { "." }.absolute();
+            selection = Engine::Platform::Filesystem::Path { "." }.absolute();
     }
 
     ImGui::BeginDisabled(path == base);
@@ -398,7 +397,7 @@ bool BeginFilesystemPicker(Engine::Filesystem::Path &path, Engine::Filesystem::P
     return changed;
 }
 
-bool DirectoryPicker(Engine::Filesystem::Path &path, Engine::Filesystem::Path &selection, const FilesystemPickerOptions &options)
+bool DirectoryPicker(Engine::Platform::Filesystem::Path &path, Engine::Platform::Filesystem::Path &selection, const FilesystemPickerOptions &options)
 {
     bool changed = BeginFilesystemPicker(path, selection, options.mBase);
 
@@ -415,7 +414,7 @@ bool DirectoryPicker(Engine::Filesystem::Path &path, Engine::Filesystem::Path &s
         ImGui::TableSetupScrollFreeze(0, 1);
         ImGui::TableHeadersRow();
 
-        for (Engine::Filesystem::FileQueryResult result : Engine::Filesystem::listDirs(path)) {
+        for (Engine::Platform::Filesystem::FileQueryResult result : Engine::Platform::Filesystem::listDirs(path)) {
 
             ImGui::TableNextRow();
 
@@ -445,7 +444,7 @@ FilesystemPickerOptions *GetFilesystemPickerOptions()
     return &sFilesystemPickerOptions;
 }
 
-bool FilePicker(Engine::Filesystem::Path &path, Engine::Filesystem::Path &selection, bool *itemDoubleClicked, const FilesystemPickerOptions &options)
+bool FilePicker(Engine::Platform::Filesystem::Path &path, Engine::Platform::Filesystem::Path &selection, bool *itemDoubleClicked, const FilesystemPickerOptions &options)
 {
     bool changed = BeginFilesystemPicker(path, selection, options.mBase);
 
@@ -457,7 +456,7 @@ bool FilePicker(Engine::Filesystem::Path &path, Engine::Filesystem::Path &select
 
     ImGuiStyle &style = g.Style;
 
-    Engine::Filesystem::Path file = selection.relative(path);
+    Engine::Platform::Filesystem::Path file = selection.relative(path);
     if (file == ".")
         file.clear();
 
@@ -478,12 +477,12 @@ bool FilePicker(Engine::Filesystem::Path &path, Engine::Filesystem::Path &select
         ImGui::TableHeadersRow();
 
         struct File {
-            Engine::Filesystem::Path mPath;
+            Engine::Platform::Filesystem::Path mPath;
             bool mIsDir;
         };
         std::vector<File> files;
 
-        std::ranges::transform(Engine::Filesystem::listFilesAndDirs(path), std::back_inserter(files), [](Engine::Filesystem::FileQueryResult result) { return File { result.path(), result.isDir() }; });
+        std::ranges::transform(Engine::Platform::Filesystem::listFilesAndDirs(path), std::back_inserter(files), [](Engine::Platform::Filesystem::FileQueryResult result) { return File { result.path(), result.isDir() }; });
 
         for (const File &file : files) {
 
@@ -529,7 +528,7 @@ bool FilePicker(Engine::Filesystem::Path &path, Engine::Filesystem::Path &select
     std::string baseName { file.stem() };
 
     if (InputText("Filename:", &baseName)) {
-        Engine::Filesystem::Path p = baseName + extension;
+        Engine::Platform::Filesystem::Path p = baseName + extension;
         if (!p.empty() && p.isRelative())
             selection = path / p;
 
@@ -541,7 +540,7 @@ bool FilePicker(Engine::Filesystem::Path &path, Engine::Filesystem::Path &select
             for (const std::string &ext : options.mExtensions) {
                 if (Selectable(ext.c_str(), ext == extension)) {
                     extension = ext;
-                    Engine::Filesystem::Path p = baseName + extension;
+                    Engine::Platform::Filesystem::Path p = baseName + extension;
                     if (!p.empty() && p.isRelative())
                         selection = path / p;
 

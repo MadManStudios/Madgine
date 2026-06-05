@@ -5,9 +5,9 @@
 
 #include "Generic/projections.h"
 
-#include "Interfaces/filesystem/fsapi.h"
+#include "Platform/filesystem/fsapi.h"
 
-#include "Meta/keyvalueutil/valuetypeserialize.h"
+#include "Meta/reflectserialize/valuetypeserialize.h"
 #include "Meta/serialize/formats.h"
 #include "Meta/serialize/streams/serializestream.h"
 
@@ -15,7 +15,7 @@
 
 #include "Madgine/serialize/filesystem/filemanager.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
 #include "nodebase.h"
@@ -84,10 +84,10 @@ namespace Behavior {
             return *this;
         }
 
-        Threading::Task<Serialize::StreamResult> NodeGraph::loadFromFile(const Filesystem::Path &path)
+        Threading::Task<Serialize::StreamResult> NodeGraph::loadFromFile(const Platform::Filesystem::Path &path)
         {
-            if (Filesystem::exists(path)) {
-                Filesystem::FileManager mgr("Graph-Serializer");
+            if (Platform::Filesystem::exists(path)) {
+                Serialize::FileManager mgr("Graph-Serializer");
                 Serialize::FormattedSerializeStream in = mgr.openRead(path, Serialize::Formats::xml);
 
                 std::vector<Threading::TaskFuture<bool>> futures;
@@ -199,9 +199,9 @@ namespace Behavior {
             co_return {};
         }
 
-        void NodeGraph::saveToFile(const Filesystem::Path &path)
+        void NodeGraph::saveToFile(const Platform::Filesystem::Path &path)
         {
-            Filesystem::FileManager mgr("Graph-Serializer");
+            Serialize::FileManager mgr("Graph-Serializer");
             Serialize::FormattedSerializeStream out = mgr.openWrite(path, Serialize::Formats::xml);
             Serialize::write(out, *this, "Graph");
         }
@@ -389,22 +389,22 @@ namespace Behavior {
             return mDataInPins[target.mIndex].mSource;
         }
 
-        ExtendedValueTypeDesc NodeGraph::dataOutType(Pin target, bool bidir)
+        Reflect::ExtendedType NodeGraph::dataOutType(Pin target, bool bidir)
         {
             if (target.mNode)
                 return node(target.mNode)->dataOutType(target.mIndex, target.mGroup, bidir);
             if (!bidir || target.mIndex == mDataOutPins.size())
-                return { ExtendedValueTypeEnum::GenericType };
+                return { Reflect::ExtendedTypeEnum::GenericType };
             Pin source = mDataOutPins[target.mIndex].mTargets.front();
             return node(source.mNode)->dataInType(source.mIndex, source.mGroup, false);
         }
 
-        ExtendedValueTypeDesc NodeGraph::dataInType(Pin source, bool bidir)
+        Reflect::ExtendedType NodeGraph::dataInType(Pin source, bool bidir)
         {
             if (source.mNode)
                 return node(source.mNode)->dataInType(source.mIndex, source.mGroup, bidir);
             if (!bidir || source.mIndex == mDataInPins.size())
-                return { ExtendedValueTypeEnum::GenericType };
+                return { Reflect::ExtendedTypeEnum::GenericType };
             Pin target = mDataInPins[source.mIndex].mSource;
             return node(target.mNode)->dataOutType(target.mIndex, target.mGroup, false);
         }

@@ -147,7 +147,7 @@ namespace Resources {
         }
 
         template <typename C = typename Loader::Ctor>
-        Threading::TaskFuture<bool> create(std::string_view name, const Filesystem::Path &path = {}, C &&c = {}, Loader *loader = &Loader::getSingleton())
+        Threading::TaskFuture<bool> create(std::string_view name, const Platform::Filesystem::Path &path = {}, C &&c = {}, Loader *loader = &Loader::getSingleton())
         {
             *this = Loader::loadManual(name, path, std::forward<C>(c), loader);
             typename Loader::ResourceDataInfo *i = info();
@@ -157,7 +157,7 @@ namespace Resources {
         }
 
         template <typename C = typename Loader::Ctor>
-        Threading::Task<bool> createTask(std::string_view name, const Filesystem::Path &path = {}, C &&c = {}, Loader *loader = &Loader::getSingleton())
+        Threading::Task<bool> createTask(std::string_view name, const Platform::Filesystem::Path &path = {}, C &&c = {}, Loader *loader = &Loader::getSingleton())
         {
             *this = Loader::loadManual(name, path, std::forward<C>(c), loader);
             typename Loader::ResourceDataInfo *i = info();

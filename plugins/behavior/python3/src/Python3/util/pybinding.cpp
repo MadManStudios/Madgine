@@ -2,8 +2,8 @@
 
 #include "pybinding.h"
 
-#include "Meta/keyvalue/scopeiterator.h"
-#include "Meta/keyvalue/valuetype.h"
+#include "Meta/reflect/scopeiterator.h"
+#include "Meta/reflect/value.h"
 
 #include "pyobjectptr.h"
 #include "pyobjectutil.h"
@@ -15,7 +15,7 @@ namespace Behavior {
         static PyObject *PyBinding_str(PyBinding *self)
         {
             PyObject *result = nullptr;
-            bool success = Execution::access_binding(self->mBinding, [&](const ValueType &v) {
+            bool success = Execution::access_binding(self->mBinding, [&](const Reflect::Value &v) {
                 result = PyUnicode_FromString(v.toShortString().c_str());
             });
             if (!success) {
@@ -27,7 +27,7 @@ namespace Behavior {
         static PyObject *PyBinding_await(PyBinding *self)
         {
             PyObject *result = nullptr;
-            bool success = Execution::access_binding(self->mBinding, [&](const ValueType &v) {
+            bool success = Execution::access_binding(self->mBinding, [&](const Reflect::Value &v) {
                 result = PyObject_CallFunctionObjArgs(PyObjectPtr { toPyObject(v) }.get("__await__"), NULL);
             });
             if (!success) {
@@ -63,12 +63,12 @@ namespace Behavior {
             if (!PyArg_Parse(args, "s", &name))
                 return NULL;
 
-            ScopeIterator it = self->mBinding.mType->find(name, ValueType { self->mBinding });
-            if (it == ScopeIterator { ValueType { self->mBinding }, nullptr }) {
+            Reflect::ScopeIterator it = self->mBinding.mType->find(name, Reflect::Value { self->mBinding });
+            if (it == Reflect::ScopeIterator { Reflect::Value { self->mBinding }, nullptr }) {
                 PyErr_Format(PyExc_AttributeError, "Could not find attribute '%s' in %R!", name, self);
                 return NULL;
             }
-            ValueType v;
+            Reflect::Value v;
             PYTHON3_PROPAGATE_ERROR(it->value(v));
             return toPyObject(v);
         }
@@ -99,7 +99,7 @@ namespace Behavior {
         static PyObject *PyScopeBinding_str(PyScopeBinding *self)
         {
             PyObject *result = nullptr;
-            bool success = Execution::access_binding(self->mBinding, [&](const ValueType &v) {
+            bool success = Execution::access_binding(self->mBinding, [&](const Reflect::Value &v) {
                 result = PyUnicode_FromString(v.toShortString().c_str());
             });
             if (!success) {
@@ -111,7 +111,7 @@ namespace Behavior {
         static PyObject *PyScopeBinding_await(PyScopeBinding *self)
         {
             PyObject *result = nullptr;
-            bool success = Execution::access_binding(self->mBinding, [&](const ValueType &v) {
+            bool success = Execution::access_binding(self->mBinding, [&](const Reflect::Value &v) {
                 result = PyObject_CallFunctionObjArgs(PyObjectPtr { toPyObject(v) }.get("__await__"), NULL);
             });
             if (!success) {

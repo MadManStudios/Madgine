@@ -23,7 +23,7 @@ namespace Render {
         mDescriptorHeap.deallocate(mDescriptors);
     }
 
-    Block DirectX12HeapAllocator::allocate(size_t size, size_t alignment)
+    Memory::Block DirectX12HeapAllocator::allocate(size_t size, size_t alignment)
     {
         DX12_LOG("Allocating DX12 heap memory: (size: " << size << ", " << alignment << ")");
 
@@ -70,7 +70,7 @@ namespace Render {
         return { reinterpret_cast<void *>(mHeaps.size() << 32), size };
     }
 
-    void DirectX12HeapAllocator::deallocate(Block block)
+    void DirectX12HeapAllocator::deallocate(Memory::Block block)
     {
         uint32_t offset = reinterpret_cast<uintptr_t>(block.mAddress);
         uint32_t buffer = reinterpret_cast<uintptr_t>(block.mAddress) >> 32;
@@ -111,7 +111,7 @@ namespace Render {
         mPages.clear();
     }
 
-    Block DirectX12MappedHeapAllocator::allocate(size_t size, size_t alignment)
+    Memory::Block DirectX12MappedHeapAllocator::allocate(size_t size, size_t alignment)
     {
         DX12_LOG("Allocating DX12 mapped memory: (size: " << size << ", " << alignment << ")");
 
@@ -135,7 +135,7 @@ namespace Render {
         return { page.mMappedAddress, size };
     }
 
-    void DirectX12MappedHeapAllocator::deallocate(Block block)
+    void DirectX12MappedHeapAllocator::deallocate(Memory::Block block)
     {
         auto it = std::ranges::find(mPages, block.mAddress, &Page::mMappedAddress);
         assert(it != mPages.end());

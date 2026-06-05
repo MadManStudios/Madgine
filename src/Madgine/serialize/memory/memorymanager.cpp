@@ -10,7 +10,7 @@
 #include "memorybuffer.h"
 
 namespace Engine {
-namespace Memory {
+namespace Serialize {
 
     MemoryManager::MemoryManager(const std::string &name)
         : SerializeManager(name)
@@ -26,13 +26,13 @@ namespace Memory {
     {
     }
 
-    Serialize::FormattedSerializeStream MemoryManager::openRead(ByteBuffer buffer, Serialize::Format format)
+    Serialize::FormattedSerializeStream MemoryManager::openRead(Memory::ByteBuffer buffer, Serialize::Format format)
     {
         Serialize::FormattedSerializeStream stream { format(), wrapStream(Stream { std::make_unique<MemoryReadBuffer>(std::move(buffer)) }, true) };
         return stream;
     }
 
-    Serialize::FormattedSerializeStream MemoryManager::openWrite(WritableByteBuffer &buffer, Serialize::Format format)
+    Serialize::FormattedSerializeStream MemoryManager::openWrite(Memory::WritableByteBuffer &buffer, Serialize::Format format)
     {
         return { format(), wrapStream(Stream { std::make_unique<MemoryWriteBuffer>(buffer) }) };
     }

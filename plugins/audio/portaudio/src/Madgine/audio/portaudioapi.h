@@ -12,7 +12,7 @@ namespace Audio {
 
     struct PortAudioApi : AudioApiImpl<PortAudioApi>, Threading::MadgineObject<PortAudioApi> {
 
-        PortAudioApi(Root::Root &root);
+        PortAudioApi(Core::Root &root);
         ~PortAudioApi();
 
         bool init();

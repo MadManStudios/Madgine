@@ -2,7 +2,7 @@
 
 #include "gamemanager.h"
 
-#include "Interfaces/log/logsenders.h"
+#include "Platform/log/logsenders.h"
 
 #include "Meta/math/boundingbox.h"
 #include "Meta/math/geometry3.h"
@@ -27,7 +27,7 @@
 #include "Madgine/widgets/scenewindow.h"
 #include "Madgine/window/mainwindow.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 
 #include "gameoverhandler.h"
 
@@ -116,10 +116,10 @@ Engine::Behavior::Behavior GameManager::game()
 
 void GameManager::spawnBrick()
 {
-    Engine::Vector3 dir = { static_cast<float>(rand() - RAND_MAX / 2), static_cast<float>(rand() - RAND_MAX / 2), static_cast<float>(rand() - RAND_MAX / 2) };
+    Engine::Math::Vector3 dir = { static_cast<float>(rand() - RAND_MAX / 2), static_cast<float>(rand() - RAND_MAX / 2), static_cast<float>(rand() - RAND_MAX / 2) };
     dir.normalize();
-    Engine::Vector3 orientation = { static_cast<float>(rand() - RAND_MAX / 2), static_cast<float>(rand() - RAND_MAX / 2), static_cast<float>(rand() - RAND_MAX / 2) };
-    Engine::Quaternion q { static_cast<float>(rand()), orientation };
+    Engine::Math::Vector3 orientation = { static_cast<float>(rand() - RAND_MAX / 2), static_cast<float>(rand() - RAND_MAX / 2), static_cast<float>(rand() - RAND_MAX / 2) };
+    Engine::Math::Quaternion q { static_cast<float>(rand()), orientation };
 
     mUI.app().getGlobalAPIComponent<Engine::Scene::SceneManager>().container("Default").createEntity("", [=](Engine::Scene::Entity::Entity &brick) {
         Engine::Scene::Entity::Transform *t = brick.addComponent<Engine::Scene::Entity::Transform>();
@@ -138,16 +138,16 @@ void GameManager::spawnBrick()
 
 void GameManager::onPointerClickHandler(const Engine::Widgets::PointerClickEvent &evt)
 {
-    Engine::Ray3 ray = mCamera.mousePointToRay(Engine::Vector2 { static_cast<float>(evt.mWindowPosition.x), static_cast<float>(evt.mWindowPosition.y) }, mGameWindow->getAbsoluteSize().xy());
+    Engine::Math::Ray3 ray = mCamera.mousePointToRay(Engine::Math::Vector2 { static_cast<float>(evt.mWindowPosition.x), static_cast<float>(evt.mWindowPosition.y) }, mGameWindow->getAbsoluteSize().xy());
 
     Engine::Scene::Entity::EntityPtr hit;
     float distance = std::numeric_limits<float>::max();
 
     for (const Engine::Scene::Entity::EntityPtr &brick : mBricks) {
         Engine::Execution::access_binding(brick, [&](Engine::Scene::Entity::Entity &e) {
-            const Engine::AABB &aabb = e.getComponent<Engine::Scene::Entity::Mesh>()->aabb();
-            Engine::BoundingBox bb = e.getComponent<Engine::Scene::Entity::Transform>()->matrix() * aabb;
-            if (Engine::UpTo<float, 2> hits = Engine::Intersect(ray, bb)) {
+            const Engine::Math::AABB &aabb = e.getComponent<Engine::Scene::Entity::Mesh>()->aabb();
+            Engine::Math::BoundingBox bb = e.getComponent<Engine::Scene::Entity::Transform>()->matrix() * aabb;
+            if (Engine::Math::UpTo<float, 2> hits = Engine::Math::Intersect(ray, bb)) {
                 if (hits[0] < distance) {
                     hit = brick;
                     distance = hits[0];
@@ -191,14 +191,14 @@ void GameManager::start()
     mLifetime.attach(game() | Engine::Behavior::with_named<"Scene">(mSceneMgr));
 }
 
-Engine::Behavior::Behavior Brick(float speed, Engine::Vector3 dir, Engine::Quaternion q, GameManager &manager, Engine::Scene::EntityBinding entity)
+Engine::Behavior::Behavior Brick(float speed, Engine::Math::Vector3 dir, Engine::Math::Quaternion q, GameManager &manager, Engine::Scene::EntityBinding entity)
 {
 
     float qAcc = 1.0f;
     float qSpeed = 1.0f;
 
-    Engine::Quaternion q0 = q;
-    Engine::Quaternion q1 = q;
+    Engine::Math::Quaternion q0 = q;
+    Engine::Math::Quaternion q1 = q;
 
     auto e = co_await *entity;
     Engine::Scene::Entity::Transform *t = e->getComponent<Engine::Scene::Entity::Transform>();
@@ -217,11 +217,11 @@ Engine::Behavior::Behavior Brick(float speed, Engine::Vector3 dir, Engine::Quate
             qAcc = 0.0f;
             q0 = q1;
 
-            Engine::Vector3 orientation = { static_cast<float>(rand() - RAND_MAX / 2), static_cast<float>(rand() - RAND_MAX / 2), static_cast<float>(rand() - RAND_MAX / 2) };
+            Engine::Math::Vector3 orientation = { static_cast<float>(rand() - RAND_MAX / 2), static_cast<float>(rand() - RAND_MAX / 2), static_cast<float>(rand() - RAND_MAX / 2) };
             q1 = { static_cast<float>(rand()), orientation };
         }
 
-        t->mOrientation = Engine::slerp(q0, q1, qAcc);
+        t->mOrientation = Engine::Math::slerp(q0, q1, qAcc);
     }
 
     manager.modLife(-1);

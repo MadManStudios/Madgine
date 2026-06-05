@@ -22,16 +22,16 @@ MADGINE_TOOLS_EXPORT bool DragDuration(const char *label, const Engine::Tools::T
 MADGINE_TOOLS_EXPORT bool DragUInt(const char *label, const Engine::Tools::Traced<uint64_t *> &p_data, float v_speed = 1.0f, const void *p_min = NULL, const void *p_max = NULL, const char *format = NULL, ImGuiSliderFlags flags = 0);
 MADGINE_TOOLS_EXPORT bool InputText(const char *label, const Engine::Tools::Traced<Engine::CoWString *> &buf, ImGuiInputTextFlags flags = 0, ImGuiInputTextCallback callback = NULL, void *user_data = NULL);
 
-MADGINE_TOOLS_EXPORT bool DragMatrix3(const char *label, const Engine::Tools::Traced<Engine::Matrix3 *> &m, float v_speed);
-MADGINE_TOOLS_EXPORT bool DragMatrix3(const char *label, const Engine::Tools::Traced<Engine::Matrix3 *> &m, float *v_speeds);
-MADGINE_TOOLS_EXPORT bool DragMatrix4(const char *label, const Engine::Tools::Traced<Engine::Matrix4 *> &m, float v_speed);
-MADGINE_TOOLS_EXPORT bool DragMatrix4(const char *label, const Engine::Tools::Traced<Engine::Matrix4 *> &m, float *v_speeds);
+MADGINE_TOOLS_EXPORT bool DragMatrix3(const char *label, const Engine::Tools::Traced<Engine::Math::Matrix3 *> &m, float v_speed);
+MADGINE_TOOLS_EXPORT bool DragMatrix3(const char *label, const Engine::Tools::Traced<Engine::Math::Matrix3 *> &m, float *v_speeds);
+MADGINE_TOOLS_EXPORT bool DragMatrix4(const char *label, const Engine::Tools::Traced<Engine::Math::Matrix4 *> &m, float v_speed);
+MADGINE_TOOLS_EXPORT bool DragMatrix4(const char *label, const Engine::Tools::Traced<Engine::Math::Matrix4 *> &m, float *v_speeds);
 
 //////// ValueType
 
 struct MADGINE_TOOLS_EXPORT ValueTypeDrawer {
-    static bool draw(const Engine::Tools::Traced<Engine::ScopePtr &> &scope);
-    static bool draw(const Engine::Tools::Traced<const Engine::ScopePtr &> &scope);
+    static bool draw(const Engine::Tools::Traced<Engine::Reflect::ScopePtr &> &scope);
+    static bool draw(const Engine::Tools::Traced<const Engine::Reflect::ScopePtr &> &scope);
     static bool draw(const Engine::Tools::Traced<bool &> &b);
     static bool draw(const Engine::Tools::Traced<const bool &> &b);
     static bool draw(const Engine::Tools::Traced<Engine::CoWString &> &s);
@@ -42,55 +42,55 @@ struct MADGINE_TOOLS_EXPORT ValueTypeDrawer {
     static bool draw(const Engine::Tools::Traced<const uint64_t &> &i);
     static bool draw(const Engine::Tools::Traced<float &> &f);
     static bool draw(const Engine::Tools::Traced<const float &> &f);
-    static bool draw(const Engine::Tools::Traced<Engine::CoW<Engine::Matrix3> &> &m);
-    static bool draw(const Engine::Tools::Traced<const Engine::CoW<Engine::Matrix3> &> &m);
-    static bool draw(const Engine::Tools::Traced<Engine::Matrix3 *> &m);
-    static bool draw(const Engine::Tools::Traced<const Engine::Matrix3 *> &m);
-    static bool draw(const Engine::Tools::Traced<Engine::CoW<Engine::Matrix4> &> &m);
-    static bool draw(const Engine::Tools::Traced<const Engine::CoW<Engine::Matrix4> &> &m);
-    static bool draw(const Engine::Tools::Traced<Engine::Matrix4 *> &m);
-    static bool draw(const Engine::Tools::Traced<const Engine::Matrix4 *> &m);
-    static bool draw(const Engine::Tools::Traced<Engine::Vector2 &> &v);
-    static bool draw(const Engine::Tools::Traced<const Engine::Vector2 &> &v);
-    static bool draw(const Engine::Tools::Traced<Engine::Vector3 &> &v);
-    static bool draw(const Engine::Tools::Traced<const Engine::Vector3 &> &v);
-    static bool draw(const Engine::Tools::Traced<Engine::Vector4 &> &v);
-    static bool draw(const Engine::Tools::Traced<const Engine::Vector4 &> &v);
-    static bool draw(const Engine::Tools::Traced<Engine::Vector2i &> &v);
-    static bool draw(const Engine::Tools::Traced<const Engine::Vector2i &> &v);
-    static bool draw(const Engine::Tools::Traced<Engine::Vector3i &> &v);
-    static bool draw(const Engine::Tools::Traced<const Engine::Vector3i &> &v);
-    static bool draw(const Engine::Tools::Traced<Engine::Vector4i &> &v);
-    static bool draw(const Engine::Tools::Traced<const Engine::Vector4i &> &v);
-    static bool draw(const Engine::Tools::Traced<Engine::KeyValueVirtualSequenceRange &> &range);
-    static bool draw(const Engine::Tools::Traced<const Engine::KeyValueVirtualSequenceRange &> &range);
-    static bool draw(const Engine::Tools::Traced<Engine::KeyValueVirtualAssociativeRange &> &range);
-    static bool draw(const Engine::Tools::Traced<const Engine::KeyValueVirtualAssociativeRange &> &range);
-    static bool draw(const Engine::Tools::Traced<Engine::KeyValueFunction &> &m);
-    static bool draw(const Engine::Tools::Traced<const Engine::KeyValueFunction &> &m);
-    static bool draw(const Engine::Tools::Traced<Engine::ApiFunction &> &m);
-    static bool draw(const Engine::Tools::Traced<const Engine::ApiFunction &> &m);
-    static bool draw(const Engine::Tools::Traced<Engine::BoundApiFunction &> &m);
-    static bool draw(const Engine::Tools::Traced<const Engine::BoundApiFunction &> &m);
+    static bool draw(const Engine::Tools::Traced<Engine::CoW<Engine::Math::Matrix3> &> &m);
+    static bool draw(const Engine::Tools::Traced<const Engine::CoW<Engine::Math::Matrix3> &> &m);
+    static bool draw(const Engine::Tools::Traced<Engine::Math::Matrix3 *> &m);
+    static bool draw(const Engine::Tools::Traced<const Engine::Math::Matrix3 *> &m);
+    static bool draw(const Engine::Tools::Traced<Engine::CoW<Engine::Math::Matrix4> &> &m);
+    static bool draw(const Engine::Tools::Traced<const Engine::CoW<Engine::Math::Matrix4> &> &m);
+    static bool draw(const Engine::Tools::Traced<Engine::Math::Matrix4 *> &m);
+    static bool draw(const Engine::Tools::Traced<const Engine::Math::Matrix4 *> &m);
+    static bool draw(const Engine::Tools::Traced<Engine::Math::Vector2 &> &v);
+    static bool draw(const Engine::Tools::Traced<const Engine::Math::Vector2 &> &v);
+    static bool draw(const Engine::Tools::Traced<Engine::Math::Vector3 &> &v);
+    static bool draw(const Engine::Tools::Traced<const Engine::Math::Vector3 &> &v);
+    static bool draw(const Engine::Tools::Traced<Engine::Math::Vector4 &> &v);
+    static bool draw(const Engine::Tools::Traced<const Engine::Math::Vector4 &> &v);
+    static bool draw(const Engine::Tools::Traced<Engine::Math::Vector2i &> &v);
+    static bool draw(const Engine::Tools::Traced<const Engine::Math::Vector2i &> &v);
+    static bool draw(const Engine::Tools::Traced<Engine::Math::Vector3i &> &v);
+    static bool draw(const Engine::Tools::Traced<const Engine::Math::Vector3i &> &v);
+    static bool draw(const Engine::Tools::Traced<Engine::Math::Vector4i &> &v);
+    static bool draw(const Engine::Tools::Traced<const Engine::Math::Vector4i &> &v);
+    static bool draw(const Engine::Tools::Traced<Engine::Reflect::SequenceRange &> &range);
+    static bool draw(const Engine::Tools::Traced<const Engine::Reflect::SequenceRange &> &range);
+    static bool draw(const Engine::Tools::Traced<Engine::Reflect::AssociativeRange &> &range);
+    static bool draw(const Engine::Tools::Traced<const Engine::Reflect::AssociativeRange &> &range);
+    static bool draw(const Engine::Tools::Traced<Engine::Reflect::Function &> &m);
+    static bool draw(const Engine::Tools::Traced<const Engine::Reflect::Function &> &m);
+    static bool draw(const Engine::Tools::Traced<Engine::Reflect::ApiFunction &> &m);
+    static bool draw(const Engine::Tools::Traced<const Engine::Reflect::ApiFunction &> &m);
+    static bool draw(const Engine::Tools::Traced<Engine::Reflect::BoundApiFunction &> &m);
+    static bool draw(const Engine::Tools::Traced<const Engine::Reflect::BoundApiFunction &> &m);
     static bool draw(const Engine::Tools::Traced<std::monostate &> &);
     static bool draw(const Engine::Tools::Traced<const std::monostate &> &);
-    static bool draw(const Engine::Tools::Traced<Engine::Quaternion &> &q);
-    static bool draw(const Engine::Tools::Traced<const Engine::Quaternion &> &q);
-    static bool draw(const Engine::Tools::Traced<Engine::ObjectPtr &> &o);
-    static bool draw(const Engine::Tools::Traced<const Engine::ObjectPtr &> &o);
-    static bool draw(const Engine::Tools::Traced<Engine::Filesystem::Path &> &p);
-    static bool draw(const Engine::Tools::Traced<const Engine::Filesystem::Path &> &p);
-    static bool draw(const Engine::Tools::Traced<Engine::EnumHolder &> &e);
-    static bool draw(const Engine::Tools::Traced<const Engine::EnumHolder &> &e);
-    static bool draw(const Engine::Tools::Traced<Engine::FlagsHolder &> &f);
-    static bool draw(const Engine::Tools::Traced<const Engine::FlagsHolder &> &f);
-    static bool draw(const Engine::Tools::Traced<Engine::Color3 &> &c);
-    static bool draw(const Engine::Tools::Traced<const Engine::Color3 &> &c);
-    static bool draw(const Engine::Tools::Traced<Engine::Color4 &> &c);
-    static bool draw(const Engine::Tools::Traced<const Engine::Color4 &> &c);
-    static bool draw(const Engine::Tools::Traced<const Engine::KeyValueSender &> &s);
-    static bool draw(const Engine::Tools::Traced<const Engine::KeyValueBinding &> &b);
-    static bool draw(const Engine::Tools::Traced<const Engine::KeyValueScopeBinding &> &b);
+    static bool draw(const Engine::Tools::Traced<Engine::Math::Quaternion &> &q);
+    static bool draw(const Engine::Tools::Traced<const Engine::Math::Quaternion &> &q);
+    static bool draw(const Engine::Tools::Traced<Engine::Reflect::ObjectPtr &> &o);
+    static bool draw(const Engine::Tools::Traced<const Engine::Reflect::ObjectPtr &> &o);
+    static bool draw(const Engine::Tools::Traced<Engine::Platform::Filesystem::Path &> &p);
+    static bool draw(const Engine::Tools::Traced<const Engine::Platform::Filesystem::Path &> &p);
+    static bool draw(const Engine::Tools::Traced<Engine::Reflect::Enum &> &e);
+    static bool draw(const Engine::Tools::Traced<const Engine::Reflect::Enum &> &e);
+    static bool draw(const Engine::Tools::Traced<Engine::Reflect::Flags &> &f);
+    static bool draw(const Engine::Tools::Traced<const Engine::Reflect::Flags &> &f);
+    static bool draw(const Engine::Tools::Traced<Engine::Math::Color3 &> &c);
+    static bool draw(const Engine::Tools::Traced<const Engine::Math::Color3 &> &c);
+    static bool draw(const Engine::Tools::Traced<Engine::Math::Color4 &> &c);
+    static bool draw(const Engine::Tools::Traced<const Engine::Math::Color4 &> &c);
+    static bool draw(const Engine::Tools::Traced<const Engine::Reflect::Sender &> &s);
+    static bool draw(const Engine::Tools::Traced<const Engine::Reflect::Binding &> &b);
+    static bool draw(const Engine::Tools::Traced<const Engine::Reflect::ScopeBinding &> &b);
     template <typename Rep, typename Ratio>
     static bool draw(const Engine::Tools::Traced<std::chrono::duration<Rep, Ratio> &> &d)
     {
@@ -108,48 +108,48 @@ struct MADGINE_TOOLS_EXPORT ValueTypeDrawer {
     }
     static bool draw(const Engine::Tools::Traced<std::chrono::nanoseconds &> &d);
     static bool draw(const Engine::Tools::Traced<const std::chrono::nanoseconds &> &d);
-    static bool draw(const Engine::Tools::Traced<Engine::ExtendedValueTypeDesc &> &t);
-    static bool draw(const Engine::Tools::Traced<const Engine::ExtendedValueTypeDesc &> &t);
+    static bool draw(const Engine::Tools::Traced<Engine::Reflect::ExtendedType &> &t);
+    static bool draw(const Engine::Tools::Traced<const Engine::Reflect::ExtendedType &> &t);
 };
 
-MADGINE_TOOLS_EXPORT bool ScopeTypePicker(const Engine::MetaTable *&t);
-MADGINE_TOOLS_EXPORT bool ValueTypeTypePicker(Engine::ValueTypeDesc &t);
-MADGINE_TOOLS_EXPORT bool ValueTypeTypePicker(Engine::ExtendedValueTypeDesc &t);
+MADGINE_TOOLS_EXPORT bool ScopeTypePicker(const Engine::Reflect::MetaTable *&t);
+MADGINE_TOOLS_EXPORT bool ValueTypeTypePicker(Engine::Reflect::Type &t);
+MADGINE_TOOLS_EXPORT bool ValueTypeTypePicker(Engine::Reflect::ExtendedType &t);
 
-MADGINE_TOOLS_EXPORT bool MethodPicker(const char *label, const std::vector<std::pair<std::string, Engine::BoundApiFunction>> &methods, Engine::BoundApiFunction *m, std::string *currentName, std::string *filter = nullptr, int expectedArgumentCount = -1);
+MADGINE_TOOLS_EXPORT bool MethodPicker(const char *label, const std::vector<std::pair<std::string, Engine::Reflect::BoundApiFunction>> &methods, Engine::Reflect::BoundApiFunction *m, std::string *currentName, std::string *filter = nullptr, int expectedArgumentCount = -1);
 
 ////////// Drag & Drop ValueTypes
 
 struct ValueTypePayload {
     std::string mName;
-    Engine::Closure<Engine::KeyValueResult(Engine::CallableView<std::pair<Engine::KeyValueResult, bool>(const Engine::Tools::Traced<const Engine::ValueType &> &)>)> mValue;
+    Engine::Closure<Engine::Reflect::Result(Engine::CallableView<std::pair<Engine::Reflect::Result, bool>(const Engine::Tools::Traced<const Engine::Reflect::Value &> &)>)> mValue;
 };
 
 MADGINE_TOOLS_EXPORT void ResetDraggableValueType();
 
-MADGINE_TOOLS_EXPORT void DraggableValueTypeSourceEx(std::string_view name, const Engine::Tools::Traced<const Engine::ValueType &> &value, ImGuiDragDropFlags flags = 0);
+MADGINE_TOOLS_EXPORT void DraggableValueTypeSourceEx(std::string_view name, const Engine::Tools::Traced<const Engine::Reflect::Value &> &value, ImGuiDragDropFlags flags = 0);
 template <typename T>
 void DraggableValueTypeSource(std::string_view name, const Engine::Tools::Traced<const T &> &data, ImGuiDragDropFlags flags = 0)
 {
-    DraggableValueTypeSourceEx(name, Engine::to_ValueType(data), flags);
+    DraggableValueTypeSourceEx(name, Engine::Reflect::toValue(data), flags);
 }
 
-MADGINE_TOOLS_EXPORT bool AcceptDraggableValueType(Engine::CallableView<Engine::KeyValueResult(const Engine::Tools::Traced<const Engine::ValueType &> &)> output, Engine::CallableView<Engine::KeyValueResult(const Engine::Tools::Traced<const Engine::ValueType &> &)> validate);
-template <typename T, typename Validator = Engine::KeyValueResult (*)(const Engine::Tools::Traced<const T &> &)>
+MADGINE_TOOLS_EXPORT bool AcceptDraggableValueType(Engine::CallableView<Engine::Reflect::Result(const Engine::Tools::Traced<const Engine::Reflect::Value &> &)> output, Engine::CallableView<Engine::Reflect::Result(const Engine::Tools::Traced<const Engine::Reflect::Value &> &)> validate);
+template <typename T, typename Validator = Engine::Reflect::Result (*)(const Engine::Tools::Traced<const T &> &)>
 bool AcceptDraggableValueType(
-    T &result, Validator &&validate = [](const Engine::Tools::Traced<const T &> &t) { return Engine::KeyValueResult {}; })
+    T &result, Validator &&validate = [](const Engine::Tools::Traced<const T &> &t) { return Engine::Reflect::Result {}; })
 {
     return AcceptDraggableValueType(
-        [&](const Engine::Tools::Traced<const Engine::ValueType &> &v) { return ValueType_call([&](const Engine::Tools::Traced<const T &> &t) { result = t.get(); return Engine::KeyValueResult{}; }, v); },
-        [&](const Engine::Tools::Traced<const Engine::ValueType &> &v) { return ValueType_call([&](const Engine::Tools::Traced<const T &> &t) { return validate(t); }, v); });
+        [&](const Engine::Tools::Traced<const Engine::Reflect::Value &> &v) { return call([&](const Engine::Tools::Traced<const T &> &t) { result = t.get(); return Engine::Reflect::Result{}; }, v); },
+        [&](const Engine::Tools::Traced<const Engine::Reflect::Value &> &v) { return call([&](const Engine::Tools::Traced<const T &> &t) { return validate(t); }, v); });
 }
 
-MADGINE_TOOLS_EXPORT bool IsDraggableValueTypeBeingAccepted(Engine::CallableView<Engine::KeyValueResult(const Engine::Tools::Traced<const Engine::ValueType &> &)> output);
+MADGINE_TOOLS_EXPORT bool IsDraggableValueTypeBeingAccepted(Engine::CallableView<Engine::Reflect::Result(const Engine::Tools::Traced<const Engine::Reflect::Value &> &)> output);
 template <typename T>
 bool IsDraggableValueTypeBeingAccepted(T &result)
 {
-    return IsDraggableValueTypeBeingAccepted([&](const Engine::Tools::Traced<const Engine::ValueType &> &v) {
-        return ValueType_call([&](const Engine::Tools::Traced<const T &> &t) { result = t.get(); return Engine::KeyValueResult{}; }, v);
+    return IsDraggableValueTypeBeingAccepted([&](const Engine::Tools::Traced<const Engine::Reflect::Value &> &v) {
+        return call([&](const Engine::Tools::Traced<const T &> &t) { result = t.get(); return Engine::Reflect::Result{}; }, v);
     });
 }
 }

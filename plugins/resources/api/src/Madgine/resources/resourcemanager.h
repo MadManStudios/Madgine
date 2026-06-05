@@ -2,7 +2,7 @@
 
 #include "Generic/systemvariable.h"
 
-#include "Interfaces/filesystem/filewatcher.h"
+#include "Platform/filesystem/filewatcher.h"
 
 #include "Modules/threading/madgineobject.h"
 #include "Modules/threading/taskqueue.h"
@@ -15,17 +15,17 @@
 
 namespace Engine {
 namespace Resources {
-    struct MADGINE_RESOURCES_EXPORT ResourceManager : Root::RootComponent<ResourceManager>, Threading::MadgineObject<ResourceManager> {
+    struct MADGINE_RESOURCES_EXPORT ResourceManager : Core::RootComponent<ResourceManager>, Threading::MadgineObject<ResourceManager> {
         static ResourceManager &getSingleton();
 
-        ResourceManager(Root::Root &root);
+        ResourceManager(Core::Root &root);
         ~ResourceManager();
 
         virtual std::string_view key() const override;
 
         virtual Threading::Task<int> runTools() override;
 
-        void registerResourceLocation(const Filesystem::Path &path, std::string_view identifier, int priority);
+        void registerResourceLocation(const Platform::Filesystem::Path &path, std::string_view identifier, int priority);
 
         template <typename Loader>
         typename Loader::Resource *getResource(const std::string &name)
@@ -49,7 +49,7 @@ namespace Resources {
 
         ResourceLoaderContainer<std::vector<Placeholder<0>>> mCollector;
 
-        Filesystem::Path findResourceFile(std::string_view fileName);
+        Platform::Filesystem::Path findResourceFile(std::string_view fileName);
 
         Threading::Task<void> update();
 
@@ -57,33 +57,33 @@ namespace Resources {
 
         Threading::TaskQueue *taskQueue();
 
-        std::map<std::pair<std::string, Filesystem::Path>, std::vector<ResourceBase *>> buildResourceList();
-        std::pair<std::string, Filesystem::Path> makeRelative(const Filesystem::Path &path) const;
+        std::map<std::pair<std::string, Platform::Filesystem::Path>, std::vector<ResourceBase *>> buildResourceList();
+        std::pair<std::string, Platform::Filesystem::Path> makeRelative(const Platform::Filesystem::Path &path) const;
 
     private:
-        void updateResources(Filesystem::FileEventType event, const Filesystem::Path &path, int priority);
-        void updateResources(Filesystem::FileEventType event, const Filesystem::Path &path, int priority, const std::map<std::string, std::vector<ResourceLoaderBase *>, std::less<>> &loaderByExtension);
+        void updateResources(Platform::Filesystem::FileEventType event, const Platform::Filesystem::Path &path, int priority);
+        void updateResources(Platform::Filesystem::FileEventType event, const Platform::Filesystem::Path &path, int priority, const std::map<std::string, std::vector<ResourceLoaderBase *>, std::less<>> &loaderByExtension);
 
-        void updateResource(Filesystem::FileEventType event, const Filesystem::Path &path, int priority, const std::map<std::string, std::vector<ResourceLoaderBase *>, std::less<>> &loaderByExtension);
+        void updateResource(Platform::Filesystem::FileEventType event, const Platform::Filesystem::Path &path, int priority, const std::map<std::string, std::vector<ResourceLoaderBase *>, std::less<>> &loaderByExtension);
 
         std::map<std::string, std::vector<ResourceLoaderBase *>, std::less<>> getLoaderByExtension();
 
         void enumerateResources();
 
-        Filesystem::Path getProjectPath(std::string_view name) const;
+        Platform::Filesystem::Path getProjectPath(std::string_view name) const;
 
     private:
         struct SubDirCompare {
-            bool operator()(const Filesystem::Path &first, const Filesystem::Path &second) const;
+            bool operator()(const Platform::Filesystem::Path &first, const Platform::Filesystem::Path &second) const;
         };
 
-        Filesystem::FileWatcher mFileWatcher;
+        Platform::Filesystem::FileWatcher mFileWatcher;
 
         struct PathProperties {
             int mPriority;
             std::string mIdentifier;
         };
-        std::map<Filesystem::Path, PathProperties, SubDirCompare> mResourcePaths;
+        std::map<Platform::Filesystem::Path, PathProperties, SubDirCompare> mResourcePaths;
 
         SystemVariable<bool, false> mEnumerated;
     };

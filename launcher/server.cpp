@@ -18,16 +18,16 @@
 #    define FIX_LOCAL
 #endif
 
-Engine::CLI::Parameter<bool> headlessParameter { { "--headless", "-l" }, false, "If set, the server will not have any graphical interface." };
+Engine::Core::Parameter<bool> headlessParameter { { "--headless", "-l" }, false, "If set, the server will not have any graphical interface." };
 
-int server_launch(Engine::Closure<void(Engine::App::Application &, Engine::Window::MainWindow &)> init)
+int server_launch(Engine::Closure<void(Engine::Core::Application &, Engine::Core::MainWindow &)> init)
 {
     return launch(std::move(init));
 }
 
 int server()
 {
-    FIX_LOCAL Engine::KeyValueWorkGroupLocal<Engine::Server::Server> server { "Server", server_launch };
+    FIX_LOCAL Engine::Core::KeyValueWorkGroupLocal<Engine::Core::Server> server { "Server", server_launch };
 
     if (headlessParameter) {
         return Engine::Threading::Scheduler {}.go();

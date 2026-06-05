@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Meta/keyvalue/virtualscope.h"
+#include "Meta/reflect/virtualscope.h"
 #include "Meta/serialize/hierarchy/virtualserializableunit.h"
 
 #include "Modules/threading/madgineobject.h"
@@ -19,7 +19,7 @@ namespace Tools {
         std::string mText;
     };
 
-    struct MADGINE_TOOLS_EXPORT ToolBase : Serialize::VirtualSerializableUnitBase<VirtualScopeBase<>, Serialize::SerializableUnitBase>, Threading::MadgineObject<ToolBase> {
+    struct MADGINE_TOOLS_EXPORT ToolBase : Serialize::VirtualSerializableUnitBase<Reflect::VirtualScopeBase<>, Serialize::SerializableUnitBase>, Threading::MadgineObject<ToolBase> {
         SERIALIZABLEUNIT(ToolBase)
 
         ToolBase(ImRoot &root);
@@ -27,13 +27,13 @@ namespace Tools {
 
         virtual void render();
         virtual void renderMenu();
-        virtual bool renderConfiguration(const Filesystem::Path &config);
+        virtual bool renderConfiguration(const Platform::Filesystem::Path &config);
         virtual void renderSettings();
         virtual void renderMetrics();
         virtual void update();
 
-        virtual void loadConfiguration(const Filesystem::Path &config);
-        virtual void saveConfiguration(const Filesystem::Path &config);
+        virtual void loadConfiguration(const Platform::Filesystem::Path &config);
+        virtual void saveConfiguration(const Platform::Filesystem::Path &config);
 
         virtual std::vector<Tip> tips();
 
@@ -49,7 +49,7 @@ namespace Tools {
         template <typename T>
         T &getTool()
         {
-            return static_cast<T &>(getTool(UniqueComponent::component_index<T>()));
+            return static_cast<T &>(getTool(Plugins::component_index<T>()));
         }
 
         ImRoot &root();

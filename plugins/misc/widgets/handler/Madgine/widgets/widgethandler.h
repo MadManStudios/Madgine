@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Interfaces/input/inputevents.h"
+#include "Platform/input/inputevents.h"
 
 #include "Madgine/handler.h"
 #include "Madgine/handlercollector.h"
@@ -30,7 +30,7 @@ namespace Widgets {
         bool isRootWindow() const;
 
     protected:
-        virtual void onPointerMove(const Input::PointerMoveEvent &me);
+        virtual void onPointerMove(const Platform::Input::PointerMoveEvent &me);
         virtual void onPointerClick(const PointerClickEvent &me);
 
         virtual void onDragBegin(const DragBeginEvent &me);
@@ -38,10 +38,10 @@ namespace Widgets {
         virtual void onDragEnd(const DragEndEvent &me);
         virtual void onDragAbort();
 
-        virtual void onKeyPress(const Input::KeyPressEvent &evt);
-        virtual void onKeyRelease(const Input::KeyReleaseEvent &evt);
+        virtual void onKeyPress(const Platform::Input::KeyPressEvent &evt);
+        virtual void onKeyRelease(const Platform::Input::KeyReleaseEvent &evt);
 
-        virtual void onAxisEvent(const Input::AxisEvent &evt);
+        virtual void onAxisEvent(const Platform::Input::AxisEvent &evt);
 
         bool dragging() const;
 
@@ -64,6 +64,6 @@ namespace Widgets {
     };
 
     template <typename T>
-    using WidgetHandler = VirtualScope<T, Behavior::HandlerComponent<T, WidgetHandlerBase>>;
+    using WidgetHandler = Reflect::VirtualScope<T, Behavior::HandlerComponent<T, WidgetHandlerBase>>;
 }
 }

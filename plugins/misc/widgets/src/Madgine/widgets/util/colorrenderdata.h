@@ -11,33 +11,33 @@ namespace Widgets {
 
     struct ColorQuad {
 
-        Color4 mTopLeft = { 1.0f, 1.0f, 1.0f, 1.0f };
-        Color4 mTopRight = { 1.0f, 1.0f, 1.0f, 1.0f };
-        Color4 mBottomLeft = { 1.0f, 1.0f, 1.0f, 1.0f };
-        Color4 mBottomRight = { 1.0f, 1.0f, 1.0f, 1.0f };
+        Math::Color4 mTopLeft = { 1.0f, 1.0f, 1.0f, 1.0f };
+        Math::Color4 mTopRight = { 1.0f, 1.0f, 1.0f, 1.0f };
+        Math::Color4 mBottomLeft = { 1.0f, 1.0f, 1.0f, 1.0f };
+        Math::Color4 mBottomRight = { 1.0f, 1.0f, 1.0f, 1.0f };
     };
 
     struct ColorRenderData : RenderData {
 
         ColorRenderData() = default;
-        ColorRenderData(Color4 color)
+        ColorRenderData(Math::Color4 color)
             : mColor(color)
         {
         }
 
-        ColorFrame frame(Vector2 pos, Vector2 size) const;
+        ColorFrame frame(Math::Vector2 pos, Math::Vector2 size) const;
 
-        Color4 mColor = { 1.0f, 1.0f, 1.0f, 1.0f };
-        Color4 mSecondaryColor = { 1.0f, 1.0f, 1.0f, 1.0f };
-        Vector2 mGradient = { 0.0f, 0.0f };
+        Math::Color4 mColor = { 1.0f, 1.0f, 1.0f, 1.0f };
+        Math::Color4 mSecondaryColor = { 1.0f, 1.0f, 1.0f, 1.0f };
+        Math::Vector2 mGradient = { 0.0f, 0.0f };
     };
 
     struct ColorFrame {
-        ColorQuad toQuad(Vector2 pos, Vector2 size) const;
+        ColorQuad toQuad(Math::Vector2 pos, Math::Vector2 size) const;
 
         ColorRenderData mRenderData;
-        Vector2 mPos { 0.0f, 0.0f };
-        Vector2 mSize { 1.0f, 1.0f };
+        Math::Vector2 mPos { 0.0f, 0.0f };
+        Math::Vector2 mSize { 1.0f, 1.0f };
     };
 
 }

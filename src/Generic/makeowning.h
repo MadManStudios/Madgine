@@ -25,7 +25,7 @@ template <typename T>
 struct MakeOwning<const T> : MakeOwning<T> {
 };
 
-template <StringViewable S>
+template <Concepts::StringViewable S>
 struct MakeOwning<S> {
     static std::string apply(const S &s)
     {

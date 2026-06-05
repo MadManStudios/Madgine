@@ -2,13 +2,13 @@
 
 #include "rendertarget.h"
 
-#include "Generic/container/safeiterator.h"
+#include "Generic/containers/safeiterator.h"
 
 #include "Meta/math/matrix4.h"
 
 #include "Madgine/render/texture.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 
 #include "rendercontext.h"
 #include "renderpass.h"
@@ -49,7 +49,7 @@ namespace Render {
         if (mBlitSource)
             dependencies.push_back(mBlitSource->update(context));
 
-        for (RenderPass *pass : safeIterate(mRenderPasses))
+        for (RenderPass *pass : Containers::safeIterate(mRenderPasses))
             pass->preRender(dependencies, context);
 
         for (Threading::TaskFuture<RenderFuture> &dependency : dependencies)
@@ -143,7 +143,7 @@ namespace Render {
         return mName;
     }
 
-    bool RenderTarget::resize(const Vector2i &size)
+    bool RenderTarget::resize(const Math::Vector2i &size)
     {
         if (mBlitSource)
             mBlitSource->resize(size);
@@ -155,9 +155,9 @@ namespace Render {
         return resized;
     }
 
-    Matrix4 RenderTarget::getClipSpaceMatrix() const
+    Math::Matrix4 RenderTarget::getClipSpaceMatrix() const
     {
-        return Matrix4::IDENTITY;
+        return Math::Matrix4::IDENTITY;
     }
 
     ConstTexturePtr RenderTarget::texture(size_t index) const
@@ -192,12 +192,12 @@ namespace Render {
             mFlipFlopIndices[startIndex + i] = mFlipFlopIndices[startIndex + i] ^ 1;
     }
 
-    void RenderTarget::setRenderSpace(const Rect2i &space)
+    void RenderTarget::setRenderSpace(const Math::Rect2i &space)
     {
         mRenderSpace = space;
     }
 
-    const Rect2i &RenderTarget::renderSpace() const
+    const Math::Rect2i &RenderTarget::renderSpace() const
     {
         return mRenderSpace;
     }

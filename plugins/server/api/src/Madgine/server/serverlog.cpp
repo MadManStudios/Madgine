@@ -13,7 +13,7 @@
 #endif
 
 namespace Engine {
-namespace Server {
+namespace Core {
     ServerLog::ServerLog(const std::string &name)
         : StandardLog(name)
         , mConsole(false)
@@ -25,7 +25,7 @@ namespace Server {
         stopConsole();
     }
 
-    void ServerLog::log(std::string_view msg, Engine::Log::MessageType lvl, const char *file, size_t line)
+    void ServerLog::log(std::string_view msg, Platform::Log::MessageType lvl, const char *file, size_t line)
     {
         std::cout << "\r";
         StandardLog::log(msg, lvl, file, line);

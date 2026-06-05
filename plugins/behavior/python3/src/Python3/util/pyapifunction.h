@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Meta/keyvalue/apifunction.h"
+#include "Meta/reflect/apifunction.h"
 
 namespace Engine {
 namespace Behavior {
@@ -10,7 +10,7 @@ namespace Behavior {
 
         struct PyApiFunction {
             PyObject_HEAD
-                ApiFunction mFunction;
+                Reflect::ApiFunction mFunction;
         };
 
     }

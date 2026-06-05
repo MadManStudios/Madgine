@@ -31,7 +31,7 @@ namespace Render {
         Threading::Task<bool> generate(OpenGLShader &shader, ResourceDataInfo &info, ShaderType type, ShaderObjectPtr object = {});
         void unloadImpl(OpenGLShader &shader);
 
-        bool loadFromSource(OpenGLShader &shader, std::string_view name, std::string source, ShaderType type, const Filesystem::Path &path = {});
+        bool loadFromSource(OpenGLShader &shader, std::string_view name, std::string source, ShaderType type, const Platform::Filesystem::Path &path = {});
 
         virtual Threading::TaskQueue *loadingTaskQueue() const override;
     };

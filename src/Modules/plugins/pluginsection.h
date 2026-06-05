@@ -2,7 +2,7 @@
 
 #if ENABLE_PLUGINS
 
-#    include "Generic/container/mutable_set.h"
+#    include "Generic/containers/mutable_set.h"
 
 #    include "../threading/taskfuture.h"
 #    include "namecompare.h"
@@ -20,16 +20,16 @@ namespace Plugins {
         bool isAtleastOne() const;
         bool isExclusive() const;
 
-        bool load(Ini::IniFile &file);
-        bool unload(Ini::IniFile &file);
+        bool load(IniFile &file);
+        bool unload(IniFile &file);
 
-        bool isLoaded(std::string_view name, Ini::IniFile &file);
-        bool loadPlugin(std::string_view name, Ini::IniFile &file);
-        bool unloadPlugin(std::string_view name, Ini::IniFile &file);
+        bool isLoaded(std::string_view name, IniFile &file);
+        bool loadPlugin(std::string_view name, IniFile &file);
+        bool unloadPlugin(std::string_view name, IniFile &file);
 
-        bool loadPluginByFilename(std::string_view name, Ini::IniFile &file);
+        bool loadPluginByFilename(std::string_view name, IniFile &file);
 
-        void loadAllDependencies(Ini::IniFile &file);
+        void loadAllDependencies(IniFile &file);
 
         template <typename T>
         T *getUniqueSymbol(std::string_view name) const
@@ -38,22 +38,22 @@ namespace Plugins {
         }
         const void *getUniqueSymbol(std::string_view name) const;
 
-        mutable_set<Plugin, NameCompare>::const_iterator begin() const;
-        mutable_set<Plugin, NameCompare>::const_iterator end() const;
-        mutable_set<Plugin, NameCompare>::iterator begin();
-        mutable_set<Plugin, NameCompare>::iterator end();
+        Containers::mutable_set<Plugin, NameCompare>::const_iterator begin() const;
+        Containers::mutable_set<Plugin, NameCompare>::const_iterator end() const;
+        Containers::mutable_set<Plugin, NameCompare>::iterator begin();
+        Containers::mutable_set<Plugin, NameCompare>::iterator end();
 
         PluginManager &manager();
 
         Plugin *getPlugin(std::string_view name);
 
     private:
-        bool loadPlugin(Plugin *p, Ini::IniFile &file, bool autoLoadTools = true);
-        bool unloadPlugin(Plugin *p, Ini::IniFile &file);
+        bool loadPlugin(Plugin *p, IniFile &file, bool autoLoadTools = true);
+        bool unloadPlugin(Plugin *p, IniFile &file);
 
         friend struct Plugin;
 
-        mutable_set<Plugin, NameCompare> mPlugins;
+        Containers::mutable_set<Plugin, NameCompare> mPlugins;
 
         std::vector<Plugin *> mDependents;
 

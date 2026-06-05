@@ -2,14 +2,14 @@
 
 #include <zep.h>
 
-#include "Interfaces/filesystem/path.h"
+#include "Platform/filesystem/path.h"
 
 namespace Engine {
 namespace Tools {
 
     struct MADGINE_TEXTEDITOR_EXPORT TextDocument : Zep::IZepComponent {
 
-        TextDocument(Filesystem::Path path, TextEditor *editor);
+        TextDocument(Platform::Filesystem::Path path, TextEditor *editor);
 
         bool render();
 
@@ -23,7 +23,7 @@ namespace Tools {
         Zep::ZepEditor &GetEditor() const override;
 
     private:
-        Filesystem::Path mPath;
+        Platform::Filesystem::Path mPath;
 
         Zep::ZepEditor_ImGui mEditor;
 

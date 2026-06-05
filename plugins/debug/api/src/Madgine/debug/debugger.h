@@ -8,13 +8,13 @@
 namespace Engine {
 namespace Debug {
 
-    struct MADGINE_DEBUGGER_EXPORT Debugger : Root::RootComponent<Debugger> {
+    struct MADGINE_DEBUGGER_EXPORT Debugger : Core::RootComponent<Debugger> {
 
         friend struct ContextInfo;
 
         Debugger(const Debugger &) = delete;
 
-        using Root::RootComponent<Debugger>::RootComponent;
+        using Core::RootComponent<Debugger>::RootComponent;
 
         virtual std::string_view key() const override;
 

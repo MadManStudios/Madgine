@@ -2,7 +2,7 @@
 
 #include "Generic/functor.h"
 
-#include "Interfaces/filesystem/path.h"
+#include "Platform/filesystem/path.h"
 
 namespace Engine {
 namespace Render {
@@ -37,8 +37,8 @@ namespace Render {
     };
 
     struct ShaderMetadata {
-        Filesystem::Path mPath;
-        std::vector<Filesystem::Path> mIncludePaths;
+        Platform::Filesystem::Path mPath;
+        std::vector<Platform::Filesystem::Path> mIncludePaths;
     };
 
     struct MADGINE_RENDER_EXPORT ShaderObjectPtr {
@@ -127,7 +127,7 @@ namespace Render {
     struct TypedShaderObjectPtr : ShaderObjectPtr {
 
         template <typename T1, typename T2>
-        using F = typename std::conditional_t<std::is_void_v<T1>, std::type_identity<T2>, std::enable_if<OneOf<T2, T1, void>, T1>>::type;
+        using F = typename std::conditional_t<std::is_void_v<T1>, std::type_identity<T2>, std::enable_if<Concepts::OneOf<T2, T1, void>, T1>>::type;
 
         template <fixed_string R2, fixed_string In2>
         struct helper {

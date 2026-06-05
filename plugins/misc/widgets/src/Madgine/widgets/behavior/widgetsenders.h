@@ -2,7 +2,7 @@
 
 #include "Generic/execution/algorithm.h"
 #include "Generic/execution/binding.h"
-#include "Generic/intervalclock.h"
+#include "Generic/execution/intervalclock.h"
 
 #include "Madgine/behavior/named.h"
 
@@ -23,7 +23,7 @@ namespace Widgets {
         return wait_frame(0s, manager, duration, acc);
     };
 
-    MADGINE_WIDGETS_EXPORT Behavior::Behavior animate_move(Matrix3 dist, std::chrono::nanoseconds duration, WidgetBinding widget = {});
+    MADGINE_WIDGETS_EXPORT Behavior::Behavior animate_move(Math::Matrix3 dist, std::chrono::nanoseconds duration, WidgetBinding widget = {});
     MADGINE_WIDGETS_EXPORT Behavior::Behavior animate_opacity(float dist, std::chrono::nanoseconds duration, WidgetBinding widget = {});
 
 }

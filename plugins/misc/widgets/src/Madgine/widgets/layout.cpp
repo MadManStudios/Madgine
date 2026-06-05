@@ -2,7 +2,7 @@
 
 #include "layout.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
 #include "geometry.h"
@@ -30,7 +30,7 @@ namespace Widgets {
 
     struct LayoutSize {
         SizeConstraints2 mConstraints;
-        Vector3 mDefaultZ;
+        Math::Vector3 mDefaultZ;
     };
 
     struct LayoutAxisElement {
@@ -45,8 +45,8 @@ namespace Widgets {
         std::vector<LayoutAxisElement> cols;
 
         for (WidgetBase *child : children()) {
-            Matrix3 matrixPos = child->getPos().Transpose();
-            Matrix3 matrixSize = child->getSize().Transpose();
+            Math::Matrix3 matrixPos = child->getPos().Transpose();
+            Math::Matrix3 matrixSize = child->getSize().Transpose();
 
             LayoutPos pos = reinterpret_cast<LayoutPos &>(matrixPos);
             LayoutSize size = reinterpret_cast<LayoutSize &>(matrixSize);
@@ -95,8 +95,8 @@ namespace Widgets {
 
             Geometry geometry = child->getGeometry();
 
-            Matrix3 matrixPos = geometry.mPos.Transpose();
-            Matrix3 matrixSize = geometry.mSize.Transpose();
+            Math::Matrix3 matrixPos = geometry.mPos.Transpose();
+            Math::Matrix3 matrixSize = geometry.mSize.Transpose();
 
             LayoutPos pos = reinterpret_cast<LayoutPos &>(matrixPos);
             LayoutSize size = reinterpret_cast<LayoutSize &>(matrixSize);
@@ -108,14 +108,14 @@ namespace Widgets {
             for (size_t i = 0; i < pos.mRowSpan; ++i)
                 height += rows[pos.mRow + i].mConstraints.apply(rowFactor);
 
-            Vector2 absolutePosition = getAbsolutePosition() + Vector2 { cols[pos.mColumn].mOffset, rows[pos.mRow].mOffset };
+            Math::Vector2 absolutePosition = getAbsolutePosition() + Math::Vector2 { cols[pos.mColumn].mOffset, rows[pos.mRow].mOffset };
             if (size.mConstraints.mWidth.mMax < width) {
                 absolutePosition.x += pos.mXAlign * (width - size.mConstraints.mWidth.mMax);
             }
             if (size.mConstraints.mHeight.mMax < height) {
                 absolutePosition.y += pos.mYAlign * (height - size.mConstraints.mHeight.mMax);
             }
-            Vector3 absoluteSize = {
+            Math::Vector3 absoluteSize = {
                 std::min(width, size.mConstraints.mWidth.mMax),
                 std::min(height, size.mConstraints.mHeight.mMax),
                 getAbsoluteSize().z

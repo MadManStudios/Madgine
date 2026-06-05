@@ -74,13 +74,13 @@ namespace Behavior {
         using meta_t = std::variant<T, Execution::BindingPtr<T>>;
 
         template <bool isReferenceWrapped>
-        friend std::variant<T, Execution::BindingPtr<T>> tag_invoke(convert_ValueType_t<isReferenceWrapped> convert_ValueType, Bindable<T> &&bindable)
+        friend std::variant<T, Execution::BindingPtr<T>> tag_invoke(Reflect::convert_Value_t<isReferenceWrapped>, Bindable<T> &&bindable)
         {
             return std::move(bindable.mValue);
         }
 
         template <bool isReferenceWrapped>
-        friend std::variant<T, Execution::BindingPtr<T>> tag_invoke(convert_ValueType_t<isReferenceWrapped> convert_ValueType, Bindable<T> &bindable)
+        friend std::variant<T, Execution::BindingPtr<T>> tag_invoke(Reflect::convert_Value_t<isReferenceWrapped>, Bindable<T> &bindable)
         {
             return bindable.mValue;
         }        
@@ -162,13 +162,13 @@ namespace Behavior {
         using meta_t = std::variant<std::string, Execution::BindingPtr<std::string_view>>;
 
         template <bool isReferenceWrapped>
-        friend std::variant<std::string, Execution::BindingPtr<std::string_view>> tag_invoke(convert_ValueType_t<isReferenceWrapped> convert_ValueType, Bindable<std::string> &&bindable)
+        friend std::variant<std::string, Execution::BindingPtr<std::string_view>> tag_invoke(Reflect::convert_Value_t<isReferenceWrapped>, Bindable<std::string> &&bindable)
         {
             return std::move(bindable.mValue);
         }
 
         template <bool isReferenceWrapped>
-        friend std::variant<std::string, Execution::BindingPtr<std::string_view>> tag_invoke(convert_ValueType_t<isReferenceWrapped> convert_ValueType, Bindable<std::string> &bindable)
+        friend std::variant<std::string, Execution::BindingPtr<std::string_view>> tag_invoke(Reflect::convert_Value_t<isReferenceWrapped>, Bindable<std::string> &bindable)
         {
             return bindable.mValue;
         }        

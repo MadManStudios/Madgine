@@ -1,23 +1,23 @@
 #pragma once
 
-#include "Meta/keyvalue/virtualscope.h"
+#include "Meta/reflect/virtualscope.h"
 #include "Meta/serialize/hierarchy/syncableunit.h"
 
 #include "Modules/uniquecomponent/uniquecomponentdefine.h"
 
-DECLARE_UNIQUE_COMPONENT(Engine::Scene, SceneComponent, SceneComponentBase, Engine::UniqueComponent::Constructor<SceneManager &>)
+DECLARE_UNIQUE_COMPONENT(Engine::Scene, SceneComponent, SceneComponentBase, Engine::Plugins::Constructor<SceneManager &>)
 
 namespace Engine {
 namespace Scene {
 
     template <typename T>
-    using SceneComponent = VirtualScope<T, Serialize::SyncableUnit<T, SceneComponentComponent<T>>>;
+    using SceneComponent = Reflect::VirtualScope<T, Serialize::SyncableUnit<T, SceneComponentComponent<T>>>;
 
     template <typename T>
     using VirtualSceneComponentBase = Serialize::SyncableUnit<T, SceneComponentVirtualBase<T>>;
 
     template <typename T, typename Base>
-    using VirtualSceneComponentImpl = VirtualScope<T, Serialize::SyncableUnit<T, UniqueComponent::VirtualComponentImpl<T, Base>>>;
+    using VirtualSceneComponentImpl = Reflect::VirtualScope<T, Serialize::SyncableUnit<T, Plugins::VirtualComponentImpl<T, Base>>>;
 
 #define VIRTUALSCENECOMPONENTBASE(T)                                                          \
     template <>                                                                               \

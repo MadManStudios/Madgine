@@ -6,7 +6,7 @@
 
 #include "Madgine/behavior/nativebehaviorcollector.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
 #include "../entity/components/skeleton.h"
@@ -41,7 +41,7 @@ namespace Scene {
         }
 
         struct AnimationSender : Execution::base_sender {
-            using result_type = KeyValueError;
+            using result_type = Reflect::Error;
             template <template <typename...> typename Tuple>
             using value_types = Tuple<>;
 
@@ -95,7 +95,7 @@ namespace Scene {
             return mCurrentStep;
         }
 
-        bool AnimationState::updateRender(std::chrono::microseconds frameTimeSinceLastFrame, std::chrono::microseconds sceneTimeSinceLastFrame, Matrix4 *matrices)
+        bool AnimationState::updateRender(std::chrono::microseconds frameTimeSinceLastFrame, std::chrono::microseconds sceneTimeSinceLastFrame, Math::Matrix4 *matrices)
         {
             mCurrentStep += std::chrono::duration_cast<std::chrono::duration<float>>(sceneTimeSinceLastFrame).count();
             Render::AnimationDescriptor &animation = mAnimationList->mAnimations[mCurrentAnimation];
@@ -107,18 +107,18 @@ namespace Scene {
 
             std::set<size_t> parentTransformToDos;
 
-            std::vector<Matrix4> localMatrices { skeleton->data()->mBones.size() };
+            std::vector<Math::Matrix4> localMatrices { skeleton->data()->mBones.size() };
 
             for (size_t i = 0; i < skeleton->data()->mBones.size(); ++i) {
                 int mappedBone = mBoneIndexMapping ? mBoneIndexMapping[i] : i;
                 if (mappedBone != -1) {
                     Render::AnimationBone &boneData = animation.mBones[mappedBone];
 
-                    auto it_position_end = std::upper_bound(boneData.mPositions.begin(), boneData.mPositions.end(), step, [](float step, const Render::KeyFrame<Vector3> &k) { return step < k.mTime; });
+                    auto it_position_end = std::upper_bound(boneData.mPositions.begin(), boneData.mPositions.end(), step, [](float step, const Render::KeyFrame<Math::Vector3> &k) { return step < k.mTime; });
                     assert(it_position_end != boneData.mPositions.begin());
                     auto it_position = std::prev(it_position_end);
 
-                    Vector3 pos;
+                    Math::Vector3 pos;
                     if (it_position_end != boneData.mPositions.end()) {
                         float position_blend = (step - it_position->mTime) / (it_position_end->mTime - it_position->mTime);
                         pos = lerp(it_position->mValue, it_position_end->mValue, position_blend);
@@ -126,11 +126,11 @@ namespace Scene {
                         pos = it_position->mValue;
                     }
 
-                    auto it_scale_end = std::upper_bound(boneData.mScalings.begin(), boneData.mScalings.end(), step, [](float step, const Render::KeyFrame<Vector3> &k) { return step < k.mTime; });
+                    auto it_scale_end = std::upper_bound(boneData.mScalings.begin(), boneData.mScalings.end(), step, [](float step, const Render::KeyFrame<Math::Vector3> &k) { return step < k.mTime; });
                     assert(it_scale_end != boneData.mScalings.begin());
                     auto it_scale = std::prev(it_scale_end);
 
-                    Vector3 scale;
+                    Math::Vector3 scale;
                     if (it_scale_end != boneData.mScalings.end()) {
                         float scale_blend = (step - it_scale->mTime) / (it_scale_end->mTime - it_scale->mTime);
                         scale = lerp(it_scale->mValue, it_scale_end->mValue, scale_blend);
@@ -138,11 +138,11 @@ namespace Scene {
                         scale = it_scale->mValue;
                     }
 
-                    auto it_orientation_end = std::upper_bound(boneData.mOrientations.begin(), boneData.mOrientations.end(), step, [](float step, const Render::KeyFrame<Quaternion> &k) { return step < k.mTime; });
+                    auto it_orientation_end = std::upper_bound(boneData.mOrientations.begin(), boneData.mOrientations.end(), step, [](float step, const Render::KeyFrame<Math::Quaternion> &k) { return step < k.mTime; });
                     assert(it_orientation_end != boneData.mOrientations.begin());
                     auto it_orientation = std::prev(it_orientation_end);
 
-                    Quaternion orientation;
+                    Math::Quaternion orientation;
                     if (it_orientation_end != boneData.mOrientations.end()) {
                         float orientation_blend = (step - it_orientation->mTime) / (it_orientation_end->mTime - it_orientation->mTime);
                         orientation = slerp(it_orientation->mValue, it_orientation_end->mValue, orientation_blend);

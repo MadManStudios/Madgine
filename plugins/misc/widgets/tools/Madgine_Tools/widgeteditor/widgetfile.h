@@ -14,7 +14,7 @@ namespace Tools {
         WidgetFile(WidgetEditor &editor, Widgets::WidgetLoader::Resource *resource);
         ~WidgetFile();
 
-        void saveAs(const Filesystem::Path &path) override;
+        void saveAs(const Platform::Filesystem::Path &path) override;
 
         void renderSelection();
         void renderHierarchy(Widgets::WidgetBase **hoveredWidget = nullptr);

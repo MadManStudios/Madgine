@@ -2,11 +2,11 @@
 
 #include "Modules/uniquecomponent/uniquecomponentdefine.h"
 
-DECLARE_UNIQUE_COMPONENT(Engine::Server, ServerAPI, ServerAPIBase, Engine::UniqueComponent::Constructor<Engine::Server::Server &>)
+DECLARE_UNIQUE_COMPONENT(Engine::Core, ServerAPI, ServerAPIBase, Engine::Plugins::Constructor<Engine::Core::Server &>)
 
 namespace Engine {
-namespace Server {
+namespace Core {
     template <typename T>
-    using ServerAPI = VirtualScope<T, ServerAPIComponent<T>>;
+    using ServerAPI = Reflect::VirtualScope<T, ServerAPIComponent<T>>;
 }
 }

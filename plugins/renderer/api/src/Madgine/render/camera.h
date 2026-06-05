@@ -12,18 +12,18 @@ namespace Render {
         // Camera(const Camera &) = delete;
         ~Camera() = default;
 
-        Matrix4 getViewProjectionMatrix(float aspectRatio);
-        Matrix4 getViewMatrix();
-        Matrix4 getProjectionMatrix(float aspectRatio);
-        Frustum getFrustum(float aspectRatio) const;
+        Math::Matrix4 getViewProjectionMatrix(float aspectRatio);
+        Math::Matrix4 getViewMatrix();
+        Math::Matrix4 getProjectionMatrix(float aspectRatio);
+        Math::Frustum getFrustum(float aspectRatio) const;
 
-        Ray3 mousePointToRay(const Vector2 &mousePos, const Vector2 &viewportSize);
-        Ray3 toRay() const;
+        Math::Ray3 mousePointToRay(const Math::Vector2 &mousePos, const Math::Vector2 &viewportSize);
+        Math::Ray3 toRay() const;
 
         std::string mName;
 
-        Vector3 mPosition = Vector3::ZERO;
-        Quaternion mOrientation;
+        Math::Vector3 mPosition = Math::Vector3::ZERO;
+        Math::Quaternion mOrientation;
 
         float mF = 200.0f;
         float mN = 0.1f;

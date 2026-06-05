@@ -35,7 +35,7 @@ namespace Render {
         Threading::Task<bool> generate(VulkanShader &shader, ResourceDataInfo &info, ShaderType type, ShaderObjectPtr object = {});
         void unloadImpl(VulkanShader &shader);
 
-        bool loadFromSource(VulkanShader &shader, std::string_view name, std::vector<unsigned char> source, ShaderType type, const Filesystem::Path &path);
+        bool loadFromSource(VulkanShader &shader, std::string_view name, std::vector<unsigned char> source, ShaderType type, const Platform::Filesystem::Path &path);
 
         virtual Threading::TaskQueue *loadingTaskQueue() const override;
 

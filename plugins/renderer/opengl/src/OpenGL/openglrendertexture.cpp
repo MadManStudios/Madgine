@@ -52,7 +52,7 @@ namespace Render {
 #endif
     }
 
-    OpenGLRenderTexture::OpenGLRenderTexture(OpenGLRenderContext *context, const Vector2i &size, const RenderTextureConfig &config)
+    OpenGLRenderTexture::OpenGLRenderTexture(OpenGLRenderContext *context, const Math::Vector2i &size, const RenderTextureConfig &config)
         : OpenGLRenderTarget(context, false, config.mName, config.mFormat == FORMAT_RGBA8_SRGB, false, config.mFlipFlop, config.mBlitSource)
         , mCreateDepthTexture(config.mCreateDepthBufferView)
         , mSamples(context->supportsMultisampling() ? config.mSamples : 1)
@@ -94,7 +94,7 @@ namespace Render {
         }
     }
 
-    bool OpenGLRenderTexture::resizeImpl(const Vector2i &size)
+    bool OpenGLRenderTexture::resizeImpl(const Math::Vector2i &size)
     {
         if (mSize == size)
             return false;
@@ -107,7 +107,7 @@ namespace Render {
         assert(width > 0 && height > 0);
 
         for (std::shared_ptr<OpenGLTexture> &tex : mTextures) {
-            tex = std::make_shared<OpenGLTexture>(mType, tex->format(), Vector2i { width, height }, mSamples);
+            tex = std::make_shared<OpenGLTexture>(mType, tex->format(), Math::Vector2i { width, height }, mSamples);
             if (mType != TextureType_2DMultiSample) {
                 tex->setWrapMode(GL_CLAMP_TO_EDGE);
                 tex->setFilter(GL_NEAREST);
@@ -128,7 +128,7 @@ namespace Render {
             GL_CHECK();
         }
         if (mCreateDepthTexture) {
-            mDepthTexture = std::make_shared<OpenGLTexture>(mType, mDepthTexture->format(), Vector2i { width, height }, mSamples);            
+            mDepthTexture = std::make_shared<OpenGLTexture>(mType, mDepthTexture->format(), Math::Vector2i { width, height }, mSamples);            
             if (mType == TextureType_Cube) {
                 mDepthTexture->setWrapMode(GL_CLAMP_TO_EDGE);
                 mDepthTexture->setFilter(GL_NEAREST);
@@ -344,9 +344,9 @@ namespace Render {
         GL_CHECK();
     }
 
-    Matrix4 OpenGLRenderTexture::getClipSpaceMatrix() const
+    Math::Matrix4 OpenGLRenderTexture::getClipSpaceMatrix() const
     {
-        return Matrix4 { 1, 0, 0, 0,
+        return Math::Matrix4 { 1, 0, 0, 0,
             0, -1, 0, 0,
             0, 0, 2, -1,
             0, 0, 0, 1 };
@@ -379,7 +379,7 @@ namespace Render {
         }
     }
 
-    Vector2i OpenGLRenderTexture::size() const
+    Math::Vector2i OpenGLRenderTexture::size() const
     {
         return mSize;
     }

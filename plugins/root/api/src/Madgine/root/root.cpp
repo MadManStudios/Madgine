@@ -2,11 +2,11 @@
 
 #include "root.h"
 
-#include "Interfaces/debug/memory/memory.h"
-#include "Interfaces/filesystem/async.h"
-#include "Interfaces/filesystem/path.h"
-#include "Interfaces/log/standardlog.h"
-#include "Interfaces/process/processapi.h"
+#include "Platform/debug/memory/memory.h"
+#include "Platform/filesystem/async.h"
+#include "Platform/filesystem/path.h"
+#include "Platform/log/standardlog.h"
+#include "Platform/process/processapi.h"
 
 #include "Modules/plugins/pluginmanager.h"
 #include "Modules/threading/awaitables/awaitabletimepoint.h"
@@ -19,26 +19,26 @@
 #include "rootcomponentbase.h"
 
 namespace Engine {
-namespace Root {
+namespace Core {
 
     static Root *sSingleton = nullptr;
 
 #if ENABLE_PLUGINS
-    CLI::Parameter<bool> noPluginCache { { "--no-plugin-cache", "-npc" }, false, "Disables the loading of the cached plugin selection at startup." };
-    CLI::Parameter<Filesystem::Path> loadPlugins { { "--load-plugins", "-lp" }, "", "If set the pluginmanager will load the specified config file after loading the cached plugin-file." };
+    Parameter<bool> noPluginCache { { "--no-plugin-cache", "-npc" }, false, "Disables the loading of the cached plugin selection at startup." };
+    Parameter<Platform::Filesystem::Path> loadPlugins { { "--load-plugins", "-lp" }, "", "If set the pluginmanager will load the specified config file after loading the cached plugin-file." };
 #endif
 
-    CLI::Parameter<bool> toolModeParameter { { "--toolMode", "-t" }, false, "If set, no application will be started. Only the root will be initialized and then immediately shutdown again." };
-    CLI::Parameter<bool> debugParameter { { "--debug", "-g" }, false, "Marks the build as a debug build in tool mode." };
-    CLI::Parameter<Engine::Log::MessageType> logLevel { { "--logLevel", "-l" }, Engine::Log::MessageType::DEBUG_TYPE, "Specify log-level." };
-    CLI::Parameter<Filesystem::Path> logFile { { "--logFile" }, "out.log", "If set, the log output will be written to the specified path" };
+    Parameter<bool> toolModeParameter { { "--toolMode", "-t" }, false, "If set, no application will be started. Only the root will be initialized and then immediately shutdown again." };
+    Parameter<bool> debugParameter { { "--debug", "-g" }, false, "Marks the build as a debug build in tool mode." };
+    Parameter<Platform::Log::MessageType> logLevel { { "--logLevel", "-l" }, Platform::Log::MessageType::DEBUG_TYPE, "Specify log-level." };
+    Parameter<Platform::Filesystem::Path> logFile { { "--logFile" }, "out.log", "If set, the log output will be written to the specified path" };
 
     Root::Root(int argc, char **argv)
-        : Root(std::make_unique<CLI::CLICore>(argc, argv))
+        : Root(std::make_unique<CLICore>(argc, argv))
     {
     }
 
-    Root::Root(std::unique_ptr<CLI::CLICore> cli)
+    Root::Root(std::unique_ptr<CLICore> cli)
         : mCLI(std::move(cli))
         , mFileLogListener(*logFile)
         , mTaskQueue("Root")
@@ -47,14 +47,14 @@ namespace Root {
         assert(!sSingleton);
         sSingleton = this;
 
-        Log::StandardLog::setLogLevel(logLevel);
+        Platform::Log::StandardLog::setLogLevel(logLevel);
         if (!logFile->empty())
-            Log::Log::addListener(&mFileLogListener);
+            Platform::Log::Log::addListener(&mFileLogListener);
 
 #if ENABLE_PLUGINS
         mPluginManager = std::make_unique<Plugins::PluginManager>();
         mErrorCode = mPluginManager->setup(!noPluginCache, mCLI->mProgramPath.stem(), loadPlugins);
-        mCollectorManager = std::make_unique<UniqueComponent::CollectorManager>(*mPluginManager);
+        mCollectorManager = std::make_unique<Plugins::CollectorManager>(*mPluginManager);
 #endif
 
 #if ENABLE_MEMTRACKING
@@ -123,16 +123,16 @@ namespace Root {
     Threading::Task<void> Root::updateAsyncIO()
     {
         while (mTaskQueue.running()) {
-            Filesystem::checkAsyncIOCompletion();
-            Process::checkAsyncProcessCompletion();
+            Platform::Filesystem::checkAsyncIOCompletion();
+            Platform::Process::checkAsyncProcessCompletion();
             co_await 500ms;
         }
         do {
-            Filesystem::cancelAllAsyncIO();
-            Filesystem::checkAsyncIOCompletion();
-            Process::checkAsyncProcessCompletion();
+            Platform::Filesystem::cancelAllAsyncIO();
+            Platform::Filesystem::checkAsyncIOCompletion();
+            Platform::Process::checkAsyncProcessCompletion();
             co_await 0ms;
-        } while (Filesystem::pendingIOOperationCount() > 0 || Process::pendingProcesses() > 0);
+        } while (Platform::Filesystem::pendingIOOperationCount() > 0 || Platform::Process::pendingProcesses() > 0);
     }
 
     int Root::errorCode()

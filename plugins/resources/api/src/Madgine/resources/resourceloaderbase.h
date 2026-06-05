@@ -2,9 +2,9 @@
 
 #include "Generic/genericresult.h"
 
-#include "Interfaces/filesystem/path.h"
+#include "Platform/filesystem/path.h"
 
-#include "Meta/keyvalue/virtualscope.h"
+#include "Meta/reflect/virtualscope.h"
 
 #include "Modules/threading/madgineobject.h"
 #include "Modules/threading/task.h"
@@ -22,7 +22,7 @@ namespace Resources {
         std::string mIconName;
     };
 
-    struct MADGINE_RESOURCES_EXPORT ResourceLoaderBase : VirtualScopeBase<>, Threading::MadgineObject<ResourceLoaderBase> {
+    struct MADGINE_RESOURCES_EXPORT ResourceLoaderBase : Reflect::VirtualScopeBase<>, Threading::MadgineObject<ResourceLoaderBase> {
 
         using Resource = ResourceBase;
 
@@ -35,18 +35,18 @@ namespace Resources {
         virtual Threading::Task<bool> init();
         virtual Threading::Task<void> finalize();
 
-        virtual Threading::Task<BakeResult> bakeResources(std::vector<Filesystem::Path> &resources, const Filesystem::Path &intermediateDir);
+        virtual Threading::Task<BakeResult> bakeResources(std::vector<Platform::Filesystem::Path> &resources, const Platform::Filesystem::Path &intermediateDir);
 
         virtual Threading::TaskQueue *loadingTaskQueue() const;
 
         const std::vector<std::string> &fileExtensions() const;
 
-        virtual const Filesystem::Path &iconPath(ResourceBase *res) const { return mIconPath; }
+        virtual const Platform::Filesystem::Path &iconPath(ResourceBase *res) const { return mIconPath; }
 
         size_t extensionIndex(std::string_view ext) const;
 
         // Implemented by ResourceManager template class
-        virtual std::pair<ResourceBase *, bool> addResource(const Filesystem::Path &path, std::string_view name = {}) = 0;
+        virtual std::pair<ResourceBase *, bool> addResource(const Platform::Filesystem::Path &path, std::string_view name = {}) = 0;
         virtual void updateResourceData(ResourceBase *res) = 0;
 
         template <typename T>
@@ -57,14 +57,14 @@ namespace Resources {
             }
         }
 
-        virtual std::vector<std::pair<std::string_view, ScopePtr>> typedResources() = 0;
-        virtual std::vector<const MetaTable *> resourceTypes() const = 0;
+        virtual std::vector<std::pair<std::string_view, Reflect::ScopePtr>> typedResources() = 0;
+        virtual std::vector<const Reflect::MetaTable *> resourceTypes() const = 0;
         virtual std::vector<ResourceBase *> resources() = 0;
 
     protected:
         std::vector<std::string> mExtensions;
 
-        Filesystem::Path mIconPath;
+        Platform::Filesystem::Path mIconPath;
 
         ResourceLoaderSettings mSettings;
     };

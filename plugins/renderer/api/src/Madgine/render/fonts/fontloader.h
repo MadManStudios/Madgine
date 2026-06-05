@@ -26,7 +26,7 @@ namespace Render {
 
     protected:
 
-        std::pair<Resources::ResourceBase *, bool> addResource(const Filesystem::Path &path, std::string_view name = {}) override;
+        std::pair<Resources::ResourceBase *, bool> addResource(const Platform::Filesystem::Path &path, std::string_view name = {}) override;
 
     private:
         FT_Library mFreeType;

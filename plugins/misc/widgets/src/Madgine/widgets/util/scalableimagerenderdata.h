@@ -19,7 +19,7 @@ namespace Widgets {
         std::string_view imageName() const;
         Resources::ImageLoader::Resource *image() const;
 
-        void renderImage(WidgetsRenderData &renderData, Vector2 pos, Vector3 size, const Atlas2::Entry &entry, const ColorFrame &color = {});
+        void renderImage(WidgetsRenderData &renderData, Math::Vector2 pos, Math::Vector3 size, const Math::Atlas2::Entry &entry, const ColorFrame &color = {});
 
         uint16_t mLeftBorder = 0;
         uint16_t mTopBorder = 0;

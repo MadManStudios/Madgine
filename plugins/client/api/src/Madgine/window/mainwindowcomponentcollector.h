@@ -1,21 +1,21 @@
 #pragma once
 
-#include "Meta/keyvalue/virtualscope.h"
+#include "Meta/reflect/virtualscope.h"
 #include "Meta/serialize/helper/annotations.h"
 #include "Meta/serialize/hierarchy/virtualserializableunit.h"
 
 #include "Modules/uniquecomponent/uniquecomponentdefine.h"
 
-DECLARE_NAMED_UNIQUE_COMPONENT(Engine::Window, MainWindowComponent, MainWindowComponentBase,
-    Engine::UniqueComponent::Constructor<MainWindow &>,
+DECLARE_NAMED_UNIQUE_COMPONENT(Engine::Core, MainWindowComponent, MainWindowComponentBase,
+    Engine::Plugins::Constructor<MainWindow &>,
     Engine::Serialize::TypeAnnotation)
 
 namespace Engine {
-namespace Window {
+namespace Core {
 
     template <typename T>
-    struct MainWindowComponent : Serialize::VirtualData<T, VirtualScope<T, MainWindowComponentComponent<T>>> {
-        using Serialize::VirtualData<T, VirtualScope<T, MainWindowComponentComponent<T>>>::VirtualData;
+    struct MainWindowComponent : Serialize::VirtualData<T, Reflect::VirtualScope<T, MainWindowComponentComponent<T>>> {
+        using Serialize::VirtualData<T, Reflect::VirtualScope<T, MainWindowComponentComponent<T>>>::VirtualData;
 
         virtual std::string_view key() const override final
         {

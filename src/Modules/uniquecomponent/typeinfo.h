@@ -2,10 +2,10 @@
 
 #include "Generic/stringutil.h"
 
-DLL_IMPORT_VARIABLE2(const Engine::UniqueComponent::TypeInfo, typeInfo, typename);
+DLL_IMPORT_VARIABLE2(const Engine::Plugins::TypeInfo, typeInfo, typename);
 
 namespace Engine {
-namespace UniqueComponent {
+namespace Plugins {
 
     struct TypeInfo {
 

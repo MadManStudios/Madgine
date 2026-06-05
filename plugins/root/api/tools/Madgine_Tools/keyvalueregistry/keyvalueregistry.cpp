@@ -6,7 +6,7 @@
 
 #include "Madgine/root/keyvalueregistry.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
 #include "Madgine_Tools/inspector/inspector.h"
@@ -41,8 +41,8 @@ namespace Tools {
     {
         if (beginToolPanel("KeyValueRegistry", &mVisible, ImGuiDir_Right)) {
 
-            auto drawList = [this](const std::map<std::string_view, ScopePtr> &items) {
-                for (const std::pair<const std::string_view, ScopePtr> &p : items) {
+            auto drawList = [this](const std::map<std::string_view, Reflect::ScopePtr> &items) {
+                for (const std::pair<const std::string_view, Reflect::ScopePtr> &p : items) {
                     ImGui::TableNextRow();
                     ImGui::TableNextColumn();
                     if (ImGui::TreeNode(p.first.data())) {
@@ -55,8 +55,8 @@ namespace Tools {
             };
 
             if (ImGui::BeginTable("table", 2, ImGuiTableFlags_Resizable)) {
-                drawList(Engine::KeyValueRegistry::globals());
-                drawList(Engine::KeyValueRegistry::workgroupLocals());
+                drawList(Core::KeyValueRegistry::globals());
+                drawList(Core::KeyValueRegistry::workgroupLocals());
                 ImGui::EndTable();
             }
         }

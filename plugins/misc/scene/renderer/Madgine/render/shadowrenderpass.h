@@ -22,13 +22,13 @@ namespace Render {
 
         virtual std::string_view name() const override;
 
-        Matrix4 projectionMatrix() const;
-        Matrix4 viewMatrix() const;
-        Matrix4 viewProjectionMatrix() const;
+        Math::Matrix4 projectionMatrix() const;
+        Math::Matrix4 viewMatrix() const;
+        Math::Matrix4 viewProjectionMatrix() const;
 
         void updateFrustum(float aspectRatio);
 
-        virtual void debugFrustums(CallableView<void(const Frustum &, std::string_view)> handler) const override;
+        virtual void debugFrustums(CallableView<void(const Math::Frustum &, std::string_view)> handler) const override;
 
     private:
         ShadowSceneRenderData mData;
@@ -37,7 +37,7 @@ namespace Render {
 
         int mPriority;
 
-        Frustum mLightFrustum;
+        Math::Frustum mLightFrustum;
     };
 
 }

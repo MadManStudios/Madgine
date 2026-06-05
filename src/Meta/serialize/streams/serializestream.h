@@ -83,7 +83,7 @@ namespace Serialize {
         StreamResult operator>>(SerializableDataPtr &p);
 
         StreamResult read(std::string &s);
-        StreamResult read(String auto &s)
+        StreamResult read(Concepts::String auto &s)
         {
             std::string string;
             STREAM_PROPAGATE_ERROR(read(string));
@@ -91,7 +91,7 @@ namespace Serialize {
             return {};
         }
 
-        StreamResult operator>>(String auto &s)
+        StreamResult operator>>(Concepts::String auto &s)
             requires(!std::same_as<decltype(s), std::string &>)
         {
             std::string string;
@@ -100,23 +100,23 @@ namespace Serialize {
             return {};
         }
 
-        StreamResult read(ByteBuffer &b);
+        StreamResult read(Memory::ByteBuffer &b);
 
-        StreamResult operator>>(ByteBuffer &b);
+        StreamResult operator>>(Memory::ByteBuffer &b);
 
         StreamResult read(Void &);
 
         StreamResult operator>>(Void &);
 
         template <typename T>
-            requires(!Pointer<T> && !StringViewable<T>)
+            requires(!Concepts::Pointer<T> && !Concepts::StringViewable<T>)
         void write(const T &t)
         {
             Stream::write(t);
         }
 
         template <typename T>
-            requires(!Pointer<T> && !StringViewable<T>)
+            requires(!Concepts::Pointer<T> && !Concepts::StringViewable<T>)
         SerializeStream &operator<<(const T &t)
         {
             Stream::operator<<(t);
@@ -130,20 +130,20 @@ namespace Serialize {
         SerializeStream &operator<<(SerializableDataConstPtr);
 
         void write(const std::string_view &s);
-        void write(const StringViewable auto &s)
+        void write(const Concepts::StringViewable auto &s)
         {
             write(std::string_view { s });
         }
 
         SerializeStream &operator<<(const std::string_view &);
-        SerializeStream &operator<<(const StringViewable auto &s)
+        SerializeStream &operator<<(const Concepts::StringViewable auto &s)
         {
             return operator<<(std::string_view { s });
         }
 
-        void write(const ByteBuffer &b);
+        void write(const Memory::ByteBuffer &b);
 
-        SerializeStream &operator<<(const ByteBuffer &b);
+        SerializeStream &operator<<(const Memory::ByteBuffer &b);
 
         void write(const Void &);
 

@@ -2,7 +2,7 @@
 
 namespace Engine {
 
-namespace CLI {
+namespace Core {
 
     struct CLI_EXPORT ParameterBase {
 

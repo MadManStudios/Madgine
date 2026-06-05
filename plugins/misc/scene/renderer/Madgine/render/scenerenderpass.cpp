@@ -16,7 +16,7 @@
 #include "Madgine/scene/entity/entity.h"
 #include "Madgine/scene/scenemanager.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 
 #include "light_hlsl.h"
 #include "scene_hlsl.h"
@@ -80,7 +80,7 @@ namespace Render {
         if (!mPipeline.available())
             return;
 
-        Vector2i size = target->renderSpace().mSize;
+        Math::Vector2i size = target->renderSpace().mSize;
 
         float aspectRatio = float(size.x) / size.y;
 
@@ -90,7 +90,7 @@ namespace Render {
             perApplication->p = target->getClipSpaceMatrix() * mData.mCamera.getProjectionMatrix(aspectRatio);
         }
 
-        Matrix4 v = mData.mCamera.getViewMatrix();
+        Math::Matrix4 v = mData.mCamera.getViewMatrix();
 
         {
             auto perFrame = mPipeline->mapParameters<HLSL::LightPerFrame>(1);
@@ -99,8 +99,8 @@ namespace Render {
 
             perFrame->light.caster.shadowSamples = 4;
 
-            perFrame->light.light.color = Vector3 { mData.mScene.mAmbientLightColor };
-            perFrame->light.light.dir = (v * Vector4 { mData.mScene.mAmbientLightDirection, 0.0f }).xyz();
+            perFrame->light.light.color = Math::Vector3 { mData.mScene.mAmbientLightColor };
+            perFrame->light.light.dir = (v * Math::Vector4 { mData.mScene.mAmbientLightDirection, 0.0f }).xyz();
             perFrame->light.light.orthographic = mData.mScene.mAmbientLightOrthographic;
 
             Scene::Entity::EntityComponentList<Scene::Entity::PointLight> &lights = mData.mScene.entityComponentList<Scene::Entity::PointLight>();
@@ -115,8 +115,8 @@ namespace Render {
                 Scene::Entity::Transform *t = light.entity().getComponent<Scene::Entity::Transform>();
                 if (t) {
                     float range = light.mRange;
-                    perFrame->pointLights[i].light.position = (v * Vector4 { t->mPosition, 1.0f }).xyz();
-                    perFrame->pointLights[i].light.color = Vector3 { light.mColor };
+                    perFrame->pointLights[i].light.position = (v * Math::Vector4 { t->mPosition, 1.0f }).xyz();
+                    perFrame->pointLights[i].light.color = Math::Vector3 { light.mColor };
                     perFrame->pointLights[i].light.constantFactor = mLightConstantFactor;
                     perFrame->pointLights[i].light.linearFactor = mLightLinearFactor / range;
                     perFrame->pointLights[i].light.squaredFactor = mLightSquaredFactor / (range * range);
@@ -149,12 +149,12 @@ namespace Render {
                 auto instanceData = mPipeline->mapTempBuffer<HLSL::SceneInstanceData[]>(1, instance.second.size());
 
                 std::ranges::transform(instance.second, instanceData.mData, [&](const LitSceneRenderData::ObjectData &o) {
-                    Matrix4 mv = v * o.mTransform;
+                    Math::Matrix4 mv = v * o.mTransform;
                     return HLSL::SceneInstanceData {
                         mv.Transpose(),
                         mv.Inverse() /*.Transpose().Transpose()*/,
                         o.mDiffuseColor,
-                        Vector4 { 1.0f, 1.0f, 1.0f, 1.0f },
+                        Math::Vector4 { 1.0f, 1.0f, 1.0f, 1.0f },
                         // o.mBones
                     };
                 });

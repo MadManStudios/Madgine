@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Meta/keyvalue/virtualscope.h"
+#include "Meta/reflect/virtualscope.h"
 #include "Meta/serialize/hierarchy/virtualserializableunit.h"
 
 #include "Madgine/codegen/statement.h"
@@ -12,7 +12,7 @@ namespace Engine {
 namespace Behavior {
     namespace NodeGraph {
 
-        struct MADGINE_NODEGRAPH_EXPORT NodeBase : Serialize::VirtualSerializableDataBase<VirtualScopeBase<>> {
+        struct MADGINE_NODEGRAPH_EXPORT NodeBase : Serialize::VirtualSerializableDataBase<Reflect::VirtualScopeBase<>> {
 
             SERIALIZABLEUNIT(NodeBase)
 
@@ -42,9 +42,9 @@ namespace Behavior {
             uint32_t dataInCount(uint32_t group = 0) const;
             virtual std::string_view dataInName(uint32_t index, uint32_t group = 0) const { return "read"; }
             virtual uint32_t dataInMask(uint32_t index, uint32_t group = 0, bool bidir = true) const { return NodeExecutionMask::CPU; }
-            virtual ExtendedValueTypeDesc dataInType(uint32_t index, uint32_t group = 0, bool bidir = true) const { throw 0; }
+            virtual Reflect::ExtendedType dataInType(uint32_t index, uint32_t group = 0, bool bidir = true) const { throw 0; }
             virtual bool dataInVariadic(uint32_t group = 0) const { return false; }
-            virtual ValueType dataInDefault(uint32_t index, uint32_t group = 0) const;
+            virtual Reflect::Value dataInDefault(uint32_t index, uint32_t group = 0) const;
             Pin dataInSource(uint32_t index, uint32_t group = 0) const;
             static uint32_t dataInId(uint32_t index, uint32_t group = 0);
 
@@ -52,7 +52,7 @@ namespace Behavior {
             uint32_t dataOutCount(uint32_t group = 0) const;
             virtual std::string_view dataOutName(uint32_t index, uint32_t group = 0) const { return "write"; }
             virtual uint32_t dataOutMask(uint32_t index, uint32_t group = 0, bool bidir = true) const { return NodeExecutionMask::CPU; }
-            virtual ExtendedValueTypeDesc dataOutType(uint32_t index, uint32_t group = 0, bool bidir = true) const { throw 0; }
+            virtual Reflect::ExtendedType dataOutType(uint32_t index, uint32_t group = 0, bool bidir = true) const { throw 0; }
             virtual bool dataOutVariadic(uint32_t group = 0) const { return false; }
             const std::vector<Pin> &dataOutTargets(uint32_t index, uint32_t group = 0) const;
             static uint32_t dataOutId(uint32_t index, uint32_t group = 0);
@@ -81,7 +81,7 @@ namespace Behavior {
 
             virtual void setupInterpret(NodeInterpreterStateBase &interpreter, std::unique_ptr<NodeInterpreterData> &data) const;
             virtual void interpret(NodeReceiver<NodeBase> receiver, std::unique_ptr<NodeInterpreterData> &data, uint32_t flowIn, uint32_t group = 0) const;
-            virtual KeyValueResult interpretRead(NodeInterpreterStateBase &interpreter, ValueType &retVal, std::unique_ptr<NodeInterpreterData> &data, uint32_t providerIndex, uint32_t group = 0) const;
+            virtual Reflect::Result interpretRead(NodeInterpreterStateBase &interpreter, Reflect::Value &retVal, std::unique_ptr<NodeInterpreterData> &data, uint32_t providerIndex, uint32_t group = 0) const;
 
             virtual std::unique_ptr<NodeBase> clone(NodeGraph &graph) const = 0;
 

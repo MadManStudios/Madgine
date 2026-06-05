@@ -2,10 +2,10 @@
 
 #include "clientimroot.h"
 
-#include "Interfaces/filesystem/fsapi.h"
-#include "Interfaces/input/inputevents.h"
-#include "Interfaces/window/windowapi.h"
-#include "Interfaces/window/windowsettings.h"
+#include "Platform/filesystem/fsapi.h"
+#include "Platform/input/inputevents.h"
+#include "Platform/window/windowapi.h"
+#include "Platform/window/windowsettings.h"
 
 #include "Modules/debug/profiler/profile.h"
 
@@ -18,7 +18,7 @@
 #include "Madgine/window/mainwindow.h"
 #include "Madgine/window/toolwindow.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
 #include "Madgine_Tools/imguiicons.h"
@@ -41,82 +41,82 @@ NAMED_UNIQUECOMPONENT(ClientImRoot, Engine::Tools::ClientImRoot)
 namespace Engine {
 namespace Tools {
 
-    static std::map<Input::Key::Key, ImGuiKey> sKeyMap {
-        { Input::Key::Tabulator, ImGuiKey_Tab },
-        { Input::Key::LeftArrow, ImGuiKey_LeftArrow },
-        { Input::Key::RightArrow, ImGuiKey_RightArrow },
-        { Input::Key::UpArrow, ImGuiKey_UpArrow },
-        { Input::Key::DownArrow, ImGuiKey_DownArrow },
-        { Input::Key::PageUp, ImGuiKey_PageUp },
-        { Input::Key::PageDown, ImGuiKey_PageDown },
-        { Input::Key::Home, ImGuiKey_Home },
-        { Input::Key::End, ImGuiKey_End },
-        { Input::Key::Insert, ImGuiKey_Insert },
-        { Input::Key::Delete, ImGuiKey_Delete },
-        { Input::Key::Backspace, ImGuiKey_Backspace },
-        { Input::Key::Space, ImGuiKey_Space },
-        { Input::Key::Return, ImGuiKey_Enter },
-        { Input::Key::Escape, ImGuiKey_Escape },
-        { Input::Key::LShift, ImGuiKey_LeftShift },
-        { Input::Key::Shift, ImGuiKey_LeftShift },
-        { Input::Key::RShift, ImGuiKey_RightShift },
-        { Input::Key::LAlt, ImGuiKey_LeftAlt },
-        { Input::Key::Alt, ImGuiKey_LeftAlt },
-        { Input::Key::RAlt, ImGuiKey_RightAlt },
-        { Input::Key::LControl, ImGuiKey_LeftCtrl },
-        { Input::Key::Control, ImGuiKey_LeftCtrl },
-        { Input::Key::RControl, ImGuiKey_RightCtrl },
-        { Input::Key::A, ImGuiKey_A },
-        { Input::Key::B, ImGuiKey_B },
-        { Input::Key::C, ImGuiKey_C },
-        { Input::Key::D, ImGuiKey_D },
-        { Input::Key::E, ImGuiKey_E },
-        { Input::Key::F, ImGuiKey_F },
-        { Input::Key::G, ImGuiKey_G },
-        { Input::Key::H, ImGuiKey_H },
-        { Input::Key::I, ImGuiKey_I },
-        { Input::Key::J, ImGuiKey_J },
-        { Input::Key::K, ImGuiKey_K },
-        { Input::Key::L, ImGuiKey_L },
-        { Input::Key::M, ImGuiKey_M },
-        { Input::Key::N, ImGuiKey_N },
-        { Input::Key::O, ImGuiKey_O },
-        { Input::Key::P, ImGuiKey_P },
-        { Input::Key::Q, ImGuiKey_Q },
-        { Input::Key::R, ImGuiKey_R },
-        { Input::Key::S, ImGuiKey_S },
-        { Input::Key::T, ImGuiKey_T },
-        { Input::Key::U, ImGuiKey_U },
-        { Input::Key::V, ImGuiKey_V },
-        { Input::Key::W, ImGuiKey_W },
-        { Input::Key::X, ImGuiKey_X },
-        { Input::Key::Y, ImGuiKey_Y },
-        { Input::Key::Z, ImGuiKey_Z },
-        { Input::Key::Alpha0, ImGuiKey_0 },
-        { Input::Key::Alpha1, ImGuiKey_1 },
-        { Input::Key::Alpha2, ImGuiKey_2 },
-        { Input::Key::Alpha3, ImGuiKey_3 },
-        { Input::Key::Alpha4, ImGuiKey_4 },
-        { Input::Key::Alpha5, ImGuiKey_5 },
-        { Input::Key::Alpha6, ImGuiKey_6 },
-        { Input::Key::Alpha7, ImGuiKey_7 },
-        { Input::Key::Alpha8, ImGuiKey_8 },
-        { Input::Key::Alpha9, ImGuiKey_9 },
-        { Input::Key::Comma, ImGuiKey_Comma },
-        { Input::Key::Period, ImGuiKey_Period },
-        { Input::Key::Minus, ImGuiKey_Minus }
+    static std::map<Platform::Input::Key::Key, ImGuiKey> sKeyMap {
+        { Platform::Input::Key::Tabulator, ImGuiKey_Tab },
+        { Platform::Input::Key::LeftArrow, ImGuiKey_LeftArrow },
+        { Platform::Input::Key::RightArrow, ImGuiKey_RightArrow },
+        { Platform::Input::Key::UpArrow, ImGuiKey_UpArrow },
+        { Platform::Input::Key::DownArrow, ImGuiKey_DownArrow },
+        { Platform::Input::Key::PageUp, ImGuiKey_PageUp },
+        { Platform::Input::Key::PageDown, ImGuiKey_PageDown },
+        { Platform::Input::Key::Home, ImGuiKey_Home },
+        { Platform::Input::Key::End, ImGuiKey_End },
+        { Platform::Input::Key::Insert, ImGuiKey_Insert },
+        { Platform::Input::Key::Delete, ImGuiKey_Delete },
+        { Platform::Input::Key::Backspace, ImGuiKey_Backspace },
+        { Platform::Input::Key::Space, ImGuiKey_Space },
+        { Platform::Input::Key::Return, ImGuiKey_Enter },
+        { Platform::Input::Key::Escape, ImGuiKey_Escape },
+        { Platform::Input::Key::LShift, ImGuiKey_LeftShift },
+        { Platform::Input::Key::Shift, ImGuiKey_LeftShift },
+        { Platform::Input::Key::RShift, ImGuiKey_RightShift },
+        { Platform::Input::Key::LAlt, ImGuiKey_LeftAlt },
+        { Platform::Input::Key::Alt, ImGuiKey_LeftAlt },
+        { Platform::Input::Key::RAlt, ImGuiKey_RightAlt },
+        { Platform::Input::Key::LControl, ImGuiKey_LeftCtrl },
+        { Platform::Input::Key::Control, ImGuiKey_LeftCtrl },
+        { Platform::Input::Key::RControl, ImGuiKey_RightCtrl },
+        { Platform::Input::Key::A, ImGuiKey_A },
+        { Platform::Input::Key::B, ImGuiKey_B },
+        { Platform::Input::Key::C, ImGuiKey_C },
+        { Platform::Input::Key::D, ImGuiKey_D },
+        { Platform::Input::Key::E, ImGuiKey_E },
+        { Platform::Input::Key::F, ImGuiKey_F },
+        { Platform::Input::Key::G, ImGuiKey_G },
+        { Platform::Input::Key::H, ImGuiKey_H },
+        { Platform::Input::Key::I, ImGuiKey_I },
+        { Platform::Input::Key::J, ImGuiKey_J },
+        { Platform::Input::Key::K, ImGuiKey_K },
+        { Platform::Input::Key::L, ImGuiKey_L },
+        { Platform::Input::Key::M, ImGuiKey_M },
+        { Platform::Input::Key::N, ImGuiKey_N },
+        { Platform::Input::Key::O, ImGuiKey_O },
+        { Platform::Input::Key::P, ImGuiKey_P },
+        { Platform::Input::Key::Q, ImGuiKey_Q },
+        { Platform::Input::Key::R, ImGuiKey_R },
+        { Platform::Input::Key::S, ImGuiKey_S },
+        { Platform::Input::Key::T, ImGuiKey_T },
+        { Platform::Input::Key::U, ImGuiKey_U },
+        { Platform::Input::Key::V, ImGuiKey_V },
+        { Platform::Input::Key::W, ImGuiKey_W },
+        { Platform::Input::Key::X, ImGuiKey_X },
+        { Platform::Input::Key::Y, ImGuiKey_Y },
+        { Platform::Input::Key::Z, ImGuiKey_Z },
+        { Platform::Input::Key::Alpha0, ImGuiKey_0 },
+        { Platform::Input::Key::Alpha1, ImGuiKey_1 },
+        { Platform::Input::Key::Alpha2, ImGuiKey_2 },
+        { Platform::Input::Key::Alpha3, ImGuiKey_3 },
+        { Platform::Input::Key::Alpha4, ImGuiKey_4 },
+        { Platform::Input::Key::Alpha5, ImGuiKey_5 },
+        { Platform::Input::Key::Alpha6, ImGuiKey_6 },
+        { Platform::Input::Key::Alpha7, ImGuiKey_7 },
+        { Platform::Input::Key::Alpha8, ImGuiKey_8 },
+        { Platform::Input::Key::Alpha9, ImGuiKey_9 },
+        { Platform::Input::Key::Comma, ImGuiKey_Comma },
+        { Platform::Input::Key::Period, ImGuiKey_Period },
+        { Platform::Input::Key::Minus, ImGuiKey_Minus }
     };
 
     static void CreateImGuiToolWindow(ImGuiViewport *vp)
     {
 
         ImGuiIO &io = ImGui::GetIO();
-        Window::MainWindow *topLevel = static_cast<Window::MainWindow *>(io.BackendPlatformUserData);
+        Core::MainWindow *topLevel = static_cast<Core::MainWindow *>(io.BackendPlatformUserData);
 
-        Window::WindowSettings settings;
+        Platform::Window::WindowSettings settings;
         settings.mHeadless = true;
         settings.mHidden = true;
-        Window::ToolWindow *window = topLevel->createToolWindow(settings);
+        Core::ToolWindow *window = topLevel->createToolWindow(settings);
         vp->PlatformUserData = window;
         vp->PlatformHandle = window->osWindow();
         vp->PlatformHandleRaw = window->osWindow()->ptrHandle();
@@ -128,7 +128,7 @@ namespace Tools {
     static void DestroyImGuiToolWindow(ImGuiViewport *vp)
     {
         if (vp->PlatformUserData) {
-            Window::ToolWindow *toolWindow = static_cast<Window::ToolWindow *>(vp->PlatformUserData);
+            Core::ToolWindow *toolWindow = static_cast<Core::ToolWindow *>(vp->PlatformUserData);
             vp->PlatformUserData = nullptr;
             vp->PlatformHandle = nullptr;
             vp->PlatformHandleRaw = nullptr;
@@ -140,57 +140,57 @@ namespace Tools {
     }
     static void ShowImGuiToolWindow(ImGuiViewport *vp)
     {
-        Window::OSWindow *w = static_cast<Window::OSWindow *>(vp->PlatformHandle);
+        Platform::Window::OSWindow *w = static_cast<Platform::Window::OSWindow *>(vp->PlatformHandle);
         w->show();
     }
     static void SetImGuiToolWindowPos(ImGuiViewport *vp, ImVec2 pos)
     {
         ImGuiIO &io = ImGui::GetIO();
-        Window::OSWindow *w = static_cast<Window::OSWindow *>(vp->PlatformHandle);
+        Platform::Window::OSWindow *w = static_cast<Platform::Window::OSWindow *>(vp->PlatformHandle);
         w->setRenderPos({ static_cast<int>(pos.x * io.DisplayFramebufferScale.x), static_cast<int>(pos.y * io.DisplayFramebufferScale.y) });
     }
     static ImVec2 GetImGuiToolWindowPos(ImGuiViewport *vp)
     {
         ImGuiIO &io = ImGui::GetIO();
-        Window::OSWindow *w = static_cast<Window::OSWindow *>(vp->PlatformHandle);
+        Platform::Window::OSWindow *w = static_cast<Platform::Window::OSWindow *>(vp->PlatformHandle);
         return { static_cast<float>(w->renderPos().x / io.DisplayFramebufferScale.x), static_cast<float>(w->renderPos().y / io.DisplayFramebufferScale.y) };
     }
     static void SetImGuiToolWindowSize(ImGuiViewport *vp, ImVec2 size)
     {
         ImGuiIO &io = ImGui::GetIO();
-        Window::OSWindow *w = static_cast<Window::OSWindow *>(vp->PlatformHandle);
+        Platform::Window::OSWindow *w = static_cast<Platform::Window::OSWindow *>(vp->PlatformHandle);
         w->setRenderSize({ static_cast<int>(size.x * io.DisplayFramebufferScale.x), static_cast<int>(size.y * io.DisplayFramebufferScale.y) });
     }
     static ImVec2 GetImGuiToolWindowSize(ImGuiViewport *vp)
     {
         ImGuiIO &io = ImGui::GetIO();
-        Window::OSWindow *w = static_cast<Window::OSWindow *>(vp->PlatformHandle);
+        Platform::Window::OSWindow *w = static_cast<Platform::Window::OSWindow *>(vp->PlatformHandle);
         return { static_cast<float>(w->renderSize().x / io.DisplayFramebufferScale.x), static_cast<float>(w->renderSize().y / io.DisplayFramebufferScale.y) };
     }
     static void SetImGuiToolWindowFocus(ImGuiViewport *vp)
     {
-        Window::OSWindow *w = static_cast<Window::OSWindow *>(vp->PlatformHandle);
+        Platform::Window::OSWindow *w = static_cast<Platform::Window::OSWindow *>(vp->PlatformHandle);
         w->focus();
     }
     static bool GetImGuiToolWindowFocus(ImGuiViewport *vp)
     {
-        Window::OSWindow *w = static_cast<Window::OSWindow *>(vp->PlatformHandle);
+        Platform::Window::OSWindow *w = static_cast<Platform::Window::OSWindow *>(vp->PlatformHandle);
         return w->hasFocus();
     }
     static bool GetImGuiToolWindowMinimized(ImGuiViewport *vp)
     {
-        Window::OSWindow *w = static_cast<Window::OSWindow *>(vp->PlatformHandle);
+        Platform::Window::OSWindow *w = static_cast<Platform::Window::OSWindow *>(vp->PlatformHandle);
         return w->isMinimized();
     }
     static void SetImGuiToolWindowTitle(ImGuiViewport *vp, const char *title)
     {
-        Window::OSWindow *w = static_cast<Window::OSWindow *>(vp->PlatformHandle);
+        Platform::Window::OSWindow *w = static_cast<Platform::Window::OSWindow *>(vp->PlatformHandle);
         w->setTitle(title);
     }
 
-    ClientImRoot::ClientImRoot(Window::MainWindow &window)
+    ClientImRoot::ClientImRoot(Core::MainWindow &window)
         : MainWindowComponent(window, 80)
-        , mImGuiIniFilePath(Filesystem::appDataPath() / "imgui.ini")
+        , mImGuiIniFilePath(Platform::Filesystem::appDataPath() / "imgui.ini")
         , mRenderData(*this)
     {
     }
@@ -212,11 +212,11 @@ namespace Tools {
 
         io.IniFilename = mImGuiIniFilePath.c_str();
 
-        io.DisplayFramebufferScale = ImVec2 { Window::platformCapabilities.mScalingFactor, Window::platformCapabilities.mScalingFactor };
+        io.DisplayFramebufferScale = ImVec2 { Platform::Window::platformCapabilities.mScalingFactor, Platform::Window::platformCapabilities.mScalingFactor };
 
         io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
 
-        if (Window::platformCapabilities.mSupportMultipleWindows) {
+        if (Platform::Window::platformCapabilities.mSupportMultipleWindows) {
             io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
 
             ImGuiPlatformIO &platform_io = ImGui::GetPlatformIO();
@@ -237,7 +237,7 @@ namespace Tools {
             io.BackendFlags |= ImGuiBackendFlags_RendererHasViewports | ImGuiBackendFlags_PlatformHasViewports;
 
             platform_io.Monitors.clear();
-            for (Window::MonitorInfo info : Window::listMonitors()) {
+            for (Platform::Window::MonitorInfo info : Platform::Window::listMonitors()) {
                 ImGuiPlatformMonitor monitor;
                 monitor.MainPos = monitor.WorkPos = ImVec2 { static_cast<float>(info.mPosition.x), static_cast<float>(info.mPosition.y) };
                 monitor.MainSize = monitor.WorkSize = ImVec2 { static_cast<float>(info.mSize.x), static_cast<float>(info.mSize.y) };
@@ -268,7 +268,7 @@ namespace Tools {
 
         ImGui::FilesystemPickerOptions *filepickerOptions = ImGui::GetFilesystemPickerOptions();
 
-        filepickerOptions->mIconLookup = [](const Filesystem::Path &path, bool isDir) {
+        filepickerOptions->mIconLookup = [](const Platform::Filesystem::Path &path, bool isDir) {
             if (isDir)
                 return IMGUI_ICON_FOLDER " ";
             else
@@ -281,13 +281,13 @@ namespace Tools {
             co_return false;
 
         ImFontConfig defaultConfig {};
-        defaultConfig.SizePixels = 13.0f * Window::platformCapabilities.mScalingFactor;
+        defaultConfig.SizePixels = 13.0f * Platform::Window::platformCapabilities.mScalingFactor;
         defaultConfig.RasterizerDensity = 2.0f;
         io.FontDefault = io.Fonts->AddFontDefaultVector(&defaultConfig);
         ImGui::GetStyle().FontSizeBase = 16.0f;
 
-        Filesystem::Path iconsPath = Resources::ResourceManager::getSingleton().findResourceFile("icons.ttf");
-        auto iconsResult = co_await Filesystem::readFileAsync(iconsPath);
+        Platform::Filesystem::Path iconsPath = Resources::ResourceManager::getSingleton().findResourceFile("icons.ttf");
+        auto iconsResult = co_await Platform::Filesystem::readFileAsync(iconsPath);
         if (iconsResult.is_value()) {
             mIconsData = std::move(iconsResult).value().get();
 
@@ -297,11 +297,11 @@ namespace Tools {
             config.MergeMode = true;
             config.FontLoaderFlags |= ImGuiFreeTypeLoaderFlags_LoadColor;
             // config.GlyphMinAdvanceX = 13.0f;
-            config.GlyphOffset = { 0.0f, 3.0f * Window::platformCapabilities.mScalingFactor };
+            config.GlyphOffset = { 0.0f, 3.0f * Platform::Window::platformCapabilities.mScalingFactor };
             config.FontDataOwnedByAtlas = false;
             config.RasterizerDensity = 5.0f;
 
-            io.Fonts->AddFontFromMemoryTTF(const_cast<void *>(mIconsData.mData), mIconsData.mSize, 13.0f * Window::platformCapabilities.mScalingFactor, &config, icons_ranges);
+            io.Fonts->AddFontFromMemoryTTF(const_cast<void *>(mIconsData.mData), mIconsData.mSize, 13.0f * Platform::Window::platformCapabilities.mScalingFactor, &config, icons_ranges);
         } else {
             LOG_ERROR("Reading icons.ttf failed!");
         }
@@ -335,7 +335,7 @@ namespace Tools {
 
         co_await ImRoot::finalize();
 
-        if (Window::platformCapabilities.mSupportMultipleWindows) {
+        if (Platform::Window::platformCapabilities.mSupportMultipleWindows) {
             ImGuiViewport *main_viewport = ImGui::GetMainViewport();
             main_viewport->PlatformHandle = nullptr;
         }
@@ -361,11 +361,11 @@ namespace Tools {
         removeDependency(target);
     }
 
-    static Input::CursorIcon convertCursorIcon(ImGuiMouseCursor cursor)
+    static Platform::Input::CursorIcon convertCursorIcon(ImGuiMouseCursor cursor)
     {
 #define HELPER(x)              \
     case ImGuiMouseCursor_##x: \
-        return Input::CursorIcon::x;
+        return Platform::Input::CursorIcon::x;
         switch (cursor) {
             HELPER(Arrow)
             HELPER(TextInput)
@@ -384,7 +384,7 @@ namespace Tools {
     void ClientImRoot::setup(Render::RenderTarget *target)
     {
         if (mWindow.getRenderWindow() == target) {
-            setupImpl(target, HLSL::imgui_VS, HLSL::imgui_PS, { sizeof(Matrix4) }, false);
+            setupImpl(target, HLSL::imgui_VS, HLSL::imgui_PS, { sizeof(Math::Matrix4) }, false);
         }
 
         MainWindowComponentBase::setup(target);
@@ -439,13 +439,13 @@ namespace Tools {
         draw_data->ScaleClipRects(ImGui::GetIO().DisplayFramebufferScale);
 
         {
-            auto mvp = mPipeline->mapParameters<Matrix4>(0);
+            auto mvp = mPipeline->mapParameters<Math::Matrix4>(0);
 
             float L = draw_data->DisplayPos.x;
             float R = draw_data->DisplayPos.x + draw_data->DisplaySize.x /* / ImGui::GetIO().DisplayFramebufferScale.x*/;
             float T = draw_data->DisplayPos.y;
             float B = draw_data->DisplayPos.y + draw_data->DisplaySize.y /* / ImGui::GetIO().DisplayFramebufferScale.y*/;
-            *mvp.mData = target->getClipSpaceMatrix() * Matrix4 { 2.0f / (R - L), 0.0f, 0.0f, (R + L) / (L - R), 0.0f, 2.0f / (T - B), 0.0f, (T + B) / (B - T), 0.0f, 0.0f, 0.5f, 0.5f, 0.0f, 0.0f, 0.0f, 1.0f };
+            *mvp.mData = target->getClipSpaceMatrix() * Math::Matrix4 { 2.0f / (R - L), 0.0f, 0.0f, (R + L) / (L - R), 0.0f, 2.0f / (T - B), 0.0f, (T + B) / (B - T), 0.0f, 0.0f, 0.5f, 0.5f, 0.0f, 0.0f, 0.0f, 1.0f };
         }
 
         using Vertex = Compound<Render::VertexPos2, Render::VertexColor, Render::VertexUV>;
@@ -497,7 +497,7 @@ namespace Tools {
                         pcmd->UserCallback(cmd_list, pcmd);
                 } else {
                     // Apply Scissor, Bind texture, Draw
-                    const Rect2i r = { { (int)(pcmd->ClipRect.x - clip_off.x), (int)(pcmd->ClipRect.y - clip_off.y) }, { (int)(pcmd->ClipRect.z - pcmd->ClipRect.x), (int)(pcmd->ClipRect.w - pcmd->ClipRect.y) } };
+                    const Math::Rect2i r = { { (int)(pcmd->ClipRect.x - clip_off.x), (int)(pcmd->ClipRect.y - clip_off.y) }, { (int)(pcmd->ClipRect.z - pcmd->ClipRect.x), (int)(pcmd->ClipRect.w - pcmd->ClipRect.y) } };
                     if (r.bottomRight().x > r.mTopLeft.x && r.bottomRight().y > r.mTopLeft.y) {
                         ImTextureID tex = pcmd->GetTexID();
                         const Render::Texture *texture = reinterpret_cast<const Render::Texture *>(tex);
@@ -558,10 +558,10 @@ namespace Tools {
         mViewportMappings.erase(target);
     }
 
-    Rect2i ClientImRoot::getChildClientSpace()
+    Math::Rect2i ClientImRoot::getChildClientSpace()
     {
         ImGuiIO &io = ImGui::GetIO();
-        if (mAreaSize == Vector2 { 0, 0 })
+        if (mAreaSize == Math::Vector2 { 0, 0 })
             return mClientSpace;
         if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
             return { (mAreaPos - getScreenSpace().mTopLeft).floor(), mAreaSize.floor() };
@@ -574,22 +574,22 @@ namespace Tools {
         return false;
     }
 
-    bool ClientImRoot::onWindowEvent(const Window::WindowEvent &arg)
+    bool ClientImRoot::onWindowEvent(const Platform::Window::WindowEvent &arg)
     {
         return std::visit(overloaded {
-                              [&](const Window::ResizeEvent &e) { return false; },
-                              [&](const Window::CloseEvent &e) { dialogs().show(closeDialog(), [this]() { mWindow.onWindowEvent(Window::CloseEvent {}, this); }); return true; },
-                              [&](const Window::RepaintEvent &e) { return false; },
-                              [&](const Input::KeyPressEvent &e) { return injectKeyPress(e); },
-                              [&](const Input::KeyReleaseEvent &e) { return injectKeyRelease(e); },
-                              [&](const Input::PointerPressEvent &e) { return injectPointerPress(e); },
-                              [&](const Input::PointerReleaseEvent &e) { return injectPointerRelease(e); },
-                              [&](const Input::PointerMoveEvent &e) { return injectPointerMove(e); },
-                              [&](const Input::AxisEvent &e) { return injectAxisEvent(e); } },
+                              [&](const Platform::Window::ResizeEvent &e) { return false; },
+                              [&](const Platform::Window::CloseEvent &e) { dialogs().show(closeDialog(), [this]() { mWindow.onWindowEvent(Platform::Window::CloseEvent {}, this); }); return true; },
+                              [&](const Platform::Window::RepaintEvent &e) { return false; },
+                              [&](const Platform::Input::KeyPressEvent &e) { return injectKeyPress(e); },
+                              [&](const Platform::Input::KeyReleaseEvent &e) { return injectKeyRelease(e); },
+                              [&](const Platform::Input::PointerPressEvent &e) { return injectPointerPress(e); },
+                              [&](const Platform::Input::PointerReleaseEvent &e) { return injectPointerRelease(e); },
+                              [&](const Platform::Input::PointerMoveEvent &e) { return injectPointerMove(e); },
+                              [&](const Platform::Input::AxisEvent &e) { return injectAxisEvent(e); } },
             arg);
     }
 
-    bool ClientImRoot::injectKeyPress(const Engine::Input::KeyPressEvent &arg)
+    bool ClientImRoot::injectKeyPress(const Platform::Input::KeyPressEvent &arg)
     {
         ImGuiIO &io = ImGui::GetIO();
 
@@ -610,7 +610,7 @@ namespace Tools {
         return io.WantCaptureKeyboard;
     }
 
-    bool ClientImRoot::injectKeyRelease(const Engine::Input::KeyReleaseEvent &arg)
+    bool ClientImRoot::injectKeyRelease(const Platform::Input::KeyReleaseEvent &arg)
     {
         ImGuiIO &io = ImGui::GetIO();
 
@@ -629,7 +629,7 @@ namespace Tools {
         return io.WantCaptureKeyboard;
     }
 
-    bool ClientImRoot::injectPointerPress(const Engine::Input::PointerPressEvent &arg)
+    bool ClientImRoot::injectPointerPress(const Platform::Input::PointerPressEvent &arg)
     {
         ImGuiIO &io = ImGui::GetIO();
         io.AddMouseButtonEvent(arg.mButton - 1, true);
@@ -637,7 +637,7 @@ namespace Tools {
         return io.WantCaptureMouse;
     }
 
-    bool ClientImRoot::injectPointerRelease(const Engine::Input::PointerReleaseEvent &arg)
+    bool ClientImRoot::injectPointerRelease(const Platform::Input::PointerReleaseEvent &arg)
     {
         ImGuiIO &io = ImGui::GetIO();
         io.AddMouseButtonEvent(arg.mButton - 1, false);
@@ -645,15 +645,15 @@ namespace Tools {
         return io.WantCaptureMouse;
     }
 
-    bool ClientImRoot::injectPointerMove(const Engine::Input::PointerMoveEvent &arg)
+    bool ClientImRoot::injectPointerMove(const Platform::Input::PointerMoveEvent &arg)
     {
         ImGuiIO &io = ImGui::GetIO();
 
-        Vector2 pos;
+        Math::Vector2 pos;
         if (ImGui::GetIO().ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
-            pos = Vector2 { static_cast<float>(arg.mScreenPosition.x), static_cast<float>(arg.mScreenPosition.y) } / Vector2 { io.DisplayFramebufferScale };
+            pos = Math::Vector2 { static_cast<float>(arg.mScreenPosition.x), static_cast<float>(arg.mScreenPosition.y) } / Math::Vector2 { io.DisplayFramebufferScale };
         else
-            pos = Vector2 { static_cast<float>(arg.mWindowPosition.x), static_cast<float>(arg.mWindowPosition.y) } / Vector2 { io.DisplayFramebufferScale };
+            pos = Math::Vector2 { static_cast<float>(arg.mWindowPosition.x), static_cast<float>(arg.mWindowPosition.y) } / Math::Vector2 { io.DisplayFramebufferScale };
 
         io.AddMousePosEvent(pos.x, pos.y);
 
@@ -664,23 +664,23 @@ namespace Tools {
         return io.WantCaptureMouse;
     }
 
-    bool ClientImRoot::injectAxisEvent(const Engine::Input::AxisEvent &arg)
+    bool ClientImRoot::injectAxisEvent(const Platform::Input::AxisEvent &arg)
     {
         ImGuiIO &io = ImGui::GetIO();
         switch (arg.mAxisType) {
-        case Input::AxisEvent::WHEEL:
+        case Platform::Input::AxisEvent::WHEEL:
             io.AddMouseWheelEvent(0.0f, arg.mAxis1);
             break;
-        case Input::AxisEvent::Z:
+        case Platform::Input::AxisEvent::Z:
             mZAxis = arg.mAxis1;
             break;
-        case Input::AxisEvent::LEFT:
+        case Platform::Input::AxisEvent::LEFT:
             mLeftControllerStick = { arg.mAxis1, arg.mAxis2 };
             break;
-        case Input::AxisEvent::RIGHT:
+        case Platform::Input::AxisEvent::RIGHT:
             mRightControllerStick = { arg.mAxis1, arg.mAxis2 };
             break;
-        case Input::AxisEvent::DPAD:
+        case Platform::Input::AxisEvent::DPAD:
             mDPadState = arg.mAxis1;
             break;
         }
@@ -699,24 +699,24 @@ namespace Tools {
     {
         ImGuiIO &io = ImGui::GetIO();
 
-        Vector2 oldSize = mAreaSize;
-        Vector2 oldPos = mAreaPos;
+        Math::Vector2 oldSize = mAreaSize;
+        Math::Vector2 oldPos = mAreaPos;
 
         ImGuiDockNode *node = ImGui::DockBuilderGetCentralNode(mGameDockSpaceId);
 
         if (node) {
-            mAreaPos = Vector2 { node->Pos } * Vector2 { io.DisplayFramebufferScale };
-            mAreaSize = Vector2 { node->Size } * Vector2 { io.DisplayFramebufferScale };
+            mAreaPos = Math::Vector2 { node->Pos } * Math::Vector2 { io.DisplayFramebufferScale };
+            mAreaSize = Math::Vector2 { node->Size } * Math::Vector2 { io.DisplayFramebufferScale };
         } else {
-            mAreaPos = Vector2::ZERO;
-            mAreaSize = Vector2::ZERO;
+            mAreaPos = Math::Vector2::ZERO;
+            mAreaSize = Math::Vector2::ZERO;
         }
 
         if (mAreaSize != oldSize || mAreaPos != oldPos)
             mWindow.applyClientSpaceResize(this);
     }
 
-    Filesystem::Path ClientImRoot::findDataFile(std::string_view name) const
+    Platform::Filesystem::Path ClientImRoot::findDataFile(std::string_view name) const
     {
         return Resources::ResourceManager::getSingleton().findResourceFile(name);
     }
@@ -726,14 +726,14 @@ namespace Tools {
         return mWindow.taskQueue();
     }
 
-    void ClientImRoot::Image(Render::ConstTexturePtr tex, Vector2i image_size, const Vector2 &uv0, const Vector2 &uv1)
+    void ClientImRoot::Image(Render::ConstTexturePtr tex, Math::Vector2i image_size, const Math::Vector2 &uv0, const Math::Vector2 &uv1)
     {
         ImGui::Image((void *)tex.get(), image_size, uv0, uv1);
 
         mTextureCache.push_back(std::move(tex));        
     }
 
-    void ClientImRoot::Image(const Filesystem::Path &path, Vector2i image_size)
+    void ClientImRoot::Image(const Platform::Filesystem::Path &path, Math::Vector2i image_size)
     {
         std::string_view name = path.stem();
 
@@ -759,7 +759,7 @@ namespace Tools {
         }
     }
 
-    void ClientImRoot::DrawImage(const Filesystem::Path &path, Vector2i pos, Vector2i image_size, float spinnerRadius)
+    void ClientImRoot::DrawImage(const Platform::Filesystem::Path &path, Math::Vector2i pos, Math::Vector2i image_size, float spinnerRadius)
     {
         std::string_view name = path.stem();
 
@@ -802,7 +802,7 @@ namespace Tools {
     {
         ImGuiIO &io = ImGui::GetIO();
 
-        Vector2i size = mRoot.window().getScreenSpace().mSize;
+        Math::Vector2i size = mRoot.window().getScreenSpace().mSize;
 
         io.DisplaySize = ImVec2(size.x / io.DisplayFramebufferScale.x, size.y / io.DisplayFramebufferScale.y);
 

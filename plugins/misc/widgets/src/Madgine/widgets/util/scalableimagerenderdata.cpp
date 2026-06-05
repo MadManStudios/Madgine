@@ -2,7 +2,7 @@
 
 #include "scalableimagerenderdata.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
 #include "../widgetmanager.h"
@@ -48,18 +48,18 @@ namespace Widgets {
         return mImage;
     }
 
-    void ScalableImageRenderData::renderImage(WidgetsRenderData &renderData, Vector2 pos, Vector3 size, const Atlas2::Entry &entry, const ColorFrame &color)
+    void ScalableImageRenderData::renderImage(WidgetsRenderData &renderData, Math::Vector2 pos, Math::Vector3 size, const Math::Atlas2::Entry &entry, const ColorFrame &color)
     {
-        Vector2 posOuter = pos;
+        Math::Vector2 posOuter = pos;
 
-        Vector2 topLeftUV = Vector2 { entry.mArea.mTopLeft + Vector2i { 1, 1 } } / (2048.f /* * mData->mUIAtlasSize*/);
-        Vector2 uvSize = Vector2 { entry.mArea.mSize - Vector2i { 2, 2 } } / (2048.f /* * mData->mUIAtlasSize*/);
-        Vector2 bottomRightUV = topLeftUV + uvSize;
+        Math::Vector2 topLeftUV = Math::Vector2 { entry.mArea.mTopLeft + Math::Vector2i { 1, 1 } } / (2048.f /* * mData->mUIAtlasSize*/);
+        Math::Vector2 uvSize = Math::Vector2 { entry.mArea.mSize - Math::Vector2i { 2, 2 } } / (2048.f /* * mData->mUIAtlasSize*/);
+        Math::Vector2 bottomRightUV = topLeftUV + uvSize;
 
-        Vector2 topLeftUVOuter = topLeftUV;
-        Vector2 bottomRightUVOuter = bottomRightUV;
+        Math::Vector2 topLeftUVOuter = topLeftUV;
+        Math::Vector2 bottomRightUVOuter = bottomRightUV;
 
-        const Vector2i &imageSize = entry.mArea.mSize;
+        const Math::Vector2i &imageSize = entry.mArea.mSize;
 
         if (mLeftBorder > 0) {
             pos.x += size.z * mLeftBorder;

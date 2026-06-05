@@ -5,17 +5,17 @@
 #    include "Generic/execution/algorithm.h"
 #    include "Generic/execution/execution.h"
 
-#    include "Interfaces/fetch/fetchapi.h"
-#    include "Interfaces/filesystem/fsapi.h"
+#    include "Platform/fetch/fetchapi.h"
+#    include "Platform/filesystem/fsapi.h"
 
-#    include "Modules/ini/inisection.h"
+#    include "Modules/plugins/inisection.h"
 #    include "Modules/plugins/plugin.h"
 #    include "Modules/plugins/pluginmanager.h"
 #    include "Modules/plugins/pluginsection.h"
 #    include "Modules/threading/taskqueue.h"
 #    include "Modules/uniquecomponent/uniquecomponentcollector.h"
 
-#    include "Meta/keyvalue/metatable_impl.h"
+#    include "Meta/reflect/metatable_impl.h"
 #    include "Meta/serialize/serializetable_impl.h"
 
 #    include "../renderer/imroot.h"
@@ -63,10 +63,10 @@ namespace Tools {
 
                     if (fetch) {
                         mFetching = true;
-                        mLifetime.attach(FetchSender<JsonParser>("https://api.github.com/orgs/MadManStudios/repos", { "Accept: application/vnd.github+json", "User-Agent: Madgine" }) | Execution::then([this](JsonObject result) {
+                        mLifetime.attach(Platform::Fetch::FetchSender<Platform::Fetch::JsonParser>("https://api.github.com/orgs/MadManStudios/repos", { "Accept: application/vnd.github+json", "User-Agent: Madgine" }) | Execution::then([this](Platform::Fetch::JsonObject result) {
                             // LOG(result);
                             mSources.clear();
-                            for (JsonObject &repo : result.asList()) {
+                            for (Platform::Fetch::JsonObject &repo : result.asList()) {
                                 if (!repo.asObject()["custom_properties"].asObject().contains("Madgine-Plugin-Group"))
                                     continue;
                                 PluginSource &source = mSources.emplace_back();
@@ -127,7 +127,7 @@ namespace Tools {
                         auto locals = std::ranges::stable_partition(dependencies, [](const std::string &s) { return !s.starts_with("http"); });
 
                         for (const std::string &customDependency : std::ranges::subrange(dependencies.begin(), locals.begin())) {
-                            Filesystem::Path path = customDependency;
+                            Platform::Filesystem::Path path = customDependency;
 
                             std::string name { path.stem() };
 
@@ -167,7 +167,7 @@ namespace Tools {
                         }
 
                         for (const std::string &localDependency : locals) {
-                            Filesystem::Path path = localDependency;
+                            Platform::Filesystem::Path path = localDependency;
 
                             std::string name { path.stem() };
 
@@ -200,7 +200,7 @@ namespace Tools {
         ImGui::End();
     }
 
-    bool PluginManager::renderConfiguration(const Filesystem::Path &config)
+    bool PluginManager::renderConfiguration(const Platform::Filesystem::Path &config)
     {
         bool changed = false;
 
@@ -215,7 +215,7 @@ namespace Tools {
         return changed;
     }
 
-    void PluginManager::loadConfiguration(const Filesystem::Path &config)
+    void PluginManager::loadConfiguration(const Platform::Filesystem::Path &config)
     {
         mCurrentConfiguration.loadFromDisk(config / "plugins.ini");
         for (auto &[sectionName, section] : mCurrentConfiguration) {
@@ -230,7 +230,7 @@ namespace Tools {
         }
     }
 
-    void PluginManager::saveConfiguration(const Filesystem::Path &config)
+    void PluginManager::saveConfiguration(const Platform::Filesystem::Path &config)
     {
         mCurrentConfiguration.saveToDisk(config / "plugins.ini");
     }
@@ -239,7 +239,7 @@ namespace Tools {
     {
         bool changed = false;
 
-        Ini::IniFile &file = isConfiguration ? mCurrentConfiguration : mManager.selection();
+        Plugins::IniFile &file = isConfiguration ? mCurrentConfiguration : mManager.selection();
 
         for (auto &section : mManager) {
             if (ImGui::CollapsingHeader(section.name().c_str())) {
@@ -301,10 +301,10 @@ namespace Tools {
                         }
 
                         if (ImGui::TreeNode("UniqueComponents")) {
-                            for (UniqueComponent::RegistryBase *reg : UniqueComponent::registryRegistry()) {
-                                for (UniqueComponent::CollectorInfoBase *info : *reg) {
+                            for (Plugins::RegistryBase *reg : Plugins::registryRegistry()) {
+                                for (Plugins::CollectorInfoBase *info : *reg) {
                                     if (info->mBinary == binInfo && ImGui::TreeNode(reg->type_info().type_name().data(), "%.*s", static_cast<int>(reg->type_info().type_name().size()), reg->type_info().type_name().data())) {
-                                        for (const std::pair<std::vector<UniqueComponent::TypeInfo>, UniqueComponent::TypeInfo> &components : info->mElementInfos) {
+                                        for (const std::pair<std::vector<Plugins::TypeInfo>, Plugins::TypeInfo> &components : info->mElementInfos) {
                                             ImGui::Text(components.first.front().type_name());
                                         }
                                         ImGui::TreePop();
@@ -333,7 +333,7 @@ namespace Tools {
             co_await mLifetime;
         });
 
-        if (Filesystem::exists(SOURCE_DIR "/dependencies.txt")) {
+        if (Platform::Filesystem::exists(SOURCE_DIR "/dependencies.txt")) {
             std::ifstream in { SOURCE_DIR "/dependencies.txt" };
             std::string line;
             while (std::getline(in, line)) {

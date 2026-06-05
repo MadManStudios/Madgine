@@ -41,11 +41,11 @@ namespace Resources {
                     if (success)
                         mState.start();
                     else
-                        this->mRec.set_error(KEYVALUE_UNKNOWN_ERROR());
+                        this->mRec.set_error(REFLECT_UNKNOWN_ERROR());
                 };
 
                 if (!this->mRec.mHandle) {
-                    this->mRec.set_error(KEYVALUE_UNKNOWN_ERROR());
+                    this->mRec.set_error(REFLECT_UNKNOWN_ERROR());
                     return;
                 }
 
@@ -53,7 +53,7 @@ namespace Resources {
                 if (fut.is_ready()) {
                     handler(fut);
                 } else {
-                    Root::Root::getSingleton().taskQueue()->queueTask(fut.then(handler));
+                    Core::Root::getSingleton().taskQueue()->queueTask(fut.then(handler));
                 }
             }
 

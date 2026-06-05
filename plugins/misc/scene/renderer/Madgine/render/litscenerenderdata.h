@@ -24,9 +24,9 @@ namespace Render {
             constexpr auto operator<=>(const NonInstancedData &) const = default;
         };
         struct ObjectData {
-            Matrix4 mTransform;
-            Vector4 mDiffuseColor;
-            GPUPtr<Matrix4[]> mBones;
+            Math::Matrix4 mTransform;
+            Math::Vector4 mDiffuseColor;
+            GPUPtr<Math::Matrix4[]> mBones;
         };
         std::map<NonInstancedData, std::vector<ObjectData>> mInstances;
 

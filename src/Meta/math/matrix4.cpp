@@ -32,7 +32,8 @@ THE SOFTWARE.
 // Adapted from Matrix math by Wild Magic http://www.geometrictools.com/
 
 namespace Engine {
-// const float Matrix4::EPSILON = 1e-06f;
+namespace Math {
+    // const float Matrix4::EPSILON = 1e-06f;
 /*const float Matrix4::msSvdEpsilon = 1e-04f;
     const unsigned int Matrix4::msSvdMaxIterations = 42;*/
 
@@ -1512,4 +1513,5 @@ Matrix4 Matrix4::Inverse() const
     //-----------------------------------------------------------------------
         */
 
+}
 }

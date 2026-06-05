@@ -1,9 +1,9 @@
 #pragma once
 
-#include "Generic/container/container_api.h"
-#include "Generic/container/freelistcontainer.h"
+#include "Generic/containers/container_api.h"
+#include "Generic/containers/freelistcontainer.h"
 
-#include "Meta/keyvalue/scopeptr.h"
+#include "Meta/reflect/scopeptr.h"
 #include "Meta/serialize/hierarchy/serializableunitptr.h"
 #include "Meta/serialize/operations.h"
 
@@ -18,7 +18,7 @@ namespace Scene {
         template <typename T>
         struct EntityComponentList : EntityComponentListBase {
 
-            using Vector = container_api<typename replace<typename T::Container>::template type<T>>;
+            using Vector = Containers::container_api<typename replace<typename T::Container>::template type<T>>;
 
             Vector *operator->()
             {
@@ -30,7 +30,7 @@ namespace Scene {
                 return &mData;
             }
 
-            ScopePtr getTyped(EntityComponentBase &comp) override final
+            Reflect::ScopePtr getTyped(EntityComponentBase &comp) override final
             {
                 return static_cast<T *>(&comp);
             }
@@ -64,7 +64,7 @@ namespace Scene {
 
             EntityComponentBase &emplace(Entity &entity) override final
             {
-                typename Vector::iterator it = Engine::emplace(mData, mData.end(), entity);
+                typename Vector::iterator it = Containers::emplace(mData, mData.end(), entity);
                 return *it;
             }
 

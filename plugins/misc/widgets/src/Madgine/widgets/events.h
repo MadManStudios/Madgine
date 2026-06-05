@@ -4,27 +4,27 @@ namespace Engine {
 namespace Widgets {
 
     struct PointerClickEvent {
-        mutable InterfacesVector mWindowPosition;
-        InterfacesVector mScreenPosition;
-        Input::MouseButton::MouseButton mButton;
+        mutable Platform::PlatformVector mWindowPosition;
+        Platform::PlatformVector mScreenPosition;
+        Platform::Input::MouseButton::MouseButton mButton;
     };
 
     struct DragBeginEvent {
-        mutable InterfacesVector mWindowPosition;
-        InterfacesVector mScreenPosition;
-        Input::MouseButton::MouseButton mButton;
+        mutable Platform::PlatformVector mWindowPosition;
+        Platform::PlatformVector mScreenPosition;
+        Platform::Input::MouseButton::MouseButton mButton;
     };
 
     struct DragMoveEvent {
-        mutable InterfacesVector mWindowPosition;
-        InterfacesVector mScreenPosition;
-        InterfacesVector mMoveDelta;
+        mutable Platform::PlatformVector mWindowPosition;
+        Platform::PlatformVector mScreenPosition;
+        Platform::PlatformVector mMoveDelta;
     };
 
     struct DragEndEvent {
-        mutable InterfacesVector mWindowPosition;
-        InterfacesVector mScreenPosition;
-        Input::MouseButton::MouseButton mButton;
+        mutable Platform::PlatformVector mWindowPosition;
+        Platform::PlatformVector mScreenPosition;
+        Platform::Input::MouseButton::MouseButton mButton;
     };
 
 }

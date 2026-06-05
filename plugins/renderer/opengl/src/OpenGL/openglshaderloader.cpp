@@ -2,9 +2,9 @@
 
 #include "openglshaderloader.h"
 
-#include "Interfaces/filesystem/fsapi.h"
+#include "Platform/filesystem/fsapi.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
 #include "openglrendercontext.h"
@@ -47,13 +47,13 @@ namespace Render {
 
     Threading::Task<bool> OpenGLShaderLoader::generate(OpenGLShader &shader, ResourceDataInfo &info, ShaderType type, ShaderObjectPtr object)
     {
-        const Filesystem::Path &p = info.resource()->path();
+        const Platform::Filesystem::Path &p = info.resource()->path();
 
         if (object) {
             co_await ShaderCache::generate(p, object, TARGET, type);
         }
 
-        if (!Filesystem::exists(p))
+        if (!Platform::Filesystem::exists(p))
             co_return false;
 
         std::string source = info.resource()->readAsText();
@@ -66,7 +66,7 @@ namespace Render {
         shader.reset();
     }
 
-    bool OpenGLShaderLoader::loadFromSource(OpenGLShader &shader, std::string_view name, std::string source, ShaderType type, const Filesystem::Path &path)
+    bool OpenGLShaderLoader::loadFromSource(OpenGLShader &shader, std::string_view name, std::string source, ShaderType type, const Platform::Filesystem::Path &path)
     {
         OpenGLShader tempShader { type };
 
@@ -123,7 +123,7 @@ vec3 linearToSrgb(vec3 linearRGB) {
         glGetShaderiv(handle, GL_COMPILE_STATUS, &success);
         if (!success) {
             glGetShaderInfoLog(handle, 512, NULL, infoLog);
-            Engine::Log::LogDummy { Engine::Log::MessageType::FATAL_TYPE, path.c_str() }
+            Platform::Log::LogDummy { Platform::Log::MessageType::FATAL_TYPE, path.c_str() }
                 << "Compilation of " << (type == VertexShader ? "VS" : "PS")
                 << " Shader '" << name << "' failed:\n"
                 << infoLog;

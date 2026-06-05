@@ -12,7 +12,7 @@
 
 #include "Madgine/serialize/memory/memorymanager.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
 #include "scenemanager.h"
@@ -138,15 +138,15 @@ namespace Scene {
 
     void SceneContainer::copy(const SceneContainer &other)
     {
-        Memory::MemoryManager mgr { "SceneCopy" };
+        Serialize::MemoryManager mgr { "SceneCopy" };
 
-        WritableByteBuffer buffer;
+        Memory::WritableByteBuffer buffer;
 
         Serialize::FormattedSerializeStream out = mgr.openWrite(buffer, Serialize::Formats::xml);
 
         Serialize::write(out, other, "Scene");
 
-        ByteBuffer readBuffer { buffer.mData, buffer.mSize };
+        Memory::ByteBuffer readBuffer { buffer.mData, buffer.mSize };
 
         Serialize::FormattedSerializeStream in = mgr.openRead(std::move(readBuffer), Serialize::Formats::xml);
 

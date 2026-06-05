@@ -2,7 +2,7 @@
 
 #include "tabbarrenderdata.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
 METATABLE_BEGIN_BASE(Engine::Widgets::TabBarRenderData, Engine::Widgets::RenderData)

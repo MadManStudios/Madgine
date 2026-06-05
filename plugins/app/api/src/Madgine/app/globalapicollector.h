@@ -2,11 +2,11 @@
 
 #include "Modules/uniquecomponent/uniquecomponentdefine.h"
 
-DECLARE_UNIQUE_COMPONENT(Engine::App, GlobalAPI, GlobalAPIBase, Engine::UniqueComponent::Constructor<Application &>)
+DECLARE_UNIQUE_COMPONENT(Engine::Core, GlobalAPI, GlobalAPIBase, Engine::Plugins::Constructor<Application &>)
 
 namespace Engine {
-namespace App {
+namespace Core {
     template <typename T>
-    using GlobalAPI = VirtualScope<T, GlobalAPIComponent<T>>;
+    using GlobalAPI = Reflect::VirtualScope<T, GlobalAPIComponent<T>>;
 }
 }

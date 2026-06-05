@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Meta/keyvalue/scopeiterator.h"
+#include "Meta/reflect/scopeiterator.h"
 
 namespace Engine {
 namespace Behavior {
@@ -10,7 +10,7 @@ namespace Behavior {
 
         struct PyScopeIterator {
             PyObject_HEAD
-                ScopeIterator mIt;
+                Reflect::ScopeIterator mIt;
         };
 
     }

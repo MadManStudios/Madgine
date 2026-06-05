@@ -4,7 +4,7 @@
 
 #include "Meta/math/line3.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
 #include "util/layouts/gridlayoutrenderdata.h"
@@ -105,8 +105,8 @@ namespace Widgets {
     {
         if (mTextRenderData.available()) {
 
-            Vector2 pos = getAbsolutePosition();
-            Vector3 size = getAbsoluteSize();
+            Math::Vector2 pos = getAbsolutePosition();
+            Math::Vector3 size = getAbsoluteSize();
             renderData.setSubLayer(1);
 
             auto keep = renderData.pushClipRect(pos, size.xy());
@@ -117,7 +117,7 @@ namespace Widgets {
             float fullWidth = mVerticalLayoutRenderData.fullSize();
             float fullHeight = mHorizontalLayoutRenderData.fullSize(mRowCount);
 
-            const Atlas2::Entry *blankEntry = manager().lookUpImage("blank_white");
+            const Math::Atlas2::Entry *blankEntry = manager().lookUpImage("blank_white");
 
             AreaView<std::string, 2> view { mCellData.data(), { columnCount(), mRowCount } };
 
@@ -146,7 +146,7 @@ namespace Widgets {
 
                 if (row + 1 < mRowCount) {
                     float y = rowPos + rowSize;
-                    Line2 line {
+                    Math::Line2 line {
                         { pos.x,
                             pos.y + y },
                         { pos.x + fullWidth,
@@ -158,7 +158,7 @@ namespace Widgets {
 
             for (size_t col = 1; col < mColumnConfigs.size(); ++col) {
                 auto [x, _] = mVerticalLayoutRenderData.getElementDimensions(col);
-                Line2 line {
+                Math::Line2 line {
                     { pos.x + x,
                         pos.y },
                     { pos.x + x,
@@ -171,7 +171,7 @@ namespace Widgets {
         WidgetBase::render(renderData);
     }
 
-    void TableWidget::sizeChanged(const Vector3 &pixelSize)
+    void TableWidget::sizeChanged(const Math::Vector3 &pixelSize)
     {
         if (mTextRenderData.available()) {
             float lineHeight = mTextRenderData.calculateLineHeight(pixelSize.z);
@@ -214,19 +214,19 @@ namespace Widgets {
         return index;
     }
 
-    void TableWidget::injectPointerEnter(const Input::PointerMoveEvent &arg)
+    void TableWidget::injectPointerEnter(const Platform::Input::PointerMoveEvent &arg)
     {
         mHoveredRow = rowIndex(arg.mWindowPosition.y);
         WidgetBase::injectPointerEnter(arg);
     }
 
-    void TableWidget::injectPointerLeave(const Input::PointerMoveEvent &arg)
+    void TableWidget::injectPointerLeave(const Platform::Input::PointerMoveEvent &arg)
     {
         mHoveredRow.reset();
         WidgetBase::injectPointerLeave(arg);
     }
 
-    void TableWidget::injectPointerMove(const Input::PointerMoveEvent &arg)
+    void TableWidget::injectPointerMove(const Platform::Input::PointerMoveEvent &arg)
     {
         mHoveredRow = rowIndex(arg.mWindowPosition.y);
         WidgetBase::injectPointerMove(arg);

@@ -14,12 +14,12 @@ namespace Render {
         bool bind(DirectX12RenderTarget *target, VertexFormat vertexFormat, size_t groupSize) const;
         void bindRootSignature(DirectX12RenderTarget *target) const;
 
-        virtual WritableByteBuffer mapParameters(size_t index) override;
-        virtual WritableByteBuffer mapTempBuffer(size_t space, size_t elementSize, size_t count) const override;
+        virtual Memory::WritableByteBuffer mapParameters(size_t index) override;
+        virtual Memory::WritableByteBuffer mapTempBuffer(size_t space, size_t elementSize, size_t count) const override;
 
         virtual void bindMesh(RenderTarget *target, const GPUMeshData &mesh) const override;
-        virtual WritableByteBuffer mapVertices(RenderTarget *target, VertexFormat format, size_t count) const override;
-        virtual TypedByteBuffer<uint32_t> mapIndices(RenderTarget *target, size_t count) const override;
+        virtual Memory::WritableByteBuffer mapVertices(RenderTarget *target, VertexFormat format, size_t count) const override;
+        virtual Memory::TypedByteBuffer<uint32_t> mapIndices(RenderTarget *target, size_t count) const override;
         virtual void setGroupSize(size_t groupSize) const override;
 
         virtual void render(RenderTarget *target) const override;

@@ -4,8 +4,8 @@ namespace Engine {
 namespace Widgets {
 
     struct Geometry {
-        Matrix3 mPos;
-        Matrix3 mSize;
+        Math::Matrix3 mPos;
+        Math::Matrix3 mSize;
     };
 
     struct GeometrySourceInfo {

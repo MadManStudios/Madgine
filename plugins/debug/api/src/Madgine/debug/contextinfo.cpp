@@ -4,7 +4,7 @@
 
 #include "Generic/execution/stop_source.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 
 #include "debugger.h"
 #include "debuglistener.h"

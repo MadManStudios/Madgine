@@ -7,7 +7,7 @@
 #include "Madgine/imageloader/imageloader.h"
 #include "Madgine/render/fonts/fontloader.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
 #include "Madgine_Tools/inspector/inspector.h"
@@ -34,7 +34,7 @@ namespace Tools {
 
     Threading::Task<bool> VulkanRenderContextTool::init()
     {
-        mImageTexture = std::make_shared<Render::VulkanTexture>(Render::TextureType_2D, false, Render::FORMAT_RGBA8, Vector2i{ 100, 100 });
+        mImageTexture = std::make_shared<Render::VulkanTexture>(Render::TextureType_2D, false, Render::FORMAT_RGBA8, Math::Vector2i { 100, 100 });
 
         getTool<Inspector>().addPreviewDefinition<Resources::ImageLoader::Resource>([this](const Traced<Resources::ImageLoader::Resource *> &image) {
             Resources::ImageLoader::Handle data = image.get()->loadData();

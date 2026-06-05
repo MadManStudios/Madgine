@@ -7,7 +7,7 @@
 #    include "indexholder.h"
 
 namespace Engine {
-namespace UniqueComponent {
+namespace Plugins {
 
     template <typename _Registry>
     struct Collector {
@@ -72,7 +72,7 @@ namespace UniqueComponent {
 #else
 
 namespace Engine {
-namespace UniqueComponent {
+namespace Plugins {
 
     template <typename _Registry>
     struct Collector {

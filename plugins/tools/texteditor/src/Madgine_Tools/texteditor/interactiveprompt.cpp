@@ -188,12 +188,12 @@ namespace Tools {
         return std::string { mInterpreter->name() };
     }
 
-    void InteractivePrompt::log(std::string_view msg, Engine::Log::MessageType lvl, const char *file, size_t line)
+    void InteractivePrompt::log(std::string_view msg, Platform::Log::MessageType lvl, const char *file, size_t line)
     {
         auto it = mBuffer->End();
         Zep::ChangeRecord changeRecord;
         mBuffer->Insert(it, std::string { msg } + "\n", changeRecord);
-        if (lvl == Engine::Log::MessageType::ERROR_TYPE) {
+        if (lvl == Platform::Log::MessageType::ERROR_TYPE) {
             mHighlighter->addError({ it.Index(), mBuffer->End().Index() });
         }
     }

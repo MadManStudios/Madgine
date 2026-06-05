@@ -16,7 +16,7 @@ inline void resolveIncludes(std::string &source, std::function<std::string(const
         ++mark;
         end = source.find('"', mark);
         std::string filename { source.begin() + mark, source.begin() + end };
-        Engine::Filesystem::Path path { filename };
+        Engine::Platform::Filesystem::Path path { filename };
         ++end;
         std::string code;
         if (files.try_emplace(filename, files.size()).second) {

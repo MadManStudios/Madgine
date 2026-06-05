@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Interfaces/interfaceslib.h"
+#include "Platform/platformlib.h"
 #include "Meta/metalib.h"
 
 #if defined(FilesystemSerialize_EXPORTS)

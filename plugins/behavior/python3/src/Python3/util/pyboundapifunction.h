@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Meta/keyvalue/boundapifunction.h"
+#include "Meta/reflect/boundapifunction.h"
 
 namespace Engine {
 namespace Behavior {
@@ -10,7 +10,7 @@ namespace Behavior {
 
         struct PyBoundApiFunction {
             PyObject_HEAD
-                BoundApiFunction mFunction;
+                Reflect::BoundApiFunction mFunction;
         };
 
     }

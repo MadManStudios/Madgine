@@ -9,14 +9,14 @@
 #include "networkbuffer.h"
 
 namespace Engine {
-namespace Network {
+namespace Serialize {
     static int sManagerCount = 0;
 
     NetworkManager::NetworkManager(const std::string &name)
         : SyncManager(name)
     {
         if (sManagerCount == 0) {
-            if (SocketAPI::init() != SocketAPIResult::SUCCESS)
+            if (Platform::SocketAPI::init() != Platform::SocketAPIResult::SUCCESS)
                 std::terminate();
         }
         ++sManagerCount;
@@ -34,7 +34,7 @@ namespace Network {
         close();
         --sManagerCount;
         if (sManagerCount == 0) {
-            SocketAPI::finalize();
+            Platform::SocketAPI::finalize();
         }
     }
 
@@ -43,7 +43,7 @@ namespace Network {
         if (isServer())
             return NetworkManagerResult::ALREADY_CONNECTED;
 
-        SocketAPIResult error = mServerSocket.open(port);
+        Platform::SocketAPIResult error = mServerSocket.open(port);
 
         if (!isServer()) {
             NetworkManagerResult result = recordSocketError(error);
@@ -61,8 +61,8 @@ namespace Network {
             return promise.getFuture();
         }
 
-        Socket socket;
-        SocketAPIResult error = socket.connect(url, portNr);
+        Platform::Socket socket;
+        Platform::SocketAPIResult error = socket.connect(url, portNr);
 
         if (!socket) {
             NetworkManagerResult result = recordSocketError(error);
@@ -72,7 +72,7 @@ namespace Network {
         }
 
         Execution::Future<Serialize::SyncManagerResult> fut = setSlaveStream(format, std::make_unique<Engine::Serialize::buffered_streambuf>(std::make_unique<NetworkBuffer>(std::move(socket))), timeout);
-        return reinterpret_cast<Execution::Future<NetworkManagerResult>&&>(fut);
+        return reinterpret_cast<Execution::Future<NetworkManagerResult> &&>(fut);
     }
 
     void NetworkManager::close()
@@ -89,9 +89,9 @@ namespace Network {
     {
         int count = 0;
         if (isServer()) {
-            Socket sock;
-            SocketAPIResult error = sock.accept(mServerSocket, timeout);
-            while (error != SocketAPIResult::TIMEOUT && (limit == -1 || count < limit)) {
+            Platform::Socket sock;
+            Platform::SocketAPIResult error = sock.accept(mServerSocket, timeout);
+            while (error != Platform::SocketAPIResult::TIMEOUT && (limit == -1 || count < limit)) {
                 if (sock) {
                     if (addMasterStream(format, std::make_unique<Engine::Serialize::buffered_streambuf>(std::make_unique<NetworkBuffer>(std::move(sock)))) == Serialize::SyncManagerResult::SUCCESS) {
                         ++count;
@@ -108,8 +108,8 @@ namespace Network {
         if (!isServer())
             return NetworkManagerResult::NO_SERVER;
 
-        Socket sock;
-        SocketAPIResult error = sock.accept(mServerSocket, timeout);
+        Platform::Socket sock;
+        Platform::SocketAPIResult error = sock.accept(mServerSocket, timeout);
         if (!sock)
             return recordSocketError(error);
 
@@ -132,18 +132,18 @@ namespace Network {
         return SyncManager::moveMasterStream(streamId, target);
     }
 
-    SocketAPIResult NetworkManager::getSocketAPIError() const
+    Platform::SocketAPIResult NetworkManager::getSocketAPIError() const
     {
         return mSocketAPIError;
     }
 
-    NetworkManagerResult NetworkManager::recordSocketError(SocketAPIResult error)
+    NetworkManagerResult NetworkManager::recordSocketError(Platform::SocketAPIResult error)
     {
         mSocketAPIError = error;
         return NetworkManagerResult::SOCKET_ERROR;
     }
 
-    SocketAddress NetworkManager::getAddress(Serialize::ParticipantId id)
+    Platform::SocketAddress NetworkManager::getAddress(Serialize::ParticipantId id)
     {
         Serialize::FormattedMessageStream &stream = getMasterStream(id);
         NetworkBuffer &buffer = static_cast<NetworkBuffer &>(static_cast<Serialize::buffered_streambuf &>(stream.stream().buffer()).buffer());

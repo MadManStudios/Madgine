@@ -2,7 +2,7 @@
 
 #include "pytype.h"
 
-#include "Meta/keyvalue/metatable.h"
+#include "Meta/reflect/metatable.h"
 
 #include "pyobjectutil.h"
 

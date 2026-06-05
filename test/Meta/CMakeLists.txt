@@ -14,4 +14,4 @@ FolderSources(sources "" "" Meta_gtest_main.cc)
 
 add_gtest(Meta_Test ${sources})
 
-target_link_libraries(Meta_Test PRIVATE Interfaces Meta CLI)
+target_link_libraries(Meta_Test PRIVATE Platform Meta CLI)

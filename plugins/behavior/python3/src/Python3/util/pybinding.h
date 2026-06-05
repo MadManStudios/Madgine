@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Meta/keyvalue/keyvaluebinding.h"
+#include "Meta/reflect/binding.h"
 
 namespace Engine {
 namespace Behavior {
@@ -10,14 +10,14 @@ namespace Behavior {
 
         struct PyBinding {
             PyObject_HEAD
-                KeyValueBinding mBinding;
+                Reflect::Binding mBinding;
         };
 
         extern PyTypeObject PyScopeBindingType;
 
         struct PyScopeBinding {
             PyObject_HEAD
-                KeyValueScopeBinding mBinding;
+                Reflect::ScopeBinding mBinding;
         };
 
     }

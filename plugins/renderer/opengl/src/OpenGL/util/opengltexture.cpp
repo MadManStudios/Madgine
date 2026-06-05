@@ -9,7 +9,7 @@
 namespace Engine {
 namespace Render {
 
-    OpenGLTexture::OpenGLTexture(TextureType type, TextureFormat format, Vector2i size, size_t samples, const ByteBuffer &data)
+    OpenGLTexture::OpenGLTexture(TextureType type, TextureFormat format, Math::Vector2i size, size_t samples, const Memory::ByteBuffer &data)
         : Texture(type, format, size)
         , mSamples(samples)
     {
@@ -161,7 +161,7 @@ namespace Render {
         return mHandle;
     }
 
-    void OpenGLTexture::setSubData(Vector2i offset, Vector2i size, const ByteBuffer &data)
+    void OpenGLTexture::setSubData(Math::Vector2i offset, Math::Vector2i size, const Memory::ByteBuffer &data)
     {
         GLenum internalStorage;
         GLenum internalFormat;

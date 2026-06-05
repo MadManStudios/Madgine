@@ -13,8 +13,8 @@ namespace Render {
         T mValue;
     };
 
-    using VectorKeyFrame = KeyFrame<Vector3>;
-    using QuaternionKeyFrame = KeyFrame<Quaternion>;
+    using VectorKeyFrame = KeyFrame<Math::Vector3>;
+    using QuaternionKeyFrame = KeyFrame<Math::Quaternion>;
 
     struct AnimationBone {
         std::vector<VectorKeyFrame> mPositions;

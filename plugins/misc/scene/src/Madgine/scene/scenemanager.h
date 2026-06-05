@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Generic/intervalclock.h"
+#include "Generic/execution/intervalclock.h"
 
 #include "Meta/math/color3.h"
 #include "Meta/math/vector3.h"
@@ -21,18 +21,18 @@
 namespace Engine {
 namespace Scene {
     struct MADGINE_SCENE_EXPORT SceneManager : Serialize::TopLevelUnit<SceneManager>,
-                                               App::GlobalAPI<SceneManager> {
+                                               Core::GlobalAPI<SceneManager> {
 
         using Self = SceneManager;
 
-        SceneManager(App::Application &app);
-        SceneManager(App::Application &app, std::nullopt_t);
+        SceneManager(Core::Application &app);
+        SceneManager(Core::Application &app, std::nullopt_t);
         SceneManager(const SceneManager &) = delete;
         ~SceneManager();
 
         virtual std::string_view key() const override;
 
-        void updateFrame(Closure<TypedByteBuffer<Matrix4[]>(Entity::Skeleton *)> callback);
+        void updateFrame(Closure<Memory::TypedByteBuffer<Math::Matrix4[]>(Entity::Skeleton *)> callback);
 
         void clear();
 
@@ -41,8 +41,8 @@ namespace Scene {
         bool isPaused() const;
         const Threading::CustomClock &clock() const;
 
-        IntervalClock<Threading::CustomTimepoint> &simulationClock();
-        IntervalClock<Threading::CustomTimepoint> &animationClock();
+        Execution::IntervalClock<Threading::CustomTimepoint> &simulationClock();
+        Execution::IntervalClock<Threading::CustomTimepoint> &animationClock();
 
         SceneContainer &container(std::string_view name);
         auto containers()
@@ -55,7 +55,7 @@ namespace Scene {
         template <typename T>
         T &getComponent()
         {
-            return static_cast<T &>(getComponent(UniqueComponent::component_index<T>()));
+            return static_cast<T &>(getComponent(Plugins::component_index<T>()));
         }
         SceneComponentBase &getComponent(size_t i);
         size_t getComponentCount();
@@ -68,7 +68,7 @@ namespace Scene {
         template <typename Sender>
         void addBehavior(Sender &&sender)
         {
-            mLifetime.attach(std::forward<Sender>(sender) | Log::log_result());
+            mLifetime.attach(std::forward<Sender>(sender) | Platform::Log::log_result());
         }
 
         void addAnimation(Entity::AnimationState *animation);
@@ -79,7 +79,7 @@ namespace Scene {
         template <typename T>
         Entity::EntityComponentList<T> &entityComponentList()
         {
-            return static_cast<Entity::EntityComponentList<T> &>(*mEntityComponentLists.at(UniqueComponent::component_index<T>()));
+            return static_cast<Entity::EntityComponentList<T> &>(*mEntityComponentLists.at(Plugins::component_index<T>()));
         }
 
         Entity::EntityComponentListBase &entityComponentList(size_t index)
@@ -113,14 +113,14 @@ namespace Scene {
         Threading::DataMutex mMutex;
         DEBUGGABLE_LIFETIME(mLifetime, Behavior::get_named_d);
 
-        IntervalClock<Threading::CustomTimepoint> mSimulationClock;
-        IntervalClock<Threading::CustomTimepoint> mAnimationClock;
-        IntervalClock<std::chrono::steady_clock::time_point> mFrameClock;
+        Execution::IntervalClock<Threading::CustomTimepoint> mSimulationClock;
+        Execution::IntervalClock<Threading::CustomTimepoint> mAnimationClock;
+        Execution::IntervalClock<std::chrono::steady_clock::time_point> mFrameClock;
 
         std::mutex mAnimationMutex;
         std::vector<Entity::AnimationState *> mAnimationStates;
 
-        UniqueComponent::Container<std::vector<std::unique_ptr<Entity::EntityComponentListBase>>, Entity::EntityComponentRegistry, Entity::EntityComponentListBase> mEntityComponentLists;
+        Plugins::Container<std::vector<std::unique_ptr<Entity::EntityComponentListBase>>, Entity::EntityComponentRegistry, Entity::EntityComponentListBase> mEntityComponentLists;
 
     public:
         MEMBER_OFFSET_CONTAINER(mSceneComponents, , SceneComponentContainer<Serialize::SerializableContainer<std::set<Placeholder<0>, KeyCompare<Placeholder<0>>>, NoOpFunctor>>);
@@ -133,8 +133,8 @@ namespace Scene {
         };
         std::map<std::string, ContainerData> mContainers;
 
-        Color3 mAmbientLightColor = { 1.0f, 1.0f, 1.0f };
-        NormalizedVector3 mAmbientLightDirection = { -0.0f, -1.0f, 1.5f };
+        Math::Color3 mAmbientLightColor = { 1.0f, 1.0f, 1.0f };
+        Math::NormalizedVector3 mAmbientLightDirection = { -0.0f, -1.0f, 1.5f };
         bool mAmbientLightOrthographic = false;
     };
 

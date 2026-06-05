@@ -7,7 +7,7 @@
 #include "Madgine/imageloader/imageloader.h"
 #include "Madgine/meshloader/meshdata.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
 #include "rendercontext.h"

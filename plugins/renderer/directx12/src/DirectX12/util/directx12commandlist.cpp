@@ -7,7 +7,7 @@
 namespace Engine {
 namespace Render {
 
-    DirectX12CommandList::DirectX12CommandList(DirectX12CommandAllocator *manager, ReleasePtr<ID3D12GraphicsCommandList> list, ReleasePtr<ID3D12CommandAllocator> allocator)
+    DirectX12CommandList::DirectX12CommandList(DirectX12CommandAllocator *manager, Platform::ReleasePtr<ID3D12GraphicsCommandList> list, Platform::ReleasePtr<ID3D12CommandAllocator> allocator)
         : mManager(manager)
         , mList(std::move(list))
         , mAllocator(std::move(allocator))

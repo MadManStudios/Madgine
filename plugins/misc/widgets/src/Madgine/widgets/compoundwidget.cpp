@@ -6,7 +6,7 @@
 
 #include "Madgine/serialize/memory/memorymanager.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
 #include "image.h"
@@ -85,7 +85,7 @@ namespace Widgets {
         return WidgetBase::getChildRecursive(name);
     }
 
-    WidgetBase *CompoundWidget::getHoveredDown(const Vector2 &point, const Rect2i &screenSpace)
+    WidgetBase *CompoundWidget::getHoveredDown(const Math::Vector2 &point, const Math::Rect2i &screenSpace)
     {
         WidgetBase *hovered = WidgetBase::getHoveredDown(point, screenSpace);
 

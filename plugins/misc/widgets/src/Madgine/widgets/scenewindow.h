@@ -14,7 +14,7 @@ namespace Widgets {
         void setRenderSource(Render::RenderTarget *source);
 
     protected:
-        void sizeChanged(const Vector3 &pixelSize) override;
+        void sizeChanged(const Math::Vector3 &pixelSize) override;
 
     private:
         Render::RenderTarget *mSource = nullptr;

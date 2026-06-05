@@ -18,7 +18,7 @@ namespace Widgets {
 
         void render(WidgetsRenderData &renderData) override;
 
-        void sizeChanged(const Vector3 &pixelSize) override;
+        void sizeChanged(const Math::Vector3 &pixelSize) override;
 
         uint32_t tabCount() const;
         void setTabCount(uint32_t count);
@@ -33,8 +33,8 @@ namespace Widgets {
         std::vector<std::string> mTabNames;
 
     protected:
-        void injectPointerMove(const Input::PointerMoveEvent &arg) override;
-        void injectPointerLeave(const Input::PointerMoveEvent &arg) override;
+        void injectPointerMove(const Platform::Input::PointerMoveEvent &arg) override;
+        void injectPointerLeave(const Platform::Input::PointerMoveEvent &arg) override;
 
         void injectPointerClick(const PointerClickEvent &arg) override;
 

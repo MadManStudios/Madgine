@@ -2,7 +2,7 @@
 
 namespace Engine {
 
-namespace Root {
+namespace Core {
     struct RootComponentBase;
     struct Root;
 }

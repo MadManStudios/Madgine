@@ -96,9 +96,9 @@ namespace Debug {
             queue->mTracker.onSuspend();
         }
 
-        void onDestroy(Engine::Threading::TaskSuspendablePromiseTypeBase &promise)
+        void onDestroy(Engine::Threading::TaskPromiseBase &promise)
         {
-            promise.queue()->mTracker.onDestroy(std::coroutine_handle<Engine::Threading::TaskSuspendablePromiseTypeBase>::from_promise(promise).address());
+            promise.queue()->mTracker.onDestroy(std::coroutine_handle<Engine::Threading::TaskPromiseBase>::from_promise(promise).address());
         }
 
     }

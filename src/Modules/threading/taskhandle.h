@@ -12,7 +12,7 @@ namespace Threading {
         TaskHandle &operator=(const TaskHandle &) = delete;
         TaskHandle &operator=(TaskHandle &&);
 
-        TaskHandle(CoroutineHandle<TaskPromiseBase> handle);
+        TaskHandle(Execution::CoroutineHandle<TaskPromiseBase> handle);
         template <typename T>
         TaskHandle(std::coroutine_handle<T> handle) noexcept
             : mHandle(std::coroutine_handle<TaskPromiseBase>::from_promise(handle.promise()))

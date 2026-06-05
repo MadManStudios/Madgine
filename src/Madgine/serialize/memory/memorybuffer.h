@@ -3,9 +3,9 @@
 #include "Generic/bytebuffer.h"
 
 namespace Engine {
-namespace Memory {
+namespace Serialize {
     struct MADGINE_MEMORY_SERIALIZE_EXPORT MemoryWriteBuffer : std::basic_streambuf<char> {
-        MemoryWriteBuffer(WritableByteBuffer &buffer);
+        MemoryWriteBuffer(Memory::WritableByteBuffer &buffer);
         MemoryWriteBuffer(const MemoryWriteBuffer &) = delete;
         MemoryWriteBuffer(MemoryWriteBuffer &&other) noexcept;
         virtual ~MemoryWriteBuffer();
@@ -14,11 +14,11 @@ namespace Memory {
         int_type overflow(int c = EOF) override;
 
     private:
-        WritableByteBuffer &mWriteBuffer;
+        Memory::WritableByteBuffer &mWriteBuffer;
     };
 
     struct MADGINE_MEMORY_SERIALIZE_EXPORT MemoryReadBuffer : std::basic_streambuf<char> {
-        MemoryReadBuffer(ByteBuffer buffer);
+        MemoryReadBuffer(Memory::ByteBuffer buffer);
         MemoryReadBuffer(const MemoryReadBuffer &) = delete;
         MemoryReadBuffer(MemoryReadBuffer &&other) noexcept;
         virtual ~MemoryReadBuffer();
@@ -30,7 +30,7 @@ namespace Memory {
         pos_type seekpos(pos_type sp, std::ios_base::openmode which = std::ios_base::in) override;
 
     private:
-        ByteBuffer mReadBuffer;
+        Memory::ByteBuffer mReadBuffer;
     };
 }
 }

@@ -8,9 +8,9 @@ namespace Engine {
 namespace Resources {
 
     struct ImageData {
-        ByteBuffer mBuffer;
+        Memory::ByteBuffer mBuffer;
         int mChannels;
-        Vector2i mSize;
+        Math::Vector2i mSize;
     };
 
 }

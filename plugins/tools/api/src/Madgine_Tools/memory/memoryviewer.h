@@ -2,8 +2,8 @@
 
 #if ENABLE_MEMTRACKING
 
-#    include "Interfaces/debug/memory/memory.h"
-#    include "Interfaces/debug/stacktrace.h"
+#    include "Platform/debug/memory/memory.h"
+#    include "Platform/debug/stacktrace.h"
 
 #    include "../toolbase.h"
 #    include "../toolscollector.h"

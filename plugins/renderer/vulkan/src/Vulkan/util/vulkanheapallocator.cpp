@@ -57,7 +57,7 @@ namespace Render {
     {
     }
 
-    Block VulkanHeapAllocator::allocate(size_t size, size_t alignment)
+    Memory::Block VulkanHeapAllocator::allocate(size_t size, size_t alignment)
     {
         Heap &heap = mHeaps.emplace_back();
 
@@ -73,7 +73,7 @@ namespace Render {
         return { reinterpret_cast<void *>(mHeaps.size() << 32), size };
     }
 
-    void VulkanHeapAllocator::deallocate(Block block)
+    void VulkanHeapAllocator::deallocate(Memory::Block block)
     {
         [[maybe_unused]] uint32_t offset = reinterpret_cast<uintptr_t>(block.mAddress);
         uint32_t buffer = reinterpret_cast<uintptr_t>(block.mAddress) >> 32;
@@ -97,7 +97,7 @@ namespace Render {
     {
     }
 
-    Block VulkanMappedHeapAllocator::allocate(size_t size, size_t alignment)
+    Memory::Block VulkanMappedHeapAllocator::allocate(size_t size, size_t alignment)
     {
         Page &page = mPages.emplace_back();
 
@@ -118,7 +118,7 @@ namespace Render {
         return { page.mMappedAddress, size };
     }
 
-    void VulkanMappedHeapAllocator::deallocate(Block block)
+    void VulkanMappedHeapAllocator::deallocate(Memory::Block block)
     {
         auto it = std::ranges::find(mPages, block.mAddress, &Page::mMappedAddress);
         assert(it != mPages.end());

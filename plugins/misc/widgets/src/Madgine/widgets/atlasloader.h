@@ -14,25 +14,25 @@ namespace Widgets {
 
         void insert(const std::map<std::string, Resources::ImageLoader::Handle> &images);
 
-        const Atlas2 &atlas() const;
-        const ByteBuffer &buffer() const;
-        const std::map<std::string, Atlas2::Entry, std::less<>> &entries() const;
+        const Math::Atlas2 &atlas() const;
+        const Memory::ByteBuffer &buffer() const;
+        const std::map<std::string, Math::Atlas2::Entry, std::less<>> &entries() const;
         int size() const;
 
-        Vector2i imageSize() const;
+        Math::Vector2i imageSize() const;
 
-        ByteBuffer toPNG() const;
-        void fromPNG(const ByteBuffer &buffer);
+        Memory::ByteBuffer toPNG() const;
+        void fromPNG(const Memory::ByteBuffer &buffer);
 
         void postLoad();
 
     private:
         void expand();
 
-        Atlas2 mAtlas { { 2048, 2048 } };
+        Math::Atlas2 mAtlas { { 2048, 2048 } };
         int mSize = 0;
-        std::map<std::string, Atlas2::Entry, std::less<>> mEntries;
-        ByteBuffer mBuffer;
+        std::map<std::string, Math::Atlas2::Entry, std::less<>> mEntries;
+        Memory::ByteBuffer mBuffer;
     };
 
     struct UIAtlas {
@@ -44,8 +44,8 @@ namespace Widgets {
 
         Resources::ImageLoader::Resource *getImage(std::string_view name);
 
-        const Atlas2::Entry *lookUpImage(Resources::ImageLoader::Resource *image);
-        const Atlas2::Entry *lookUpImage(std::string_view name);
+        const Math::Atlas2::Entry *lookUpImage(Resources::ImageLoader::Resource *image);
+        const Math::Atlas2::Entry *lookUpImage(std::string_view name);
 
         Render::ResourceBlock resource();
 
@@ -54,9 +54,9 @@ namespace Widgets {
 
         Render::TexturePtr mTexture;
         std::set<Resources::ImageLoader::Handle> mImageLoadingTasks;
-        Atlas2 mAtlas { { 2048, 2048 } };
+        Math::Atlas2 mAtlas { { 2048, 2048 } };
         int mSize = 0;
-        std::map<std::string, Atlas2::Entry, std::less<>> mEntries;
+        std::map<std::string, Math::Atlas2::Entry, std::less<>> mEntries;
         std::map<std::string, Resources::ImageLoader::Resource, std::less<>> mDummyResources;
     };
 
@@ -67,7 +67,7 @@ namespace Widgets {
         Threading::Task<bool> loadImpl(PreprocessedUIAtlas &data, ResourceDataInfo &info);
         Threading::Task<void> unloadImpl(PreprocessedUIAtlas &data);
 
-        virtual Threading::Task<Resources::BakeResult> bakeResources(std::vector<Filesystem::Path> &resourcesToBake, const Filesystem::Path &intermediateDir) override;
+        virtual Threading::Task<Resources::BakeResult> bakeResources(std::vector<Platform::Filesystem::Path> &resourcesToBake, const Platform::Filesystem::Path &intermediateDir) override;
     };
 
 }

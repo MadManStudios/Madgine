@@ -59,9 +59,9 @@ namespace Behavior {
 
         using is_sender = void;
 
-        using result_type = KeyValueError;
+        using result_type = Reflect::Error;
         template <template <typename...> typename Tuple>
-        using value_types = Tuple<ArgumentList>;
+        using value_types = Tuple<Reflect::ArgumentList>;
 
         template <typename Rec, std::same_as<Behavior> T> // Necessary to prevent implicit conversion
         friend auto tag_invoke(Execution::connect_t, T &&behavior, Rec &&rec)

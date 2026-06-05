@@ -45,7 +45,7 @@ namespace Render {
         mPipeline->renderQuad(target);
     }
 
-    void BlurPass::onTargetResize(const Vector2i &size)
+    void BlurPass::onTargetResize(const Math::Vector2i &size)
     {
         mInput->resize(size);
     }

@@ -30,23 +30,23 @@ namespace Widgets {
 
         void render(WidgetsRenderData &renderData) override;
 
-        virtual void sizeChanged(const Vector3 &pixelSize) override;
+        virtual void sizeChanged(const Math::Vector3 &pixelSize) override;
 
         void onActivate(Serialize::CallbackTiming, bool b);
 
         virtual void injectPointerClick(const PointerClickEvent &arg) override;
         virtual void injectDragBegin(const DragBeginEvent &arg) override;
         virtual void injectDragMove(const DragMoveEvent &arg) override;
-        virtual bool injectKeyPress(const Input::KeyPressEvent &arg) override;
+        virtual bool injectKeyPress(const Platform::Input::KeyPressEvent &arg) override;
 
-        virtual bool injectAxisEvent(const Input::AxisEvent &arg) override;
+        virtual bool injectAxisEvent(const Platform::Input::AxisEvent &arg) override;
 
         void layoutRow(StbTexteditRow *row, size_t i);
         float calculateWidth(size_t i, size_t n);
-        Vector3 getAbsoluteTextSize();
+        Math::Vector3 getAbsoluteTextSize();
 
-        void setBorder(Vector2 border);
-        Vector2 border() const;
+        void setBorder(Math::Vector2 border);
+        Math::Vector2 border() const;
 
         MultilineTextRenderData mTextRenderData;
 
@@ -59,7 +59,7 @@ namespace Widgets {
         std::string mText;
         bool mEditable = true;
 
-        Vector2 mBorder = Vector2::ZERO;
+        Math::Vector2 mBorder = Math::Vector2::ZERO;
     };
 }
 }

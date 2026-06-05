@@ -7,7 +7,7 @@
 #include "Madgine/imageloader/imageloader.h"
 #include "Madgine/render/fonts/fontloader.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
 #include "widgetmanager.h"
@@ -55,10 +55,10 @@ namespace Widgets {
 
     void Button::render(WidgetsRenderData &renderData)
     {
-        const Atlas2::Entry *entry = manager().lookUpImage(mImageRenderData.image());
+        const Math::Atlas2::Entry *entry = manager().lookUpImage(mImageRenderData.image());
 
-        Vector2 pos = getAbsolutePosition();
-        Vector3 size = getAbsoluteSize();
+        Math::Vector2 pos = getAbsolutePosition();
+        Math::Vector3 size = getAbsoluteSize();
 
         const ColorRenderData &color = mEnabled ? (mHovered ? mColorTintRenderData.mHighlightedColor : mColorTintRenderData.mNormalColor)
                                 : mColorTintRenderData.mDisabledColor;
@@ -74,13 +74,13 @@ namespace Widgets {
         WidgetBase::render(renderData);
     }
 
-    void Button::injectPointerEnter(const Input::PointerMoveEvent &arg)
+    void Button::injectPointerEnter(const Platform::Input::PointerMoveEvent &arg)
     {
         mHovered = true;
         WidgetBase::injectPointerEnter(arg);
     }
 
-    void Button::injectPointerLeave(const Input::PointerMoveEvent &arg)
+    void Button::injectPointerLeave(const Platform::Input::PointerMoveEvent &arg)
     {
         mHovered = false;
         WidgetBase::injectPointerLeave(arg);

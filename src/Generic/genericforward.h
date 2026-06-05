@@ -11,28 +11,30 @@ struct container_api_impl;
 template <typename...>
 struct type_pack;
 
+namespace __Generic_impl__ {
+    template <typename T>
+    struct to_type_pack_helper {
+        using type = type_pack<T>;
+    };
+
+    template <typename... Ty>
+    struct to_type_pack_helper<std::tuple<Ty...>> {
+        using type = type_pack<Ty...>;
+    };
+
+    template <typename... Ty>
+    struct to_type_pack_helper<type_pack<Ty...>> {
+        using type = type_pack<Ty...>;
+    };
+
+    template <>
+    struct to_type_pack_helper<void> {
+        using type = type_pack<>;
+    };
+}
+
 template <typename T>
-struct to_type_pack_helper {
-    using type = type_pack<T>;
-};
-
-template <typename... Ty>
-struct to_type_pack_helper<std::tuple<Ty...>> {
-    using type = type_pack<Ty...>;
-};
-
-template <typename... Ty>
-struct to_type_pack_helper<type_pack<Ty...>> {
-    using type = type_pack<Ty...>;
-};
-
-template <>
-struct to_type_pack_helper<void> {
-    using type = type_pack<>;
-};
-
-template <typename T>
-using to_type_pack = typename to_type_pack_helper<T>::type;
+using to_type_pack = typename __Generic_impl__::to_type_pack_helper<T>::type;
 
 struct CompoundAtomicOperation;
 
@@ -42,10 +44,12 @@ struct TaggedPlaceholder;
 
 struct Any;
 
-template <typename>
-struct TypedByteBuffer;
-using ByteBuffer = TypedByteBuffer<const void>;
-using WritableByteBuffer = TypedByteBuffer<void>;
+namespace Memory {
+    template <typename>
+    struct TypedByteBuffer;
+    using ByteBuffer = TypedByteBuffer<const void>;
+    using WritableByteBuffer = TypedByteBuffer<void>;
+}
 
 struct CoWString;
 template <typename T>
@@ -57,10 +61,7 @@ struct EnumMetaTable;
 template <typename>
 struct Flags;
 
-template <typename>
-struct Generator;
-template <typename>
-struct CoroutineHandle;
+struct DefaultAssign;
 
 struct OffsetPtr;
 
@@ -72,6 +73,9 @@ enum class AccessMode {
 };
 
 namespace Execution {
+
+    template <typename>
+    struct CoroutineHandle;
 
     template <typename R, typename... V>
     struct Sender;
@@ -104,6 +108,18 @@ namespace Execution {
     namespace State {
         struct Breakpoint;
     }
+}
+
+namespace Containers {
+
+    template <typename>
+    struct Generator;
+
+    template <typename RefT>
+    struct VirtualIterator;
+    template <typename RefT, typename AssignDefault = DefaultAssign>
+    struct VirtualRange;
+
 }
 
 }

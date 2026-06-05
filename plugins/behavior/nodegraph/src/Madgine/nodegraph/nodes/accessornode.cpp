@@ -2,13 +2,13 @@
 
 #include "accessornode.h"
 
-#include "Meta/keyvalue/functiontable.h"
-#include "Meta/keyvalue/valuetype.h"
-#include "Meta/keyvalueutil/valuetypeserialize.h"
+#include "Meta/reflect/functiontable.h"
+#include "Meta/reflect/value.h"
+#include "Meta/reflectserialize/valuetypeserialize.h"
 
 #include "Modules/uniquecomponent/uniquecomponentcollector.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
 #include "../nodeexecution.h"
@@ -56,17 +56,17 @@ namespace Behavior {
 
         uint32_t AccessorNode::flowInCount(uint32_t group) const
         {
-            return accessor()->mType.mType == ValueTypeEnum::ApiFunctionValue || accessor()->mType.mType == ValueTypeEnum::BoundApiFunctionValue ? 1 : 0;
+            return accessor()->mType.mType == Reflect::TypeEnum::ApiFunctionValue || accessor()->mType.mType == Reflect::TypeEnum::BoundApiFunctionValue ? 1 : 0;
         }
 
         uint32_t AccessorNode::flowOutBaseCount(uint32_t group) const
         {
-            return accessor()->mType.mType == ValueTypeEnum::ApiFunctionValue || accessor()->mType.mType == ValueTypeEnum::BoundApiFunctionValue ? 1 : 0;
+            return accessor()->mType.mType == Reflect::TypeEnum::ApiFunctionValue || accessor()->mType.mType == Reflect::TypeEnum::BoundApiFunctionValue ? 1 : 0;
         }
 
         uint32_t AccessorNode::dataInBaseCount(uint32_t group) const
         {
-            if (accessor()->mType.mType == ValueTypeEnum::ApiFunctionValue || accessor()->mType.mType == ValueTypeEnum::BoundApiFunctionValue) {
+            if (accessor()->mType.mType == Reflect::TypeEnum::ApiFunctionValue || accessor()->mType.mType == Reflect::TypeEnum::BoundApiFunctionValue) {
                 return (*accessor()->mType.mSecondary.mFunctionTable)->mArgumentsCount;
             } else {
                 return 1;
@@ -75,19 +75,19 @@ namespace Behavior {
 
         std::string_view AccessorNode::dataInName(uint32_t index, uint32_t group) const
         {
-            if (accessor()->mType.mType == ValueTypeEnum::ApiFunctionValue || accessor()->mType.mType == ValueTypeEnum::BoundApiFunctionValue) {
+            if (accessor()->mType.mType == Reflect::TypeEnum::ApiFunctionValue || accessor()->mType.mType == Reflect::TypeEnum::BoundApiFunctionValue) {
                 return (*accessor()->mType.mSecondary.mFunctionTable)->mArguments[index].mName;
             } else {
                 return "this";
             }
         }
 
-        ExtendedValueTypeDesc AccessorNode::dataInType(uint32_t index, uint32_t group, bool bidir) const
+        Reflect::ExtendedType AccessorNode::dataInType(uint32_t index, uint32_t group, bool bidir) const
         {
-            if (accessor()->mType.mType == ValueTypeEnum::ApiFunctionValue || accessor()->mType.mType == ValueTypeEnum::BoundApiFunctionValue) {
+            if (accessor()->mType.mType == Reflect::TypeEnum::ApiFunctionValue || accessor()->mType.mType == Reflect::TypeEnum::BoundApiFunctionValue) {
                 return (*accessor()->mType.mSecondary.mFunctionTable)->mArguments[index].mType;
             } else {
-                return { { ValueTypeEnum::ScopeValue }, type()->mSelf };
+                return { { Reflect::TypeEnum::ScopeValue }, type()->mSelf };
             }
         }
 
@@ -96,32 +96,32 @@ namespace Behavior {
             return 1;
         }
 
-        ExtendedValueTypeDesc AccessorNode::dataOutType(uint32_t index, uint32_t group, bool bidir) const
+        Reflect::ExtendedType AccessorNode::dataOutType(uint32_t index, uint32_t group, bool bidir) const
         {
-            if (accessor()->mType.mType == ValueTypeEnum::ApiFunctionValue || accessor()->mType.mType == ValueTypeEnum::BoundApiFunctionValue) {
+            if (accessor()->mType.mType == Reflect::TypeEnum::ApiFunctionValue || accessor()->mType.mType == Reflect::TypeEnum::BoundApiFunctionValue) {
                 return (*accessor()->mType.mSecondary.mFunctionTable)->mReturnType;
             } else {
                 return accessor()->mType;
             }
         }
 
-        KeyValueResult AccessorNode::interpretRead(NodeInterpreterStateBase &interpreter, ValueType &retVal, std::unique_ptr<NodeInterpreterData> &data, uint32_t providerIndex, uint32_t group) const
+        Reflect::Result AccessorNode::interpretRead(NodeInterpreterStateBase &interpreter, Reflect::Value &retVal, std::unique_ptr<NodeInterpreterData> &data, uint32_t providerIndex, uint32_t group) const
         {
-            if (accessor()->mType.mType == ValueTypeEnum::ApiFunctionValue || accessor()->mType.mType == ValueTypeEnum::BoundApiFunctionValue) {
-                ArgumentList arguments { std::true_type {}, dataInCount() };
+            if (accessor()->mType.mType == Reflect::TypeEnum::ApiFunctionValue || accessor()->mType.mType == Reflect::TypeEnum::BoundApiFunctionValue) {
+                Reflect::ArgumentList arguments { std::true_type {}, dataInCount() };
                 for (size_t i = 0; i < dataInCount(); ++i) {
-                    KEYVALUE_PROPAGATE_ERROR(NodeInterpretHandle<NodeBase> { { interpreter }, *this }.read(arguments[i], i));
+                    REFLECT_PROPAGATE_ERROR(NodeInterpretHandle<NodeBase> { { interpreter }, *this }.read(arguments[i], i));
                 }
                 return (*accessor()->mType.mSecondary.mFunctionTable)->mFunctionPtr((*accessor()->mType.mSecondary.mFunctionTable), retVal, arguments);
             } else {
-                ValueType scope;
-                KEYVALUE_PROPAGATE_ERROR(NodeInterpretHandle<NodeBase> { { interpreter }, *this }.read(scope, 0));
+                Reflect::Value scope;
+                REFLECT_PROPAGATE_ERROR(NodeInterpretHandle<NodeBase> { { interpreter }, *this }.read(scope, 0));
 
                 return accessor()->mGetter(accessor(), retVal, scope);
             }
         }
 
-        const MetaTable *AccessorNode::type() const
+        const Reflect::MetaTable *AccessorNode::type() const
         {
             std::string_view fullClassName = mFullClassName;
 
@@ -133,7 +133,7 @@ namespace Behavior {
 
             std::string_view typeName = path.substr(0, pos);
 
-            const MetaTable *type = sTypeList();
+            const Reflect::MetaTable *type = Reflect::sTypeList();
             while (type) {
                 if (type->mTypeName == typeName) {
                     return type;
@@ -143,7 +143,7 @@ namespace Behavior {
             return nullptr;
         }
 
-        const Accessor *AccessorNode::accessor() const
+        const Reflect::Accessor *AccessorNode::accessor() const
         {
             std::string_view fullClassName = mFullClassName;
 
@@ -155,9 +155,9 @@ namespace Behavior {
 
             std::string_view accessorName = path.substr(pos + 1);
 
-            const MetaTable *classType = type();
+            const Reflect::MetaTable *classType = type();
 
-            for (const Accessor *accessor = classType->mMembers; accessor->mName; ++accessor) {
+            for (const Reflect::Accessor *accessor = classType->mMembers; accessor->mName; ++accessor) {
                 if (accessor->mName == accessorName) {
                     return accessor;
                 }

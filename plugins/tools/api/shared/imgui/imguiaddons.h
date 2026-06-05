@@ -1,10 +1,10 @@
 #pragma once
 
-#include "Generic/coroutines/generator.h"
+#include "Generic/containers/generator.h"
 
-#include "Interfaces/filesystem/path.h"
+#include "Platform/filesystem/path.h"
 
-#include "Meta/keyvalue/valuetype_forward.h"
+#include "Meta/reflect/util.h"
 
 #include "Modules/debug/history.h"
 
@@ -91,15 +91,15 @@ IMGUI_API bool InlineContextButton(const char *text, bool checked = false);
 ///////// Filepicker
 
 struct FilesystemPickerOptions {
-    const char *(*mIconLookup)(const Engine::Filesystem::Path &path, bool isDir) = nullptr;
-    Engine::Filesystem::Path mBase;
+    const char *(*mIconLookup)(const Engine::Platform::Filesystem::Path &path, bool isDir) = nullptr;
+    Engine::Platform::Filesystem::Path mBase;
     std::vector<std::string> mExtensions;
 };
 
 IMGUI_API FilesystemPickerOptions *GetFilesystemPickerOptions();
 
-IMGUI_API bool DirectoryPicker(Engine::Filesystem::Path &path, Engine::Filesystem::Path &selection, const FilesystemPickerOptions &options = {});
-IMGUI_API bool FilePicker(Engine::Filesystem::Path &path, Engine::Filesystem::Path &selection, bool *itemDoubleClicked = nullptr, const FilesystemPickerOptions &options = {});
+IMGUI_API bool DirectoryPicker(Engine::Platform::Filesystem::Path &path, Engine::Platform::Filesystem::Path &selection, const FilesystemPickerOptions &options = {});
+IMGUI_API bool FilePicker(Engine::Platform::Filesystem::Path &path, Engine::Platform::Filesystem::Path &selection, bool *itemDoubleClicked = nullptr, const FilesystemPickerOptions &options = {});
 
 ///////// Interactive View
 

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Meta/keyvalue/virtualscope.h"
+#include "Meta/reflect/virtualscope.h"
 #include "Meta/math/rect2i.h"
 #include "Meta/serialize/hierarchy/virtualserializableunit.h"
 
@@ -10,9 +10,9 @@
 #include "Madgine/render/renderpass.h"
 
 namespace Engine {
-namespace Window {
+namespace Core {
 
-    struct MADGINE_CLIENT_EXPORT MainWindowComponentBase : Serialize::VirtualSerializableDataBase<VirtualScopeBase<Render::RenderPass>>, Threading::MadgineObject<MainWindowComponentBase> {
+    struct MADGINE_CLIENT_EXPORT MainWindowComponentBase : Serialize::VirtualSerializableDataBase<Reflect::VirtualScopeBase<Render::RenderPass>>, Threading::MadgineObject<MainWindowComponentBase> {
         MainWindowComponentBase(MainWindow &window, int priority);
         virtual ~MainWindowComponentBase() = default;
 
@@ -30,15 +30,15 @@ namespace Window {
 
         virtual int priority() const override;
 
-        Rect2i getScreenSpace() const;
-        const Rect2i &getClientSpace() const;
-        virtual Rect2i getChildClientSpace();
+        Math::Rect2i getScreenSpace() const;
+        const Math::Rect2i &getClientSpace() const;
+        virtual Math::Rect2i getChildClientSpace();
 
-        virtual void onResize(const Rect2i &space);
+        virtual void onResize(const Math::Rect2i &space);
 
         virtual void render(Render::RenderTarget *target, size_t iteration) override;
 
-        virtual bool onWindowEvent(const WindowEvent &arg) { return false; };
+        virtual bool onWindowEvent(const Platform::Window::WindowEvent &arg) { return false; };
 
         virtual bool wantsSoftwareKeyboard() const { return false; }
 
@@ -57,7 +57,7 @@ namespace Window {
         friend struct MadgineObject<MainWindowComponentBase>;
 
         MainWindow &mWindow;
-        Rect2i mClientSpace;
+        Math::Rect2i mClientSpace;
     };
 
 }

@@ -8,15 +8,15 @@
 
 #include "Madgine/serialize/filesystem/filemanager.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
 #include "mainwindow.h"
 
-INSTANCELOADER(Engine::Window::LayoutLoader)
+INSTANCELOADER(Engine::Core::LayoutLoader)
 
 namespace Engine {
-namespace Window {
+namespace Core {
 
     LayoutLoader::LayoutLoader()
         : InstanceLoader({ ".layout" })
@@ -48,7 +48,7 @@ namespace Window {
         co_return;
     }
 
-    Threading::Task<Resources::BakeResult> LayoutLoader::bakeResources(std::vector<Filesystem::Path> &resourcesToBake, const Filesystem::Path &intermediateDir)
+    Threading::Task<Resources::BakeResult> LayoutLoader::bakeResources(std::vector<Platform::Filesystem::Path> &resourcesToBake, const Platform::Filesystem::Path &intermediateDir)
     {
         co_return Resources::BakeResult::NOTHING_TO_DO;
     }

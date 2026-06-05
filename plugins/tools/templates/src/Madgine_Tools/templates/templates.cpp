@@ -2,12 +2,12 @@
 
 #include "templates.h"
 
-#include "Interfaces/filesystem/fsapi.h"
+#include "Platform/filesystem/fsapi.h"
 
 #include "Modules/plugins/plugin.h"
 #include "Modules/uniquecomponent/uniquecomponentcollector.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
 #include "Madgine_Tools/inspector/inspector.h"
@@ -60,7 +60,7 @@ namespace Tools {
             if (ImGui::BeginMenu("Dev")) {
                 if (ImGui::BeginMenu("Templates")) {
 
-                    for (Filesystem::FileQueryResult dir : Filesystem::listDirs(PROJECT_ROOT "/templates")) {
+                    for (Platform::Filesystem::FileQueryResult dir : Platform::Filesystem::listDirs(PROJECT_ROOT "/templates")) {
                         std::string name = dir.path().filename().str();
                         if (ImGui::MenuItem(name.c_str())) {
                             showTemplateDialog(name);
@@ -81,13 +81,13 @@ namespace Tools {
     }
 
 #ifndef STATIC_BUILD
-    void Templates::showTemplateDialog(std::string_view name, Closure<void(const Filesystem::Path &)> cb)
+    void Templates::showTemplateDialog(std::string_view name, Closure<void(const Platform::Filesystem::Path &)> cb)
     {
         mRoot.dialogs().show(
-            [](Templates *templates, std::string name) -> Dialog<TemplateEngine::Parser, Filesystem::Path> {
-                Filesystem::Path outputPath { "C:\\Users\\Bub\\Desktop\\Test" };
+            [](Templates *templates, std::string name) -> Dialog<TemplateEngine::Parser, Platform::Filesystem::Path> {
+                Platform::Filesystem::Path outputPath { "C:\\Users\\Bub\\Desktop\\Test" };
 
-                Filesystem::Path path = Filesystem::Path { PROJECT_ROOT "/templates" } / name;
+                Platform::Filesystem::Path path = Platform::Filesystem::Path { PROJECT_ROOT "/templates" } / name;
 
                 TemplateEngine::Parser parser { path };
 
@@ -118,26 +118,26 @@ namespace Tools {
                 } while (co_yield settings);
                 co_return { std::move(parser), std::move(outputPath) };
             }(this, std::string { name }),
-            [cb { std::move(cb) }](const TemplateEngine::Parser &parser, const Filesystem::Path &outTarget) {
+            [cb { std::move(cb) }](const TemplateEngine::Parser &parser, const Platform::Filesystem::Path &outTarget) {
                 parser.generateFiles(outTarget);
                 if (cb)
                     cb(outTarget);
             });
     }
 
-    void Templates::showUniqueComponentTemplateDialog(Closure<void(const Filesystem::Path &)> cb)
+    void Templates::showUniqueComponentTemplateDialog(Closure<void(const Platform::Filesystem::Path &)> cb)
     {
 
         mRoot.dialogs().show(
-            [](Templates *templates) -> Dialog<TemplateEngine::Parser, Filesystem::Path> {
-                Filesystem::Path outputPath { "C:\\Users\\Bub\\Desktop\\Test" };
+            [](Templates *templates) -> Dialog<TemplateEngine::Parser, Platform::Filesystem::Path> {
+                Platform::Filesystem::Path outputPath { "C:\\Users\\Bub\\Desktop\\Test" };
 
-                Filesystem::Path path = PROJECT_ROOT "/templates/UniqueComponent";
+                Platform::Filesystem::Path path = PROJECT_ROOT "/templates/UniqueComponent";
 
                 TemplateEngine::Parser parser { path };
 
                 const Plugins::Plugin *currentPlugin = nullptr;
-                const UniqueComponent::RegistryBase *currentRegistry = nullptr;
+                const Plugins::RegistryBase *currentRegistry = nullptr;
 
                 UndoStack history;
 
@@ -164,7 +164,7 @@ namespace Tools {
                     }
 
                     if (ImGui::BeginCombo("Registry", currentRegistry ? currentRegistry->named_type_info().mFullName.data() : "")) {
-                        for (UniqueComponent::RegistryBase *registry : UniqueComponent::registryRegistry()) {
+                        for (Plugins::RegistryBase *registry : Plugins::registryRegistry()) {
                             if (ImGui::Selectable(registry->named_type_info().mFullName.data())) {
                                 currentRegistry = registry;
                                 std::string_view name = registry->named_type_info().mFullName;
@@ -172,7 +172,7 @@ namespace Tools {
                                 parser.fields()["prefix"] = name.substr(0, name.size() - strlen("Registry"));
 
                                 // parser.fields()["include"] =
-                                parser.fields()["collector"] = std::string { Filesystem::Path { registry->mHeader() }.relative(currentRegistry->mBinary->mSourceRoot).str() };
+                                parser.fields()["collector"] = std::string { Platform::Filesystem::Path { registry->mHeader() }.relative(currentRegistry->mBinary->mSourceRoot).str() };
                             }
                         }
                         ImGui::EndCombo();
@@ -200,7 +200,7 @@ namespace Tools {
                 } while (co_yield settings);
                 co_return { std::move(parser), std::move(outputPath) };
             }(this),
-            [cb { std::move(cb) }](const TemplateEngine::Parser &parser, const Filesystem::Path &outTarget) {
+            [cb { std::move(cb) }](const TemplateEngine::Parser &parser, const Platform::Filesystem::Path &outTarget) {
                 parser.generateFiles(outTarget);
                 if (cb)
                     cb(outTarget);

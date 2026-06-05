@@ -4,13 +4,13 @@
 
 #include "Modules/threading/task.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 
-METATABLE_BEGIN(Engine::Root::RootComponentBase)
-METATABLE_END(Engine::Root::RootComponentBase)
+METATABLE_BEGIN(Engine::Core::RootComponentBase)
+METATABLE_END(Engine::Core::RootComponentBase)
 
 namespace Engine {
-namespace Root {
+namespace Core {
     RootComponentBase::RootComponentBase(Root &root)
         : mRoot(root)
     {

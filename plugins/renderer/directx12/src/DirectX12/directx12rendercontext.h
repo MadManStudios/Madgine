@@ -24,8 +24,8 @@ namespace Render {
         DirectX12RenderContext(Threading::TaskQueue *queue);
         ~DirectX12RenderContext();
 
-        virtual std::unique_ptr<RenderTarget> createRenderWindow(Window::OSWindow *w, size_t samples) override;
-        virtual std::unique_ptr<RenderTarget> createRenderTexture(const Vector2i &size = { 1, 1 }, const RenderTextureConfig &config = {}) override;
+        virtual std::unique_ptr<RenderTarget> createRenderWindow(Platform::Window::OSWindow *w, size_t samples) override;
+        virtual std::unique_ptr<RenderTarget> createRenderTexture(const Math::Vector2i &size = { 1, 1 }, const RenderTextureConfig &config = {}) override;
 
         virtual bool beginFrame() override;
         virtual void endFrame() override;
@@ -36,15 +36,15 @@ namespace Render {
 
         virtual GPUPtr<void> allocateBufferImpl(size_t size, UsageHint hint = UsageHint::USAGE_DEFAULT) override;    
         virtual GPUPtr<Void[]> allocateBufferImpl(size_t elementSize, size_t count, UsageHint hint = UsageHint::USAGE_DEFAULT) override;
-        virtual WritableByteBuffer mapBufferImpl(const GPUPtr<void> &buffer) override;
-        virtual WritableByteBuffer mapBufferImpl(const GPUPtr<Void[]> &buffer) override;
+        virtual Memory::WritableByteBuffer mapBufferImpl(const GPUPtr<void> &buffer) override;
+        virtual Memory::WritableByteBuffer mapBufferImpl(const GPUPtr<Void[]> &buffer) override;
 
         virtual UniqueResourceBlock createResourceBlock(std::vector<std::variant<ConstTexturePtr, GPUPtr<void>, GPUPtr<Void[]>>> textures) override;
         virtual void destroyResourceBlock(UniqueResourceBlock &block) override;
 
-        TexturePtr createTexture(TextureType type, TextureFormat format, Vector2i size, const ByteBuffer &data) override;
+        TexturePtr createTexture(TextureType type, TextureFormat format, Math::Vector2i size, const Memory::ByteBuffer &data) override;
 
-        void setTextureSubData(const TexturePtr &tex, Vector2i offset, Vector2i size, const ByteBuffer &data) override;
+        void setTextureSubData(const TexturePtr &tex, Math::Vector2i offset, Math::Vector2i size, const Memory::ByteBuffer &data) override;
 
         static DirectX12RenderContext &getSingleton();
         
@@ -61,9 +61,9 @@ namespace Render {
         DirectX12DescriptorHeap mRenderTargetDescriptorHeap;
         DirectX12DescriptorHeap mDepthStencilDescriptorHeap;
 
-        ReleasePtr<IDXGIFactory4> mFactory;
+        Platform::ReleasePtr<IDXGIFactory4> mFactory;
 
-        std::map<PipelineSignature, ReleasePtr<ID3D12RootSignature>> mRootSignatures;
+        std::map<PipelineSignature, Platform::ReleasePtr<ID3D12RootSignature>> mRootSignatures;
 
         DirectX12QueryHeap mTimestampQueryHeap;
 
@@ -72,19 +72,19 @@ namespace Render {
         DirectX12CommandAllocator mComputeQueue;
 
         DirectX12MappedHeapAllocator mUploadHeap = D3D12_HEAP_TYPE_UPLOAD;
-        BucketAllocator<HeapAllocator<DirectX12MappedHeapAllocator &>, 16, 64, 16> mUploadAllocator;
+        Memory::BucketAllocator<Memory::HeapAllocator<DirectX12MappedHeapAllocator &>, 16, 64, 16> mUploadAllocator;
 
         DirectX12HeapAllocator mBufferMemoryHeap;
-        LogBucketAllocator<HeapAllocator<DirectX12HeapAllocator &>, 64, 4096, 4> mBufferAllocator;
+        Memory::LogBucketAllocator<Memory::HeapAllocator<DirectX12HeapAllocator &>, 64, 4096, 4> mBufferAllocator;
 
         DirectX12MappedHeapAllocator mTempMemoryHeap = D3D12_HEAP_TYPE_UPLOAD;
-        BumpAllocator<FixedAllocator<DirectX12MappedHeapAllocator &>> mTempAllocator;
+        Memory::BumpAllocator<Memory::FixedAllocator<DirectX12MappedHeapAllocator &>> mTempAllocator;
 
         DirectX12MappedHeapAllocator mReadbackMemoryHeap = D3D12_HEAP_TYPE_READBACK;
-        BumpAllocator<FixedAllocator<DirectX12MappedHeapAllocator &>> mReadbackAllocator;
+        Memory::BumpAllocator<Memory::FixedAllocator<DirectX12MappedHeapAllocator &>> mReadbackAllocator;
 
         DirectX12HeapAllocator mConstantMemoryHeap;
-        LogBucketAllocator<HeapAllocator<DirectX12HeapAllocator &>, 64, 4096, 4> mConstantAllocator;
+        Memory::LogBucketAllocator<Memory::HeapAllocator<DirectX12HeapAllocator &>, 64, 4096, 4> mConstantAllocator;
 
         GPUPtr<ConstantValues> mConstantBuffer;
 

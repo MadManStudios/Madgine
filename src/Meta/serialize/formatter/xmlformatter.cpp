@@ -117,7 +117,7 @@ namespace Serialize {
             assert(mCurrentExtended);
             --mCurrentExtendedCount;
             mStream << " " << name << "=";
-            if (typeId == Serialize::PrimitiveTypeIndex_v<std::string> || typeId == Serialize::PrimitiveTypeIndex_v<ByteBuffer>)
+            if (typeId == Serialize::PrimitiveTypeIndex_v<std::string> || typeId == Serialize::PrimitiveTypeIndex_v<Memory::ByteBuffer>)
                 mStream << "\"";
         } else {
             if (!mCurrentExtended) {
@@ -142,7 +142,7 @@ namespace Serialize {
             } else {
                 STREAM_PROPAGATE_ERROR(prefetchAttributes(name));
             }
-            if (typeId == Serialize::PrimitiveTypeIndex_v<std::string> || typeId == Serialize::PrimitiveTypeIndex_v<ByteBuffer>) {
+            if (typeId == Serialize::PrimitiveTypeIndex_v<std::string> || typeId == Serialize::PrimitiveTypeIndex_v<Memory::ByteBuffer>) {
                 FORMATTER_EXPECT("\"");
                 pushLocale(sLocaleQuote, false);
             }
@@ -162,7 +162,7 @@ namespace Serialize {
             }
             FORMATTER_EXPECT(">");
 
-            if (typeId == Serialize::PrimitiveTypeIndex_v<std::string> || typeId == Serialize::PrimitiveTypeIndex_v<ByteBuffer> || typeId == Serialize::PrimitiveTypeIndex_v<EnumTag> || typeId == Serialize::PrimitiveTypeIndex_v<std::chrono::nanoseconds> || typeId == Serialize::PrimitiveTypeIndex_v<FlagsTag>) {
+            if (typeId == Serialize::PrimitiveTypeIndex_v<std::string> || typeId == Serialize::PrimitiveTypeIndex_v<Memory::ByteBuffer> || typeId == Serialize::PrimitiveTypeIndex_v<EnumTag> || typeId == Serialize::PrimitiveTypeIndex_v<std::chrono::nanoseconds> || typeId == Serialize::PrimitiveTypeIndex_v<FlagsTag>) {
                 pushLocale(sLocaleBracket, false);
             }
         }
@@ -174,7 +174,7 @@ namespace Serialize {
         if (!name)
             name = "Element";
         if (mCurrentExtended) {
-            if (typeId == Serialize::PrimitiveTypeIndex_v<std::string> || typeId == Serialize::PrimitiveTypeIndex_v<ByteBuffer>)
+            if (typeId == Serialize::PrimitiveTypeIndex_v<std::string> || typeId == Serialize::PrimitiveTypeIndex_v<Memory::ByteBuffer>)
                 mStream << "\"";
         } else
             mStream << "</" << name << ">\n";
@@ -187,13 +187,13 @@ namespace Serialize {
                 mStream.seek(mExtendedLookupPos);
                 mExtendedLookupPos = -1;
             }
-            if (typeId == Serialize::PrimitiveTypeIndex_v<std::string> || typeId == Serialize::PrimitiveTypeIndex_v<ByteBuffer>) {
+            if (typeId == Serialize::PrimitiveTypeIndex_v<std::string> || typeId == Serialize::PrimitiveTypeIndex_v<Memory::ByteBuffer>) {
                 popLocale();
                 FORMATTER_EXPECT("\"");
             }
         } else {
             const char *cPrefix = "</";
-            if (typeId == Serialize::PrimitiveTypeIndex_v<std::string> || typeId == Serialize::PrimitiveTypeIndex_v<ByteBuffer> || typeId == Serialize::PrimitiveTypeIndex_v<EnumTag> || typeId == Serialize::PrimitiveTypeIndex_v<std::chrono::nanoseconds> || typeId == Serialize::PrimitiveTypeIndex_v<FlagsTag>) {
+            if (typeId == Serialize::PrimitiveTypeIndex_v<std::string> || typeId == Serialize::PrimitiveTypeIndex_v<Memory::ByteBuffer> || typeId == Serialize::PrimitiveTypeIndex_v<EnumTag> || typeId == Serialize::PrimitiveTypeIndex_v<std::chrono::nanoseconds> || typeId == Serialize::PrimitiveTypeIndex_v<FlagsTag>) {
                 popLocale();
             }
             std::string prefix;

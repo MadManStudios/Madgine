@@ -2,8 +2,7 @@
 
 #include "pyvirtualiterator.h"
 
-#include "Meta/keyvalue/keyvaluepair.h"
-#include "Meta/keyvalue/valuetype.h"
+#include "Meta/reflect/keyvaluepair.h"
 
 #include "pyobjectutil.h"
 

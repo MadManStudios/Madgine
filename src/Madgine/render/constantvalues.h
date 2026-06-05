@@ -4,12 +4,12 @@ namespace Engine {
 namespace Render {
 
     struct ConstantValues {
-        Vector3 mPos { 0, 0, 0 };
+        Math::Vector3 mPos { 0, 0, 0 };
         float mW = 1;
-        Vector2 mPos2 { 0, 0 };
-        Vector3 mNormal { 0, 0, 0 };
-        Vector4 mColor { 1, 1, 1, 1 };
-        Vector2 mUV { 0, 0 };
+        Math::Vector2 mPos2 { 0, 0 };
+        Math::Vector3 mNormal { 0, 0, 0 };
+        Math::Vector4 mColor { 1, 1, 1, 1 };
+        Math::Vector2 mUV { 0, 0 };
         int mBoneIndices[4] { 0, 0, 0, 0 };
         float mBoneWeights[4] { 0.0f, 0.0f, 0.0f, 0.0f };
     };

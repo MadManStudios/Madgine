@@ -1,16 +1,15 @@
-#include "Interfaces/interfaceslib.h"
+#include "Platform/platformlib.h"
 
 #include <csignal>
 
 #include "Generic/guard.h"
 
-#include "Interfaces/debug/stacktrace.h"
+#include "Platform/debug/stacktrace.h"
 
 #ifndef NDEBUG
 
-
 static std::terminate_handler sOldTerminateHandler;
-using signal_handler = decltype(std::signal(SIGSEGV, std::declval<void(*)(int)>()));
+using signal_handler = decltype(std::signal(SIGSEGV, std::declval<void (*)(int)>()));
 static signal_handler sOldSigSegvHandler;
 static signal_handler sOldSigIllHandler;
 static signal_handler sOldSigAbrtHandler;
@@ -18,7 +17,8 @@ static signal_handler sOldSigTermHandler;
 static signal_handler sOldSigFpeHandler;
 static signal_handler sOldSigIntHandler;
 
-void finalize() {
+void finalize()
+{
     std::set_terminate(sOldTerminateHandler);
     std::signal(SIGSEGV, sOldSigSegvHandler);
     std::signal(SIGILL, sOldSigIllHandler);

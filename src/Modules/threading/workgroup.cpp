@@ -1,7 +1,7 @@
 #include "../moduleslib.h"
 
 #if ENABLE_THREADING
-#    include "Interfaces/threading/threadapi.h"
+#    include "Platform/threading/threadapi.h"
 
 #    include "threadlocal.h"
 #    include "threadstorage.h"
@@ -45,7 +45,7 @@ namespace Threading {
         ThreadStorage::init(true);
         ThreadStorage::init(false);
 
-        setCurrentThreadName(mName + "_Main");
+        Platform::Threading::setCurrentThreadName(mName + "_Main");
 #endif
 
         assert(!sSelf);

@@ -56,13 +56,13 @@ namespace Render {
             perApplication->p = target->getClipSpaceMatrix() * projectionMatrix();
         }
 
-        Matrix4 v = viewMatrix();
+        Math::Matrix4 v = viewMatrix();
 
         {
             auto perFrame = mPipeline->mapParameters<HLSL::LightPerFrame>(1);
 
-            perFrame->light.light.color = Vector3 { mData.mScene.mAmbientLightColor };
-            perFrame->light.light.dir = (v * Vector4 { mData.mScene.mAmbientLightDirection, 0.0f }).xyz();
+            perFrame->light.light.color = Math::Vector3 { mData.mScene.mAmbientLightColor };
+            perFrame->light.light.dir = (v * Math::Vector4 { mData.mScene.mAmbientLightDirection, 0.0f }).xyz();
         }
 
         for (const std::pair<const GPUMeshData * const, std::vector<ShadowSceneRenderData::ObjectData>> &instance : mData.mInstances) {
@@ -82,12 +82,12 @@ namespace Render {
                 auto instanceData = mPipeline->mapTempBuffer<HLSL::SceneInstanceData[]>(1, instance.second.size());
 
                 std::ranges::transform(instance.second, instanceData.mData, [&](const ShadowSceneRenderData::ObjectData &o) {
-                    Matrix4 mv = v * o.mTransform;
+                    Math::Matrix4 mv = v * o.mTransform;
                     return HLSL::SceneInstanceData {
                         mv.Transpose(),
                         mv.Inverse().Transpose().Transpose(),
-                        Vector4 { 0.0f, 0.0f, 0.0f, 0.0f },
-                        Vector4 { 0.0f, 0.0f, 0.0f, 0.0f },
+                        Math::Vector4 { 0.0f, 0.0f, 0.0f, 0.0f },
+                        Math::Vector4 { 0.0f, 0.0f, 0.0f, 0.0f },
                         //o.mBones
                     };
                 });
@@ -115,40 +115,40 @@ namespace Render {
         return "Shadow";
     }
 
-    Matrix4 ShadowRenderPass::projectionMatrix() const
+    Math::Matrix4 ShadowRenderPass::projectionMatrix() const
     {
         return mLightFrustum.getProjectionMatrix();
     }
 
-    Matrix4 ShadowRenderPass::viewMatrix() const
+    Math::Matrix4 ShadowRenderPass::viewMatrix() const
     {
         return mLightFrustum.getViewMatrix();
     }
 
-    Matrix4 ShadowRenderPass::viewProjectionMatrix() const
+    Math::Matrix4 ShadowRenderPass::viewProjectionMatrix() const
     {
         return mLightFrustum.getViewProjectionMatrix();
     }
 
     void ShadowRenderPass::updateFrustum(float aspectRatio)
     {
-        Vector3 minBounds = std::numeric_limits<float>::max() * Vector3 { Vector3::UNIT_SCALE };
-        Vector3 maxBounds = std::numeric_limits<float>::lowest() * Vector3 { Vector3::UNIT_SCALE };
+        Math::Vector3 minBounds = std::numeric_limits<float>::max() * Math::Vector3 { Math::Vector3::UNIT_SCALE };
+        Math::Vector3 maxBounds = std::numeric_limits<float>::lowest() * Math::Vector3 { Math::Vector3::UNIT_SCALE };
 
-        Quaternion q = Quaternion::FromDirection(mData.mScene.mAmbientLightDirection, (mCamera.mOrientation * Vector3 { Vector3::UNIT_Z }).crossProduct(mData.mScene.mAmbientLightDirection));
-        Quaternion qInv = q.inverse();
+        Math::Quaternion q = Math::Quaternion::FromDirection(mData.mScene.mAmbientLightDirection, (mCamera.mOrientation * Math::Vector3 { Math::Vector3::UNIT_Z }).crossProduct(mData.mScene.mAmbientLightDirection));
+        Math::Quaternion qInv = q.inverse();
 
-        Frustum cameraFrustum = mCamera.getFrustum(aspectRatio);
-        Frustum localFrustum = qInv * cameraFrustum;
+        Math::Frustum cameraFrustum = mCamera.getFrustum(aspectRatio);
+        Math::Frustum localFrustum = qInv * cameraFrustum;
         auto corners = localFrustum.getCorners();
 
-        minBounds = std::accumulate(corners.begin(), corners.end(), minBounds, [](const Vector3 &v1, const Vector3 &v2) { return min(v1, v2); });
-        maxBounds = std::accumulate(corners.begin(), corners.end(), maxBounds, [](const Vector3 &v1, const Vector3 &v2) { return max(v1, v2); });
+        minBounds = std::accumulate(corners.begin(), corners.end(), minBounds, [](const Math::Vector3 &v1, const Math::Vector3 &v2) { return min(v1, v2); });
+        maxBounds = std::accumulate(corners.begin(), corners.end(), maxBounds, [](const Math::Vector3 &v1, const Math::Vector3 &v2) { return max(v1, v2); });
 
-        Vector3 relPos = (maxBounds + minBounds) / 2.0f;
+        Math::Vector3 relPos = (maxBounds + minBounds) / 2.0f;
         relPos.z = minBounds.z - 1.0f;
 
-        Vector2 size = maxBounds.xy() - minBounds.xy();
+        Math::Vector2 size = maxBounds.xy() - minBounds.xy();
 
         mLightFrustum = {
             q * relPos,
@@ -159,7 +159,7 @@ namespace Render {
         };
     }
 
-    void ShadowRenderPass::debugFrustums(CallableView<void(const Frustum &, std::string_view)> handler) const
+    void ShadowRenderPass::debugFrustums(CallableView<void(const Math::Frustum &, std::string_view)> handler) const
     {
         handler(mLightFrustum, "ShadowRenderPass");
     }

@@ -4,4 +4,4 @@
 
 #include "Modules/uniquecomponent/uniquecomponentregistry.h"
 
-DEFINE_UNIQUE_COMPONENT(Engine::Server, ServerAPI)
+DEFINE_UNIQUE_COMPONENT(Engine::Core, ServerAPI)

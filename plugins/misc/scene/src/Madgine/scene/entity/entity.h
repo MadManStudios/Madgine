@@ -1,9 +1,9 @@
 #pragma once
 
-#include "Generic/container/mutable_set.h"
+#include "Generic/containers/mutable_set.h"
 #include "Generic/customfunctors.h"
 
-#include "Interfaces/log/logsenders.h"
+#include "Platform/log/logsenders.h"
 
 #include "Meta/serialize/container/serializablecontainer.h"
 #include "Meta/serialize/hierarchy/syncableunit.h"
@@ -47,7 +47,7 @@ namespace Scene {
             template <typename T>
             T *addComponent()
             {
-                return static_cast<T *>(addComponent(UniqueComponent::component_index<T>()));
+                return static_cast<T *>(addComponent(Plugins::component_index<T>()));
             }
 
             template <typename T>
@@ -59,13 +59,13 @@ namespace Scene {
             template <typename T>
             T *getComponent()
             {
-                return static_cast<T *>(getComponent(UniqueComponent::component_index<T>()));
+                return static_cast<T *>(getComponent(Plugins::component_index<T>()));
             }
 
             template <typename T>
             const T *getComponent() const
             {
-                return static_cast<const T *>(getComponent(UniqueComponent::component_index<T>()));
+                return static_cast<const T *>(getComponent(Plugins::component_index<T>()));
             }
 
             EntityComponentBase *getComponent(uint32_t i);
@@ -73,7 +73,7 @@ namespace Scene {
             EntityComponentBase *getComponent(std::string_view name);
             const EntityComponentBase *getComponent(std::string_view name) const;
 
-            const mutable_set<EntityComponentHandle, std::less<>> &components()
+            const Containers::mutable_set<EntityComponentHandle, std::less<>> &components()
             {
                 return mComponents;
             }
@@ -81,7 +81,7 @@ namespace Scene {
             template <typename T>
             bool hasComponent()
             {
-                return hasComponent(UniqueComponent::component_index<T>());
+                return hasComponent(Plugins::component_index<T>());
             }
 
             bool hasComponent(size_t i);
@@ -96,7 +96,7 @@ namespace Scene {
             template <typename Sender>
             void addBehavior(Sender &&sender)
             {
-                mLifetime.attach(std::forward<Sender>(sender) | Log::log_result());
+                mLifetime.attach(std::forward<Sender>(sender) | Platform::Log::log_result());
             }
 
             auto lifetimeSender()
@@ -106,7 +106,7 @@ namespace Scene {
                     mutex().locked(AccessMode::WRITE, [this]() { dtor(); }));
             }
 
-            void handleEntityEvent(const typename mutable_set<EntityComponentHandle, std::less<>>::iterator &it, int op);
+            void handleEntityEvent(const typename Containers::mutable_set<EntityComponentHandle, std::less<>>::iterator &it, int op);
 
             Threading::DataMutex &mutex() const;
             SceneManager &sceneMgr() const;
@@ -132,7 +132,7 @@ namespace Scene {
             Serialize::StreamResult readComponent(Serialize::CallerHierarchyFormattedSerializeStream in, uint32_t &type, OutRef<EntityComponentBase> &ptr);
             const char *writeComponent(Serialize::CallerHierarchyFormattedSerializeStream out, const EntityComponentHandle &p) const;
 
-            SERIALIZABLE_CONTAINER(mComponents, mutable_set<EntityComponentHandle, std::less<>>, ParentFunctor<&Entity::handleEntityEvent>);
+            SERIALIZABLE_CONTAINER(mComponents, Containers::mutable_set<EntityComponentHandle, std::less<>>, ParentFunctor<&Entity::handleEntityEvent>);
 
             EntityHandle &mHandle;
 

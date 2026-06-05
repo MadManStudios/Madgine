@@ -4,7 +4,7 @@
 
 #include "Madgine/render/texture.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 
 #include "../rendercontext.h"
 #include "../rendertarget.h"
@@ -48,7 +48,7 @@ namespace Render {
         mPipeline->renderQuad(target);
     }
 
-    void BloomPass::onTargetResize(const Vector2i &size)
+    void BloomPass::onTargetResize(const Math::Vector2i &size)
     {
         mInput->resize(size);
     }

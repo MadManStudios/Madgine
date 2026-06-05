@@ -1,9 +1,9 @@
 #pragma once
 
 #include "Generic/closure.h"
-#include "Generic/container/emplace.h"
+#include "Generic/containers/emplace.h"
 
-#include "Interfaces/filesystem/filewatcher.h"
+#include "Platform/filesystem/filewatcher.h"
 
 #include "Modules/threading/globalstorage.h"
 #include "Modules/uniquecomponent/uniquecomponent.h"
@@ -36,14 +36,14 @@ namespace Resources {
 
         using DataContainer = typename replace<Container>::template type<ResourceData<T>>;
 
-        using traits = container_traits<DataContainer>;
+        using traits = Containers::container_traits<DataContainer>;
 
         using Handle = Handle<T, typename traits::handle>;
         using Ptr = Ptr<T, Data>;
         using OriginalHandle = Handle;
         using OriginalPtr = Ptr;
 
-        using Ctor = Closure<Threading::Task<bool>(T *, Data &, ResourceDataInfo &, Filesystem::FileEventType event)>;
+        using Ctor = Closure<Threading::Task<bool>(T *, Data &, ResourceDataInfo &, Platform::Filesystem::FileEventType event)>;
         using UnnamedCtor = Closure<Threading::Task<bool>(T *, Data &)>;
 
         struct Resource : ResourceLoaderBase::Resource {
@@ -72,7 +72,7 @@ namespace Resources {
         static typename Loader::Ctor toCtor(C &&ctor)
         {
             static_assert(!std::is_same_v<C, typename Loader::Ctor>);
-            return [ctor { std::forward<C>(ctor) }](T *loader, Data &data, ResourceDataInfo &info, Filesystem::FileEventType event) {
+            return [ctor { std::forward<C>(ctor) }](T *loader, Data &data, ResourceDataInfo &info, Platform::Filesystem::FileEventType event) {
                 return Threading::make_task(LIFT(TupleUnpacker::invoke), ctor, static_cast<Loader *>(loader), static_cast<typename Loader::Data &>(data), info, event);
             };
         }
@@ -87,7 +87,7 @@ namespace Resources {
 
         static T &getSingleton()
         {
-            return static_cast<T &>(getLoaderByIndex(UniqueComponent::component_index<T>()));
+            return static_cast<T &>(getLoaderByIndex(Plugins::component_index<T>()));
         }
     };
 
@@ -104,7 +104,7 @@ namespace Resources {
 
         using DataContainer = typename replace<typename Base::Container>::template type<ResourceData<T>>;
 
-        using traits = container_traits<DataContainer>;
+        using traits = Containers::container_traits<DataContainer>;
 
         static_assert(!traits::remove_invalidates_handles);
 
@@ -126,13 +126,13 @@ namespace Resources {
             }
         };
 
-        using Ctor = Closure<Threading::Task<bool>(T *, Data &, ResourceDataInfo &, Filesystem::FileEventType event)>;
+        using Ctor = Closure<Threading::Task<bool>(T *, Data &, ResourceDataInfo &, Platform::Filesystem::FileEventType event)>;
 
         using Base::Base;
 
         static T &getSingleton()
         {
-            return static_cast<T &>(getLoaderByIndex(UniqueComponent::component_index<T>()));
+            return static_cast<T &>(getLoaderByIndex(Plugins::component_index<T>()));
         }
 
         static Handle load(std::string_view name, T *loader = &getSingleton())
@@ -147,7 +147,7 @@ namespace Resources {
 
         static Handle load(Resource *resource, T *loader = nullptr)
         {
-            return load(resource, Filesystem::FileEventType::FILE_CREATED, loader);
+            return load(resource, Platform::Filesystem::FileEventType::FILE_CREATED, loader);
         }
 
         static Resource *get(std::string_view name, T *loader = &getSingleton())
@@ -184,7 +184,7 @@ namespace Resources {
         }
 
         template <typename C = Ctor>
-        static Resource *getOrCreateManual(std::string_view name, const Filesystem::Path &path = {}, C &&ctor = {}, T *loader = &getSingleton())
+        static Resource *getOrCreateManual(std::string_view name, const Platform::Filesystem::Path &path = {}, C &&ctor = {}, T *loader = &getSingleton())
         {
             auto pib = loader->mResources.try_emplace(
                 std::string { name }, std::string { name }, path, Interface::template toCtor<T>(std::forward<C>(ctor)));
@@ -197,15 +197,15 @@ namespace Resources {
             return resource;
         }
 
-        static Handle create(Resource *resource, Filesystem::FileEventType event = Filesystem::FileEventType::FILE_CREATED, T *loader = nullptr)
+        static Handle create(Resource *resource, Platform::Filesystem::FileEventType event = Platform::Filesystem::FileEventType::FILE_CREATED, T *loader = nullptr)
         {
             Handle handle { (typename traits::handle) * resource->mData };
-            assert(event == Filesystem::FileEventType::FILE_CREATED || handle);
-            if (!handle || event != Filesystem::FileEventType::FILE_CREATED) {
-                if (event == Filesystem::FileEventType::FILE_CREATED || !loader->mSettings.mInplaceReload) {
+            assert(event == Platform::Filesystem::FileEventType::FILE_CREATED || handle);
+            if (!handle || event != Platform::Filesystem::FileEventType::FILE_CREATED) {
+                if (event == Platform::Filesystem::FileEventType::FILE_CREATED || !loader->mSettings.mInplaceReload) {
                     if (!loader)
                         loader = &getSingleton();
-                    auto it = emplace(*loader->mData, loader->mData->end(), resource);
+                    auto it = Containers::emplace(*loader->mData, loader->mData->end(), resource);
                     it->mHolder = traits::toPositionHandle(*loader->mData, it);
                     handle = traits::toHandle(*loader->mData, it->mHolder);
                     *resource->mData = (decltype(*resource->mData))handle.mData;
@@ -214,11 +214,11 @@ namespace Resources {
             return handle;
         }
 
-        static Handle load(Resource *resource, Filesystem::FileEventType event, T *loader = nullptr)
+        static Handle load(Resource *resource, Platform::Filesystem::FileEventType event, T *loader = nullptr)
         {
             Handle handle { (typename traits::handle) * resource->mData };
 
-            if (!handle || event != Filesystem::FileEventType::FILE_CREATED) {
+            if (!handle || event != Platform::Filesystem::FileEventType::FILE_CREATED) {
                 if (!loader)
                     loader = &getSingleton();
                 handle = create(resource, event, loader);
@@ -287,18 +287,18 @@ namespace Resources {
 
             Resource *resource = handle.resource();
             if ((typename traits::handle) * resource->mData != handle.mData) {
-                return load(resource, Filesystem::FileEventType::FILE_CREATED, loader);
+                return load(resource, Platform::Filesystem::FileEventType::FILE_CREATED, loader);
             }
             return {};
         }
 
         template <typename C = Ctor>
-        static Handle loadManual(std::string_view name, const Filesystem::Path &path = {}, C &&ctor = {}, T *loader = &getSingleton())
+        static Handle loadManual(std::string_view name, const Platform::Filesystem::Path &path = {}, C &&ctor = {}, T *loader = &getSingleton())
         {
             return load(getOrCreateManual(
                             name, path, std::forward<C>(ctor),
                             loader),
-                Filesystem::FileEventType::FILE_CREATED, loader);
+                Platform::Filesystem::FileEventType::FILE_CREATED, loader);
         }
 
         static Ptr createUnnamed()
@@ -328,7 +328,7 @@ namespace Resources {
                 return data->verified(verified);
         }
 
-        std::pair<ResourceBase *, bool> addResource(const Filesystem::Path &path, std::string_view name = {}) override
+        std::pair<ResourceBase *, bool> addResource(const Platform::Filesystem::Path &path, std::string_view name = {}) override
         {
             std::string actualName { name.empty() ? path.stem() : name };
             auto pib = mResources.try_emplace(actualName, actualName, path);
@@ -345,7 +345,7 @@ namespace Resources {
                 Resource *res = static_cast<Resource *>(resource);
                 if (*res->mData) {
                     if (static_cast<T *>(this)->mSettings.mInplaceReload) {
-                        load(res, Filesystem::FileEventType::FILE_MODIFIED);
+                        load(res, Platform::Filesystem::FileEventType::FILE_MODIFIED);
                     } else {
                         *res->mData = {};
                     }
@@ -372,18 +372,18 @@ namespace Resources {
             return result;
         }
 
-        virtual std::vector<std::pair<std::string_view, ScopePtr>> typedResources() override
+        virtual std::vector<std::pair<std::string_view, Reflect::ScopePtr>> typedResources() override
         {
-            std::vector<std::pair<std::string_view, ScopePtr>> result;
+            std::vector<std::pair<std::string_view, Reflect::ScopePtr>> result;
             std::ranges::transform(mResources, std::back_inserter(result), [](std::pair<const std::string, Resource> &p) {
                 return std::make_pair(std::string_view { p.first }, &p.second);
             });
             return result;
         }
 
-        virtual std::vector<const MetaTable *> resourceTypes() const override
+        virtual std::vector<const Reflect::MetaTable *> resourceTypes() const override
         {
-            std::vector<const MetaTable *> result = Base::resourceTypes();
+            std::vector<const Reflect::MetaTable *> result = Base::resourceTypes();
             result.push_back(table<meta_decayed_t<Resource>>);
             return result;
         }
@@ -394,9 +394,9 @@ namespace Resources {
     };
 
     template <typename T, typename _Data, typename Container = std::list<Placeholder<0>>, typename Storage = Threading::GlobalStorage>
-    struct ResourceLoader : ResourceLoaderComponent<T, VirtualScope<T, ResourceLoaderImpl<T, _Data, ResourceLoaderInterface<T, _Data, Container, Storage>>>> {
+    struct ResourceLoader : ResourceLoaderComponent<T, Reflect::VirtualScope<T, ResourceLoaderImpl<T, _Data, ResourceLoaderInterface<T, _Data, Container, Storage>>>> {
 
-        using ResourceLoaderComponent<T, VirtualScope<T, ResourceLoaderImpl<T, _Data, ResourceLoaderInterface<T, _Data, Container, Storage>>>>::ResourceLoaderComponent;
+        using ResourceLoaderComponent<T, Reflect::VirtualScope<T, ResourceLoaderImpl<T, _Data, ResourceLoaderInterface<T, _Data, Container, Storage>>>>::ResourceLoaderComponent;
     };
 
 }

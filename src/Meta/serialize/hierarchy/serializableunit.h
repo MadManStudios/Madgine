@@ -12,7 +12,7 @@ namespace Serialize {
 
 #define SERIALIZABLEUNIT(_Self)                                 \
     template <typename Tag, size_t...>                          \
-    friend struct ::Engine::LineStruct;                         \
+    friend struct ::Engine::__generic_impl__::LineStruct;       \
     friend struct ::Engine::Serialize::SerializeTableCallbacks; \
     using Self = _Self;
 

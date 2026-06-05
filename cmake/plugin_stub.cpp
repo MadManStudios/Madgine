@@ -4,11 +4,11 @@ using namespace Engine;
 
 struct UniqueComponentStub {
 
-    static UniqueComponent::CollectorInfoBase &getCollector(UniqueComponent::RegistryBase *reg)
+    static Plugins::CollectorInfoBase &getCollector(Plugins::RegistryBase *reg)
     {
-        static std::map<UniqueComponent::RegistryBase *, UniqueComponent::CollectorInfoBase> sMap;
+        static std::map<Plugins::RegistryBase *, Plugins::CollectorInfoBase> sMap;
         auto pib = sMap.try_emplace(reg);
-        UniqueComponent::CollectorInfoBase &collector = pib.first->second;
+        Plugins::CollectorInfoBase &collector = pib.first->second;
         if (pib.second) {
             collector.mBinary = &Engine::Plugins::PLUGIN_LOCAL(binaryInfo);
             reg->addCollector(&collector);
@@ -16,22 +16,23 @@ struct UniqueComponentStub {
         return collector;
     }
 
-    static UniqueComponent::RegistryBase *findRegistry(std::string_view name)
+    static Plugins::RegistryBase *findRegistry(std::string_view name)
     {
-        for (UniqueComponent::RegistryBase *reg : UniqueComponent::registryRegistry()) {
+        for (Plugins::RegistryBase *reg : Plugins::registryRegistry()) {
             if (StringUtil::startsWith(reg->type_info().mFullName, name)) {
                 return reg;
             }
         }
+        LOG_FATAL("Unable to find Registry called: " << name);
         throw 0;
     }
 
     UniqueComponentStub(const char *type, const char *baseName, const char *vBase)
     {
 
-        UniqueComponent::RegistryBase *reg = findRegistry(baseName);
-        UniqueComponent::CollectorInfoBase &collector = getCollector(reg);
-        auto &infos = collector.mElementInfos.emplace_back(std::vector<UniqueComponent::TypeInfo> {}, type);
+        Plugins::RegistryBase *reg = findRegistry(baseName);
+        Plugins::CollectorInfoBase &collector = getCollector(reg);
+        auto &infos = collector.mElementInfos.emplace_back(std::vector<Plugins::TypeInfo> {}, type);
         infos.first.emplace_back(type);
         if (vBase)
             infos.first.emplace_back(vBase);

@@ -4,12 +4,12 @@
 
 #include "Generic/cowstring.h"
 
-#include "Interfaces/filesystem/fsapi.h"
+#include "Platform/filesystem/fsapi.h"
 
 #include "Madgine/root/keyvalueregistry.h"
 #include "Madgine/root/root.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 
 #include "python3behaviors.h"
 #include "python3fileloader.h"
@@ -67,13 +67,13 @@ namespace Behavior {
             if (!PyArg_ParseTuple(args, "s", &name))
                 return NULL;
 
-            auto it = KeyValueRegistry::globals().find(name);
-            if (it != KeyValueRegistry::globals().end()) {
+            auto it = Core::KeyValueRegistry::globals().find(name);
+            if (it != Core::KeyValueRegistry::globals().end()) {
                 return toPyObject(it->second);
             }
 
-            auto it2 = KeyValueRegistry::workgroupLocals().find(name);
-            if (it2 != KeyValueRegistry::workgroupLocals().end()) {
+            auto it2 = Core::KeyValueRegistry::workgroupLocals().find(name);
+            if (it2 != Core::KeyValueRegistry::workgroupLocals().end()) {
                 return toPyObject(it2->second);
             }
 
@@ -84,12 +84,12 @@ namespace Behavior {
         static PyObject *
         PyEnvironment_dir(PyObject *self, PyObject *args)
         {
-            PyObject *list = PyList_New(KeyValueRegistry::globals().size() + KeyValueRegistry::workgroupLocals().size());
+            PyObject *list = PyList_New(Core::KeyValueRegistry::globals().size() + Core::KeyValueRegistry::workgroupLocals().size());
             size_t i = 0;
-            for (std::string_view key : kvKeys(KeyValueRegistry::globals())) {
+            for (std::string_view key : kvKeys(Core::KeyValueRegistry::globals())) {
                 PyList_SetItem(list, i++, toPyObject(key));
             }
-            for (std::string_view key : kvKeys(KeyValueRegistry::workgroupLocals())) {
+            for (std::string_view key : kvKeys(Core::KeyValueRegistry::workgroupLocals())) {
                 PyList_SetItem(list, i++, toPyObject(key));
             }
 
@@ -128,7 +128,7 @@ namespace Behavior {
             std::string fullName = std::string { PyModule_GetName(self) } + "::" + name;
             std::string namespaceName = fullName + "::";
 
-            const MetaTable *list = sTypeList();
+            const Reflect::MetaTable *list = Reflect::sTypeList();
             while (list) {
 
                 if (fullName == list->mTypeName) {
@@ -287,7 +287,7 @@ namespace Behavior {
         static Python3StreamRedirect sStream;
         BehaviorReceiver *sReceiver = nullptr;
 
-        Python3Environment::Python3Environment(Root::Root &root)
+        Python3Environment::Python3Environment(Core::Root &root)
             : RootComponent(root)
         {
             root.taskQueue()->addSetupSteps([this]() { return callInit(); },
@@ -311,17 +311,17 @@ namespace Behavior {
             PyConfig_InitPythonConfig(&config);
             config.isolated = 1;
 
-            std::string path = Filesystem::shippingPath() / PYTHON3_STDLIB_ZIP;
+            std::string path = Platform::Filesystem::shippingPath() / PYTHON3_STDLIB_ZIP;
 
 #if ANDROID
-            std::string newPath = Filesystem::appDataPath() / PYTHON3_STDLIB_ZIP;
-            Filesystem::copyFile(path, newPath);
+            std::string newPath = Platform::Filesystem::appDataPath() / PYTHON3_STDLIB_ZIP;
+            Platform::Filesystem::copyFile(path, newPath);
             path = newPath;
 
-            std::string lib_dynloadPath = Filesystem::appDataPath() / "lib-dynload";
-            Filesystem::createDirectory(lib_dynloadPath);
-            for (const Filesystem::Path &p : Filesystem::listFiles(Filesystem::shippingPath() / "lib-dynload")) {
-                Filesystem::copyFile(p, lib_dynloadPath);
+            std::string lib_dynloadPath = Platform::Filesystem::appDataPath() / "lib-dynload";
+            Platform::Filesystem::createDirectory(lib_dynloadPath);
+            for (const Platform::Filesystem::Path &p : Platform::Filesystem::listFiles(Platform::Filesystem::shippingPath() / "lib-dynload")) {
+                Platform::Filesystem::copyFile(p, lib_dynloadPath);
             }
 
             wchar_t *lib_dynload = nullptr;
@@ -412,7 +412,7 @@ namespace Behavior {
             return "Python3Environment";
         }
 
-        KeyValueResult Python3Environment::execute(ValueType &retVal, std::string_view command, Log::Log *log)
+        Reflect::Result Python3Environment::execute(Reflect::Value &retVal, std::string_view command, Platform::Log::Log *log)
         {
             Python3Lock lock { log };
 
@@ -430,18 +430,18 @@ namespace Behavior {
             return handle;
         }
 
-        Log::Log *Python3Environment::unlock(PyGILState_STATE handle)
+        Platform::Log::Log *Python3Environment::unlock(PyGILState_STATE handle)
         {
-            Log::Log *result = sStream.log();
+            Platform::Log::Log *result = sStream.log();
             assert(PyGILState_Check() == 1);
             PyGILState_Release(handle);
             return result;
         }
 
-        void Python3Environment::lock(BehaviorReceiver *rec, Log::Log *log)
+        void Python3Environment::lock(BehaviorReceiver *rec, Platform::Log::Log *log)
         {
             if (rec && !log)
-                log = Log::get_log(*rec);
+                log = Platform::Log::get_log(*rec);
             // assert(PyGILState_Check() == 0);
             [[maybe_unused]] PyGILState_STATE handle = PyGILState_Ensure();
             assert(PyGILState_Check() == 1);
@@ -450,9 +450,9 @@ namespace Behavior {
             sReceiver = rec;
         }
 
-        std::pair<BehaviorReceiver *, Log::Log *> Python3Environment::unlock()
+        std::pair<BehaviorReceiver *, Platform::Log::Log *> Python3Environment::unlock()
         {
-            std::pair<BehaviorReceiver *, Log::Log *> result = { std::exchange(sReceiver, nullptr), sStream.setLog(nullptr) };
+            std::pair<BehaviorReceiver *, Platform::Log::Log *> result = { std::exchange(sReceiver, nullptr), sStream.setLog(nullptr) };
             assert(PyGILState_Check() == 1);
             PyGILState_Release(PyGILState_UNLOCKED);
             return result;

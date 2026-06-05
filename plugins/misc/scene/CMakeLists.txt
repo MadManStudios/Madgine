@@ -33,13 +33,13 @@ target_link_plugins(SceneRenderer Scene Client)
 target_include_directories(SceneRenderer PRIVATE ${CMAKE_CURRENT_BINARY_DIR})
 
 set(sources "")
-FolderSources(sources "" renderer_tools)
-	FolderSources(sources renderer_tools Madgine_Tools)
+FolderSources(sources "" tools)
+	FolderSources(sources tools Madgine_Tools)
 		FolderSources(sources Madgine_Tools sceneeditor entitycache.cpp entitycache.h gridpass.cpp gridpass.h sceneeditor.cpp sceneeditor.h scenefile.cpp scenefile.h scenetool.cpp scenetool.h sceneview.cpp sceneview.h)
 			FolderSources(sources sceneeditor shaders grid.hlsl)
 			FolderSources(sources sceneeditor tests sceneeditortests.cpp sceneeditortests.h)
 
-add_tools(SceneRenderer ${sources} PRECOMPILED_HEADER renderer_tools/Madgine_Tools/scenerenderertoolslib.h SOURCE_ROOT renderer_tools)
+add_tools(SceneRenderer ${sources} PRECOMPILED_HEADER tools/Madgine_Tools/scenerenderertoolslib.h SOURCE_ROOT tools)
 
 target_link_plugins(SceneRendererTools RenderTools ClientTools DebuggerTools BehaviorTools ResourcesTools)
 

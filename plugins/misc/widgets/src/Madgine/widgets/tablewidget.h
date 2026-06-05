@@ -31,7 +31,7 @@ namespace Widgets {
 
         void render(WidgetsRenderData &renderData) override;
 
-        void sizeChanged(const Vector3 &pixelSize) override;
+        void sizeChanged(const Math::Vector3 &pixelSize) override;
 
         Execution::SignalStub<void, IndexType<uint32_t>> &selectedRowChanged();
         IndexType<uint32_t> selectedRow() const;
@@ -46,9 +46,9 @@ namespace Widgets {
     protected:
         IndexType<uint32_t> rowIndex(float y);
 
-        void injectPointerEnter(const Input::PointerMoveEvent &arg) override;
-        void injectPointerLeave(const Input::PointerMoveEvent &arg) override;
-        void injectPointerMove(const Input::PointerMoveEvent &arg) override;
+        void injectPointerEnter(const Platform::Input::PointerMoveEvent &arg) override;
+        void injectPointerLeave(const Platform::Input::PointerMoveEvent &arg) override;
+        void injectPointerMove(const Platform::Input::PointerMoveEvent &arg) override;
 
         void injectPointerClick(const PointerClickEvent &arg) override;
 

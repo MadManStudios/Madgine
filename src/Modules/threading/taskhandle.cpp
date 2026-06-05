@@ -12,7 +12,7 @@
 namespace Engine {
 namespace Threading {
 
-    TaskHandle::TaskHandle(CoroutineHandle<TaskPromiseBase> handle)
+    TaskHandle::TaskHandle(Execution::CoroutineHandle<TaskPromiseBase> handle)
         : mHandle(handle.release())
     {
     }

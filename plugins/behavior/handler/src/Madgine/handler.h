@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Meta/keyvalue/virtualscope.h"
+#include "Meta/reflect/virtualscope.h"
 #include "Meta/serialize/hierarchy/virtualserializableunit.h"
 
 #include "Modules/threading/madgineobject.h"
@@ -13,7 +13,7 @@
 namespace Engine {
 namespace Behavior {
 
-    struct MADGINE_HANDLER_EXPORT HandlerBase : VirtualScopeBase<>, Threading::MadgineObject<HandlerBase> {
+    struct MADGINE_HANDLER_EXPORT HandlerBase : Reflect::VirtualScopeBase<>, Threading::MadgineObject<HandlerBase> {
         SERIALIZABLEUNIT(HandlerBase)
 
         HandlerBase(HandlerManager &ui);
@@ -29,7 +29,7 @@ namespace Behavior {
         template <typename T>
         T &getHandler()
         {
-            return static_cast<T &>(getHandler(UniqueComponent::component_index<T>()));
+            return static_cast<T &>(getHandler(Plugins::component_index<T>()));
         }
 
         HandlerBase &getHandler(size_t i);

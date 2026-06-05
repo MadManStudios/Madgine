@@ -16,8 +16,8 @@ namespace Render {
         Scene::SceneManager &mScene;
 
         struct ObjectData {
-            Matrix4 mTransform;
-            GPUPtr<Matrix4[]> mBones;
+            Math::Matrix4 mTransform;
+            GPUPtr<Math::Matrix4[]> mBones;
         };
         std::map<const GPUMeshData *, std::vector<ObjectData>> mInstances;
 

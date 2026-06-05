@@ -3,7 +3,7 @@
 #include "Generic/execution/lifetime.h"
 #include "Generic/memberoffsetptr.h"
 
-#include "Meta/keyvalue/scopeptr.h"
+#include "Meta/reflect/scopeptr.h"
 
 #include "debuggablesender.h"
 
@@ -42,7 +42,7 @@ namespace Debug {
         DebuggableLifetimeBase *parent() const;
         std::ranges::subrange<iterator, iterator> children();
 
-        virtual ScopePtr owner() = 0;
+        virtual Reflect::ScopePtr owner() = 0;
 
         const std::vector<std::reference_wrapper<ContextInfo>> &debugContexts();
 
@@ -130,7 +130,7 @@ namespace Debug {
             OffsetPtr::parent(this)->endLifetime();
         }
 
-        ScopePtr owner() override
+        Reflect::ScopePtr owner() override
         {
             return OffsetPtr::parent(this);
         }

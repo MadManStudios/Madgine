@@ -11,7 +11,7 @@
 #include "Madgine/resources/sender.h"
 #include "Madgine/root/root.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 
 METATABLE_BEGIN_BASE(Engine::Audio::OboeApi, Engine::Audio::AudioApi)
 METATABLE_END(Engine::Audio::OboeApi)
@@ -38,7 +38,7 @@ namespace Audio {
     };
 
     struct PlaybackSender : Execution::base_sender {
-        using result_type = KeyValueError;
+        using result_type = Reflect::Error;
         template <template <typename...> typename Tuple>
         using value_types = Tuple<>;
 
@@ -82,7 +82,7 @@ namespace Audio {
             void *audioData,
             int32_t numFrames) override
         {
-            if (!Engine::Root::Root::getSingleton().taskQueue()->running()) {
+            if (!Engine::Core::Root::getSingleton().taskQueue()->running()) {
                 OboeApi *api = mState->mApi;
                 mState->set_done();
                 mState = nullptr;
@@ -146,7 +146,7 @@ namespace Audio {
         throw 0;
     }
 
-    OboeApi::OboeApi(Root::Root &root)
+    OboeApi::OboeApi(Core::Root &root)
         : AudioApiImpl<OboeApi>(root)
     {
         mErrorCallback = std::make_shared<OboeErrorCallback>();

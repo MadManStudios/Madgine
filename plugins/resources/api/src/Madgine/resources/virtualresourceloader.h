@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Meta/keyvalue/virtualscope.h"
+#include "Meta/reflect/virtualscope.h"
 
 #include "resourceloader.h"
 
@@ -45,7 +45,7 @@ namespace Resources {
         }
 
         template <typename C = typename Base::Ctor>
-        static typename Base::Handle loadManual(std::string_view name, const Filesystem::Path &path = {}, C &&ctor = {}, T *loader = &Base::getSingleton())
+        static typename Base::Handle loadManual(std::string_view name, const Platform::Filesystem::Path &path = {}, C &&ctor = {}, T *loader = &Base::getSingleton())
         {
             return loader->loadManualVImpl(
                 name, path, Base::toCtor(std::forward<C>(ctor)));
@@ -68,7 +68,7 @@ namespace Resources {
         {
             if (!handle)
                 return nullptr;
-            if constexpr (container_traits<typename Base::DataContainer>::has_dependent_handle) {
+            if constexpr (Containers::container_traits<typename Base::DataContainer>::has_dependent_handle) {
                 if (!loader)
                     loader = &Base::getSingleton();
                 return loader->getDataPtrVImpl(handle, verified);
@@ -81,7 +81,7 @@ namespace Resources {
         {
             if (!handle)
                 return nullptr;
-            if constexpr (container_traits<typename Base::DataContainer>::has_dependent_handle) {
+            if constexpr (Containers::container_traits<typename Base::DataContainer>::has_dependent_handle) {
                 if (!loader)
                     loader = &Base::getSingleton();
                 return loader->getInfoVImpl(handle);
@@ -90,14 +90,14 @@ namespace Resources {
             }
         }
 
-        virtual std::vector<const MetaTable *> resourceTypes() const override
+        virtual std::vector<const Reflect::MetaTable *> resourceTypes() const override
         {
-            std::vector<const MetaTable *> result = ResourceLoaderBase::resourceTypes();
+            std::vector<const Reflect::MetaTable *> result = ResourceLoaderBase::resourceTypes();
             result.push_back(table<typename Base::Resource>);
             return result;
         }
 
-        virtual typename Base::Handle loadManualVImpl(std::string_view name, const Filesystem::Path &path = {}, typename Base::Ctor ctor = {}) = 0;
+        virtual typename Base::Handle loadManualVImpl(std::string_view name, const Platform::Filesystem::Path &path = {}, typename Base::Ctor ctor = {}) = 0;
         virtual typename Base::Ptr createUnnamedVImpl() = 0;
         virtual typename Base::Handle loadVImpl(std::string_view name) = 0;
         virtual typename Base::Handle loadVImpl(typename Base::Resource *resource) = 0;
@@ -110,16 +110,16 @@ namespace Resources {
     };
 
     template <typename T, typename _Data, typename _Base>
-    struct VirtualResourceLoaderImpl : UniqueComponent::VirtualComponentImpl<T, VirtualScope<T, ResourceLoaderImpl<T, _Data, _Base>>, _Base> {
+    struct VirtualResourceLoaderImpl : Plugins::VirtualComponentImpl<T, Reflect::VirtualScope<T, ResourceLoaderImpl<T, _Data, _Base>>, _Base> {
 
         using Data = _Data;
         using Base = _Base;
 
-        using Self = UniqueComponent::VirtualComponentImpl<T, VirtualScope<T, ResourceLoaderImpl<T, Data, Base>>, _Base>;
+        using Self = Plugins::VirtualComponentImpl<T, Reflect::VirtualScope<T, ResourceLoaderImpl<T, Data, Base>>, _Base>;
 
         using Self::Self;
 
-        virtual typename Base::OriginalHandle loadManualVImpl(std::string_view name, const Filesystem::Path &path = {}, typename Base::Ctor ctor = {}) override
+        virtual typename Base::OriginalHandle loadManualVImpl(std::string_view name, const Platform::Filesystem::Path &path = {}, typename Base::Ctor ctor = {}) override
         {
             return Self::loadManual(name, path, std::move(ctor), static_cast<T *>(this));
         }
@@ -133,7 +133,7 @@ namespace Resources {
         }
         virtual typename Base::OriginalHandle loadVImpl(typename Base::Resource *resource) override
         {
-            return Self::load(static_cast<typename Self::Resource *>(resource), Filesystem::FileEventType::FILE_CREATED, static_cast<T *>(this));
+            return Self::load(static_cast<typename Self::Resource *>(resource), Platform::Filesystem::FileEventType::FILE_CREATED, static_cast<T *>(this));
         }
         virtual Threading::TaskFuture<void> unloadVImpl(typename Base::Resource *resource) override
         {

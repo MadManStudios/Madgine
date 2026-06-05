@@ -5,7 +5,7 @@
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
 RESOURCELOADER(Engine::Render::AnimationLoader)
@@ -59,7 +59,7 @@ namespace Render {
             co_return false;
         }
 
-        ByteBuffer buffer = std::move(bufferResult).value();
+        Memory::ByteBuffer buffer = std::move(bufferResult).value();
 
         const aiScene *scene = importer.ReadFileFromMemory(buffer.mData, buffer.mSize, 0);
 
@@ -99,15 +99,15 @@ namespace Render {
                 }
 
                 std::transform(node->mPositionKeys, node->mPositionKeys + node->mNumPositionKeys, std::back_inserter(bone.mPositions), [&](const aiVectorKey &key) {
-                    return KeyFrame<Vector3> { static_cast<float>(key.mTime), Vector3 { &key.mValue.x } };
+                    return KeyFrame<Math::Vector3> { static_cast<float>(key.mTime), Math::Vector3 { &key.mValue.x } };
                 });
 
                 std::transform(node->mRotationKeys, node->mRotationKeys + node->mNumRotationKeys, std::back_inserter(bone.mOrientations), [&](const aiQuatKey &key) {
-                    return KeyFrame<Quaternion> { static_cast<float>(key.mTime), Quaternion { key.mValue.x, key.mValue.y, key.mValue.z, key.mValue.w } };
+                    return KeyFrame<Math::Quaternion> { static_cast<float>(key.mTime), Math::Quaternion { key.mValue.x, key.mValue.y, key.mValue.z, key.mValue.w } };
                 });
 
                 std::transform(node->mScalingKeys, node->mScalingKeys + node->mNumScalingKeys, std::back_inserter(bone.mScalings), [&](const aiVectorKey &key) {
-                    return KeyFrame<Vector3> { static_cast<float>(key.mTime), Vector3 { &key.mValue.x } };
+                    return KeyFrame<Math::Vector3> { static_cast<float>(key.mTime), Math::Vector3 { &key.mValue.x } };
                 });
             }
         }

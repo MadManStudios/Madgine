@@ -14,12 +14,12 @@ namespace Render {
     struct DirectX12ResourceBlock {
         D3D12_GPU_DESCRIPTOR_HANDLE mHandle;
         size_t mSize = I;
-        std::variant<ReleasePtr<ID3D12Resource>, GPUPtr<void>, GPUPtr<Void[]>> mResources[I];
+        std::variant<Platform::ReleasePtr<ID3D12Resource>, GPUPtr<void>, GPUPtr<Void[]>> mResources[I];
     };
 
     struct MADGINE_DIRECTX12_EXPORT DirectX12Texture : Texture {
 
-        DirectX12Texture(TextureType type, bool isRenderTarget, TextureFormat format, Vector2i size, size_t samples = 1, const ByteBuffer &data = {});
+        DirectX12Texture(TextureType type, bool isRenderTarget, TextureFormat format, Math::Vector2i size, size_t samples = 1, const Memory::ByteBuffer &data = {});
         DirectX12Texture(TextureType type = TextureType_2D, bool isRenderTarget = false, TextureFormat format = FORMAT_RGBA8, size_t samples = 1);
         DirectX12Texture(const DirectX12Texture &) = delete;
         DirectX12Texture(DirectX12Texture &&) = delete;
@@ -29,12 +29,12 @@ namespace Render {
 
         void reset();
 
-        void setSubData(Vector2i offset, Vector2i size, const ByteBuffer &data);
+        void setSubData(Math::Vector2i offset, Math::Vector2i size, const Memory::ByteBuffer &data);
 
         void createShaderResourceView(OffsetPtr descriptorHandle) const;
 
         ID3D12Resource *resource() const;
-        const ReleasePtr<ID3D12Resource> &resourcePtr() const;
+        const Platform::ReleasePtr<ID3D12Resource> &resourcePtr() const;
 
         void setName(std::string_view name);
 
@@ -46,7 +46,7 @@ namespace Render {
         bool mIsRenderTarget;
         size_t mSamples = 0;
         DirectX12ResourceBlock<1> mBlock;
-        ReleasePtr<ID3D12Resource> mResource;
+        Platform::ReleasePtr<ID3D12Resource> mResource;
     };
 
 }

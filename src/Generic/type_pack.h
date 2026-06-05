@@ -191,12 +191,6 @@ using type_pack_as_tuple = typename Pack::as_tuple;
 template <typename Pack1, typename Pack2>
 using type_pack_concat = typename Pack1::template concat<Pack2>;
 
-template <typename T>
-struct type_pack_appender {
-    template <typename Pack>
-    using type = typename Pack::template append<T>;
-};
-
 namespace __generic_impl__ {
     template <typename T, size_t I>
     using lift_by_index = T;

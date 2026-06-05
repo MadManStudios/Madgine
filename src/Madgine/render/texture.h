@@ -12,7 +12,7 @@ namespace Render {
 
         Texture() = default;
 
-        Texture(TextureType type, TextureFormat format, const Vector2i &size = { 0, 0 })
+        Texture(TextureType type, TextureFormat format, const Math::Vector2i &size = { 0, 0 })
             : mType(type)
             , mFormat(format)
             , mSize(size)
@@ -41,7 +41,7 @@ namespace Render {
             return mResourceBlock;
         }
 
-        const Vector2i &size() const
+        const Math::Vector2i &size() const
         {
             return mSize;
         }
@@ -60,7 +60,7 @@ namespace Render {
         UniqueResourceBlock mResourceBlock;
         TextureType mType;
         TextureFormat mFormat;
-        Vector2i mSize = { 0, 0 };
+        Math::Vector2i mSize = { 0, 0 };
     };
 
 }

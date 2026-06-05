@@ -21,7 +21,7 @@ namespace Scene {
             void setStep(float step);
             float currentStep() const;
 
-            bool updateRender(std::chrono::microseconds frameTimeSinceLastFrame, std::chrono::microseconds sceneTimeSinceLastFrame, Matrix4 *matrices);
+            bool updateRender(std::chrono::microseconds frameTimeSinceLastFrame, std::chrono::microseconds sceneTimeSinceLastFrame, Math::Matrix4 *matrices);
 
             Entity *entity();
             SceneManager *scene();

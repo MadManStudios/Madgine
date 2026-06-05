@@ -14,7 +14,7 @@ namespace Render {
         ~VulkanRenderTarget();
 
         void createRenderPass(size_t colorAttachmentCount, VkFormat format, VkImageLayout layout, bool createDepthBufferView, std::span<VkSubpassDependency> dependencies);
-        void setup(const Vector2i &framebufferSize, const Vector2i &size, bool createDepthBufferView = false);
+        void setup(const Math::Vector2i &framebufferSize, const Math::Vector2i &size, bool createDepthBufferView = false);
 
         void beginFrame() override;
         RenderFuture endFrame() override;
@@ -25,12 +25,12 @@ namespace Render {
         virtual void pushAnnotation(const char *tag) override;
         virtual void popAnnotation() override;
 
-        virtual Matrix4 getClipSpaceMatrix() const override;
+        virtual Math::Matrix4 getClipSpaceMatrix() const override;
 
         size_t samples() const;
 
-        virtual void setRenderSpace(const Rect2i &space) override;
-        virtual void setScissorsRect(const Rect2i &space) override;
+        virtual void setRenderSpace(const Math::Rect2i &space) override;
+        virtual void setScissorsRect(const Math::Rect2i &space) override;
 
         virtual ConstTexturePtr depthTexture() const override;
 
@@ -42,8 +42,8 @@ namespace Render {
 
         VulkanCommandList mCommandList;
 
-        Vector2i mSize;
-        Vector2i mBufferSize;
+        Math::Vector2i mSize;
+        Math::Vector2i mBufferSize;
 
         VkFramebuffer mFramebuffer;
 

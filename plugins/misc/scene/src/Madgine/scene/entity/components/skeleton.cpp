@@ -7,7 +7,7 @@
 #include "Madgine/resources/resourcemanager.h"
 #include "Madgine/skeletonloader/skeletondescriptor.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
 NAMED_UNIQUECOMPONENT(Skeleton, Engine::Scene::Entity::Skeleton);
@@ -56,7 +56,7 @@ namespace Scene {
             return mSkeleton;
         }
 
-        void Skeleton::resetMatrices(Matrix4 *matrices)
+        void Skeleton::resetMatrices(Math::Matrix4 *matrices)
         {
             assert(mSkeleton.available());
 

@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Generic/bits/array.h"
-#include "Generic/container/tinyvector.h"
+#include "Generic/containers/bits/array.h"
+#include "Generic/containers/tinyvector.h"
 
 namespace CodeGen {
 
@@ -12,7 +12,7 @@ struct MADGINE_CODEGEN_EXPORT File {
 
     virtual void statement(Statement statement) = 0;
 
-    bool openCStyleGuard(std::ostream &stream, const Engine::TinyVector<Engine::BitArray<62>> &conditionals) const;
+    bool openCStyleGuard(std::ostream &stream, const Engine::Containers::TinyVector<Engine::Containers::BitArray<62>> &conditionals) const;
     void closeCStyleGuard(std::ostream &stream, bool wasOpened) const;
 
     struct MADGINE_CODEGEN_EXPORT CustomCodeBuilder {
@@ -43,7 +43,7 @@ struct MADGINE_CODEGEN_EXPORT File {
     std::vector<size_t> mConditionalsStack;
     std::vector<std::string> mConditionalTokenList;
 
-    Engine::BitArray<62> mConditionalsBitMask;
+    Engine::Containers::BitArray<62> mConditionalsBitMask;
 };
 
 }

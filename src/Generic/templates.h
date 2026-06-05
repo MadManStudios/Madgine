@@ -149,7 +149,7 @@ using forward_ref_t = std::conditional_t<
 template <typename T>
 decltype(auto) forward_ref(std::remove_reference_t<T> &t)
 {
-    if constexpr (Reference<T>) {
+    if constexpr (Concepts::Reference<T>) {
         return std::ref(t);
     } else {
         return std::forward<T>(t);
@@ -159,7 +159,7 @@ decltype(auto) forward_ref(std::remove_reference_t<T> &t)
 template <typename T>
 decltype(auto) forward_ref(std::remove_reference_t<T> &&t)
 {
-    if constexpr (Reference<T>) {
+    if constexpr (Concepts::Reference<T>) {
         return std::ref(t);
     } else {
         return std::forward<T>(t);

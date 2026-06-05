@@ -1,16 +1,16 @@
 #pragma once
 
-#include "Meta/keyvalue/virtualscope.h"
+#include "Meta/reflect/virtualscope.h"
 
 #include "Modules/uniquecomponent/uniquecomponentdefine.h"
 
-DECLARE_UNIQUE_COMPONENT(Engine::Behavior, Handler, HandlerBase, Engine::UniqueComponent::Constructor<HandlerManager &>)
+DECLARE_UNIQUE_COMPONENT(Engine::Behavior, Handler, HandlerBase, Engine::Plugins::Constructor<HandlerManager &>)
 
 namespace Engine {
 namespace Behavior {
 
     template <typename T>
-    using Handler = VirtualScope<T, HandlerComponent<T>>;
+    using Handler = Reflect::VirtualScope<T, HandlerComponent<T>>;
 
 }
 }

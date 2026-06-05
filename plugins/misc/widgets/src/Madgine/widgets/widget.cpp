@@ -2,11 +2,11 @@
 
 #include "widget.h"
 
-#include "Interfaces/window/windowapi.h"
+#include "Platform/window/windowapi.h"
 
 #include "Madgine/behavior/behavior.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
 #include "geometry.h"
@@ -40,17 +40,28 @@ namespace Widgets {
 
     WidgetBase::WidgetBase(WidgetManager &manager, WidgetBase *parent, const WidgetConfig &config)
         : mVisible(parent)
-        , mPointerMoveSignal("\xef\x84\x89" " Pointer Move")
-        , mPointerClickSignal("\xef\x84\x89" " Click")
-        , mPointerEnterSignal("\xef\x84\x89" " Pointer Enter")
-        , mPointerLeaveSignal("\xef\x84\x89" " Pointer Leave")
-        , mDragBeginSignal("\xef\x84\x89" " Drag Begin")
-        , mDragMoveSignal("\xef\x84\x89" " Drag Move")
-        , mDragEndSignal("\xef\x84\x89" " Drag End")
-        , mDragAbortSignal("\xef\x84\x89" " Drag Abort")
-        , mAxisEventSignal("\xef\x84\x89" " Axis Event")
-        , mKeyPressSignal("\xef\x84\x89" " Key Event")
-        , mKeyReleaseSignal("\xef\x84\x89" " Key Release")
+        , mPointerMoveSignal("\xef\x84\x89"
+                             " Pointer Move")
+        , mPointerClickSignal("\xef\x84\x89"
+                              " Click")
+        , mPointerEnterSignal("\xef\x84\x89"
+                              " Pointer Enter")
+        , mPointerLeaveSignal("\xef\x84\x89"
+                              " Pointer Leave")
+        , mDragBeginSignal("\xef\x84\x89"
+                           " Drag Begin")
+        , mDragMoveSignal("\xef\x84\x89"
+                          " Drag Move")
+        , mDragEndSignal("\xef\x84\x89"
+                         " Drag End")
+        , mDragAbortSignal("\xef\x84\x89"
+                           " Drag Abort")
+        , mAxisEventSignal("\xef\x84\x89"
+                           " Axis Event")
+        , mKeyPressSignal("\xef\x84\x89"
+                          " Key Event")
+        , mKeyReleaseSignal("\xef\x84\x89"
+                            " Key Release")
         , mManager(manager)
         , mParent(parent)
         , mAcceptsPointerEvents(config.acceptsPointerEvents || !parent)
@@ -58,7 +69,7 @@ namespace Widgets {
     {
         mManager.registerWidget(this);
 
-        applyGeometry(parent ? parent->getAbsoluteSize() : Vector3 { Vector2 { manager.mClientSpace.mSize }, Window::platformCapabilities.mScalingFactor });
+        applyGeometry(parent ? parent->getAbsoluteSize() : Math::Vector3 { Math::Vector2 { manager.mClientSpace.mSize }, Platform::Window::platformCapabilities.mScalingFactor });
     }
 
     WidgetBase::~WidgetBase()
@@ -66,24 +77,24 @@ namespace Widgets {
         mManager.unregisterWidget(this);
     }
 
-    void WidgetBase::setSize(const Matrix3 &size)
+    void WidgetBase::setSize(const Math::Matrix3 &size)
     {
         mSize = size;
         applyGeometry();
     }
 
-    const Matrix3 &WidgetBase::getSize()
+    const Math::Matrix3 &WidgetBase::getSize()
     {
         return mSize;
     }
 
-    void WidgetBase::setPos(const Matrix3 &pos)
+    void WidgetBase::setPos(const Math::Matrix3 &pos)
     {
         mPos = pos;
         applyGeometry();
     }
 
-    const Matrix3 &WidgetBase::getPos() const
+    const Math::Matrix3 &WidgetBase::getPos() const
     {
         return mPos;
     }
@@ -98,17 +109,17 @@ namespace Widgets {
         return mOpacity;
     }
 
-    Vector3 WidgetBase::getAbsoluteSize() const
+    Math::Vector3 WidgetBase::getAbsoluteSize() const
     {
         return mAbsoluteSize;
     }
 
-    Vector2 WidgetBase::getAbsolutePosition() const
+    Math::Vector2 WidgetBase::getAbsolutePosition() const
     {
         return mAbsolutePos;
     }
 
-    void WidgetBase::setAbsoluteSize(const Vector3 &size)
+    void WidgetBase::setAbsoluteSize(const Math::Vector3 &size)
     {
         mAbsoluteSize = size;
 
@@ -117,7 +128,7 @@ namespace Widgets {
         updateChildrenGeometry();
     }
 
-    void WidgetBase::setAbsolutePosition(const Vector2 &pos)
+    void WidgetBase::setAbsolutePosition(const Math::Vector2 &pos)
     {
         mAbsolutePos = pos;
     }
@@ -127,10 +138,10 @@ namespace Widgets {
         if (mParent)
             applyGeometry(mParent->getAbsoluteSize(), mParent->getAbsolutePosition());
         else
-            applyGeometry(Vector3 { Vector2 { manager().getClientSpace().mSize }, 1.0f });
+            applyGeometry(Math::Vector3 { Math::Vector2 { manager().getClientSpace().mSize }, 1.0f });
     }
 
-    void WidgetBase::applyGeometry(const Vector3 &parentSize, const Vector2 &parentPos)
+    void WidgetBase::applyGeometry(const Math::Vector3 &parentSize, const Math::Vector2 &parentPos)
     {
         Geometry geometry = getGeometry();
 
@@ -312,17 +323,17 @@ namespace Widgets {
         mPointerClickSignal.emit(arg);
     }
 
-    void WidgetBase::injectPointerMove(const Input::PointerMoveEvent &arg)
+    void WidgetBase::injectPointerMove(const Platform::Input::PointerMoveEvent &arg)
     {
         mPointerMoveSignal.emit(arg);
     }
 
-    void WidgetBase::injectPointerEnter(const Input::PointerMoveEvent &arg)
+    void WidgetBase::injectPointerEnter(const Platform::Input::PointerMoveEvent &arg)
     {
         mPointerEnterSignal.emit(arg);
     }
 
-    void WidgetBase::injectPointerLeave(const Input::PointerMoveEvent &arg)
+    void WidgetBase::injectPointerLeave(const Platform::Input::PointerMoveEvent &arg)
     {
         mPointerLeaveSignal.emit(arg);
     }
@@ -347,19 +358,19 @@ namespace Widgets {
         mDragAbortSignal.emit();
     }
 
-    bool WidgetBase::injectAxisEvent(const Input::AxisEvent &arg)
+    bool WidgetBase::injectAxisEvent(const Platform::Input::AxisEvent &arg)
     {
         mAxisEventSignal.emit(arg);
         return true;
     }
 
-    bool WidgetBase::injectKeyPress(const Input::KeyPressEvent &arg)
+    bool WidgetBase::injectKeyPress(const Platform::Input::KeyPressEvent &arg)
     {
         mKeyPressSignal.emit(arg);
         return true;
     }
 
-    bool WidgetBase::injectKeyRelease(const Input::KeyReleaseEvent &arg)
+    bool WidgetBase::injectKeyRelease(const Platform::Input::KeyReleaseEvent &arg)
     {
         mKeyReleaseSignal.emit(arg);
         return true;
@@ -369,7 +380,7 @@ namespace Widgets {
     {
     }
 
-    Execution::SignalStub<void, const Input::PointerMoveEvent &> &WidgetBase::pointerMoveEvent()
+    Execution::SignalStub<void, const Platform::Input::PointerMoveEvent &> &WidgetBase::pointerMoveEvent()
     {
         return mPointerMoveSignal;
     }
@@ -379,12 +390,12 @@ namespace Widgets {
         return mPointerClickSignal;
     }
 
-    Execution::SignalStub<void, const Input::PointerMoveEvent &> &WidgetBase::pointerEnterEvent()
+    Execution::SignalStub<void, const Platform::Input::PointerMoveEvent &> &WidgetBase::pointerEnterEvent()
     {
         return mPointerEnterSignal;
     }
 
-    Execution::SignalStub<void, const Input::PointerMoveEvent &> &WidgetBase::pointerLeaveEvent()
+    Execution::SignalStub<void, const Platform::Input::PointerMoveEvent &> &WidgetBase::pointerLeaveEvent()
     {
         return mPointerLeaveSignal;
     }
@@ -409,29 +420,29 @@ namespace Widgets {
         return mDragAbortSignal;
     }
 
-    Execution::SignalStub<void, const Input::AxisEvent &> &WidgetBase::axisEvent()
+    Execution::SignalStub<void, const Platform::Input::AxisEvent &> &WidgetBase::axisEvent()
     {
         return mAxisEventSignal;
     }
 
-    Execution::SignalStub<void, const Input::KeyPressEvent &> &WidgetBase::keyPressEvent()
+    Execution::SignalStub<void, const Platform::Input::KeyPressEvent &> &WidgetBase::keyPressEvent()
     {
         return mKeyPressSignal;
     }
 
-    Execution::SignalStub<void, const Input::KeyReleaseEvent &> &WidgetBase::keyReleaseEvent()
+    Execution::SignalStub<void, const Platform::Input::KeyReleaseEvent &> &WidgetBase::keyReleaseEvent()
     {
         return mKeyReleaseSignal;
     }
 
-    bool WidgetBase::containsPoint(const Vector2 &point, const Rect2i &screenSpace, float extend) const
+    bool WidgetBase::containsPoint(const Math::Vector2 &point, const Math::Rect2i &screenSpace, float extend) const
     {
-        Vector2 min = mAbsolutePos + Vector2 { screenSpace.mTopLeft } - extend;
-        Vector2 max = mAbsoluteSize.xy() + min + 2 * extend;
+        Math::Vector2 min = mAbsolutePos + Math::Vector2 { screenSpace.mTopLeft } - extend;
+        Math::Vector2 max = mAbsoluteSize.xy() + min + 2 * extend;
         return min.x <= point.x && min.y <= point.y && max.x >= point.x && max.y >= point.y;
     }
 
-    WidgetBase *WidgetBase::getHoveredUp(const Vector2 &point, const Rect2i &screenSpace)
+    WidgetBase *WidgetBase::getHoveredUp(const Math::Vector2 &point, const Math::Rect2i &screenSpace)
     {
         if (mVisible && containsPoint(point, screenSpace)) {
             return this;
@@ -442,7 +453,7 @@ namespace Widgets {
         }
     }
 
-    WidgetBase *WidgetBase::getHoveredDown(const Vector2 &point, const Rect2i &screenSpace)
+    WidgetBase *WidgetBase::getHoveredDown(const Math::Vector2 &point, const Math::Rect2i &screenSpace)
     {
         if (!mVisible || !containsPoint(point, screenSpace))
             return nullptr;
@@ -493,7 +504,7 @@ namespace Widgets {
         return WidgetManager::scanWidget(out, in);
     }
 
-    void WidgetBase::sizeChanged(const Vector3 &pixelSize)
+    void WidgetBase::sizeChanged(const Math::Vector3 &pixelSize)
     {
     }
 

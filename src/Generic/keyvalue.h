@@ -225,15 +225,4 @@ struct comparator_traits<KeyCompare<_Ty>> {
     }
 };
 
-template <typename _Ty = void>
-struct KeyHash {
-    typedef _Ty argument_type;
-    typedef size_t result_type;
-
-    constexpr size_t operator()(const _Ty &_Arg) const
-    {
-        return std::hash<KeyType_t<_Ty>> {}(kvKey(_Arg));
-    }
-};
-
 }

@@ -2,7 +2,7 @@
 
 #include "pipelineloader.h"
 
-#include "Interfaces/filesystem/fsapi.h"
+#include "Platform/filesystem/fsapi.h"
 
 #include "Modules/threading/taskqueue.h"
 
@@ -10,7 +10,7 @@
 #include "Madgine/codegen/codegen_shader.h"
 #include "Madgine/meshloader/gpumeshloader.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
 #include "shadercache.h"
@@ -23,7 +23,7 @@ VIRTUALRESOURCELOADERBASE(Engine::Render::PipelineLoader)
 namespace Engine {
 namespace Render {
 
-    CLI::Parameter<std::string> shadergenTarget { { "--shadergen-target" }, "", "Specifies the target format for shader code generation during resource baking." };
+    Core::Parameter<std::string> shadergenTarget { { "--shadergen-target" }, "", "Specifies the target format for shader code generation during resource baking." };
 
     PipelineLoader::PipelineLoader()
         : VirtualResourceLoaderBase(std::vector<std::string> {})
@@ -79,15 +79,15 @@ namespace Render {
         }
     }
 
-    Threading::Task<Resources::BakeResult> PipelineLoader::bakeResources(std::vector<Filesystem::Path> &resourcesToBake, const Filesystem::Path &intermediateDir)
+    Threading::Task<Resources::BakeResult> PipelineLoader::bakeResources(std::vector<Platform::Filesystem::Path> &resourcesToBake, const Platform::Filesystem::Path &intermediateDir)
     {
         Resources::BakeResult result = Resources::BakeResult::SUCCESS;
 
-        Filesystem::createDirectories(ShaderCache::directory());
+        Platform::Filesystem::createDirectories(ShaderCache::directory());
 
         for (ShaderObjectPtr object : ShaderCache::shaderCache()) {
 
-            Filesystem::Path p = intermediateDir.parentPath() / "shadercache" / (object->entrypoint() + std::string { extensionForTarget(shadergenTarget, ShaderType::PixelShader) });
+            Platform::Filesystem::Path p = intermediateDir.parentPath() / "shadercache" / (object->entrypoint() + std::string { extensionForTarget(shadergenTarget, ShaderType::PixelShader) });
 
             if (!co_await ShaderCache::generate(p, object, shadergenTarget, ShaderType::PixelShader)) {
                 result = Resources::BakeResult::UNKNOWN_ERROR;

@@ -2,9 +2,9 @@
 
 #include "pluginexporter.h"
 
-#include "Interfaces/filesystem/fsapi.h"
+#include "Platform/filesystem/fsapi.h"
 
-#include "Modules/ini/inifile.h"
+#include "Modules/plugins/inifile.h"
 #include "Modules/plugins/binaryinfo.h"
 #include "Modules/plugins/pluginmanager.h"
 #include "Modules/uniquecomponent/uniquecomponentcollector.h"
@@ -13,7 +13,7 @@
 #include "Madgine/cli/parameter.h"
 #include "Madgine/codegen/codegen_cpp.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 
 #include "Madgine_Tools/pluginmanager/pluginmanager.h"
 
@@ -21,16 +21,16 @@
 
 UNIQUECOMPONENT(Engine::Tools::PluginExporter)
 
-METATABLE_BEGIN_BASE(Engine::Tools::PluginExporter, Engine::Root::RootComponentBase)
+METATABLE_BEGIN_BASE(Engine::Tools::PluginExporter, Engine::Core::RootComponentBase)
 METATABLE_END(Engine::Tools::PluginExporter)
 
 namespace Engine {
 namespace Tools {
 
-    CLI::Parameter<Filesystem::Path> exportPlugins { { "--export-plugins", "-ep" }, "", "If set, the pluginmanager will save the current plugin selection after the boot to the specified config file." };
-    CLI::Parameter<Filesystem::Path> generatePluginsCode { { "--generate-plugins-code", "-epc" }, "", "If set, the pluginmanager will export a uniquecomponent configuration source file for the current plugin selection to the specified path." };
+    Core::Parameter<Platform::Filesystem::Path> exportPlugins { { "--export-plugins", "-ep" }, "", "If set, the pluginmanager will save the current plugin selection after the boot to the specified config file." };
+    Core::Parameter<Platform::Filesystem::Path> generatePluginsCode { { "--generate-plugins-code", "-epc" }, "", "If set, the pluginmanager will export a uniquecomponent configuration source file for the current plugin selection to the specified path." };
 
-    PluginExporter::PluginExporter(Root::Root &root)
+    PluginExporter::PluginExporter(Core::Root &root)
         : RootComponent(root)
     {
     }
@@ -44,10 +44,10 @@ namespace Tools {
     {
         if (!exportPlugins->empty()) {
 
-            Filesystem::Path p = *exportPlugins;
+            Platform::Filesystem::Path p = *exportPlugins;
 
-            Filesystem::createDirectories(p.parentPath());
-            Ini::IniFile file;
+            Platform::Filesystem::createDirectories(p.parentPath());
+            Plugins::IniFile file;
             LOG("Saving Plugins to '" << p << "'");
             Plugins::PluginManager::getSingleton().saveSelection(file, true);
             if (!file.saveToDisk(p))
@@ -61,25 +61,25 @@ namespace Tools {
 
     std::string fixInclude(const char *pStr, const Plugins::BinaryInfo *binInfo)
     {
-        Filesystem::Path p = pStr;
+        Platform::Filesystem::Path p = pStr;
         if (p.isRelative())
-            p = Filesystem::Path { BINARY_DIR } / p;
-        Filesystem::Path r = p.relative(binInfo->mSourceRoot);
+            p = Platform::Filesystem::Path { BINARY_DIR } / p;
+        Platform::Filesystem::Path r = p.relative(binInfo->mSourceRoot);
         if (r.empty())
             LOG_ERROR("Include Path '" << p << "' is not relative to source root '" << binInfo->mSourceRoot << "'");
         return r.str();
     };
 
-    void PluginExporter::exportStaticComponentHeader(const Filesystem::Path &outFile)
+    void PluginExporter::exportStaticComponentHeader(const Platform::Filesystem::Path &outFile)
     {
         LOG("Exporting uniquecomponent configuration source file '" << outFile << "'");
 
         std::set<const Plugins::BinaryInfo *> binaries;
 
-        for (UniqueComponent::RegistryBase *reg : UniqueComponent::registryRegistry()) {
+        for (Plugins::RegistryBase *reg : Plugins::registryRegistry()) {
             binaries.insert(reg->mBinary);
 
-            for (UniqueComponent::CollectorInfoBase *collector : *reg) {
+            for (Plugins::CollectorInfoBase *collector : *reg) {
                 binaries.insert(collector->mBinary);
             }
         }
@@ -98,7 +98,7 @@ namespace Tools {
             }
         }
 
-        for (UniqueComponent::RegistryBase *reg : UniqueComponent::registryRegistry()) {
+        for (Plugins::RegistryBase *reg : Plugins::registryRegistry()) {
             LOG("Exporting Registry: " << reg->type_info().type_name());
             const Plugins::BinaryInfo *bin = reg->mBinary;
             file.beginCondition("BUILD_"s + bin->mName);
@@ -106,13 +106,13 @@ namespace Tools {
             file.endCondition("BUILD_"s + bin->mName);
         }
 
-        for (UniqueComponent::RegistryBase *reg : UniqueComponent::registryRegistry()) {
+        for (Plugins::RegistryBase *reg : Plugins::registryRegistry()) {
             file.beginCondition("BUILD_"s + reg->mBinary->mName);
-            for (UniqueComponent::CollectorInfoBase *collector : *reg) {
+            for (Plugins::CollectorInfoBase *collector : *reg) {
                 file.beginCondition("BUILD_"s + collector->mBinary->mName);
-                for (const std::pair<std::vector<UniqueComponent::TypeInfo>, UniqueComponent::TypeInfo> &typeInfos : collector->mElementInfos) {
+                for (const std::pair<std::vector<Plugins::TypeInfo>, Plugins::TypeInfo> &typeInfos : collector->mElementInfos) {
                     bool first = true;
-                    for (const UniqueComponent::TypeInfo &ti : typeInfos.first) {
+                    for (const Plugins::TypeInfo &ti : typeInfos.first) {
                         if (ti.type_name() != "PluginManager" && ti.type_name() != "PluginExporter") {
                             std::string_view namespaceName = ti.namespaceName();
                             if (!namespaceName.empty())
@@ -134,7 +134,7 @@ namespace Tools {
 
         file.beginNamespace("Engine");
 
-        for (UniqueComponent::RegistryBase *reg : UniqueComponent::registryRegistry()) {
+        for (Plugins::RegistryBase *reg : Plugins::registryRegistry()) {
             file.beginCondition("BUILD_"s + reg->mBinary->mName);
 
             file << R"(template <>
@@ -145,10 +145,10 @@ std::vector<)"
 	return {
 )";
 
-            for (UniqueComponent::CollectorInfoBase *collector : *reg) {
+            for (Plugins::CollectorInfoBase *collector : *reg) {
                 file.beginCondition("BUILD_"s + collector->mBinary->mName);
-                for (const std::pair<std::vector<UniqueComponent::TypeInfo>, UniqueComponent::TypeInfo> &typeInfos : collector->mElementInfos) {
-                    const UniqueComponent::TypeInfo &ti = typeInfos.first.front();
+                for (const std::pair<std::vector<Plugins::TypeInfo>, Plugins::TypeInfo> &typeInfos : collector->mElementInfos) {
+                    const Plugins::TypeInfo &ti = typeInfos.first.front();
                     if (ti.type_name() != "PluginManager" && ti.type_name() != "PluginExporter")
                         file << "		{ type_holder<"
                              << ti.mFullName << ">, type_holder<" << typeInfos.second.mFullName << "> },\n";
@@ -166,17 +166,17 @@ std::vector<)"
 
 )";
 
-            for (UniqueComponent::CollectorInfoBase *collector : *reg) {
+            for (Plugins::CollectorInfoBase *collector : *reg) {
                 file.beginCondition("BUILD_"s + collector->mBinary->mName);
                 file << "constexpr size_t CollectorBaseIndex_"
                      << reg->type_info().type_name() << "_"
                      << collector->mBinary->mName << " = ACC;\n";
                 size_t i = 0;
-                for (const std::pair<std::vector<UniqueComponent::TypeInfo>, UniqueComponent::TypeInfo> &typeInfos : collector->mElementInfos) {
+                for (const std::pair<std::vector<Plugins::TypeInfo>, Plugins::TypeInfo> &typeInfos : collector->mElementInfos) {
                     if (typeInfos.first.front().type_name() != "PluginManager" && typeInfos.first.front().type_name() != "PluginExporter") {
-                        for (const UniqueComponent::TypeInfo &typeInfo : typeInfos.first) {
+                        for (const Plugins::TypeInfo &typeInfo : typeInfos.first) {
                             file << R"(template <>
-size_t UniqueComponent::component_index<)"
+size_t Plugins::component_index<)"
                                  << typeInfo.mFullName
                                  << ">() { return CollectorBaseIndex_"
                                  << reg->type_info().type_name() << "_"
@@ -204,11 +204,11 @@ const std::map<std::string_view, IndexType<uint32_t>> &)"
     static std::map<std::string_view, IndexType<uint32_t>> mapping {
 )";
 
-                for (UniqueComponent::CollectorInfoBase *collector : *reg) {
+                for (Plugins::CollectorInfoBase *collector : *reg) {
                     file.beginCondition("BUILD_"s + collector->mBinary->mName);
                     size_t i = 0;
-                    for (const std::pair<std::vector<UniqueComponent::TypeInfo>, UniqueComponent::TypeInfo> &typeInfos : collector->mElementInfos) {
-                        const UniqueComponent::TypeInfo &ti = typeInfos.first.front();
+                    for (const std::pair<std::vector<Plugins::TypeInfo>, Plugins::TypeInfo> &typeInfos : collector->mElementInfos) {
+                        const Plugins::TypeInfo &ti = typeInfos.first.front();
                         if (ti.type_name() != "PluginManager" && ti.type_name() != "PluginExporter")
                             file << R"(		{")" << collector->mComponentNames[i] << R"(", CollectorBaseIndex_)"
                                  << reg->type_info().type_name() << "_"

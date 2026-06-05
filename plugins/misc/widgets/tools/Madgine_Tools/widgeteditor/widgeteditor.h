@@ -29,7 +29,7 @@ namespace Tools {
 
         Widgets::WidgetManager &manager();
 
-        static void renderWidgetBorders(Widgets::WidgetBase *widget, Engine::Vector2i screenOffset, ImU32 color);
+        static void renderWidgetBorders(Widgets::WidgetBase *widget, Math::Vector2i screenOffset, ImU32 color);
 
         void renderHierarchy(Widgets::WidgetBase **hoveredWidget);
         void renderSelection();

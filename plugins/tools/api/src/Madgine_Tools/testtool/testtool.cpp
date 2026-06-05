@@ -2,7 +2,7 @@
 
 #include "testtool.h"
 
-#include "Interfaces/window/windowapi.h"
+#include "Platform/window/windowapi.h"
 
 #include "Meta/math/atlas2.h"
 
@@ -10,7 +10,7 @@
 
 #include "Madgine/render/vertex.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
 #include "../renderer/imroot.h"
@@ -45,7 +45,7 @@ namespace Tools {
     void renderValuetypeSizes(std::index_sequence<Is...>)
     {
         std::vector<std::pair<const char *, unsigned int>> data = {
-            { typeid(std::get<Is>(std::declval<ValueType::Union>())).name(), sizeof(std::get<Is>(std::declval<ValueType::Union>())) }...
+            { typeid(std::get<Is>(std::declval<Reflect::Value::Union>())).name(), sizeof(std::get<Is>(std::declval<Reflect::Value::Union>())) }...
         };
         for (auto [name, size] : data) {
             ImGui::Text("  %s size: %u", name, size);
@@ -78,12 +78,12 @@ namespace Tools {
                 ImGui::Checkbox("3D Arrow", &mRenderArrow);
 
                 if (mRenderArrow)
-                    Im3D::Arrow(0.15f, Vector3::ZERO, Vector3::UNIT_X);
+                    Im3D::Arrow(0.15f, Math::Vector3::ZERO, Math::Vector3::UNIT_X);
             }
             if (ImGui::CollapsingHeader("Misc")) {
                 if (ImGui::TreeNode("ValueType Sizes")) {
-                    ImGui::Text("ValueType size: %u", (unsigned int)sizeof(ValueType));
-                    renderValuetypeSizes(std::make_index_sequence<size_t(ValueTypeEnum::MAX_VALUETYPE_TYPE)>());
+                    ImGui::Text("ValueType size: %u", (unsigned int)sizeof(Reflect::Value));
+                    renderValuetypeSizes(std::make_index_sequence<size_t(Reflect::TypeEnum::MAX)>());
                     ImGui::TreePop();
                 }
             }
@@ -107,7 +107,7 @@ namespace Tools {
         LOG("Test");
     }
 
-    void TestTool::logValue(const ValueType &v)
+    void TestTool::logValue(const Reflect::Value &v)
     {
         LOG(v);
     }

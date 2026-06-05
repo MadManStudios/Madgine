@@ -2,7 +2,7 @@
 
 #include "scenerenderdata.h"
 
-#include "Generic/container/safeiterator.h"
+#include "Generic/containers/safeiterator.h"
 
 #include "Madgine/render/rendercontext.h"
 #include "Madgine/scene/behavior/animation.h"
@@ -26,7 +26,7 @@ namespace Render {
         co_await mScene.mutex().locked(Engine::AccessMode::READ, [this, context]() {
             mScene.updateFrame([context](Scene::Entity::Skeleton *skeleton) {
                 if (!skeleton->mBoneMatrices) {
-                    skeleton->mBoneMatrices = context->allocateBuffer<Matrix4[]>(skeleton->data()->mBones.size());
+                    skeleton->mBoneMatrices = context->allocateBuffer<Math::Matrix4[]>(skeleton->data()->mBones.size());
                 }
                 return context->mapBuffer(skeleton->mBoneMatrices); });
         });

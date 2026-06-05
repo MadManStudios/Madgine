@@ -5,7 +5,7 @@
 #include "Madgine/behavior/behavior.h"
 #include "Madgine/window/mainwindow.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 
 #include "handlermanager.h"
 

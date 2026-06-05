@@ -9,43 +9,43 @@ TEST(Math, Matrix3)
 {
     using namespace Engine;
 
-    Matrix3 identity {
+    Math::Matrix3 identity {
         1, 0, 0,
         0, 1, 0,
         0, 0, 1
     };
 
-    Matrix3 rot1 {
+    Math::Matrix3 rot1 {
         0, 1, 0,
         0, 0, 1,
         1, 0, 0
     };
 
-    Matrix3 rot2 {
+    Math::Matrix3 rot2 {
         0, 0, 1,
         1, 0, 0,
         0, 1, 0
     };
 
-    Matrix3 flip1 {
+    Math::Matrix3 flip1 {
         0, 1, 0,
         1, 0, 0,
         0, 0, 1
     };
 
-    Matrix3 flip2 {
+    Math::Matrix3 flip2 {
         1, 0, 0,
         0, 0, 1,
         0, 1, 0
     };
 
-    Matrix3 flip3 {
+    Math::Matrix3 flip3 {
         0, 0, 1,
         0, 1, 0,
         1, 0, 0
     };
 
-    Matrix3 ones {
+    Math::Matrix3 ones {
         1, 1, 1,
         1, 1, 1,
         1, 1, 1
@@ -76,49 +76,49 @@ TEST(Math, Matrix4)
 {
     using namespace Engine;
 
-    Matrix4 identity {
+    Math::Matrix4 identity {
         1, 0, 0, 0,
         0, 1, 0, 0,
         0, 0, 1, 0,
         0, 0, 0, 1
     };
 
-    Matrix4 rot1 {
+    Math::Matrix4 rot1 {
         0, 1, 0, 0,
         0, 0, 1, 0,
         1, 0, 0, 0,
         0, 0, 0, 1
     };
 
-    Matrix4 rot2 {
+    Math::Matrix4 rot2 {
         0, 0, 1, 0,
         1, 0, 0, 0,
         0, 1, 0, 0,
         0, 0, 0, 1
     };
 
-    Matrix4 flip1 {
+    Math::Matrix4 flip1 {
         0, 1, 0, 0,
         1, 0, 0, 0,
         0, 0, 1, 0,
         0, 0, 0, 1
     };
 
-    Matrix4 flip2 {
+    Math::Matrix4 flip2 {
         1, 0, 0, 0,
         0, 0, 1, 0,
         0, 1, 0, 0,
         0, 0, 0, 1
     };
 
-    Matrix4 flip3 {
+    Math::Matrix4 flip3 {
         0, 0, 1, 0,
         0, 1, 0, 0,
         1, 0, 0, 0,
         0, 0, 0, 1
     };
 
-    Matrix4 ones {
+    Math::Matrix4 ones {
         1, 1, 1, 1,
         1, 1, 1, 1,
         1, 1, 1, 1,
@@ -143,19 +143,19 @@ TEST(Math, Matrix4)
     EXPECT_EQ(rot1[0][1], 1);
     EXPECT_EQ(rot1[1][0], 0);
 
-    Matrix3 tmp = { 1, 2, 3,
+    Math::Matrix3 tmp = { 1, 2, 3,
                     4, 5, 6,
                     7, 8, 9 };
-    EXPECT_EQ(tmp, Matrix4 { tmp }.ToMat3());
+    EXPECT_EQ(tmp, Math::Matrix4 { tmp }.ToMat3());
 
-    Matrix4 transposeX {
+    Math::Matrix4 transposeX {
         1, 0, 0, 1,
         0, 1, 0, 0,
         0, 0, 1, 0,
         0, 0, 0, 1
     };
 
-    Matrix4 invTransposeX {
+    Math::Matrix4 invTransposeX {
         1, 0, 0, -1,
         0, 1, 0, 0,
         0, 0, 1, 0,
@@ -164,14 +164,14 @@ TEST(Math, Matrix4)
 
     EXPECT_EQ(transposeX.Inverse(), invTransposeX);
 
-    Matrix4 transposeY {
+    Math::Matrix4 transposeY {
         1, 0, 0, 0,
         0, 1, 0, 1,
         0, 0, 1, 0,
         0, 0, 0, 1
     };
 
-    Matrix4 invTransposeY {
+    Math::Matrix4 invTransposeY {
         1, 0, 0, 0,
         0, 1, 0, -1,
         0, 0, 1, 0,
@@ -180,14 +180,14 @@ TEST(Math, Matrix4)
 
     EXPECT_EQ(transposeY.Inverse(), invTransposeY);
 
-    Matrix4 transposeZ {
+    Math::Matrix4 transposeZ {
         1, 0, 0, 0,
         0, 1, 0, 0,
         0, 0, 1, 1,
         0, 0, 0, 1
     };
 
-    Matrix4 invTransposeZ {
+    Math::Matrix4 invTransposeZ {
         1, 0, 0, 0,
         0, 1, 0, 0,
         0, 0, 1, -1,

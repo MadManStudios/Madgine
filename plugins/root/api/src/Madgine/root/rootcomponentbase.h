@@ -1,10 +1,10 @@
 #pragma once
 
-#include "Meta/keyvalue/virtualscope.h"
+#include "Meta/reflect/virtualscope.h"
 
 namespace Engine {
-namespace Root {
-    struct MADGINE_ROOT_EXPORT RootComponentBase : VirtualScopeBase<> {
+namespace Core {
+    struct MADGINE_ROOT_EXPORT RootComponentBase : Reflect::VirtualScopeBase<> {
         RootComponentBase(Root &root);
         virtual ~RootComponentBase() = default;
 

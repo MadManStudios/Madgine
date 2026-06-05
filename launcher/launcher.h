@@ -3,12 +3,10 @@
 #include "Generic/closure.h"
 
 namespace Engine {
-namespace Window {
+namespace Core {
     struct MainWindow;
-}
-namespace App {
     struct Application;
 }
 }
 
-int launch(Engine::Closure<void(Engine::App::Application &, Engine::Window::MainWindow &)> callback = {});
+int launch(Engine::Closure<void(Engine::Core::Application &, Engine::Core::MainWindow &)> callback = {});

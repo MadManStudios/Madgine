@@ -68,7 +68,7 @@ namespace Im3D {
         return sContext->mIO;
     }
 
-    const Ray3 &GetMouseRay()
+    const Math::Ray3 &GetMouseRay()
     {
         return sContext->mMouseRay;
     }
@@ -102,7 +102,7 @@ namespace Im3D {
             }
         }
 
-        for (std::pair<const Im3DNativeMesh, std::vector<Matrix4>> &p : c.mNativeMeshes)
+        for (std::pair<const Im3DNativeMesh, std::vector<Math::Matrix4>> &p : c.mNativeMeshes)
             p.second.clear();
 
         assert(c.mIDStack.empty());
@@ -118,7 +118,7 @@ namespace Im3D {
 
         c.mTemp.mLastObject = nullptr;
         c.mTemp.mLastAABB = {};
-        c.mTemp.mLastTransform = Matrix4::IDENTITY;
+        c.mTemp.mLastTransform = Math::Matrix4::IDENTITY;
     }
 
     Im3DObject *FindObjectByID(Im3DID id)
@@ -192,8 +192,8 @@ namespace Im3D {
 
         ResetLastObject();
 
-        Vector3 minP { std::numeric_limits<float>::max(), std::numeric_limits<float>::max(), std::numeric_limits<float>::max() };
-        Vector3 maxP { std::numeric_limits<float>::lowest(), std::numeric_limits<float>::lowest(), std::numeric_limits<float>::lowest() };
+        Math::Vector3 minP { std::numeric_limits<float>::max(), std::numeric_limits<float>::max(), std::numeric_limits<float>::max() };
+        Math::Vector3 maxP { std::numeric_limits<float>::lowest(), std::numeric_limits<float>::lowest(), std::numeric_limits<float>::lowest() };
 
         size_t vertexPivot = c.mRenderData[0].mVertexBase[type];
         size_t indexPivot = c.mRenderData[0].mIndices[type].size();
@@ -204,7 +204,7 @@ namespace Im3D {
             minP = min(v.mPos, minP);
             maxP = max(v.mPos, maxP);
 
-            result.mPos = (param.mTransform * Vector4 { v.mPos, 1.0f }).xyz();
+            result.mPos = (param.mTransform * Math::Vector4 { v.mPos, 1.0f }).xyz();
 
             /*if (c.mHoveredObject == object)
                 result.mColor *= 2.f;*/
@@ -240,8 +240,8 @@ namespace Im3D {
 
         ResetLastObject();
 
-        Vector3 minP { std::numeric_limits<float>::max(), std::numeric_limits<float>::max(), std::numeric_limits<float>::max() };
-        Vector3 maxP { std::numeric_limits<float>::lowest(), std::numeric_limits<float>::lowest(), std::numeric_limits<float>::lowest() };
+        Math::Vector3 minP { std::numeric_limits<float>::max(), std::numeric_limits<float>::max(), std::numeric_limits<float>::max() };
+        Math::Vector3 maxP { std::numeric_limits<float>::lowest(), std::numeric_limits<float>::lowest(), std::numeric_limits<float>::lowest() };
 
         std::transform(vertices, vertices + vertexCount, std::back_inserter(c.mRenderData[texId].mVertices2[type]), [&](const Vertex2 &v) {
             Vertex2 result = v;
@@ -249,7 +249,7 @@ namespace Im3D {
             minP = min(v.mPos, minP);
             maxP = max(v.mPos, maxP);
 
-            result.mPos = (param.mTransform * Vector4 { v.mPos, 1.0f }).xyz();
+            result.mPos = (param.mTransform * Math::Vector4 { v.mPos, 1.0f }).xyz();
 
             /*if (c.mHoveredObject == object)
                 result.mColor *= 2.f;*/
@@ -276,7 +276,7 @@ namespace Im3D {
         assert(c.mRenderData[texId].mIndices2[type].size() % groupSize == 0);
     }
 
-    void NativeMesh(Im3DNativeMesh mesh, const AABB &bb, const Matrix4 &transform)
+    void NativeMesh(Im3DNativeMesh mesh, const Math::AABB &bb, const Math::Matrix4 &transform)
     {
         Im3DContext &c = *sContext;
 
@@ -310,8 +310,8 @@ namespace Im3D {
             Render::Glyph &g = font.mGlyphs[static_cast<uint8_t>(text[i])];
 
             fullWidth += g.mAdvance / 64.0f * scale;
-            maxY = max(maxY, g.mBearing.y * scale);
-            minY = min(minY, (g.mBearing.y - g.mSize.y) * scale);
+            maxY = Math::max(maxY, g.mBearing.y * scale);
+            minY = Math::min(minY, (g.mBearing.y - g.mSize.y) * scale);
         }
 
         float fullHeight = maxY - minY;
@@ -333,8 +333,8 @@ namespace Im3D {
             float vPosY1 = originY + g.mBearing.y * scale;
             float vPosY2 = vPosY1 - height;
 
-            Vector3 v11 = { 0, 0, 0 }, v12 = { 0, 0, 0 }, v21 = { 0, 0, 0 }, v22 = { 0, 0, 0 };
-            Vector2 v211 = { 0, 0 }, v212 = { 0, 0 }, v221 = { 0, 0 }, v222 = { 0, 0 };
+            Math::Vector3 v11 = { 0, 0, 0 }, v12 = { 0, 0, 0 }, v21 = { 0, 0, 0 }, v22 = { 0, 0, 0 };
+            Math::Vector2 v211 = { 0, 0 }, v212 = { 0, 0 }, v221 = { 0, 0 }, v222 = { 0, 0 };
 
             if (param.mFacingX) {
                 v211.x = vPosX1;
@@ -366,12 +366,12 @@ namespace Im3D {
             if (g.mFlipped)
                 std::swap(uvWidth, uvHeight);
 
-            Vector2 uvTopLeft = { float(g.mUV.x) / font.mTextureSize.x, float(g.mUV.y) / font.mTextureSize.y };
-            Vector2 uvBottomRight = { float(g.mUV.x + uvWidth) / font.mTextureSize.x,
+            Math::Vector2 uvTopLeft = { float(g.mUV.x) / font.mTextureSize.x, float(g.mUV.y) / font.mTextureSize.y };
+            Math::Vector2 uvBottomRight = { float(g.mUV.x + uvWidth) / font.mTextureSize.x,
                 float(g.mUV.y + uvHeight) / font.mTextureSize.y };
 
-            Vector2 uvTopRight = { uvBottomRight.x, uvTopLeft.y };
-            Vector2 uvBottomLeft = { uvTopLeft.x, uvBottomRight.y };
+            Math::Vector2 uvTopRight = { uvBottomRight.x, uvTopLeft.y };
+            Math::Vector2 uvBottomLeft = { uvTopLeft.x, uvBottomRight.y };
 
             if (g.mFlipped)
                 std::swap(uvTopRight, uvBottomLeft);
@@ -397,7 +397,7 @@ namespace Im3D {
             GetIO().mReleaseFont(font);
     }
 
-    void Line(const Vector3 &a, const Vector3 &b, const LineParameters &param)
+    void Line(const Math::Vector3 &a, const Math::Vector3 &b, const LineParameters &param)
     {
         Vertex vertices[] = {
             { a, param.mColorA },
@@ -406,14 +406,14 @@ namespace Im3D {
         Mesh(IM3D_LINES, vertices, 2, param);
     }
 
-    void Arrow(float radius, const Vector3 &a, const Vector3 &b, const Parameters &param)
+    void Arrow(float radius, const Math::Vector3 &a, const Math::Vector3 &b, const Parameters &param)
     {
         constexpr int segments = 6;
 
         Vertex vertices[2 + segments];
         uint32_t indices[2 + 2 * segments];
 
-        Vector3 d = b - a;
+        Math::Vector3 d = b - a;
 
         vertices[0] = {
             a, param.mColor
@@ -424,13 +424,13 @@ namespace Im3D {
         };
         indices[1] = 1;
 
-        Vector3 p = d.perpendicular();
+        Math::Vector3 p = d.perpendicular();
         p.normalize();
         p -= d.normalizedCopy();
         p *= radius /* / sqrt2*/;
 
         for (int i = 0; i < segments; ++i) {
-            Vector3 dir = Quaternion { i * 2 * PI / segments, d } * p;
+            Math::Vector3 dir = Math::Quaternion { i * 2 * Math::PI / segments, d } * p;
             vertices[2 + i] = { b + dir, param.mColor };
             indices[2 + 2 * i] = 1;
             indices[2 + 2 * i + 1] = 2 + i;
@@ -439,16 +439,16 @@ namespace Im3D {
         Mesh(IM3D_LINES, vertices, 2 + segments, param, indices, 2 + 2 * segments);
     }
 
-    void Arrow3D(Im3DMeshType type, float radius, const Vector3 &a, const Vector3 &b, const Parameters &param)
+    void Arrow3D(Im3DMeshType type, float radius, const Math::Vector3 &a, const Math::Vector3 &b, const Parameters &param)
     {
-        Vector3 dist = b - a;
-        Vector3 d1 = dist.perpendicular();
+        Math::Vector3 dist = b - a;
+        Math::Vector3 d1 = dist.perpendicular();
         d1.normalize();
         d1 *= radius;
-        Vector3 d2 = d1.crossProduct(dist);
+        Math::Vector3 d2 = d1.crossProduct(dist);
         d2.normalize();
         d2 *= radius;
-        Vector3 d0 = radius * dist.normalizedCopy();
+        Math::Vector3 d0 = radius * dist.normalizedCopy();
 
         const Vertex vertices[]
             = { { a, param.mColor },
@@ -480,7 +480,7 @@ namespace Im3D {
         }
     }
 
-    void Sphere(const Vector3 &center, float radius, const SphereParameters &param)
+    void Sphere(const Math::Vector3 &center, float radius, const SphereParameters &param)
     {
         size_t faceVertexCount = (param.mDetail + 2) * (param.mDetail + 3) / 2 - 3;
         size_t vertexCount = 20 * faceVertexCount + 12;
@@ -493,57 +493,57 @@ namespace Im3D {
             return 12 + face * faceVertexCount + ((5 * y + 2 * param.mDetail * y - y * y) / 2) - (y > 0 ? 2 : 1) + x;
         };
 
-        constexpr float coeff = (1.0f + sqrtf(5.0f)) / 2.0f;
-        constexpr float coeff2 = sqrtf(2.5f + sqrtf(5.0f) / 2.0f);
+        constexpr float coeff = (1.0f + Math::sqrtf(5.0f)) / 2.0f;
+        constexpr float coeff2 = Math::sqrtf(2.5f + Math::sqrtf(5.0f) / 2.0f);
         radius /= coeff2;
         const float t = radius * coeff;
 
         vertices[0] = {
-            Vector3 { -radius, t, 0 },
+            Math::Vector3 { -radius, t, 0 },
             param.mColor
         };
         vertices[1] = {
-            Vector3 { radius, t, 0 },
+            Math::Vector3 { radius, t, 0 },
             param.mColor
         };
         vertices[2] = {
-            Vector3 { -radius, -t, 0 },
+            Math::Vector3 { -radius, -t, 0 },
             param.mColor
         };
         vertices[3] = {
-            Vector3 { radius, -t, 0 },
+            Math::Vector3 { radius, -t, 0 },
             param.mColor
         };
         vertices[4] = {
-            Vector3 { 0, -radius, t },
+            Math::Vector3 { 0, -radius, t },
             param.mColor
         };
         vertices[5] = {
-            Vector3 { 0, radius, t },
+            Math::Vector3 { 0, radius, t },
             param.mColor
         };
         vertices[6] = {
-            Vector3 { 0, -radius, -t },
+            Math::Vector3 { 0, -radius, -t },
             param.mColor
         };
         vertices[7] = {
-            Vector3 { 0, radius, -t },
+            Math::Vector3 { 0, radius, -t },
             param.mColor
         };
         vertices[8] = {
-            Vector3 { t, 0, -radius },
+            Math::Vector3 { t, 0, -radius },
             param.mColor
         };
         vertices[9] = {
-            Vector3 { t, 0, radius },
+            Math::Vector3 { t, 0, radius },
             param.mColor
         };
         vertices[10] = {
-            Vector3 { -t, 0, -radius },
+            Math::Vector3 { -t, 0, -radius },
             param.mColor
         };
         vertices[11] = {
-            Vector3 { -t, 0, radius },
+            Math::Vector3 { -t, 0, radius },
             param.mColor
         };
 
@@ -572,13 +572,13 @@ namespace Im3D {
 
         size_t vertexCounter = 12;
         for (size_t face = 0; face < 20; ++face) {
-            Vector3 bottomLeft = vertices[cornerIndices[face][0]].mPos;
-            Vector3 bottomRight = vertices[cornerIndices[face][1]].mPos;
-            Vector3 top = vertices[cornerIndices[face][2]].mPos;
+            Math::Vector3 bottomLeft = vertices[cornerIndices[face][0]].mPos;
+            Math::Vector3 bottomRight = vertices[cornerIndices[face][1]].mPos;
+            Math::Vector3 top = vertices[cornerIndices[face][2]].mPos;
             for (size_t y = 0; y <= param.mDetail + 1; ++y) {
 
-                Vector3 left = slerp(bottomLeft, top, y / float(param.mDetail + 1));
-                Vector3 right = slerp(bottomRight, top, y / float(param.mDetail + 1));
+                Math::Vector3 left = slerp(bottomLeft, top, y / float(param.mDetail + 1));
+                Math::Vector3 right = slerp(bottomRight, top, y / float(param.mDetail + 1));
 
                 for (size_t x = 0; x <= param.mDetail + 1 - y; ++x) {
                     if ((y == 0 && (x == 0 || x == param.mDetail + 1)) || y == param.mDetail + 1)
@@ -615,13 +615,13 @@ namespace Im3D {
         Mesh(IM3D_LINES, vertices.get(), vertexCount, meshParam, indices.get(), indexCounter);
     }
 
-    MADGINE_IM3D_EXPORT void Frustum(const struct Frustum &frustum, const Parameters &param)
+    MADGINE_IM3D_EXPORT void Frustum(const struct Math::Frustum &frustum, const Parameters &param)
     {
         Vertex vertices[8];
         auto corners = frustum.getCorners();
         for (size_t i = 0; i < 8; ++i) {
             vertices[i].mPos = corners[i];
-            vertices[i].mColor = Vector4 { param.mColor };
+            vertices[i].mColor = Math::Vector4 { param.mColor };
         }
 
         static constexpr uint32_t indices[] = {
@@ -642,16 +642,16 @@ namespace Im3D {
         return BoundingSphere(id, c.mTemp.mLastAABB, c.mTemp.mLastTransform, flags, priority);
     }
 
-    bool BoundingSphere(const char *name, const AABB &bb, const Matrix4 &transform, Im3DBoundingObjectFlags flags, size_t priority)
+    bool BoundingSphere(const char *name, const Math::AABB &bb, const Math::Matrix4 &transform, Im3DBoundingObjectFlags flags, size_t priority)
     {
         return BoundingSphere(GetID(name), bb, transform, flags, priority);
     }
 
-    bool BoundingSphere(Im3DID id, const AABB &bb, const Matrix4 &transform, Im3DBoundingObjectFlags flags, size_t priority)
+    bool BoundingSphere(Im3DID id, const Math::AABB &bb, const Math::Matrix4 &transform, Im3DBoundingObjectFlags flags, size_t priority)
     {
         Im3DContext &c = *sContext;
 
-        Engine::Sphere bounds = { bb.center(),
+        Math::Sphere bounds = { bb.center(),
             0.4f * bb.diameter() };
 
         // Check if Hovered
@@ -673,12 +673,12 @@ namespace Im3D {
         return BoundingBox(id, c.mTemp.mLastAABB, c.mTemp.mLastTransform, flags, priority);
     }
 
-    bool BoundingBox(const char *name, const AABB &bb, const Matrix4 &transform, Im3DBoundingObjectFlags flags, size_t priority)
+    bool BoundingBox(const char *name, const Math::AABB &bb, const Math::Matrix4 &transform, Im3DBoundingObjectFlags flags, size_t priority)
     {
         return BoundingBox(GetID(name), bb, transform, flags, priority);
     }
 
-    bool BoundingBox(Im3DID id, const AABB &bb, const Matrix4 &transform, Im3DBoundingObjectFlags flags, size_t priority)
+    bool BoundingBox(Im3DID id, const Math::AABB &bb, const Math::Matrix4 &transform, Im3DBoundingObjectFlags flags, size_t priority)
     {
         Im3DContext &c = *sContext;
 
@@ -690,7 +690,7 @@ namespace Im3D {
         bool hovered = BoundingObject(id, distance, flags, priority);
 
         if ((flags & Im3DBoundingObjectFlags_ShowOutline) || (hovered && (flags & Im3DBoundingObjectFlags_ShowOnHover))) {
-            std::array<Vector3, 8> corners = bb.corners();
+            std::array<Math::Vector3, 8> corners = bb.corners();
             Vertex vertices[] = {
                 { corners[0], { 1, 1, 1, 1 } },
                 { corners[1], { 1, 1, 1, 1 } },
@@ -737,12 +737,12 @@ namespace Im3D {
         return object == c.mHoveredObject;
     }
 
-    bool BoundingFrustum(const char *name, const Engine::Frustum &frustum, Im3DBoundingObjectFlags flags, size_t priority)
+    bool BoundingFrustum(const char *name, const Math::Frustum &frustum, Im3DBoundingObjectFlags flags, size_t priority)
     {
         return BoundingFrustum(GetID(name), frustum, flags, priority);
     }
 
-    bool BoundingFrustum(Im3DID id, const Engine::Frustum &frustum, Im3DBoundingObjectFlags flags, size_t priority)
+    bool BoundingFrustum(Im3DID id, const Math::Frustum &frustum, Im3DBoundingObjectFlags flags, size_t priority)
     {
         Im3DContext &c = *sContext;
 

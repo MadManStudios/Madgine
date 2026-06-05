@@ -1,13 +1,14 @@
 #pragma once
 
-#include "Meta/keyvalue/virtualscope.h"
+#include "Meta/reflect/virtualscope.h"
 
 #include "Modules/threading/madgineobject.h"
 #include "Modules/uniquecomponent/uniquecomponent.h"
 
 namespace Engine {
-namespace App {
-    struct MADGINE_APP_EXPORT GlobalAPIBase : VirtualScopeBase<>, Threading::MadgineObject<GlobalAPIBase> {
+namespace Core {
+
+    struct MADGINE_APP_EXPORT GlobalAPIBase : Reflect::VirtualScopeBase<>, Threading::MadgineObject<GlobalAPIBase> {
         GlobalAPIBase(Application &app);
         virtual ~GlobalAPIBase() = default;
 
@@ -16,7 +17,7 @@ namespace App {
         template <typename T>
         T &getGlobalAPIComponent()
         {
-            return static_cast<T &>(getGlobalAPIComponent(UniqueComponent::component_index<T>()));
+            return static_cast<T &>(getGlobalAPIComponent(Plugins::component_index<T>()));
         }
 
         GlobalAPIBase &getGlobalAPIComponent(size_t i);

@@ -5,7 +5,7 @@
 #include "taskqueue.h"
 
 #if ENABLE_TASK_TRACKING
-#    include "Interfaces/debug/stacktrace.h"
+#    include "Platform/debug/stacktrace.h"
 #endif
 
 namespace Engine {
@@ -59,7 +59,7 @@ namespace Threading {
     void TaskInitialSuspend::await_resume() noexcept
     {
 #if ENABLE_TASK_TRACKING
-        Debug::Tasks::onAssign(std::coroutine_handle<TaskSuspendablePromiseTypeBase>::from_promise(*mPromise), mPromise->queue(), Debug::StackTrace<1>::getCurrent(1));
+        Debug::Tasks::onAssign(std::coroutine_handle<TaskPromiseBase>::from_promise(*mPromise), mPromise->queue(), Debug::StackTrace<1>::getCurrent(1));
 #endif
     }
 

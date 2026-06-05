@@ -5,7 +5,7 @@
 #include "parameter.h"
 
 namespace Engine {
-namespace CLI {
+namespace Core {
 
     Parameter<bool> showHelp { { "--help", "-h" }, false, "Show this help message" };
 
@@ -71,7 +71,7 @@ namespace CLI {
 
     void CLICore::help()
     {
-        Log::LogDummy out { Log::MessageType::INFO_TYPE };
+        Platform::Log::LogDummy out { Platform::Log::MessageType::INFO_TYPE };
         out << "Help:\n";
         for (ParameterBase *parameter : parameters()) {
             out << parameter->help() << "\n";

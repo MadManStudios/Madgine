@@ -2,10 +2,10 @@
 
 #include "imroot.h"
 
-#include "Generic/container/safeiterator.h"
+#include "Generic/containers/safeiterator.h"
 #include "Generic/projections.h"
 
-#include "Interfaces/filesystem/fsapi.h"
+#include "Platform/filesystem/fsapi.h"
 
 #include "Meta/serialize/formats.h"
 #include "Meta/serialize/operations.h"
@@ -13,7 +13,7 @@
 
 #include "Modules/debug/profiler/profile.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 
 #include "../toolbase.h"
 #include "../util/trace_imgui.h"
@@ -333,9 +333,9 @@ namespace Tools {
                 if (ImGui::BeginTooltip()) {
                     ImGui::ValueTypePayload *payload = *static_cast<ImGui::ValueTypePayload **>(imGuiPayload->Data);
                     ImGui::Text(payload->mName);
-                    payload->mValue([&](const Engine::Tools::Traced<const Engine::ValueType &> &v) {
+                    payload->mValue([&](const Engine::Tools::Traced<const Reflect::Value &> &v) {
                         ImGui::Text(v.get().getTypeString());
-                        return std::make_pair(Engine::KeyValueResult {}, false);
+                        return std::make_pair(Reflect::Result {}, false);
                     });
                     ImGui::EndTooltip();
                 }
@@ -343,7 +343,7 @@ namespace Tools {
         }
     }
 
-    Dialog<Filesystem::Path> ImRoot::directoryPicker(Filesystem::Path path, Filesystem::Path selected, Filesystem::Path base)
+    Dialog<Platform::Filesystem::Path> ImRoot::directoryPicker(Platform::Filesystem::Path path, Platform::Filesystem::Path selected, Platform::Filesystem::Path base)
     {
         DialogSettings &settings = co_await get_dialog_settings;
         settings.acceptText = "Open";
@@ -357,7 +357,7 @@ namespace Tools {
         co_return selected;
     }
 
-    Dialog<Filesystem::Path> ImRoot::filePicker(bool allowNewFile, Filesystem::Path path, Filesystem::Path selected)
+    Dialog<Platform::Filesystem::Path> ImRoot::filePicker(bool allowNewFile, Platform::Filesystem::Path path, Platform::Filesystem::Path selected)
     {
         DialogSettings &settings = co_await get_dialog_settings;
         settings.acceptText = allowNewFile ? "Save" : "Open";
@@ -366,7 +366,7 @@ namespace Tools {
         bool implicitlyAccepted = false;
         do {
             ImGui::FilePicker(path, selected, &implicitlyAccepted);
-            settings.acceptPossible = !selected.empty() && (allowNewFile || Filesystem::exists(selected));
+            settings.acceptPossible = !selected.empty() && (allowNewFile || Platform::Filesystem::exists(selected));
         } while (!implicitlyAccepted && (co_yield settings));
         co_return selected;
     }

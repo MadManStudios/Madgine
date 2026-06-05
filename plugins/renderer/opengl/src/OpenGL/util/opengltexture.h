@@ -18,7 +18,7 @@ namespace Render {
 
     struct MADGINE_OPENGL_EXPORT OpenGLTexture : Texture {
 
-        OpenGLTexture(TextureType type, TextureFormat format, Vector2i size, size_t samples = 1, const ByteBuffer &data = {});
+        OpenGLTexture(TextureType type, TextureFormat format, Math::Vector2i size, size_t samples = 1, const Memory::ByteBuffer &data = {});
         OpenGLTexture(TextureType type, TextureFormat format, size_t samples = 1);
         OpenGLTexture() = default;
         OpenGLTexture(const OpenGLTexture &) = delete;
@@ -32,7 +32,7 @@ namespace Render {
 
         GLuint handle() const;
 
-        void setSubData(Vector2i offset, Vector2i size, const ByteBuffer &data);
+        void setSubData(Math::Vector2i offset, Math::Vector2i size, const Memory::ByteBuffer &data);
 
         GLenum target() const;
 

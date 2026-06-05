@@ -2,11 +2,11 @@
 
 #include "texteditor.h"
 
-#include "Interfaces/filesystem/async.h"
+#include "Platform/filesystem/async.h"
 
 #include "Modules/uniquecomponent/uniquecomponentcollector.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
 #include "Madgine_Tools/renderer/imroot.h"
@@ -55,7 +55,7 @@ namespace Tools {
 
         mFontPixelHeight = (int)dpi_pixel_height_from_point_size(sFontSize, sPixelScale().y);
 
-        auto fontResult = co_await Filesystem::readFileAsync(fontPath);
+        auto fontResult = co_await Platform::Filesystem::readFileAsync(fontPath);
         if (fontResult.is_value()) {
             mFontData = std::move(fontResult).value().get();
 
@@ -94,12 +94,12 @@ namespace Tools {
         return "TextEditor";
     }
 
-    TextDocument &TextEditor::openDocument(const Filesystem::Path &path)
+    TextDocument &TextEditor::openDocument(const Platform::Filesystem::Path &path)
     {
         return mDocuments.try_emplace(path, path, this).first->second;
     }
 
-    TextDocument *TextEditor::getDocument(const Filesystem::Path &path)
+    TextDocument *TextEditor::getDocument(const Platform::Filesystem::Path &path)
     {
         auto it = mDocuments.find(path);
         return it == mDocuments.end() ? nullptr : &it->second;

@@ -2,7 +2,7 @@
 
 #include "widgeteditor.h"
 
-#include "Generic/coroutines/generator.h"
+#include "Generic/containers/generator.h"
 
 #include "Meta/math/bounds.h"
 #include "Meta/serialize/streams/serializestream.h"
@@ -15,7 +15,7 @@
 #include "Madgine/widgets/widgetmanager.h"
 #include "Madgine/window/mainwindow.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
 #include "Madgine_Tools/behaviortool.h"
@@ -132,16 +132,16 @@ namespace Tools {
         mFiles.try_emplace(widget, *this, widget);
     }
 
-    void WidgetEditor::renderWidgetBorders(Widgets::WidgetBase *widget, Engine::Vector2i screenOffset, ImU32 color)
+    void WidgetEditor::renderWidgetBorders(Widgets::WidgetBase *widget, Math::Vector2i screenOffset, ImU32 color)
     {
         ImDrawList *drawList = ImGui::GetWindowDrawList();
 
         ImGuiIO &io = ImGui::GetIO();
 
-        Vector3 absoluteSize = widget->getAbsoluteSize();
-        Vector2 absolutePos = widget->getAbsolutePosition() + Vector2 { screenOffset };
+        Math::Vector3 absoluteSize = widget->getAbsoluteSize();
+        Math::Vector2 absolutePos = widget->getAbsolutePosition() + Math::Vector2 { screenOffset };
 
-        Bounds bounds(absolutePos.x, absolutePos.y + absoluteSize.y, absolutePos.x + absoluteSize.x, absolutePos.y);
+        Math::Bounds bounds(absolutePos.x, absolutePos.y + absoluteSize.y, absolutePos.x + absoluteSize.x, absolutePos.y);
 
         drawList->AddRect(ImVec2 { bounds.topLeft() } / io.DisplayFramebufferScale, ImVec2 { bounds.bottomRight() } / io.DisplayFramebufferScale, color);
     }
@@ -203,7 +203,7 @@ namespace Tools {
         Widgets::WidgetBase *hoveredWidget = manager.hoveredWidget();
 
         if (hoveredWidget) {
-            Rect2i screenSpace = manager.getClientSpace();
+            Math::Rect2i screenSpace = manager.getClientSpace();
             screenSpace.mTopLeft = { static_cast<int>(pos.x), static_cast<int>(pos.y) };
 
             ImGuiIO &io = ImGui::GetIO();

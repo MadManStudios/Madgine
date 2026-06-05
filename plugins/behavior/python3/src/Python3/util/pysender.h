@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Meta/keyvalue/keyvaluesender.h"
+#include "Meta/reflect/sender.h"
 
 #include "Madgine/behavior/behaviorreceiver.h"
 #include "Madgine/debug/debuggablesender.h"
@@ -16,15 +16,15 @@ namespace Behavior {
 
         struct PySender {
             PyObject_HEAD
-                KeyValueSender mSender;
+                Reflect::Sender mSender;
         };
 
         struct SenderState;
 
         struct SenderReceiver {
 
-            void set_value(const ArgumentList &values);
-            void set_error(KeyValueError error);
+            void set_value(const Reflect::ArgumentList &values);
+            void set_error(Reflect::Error error);
             void set_done();
 
             template <typename CPO, typename... Args>
@@ -40,7 +40,7 @@ namespace Behavior {
             ~SenderState();
             void resume();
 
-            using Inner = Execution::connect_result_t<Execution::with_debug_location_t::sender<Execution::stoppable_t::sender<KeyValueSender>>, SenderReceiver>;
+            using Inner = Execution::connect_result_t<Execution::with_debug_location_t::sender<Execution::stoppable_t::sender<Reflect::Sender>>, SenderReceiver>;
 
             BehaviorReceiver &mReceiver;
             std::atomic_flag mFlag;

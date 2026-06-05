@@ -2,7 +2,7 @@
 
 #include "openglrenderwindow.h"
 
-#include "Interfaces/window/windowapi.h"
+#include "Platform/window/windowapi.h"
 
 #include "openglrendercontext.h"
 
@@ -19,7 +19,7 @@ extern EGLDisplay sDisplay;
 namespace Engine {
 namespace Render {
 
-    OpenGLRenderWindow::OpenGLRenderWindow(OpenGLRenderContext *context, Window::OSWindow *w, size_t samples, OpenGLRenderWindow *reusedResources)
+    OpenGLRenderWindow::OpenGLRenderWindow(OpenGLRenderContext *context, Platform::Window::OSWindow *w, size_t samples, OpenGLRenderWindow *reusedResources)
         : OpenGLRenderTarget(context, true, w->title(), true, true)
         , mOsWindow(w)
         , mReusedContext(reusedResources)
@@ -109,9 +109,9 @@ namespace Render {
         return result;
     }
 
-    Vector2i OpenGLRenderWindow::size() const
+    Math::Vector2i OpenGLRenderWindow::size() const
     {
-        InterfacesVector size = mOsWindow->renderSize();
+        Platform::PlatformVector size = mOsWindow->renderSize();
         return { size.x, size.y };
     }
 
@@ -134,7 +134,7 @@ namespace Render {
 #endif
     }
 
-    bool OpenGLRenderWindow::resizeImpl(const Vector2i &size)
+    bool OpenGLRenderWindow::resizeImpl(const Math::Vector2i &size)
     {
         return true;
     }

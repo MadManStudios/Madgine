@@ -42,7 +42,7 @@ namespace Render {
 
         virtual std::string_view extensionForTarget(std::string_view target, ShaderType type) = 0;
 
-        Threading::Task<Resources::BakeResult> bakeResources(std::vector<Filesystem::Path> &resourcesToBake, const Filesystem::Path &intermediateDir) override;
+        Threading::Task<Resources::BakeResult> bakeResources(std::vector<Platform::Filesystem::Path> &resourcesToBake, const Platform::Filesystem::Path &intermediateDir) override;
 
     private:
     };

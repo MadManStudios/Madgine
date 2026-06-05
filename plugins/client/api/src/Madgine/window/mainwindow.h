@@ -12,7 +12,7 @@
 #include "mainwindowcomponentcollector.h"
 
 namespace Engine {
-namespace Window {
+namespace Core {
 
     struct MADGINE_CLIENT_EXPORT MainWindowComponentComparator {
 
@@ -42,10 +42,10 @@ namespace Window {
     struct MADGINE_CLIENT_EXPORT MainWindow : Threading::MadgineObject<MainWindow> {
         SERIALIZABLEUNIT(MainWindow)
 
-        MainWindow(App::Application &app, const WindowSettings &settings);
+        MainWindow(Application &app, const Platform::Window::WindowSettings &settings);
         ~MainWindow();
 
-        void saveLayout(const Filesystem::Path &path);
+        void saveLayout(const Platform::Filesystem::Path &path);
         Threading::Task<bool> loadLayout(LayoutLoader::Resource *res);
 
         /**
@@ -75,21 +75,21 @@ namespace Window {
         template <typename T>
         T &getWindowComponent()
         {
-            return static_cast<T &>(getWindowComponent(UniqueComponent::component_index<T>()));
+            return static_cast<T &>(getWindowComponent(Plugins::component_index<T>()));
         }
 
         MainWindowComponentBase &getWindowComponent(size_t i);
 
-        Rect2i getScreenSpace();
+        Math::Rect2i getScreenSpace();
         void applyClientSpaceResize(MainWindowComponentBase *component = nullptr);
         ///@}
 
-        ToolWindow *createToolWindow(const WindowSettings &settings);
+        ToolWindow *createToolWindow(const Platform::Window::WindowSettings &settings);
         void destroyToolWindow(ToolWindow *w);
 
-        App::Application &app() const;
+        Application &app() const;
 
-        OSWindow *osWindow() const;
+        Platform::Window::OSWindow *osWindow() const;
 
         Render::RenderContext *getRenderer();
         Render::RenderTarget *getRenderWindow();
@@ -97,7 +97,7 @@ namespace Window {
         Threading::TaskQueue *taskQueue();
         void shutdown();
 
-        bool onWindowEvent(const WindowEvent &event, MainWindowComponentBase *component = nullptr);
+        bool onWindowEvent(const Platform::Window::WindowEvent &event, MainWindowComponentBase *component = nullptr);
 
         // TESTING
         static void sTestScreens(size_t n);
@@ -108,9 +108,9 @@ namespace Window {
         void onActivate(Serialize::CallbackTiming timing, bool active);
 
     private:
-        App::Application &mApp;
+        Application &mApp;
 
-        const WindowSettings &mSettings;
+        const Platform::Window::WindowSettings &mSettings;
 
         Threading::TaskQueue mTaskQueue;
 
@@ -120,7 +120,7 @@ namespace Window {
 
         std::list<ToolWindow> mToolWindows;
 
-        OSWindow *mOsWindow = nullptr;
+        Platform::Window::OSWindow *mOsWindow = nullptr;
         Render::RenderContextSelector mRenderContext;
         std::unique_ptr<Render::RenderTarget> mRenderWindow;
 

@@ -2,7 +2,7 @@
 
 #include "directx12renderwindow.h"
 
-#include "Interfaces/window/windowapi.h"
+#include "Platform/window/windowapi.h"
 
 #include "Meta/math/vector2i.h"
 
@@ -15,7 +15,7 @@
 namespace Engine {
 namespace Render {
 
-    DirectX12RenderWindow::DirectX12RenderWindow(DirectX12RenderContext *context, Window::OSWindow *w, size_t samples)
+    DirectX12RenderWindow::DirectX12RenderWindow(DirectX12RenderContext *context, Platform::Window::OSWindow *w, size_t samples)
         : DirectX12RenderTarget(context, true, w->title(), TextureType_2D, samples)
         , mWindow(w)
     {
@@ -55,7 +55,7 @@ namespace Render {
         // Next initialize the back buffer of the swap chain and associate it to a
         // render target view.
 
-        InterfacesVector size = w->renderSize();
+        Platform::PlatformVector size = w->renderSize();
 
         std::vector<std::array<OffsetPtr, 6>> views;
         views.emplace_back()[0] = mCachedTargetViews[0];
@@ -124,9 +124,9 @@ namespace Render {
         DirectX12RenderTarget::endIteration(targetIndex, targetCount, targetSubresourceIndex);
     }
 
-    Vector2i DirectX12RenderWindow::size() const
+    Math::Vector2i DirectX12RenderWindow::size() const
     {
-        InterfacesVector size = mWindow->renderSize();
+        Platform::PlatformVector size = mWindow->renderSize();
         return { size.x, size.y };
     }
 
@@ -158,7 +158,7 @@ namespace Render {
         }
     }
 
-    bool DirectX12RenderWindow::resizeImpl(const Vector2i &size)
+    bool DirectX12RenderWindow::resizeImpl(const Math::Vector2i &size)
     {
         mTargetViews.clear();
         mResizeFence = context()->graphicsQueue()->currentFence();

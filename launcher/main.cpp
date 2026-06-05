@@ -3,7 +3,7 @@
 
 #include "main.h"
 
-#include "Interfaces/filesystem/fsapi.h"
+#include "Platform/filesystem/fsapi.h"
 
 #include "Modules/threading/scheduler.h"
 #include "Modules/threading/workgroup.h"
@@ -20,12 +20,12 @@ int desktopMain_compat(int argc, char **argv)
     return desktopMain(argc, argv);
 }
 
-int desktopMain(int argc, char **argv, Engine::Closure<void(Engine::App::Application &, Engine::Window::MainWindow &)> callback)
+int desktopMain(int argc, char **argv, Engine::Closure<void(Engine::Core::Application &, Engine::Core::MainWindow &)> callback)
 {
-    Engine::Filesystem::setup();
+    Engine::Platform::Filesystem::setup();
     Engine::Threading::WorkGroup workGroup { "Launcher" };
 
-    Engine::Root::Root root { argc, argv };
+    Engine::Core::Root root { argc, argv };
 
     if (root.errorCode() != 0)
         return root.errorCode();

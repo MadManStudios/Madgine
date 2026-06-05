@@ -12,10 +12,10 @@ namespace Render {
         struct Material {
             std::string mName;
             UniqueResourceBlock mResourceBlock;
-            Vector4 mDiffuseColor = Vector4::UNIT_SCALE;
+            Math::Vector4 mDiffuseColor = Math::Vector4::UNIT_SCALE;
         };
         std::vector<Material> mMaterials;
-        AABB mAABB;
+        Math::AABB mAABB;
         VertexFormat mFormat;
         size_t mGroupSize;
         size_t mElementCount;

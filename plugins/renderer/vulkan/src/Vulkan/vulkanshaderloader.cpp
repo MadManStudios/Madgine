@@ -2,11 +2,11 @@
 
 #include "vulkanshaderloader.h"
 
-#include "Interfaces/filesystem/fsapi.h"
+#include "Platform/filesystem/fsapi.h"
 
 #include "Modules/uniquecomponent/uniquecomponent.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
 #include "vulkanrendercontext.h"
@@ -53,13 +53,13 @@ namespace Render {
 
     Threading::Task<bool> VulkanShaderLoader::generate(VulkanShader &shader, ResourceDataInfo &info, ShaderType type, ShaderObjectPtr object)
     {
-        const Filesystem::Path &p = info.resource()->path();
+        const Platform::Filesystem::Path &p = info.resource()->path();
 
         if (object) {
             co_await ShaderCache::generate(p, object, "SPIRV", type);
         }
 
-        if (!Filesystem::exists(p))
+        if (!Platform::Filesystem::exists(p))
             co_return false;
 
         std::vector<unsigned char> source = info.resource()->readAsBlob();
@@ -72,7 +72,7 @@ namespace Render {
         shader.mModule.reset();
     }
 
-    bool VulkanShaderLoader::loadFromSource(VulkanShader &shader, std::string_view name, std::vector<unsigned char> source, ShaderType type, const Filesystem::Path &path)
+    bool VulkanShaderLoader::loadFromSource(VulkanShader &shader, std::string_view name, std::vector<unsigned char> source, ShaderType type, const Platform::Filesystem::Path &path)
     {
 
         VkShaderModuleCreateInfo createInfo {};

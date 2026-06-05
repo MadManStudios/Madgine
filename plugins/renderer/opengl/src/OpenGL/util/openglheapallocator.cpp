@@ -20,7 +20,7 @@ namespace Render {
     {
     }
 
-    Block OpenGLHeapAllocator::allocate(size_t size, size_t alignment)
+    Memory::Block OpenGLHeapAllocator::allocate(size_t size, size_t alignment)
     {
         GLuint buffer;
 
@@ -42,7 +42,7 @@ namespace Render {
         return { reinterpret_cast<void *>(static_cast<uintptr_t>(buffer) << 24), size };
     }
 
-    void OpenGLHeapAllocator::deallocate(Block block)
+    void OpenGLHeapAllocator::deallocate(Memory::Block block)
     {
         uintptr_t ptr = reinterpret_cast<uintptr_t>(block.mAddress);
         uint32_t buffer = ptr >> 24;
@@ -72,7 +72,7 @@ namespace Render {
     {
     }
 
-    Block OpenGLMappedHeapAllocator::allocate(size_t size, size_t alignment)
+    Memory::Block OpenGLMappedHeapAllocator::allocate(size_t size, size_t alignment)
     {
 #if !OPENGL_ES
         GLuint handle;
@@ -110,7 +110,7 @@ namespace Render {
 #endif
     }
 
-    void OpenGLMappedHeapAllocator::deallocate(Block block)
+    void OpenGLMappedHeapAllocator::deallocate(Memory::Block block)
     {
 #if !OPENGL_ES
         auto it = std::ranges::find(mPages, block.mAddress, &Page::mMappedAddress);

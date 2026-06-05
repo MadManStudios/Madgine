@@ -2,8 +2,8 @@
 
 #include "widgetmanager.h"
 
-#include "Interfaces/input/inputevents.h"
-#include "Interfaces/window/windowapi.h"
+#include "Platform/input/inputevents.h"
+#include "Platform/window/windowapi.h"
 
 #include "Meta/serialize/helper/typedobjectserialize.h"
 
@@ -16,7 +16,7 @@
 #include "Madgine/render/rendertarget.h"
 #include "Madgine/window/mainwindow.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
 #include "atlasloader.h"
@@ -46,7 +46,7 @@ namespace Widgets {
         UIAtlas mAtlas;
     };
 
-    WidgetManager::WidgetManager(Window::MainWindow &window)
+    WidgetManager::WidgetManager(Core::MainWindow &window)
         : MainWindowComponent(window, 20)
         , mLifetime(&window.lifetime())        
         , mData(std::make_shared<WidgetManagerData>())
@@ -179,25 +179,25 @@ namespace Widgets {
         return {};
     }
 
-    bool WidgetManager::onWindowEvent(const Window::WindowEvent &arg)
+    bool WidgetManager::onWindowEvent(const Platform::Window::WindowEvent &arg)
     {
         return std::visit(overloaded {
-                              [&](const Window::ResizeEvent &e) { return false; },
-                              [&](const Window::CloseEvent &e) { return false; },
-                              [&](const Window::RepaintEvent &e) { return false; },
-                              [&](const Input::KeyPressEvent &e) { return injectKeyPress(e); },
-                              [&](const Input::KeyReleaseEvent &e) { return injectKeyRelease(e); },
-                              [&](const Input::PointerPressEvent &e) { return injectPointerPress(e); },
-                              [&](const Input::PointerReleaseEvent &e) { return injectPointerRelease(e); },
-                              [&](const Input::PointerMoveEvent &e) { return injectPointerMove(e); },
-                              [&](const Input::AxisEvent &e) { return injectAxisEvent(e); } },
+                              [&](const Platform::Window::ResizeEvent &e) { return false; },
+                              [&](const Platform::Window::CloseEvent &e) { return false; },
+                              [&](const Platform::Window::RepaintEvent &e) { return false; },
+                              [&](const Platform::Input::KeyPressEvent &e) { return injectKeyPress(e); },
+                              [&](const Platform::Input::KeyReleaseEvent &e) { return injectKeyRelease(e); },
+                              [&](const Platform::Input::PointerPressEvent &e) { return injectPointerPress(e); },
+                              [&](const Platform::Input::PointerReleaseEvent &e) { return injectPointerRelease(e); },
+                              [&](const Platform::Input::PointerMoveEvent &e) { return injectPointerMove(e); },
+                              [&](const Platform::Input::AxisEvent &e) { return injectAxisEvent(e); } },
             arg);
     }
 
-    bool WidgetManager::injectPointerPress(const Input::PointerPressEvent &arg)
+    bool WidgetManager::injectPointerPress(const Platform::Input::PointerPressEvent &arg)
     {
         assert(mDragStartEvent.mButton != arg.mButton);
-        if (mDragStartEvent.mButton != Input::MouseButton::NO_BUTTON)
+        if (mDragStartEvent.mButton != Platform::Input::MouseButton::NO_BUTTON)
             return true;
 
         if (mPointerEventTargetWidget) {
@@ -210,8 +210,8 @@ namespace Widgets {
 
             mDragStartEvent = DragBeginEvent { arg.mWindowPosition, arg.mScreenPosition, arg.mButton };
 
-            Vector2i pos = mFocusedWidget->getAbsolutePosition().floor();
-            mDragStartEvent.mWindowPosition = mDragStartEvent.mWindowPosition - InterfacesVector { pos.x, pos.y };
+            Math::Vector2i pos = mFocusedWidget->getAbsolutePosition().floor();
+            mDragStartEvent.mWindowPosition = mDragStartEvent.mWindowPosition - Platform::PlatformVector { pos.x, pos.y };
 
             mDragStartTime = std::chrono::steady_clock::now();
 
@@ -226,7 +226,7 @@ namespace Widgets {
         return false;
     }
 
-    bool WidgetManager::injectKeyPress(const Input::KeyPressEvent &arg)
+    bool WidgetManager::injectKeyPress(const Platform::Input::KeyPressEvent &arg)
     {
         for (WidgetBase *modalWidget : mModalWidgetList) {
             while (modalWidget) {
@@ -246,7 +246,7 @@ namespace Widgets {
         return false;
     }
 
-    bool WidgetManager::injectKeyRelease(const Input::KeyReleaseEvent &arg)
+    bool WidgetManager::injectKeyRelease(const Platform::Input::KeyReleaseEvent &arg)
     {
         for (WidgetBase *modalWidget : mModalWidgetList) {
             while (modalWidget) {
@@ -266,15 +266,15 @@ namespace Widgets {
         return false;
     }
 
-    bool WidgetManager::injectPointerRelease(const Input::PointerReleaseEvent &arg)
+    bool WidgetManager::injectPointerRelease(const Platform::Input::PointerReleaseEvent &arg)
     {
         if (mDragStartEvent.mButton != arg.mButton)
             return false;
 
         if (mFocusedWidget) {
 
-            Vector2i pos = mFocusedWidget->getAbsolutePosition().floor();
-            arg.mWindowPosition = arg.mWindowPosition - InterfacesVector { pos.x, pos.y };
+            Math::Vector2i pos = mFocusedWidget->getAbsolutePosition().floor();
+            arg.mWindowPosition = arg.mWindowPosition - Platform::PlatformVector { pos.x, pos.y };
             if (mDragging) {
                 if (!mDraggingAborted)
                     mFocusedWidget->injectDragEnd(DragEndEvent { arg.mWindowPosition, arg.mScreenPosition, arg.mButton });
@@ -283,7 +283,7 @@ namespace Widgets {
                 mFocusedWidget->injectPointerClick(PointerClickEvent { arg.mWindowPosition, arg.mScreenPosition, arg.mButton });
             }
 
-            mDragStartEvent.mButton = Input::MouseButton::NO_BUTTON;
+            mDragStartEvent.mButton = Platform::Input::MouseButton::NO_BUTTON;
 
             return true;
         }
@@ -291,12 +291,12 @@ namespace Widgets {
         return false;
     }
 
-    WidgetBase *WidgetManager::getHoveredWidgetUp(const Vector2 &pos, WidgetBase *current)
+    WidgetBase *WidgetManager::getHoveredWidgetUp(const Math::Vector2 &pos, WidgetBase *current)
     {
         return current ? current->getHoveredUp(pos, { { 0, 0 }, mClientSpace.mSize }) : nullptr;
     }
 
-    WidgetBase *WidgetManager::getHoveredWidgetDown(const Vector2 &pos, WidgetBase *current)
+    WidgetBase *WidgetManager::getHoveredWidgetDown(const Math::Vector2 &pos, WidgetBase *current)
     {
         if (current) {
             return current->getHoveredDown(pos, { { 0, 0 }, mClientSpace.mSize });
@@ -314,20 +314,20 @@ namespace Widgets {
         }
     }
 
-    WidgetBase *WidgetManager::getHoveredWidget(const Vector2 &pos, WidgetBase *current)
+    WidgetBase *WidgetManager::getHoveredWidget(const Math::Vector2 &pos, WidgetBase *current)
     {
         return getHoveredWidgetDown(pos, getHoveredWidgetUp(pos, current));
     }
 
-    bool WidgetManager::injectPointerMove(const Input::PointerMoveEvent &arg)
+    bool WidgetManager::injectPointerMove(const Platform::Input::PointerMoveEvent &arg)
     {
         if (std::ranges::find(mWidgets, mHoveredWidget) == mWidgets.end())
             mHoveredWidget = nullptr;
 
-        if (mDragStartEvent.mButton != Input::MouseButton::NO_BUTTON) {
+        if (mDragStartEvent.mButton != Platform::Input::MouseButton::NO_BUTTON) {
 
             if (!mDragging && mFocusedWidget->allowsDragging()) {
-                InterfacesVector dist = arg.mScreenPosition - mDragStartEvent.mScreenPosition;
+                Platform::PlatformVector dist = arg.mScreenPosition - mDragStartEvent.mScreenPosition;
                 if (std::abs(dist.x) + std::abs(dist.y) > sDragDistanceThreshold && std::chrono::steady_clock::now() - mDragStartTime > sDragTimeThreshold) {
                     mDragging = true;
                     mDraggingAborted = false;
@@ -336,23 +336,23 @@ namespace Widgets {
             }
 
             if (mDragging && !mDraggingAborted) {
-                Vector2i pos = mFocusedWidget->getAbsolutePosition().floor();
-                arg.mWindowPosition = arg.mWindowPosition - InterfacesVector { pos.x, pos.y };
+                Math::Vector2i pos = mFocusedWidget->getAbsolutePosition().floor();
+                arg.mWindowPosition = arg.mWindowPosition - Platform::PlatformVector { pos.x, pos.y };
                 mFocusedWidget->injectDragMove(DragMoveEvent { arg.mWindowPosition, arg.mScreenPosition, arg.mMoveDelta });
             }
 
             return false;
         }
 
-        WidgetBase *hoveredWidget = getHoveredWidget(Vector2 { Vector2i { &arg.mWindowPosition.x } }, mHoveredWidget);
+        WidgetBase *hoveredWidget = getHoveredWidget(Math::Vector2 { Math::Vector2i { &arg.mWindowPosition.x } }, mHoveredWidget);
 
         bool enter = false;
         if (mHoveredWidget != hoveredWidget) {
 
             if (mHoveredWidget) {
-                InterfacesVector storedWindowPosition = arg.mWindowPosition;
-                Vector2i pos = mHoveredWidget->getAbsolutePosition().floor();
-                arg.mWindowPosition = arg.mWindowPosition - InterfacesVector { pos.x, pos.y };
+                Platform::PlatformVector storedWindowPosition = arg.mWindowPosition;
+                Math::Vector2i pos = mHoveredWidget->getAbsolutePosition().floor();
+                arg.mWindowPosition = arg.mWindowPosition - Platform::PlatformVector { pos.x, pos.y };
                 mHoveredWidget->injectPointerLeave(arg);
                 arg.mWindowPosition = storedWindowPosition;
             }
@@ -367,8 +367,8 @@ namespace Widgets {
         }
 
         if (mPointerEventTargetWidget) {
-            Vector2i pos = mPointerEventTargetWidget->getAbsolutePosition().floor();
-            arg.mWindowPosition = arg.mWindowPosition - InterfacesVector { pos.x, pos.y };
+            Math::Vector2i pos = mPointerEventTargetWidget->getAbsolutePosition().floor();
+            arg.mWindowPosition = arg.mWindowPosition - Platform::PlatformVector { pos.x, pos.y };
 
             if (enter)
                 mPointerEventTargetWidget->injectPointerEnter(arg);
@@ -380,7 +380,7 @@ namespace Widgets {
         return false;
     }
 
-    bool WidgetManager::injectAxisEvent(const Input::AxisEvent &arg)
+    bool WidgetManager::injectAxisEvent(const Platform::Input::AxisEvent &arg)
     {
         if (std::ranges::find(mWidgets, mHoveredWidget) == mWidgets.end())
             mHoveredWidget = nullptr;
@@ -463,7 +463,7 @@ namespace Widgets {
         mFocusedWidget = nullptr;
         mHoveredWidget = nullptr;
         if (mPointerEventTargetWidget) {
-            Input::PointerMoveEvent arg {
+            Platform::Input::PointerMoveEvent arg {
                 { 0, 0 }, { 0, 0 }, { 0, 0 }
             };
             mPointerEventTargetWidget->injectPointerLeave(arg);
@@ -520,7 +520,7 @@ namespace Widgets {
     {
         mOverlays.push_back(widget);
         widget->show();
-        widget->applyGeometry(Vector3 { Vector2 { mClientSpace.mSize }, Window::platformCapabilities.mScalingFactor });
+        widget->applyGeometry(Math::Vector3 { Math::Vector2 { mClientSpace.mSize }, Platform::Window::platformCapabilities.mScalingFactor });
     }
 
     void WidgetManager::closeOverlay(WidgetBase *widget)
@@ -587,11 +587,11 @@ namespace Widgets {
         return mWidgetsLayout;
     }
 
-    void WidgetManager::onResize(const Rect2i &space)
+    void WidgetManager::onResize(const Math::Rect2i &space)
     {
         MainWindowComponentBase::onResize(space);
         for (WidgetBase *topLevel : widgets()) {
-            topLevel->applyGeometry(Vector3 { Vector2 { space.mSize }, Window::platformCapabilities.mScalingFactor });
+            topLevel->applyGeometry(Math::Vector3 { Math::Vector2 { space.mSize }, Platform::Window::platformCapabilities.mScalingFactor });
         }
     }
 
@@ -602,14 +602,14 @@ namespace Widgets {
         MainWindowComponentBase::render(target, iteration);
 
         WidgetsRenderData renderData;
-        auto keep = renderData.pushClipRect(Vector2::ZERO, Vector2 { mClientSpace.mSize });
+        auto keep = renderData.pushClipRect(Math::Vector2::ZERO, Math::Vector2 { mClientSpace.mSize });
 
         for (LayoutWidget &layoutWidget : mWidgetsLayout) {
             if (!layoutWidget.mWidget.isSet() && layoutWidget.mWidgetTemplate && layoutWidget.mWidgetTemplate.info()->loadingTask().is_ready() && layoutWidget.mWidgetTemplate.info()->loadingTask()) {
                 std::unique_ptr<WidgetBase> p = layoutWidget.mWidgetTemplate.create(*this);
 
                 layoutWidget.mWidget.set_value(p.get());
-                p->applyGeometry(Vector3 { Vector2 { mClientSpace.mSize }, Window::platformCapabilities.mScalingFactor });
+                p->applyGeometry(Math::Vector3 { Math::Vector2 { mClientSpace.mSize }, Platform::Window::platformCapabilities.mScalingFactor });
                 mTopLevelWidgets.emplace_back(std::move(p));
 
                 if (layoutWidget.mDefaultVisibility) {
@@ -644,7 +644,7 @@ namespace Widgets {
         render(target, renderData, mClientSpace.mSize);
     }
 
-    void WidgetManager::render(Render::RenderTarget *target, const WidgetsRenderData &renderData, const Vector2i &size)
+    void WidgetManager::render(Render::RenderTarget *target, const WidgetsRenderData &renderData, const Math::Vector2i &size)
     {
         if (!mPipeline.available())
             return;
@@ -652,7 +652,7 @@ namespace Widgets {
         {
             auto perApp = mPipeline->mapParameters<HLSL::WidgetsPerApplication>(0);
             perApp->c = target->getClipSpaceMatrix();
-            perApp->screenSize = Vector2 { size };
+            perApp->screenSize = Math::Vector2 { size };
             perApp->distanceFieldScaling = 2.0f / Render::FontLoader::sFontSize * 64.0f;
         }
 
@@ -665,7 +665,7 @@ namespace Widgets {
                     auto parameters = mPipeline->mapParameters<HLSL::WidgetsPerObject>(2);
                     parameters->hasDistanceField = bool(tex.mFlags & TextureFlag_IsDistanceField);
                     parameters->hasTexture = true;
-                    parameters->shadowOffset = mShadowOffset / Vector2 { target->size() };
+                    parameters->shadowOffset = mShadowOffset / Math::Vector2 { target->size() };
                 }
 
                 {
@@ -708,12 +708,12 @@ namespace Widgets {
         return mData->mAtlas.getImage(name);
     }
 
-    const Atlas2::Entry *WidgetManager::lookUpImage(Resources::ImageLoader::Resource *image)
+    const Math::Atlas2::Entry *WidgetManager::lookUpImage(Resources::ImageLoader::Resource *image)
     {
         return mData->mAtlas.lookUpImage(image);
     }
 
-    const Atlas2::Entry *WidgetManager::lookUpImage(std::string_view name)
+    const Math::Atlas2::Entry *WidgetManager::lookUpImage(std::string_view name)
     {
         return mData->mAtlas.lookUpImage(name);
     }
@@ -728,7 +728,7 @@ namespace Widgets {
                 if (!layoutWidget.mWidget.isSet() && layoutWidget.mWidgetTemplate.available()) {
                     std::unique_ptr<WidgetBase> p = layoutWidget.mWidgetTemplate.create(*this);
                     layoutWidget.mWidget.set_value(p.get());
-                    p->applyGeometry(Vector3 { Vector2 { mClientSpace.mSize }, Window::platformCapabilities.mScalingFactor });
+                    p->applyGeometry(Math::Vector3 { Math::Vector2 { mClientSpace.mSize }, Platform::Window::platformCapabilities.mScalingFactor });
                     mTopLevelWidgets.emplace_back(std::move(p));
                     if (layoutWidget.mDefaultVisibility) {
                         openLayout(layoutWidget.mName);
@@ -763,7 +763,7 @@ namespace Widgets {
         return mLifetime;
     }
 
-    IntervalClock<> &WidgetManager::clock()
+    Execution::IntervalClock<> &WidgetManager::clock()
     {
         return mFrameClock;
     }

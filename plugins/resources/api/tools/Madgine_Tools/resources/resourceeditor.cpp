@@ -2,7 +2,7 @@
 
 #include "resourceeditor.h"
 
-#include "Interfaces/filesystem/fsapi.h"
+#include "Platform/filesystem/fsapi.h"
 
 #include "Modules/plugins/plugin.h"
 
@@ -102,7 +102,7 @@ namespace Tools {
         co_return true;
     }
 
-    Dialog<Filesystem::Path> ResourceEditor::resourceFilePicker(bool allowNewFile, Filesystem::Path path, Filesystem::Path selected)
+    Dialog<Platform::Filesystem::Path> ResourceEditor::resourceFilePicker(bool allowNewFile, Platform::Filesystem::Path path, Platform::Filesystem::Path selected)
     {
         DialogSettings &settings = co_await get_dialog_settings;
         settings.acceptText = allowNewFile ? "Save" : "Open";
@@ -121,11 +121,11 @@ namespace Tools {
 
             #if ENABLE_PLUGINS
             if (PluginSelector("Plugin", plugin, true)) {
-                selected = Filesystem::Path { SOURCE_DIR } / plugin->info()->mDataPath;
+                selected = Platform::Filesystem::Path { SOURCE_DIR } / plugin->info()->mDataPath;
             }
 
             if (plugin) {
-                options.mBase = Filesystem::Path { SOURCE_DIR } / plugin->info()->mDataPath;
+                options.mBase = Platform::Filesystem::Path { SOURCE_DIR } / plugin->info()->mDataPath;
             } else {
                 enabled = false;
             }
@@ -137,7 +137,7 @@ namespace Tools {
             if (!enabled)
                 ImGui::EndDisabled();
 
-            settings.acceptPossible = enabled && !selected.empty() && (allowNewFile || Filesystem::exists(selected));
+            settings.acceptPossible = enabled && !selected.empty() && (allowNewFile || Platform::Filesystem::exists(selected));
         } while (!implicitlyAccepted && (co_yield settings));
         co_return selected;
     }

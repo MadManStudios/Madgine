@@ -79,7 +79,7 @@ namespace Render {
             1, &barrier);
     }
 
-    VulkanTexture::VulkanTexture(TextureType type, bool isRenderTarget, TextureFormat format, Vector2i size, size_t samples, const ByteBuffer &data)
+    VulkanTexture::VulkanTexture(TextureType type, bool isRenderTarget, TextureFormat format, Math::Vector2i size, size_t samples, const Memory::ByteBuffer &data)
         : Texture(type, format, size)
         , mIsRenderTarget(isRenderTarget)
         , mSamples(samples)
@@ -327,7 +327,7 @@ namespace Render {
         mSamples = 1;
     }
 
-    void VulkanTexture::setSubData(Vector2i offset, Vector2i size, const ByteBuffer &data)
+    void VulkanTexture::setSubData(Math::Vector2i offset, Math::Vector2i size, const Memory::ByteBuffer &data)
     {
         VkFormat vFormat = vkFormat();
         size_t byteCount;

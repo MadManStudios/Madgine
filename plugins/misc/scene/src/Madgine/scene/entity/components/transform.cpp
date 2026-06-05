@@ -6,7 +6,7 @@
 
 #include "Modules/uniquecomponent/uniquecomponentcollector.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
 #include "../entity.h"
@@ -31,19 +31,19 @@ namespace Engine {
 namespace Scene {
     namespace Entity {
 
-        Matrix4 Transform::matrix() const
+        Math::Matrix4 Transform::matrix() const
         {
             return TransformMatrix(mPosition, mScale, mOrientation);
         }
 
-        Matrix4 Transform::worldMatrix() const
+        Math::Matrix4 Transform::worldMatrix() const
         {
             return parentMatrix() * matrix();
         }
 
-        Matrix4 Transform::parentMatrix() const
+        Math::Matrix4 Transform::parentMatrix() const
         {
-            Matrix4 result = Matrix4::IDENTITY;
+            Math::Matrix4 result = Math::Matrix4::IDENTITY;
             Execution::access_binding(mParent, [&](Entity &e) {
                 result = e.getComponent<Transform>()->worldMatrix(); });
             return result;

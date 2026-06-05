@@ -20,7 +20,7 @@ namespace Render {
         void setup();
 
         DirectX12CommandList fetchCommandList();
-        RenderFuture ExecuteCommandList(ReleasePtr<ID3D12GraphicsCommandList> list, ReleasePtr<ID3D12CommandAllocator> allocator, std::vector<Any> discardResources);
+        RenderFuture ExecuteCommandList(Platform::ReleasePtr<ID3D12GraphicsCommandList> list, Platform::ReleasePtr<ID3D12CommandAllocator> allocator, std::vector<Any> discardResources);
 
         RenderFuture currentFence();
 
@@ -42,9 +42,9 @@ namespace Render {
         std::string mName;
         DirectX12DescriptorHeap *mDescriptorHeap;
         DirectX12QueryHeap *mTimestampHeap;
-        ReleasePtr<ID3D12CommandQueue> mCommandQueue;
-        std::vector<std::tuple<RenderFuture, ReleasePtr<ID3D12CommandAllocator>, std::vector<Any>>> mAllocatorPool;
-        std::vector<ReleasePtr<ID3D12GraphicsCommandList>> mCommandListPool;
+        Platform::ReleasePtr<ID3D12CommandQueue> mCommandQueue;
+        std::vector<std::tuple<RenderFuture, Platform::ReleasePtr<ID3D12CommandAllocator>, std::vector<Any>>> mAllocatorPool;
+        std::vector<Platform::ReleasePtr<ID3D12GraphicsCommandList>> mCommandListPool;
 
         uint64_t mLastCompletedFenceValue = 0;
         uint64_t mNextFenceValue;

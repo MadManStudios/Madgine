@@ -2,13 +2,13 @@
 
 #include "Meta/metalib.h"
 
-#include "Meta/keyvalue/functiontable_impl.h"
-#include "Meta/keyvalue/metatable_impl.h"
-#include "Meta/keyvalue/valuetype.h"
+#include "Meta/reflect/functiontable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
+#include "Meta/reflect/value.h"
 
-#include "Meta/keyvalue/lambda.h"
+#include "Meta/reflect/lambda.h"
 
-#include "Meta/keyvalue/keyvaluepair.h"
+#include "Meta/reflect/keyvaluepair.h"
 
 int testF(int i)
 {
@@ -40,20 +40,20 @@ TEST(ValueType, Construct)
 
     //ValueType_Foo foo;
 
-    ValueType test;
+    Reflect::Value test;
     test = "abc"sv;
     test.clear();
     test = true;
     test = 3;
     test = (uint64_t)4;
     test = 5.0f;
-    test = Vector2 { 6.1f, 6.2f };
-    test = Vector3 { 7.1f, 7.2f, 7.3f };
+    test = Math::Vector2 { 6.1f, 6.2f };
+    test = Math::Vector3 { 7.1f, 7.2f, 7.3f };
 
     test = 5.0f;
     ASSERT_EQ(test, test);
     ASSERT_EQ(test, 5);
-    ASSERT_EQ(test, ValueType { 5 });
+    ASSERT_EQ(test, Reflect::Value { 5 });
 
     /* test = &function<&testF>();
     ValueType result;
@@ -83,5 +83,5 @@ TEST(ValueType, Construct)
     
     std::vector<int> v = { 1, 2, 3 };
     test = v;
-    *std::next(test.as<KeyValueVirtualSequenceRange>().begin()) = ValueType { 4 };
+    *std::next(test.as<Reflect::SequenceRange>().begin()) = Reflect::Value { 4 };
 }

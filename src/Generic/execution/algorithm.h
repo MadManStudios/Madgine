@@ -123,7 +123,7 @@ namespace Execution {
                 if constexpr (std::same_as<V2, void>) {
                     TupleUnpacker::invoke(mTransform, std::forward<V>(values)...);
                     this->mRec.set_value();
-                } else if constexpr (InstanceOf<V2, std::tuple>)
+                } else if constexpr (Concepts::InstanceOf<V2, std::tuple>)
                     TupleUnpacker::invokeExpand(LIFT(this->mRec.set_value, this), TupleUnpacker::invoke(mTransform, std::forward<V>(values)...));
                 else
                     this->mRec.set_value(TupleUnpacker::invoke(mTransform, std::forward<V>(values)...));

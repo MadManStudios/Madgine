@@ -6,7 +6,7 @@
 
 #include "Madgine/behavior/parametertuple.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
 #include "nodeinterpreter.h"
@@ -87,13 +87,13 @@ namespace Behavior {
             return ParameterTuple { std::make_tuple(), auto_pack<> {} };
         }
 
-        std::vector<ExtendedValueTypeDesc> NodeGraphBehaviorFactory::parameterTypes(const UniqueOpaquePtr &handle) const
+        std::vector<Reflect::ExtendedType> NodeGraphBehaviorFactory::parameterTypes(const UniqueOpaquePtr &handle) const
         {
             const NodeGraphLoader::Handle &graph = handle.as<NodeGraphLoader::Handle>();
             return {};
         }
 
-        std::vector<ExtendedValueTypeDesc> NodeGraphBehaviorFactory::resultTypes(const UniqueOpaquePtr &handle) const
+        std::vector<Reflect::ExtendedType> NodeGraphBehaviorFactory::resultTypes(const UniqueOpaquePtr &handle) const
         {
             const NodeGraphLoader::Handle &graph = handle.as<NodeGraphLoader::Handle>();
             return {};

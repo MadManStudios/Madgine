@@ -10,11 +10,11 @@ namespace Widgets {
 
     struct ColorTintRenderData : RenderData {
 
-        ColorRenderData mNormalColor = Color4 { 1.0f, 1.0f, 1.0f, 1.0f };
-        ColorRenderData mHighlightedColor = Color4 { 1.2f, 1.2f, 1.2f, 1.0f };
-        ColorRenderData mPressedColor = Color4 { 1.3f, 1.3f, 1.3f, 1.0f };
-        ColorRenderData mSelectedColor = Color4 { 1.1f, 1.1f, 1.1f, 1.0f };
-        ColorRenderData mDisabledColor = Color4 { 0.4f, 0.4f, 0.4f, 1.0f };
+        ColorRenderData mNormalColor = Math::Color4 { 1.0f, 1.0f, 1.0f, 1.0f };
+        ColorRenderData mHighlightedColor = Math::Color4 { 1.2f, 1.2f, 1.2f, 1.0f };
+        ColorRenderData mPressedColor = Math::Color4 { 1.3f, 1.3f, 1.3f, 1.0f };
+        ColorRenderData mSelectedColor = Math::Color4 { 1.1f, 1.1f, 1.1f, 1.0f };
+        ColorRenderData mDisabledColor = Math::Color4 { 0.4f, 0.4f, 0.4f, 1.0f };
     };
 
 }

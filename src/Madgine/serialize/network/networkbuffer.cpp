@@ -3,8 +3,8 @@
 #include "networkbuffer.h"
 
 namespace Engine {
-namespace Network {
-    NetworkBuffer::NetworkBuffer(Socket socket)
+namespace Serialize {
+    NetworkBuffer::NetworkBuffer(Platform::Socket socket)
         : mSocket(std::move(socket))
     {
     }
@@ -13,7 +13,7 @@ namespace Network {
     {
     }
 
-    SocketAddress NetworkBuffer::getAddress() const
+    Platform::SocketAddress NetworkBuffer::getAddress() const
     {
         return mSocket.address();
     }
@@ -22,7 +22,7 @@ namespace Network {
     {
         int result = mSocket.recv(buf, len);
         if (result == -1) {
-            switch (SocketAPI::getError("recv")) {
+            switch (Platform::SocketAPI::getError("recv")) {
             default:
                 return 0;
             }
@@ -34,7 +34,7 @@ namespace Network {
     {
         int result = mSocket.send(buf, len);
         if (result == -1) {
-            switch (SocketAPI::getError("send")) {
+            switch (Platform::SocketAPI::getError("send")) {
             default:
                 return 0;
             }

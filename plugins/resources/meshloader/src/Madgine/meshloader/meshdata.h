@@ -16,17 +16,17 @@ namespace Render {
             std::string mName;
             std::string mDiffuseName;
             std::string mEmissiveName;
-            Vector4 mDiffuseColor = Vector4::UNIT_SCALE;
+            Math::Vector4 mDiffuseColor = Math::Vector4::UNIT_SCALE;
         };
 
         template <typename VertexType>
-        static AABB calculateAABB(const std::vector<VertexType> &vertices)
+        static Math::AABB calculateAABB(const std::vector<VertexType> &vertices)
         {
-            Vector3 minP { std::numeric_limits<float>::max(), std::numeric_limits<float>::max(), std::numeric_limits<float>::max() };
-            Vector3 maxP { std::numeric_limits<float>::lowest(), std::numeric_limits<float>::lowest(), std::numeric_limits<float>::lowest() };
+            Math::Vector3 minP { std::numeric_limits<float>::max(), std::numeric_limits<float>::max(), std::numeric_limits<float>::max() };
+            Math::Vector3 maxP { std::numeric_limits<float>::lowest(), std::numeric_limits<float>::lowest(), std::numeric_limits<float>::lowest() };
 
             for (const VertexType &v : vertices) {
-                const Vector3 &pos = v.mPos.xyz();
+                const Math::Vector3 &pos = v.mPos.xyz();
                 minP = min(pos, minP);
                 maxP = max(pos, maxP);
             }
@@ -48,9 +48,9 @@ namespace Render {
         }
 
         VertexFormat mFormat;
-        AABB mAABB;
+        Math::AABB mAABB;
         size_t mGroupSize;
-        ByteBuffer mVertices;
+        Memory::ByteBuffer mVertices;
         std::vector<uint32_t> mIndices;
         std::vector<Material> mMaterials;
     };

@@ -2,9 +2,9 @@
 
 #include "textbox.h"
 
-#include "Interfaces/input/inputevents.h"
+#include "Platform/input/inputevents.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
 #include "widgetmanager.h"
@@ -23,19 +23,19 @@
 
 #define STB_TEXTEDIT_K(key) (static_cast<uint16_t>(key) << 8)
 
-#define STB_TEXTEDIT_K_SHIFT STB_TEXTEDIT_K(Engine::Input::Key::Shift)
-#define STB_TEXTEDIT_K_LEFT STB_TEXTEDIT_K(Engine::Input::Key::LeftArrow)
-#define STB_TEXTEDIT_K_RIGHT STB_TEXTEDIT_K(Engine::Input::Key::RightArrow)
-#define STB_TEXTEDIT_K_UP STB_TEXTEDIT_K(Engine::Input::Key::UpArrow)
-#define STB_TEXTEDIT_K_DOWN STB_TEXTEDIT_K(Engine::Input::Key::DownArrow)
-#define STB_TEXTEDIT_K_PGUP STB_TEXTEDIT_K(Engine::Input::Key::PageUp)
-#define STB_TEXTEDIT_K_PGDOWN STB_TEXTEDIT_K(Engine::Input::Key::PageDown)
-#define STB_TEXTEDIT_K_LINESTART STB_TEXTEDIT_K(Engine::Input::Key::Home)
-#define STB_TEXTEDIT_K_LINEEND STB_TEXTEDIT_K(Engine::Input::Key::End)
+#define STB_TEXTEDIT_K_SHIFT STB_TEXTEDIT_K(Engine::Platform::Input::Key::Shift)
+#define STB_TEXTEDIT_K_LEFT STB_TEXTEDIT_K(Engine::Platform::Input::Key::LeftArrow)
+#define STB_TEXTEDIT_K_RIGHT STB_TEXTEDIT_K(Engine::Platform::Input::Key::RightArrow)
+#define STB_TEXTEDIT_K_UP STB_TEXTEDIT_K(Engine::Platform::Input::Key::UpArrow)
+#define STB_TEXTEDIT_K_DOWN STB_TEXTEDIT_K(Engine::Platform::Input::Key::DownArrow)
+#define STB_TEXTEDIT_K_PGUP STB_TEXTEDIT_K(Engine::Platform::Input::Key::PageUp)
+#define STB_TEXTEDIT_K_PGDOWN STB_TEXTEDIT_K(Engine::Platform::Input::Key::PageDown)
+#define STB_TEXTEDIT_K_LINESTART STB_TEXTEDIT_K(Engine::Platform::Input::Key::Home)
+#define STB_TEXTEDIT_K_LINEEND STB_TEXTEDIT_K(Engine::Platform::Input::Key::End)
 #define STB_TEXTEDIT_K_TEXTSTART 0x4000
 #define STB_TEXTEDIT_K_TEXTEND 0x8000000
-#define STB_TEXTEDIT_K_DELETE STB_TEXTEDIT_K(Engine::Input::Key::Delete)
-#define STB_TEXTEDIT_K_BACKSPACE STB_TEXTEDIT_K(Engine::Input::Key::Backspace) | 8
+#define STB_TEXTEDIT_K_DELETE STB_TEXTEDIT_K(Engine::Platform::Input::Key::Delete)
+#define STB_TEXTEDIT_K_BACKSPACE STB_TEXTEDIT_K(Engine::Platform::Input::Key::Backspace) | 8
 #define STB_TEXTEDIT_K_UNDO 0x1000000
 #define STB_TEXTEDIT_K_REDO 0x2000000
 
@@ -75,20 +75,20 @@ namespace Widgets {
 
     void Textbox::render(WidgetsRenderData &renderData)
     {
-        const Atlas2::Entry *entry = manager().lookUpImage(mImageRenderData.image());
+        const Math::Atlas2::Entry *entry = manager().lookUpImage(mImageRenderData.image());
         if (entry) {
 
-            Vector2 pos = getAbsolutePosition();
-            Vector3 size = getAbsoluteSize();
+            Math::Vector2 pos = getAbsolutePosition();
+            Math::Vector3 size = getAbsoluteSize();
 
             mImageRenderData.renderImage(renderData, pos, size, *entry);
 
             if (mTextRenderData.available()) {
                 mTextRenderData.render(renderData, mText, pos, size, isFocused() && mTextRenderData.animationInterval(1200ms, 600ms) ? mState.cursor : -1);
                 if (mState.select_start != mState.select_end) {
-                    const Atlas2::Entry *blankEntry = manager().lookUpImage("blank_white");
+                    const Math::Atlas2::Entry *blankEntry = manager().lookUpImage("blank_white");
                     if (blankEntry) {
-                        Color4 color = { 0.0f, 0.0f, 0.8f, 0.8f };
+                        Math::Color4 color = { 0.0f, 0.0f, 0.8f, 0.8f };
                         mTextRenderData.renderSelection(renderData, mText, pos, size, *blankEntry, mState.select_start, mState.select_end, ColorRenderData { color }.frame(pos, size.xy()));
                     }
                 }
@@ -116,17 +116,17 @@ namespace Widgets {
         WidgetBase::injectDragMove(arg);
     }
 
-    bool Textbox::injectKeyPress(const Input::KeyPressEvent &arg)
+    bool Textbox::injectKeyPress(const Platform::Input::KeyPressEvent &arg)
     {
         if (std::isalnum(arg.mText)
-            || arg.mScancode == Input::Key::Control
-            || arg.mScancode == Input::Key::LeftArrow
-            || arg.mScancode == Input::Key::RightArrow
-            || arg.mScancode == Input::Key::UpArrow
-            || arg.mScancode == Input::Key::DownArrow
-            || arg.mScancode == Input::Key::Backspace
-            || arg.mScancode == Input::Key::Delete
-            || arg.mScancode == Input::Key::Space) {
+            || arg.mScancode == Platform::Input::Key::Control
+            || arg.mScancode == Platform::Input::Key::LeftArrow
+            || arg.mScancode == Platform::Input::Key::RightArrow
+            || arg.mScancode == Platform::Input::Key::UpArrow
+            || arg.mScancode == Platform::Input::Key::DownArrow
+            || arg.mScancode == Platform::Input::Key::Backspace
+            || arg.mScancode == Platform::Input::Key::Delete
+            || arg.mScancode == Platform::Input::Key::Space) {
             uint32_t val = (static_cast<uint16_t>(arg.mScancode) << 8) | arg.mText;
             stb_textedit_key(this, &mState, val);
         }
@@ -139,9 +139,9 @@ namespace Widgets {
             return;
 
         assert(i == 0);
-        Vector2 pos = Vector2::ZERO;
-        Vector3 size = getAbsoluteSize();
-        Rect2 bb = mTextRenderData.calculateBoundingBox(mText, pos, size);
+        Math::Vector2 pos = Math::Vector2::ZERO;
+        Math::Vector3 size = getAbsoluteSize();
+        Math::Rect2 bb = mTextRenderData.calculateBoundingBox(mText, pos, size);
         row->baseline_y_delta = bb.mTopLeft.y + bb.mSize.y;
         row->num_chars = mText.size();
         row->x0 = bb.mTopLeft.x;

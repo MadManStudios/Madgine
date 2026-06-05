@@ -17,7 +17,7 @@ namespace Render {
 
     private:
         D3D12_QUERY_HEAP_TYPE mType;
-        ReleasePtr<ID3D12QueryHeap> mHeap;
+        Platform::ReleasePtr<ID3D12QueryHeap> mHeap;
         size_t mIndex = 0;
     };
 

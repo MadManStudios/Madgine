@@ -5,15 +5,15 @@
 #include "Generic/execution/algorithm.h"
 #include "Generic/execution/execution.h"
 
-#include "Interfaces/log/logsenders.h"
+#include "Platform/log/logsenders.h"
 
-#include "Meta/keyvalue/valuetype.h"
+#include "Meta/reflect/value.h"
 
 #include "Modules/uniquecomponent/uniquecomponentcollector.h"
 
 #include "Madgine/debug/debugger.h"
 
-#include "Meta/keyvalue/metatable_impl.h"
+#include "Meta/reflect/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
 #include "Madgine_Tools/debugger/debuggerview.h"
@@ -127,12 +127,12 @@ namespace Tools {
 
     bool Python3ImmediateWindow::interpret(EMSCRIPTEN_WORKAROUND(std::string_view) command)
     {
-        ValueType retVal;
-        KeyValueResult result = mEnv->execute(retVal, command, mPrompt.get());
+        Reflect::Value retVal;
+        Reflect::Result result = mEnv->execute(retVal, command, mPrompt.get());
         if (result) {
-            Log::LogDummy { Log::MessageType::ERROR_TYPE, __FILE__, __LINE__, mPrompt.get() } << result;                        
+            Platform::Log::LogDummy { Platform::Log::MessageType::ERROR_TYPE, __FILE__, __LINE__, mPrompt.get() } << result;
         } else {
-            Log::LogDummy { Log::MessageType::INFO_TYPE, __FILE__, __LINE__, mPrompt.get() } << retVal;     
+            Platform::Log::LogDummy { Platform::Log::MessageType::INFO_TYPE, __FILE__, __LINE__, mPrompt.get() } << retVal;
         }
         mPrompt->resume();
         return false;
