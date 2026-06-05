@@ -286,10 +286,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:aef94730c45201ae77dd298721cd7ded0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4a8af2275348033e75ff495537cc4092"><td class="memItemLeft" align="right" valign="top">std::span&lt; const <a class="el" href="struct_engine_1_1_behavior_1_1_named_descriptor.html">NamedDescriptor</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_native_behavior.html#a4a8af2275348033e75ff495537cc4092">namedInputs</a> () const override</td></tr>
 <tr class="separator:a4a8af2275348033e75ff495537cc4092"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6f079e85a6c110f155bf6d4f1101e140"><td class="memItemLeft" align="right" valign="top">virtual std::span&lt; const <a class="el" href="struct_engine_1_1_extended_value_type_desc.html">ExtendedValueTypeDesc</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_native_behavior.html#a6f079e85a6c110f155bf6d4f1101e140">parameterTypes</a> () const override</td></tr>
-<tr class="separator:a6f079e85a6c110f155bf6d4f1101e140"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2da3334e43aec47099e878f93b2ee06d"><td class="memItemLeft" align="right" valign="top">virtual std::span&lt; const <a class="el" href="struct_engine_1_1_extended_value_type_desc.html">ExtendedValueTypeDesc</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_native_behavior.html#a2da3334e43aec47099e878f93b2ee06d">resultTypes</a> () const override</td></tr>
-<tr class="separator:a2da3334e43aec47099e878f93b2ee06d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a925e58cedffcfbfb4ae4d8a00d3de6df"><td class="memItemLeft" align="right" valign="top">virtual std::span&lt; const <a class="el" href="struct_engine_1_1_reflect_1_1_extended_type.html">Reflect::ExtendedType</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_native_behavior.html#a925e58cedffcfbfb4ae4d8a00d3de6df">parameterTypes</a> () const override</td></tr>
+<tr class="separator:a925e58cedffcfbfb4ae4d8a00d3de6df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab34372550e0f7c065ec3b4ee560bc624"><td class="memItemLeft" align="right" valign="top">virtual std::span&lt; const <a class="el" href="struct_engine_1_1_reflect_1_1_extended_type.html">Reflect::ExtendedType</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_native_behavior.html#ab34372550e0f7c065ec3b4ee560bc624">resultTypes</a> () const override</td></tr>
+<tr class="separator:ab34372550e0f7c065ec3b4ee560bc624"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac525eebc77ef047d53f76a12d6545582"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_native_behavior.html#ac525eebc77ef047d53f76a12d6545582">subBehaviorCount</a> () const override</td></tr>
 <tr class="separator:ac525eebc77ef047d53f76a12d6545582"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -683,8 +683,8 @@ template&lt;typename T , auto Factory, typename... Arguments&gt; </div>
 
 </div>
 </div>
-<a id="a6f079e85a6c110f155bf6d4f1101e140" name="a6f079e85a6c110f155bf6d4f1101e140"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6f079e85a6c110f155bf6d4f1101e140">&#9670;&#160;</a></span>parameterTypes()</h2>
+<a id="a925e58cedffcfbfb4ae4d8a00d3de6df" name="a925e58cedffcfbfb4ae4d8a00d3de6df"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a925e58cedffcfbfb4ae4d8a00d3de6df">&#9670;&#160;</a></span>parameterTypes()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -695,7 +695,7 @@ template&lt;typename T , auto Factory, typename... Arguments&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual std::span&lt; const <a class="el" href="struct_engine_1_1_extended_value_type_desc.html">ExtendedValueTypeDesc</a> &gt; <a class="el" href="struct_engine_1_1_behavior_1_1_native_behavior.html">Engine::Behavior::NativeBehavior</a>&lt; T, Factory, Arguments &gt;::parameterTypes </td>
+          <td class="memname">virtual std::span&lt; const <a class="el" href="struct_engine_1_1_reflect_1_1_extended_type.html">Reflect::ExtendedType</a> &gt; <a class="el" href="struct_engine_1_1_behavior_1_1_native_behavior.html">Engine::Behavior::NativeBehavior</a>&lt; T, Factory, Arguments &gt;::parameterTypes </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -710,8 +710,8 @@ template&lt;typename T , auto Factory, typename... Arguments&gt; </div>
 
 </div>
 </div>
-<a id="a2da3334e43aec47099e878f93b2ee06d" name="a2da3334e43aec47099e878f93b2ee06d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2da3334e43aec47099e878f93b2ee06d">&#9670;&#160;</a></span>resultTypes()</h2>
+<a id="ab34372550e0f7c065ec3b4ee560bc624" name="ab34372550e0f7c065ec3b4ee560bc624"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab34372550e0f7c065ec3b4ee560bc624">&#9670;&#160;</a></span>resultTypes()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -722,7 +722,7 @@ template&lt;typename T , auto Factory, typename... Arguments&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual std::span&lt; const <a class="el" href="struct_engine_1_1_extended_value_type_desc.html">ExtendedValueTypeDesc</a> &gt; <a class="el" href="struct_engine_1_1_behavior_1_1_native_behavior.html">Engine::Behavior::NativeBehavior</a>&lt; T, Factory, Arguments &gt;::resultTypes </td>
+          <td class="memname">virtual std::span&lt; const <a class="el" href="struct_engine_1_1_reflect_1_1_extended_type.html">Reflect::ExtendedType</a> &gt; <a class="el" href="struct_engine_1_1_behavior_1_1_native_behavior.html">Engine::Behavior::NativeBehavior</a>&lt; T, Factory, Arguments &gt;::resultTypes </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -815,16 +815,16 @@ template&lt;typename T , auto Factory, typename... Arguments&gt; </div>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line">= []() {</div>
 <div class="line">            <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (std::same_as&lt;parameter_arguments, type_pack&lt;&gt;&gt;) {</div>
-<div class="line">                <span class="keywordflow">return</span> std::span&lt;const ExtendedValueTypeDesc&gt; {};</div>
+<div class="line">                <span class="keywordflow">return</span> std::span&lt;const Reflect::ExtendedType&gt; {};</div>
 <div class="line">            } <span class="keywordflow">else</span> {</div>
 <div class="line">                <span class="keywordflow">return</span> []&lt;<span class="keyword">typename</span>... P&gt;(<a class="code hl_struct" href="struct_engine_1_1type__pack.html">type_pack</a>&lt;P...&gt;) {</div>
-<div class="line">                    <span class="keywordflow">return</span> std::array&lt;<a class="code hl_struct" href="struct_engine_1_1_extended_value_type_desc.html">ExtendedValueTypeDesc</a>, <span class="keyword">sizeof</span>...(P)&gt; {</div>
-<div class="line">                        toValueTypeDesc&lt;P&gt;()...</div>
+<div class="line">                    <span class="keywordflow">return</span> std::array&lt;<a class="code hl_struct" href="struct_engine_1_1_reflect_1_1_extended_type.html">Reflect::ExtendedType</a>, <span class="keyword">sizeof</span>...(P)&gt; {</div>
+<div class="line">                        Reflect::toType&lt;P&gt;()...</div>
 <div class="line">                    };</div>
 <div class="line">                }(<span class="keyword">typename</span> parameter_arguments::template transform&lt;get_type_t&gt; {});</div>
 <div class="line">            }</div>
 <div class="line">        }()</div>
-<div class="ttc" id="astruct_engine_1_1_extended_value_type_desc_html"><div class="ttname"><a href="struct_engine_1_1_extended_value_type_desc.html">Engine::ExtendedValueTypeDesc</a></div><div class="ttdef"><b>Definition:</b> valuetype_desc.h:285</div></div>
+<div class="ttc" id="astruct_engine_1_1_reflect_1_1_extended_type_html"><div class="ttname"><a href="struct_engine_1_1_reflect_1_1_extended_type.html">Engine::Reflect::ExtendedType</a></div><div class="ttdef"><b>Definition:</b> type.h:297</div></div>
 <div class="ttc" id="astruct_engine_1_1type__pack_html"><div class="ttname"><a href="struct_engine_1_1type__pack.html">Engine::type_pack</a></div><div class="ttdef"><b>Definition:</b> genericforward.h:12</div></div>
 </div><!-- fragment -->
 </div>
@@ -852,13 +852,13 @@ template&lt;typename T , auto Factory, typename... Arguments&gt; </div>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line">= []() {</div>
 <div class="line">            <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (std::same_as&lt;typename Sender::template value_types&lt;type_pack&gt;, type_pack&lt;&gt;&gt;) {</div>
-<div class="line">                <span class="keywordflow">return</span> std::span&lt;const ExtendedValueTypeDesc&gt; {};</div>
-<div class="line">            } <span class="keywordflow">else</span> <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (std::same_as&lt;typename Sender::template value_types&lt;type_pack&gt;, <a class="code hl_struct" href="struct_engine_1_1type__pack.html">type_pack&lt;ArgumentList&gt;</a>&gt;) {</div>
-<div class="line">                <span class="keywordflow">return</span> std::span&lt;const ExtendedValueTypeDesc&gt; {};</div>
+<div class="line">                <span class="keywordflow">return</span> std::span&lt;const Reflect::ExtendedType&gt; {};</div>
+<div class="line">            } <span class="keywordflow">else</span> <span class="keywordflow">if</span> <span class="keyword">constexpr</span> (std::same_as&lt;typename Sender::template value_types&lt;type_pack&gt;, <a class="code hl_struct" href="struct_engine_1_1type__pack.html">type_pack&lt;Reflect::ArgumentList&gt;</a>&gt;) {</div>
+<div class="line">                <span class="keywordflow">return</span> std::span&lt;const Reflect::ExtendedType&gt; {};</div>
 <div class="line">            } <span class="keywordflow">else</span> {</div>
 <div class="line">                <span class="keywordflow">return</span> []&lt;<span class="keyword">typename</span>... P&gt;(type_pack&lt;P...&gt;) {</div>
-<div class="line">                    <span class="keywordflow">return</span> std::array&lt;ExtendedValueTypeDesc, <span class="keyword">sizeof</span>...(P)&gt; {</div>
-<div class="line">                        toValueTypeDesc&lt;P&gt;()...</div>
+<div class="line">                    <span class="keywordflow">return</span> std::array&lt;Reflect::ExtendedType, <span class="keyword">sizeof</span>...(P)&gt; {</div>
+<div class="line">                        Reflect::toType&lt;P&gt;()...</div>
 <div class="line">                    };</div>
 <div class="line">                }(<span class="keyword">typename</span> Sender::template value_types&lt;type_pack&gt; {});</div>
 <div class="line">            }</div>
@@ -915,7 +915,7 @@ template&lt;typename T , auto Factory, typename... Arguments&gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2026 23:14:07 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Fri Jun 5 2026 23:36:47 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

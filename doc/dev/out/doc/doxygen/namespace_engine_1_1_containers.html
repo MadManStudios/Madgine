@@ -1,0 +1,742 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: Engine::Containers Namespace Reference &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../docs/README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/gettingstarted.html#starting-the-engine">Starting the Engine</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/howtos.html">How-Tos</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/howtos/build.html">Build Instructions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/howtos/build.html#dependencies">Dependencies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/howtos/build.html#setup-the-madgine">Setup The Madgine</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/howtos/build.html#generating-project-files">Generating Project Files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/howtos/build.html#build-configurations">Build Configurations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/howtos/firstUniqueComponent.html">Writing your first UniqueComponent</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/keyvalue.html">KeyValue</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/keyvalue.html#valuetype">ValueType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/keyvalue.html#metatables">MetaTables</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/logging.html">Logging</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/logging.html#message-types">Message Types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/logging.html#building-log-messages">Building Log Messages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/logging.html#default-log">Default Log</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/logging.html#log-listener">Log Listener</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/pluginsystem.html">Plugins &amp; Unique Components</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/pluginsystem.html#plugins">Plugins</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/pluginsystem.html#unique-components">Unique Components</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/serialize.html">Serialization &amp; Synchronization</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#fundamental-data-types">Fundamental Data Types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#unit-hierarchy">Unit Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#serializetables">SerializeTables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#streams">Streams</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#managers">Managers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#state-replication">State Replication</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/threading.html">Threads &amp; Asynchronous Execution</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/threading.html#threads">Threads</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/threading.html#tasks">Tasks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/threading.html#taskqueues">TaskQueues</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/threading.html#workgroups">Workgroups</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/threading.html#scheduler">Scheduler</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#our-pledge">Our Pledge</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#our-standards">Our Standards</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#our-responsibilities">Our Responsibilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#scope">Scope</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#enforcement">Enforcement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#attribution">Attribution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/architecture.html#core-libraries">Core Libraries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../docs/README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../docs/README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: Engine::Containers Namespace Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/out/doc/doxygen/namespace_engine_1_1_containers.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="containers-namespace-reference">
+<h1>Containers Namespace Reference<a class="headerlink" href="#containers-namespace-reference" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: Engine::Containers Namespace Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;dev</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespace_engine.html">Engine</a></li><li class="navelem"><a class="el" href="namespace_engine_1_1_containers.html">Containers</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#concepts">Concepts</a> &#124;
+<a href="#typedef-members">Typedefs</a> &#124;
+<a href="#enum-members">Enumerations</a> &#124;
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle"><div class="title">Engine::Containers Namespace Reference</div></div>
+</div><!--header-->
+<div class="contents">
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_containers_1_1_atomic_container_operation.html">AtomicContainerOperation</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_containers_1_1_atomic_container_operation_base.html">AtomicContainerOperationBase</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_containers_1_1base__container.html">base_container</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><b>base_container&lt; C, std::void_t&lt; typename underlying_container&lt; C &gt;::type &gt; &gt;</b></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_containers_1_1_bit_array.html">BitArray</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_containers_1_1_bit_field.html">BitField</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_containers_1_1_bit_pair.html">BitPair</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_containers_1_1_bit_ptr.html">BitPtr</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_containers_1_1_bit_unique_ptr.html">BitUniquePtr</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_containers_1_1_bit_variant.html">BitVariant</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_containers_1_1_compact_container.html">CompactContainer</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_containers_1_1_compound_atomic_operation.html">CompoundAtomicOperation</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_containers_1_1container__api__impl.html">container_api_impl</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><b>container_api_impl&lt; C, std::deque&lt; Ty... &gt; &gt;</b></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><b>container_api_impl&lt; C, std::list&lt; Ty... &gt; &gt;</b></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><b>container_api_impl&lt; C, std::map&lt; K, T, Ty... &gt; &gt;</b></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><b>container_api_impl&lt; C, std::set&lt; Ty... &gt; &gt;</b></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><b>container_api_impl&lt; C, std::vector&lt; Ty... &gt; &gt;</b></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><b>container_traits</b></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><b>container_traits&lt; C &gt;</b></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><b>container_traits&lt; FreeListContainer&lt; C, DataTraits &gt;, void &gt;</b></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><b>container_traits&lt; mutable_set&lt; T, Cmp &gt; &gt;</b></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><b>container_traits&lt; std::array&lt; T, Size &gt; &gt;</b></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><b>container_traits&lt; std::deque&lt; T &gt; &gt;</b></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><b>container_traits&lt; std::list&lt; T &gt; &gt;</b></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><b>container_traits&lt; std::map&lt; K, T, Cmp &gt; &gt;</b></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><b>container_traits&lt; std::set&lt; T, Cmp &gt; &gt;</b></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><b>container_traits&lt; std::vector&lt; T &gt; &gt;</b></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_containers_1_1emplace__t.html">emplace_t</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_containers_1_1_free_bit_count.html">FreeBitCount</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><b>FreeBitCount&lt; std::monostate &gt;</b></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_containers_1_1_free_bit_count_3_01_t_01_4.html">FreeBitCount&lt; T &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_containers_1_1_free_list_container.html">FreeListContainer</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_containers_1_1_generator.html">Generator</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_containers_1_1mutable__set.html">mutable_set</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_containers_1_1_safe_iterator.html">SafeIterator</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_containers_1_1_sorted_container_api.html">SortedContainerApi</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_containers_1_1_tiny_vector.html">TinyVector</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><b>underlying_container</b></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><b>underlying_container&lt; AtomicContainerOperation&lt; Op &gt; &gt;</b></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><b>underlying_container&lt; CompactContainer&lt; C, Observer &gt; &gt;</b></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><b>underlying_container&lt; container_api_impl&lt; C, Base &gt; &gt;</b></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><b>underlying_container&lt; FreeListContainer&lt; C, DataTraits &gt; &gt;</b></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><b>underlying_container&lt; mutable_set&lt; T, Cmp &gt; &gt;</b></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><b>underlying_container&lt; Plugins::Container&lt; C, Registry, Base &gt; &gt;</b></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><b>underlying_container&lt; Serialize::SerializableContainerImpl&lt; C, Observer, _OffsetPtr &gt;, void &gt;</b></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><b>underlying_container&lt; Serialize::SyncableContainerImpl&lt; C, Observer, _OffsetPtr &gt; &gt;</b></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><b>underlying_container&lt; SortedContainerApi&lt; C &gt; &gt;</b></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html">VirtualIterator</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_containers_1_1_virtual_range.html">VirtualRange</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_containers_1_1_virtual_sentinel.html">VirtualSentinel</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="concepts" name="concepts"></a>
+Concepts</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="concept_engine_1_1_containers_1_1has___free_bit_count.html">has_FreeBitCount</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:a95530f02d1b2f3ab18f869c5154bdfe8"><td class="memTemplParams" colspan="2">template&lt;typename C &gt; </td></tr>
+<tr class="memitem:a95530f02d1b2f3ab18f869c5154bdfe8"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_containers.html#a95530f02d1b2f3ab18f869c5154bdfe8">container_api</a> = <a class="el" href="struct_engine_1_1_containers_1_1container__api__impl.html">container_api_impl</a>&lt; C, C &gt;</td></tr>
+<tr class="separator:a95530f02d1b2f3ab18f869c5154bdfe8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9beccdd6d27ebdd183352481b16fe89c"><td class="memTemplParams" colspan="2">template&lt;size_t bits&gt; </td></tr>
+<tr class="memitem:a9beccdd6d27ebdd183352481b16fe89c"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_containers.html#a9beccdd6d27ebdd183352481b16fe89c">MinimalHoldingUIntType</a> = std::enable_if&lt; bits&lt;=64, std::conditional_t&lt;(bits &gt; 32), uint64_t, std::conditional_t&lt;(bits &gt; 16), uint32_t, std::conditional_t&lt;(bits &gt; 8), uint16_t, std::conditional_t&lt;(bits &gt; 1), <a class="el" href="classuint8__t.html">uint8_t</a>, bool &gt; &gt; &gt; &gt; &gt;</td></tr>
+<tr class="separator:a9beccdd6d27ebdd183352481b16fe89c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a82de8b06ee3e0b77443d364c89e80a2b"><td class="memTemplParams" colspan="2">template&lt;size_t bits&gt; </td></tr>
+<tr class="memitem:a82de8b06ee3e0b77443d364c89e80a2b"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_containers.html#a82de8b06ee3e0b77443d364c89e80a2b">MinimalHoldingUIntType_t</a> = typename <a class="el" href="namespace_engine_1_1_containers.html#a9beccdd6d27ebdd183352481b16fe89c">MinimalHoldingUIntType</a>&lt; bits &gt;::type</td></tr>
+<tr class="separator:a82de8b06ee3e0b77443d364c89e80a2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:ae844b9a63c2211270f08f5392716618b"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_containers.html#ae844b9a63c2211270f08f5392716618b">ContainerEvent</a> { <br />
+&#160;&#160;<a class="el" href="namespace_engine_1_1_containers.html#ae844b9a63c2211270f08f5392716618ba652313683f6b4ce6b326e80ae4c7c062">EMPLACE</a> = 0x1
+, <a class="el" href="namespace_engine_1_1_containers.html#ae844b9a63c2211270f08f5392716618bade732569b7928f6ef74ba9301ea1ae3b">ERASE</a> = 0x2
+, <a class="el" href="namespace_engine_1_1_containers.html#ae844b9a63c2211270f08f5392716618ba20ab1f91a90d226172ae4ed7b25e7048">ERASE_RANGE</a> = 0x3
+, <a class="el" href="namespace_engine_1_1_containers.html#ae844b9a63c2211270f08f5392716618ba4c0d15a81bd371fb9409f0bd8d955b8c">SWAP_ERASE</a> = 0x4
+, <br />
+&#160;&#160;<a class="el" href="namespace_engine_1_1_containers.html#ae844b9a63c2211270f08f5392716618ba049f78d421e5450d57df46c8ec97ccce">RESET</a> = 0x5
+, <a class="el" href="namespace_engine_1_1_containers.html#ae844b9a63c2211270f08f5392716618ba284ba1d71abbbf170f3a1ab94f9e8b96">ACTIVATE_ITEM</a> = 0x6
+, <a class="el" href="namespace_engine_1_1_containers.html#ae844b9a63c2211270f08f5392716618ba8c8977dbd85fe517e5fcc8b22d346153">DEACTIVATE_ITEM</a> = 0x7
+, <a class="el" href="namespace_engine_1_1_containers.html#ae844b9a63c2211270f08f5392716618ba0d46df5d68b272c0b07331d81c00beac">MASK</a> = 0x0F
+, <br />
+&#160;&#160;<a class="el" href="namespace_engine_1_1_containers.html#ae844b9a63c2211270f08f5392716618baa4511faa9a960258e97509a0a1a707a7">BEFORE</a> = 0x00
+, <a class="el" href="namespace_engine_1_1_containers.html#ae844b9a63c2211270f08f5392716618baf06b0a66ddd0296629640c6326899ba7">AFTER</a> = 0x10
+, <a class="el" href="namespace_engine_1_1_containers.html#ae844b9a63c2211270f08f5392716618baa595b42bb8118617c6945fd489df7da3">ABORTED</a> = 0x20
+, <a class="el" href="namespace_engine_1_1_containers.html#ae844b9a63c2211270f08f5392716618bafcf801b2b4baa3e259f9f4063170736d">FULL_MASK</a> = 0x3F
+<br />
+ }</td></tr>
+<tr class="separator:ae844b9a63c2211270f08f5392716618b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a94d9a8c08cd80848fecda7bcec772792"><td class="memTemplParams" colspan="2">template&lt;typename C , typename... Args&gt; </td></tr>
+<tr class="memitem:a94d9a8c08cd80848fecda7bcec772792"><td class="memTemplItemLeft" align="right" valign="top">decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_containers.html#a94d9a8c08cd80848fecda7bcec772792">insertOperation</a> (C &amp;c, Args &amp;&amp;...args)</td></tr>
+<tr class="separator:a94d9a8c08cd80848fecda7bcec772792"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a666f6426691b11a7edb425d0222ecf1d"><td class="memTemplParams" colspan="2">template&lt;typename C , typename... Args&gt; </td></tr>
+<tr class="memitem:a666f6426691b11a7edb425d0222ecf1d"><td class="memTemplItemLeft" align="right" valign="top">decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_containers.html#a666f6426691b11a7edb425d0222ecf1d">multiInsertOperation</a> (C &amp;c, Args &amp;&amp;...args)</td></tr>
+<tr class="separator:a666f6426691b11a7edb425d0222ecf1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a86bfd97a73a5f5c89496ac563a84f381"><td class="memTemplParams" colspan="2">template&lt;typename C , typename... Args&gt; </td></tr>
+<tr class="memitem:a86bfd97a73a5f5c89496ac563a84f381"><td class="memTemplItemLeft" align="right" valign="top">decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_containers.html#a86bfd97a73a5f5c89496ac563a84f381">removeOperation</a> (C &amp;c, Args &amp;&amp;...args)</td></tr>
+<tr class="separator:a86bfd97a73a5f5c89496ac563a84f381"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a70a87b78ecb036a13ad9ed6008eb9000"><td class="memTemplParams" colspan="2">template&lt;typename C , typename... Args&gt; </td></tr>
+<tr class="memitem:a70a87b78ecb036a13ad9ed6008eb9000"><td class="memTemplItemLeft" align="right" valign="top">decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_containers.html#a70a87b78ecb036a13ad9ed6008eb9000">resetOperation</a> (C &amp;c, bool controlled, Args &amp;&amp;...args)</td></tr>
+<tr class="separator:a70a87b78ecb036a13ad9ed6008eb9000"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a070d6d2a12af272d4fbe005830c9eb27"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a070d6d2a12af272d4fbe005830c9eb27"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_containers_1_1_safe_iterator.html">SafeIterator</a>&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_containers.html#a070d6d2a12af272d4fbe005830c9eb27">safeIterate</a> (T &amp;&amp;t)</td></tr>
+<tr class="separator:a070d6d2a12af272d4fbe005830c9eb27"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a28dbb6181934dfae1de85a2c538ddc40"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="struct_engine_1_1_containers_1_1emplace__t.html">emplace_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_containers.html#a28dbb6181934dfae1de85a2c538ddc40">emplace</a></td></tr>
+<tr class="separator:a28dbb6181934dfae1de85a2c538ddc40"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa6fbd120f9e52bf17899885199426c35"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:aa6fbd120f9e52bf17899885199426c35"><td class="memTemplItemLeft" align="right" valign="top">constexpr size_t&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_containers.html#aa6fbd120f9e52bf17899885199426c35">FreeBitCount_v</a> = <a class="el" href="struct_engine_1_1_containers_1_1_free_bit_count.html">FreeBitCount</a>&lt;T&gt;::value</td></tr>
+<tr class="separator:aa6fbd120f9e52bf17899885199426c35"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Typedef Documentation</h2>
+<a id="a9beccdd6d27ebdd183352481b16fe89c" name="a9beccdd6d27ebdd183352481b16fe89c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9beccdd6d27ebdd183352481b16fe89c">&#9670;&#160;</a></span>MinimalHoldingUIntType</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;size_t bits&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespace_engine_1_1_containers.html#a9beccdd6d27ebdd183352481b16fe89c">Engine::Containers::MinimalHoldingUIntType</a> = typedef std::enable_if&lt;bits &lt;= 64, std::conditional_t&lt;(bits &gt; 32), uint64_t, std::conditional_t&lt;(bits &gt; 16), uint32_t, std::conditional_t&lt;(bits &gt; 8), uint16_t, std::conditional_t&lt;(bits &gt; 1), <a class="el" href="classuint8__t.html">uint8_t</a>, bool&gt; &gt;&gt; &gt;&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a82de8b06ee3e0b77443d364c89e80a2b" name="a82de8b06ee3e0b77443d364c89e80a2b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a82de8b06ee3e0b77443d364c89e80a2b">&#9670;&#160;</a></span>MinimalHoldingUIntType_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;size_t bits&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespace_engine_1_1_containers.html#a82de8b06ee3e0b77443d364c89e80a2b">Engine::Containers::MinimalHoldingUIntType_t</a> = typedef typename <a class="el" href="namespace_engine_1_1_containers.html#a9beccdd6d27ebdd183352481b16fe89c">MinimalHoldingUIntType</a>&lt;bits&gt;::type</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a95530f02d1b2f3ab18f869c5154bdfe8" name="a95530f02d1b2f3ab18f869c5154bdfe8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a95530f02d1b2f3ab18f869c5154bdfe8">&#9670;&#160;</a></span>container_api</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespace_engine_1_1_containers.html#a95530f02d1b2f3ab18f869c5154bdfe8">Engine::Containers::container_api</a> = typedef <a class="el" href="struct_engine_1_1_containers_1_1container__api__impl.html">container_api_impl</a>&lt;C, C&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Enumeration Type Documentation</h2>
+<a id="ae844b9a63c2211270f08f5392716618b" name="ae844b9a63c2211270f08f5392716618b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae844b9a63c2211270f08f5392716618b">&#9670;&#160;</a></span>ContainerEvent</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="namespace_engine_1_1_containers.html#ae844b9a63c2211270f08f5392716618b">Engine::Containers::ContainerEvent</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ae844b9a63c2211270f08f5392716618ba652313683f6b4ce6b326e80ae4c7c062" name="ae844b9a63c2211270f08f5392716618ba652313683f6b4ce6b326e80ae4c7c062"></a>EMPLACE&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ae844b9a63c2211270f08f5392716618bade732569b7928f6ef74ba9301ea1ae3b" name="ae844b9a63c2211270f08f5392716618bade732569b7928f6ef74ba9301ea1ae3b"></a>ERASE&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ae844b9a63c2211270f08f5392716618ba20ab1f91a90d226172ae4ed7b25e7048" name="ae844b9a63c2211270f08f5392716618ba20ab1f91a90d226172ae4ed7b25e7048"></a>ERASE_RANGE&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ae844b9a63c2211270f08f5392716618ba4c0d15a81bd371fb9409f0bd8d955b8c" name="ae844b9a63c2211270f08f5392716618ba4c0d15a81bd371fb9409f0bd8d955b8c"></a>SWAP_ERASE&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ae844b9a63c2211270f08f5392716618ba049f78d421e5450d57df46c8ec97ccce" name="ae844b9a63c2211270f08f5392716618ba049f78d421e5450d57df46c8ec97ccce"></a>RESET&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ae844b9a63c2211270f08f5392716618ba284ba1d71abbbf170f3a1ab94f9e8b96" name="ae844b9a63c2211270f08f5392716618ba284ba1d71abbbf170f3a1ab94f9e8b96"></a>ACTIVATE_ITEM&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ae844b9a63c2211270f08f5392716618ba8c8977dbd85fe517e5fcc8b22d346153" name="ae844b9a63c2211270f08f5392716618ba8c8977dbd85fe517e5fcc8b22d346153"></a>DEACTIVATE_ITEM&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ae844b9a63c2211270f08f5392716618ba0d46df5d68b272c0b07331d81c00beac" name="ae844b9a63c2211270f08f5392716618ba0d46df5d68b272c0b07331d81c00beac"></a>MASK&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ae844b9a63c2211270f08f5392716618baa4511faa9a960258e97509a0a1a707a7" name="ae844b9a63c2211270f08f5392716618baa4511faa9a960258e97509a0a1a707a7"></a>BEFORE&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ae844b9a63c2211270f08f5392716618baf06b0a66ddd0296629640c6326899ba7" name="ae844b9a63c2211270f08f5392716618baf06b0a66ddd0296629640c6326899ba7"></a>AFTER&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ae844b9a63c2211270f08f5392716618baa595b42bb8118617c6945fd489df7da3" name="ae844b9a63c2211270f08f5392716618baa595b42bb8118617c6945fd489df7da3"></a>ABORTED&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ae844b9a63c2211270f08f5392716618bafcf801b2b4baa3e259f9f4063170736d" name="ae844b9a63c2211270f08f5392716618bafcf801b2b4baa3e259f9f4063170736d"></a>FULL_MASK&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a70a87b78ecb036a13ad9ed6008eb9000" name="a70a87b78ecb036a13ad9ed6008eb9000"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a70a87b78ecb036a13ad9ed6008eb9000">&#9670;&#160;</a></span>resetOperation()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C , typename... Args&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">decltype(auto) Engine::Containers::resetOperation </td>
+          <td>(</td>
+          <td class="paramtype">C &amp;&#160;</td>
+          <td class="paramname"><em>c</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>controlled</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Args &amp;&amp;...&#160;</td>
+          <td class="paramname"><em>args</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a94d9a8c08cd80848fecda7bcec772792" name="a94d9a8c08cd80848fecda7bcec772792"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a94d9a8c08cd80848fecda7bcec772792">&#9670;&#160;</a></span>insertOperation()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C , typename... Args&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">decltype(auto) Engine::Containers::insertOperation </td>
+          <td>(</td>
+          <td class="paramtype">C &amp;&#160;</td>
+          <td class="paramname"><em>c</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Args &amp;&amp;...&#160;</td>
+          <td class="paramname"><em>args</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a666f6426691b11a7edb425d0222ecf1d" name="a666f6426691b11a7edb425d0222ecf1d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a666f6426691b11a7edb425d0222ecf1d">&#9670;&#160;</a></span>multiInsertOperation()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C , typename... Args&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">decltype(auto) Engine::Containers::multiInsertOperation </td>
+          <td>(</td>
+          <td class="paramtype">C &amp;&#160;</td>
+          <td class="paramname"><em>c</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Args &amp;&amp;...&#160;</td>
+          <td class="paramname"><em>args</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a86bfd97a73a5f5c89496ac563a84f381" name="a86bfd97a73a5f5c89496ac563a84f381"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a86bfd97a73a5f5c89496ac563a84f381">&#9670;&#160;</a></span>removeOperation()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename C , typename... Args&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">decltype(auto) Engine::Containers::removeOperation </td>
+          <td>(</td>
+          <td class="paramtype">C &amp;&#160;</td>
+          <td class="paramname"><em>c</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Args &amp;&amp;...&#160;</td>
+          <td class="paramname"><em>args</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a070d6d2a12af272d4fbe005830c9eb27" name="a070d6d2a12af272d4fbe005830c9eb27"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a070d6d2a12af272d4fbe005830c9eb27">&#9670;&#160;</a></span>safeIterate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_containers_1_1_safe_iterator.html">SafeIterator</a>&lt; T &gt; Engine::Containers::safeIterate </td>
+          <td>(</td>
+          <td class="paramtype">T &amp;&amp;&#160;</td>
+          <td class="paramname"><em>t</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="aa6fbd120f9e52bf17899885199426c35" name="aa6fbd120f9e52bf17899885199426c35"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa6fbd120f9e52bf17899885199426c35">&#9670;&#160;</a></span>FreeBitCount_v</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr size_t Engine::Containers::FreeBitCount_v = <a class="el" href="struct_engine_1_1_containers_1_1_free_bit_count.html">FreeBitCount</a>&lt;T&gt;::value</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a28dbb6181934dfae1de85a2c538ddc40" name="a28dbb6181934dfae1de85a2c538ddc40"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a28dbb6181934dfae1de85a2c538ddc40">&#9670;&#160;</a></span>emplace</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="struct_engine_1_1_containers_1_1emplace__t.html">emplace_t</a> Engine::Containers::emplace</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Fri Jun 5 2026 23:36:47 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        Version: dev
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Versions</dt>
+            <script src="../../../../versions.js"></script>
+        </dl>
+    </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

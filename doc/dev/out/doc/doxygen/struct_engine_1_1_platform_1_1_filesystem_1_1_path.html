@@ -1,0 +1,897 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: Engine::Platform::Filesystem::Path Struct Reference &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../docs/README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/gettingstarted.html#starting-the-engine">Starting the Engine</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/howtos.html">How-Tos</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/howtos/build.html">Build Instructions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/howtos/build.html#dependencies">Dependencies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/howtos/build.html#setup-the-madgine">Setup The Madgine</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/howtos/build.html#generating-project-files">Generating Project Files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/howtos/build.html#build-configurations">Build Configurations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/howtos/firstUniqueComponent.html">Writing your first UniqueComponent</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/keyvalue.html">KeyValue</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/keyvalue.html#valuetype">ValueType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/keyvalue.html#metatables">MetaTables</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/logging.html">Logging</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/logging.html#message-types">Message Types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/logging.html#building-log-messages">Building Log Messages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/logging.html#default-log">Default Log</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/logging.html#log-listener">Log Listener</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/pluginsystem.html">Plugins &amp; Unique Components</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/pluginsystem.html#plugins">Plugins</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/pluginsystem.html#unique-components">Unique Components</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/serialize.html">Serialization &amp; Synchronization</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#fundamental-data-types">Fundamental Data Types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#unit-hierarchy">Unit Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#serializetables">SerializeTables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#streams">Streams</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#managers">Managers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#state-replication">State Replication</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/threading.html">Threads &amp; Asynchronous Execution</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/threading.html#threads">Threads</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/threading.html#tasks">Tasks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/threading.html#taskqueues">TaskQueues</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/threading.html#workgroups">Workgroups</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/threading.html#scheduler">Scheduler</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#our-pledge">Our Pledge</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#our-standards">Our Standards</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#our-responsibilities">Our Responsibilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#scope">Scope</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#enforcement">Enforcement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#attribution">Attribution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/architecture.html#core-libraries">Core Libraries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../docs/README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../docs/README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: Engine::Platform::Filesystem::Path Struct Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/out/doc/doxygen/struct_engine_1_1_platform_1_1_filesystem_1_1_path.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="path-struct-reference">
+<h1>Path Struct Reference<a class="headerlink" href="#path-struct-reference" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: Engine::Platform::Filesystem::Path Struct Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;dev</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespace_engine.html">Engine</a></li><li class="navelem"><a class="el" href="namespace_engine_1_1_platform.html">Platform</a></li><li class="navelem"><a class="el" href="namespace_engine_1_1_platform_1_1_filesystem.html">Filesystem</a></li><li class="navelem"><a class="el" href="struct_engine_1_1_platform_1_1_filesystem_1_1_path.html">Path</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="struct_engine_1_1_platform_1_1_filesystem_1_1_path-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">Engine::Platform::Filesystem::Path Struct Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;path.h&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a0035815654904343a3f41bc19dceb8d9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_platform_1_1_filesystem_1_1_path.html#a0035815654904343a3f41bc19dceb8d9">Path</a> ()=default</td></tr>
+<tr class="separator:a0035815654904343a3f41bc19dceb8d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5edd2132bcab856e94a5eb842d4870f8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_platform_1_1_filesystem_1_1_path.html#a5edd2132bcab856e94a5eb842d4870f8">Path</a> (const char *s)</td></tr>
+<tr class="separator:a5edd2132bcab856e94a5eb842d4870f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af712e0f36551d075d3725c054d88232c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_platform_1_1_filesystem_1_1_path.html#af712e0f36551d075d3725c054d88232c">Path</a> (const std::string &amp;s)</td></tr>
+<tr class="separator:af712e0f36551d075d3725c054d88232c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea86b03ccd7c2f5a4f681b78ce17b69a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_platform_1_1_filesystem_1_1_path.html#aea86b03ccd7c2f5a4f681b78ce17b69a">Path</a> (std::string_view s)</td></tr>
+<tr class="separator:aea86b03ccd7c2f5a4f681b78ce17b69a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c31002bf62d2f57858ae32f07d7511d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_platform_1_1_filesystem_1_1_path.html">Path</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_platform_1_1_filesystem_1_1_path.html#a0c31002bf62d2f57858ae32f07d7511d">absolute</a> () const</td></tr>
+<tr class="separator:a0c31002bf62d2f57858ae32f07d7511d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a75542b49ba46119df5a7b063c0f681ee"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_platform_1_1_filesystem_1_1_path.html">Path</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_platform_1_1_filesystem_1_1_path.html#a75542b49ba46119df5a7b063c0f681ee">absolute</a> (const <a class="el" href="struct_engine_1_1_platform_1_1_filesystem_1_1_path.html">Path</a> &amp;base) const</td></tr>
+<tr class="separator:a75542b49ba46119df5a7b063c0f681ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af6d37fd406ed7e8c8b1716eb8bde7e3a"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_platform_1_1_filesystem_1_1_path.html#af6d37fd406ed7e8c8b1716eb8bde7e3a">c_str</a> () const</td></tr>
+<tr class="separator:af6d37fd406ed7e8c8b1716eb8bde7e3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d29694a9650dc25fb3385fbef70fb1f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_platform_1_1_filesystem_1_1_path.html#a3d29694a9650dc25fb3385fbef70fb1f">clear</a> ()</td></tr>
+<tr class="separator:a3d29694a9650dc25fb3385fbef70fb1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a644c22781eed2af10ddf84f66776e2c4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_platform_1_1_filesystem_1_1_path.html#a644c22781eed2af10ddf84f66776e2c4">empty</a> () const</td></tr>
+<tr class="separator:a644c22781eed2af10ddf84f66776e2c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a813647590f7ddac14b18a000e5bf8736"><td class="memItemLeft" align="right" valign="top">std::string_view&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_platform_1_1_filesystem_1_1_path.html#a813647590f7ddac14b18a000e5bf8736">extension</a> () const</td></tr>
+<tr class="separator:a813647590f7ddac14b18a000e5bf8736"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc3fb75500d9266a5f5ee8eb18987a31"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_platform_1_1_filesystem_1_1_path.html">Path</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_platform_1_1_filesystem_1_1_path.html#abc3fb75500d9266a5f5ee8eb18987a31">filename</a> () const</td></tr>
+<tr class="separator:abc3fb75500d9266a5f5ee8eb18987a31"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92f9009f3d976d77dbddaad6892acb11"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_platform_1_1_filesystem_1_1_path.html#a92f9009f3d976d77dbddaad6892acb11">isAbsolute</a> () const</td></tr>
+<tr class="separator:a92f9009f3d976d77dbddaad6892acb11"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a74ddb5b89a410e9a989c7aed1e75c0a8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_platform_1_1_filesystem_1_1_path.html#a74ddb5b89a410e9a989c7aed1e75c0a8">isRelative</a> () const</td></tr>
+<tr class="separator:a74ddb5b89a410e9a989c7aed1e75c0a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a221037073ef372fd2a19b373437728c1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_platform_1_1_filesystem_1_1_path.html#a221037073ef372fd2a19b373437728c1">isRelative</a> (const <a class="el" href="struct_engine_1_1_platform_1_1_filesystem_1_1_path.html">Path</a> &amp;base) const</td></tr>
+<tr class="separator:a221037073ef372fd2a19b373437728c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad72002d1e88db0839b4f0bc1b5ef35bb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_platform_1_1_filesystem_1_1_path.html#ad72002d1e88db0839b4f0bc1b5ef35bb">normalize</a> ()</td></tr>
+<tr class="separator:ad72002d1e88db0839b4f0bc1b5ef35bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4075d894a16618cd6664e2812b76aecf"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_platform_1_1_filesystem_1_1_path.html#a4075d894a16618cd6664e2812b76aecf">operator!=</a> (const <a class="el" href="struct_engine_1_1_platform_1_1_filesystem_1_1_path.html">Path</a> &amp;other) const</td></tr>
+<tr class="separator:a4075d894a16618cd6664e2812b76aecf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48d8136eac9b1278370ec2385ea3ba06"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_platform_1_1_filesystem_1_1_path.html">Path</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_platform_1_1_filesystem_1_1_path.html#a48d8136eac9b1278370ec2385ea3ba06">operator/</a> (const <a class="el" href="struct_engine_1_1_platform_1_1_filesystem_1_1_path.html">Path</a> &amp;p) const</td></tr>
+<tr class="separator:a48d8136eac9b1278370ec2385ea3ba06"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aecc629854885c2e928e4bb9c7726b1f9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_platform_1_1_filesystem_1_1_path.html">Path</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_platform_1_1_filesystem_1_1_path.html#aecc629854885c2e928e4bb9c7726b1f9">operator/=</a> (const <a class="el" href="struct_engine_1_1_platform_1_1_filesystem_1_1_path.html">Path</a> &amp;p)</td></tr>
+<tr class="separator:aecc629854885c2e928e4bb9c7726b1f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2582c9ea21db7f833c4c1f8b0d61a054"><td class="memItemLeft" align="right" valign="top">std::strong_ordering&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_platform_1_1_filesystem_1_1_path.html#a2582c9ea21db7f833c4c1f8b0d61a054">operator&lt;=&gt;</a> (const <a class="el" href="struct_engine_1_1_platform_1_1_filesystem_1_1_path.html">Path</a> &amp;other) const noexcept=default</td></tr>
+<tr class="separator:a2582c9ea21db7f833c4c1f8b0d61a054"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa785347a227bab54d0049df72bdd9396"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_platform_1_1_filesystem_1_1_path.html">Path</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_platform_1_1_filesystem_1_1_path.html#aa785347a227bab54d0049df72bdd9396">operator=</a> (const char *s)</td></tr>
+<tr class="separator:aa785347a227bab54d0049df72bdd9396"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a19dc319e4f5e5e61c266b5fa7a38f5e9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_platform_1_1_filesystem_1_1_path.html">Path</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_platform_1_1_filesystem_1_1_path.html#a19dc319e4f5e5e61c266b5fa7a38f5e9">operator=</a> (const std::string &amp;s)</td></tr>
+<tr class="separator:a19dc319e4f5e5e61c266b5fa7a38f5e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ef449afe981b824f373a1bd26b705d2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_platform_1_1_filesystem_1_1_path.html">Path</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_platform_1_1_filesystem_1_1_path.html#a6ef449afe981b824f373a1bd26b705d2">operator=</a> (std::string_view s)</td></tr>
+<tr class="separator:a6ef449afe981b824f373a1bd26b705d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a29c8e8917a550fd071230d63b2983dbb"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_platform_1_1_filesystem_1_1_path.html#a29c8e8917a550fd071230d63b2983dbb">operator==</a> (const <a class="el" href="struct_engine_1_1_platform_1_1_filesystem_1_1_path.html">Path</a> &amp;other) const</td></tr>
+<tr class="separator:a29c8e8917a550fd071230d63b2983dbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab4db6e456edf9f91a0701199d5870322"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_platform_1_1_filesystem_1_1_path.html">Path</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_platform_1_1_filesystem_1_1_path.html#ab4db6e456edf9f91a0701199d5870322">parentPath</a> () const</td></tr>
+<tr class="separator:ab4db6e456edf9f91a0701199d5870322"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a218f06aa1d8228ebb343d90b8a2efae4"><td class="memItemLeft" align="right" valign="top">std::string_view&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_platform_1_1_filesystem_1_1_path.html#a218f06aa1d8228ebb343d90b8a2efae4">protocol</a> () const</td></tr>
+<tr class="separator:a218f06aa1d8228ebb343d90b8a2efae4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d13fbf78cf52e301faced0e915eea98"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_platform_1_1_filesystem_1_1_path.html">Path</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_platform_1_1_filesystem_1_1_path.html#a8d13fbf78cf52e301faced0e915eea98">relative</a> () const</td></tr>
+<tr class="separator:a8d13fbf78cf52e301faced0e915eea98"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a50bb51f578cde30cda6643f1a3bb93e9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_platform_1_1_filesystem_1_1_path.html">Path</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_platform_1_1_filesystem_1_1_path.html#a50bb51f578cde30cda6643f1a3bb93e9">relative</a> (const <a class="el" href="struct_engine_1_1_platform_1_1_filesystem_1_1_path.html">Path</a> &amp;base) const</td></tr>
+<tr class="separator:a50bb51f578cde30cda6643f1a3bb93e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a305e87732d652c4ddb590855c4926f85"><td class="memItemLeft" align="right" valign="top">std::string_view&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_platform_1_1_filesystem_1_1_path.html#a305e87732d652c4ddb590855c4926f85">stem</a> () const</td></tr>
+<tr class="separator:a305e87732d652c4ddb590855c4926f85"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4305b7f2741604f2a45df80d4d09ad83"><td class="memItemLeft" align="right" valign="top">const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_platform_1_1_filesystem_1_1_path.html#a4305b7f2741604f2a45df80d4d09ad83">str</a> () const</td></tr>
+<tr class="separator:a4305b7f2741604f2a45df80d4d09ad83"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a0035815654904343a3f41bc19dceb8d9" name="a0035815654904343a3f41bc19dceb8d9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0035815654904343a3f41bc19dceb8d9">&#9670;&#160;</a></span>Path() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::Platform::Filesystem::Path::Path </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aea86b03ccd7c2f5a4f681b78ce17b69a" name="aea86b03ccd7c2f5a4f681b78ce17b69a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aea86b03ccd7c2f5a4f681b78ce17b69a">&#9670;&#160;</a></span>Path() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::Platform::Filesystem::Path::Path </td>
+          <td>(</td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>s</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af712e0f36551d075d3725c054d88232c" name="af712e0f36551d075d3725c054d88232c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af712e0f36551d075d3725c054d88232c">&#9670;&#160;</a></span>Path() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::Platform::Filesystem::Path::Path </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>s</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5edd2132bcab856e94a5eb842d4870f8" name="a5edd2132bcab856e94a5eb842d4870f8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5edd2132bcab856e94a5eb842d4870f8">&#9670;&#160;</a></span>Path() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::Platform::Filesystem::Path::Path </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>s</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a6ef449afe981b824f373a1bd26b705d2" name="a6ef449afe981b824f373a1bd26b705d2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ef449afe981b824f373a1bd26b705d2">&#9670;&#160;</a></span>operator=() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_platform_1_1_filesystem_1_1_path.html">Path</a> &amp; Engine::Platform::Filesystem::Path::operator= </td>
+          <td>(</td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>s</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a19dc319e4f5e5e61c266b5fa7a38f5e9" name="a19dc319e4f5e5e61c266b5fa7a38f5e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a19dc319e4f5e5e61c266b5fa7a38f5e9">&#9670;&#160;</a></span>operator=() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_platform_1_1_filesystem_1_1_path.html">Path</a> &amp; Engine::Platform::Filesystem::Path::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>s</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa785347a227bab54d0049df72bdd9396" name="aa785347a227bab54d0049df72bdd9396"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa785347a227bab54d0049df72bdd9396">&#9670;&#160;</a></span>operator=() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_platform_1_1_filesystem_1_1_path.html">Path</a> &amp; Engine::Platform::Filesystem::Path::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>s</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aecc629854885c2e928e4bb9c7726b1f9" name="aecc629854885c2e928e4bb9c7726b1f9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aecc629854885c2e928e4bb9c7726b1f9">&#9670;&#160;</a></span>operator/=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_platform_1_1_filesystem_1_1_path.html">Path</a> &amp; Engine::Platform::Filesystem::Path::operator/= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_platform_1_1_filesystem_1_1_path.html">Path</a> &amp;&#160;</td>
+          <td class="paramname"><em>p</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a48d8136eac9b1278370ec2385ea3ba06" name="a48d8136eac9b1278370ec2385ea3ba06"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a48d8136eac9b1278370ec2385ea3ba06">&#9670;&#160;</a></span>operator/()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_platform_1_1_filesystem_1_1_path.html">Path</a> Engine::Platform::Filesystem::Path::operator/ </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_platform_1_1_filesystem_1_1_path.html">Path</a> &amp;&#160;</td>
+          <td class="paramname"><em>p</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a29c8e8917a550fd071230d63b2983dbb" name="a29c8e8917a550fd071230d63b2983dbb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a29c8e8917a550fd071230d63b2983dbb">&#9670;&#160;</a></span>operator==()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Engine::Platform::Filesystem::Path::operator== </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_platform_1_1_filesystem_1_1_path.html">Path</a> &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4075d894a16618cd6664e2812b76aecf" name="a4075d894a16618cd6664e2812b76aecf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4075d894a16618cd6664e2812b76aecf">&#9670;&#160;</a></span>operator!=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Engine::Platform::Filesystem::Path::operator!= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_platform_1_1_filesystem_1_1_path.html">Path</a> &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2582c9ea21db7f833c4c1f8b0d61a054" name="a2582c9ea21db7f833c4c1f8b0d61a054"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2582c9ea21db7f833c4c1f8b0d61a054">&#9670;&#160;</a></span>operator&lt;=&gt;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::strong_ordering Engine::Platform::Filesystem::Path::operator&lt;=&gt; </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_platform_1_1_filesystem_1_1_path.html">Path</a> &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab4db6e456edf9f91a0701199d5870322" name="ab4db6e456edf9f91a0701199d5870322"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab4db6e456edf9f91a0701199d5870322">&#9670;&#160;</a></span>parentPath()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_platform_1_1_filesystem_1_1_path.html">Path</a> Engine::Platform::Filesystem::Path::parentPath </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8d13fbf78cf52e301faced0e915eea98" name="a8d13fbf78cf52e301faced0e915eea98"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8d13fbf78cf52e301faced0e915eea98">&#9670;&#160;</a></span>relative() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_platform_1_1_filesystem_1_1_path.html">Path</a> Engine::Platform::Filesystem::Path::relative </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a50bb51f578cde30cda6643f1a3bb93e9" name="a50bb51f578cde30cda6643f1a3bb93e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a50bb51f578cde30cda6643f1a3bb93e9">&#9670;&#160;</a></span>relative() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_platform_1_1_filesystem_1_1_path.html">Path</a> Engine::Platform::Filesystem::Path::relative </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_platform_1_1_filesystem_1_1_path.html">Path</a> &amp;&#160;</td>
+          <td class="paramname"><em>base</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0c31002bf62d2f57858ae32f07d7511d" name="a0c31002bf62d2f57858ae32f07d7511d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0c31002bf62d2f57858ae32f07d7511d">&#9670;&#160;</a></span>absolute() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_platform_1_1_filesystem_1_1_path.html">Path</a> Engine::Platform::Filesystem::Path::absolute </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a75542b49ba46119df5a7b063c0f681ee" name="a75542b49ba46119df5a7b063c0f681ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a75542b49ba46119df5a7b063c0f681ee">&#9670;&#160;</a></span>absolute() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_platform_1_1_filesystem_1_1_path.html">Path</a> Engine::Platform::Filesystem::Path::absolute </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_platform_1_1_filesystem_1_1_path.html">Path</a> &amp;&#160;</td>
+          <td class="paramname"><em>base</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad72002d1e88db0839b4f0bc1b5ef35bb" name="ad72002d1e88db0839b4f0bc1b5ef35bb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad72002d1e88db0839b4f0bc1b5ef35bb">&#9670;&#160;</a></span>normalize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Platform::Filesystem::Path::normalize </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abc3fb75500d9266a5f5ee8eb18987a31" name="abc3fb75500d9266a5f5ee8eb18987a31"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abc3fb75500d9266a5f5ee8eb18987a31">&#9670;&#160;</a></span>filename()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_platform_1_1_filesystem_1_1_path.html">Path</a> Engine::Platform::Filesystem::Path::filename </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a305e87732d652c4ddb590855c4926f85" name="a305e87732d652c4ddb590855c4926f85"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a305e87732d652c4ddb590855c4926f85">&#9670;&#160;</a></span>stem()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string_view Engine::Platform::Filesystem::Path::stem </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a813647590f7ddac14b18a000e5bf8736" name="a813647590f7ddac14b18a000e5bf8736"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a813647590f7ddac14b18a000e5bf8736">&#9670;&#160;</a></span>extension()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string_view Engine::Platform::Filesystem::Path::extension </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a218f06aa1d8228ebb343d90b8a2efae4" name="a218f06aa1d8228ebb343d90b8a2efae4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a218f06aa1d8228ebb343d90b8a2efae4">&#9670;&#160;</a></span>protocol()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string_view Engine::Platform::Filesystem::Path::protocol </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a92f9009f3d976d77dbddaad6892acb11" name="a92f9009f3d976d77dbddaad6892acb11"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a92f9009f3d976d77dbddaad6892acb11">&#9670;&#160;</a></span>isAbsolute()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Engine::Platform::Filesystem::Path::isAbsolute </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a74ddb5b89a410e9a989c7aed1e75c0a8" name="a74ddb5b89a410e9a989c7aed1e75c0a8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a74ddb5b89a410e9a989c7aed1e75c0a8">&#9670;&#160;</a></span>isRelative() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Engine::Platform::Filesystem::Path::isRelative </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a221037073ef372fd2a19b373437728c1" name="a221037073ef372fd2a19b373437728c1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a221037073ef372fd2a19b373437728c1">&#9670;&#160;</a></span>isRelative() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Engine::Platform::Filesystem::Path::isRelative </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_platform_1_1_filesystem_1_1_path.html">Path</a> &amp;&#160;</td>
+          <td class="paramname"><em>base</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3d29694a9650dc25fb3385fbef70fb1f" name="a3d29694a9650dc25fb3385fbef70fb1f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3d29694a9650dc25fb3385fbef70fb1f">&#9670;&#160;</a></span>clear()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Platform::Filesystem::Path::clear </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a644c22781eed2af10ddf84f66776e2c4" name="a644c22781eed2af10ddf84f66776e2c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a644c22781eed2af10ddf84f66776e2c4">&#9670;&#160;</a></span>empty()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Engine::Platform::Filesystem::Path::empty </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4305b7f2741604f2a45df80d4d09ad83" name="a4305b7f2741604f2a45df80d4d09ad83"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4305b7f2741604f2a45df80d4d09ad83">&#9670;&#160;</a></span>str()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::string &amp; Engine::Platform::Filesystem::Path::str </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af6d37fd406ed7e8c8b1716eb8bde7e3a" name="af6d37fd406ed7e8c8b1716eb8bde7e3a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af6d37fd406ed7e8c8b1716eb8bde7e3a">&#9670;&#160;</a></span>c_str()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char * Engine::Platform::Filesystem::Path::c_str </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following files:<ul>
+<li>src/Platform/filesystem/<a class="el" href="path_8h.html">path.h</a></li>
+<li>src/Platform/filesystem/<a class="el" href="path_8cpp.html">path.cpp</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Fri Jun 5 2026 23:36:48 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        Version: dev
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Versions</dt>
+            <script src="../../../../versions.js"></script>
+        </dl>
+    </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

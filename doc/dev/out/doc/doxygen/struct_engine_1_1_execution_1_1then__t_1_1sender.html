@@ -263,7 +263,7 @@ Public Types</h2></td></tr>
 <tr class="memitem:a1808444b1656e8860f6dadf03a23f427"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1then__t_1_1sender.html#a1808444b1656e8860f6dadf03a23f427">helper_type</a> = typename std::decay_t&lt; <a class="el" href="struct_engine_1_1_execution_1_1_sender.html">Sender</a> &gt;::template <a class="el" href="struct_engine_1_1_execution_1_1then__t_1_1sender.html#a269254f6b7c14563c5149423655ad819">value_types</a>&lt; <a class="el" href="struct_engine_1_1_execution_1_1then__t_1_1sender.html#ac579ae5a50907e6cf3564656e3524a6b">helper</a> &gt;</td></tr>
 <tr class="separator:a1808444b1656e8860f6dadf03a23f427"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a269254f6b7c14563c5149423655ad819"><td class="memTemplParams" colspan="2">template&lt;template&lt; typename... &gt; typename Tuple&gt; </td></tr>
-<tr class="memitem:a269254f6b7c14563c5149423655ad819"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1then__t_1_1sender.html#a269254f6b7c14563c5149423655ad819">value_types</a> = typename <a class="el" href="namespace_engine.html#ad21b000441a383ca943de4a3792ce0ec">to_type_pack</a>&lt; <a class="el" href="struct_engine_1_1_execution_1_1then__t_1_1sender.html#a1808444b1656e8860f6dadf03a23f427">helper_type</a> &gt;::template instantiate&lt; Tuple &gt;</td></tr>
+<tr class="memitem:a269254f6b7c14563c5149423655ad819"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1then__t_1_1sender.html#a269254f6b7c14563c5149423655ad819">value_types</a> = typename <a class="el" href="namespace_engine.html#a4730eea0dd80156674d4302db2bdf1ce">to_type_pack</a>&lt; <a class="el" href="struct_engine_1_1_execution_1_1then__t_1_1sender.html#a1808444b1656e8860f6dadf03a23f427">helper_type</a> &gt;::template instantiate&lt; Tuple &gt;</td></tr>
 <tr class="separator:a269254f6b7c14563c5149423655ad819"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_types_struct_engine_1_1_execution_1_1algorithm__sender"><td colspan="2" onclick="javascript:toggleInherit('pub_types_struct_engine_1_1_execution_1_1algorithm__sender')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="struct_engine_1_1_execution_1_1algorithm__sender.html">Engine::Execution::algorithm_sender&lt; Sender &gt;</a></td></tr>
 <tr class="memitem:a4c9e571510667c43971f19e34f282a64 inherit pub_types_struct_engine_1_1_execution_1_1algorithm__sender"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1algorithm__sender.html#a4c9e571510667c43971f19e34f282a64">result_type</a> = typename std::decay_t&lt; <a class="el" href="struct_engine_1_1_execution_1_1_sender.html">Sender</a> &gt;::result_type</td></tr>
@@ -338,7 +338,7 @@ template&lt;AnySender Sender, typename T &gt; </div>
 template&lt;template&lt; typename... &gt; typename Tuple&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="struct_engine_1_1_execution_1_1then__t_1_1sender.html">Engine::Execution::then_t::sender</a>&lt; <a class="el" href="struct_engine_1_1_execution_1_1_sender.html">Sender</a>, T &gt;::value_types =  typename <a class="el" href="namespace_engine.html#ad21b000441a383ca943de4a3792ce0ec">to_type_pack</a>&lt;<a class="el" href="struct_engine_1_1_execution_1_1then__t_1_1sender.html#a1808444b1656e8860f6dadf03a23f427">helper_type</a>&gt;::template instantiate&lt;Tuple&gt;</td>
+          <td class="memname">using <a class="el" href="struct_engine_1_1_execution_1_1then__t_1_1sender.html">Engine::Execution::then_t::sender</a>&lt; <a class="el" href="struct_engine_1_1_execution_1_1_sender.html">Sender</a>, T &gt;::value_types =  typename <a class="el" href="namespace_engine.html#a4730eea0dd80156674d4302db2bdf1ce">to_type_pack</a>&lt;<a class="el" href="struct_engine_1_1_execution_1_1then__t_1_1sender.html#a1808444b1656e8860f6dadf03a23f427">helper_type</a>&gt;::template instantiate&lt;Tuple&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -461,7 +461,7 @@ template&lt;AnySender Sender, typename T &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2026 23:14:07 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Fri Jun 5 2026 23:36:48 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

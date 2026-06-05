@@ -1,0 +1,987 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: Engine::Core::MainWindowComponentBase Struct Reference &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../docs/README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/gettingstarted.html#starting-the-engine">Starting the Engine</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/howtos.html">How-Tos</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/howtos/build.html">Build Instructions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/howtos/build.html#dependencies">Dependencies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/howtos/build.html#setup-the-madgine">Setup The Madgine</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/howtos/build.html#generating-project-files">Generating Project Files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/howtos/build.html#build-configurations">Build Configurations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/howtos/firstUniqueComponent.html">Writing your first UniqueComponent</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/keyvalue.html">KeyValue</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/keyvalue.html#valuetype">ValueType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/keyvalue.html#metatables">MetaTables</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/logging.html">Logging</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/logging.html#message-types">Message Types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/logging.html#building-log-messages">Building Log Messages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/logging.html#default-log">Default Log</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/logging.html#log-listener">Log Listener</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/pluginsystem.html">Plugins &amp; Unique Components</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/pluginsystem.html#plugins">Plugins</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/pluginsystem.html#unique-components">Unique Components</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/serialize.html">Serialization &amp; Synchronization</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#fundamental-data-types">Fundamental Data Types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#unit-hierarchy">Unit Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#serializetables">SerializeTables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#streams">Streams</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#managers">Managers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#state-replication">State Replication</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/threading.html">Threads &amp; Asynchronous Execution</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/threading.html#threads">Threads</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/threading.html#tasks">Tasks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/threading.html#taskqueues">TaskQueues</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/threading.html#workgroups">Workgroups</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/threading.html#scheduler">Scheduler</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#our-pledge">Our Pledge</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#our-standards">Our Standards</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#our-responsibilities">Our Responsibilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#scope">Scope</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#enforcement">Enforcement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#attribution">Attribution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/architecture.html#core-libraries">Core Libraries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../docs/README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../docs/README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: Engine::Core::MainWindowComponentBase Struct Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/out/doc/doxygen/struct_engine_1_1_core_1_1_main_window_component_base.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="mainwindowcomponentbase-struct-reference">
+<h1>MainWindowComponentBase Struct Reference<a class="headerlink" href="#mainwindowcomponentbase-struct-reference" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: Engine::Core::MainWindowComponentBase Struct Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;dev</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespace_engine.html">Engine</a></li><li class="navelem"><a class="el" href="namespace_engine_1_1_core.html">Core</a></li><li class="navelem"><a class="el" href="struct_engine_1_1_core_1_1_main_window_component_base.html">MainWindowComponentBase</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="#friends">Friends</a> &#124;
+<a href="struct_engine_1_1_core_1_1_main_window_component_base-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">Engine::Core::MainWindowComponentBase Struct Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;mainwindowcomponent.h&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for Engine::Core::MainWindowComponentBase:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="struct_engine_1_1_core_1_1_main_window_component_base__inherit__graph.svg" width="100%" height="420"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a5535b595e2c21789d769f392644da8d4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_core_1_1_main_window_component_base.html#a5535b595e2c21789d769f392644da8d4">MainWindowComponentBase</a> (<a class="el" href="struct_engine_1_1_core_1_1_main_window.html">MainWindow</a> &amp;<a class="el" href="struct_engine_1_1_core_1_1_main_window_component_base.html#a0c6b4c8618d882901d29a1aef32718ef">window</a>, int <a class="el" href="struct_engine_1_1_core_1_1_main_window_component_base.html#a9029f96e394108e19274dc05a5a51280">priority</a>)</td></tr>
+<tr class="separator:a5535b595e2c21789d769f392644da8d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac12a57a628e21551fc8f04fe11998a0"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_core_1_1_main_window_component_base.html#aac12a57a628e21551fc8f04fe11998a0">~MainWindowComponentBase</a> ()=default</td></tr>
+<tr class="separator:aac12a57a628e21551fc8f04fe11998a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d1e57149dd8be58899d211be06ebdda"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_math_1_1_rect2i.html">Math::Rect2i</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_core_1_1_main_window_component_base.html#a3d1e57149dd8be58899d211be06ebdda">getChildClientSpace</a> ()</td></tr>
+<tr class="separator:a3d1e57149dd8be58899d211be06ebdda"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a594599dfc74c19e9d65dce324149171b"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="struct_engine_1_1_math_1_1_rect2i.html">Math::Rect2i</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_core_1_1_main_window_component_base.html#a594599dfc74c19e9d65dce324149171b">getClientSpace</a> () const</td></tr>
+<tr class="separator:a594599dfc74c19e9d65dce324149171b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a81e50601983e5c414fe075752dd751fd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_math_1_1_rect2i.html">Math::Rect2i</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_core_1_1_main_window_component_base.html#a81e50601983e5c414fe075752dd751fd">getScreenSpace</a> () const</td></tr>
+<tr class="separator:a81e50601983e5c414fe075752dd751fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a637c55f20fdf062e2f182b0c36f76251"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a637c55f20fdf062e2f182b0c36f76251"><td class="memTemplItemLeft" align="right" valign="top">T &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_core_1_1_main_window_component_base.html#a637c55f20fdf062e2f182b0c36f76251">getWindowComponent</a> ()</td></tr>
+<tr class="separator:a637c55f20fdf062e2f182b0c36f76251"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a894a6d8ac816c2a21f508b5d1b8193b4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_core_1_1_main_window_component_base.html">MainWindowComponentBase</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_core_1_1_main_window_component_base.html#a894a6d8ac816c2a21f508b5d1b8193b4">getWindowComponent</a> (size_t i)</td></tr>
+<tr class="separator:a894a6d8ac816c2a21f508b5d1b8193b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ee2b2682d5a3ee0730b0ed41321f586"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_core_1_1_main_window_component_base.html#a3ee2b2682d5a3ee0730b0ed41321f586">includeInLayout</a> () const</td></tr>
+<tr class="separator:a3ee2b2682d5a3ee0730b0ed41321f586"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a31debbdbc9d2c88cb31e1dc4366760ee"><td class="memItemLeft" align="right" valign="top">virtual std::string_view&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_core_1_1_main_window_component_base.html#a31debbdbc9d2c88cb31e1dc4366760ee">key</a> () const =0</td></tr>
+<tr class="separator:a31debbdbc9d2c88cb31e1dc4366760ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef8b0e770b978765b645543eb6fc7665"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_core_1_1_main_window_component_base.html#aef8b0e770b978765b645543eb6fc7665">onResize</a> (const <a class="el" href="struct_engine_1_1_math_1_1_rect2i.html">Math::Rect2i</a> &amp;space)</td></tr>
+<tr class="separator:aef8b0e770b978765b645543eb6fc7665"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3397f7ea02981093efb38455b6877545"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_core_1_1_main_window_component_base.html#a3397f7ea02981093efb38455b6877545">onWindowEvent</a> (const <a class="el" href="namespace_engine_1_1_platform_1_1_window.html#a5aa522b8abcf1367061fe059b60b2228">Platform::Window::WindowEvent</a> &amp;arg)</td></tr>
+<tr class="separator:a3397f7ea02981093efb38455b6877545"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9029f96e394108e19274dc05a5a51280"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_core_1_1_main_window_component_base.html#a9029f96e394108e19274dc05a5a51280">priority</a> () const override</td></tr>
+<tr class="separator:a9029f96e394108e19274dc05a5a51280"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5e08b813a8001952335af4a652bc2abb"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_core_1_1_main_window_component_base.html#a5e08b813a8001952335af4a652bc2abb">render</a> (<a class="el" href="struct_engine_1_1_render_1_1_render_target.html">Render::RenderTarget</a> *target, size_t iteration) override</td></tr>
+<tr class="separator:a5e08b813a8001952335af4a652bc2abb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae73eb103a8432148b2b24c16618b32dd"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_core_1_1_main_window_component_base.html#ae73eb103a8432148b2b24c16618b32dd">startLifetime</a> ()</td></tr>
+<tr class="separator:ae73eb103a8432148b2b24c16618b32dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeff5fb9aab8a90bb4f9b1e3ec63ce0a9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_threading_1_1_task_queue.html">Threading::TaskQueue</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_core_1_1_main_window_component_base.html#aeff5fb9aab8a90bb4f9b1e3ec63ce0a9">taskQueue</a> () const</td></tr>
+<tr class="separator:aeff5fb9aab8a90bb4f9b1e3ec63ce0a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc4500c1e115703f34c620c88065ec5e"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_core_1_1_main_window_component_base.html#acc4500c1e115703f34c620c88065ec5e">wantsSoftwareKeyboard</a> () const</td></tr>
+<tr class="separator:acc4500c1e115703f34c620c88065ec5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c6b4c8618d882901d29a1aef32718ef"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_core_1_1_main_window.html">MainWindow</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_core_1_1_main_window_component_base.html#a0c6b4c8618d882901d29a1aef32718ef">window</a> () const</td></tr>
+<tr class="separator:a0c6b4c8618d882901d29a1aef32718ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_struct_engine_1_1_serialize_1_1_virtual_serializable_data_base"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_struct_engine_1_1_serialize_1_1_virtual_serializable_data_base')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="struct_engine_1_1_serialize_1_1_virtual_serializable_data_base.html">Engine::Serialize::VirtualSerializableDataBase&lt; Reflect::VirtualScopeBase&lt; Render::RenderPass &gt; &gt;</a></td></tr>
+<tr class="memitem:a4080aa7558545d734b7c0e8d490bd2e4 inherit pub_methods_struct_engine_1_1_serialize_1_1_virtual_serializable_data_base"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_serialize_1_1_serializable_data_const_ptr.html">SerializableDataConstPtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_virtual_serializable_data_base.html#a4080aa7558545d734b7c0e8d490bd2e4">customUnitPtr</a> () const=0</td></tr>
+<tr class="separator:a4080aa7558545d734b7c0e8d490bd2e4 inherit pub_methods_struct_engine_1_1_serialize_1_1_virtual_serializable_data_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa89ab97b888fa1bdff7c758e4eec8965 inherit pub_methods_struct_engine_1_1_serialize_1_1_virtual_serializable_data_base"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_serialize_1_1_serializable_data_ptr.html">SerializableDataPtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_virtual_serializable_data_base.html#aa89ab97b888fa1bdff7c758e4eec8965">customUnitPtr</a> ()=0</td></tr>
+<tr class="separator:aa89ab97b888fa1bdff7c758e4eec8965 inherit pub_methods_struct_engine_1_1_serialize_1_1_virtual_serializable_data_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_struct_engine_1_1_reflect_1_1_virtual_scope_base"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_struct_engine_1_1_reflect_1_1_virtual_scope_base')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="struct_engine_1_1_reflect_1_1_virtual_scope_base.html">Engine::Reflect::VirtualScopeBase&lt; Render::RenderPass &gt;</a></td></tr>
+<tr class="memitem:a9cc7cd4c4e4a4e01de294ed9ae5ac979 inherit pub_methods_struct_engine_1_1_reflect_1_1_virtual_scope_base"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_reflect_1_1_scope_ptr.html">ScopePtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_reflect_1_1_virtual_scope_base.html#a9cc7cd4c4e4a4e01de294ed9ae5ac979">customScopePtr</a> ()=0</td></tr>
+<tr class="separator:a9cc7cd4c4e4a4e01de294ed9ae5ac979 inherit pub_methods_struct_engine_1_1_reflect_1_1_virtual_scope_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_struct_engine_1_1_render_1_1_render_pass"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_struct_engine_1_1_render_1_1_render_pass')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="struct_engine_1_1_render_1_1_render_pass.html">Engine::Render::RenderPass</a></td></tr>
+<tr class="memitem:a3f48f7106a87c14a82d178f691351a43 inherit pub_methods_struct_engine_1_1_render_1_1_render_pass"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_pass.html#a3f48f7106a87c14a82d178f691351a43">~RenderPass</a> ()=default</td></tr>
+<tr class="separator:a3f48f7106a87c14a82d178f691351a43 inherit pub_methods_struct_engine_1_1_render_1_1_render_pass"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9bf8ab2e40afcee724591bfa21d5b8a6 inherit pub_methods_struct_engine_1_1_render_1_1_render_pass"><td class="memItemLeft" align="right" valign="top">const std::vector&lt; <a class="el" href="struct_engine_1_1_render_1_1_render_data.html">RenderData</a> * &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_pass.html#a9bf8ab2e40afcee724591bfa21d5b8a6">dependencies</a> () const</td></tr>
+<tr class="separator:a9bf8ab2e40afcee724591bfa21d5b8a6 inherit pub_methods_struct_engine_1_1_render_1_1_render_pass"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adf8d2bbdfba8e8147786f6a8e08c5206 inherit pub_methods_struct_engine_1_1_render_1_1_render_pass"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_pass.html#adf8d2bbdfba8e8147786f6a8e08c5206">iterations</a> () const</td></tr>
+<tr class="separator:adf8d2bbdfba8e8147786f6a8e08c5206 inherit pub_methods_struct_engine_1_1_render_1_1_render_pass"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aefee12ba047625b432159a8a5aab5db5 inherit pub_methods_struct_engine_1_1_render_1_1_render_pass"><td class="memItemLeft" align="right" valign="top">virtual std::string_view&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_pass.html#aefee12ba047625b432159a8a5aab5db5">name</a> () const =0</td></tr>
+<tr class="separator:aefee12ba047625b432159a8a5aab5db5 inherit pub_methods_struct_engine_1_1_render_1_1_render_pass"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a65da40f41f7ea1a615574f1278dbbba5 inherit pub_methods_struct_engine_1_1_render_1_1_render_pass"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_pass.html#a65da40f41f7ea1a615574f1278dbbba5">onTargetResize</a> (const <a class="el" href="struct_engine_1_1_math_1_1_vector2i.html">Math::Vector2i</a> &amp;size)</td></tr>
+<tr class="separator:a65da40f41f7ea1a615574f1278dbbba5 inherit pub_methods_struct_engine_1_1_render_1_1_render_pass"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7bd05ac718ffecfc128d459bb9b55aa8 inherit pub_methods_struct_engine_1_1_render_1_1_render_pass"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_pass.html#a7bd05ac718ffecfc128d459bb9b55aa8">preRender</a> (std::vector&lt; <a class="el" href="struct_engine_1_1_threading_1_1_task_future.html">Threading::TaskFuture</a>&lt; <a class="el" href="struct_engine_1_1_render_1_1_render_future.html">RenderFuture</a> &gt; &gt; &amp;<a class="el" href="struct_engine_1_1_render_1_1_render_pass.html#a9bf8ab2e40afcee724591bfa21d5b8a6">dependencies</a>, <a class="el" href="struct_engine_1_1_render_1_1_render_context.html">RenderContext</a> *context)</td></tr>
+<tr class="separator:a7bd05ac718ffecfc128d459bb9b55aa8 inherit pub_methods_struct_engine_1_1_render_1_1_render_pass"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a258a0f93a9d9b43bfd3c6069ccd1f01b inherit pub_methods_struct_engine_1_1_render_1_1_render_pass"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_pass.html#a258a0f93a9d9b43bfd3c6069ccd1f01b">priority</a> () const =0</td></tr>
+<tr class="separator:a258a0f93a9d9b43bfd3c6069ccd1f01b inherit pub_methods_struct_engine_1_1_render_1_1_render_pass"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a0c6b902e087d5400550ae5840dd123 inherit pub_methods_struct_engine_1_1_render_1_1_render_pass"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_pass.html#a4a0c6b902e087d5400550ae5840dd123">render</a> (<a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> *target, size_t iteration)=0</td></tr>
+<tr class="separator:a4a0c6b902e087d5400550ae5840dd123 inherit pub_methods_struct_engine_1_1_render_1_1_render_pass"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad611652b225be228decf1ce025fedba3 inherit pub_methods_struct_engine_1_1_render_1_1_render_pass"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_pass.html#ad611652b225be228decf1ce025fedba3">setup</a> (<a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> *target)</td></tr>
+<tr class="separator:ad611652b225be228decf1ce025fedba3 inherit pub_methods_struct_engine_1_1_render_1_1_render_pass"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aafea236add319940b82d47ee683153eb inherit pub_methods_struct_engine_1_1_render_1_1_render_pass"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_pass.html#aafea236add319940b82d47ee683153eb">shutdown</a> (<a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> *target)</td></tr>
+<tr class="separator:aafea236add319940b82d47ee683153eb inherit pub_methods_struct_engine_1_1_render_1_1_render_pass"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac179ec9a3bb2a3d8c5e5b67d076a9887 inherit pub_methods_struct_engine_1_1_render_1_1_render_pass"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_pass.html#ac179ec9a3bb2a3d8c5e5b67d076a9887">swapFlipFlopTextures</a> (size_t iteration) const</td></tr>
+<tr class="separator:ac179ec9a3bb2a3d8c5e5b67d076a9887 inherit pub_methods_struct_engine_1_1_render_1_1_render_pass"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab6074cb9edbe7ca80797849e852c55bc inherit pub_methods_struct_engine_1_1_render_1_1_render_pass"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_pass.html#ab6074cb9edbe7ca80797849e852c55bc">targetCount</a> (size_t iteration) const</td></tr>
+<tr class="separator:ab6074cb9edbe7ca80797849e852c55bc inherit pub_methods_struct_engine_1_1_render_1_1_render_pass"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9086e4e60606292e619020aacbe36f2 inherit pub_methods_struct_engine_1_1_render_1_1_render_pass"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_pass.html#aa9086e4e60606292e619020aacbe36f2">targetIndex</a> (size_t iteration) const</td></tr>
+<tr class="separator:aa9086e4e60606292e619020aacbe36f2 inherit pub_methods_struct_engine_1_1_render_1_1_render_pass"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a95cd5c6422bb3a19171d6c7622283d32 inherit pub_methods_struct_engine_1_1_render_1_1_render_pass"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_pass.html#a95cd5c6422bb3a19171d6c7622283d32">targetSubresourceIndex</a> (size_t iteration) const</td></tr>
+<tr class="separator:a95cd5c6422bb3a19171d6c7622283d32 inherit pub_methods_struct_engine_1_1_render_1_1_render_pass"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_struct_engine_1_1_render_1_1_render_debuggable"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_struct_engine_1_1_render_1_1_render_debuggable')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="struct_engine_1_1_render_1_1_render_debuggable.html">Engine::Render::RenderDebuggable</a></td></tr>
+<tr class="memitem:a9ca57c4ea911fea7490c5881c5530fb9 inherit pub_methods_struct_engine_1_1_render_1_1_render_debuggable"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_debuggable.html#a9ca57c4ea911fea7490c5881c5530fb9">debugCameras</a> (<a class="el" href="namespace_engine.html#af01988c2c1ea209918743fd4d06dc156">CallableView</a>&lt; <a class="el" href="classvoid.html">void</a>(const <a class="el" href="struct_engine_1_1_render_1_1_camera.html">Camera</a> &amp;, std::string_view)&gt; handler) const</td></tr>
+<tr class="separator:a9ca57c4ea911fea7490c5881c5530fb9 inherit pub_methods_struct_engine_1_1_render_1_1_render_debuggable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7207ca75b583ec49cbf66e07298da824 inherit pub_methods_struct_engine_1_1_render_1_1_render_debuggable"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_debuggable.html#a7207ca75b583ec49cbf66e07298da824">debugFrustums</a> (<a class="el" href="namespace_engine.html#af01988c2c1ea209918743fd4d06dc156">CallableView</a>&lt; <a class="el" href="classvoid.html">void</a>(const <a class="el" href="struct_engine_1_1_math_1_1_frustum.html">Math::Frustum</a> &amp;, std::string_view)&gt; handler) const</td></tr>
+<tr class="separator:a7207ca75b583ec49cbf66e07298da824 inherit pub_methods_struct_engine_1_1_render_1_1_render_debuggable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_struct_engine_1_1_threading_1_1_madgine_object"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_struct_engine_1_1_threading_1_1_madgine_object')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="struct_engine_1_1_threading_1_1_madgine_object.html">Engine::Threading::MadgineObject&lt; MainWindowComponentBase &gt;</a></td></tr>
+<tr class="memitem:a7f961a0e1fb888abeefec69330433b0b inherit pub_methods_struct_engine_1_1_threading_1_1_madgine_object"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_threading_1_1_task.html">Threading::Task</a>&lt; <a class="el" href="classvoid.html">void</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_madgine_object.html#a7f961a0e1fb888abeefec69330433b0b">callFinalize</a> ()</td></tr>
+<tr class="separator:a7f961a0e1fb888abeefec69330433b0b inherit pub_methods_struct_engine_1_1_threading_1_1_madgine_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b7e2b8dcec964a2e0c63914970ead44 inherit pub_methods_struct_engine_1_1_threading_1_1_madgine_object"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_threading_1_1_task.html">Threading::Task</a>&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_madgine_object.html#a8b7e2b8dcec964a2e0c63914970ead44">callInit</a> ()</td></tr>
+<tr class="separator:a8b7e2b8dcec964a2e0c63914970ead44 inherit pub_methods_struct_engine_1_1_threading_1_1_madgine_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_struct_engine_1_1_threading_1_1_madgine_object_state"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_struct_engine_1_1_threading_1_1_madgine_object_state')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="struct_engine_1_1_threading_1_1_madgine_object_state.html">Engine::Threading::MadgineObjectState</a></td></tr>
+<tr class="memitem:a58fd57e0dc3b8883599040a374216065 inherit pub_methods_struct_engine_1_1_threading_1_1_madgine_object_state"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_madgine_object_state.html#a58fd57e0dc3b8883599040a374216065">isInitialized</a> ()</td></tr>
+<tr class="separator:a58fd57e0dc3b8883599040a374216065 inherit pub_methods_struct_engine_1_1_threading_1_1_madgine_object_state"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ddeebc3ec5f65954475998971698894 inherit pub_methods_struct_engine_1_1_threading_1_1_madgine_object_state"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_threading_1_1_task_future.html">Threading::TaskFuture</a>&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_madgine_object_state.html#a2ddeebc3ec5f65954475998971698894">state</a> ()</td></tr>
+<tr class="separator:a2ddeebc3ec5f65954475998971698894 inherit pub_methods_struct_engine_1_1_threading_1_1_madgine_object_state"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a84d63d884d56f99d240229ddac77fe04"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_core_1_1_main_window_component_base.html#a84d63d884d56f99d240229ddac77fe04">mPriority</a></td></tr>
+<tr class="separator:a84d63d884d56f99d240229ddac77fe04"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:a6221ed538d2f2a24618405cb12ca57bc"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_threading_1_1_task.html">Threading::Task</a>&lt; <a class="el" href="classvoid.html">void</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_core_1_1_main_window_component_base.html#a6221ed538d2f2a24618405cb12ca57bc">finalize</a> ()</td></tr>
+<tr class="separator:a6221ed538d2f2a24618405cb12ca57bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa4808578c3b2aa93b4bcbec8cde0d66e"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_threading_1_1_task.html">Threading::Task</a>&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_core_1_1_main_window_component_base.html#aa4808578c3b2aa93b4bcbec8cde0d66e">init</a> ()</td></tr>
+<tr class="separator:aa4808578c3b2aa93b4bcbec8cde0d66e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_methods_struct_engine_1_1_render_1_1_render_pass"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_struct_engine_1_1_render_1_1_render_pass')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="struct_engine_1_1_render_1_1_render_pass.html">Engine::Render::RenderPass</a></td></tr>
+<tr class="memitem:a9bb814447635eeee9642f4c8213f4042 inherit pro_methods_struct_engine_1_1_render_1_1_render_pass"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_pass.html#a9bb814447635eeee9642f4c8213f4042">addDependency</a> (<a class="el" href="struct_engine_1_1_render_1_1_render_data.html">RenderData</a> *dep)</td></tr>
+<tr class="separator:a9bb814447635eeee9642f4c8213f4042 inherit pro_methods_struct_engine_1_1_render_1_1_render_pass"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88d63e477c496ea4e94de634f55943de inherit pro_methods_struct_engine_1_1_render_1_1_render_pass"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_pass.html#a88d63e477c496ea4e94de634f55943de">removeDependency</a> (<a class="el" href="struct_engine_1_1_render_1_1_render_data.html">RenderData</a> *dep)</td></tr>
+<tr class="separator:a88d63e477c496ea4e94de634f55943de inherit pro_methods_struct_engine_1_1_render_1_1_render_pass"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea0c047fde6108f4558f4b246d776110 inherit pro_methods_struct_engine_1_1_render_1_1_render_pass"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_pass.html#aea0c047fde6108f4558f4b246d776110">setupImpl</a> (<a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> *target, <a class="el" href="struct_engine_1_1_render_1_1_shader_object_ptr.html">ShaderObjectPtr</a> vs, <a class="el" href="struct_engine_1_1_render_1_1_shader_object_ptr.html">ShaderObjectPtr</a> ps, std::vector&lt; size_t &gt; bufferSizes, bool depthChecking=true)</td></tr>
+<tr class="separator:aea0c047fde6108f4558f4b246d776110 inherit pro_methods_struct_engine_1_1_render_1_1_render_pass"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_methods_struct_engine_1_1_threading_1_1_madgine_object_state"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_struct_engine_1_1_threading_1_1_madgine_object_state')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="struct_engine_1_1_threading_1_1_madgine_object_state.html">Engine::Threading::MadgineObjectState</a></td></tr>
+<tr class="memitem:adc0d30618c88b1348697944a0409a8ff inherit pro_methods_struct_engine_1_1_threading_1_1_madgine_object_state"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_madgine_object_state.html#adc0d30618c88b1348697944a0409a8ff">~MadgineObjectState</a> ()</td></tr>
+<tr class="separator:adc0d30618c88b1348697944a0409a8ff inherit pro_methods_struct_engine_1_1_threading_1_1_madgine_object_state"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:a98e411c45b553fa2cfde845cb41e0f1f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_math_1_1_rect2i.html">Math::Rect2i</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_core_1_1_main_window_component_base.html#a98e411c45b553fa2cfde845cb41e0f1f">mClientSpace</a></td></tr>
+<tr class="separator:a98e411c45b553fa2cfde845cb41e0f1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a57cf0fd2ff26c80b948638ea5ccf8870"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_core_1_1_main_window.html">MainWindow</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_core_1_1_main_window_component_base.html#a57cf0fd2ff26c80b948638ea5ccf8870">mWindow</a></td></tr>
+<tr class="separator:a57cf0fd2ff26c80b948638ea5ccf8870"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_attribs_struct_engine_1_1_render_1_1_render_pass"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_struct_engine_1_1_render_1_1_render_pass')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="struct_engine_1_1_render_1_1_render_pass.html">Engine::Render::RenderPass</a></td></tr>
+<tr class="memitem:ab11687ad9479443010b07863d2da95a5 inherit pro_attribs_struct_engine_1_1_render_1_1_render_pass"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_render_1_1_pipeline_loader_1_1_instance.html">PipelineLoader::Instance</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_pass.html#ab11687ad9479443010b07863d2da95a5">mPipeline</a></td></tr>
+<tr class="separator:ab11687ad9479443010b07863d2da95a5 inherit pro_attribs_struct_engine_1_1_render_1_1_render_pass"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_attribs_struct_engine_1_1_threading_1_1_madgine_object_state"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_struct_engine_1_1_threading_1_1_madgine_object_state')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="struct_engine_1_1_threading_1_1_madgine_object_state.html">Engine::Threading::MadgineObjectState</a></td></tr>
+<tr class="memitem:a973f1761d25a9970ccf6f48c019927f0 inherit pro_attribs_struct_engine_1_1_threading_1_1_madgine_object_state"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_threading_1_1_atomic_task_future.html">Threading::AtomicTaskFuture</a>&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_madgine_object_state.html#a973f1761d25a9970ccf6f48c019927f0">mState</a></td></tr>
+<tr class="separator:a973f1761d25a9970ccf6f48c019927f0 inherit pro_attribs_struct_engine_1_1_threading_1_1_madgine_object_state"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9dc0b798d3cdd9d075bef9d161d9419c inherit pro_attribs_struct_engine_1_1_threading_1_1_madgine_object_state"><td class="memItemLeft" align="right" valign="top">const std::type_info *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_madgine_object_state.html#a9dc0b798d3cdd9d075bef9d161d9419c">mTypeInfo</a> = nullptr</td></tr>
+<tr class="separator:a9dc0b798d3cdd9d075bef9d161d9419c inherit pro_attribs_struct_engine_1_1_threading_1_1_madgine_object_state"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
+Friends</h2></td></tr>
+<tr class="memitem:a2f969b381258f04d79aa9f0073fd691b"><td class="memItemLeft" align="right" valign="top">struct&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_core_1_1_main_window_component_base.html#a2f969b381258f04d79aa9f0073fd691b">MadgineObject&lt; MainWindowComponentBase &gt;</a></td></tr>
+<tr class="separator:a2f969b381258f04d79aa9f0073fd691b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a5535b595e2c21789d769f392644da8d4" name="a5535b595e2c21789d769f392644da8d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5535b595e2c21789d769f392644da8d4">&#9670;&#160;</a></span>MainWindowComponentBase()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::Core::MainWindowComponentBase::MainWindowComponentBase </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_core_1_1_main_window.html">MainWindow</a> &amp;&#160;</td>
+          <td class="paramname"><em>window</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>priority</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aac12a57a628e21551fc8f04fe11998a0" name="aac12a57a628e21551fc8f04fe11998a0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aac12a57a628e21551fc8f04fe11998a0">&#9670;&#160;</a></span>~MainWindowComponentBase()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual Engine::Core::MainWindowComponentBase::~MainWindowComponentBase </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a637c55f20fdf062e2f182b0c36f76251" name="a637c55f20fdf062e2f182b0c36f76251"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a637c55f20fdf062e2f182b0c36f76251">&#9670;&#160;</a></span>getWindowComponent() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T &amp; Engine::Core::MainWindowComponentBase::getWindowComponent </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a894a6d8ac816c2a21f508b5d1b8193b4" name="a894a6d8ac816c2a21f508b5d1b8193b4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a894a6d8ac816c2a21f508b5d1b8193b4">&#9670;&#160;</a></span>getWindowComponent() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_core_1_1_main_window_component_base.html">MainWindowComponentBase</a> &amp; Engine::Core::MainWindowComponentBase::getWindowComponent </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>i</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0c6b4c8618d882901d29a1aef32718ef" name="a0c6b4c8618d882901d29a1aef32718ef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0c6b4c8618d882901d29a1aef32718ef">&#9670;&#160;</a></span>window()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_core_1_1_main_window.html">MainWindow</a> &amp; Engine::Core::MainWindowComponentBase::window </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a31debbdbc9d2c88cb31e1dc4366760ee" name="a31debbdbc9d2c88cb31e1dc4366760ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a31debbdbc9d2c88cb31e1dc4366760ee">&#9670;&#160;</a></span>key()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual std::string_view Engine::Core::MainWindowComponentBase::key </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9029f96e394108e19274dc05a5a51280" name="a9029f96e394108e19274dc05a5a51280"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9029f96e394108e19274dc05a5a51280">&#9670;&#160;</a></span>priority()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Engine::Core::MainWindowComponentBase::priority </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implements <a class="el" href="struct_engine_1_1_render_1_1_render_pass.html#a258a0f93a9d9b43bfd3c6069ccd1f01b">Engine::Render::RenderPass</a>.</p>
+
+</div>
+</div>
+<a id="a81e50601983e5c414fe075752dd751fd" name="a81e50601983e5c414fe075752dd751fd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a81e50601983e5c414fe075752dd751fd">&#9670;&#160;</a></span>getScreenSpace()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_math_1_1_rect2i.html">Math::Rect2i</a> Engine::Core::MainWindowComponentBase::getScreenSpace </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a594599dfc74c19e9d65dce324149171b" name="a594599dfc74c19e9d65dce324149171b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a594599dfc74c19e9d65dce324149171b">&#9670;&#160;</a></span>getClientSpace()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="struct_engine_1_1_math_1_1_rect2i.html">Math::Rect2i</a> &amp; Engine::Core::MainWindowComponentBase::getClientSpace </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3d1e57149dd8be58899d211be06ebdda" name="a3d1e57149dd8be58899d211be06ebdda"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3d1e57149dd8be58899d211be06ebdda">&#9670;&#160;</a></span>getChildClientSpace()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_math_1_1_rect2i.html">Math::Rect2i</a> Engine::Core::MainWindowComponentBase::getChildClientSpace </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aef8b0e770b978765b645543eb6fc7665" name="aef8b0e770b978765b645543eb6fc7665"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aef8b0e770b978765b645543eb6fc7665">&#9670;&#160;</a></span>onResize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Core::MainWindowComponentBase::onResize </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_math_1_1_rect2i.html">Math::Rect2i</a> &amp;&#160;</td>
+          <td class="paramname"><em>space</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5e08b813a8001952335af4a652bc2abb" name="a5e08b813a8001952335af4a652bc2abb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5e08b813a8001952335af4a652bc2abb">&#9670;&#160;</a></span>render()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Core::MainWindowComponentBase::render </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html">Render::RenderTarget</a> *&#160;</td>
+          <td class="paramname"><em>target</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>iteration</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implements <a class="el" href="struct_engine_1_1_render_1_1_render_pass.html#a4a0c6b902e087d5400550ae5840dd123">Engine::Render::RenderPass</a>.</p>
+
+</div>
+</div>
+<a id="a3397f7ea02981093efb38455b6877545" name="a3397f7ea02981093efb38455b6877545"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3397f7ea02981093efb38455b6877545">&#9670;&#160;</a></span>onWindowEvent()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool Engine::Core::MainWindowComponentBase::onWindowEvent </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="namespace_engine_1_1_platform_1_1_window.html#a5aa522b8abcf1367061fe059b60b2228">Platform::Window::WindowEvent</a> &amp;&#160;</td>
+          <td class="paramname"><em>arg</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="acc4500c1e115703f34c620c88065ec5e" name="acc4500c1e115703f34c620c88065ec5e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acc4500c1e115703f34c620c88065ec5e">&#9670;&#160;</a></span>wantsSoftwareKeyboard()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool Engine::Core::MainWindowComponentBase::wantsSoftwareKeyboard </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aeff5fb9aab8a90bb4f9b1e3ec63ce0a9" name="aeff5fb9aab8a90bb4f9b1e3ec63ce0a9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeff5fb9aab8a90bb4f9b1e3ec63ce0a9">&#9670;&#160;</a></span>taskQueue()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_threading_1_1_task_queue.html">Threading::TaskQueue</a> * Engine::Core::MainWindowComponentBase::taskQueue </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3ee2b2682d5a3ee0730b0ed41321f586" name="a3ee2b2682d5a3ee0730b0ed41321f586"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3ee2b2682d5a3ee0730b0ed41321f586">&#9670;&#160;</a></span>includeInLayout()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Engine::Core::MainWindowComponentBase::includeInLayout </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae73eb103a8432148b2b24c16618b32dd" name="ae73eb103a8432148b2b24c16618b32dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae73eb103a8432148b2b24c16618b32dd">&#9670;&#160;</a></span>startLifetime()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Core::MainWindowComponentBase::startLifetime </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa4808578c3b2aa93b4bcbec8cde0d66e" name="aa4808578c3b2aa93b4bcbec8cde0d66e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa4808578c3b2aa93b4bcbec8cde0d66e">&#9670;&#160;</a></span>init()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_threading_1_1_task.html">Threading::Task</a>&lt; bool &gt; Engine::Core::MainWindowComponentBase::init </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6221ed538d2f2a24618405cb12ca57bc" name="a6221ed538d2f2a24618405cb12ca57bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6221ed538d2f2a24618405cb12ca57bc">&#9670;&#160;</a></span>finalize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_threading_1_1_task.html">Threading::Task</a>&lt; <a class="el" href="classvoid.html">void</a> &gt; Engine::Core::MainWindowComponentBase::finalize </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Friends And Related Function Documentation</h2>
+<a id="a2f969b381258f04d79aa9f0073fd691b" name="a2f969b381258f04d79aa9f0073fd691b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f969b381258f04d79aa9f0073fd691b">&#9670;&#160;</a></span>MadgineObject&lt; MainWindowComponentBase &gt;</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">friend struct MadgineObject&lt; <a class="el" href="struct_engine_1_1_core_1_1_main_window_component_base.html">MainWindowComponentBase</a> &gt;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a84d63d884d56f99d240229ddac77fe04" name="a84d63d884d56f99d240229ddac77fe04"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a84d63d884d56f99d240229ddac77fe04">&#9670;&#160;</a></span>mPriority</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int Engine::Core::MainWindowComponentBase::mPriority</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a57cf0fd2ff26c80b948638ea5ccf8870" name="a57cf0fd2ff26c80b948638ea5ccf8870"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a57cf0fd2ff26c80b948638ea5ccf8870">&#9670;&#160;</a></span>mWindow</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_core_1_1_main_window.html">MainWindow</a>&amp; Engine::Core::MainWindowComponentBase::mWindow</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a98e411c45b553fa2cfde845cb41e0f1f" name="a98e411c45b553fa2cfde845cb41e0f1f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a98e411c45b553fa2cfde845cb41e0f1f">&#9670;&#160;</a></span>mClientSpace</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_math_1_1_rect2i.html">Math::Rect2i</a> Engine::Core::MainWindowComponentBase::mClientSpace</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following files:<ul>
+<li>plugins/client/api/src/Madgine/window/<a class="el" href="mainwindowcomponent_8h.html">mainwindowcomponent.h</a></li>
+<li>plugins/client/api/src/Madgine/window/<a class="el" href="mainwindowcomponent_8cpp.html">mainwindowcomponent.cpp</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Fri Jun 5 2026 23:36:47 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        Version: dev
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Versions</dt>
+            <script src="../../../../versions.js"></script>
+        </dl>
+    </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

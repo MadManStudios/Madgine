@@ -303,6 +303,10 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_constant_binding_3_01_t_01_6_01_4.html">ConstantBinding&lt; T &amp; &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_coroutine_handle.html">CoroutineHandle</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_coroutine_handle_3_01void_01_4.html">CoroutineHandle&lt; void &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_coroutine_sender_state.html">CoroutineSenderState</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_coroutine_sender_state_3_01_r_01_4.html">CoroutineSenderState&lt; R &gt;</a></td></tr>
@@ -342,6 +346,8 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1get__stop__token__t.html">get_stop_token_t</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1halt__t.html">halt_t</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_interval_clock.html">IntervalClock</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1just__error__t.html">just_error_t</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -471,7 +477,7 @@ Typedefs</h2></td></tr>
 <tr class="memitem:a0607edaba960b3bfd37ca2e476a3a362"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_execution.html#a0607edaba960b3bfd37ca2e476a3a362">connect_result_t</a> = decltype(<a class="el" href="namespace_engine_1_1_execution.html#acbbd90e985d42e94e2068ee0e5fe56e1">connect</a>(std::declval&lt; <a class="el" href="struct_engine_1_1_execution_1_1_sender.html">Sender</a> &gt;(), std::declval&lt; Rec &gt;()))</td></tr>
 <tr class="separator:a0607edaba960b3bfd37ca2e476a3a362"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab0d30f61aa086490f27bf10538b9c1d5"><td class="memTemplParams" colspan="2">template&lt;typename R , typename... Ty&gt; </td></tr>
-<tr class="memitem:ab0d30f61aa086490f27bf10538b9c1d5"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_execution.html#ab0d30f61aa086490f27bf10538b9c1d5">ConnectionReceiver</a> = <a class="el" href="struct_engine_1_1_execution_1_1_virtual_receiver_base_ex.html">VirtualReceiverBaseEx</a>&lt; <a class="el" href="namespace_engine.html#ad21b000441a383ca943de4a3792ce0ec">to_type_pack</a>&lt; R &gt;, <a class="el" href="struct_engine_1_1type__pack.html">type_pack</a>&lt; Ty... &gt; &gt;</td></tr>
+<tr class="memitem:ab0d30f61aa086490f27bf10538b9c1d5"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_execution.html#ab0d30f61aa086490f27bf10538b9c1d5">ConnectionReceiver</a> = <a class="el" href="struct_engine_1_1_execution_1_1_virtual_receiver_base_ex.html">VirtualReceiverBaseEx</a>&lt; <a class="el" href="namespace_engine.html#a4730eea0dd80156674d4302db2bdf1ce">to_type_pack</a>&lt; R &gt;, <a class="el" href="struct_engine_1_1type__pack.html">type_pack</a>&lt; Ty... &gt; &gt;</td></tr>
 <tr class="separator:ab0d30f61aa086490f27bf10538b9c1d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa3c50cf86bf6889571640d81dfff6236"><td class="memTemplParams" colspan="2">template&lt;typename <a class="el" href="struct_engine_1_1_execution_1_1_sender.html">Sender</a> &gt; </td></tr>
 <tr class="memitem:aa3c50cf86bf6889571640d81dfff6236"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_execution.html#aa3c50cf86bf6889571640d81dfff6236">ErrorStorage</a> = <a class="el" href="struct_engine_1_1_execution_1_1_error_storage_impl.html">ErrorStorageImpl</a>&lt; typename std::decay_t&lt; <a class="el" href="struct_engine_1_1_execution_1_1_sender.html">Sender</a> &gt;::result_type &gt;</td></tr>
@@ -493,7 +499,7 @@ Typedefs</h2></td></tr>
 <tr class="memitem:aa89dab27db331117cfcea43174d7e412"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_execution.html#aa89dab27db331117cfcea43174d7e412">ValueStorage</a> = typename std::decay_t&lt; <a class="el" href="struct_engine_1_1_execution_1_1_sender.html">Sender</a> &gt;::template value_types&lt; <a class="el" href="struct_engine_1_1_execution_1_1_value_storage_impl.html">ValueStorageImpl</a> &gt;</td></tr>
 <tr class="separator:aa89dab27db331117cfcea43174d7e412"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a53c08663c721d22713b43c968c21d775"><td class="memTemplParams" colspan="2">template&lt;typename R , typename... V&gt; </td></tr>
-<tr class="memitem:a53c08663c721d22713b43c968c21d775"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_execution.html#a53c08663c721d22713b43c968c21d775">VirtualReceiverBase</a> = <a class="el" href="struct_engine_1_1_execution_1_1_virtual_receiver_base_ex.html">VirtualReceiverBaseEx</a>&lt; <a class="el" href="namespace_engine.html#ad21b000441a383ca943de4a3792ce0ec">to_type_pack</a>&lt; R &gt;, <a class="el" href="struct_engine_1_1type__pack.html">type_pack</a>&lt; V... &gt; &gt;</td></tr>
+<tr class="memitem:a53c08663c721d22713b43c968c21d775"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_execution.html#a53c08663c721d22713b43c968c21d775">VirtualReceiverBase</a> = <a class="el" href="struct_engine_1_1_execution_1_1_virtual_receiver_base_ex.html">VirtualReceiverBaseEx</a>&lt; <a class="el" href="namespace_engine.html#a4730eea0dd80156674d4302db2bdf1ce">to_type_pack</a>&lt; R &gt;, <a class="el" href="struct_engine_1_1type__pack.html">type_pack</a>&lt; V... &gt; &gt;</td></tr>
 <tr class="separator:a53c08663c721d22713b43c968c21d775"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9f557ecd77fd04d645469b91c6dfe675"><td class="memTemplParams" colspan="2">template&lt;typename Base , typename Rec &gt; </td></tr>
 <tr class="memitem:a9f557ecd77fd04d645469b91c6dfe675"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_execution.html#a9f557ecd77fd04d645469b91c6dfe675">VirtualState</a> = <a class="el" href="namespace_engine.html#abf7e2f3569ac2d23721ed3cb9fcd8d8e">VirtualCPOsImpl</a>&lt; <a class="el" href="struct_engine_1_1_execution_1_1_virtual_state_ex.html">VirtualStateEx</a>&lt; Base, Rec, typename Base::result_types, typename Base::value_types &gt; &gt;</td></tr>
@@ -652,7 +658,7 @@ template&lt;typename T &gt; </div>
 template&lt;typename R , typename... Ty&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="namespace_engine_1_1_execution.html#ab0d30f61aa086490f27bf10538b9c1d5">Engine::Execution::ConnectionReceiver</a> = typedef <a class="el" href="struct_engine_1_1_execution_1_1_virtual_receiver_base_ex.html">VirtualReceiverBaseEx</a>&lt;<a class="el" href="namespace_engine.html#ad21b000441a383ca943de4a3792ce0ec">to_type_pack</a>&lt;R&gt;, <a class="el" href="struct_engine_1_1type__pack.html">type_pack</a>&lt;Ty...&gt; &gt;</td>
+          <td class="memname">using <a class="el" href="namespace_engine_1_1_execution.html#ab0d30f61aa086490f27bf10538b9c1d5">Engine::Execution::ConnectionReceiver</a> = typedef <a class="el" href="struct_engine_1_1_execution_1_1_virtual_receiver_base_ex.html">VirtualReceiverBaseEx</a>&lt;<a class="el" href="namespace_engine.html#a4730eea0dd80156674d4302db2bdf1ce">to_type_pack</a>&lt;R&gt;, <a class="el" href="struct_engine_1_1type__pack.html">type_pack</a>&lt;Ty...&gt; &gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -746,7 +752,7 @@ template&lt;typename <a class="el" href="struct_engine_1_1_execution_1_1_sender.
 template&lt;typename R , typename... V&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="namespace_engine_1_1_execution.html#a53c08663c721d22713b43c968c21d775">Engine::Execution::VirtualReceiverBase</a> = typedef <a class="el" href="struct_engine_1_1_execution_1_1_virtual_receiver_base_ex.html">VirtualReceiverBaseEx</a>&lt;<a class="el" href="namespace_engine.html#ad21b000441a383ca943de4a3792ce0ec">to_type_pack</a>&lt;R&gt;, <a class="el" href="struct_engine_1_1type__pack.html">type_pack</a>&lt;V...&gt; &gt;</td>
+          <td class="memname">using <a class="el" href="namespace_engine_1_1_execution.html#a53c08663c721d22713b43c968c21d775">Engine::Execution::VirtualReceiverBase</a> = typedef <a class="el" href="struct_engine_1_1_execution_1_1_virtual_receiver_base_ex.html">VirtualReceiverBaseEx</a>&lt;<a class="el" href="namespace_engine.html#a4730eea0dd80156674d4302db2bdf1ce">to_type_pack</a>&lt;R&gt;, <a class="el" href="struct_engine_1_1type__pack.html">type_pack</a>&lt;V...&gt; &gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1757,7 +1763,7 @@ template&lt;<a class="el" href="struct_engine_1_1fixed__string.html">fixed_strin
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2026 23:14:07 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Fri Jun 5 2026 23:36:47 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

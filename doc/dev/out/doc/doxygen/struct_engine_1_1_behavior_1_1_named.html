@@ -256,8 +256,8 @@ Public Types</h2></td></tr>
 <tr class="separator:a6e4fcce392e77679da15ff0d4ad2ee6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa25f9d27cdc0df548bca04a852a6b89b"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_named.html#aa25f9d27cdc0df548bca04a852a6b89b">meta_t</a> = std::optional&lt; <a class="el" href="namespace_engine.html#a1ea2ca5e8f96e113be72baa7a9a703ed">forward_ref_t</a>&lt; T &gt; &gt;</td></tr>
 <tr class="separator:aa25f9d27cdc0df548bca04a852a6b89b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a70d790e7e5bee09c66a767c8bef376ea"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_named.html#a70d790e7e5bee09c66a767c8bef376ea">result_type</a> = <a class="el" href="struct_engine_1_1_key_value_error.html">KeyValueError</a></td></tr>
-<tr class="separator:a70d790e7e5bee09c66a767c8bef376ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae16083ca80b8887dab448cf3ee4113f4"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_named.html#ae16083ca80b8887dab448cf3ee4113f4">result_type</a> = <a class="el" href="struct_engine_1_1_reflect_1_1_error.html">Reflect::Error</a></td></tr>
+<tr class="separator:ae16083ca80b8887dab448cf3ee4113f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4851b89380a60b88bbc9e1d4333a25ef"><td class="memTemplParams" colspan="2">template&lt;template&lt; typename... &gt; typename Tuple&gt; </td></tr>
 <tr class="memitem:a4851b89380a60b88bbc9e1d4333a25ef"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_named.html#a4851b89380a60b88bbc9e1d4333a25ef">value_types</a> = Tuple&lt; T &amp; &gt;</td></tr>
 <tr class="separator:a4851b89380a60b88bbc9e1d4333a25ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -276,8 +276,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a6c127b6a9630079d90b05b30c531be05"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5b8786073517da9ebe7950d0744f890e"><td class="memItemLeft" align="right" valign="top">decltype(auto)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_named.html#a5b8786073517da9ebe7950d0744f890e">operator-&gt;*</a> (auto &amp;&amp;arg)</td></tr>
 <tr class="separator:a5b8786073517da9ebe7950d0744f890e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3efc47bcafd98876d6384037380b9f78"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_key_value_result.html">KeyValueResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_named.html#a3efc47bcafd98876d6384037380b9f78">resolve</a> (auto &amp;context)</td></tr>
-<tr class="separator:a3efc47bcafd98876d6384037380b9f78"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0466bda561ed153d74dbf7720f4e0279"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_reflect_1_1_result.html">Reflect::Result</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_named.html#a0466bda561ed153d74dbf7720f4e0279">resolve</a> (auto &amp;context)</td></tr>
+<tr class="separator:a0466bda561ed153d74dbf7720f4e0279"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -286,18 +286,18 @@ Public Attributes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
 Friends</h2></td></tr>
-<tr class="memitem:ae0c74779861004a534a0456f21b95a4e"><td class="memTemplParams" colspan="2">template&lt;bool isReferenceWrapped&gt; </td></tr>
-<tr class="memitem:ae0c74779861004a534a0456f21b95a4e"><td class="memTemplItemLeft" align="right" valign="top">decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_named.html#ae0c74779861004a534a0456f21b95a4e">tag_invoke</a> (<a class="el" href="struct_engine_1_1convert___value_type__t.html">convert_ValueType_t</a>&lt; isReferenceWrapped &gt; <a class="el" href="namespace_engine.html#add5fcdf1118e4a3bad537e555372f51f">convert_ValueType</a>, <a class="el" href="struct_engine_1_1_behavior_1_1_named.html">Named</a>&lt; Name, T &gt; &amp;&amp;named)</td></tr>
-<tr class="separator:ae0c74779861004a534a0456f21b95a4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9a04fd46c07ffb2a3d26e03188733c15"><td class="memTemplParams" colspan="2">template&lt;bool isReferenceWrapped&gt; </td></tr>
-<tr class="memitem:a9a04fd46c07ffb2a3d26e03188733c15"><td class="memTemplItemLeft" align="right" valign="top">decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_named.html#a9a04fd46c07ffb2a3d26e03188733c15">tag_invoke</a> (<a class="el" href="struct_engine_1_1convert___value_type__t.html">convert_ValueType_t</a>&lt; isReferenceWrapped &gt; <a class="el" href="namespace_engine.html#add5fcdf1118e4a3bad537e555372f51f">convert_ValueType</a>, <a class="el" href="struct_engine_1_1_behavior_1_1_named.html">Named</a>&lt; Name, T &gt; &amp;named)</td></tr>
-<tr class="separator:a9a04fd46c07ffb2a3d26e03188733c15"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac548da924b3382f0da0349451cc98a6b"><td class="memTemplParams" colspan="2">template&lt;typename Rec &gt; </td></tr>
 <tr class="memitem:ac548da924b3382f0da0349451cc98a6b"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_named.html#ac548da924b3382f0da0349451cc98a6b">tag_invoke</a> (<a class="el" href="struct_engine_1_1_execution_1_1connect__t.html">Execution::connect_t</a>, <a class="el" href="struct_engine_1_1_behavior_1_1_named.html">Named</a> &amp;&amp;sender, Rec &amp;&amp;rec)</td></tr>
 <tr class="separator:ac548da924b3382f0da0349451cc98a6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a59e7e626f7f6c833db7ece891833659f"><td class="memTemplParams" colspan="2">template&lt;typename Rec &gt; </td></tr>
 <tr class="memitem:a59e7e626f7f6c833db7ece891833659f"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_named.html#a59e7e626f7f6c833db7ece891833659f">tag_invoke</a> (<a class="el" href="struct_engine_1_1_execution_1_1connect__t.html">Execution::connect_t</a>, <a class="el" href="struct_engine_1_1_behavior_1_1_named.html">Named</a> &amp;sender, Rec &amp;&amp;rec)</td></tr>
 <tr class="separator:a59e7e626f7f6c833db7ece891833659f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad71f40a716992a811ae7ef651eb10c43"><td class="memTemplParams" colspan="2">template&lt;bool isReferenceWrapped&gt; </td></tr>
+<tr class="memitem:ad71f40a716992a811ae7ef651eb10c43"><td class="memTemplItemLeft" align="right" valign="top">decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_named.html#ad71f40a716992a811ae7ef651eb10c43">tag_invoke</a> (<a class="el" href="struct_engine_1_1_reflect_1_1convert___value__t.html">Reflect::convert_Value_t</a>&lt; isReferenceWrapped &gt; convert_ValueType, <a class="el" href="struct_engine_1_1_behavior_1_1_named.html">Named</a>&lt; Name, T &gt; &amp;&amp;named)</td></tr>
+<tr class="separator:ad71f40a716992a811ae7ef651eb10c43"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9054ae04dc80cd500dac5ff3ab82e864"><td class="memTemplParams" colspan="2">template&lt;bool isReferenceWrapped&gt; </td></tr>
+<tr class="memitem:a9054ae04dc80cd500dac5ff3ab82e864"><td class="memTemplItemLeft" align="right" valign="top">decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_named.html#a9054ae04dc80cd500dac5ff3ab82e864">tag_invoke</a> (<a class="el" href="struct_engine_1_1_reflect_1_1convert___value__t.html">Reflect::convert_Value_t</a>&lt; isReferenceWrapped &gt; convert_ValueType, <a class="el" href="struct_engine_1_1_behavior_1_1_named.html">Named</a>&lt; Name, T &gt; &amp;named)</td></tr>
+<tr class="separator:a9054ae04dc80cd500dac5ff3ab82e864"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Typedef Documentation</h2>
 <a id="a6e4fcce392e77679da15ff0d4ad2ee6b" name="a6e4fcce392e77679da15ff0d4ad2ee6b"></a>
@@ -316,8 +316,8 @@ template&lt;<a class="el" href="struct_engine_1_1fixed__string.html">fixed_strin
 
 </div>
 </div>
-<a id="a70d790e7e5bee09c66a767c8bef376ea" name="a70d790e7e5bee09c66a767c8bef376ea"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a70d790e7e5bee09c66a767c8bef376ea">&#9670;&#160;</a></span>result_type</h2>
+<a id="ae16083ca80b8887dab448cf3ee4113f4" name="ae16083ca80b8887dab448cf3ee4113f4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae16083ca80b8887dab448cf3ee4113f4">&#9670;&#160;</a></span>result_type</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -325,7 +325,7 @@ template&lt;<a class="el" href="struct_engine_1_1fixed__string.html">fixed_strin
 template&lt;<a class="el" href="struct_engine_1_1fixed__string.html">fixed_string</a> Name, typename T &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="struct_engine_1_1_behavior_1_1_named.html">Engine::Behavior::Named</a>&lt; Name, T &gt;::result_type =  <a class="el" href="struct_engine_1_1_key_value_error.html">KeyValueError</a></td>
+          <td class="memname">using <a class="el" href="struct_engine_1_1_behavior_1_1_named.html">Engine::Behavior::Named</a>&lt; Name, T &gt;::result_type =  <a class="el" href="struct_engine_1_1_reflect_1_1_error.html">Reflect::Error</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -451,8 +451,8 @@ template&lt;<a class="el" href="struct_engine_1_1fixed__string.html">fixed_strin
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a3efc47bcafd98876d6384037380b9f78" name="a3efc47bcafd98876d6384037380b9f78"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3efc47bcafd98876d6384037380b9f78">&#9670;&#160;</a></span>resolve()</h2>
+<a id="a0466bda561ed153d74dbf7720f4e0279" name="a0466bda561ed153d74dbf7720f4e0279"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0466bda561ed153d74dbf7720f4e0279">&#9670;&#160;</a></span>resolve()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -463,7 +463,7 @@ template&lt;<a class="el" href="struct_engine_1_1fixed__string.html">fixed_strin
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="struct_engine_1_1_key_value_result.html">KeyValueResult</a> <a class="el" href="struct_engine_1_1_behavior_1_1_named.html">Engine::Behavior::Named</a>&lt; Name, T &gt;::resolve </td>
+          <td class="memname"><a class="el" href="struct_engine_1_1_reflect_1_1_result.html">Reflect::Result</a> <a class="el" href="struct_engine_1_1_behavior_1_1_named.html">Engine::Behavior::Named</a>&lt; Name, T &gt;::resolve </td>
           <td>(</td>
           <td class="paramtype">auto &amp;&#160;</td>
           <td class="paramname"><em>context</em></td><td>)</td>
@@ -654,8 +654,8 @@ template&lt;typename Rec &gt; </div>
 
 </div>
 </div>
-<a id="a9a04fd46c07ffb2a3d26e03188733c15" name="a9a04fd46c07ffb2a3d26e03188733c15"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9a04fd46c07ffb2a3d26e03188733c15">&#9670;&#160;</a></span>tag_invoke <span class="overload">[3/4]</span></h2>
+<a id="a9054ae04dc80cd500dac5ff3ab82e864" name="a9054ae04dc80cd500dac5ff3ab82e864"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9054ae04dc80cd500dac5ff3ab82e864">&#9670;&#160;</a></span>tag_invoke <span class="overload">[3/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -670,7 +670,7 @@ template&lt;bool isReferenceWrapped&gt; </div>
         <tr>
           <td class="memname">decltype(auto) tag_invoke </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_engine_1_1convert___value_type__t.html">convert_ValueType_t</a>&lt; isReferenceWrapped &gt;&#160;</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_reflect_1_1convert___value__t.html">Reflect::convert_Value_t</a>&lt; isReferenceWrapped &gt;&#160;</td>
           <td class="paramname"><em>convert_ValueType</em>, </td>
         </tr>
         <tr>
@@ -694,8 +694,8 @@ template&lt;bool isReferenceWrapped&gt; </div>
 
 </div>
 </div>
-<a id="ae0c74779861004a534a0456f21b95a4e" name="ae0c74779861004a534a0456f21b95a4e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae0c74779861004a534a0456f21b95a4e">&#9670;&#160;</a></span>tag_invoke <span class="overload">[4/4]</span></h2>
+<a id="ad71f40a716992a811ae7ef651eb10c43" name="ad71f40a716992a811ae7ef651eb10c43"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad71f40a716992a811ae7ef651eb10c43">&#9670;&#160;</a></span>tag_invoke <span class="overload">[4/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -710,7 +710,7 @@ template&lt;bool isReferenceWrapped&gt; </div>
         <tr>
           <td class="memname">decltype(auto) tag_invoke </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_engine_1_1convert___value_type__t.html">convert_ValueType_t</a>&lt; isReferenceWrapped &gt;&#160;</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_reflect_1_1convert___value__t.html">Reflect::convert_Value_t</a>&lt; isReferenceWrapped &gt;&#160;</td>
           <td class="paramname"><em>convert_ValueType</em>, </td>
         </tr>
         <tr>
@@ -757,7 +757,7 @@ template&lt;<a class="el" href="struct_engine_1_1fixed__string.html">fixed_strin
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2026 23:14:07 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Fri Jun 5 2026 23:36:47 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

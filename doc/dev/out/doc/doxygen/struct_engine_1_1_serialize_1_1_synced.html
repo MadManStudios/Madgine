@@ -277,7 +277,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a24a64905c2809cd36a66beb5ed58fc32"><td class="memTemplParams" colspan="2">template&lt;typename... _Ty&gt; </td></tr>
 <tr class="memitem:a24a64905c2809cd36a66beb5ed58fc32"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_synced.html#a24a64905c2809cd36a66beb5ed58fc32">Synced</a> (_Ty &amp;&amp;...args)</td></tr>
 <tr class="separator:a24a64905c2809cd36a66beb5ed58fc32"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa73f6f40fc3a6178aa45b1efc8947b17"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_observer.html">Observer</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_synced.html#aa73f6f40fc3a6178aa45b1efc8947b17">observer</a> ()</td></tr>
+<tr class="memitem:aa73f6f40fc3a6178aa45b1efc8947b17"><td class="memItemLeft" align="right" valign="top">Observer &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_synced.html#aa73f6f40fc3a6178aa45b1efc8947b17">observer</a> ()</td></tr>
 <tr class="separator:aa73f6f40fc3a6178aa45b1efc8947b17"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2383ae99a1107eb149e1755b0d529365"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_synced.html#a2383ae99a1107eb149e1755b0d529365">operator const T &amp;</a> () const</td></tr>
 <tr class="separator:a2383ae99a1107eb149e1755b0d529365"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -340,7 +340,7 @@ Friends</h2></td></tr>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename <a class="el" href="class_observer.html">Observer</a>  = NoOpFunctor, typename <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a>  = TaggedPlaceholder&lt;MemberOffsetPtrTag, 0&gt;&gt; </div>
+template&lt;typename T , typename Observer  = NoOpFunctor, typename <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a>  = TaggedPlaceholder&lt;MemberOffsetPtrTag, 0&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -370,7 +370,7 @@ template&lt;typename T , typename <a class="el" href="class_observer.html">Obser
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename <a class="el" href="class_observer.html">Observer</a>  = NoOpFunctor, typename <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a>  = TaggedPlaceholder&lt;MemberOffsetPtrTag, 0&gt;&gt; </div>
+template&lt;typename T , typename Observer  = NoOpFunctor, typename <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a>  = TaggedPlaceholder&lt;MemberOffsetPtrTag, 0&gt;&gt; </div>
 <div class="memtemplate">
 template&lt;typename... _Ty&gt; </div>
 <table class="mlabels">
@@ -378,7 +378,7 @@ template&lt;typename... _Ty&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="struct_engine_1_1_serialize_1_1_synced.html">Engine::Serialize::Synced</a>&lt; T, <a class="el" href="class_observer.html">Observer</a>, <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> &gt;::Synced </td>
+          <td class="memname"><a class="el" href="struct_engine_1_1_serialize_1_1_synced.html">Engine::Serialize::Synced</a>&lt; T, Observer, <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> &gt;::Synced </td>
           <td>(</td>
           <td class="paramtype">_Ty &amp;&amp;...&#160;</td>
           <td class="paramname"><em>args</em></td><td>)</td>
@@ -401,13 +401,13 @@ template&lt;typename... _Ty&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename <a class="el" href="class_observer.html">Observer</a>  = NoOpFunctor, typename <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a>  = TaggedPlaceholder&lt;MemberOffsetPtrTag, 0&gt;&gt; </div>
+template&lt;typename T , typename Observer  = NoOpFunctor, typename <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a>  = TaggedPlaceholder&lt;MemberOffsetPtrTag, 0&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_observer.html">Observer</a> &amp; <a class="el" href="struct_engine_1_1_serialize_1_1_synced.html">Engine::Serialize::Synced</a>&lt; T, <a class="el" href="class_observer.html">Observer</a>, <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> &gt;::observer </td>
+          <td class="memname">Observer &amp; <a class="el" href="struct_engine_1_1_serialize_1_1_synced.html">Engine::Serialize::Synced</a>&lt; T, Observer, <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> &gt;::observer </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -428,7 +428,7 @@ template&lt;typename T , typename <a class="el" href="class_observer.html">Obser
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename <a class="el" href="class_observer.html">Observer</a>  = NoOpFunctor, typename <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a>  = TaggedPlaceholder&lt;MemberOffsetPtrTag, 0&gt;&gt; </div>
+template&lt;typename T , typename Observer  = NoOpFunctor, typename <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a>  = TaggedPlaceholder&lt;MemberOffsetPtrTag, 0&gt;&gt; </div>
 <div class="memtemplate">
 template&lt;typename <a class="el" href="class_engine_1_1_ty.html">Ty</a> &gt; </div>
 <table class="mlabels">
@@ -436,7 +436,7 @@ template&lt;typename <a class="el" href="class_engine_1_1_ty.html">Ty</a> &gt; <
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classvoid.html">void</a> <a class="el" href="struct_engine_1_1_serialize_1_1_synced.html">Engine::Serialize::Synced</a>&lt; T, <a class="el" href="class_observer.html">Observer</a>, <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> &gt;::operator= </td>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> <a class="el" href="struct_engine_1_1_serialize_1_1_synced.html">Engine::Serialize::Synced</a>&lt; T, Observer, <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> &gt;::operator= </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="class_engine_1_1_ty.html">Ty</a> &amp;&amp;&#160;</td>
           <td class="paramname"><em>v</em></td><td>)</td>
@@ -458,7 +458,7 @@ template&lt;typename <a class="el" href="class_engine_1_1_ty.html">Ty</a> &gt; <
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename <a class="el" href="class_observer.html">Observer</a>  = NoOpFunctor, typename <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a>  = TaggedPlaceholder&lt;MemberOffsetPtrTag, 0&gt;&gt; </div>
+template&lt;typename T , typename Observer  = NoOpFunctor, typename <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a>  = TaggedPlaceholder&lt;MemberOffsetPtrTag, 0&gt;&gt; </div>
 <div class="memtemplate">
 template&lt;typename <a class="el" href="class_engine_1_1_ty.html">Ty</a> &gt; </div>
 <table class="mlabels">
@@ -466,7 +466,7 @@ template&lt;typename <a class="el" href="class_engine_1_1_ty.html">Ty</a> &gt; <
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classvoid.html">void</a> <a class="el" href="struct_engine_1_1_serialize_1_1_synced.html">Engine::Serialize::Synced</a>&lt; T, <a class="el" href="class_observer.html">Observer</a>, <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> &gt;::operator+= </td>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> <a class="el" href="struct_engine_1_1_serialize_1_1_synced.html">Engine::Serialize::Synced</a>&lt; T, Observer, <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> &gt;::operator+= </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="class_engine_1_1_ty.html">Ty</a> &amp;&amp;&#160;</td>
           <td class="paramname"><em>v</em></td><td>)</td>
@@ -488,7 +488,7 @@ template&lt;typename <a class="el" href="class_engine_1_1_ty.html">Ty</a> &gt; <
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename <a class="el" href="class_observer.html">Observer</a>  = NoOpFunctor, typename <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a>  = TaggedPlaceholder&lt;MemberOffsetPtrTag, 0&gt;&gt; </div>
+template&lt;typename T , typename Observer  = NoOpFunctor, typename <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a>  = TaggedPlaceholder&lt;MemberOffsetPtrTag, 0&gt;&gt; </div>
 <div class="memtemplate">
 template&lt;typename <a class="el" href="class_engine_1_1_ty.html">Ty</a> &gt; </div>
 <table class="mlabels">
@@ -496,7 +496,7 @@ template&lt;typename <a class="el" href="class_engine_1_1_ty.html">Ty</a> &gt; <
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classvoid.html">void</a> <a class="el" href="struct_engine_1_1_serialize_1_1_synced.html">Engine::Serialize::Synced</a>&lt; T, <a class="el" href="class_observer.html">Observer</a>, <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> &gt;::operator-= </td>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> <a class="el" href="struct_engine_1_1_serialize_1_1_synced.html">Engine::Serialize::Synced</a>&lt; T, Observer, <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> &gt;::operator-= </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="class_engine_1_1_ty.html">Ty</a> &amp;&amp;&#160;</td>
           <td class="paramname"><em>v</em></td><td>)</td>
@@ -518,13 +518,13 @@ template&lt;typename <a class="el" href="class_engine_1_1_ty.html">Ty</a> &gt; <
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename <a class="el" href="class_observer.html">Observer</a>  = NoOpFunctor, typename <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a>  = TaggedPlaceholder&lt;MemberOffsetPtrTag, 0&gt;&gt; </div>
+template&lt;typename T , typename Observer  = NoOpFunctor, typename <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a>  = TaggedPlaceholder&lt;MemberOffsetPtrTag, 0&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">T * <a class="el" href="struct_engine_1_1_serialize_1_1_synced.html">Engine::Serialize::Synced</a>&lt; T, <a class="el" href="class_observer.html">Observer</a>, <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> &gt;::operator-&gt; </td>
+          <td class="memname">T * <a class="el" href="struct_engine_1_1_serialize_1_1_synced.html">Engine::Serialize::Synced</a>&lt; T, Observer, <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> &gt;::operator-&gt; </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -545,13 +545,13 @@ template&lt;typename T , typename <a class="el" href="class_observer.html">Obser
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename <a class="el" href="class_observer.html">Observer</a>  = NoOpFunctor, typename <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a>  = TaggedPlaceholder&lt;MemberOffsetPtrTag, 0&gt;&gt; </div>
+template&lt;typename T , typename Observer  = NoOpFunctor, typename <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a>  = TaggedPlaceholder&lt;MemberOffsetPtrTag, 0&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">T * <a class="el" href="struct_engine_1_1_serialize_1_1_synced.html">Engine::Serialize::Synced</a>&lt; T, <a class="el" href="class_observer.html">Observer</a>, <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> &gt;::ptr </td>
+          <td class="memname">T * <a class="el" href="struct_engine_1_1_serialize_1_1_synced.html">Engine::Serialize::Synced</a>&lt; T, Observer, <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> &gt;::ptr </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -572,13 +572,13 @@ template&lt;typename T , typename <a class="el" href="class_observer.html">Obser
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename <a class="el" href="class_observer.html">Observer</a>  = NoOpFunctor, typename <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a>  = TaggedPlaceholder&lt;MemberOffsetPtrTag, 0&gt;&gt; </div>
+template&lt;typename T , typename Observer  = NoOpFunctor, typename <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a>  = TaggedPlaceholder&lt;MemberOffsetPtrTag, 0&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="struct_engine_1_1_serialize_1_1_synced.html">Engine::Serialize::Synced</a>&lt; T, <a class="el" href="class_observer.html">Observer</a>, <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> &gt;::operator const T &amp; </td>
+          <td class="memname"><a class="el" href="struct_engine_1_1_serialize_1_1_synced.html">Engine::Serialize::Synced</a>&lt; T, Observer, <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> &gt;::operator const T &amp; </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -599,13 +599,13 @@ template&lt;typename T , typename <a class="el" href="class_observer.html">Obser
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename <a class="el" href="class_observer.html">Observer</a>  = NoOpFunctor, typename <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a>  = TaggedPlaceholder&lt;MemberOffsetPtrTag, 0&gt;&gt; </div>
+template&lt;typename T , typename Observer  = NoOpFunctor, typename <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a>  = TaggedPlaceholder&lt;MemberOffsetPtrTag, 0&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classvoid.html">void</a> <a class="el" href="struct_engine_1_1_serialize_1_1_synced.html">Engine::Serialize::Synced</a>&lt; T, <a class="el" href="class_observer.html">Observer</a>, <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> &gt;::notify </td>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> <a class="el" href="struct_engine_1_1_serialize_1_1_synced.html">Engine::Serialize::Synced</a>&lt; T, Observer, <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> &gt;::notify </td>
           <td>(</td>
           <td class="paramtype">const T &amp;&#160;</td>
           <td class="paramname"><em>old</em>, </td>
@@ -644,7 +644,7 @@ template&lt;typename T , typename <a class="el" href="class_observer.html">Obser
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename <a class="el" href="class_observer.html">Observer</a>  = NoOpFunctor, typename <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a>  = TaggedPlaceholder&lt;MemberOffsetPtrTag, 0&gt;&gt; </div>
+template&lt;typename T , typename Observer  = NoOpFunctor, typename <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a>  = TaggedPlaceholder&lt;MemberOffsetPtrTag, 0&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -658,7 +658,7 @@ template&lt;typename T , typename <a class="el" href="class_observer.html">Obser
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_synced.html">Synced</a>&lt; T, <a class="el" href="class_observer.html">Observer</a>, <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> &gt; &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_synced.html">Synced</a>&lt; T, Observer, <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> &gt; &amp;&#160;</td>
           <td class="paramname"><em>synced</em>, </td>
         </tr>
         <tr>
@@ -688,7 +688,7 @@ template&lt;typename T , typename <a class="el" href="class_observer.html">Obser
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename <a class="el" href="class_observer.html">Observer</a>  = NoOpFunctor, typename <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a>  = TaggedPlaceholder&lt;MemberOffsetPtrTag, 0&gt;&gt; </div>
+template&lt;typename T , typename Observer  = NoOpFunctor, typename <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a>  = TaggedPlaceholder&lt;MemberOffsetPtrTag, 0&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -702,7 +702,7 @@ template&lt;typename T , typename <a class="el" href="class_observer.html">Obser
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_synced.html">Synced</a>&lt; T, <a class="el" href="class_observer.html">Observer</a>, <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> &gt; &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_synced.html">Synced</a>&lt; T, Observer, <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> &gt; &amp;&#160;</td>
           <td class="paramname"><em>synced</em>, </td>
         </tr>
         <tr>
@@ -744,7 +744,7 @@ template&lt;typename T , typename <a class="el" href="class_observer.html">Obser
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename <a class="el" href="class_observer.html">Observer</a>  = NoOpFunctor, typename <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a>  = TaggedPlaceholder&lt;MemberOffsetPtrTag, 0&gt;&gt; </div>
+template&lt;typename T , typename Observer  = NoOpFunctor, typename <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a>  = TaggedPlaceholder&lt;MemberOffsetPtrTag, 0&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -758,7 +758,7 @@ template&lt;typename T , typename <a class="el" href="class_observer.html">Obser
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_synced.html">Synced</a>&lt; T, <a class="el" href="class_observer.html">Observer</a>, <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> &gt; &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_synced.html">Synced</a>&lt; T, Observer, <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> &gt; &amp;&#160;</td>
           <td class="paramname"><em>synced</em>, </td>
         </tr>
         <tr>
@@ -794,7 +794,7 @@ template&lt;typename T , typename <a class="el" href="class_observer.html">Obser
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2026 23:14:09 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Fri Jun 5 2026 23:36:49 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

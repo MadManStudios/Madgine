@@ -336,16 +336,12 @@ Typedefs</h2></td></tr>
 Functions</h2></td></tr>
 <tr class="memitem:ac528eceedb47c78bc3a682a825cb231c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_threading.html#ac528eceedb47c78bc3a682a825cb231c">ENUM</a> (WorkGroupState, INITIALIZING, RUNNING, STOPPING, FINALIZING, DONE)</td></tr>
 <tr class="separator:ac528eceedb47c78bc3a682a825cb231c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0aee95c1e512fb0c6d2b1b6a9bc35b2f"><td class="memItemLeft" align="right" valign="top">INTERFACES_EXPORT std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_threading.html#a0aee95c1e512fb0c6d2b1b6a9bc35b2f">getCurrentThreadName</a> ()</td></tr>
-<tr class="separator:a0aee95c1e512fb0c6d2b1b6a9bc35b2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4d99ecdf9471012593ee971b1f52b2ef"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:a4d99ecdf9471012593ee971b1f52b2ef"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_threading_1_1_task.html">Task</a>&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_threading.html#a4d99ecdf9471012593ee971b1f52b2ef">make_ready_task</a> (T &amp;&amp;val)</td></tr>
 <tr class="separator:a4d99ecdf9471012593ee971b1f52b2ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a10b360e219d211a30b0dedbd6f317356"><td class="memTemplParams" colspan="2">template&lt;typename F , typename... Args&gt; </td></tr>
 <tr class="memitem:a10b360e219d211a30b0dedbd6f317356"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_threading.html#a10b360e219d211a30b0dedbd6f317356">make_task</a> (F f, Args &amp;&amp;...args)</td></tr>
 <tr class="separator:a10b360e219d211a30b0dedbd6f317356"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a659b4715780662d7360a2452f15a1794"><td class="memItemLeft" align="right" valign="top">INTERFACES_EXPORT <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_threading.html#a659b4715780662d7360a2452f15a1794">setCurrentThreadName</a> (const std::string &amp;name)</td></tr>
-<tr class="separator:a659b4715780662d7360a2452f15a1794"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae0d0c696cf606d02837db91d03a74533"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_engine_1_1_execution.html#a9d54b0f0d186287e871cb1dff3d4684d">Execution::StopToken</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_threading.html#ae0d0c696cf606d02837db91d03a74533">tag_invoke</a> (<a class="el" href="struct_engine_1_1_execution_1_1get__stop__token__t.html">Execution::get_stop_token_t</a>, <a class="el" href="struct_engine_1_1_threading_1_1_task_promise_base.html">TaskPromiseBase</a> &amp;promise)</td></tr>
 <tr class="separator:ae0d0c696cf606d02837db91d03a74533"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -383,41 +379,6 @@ template&lt;typename T &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a659b4715780662d7360a2452f15a1794" name="a659b4715780662d7360a2452f15a1794"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a659b4715780662d7360a2452f15a1794">&#9670;&#160;</a></span>setCurrentThreadName()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">INTERFACES_EXPORT <a class="el" href="classvoid.html">void</a> Engine::Threading::setCurrentThreadName </td>
-          <td>(</td>
-          <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>name</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a0aee95c1e512fb0c6d2b1b6a9bc35b2f" name="a0aee95c1e512fb0c6d2b1b6a9bc35b2f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0aee95c1e512fb0c6d2b1b6a9bc35b2f">&#9670;&#160;</a></span>getCurrentThreadName()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">INTERFACES_EXPORT std::string Engine::Threading::getCurrentThreadName </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="a4d99ecdf9471012593ee971b1f52b2ef" name="a4d99ecdf9471012593ee971b1f52b2ef"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4d99ecdf9471012593ee971b1f52b2ef">&#9670;&#160;</a></span>make_ready_task()</h2>
 
@@ -551,7 +512,7 @@ template&lt;typename F , typename... Args&gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2026 23:14:09 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Fri Jun 5 2026 23:36:49 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

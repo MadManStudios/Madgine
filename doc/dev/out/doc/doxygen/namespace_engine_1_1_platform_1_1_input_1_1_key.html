@@ -1,0 +1,621 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: Engine::Platform::Input::Key Namespace Reference &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../docs/README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/gettingstarted.html#starting-the-engine">Starting the Engine</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/howtos.html">How-Tos</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/howtos/build.html">Build Instructions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/howtos/build.html#dependencies">Dependencies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/howtos/build.html#setup-the-madgine">Setup The Madgine</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/howtos/build.html#generating-project-files">Generating Project Files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/howtos/build.html#build-configurations">Build Configurations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/howtos/firstUniqueComponent.html">Writing your first UniqueComponent</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/keyvalue.html">KeyValue</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/keyvalue.html#valuetype">ValueType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/keyvalue.html#metatables">MetaTables</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/logging.html">Logging</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/logging.html#message-types">Message Types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/logging.html#building-log-messages">Building Log Messages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/logging.html#default-log">Default Log</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/logging.html#log-listener">Log Listener</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/pluginsystem.html">Plugins &amp; Unique Components</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/pluginsystem.html#plugins">Plugins</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/pluginsystem.html#unique-components">Unique Components</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/serialize.html">Serialization &amp; Synchronization</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#fundamental-data-types">Fundamental Data Types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#unit-hierarchy">Unit Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#serializetables">SerializeTables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#streams">Streams</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#managers">Managers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#state-replication">State Replication</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/threading.html">Threads &amp; Asynchronous Execution</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/threading.html#threads">Threads</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/threading.html#tasks">Tasks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/threading.html#taskqueues">TaskQueues</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/threading.html#workgroups">Workgroups</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/threading.html#scheduler">Scheduler</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#our-pledge">Our Pledge</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#our-standards">Our Standards</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#our-responsibilities">Our Responsibilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#scope">Scope</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#enforcement">Enforcement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#attribution">Attribution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/architecture.html#core-libraries">Core Libraries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../docs/README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../docs/README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: Engine::Platform::Input::Key Namespace Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/out/doc/doxygen/namespace_engine_1_1_platform_1_1_input_1_1_key.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="key-namespace-reference">
+<h1>Key Namespace Reference<a class="headerlink" href="#key-namespace-reference" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: Engine::Platform::Input::Key Namespace Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;dev</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespace_engine.html">Engine</a></li><li class="navelem"><a class="el" href="namespace_engine_1_1_platform.html">Platform</a></li><li class="navelem"><a class="el" href="namespace_engine_1_1_platform_1_1_input.html">Input</a></li><li class="navelem"><a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html">Key</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#enum-members">Enumerations</a>  </div>
+  <div class="headertitle"><div class="title">Engine::Platform::Input::Key Namespace Reference</div></div>
+</div><!--header-->
+<div class="contents">
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:acc830e29a87e19a7d2f97672dab85b07"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07">Key</a> : uint8_t { <br />
+&#160;&#160;<a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a172afd2e88b723f275033fc681f7e784">Backspace</a> = 0x08
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a14307af5a0e230541837c01c9a241c6b">Tabulator</a> = 0x09
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a493d5953eae7f7c9853cf96fc3f9647e">Clear</a> = 0x0c
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07ab931fe3027e669264222fd5faef05f3f">Return</a> = 0x0d
+, <br />
+&#160;&#160;<a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07ac707846a93bf40201c3638910be0ceac">Shift</a> = 0x10
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a4e03546b68e0a55537e151d54d054d40">Control</a> = 0x11
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a59946f5c029ebd538d3e257d0162af1d">Alt</a> = 0x12
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a74eb2fd79b8a3b2b838133702d7c1853">Pause</a> = 0x13
+, <br />
+&#160;&#160;<a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a4c4391de64ac0b61a9997fbea33f90e5">Capslock</a> = 0x14
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07aef374d250ef1cfbf0ff5561e3585f25a">Escape</a> = 0x1b
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a7a7440fd8d91b64a1a4ccd8b8c047711">PageUp</a> = 0x21
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07ac876af065a196053e837b37fe646ef6e">PageDown</a> = 0x22
+, <br />
+&#160;&#160;<a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a89cad21113c61b7da248de0d849634e8">End</a> = 0x23
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a8652941b2fb7f9a20d103e691ac9f6fd">Home</a> = 0x24
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a3014c4088e392d83ddaf975a740db7e0">LeftArrow</a> = 0x25
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a1311b1e042a38e2b8b57b99aa1d6fa70">UpArrow</a> = 0x26
+, <br />
+&#160;&#160;<a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a584a6ab91421a4f5f0a9f7a7c848dc17">RightArrow</a> = 0x27
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a15b45d8a144b5a4220adb707f6ee265c">DownArrow</a> = 0x28
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07aab7c3f69a24751a35c1b6886982d0657">Select</a> = 0x29
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07af431037a74866740b57962680eeba5a3">Print</a> = 0x2a
+, <br />
+&#160;&#160;<a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a7d4aa0786523f752b186892a6c89c835">Execute</a> = 0x2b
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a96be3c980b5ed00c2120c8e1fecefdc6">PrintScreen</a> = 0x2c
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a78a2daebb9c7a8ff5f91036792f18e0e">Insert</a> = 0x2d
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a4953f180a524e16115fecba70e928bc0">Delete</a> = 0x2e
+, <br />
+&#160;&#160;<a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a1c9175c270d131e63525e1d81b3f048c">Help</a> = 0x2f
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a245211c5394f32c831ccbb16660274fa">LWin</a> = 0x5b
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a9c651963b0f0df61033c11e876668096">RWin</a> = 0x5c
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a6b9eea401b5230adccad043280d6ac96">NumLock</a> = 0x90
+, <br />
+&#160;&#160;<a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a2c34900a532d1d507b9ef594d015a50f">ScrollLock</a> = 0x91
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a3ba7e8e157383783aa124e8ce196c78a">LShift</a> = 0xa0
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a89dff48efad09faec4b940d86c6f6063">RShift</a> = 0xa1
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a945a3b8776b577f9a7561de2d8837884">LControl</a> = 0xa2
+, <br />
+&#160;&#160;<a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a72c8bb1b4d6b74d4687befe57d4b5259">RControl</a> = 0xa3
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a46829395a0db8f95024ded335b318ff4">LAlt</a> = 0xa4
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07ac88191ea793691b11ead6af1ed76d431">RAlt</a> = 0xa5
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a8ffb9600b361021ca7443c89ff9201da">Space</a> = 0x20
+, <br />
+&#160;&#160;<a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07ac4331da1d4e98d43beec74c511ecdebe">A</a> = 0x41
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07af8351cfce526da8681d6dfcc714f9b4d">B</a> = 0x42
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07ad19a0acd51f1dc5950a11be5a7e79268">C</a> = 0x43
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a80cdd657dcde9ec6eaf9b4ff5b7a8dcc">D</a> = 0x44
+, <br />
+&#160;&#160;<a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07ace820912973b828176d2cd54cf0fccda">E</a> = 0x45
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a468cb12b11112af8b02923596eadee0b">F</a> = 0x46
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a325d7ff373e7ef335a8c1b752fc0a638">G</a> = 0x47
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07acad565eb6f22abfe01812e5644e4555b">H</a> = 0x48
+, <br />
+&#160;&#160;<a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a9d6867c2e1008cc1d009943adab73b88">I</a> = 0x49
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a5b1945303d4c20432ec191471233d2e7">J</a> = 0x4a
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a303a38d6674e94ad62530f582140e872">K</a> = 0x4b
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a8184a0bc457b02527fc76269dd17e7ef">L</a> = 0x4c
+, <br />
+&#160;&#160;<a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a4b5c9c0349943a4f0a41fb74583bf833">M</a> = 0x4d
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07ad2545608a7a0a44aa7ac6b9c5343a196">N</a> = 0x4e
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a3f28fc12b267e1a1ebdfba90aa8e826a">O</a> = 0x4f
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a88bcdbd853b933632c2e9693ba500b04">P</a> = 0x50
+, <br />
+&#160;&#160;<a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07adb091a0fb69008d629d76aa5637e0cd5">Q</a> = 0x51
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07aa94c2d1d4d6368d292b24501bdf1f959">R</a> = 0x52
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a53797beecc368501b720969206d15a39">S</a> = 0x53
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a5428d0fe98f428e5c4ecbc58cb745d9b">T</a> = 0x54
+, <br />
+&#160;&#160;<a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07aaa3fddfd8ba928a70d80539d5e6384b5">U</a> = 0x55
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a2663ec7eae5480e39d7c36a6142e1861">V</a> = 0x56
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07ab4b64c4fe6efc88be035f603ce91a22f">W</a> = 0x57
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07aab9bb019f7ebe45bb4275c396d61681a">X</a> = 0x58
+, <br />
+&#160;&#160;<a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a0d6233c21205bf18e38cf9fc10d3e5a3">Y</a> = 0x59
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a9990340fcd2c1bf35355374d22234426">Z</a> = 0x5a
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07ac905f7d8ccaf44f0f376a9e88c6bc041">OEM1</a> = 0xba
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07abbac1f8eae0b6e7038f198cfc1924186">Plus</a> = 0xbb
+, <br />
+&#160;&#160;<a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07ad3af577ba2be75a5a85852883a1a4a30">Comma</a> = 0xbc
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a16a1c01fc2e30924b30b52f4d588dfbe">Minus</a> = 0xbd
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07afcafc21e01220a4632264c2224482a51">Period</a> = 0xbe
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a9a40d32c57daac3be23be69737929074">OEM2</a> = 0xbf
+, <br />
+&#160;&#160;<a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07ad01447025ee0c992ac0269c80710f9ee">OEM3</a> = 0xc0
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a3c6c0ae26cd2f0c5d3135b8f42f3423f">OEM4</a> = 0xdb
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07abb9fd8f57eb8d060f0fd1672b3435b67">OEM5</a> = 0xdc
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a906fbf0ad83d18280ea5b6c406c2ab38">OEM6</a> = 0xdd
+, <br />
+&#160;&#160;<a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a8681c24e5d7c7baa80a9988e9cf57ea0">OEM7</a> = 0xde
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a71d498373b47a1a773eab1e6471158b2">OEM8</a> = 0xdf
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a0a1710b7d94dfb58d4ec1a74e511e6b0">Alpha0</a> = 0x30
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a1c09fcccc2c4d529e963ddb7a328f725">Alpha1</a> = 0x31
+, <br />
+&#160;&#160;<a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07adbc11ad5056e6d65683f226949722879">Alpha2</a> = 0x32
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a7f59944c8afaf667ec0cee60bec1dfc4">Alpha3</a> = 0x33
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07aa605314cefe65c48ed2d8c5016a9f5f9">Alpha4</a> = 0x34
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07af172a62a17680fd0c62f0d3ff73e6e5e">Alpha5</a> = 0x35
+, <br />
+&#160;&#160;<a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07afc9fa74e6fe65a335cf258fbf1bc08cc">Alpha6</a> = 0x36
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a9a1fb7146660ec86809cc9aa0f7a9c60">Alpha7</a> = 0x37
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a79ec34092e9e36ca9fd085241861abb5">Alpha8</a> = 0x38
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07acbf42c6d675241a458d45380e9db7dfe">Alpha9</a> = 0x39
+, <br />
+&#160;&#160;<a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a9bb1dbd7af4d188acbc2abbd42f642ca">Num0</a> = 0x60
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a23de41931d44ba6db05addd68de040c8">Num1</a> = 0x61
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07ab93419777bef507bc6e1491452de9ff5">Num2</a> = 0x62
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a99405117c1f5f4eb504024ef26e7e8d6">Num3</a> = 0x63
+, <br />
+&#160;&#160;<a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a31bea4ce497c8f397df55be5047cc28f">Num4</a> = 0x64
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a998582b7f32bd3f175c732ccfe22fc9a">Num5</a> = 0x65
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a002032b754a5b836469e45e6a52b994a">Num6</a> = 0x66
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a7d9b375b803ee36b8a4417c3687aee4c">Num7</a> = 0x67
+, <br />
+&#160;&#160;<a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a9afd4ddc5e27dc5e7ded0f52905a2bfc">Num8</a> = 0x68
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07afd7c273fac54446074a6847d7bb2de1c">Num9</a> = 0x69
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a1f496e596cdfd4a0762c1e694408e831">NumMulitply</a> = 0x6a
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a3f62552a517d3415dba3d33bc3bed568">NumAdd</a> = 0x6b
+, <br />
+&#160;&#160;<a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a6fb70a56fea27a55712f1c71eea82748">NumSeparator</a> = 0x6c
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07addd26bf7d642756e1aa7f467ebb587dd">NumSubtract</a> = 0x6d
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a3101d74958b9a610acf3cdf18e135fe8">NumDecimal</a> = 0x6e
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a7ba3a1c45c6cb5ff80049162561fcc0f">NumDivide</a> = 0x6f
+, <br />
+&#160;&#160;<a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07ab4a46e438455d806093f3c5f44f8f2f3">F1</a> = 0x70
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a76642b5231bedf17a47cc021ae781045">F2</a> = 0x71
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a842db1da7c1b172b0aeeb38aa12184b7">F3</a> = 0x72
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07abd6d8cd368040e12d19b7a95ee6431e7">F4</a> = 0x73
+, <br />
+&#160;&#160;<a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a175e8c409c46aea0812ba8e087daa558">F5</a> = 0x74
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07ac77382568d91b130e5802d2ef15c79c1">F6</a> = 0x75
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07add01160b55bac2c2775644767ded4693">F7</a> = 0x76
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07af798b9df9ad49e4a2f28451571754d44">F8</a> = 0x77
+, <br />
+&#160;&#160;<a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07aca6a82a658fa9087ef8c2bb93834cab6">F9</a> = 0x78
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a1e03b2bf6ffac654771857f8ed39ed50">F10</a> = 0x79
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a8a49f5b66a1c7b2f52d132be33209af8">F11</a> = 0x7a
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a19150d2020c77e93ce582ae1472e7c3f">F12</a> = 0x7b
+, <br />
+&#160;&#160;<a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a78c9d32b76cebc7e3caa1df274c04d5b">F13</a> = 0x7c
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a83aeef0873e8a6f20ac5fd688d4afbcd">F14</a> = 0x7d
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a29b54c79647cac26a2a82d9dd569c19d">F15</a> = 0x7e
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a1086b288700ec83cc866407d29ce6b39">F16</a> = 0x7f
+, <br />
+&#160;&#160;<a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a094b24d50cfc06d066141e99b722438b">F17</a> = 0x80
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07ad8c7ccecd539a80bd534ee364cec2099">F18</a> = 0x81
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a38e51ddb0dc6167a84b7fc66656b5512">F19</a> = 0x82
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a9e5f5f8f868c9914758ec01c39edd5a2">F20</a> = 0x83
+, <br />
+&#160;&#160;<a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a5aec69c3409bc9448ecf183f18e3fab2">F21</a> = 0x84
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a07d914a29457d7a67b0b27e9a41ec212">F22</a> = 0x85
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a17fe9142b26996e1b9f5a76023bff377">F23</a> = 0x86
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a4d243b6836241c6fc60c8462c78949d2">F24</a> = 0x87
+, <br />
+&#160;&#160;<a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07ad9651577e001c934aeac8c2c5cf6cbb1">GP_A</a> = 0x88
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a8af04791cd8b246f86d78da52c8ca49f">GP_B</a> = 0x89
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07ace66022d66ed12096449f35a5947e6c9">GP_X</a> = 0x8A
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a7f342393998a8b5fae4c8499ceff4482">GP_Y</a> = 0x8B
+, <br />
+&#160;&#160;<a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a6e7afd1cf10d3e65d691c3852d00d9e0">GP_LB</a> = 0x8C
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a28205141305c9838b48394393242f2ae">GP_RB</a> = 0x8D
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a6bf0d9a507ee1df36ecc32219a220fdb">GP_B1</a> = 0x8E
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a00c3f078d13a4a4efb8663a8d238b120">GP_B2</a> = 0x8F
+, <br />
+&#160;&#160;<a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a50e613c050d067dc59d3b15f804ff104">GP_LSB</a> = 0x98
+, <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a8074ea30060904ef1a817860ccae813e">GP_RSB</a> = 0x99
+<br />
+ }</td></tr>
+<tr class="separator:acc830e29a87e19a7d2f97672dab85b07"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Enumeration Type Documentation</h2>
+<a id="acc830e29a87e19a7d2f97672dab85b07" name="acc830e29a87e19a7d2f97672dab85b07"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acc830e29a87e19a7d2f97672dab85b07">&#9670;&#160;</a></span>Key</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07">Engine::Platform::Input::Key::Key</a> : <a class="el" href="classuint8__t.html">uint8_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a172afd2e88b723f275033fc681f7e784" name="acc830e29a87e19a7d2f97672dab85b07a172afd2e88b723f275033fc681f7e784"></a>Backspace&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a14307af5a0e230541837c01c9a241c6b" name="acc830e29a87e19a7d2f97672dab85b07a14307af5a0e230541837c01c9a241c6b"></a>Tabulator&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a493d5953eae7f7c9853cf96fc3f9647e" name="acc830e29a87e19a7d2f97672dab85b07a493d5953eae7f7c9853cf96fc3f9647e"></a>Clear&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07ab931fe3027e669264222fd5faef05f3f" name="acc830e29a87e19a7d2f97672dab85b07ab931fe3027e669264222fd5faef05f3f"></a>Return&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07ac707846a93bf40201c3638910be0ceac" name="acc830e29a87e19a7d2f97672dab85b07ac707846a93bf40201c3638910be0ceac"></a>Shift&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a4e03546b68e0a55537e151d54d054d40" name="acc830e29a87e19a7d2f97672dab85b07a4e03546b68e0a55537e151d54d054d40"></a>Control&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a59946f5c029ebd538d3e257d0162af1d" name="acc830e29a87e19a7d2f97672dab85b07a59946f5c029ebd538d3e257d0162af1d"></a>Alt&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a74eb2fd79b8a3b2b838133702d7c1853" name="acc830e29a87e19a7d2f97672dab85b07a74eb2fd79b8a3b2b838133702d7c1853"></a>Pause&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a4c4391de64ac0b61a9997fbea33f90e5" name="acc830e29a87e19a7d2f97672dab85b07a4c4391de64ac0b61a9997fbea33f90e5"></a>Capslock&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07aef374d250ef1cfbf0ff5561e3585f25a" name="acc830e29a87e19a7d2f97672dab85b07aef374d250ef1cfbf0ff5561e3585f25a"></a>Escape&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a7a7440fd8d91b64a1a4ccd8b8c047711" name="acc830e29a87e19a7d2f97672dab85b07a7a7440fd8d91b64a1a4ccd8b8c047711"></a>PageUp&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07ac876af065a196053e837b37fe646ef6e" name="acc830e29a87e19a7d2f97672dab85b07ac876af065a196053e837b37fe646ef6e"></a>PageDown&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a89cad21113c61b7da248de0d849634e8" name="acc830e29a87e19a7d2f97672dab85b07a89cad21113c61b7da248de0d849634e8"></a>End&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a8652941b2fb7f9a20d103e691ac9f6fd" name="acc830e29a87e19a7d2f97672dab85b07a8652941b2fb7f9a20d103e691ac9f6fd"></a>Home&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a3014c4088e392d83ddaf975a740db7e0" name="acc830e29a87e19a7d2f97672dab85b07a3014c4088e392d83ddaf975a740db7e0"></a>LeftArrow&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a1311b1e042a38e2b8b57b99aa1d6fa70" name="acc830e29a87e19a7d2f97672dab85b07a1311b1e042a38e2b8b57b99aa1d6fa70"></a>UpArrow&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a584a6ab91421a4f5f0a9f7a7c848dc17" name="acc830e29a87e19a7d2f97672dab85b07a584a6ab91421a4f5f0a9f7a7c848dc17"></a>RightArrow&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a15b45d8a144b5a4220adb707f6ee265c" name="acc830e29a87e19a7d2f97672dab85b07a15b45d8a144b5a4220adb707f6ee265c"></a>DownArrow&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07aab7c3f69a24751a35c1b6886982d0657" name="acc830e29a87e19a7d2f97672dab85b07aab7c3f69a24751a35c1b6886982d0657"></a>Select&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07af431037a74866740b57962680eeba5a3" name="acc830e29a87e19a7d2f97672dab85b07af431037a74866740b57962680eeba5a3"></a>Print&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a7d4aa0786523f752b186892a6c89c835" name="acc830e29a87e19a7d2f97672dab85b07a7d4aa0786523f752b186892a6c89c835"></a>Execute&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a96be3c980b5ed00c2120c8e1fecefdc6" name="acc830e29a87e19a7d2f97672dab85b07a96be3c980b5ed00c2120c8e1fecefdc6"></a>PrintScreen&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a78a2daebb9c7a8ff5f91036792f18e0e" name="acc830e29a87e19a7d2f97672dab85b07a78a2daebb9c7a8ff5f91036792f18e0e"></a>Insert&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a4953f180a524e16115fecba70e928bc0" name="acc830e29a87e19a7d2f97672dab85b07a4953f180a524e16115fecba70e928bc0"></a>Delete&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a1c9175c270d131e63525e1d81b3f048c" name="acc830e29a87e19a7d2f97672dab85b07a1c9175c270d131e63525e1d81b3f048c"></a>Help&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a245211c5394f32c831ccbb16660274fa" name="acc830e29a87e19a7d2f97672dab85b07a245211c5394f32c831ccbb16660274fa"></a>LWin&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a9c651963b0f0df61033c11e876668096" name="acc830e29a87e19a7d2f97672dab85b07a9c651963b0f0df61033c11e876668096"></a>RWin&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a6b9eea401b5230adccad043280d6ac96" name="acc830e29a87e19a7d2f97672dab85b07a6b9eea401b5230adccad043280d6ac96"></a>NumLock&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a2c34900a532d1d507b9ef594d015a50f" name="acc830e29a87e19a7d2f97672dab85b07a2c34900a532d1d507b9ef594d015a50f"></a>ScrollLock&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a3ba7e8e157383783aa124e8ce196c78a" name="acc830e29a87e19a7d2f97672dab85b07a3ba7e8e157383783aa124e8ce196c78a"></a>LShift&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a89dff48efad09faec4b940d86c6f6063" name="acc830e29a87e19a7d2f97672dab85b07a89dff48efad09faec4b940d86c6f6063"></a>RShift&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a945a3b8776b577f9a7561de2d8837884" name="acc830e29a87e19a7d2f97672dab85b07a945a3b8776b577f9a7561de2d8837884"></a>LControl&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a72c8bb1b4d6b74d4687befe57d4b5259" name="acc830e29a87e19a7d2f97672dab85b07a72c8bb1b4d6b74d4687befe57d4b5259"></a>RControl&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a46829395a0db8f95024ded335b318ff4" name="acc830e29a87e19a7d2f97672dab85b07a46829395a0db8f95024ded335b318ff4"></a>LAlt&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07ac88191ea793691b11ead6af1ed76d431" name="acc830e29a87e19a7d2f97672dab85b07ac88191ea793691b11ead6af1ed76d431"></a>RAlt&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a8ffb9600b361021ca7443c89ff9201da" name="acc830e29a87e19a7d2f97672dab85b07a8ffb9600b361021ca7443c89ff9201da"></a>Space&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07ac4331da1d4e98d43beec74c511ecdebe" name="acc830e29a87e19a7d2f97672dab85b07ac4331da1d4e98d43beec74c511ecdebe"></a>A&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07af8351cfce526da8681d6dfcc714f9b4d" name="acc830e29a87e19a7d2f97672dab85b07af8351cfce526da8681d6dfcc714f9b4d"></a>B&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07ad19a0acd51f1dc5950a11be5a7e79268" name="acc830e29a87e19a7d2f97672dab85b07ad19a0acd51f1dc5950a11be5a7e79268"></a>C&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a80cdd657dcde9ec6eaf9b4ff5b7a8dcc" name="acc830e29a87e19a7d2f97672dab85b07a80cdd657dcde9ec6eaf9b4ff5b7a8dcc"></a>D&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07ace820912973b828176d2cd54cf0fccda" name="acc830e29a87e19a7d2f97672dab85b07ace820912973b828176d2cd54cf0fccda"></a>E&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a468cb12b11112af8b02923596eadee0b" name="acc830e29a87e19a7d2f97672dab85b07a468cb12b11112af8b02923596eadee0b"></a>F&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a325d7ff373e7ef335a8c1b752fc0a638" name="acc830e29a87e19a7d2f97672dab85b07a325d7ff373e7ef335a8c1b752fc0a638"></a>G&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07acad565eb6f22abfe01812e5644e4555b" name="acc830e29a87e19a7d2f97672dab85b07acad565eb6f22abfe01812e5644e4555b"></a>H&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a9d6867c2e1008cc1d009943adab73b88" name="acc830e29a87e19a7d2f97672dab85b07a9d6867c2e1008cc1d009943adab73b88"></a>I&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a5b1945303d4c20432ec191471233d2e7" name="acc830e29a87e19a7d2f97672dab85b07a5b1945303d4c20432ec191471233d2e7"></a>J&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a303a38d6674e94ad62530f582140e872" name="acc830e29a87e19a7d2f97672dab85b07a303a38d6674e94ad62530f582140e872"></a>K&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a8184a0bc457b02527fc76269dd17e7ef" name="acc830e29a87e19a7d2f97672dab85b07a8184a0bc457b02527fc76269dd17e7ef"></a>L&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a4b5c9c0349943a4f0a41fb74583bf833" name="acc830e29a87e19a7d2f97672dab85b07a4b5c9c0349943a4f0a41fb74583bf833"></a>M&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07ad2545608a7a0a44aa7ac6b9c5343a196" name="acc830e29a87e19a7d2f97672dab85b07ad2545608a7a0a44aa7ac6b9c5343a196"></a>N&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a3f28fc12b267e1a1ebdfba90aa8e826a" name="acc830e29a87e19a7d2f97672dab85b07a3f28fc12b267e1a1ebdfba90aa8e826a"></a>O&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a88bcdbd853b933632c2e9693ba500b04" name="acc830e29a87e19a7d2f97672dab85b07a88bcdbd853b933632c2e9693ba500b04"></a>P&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07adb091a0fb69008d629d76aa5637e0cd5" name="acc830e29a87e19a7d2f97672dab85b07adb091a0fb69008d629d76aa5637e0cd5"></a>Q&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07aa94c2d1d4d6368d292b24501bdf1f959" name="acc830e29a87e19a7d2f97672dab85b07aa94c2d1d4d6368d292b24501bdf1f959"></a>R&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a53797beecc368501b720969206d15a39" name="acc830e29a87e19a7d2f97672dab85b07a53797beecc368501b720969206d15a39"></a>S&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a5428d0fe98f428e5c4ecbc58cb745d9b" name="acc830e29a87e19a7d2f97672dab85b07a5428d0fe98f428e5c4ecbc58cb745d9b"></a>T&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07aaa3fddfd8ba928a70d80539d5e6384b5" name="acc830e29a87e19a7d2f97672dab85b07aaa3fddfd8ba928a70d80539d5e6384b5"></a>U&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a2663ec7eae5480e39d7c36a6142e1861" name="acc830e29a87e19a7d2f97672dab85b07a2663ec7eae5480e39d7c36a6142e1861"></a>V&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07ab4b64c4fe6efc88be035f603ce91a22f" name="acc830e29a87e19a7d2f97672dab85b07ab4b64c4fe6efc88be035f603ce91a22f"></a>W&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07aab9bb019f7ebe45bb4275c396d61681a" name="acc830e29a87e19a7d2f97672dab85b07aab9bb019f7ebe45bb4275c396d61681a"></a>X&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a0d6233c21205bf18e38cf9fc10d3e5a3" name="acc830e29a87e19a7d2f97672dab85b07a0d6233c21205bf18e38cf9fc10d3e5a3"></a>Y&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a9990340fcd2c1bf35355374d22234426" name="acc830e29a87e19a7d2f97672dab85b07a9990340fcd2c1bf35355374d22234426"></a>Z&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07ac905f7d8ccaf44f0f376a9e88c6bc041" name="acc830e29a87e19a7d2f97672dab85b07ac905f7d8ccaf44f0f376a9e88c6bc041"></a>OEM1&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07abbac1f8eae0b6e7038f198cfc1924186" name="acc830e29a87e19a7d2f97672dab85b07abbac1f8eae0b6e7038f198cfc1924186"></a>Plus&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07ad3af577ba2be75a5a85852883a1a4a30" name="acc830e29a87e19a7d2f97672dab85b07ad3af577ba2be75a5a85852883a1a4a30"></a>Comma&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a16a1c01fc2e30924b30b52f4d588dfbe" name="acc830e29a87e19a7d2f97672dab85b07a16a1c01fc2e30924b30b52f4d588dfbe"></a>Minus&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07afcafc21e01220a4632264c2224482a51" name="acc830e29a87e19a7d2f97672dab85b07afcafc21e01220a4632264c2224482a51"></a>Period&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a9a40d32c57daac3be23be69737929074" name="acc830e29a87e19a7d2f97672dab85b07a9a40d32c57daac3be23be69737929074"></a>OEM2&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07ad01447025ee0c992ac0269c80710f9ee" name="acc830e29a87e19a7d2f97672dab85b07ad01447025ee0c992ac0269c80710f9ee"></a>OEM3&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a3c6c0ae26cd2f0c5d3135b8f42f3423f" name="acc830e29a87e19a7d2f97672dab85b07a3c6c0ae26cd2f0c5d3135b8f42f3423f"></a>OEM4&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07abb9fd8f57eb8d060f0fd1672b3435b67" name="acc830e29a87e19a7d2f97672dab85b07abb9fd8f57eb8d060f0fd1672b3435b67"></a>OEM5&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a906fbf0ad83d18280ea5b6c406c2ab38" name="acc830e29a87e19a7d2f97672dab85b07a906fbf0ad83d18280ea5b6c406c2ab38"></a>OEM6&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a8681c24e5d7c7baa80a9988e9cf57ea0" name="acc830e29a87e19a7d2f97672dab85b07a8681c24e5d7c7baa80a9988e9cf57ea0"></a>OEM7&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a71d498373b47a1a773eab1e6471158b2" name="acc830e29a87e19a7d2f97672dab85b07a71d498373b47a1a773eab1e6471158b2"></a>OEM8&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a0a1710b7d94dfb58d4ec1a74e511e6b0" name="acc830e29a87e19a7d2f97672dab85b07a0a1710b7d94dfb58d4ec1a74e511e6b0"></a>Alpha0&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a1c09fcccc2c4d529e963ddb7a328f725" name="acc830e29a87e19a7d2f97672dab85b07a1c09fcccc2c4d529e963ddb7a328f725"></a>Alpha1&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07adbc11ad5056e6d65683f226949722879" name="acc830e29a87e19a7d2f97672dab85b07adbc11ad5056e6d65683f226949722879"></a>Alpha2&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a7f59944c8afaf667ec0cee60bec1dfc4" name="acc830e29a87e19a7d2f97672dab85b07a7f59944c8afaf667ec0cee60bec1dfc4"></a>Alpha3&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07aa605314cefe65c48ed2d8c5016a9f5f9" name="acc830e29a87e19a7d2f97672dab85b07aa605314cefe65c48ed2d8c5016a9f5f9"></a>Alpha4&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07af172a62a17680fd0c62f0d3ff73e6e5e" name="acc830e29a87e19a7d2f97672dab85b07af172a62a17680fd0c62f0d3ff73e6e5e"></a>Alpha5&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07afc9fa74e6fe65a335cf258fbf1bc08cc" name="acc830e29a87e19a7d2f97672dab85b07afc9fa74e6fe65a335cf258fbf1bc08cc"></a>Alpha6&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a9a1fb7146660ec86809cc9aa0f7a9c60" name="acc830e29a87e19a7d2f97672dab85b07a9a1fb7146660ec86809cc9aa0f7a9c60"></a>Alpha7&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a79ec34092e9e36ca9fd085241861abb5" name="acc830e29a87e19a7d2f97672dab85b07a79ec34092e9e36ca9fd085241861abb5"></a>Alpha8&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07acbf42c6d675241a458d45380e9db7dfe" name="acc830e29a87e19a7d2f97672dab85b07acbf42c6d675241a458d45380e9db7dfe"></a>Alpha9&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a9bb1dbd7af4d188acbc2abbd42f642ca" name="acc830e29a87e19a7d2f97672dab85b07a9bb1dbd7af4d188acbc2abbd42f642ca"></a>Num0&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a23de41931d44ba6db05addd68de040c8" name="acc830e29a87e19a7d2f97672dab85b07a23de41931d44ba6db05addd68de040c8"></a>Num1&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07ab93419777bef507bc6e1491452de9ff5" name="acc830e29a87e19a7d2f97672dab85b07ab93419777bef507bc6e1491452de9ff5"></a>Num2&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a99405117c1f5f4eb504024ef26e7e8d6" name="acc830e29a87e19a7d2f97672dab85b07a99405117c1f5f4eb504024ef26e7e8d6"></a>Num3&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a31bea4ce497c8f397df55be5047cc28f" name="acc830e29a87e19a7d2f97672dab85b07a31bea4ce497c8f397df55be5047cc28f"></a>Num4&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a998582b7f32bd3f175c732ccfe22fc9a" name="acc830e29a87e19a7d2f97672dab85b07a998582b7f32bd3f175c732ccfe22fc9a"></a>Num5&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a002032b754a5b836469e45e6a52b994a" name="acc830e29a87e19a7d2f97672dab85b07a002032b754a5b836469e45e6a52b994a"></a>Num6&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a7d9b375b803ee36b8a4417c3687aee4c" name="acc830e29a87e19a7d2f97672dab85b07a7d9b375b803ee36b8a4417c3687aee4c"></a>Num7&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a9afd4ddc5e27dc5e7ded0f52905a2bfc" name="acc830e29a87e19a7d2f97672dab85b07a9afd4ddc5e27dc5e7ded0f52905a2bfc"></a>Num8&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07afd7c273fac54446074a6847d7bb2de1c" name="acc830e29a87e19a7d2f97672dab85b07afd7c273fac54446074a6847d7bb2de1c"></a>Num9&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a1f496e596cdfd4a0762c1e694408e831" name="acc830e29a87e19a7d2f97672dab85b07a1f496e596cdfd4a0762c1e694408e831"></a>NumMulitply&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a3f62552a517d3415dba3d33bc3bed568" name="acc830e29a87e19a7d2f97672dab85b07a3f62552a517d3415dba3d33bc3bed568"></a>NumAdd&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a6fb70a56fea27a55712f1c71eea82748" name="acc830e29a87e19a7d2f97672dab85b07a6fb70a56fea27a55712f1c71eea82748"></a>NumSeparator&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07addd26bf7d642756e1aa7f467ebb587dd" name="acc830e29a87e19a7d2f97672dab85b07addd26bf7d642756e1aa7f467ebb587dd"></a>NumSubtract&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a3101d74958b9a610acf3cdf18e135fe8" name="acc830e29a87e19a7d2f97672dab85b07a3101d74958b9a610acf3cdf18e135fe8"></a>NumDecimal&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a7ba3a1c45c6cb5ff80049162561fcc0f" name="acc830e29a87e19a7d2f97672dab85b07a7ba3a1c45c6cb5ff80049162561fcc0f"></a>NumDivide&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07ab4a46e438455d806093f3c5f44f8f2f3" name="acc830e29a87e19a7d2f97672dab85b07ab4a46e438455d806093f3c5f44f8f2f3"></a>F1&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a76642b5231bedf17a47cc021ae781045" name="acc830e29a87e19a7d2f97672dab85b07a76642b5231bedf17a47cc021ae781045"></a>F2&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a842db1da7c1b172b0aeeb38aa12184b7" name="acc830e29a87e19a7d2f97672dab85b07a842db1da7c1b172b0aeeb38aa12184b7"></a>F3&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07abd6d8cd368040e12d19b7a95ee6431e7" name="acc830e29a87e19a7d2f97672dab85b07abd6d8cd368040e12d19b7a95ee6431e7"></a>F4&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a175e8c409c46aea0812ba8e087daa558" name="acc830e29a87e19a7d2f97672dab85b07a175e8c409c46aea0812ba8e087daa558"></a>F5&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07ac77382568d91b130e5802d2ef15c79c1" name="acc830e29a87e19a7d2f97672dab85b07ac77382568d91b130e5802d2ef15c79c1"></a>F6&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07add01160b55bac2c2775644767ded4693" name="acc830e29a87e19a7d2f97672dab85b07add01160b55bac2c2775644767ded4693"></a>F7&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07af798b9df9ad49e4a2f28451571754d44" name="acc830e29a87e19a7d2f97672dab85b07af798b9df9ad49e4a2f28451571754d44"></a>F8&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07aca6a82a658fa9087ef8c2bb93834cab6" name="acc830e29a87e19a7d2f97672dab85b07aca6a82a658fa9087ef8c2bb93834cab6"></a>F9&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a1e03b2bf6ffac654771857f8ed39ed50" name="acc830e29a87e19a7d2f97672dab85b07a1e03b2bf6ffac654771857f8ed39ed50"></a>F10&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a8a49f5b66a1c7b2f52d132be33209af8" name="acc830e29a87e19a7d2f97672dab85b07a8a49f5b66a1c7b2f52d132be33209af8"></a>F11&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a19150d2020c77e93ce582ae1472e7c3f" name="acc830e29a87e19a7d2f97672dab85b07a19150d2020c77e93ce582ae1472e7c3f"></a>F12&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a78c9d32b76cebc7e3caa1df274c04d5b" name="acc830e29a87e19a7d2f97672dab85b07a78c9d32b76cebc7e3caa1df274c04d5b"></a>F13&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a83aeef0873e8a6f20ac5fd688d4afbcd" name="acc830e29a87e19a7d2f97672dab85b07a83aeef0873e8a6f20ac5fd688d4afbcd"></a>F14&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a29b54c79647cac26a2a82d9dd569c19d" name="acc830e29a87e19a7d2f97672dab85b07a29b54c79647cac26a2a82d9dd569c19d"></a>F15&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a1086b288700ec83cc866407d29ce6b39" name="acc830e29a87e19a7d2f97672dab85b07a1086b288700ec83cc866407d29ce6b39"></a>F16&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a094b24d50cfc06d066141e99b722438b" name="acc830e29a87e19a7d2f97672dab85b07a094b24d50cfc06d066141e99b722438b"></a>F17&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07ad8c7ccecd539a80bd534ee364cec2099" name="acc830e29a87e19a7d2f97672dab85b07ad8c7ccecd539a80bd534ee364cec2099"></a>F18&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a38e51ddb0dc6167a84b7fc66656b5512" name="acc830e29a87e19a7d2f97672dab85b07a38e51ddb0dc6167a84b7fc66656b5512"></a>F19&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a9e5f5f8f868c9914758ec01c39edd5a2" name="acc830e29a87e19a7d2f97672dab85b07a9e5f5f8f868c9914758ec01c39edd5a2"></a>F20&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a5aec69c3409bc9448ecf183f18e3fab2" name="acc830e29a87e19a7d2f97672dab85b07a5aec69c3409bc9448ecf183f18e3fab2"></a>F21&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a07d914a29457d7a67b0b27e9a41ec212" name="acc830e29a87e19a7d2f97672dab85b07a07d914a29457d7a67b0b27e9a41ec212"></a>F22&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a17fe9142b26996e1b9f5a76023bff377" name="acc830e29a87e19a7d2f97672dab85b07a17fe9142b26996e1b9f5a76023bff377"></a>F23&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a4d243b6836241c6fc60c8462c78949d2" name="acc830e29a87e19a7d2f97672dab85b07a4d243b6836241c6fc60c8462c78949d2"></a>F24&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07ad9651577e001c934aeac8c2c5cf6cbb1" name="acc830e29a87e19a7d2f97672dab85b07ad9651577e001c934aeac8c2c5cf6cbb1"></a>GP_A&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a8af04791cd8b246f86d78da52c8ca49f" name="acc830e29a87e19a7d2f97672dab85b07a8af04791cd8b246f86d78da52c8ca49f"></a>GP_B&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07ace66022d66ed12096449f35a5947e6c9" name="acc830e29a87e19a7d2f97672dab85b07ace66022d66ed12096449f35a5947e6c9"></a>GP_X&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a7f342393998a8b5fae4c8499ceff4482" name="acc830e29a87e19a7d2f97672dab85b07a7f342393998a8b5fae4c8499ceff4482"></a>GP_Y&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a6e7afd1cf10d3e65d691c3852d00d9e0" name="acc830e29a87e19a7d2f97672dab85b07a6e7afd1cf10d3e65d691c3852d00d9e0"></a>GP_LB&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a28205141305c9838b48394393242f2ae" name="acc830e29a87e19a7d2f97672dab85b07a28205141305c9838b48394393242f2ae"></a>GP_RB&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a6bf0d9a507ee1df36ecc32219a220fdb" name="acc830e29a87e19a7d2f97672dab85b07a6bf0d9a507ee1df36ecc32219a220fdb"></a>GP_B1&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a00c3f078d13a4a4efb8663a8d238b120" name="acc830e29a87e19a7d2f97672dab85b07a00c3f078d13a4a4efb8663a8d238b120"></a>GP_B2&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a50e613c050d067dc59d3b15f804ff104" name="acc830e29a87e19a7d2f97672dab85b07a50e613c050d067dc59d3b15f804ff104"></a>GP_LSB&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="acc830e29a87e19a7d2f97672dab85b07a8074ea30060904ef1a817860ccae813e" name="acc830e29a87e19a7d2f97672dab85b07a8074ea30060904ef1a817860ccae813e"></a>GP_RSB&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Fri Jun 5 2026 23:36:48 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        Version: dev
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Versions</dt>
+            <script src="../../../../versions.js"></script>
+        </dl>
+    </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

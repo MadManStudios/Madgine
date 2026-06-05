@@ -1,0 +1,574 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: Engine::Math::NormalizedVector3 Struct Reference &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../docs/README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/gettingstarted.html#starting-the-engine">Starting the Engine</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/howtos.html">How-Tos</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/howtos/build.html">Build Instructions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/howtos/build.html#dependencies">Dependencies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/howtos/build.html#setup-the-madgine">Setup The Madgine</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/howtos/build.html#generating-project-files">Generating Project Files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/howtos/build.html#build-configurations">Build Configurations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/howtos/firstUniqueComponent.html">Writing your first UniqueComponent</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/keyvalue.html">KeyValue</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/keyvalue.html#valuetype">ValueType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/keyvalue.html#metatables">MetaTables</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/logging.html">Logging</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/logging.html#message-types">Message Types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/logging.html#building-log-messages">Building Log Messages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/logging.html#default-log">Default Log</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/logging.html#log-listener">Log Listener</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/pluginsystem.html">Plugins &amp; Unique Components</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/pluginsystem.html#plugins">Plugins</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/pluginsystem.html#unique-components">Unique Components</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/serialize.html">Serialization &amp; Synchronization</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#fundamental-data-types">Fundamental Data Types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#unit-hierarchy">Unit Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#serializetables">SerializeTables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#streams">Streams</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#managers">Managers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#state-replication">State Replication</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/threading.html">Threads &amp; Asynchronous Execution</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/threading.html#threads">Threads</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/threading.html#tasks">Tasks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/threading.html#taskqueues">TaskQueues</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/threading.html#workgroups">Workgroups</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/threading.html#scheduler">Scheduler</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#our-pledge">Our Pledge</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#our-standards">Our Standards</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#our-responsibilities">Our Responsibilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#scope">Scope</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#enforcement">Enforcement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#attribution">Attribution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/architecture.html#core-libraries">Core Libraries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../docs/README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../docs/README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: Engine::Math::NormalizedVector3 Struct Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/out/doc/doxygen/struct_engine_1_1_math_1_1_normalized_vector3.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="normalizedvector3-struct-reference">
+<h1>NormalizedVector3 Struct Reference<a class="headerlink" href="#normalizedvector3-struct-reference" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: Engine::Math::NormalizedVector3 Struct Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;dev</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespace_engine.html">Engine</a></li><li class="navelem"><a class="el" href="namespace_engine_1_1_math.html">Math</a></li><li class="navelem"><a class="el" href="struct_engine_1_1_math_1_1_normalized_vector3.html">NormalizedVector3</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="struct_engine_1_1_math_1_1_normalized_vector3-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">Engine::Math::NormalizedVector3 Struct Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;vector3.h&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for Engine::Math::NormalizedVector3:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="struct_engine_1_1_math_1_1_normalized_vector3__inherit__graph.svg" width="178" height="124"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:adfcd9cc176516052ac9efbd63210dcc2"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_normalized_vector3.html#adfcd9cc176516052ac9efbd63210dcc2">NormalizedVector3</a> (const <a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a> &amp;v)</td></tr>
+<tr class="separator:adfcd9cc176516052ac9efbd63210dcc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2bff293b07d7830364a4b05a815a3c81"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_normalized_vector3.html#a2bff293b07d7830364a4b05a815a3c81">NormalizedVector3</a> (float <a class="el" href="struct_engine_1_1_math_1_1_vector3.html#af1bc332e73327aadf140e9935ced1f8c">x</a>, float <a class="el" href="struct_engine_1_1_math_1_1_vector3.html#a2d90e1bc97261d34d88dd406206a2711">y</a>, float <a class="el" href="struct_engine_1_1_math_1_1_vector3.html#a4b2f63f8e389e315747582246211459d">z</a>)</td></tr>
+<tr class="separator:a2bff293b07d7830364a4b05a815a3c81"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a09c691f74db9798dc0f67fa3e534a1b7"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="struct_engine_1_1_math_1_1_normalized_vector3.html">NormalizedVector3</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_normalized_vector3.html#a09c691f74db9798dc0f67fa3e534a1b7">operator=</a> (const <a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a> &amp;v)</td></tr>
+<tr class="separator:a09c691f74db9798dc0f67fa3e534a1b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_struct_engine_1_1_math_1_1_vector3"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_struct_engine_1_1_math_1_1_vector3')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Engine::Math::Vector3</a></td></tr>
+<tr class="memitem:ab50c6bd651a8941ac0d363ffb886d268 inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html#ab50c6bd651a8941ac0d363ffb886d268">Vector3</a> ()=default</td></tr>
+<tr class="memdesc:ab50c6bd651a8941ac0d363ffb886d268 inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor.  <a href="struct_engine_1_1_math_1_1_vector3.html#ab50c6bd651a8941ac0d363ffb886d268">More...</a><br /></td></tr>
+<tr class="separator:ab50c6bd651a8941ac0d363ffb886d268 inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa74629f04f4113ebb42faf2b8bfec343 inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html#aa74629f04f4113ebb42faf2b8bfec343">Vector3</a> (const float afCoordinate[3])</td></tr>
+<tr class="separator:aa74629f04f4113ebb42faf2b8bfec343 inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c07df54184ea437708366676e86eebb inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html#a0c07df54184ea437708366676e86eebb">Vector3</a> (const float fX, const float fY, const float fZ)</td></tr>
+<tr class="separator:a0c07df54184ea437708366676e86eebb inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e32bb968d1507b6dfdf452c63644f70 inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html#a2e32bb968d1507b6dfdf452c63644f70">Vector3</a> (const float scaler)</td></tr>
+<tr class="separator:a2e32bb968d1507b6dfdf452c63644f70 inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f8f054e7fc97bb59c08bbcaf1a2a77a inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html#a4f8f054e7fc97bb59c08bbcaf1a2a77a">Vector3</a> (const int afCoordinate[3])</td></tr>
+<tr class="separator:a4f8f054e7fc97bb59c08bbcaf1a2a77a inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a407d607d6babbb5f3de7c1e6dea90ad7 inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html#a407d607d6babbb5f3de7c1e6dea90ad7">Vector3</a> (const <a class="el" href="struct_engine_1_1_math_1_1_vector2.html">Vector2</a> &amp;<a class="el" href="struct_engine_1_1_math_1_1_vector3.html#a8e94b5be90b216b39faabc8ac84a6d4a">xy</a>, const float <a class="el" href="struct_engine_1_1_math_1_1_vector3.html#a4b2f63f8e389e315747582246211459d">z</a>)</td></tr>
+<tr class="separator:a407d607d6babbb5f3de7c1e6dea90ad7 inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d1f884aa8394ca7b2d4639fbdf19053 inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html#a3d1f884aa8394ca7b2d4639fbdf19053">Vector3</a> (const <a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a> &amp;)=default</td></tr>
+<tr class="separator:a3d1f884aa8394ca7b2d4639fbdf19053 inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d7b71b3818855cd885d8cbc7c1af7cc inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html#a2d7b71b3818855cd885d8cbc7c1af7cc">Vector3</a> (const <a class="el" href="struct_engine_1_1_math_1_1_vector3i.html">Vector3i</a> &amp;v)</td></tr>
+<tr class="separator:a2d7b71b3818855cd885d8cbc7c1af7cc inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99f604123e83979c4ab89f04e0588a13 inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html#a99f604123e83979c4ab89f04e0588a13">Vector3</a> (float *const r)</td></tr>
+<tr class="separator:a99f604123e83979c4ab89f04e0588a13 inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a30c592e80aed9d8bee74e36382e899a3 inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html#a30c592e80aed9d8bee74e36382e899a3">absDotProduct</a> (const <a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a> &amp;vec) const</td></tr>
+<tr class="memdesc:a30c592e80aed9d8bee74e36382e899a3 inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the absolute dot (scalar) product of this vector with another.  <a href="struct_engine_1_1_math_1_1_vector3.html#a30c592e80aed9d8bee74e36382e899a3">More...</a><br /></td></tr>
+<tr class="separator:a30c592e80aed9d8bee74e36382e899a3 inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1675cb7f664294e51ab7e2267f8a3b99 inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html#a1675cb7f664294e51ab7e2267f8a3b99">crossProduct</a> (const <a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a> &amp;rkVector) const</td></tr>
+<tr class="memdesc:a1675cb7f664294e51ab7e2267f8a3b99 inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the cross-product of 2 vectors, i.e.  <a href="struct_engine_1_1_math_1_1_vector3.html#a1675cb7f664294e51ab7e2267f8a3b99">More...</a><br /></td></tr>
+<tr class="separator:a1675cb7f664294e51ab7e2267f8a3b99 inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a37a582737f3375fa0b7f8d171748f74c inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html#a37a582737f3375fa0b7f8d171748f74c">distance</a> (const <a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a> &amp;rhs) const</td></tr>
+<tr class="memdesc:a37a582737f3375fa0b7f8d171748f74c inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the distance to another vector.  <a href="struct_engine_1_1_math_1_1_vector3.html#a37a582737f3375fa0b7f8d171748f74c">More...</a><br /></td></tr>
+<tr class="separator:a37a582737f3375fa0b7f8d171748f74c inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a965d0f5bf002c00bc4b548f21be424e9 inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html#a965d0f5bf002c00bc4b548f21be424e9">dotProduct</a> (const <a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a> &amp;vec) const</td></tr>
+<tr class="memdesc:a965d0f5bf002c00bc4b548f21be424e9 inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the dot (scalar) product of this vector with another.  <a href="struct_engine_1_1_math_1_1_vector3.html#a965d0f5bf002c00bc4b548f21be424e9">More...</a><br /></td></tr>
+<tr class="separator:a965d0f5bf002c00bc4b548f21be424e9 inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abfaeb8889503c3b3edc06982bcf97ea4 inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html#abfaeb8889503c3b3edc06982bcf97ea4">equalsWithEpsilon</a> (const <a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a> &amp;other, float epsilon=<a class="el" href="namespace_engine_1_1_math.html#a3db756d794ad82646ae1b3f4e76b1c01">floatZeroThreshold</a>)</td></tr>
+<tr class="separator:abfaeb8889503c3b3edc06982bcf97ea4 inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6cbfb15d7311943b1ea12e70e91c3be2 inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="struct_engine_1_1_math_1_1_vector3i.html">Vector3i</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html#a6cbfb15d7311943b1ea12e70e91c3be2">floor</a> () const</td></tr>
+<tr class="separator:a6cbfb15d7311943b1ea12e70e91c3be2 inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad7674f5ca77d518cf0a767f17b072bfd inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html#ad7674f5ca77d518cf0a767f17b072bfd">isZeroLength</a> () const</td></tr>
+<tr class="memdesc:ad7674f5ca77d518cf0a767f17b072bfd inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if this vector is zero length.  <a href="struct_engine_1_1_math_1_1_vector3.html#ad7674f5ca77d518cf0a767f17b072bfd">More...</a><br /></td></tr>
+<tr class="separator:ad7674f5ca77d518cf0a767f17b072bfd inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a273143bd5c8f9dc6dc127a85b351c7c4 inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memItemLeft" align="right" valign="top">constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html#a273143bd5c8f9dc6dc127a85b351c7c4">length</a> () const</td></tr>
+<tr class="memdesc:a273143bd5c8f9dc6dc127a85b351c7c4 inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the length (magnitude) of the vector.  <a href="struct_engine_1_1_math_1_1_vector3.html#a273143bd5c8f9dc6dc127a85b351c7c4">More...</a><br /></td></tr>
+<tr class="separator:a273143bd5c8f9dc6dc127a85b351c7c4 inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2203db1cc5ef86dc8f396b6ff936dbd8 inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html#a2203db1cc5ef86dc8f396b6ff936dbd8">makeCeil</a> (const <a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a> &amp;cmp)</td></tr>
+<tr class="memdesc:a2203db1cc5ef86dc8f396b6ff936dbd8 inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets this vector's components to the maximum of its own and the ones of the passed in vector.  <a href="struct_engine_1_1_math_1_1_vector3.html#a2203db1cc5ef86dc8f396b6ff936dbd8">More...</a><br /></td></tr>
+<tr class="separator:a2203db1cc5ef86dc8f396b6ff936dbd8 inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1165aaa953ef5708fe78d95ddfac0dcd inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html#a1165aaa953ef5708fe78d95ddfac0dcd">makeFloor</a> (const <a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a> &amp;cmp)</td></tr>
+<tr class="memdesc:a1165aaa953ef5708fe78d95ddfac0dcd inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if the vector's scalar components are all greater that the ones of the vector it is compared against.  <a href="struct_engine_1_1_math_1_1_vector3.html#a1165aaa953ef5708fe78d95ddfac0dcd">More...</a><br /></td></tr>
+<tr class="separator:a1165aaa953ef5708fe78d95ddfac0dcd inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a655f0b40c49e7a19ad41cba35287f14e inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html#a655f0b40c49e7a19ad41cba35287f14e">midPoint</a> (const <a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a> &amp;vec) const</td></tr>
+<tr class="memdesc:a655f0b40c49e7a19ad41cba35287f14e inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a vector at a point half way between this and the passed in vector.  <a href="struct_engine_1_1_math_1_1_vector3.html#a655f0b40c49e7a19ad41cba35287f14e">More...</a><br /></td></tr>
+<tr class="separator:a655f0b40c49e7a19ad41cba35287f14e inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae86d9d8db3e64ddb742c15604202ccd inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memItemLeft" align="right" valign="top">constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html#aae86d9d8db3e64ddb742c15604202ccd">normalize</a> ()</td></tr>
+<tr class="memdesc:aae86d9d8db3e64ddb742c15604202ccd inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Normalises the vector.  <a href="struct_engine_1_1_math_1_1_vector3.html#aae86d9d8db3e64ddb742c15604202ccd">More...</a><br /></td></tr>
+<tr class="separator:aae86d9d8db3e64ddb742c15604202ccd inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a60d66f0edf70a912436322c0333b2894 inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html#a60d66f0edf70a912436322c0333b2894">normalizedCopy</a> () const</td></tr>
+<tr class="memdesc:a60d66f0edf70a912436322c0333b2894 inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="mdescLeft">&#160;</td><td class="mdescRight">As normalise, except that this vector is unaffected and the normalised vector is returned as a copy.  <a href="struct_engine_1_1_math_1_1_vector3.html#a60d66f0edf70a912436322c0333b2894">More...</a><br /></td></tr>
+<tr class="separator:a60d66f0edf70a912436322c0333b2894 inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa6bc7f5f20f259e6cf829acd3089b40f inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html#aa6bc7f5f20f259e6cf829acd3089b40f">operator!=</a> (const <a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a> &amp;rkVector) const</td></tr>
+<tr class="separator:aa6bc7f5f20f259e6cf829acd3089b40f inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45badd4c6904119dd6aaf64c0a18f63e inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html#a45badd4c6904119dd6aaf64c0a18f63e">operator*</a> (const float fScalar) const</td></tr>
+<tr class="separator:a45badd4c6904119dd6aaf64c0a18f63e inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b6b12d328c5c3ecc189406526c1f1f2 inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html#a6b6b12d328c5c3ecc189406526c1f1f2">operator*</a> (const <a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a> &amp;rhs) const</td></tr>
+<tr class="separator:a6b6b12d328c5c3ecc189406526c1f1f2 inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab52fe4289f7ffe9a5f7dee277c59682d inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html#ab52fe4289f7ffe9a5f7dee277c59682d">operator*=</a> (const float fScalar)</td></tr>
+<tr class="separator:ab52fe4289f7ffe9a5f7dee277c59682d inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b78e8526252a6cd38347b8c53172e77 inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html#a3b78e8526252a6cd38347b8c53172e77">operator*=</a> (const <a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a> &amp;rkVector)</td></tr>
+<tr class="separator:a3b78e8526252a6cd38347b8c53172e77 inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acab52c4a6a56fa7209ab749fd4dfda17 inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html#acab52c4a6a56fa7209ab749fd4dfda17">operator+</a> () const</td></tr>
+<tr class="separator:acab52c4a6a56fa7209ab749fd4dfda17 inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6482c36eb7a9f4e409eb3b172d76fa28 inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html#a6482c36eb7a9f4e409eb3b172d76fa28">operator+</a> (const <a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a> &amp;rkVector) const</td></tr>
+<tr class="separator:a6482c36eb7a9f4e409eb3b172d76fa28 inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a367244f288b1003d7a69058f0c7a338c inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html#a367244f288b1003d7a69058f0c7a338c">operator+=</a> (const float fScalar)</td></tr>
+<tr class="separator:a367244f288b1003d7a69058f0c7a338c inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1fc7aefadc75af007f366adaedb90dee inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html#a1fc7aefadc75af007f366adaedb90dee">operator+=</a> (const <a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a> &amp;rkVector)</td></tr>
+<tr class="separator:a1fc7aefadc75af007f366adaedb90dee inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1eb716c4476344a4d2836e8ac85e1ba0 inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html#a1eb716c4476344a4d2836e8ac85e1ba0">operator-</a> () const</td></tr>
+<tr class="separator:a1eb716c4476344a4d2836e8ac85e1ba0 inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c18ccc9857f68f592fb59661c8bd34c inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html#a3c18ccc9857f68f592fb59661c8bd34c">operator-</a> (const <a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a> &amp;rkVector) const</td></tr>
+<tr class="separator:a3c18ccc9857f68f592fb59661c8bd34c inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab221d58e05345c251496f3ee59bcd88d inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html#ab221d58e05345c251496f3ee59bcd88d">operator-=</a> (const float fScalar)</td></tr>
+<tr class="separator:ab221d58e05345c251496f3ee59bcd88d inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7bdae9b624b96bb91e7f45f2ce9443ea inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html#a7bdae9b624b96bb91e7f45f2ce9443ea">operator-=</a> (const <a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a> &amp;rkVector)</td></tr>
+<tr class="separator:a7bdae9b624b96bb91e7f45f2ce9443ea inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6aaabe143febc91af21194641f484345 inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html#a6aaabe143febc91af21194641f484345">operator/</a> (const float fScalar) const</td></tr>
+<tr class="separator:a6aaabe143febc91af21194641f484345 inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abfb7e7e48b56b3cde0c2b0e0468d9abe inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html#abfb7e7e48b56b3cde0c2b0e0468d9abe">operator/</a> (const <a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a> &amp;rhs) const</td></tr>
+<tr class="separator:abfb7e7e48b56b3cde0c2b0e0468d9abe inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a33105154f876811bbf6eb0f6d55f86d5 inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html#a33105154f876811bbf6eb0f6d55f86d5">operator/=</a> (const float fScalar)</td></tr>
+<tr class="separator:a33105154f876811bbf6eb0f6d55f86d5 inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad213caf507121c9a5295e641e27aeb68 inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html#ad213caf507121c9a5295e641e27aeb68">operator/=</a> (const <a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a> &amp;rkVector)</td></tr>
+<tr class="separator:ad213caf507121c9a5295e641e27aeb68 inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca4180469a4652a503055d8c9331c89f inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html#aca4180469a4652a503055d8c9331c89f">operator=</a> (const float fScaler)</td></tr>
+<tr class="separator:aca4180469a4652a503055d8c9331c89f inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af41d77e00b8da8b5817850862700c2fd inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html#af41d77e00b8da8b5817850862700c2fd">operator=</a> (const <a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a> &amp;rkVector)=default</td></tr>
+<tr class="memdesc:af41d77e00b8da8b5817850862700c2fd inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assigns the value of the other vector.  <a href="struct_engine_1_1_math_1_1_vector3.html#af41d77e00b8da8b5817850862700c2fd">More...</a><br /></td></tr>
+<tr class="separator:af41d77e00b8da8b5817850862700c2fd inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a09972e584cb957fc2915e0e10d1c066d inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html#a09972e584cb957fc2915e0e10d1c066d">operator==</a> (const <a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a> &amp;rkVector) const</td></tr>
+<tr class="separator:a09972e584cb957fc2915e0e10d1c066d inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a87f15dd03b5b6f3e6866a6c81afa09 inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memItemLeft" align="right" valign="top">float &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html#a3a87f15dd03b5b6f3e6866a6c81afa09">operator[]</a> (const size_t i)</td></tr>
+<tr class="separator:a3a87f15dd03b5b6f3e6866a6c81afa09 inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae0602f0cf99c0102ce858872a35a4c45 inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html#ae0602f0cf99c0102ce858872a35a4c45">operator[]</a> (const size_t i) const</td></tr>
+<tr class="separator:ae0602f0cf99c0102ce858872a35a4c45 inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a301177c760fe22af851f99dd60ba19ae inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html#a301177c760fe22af851f99dd60ba19ae">perpendicular</a> () const</td></tr>
+<tr class="memdesc:a301177c760fe22af851f99dd60ba19ae inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates a vector perpendicular to this vector (eg an 'up' vector).  <a href="struct_engine_1_1_math_1_1_vector3.html#a301177c760fe22af851f99dd60ba19ae">More...</a><br /></td></tr>
+<tr class="separator:a301177c760fe22af851f99dd60ba19ae inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab6ce2bc7d4377d8393e240b3d154d2cb inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html#ab6ce2bc7d4377d8393e240b3d154d2cb">positionCloses</a> (const <a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a> &amp;rhs, float tolerance=1e-03f) const</td></tr>
+<tr class="memdesc:ab6ce2bc7d4377d8393e240b3d154d2cb inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns whether this vector is within a positional tolerance of another vector, also take scale of the vectors into account.  <a href="struct_engine_1_1_math_1_1_vector3.html#ab6ce2bc7d4377d8393e240b3d154d2cb">More...</a><br /></td></tr>
+<tr class="separator:ab6ce2bc7d4377d8393e240b3d154d2cb inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c70bf9543ea3698c9cf1e1d497a7ed9 inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html#a8c70bf9543ea3698c9cf1e1d497a7ed9">primaryAxis</a> () const</td></tr>
+<tr class="memdesc:a8c70bf9543ea3698c9cf1e1d497a7ed9 inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extract the primary (dominant) axis from this direction vector.  <a href="struct_engine_1_1_math_1_1_vector3.html#a8c70bf9543ea3698c9cf1e1d497a7ed9">More...</a><br /></td></tr>
+<tr class="separator:a8c70bf9543ea3698c9cf1e1d497a7ed9 inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b055a31cbbed6673c034b6a51691254 inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html#a4b055a31cbbed6673c034b6a51691254">ptr</a> ()</td></tr>
+<tr class="memdesc:a4b055a31cbbed6673c034b6a51691254 inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer accessor for direct copying.  <a href="struct_engine_1_1_math_1_1_vector3.html#a4b055a31cbbed6673c034b6a51691254">More...</a><br /></td></tr>
+<tr class="separator:a4b055a31cbbed6673c034b6a51691254 inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb1ce691dcc5e84c9308412532626bd9 inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memItemLeft" align="right" valign="top">const float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html#abb1ce691dcc5e84c9308412532626bd9">ptr</a> () const</td></tr>
+<tr class="memdesc:abb1ce691dcc5e84c9308412532626bd9 inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer accessor for direct copying.  <a href="struct_engine_1_1_math_1_1_vector3.html#abb1ce691dcc5e84c9308412532626bd9">More...</a><br /></td></tr>
+<tr class="separator:abb1ce691dcc5e84c9308412532626bd9 inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8908c64cea5ca7830e469c9966fb7bd1 inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html#a8908c64cea5ca7830e469c9966fb7bd1">reflect</a> (const <a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a> &amp;normal) const</td></tr>
+<tr class="memdesc:a8908c64cea5ca7830e469c9966fb7bd1 inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates a reflection vector to the plane with the given normal .  <a href="struct_engine_1_1_math_1_1_vector3.html#a8908c64cea5ca7830e469c9966fb7bd1">More...</a><br /></td></tr>
+<tr class="separator:a8908c64cea5ca7830e469c9966fb7bd1 inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa260308d6971e9aa859d7f86ee81a2a7 inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html#aa260308d6971e9aa859d7f86ee81a2a7">squaredDistance</a> (const <a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a> &amp;rhs) const</td></tr>
+<tr class="memdesc:aa260308d6971e9aa859d7f86ee81a2a7 inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the square of the distance to another vector.  <a href="struct_engine_1_1_math_1_1_vector3.html#aa260308d6971e9aa859d7f86ee81a2a7">More...</a><br /></td></tr>
+<tr class="separator:aa260308d6971e9aa859d7f86ee81a2a7 inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc11357a05bef4cfb0645402199a5f1b inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html#abc11357a05bef4cfb0645402199a5f1b">squaredLength</a> () const</td></tr>
+<tr class="memdesc:abc11357a05bef4cfb0645402199a5f1b inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the square of the length(magnitude) of the vector.  <a href="struct_engine_1_1_math_1_1_vector3.html#abc11357a05bef4cfb0645402199a5f1b">More...</a><br /></td></tr>
+<tr class="separator:abc11357a05bef4cfb0645402199a5f1b inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21a51abdaa3d137c0d851e250a1b83d9 inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html#a21a51abdaa3d137c0d851e250a1b83d9">swap</a> (<a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a> &amp;other) noexcept</td></tr>
+<tr class="memdesc:a21a51abdaa3d137c0d851e250a1b83d9 inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exchange the contents of this vector with another.  <a href="struct_engine_1_1_math_1_1_vector3.html#a21a51abdaa3d137c0d851e250a1b83d9">More...</a><br /></td></tr>
+<tr class="separator:a21a51abdaa3d137c0d851e250a1b83d9 inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e94b5be90b216b39faabc8ac84a6d4a inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_math_1_1_vector2.html">Vector2</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html#a8e94b5be90b216b39faabc8ac84a6d4a">xy</a> () const</td></tr>
+<tr class="memdesc:a8e94b5be90b216b39faabc8ac84a6d4a inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Swizzle-like narrowing operations.  <a href="struct_engine_1_1_math_1_1_vector3.html#a8e94b5be90b216b39faabc8ac84a6d4a">More...</a><br /></td></tr>
+<tr class="separator:a8e94b5be90b216b39faabc8ac84a6d4a inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a392db7aa46bffdea52c41671b69e1750 inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html#a392db7aa46bffdea52c41671b69e1750">xyz</a> () const</td></tr>
+<tr class="separator:a392db7aa46bffdea52c41671b69e1750 inherit pub_methods_struct_engine_1_1_math_1_1_vector3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pub_attribs_struct_engine_1_1_math_1_1_vector3"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_struct_engine_1_1_math_1_1_vector3')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Engine::Math::Vector3</a></td></tr>
+<tr class="memitem:af1bc332e73327aadf140e9935ced1f8c inherit pub_attribs_struct_engine_1_1_math_1_1_vector3"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html#af1bc332e73327aadf140e9935ced1f8c">x</a></td></tr>
+<tr class="separator:af1bc332e73327aadf140e9935ced1f8c inherit pub_attribs_struct_engine_1_1_math_1_1_vector3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d90e1bc97261d34d88dd406206a2711 inherit pub_attribs_struct_engine_1_1_math_1_1_vector3"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html#a2d90e1bc97261d34d88dd406206a2711">y</a></td></tr>
+<tr class="separator:a2d90e1bc97261d34d88dd406206a2711 inherit pub_attribs_struct_engine_1_1_math_1_1_vector3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b2f63f8e389e315747582246211459d inherit pub_attribs_struct_engine_1_1_math_1_1_vector3"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html#a4b2f63f8e389e315747582246211459d">z</a></td></tr>
+<tr class="separator:a4b2f63f8e389e315747582246211459d inherit pub_attribs_struct_engine_1_1_math_1_1_vector3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_static_attribs_struct_engine_1_1_math_1_1_vector3"><td colspan="2" onclick="javascript:toggleInherit('pub_static_attribs_struct_engine_1_1_math_1_1_vector3')"><img src="closed.png" alt="-"/>&#160;Static Public Attributes inherited from <a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Engine::Math::Vector3</a></td></tr>
+<tr class="memitem:af5050eced2466b01a7a4847058516d01 inherit pub_static_attribs_struct_engine_1_1_math_1_1_vector3"><td class="memItemLeft" align="right" valign="top">static const constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html#af5050eced2466b01a7a4847058516d01">NEGATIVE_UNIT_X</a> [] { -1, 0, 0 }</td></tr>
+<tr class="separator:af5050eced2466b01a7a4847058516d01 inherit pub_static_attribs_struct_engine_1_1_math_1_1_vector3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d68085f1d52d4c84957cf13acc79a2e inherit pub_static_attribs_struct_engine_1_1_math_1_1_vector3"><td class="memItemLeft" align="right" valign="top">static const constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html#a5d68085f1d52d4c84957cf13acc79a2e">NEGATIVE_UNIT_Y</a> [] { 0, -1, 0 }</td></tr>
+<tr class="separator:a5d68085f1d52d4c84957cf13acc79a2e inherit pub_static_attribs_struct_engine_1_1_math_1_1_vector3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c1c3316999b0ca3daf1b37947251669 inherit pub_static_attribs_struct_engine_1_1_math_1_1_vector3"><td class="memItemLeft" align="right" valign="top">static const constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html#a0c1c3316999b0ca3daf1b37947251669">NEGATIVE_UNIT_Z</a> [] { 0, 0, -1 }</td></tr>
+<tr class="separator:a0c1c3316999b0ca3daf1b37947251669 inherit pub_static_attribs_struct_engine_1_1_math_1_1_vector3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abba625dd9c571e94cd14cfcea7d7efaf inherit pub_static_attribs_struct_engine_1_1_math_1_1_vector3"><td class="memItemLeft" align="right" valign="top">static const constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html#abba625dd9c571e94cd14cfcea7d7efaf">UNIT_SCALE</a> [] { 1, 1, 1 }</td></tr>
+<tr class="separator:abba625dd9c571e94cd14cfcea7d7efaf inherit pub_static_attribs_struct_engine_1_1_math_1_1_vector3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab1edeb23f0e8d7abf754ab23851bd7f8 inherit pub_static_attribs_struct_engine_1_1_math_1_1_vector3"><td class="memItemLeft" align="right" valign="top">static const constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html#ab1edeb23f0e8d7abf754ab23851bd7f8">UNIT_X</a> [] { 1, 0, 0 }</td></tr>
+<tr class="separator:ab1edeb23f0e8d7abf754ab23851bd7f8 inherit pub_static_attribs_struct_engine_1_1_math_1_1_vector3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab51f7638c26f5a658eebf9c042981cfe inherit pub_static_attribs_struct_engine_1_1_math_1_1_vector3"><td class="memItemLeft" align="right" valign="top">static const constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html#ab51f7638c26f5a658eebf9c042981cfe">UNIT_Y</a> [] { 0, 1, 0 }</td></tr>
+<tr class="separator:ab51f7638c26f5a658eebf9c042981cfe inherit pub_static_attribs_struct_engine_1_1_math_1_1_vector3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ca80e4db0b798ff11c0592ec6009131 inherit pub_static_attribs_struct_engine_1_1_math_1_1_vector3"><td class="memItemLeft" align="right" valign="top">static const constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html#a2ca80e4db0b798ff11c0592ec6009131">UNIT_Z</a> [] { 0, 0, 1 }</td></tr>
+<tr class="separator:a2ca80e4db0b798ff11c0592ec6009131 inherit pub_static_attribs_struct_engine_1_1_math_1_1_vector3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a325a2f0418288cdf11023c124991c6ee inherit pub_static_attribs_struct_engine_1_1_math_1_1_vector3"><td class="memItemLeft" align="right" valign="top">static const constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html#a325a2f0418288cdf11023c124991c6ee">ZERO</a> [] { 0, 0, 0 }</td></tr>
+<tr class="separator:a325a2f0418288cdf11023c124991c6ee inherit pub_static_attribs_struct_engine_1_1_math_1_1_vector3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a2bff293b07d7830364a4b05a815a3c81" name="a2bff293b07d7830364a4b05a815a3c81"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2bff293b07d7830364a4b05a815a3c81">&#9670;&#160;</a></span>NormalizedVector3() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr Engine::Math::NormalizedVector3::NormalizedVector3 </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>z</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="adfcd9cc176516052ac9efbd63210dcc2" name="adfcd9cc176516052ac9efbd63210dcc2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adfcd9cc176516052ac9efbd63210dcc2">&#9670;&#160;</a></span>NormalizedVector3() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr Engine::Math::NormalizedVector3::NormalizedVector3 </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a> &amp;&#160;</td>
+          <td class="paramname"><em>v</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a09c691f74db9798dc0f67fa3e534a1b7" name="a09c691f74db9798dc0f67fa3e534a1b7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a09c691f74db9798dc0f67fa3e534a1b7">&#9670;&#160;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="struct_engine_1_1_math_1_1_normalized_vector3.html">NormalizedVector3</a> &amp; Engine::Math::NormalizedVector3::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a> &amp;&#160;</td>
+          <td class="paramname"><em>v</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>src/Meta/math/<a class="el" href="vector3_8h.html">vector3.h</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Fri Jun 5 2026 23:36:48 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        Version: dev
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Versions</dt>
+            <script src="../../../../versions.js"></script>
+        </dl>
+    </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

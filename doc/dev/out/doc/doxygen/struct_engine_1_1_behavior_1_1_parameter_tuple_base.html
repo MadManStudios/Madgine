@@ -259,16 +259,16 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a53f26203e7fd7b9ecf03519652212b0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa7c0840398f0bbce1bec8c65537083b2"><td class="memItemLeft" align="right" valign="top">virtual std::unique_ptr&lt; <a class="el" href="struct_engine_1_1_behavior_1_1_parameter_tuple_base.html">ParameterTupleBase</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_parameter_tuple_base.html#aa7c0840398f0bbce1bec8c65537083b2">clone</a> ()=0</td></tr>
 <tr class="separator:aa7c0840398f0bbce1bec8c65537083b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8fa6bcd2b96cc6df9550a66f0eac79fd"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_scope_ptr.html">ScopePtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_parameter_tuple_base.html#a8fa6bcd2b96cc6df9550a66f0eac79fd">customScopePtr</a> ()=0</td></tr>
-<tr class="separator:a8fa6bcd2b96cc6df9550a66f0eac79fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaee278a089efdcb0a7aa2a291d40c945"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_reflect_1_1_scope_ptr.html">Reflect::ScopePtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_parameter_tuple_base.html#aaee278a089efdcb0a7aa2a291d40c945">customScopePtr</a> ()=0</td></tr>
+<tr class="separator:aaee278a089efdcb0a7aa2a291d40c945"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abd08afbdef4f35805894bacb106386ec"><td class="memItemLeft" align="right" valign="top">virtual std::string_view&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_parameter_tuple_base.html#abd08afbdef4f35805894bacb106386ec">name</a> (size_t index) const =0</td></tr>
 <tr class="separator:abd08afbdef4f35805894bacb106386ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6620fd181ccc455502007a92578db945"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">Serialize::StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_parameter_tuple_base.html#a6620fd181ccc455502007a92578db945">read</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">Serialize::CallerHierarchyFormattedSerializeStream</a> in)=0</td></tr>
 <tr class="separator:a6620fd181ccc455502007a92578db945"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a98515fdb440def507a5d12f6e232a4c6"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_parameter_tuple_base.html#a98515fdb440def507a5d12f6e232a4c6">size</a> () const =0</td></tr>
 <tr class="separator:a98515fdb440def507a5d12f6e232a4c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a71ca622a82fbb3633072e57af4e7de35"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_extended_value_type_desc.html">ExtendedValueTypeDesc</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_parameter_tuple_base.html#a71ca622a82fbb3633072e57af4e7de35">type</a> (size_t index) const =0</td></tr>
-<tr class="separator:a71ca622a82fbb3633072e57af4e7de35"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa887df4a9b40f51dc1290ed052ce37dc"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_reflect_1_1_extended_type.html">Reflect::ExtendedType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_parameter_tuple_base.html#aa887df4a9b40f51dc1290ed052ce37dc">type</a> (size_t index) const =0</td></tr>
+<tr class="separator:aa887df4a9b40f51dc1290ed052ce37dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a90ee4d510bec4387af73f63e81f30621"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_parameter_tuple_base.html#a90ee4d510bec4387af73f63e81f30621">write</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">Serialize::CallerHierarchyFormattedSerializeStream</a> out)=0</td></tr>
 <tr class="separator:a90ee4d510bec4387af73f63e81f30621"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -354,8 +354,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a71ca622a82fbb3633072e57af4e7de35" name="a71ca622a82fbb3633072e57af4e7de35"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a71ca622a82fbb3633072e57af4e7de35">&#9670;&#160;</a></span>type()</h2>
+<a id="aa887df4a9b40f51dc1290ed052ce37dc" name="aa887df4a9b40f51dc1290ed052ce37dc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa887df4a9b40f51dc1290ed052ce37dc">&#9670;&#160;</a></span>type()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -364,7 +364,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual <a class="el" href="struct_engine_1_1_extended_value_type_desc.html">ExtendedValueTypeDesc</a> Engine::Behavior::ParameterTupleBase::type </td>
+          <td class="memname">virtual <a class="el" href="struct_engine_1_1_reflect_1_1_extended_type.html">Reflect::ExtendedType</a> Engine::Behavior::ParameterTupleBase::type </td>
           <td>(</td>
           <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>index</em></td><td>)</td>
@@ -378,7 +378,7 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implemented in <a class="el" href="struct_engine_1_1_behavior_1_1_parameter_tuple_instance.html#a83b2ded3ee6b593172d529e9b35e6b4c">Engine::Behavior::ParameterTupleInstance&lt; Ty &gt;</a>, <a class="el" href="struct_engine_1_1_behavior_1_1_parameter_tuple_instance.html#a83b2ded3ee6b593172d529e9b35e6b4c">Engine::Behavior::ParameterTupleInstance&lt; Ty... &gt;</a>, and <a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_python3_parameter_tuple.html#a85ffa26ca41778c3e4e836bfc5e8b699">Engine::Behavior::Python3::Python3ParameterTuple</a>.</p>
+<p>Implemented in <a class="el" href="struct_engine_1_1_behavior_1_1_parameter_tuple_instance.html#aef79dd37481ca9d4e499e95b947de388">Engine::Behavior::ParameterTupleInstance&lt; Ty &gt;</a>, <a class="el" href="struct_engine_1_1_behavior_1_1_parameter_tuple_instance.html#aef79dd37481ca9d4e499e95b947de388">Engine::Behavior::ParameterTupleInstance&lt; Ty... &gt;</a>, and <a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_python3_parameter_tuple.html#a84223c56db88c6b741ed8812b776e479">Engine::Behavior::Python3::Python3ParameterTuple</a>.</p>
 
 </div>
 </div>
@@ -409,8 +409,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a8fa6bcd2b96cc6df9550a66f0eac79fd" name="a8fa6bcd2b96cc6df9550a66f0eac79fd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8fa6bcd2b96cc6df9550a66f0eac79fd">&#9670;&#160;</a></span>customScopePtr()</h2>
+<a id="aaee278a089efdcb0a7aa2a291d40c945" name="aaee278a089efdcb0a7aa2a291d40c945"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaee278a089efdcb0a7aa2a291d40c945">&#9670;&#160;</a></span>customScopePtr()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -419,7 +419,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual <a class="el" href="struct_engine_1_1_scope_ptr.html">ScopePtr</a> Engine::Behavior::ParameterTupleBase::customScopePtr </td>
+          <td class="memname">virtual <a class="el" href="struct_engine_1_1_reflect_1_1_scope_ptr.html">Reflect::ScopePtr</a> Engine::Behavior::ParameterTupleBase::customScopePtr </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -432,7 +432,7 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implemented in <a class="el" href="struct_engine_1_1_behavior_1_1_typed_parameter_tuple_instance.html#a8652ec286b6c26e113e0427f1f66a5eb">Engine::Behavior::TypedParameterTupleInstance&lt; Names, Ty &gt;</a>, and <a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_python3_parameter_tuple.html#a81c910dbd2729ea0107696c60474dd31">Engine::Behavior::Python3::Python3ParameterTuple</a>.</p>
+<p>Implemented in <a class="el" href="struct_engine_1_1_behavior_1_1_typed_parameter_tuple_instance.html#a89460ad6568feb5a48ede985231b4a79">Engine::Behavior::TypedParameterTupleInstance&lt; Names, Ty &gt;</a>, and <a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_python3_parameter_tuple.html#ae34ceaa20fd4d8fe67b0bbede8809054">Engine::Behavior::Python3::Python3ParameterTuple</a>.</p>
 
 </div>
 </div>
@@ -498,7 +498,7 @@ Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2026 23:14:07 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Fri Jun 5 2026 23:36:47 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

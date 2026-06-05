@@ -1,0 +1,1895 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: Engine::Math Namespace Reference &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../docs/README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/gettingstarted.html#starting-the-engine">Starting the Engine</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/howtos.html">How-Tos</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/howtos/build.html">Build Instructions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/howtos/build.html#dependencies">Dependencies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/howtos/build.html#setup-the-madgine">Setup The Madgine</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/howtos/build.html#generating-project-files">Generating Project Files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/howtos/build.html#build-configurations">Build Configurations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/howtos/firstUniqueComponent.html">Writing your first UniqueComponent</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/keyvalue.html">KeyValue</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/keyvalue.html#valuetype">ValueType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/keyvalue.html#metatables">MetaTables</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/logging.html">Logging</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/logging.html#message-types">Message Types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/logging.html#building-log-messages">Building Log Messages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/logging.html#default-log">Default Log</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/logging.html#log-listener">Log Listener</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/pluginsystem.html">Plugins &amp; Unique Components</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/pluginsystem.html#plugins">Plugins</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/pluginsystem.html#unique-components">Unique Components</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/serialize.html">Serialization &amp; Synchronization</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#fundamental-data-types">Fundamental Data Types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#unit-hierarchy">Unit Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#serializetables">SerializeTables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#streams">Streams</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#managers">Managers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#state-replication">State Replication</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/threading.html">Threads &amp; Asynchronous Execution</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/threading.html#threads">Threads</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/threading.html#tasks">Tasks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/threading.html#taskqueues">TaskQueues</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/threading.html#workgroups">Workgroups</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/threading.html#scheduler">Scheduler</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#our-pledge">Our Pledge</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#our-standards">Our Standards</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#our-responsibilities">Our Responsibilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#scope">Scope</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#enforcement">Enforcement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#attribution">Attribution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/architecture.html#core-libraries">Core Libraries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../docs/README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../docs/README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: Engine::Math Namespace Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/out/doc/doxygen/namespace_engine_1_1_math.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="math-namespace-reference">
+<h1>Math Namespace Reference<a class="headerlink" href="#math-namespace-reference" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: Engine::Math Namespace Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;dev</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespace_engine.html">Engine</a></li><li class="navelem"><a class="el" href="namespace_engine_1_1_math.html">Math</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle"><div class="title">Engine::Math Namespace Reference</div></div>
+</div><!--header-->
+<div class="contents">
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_a_a_b_b.html">AABB</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_atlas2.html">Atlas2</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_bounding_box.html">BoundingBox</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_bounds.html">Bounds</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_color3.html">Color3</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_color4.html">Color4</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_frustum.html">Frustum</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_line2.html">Line2</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_line3.html">Line3</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_matrix3.html">Matrix3</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A 3x3 matrix which can represent rotations around axes.  <a href="struct_engine_1_1_math_1_1_matrix3.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_matrix4.html">Matrix4</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A 3x3 matrix which can represent rotations around axes.  <a href="struct_engine_1_1_math_1_1_matrix4.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_normalized_vector2.html">NormalizedVector2</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_normalized_vector3.html">NormalizedVector3</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_plane.html">Plane</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_quaternion.html">Quaternion</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_ray2.html">Ray2</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_ray3.html">Ray3</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_rect2.html">Rect2</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_rect2i.html">Rect2i</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_sphere.html">Sphere</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_up_to.html">UpTo</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector2.html">Vector2</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Standard 2-dimensional vector.  <a href="struct_engine_1_1_math_1_1_vector2.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector2i.html">Vector2i</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Standard 3-dimensional vector.  <a href="struct_engine_1_1_math_1_1_vector3.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector3i.html">Vector3i</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector4.html">Vector4</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Standard 4-dimensional vector.  <a href="struct_engine_1_1_math_1_1_vector4.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector4i.html">Vector4i</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:ace7160844b349d30c5597349850ab274"><td class="memItemLeft" align="right" valign="top">constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_math.html#ace7160844b349d30c5597349850ab274">abs</a> (float f)</td></tr>
+<tr class="separator:ace7160844b349d30c5597349850ab274"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed705cdd236a71326472ffc42e0ff3cb"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:aed705cdd236a71326472ffc42e0ff3cb"><td class="memTemplItemLeft" align="right" valign="top">constexpr T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_math.html#aed705cdd236a71326472ffc42e0ff3cb">clamp</a> (const T &amp;v, const T &amp;minV, const T &amp;maxV)</td></tr>
+<tr class="separator:aed705cdd236a71326472ffc42e0ff3cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6098e6849c2ac618e9c0ee2b0cdcbdb6"><td class="memItemLeft" align="right" valign="top">std::tuple&lt; <a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a>, <a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a>, <a class="el" href="struct_engine_1_1_math_1_1_quaternion.html">Quaternion</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_math.html#a6098e6849c2ac618e9c0ee2b0cdcbdb6">DecomposeTransformMatrix</a> (const <a class="el" href="struct_engine_1_1_math_1_1_matrix4.html">Matrix4</a> &amp;transform)</td></tr>
+<tr class="separator:a6098e6849c2ac618e9c0ee2b0cdcbdb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a742b10d1f1561a221875a01591ae3562"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_math.html#a742b10d1f1561a221875a01591ae3562">Distance</a> (const <a class="el" href="struct_engine_1_1_math_1_1_ray3.html">Ray3</a> &amp;ray, const <a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a> &amp;point, float *rayClosestParameter)</td></tr>
+<tr class="separator:a742b10d1f1561a221875a01591ae3562"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0f0d06b2e820f66bcf7b2715640966d9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_math_1_1_matrix3.html">Matrix3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_math.html#a0f0d06b2e820f66bcf7b2715640966d9">ExtractRotationMatrix</a> (const <a class="el" href="struct_engine_1_1_math_1_1_matrix3.html">Matrix3</a> &amp;m)</td></tr>
+<tr class="separator:a0f0d06b2e820f66bcf7b2715640966d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5118521937b2cf0e007068acc4d3ef2f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_math_1_1_matrix3.html">Matrix3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_math.html#a5118521937b2cf0e007068acc4d3ef2f">ExtractScalingMatrix</a> (const <a class="el" href="struct_engine_1_1_math_1_1_matrix3.html">Matrix3</a> &amp;m)</td></tr>
+<tr class="separator:a5118521937b2cf0e007068acc4d3ef2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb9b0fdb71e38209202dbadcbc6602f0"><td class="memItemLeft" align="right" valign="top">META_EXPORT <a class="el" href="struct_engine_1_1_math_1_1_up_to.html">UpTo</a>&lt; float, 2 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_math.html#afb9b0fdb71e38209202dbadcbc6602f0">Intersect</a> (const <a class="el" href="struct_engine_1_1_math_1_1_line2.html">Line2</a> &amp;line, const <a class="el" href="struct_engine_1_1_math_1_1_rect2.html">Rect2</a> &amp;rect)</td></tr>
+<tr class="separator:afb9b0fdb71e38209202dbadcbc6602f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2543176d006344cf3191c39e714c7955"><td class="memItemLeft" align="right" valign="top">META_EXPORT <a class="el" href="struct_engine_1_1_math_1_1_up_to.html">UpTo</a>&lt; std::pair&lt; float, float &gt;, 1 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_math.html#a2543176d006344cf3191c39e714c7955">Intersect</a> (const <a class="el" href="struct_engine_1_1_math_1_1_line2.html">Line2</a> &amp;lineA, const <a class="el" href="struct_engine_1_1_math_1_1_line2.html">Line2</a> &amp;lineB)</td></tr>
+<tr class="separator:a2543176d006344cf3191c39e714c7955"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4132bd51ac8f7cf6add01fd70bb7d203"><td class="memItemLeft" align="right" valign="top">META_EXPORT <a class="el" href="struct_engine_1_1_math_1_1_up_to.html">UpTo</a>&lt; float, 2 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_math.html#a4132bd51ac8f7cf6add01fd70bb7d203">Intersect</a> (const <a class="el" href="struct_engine_1_1_math_1_1_ray2.html">Ray2</a> &amp;ray, const <a class="el" href="struct_engine_1_1_math_1_1_rect2.html">Rect2</a> &amp;rect)</td></tr>
+<tr class="separator:a4132bd51ac8f7cf6add01fd70bb7d203"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a69b3bda480de9dacbc4f667b8ecd0e3d"><td class="memItemLeft" align="right" valign="top">META_EXPORT <a class="el" href="struct_engine_1_1_math_1_1_up_to.html">UpTo</a>&lt; std::pair&lt; float, float &gt;, 1 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_math.html#a69b3bda480de9dacbc4f667b8ecd0e3d">Intersect</a> (const <a class="el" href="struct_engine_1_1_math_1_1_ray2.html">Ray2</a> &amp;rayA, const <a class="el" href="struct_engine_1_1_math_1_1_ray2.html">Ray2</a> &amp;rayB)</td></tr>
+<tr class="separator:a69b3bda480de9dacbc4f667b8ecd0e3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3da6ea458f2f2838eab01944627317be"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_math_1_1_up_to.html">UpTo</a>&lt; float, 2 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_math.html#a3da6ea458f2f2838eab01944627317be">Intersect</a> (const <a class="el" href="struct_engine_1_1_math_1_1_ray3.html">Ray3</a> &amp;ray, const <a class="el" href="struct_engine_1_1_math_1_1_bounding_box.html">BoundingBox</a> &amp;box)</td></tr>
+<tr class="separator:a3da6ea458f2f2838eab01944627317be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f8fc6ee68c8d2688924ab2a164175c1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_math_1_1_up_to.html">UpTo</a>&lt; float, 2 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_math.html#a9f8fc6ee68c8d2688924ab2a164175c1">Intersect</a> (const <a class="el" href="struct_engine_1_1_math_1_1_ray3.html">Ray3</a> &amp;ray, const <a class="el" href="struct_engine_1_1_math_1_1_frustum.html">Frustum</a> &amp;frustum)</td></tr>
+<tr class="separator:a9f8fc6ee68c8d2688924ab2a164175c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad8e5b95c35d0c3db26b690ddfc463fbc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_math_1_1_up_to.html">UpTo</a>&lt; float, 2 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_math.html#ad8e5b95c35d0c3db26b690ddfc463fbc">Intersect</a> (const <a class="el" href="struct_engine_1_1_math_1_1_ray3.html">Ray3</a> &amp;ray, const <a class="el" href="struct_engine_1_1_math_1_1_plane.html">Plane</a> &amp;minX, const <a class="el" href="struct_engine_1_1_math_1_1_plane.html">Plane</a> &amp;maxX, const <a class="el" href="struct_engine_1_1_math_1_1_plane.html">Plane</a> &amp;minY, const <a class="el" href="struct_engine_1_1_math_1_1_plane.html">Plane</a> &amp;maxY, const <a class="el" href="struct_engine_1_1_math_1_1_plane.html">Plane</a> &amp;minZ, const <a class="el" href="struct_engine_1_1_math_1_1_plane.html">Plane</a> &amp;maxZ)</td></tr>
+<tr class="separator:ad8e5b95c35d0c3db26b690ddfc463fbc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a722223a7750bf8e27e7229f58f508f3c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_math_1_1_up_to.html">UpTo</a>&lt; float, 1 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_math.html#a722223a7750bf8e27e7229f58f508f3c">Intersect</a> (const <a class="el" href="struct_engine_1_1_math_1_1_ray3.html">Ray3</a> &amp;ray, const <a class="el" href="struct_engine_1_1_math_1_1_plane.html">Plane</a> &amp;plane)</td></tr>
+<tr class="separator:a722223a7750bf8e27e7229f58f508f3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac7a3f816a61f82264adea8cd4fad90ff"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_math_1_1_up_to.html">UpTo</a>&lt; float, 2 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_math.html#ac7a3f816a61f82264adea8cd4fad90ff">Intersect</a> (const <a class="el" href="struct_engine_1_1_math_1_1_ray3.html">Ray3</a> &amp;ray, const <a class="el" href="struct_engine_1_1_math_1_1_sphere.html">Sphere</a> &amp;sphere)</td></tr>
+<tr class="separator:ac7a3f816a61f82264adea8cd4fad90ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a651df3a542206ec8c312f857d497589e"><td class="memItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_math.html#a651df3a542206ec8c312f857d497589e">isEqual</a> (float a, float b, float epsilon=<a class="el" href="namespace_engine_1_1_math.html#a3db756d794ad82646ae1b3f4e76b1c01">floatZeroThreshold</a>)</td></tr>
+<tr class="separator:a651df3a542206ec8c312f857d497589e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a53a667d787062cf71bfa63b4d1e0b43a"><td class="memItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_math.html#a53a667d787062cf71bfa63b4d1e0b43a">isZero</a> (float f, float epsilon=<a class="el" href="namespace_engine_1_1_math.html#a3db756d794ad82646ae1b3f4e76b1c01">floatZeroThreshold</a>)</td></tr>
+<tr class="separator:a53a667d787062cf71bfa63b4d1e0b43a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a035362eb8f34e920f3db62c33356b93a"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="struct_engine_1_1_math_1_1_color3.html">Color3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_math.html#a035362eb8f34e920f3db62c33356b93a">lerp</a> (const <a class="el" href="struct_engine_1_1_math_1_1_color3.html">Color3</a> &amp;c1, const <a class="el" href="struct_engine_1_1_math_1_1_color3.html">Color3</a> &amp;c2, float ratio)</td></tr>
+<tr class="separator:a035362eb8f34e920f3db62c33356b93a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e51bc464b07842bea8ba0cadd75e1b7"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="struct_engine_1_1_math_1_1_color4.html">Color4</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_math.html#a0e51bc464b07842bea8ba0cadd75e1b7">lerp</a> (const <a class="el" href="struct_engine_1_1_math_1_1_color4.html">Color4</a> &amp;c1, const <a class="el" href="struct_engine_1_1_math_1_1_color4.html">Color4</a> &amp;c2, float ratio)</td></tr>
+<tr class="separator:a0e51bc464b07842bea8ba0cadd75e1b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a574f4582355d48fd25e9e818e9d3b427"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="struct_engine_1_1_math_1_1_matrix3.html">Matrix3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_math.html#a574f4582355d48fd25e9e818e9d3b427">lerp</a> (const <a class="el" href="struct_engine_1_1_math_1_1_matrix3.html">Matrix3</a> &amp;m1, const <a class="el" href="struct_engine_1_1_math_1_1_matrix3.html">Matrix3</a> &amp;m2, float ratio)</td></tr>
+<tr class="separator:a574f4582355d48fd25e9e818e9d3b427"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a52f6ddcc2168a234c229efad0ea3d024"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_math.html#a52f6ddcc2168a234c229efad0ea3d024">lerp</a> (const <a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a> &amp;v1, const <a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a> &amp;v2, float ratio)</td></tr>
+<tr class="separator:a52f6ddcc2168a234c229efad0ea3d024"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a02d52176b936784d4587fd5b1445136f"><td class="memItemLeft" align="right" valign="top">constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_math.html#a02d52176b936784d4587fd5b1445136f">lerp</a> (float a, float b, float t)</td></tr>
+<tr class="separator:a02d52176b936784d4587fd5b1445136f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2c35233bc86cacd5ea88257c3140584"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:ac2c35233bc86cacd5ea88257c3140584"><td class="memTemplItemLeft" align="right" valign="top">constexpr T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_math.html#ac2c35233bc86cacd5ea88257c3140584">max</a> (const T &amp;a, const T &amp;b)</td></tr>
+<tr class="separator:ac2c35233bc86cacd5ea88257c3140584"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa6864d7f7a1a65e0f1c323200c1b6cb7"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_math.html#aa6864d7f7a1a65e0f1c323200c1b6cb7">max</a> (const <a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a> &amp;v1, const <a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a> &amp;v2)</td></tr>
+<tr class="separator:aa6864d7f7a1a65e0f1c323200c1b6cb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a68bed508c4d0472496c073399e2c8cd2"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a68bed508c4d0472496c073399e2c8cd2"><td class="memTemplItemLeft" align="right" valign="top">constexpr T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_math.html#a68bed508c4d0472496c073399e2c8cd2">min</a> (const T &amp;a, const T &amp;b)</td></tr>
+<tr class="separator:a68bed508c4d0472496c073399e2c8cd2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22976d17488fb65b8705b1c8608c395a"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="struct_engine_1_1_math_1_1_vector2i.html">Vector2i</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_math.html#a22976d17488fb65b8705b1c8608c395a">min</a> (const <a class="el" href="struct_engine_1_1_math_1_1_vector2i.html">Vector2i</a> &amp;<a class="el" href="struct_engine_1_1first.html">first</a>, const <a class="el" href="struct_engine_1_1_math_1_1_vector2i.html">Vector2i</a> &amp;second)</td></tr>
+<tr class="separator:a22976d17488fb65b8705b1c8608c395a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6dcdb20f879c5a83d7434e2356f16062"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_math.html#a6dcdb20f879c5a83d7434e2356f16062">min</a> (const <a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a> &amp;v1, const <a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a> &amp;v2)</td></tr>
+<tr class="separator:a6dcdb20f879c5a83d7434e2356f16062"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a51c33bfef2f5ce008085f6bc4da2575e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_math_1_1_sphere.html">Sphere</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_math.html#a51c33bfef2f5ce008085f6bc4da2575e">operator*</a> (const <a class="el" href="struct_engine_1_1_math_1_1_matrix4.html">Matrix4</a> &amp;m, const <a class="el" href="struct_engine_1_1_math_1_1_sphere.html">Sphere</a> &amp;s)</td></tr>
+<tr class="separator:a51c33bfef2f5ce008085f6bc4da2575e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9304a54cfa3090f9643303b18ed4291e"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="struct_engine_1_1_math_1_1_bounding_box.html">BoundingBox</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_math.html#a9304a54cfa3090f9643303b18ed4291e">operator*</a> (const <a class="el" href="struct_engine_1_1_math_1_1_matrix4.html">Matrix4</a> &amp;transform, const <a class="el" href="struct_engine_1_1_math_1_1_bounding_box.html">BoundingBox</a> &amp;bb)</td></tr>
+<tr class="separator:a9304a54cfa3090f9643303b18ed4291e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21a981384066e6965209d505b347f8f6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_math_1_1_frustum.html">Frustum</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_math.html#a21a981384066e6965209d505b347f8f6">operator*</a> (const <a class="el" href="struct_engine_1_1_math_1_1_quaternion.html">Quaternion</a> &amp;q, const <a class="el" href="struct_engine_1_1_math_1_1_frustum.html">Frustum</a> &amp;f)</td></tr>
+<tr class="separator:a21a981384066e6965209d505b347f8f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a835c2d356d2ad20c6f7d35a78dd37be3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_math.html#a835c2d356d2ad20c6f7d35a78dd37be3">operator*</a> (const <a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a> &amp;rkPoint, const <a class="el" href="struct_engine_1_1_math_1_1_matrix3.html">Matrix3</a> &amp;rkMatrix)</td></tr>
+<tr class="separator:a835c2d356d2ad20c6f7d35a78dd37be3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a79283fbd28e4222c1b3f2d6d22bfbc72"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_math_1_1_vector4.html">Vector4</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_math.html#a79283fbd28e4222c1b3f2d6d22bfbc72">operator*</a> (const <a class="el" href="struct_engine_1_1_math_1_1_vector4.html">Vector4</a> &amp;rkPoint, const <a class="el" href="struct_engine_1_1_math_1_1_matrix4.html">Matrix4</a> &amp;rkMatrix)</td></tr>
+<tr class="separator:a79283fbd28e4222c1b3f2d6d22bfbc72"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8fb8e7bca3304fb4d9473aef783d2127"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_math_1_1_matrix3.html">Matrix3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_math.html#a8fb8e7bca3304fb4d9473aef783d2127">operator*</a> (float fScalar, const <a class="el" href="struct_engine_1_1_math_1_1_matrix3.html">Matrix3</a> &amp;rkMatrix)</td></tr>
+<tr class="separator:a8fb8e7bca3304fb4d9473aef783d2127"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f0a788d16a5e880da6eea178bce1c70"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_math_1_1_matrix4.html">Matrix4</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_math.html#a1f0a788d16a5e880da6eea178bce1c70">operator*</a> (float fScalar, const <a class="el" href="struct_engine_1_1_math_1_1_matrix4.html">Matrix4</a> &amp;rkMatrix)</td></tr>
+<tr class="separator:a1f0a788d16a5e880da6eea178bce1c70"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5747360812f35591ceafa4b2da6490c8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_math_1_1_matrix4.html">Matrix4</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_math.html#a5747360812f35591ceafa4b2da6490c8">ProjectionMatrix</a> (const <a class="el" href="struct_engine_1_1_math_1_1_frustum.html">Frustum</a> &amp;frustum)</td></tr>
+<tr class="separator:a5747360812f35591ceafa4b2da6490c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad4db27bccf252fda20541d7fa362655b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_math_1_1_matrix3.html">Matrix3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_math.html#ad4db27bccf252fda20541d7fa362655b">ScalingMatrix</a> (const <a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a> &amp;v)</td></tr>
+<tr class="separator:ad4db27bccf252fda20541d7fa362655b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99157d577a7152370d9efa19fea2edd9"><td class="memItemLeft" align="right" valign="top">constexpr int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_math.html#a99157d577a7152370d9efa19fea2edd9">sign</a> (int i)</td></tr>
+<tr class="separator:a99157d577a7152370d9efa19fea2edd9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a86a31ac83c85bb25f4bc18925a9cd7fa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_math.html#a86a31ac83c85bb25f4bc18925a9cd7fa">slerp</a> (const <a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a> &amp;v1, const <a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a> &amp;v2, float ratio)</td></tr>
+<tr class="separator:a86a31ac83c85bb25f4bc18925a9cd7fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4d18d18bbca21115d62e43addc0b64ec"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_math_1_1_quaternion.html">Quaternion</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_math.html#a4d18d18bbca21115d62e43addc0b64ec">slerp</a> (<a class="el" href="struct_engine_1_1_math_1_1_quaternion.html">Quaternion</a> q1, <a class="el" href="struct_engine_1_1_math_1_1_quaternion.html">Quaternion</a> q2, float ratio)</td></tr>
+<tr class="separator:a4d18d18bbca21115d62e43addc0b64ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afc6547beef08f0ad8c2d68af8d196ee1"><td class="memItemLeft" align="right" valign="top">constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_math.html#afc6547beef08f0ad8c2d68af8d196ee1">sqrtf</a> (float x)</td></tr>
+<tr class="separator:afc6547beef08f0ad8c2d68af8d196ee1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3554ec705134c091f71b69e7ac26e94f"><td class="memItemLeft" align="right" valign="top">constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_math.html#a3554ec705134c091f71b69e7ac26e94f">sqrtNewtonRaphson</a> (float x, float curr, float prev)</td></tr>
+<tr class="separator:a3554ec705134c091f71b69e7ac26e94f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af59851b379521ca61cf570934381e5bc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_math_1_1_matrix4.html">Matrix4</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_math.html#af59851b379521ca61cf570934381e5bc">TransformMatrix</a> (const <a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a> &amp;translate, const <a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a> &amp;scale, const <a class="el" href="struct_engine_1_1_math_1_1_quaternion.html">Quaternion</a> &amp;orientation)</td></tr>
+<tr class="separator:af59851b379521ca61cf570934381e5bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aece5779e6574933f915053f40cab1987"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_math_1_1_matrix4.html">Matrix4</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_math.html#aece5779e6574933f915053f40cab1987">TranslationMatrix</a> (const <a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a> &amp;v)</td></tr>
+<tr class="separator:aece5779e6574933f915053f40cab1987"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a3db756d794ad82646ae1b3f4e76b1c01"><td class="memItemLeft" align="right" valign="top">const constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_math.html#a3db756d794ad82646ae1b3f4e76b1c01">floatZeroThreshold</a> = 1e-06f</td></tr>
+<tr class="separator:a3db756d794ad82646ae1b3f4e76b1c01"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac3f63097700c49fef19d33c37a70a7af"><td class="memItemLeft" align="right" valign="top">const constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_math.html#ac3f63097700c49fef19d33c37a70a7af">PI</a> = 3.14159265359f</td></tr>
+<tr class="separator:ac3f63097700c49fef19d33c37a70a7af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a9304a54cfa3090f9643303b18ed4291e" name="a9304a54cfa3090f9643303b18ed4291e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9304a54cfa3090f9643303b18ed4291e">&#9670;&#160;</a></span>operator*() <span class="overload">[1/7]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="struct_engine_1_1_math_1_1_bounding_box.html">BoundingBox</a> Engine::Math::operator* </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_math_1_1_matrix4.html">Matrix4</a> &amp;&#160;</td>
+          <td class="paramname"><em>transform</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_math_1_1_bounding_box.html">BoundingBox</a> &amp;&#160;</td>
+          <td class="paramname"><em>bb</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a035362eb8f34e920f3db62c33356b93a" name="a035362eb8f34e920f3db62c33356b93a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a035362eb8f34e920f3db62c33356b93a">&#9670;&#160;</a></span>lerp() <span class="overload">[1/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="struct_engine_1_1_math_1_1_color3.html">Color3</a> Engine::Math::lerp </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_math_1_1_color3.html">Color3</a> &amp;&#160;</td>
+          <td class="paramname"><em>c1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_math_1_1_color3.html">Color3</a> &amp;&#160;</td>
+          <td class="paramname"><em>c2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>ratio</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0e51bc464b07842bea8ba0cadd75e1b7" name="a0e51bc464b07842bea8ba0cadd75e1b7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0e51bc464b07842bea8ba0cadd75e1b7">&#9670;&#160;</a></span>lerp() <span class="overload">[2/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="struct_engine_1_1_math_1_1_color4.html">Color4</a> Engine::Math::lerp </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_math_1_1_color4.html">Color4</a> &amp;&#160;</td>
+          <td class="paramname"><em>c1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_math_1_1_color4.html">Color4</a> &amp;&#160;</td>
+          <td class="paramname"><em>c2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>ratio</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ace7160844b349d30c5597349850ab274" name="ace7160844b349d30c5597349850ab274"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ace7160844b349d30c5597349850ab274">&#9670;&#160;</a></span>abs()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr float Engine::Math::abs </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>f</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a53a667d787062cf71bfa63b4d1e0b43a" name="a53a667d787062cf71bfa63b4d1e0b43a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a53a667d787062cf71bfa63b4d1e0b43a">&#9670;&#160;</a></span>isZero()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr bool Engine::Math::isZero </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>f</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>epsilon</em> = <code><a class="el" href="namespace_engine_1_1_math.html#a3db756d794ad82646ae1b3f4e76b1c01">floatZeroThreshold</a></code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a651df3a542206ec8c312f857d497589e" name="a651df3a542206ec8c312f857d497589e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a651df3a542206ec8c312f857d497589e">&#9670;&#160;</a></span>isEqual()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr bool Engine::Math::isEqual </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>a</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>b</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>epsilon</em> = <code><a class="el" href="namespace_engine_1_1_math.html#a3db756d794ad82646ae1b3f4e76b1c01">floatZeroThreshold</a></code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3554ec705134c091f71b69e7ac26e94f" name="a3554ec705134c091f71b69e7ac26e94f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3554ec705134c091f71b69e7ac26e94f">&#9670;&#160;</a></span>sqrtNewtonRaphson()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr float Engine::Math::sqrtNewtonRaphson </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>curr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>prev</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afc6547beef08f0ad8c2d68af8d196ee1" name="afc6547beef08f0ad8c2d68af8d196ee1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afc6547beef08f0ad8c2d68af8d196ee1">&#9670;&#160;</a></span>sqrtf()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr float Engine::Math::sqrtf </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>x</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a68bed508c4d0472496c073399e2c8cd2" name="a68bed508c4d0472496c073399e2c8cd2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a68bed508c4d0472496c073399e2c8cd2">&#9670;&#160;</a></span>min() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr T Engine::Math::min </td>
+          <td>(</td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>a</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>b</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac2c35233bc86cacd5ea88257c3140584" name="ac2c35233bc86cacd5ea88257c3140584"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac2c35233bc86cacd5ea88257c3140584">&#9670;&#160;</a></span>max() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr T Engine::Math::max </td>
+          <td>(</td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>a</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>b</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aed705cdd236a71326472ffc42e0ff3cb" name="aed705cdd236a71326472ffc42e0ff3cb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aed705cdd236a71326472ffc42e0ff3cb">&#9670;&#160;</a></span>clamp()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr T Engine::Math::clamp </td>
+          <td>(</td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>v</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>minV</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>maxV</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a99157d577a7152370d9efa19fea2edd9" name="a99157d577a7152370d9efa19fea2edd9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a99157d577a7152370d9efa19fea2edd9">&#9670;&#160;</a></span>sign()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr int Engine::Math::sign </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>i</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a02d52176b936784d4587fd5b1445136f" name="a02d52176b936784d4587fd5b1445136f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a02d52176b936784d4587fd5b1445136f">&#9670;&#160;</a></span>lerp() <span class="overload">[3/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr float Engine::Math::lerp </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>a</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>b</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>t</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a21a981384066e6965209d505b347f8f6" name="a21a981384066e6965209d505b347f8f6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a21a981384066e6965209d505b347f8f6">&#9670;&#160;</a></span>operator*() <span class="overload">[2/7]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_math_1_1_frustum.html">Frustum</a> Engine::Math::operator* </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_math_1_1_quaternion.html">Quaternion</a> &amp;&#160;</td>
+          <td class="paramname"><em>q</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_math_1_1_frustum.html">Frustum</a> &amp;&#160;</td>
+          <td class="paramname"><em>f</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afb9b0fdb71e38209202dbadcbc6602f0" name="afb9b0fdb71e38209202dbadcbc6602f0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afb9b0fdb71e38209202dbadcbc6602f0">&#9670;&#160;</a></span>Intersect() <span class="overload">[1/9]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">META_EXPORT <a class="el" href="struct_engine_1_1_math_1_1_up_to.html">UpTo</a>&lt; float, 2 &gt; Engine::Math::Intersect </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_math_1_1_line2.html">Line2</a> &amp;&#160;</td>
+          <td class="paramname"><em>line</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_math_1_1_rect2.html">Rect2</a> &amp;&#160;</td>
+          <td class="paramname"><em>rect</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4132bd51ac8f7cf6add01fd70bb7d203" name="a4132bd51ac8f7cf6add01fd70bb7d203"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4132bd51ac8f7cf6add01fd70bb7d203">&#9670;&#160;</a></span>Intersect() <span class="overload">[2/9]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">META_EXPORT <a class="el" href="struct_engine_1_1_math_1_1_up_to.html">UpTo</a>&lt; float, 2 &gt; Engine::Math::Intersect </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_math_1_1_ray2.html">Ray2</a> &amp;&#160;</td>
+          <td class="paramname"><em>ray</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_math_1_1_rect2.html">Rect2</a> &amp;&#160;</td>
+          <td class="paramname"><em>rect</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2543176d006344cf3191c39e714c7955" name="a2543176d006344cf3191c39e714c7955"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2543176d006344cf3191c39e714c7955">&#9670;&#160;</a></span>Intersect() <span class="overload">[3/9]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">META_EXPORT <a class="el" href="struct_engine_1_1_math_1_1_up_to.html">UpTo</a>&lt; std::pair&lt; float, float &gt;, 1 &gt; Engine::Math::Intersect </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_math_1_1_line2.html">Line2</a> &amp;&#160;</td>
+          <td class="paramname"><em>lineA</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_math_1_1_line2.html">Line2</a> &amp;&#160;</td>
+          <td class="paramname"><em>lineB</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a69b3bda480de9dacbc4f667b8ecd0e3d" name="a69b3bda480de9dacbc4f667b8ecd0e3d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a69b3bda480de9dacbc4f667b8ecd0e3d">&#9670;&#160;</a></span>Intersect() <span class="overload">[4/9]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">META_EXPORT <a class="el" href="struct_engine_1_1_math_1_1_up_to.html">UpTo</a>&lt; std::pair&lt; float, float &gt;, 1 &gt; Engine::Math::Intersect </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_math_1_1_ray2.html">Ray2</a> &amp;&#160;</td>
+          <td class="paramname"><em>rayA</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_math_1_1_ray2.html">Ray2</a> &amp;&#160;</td>
+          <td class="paramname"><em>rayB</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a742b10d1f1561a221875a01591ae3562" name="a742b10d1f1561a221875a01591ae3562"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a742b10d1f1561a221875a01591ae3562">&#9670;&#160;</a></span>Distance()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">META_EXPORT float Engine::Math::Distance </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_math_1_1_ray3.html">Ray3</a> &amp;&#160;</td>
+          <td class="paramname"><em>ray</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a> &amp;&#160;</td>
+          <td class="paramname"><em>point</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>rayClosestParameter</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac7a3f816a61f82264adea8cd4fad90ff" name="ac7a3f816a61f82264adea8cd4fad90ff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac7a3f816a61f82264adea8cd4fad90ff">&#9670;&#160;</a></span>Intersect() <span class="overload">[5/9]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">META_EXPORT <a class="el" href="struct_engine_1_1_math_1_1_up_to.html">UpTo</a>&lt; float, 2 &gt; Engine::Math::Intersect </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_math_1_1_ray3.html">Ray3</a> &amp;&#160;</td>
+          <td class="paramname"><em>ray</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_math_1_1_sphere.html">Sphere</a> &amp;&#160;</td>
+          <td class="paramname"><em>sphere</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3da6ea458f2f2838eab01944627317be" name="a3da6ea458f2f2838eab01944627317be"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3da6ea458f2f2838eab01944627317be">&#9670;&#160;</a></span>Intersect() <span class="overload">[6/9]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">META_EXPORT <a class="el" href="struct_engine_1_1_math_1_1_up_to.html">UpTo</a>&lt; float, 2 &gt; Engine::Math::Intersect </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_math_1_1_ray3.html">Ray3</a> &amp;&#160;</td>
+          <td class="paramname"><em>ray</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_math_1_1_bounding_box.html">BoundingBox</a> &amp;&#160;</td>
+          <td class="paramname"><em>box</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a722223a7750bf8e27e7229f58f508f3c" name="a722223a7750bf8e27e7229f58f508f3c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a722223a7750bf8e27e7229f58f508f3c">&#9670;&#160;</a></span>Intersect() <span class="overload">[7/9]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">META_EXPORT <a class="el" href="struct_engine_1_1_math_1_1_up_to.html">UpTo</a>&lt; float, 1 &gt; Engine::Math::Intersect </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_math_1_1_ray3.html">Ray3</a> &amp;&#160;</td>
+          <td class="paramname"><em>ray</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_math_1_1_plane.html">Plane</a> &amp;&#160;</td>
+          <td class="paramname"><em>plane</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9f8fc6ee68c8d2688924ab2a164175c1" name="a9f8fc6ee68c8d2688924ab2a164175c1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9f8fc6ee68c8d2688924ab2a164175c1">&#9670;&#160;</a></span>Intersect() <span class="overload">[8/9]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">META_EXPORT <a class="el" href="struct_engine_1_1_math_1_1_up_to.html">UpTo</a>&lt; float, 2 &gt; Engine::Math::Intersect </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_math_1_1_ray3.html">Ray3</a> &amp;&#160;</td>
+          <td class="paramname"><em>ray</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_math_1_1_frustum.html">Frustum</a> &amp;&#160;</td>
+          <td class="paramname"><em>frustum</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad8e5b95c35d0c3db26b690ddfc463fbc" name="ad8e5b95c35d0c3db26b690ddfc463fbc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad8e5b95c35d0c3db26b690ddfc463fbc">&#9670;&#160;</a></span>Intersect() <span class="overload">[9/9]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">META_EXPORT <a class="el" href="struct_engine_1_1_math_1_1_up_to.html">UpTo</a>&lt; float, 2 &gt; Engine::Math::Intersect </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_math_1_1_ray3.html">Ray3</a> &amp;&#160;</td>
+          <td class="paramname"><em>ray</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_math_1_1_plane.html">Plane</a> &amp;&#160;</td>
+          <td class="paramname"><em>minX</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_math_1_1_plane.html">Plane</a> &amp;&#160;</td>
+          <td class="paramname"><em>maxX</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_math_1_1_plane.html">Plane</a> &amp;&#160;</td>
+          <td class="paramname"><em>minY</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_math_1_1_plane.html">Plane</a> &amp;&#160;</td>
+          <td class="paramname"><em>maxY</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_math_1_1_plane.html">Plane</a> &amp;&#160;</td>
+          <td class="paramname"><em>minZ</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_math_1_1_plane.html">Plane</a> &amp;&#160;</td>
+          <td class="paramname"><em>maxZ</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a835c2d356d2ad20c6f7d35a78dd37be3" name="a835c2d356d2ad20c6f7d35a78dd37be3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a835c2d356d2ad20c6f7d35a78dd37be3">&#9670;&#160;</a></span>operator*() <span class="overload">[3/7]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a> Engine::Math::operator* </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a> &amp;&#160;</td>
+          <td class="paramname"><em>rkPoint</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_math_1_1_matrix3.html">Matrix3</a> &amp;&#160;</td>
+          <td class="paramname"><em>rkMatrix</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8fb8e7bca3304fb4d9473aef783d2127" name="a8fb8e7bca3304fb4d9473aef783d2127"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8fb8e7bca3304fb4d9473aef783d2127">&#9670;&#160;</a></span>operator*() <span class="overload">[4/7]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_math_1_1_matrix3.html">Matrix3</a> Engine::Math::operator* </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>fScalar</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_math_1_1_matrix3.html">Matrix3</a> &amp;&#160;</td>
+          <td class="paramname"><em>rkMatrix</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a574f4582355d48fd25e9e818e9d3b427" name="a574f4582355d48fd25e9e818e9d3b427"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a574f4582355d48fd25e9e818e9d3b427">&#9670;&#160;</a></span>lerp() <span class="overload">[4/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="struct_engine_1_1_math_1_1_matrix3.html">Matrix3</a> Engine::Math::lerp </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_math_1_1_matrix3.html">Matrix3</a> &amp;&#160;</td>
+          <td class="paramname"><em>m1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_math_1_1_matrix3.html">Matrix3</a> &amp;&#160;</td>
+          <td class="paramname"><em>m2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>ratio</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a79283fbd28e4222c1b3f2d6d22bfbc72" name="a79283fbd28e4222c1b3f2d6d22bfbc72"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a79283fbd28e4222c1b3f2d6d22bfbc72">&#9670;&#160;</a></span>operator*() <span class="overload">[5/7]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_math_1_1_vector4.html">Vector4</a> Engine::Math::operator* </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_math_1_1_vector4.html">Vector4</a> &amp;&#160;</td>
+          <td class="paramname"><em>rkPoint</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_math_1_1_matrix4.html">Matrix4</a> &amp;&#160;</td>
+          <td class="paramname"><em>rkMatrix</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1f0a788d16a5e880da6eea178bce1c70" name="a1f0a788d16a5e880da6eea178bce1c70"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f0a788d16a5e880da6eea178bce1c70">&#9670;&#160;</a></span>operator*() <span class="overload">[6/7]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_math_1_1_matrix4.html">Matrix4</a> Engine::Math::operator* </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>fScalar</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_math_1_1_matrix4.html">Matrix4</a> &amp;&#160;</td>
+          <td class="paramname"><em>rkMatrix</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4d18d18bbca21115d62e43addc0b64ec" name="a4d18d18bbca21115d62e43addc0b64ec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4d18d18bbca21115d62e43addc0b64ec">&#9670;&#160;</a></span>slerp() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">META_EXPORT <a class="el" href="struct_engine_1_1_math_1_1_quaternion.html">Quaternion</a> Engine::Math::slerp </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_math_1_1_quaternion.html">Quaternion</a>&#160;</td>
+          <td class="paramname"><em>q1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_math_1_1_quaternion.html">Quaternion</a>&#160;</td>
+          <td class="paramname"><em>q2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>ratio</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a51c33bfef2f5ce008085f6bc4da2575e" name="a51c33bfef2f5ce008085f6bc4da2575e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a51c33bfef2f5ce008085f6bc4da2575e">&#9670;&#160;</a></span>operator*() <span class="overload">[7/7]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_math_1_1_sphere.html">Sphere</a> Engine::Math::operator* </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_math_1_1_matrix4.html">Matrix4</a> &amp;&#160;</td>
+          <td class="paramname"><em>m</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_math_1_1_sphere.html">Sphere</a> &amp;&#160;</td>
+          <td class="paramname"><em>s</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af59851b379521ca61cf570934381e5bc" name="af59851b379521ca61cf570934381e5bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af59851b379521ca61cf570934381e5bc">&#9670;&#160;</a></span>TransformMatrix()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">META_EXPORT <a class="el" href="struct_engine_1_1_math_1_1_matrix4.html">Matrix4</a> Engine::Math::TransformMatrix </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a> &amp;&#160;</td>
+          <td class="paramname"><em>translate</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a> &amp;&#160;</td>
+          <td class="paramname"><em>scale</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_math_1_1_quaternion.html">Quaternion</a> &amp;&#160;</td>
+          <td class="paramname"><em>orientation</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6098e6849c2ac618e9c0ee2b0cdcbdb6" name="a6098e6849c2ac618e9c0ee2b0cdcbdb6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6098e6849c2ac618e9c0ee2b0cdcbdb6">&#9670;&#160;</a></span>DecomposeTransformMatrix()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">META_EXPORT std::tuple&lt; <a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a>, <a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a>, <a class="el" href="struct_engine_1_1_math_1_1_quaternion.html">Quaternion</a> &gt; Engine::Math::DecomposeTransformMatrix </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_math_1_1_matrix4.html">Matrix4</a> &amp;&#160;</td>
+          <td class="paramname"><em>transform</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aece5779e6574933f915053f40cab1987" name="aece5779e6574933f915053f40cab1987"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aece5779e6574933f915053f40cab1987">&#9670;&#160;</a></span>TranslationMatrix()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">META_EXPORT <a class="el" href="struct_engine_1_1_math_1_1_matrix4.html">Matrix4</a> Engine::Math::TranslationMatrix </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a> &amp;&#160;</td>
+          <td class="paramname"><em>v</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad4db27bccf252fda20541d7fa362655b" name="ad4db27bccf252fda20541d7fa362655b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad4db27bccf252fda20541d7fa362655b">&#9670;&#160;</a></span>ScalingMatrix()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">META_EXPORT <a class="el" href="struct_engine_1_1_math_1_1_matrix3.html">Matrix3</a> Engine::Math::ScalingMatrix </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a> &amp;&#160;</td>
+          <td class="paramname"><em>v</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5747360812f35591ceafa4b2da6490c8" name="a5747360812f35591ceafa4b2da6490c8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5747360812f35591ceafa4b2da6490c8">&#9670;&#160;</a></span>ProjectionMatrix()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">META_EXPORT <a class="el" href="struct_engine_1_1_math_1_1_matrix4.html">Matrix4</a> Engine::Math::ProjectionMatrix </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_math_1_1_frustum.html">Frustum</a> &amp;&#160;</td>
+          <td class="paramname"><em>frustum</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0f0d06b2e820f66bcf7b2715640966d9" name="a0f0d06b2e820f66bcf7b2715640966d9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0f0d06b2e820f66bcf7b2715640966d9">&#9670;&#160;</a></span>ExtractRotationMatrix()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">META_EXPORT <a class="el" href="struct_engine_1_1_math_1_1_matrix3.html">Matrix3</a> Engine::Math::ExtractRotationMatrix </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_math_1_1_matrix3.html">Matrix3</a> &amp;&#160;</td>
+          <td class="paramname"><em>m</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5118521937b2cf0e007068acc4d3ef2f" name="a5118521937b2cf0e007068acc4d3ef2f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5118521937b2cf0e007068acc4d3ef2f">&#9670;&#160;</a></span>ExtractScalingMatrix()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">META_EXPORT <a class="el" href="struct_engine_1_1_math_1_1_matrix3.html">Matrix3</a> Engine::Math::ExtractScalingMatrix </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_math_1_1_matrix3.html">Matrix3</a> &amp;&#160;</td>
+          <td class="paramname"><em>m</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a22976d17488fb65b8705b1c8608c395a" name="a22976d17488fb65b8705b1c8608c395a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a22976d17488fb65b8705b1c8608c395a">&#9670;&#160;</a></span>min() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="struct_engine_1_1_math_1_1_vector2i.html">Vector2i</a> Engine::Math::min </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_math_1_1_vector2i.html">Vector2i</a> &amp;&#160;</td>
+          <td class="paramname"><em>first</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_math_1_1_vector2i.html">Vector2i</a> &amp;&#160;</td>
+          <td class="paramname"><em>second</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6dcdb20f879c5a83d7434e2356f16062" name="a6dcdb20f879c5a83d7434e2356f16062"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6dcdb20f879c5a83d7434e2356f16062">&#9670;&#160;</a></span>min() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a> Engine::Math::min </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a> &amp;&#160;</td>
+          <td class="paramname"><em>v1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a> &amp;&#160;</td>
+          <td class="paramname"><em>v2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa6864d7f7a1a65e0f1c323200c1b6cb7" name="aa6864d7f7a1a65e0f1c323200c1b6cb7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa6864d7f7a1a65e0f1c323200c1b6cb7">&#9670;&#160;</a></span>max() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a> Engine::Math::max </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a> &amp;&#160;</td>
+          <td class="paramname"><em>v1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a> &amp;&#160;</td>
+          <td class="paramname"><em>v2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a52f6ddcc2168a234c229efad0ea3d024" name="a52f6ddcc2168a234c229efad0ea3d024"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a52f6ddcc2168a234c229efad0ea3d024">&#9670;&#160;</a></span>lerp() <span class="overload">[5/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a> Engine::Math::lerp </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a> &amp;&#160;</td>
+          <td class="paramname"><em>v1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a> &amp;&#160;</td>
+          <td class="paramname"><em>v2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>ratio</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a86a31ac83c85bb25f4bc18925a9cd7fa" name="a86a31ac83c85bb25f4bc18925a9cd7fa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a86a31ac83c85bb25f4bc18925a9cd7fa">&#9670;&#160;</a></span>slerp() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a> Engine::Math::slerp </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a> &amp;&#160;</td>
+          <td class="paramname"><em>v1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Vector3</a> &amp;&#160;</td>
+          <td class="paramname"><em>v2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>ratio</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="a3db756d794ad82646ae1b3f4e76b1c01" name="a3db756d794ad82646ae1b3f4e76b1c01"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3db756d794ad82646ae1b3f4e76b1c01">&#9670;&#160;</a></span>floatZeroThreshold</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const constexpr float Engine::Math::floatZeroThreshold = 1e-06f</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac3f63097700c49fef19d33c37a70a7af" name="ac3f63097700c49fef19d33c37a70a7af"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac3f63097700c49fef19d33c37a70a7af">&#9670;&#160;</a></span>PI</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const constexpr float Engine::Math::PI = 3.14159265359f</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Fri Jun 5 2026 23:36:48 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        Version: dev
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Versions</dt>
+            <script src="../../../../versions.js"></script>
+        </dl>
+    </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

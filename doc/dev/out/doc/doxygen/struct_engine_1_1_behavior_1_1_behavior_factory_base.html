@@ -261,12 +261,12 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a4e21dd28fb43f0c3491333a8a80f307d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad7459c831bcd2a5f602b8ea9eee38ac9"><td class="memItemLeft" align="right" valign="top">virtual std::vector&lt; std::string_view &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_behavior_factory_base.html#ad7459c831bcd2a5f602b8ea9eee38ac9">names</a> () const =0</td></tr>
 <tr class="separator:ad7459c831bcd2a5f602b8ea9eee38ac9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad081800956762686fc66558fa0ae99af"><td class="memItemLeft" align="right" valign="top">virtual std::vector&lt; <a class="el" href="struct_engine_1_1_extended_value_type_desc.html">ExtendedValueTypeDesc</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_behavior_factory_base.html#ad081800956762686fc66558fa0ae99af">parameterTypes</a> (const <a class="el" href="struct_engine_1_1_unique_opaque_ptr.html">UniqueOpaquePtr</a> &amp;handle) const =0</td></tr>
-<tr class="separator:ad081800956762686fc66558fa0ae99af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aacb4cc8b6cba376807258edb737d67b8"><td class="memItemLeft" align="right" valign="top">virtual std::vector&lt; <a class="el" href="struct_engine_1_1_reflect_1_1_extended_type.html">Reflect::ExtendedType</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_behavior_factory_base.html#aacb4cc8b6cba376807258edb737d67b8">parameterTypes</a> (const <a class="el" href="struct_engine_1_1_unique_opaque_ptr.html">UniqueOpaquePtr</a> &amp;handle) const =0</td></tr>
+<tr class="separator:aacb4cc8b6cba376807258edb737d67b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad5ca7c55140715f872a2caf4879a677b"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_behavior_factory_base.html#ad5ca7c55140715f872a2caf4879a677b">release</a> (<a class="el" href="struct_engine_1_1_unique_opaque_ptr.html">UniqueOpaquePtr</a> &amp;ptr) const =0</td></tr>
 <tr class="separator:ad5ca7c55140715f872a2caf4879a677b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac50ec7d0b3989931c404d962b31094b1"><td class="memItemLeft" align="right" valign="top">virtual std::vector&lt; <a class="el" href="struct_engine_1_1_extended_value_type_desc.html">ExtendedValueTypeDesc</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_behavior_factory_base.html#ac50ec7d0b3989931c404d962b31094b1">resultTypes</a> (const <a class="el" href="struct_engine_1_1_unique_opaque_ptr.html">UniqueOpaquePtr</a> &amp;handle) const =0</td></tr>
-<tr class="separator:ac50ec7d0b3989931c404d962b31094b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaea897f24cda8be2da9de344c32cb49a"><td class="memItemLeft" align="right" valign="top">virtual std::vector&lt; <a class="el" href="struct_engine_1_1_reflect_1_1_extended_type.html">Reflect::ExtendedType</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_behavior_factory_base.html#aaea897f24cda8be2da9de344c32cb49a">resultTypes</a> (const <a class="el" href="struct_engine_1_1_unique_opaque_ptr.html">UniqueOpaquePtr</a> &amp;handle) const =0</td></tr>
+<tr class="separator:aaea897f24cda8be2da9de344c32cb49a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3bd1da29d54e618c5f78dd85574c3986"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_threading_1_1_task_future.html">Threading::TaskFuture</a>&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_behavior_factory_base.html#a3bd1da29d54e618c5f78dd85574c3986">state</a> (const <a class="el" href="struct_engine_1_1_unique_opaque_ptr.html">UniqueOpaquePtr</a> &amp;handle) const =0</td></tr>
 <tr class="separator:a3bd1da29d54e618c5f78dd85574c3986"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7d05a3106e027401ea8e6bbc378198bc"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_behavior_factory_base.html#a7d05a3106e027401ea8e6bbc378198bc">subBehaviorCount</a> (const <a class="el" href="struct_engine_1_1_unique_opaque_ptr.html">UniqueOpaquePtr</a> &amp;handle) const =0</td></tr>
@@ -470,8 +470,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ad081800956762686fc66558fa0ae99af" name="ad081800956762686fc66558fa0ae99af"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad081800956762686fc66558fa0ae99af">&#9670;&#160;</a></span>parameterTypes()</h2>
+<a id="aacb4cc8b6cba376807258edb737d67b8" name="aacb4cc8b6cba376807258edb737d67b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aacb4cc8b6cba376807258edb737d67b8">&#9670;&#160;</a></span>parameterTypes()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -480,7 +480,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual std::vector&lt; <a class="el" href="struct_engine_1_1_extended_value_type_desc.html">ExtendedValueTypeDesc</a> &gt; Engine::Behavior::BehaviorFactoryBase::parameterTypes </td>
+          <td class="memname">virtual std::vector&lt; <a class="el" href="struct_engine_1_1_reflect_1_1_extended_type.html">Reflect::ExtendedType</a> &gt; Engine::Behavior::BehaviorFactoryBase::parameterTypes </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="struct_engine_1_1_unique_opaque_ptr.html">UniqueOpaquePtr</a> &amp;&#160;</td>
           <td class="paramname"><em>handle</em></td><td>)</td>
@@ -496,8 +496,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ac50ec7d0b3989931c404d962b31094b1" name="ac50ec7d0b3989931c404d962b31094b1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac50ec7d0b3989931c404d962b31094b1">&#9670;&#160;</a></span>resultTypes()</h2>
+<a id="aaea897f24cda8be2da9de344c32cb49a" name="aaea897f24cda8be2da9de344c32cb49a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaea897f24cda8be2da9de344c32cb49a">&#9670;&#160;</a></span>resultTypes()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -506,7 +506,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual std::vector&lt; <a class="el" href="struct_engine_1_1_extended_value_type_desc.html">ExtendedValueTypeDesc</a> &gt; Engine::Behavior::BehaviorFactoryBase::resultTypes </td>
+          <td class="memname">virtual std::vector&lt; <a class="el" href="struct_engine_1_1_reflect_1_1_extended_type.html">Reflect::ExtendedType</a> &gt; Engine::Behavior::BehaviorFactoryBase::resultTypes </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="struct_engine_1_1_unique_opaque_ptr.html">UniqueOpaquePtr</a> &amp;&#160;</td>
           <td class="paramname"><em>handle</em></td><td>)</td>
@@ -580,7 +580,7 @@ Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2026 23:14:07 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Fri Jun 5 2026 23:36:47 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

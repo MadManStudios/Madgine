@@ -46,7 +46,7 @@ if (edges && edges.length) {
         </defs>
 
 <script type="text/javascript">
-var viewWidth = 737;
+var viewWidth = 729;
 var viewHeight = 86;
 var sectionId = 'dynsection-0';
 </script>
@@ -58,59 +58,59 @@ var sectionId = 'dynsection-0';
 <g id="node1" class="node">
 <title>Node1</title>
 <g id="a_node1"><a xlink:title=" ">
-<polygon fill="#999999" stroke="#666666" points="729,-54 601,-54 601,-24 729,-24 729,-54"/>
-<text text-anchor="start" x="609" y="-42" font-family="Helvetica,sans-Serif" font-size="10.00">Engine::Behavior::Python3</text>
-<text text-anchor="middle" x="665" y="-31" font-family="Helvetica,sans-Serif" font-size="10.00">::Python3Environment</text>
+<polygon fill="#999999" stroke="#666666" points="721,-54 593,-54 593,-24 721,-24 721,-54"/>
+<text text-anchor="start" x="601" y="-42" font-family="Helvetica,sans-Serif" font-size="10.00">Engine::Behavior::Python3</text>
+<text text-anchor="middle" x="657" y="-31" font-family="Helvetica,sans-Serif" font-size="10.00">::Python3Environment</text>
 </a>
 </g>
 </g>
 <!-- Node2 -->
 <g id="node2" class="node">
 <title>Node2</title>
-<g id="a_node2"><a xlink:href="struct_engine_1_1_root_1_1_root_component.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="#666666" points="543.5,-78 398.5,-78 398.5,-48 543.5,-48 543.5,-78"/>
-<text text-anchor="start" x="406.5" y="-66" font-family="Helvetica,sans-Serif" font-size="10.00">Engine::Root::RootComponent</text>
-<text text-anchor="middle" x="471" y="-55" font-family="Helvetica,sans-Serif" font-size="10.00">&lt; Python3Environment &gt;</text>
+<g id="a_node2"><a xlink:href="struct_engine_1_1_core_1_1_root_component.html" target="_top" xlink:title=" ">
+<polygon fill="white" stroke="#666666" points="535.5,-78 390.5,-78 390.5,-48 535.5,-48 535.5,-78"/>
+<text text-anchor="start" x="398.5" y="-66" font-family="Helvetica,sans-Serif" font-size="10.00">Engine::Core::RootComponent</text>
+<text text-anchor="middle" x="463" y="-55" font-family="Helvetica,sans-Serif" font-size="10.00">&lt; Python3Environment &gt;</text>
 </a>
 </g>
 </g>
 <!-- Node2&#45;&gt;Node1 -->
 <g id="edge1" class="edge">
 <title>Node2&#45;&gt;Node1</title>
-<path fill="none" stroke="#63b8ff" d="M554.81,-52.65C570.13,-50.73 585.9,-48.76 600.53,-46.93"/>
-<polygon fill="#63b8ff" stroke="#63b8ff" points="554.76,-49.13 545.27,-53.84 555.63,-56.07 554.76,-49.13"/>
+<path fill="none" stroke="#63b8ff" d="M546.81,-52.65C562.13,-50.73 577.9,-48.76 592.53,-46.93"/>
+<polygon fill="#63b8ff" stroke="#63b8ff" points="546.76,-49.13 537.27,-53.84 547.63,-56.07 546.76,-49.13"/>
 </g>
 <!-- Node3 -->
 <g id="node3" class="node">
 <title>Node3</title>
-<g id="a_node3"><a xlink:href="struct_engine_1_1_virtual_scope.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="#666666" points="341,-78 235,-78 235,-48 341,-48 341,-78"/>
-<text text-anchor="start" x="243" y="-66" font-family="Helvetica,sans-Serif" font-size="10.00">Engine::VirtualScope</text>
-<text text-anchor="middle" x="288" y="-55" font-family="Helvetica,sans-Serif" font-size="10.00">&lt; T, Base &gt;</text>
+<g id="a_node3"><a xlink:href="struct_engine_1_1_reflect_1_1_virtual_scope.html" target="_top" xlink:title=" ">
+<polygon fill="white" stroke="#666666" points="333,-78 220,-78 220,-48 333,-48 333,-78"/>
+<text text-anchor="start" x="228" y="-66" font-family="Helvetica,sans-Serif" font-size="10.00">Engine::Reflect::Virtual</text>
+<text text-anchor="middle" x="276.5" y="-55" font-family="Helvetica,sans-Serif" font-size="10.00">Scope&lt; T, Base &gt;</text>
 </a>
 </g>
 </g>
 <!-- Node3&#45;&gt;Node2 -->
 <g id="edge2" class="edge">
 <title>Node3&#45;&gt;Node2</title>
-<path fill="none" stroke="#63b8ff" d="M352.44,-63C367.24,-63 383.11,-63 398.24,-63"/>
-<polygon fill="#63b8ff" stroke="#63b8ff" points="352.87,-59.5 342.87,-63 352.87,-66.5 352.87,-59.5"/>
+<path fill="none" stroke="#63b8ff" d="M344.52,-63C359.4,-63 375.23,-63 390.28,-63"/>
+<polygon fill="#63b8ff" stroke="#63b8ff" points="344.87,-59.5 334.87,-63 344.87,-66.5 344.87,-59.5"/>
 </g>
 <!-- Node4 -->
 <g id="node4" class="node">
 <title>Node4</title>
-<g id="a_node4"><a xlink:href="struct_engine_1_1_virtual_scope_base.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="#666666" points="199,-78 71,-78 71,-48 199,-48 199,-78"/>
-<text text-anchor="start" x="79" y="-66" font-family="Helvetica,sans-Serif" font-size="10.00">Engine::VirtualScopeBase</text>
-<text text-anchor="middle" x="135" y="-55" font-family="Helvetica,sans-Serif" font-size="10.00">&lt; Base &gt;</text>
+<g id="a_node4"><a xlink:href="struct_engine_1_1_reflect_1_1_virtual_scope_base.html" target="_top" xlink:title=" ">
+<polygon fill="white" stroke="#666666" points="184,-78 71,-78 71,-48 184,-48 184,-78"/>
+<text text-anchor="start" x="79" y="-66" font-family="Helvetica,sans-Serif" font-size="10.00">Engine::Reflect::Virtual</text>
+<text text-anchor="middle" x="127.5" y="-55" font-family="Helvetica,sans-Serif" font-size="10.00">ScopeBase&lt; Base &gt;</text>
 </a>
 </g>
 </g>
 <!-- Node4&#45;&gt;Node3 -->
 <g id="edge3" class="edge">
 <title>Node4&#45;&gt;Node3</title>
-<path fill="none" stroke="#63b8ff" d="M210.59,-63C218.71,-63 226.84,-63 234.6,-63"/>
-<polygon fill="#63b8ff" stroke="#63b8ff" points="210.68,-59.5 200.68,-63 210.68,-66.5 210.68,-59.5"/>
+<path fill="none" stroke="#63b8ff" d="M195.99,-63C203.91,-63 211.92,-63 219.66,-63"/>
+<polygon fill="#63b8ff" stroke="#63b8ff" points="196.01,-59.5 186.01,-63 196.01,-66.5 196.01,-59.5"/>
 </g>
 <!-- Node5 -->
 <g id="node5" class="node">
@@ -124,40 +124,40 @@ var sectionId = 'dynsection-0';
 <!-- Node5&#45;&gt;Node4 -->
 <g id="edge4" class="edge">
 <title>Node5&#45;&gt;Node4</title>
-<path fill="none" stroke="#63b8ff" d="M46.51,-63C53.89,-63 62.17,-63 70.61,-63"/>
-<polygon fill="#63b8ff" stroke="#63b8ff" points="46.56,-59.5 36.56,-63 46.56,-66.5 46.56,-59.5"/>
+<path fill="none" stroke="#63b8ff" d="M46.66,-63C54.15,-63 62.51,-63 70.92,-63"/>
+<polygon fill="#63b8ff" stroke="#63b8ff" points="46.89,-59.5 36.89,-63 46.89,-66.5 46.89,-59.5"/>
 </g>
 <!-- Node6 -->
 <g id="node6" class="node">
 <title>Node6</title>
 <g id="a_node6"><a xlink:href="struct_engine_1_1_threading_1_1_madgine_object.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="#666666" points="565,-30 377,-30 377,0 565,0 565,-30"/>
-<text text-anchor="start" x="385" y="-18" font-family="Helvetica,sans-Serif" font-size="10.00">Engine::Threading::</text>
-<text text-anchor="middle" x="471" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">MadgineObject&lt; Python3Environment &gt;</text>
+<polygon fill="white" stroke="#666666" points="557,-30 369,-30 369,0 557,0 557,-30"/>
+<text text-anchor="start" x="377" y="-18" font-family="Helvetica,sans-Serif" font-size="10.00">Engine::Threading::</text>
+<text text-anchor="middle" x="463" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">MadgineObject&lt; Python3Environment &gt;</text>
 </a>
 </g>
 </g>
 <!-- Node6&#45;&gt;Node1 -->
 <g id="edge5" class="edge">
 <title>Node6&#45;&gt;Node1</title>
-<path fill="none" stroke="#63b8ff" d="M576.64,-28.08C584.81,-29.1 592.89,-30.11 600.65,-31.08"/>
-<polygon fill="#63b8ff" stroke="#63b8ff" points="577.33,-24.64 566.97,-26.87 576.46,-31.58 577.33,-24.64"/>
+<path fill="none" stroke="#63b8ff" d="M568.64,-28.08C576.81,-29.1 584.89,-30.11 592.65,-31.08"/>
+<polygon fill="#63b8ff" stroke="#63b8ff" points="569.33,-24.64 558.97,-26.87 568.46,-31.58 569.33,-24.64"/>
 </g>
 <!-- Node7 -->
 <g id="node7" class="node">
 <title>Node7</title>
 <g id="a_node7"><a xlink:href="struct_engine_1_1_threading_1_1_madgine_object_state.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="#666666" points="340.5,-30 235.5,-30 235.5,0 340.5,0 340.5,-30"/>
-<text text-anchor="start" x="243.5" y="-18" font-family="Helvetica,sans-Serif" font-size="10.00">Engine::Threading::</text>
-<text text-anchor="middle" x="288" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">MadgineObjectState</text>
+<polygon fill="white" stroke="#666666" points="329,-30 224,-30 224,0 329,0 329,-30"/>
+<text text-anchor="start" x="232" y="-18" font-family="Helvetica,sans-Serif" font-size="10.00">Engine::Threading::</text>
+<text text-anchor="middle" x="276.5" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">MadgineObjectState</text>
 </a>
 </g>
 </g>
 <!-- Node7&#45;&gt;Node6 -->
 <g id="edge6" class="edge">
 <title>Node7&#45;&gt;Node6</title>
-<path fill="none" stroke="#63b8ff" d="M352.26,-15C360.21,-15 368.47,-15 376.75,-15"/>
-<polygon fill="#63b8ff" stroke="#63b8ff" points="352.38,-11.5 342.38,-15 352.38,-18.5 352.38,-11.5"/>
+<path fill="none" stroke="#63b8ff" d="M340.89,-15C349.84,-15 359.19,-15 368.56,-15"/>
+<polygon fill="#63b8ff" stroke="#63b8ff" points="340.9,-11.5 330.9,-15 340.9,-18.5 340.9,-11.5"/>
 </g>
 </g>
 </svg>

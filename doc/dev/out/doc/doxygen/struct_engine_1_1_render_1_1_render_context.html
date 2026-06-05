@@ -269,14 +269,14 @@ requires (!std::is_array_v&lt;T&gt;)</td></tr>
 <tr class="separator:a042a15768652e6a4b1b84a5873afd390"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aba7bf2116374859459f6bfd9f6e736aa"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_context.html#aba7bf2116374859459f6bfd9f6e736aa">beginFrame</a> ()</td></tr>
 <tr class="separator:aba7bf2116374859459f6bfd9f6e736aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab2b4aa901875cc21806550bb2f5a7566"><td class="memItemLeft" align="right" valign="top">virtual std::unique_ptr&lt; <a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_context.html#ab2b4aa901875cc21806550bb2f5a7566">createRenderTexture</a> (const <a class="el" href="struct_engine_1_1_vector2i.html">Vector2i</a> &amp;size={ 1, 1 }, const <a class="el" href="struct_engine_1_1_render_1_1_render_texture_config.html">RenderTextureConfig</a> &amp;config={})=0</td></tr>
-<tr class="separator:ab2b4aa901875cc21806550bb2f5a7566"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6ee455253277ba13438fdb32b9436e8a"><td class="memItemLeft" align="right" valign="top">virtual std::unique_ptr&lt; <a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_context.html#a6ee455253277ba13438fdb32b9436e8a">createRenderWindow</a> (<a class="el" href="struct_engine_1_1_window_1_1_o_s_window.html">Window::OSWindow</a> *w, size_t samples=1)=0</td></tr>
-<tr class="separator:a6ee455253277ba13438fdb32b9436e8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ca77c1ac9f063315f9ba36c6cdbaada"><td class="memItemLeft" align="right" valign="top">virtual std::unique_ptr&lt; <a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_context.html#a3ca77c1ac9f063315f9ba36c6cdbaada">createRenderTexture</a> (const <a class="el" href="struct_engine_1_1_math_1_1_vector2i.html">Math::Vector2i</a> &amp;size={ 1, 1 }, const <a class="el" href="struct_engine_1_1_render_1_1_render_texture_config.html">RenderTextureConfig</a> &amp;config={})=0</td></tr>
+<tr class="separator:a3ca77c1ac9f063315f9ba36c6cdbaada"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af25dc3cf9b7b32435ddc36e780cf32f6"><td class="memItemLeft" align="right" valign="top">virtual std::unique_ptr&lt; <a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_context.html#af25dc3cf9b7b32435ddc36e780cf32f6">createRenderWindow</a> (<a class="el" href="struct_engine_1_1_platform_1_1_window_1_1_o_s_window.html">Platform::Window::OSWindow</a> *w, size_t samples=1)=0</td></tr>
+<tr class="separator:af25dc3cf9b7b32435ddc36e780cf32f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0ee86cbb0de158f1c0b08d2403e91ab6"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_render_1_1_unique_resource_block.html">UniqueResourceBlock</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_context.html#a0ee86cbb0de158f1c0b08d2403e91ab6">createResourceBlock</a> (std::vector&lt; std::variant&lt; <a class="el" href="namespace_engine_1_1_render.html#af28920ed5a8250ed3c89905c6bdd7ebc">ConstTexturePtr</a>, <a class="el" href="struct_engine_1_1_render_1_1_g_p_u_ptr.html">GPUPtr</a>&lt; <a class="el" href="classvoid.html">void</a> &gt;, <a class="el" href="struct_engine_1_1_render_1_1_g_p_u_ptr.html">GPUPtr</a>&lt; <a class="el" href="struct_engine_1_1_void.html">Void</a>[]&gt; &gt; &gt; data)=0</td></tr>
 <tr class="separator:a0ee86cbb0de158f1c0b08d2403e91ab6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2f81d1fcfcfa8877aa759e0457440b41"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespace_engine_1_1_render.html#acf4d21ad6f42937445a8ef1b6ff82655">TexturePtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_context.html#a2f81d1fcfcfa8877aa759e0457440b41">createTexture</a> (<a class="el" href="namespace_engine_1_1_render.html#a9a12599617d3227875517fefba34a691">TextureType</a> type, <a class="el" href="namespace_engine_1_1_render.html#ad4f85580b5cfb0cb84748f6f4b47153f">TextureFormat</a> format, <a class="el" href="struct_engine_1_1_vector2i.html">Vector2i</a> size={ 0, 0 }, const <a class="el" href="namespace_engine.html#a887943bc4724416349d3201b8e183c49">ByteBuffer</a> &amp;data={})=0</td></tr>
-<tr class="separator:a2f81d1fcfcfa8877aa759e0457440b41"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac88c578cb67cae2d11b24c7406a0250f"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespace_engine_1_1_render.html#acf4d21ad6f42937445a8ef1b6ff82655">TexturePtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_context.html#ac88c578cb67cae2d11b24c7406a0250f">createTexture</a> (<a class="el" href="namespace_engine_1_1_render.html#a9a12599617d3227875517fefba34a691">TextureType</a> type, <a class="el" href="namespace_engine_1_1_render.html#ad4f85580b5cfb0cb84748f6f4b47153f">TextureFormat</a> format, <a class="el" href="struct_engine_1_1_math_1_1_vector2i.html">Math::Vector2i</a> size={ 0, 0 }, const <a class="el" href="namespace_engine.html#a887943bc4724416349d3201b8e183c49">ByteBuffer</a> &amp;data={})=0</td></tr>
+<tr class="separator:ac88c578cb67cae2d11b24c7406a0250f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2640617c81ad5a93804ef6dd267c0bdd"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_context.html#a2640617c81ad5a93804ef6dd267c0bdd">destroyResourceBlock</a> (<a class="el" href="struct_engine_1_1_render_1_1_unique_resource_block.html">UniqueResourceBlock</a> &amp;block)=0</td></tr>
 <tr class="separator:a2640617c81ad5a93804ef6dd267c0bdd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad1ea747638b8cb6e737c379ae32ae3c6"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_context.html#ad1ea747638b8cb6e737c379ae32ae3c6">endFrame</a> ()</td></tr>
@@ -292,8 +292,8 @@ requires (!std::is_array_v&lt;T&gt;)</td></tr>
 <tr class="separator:ab3967e1756e3be5ab3d633543d1f34d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a722ad051bac2e7fe41f1e8ebc80f3bb2"><td class="memItemLeft" align="right" valign="top">std::vector&lt; const <a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_context.html#a722ad051bac2e7fe41f1e8ebc80f3bb2">renderTargets</a> () const</td></tr>
 <tr class="separator:a722ad051bac2e7fe41f1e8ebc80f3bb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af96d4d750170aa47d917f21f8b6269e4"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_context.html#af96d4d750170aa47d917f21f8b6269e4">setTextureSubData</a> (const <a class="el" href="namespace_engine_1_1_render.html#acf4d21ad6f42937445a8ef1b6ff82655">TexturePtr</a> &amp;tex, <a class="el" href="struct_engine_1_1_vector2i.html">Vector2i</a> offset, <a class="el" href="struct_engine_1_1_vector2i.html">Vector2i</a> size, const <a class="el" href="namespace_engine.html#a887943bc4724416349d3201b8e183c49">ByteBuffer</a> &amp;data)=0</td></tr>
-<tr class="separator:af96d4d750170aa47d917f21f8b6269e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34260a57257cc8fbdbbdea987bf435bc"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_context.html#a34260a57257cc8fbdbbdea987bf435bc">setTextureSubData</a> (const <a class="el" href="namespace_engine_1_1_render.html#acf4d21ad6f42937445a8ef1b6ff82655">TexturePtr</a> &amp;tex, <a class="el" href="struct_engine_1_1_math_1_1_vector2i.html">Math::Vector2i</a> offset, <a class="el" href="struct_engine_1_1_math_1_1_vector2i.html">Math::Vector2i</a> size, const <a class="el" href="namespace_engine.html#a887943bc4724416349d3201b8e183c49">ByteBuffer</a> &amp;data)=0</td></tr>
+<tr class="separator:a34260a57257cc8fbdbbdea987bf435bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae6de1fcb29c4fdf9af7c131775de2fbc"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_context.html#ae6de1fcb29c4fdf9af7c131775de2fbc">supportsMultisampling</a> () const =0</td></tr>
 <tr class="separator:ae6de1fcb29c4fdf9af7c131775de2fbc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af2b58bc4b7db2167b33de3b09f5765bd"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_threading_1_1_task.html">Threading::Task</a>&lt; <a class="el" href="classvoid.html">void</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_context.html#af2b58bc4b7db2167b33de3b09f5765bd">unloadAllResources</a> ()</td></tr>
@@ -380,8 +380,8 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a6ee455253277ba13438fdb32b9436e8a" name="a6ee455253277ba13438fdb32b9436e8a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6ee455253277ba13438fdb32b9436e8a">&#9670;&#160;</a></span>createRenderWindow()</h2>
+<a id="af25dc3cf9b7b32435ddc36e780cf32f6" name="af25dc3cf9b7b32435ddc36e780cf32f6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af25dc3cf9b7b32435ddc36e780cf32f6">&#9670;&#160;</a></span>createRenderWindow()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -392,7 +392,7 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname">virtual std::unique_ptr&lt; <a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> &gt; Engine::Render::RenderContext::createRenderWindow </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_engine_1_1_window_1_1_o_s_window.html">Window::OSWindow</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_platform_1_1_window_1_1_o_s_window.html">Platform::Window::OSWindow</a> *&#160;</td>
           <td class="paramname"><em>w</em>, </td>
         </tr>
         <tr>
@@ -416,8 +416,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="ab2b4aa901875cc21806550bb2f5a7566" name="ab2b4aa901875cc21806550bb2f5a7566"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab2b4aa901875cc21806550bb2f5a7566">&#9670;&#160;</a></span>createRenderTexture()</h2>
+<a id="a3ca77c1ac9f063315f9ba36c6cdbaada" name="a3ca77c1ac9f063315f9ba36c6cdbaada"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3ca77c1ac9f063315f9ba36c6cdbaada">&#9670;&#160;</a></span>createRenderTexture()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -428,7 +428,7 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname">virtual std::unique_ptr&lt; <a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> &gt; Engine::Render::RenderContext::createRenderTexture </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="struct_engine_1_1_vector2i.html">Vector2i</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_math_1_1_vector2i.html">Math::Vector2i</a> &amp;&#160;</td>
           <td class="paramname"><em>size</em> = <code>{&#160;1,&#160;1&#160;}</code>, </td>
         </tr>
         <tr>
@@ -785,8 +785,8 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="a2f81d1fcfcfa8877aa759e0457440b41" name="a2f81d1fcfcfa8877aa759e0457440b41"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2f81d1fcfcfa8877aa759e0457440b41">&#9670;&#160;</a></span>createTexture()</h2>
+<a id="ac88c578cb67cae2d11b24c7406a0250f" name="ac88c578cb67cae2d11b24c7406a0250f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac88c578cb67cae2d11b24c7406a0250f">&#9670;&#160;</a></span>createTexture()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -809,7 +809,7 @@ template&lt;typename T &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="struct_engine_1_1_vector2i.html">Vector2i</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_math_1_1_vector2i.html">Math::Vector2i</a>&#160;</td>
           <td class="paramname"><em>size</em> = <code>{&#160;0,&#160;0&#160;}</code>, </td>
         </tr>
         <tr>
@@ -833,8 +833,8 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="af96d4d750170aa47d917f21f8b6269e4" name="af96d4d750170aa47d917f21f8b6269e4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af96d4d750170aa47d917f21f8b6269e4">&#9670;&#160;</a></span>setTextureSubData()</h2>
+<a id="a34260a57257cc8fbdbbdea987bf435bc" name="a34260a57257cc8fbdbbdea987bf435bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a34260a57257cc8fbdbbdea987bf435bc">&#9670;&#160;</a></span>setTextureSubData()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -851,13 +851,13 @@ template&lt;typename T &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="struct_engine_1_1_vector2i.html">Vector2i</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_math_1_1_vector2i.html">Math::Vector2i</a>&#160;</td>
           <td class="paramname"><em>offset</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="struct_engine_1_1_vector2i.html">Vector2i</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_math_1_1_vector2i.html">Math::Vector2i</a>&#160;</td>
           <td class="paramname"><em>size</em>, </td>
         </tr>
         <tr>
@@ -1209,7 +1209,7 @@ template&lt;typename T &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2026 23:14:08 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Fri Jun 5 2026 23:36:48 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

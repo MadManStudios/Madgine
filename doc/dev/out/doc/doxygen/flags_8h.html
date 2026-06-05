@@ -248,7 +248,7 @@ $(function() {
 <div class="textblock"><div class="dynheader">
 Include dependency graph for flags.h:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="flags_8h__incl.svg" width="143" height="256"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="flags_8h__incl.svg" width="160" height="256"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -369,11 +369,11 @@ Macros</h2></td></tr>
 <div class="line">            <span class="keyword">nullptr</span>, #Name, sIdentifiers.data(), 0, COUNT                                                                              \</div>
 <div class="line">        };                                                                                                                             \</div>
 <div class="line">    };                                                                                                                                 \</div>
-<div class="line">    <span class="keyword">inline</span> std::ostream &amp;<a class="code hl_function" href="namespace_engine.html#addcb28fcaa4f2ef73ec7f742ebf72665">operator&lt;&lt;</a>(std::ostream &amp;stream, <span class="keyword">typename</span> Name##Representation::EnumType value)                               \</div>
+<div class="line">    <span class="keyword">inline</span> std::ostream &amp;<a class="code hl_function" href="namespace_engine.html#a9885a6c0e5ef2389f7fa4ec15dbb60b4">operator&lt;&lt;</a>(std::ostream &amp;stream, <span class="keyword">typename</span> Name##Representation::EnumType value)                               \</div>
 <div class="line">    {                                                                                                                                  \</div>
 <div class="line">        <span class="keywordflow">return</span> Name##Representation::sTable.print(stream, value, Name##Representation::sTable.mName);                                  \</div>
 <div class="line">    }                                                                                                                                  \</div>
-<div class="line">    <span class="keyword">inline</span> std::istream &amp;<a class="code hl_function" href="namespace_engine.html#a28644ea7c66292f8a6c34e09ea95ccde">operator&gt;&gt;</a>(std::istream &amp;stream, <span class="keyword">typename</span> Name##Representation::EnumType &amp;value)                              \</div>
+<div class="line">    <span class="keyword">inline</span> std::istream &amp;<a class="code hl_function" href="namespace_engine.html#a1e77372c4579ff0a6b98a1b95ff39108">operator&gt;&gt;</a>(std::istream &amp;stream, <span class="keyword">typename</span> Name##Representation::EnumType &amp;value)                              \</div>
 <div class="line">    {                                                                                                                                  \</div>
 <div class="line">        int32_t dummy;                                                                                                                 \</div>
 <div class="line">        if (Name##Representation::sTable.<a class="code hl_function" href="namespace_engine_1_1_serialize.html#a39f6d7ce89911e530d4803786b0e0397">read</a>(stream, dummy, Name##Representation::sTable.mName))                                      \</div>
@@ -383,8 +383,8 @@ Macros</h2></td></tr>
 <div class="ttc" id="aflags_8h_html_ac22e699086edfb7ee76289c9acc24ab0"><div class="ttname"><a href="flags_8h.html#ac22e699086edfb7ee76289c9acc24ab0">FLAGS_EXPAND</a></div><div class="ttdeci">#define FLAGS_EXPAND(offset, a,...)</div><div class="ttdef"><b>Definition:</b> flags.h:73</div></div>
 <div class="ttc" id="amacros_8h_html_a8f1bac1b9225d9b290d41c1a85fdc73f"><div class="ttname"><a href="macros_8h.html#a8f1bac1b9225d9b290d41c1a85fdc73f">NUM_ARGS</a></div><div class="ttdeci">#define NUM_ARGS(...)</div><div class="ttdef"><b>Definition:</b> macros.h:48</div></div>
 <div class="ttc" id="anamespace_engine_1_1_serialize_html_a39f6d7ce89911e530d4803786b0e0397"><div class="ttname"><a href="namespace_engine_1_1_serialize.html#a39f6d7ce89911e530d4803786b0e0397">Engine::Serialize::read</a></div><div class="ttdeci">StreamResult read(CallerHierarchyFormattedSerializeStream in, T &amp;t, const char *name)</div><div class="ttdef"><b>Definition:</b> operations.h:282</div></div>
-<div class="ttc" id="anamespace_engine_html_a28644ea7c66292f8a6c34e09ea95ccde"><div class="ttname"><a href="namespace_engine.html#a28644ea7c66292f8a6c34e09ea95ccde">Engine::operator&gt;&gt;</a></div><div class="ttdeci">std::istream &amp; operator&gt;&gt;(std::istream &amp;stream, typename GenericResultRepresentation::EnumType &amp;value)</div><div class="ttdef"><b>Definition:</b> genericresult.h:9</div></div>
-<div class="ttc" id="anamespace_engine_html_addcb28fcaa4f2ef73ec7f742ebf72665"><div class="ttname"><a href="namespace_engine.html#addcb28fcaa4f2ef73ec7f742ebf72665">Engine::operator&lt;&lt;</a></div><div class="ttdeci">std::ostream &amp; operator&lt;&lt;(std::ostream &amp;stream, typename GenericResultRepresentation::EnumType value)</div><div class="ttdef"><b>Definition:</b> genericresult.h:9</div></div>
+<div class="ttc" id="anamespace_engine_html_a1e77372c4579ff0a6b98a1b95ff39108"><div class="ttname"><a href="namespace_engine.html#a1e77372c4579ff0a6b98a1b95ff39108">Engine::operator&gt;&gt;</a></div><div class="ttdeci">std::istream &amp; operator&gt;&gt;(std::istream &amp;stream, typename __GenericResultRepresentation_impl__::EnumType &amp;value)</div><div class="ttdef"><b>Definition:</b> genericresult.h:9</div></div>
+<div class="ttc" id="anamespace_engine_html_a9885a6c0e5ef2389f7fa4ec15dbb60b4"><div class="ttname"><a href="namespace_engine.html#a9885a6c0e5ef2389f7fa4ec15dbb60b4">Engine::operator&lt;&lt;</a></div><div class="ttdeci">std::ostream &amp; operator&lt;&lt;(std::ostream &amp;stream, typename __GenericResultRepresentation_impl__::EnumType value)</div><div class="ttdef"><b>Definition:</b> genericresult.h:9</div></div>
 <div class="ttc" id="astruct_engine_1_1_enum_meta_table_html"><div class="ttname"><a href="struct_engine_1_1_enum_meta_table.html">Engine::EnumMetaTable</a></div><div class="ttdef"><b>Definition:</b> enum.h:7</div></div>
 </div><!-- fragment -->
 </div>
@@ -424,7 +424,7 @@ Macros</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2026 23:14:05 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Fri Jun 5 2026 23:36:45 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

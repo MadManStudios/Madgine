@@ -260,14 +260,14 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a80ce1ad613cd6fc2926b9a810330c99a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a41fc07c300f64827e3a3f63002e1bc37"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_typed_byte_buffer.html#a41fc07c300f64827e3a3f63002e1bc37">TypedByteBuffer</a> (Data *data, size_t size)</td></tr>
 <tr class="separator:a41fc07c300f64827e3a3f63002e1bc37"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a17ac4f6b24f475b504ab46ba9f0578d4"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; <br />
-requires (requires(T &amp;t) { <a class="el" href="struct_engine_1_1_byte_buffer_size_accessor.html">ByteBufferSizeAccessor</a> {}(t); <a class="el" href="struct_engine_1_1_byte_buffer_data_accessor.html">ByteBufferDataAccessor</a> {}(t); })</td></tr>
-<tr class="memitem:a17ac4f6b24f475b504ab46ba9f0578d4"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_typed_byte_buffer.html#a17ac4f6b24f475b504ab46ba9f0578d4">TypedByteBuffer</a> (T &amp;&amp;t)</td></tr>
-<tr class="separator:a17ac4f6b24f475b504ab46ba9f0578d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a93a1557a095fb1e2f8f5470fc7daa885"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; <br />
-requires (requires(T &amp;t) { <a class="el" href="struct_engine_1_1_byte_buffer_data_accessor.html">ByteBufferDataAccessor</a> {}(t); })</td></tr>
-<tr class="memitem:a93a1557a095fb1e2f8f5470fc7daa885"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_typed_byte_buffer.html#a93a1557a095fb1e2f8f5470fc7daa885">TypedByteBuffer</a> (T &amp;&amp;t, size_t size)</td></tr>
-<tr class="separator:a93a1557a095fb1e2f8f5470fc7daa885"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a60ec94bbe3041f81dc5b372b498fa813"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; <br />
+requires (requires(T &amp;t) { __generic_impl__::ByteBufferSizeAccessor {}(t); __generic_impl__::ByteBufferDataAccessor {}(t); })</td></tr>
+<tr class="memitem:a60ec94bbe3041f81dc5b372b498fa813"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_typed_byte_buffer.html#a60ec94bbe3041f81dc5b372b498fa813">TypedByteBuffer</a> (T &amp;&amp;t)</td></tr>
+<tr class="separator:a60ec94bbe3041f81dc5b372b498fa813"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a37648df3f604092e29ba14031716366d"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; <br />
+requires (requires(T &amp;t) { __generic_impl__::ByteBufferDataAccessor {}(t); })</td></tr>
+<tr class="memitem:a37648df3f604092e29ba14031716366d"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_typed_byte_buffer.html#a37648df3f604092e29ba14031716366d">TypedByteBuffer</a> (T &amp;&amp;t, size_t size)</td></tr>
+<tr class="separator:a37648df3f604092e29ba14031716366d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5159f29227227cdf3436ae8d55e93c2c"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; <br />
 requires (!Pointer&lt;std::remove_reference_t&lt;T&gt;&gt;)</td></tr>
 <tr class="memitem:a5159f29227227cdf3436ae8d55e93c2c"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_typed_byte_buffer.html#a5159f29227227cdf3436ae8d55e93c2c">TypedByteBuffer</a> (T &amp;&amp;t, size_t size, Data *data)</td></tr>
@@ -331,8 +331,8 @@ template&lt;typename Data &gt; </div>
 
 </div>
 </div>
-<a id="a17ac4f6b24f475b504ab46ba9f0578d4" name="a17ac4f6b24f475b504ab46ba9f0578d4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a17ac4f6b24f475b504ab46ba9f0578d4">&#9670;&#160;</a></span>TypedByteBuffer() <span class="overload">[2/5]</span></h2>
+<a id="a60ec94bbe3041f81dc5b372b498fa813" name="a60ec94bbe3041f81dc5b372b498fa813"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a60ec94bbe3041f81dc5b372b498fa813">&#9670;&#160;</a></span>TypedByteBuffer() <span class="overload">[2/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -340,7 +340,7 @@ template&lt;typename Data &gt; </div>
 template&lt;typename Data &gt; </div>
 <div class="memtemplate">
 template&lt;typename T &gt; <br />
-requires (requires(T &amp;t) { <a class="el" href="struct_engine_1_1_byte_buffer_size_accessor.html">ByteBufferSizeAccessor</a> {}(t); <a class="el" href="struct_engine_1_1_byte_buffer_data_accessor.html">ByteBufferDataAccessor</a> {}(t); })</div>
+requires (requires(T &amp;t) { __generic_impl__::ByteBufferSizeAccessor {}(t); __generic_impl__::ByteBufferDataAccessor {}(t); })</div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -362,8 +362,8 @@ requires (requires(T &amp;t) { <a class="el" href="struct_engine_1_1_byte_buffer
 
 </div>
 </div>
-<a id="a93a1557a095fb1e2f8f5470fc7daa885" name="a93a1557a095fb1e2f8f5470fc7daa885"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a93a1557a095fb1e2f8f5470fc7daa885">&#9670;&#160;</a></span>TypedByteBuffer() <span class="overload">[3/5]</span></h2>
+<a id="a37648df3f604092e29ba14031716366d" name="a37648df3f604092e29ba14031716366d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a37648df3f604092e29ba14031716366d">&#9670;&#160;</a></span>TypedByteBuffer() <span class="overload">[3/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -371,7 +371,7 @@ requires (requires(T &amp;t) { <a class="el" href="struct_engine_1_1_byte_buffer
 template&lt;typename Data &gt; </div>
 <div class="memtemplate">
 template&lt;typename T &gt; <br />
-requires (requires(T &amp;t) { <a class="el" href="struct_engine_1_1_byte_buffer_data_accessor.html">ByteBufferDataAccessor</a> {}(t); })</div>
+requires (requires(T &amp;t) { __generic_impl__::ByteBufferDataAccessor {}(t); })</div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -720,7 +720,7 @@ template&lt;typename Data &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2026 23:14:06 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Fri Jun 5 2026 23:36:46 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

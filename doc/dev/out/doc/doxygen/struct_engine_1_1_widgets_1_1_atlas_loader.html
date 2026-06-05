@@ -257,8 +257,8 @@ Inheritance diagram for Engine::Widgets::AtlasLoader:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a7c981e80315ecc2a658c647f7aa65547"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_atlas_loader.html#a7c981e80315ecc2a658c647f7aa65547">AtlasLoader</a> ()</td></tr>
 <tr class="separator:a7c981e80315ecc2a658c647f7aa65547"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a61323ca41aa70e83153c29ec9f12cc1a"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_threading_1_1_task.html">Threading::Task</a>&lt; Resources::BakeResult &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_atlas_loader.html#a61323ca41aa70e83153c29ec9f12cc1a">bakeResources</a> (std::vector&lt; <a class="el" href="struct_engine_1_1_filesystem_1_1_path.html">Filesystem::Path</a> &gt; &amp;resourcesToBake, const <a class="el" href="struct_engine_1_1_filesystem_1_1_path.html">Filesystem::Path</a> &amp;intermediateDir) override</td></tr>
-<tr class="separator:a61323ca41aa70e83153c29ec9f12cc1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a670ed18e7d961bd79dc9beaa075ad0ea"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_threading_1_1_task.html">Threading::Task</a>&lt; Resources::BakeResult &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_atlas_loader.html#a670ed18e7d961bd79dc9beaa075ad0ea">bakeResources</a> (std::vector&lt; <a class="el" href="struct_engine_1_1_platform_1_1_filesystem_1_1_path.html">Platform::Filesystem::Path</a> &gt; &amp;resourcesToBake, const <a class="el" href="struct_engine_1_1_platform_1_1_filesystem_1_1_path.html">Platform::Filesystem::Path</a> &amp;intermediateDir) override</td></tr>
+<tr class="separator:a670ed18e7d961bd79dc9beaa075ad0ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abf11044d189fe8751d82f3b89e181f99"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_threading_1_1_task.html">Threading::Task</a>&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_atlas_loader.html#abf11044d189fe8751d82f3b89e181f99">loadImpl</a> (<a class="el" href="struct_engine_1_1_widgets_1_1_preprocessed_u_i_atlas.html">PreprocessedUIAtlas</a> &amp;data, ResourceDataInfo &amp;info)</td></tr>
 <tr class="separator:abf11044d189fe8751d82f3b89e181f99"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9e2257c794d2d56673df0af6eecfdff2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_threading_1_1_task.html">Threading::Task</a>&lt; <a class="el" href="classvoid.html">void</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_atlas_loader.html#a9e2257c794d2d56673df0af6eecfdff2">unloadImpl</a> (<a class="el" href="struct_engine_1_1_widgets_1_1_preprocessed_u_i_atlas.html">PreprocessedUIAtlas</a> &amp;data)</td></tr>
@@ -329,8 +329,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a61323ca41aa70e83153c29ec9f12cc1a" name="a61323ca41aa70e83153c29ec9f12cc1a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a61323ca41aa70e83153c29ec9f12cc1a">&#9670;&#160;</a></span>bakeResources()</h2>
+<a id="a670ed18e7d961bd79dc9beaa075ad0ea" name="a670ed18e7d961bd79dc9beaa075ad0ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a670ed18e7d961bd79dc9beaa075ad0ea">&#9670;&#160;</a></span>bakeResources()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -341,13 +341,13 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="struct_engine_1_1_threading_1_1_task.html">Threading::Task</a>&lt; Resources::BakeResult &gt; Engine::Widgets::AtlasLoader::bakeResources </td>
           <td>(</td>
-          <td class="paramtype">std::vector&lt; <a class="el" href="struct_engine_1_1_filesystem_1_1_path.html">Filesystem::Path</a> &gt; &amp;&#160;</td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="struct_engine_1_1_platform_1_1_filesystem_1_1_path.html">Platform::Filesystem::Path</a> &gt; &amp;&#160;</td>
           <td class="paramname"><em>resourcesToBake</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="struct_engine_1_1_filesystem_1_1_path.html">Filesystem::Path</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_platform_1_1_filesystem_1_1_path.html">Platform::Filesystem::Path</a> &amp;&#160;</td>
           <td class="paramname"><em>intermediateDir</em>&#160;</td>
         </tr>
         <tr>
@@ -372,7 +372,7 @@ Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2026 23:14:09 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Fri Jun 5 2026 23:36:49 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

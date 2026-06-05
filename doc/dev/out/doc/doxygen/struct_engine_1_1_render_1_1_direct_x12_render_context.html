@@ -267,14 +267,14 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ad310bd5a15e1b3759715f5158a38a7ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3f779f3fdaa7a3634ce1e155c39f746f"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#a3f779f3fdaa7a3634ce1e155c39f746f">beginFrame</a> () override</td></tr>
 <tr class="separator:a3f779f3fdaa7a3634ce1e155c39f746f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad5ae852338ebe84c20ecdc07eac15200"><td class="memItemLeft" align="right" valign="top">virtual std::unique_ptr&lt; <a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#ad5ae852338ebe84c20ecdc07eac15200">createRenderTexture</a> (const <a class="el" href="struct_engine_1_1_vector2i.html">Vector2i</a> &amp;size={ 1, 1 }, const <a class="el" href="struct_engine_1_1_render_1_1_render_texture_config.html">RenderTextureConfig</a> &amp;config={}) override</td></tr>
-<tr class="separator:ad5ae852338ebe84c20ecdc07eac15200"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7dc43dc22b3c636596073251cb30e3a2"><td class="memItemLeft" align="right" valign="top">virtual std::unique_ptr&lt; <a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#a7dc43dc22b3c636596073251cb30e3a2">createRenderWindow</a> (<a class="el" href="struct_engine_1_1_window_1_1_o_s_window.html">Window::OSWindow</a> *w, size_t samples) override</td></tr>
-<tr class="separator:a7dc43dc22b3c636596073251cb30e3a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a508d00215c902a1ff71578e915aeb375"><td class="memItemLeft" align="right" valign="top">virtual std::unique_ptr&lt; <a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#a508d00215c902a1ff71578e915aeb375">createRenderTexture</a> (const <a class="el" href="struct_engine_1_1_math_1_1_vector2i.html">Math::Vector2i</a> &amp;size={ 1, 1 }, const <a class="el" href="struct_engine_1_1_render_1_1_render_texture_config.html">RenderTextureConfig</a> &amp;config={}) override</td></tr>
+<tr class="separator:a508d00215c902a1ff71578e915aeb375"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abecaf5ea15513ad8ea52cb3df386386c"><td class="memItemLeft" align="right" valign="top">virtual std::unique_ptr&lt; <a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#abecaf5ea15513ad8ea52cb3df386386c">createRenderWindow</a> (<a class="el" href="struct_engine_1_1_platform_1_1_window_1_1_o_s_window.html">Platform::Window::OSWindow</a> *w, size_t samples) override</td></tr>
+<tr class="separator:abecaf5ea15513ad8ea52cb3df386386c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5b71798f42fcf1cdcc04bb2afc61a344"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_render_1_1_unique_resource_block.html">UniqueResourceBlock</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#a5b71798f42fcf1cdcc04bb2afc61a344">createResourceBlock</a> (std::vector&lt; std::variant&lt; <a class="el" href="namespace_engine_1_1_render.html#af28920ed5a8250ed3c89905c6bdd7ebc">ConstTexturePtr</a>, <a class="el" href="struct_engine_1_1_render_1_1_g_p_u_ptr.html">GPUPtr</a>&lt; <a class="el" href="classvoid.html">void</a> &gt;, <a class="el" href="struct_engine_1_1_render_1_1_g_p_u_ptr.html">GPUPtr</a>&lt; <a class="el" href="struct_engine_1_1_void.html">Void</a>[]&gt; &gt; &gt; textures) override</td></tr>
 <tr class="separator:a5b71798f42fcf1cdcc04bb2afc61a344"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8bde0c07ebaa9ebefb53f46db68b4067"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_engine_1_1_render.html#acf4d21ad6f42937445a8ef1b6ff82655">TexturePtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#a8bde0c07ebaa9ebefb53f46db68b4067">createTexture</a> (<a class="el" href="namespace_engine_1_1_render.html#a9a12599617d3227875517fefba34a691">TextureType</a> type, <a class="el" href="namespace_engine_1_1_render.html#ad4f85580b5cfb0cb84748f6f4b47153f">TextureFormat</a> format, <a class="el" href="struct_engine_1_1_vector2i.html">Vector2i</a> size, const <a class="el" href="namespace_engine.html#a887943bc4724416349d3201b8e183c49">ByteBuffer</a> &amp;data) override</td></tr>
-<tr class="separator:a8bde0c07ebaa9ebefb53f46db68b4067"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adcc01ae179e1f0f1227e71834f23ab0c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_engine_1_1_render.html#acf4d21ad6f42937445a8ef1b6ff82655">TexturePtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#adcc01ae179e1f0f1227e71834f23ab0c">createTexture</a> (<a class="el" href="namespace_engine_1_1_render.html#a9a12599617d3227875517fefba34a691">TextureType</a> type, <a class="el" href="namespace_engine_1_1_render.html#ad4f85580b5cfb0cb84748f6f4b47153f">TextureFormat</a> format, <a class="el" href="struct_engine_1_1_math_1_1_vector2i.html">Math::Vector2i</a> size, const <a class="el" href="namespace_engine.html#a887943bc4724416349d3201b8e183c49">ByteBuffer</a> &amp;data) override</td></tr>
+<tr class="separator:adcc01ae179e1f0f1227e71834f23ab0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af6d321344b04233210597ec110677c21"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#af6d321344b04233210597ec110677c21">destroyResourceBlock</a> (<a class="el" href="struct_engine_1_1_render_1_1_unique_resource_block.html">UniqueResourceBlock</a> &amp;block) override</td></tr>
 <tr class="separator:af6d321344b04233210597ec110677c21"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a76a7b3f51a33e3f69d2d0e13e86e9a5b"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#a76a7b3f51a33e3f69d2d0e13e86e9a5b">endFrame</a> () override</td></tr>
@@ -289,8 +289,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:aca7e70498f68bc527f31b728d556f926"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aee8745c0adfaf4c4dc068a449a39facb"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespace_engine.html#a21c5817736858b7eb80c75c9b92aff02">WritableByteBuffer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#aee8745c0adfaf4c4dc068a449a39facb">mapBufferImpl</a> (const <a class="el" href="struct_engine_1_1_render_1_1_g_p_u_ptr.html">GPUPtr</a>&lt; <a class="el" href="struct_engine_1_1_void.html">Void</a>[]&gt; &amp;buffer) override</td></tr>
 <tr class="separator:aee8745c0adfaf4c4dc068a449a39facb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4aa3f013e47b3ced78c508036c50ba73"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#a4aa3f013e47b3ced78c508036c50ba73">setTextureSubData</a> (const <a class="el" href="namespace_engine_1_1_render.html#acf4d21ad6f42937445a8ef1b6ff82655">TexturePtr</a> &amp;tex, <a class="el" href="struct_engine_1_1_vector2i.html">Vector2i</a> offset, <a class="el" href="struct_engine_1_1_vector2i.html">Vector2i</a> size, const <a class="el" href="namespace_engine.html#a887943bc4724416349d3201b8e183c49">ByteBuffer</a> &amp;data) override</td></tr>
-<tr class="separator:a4aa3f013e47b3ced78c508036c50ba73"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac41aa37bd911e42caa6b4ef9d11675d6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#ac41aa37bd911e42caa6b4ef9d11675d6">setTextureSubData</a> (const <a class="el" href="namespace_engine_1_1_render.html#acf4d21ad6f42937445a8ef1b6ff82655">TexturePtr</a> &amp;tex, <a class="el" href="struct_engine_1_1_math_1_1_vector2i.html">Math::Vector2i</a> offset, <a class="el" href="struct_engine_1_1_math_1_1_vector2i.html">Math::Vector2i</a> size, const <a class="el" href="namespace_engine.html#a887943bc4724416349d3201b8e183c49">ByteBuffer</a> &amp;data) override</td></tr>
+<tr class="separator:ac41aa37bd911e42caa6b4ef9d11675d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afd6cf0b46c42836ad1599dddcbbb355e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#afd6cf0b46c42836ad1599dddcbbb355e">setupRootSignature</a> (ID3D12RootSignature *signature, ID3D12GraphicsCommandList *list)</td></tr>
 <tr class="separator:afd6cf0b46c42836ad1599dddcbbb355e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a84f17c57ed234dc794d0291bc4f02103"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#a84f17c57ed234dc794d0291bc4f02103">supportsMultisampling</a> () const override</td></tr>
@@ -307,16 +307,16 @@ Static Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a9dbbbe0ccc4e96296f882653defb993a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_engine.html#a9a928f7b8c279392452988aa0a4bb049">LogBucketAllocator</a>&lt; <a class="el" href="struct_engine_1_1_heap_allocator.html">HeapAllocator</a>&lt; <a class="el" href="struct_engine_1_1_render_1_1_direct_x12_heap_allocator.html">DirectX12HeapAllocator</a> &amp; &gt;, 64, 4096, 4 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#a9dbbbe0ccc4e96296f882653defb993a">mBufferAllocator</a></td></tr>
-<tr class="separator:a9dbbbe0ccc4e96296f882653defb993a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b006953e36e4c1a8a52ea4c46afa1d0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_engine_1_1_memory.html#a3392d1b67a339295884496afea8571a3">Memory::LogBucketAllocator</a>&lt; <a class="el" href="struct_engine_1_1_memory_1_1_heap_allocator.html">Memory::HeapAllocator</a>&lt; <a class="el" href="struct_engine_1_1_render_1_1_direct_x12_heap_allocator.html">DirectX12HeapAllocator</a> &amp; &gt;, 64, 4096, 4 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#a6b006953e36e4c1a8a52ea4c46afa1d0">mBufferAllocator</a></td></tr>
+<tr class="separator:a6b006953e36e4c1a8a52ea4c46afa1d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9836a1088b1846c4cdbf352ea804c45f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_heap_allocator.html">DirectX12HeapAllocator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#a9836a1088b1846c4cdbf352ea804c45f">mBufferMemoryHeap</a></td></tr>
 <tr class="separator:a9836a1088b1846c4cdbf352ea804c45f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0f135698ffac501bad60fa2f9efbd961"><td class="memItemLeft" align="right" valign="top">DWORD&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#a0f135698ffac501bad60fa2f9efbd961">mCallbackCookie</a></td></tr>
 <tr class="separator:a0f135698ffac501bad60fa2f9efbd961"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a06c89ed2be538067c826ff8e8159d686"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_command_allocator.html">DirectX12CommandAllocator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#a06c89ed2be538067c826ff8e8159d686">mComputeQueue</a></td></tr>
 <tr class="separator:a06c89ed2be538067c826ff8e8159d686"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1a3924d358bbcb7fb641a83f1927fe1b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_engine.html#a9a928f7b8c279392452988aa0a4bb049">LogBucketAllocator</a>&lt; <a class="el" href="struct_engine_1_1_heap_allocator.html">HeapAllocator</a>&lt; <a class="el" href="struct_engine_1_1_render_1_1_direct_x12_heap_allocator.html">DirectX12HeapAllocator</a> &amp; &gt;, 64, 4096, 4 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#a1a3924d358bbcb7fb641a83f1927fe1b">mConstantAllocator</a></td></tr>
-<tr class="separator:a1a3924d358bbcb7fb641a83f1927fe1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a38db637f7093b7c41f24c6ab9d4d61ed"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_engine_1_1_memory.html#a3392d1b67a339295884496afea8571a3">Memory::LogBucketAllocator</a>&lt; <a class="el" href="struct_engine_1_1_memory_1_1_heap_allocator.html">Memory::HeapAllocator</a>&lt; <a class="el" href="struct_engine_1_1_render_1_1_direct_x12_heap_allocator.html">DirectX12HeapAllocator</a> &amp; &gt;, 64, 4096, 4 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#a38db637f7093b7c41f24c6ab9d4d61ed">mConstantAllocator</a></td></tr>
+<tr class="separator:a38db637f7093b7c41f24c6ab9d4d61ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab90e09bca20397a1ab10dfea0561197e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_render_1_1_g_p_u_ptr.html">GPUPtr</a>&lt; <a class="el" href="struct_engine_1_1_render_1_1_constant_values.html">ConstantValues</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#ab90e09bca20397a1ab10dfea0561197e">mConstantBuffer</a></td></tr>
 <tr class="separator:ab90e09bca20397a1ab10dfea0561197e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3eec8cf54b45967b4f11c89ec5459d32"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_heap_allocator.html">DirectX12HeapAllocator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#a3eec8cf54b45967b4f11c89ec5459d32">mConstantMemoryHeap</a></td></tr>
@@ -327,30 +327,30 @@ Public Attributes</h2></td></tr>
 <tr class="separator:a7e0c8715f65d7899840970e73c3d35c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a509c636ec11da4c77f85a857a8eebd67"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_descriptor_heap.html">DirectX12DescriptorHeap</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#a509c636ec11da4c77f85a857a8eebd67">mDescriptorHeap</a></td></tr>
 <tr class="separator:a509c636ec11da4c77f85a857a8eebd67"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6ea65fda9316d9b98dfdf8f26dd0d795"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_release_ptr.html">ReleasePtr</a>&lt; IDXGIFactory4 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#a6ea65fda9316d9b98dfdf8f26dd0d795">mFactory</a></td></tr>
-<tr class="separator:a6ea65fda9316d9b98dfdf8f26dd0d795"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af06c95bab0e3264ef23e72f3eb70c8fb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_platform_1_1_release_ptr.html">Platform::ReleasePtr</a>&lt; IDXGIFactory4 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#af06c95bab0e3264ef23e72f3eb70c8fb">mFactory</a></td></tr>
+<tr class="separator:af06c95bab0e3264ef23e72f3eb70c8fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1e7237104f96fa2b69cd7d81638b82f2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_render_1_1_render_future.html">RenderFuture</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#a1e7237104f96fa2b69cd7d81638b82f2">mFrameFences</a> [2]</td></tr>
 <tr class="separator:a1e7237104f96fa2b69cd7d81638b82f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1bc1ef307c4316e389228cb981bf744c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_command_allocator.html">DirectX12CommandAllocator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#a1bc1ef307c4316e389228cb981bf744c">mGraphicsQueue</a></td></tr>
 <tr class="separator:a1bc1ef307c4316e389228cb981bf744c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4fa3c80dfba6d2acc8c33fbdc90e48b1"><td class="memItemLeft" align="right" valign="top">D3D12_FEATURE_DATA_D3D12_OPTIONS&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#a4fa3c80dfba6d2acc8c33fbdc90e48b1">mOptions</a></td></tr>
 <tr class="separator:a4fa3c80dfba6d2acc8c33fbdc90e48b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a623316f822579d1ad38e72c998922e34"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_bump_allocator.html">BumpAllocator</a>&lt; <a class="el" href="struct_engine_1_1_fixed_allocator.html">FixedAllocator</a>&lt; <a class="el" href="struct_engine_1_1_render_1_1_direct_x12_mapped_heap_allocator.html">DirectX12MappedHeapAllocator</a> &amp; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#a623316f822579d1ad38e72c998922e34">mReadbackAllocator</a></td></tr>
-<tr class="separator:a623316f822579d1ad38e72c998922e34"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac3d367f9251d42e70cdc46224694f941"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_memory_1_1_bump_allocator.html">Memory::BumpAllocator</a>&lt; <a class="el" href="struct_engine_1_1_memory_1_1_fixed_allocator.html">Memory::FixedAllocator</a>&lt; <a class="el" href="struct_engine_1_1_render_1_1_direct_x12_mapped_heap_allocator.html">DirectX12MappedHeapAllocator</a> &amp; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#ac3d367f9251d42e70cdc46224694f941">mReadbackAllocator</a></td></tr>
+<tr class="separator:ac3d367f9251d42e70cdc46224694f941"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4724b937a4e0a9ed6724d7b5ccca096c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_mapped_heap_allocator.html">DirectX12MappedHeapAllocator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#a4724b937a4e0a9ed6724d7b5ccca096c">mReadbackMemoryHeap</a> = D3D12_HEAP_TYPE_READBACK</td></tr>
 <tr class="separator:a4724b937a4e0a9ed6724d7b5ccca096c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab4deed86c2f469ebb33a15f73af49379"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_descriptor_heap.html">DirectX12DescriptorHeap</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#ab4deed86c2f469ebb33a15f73af49379">mRenderTargetDescriptorHeap</a></td></tr>
 <tr class="separator:ab4deed86c2f469ebb33a15f73af49379"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7b11183b67d2a0fb07e9538d42472a74"><td class="memItemLeft" align="right" valign="top">std::map&lt; <a class="el" href="struct_engine_1_1_render_1_1_pipeline_signature.html">PipelineSignature</a>, <a class="el" href="struct_engine_1_1_release_ptr.html">ReleasePtr</a>&lt; ID3D12RootSignature &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#a7b11183b67d2a0fb07e9538d42472a74">mRootSignatures</a></td></tr>
-<tr class="separator:a7b11183b67d2a0fb07e9538d42472a74"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a225cd5a64296ad40ef5f5a531ab2c29d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_bump_allocator.html">BumpAllocator</a>&lt; <a class="el" href="struct_engine_1_1_fixed_allocator.html">FixedAllocator</a>&lt; <a class="el" href="struct_engine_1_1_render_1_1_direct_x12_mapped_heap_allocator.html">DirectX12MappedHeapAllocator</a> &amp; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#a225cd5a64296ad40ef5f5a531ab2c29d">mTempAllocator</a></td></tr>
-<tr class="separator:a225cd5a64296ad40ef5f5a531ab2c29d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3752732c34c0ae9ce2ccfb41f521e963"><td class="memItemLeft" align="right" valign="top">std::map&lt; <a class="el" href="struct_engine_1_1_render_1_1_pipeline_signature.html">PipelineSignature</a>, <a class="el" href="struct_engine_1_1_platform_1_1_release_ptr.html">Platform::ReleasePtr</a>&lt; ID3D12RootSignature &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#a3752732c34c0ae9ce2ccfb41f521e963">mRootSignatures</a></td></tr>
+<tr class="separator:a3752732c34c0ae9ce2ccfb41f521e963"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a561a862785f33e43028d979af87cbf6a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_memory_1_1_bump_allocator.html">Memory::BumpAllocator</a>&lt; <a class="el" href="struct_engine_1_1_memory_1_1_fixed_allocator.html">Memory::FixedAllocator</a>&lt; <a class="el" href="struct_engine_1_1_render_1_1_direct_x12_mapped_heap_allocator.html">DirectX12MappedHeapAllocator</a> &amp; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#a561a862785f33e43028d979af87cbf6a">mTempAllocator</a></td></tr>
+<tr class="separator:a561a862785f33e43028d979af87cbf6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac9d102d0812c06ddf1ad17d505e99021"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_mapped_heap_allocator.html">DirectX12MappedHeapAllocator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#ac9d102d0812c06ddf1ad17d505e99021">mTempMemoryHeap</a> = D3D12_HEAP_TYPE_UPLOAD</td></tr>
 <tr class="separator:ac9d102d0812c06ddf1ad17d505e99021"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5e3ca71e39cd12202bb70ce36cdf042c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_query_heap.html">DirectX12QueryHeap</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#a5e3ca71e39cd12202bb70ce36cdf042c">mTimestampQueryHeap</a></td></tr>
 <tr class="separator:a5e3ca71e39cd12202bb70ce36cdf042c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7993279dbe88e7afe55928e2cef305aa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_engine.html#ac15b8d2ae403549086a5638a1ba11d77">BucketAllocator</a>&lt; <a class="el" href="struct_engine_1_1_heap_allocator.html">HeapAllocator</a>&lt; <a class="el" href="struct_engine_1_1_render_1_1_direct_x12_mapped_heap_allocator.html">DirectX12MappedHeapAllocator</a> &amp; &gt;, 16, 64, 16 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#a7993279dbe88e7afe55928e2cef305aa">mUploadAllocator</a></td></tr>
-<tr class="separator:a7993279dbe88e7afe55928e2cef305aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a070dfbb283889ebc1318408c7b0a7d38"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_engine_1_1_memory.html#a0840bc230969cb17ea713b91431873a9">Memory::BucketAllocator</a>&lt; <a class="el" href="struct_engine_1_1_memory_1_1_heap_allocator.html">Memory::HeapAllocator</a>&lt; <a class="el" href="struct_engine_1_1_render_1_1_direct_x12_mapped_heap_allocator.html">DirectX12MappedHeapAllocator</a> &amp; &gt;, 16, 64, 16 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#a070dfbb283889ebc1318408c7b0a7d38">mUploadAllocator</a></td></tr>
+<tr class="separator:a070dfbb283889ebc1318408c7b0a7d38"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9b4d0f8415030cf536a67c03c62e44a3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_mapped_heap_allocator.html">DirectX12MappedHeapAllocator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_render_context.html#a9b4d0f8415030cf536a67c03c62e44a3">mUploadHeap</a> = D3D12_HEAP_TYPE_UPLOAD</td></tr>
 <tr class="separator:a9b4d0f8415030cf536a67c03c62e44a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -391,8 +391,8 @@ Public Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a7dc43dc22b3c636596073251cb30e3a2" name="a7dc43dc22b3c636596073251cb30e3a2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7dc43dc22b3c636596073251cb30e3a2">&#9670;&#160;</a></span>createRenderWindow()</h2>
+<a id="abecaf5ea15513ad8ea52cb3df386386c" name="abecaf5ea15513ad8ea52cb3df386386c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abecaf5ea15513ad8ea52cb3df386386c">&#9670;&#160;</a></span>createRenderWindow()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -403,7 +403,7 @@ Public Attributes</h2></td></tr>
         <tr>
           <td class="memname">std::unique_ptr&lt; <a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> &gt; Engine::Render::DirectX12RenderContext::createRenderWindow </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_engine_1_1_window_1_1_o_s_window.html">Window::OSWindow</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_platform_1_1_window_1_1_o_s_window.html">Platform::Window::OSWindow</a> *&#160;</td>
           <td class="paramname"><em>w</em>, </td>
         </tr>
         <tr>
@@ -427,8 +427,8 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="ad5ae852338ebe84c20ecdc07eac15200" name="ad5ae852338ebe84c20ecdc07eac15200"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad5ae852338ebe84c20ecdc07eac15200">&#9670;&#160;</a></span>createRenderTexture()</h2>
+<a id="a508d00215c902a1ff71578e915aeb375" name="a508d00215c902a1ff71578e915aeb375"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a508d00215c902a1ff71578e915aeb375">&#9670;&#160;</a></span>createRenderTexture()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -439,7 +439,7 @@ Public Attributes</h2></td></tr>
         <tr>
           <td class="memname">std::unique_ptr&lt; <a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> &gt; Engine::Render::DirectX12RenderContext::createRenderTexture </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="struct_engine_1_1_vector2i.html">Vector2i</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_math_1_1_vector2i.html">Math::Vector2i</a> &amp;&#160;</td>
           <td class="paramname"><em>size</em> = <code>{&#160;1,&#160;1&#160;}</code>, </td>
         </tr>
         <tr>
@@ -745,8 +745,8 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a8bde0c07ebaa9ebefb53f46db68b4067" name="a8bde0c07ebaa9ebefb53f46db68b4067"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8bde0c07ebaa9ebefb53f46db68b4067">&#9670;&#160;</a></span>createTexture()</h2>
+<a id="adcc01ae179e1f0f1227e71834f23ab0c" name="adcc01ae179e1f0f1227e71834f23ab0c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adcc01ae179e1f0f1227e71834f23ab0c">&#9670;&#160;</a></span>createTexture()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -769,7 +769,7 @@ Public Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="struct_engine_1_1_vector2i.html">Vector2i</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_math_1_1_vector2i.html">Math::Vector2i</a>&#160;</td>
           <td class="paramname"><em>size</em>, </td>
         </tr>
         <tr>
@@ -793,8 +793,8 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a4aa3f013e47b3ced78c508036c50ba73" name="a4aa3f013e47b3ced78c508036c50ba73"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4aa3f013e47b3ced78c508036c50ba73">&#9670;&#160;</a></span>setTextureSubData()</h2>
+<a id="ac41aa37bd911e42caa6b4ef9d11675d6" name="ac41aa37bd911e42caa6b4ef9d11675d6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac41aa37bd911e42caa6b4ef9d11675d6">&#9670;&#160;</a></span>setTextureSubData()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -811,13 +811,13 @@ Public Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="struct_engine_1_1_vector2i.html">Vector2i</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_math_1_1_vector2i.html">Math::Vector2i</a>&#160;</td>
           <td class="paramname"><em>offset</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="struct_engine_1_1_vector2i.html">Vector2i</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_math_1_1_vector2i.html">Math::Vector2i</a>&#160;</td>
           <td class="paramname"><em>size</em>, </td>
         </tr>
         <tr>
@@ -1016,28 +1016,28 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a6ea65fda9316d9b98dfdf8f26dd0d795" name="a6ea65fda9316d9b98dfdf8f26dd0d795"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6ea65fda9316d9b98dfdf8f26dd0d795">&#9670;&#160;</a></span>mFactory</h2>
+<a id="af06c95bab0e3264ef23e72f3eb70c8fb" name="af06c95bab0e3264ef23e72f3eb70c8fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af06c95bab0e3264ef23e72f3eb70c8fb">&#9670;&#160;</a></span>mFactory</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="struct_engine_1_1_release_ptr.html">ReleasePtr</a>&lt;IDXGIFactory4&gt; Engine::Render::DirectX12RenderContext::mFactory</td>
+          <td class="memname"><a class="el" href="struct_engine_1_1_platform_1_1_release_ptr.html">Platform::ReleasePtr</a>&lt;IDXGIFactory4&gt; Engine::Render::DirectX12RenderContext::mFactory</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a7b11183b67d2a0fb07e9538d42472a74" name="a7b11183b67d2a0fb07e9538d42472a74"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7b11183b67d2a0fb07e9538d42472a74">&#9670;&#160;</a></span>mRootSignatures</h2>
+<a id="a3752732c34c0ae9ce2ccfb41f521e963" name="a3752732c34c0ae9ce2ccfb41f521e963"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3752732c34c0ae9ce2ccfb41f521e963">&#9670;&#160;</a></span>mRootSignatures</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::map&lt;<a class="el" href="struct_engine_1_1_render_1_1_pipeline_signature.html">PipelineSignature</a>, <a class="el" href="struct_engine_1_1_release_ptr.html">ReleasePtr</a>&lt;ID3D12RootSignature&gt; &gt; Engine::Render::DirectX12RenderContext::mRootSignatures</td>
+          <td class="memname">std::map&lt;<a class="el" href="struct_engine_1_1_render_1_1_pipeline_signature.html">PipelineSignature</a>, <a class="el" href="struct_engine_1_1_platform_1_1_release_ptr.html">Platform::ReleasePtr</a>&lt;ID3D12RootSignature&gt; &gt; Engine::Render::DirectX12RenderContext::mRootSignatures</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1114,14 +1114,14 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a7993279dbe88e7afe55928e2cef305aa" name="a7993279dbe88e7afe55928e2cef305aa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7993279dbe88e7afe55928e2cef305aa">&#9670;&#160;</a></span>mUploadAllocator</h2>
+<a id="a070dfbb283889ebc1318408c7b0a7d38" name="a070dfbb283889ebc1318408c7b0a7d38"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a070dfbb283889ebc1318408c7b0a7d38">&#9670;&#160;</a></span>mUploadAllocator</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespace_engine.html#ac15b8d2ae403549086a5638a1ba11d77">BucketAllocator</a>&lt;<a class="el" href="struct_engine_1_1_heap_allocator.html">HeapAllocator</a>&lt;<a class="el" href="struct_engine_1_1_render_1_1_direct_x12_mapped_heap_allocator.html">DirectX12MappedHeapAllocator</a> &amp;&gt;, 16, 64, 16&gt; Engine::Render::DirectX12RenderContext::mUploadAllocator</td>
+          <td class="memname"><a class="el" href="namespace_engine_1_1_memory.html#a0840bc230969cb17ea713b91431873a9">Memory::BucketAllocator</a>&lt;<a class="el" href="struct_engine_1_1_memory_1_1_heap_allocator.html">Memory::HeapAllocator</a>&lt;<a class="el" href="struct_engine_1_1_render_1_1_direct_x12_mapped_heap_allocator.html">DirectX12MappedHeapAllocator</a> &amp;&gt;, 16, 64, 16&gt; Engine::Render::DirectX12RenderContext::mUploadAllocator</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1142,14 +1142,14 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a9dbbbe0ccc4e96296f882653defb993a" name="a9dbbbe0ccc4e96296f882653defb993a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9dbbbe0ccc4e96296f882653defb993a">&#9670;&#160;</a></span>mBufferAllocator</h2>
+<a id="a6b006953e36e4c1a8a52ea4c46afa1d0" name="a6b006953e36e4c1a8a52ea4c46afa1d0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b006953e36e4c1a8a52ea4c46afa1d0">&#9670;&#160;</a></span>mBufferAllocator</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespace_engine.html#a9a928f7b8c279392452988aa0a4bb049">LogBucketAllocator</a>&lt;<a class="el" href="struct_engine_1_1_heap_allocator.html">HeapAllocator</a>&lt;<a class="el" href="struct_engine_1_1_render_1_1_direct_x12_heap_allocator.html">DirectX12HeapAllocator</a> &amp;&gt;, 64, 4096, 4&gt; Engine::Render::DirectX12RenderContext::mBufferAllocator</td>
+          <td class="memname"><a class="el" href="namespace_engine_1_1_memory.html#a3392d1b67a339295884496afea8571a3">Memory::LogBucketAllocator</a>&lt;<a class="el" href="struct_engine_1_1_memory_1_1_heap_allocator.html">Memory::HeapAllocator</a>&lt;<a class="el" href="struct_engine_1_1_render_1_1_direct_x12_heap_allocator.html">DirectX12HeapAllocator</a> &amp;&gt;, 64, 4096, 4&gt; Engine::Render::DirectX12RenderContext::mBufferAllocator</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1170,14 +1170,14 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a225cd5a64296ad40ef5f5a531ab2c29d" name="a225cd5a64296ad40ef5f5a531ab2c29d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a225cd5a64296ad40ef5f5a531ab2c29d">&#9670;&#160;</a></span>mTempAllocator</h2>
+<a id="a561a862785f33e43028d979af87cbf6a" name="a561a862785f33e43028d979af87cbf6a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a561a862785f33e43028d979af87cbf6a">&#9670;&#160;</a></span>mTempAllocator</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="struct_engine_1_1_bump_allocator.html">BumpAllocator</a>&lt;<a class="el" href="struct_engine_1_1_fixed_allocator.html">FixedAllocator</a>&lt;<a class="el" href="struct_engine_1_1_render_1_1_direct_x12_mapped_heap_allocator.html">DirectX12MappedHeapAllocator</a> &amp;&gt; &gt; Engine::Render::DirectX12RenderContext::mTempAllocator</td>
+          <td class="memname"><a class="el" href="struct_engine_1_1_memory_1_1_bump_allocator.html">Memory::BumpAllocator</a>&lt;<a class="el" href="struct_engine_1_1_memory_1_1_fixed_allocator.html">Memory::FixedAllocator</a>&lt;<a class="el" href="struct_engine_1_1_render_1_1_direct_x12_mapped_heap_allocator.html">DirectX12MappedHeapAllocator</a> &amp;&gt; &gt; Engine::Render::DirectX12RenderContext::mTempAllocator</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1198,14 +1198,14 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a623316f822579d1ad38e72c998922e34" name="a623316f822579d1ad38e72c998922e34"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a623316f822579d1ad38e72c998922e34">&#9670;&#160;</a></span>mReadbackAllocator</h2>
+<a id="ac3d367f9251d42e70cdc46224694f941" name="ac3d367f9251d42e70cdc46224694f941"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac3d367f9251d42e70cdc46224694f941">&#9670;&#160;</a></span>mReadbackAllocator</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="struct_engine_1_1_bump_allocator.html">BumpAllocator</a>&lt;<a class="el" href="struct_engine_1_1_fixed_allocator.html">FixedAllocator</a>&lt;<a class="el" href="struct_engine_1_1_render_1_1_direct_x12_mapped_heap_allocator.html">DirectX12MappedHeapAllocator</a> &amp;&gt; &gt; Engine::Render::DirectX12RenderContext::mReadbackAllocator</td>
+          <td class="memname"><a class="el" href="struct_engine_1_1_memory_1_1_bump_allocator.html">Memory::BumpAllocator</a>&lt;<a class="el" href="struct_engine_1_1_memory_1_1_fixed_allocator.html">Memory::FixedAllocator</a>&lt;<a class="el" href="struct_engine_1_1_render_1_1_direct_x12_mapped_heap_allocator.html">DirectX12MappedHeapAllocator</a> &amp;&gt; &gt; Engine::Render::DirectX12RenderContext::mReadbackAllocator</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1226,14 +1226,14 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a1a3924d358bbcb7fb641a83f1927fe1b" name="a1a3924d358bbcb7fb641a83f1927fe1b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1a3924d358bbcb7fb641a83f1927fe1b">&#9670;&#160;</a></span>mConstantAllocator</h2>
+<a id="a38db637f7093b7c41f24c6ab9d4d61ed" name="a38db637f7093b7c41f24c6ab9d4d61ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a38db637f7093b7c41f24c6ab9d4d61ed">&#9670;&#160;</a></span>mConstantAllocator</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespace_engine.html#a9a928f7b8c279392452988aa0a4bb049">LogBucketAllocator</a>&lt;<a class="el" href="struct_engine_1_1_heap_allocator.html">HeapAllocator</a>&lt;<a class="el" href="struct_engine_1_1_render_1_1_direct_x12_heap_allocator.html">DirectX12HeapAllocator</a> &amp;&gt;, 64, 4096, 4&gt; Engine::Render::DirectX12RenderContext::mConstantAllocator</td>
+          <td class="memname"><a class="el" href="namespace_engine_1_1_memory.html#a3392d1b67a339295884496afea8571a3">Memory::LogBucketAllocator</a>&lt;<a class="el" href="struct_engine_1_1_memory_1_1_heap_allocator.html">Memory::HeapAllocator</a>&lt;<a class="el" href="struct_engine_1_1_render_1_1_direct_x12_heap_allocator.html">DirectX12HeapAllocator</a> &amp;&gt;, 64, 4096, 4&gt; Engine::Render::DirectX12RenderContext::mConstantAllocator</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1303,7 +1303,7 @@ Public Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2026 23:14:08 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Fri Jun 5 2026 23:36:48 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

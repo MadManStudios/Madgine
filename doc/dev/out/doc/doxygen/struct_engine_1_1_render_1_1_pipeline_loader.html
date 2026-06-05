@@ -269,8 +269,8 @@ Public Types</h2></td></tr>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a15c5d8a48b3a14d72f7b9a9992a6dca4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_pipeline_loader.html#a15c5d8a48b3a14d72f7b9a9992a6dca4">PipelineLoader</a> ()</td></tr>
 <tr class="separator:a15c5d8a48b3a14d72f7b9a9992a6dca4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab355fbd67f8752ace2b7755328ccb3c5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_threading_1_1_task.html">Threading::Task</a>&lt; Resources::BakeResult &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_pipeline_loader.html#ab355fbd67f8752ace2b7755328ccb3c5">bakeResources</a> (std::vector&lt; <a class="el" href="struct_engine_1_1_filesystem_1_1_path.html">Filesystem::Path</a> &gt; &amp;resourcesToBake, const <a class="el" href="struct_engine_1_1_filesystem_1_1_path.html">Filesystem::Path</a> &amp;intermediateDir) override</td></tr>
-<tr class="separator:ab355fbd67f8752ace2b7755328ccb3c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a273fea69a193e8f446285a37111f2a35"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_threading_1_1_task.html">Threading::Task</a>&lt; Resources::BakeResult &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_pipeline_loader.html#a273fea69a193e8f446285a37111f2a35">bakeResources</a> (std::vector&lt; <a class="el" href="struct_engine_1_1_platform_1_1_filesystem_1_1_path.html">Platform::Filesystem::Path</a> &gt; &amp;resourcesToBake, const <a class="el" href="struct_engine_1_1_platform_1_1_filesystem_1_1_path.html">Platform::Filesystem::Path</a> &amp;intermediateDir) override</td></tr>
+<tr class="separator:a273fea69a193e8f446285a37111f2a35"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6f454bb30a86c95d54fa6e760c4ad8d1"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_threading_1_1_task.html">Threading::Task</a>&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_pipeline_loader.html#a6f454bb30a86c95d54fa6e760c4ad8d1">create</a> (<a class="el" href="struct_engine_1_1_render_1_1_pipeline_loader_1_1_instance.html">Instance</a> &amp;instance, <a class="el" href="struct_engine_1_1_render_1_1_pipeline_configuration.html">PipelineConfiguration</a> config)=0</td></tr>
 <tr class="separator:a6f454bb30a86c95d54fa6e760c4ad8d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad5c87ff38feda60be8e692e214bc004e"><td class="memItemLeft" align="right" valign="top">virtual std::string_view&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_pipeline_loader.html#ad5c87ff38feda60be8e692e214bc004e">extensionForTarget</a> (std::string_view target, <a class="el" href="namespace_engine_1_1_render.html#aca15bb3bf29d2afc8394dca2a093a6d4">ShaderType</a> type)=0</td></tr>
@@ -382,8 +382,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ab355fbd67f8752ace2b7755328ccb3c5" name="ab355fbd67f8752ace2b7755328ccb3c5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab355fbd67f8752ace2b7755328ccb3c5">&#9670;&#160;</a></span>bakeResources()</h2>
+<a id="a273fea69a193e8f446285a37111f2a35" name="a273fea69a193e8f446285a37111f2a35"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a273fea69a193e8f446285a37111f2a35">&#9670;&#160;</a></span>bakeResources()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -394,13 +394,13 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="struct_engine_1_1_threading_1_1_task.html">Threading::Task</a>&lt; Resources::BakeResult &gt; Engine::Render::PipelineLoader::bakeResources </td>
           <td>(</td>
-          <td class="paramtype">std::vector&lt; <a class="el" href="struct_engine_1_1_filesystem_1_1_path.html">Filesystem::Path</a> &gt; &amp;&#160;</td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="struct_engine_1_1_platform_1_1_filesystem_1_1_path.html">Platform::Filesystem::Path</a> &gt; &amp;&#160;</td>
           <td class="paramname"><em>resourcesToBake</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="struct_engine_1_1_filesystem_1_1_path.html">Filesystem::Path</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_platform_1_1_filesystem_1_1_path.html">Platform::Filesystem::Path</a> &amp;&#160;</td>
           <td class="paramname"><em>intermediateDir</em>&#160;</td>
         </tr>
         <tr>
@@ -425,7 +425,7 @@ Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2026 23:14:08 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Fri Jun 5 2026 23:36:48 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

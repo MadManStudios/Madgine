@@ -249,19 +249,16 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:a250843b19955d399f009d5bdea154606"><td class="memTemplParams" colspan="2">template&lt;template&lt; auto... &gt; typename Pattern, template&lt; auto... &gt; typename... Args&gt; </td></tr>
-<tr class="memitem:a250843b19955d399f009d5bdea154606"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1replace.html#a250843b19955d399f009d5bdea154606">pattern_tagged</a> = typename <a class="el" href="struct_engine_1_1replace__pattern__tagged.html">replace_pattern_tagged</a>&lt; T, Pattern, Args... &gt;<a class="el" href="struct_engine_1_1replace.html#a38e64c4fcb6f0a619dbad220d043d2c9">::type</a></td></tr>
-<tr class="separator:a250843b19955d399f009d5bdea154606"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab1b15336a438d8d9ec0e1a5fe3d12bab"><td class="memTemplParams" colspan="2">template&lt;typename Tag , typename... Args&gt; </td></tr>
-<tr class="memitem:ab1b15336a438d8d9ec0e1a5fe3d12bab"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1replace.html#ab1b15336a438d8d9ec0e1a5fe3d12bab">tagged</a> = typename <a class="el" href="struct_engine_1_1replace__tagged.html">replace_tagged</a>&lt; T, Tag, Args... &gt;<a class="el" href="struct_engine_1_1replace.html#a38e64c4fcb6f0a619dbad220d043d2c9">::type</a></td></tr>
-<tr class="separator:ab1b15336a438d8d9ec0e1a5fe3d12bab"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a38e64c4fcb6f0a619dbad220d043d2c9"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; </td></tr>
-<tr class="memitem:a38e64c4fcb6f0a619dbad220d043d2c9"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1replace.html#a38e64c4fcb6f0a619dbad220d043d2c9">type</a> = typename <a class="el" href="struct_engine_1_1replace__tagged.html">replace_tagged</a>&lt; T, DefaultTag, Args... &gt;::type</td></tr>
-<tr class="separator:a38e64c4fcb6f0a619dbad220d043d2c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a659a633662450fcc14c03e7a6c57f199"><td class="memTemplParams" colspan="2">template&lt;typename Tag , typename... Args&gt; </td></tr>
+<tr class="memitem:a659a633662450fcc14c03e7a6c57f199"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1replace.html#a659a633662450fcc14c03e7a6c57f199">tagged</a> = typename __Generic_impl__::replace_tagged&lt; T, Tag, Args... &gt;<a class="el" href="struct_engine_1_1replace.html#ad96c29c8c2a03d83e548f0032d23916b">::type</a></td></tr>
+<tr class="separator:a659a633662450fcc14c03e7a6c57f199"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad96c29c8c2a03d83e548f0032d23916b"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; </td></tr>
+<tr class="memitem:ad96c29c8c2a03d83e548f0032d23916b"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1replace.html#ad96c29c8c2a03d83e548f0032d23916b">type</a> = typename __Generic_impl__::replace_tagged&lt; T, DefaultTag, Args... &gt;::type</td></tr>
+<tr class="separator:ad96c29c8c2a03d83e548f0032d23916b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Typedef Documentation</h2>
-<a id="a38e64c4fcb6f0a619dbad220d043d2c9" name="a38e64c4fcb6f0a619dbad220d043d2c9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a38e64c4fcb6f0a619dbad220d043d2c9">&#9670;&#160;</a></span>type</h2>
+<a id="ad96c29c8c2a03d83e548f0032d23916b" name="ad96c29c8c2a03d83e548f0032d23916b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad96c29c8c2a03d83e548f0032d23916b">&#9670;&#160;</a></span>type</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -271,15 +268,15 @@ template&lt;typename T &gt; </div>
 template&lt;typename... Args&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="struct_engine_1_1replace.html">Engine::replace</a>&lt; T &gt;::type =  typename <a class="el" href="struct_engine_1_1replace__tagged.html">replace_tagged</a>&lt;T, DefaultTag, Args...&gt;::type</td>
+          <td class="memname">using <a class="el" href="struct_engine_1_1replace.html">Engine::replace</a>&lt; T &gt;::type =  typename __Generic_impl__::replace_tagged&lt;T, DefaultTag, Args...&gt;::type</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="ab1b15336a438d8d9ec0e1a5fe3d12bab" name="ab1b15336a438d8d9ec0e1a5fe3d12bab"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab1b15336a438d8d9ec0e1a5fe3d12bab">&#9670;&#160;</a></span>tagged</h2>
+<a id="a659a633662450fcc14c03e7a6c57f199" name="a659a633662450fcc14c03e7a6c57f199"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a659a633662450fcc14c03e7a6c57f199">&#9670;&#160;</a></span>tagged</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -289,25 +286,7 @@ template&lt;typename T &gt; </div>
 template&lt;typename Tag , typename... Args&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="struct_engine_1_1replace.html">Engine::replace</a>&lt; T &gt;::tagged =  typename <a class="el" href="struct_engine_1_1replace__tagged.html">replace_tagged</a>&lt;T, Tag, Args...&gt;<a class="el" href="struct_engine_1_1replace.html#a38e64c4fcb6f0a619dbad220d043d2c9">::type</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a250843b19955d399f009d5bdea154606" name="a250843b19955d399f009d5bdea154606"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a250843b19955d399f009d5bdea154606">&#9670;&#160;</a></span>pattern_tagged</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<div class="memtemplate">
-template&lt;template&lt; auto... &gt; typename Pattern, template&lt; auto... &gt; typename... Args&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">using <a class="el" href="struct_engine_1_1replace.html">Engine::replace</a>&lt; T &gt;::pattern_tagged =  typename <a class="el" href="struct_engine_1_1replace__pattern__tagged.html">replace_pattern_tagged</a>&lt;T, Pattern, Args...&gt;<a class="el" href="struct_engine_1_1replace.html#a38e64c4fcb6f0a619dbad220d043d2c9">::type</a></td>
+          <td class="memname">using <a class="el" href="struct_engine_1_1replace.html">Engine::replace</a>&lt; T &gt;::tagged =  typename __Generic_impl__::replace_tagged&lt;T, Tag, Args...&gt;<a class="el" href="struct_engine_1_1replace.html#ad96c29c8c2a03d83e548f0032d23916b">::type</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -320,7 +299,7 @@ template&lt;template&lt; auto... &gt; typename Pattern, template&lt; auto... &gt
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2026 23:14:06 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Fri Jun 5 2026 23:36:46 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

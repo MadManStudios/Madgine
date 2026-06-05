@@ -253,10 +253,10 @@ $(function() {
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a87ea3103bfa98d867a14f257b75198f8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_heap_allocator.html#a87ea3103bfa98d867a14f257b75198f8">DirectX12HeapAllocator</a> (<a class="el" href="struct_engine_1_1_render_1_1_direct_x12_descriptor_heap.html">DirectX12DescriptorHeap</a> &amp;descHeap)</td></tr>
 <tr class="separator:a87ea3103bfa98d867a14f257b75198f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeb26cd761cdddbc12f6729d5513dedba"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_block.html">Block</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_heap_allocator.html#aeb26cd761cdddbc12f6729d5513dedba">allocate</a> (size_t size, size_t alignment=1)</td></tr>
-<tr class="separator:aeb26cd761cdddbc12f6729d5513dedba"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad152ce736b18a85c44c6d8b171e4f08c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_heap_allocator.html#ad152ce736b18a85c44c6d8b171e4f08c">deallocate</a> (<a class="el" href="struct_engine_1_1_block.html">Block</a> block)</td></tr>
-<tr class="separator:ad152ce736b18a85c44c6d8b171e4f08c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad87262b5e72487359e61ff85f89d4fd1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_memory_1_1_block.html">Memory::Block</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_heap_allocator.html#ad87262b5e72487359e61ff85f89d4fd1">allocate</a> (size_t size, size_t alignment=1)</td></tr>
+<tr class="separator:ad87262b5e72487359e61ff85f89d4fd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:affb12bcfef6a5b860b8eee63b980e9d4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_heap_allocator.html#affb12bcfef6a5b860b8eee63b980e9d4">deallocate</a> (<a class="el" href="struct_engine_1_1_memory_1_1_block.html">Memory::Block</a> block)</td></tr>
+<tr class="separator:affb12bcfef6a5b860b8eee63b980e9d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a52df8cd28db85e1bbabfbbf1a59ba99c"><td class="memItemLeft" align="right" valign="top">D3D12_GPU_DESCRIPTOR_HANDLE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_heap_allocator.html#a52df8cd28db85e1bbabfbbf1a59ba99c">descriptorTable</a> () const</td></tr>
 <tr class="separator:a52df8cd28db85e1bbabfbbf1a59ba99c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa8393c0d9c02dc91067062cce66b258d"><td class="memItemLeft" align="right" valign="top">ID3D12Heap *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_heap_allocator.html#aa8393c0d9c02dc91067062cce66b258d">heap</a> (size_t index)</td></tr>
@@ -328,14 +328,14 @@ Static Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="aeb26cd761cdddbc12f6729d5513dedba" name="aeb26cd761cdddbc12f6729d5513dedba"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aeb26cd761cdddbc12f6729d5513dedba">&#9670;&#160;</a></span>allocate()</h2>
+<a id="ad87262b5e72487359e61ff85f89d4fd1" name="ad87262b5e72487359e61ff85f89d4fd1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad87262b5e72487359e61ff85f89d4fd1">&#9670;&#160;</a></span>allocate()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="struct_engine_1_1_block.html">Block</a> Engine::Render::DirectX12HeapAllocator::allocate </td>
+          <td class="memname"><a class="el" href="struct_engine_1_1_memory_1_1_block.html">Memory::Block</a> Engine::Render::DirectX12HeapAllocator::allocate </td>
           <td>(</td>
           <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>size</em>, </td>
@@ -356,8 +356,8 @@ Static Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="ad152ce736b18a85c44c6d8b171e4f08c" name="ad152ce736b18a85c44c6d8b171e4f08c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad152ce736b18a85c44c6d8b171e4f08c">&#9670;&#160;</a></span>deallocate()</h2>
+<a id="affb12bcfef6a5b860b8eee63b980e9d4" name="affb12bcfef6a5b860b8eee63b980e9d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#affb12bcfef6a5b860b8eee63b980e9d4">&#9670;&#160;</a></span>deallocate()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -365,7 +365,7 @@ Static Public Attributes</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Render::DirectX12HeapAllocator::deallocate </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_engine_1_1_block.html">Block</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_memory_1_1_block.html">Memory::Block</a>&#160;</td>
           <td class="paramname"><em>block</em></td><td>)</td>
           <td></td>
         </tr>
@@ -457,7 +457,7 @@ Static Public Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2026 23:14:08 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Fri Jun 5 2026 23:36:48 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

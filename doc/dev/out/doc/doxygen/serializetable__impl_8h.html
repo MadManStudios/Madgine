@@ -373,7 +373,7 @@ Functions</h2></td></tr>
 <div class="line">        };                                                                                                                        \</div>
 <div class="line">        START_STRUCT(Serialize::__serialize_impl__::FunctionTag, Idx)                                                             \</div>
 <div class="line">        {                                                                                                                         \</div>
-<div class="line">            <span class="keyword">using </span>Ty = <a class="code hl_enumvalue" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a5be4eda2709b93ac0ddb6366c913c002">T</a>;                                                                                                         \</div>
+<div class="line">            <span class="keyword">using </span>Ty = <a class="code hl_enumvalue" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a5428d0fe98f428e5c4ecbc58cb745d9b">T</a>;                                                                                                         \</div>
 <div class="line">            <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keyword">const</span> <span class="keywordtype">bool</span> base = <span class="keyword">true</span>;                                                                              \</div>
 <div class="line">            <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keyword">const</span> <span class="keywordtype">size_t</span> count = 0;                                                                              \</div>
 <div class="line">            <span class="keyword">constexpr</span> <span class="keyword">const</span> Serialize::SyncFunction *data()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <span class="keyword">nullptr</span>; }                                             \</div>
@@ -381,7 +381,7 @@ Functions</h2></td></tr>
 <div class="line">            <span class="keyword">static</span> <span class="keyword">constexpr</span> uint16_t getIndex();                                                                                 \</div>
 <div class="line">        };                                                                                                                        \</div>
 <div class="line">    }</div>
-<div class="ttc" id="anamespace_engine_1_1_input_1_1_key_html_ac2138c44352d486427576a0561382001a5be4eda2709b93ac0ddb6366c913c002"><div class="ttname"><a href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a5be4eda2709b93ac0ddb6366c913c002">Engine::Input::Key::T</a></div><div class="ttdeci">@ T</div><div class="ttdef"><b>Definition:</b> inputevents.h:65</div></div>
+<div class="ttc" id="anamespace_engine_1_1_platform_1_1_input_1_1_key_html_acc830e29a87e19a7d2f97672dab85b07a5428d0fe98f428e5c4ecbc58cb745d9b"><div class="ttname"><a href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a5428d0fe98f428e5c4ecbc58cb745d9b">Engine::Platform::Input::Key::T</a></div><div class="ttdeci">@ T</div><div class="ttdef"><b>Definition:</b> inputevents.h:66</div></div>
 <div class="ttc" id="anamespace_engine_html"><div class="ttname"><a href="namespace_engine.html">Engine</a></div><div class="ttdoc">Main namespace for the Madgine.</div><div class="ttdef"><b>Definition:</b> align.h:3</div></div>
 </div><!-- fragment -->
 </div>
@@ -561,7 +561,7 @@ Functions</h2></td></tr>
 <div class="line">            Serialize::Serializer mData = Ser;                                                      \</div>
 <div class="line">        };                                                                                          \</div>
 <div class="line">    }</div>
-<div class="ttc" id="alinestruct_8h_html_aa403e73e5efd940c1deb0a802ef9ed7a"><div class="ttname"><a href="linestruct_8h.html#aa403e73e5efd940c1deb0a802ef9ed7a">BASE_STRUCT</a></div><div class="ttdeci">#define BASE_STRUCT(Tag,...)</div><div class="ttdef"><b>Definition:</b> linestruct.h:28</div></div>
+<div class="ttc" id="alinestruct_8h_html_aa403e73e5efd940c1deb0a802ef9ed7a"><div class="ttname"><a href="linestruct_8h.html#aa403e73e5efd940c1deb0a802ef9ed7a">BASE_STRUCT</a></div><div class="ttdeci">#define BASE_STRUCT(Tag,...)</div><div class="ttdef"><b>Definition:</b> linestruct.h:30</div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -703,13 +703,13 @@ Functions</h2></td></tr>
 <div class="line">        <span class="keyword">namespace </span>Serialize {                                                                                         \</div>
 <div class="line">            <span class="keyword">namespace </span>__serialize_impl__ {                                                                            \</div>
 <div class="line">                <span class="keyword">template</span> &lt;&gt;                                                                                           \</div>
-<div class="line">                <span class="keyword">struct </span>SyncFunctionTable&lt;<a class="code hl_enumvalue" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a5be4eda2709b93ac0ddb6366c913c002">T</a>&gt; : <a class="code hl_define" href="linestruct_8h.html#a4ae633e4399b0687c9bdf030cbf5b2a2">GET_STRUCT</a>(::Engine::Serialize::__serialize_impl__::FunctionTag, Idx) { \</div>
+<div class="line">                <span class="keyword">struct </span>SyncFunctionTable&lt;<a class="code hl_enumvalue" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a5428d0fe98f428e5c4ecbc58cb745d9b">T</a>&gt; : <a class="code hl_define" href="linestruct_8h.html#a4ae633e4399b0687c9bdf030cbf5b2a2">GET_STRUCT</a>(::Engine::Serialize::__serialize_impl__::FunctionTag, Idx) { \</div>
 <div class="line">                };                                                                                                    \</div>
 <div class="line">            }                                                                                                         \</div>
 <div class="line">        }                                                                                                             \</div>
 <div class="line">    }                                                                                                                 \</div>
-<div class="line">    DLL_EXPORT_VARIABLE2(<span class="keyword">constexpr</span>, const ::Engine::Serialize::SerializeTable, ::, serializeTable, <a class="code hl_define" href="macros_8h.html#afa8624400132dca5f52f93deec70706b">SINGLE_ARG</a>({ #<a class="code hl_enumvalue" href="namespace_engine_1_1_input_1_1_key.html#ac2138c44352d486427576a0561382001a5be4eda2709b93ac0ddb6366c913c002">T</a>, ::Engine::type_holder&lt;T&gt;, ::Serialize_##T::baseType, ::Serialize_##T::readState, ::Serialize_##T::fields.data(), ::Serialize_##T::functions.data(), std::derived_from&lt;T, ::Engine::Serialize::TopLevelUnitBase&gt; }), T);</div>
-<div class="ttc" id="alinestruct_8h_html_a4ae633e4399b0687c9bdf030cbf5b2a2"><div class="ttname"><a href="linestruct_8h.html#a4ae633e4399b0687c9bdf030cbf5b2a2">GET_STRUCT</a></div><div class="ttdeci">#define GET_STRUCT(Tag,...)</div><div class="ttdef"><b>Definition:</b> linestruct.h:31</div></div>
+<div class="line">    DLL_EXPORT_VARIABLE2(<span class="keyword">constexpr</span>, const ::Engine::Serialize::SerializeTable, ::, serializeTable, <a class="code hl_define" href="macros_8h.html#afa8624400132dca5f52f93deec70706b">SINGLE_ARG</a>({ #<a class="code hl_enumvalue" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a5428d0fe98f428e5c4ecbc58cb745d9b">T</a>, ::Engine::type_holder&lt;T&gt;, ::Serialize_##T::baseType, ::Serialize_##T::readState, ::Serialize_##T::fields.data(), ::Serialize_##T::functions.data(), std::derived_from&lt;T, ::Engine::Serialize::TopLevelUnitBase&gt; }), T);</div>
+<div class="ttc" id="alinestruct_8h_html_a4ae633e4399b0687c9bdf030cbf5b2a2"><div class="ttname"><a href="linestruct_8h.html#a4ae633e4399b0687c9bdf030cbf5b2a2">GET_STRUCT</a></div><div class="ttdeci">#define GET_STRUCT(Tag,...)</div><div class="ttdef"><b>Definition:</b> linestruct.h:33</div></div>
 <div class="ttc" id="amacros_8h_html_afa8624400132dca5f52f93deec70706b"><div class="ttname"><a href="macros_8h.html#afa8624400132dca5f52f93deec70706b">SINGLE_ARG</a></div><div class="ttdeci">#define SINGLE_ARG(...)</div><div class="ttdef"><b>Definition:</b> macros.h:16</div></div>
 <div class="ttc" id="aserializetable__impl_8h_html_ad3279570e995d9467abf41e4f7c89f3d"><div class="ttname"><a href="serializetable__impl_8h.html#ad3279570e995d9467abf41e4f7c89f3d">SERIALIZETABLE_ENTRY_EX</a></div><div class="ttdeci">#define SERIALIZETABLE_ENTRY_EX(Idx, Ser)</div><div class="ttdef"><b>Definition:</b> serializetable_impl.h:334</div></div>
 </div><!-- fragment -->
@@ -933,7 +933,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed May 27 2026 23:14:05 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Fri Jun 5 2026 23:36:46 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

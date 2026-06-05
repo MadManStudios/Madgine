@@ -46,7 +46,7 @@ if (edges && edges.length) {
         </defs>
 
 <script type="text/javascript">
-var viewWidth = 511;
+var viewWidth = 504;
 var viewHeight = 268;
 var sectionId = 'dynsection-0';
 </script>
@@ -58,9 +58,9 @@ var sectionId = 'dynsection-0';
 <g id="node1" class="node">
 <title>Node1</title>
 <g id="a_node1"><a xlink:title=" ">
-<polygon fill="#999999" stroke="#666666" points="322,-174 191,-174 191,-144 322,-144 322,-174"/>
-<text text-anchor="start" x="199" y="-162" font-family="Helvetica,sans-Serif" font-size="10.00">Engine::Behavior::Behavior</text>
-<text text-anchor="middle" x="256.5" y="-151" font-family="Helvetica,sans-Serif" font-size="10.00">Receiver</text>
+<polygon fill="#999999" stroke="#666666" points="315,-174 184,-174 184,-144 315,-144 315,-174"/>
+<text text-anchor="start" x="192" y="-162" font-family="Helvetica,sans-Serif" font-size="10.00">Engine::Behavior::Behavior</text>
+<text text-anchor="middle" x="249.5" y="-151" font-family="Helvetica,sans-Serif" font-size="10.00">Receiver</text>
 </a>
 </g>
 </g>
@@ -68,123 +68,124 @@ var sectionId = 'dynsection-0';
 <g id="node3" class="node">
 <title>Node3</title>
 <g id="a_node3"><a xlink:href="struct_engine_1_1_audio_1_1_playback_state.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="#666666" points="502,-259.5 359,-259.5 359,-240.5 502,-240.5 502,-259.5"/>
-<text text-anchor="middle" x="430.5" y="-247.5" font-family="Helvetica,sans-Serif" font-size="10.00">Engine::Audio::PlaybackState</text>
+<polygon fill="white" stroke="#666666" points="495,-259.5 352,-259.5 352,-240.5 495,-240.5 495,-259.5"/>
+<text text-anchor="middle" x="423.5" y="-247.5" font-family="Helvetica,sans-Serif" font-size="10.00">Engine::Audio::PlaybackState</text>
 </a>
 </g>
 </g>
 <!-- Node1&#45;&gt;Node3 -->
 <g id="edge2" class="edge">
 <title>Node1&#45;&gt;Node3</title>
-<path fill="none" stroke="#63b8ff" d="M292.7,-180.97C311.14,-194.49 334.69,-211.01 358,-222 375.54,-230.27 397.27,-235.4 412.13,-240.06"/>
-<polygon fill="#63b8ff" stroke="#63b8ff" points="294.89,-178.24 284.77,-175.12 290.74,-183.87 294.89,-178.24"/>
+<path fill="none" stroke="#63b8ff" d="M285.7,-180.97C304.14,-194.49 327.69,-211.01 351,-222 368.54,-230.27 390.27,-235.4 405.13,-240.06"/>
+<polygon fill="#63b8ff" stroke="#63b8ff" points="287.89,-178.24 277.77,-175.12 283.74,-183.87 287.89,-178.24"/>
 </g>
 <!-- Node1&#45;&gt;Node3 -->
 <g id="edge3" class="edge">
 <title>Node1&#45;&gt;Node3</title>
-<path fill="none" stroke="#63b8ff" d="M276.04,-182.26C295.28,-200.76 326.86,-225.31 358,-240 358.23,-240.11 358.47,-240.22 358.7,-240.33"/>
-<polygon fill="#63b8ff" stroke="#63b8ff" points="278.7,-179.97 269.18,-175.31 273.72,-184.89 278.7,-179.97"/>
+<path fill="none" stroke="#63b8ff" d="M269.04,-182.26C288.28,-200.76 319.86,-225.31 351,-240 351.23,-240.11 351.47,-240.22 351.7,-240.33"/>
+<polygon fill="#63b8ff" stroke="#63b8ff" points="271.7,-179.97 262.18,-175.31 266.72,-184.89 271.7,-179.97"/>
 </g>
 <!-- Node4 -->
 <g id="node4" class="node">
 <title>Node4</title>
 <g id="a_node4"><a xlink:href="struct_engine_1_1_behavior_1_1_behavior_1_1state.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="#666666" points="496,-222 365,-222 365,-192 496,-192 496,-222"/>
-<text text-anchor="start" x="373" y="-210" font-family="Helvetica,sans-Serif" font-size="10.00">Engine::Behavior::Behavior</text>
-<text text-anchor="middle" x="430.5" y="-199" font-family="Helvetica,sans-Serif" font-size="10.00">::state</text>
+<polygon fill="white" stroke="#666666" points="489,-222 358,-222 358,-192 489,-192 489,-222"/>
+<text text-anchor="start" x="366" y="-210" font-family="Helvetica,sans-Serif" font-size="10.00">Engine::Behavior::Behavior</text>
+<text text-anchor="middle" x="423.5" y="-199" font-family="Helvetica,sans-Serif" font-size="10.00">::state</text>
 </a>
 </g>
 </g>
 <!-- Node1&#45;&gt;Node4 -->
 <g id="edge4" class="edge">
 <title>Node1&#45;&gt;Node4</title>
-<path fill="none" stroke="#63b8ff" d="M323.67,-177.46C340.37,-182.13 358.13,-187.08 374.24,-191.58"/>
-<polygon fill="#63b8ff" stroke="#63b8ff" points="324.9,-174.18 314.33,-174.86 323.02,-180.92 324.9,-174.18"/>
+<path fill="none" stroke="#63b8ff" d="M316.67,-177.46C333.37,-182.13 351.13,-187.08 367.24,-191.58"/>
+<polygon fill="#63b8ff" stroke="#63b8ff" points="317.9,-174.18 307.33,-174.86 316.02,-180.92 317.9,-174.18"/>
 </g>
 <!-- Node5 -->
 <g id="node5" class="node">
 <title>Node5</title>
 <g id="a_node5"><a xlink:href="struct_engine_1_1_behavior_1_1_node_graph_1_1_node_interpreter_state_base.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="#666666" points="502,-174 359,-174 359,-144 502,-144 502,-174"/>
-<text text-anchor="start" x="367" y="-162" font-family="Helvetica,sans-Serif" font-size="10.00">Engine::Behavior::NodeGraph</text>
-<text text-anchor="middle" x="430.5" y="-151" font-family="Helvetica,sans-Serif" font-size="10.00">::NodeInterpreterStateBase</text>
+<polygon fill="white" stroke="#666666" points="495,-174 352,-174 352,-144 495,-144 495,-174"/>
+<text text-anchor="start" x="360" y="-162" font-family="Helvetica,sans-Serif" font-size="10.00">Engine::Behavior::NodeGraph</text>
+<text text-anchor="middle" x="423.5" y="-151" font-family="Helvetica,sans-Serif" font-size="10.00">::NodeInterpreterStateBase</text>
 </a>
 </g>
 </g>
 <!-- Node1&#45;&gt;Node5 -->
 <g id="edge5" class="edge">
 <title>Node1&#45;&gt;Node5</title>
-<path fill="none" stroke="#63b8ff" d="M333.35,-159C341.73,-159 350.23,-159 358.55,-159"/>
-<polygon fill="#63b8ff" stroke="#63b8ff" points="333.55,-155.5 323.55,-159 333.55,-162.5 333.55,-155.5"/>
+<path fill="none" stroke="#63b8ff" d="M326.35,-159C334.73,-159 343.23,-159 351.55,-159"/>
+<polygon fill="#63b8ff" stroke="#63b8ff" points="326.55,-155.5 316.55,-159 326.55,-162.5 326.55,-155.5"/>
 </g>
 <!-- Node6 -->
 <g id="node6" class="node">
 <title>Node6</title>
 <g id="a_node6"><a xlink:href="struct_engine_1_1_behavior_1_1_python3_1_1_python3_behavior_state.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="#666666" points="494.5,-126 366.5,-126 366.5,-96 494.5,-96 494.5,-126"/>
-<text text-anchor="start" x="374.5" y="-114" font-family="Helvetica,sans-Serif" font-size="10.00">Engine::Behavior::Python3</text>
-<text text-anchor="middle" x="430.5" y="-103" font-family="Helvetica,sans-Serif" font-size="10.00">::Python3BehaviorState</text>
+<polygon fill="white" stroke="#666666" points="487.5,-126 359.5,-126 359.5,-96 487.5,-96 487.5,-126"/>
+<text text-anchor="start" x="367.5" y="-114" font-family="Helvetica,sans-Serif" font-size="10.00">Engine::Behavior::Python3</text>
+<text text-anchor="middle" x="423.5" y="-103" font-family="Helvetica,sans-Serif" font-size="10.00">::Python3BehaviorState</text>
 </a>
 </g>
 </g>
 <!-- Node1&#45;&gt;Node6 -->
 <g id="edge6" class="edge">
 <title>Node1&#45;&gt;Node6</title>
-<path fill="none" stroke="#63b8ff" d="M323.67,-140.54C340.37,-135.87 358.13,-130.92 374.24,-126.42"/>
-<polygon fill="#63b8ff" stroke="#63b8ff" points="323.02,-137.08 314.33,-143.14 324.9,-143.82 323.02,-137.08"/>
+<path fill="none" stroke="#63b8ff" d="M316.67,-140.54C333.37,-135.87 351.13,-130.92 367.24,-126.42"/>
+<polygon fill="#63b8ff" stroke="#63b8ff" points="316.02,-137.08 307.33,-143.14 317.9,-143.82 316.02,-137.08"/>
 </g>
 <!-- Node7 -->
 <g id="node7" class="node">
 <title>Node7</title>
 <g id="a_node7"><a xlink:href="struct_engine_1_1_scene_1_1_entity_1_1_animation_state.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="#666666" points="484,-78 377,-78 377,-48 484,-48 484,-78"/>
-<text text-anchor="start" x="385" y="-66" font-family="Helvetica,sans-Serif" font-size="10.00">Engine::Scene::Entity</text>
-<text text-anchor="middle" x="430.5" y="-55" font-family="Helvetica,sans-Serif" font-size="10.00">::AnimationState</text>
+<polygon fill="white" stroke="#666666" points="477,-78 370,-78 370,-48 477,-48 477,-78"/>
+<text text-anchor="start" x="378" y="-66" font-family="Helvetica,sans-Serif" font-size="10.00">Engine::Scene::Entity</text>
+<text text-anchor="middle" x="423.5" y="-55" font-family="Helvetica,sans-Serif" font-size="10.00">::AnimationState</text>
 </a>
 </g>
 </g>
 <!-- Node1&#45;&gt;Node7 -->
 <g id="edge7" class="edge">
 <title>Node1&#45;&gt;Node7</title>
-<path fill="none" stroke="#63b8ff" d="M284.19,-136.5C303.67,-120.96 331.23,-100.69 358,-87 364.18,-83.84 370.86,-80.96 377.58,-78.38"/>
-<polygon fill="#63b8ff" stroke="#63b8ff" points="282.05,-133.73 276.5,-142.75 286.47,-139.16 282.05,-133.73"/>
+<path fill="none" stroke="#63b8ff" d="M277.19,-136.5C296.67,-120.96 324.23,-100.69 351,-87 357.18,-83.84 363.86,-80.96 370.58,-78.38"/>
+<polygon fill="#63b8ff" stroke="#63b8ff" points="275.05,-133.73 269.5,-142.75 279.47,-139.16 275.05,-133.73"/>
 </g>
 <!-- Node8 -->
 <g id="node8" class="node">
 <title>Node8</title>
 <g id="a_node8"><a xlink:href="struct_engine_1_1_widgets_1_1_temp_widget_state.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="#666666" points="503,-30 358,-30 358,0 503,0 503,-30"/>
-<text text-anchor="start" x="366" y="-18" font-family="Helvetica,sans-Serif" font-size="10.00">Engine::Widgets::TempWidget</text>
-<text text-anchor="middle" x="430.5" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">State</text>
+<polygon fill="white" stroke="#666666" points="496,-30 351,-30 351,0 496,0 496,-30"/>
+<text text-anchor="start" x="359" y="-18" font-family="Helvetica,sans-Serif" font-size="10.00">Engine::Widgets::TempWidget</text>
+<text text-anchor="middle" x="423.5" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">State</text>
 </a>
 </g>
 </g>
 <!-- Node1&#45;&gt;Node8 -->
 <g id="edge8" class="edge">
 <title>Node1&#45;&gt;Node8</title>
-<path fill="none" stroke="#63b8ff" d="M272.27,-134.27C289.61,-107.24 320.78,-64.4 358,-39 362.76,-35.75 367.99,-32.91 373.4,-30.44"/>
-<polygon fill="#63b8ff" stroke="#63b8ff" points="269.46,-132.17 267.12,-142.5 275.39,-135.88 269.46,-132.17"/>
+<path fill="none" stroke="#63b8ff" d="M265.27,-134.27C282.61,-107.24 313.78,-64.4 351,-39 355.76,-35.75 360.99,-32.91 366.4,-30.44"/>
+<polygon fill="#63b8ff" stroke="#63b8ff" points="262.46,-132.17 260.12,-142.5 268.39,-135.88 262.46,-132.17"/>
 </g>
 <!-- Node2 -->
 <g id="node2" class="node">
 <title>Node2</title>
 <g id="a_node2"><a xlink:href="struct_engine_1_1_execution_1_1_virtual_receiver_base_ex.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="#666666" points="155,-201.5 0,-201.5 0,-116.5 155,-116.5 155,-201.5"/>
-<text text-anchor="start" x="8" y="-189.5" font-family="Helvetica,sans-Serif" font-size="10.00">Engine::Execution::</text>
-<text text-anchor="start" x="8" y="-178.5" font-family="Helvetica,sans-Serif" font-size="10.00">VirtualReceiverBaseEx</text>
-<text text-anchor="start" x="8" y="-167.5" font-family="Helvetica,sans-Serif" font-size="10.00">&lt; type_pack&lt; KeyValueError</text>
-<text text-anchor="start" x="8" y="-156.5" font-family="Helvetica,sans-Serif" font-size="10.00"> &gt;, type_pack&lt; ArgumentList</text>
-<text text-anchor="start" x="8" y="-145.5" font-family="Helvetica,sans-Serif" font-size="10.00"> &gt;, Execution::get_stop_token,</text>
-<text text-anchor="start" x="8" y="-134.5" font-family="Helvetica,sans-Serif" font-size="10.00"> Debug::get_debug_context, Log</text>
-<text text-anchor="middle" x="77.5" y="-123.5" font-family="Helvetica,sans-Serif" font-size="10.00">::get_log, get_named_d &gt;</text>
+<polygon fill="white" stroke="#666666" points="148,-207 0,-207 0,-111 148,-111 148,-207"/>
+<text text-anchor="start" x="8" y="-195" font-family="Helvetica,sans-Serif" font-size="10.00">Engine::Execution::</text>
+<text text-anchor="start" x="8" y="-184" font-family="Helvetica,sans-Serif" font-size="10.00">VirtualReceiverBaseEx</text>
+<text text-anchor="start" x="8" y="-173" font-family="Helvetica,sans-Serif" font-size="10.00">&lt; type_pack&lt; Reflect::</text>
+<text text-anchor="start" x="8" y="-162" font-family="Helvetica,sans-Serif" font-size="10.00">Error &gt;, type_pack&lt; Reflect</text>
+<text text-anchor="start" x="8" y="-151" font-family="Helvetica,sans-Serif" font-size="10.00">::ArgumentList &gt;, Execution</text>
+<text text-anchor="start" x="8" y="-140" font-family="Helvetica,sans-Serif" font-size="10.00">::get_stop_token, Debug::get</text>
+<text text-anchor="start" x="8" y="-129" font-family="Helvetica,sans-Serif" font-size="10.00">_debug_context, Platform::Log</text>
+<text text-anchor="middle" x="74" y="-118" font-family="Helvetica,sans-Serif" font-size="10.00">::get_log, get_named_d &gt;</text>
 </a>
 </g>
 </g>
 <!-- Node2&#45;&gt;Node1 -->
 <g id="edge1" class="edge">
 <title>Node2&#45;&gt;Node1</title>
-<path fill="none" stroke="#63b8ff" d="M166.72,-159C174.77,-159 182.82,-159 190.62,-159"/>
-<polygon fill="#63b8ff" stroke="#63b8ff" points="166.88,-155.5 156.88,-159 166.88,-162.5 166.88,-155.5"/>
+<path fill="none" stroke="#63b8ff" d="M159.69,-159C167.76,-159 175.85,-159 183.68,-159"/>
+<polygon fill="#63b8ff" stroke="#63b8ff" points="159.84,-155.5 149.84,-159 159.84,-162.5 159.84,-155.5"/>
 </g>
 </g>
 </svg>
