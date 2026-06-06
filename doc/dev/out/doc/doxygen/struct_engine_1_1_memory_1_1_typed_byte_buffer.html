@@ -268,10 +268,10 @@ requires (requires(T &amp;t) { __generic_impl__::ByteBufferSizeAccessor {}(t); _
 requires (requires(T &amp;t) { __generic_impl__::ByteBufferDataAccessor {}(t); })</td></tr>
 <tr class="memitem:a8e58435a660cea53aae6f50a505944e4"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_memory_1_1_typed_byte_buffer.html#a8e58435a660cea53aae6f50a505944e4">TypedByteBuffer</a> (T &amp;&amp;t, size_t size)</td></tr>
 <tr class="separator:a8e58435a660cea53aae6f50a505944e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a04790b8f045a900704fbcf20d124ecb3"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; <br />
-requires (!Pointer&lt;std::remove_reference_t&lt;T&gt;&gt;)</td></tr>
-<tr class="memitem:a04790b8f045a900704fbcf20d124ecb3"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_memory_1_1_typed_byte_buffer.html#a04790b8f045a900704fbcf20d124ecb3">TypedByteBuffer</a> (T &amp;&amp;t, size_t size, Data *data)</td></tr>
-<tr class="separator:a04790b8f045a900704fbcf20d124ecb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e36264b972a03cb4b85db9c6255da47"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; <br />
+requires (!Concepts::Pointer&lt;std::remove_reference_t&lt;T&gt;&gt;)</td></tr>
+<tr class="memitem:a1e36264b972a03cb4b85db9c6255da47"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_memory_1_1_typed_byte_buffer.html#a1e36264b972a03cb4b85db9c6255da47">TypedByteBuffer</a> (T &amp;&amp;t, size_t size, Data *data)</td></tr>
+<tr class="separator:a1e36264b972a03cb4b85db9c6255da47"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae8b8bc22ee4f741d1f8282e0b88dd16f"><td class="memItemLeft" align="right" valign="top">Data *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_memory_1_1_typed_byte_buffer.html#ae8b8bc22ee4f741d1f8282e0b88dd16f">begin</a> () const</td></tr>
 <tr class="separator:ae8b8bc22ee4f741d1f8282e0b88dd16f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a05993d0829a4f5fd3364733a3557693e"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
@@ -403,8 +403,8 @@ requires (requires(T &amp;t) { __generic_impl__::ByteBufferDataAccessor {}(t); }
 
 </div>
 </div>
-<a id="a04790b8f045a900704fbcf20d124ecb3" name="a04790b8f045a900704fbcf20d124ecb3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a04790b8f045a900704fbcf20d124ecb3">&#9670;&#160;</a></span>TypedByteBuffer() <span class="overload">[4/5]</span></h2>
+<a id="a1e36264b972a03cb4b85db9c6255da47" name="a1e36264b972a03cb4b85db9c6255da47"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1e36264b972a03cb4b85db9c6255da47">&#9670;&#160;</a></span>TypedByteBuffer() <span class="overload">[4/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -412,7 +412,7 @@ requires (requires(T &amp;t) { __generic_impl__::ByteBufferDataAccessor {}(t); }
 template&lt;typename Data &gt; </div>
 <div class="memtemplate">
 template&lt;typename T &gt; <br />
-requires (!Pointer&lt;std::remove_reference_t&lt;T&gt;&gt;)</div>
+requires (!Concepts::Pointer&lt;std::remove_reference_t&lt;T&gt;&gt;)</div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -720,7 +720,7 @@ template&lt;typename Data &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Jun 6 2026 19:10:38 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Sat Jun 6 2026 19:18:38 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

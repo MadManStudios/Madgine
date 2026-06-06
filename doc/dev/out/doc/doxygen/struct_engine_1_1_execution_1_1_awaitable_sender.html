@@ -264,10 +264,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a101a20cf153ef5b9822a4e7a29b60739"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a946d8f282d9b43882c8b4414ffbe4419"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_awaitable_sender.html#a946d8f282d9b43882c8b4414ffbe4419">await_suspend</a> (Handle handle)</td></tr>
 <tr class="separator:a946d8f282d9b43882c8b4414ffbe4419"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5be3e45c662c861b9b4ba906f75e4d48"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; <br />
-requires (InstanceOf&lt;Handle, std::coroutine_handle&gt;)</td></tr>
-<tr class="memitem:a5be3e45c662c861b9b4ba906f75e4d48"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_awaitable_sender.html#a5be3e45c662c861b9b4ba906f75e4d48">await_suspend</a> (std::coroutine_handle&lt; T &gt; handle)</td></tr>
-<tr class="separator:a5be3e45c662c861b9b4ba906f75e4d48"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd9662a693eb1118a655b84142e3af43"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; <br />
+requires (Concepts::InstanceOf&lt;Handle, std::coroutine_handle&gt;)</td></tr>
+<tr class="memitem:acd9662a693eb1118a655b84142e3af43"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_awaitable_sender.html#acd9662a693eb1118a655b84142e3af43">await_suspend</a> (std::coroutine_handle&lt; T &gt; handle)</td></tr>
+<tr class="separator:acd9662a693eb1118a655b84142e3af43"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a67835b95651c5d2b6df0932379be3952"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_awaitable_sender.html#a67835b95651c5d2b6df0932379be3952">set_done</a> ()</td></tr>
 <tr class="separator:a67835b95651c5d2b6df0932379be3952"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a23ecfa4b03ebce4b6af3499968bffc18"><td class="memTemplParams" colspan="2">template&lt;typename... R&gt; </td></tr>
@@ -410,8 +410,8 @@ template&lt;typename <a class="el" href="struct_engine_1_1_execution_1_1_sender.
 
 </div>
 </div>
-<a id="a5be3e45c662c861b9b4ba906f75e4d48" name="a5be3e45c662c861b9b4ba906f75e4d48"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5be3e45c662c861b9b4ba906f75e4d48">&#9670;&#160;</a></span>await_suspend() <span class="overload">[1/2]</span></h2>
+<a id="acd9662a693eb1118a655b84142e3af43" name="acd9662a693eb1118a655b84142e3af43"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acd9662a693eb1118a655b84142e3af43">&#9670;&#160;</a></span>await_suspend() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -419,7 +419,7 @@ template&lt;typename <a class="el" href="struct_engine_1_1_execution_1_1_sender.
 template&lt;typename <a class="el" href="struct_engine_1_1_execution_1_1_sender.html">Sender</a> , typename Context , typename Handle &gt; </div>
 <div class="memtemplate">
 template&lt;typename T &gt; <br />
-requires (InstanceOf&lt;Handle, std::coroutine_handle&gt;)</div>
+requires (Concepts::InstanceOf&lt;Handle, std::coroutine_handle&gt;)</div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -589,7 +589,7 @@ template&lt;typename... R&gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Jun 6 2026 19:10:37 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Sat Jun 6 2026 19:18:38 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

@@ -375,15 +375,15 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_primitive_reducer.html">PrimitiveReducer</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_primitive_reducer_3_01_enum_holder_01_4.html">PrimitiveReducer&lt; EnumHolder &gt;</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_primitive_reducer_3_01_enum_impl_3_01_t_01_4_01_4.html">PrimitiveReducer&lt; EnumImpl&lt; T &gt; &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_primitive_reducer_3_01_flags_3_01_t_01_4_01_4.html">PrimitiveReducer&lt; Flags&lt; T &gt; &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_primitive_reducer_3_01_flags_holder_01_4.html">PrimitiveReducer&lt; FlagsHolder &gt;</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_primitive_reducer_3_01_index_type_3_01_t_00_01invalid_01_4_01_4.html">PrimitiveReducer&lt; IndexType&lt; T, invalid &gt; &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_primitive_reducer_3_01_reflect_1_1_enum_01_4.html">PrimitiveReducer&lt; Reflect::Enum &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_primitive_reducer_3_01_reflect_1_1_flags_01_4.html">PrimitiveReducer&lt; Reflect::Flags &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_primitive_reducer_3_01_s_01_4.html">PrimitiveReducer&lt; S &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -667,18 +667,18 @@ Functions</h2></td></tr>
 <tr class="separator:ab83ee59b0adc80e6aa5f63ca252dc345"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac855840b66edac2534c84f32d246c783"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a> META_EXPORT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#ac855840b66edac2534c84f32d246c783">readState</a> (const <a class="el" href="struct_engine_1_1_serialize_1_1_serialize_table.html">SerializeTable</a> *table, <a class="el" href="classvoid.html">void</a> *unit, <a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a> in)</td></tr>
 <tr class="separator:ac855840b66edac2534c84f32d246c783"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4966bf14f6129040025f88abd782e66b"><td class="memTemplParams" colspan="2">template&lt;typename <a class="el" href="struct_engine_1_1_compound.html">Compound</a> , typename TargetCompound , typename... Configs, typename F &gt; <br />
-requires (!Reference&lt;F&gt; &amp;&amp; !PrimitiveType&lt;TargetCompound&gt;)</td></tr>
-<tr class="memitem:a4966bf14f6129040025f88abd782e66b"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#a4966bf14f6129040025f88abd782e66b">scanCompound</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html">FormattedSerializeStream</a> &amp;in, const char *name, F &amp;&amp;callback, size_t depth=0)</td></tr>
-<tr class="separator:a4966bf14f6129040025f88abd782e66b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaa8e5b391ef9853a0a8ca6010f6f3b03"><td class="memTemplParams" colspan="2">template&lt;typename <a class="el" href="struct_engine_1_1_compound.html">Compound</a> , typename Primitive , typename F &gt; <br />
-requires (!Reference&lt;F&gt; &amp;&amp; PrimitiveType&lt;Primitive&gt;)</td></tr>
-<tr class="memitem:aaa8e5b391ef9853a0a8ca6010f6f3b03"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#aaa8e5b391ef9853a0a8ca6010f6f3b03">scanPrimitive</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html">FormattedSerializeStream</a> &amp;in, const char *name, F &amp;&amp;callback, size_t depth=0)</td></tr>
-<tr class="separator:aaa8e5b391ef9853a0a8ca6010f6f3b03"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a44e6b54daa2320fcab07b1dd7d3b7f8d"><td class="memTemplParams" colspan="2">template&lt;typename Primitive , typename F , typename T &gt; <br />
-requires (!Reference&lt;F&gt; &amp;&amp; PrimitiveType&lt;Primitive&gt;)</td></tr>
-<tr class="memitem:a44e6b54daa2320fcab07b1dd7d3b7f8d"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#a44e6b54daa2320fcab07b1dd7d3b7f8d">scanPrimitive</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_primitive_holder.html">PrimitiveHolder</a>&lt; T &gt; holder, <a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html">FormattedSerializeStream</a> &amp;in, const char *name, F &amp;&amp;callback, size_t depth=0)</td></tr>
-<tr class="separator:a44e6b54daa2320fcab07b1dd7d3b7f8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acaaccb1e5d46a5998835d875e55ef29e"><td class="memTemplParams" colspan="2">template&lt;typename <a class="el" href="struct_engine_1_1_compound.html">Compound</a> , typename TargetCompound , typename... Configs, typename F &gt; <br />
+requires (!Concepts::Reference&lt;F&gt; &amp;&amp; !PrimitiveType&lt;TargetCompound&gt;)</td></tr>
+<tr class="memitem:acaaccb1e5d46a5998835d875e55ef29e"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#acaaccb1e5d46a5998835d875e55ef29e">scanCompound</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html">FormattedSerializeStream</a> &amp;in, const char *name, F &amp;&amp;callback, size_t depth=0)</td></tr>
+<tr class="separator:acaaccb1e5d46a5998835d875e55ef29e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01adaa0c376c7f6c445c0ed47bcec9ad"><td class="memTemplParams" colspan="2">template&lt;typename <a class="el" href="struct_engine_1_1_compound.html">Compound</a> , typename Primitive , typename F &gt; <br />
+requires (!Concepts::Reference&lt;F&gt; &amp;&amp; PrimitiveType&lt;Primitive&gt;)</td></tr>
+<tr class="memitem:a01adaa0c376c7f6c445c0ed47bcec9ad"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#a01adaa0c376c7f6c445c0ed47bcec9ad">scanPrimitive</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html">FormattedSerializeStream</a> &amp;in, const char *name, F &amp;&amp;callback, size_t depth=0)</td></tr>
+<tr class="separator:a01adaa0c376c7f6c445c0ed47bcec9ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a364b72b58efb0bfceace0a94365590c2"><td class="memTemplParams" colspan="2">template&lt;typename Primitive , typename F , typename T &gt; <br />
+requires (!Concepts::Reference&lt;F&gt; &amp;&amp; PrimitiveType&lt;Primitive&gt;)</td></tr>
+<tr class="memitem:a364b72b58efb0bfceace0a94365590c2"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#a364b72b58efb0bfceace0a94365590c2">scanPrimitive</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_primitive_holder.html">PrimitiveHolder</a>&lt; T &gt; holder, <a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html">FormattedSerializeStream</a> &amp;in, const char *name, F &amp;&amp;callback, size_t depth=0)</td></tr>
+<tr class="separator:a364b72b58efb0bfceace0a94365590c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aae7cc31d8623387ea7bbbd08a3f92ce1"><td class="memItemLeft" align="right" valign="top">StreamState&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#aae7cc31d8623387ea7bbbd08a3f92ce1">streamError</a> (std::ios::iostate state, std::ostringstream &amp;out)</td></tr>
 <tr class="separator:aae7cc31d8623387ea7bbbd08a3f92ce1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a59b585aba2827344680e72ea8a52c14d"><td class="memTemplParams" colspan="2">template&lt;typename F &gt; </td></tr>
@@ -697,60 +697,66 @@ requires (!Reference&lt;F&gt; &amp;&amp; PrimitiveType&lt;Primitive&gt;)</td></t
 <tr class="memitem:afe38b15c6a8871cdcf60066422230159"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:afe38b15c6a8871cdcf60066422230159"><td class="memTemplItemLeft" align="right" valign="top">T *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#afe38b15c6a8871cdcf60066422230159">unit_cast</a> (<a class="el" href="classvoid.html">void</a> *unit)</td></tr>
 <tr class="separator:afe38b15c6a8871cdcf60066422230159"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8d810467598ffad00a374c4c238ca479"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#a8d810467598ffad00a374c4c238ca479">visitSkipEnum</a> (const <a class="el" href="struct_engine_1_1_enum_meta_table.html">EnumMetaTable</a> *table, <a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a> in, const char *name)</td></tr>
+<tr class="memitem:a8d810467598ffad00a374c4c238ca479"><td class="memItemLeft" align="right" valign="top">META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#a8d810467598ffad00a374c4c238ca479">visitSkipEnum</a> (const <a class="el" href="struct_engine_1_1_enum_meta_table.html">EnumMetaTable</a> *table, <a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a> in, const char *name)</td></tr>
 <tr class="separator:a8d810467598ffad00a374c4c238ca479"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad4f8b85e3189fedc55d9e627c01406c8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#ad4f8b85e3189fedc55d9e627c01406c8">visitSkipFlags</a> (const <a class="el" href="struct_engine_1_1_enum_meta_table.html">EnumMetaTable</a> *table, <a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a> in, const char *name)</td></tr>
+<tr class="memitem:ad4f8b85e3189fedc55d9e627c01406c8"><td class="memItemLeft" align="right" valign="top">META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#ad4f8b85e3189fedc55d9e627c01406c8">visitSkipFlags</a> (const <a class="el" href="struct_engine_1_1_enum_meta_table.html">EnumMetaTable</a> *table, <a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a> in, const char *name)</td></tr>
 <tr class="separator:ad4f8b85e3189fedc55d9e627c01406c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae419b08e99903c86a3d4c4462f351e12"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:ae419b08e99903c86a3d4c4462f351e12"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#ae419b08e99903c86a3d4c4462f351e12">visitSkipPrimitive</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a> in, const char *name)</td></tr>
-<tr class="separator:ae419b08e99903c86a3d4c4462f351e12"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a21e6186c738e690b55e3747d5bee2b57"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:a21e6186c738e690b55e3747d5bee2b57"><td class="memTemplItemLeft" align="right" valign="top">META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#a21e6186c738e690b55e3747d5bee2b57">visitSkipPrimitive</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a> in, const char *name)</td></tr>
-<tr class="separator:a21e6186c738e690b55e3747d5bee2b57"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a371107607a358d93e0105ebfb3ab14bc"><td class="memItemLeft" align="right" valign="top">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#a371107607a358d93e0105ebfb3ab14bc">visitSkipPrimitive&lt; bool &gt;</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>, const char *)</td></tr>
-<tr class="separator:a371107607a358d93e0105ebfb3ab14bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aff5f38a06fadd8d00ae5125629dc2982"><td class="memItemLeft" align="right" valign="top">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#aff5f38a06fadd8d00ae5125629dc2982">visitSkipPrimitive&lt; float &gt;</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>, const char *)</td></tr>
-<tr class="separator:aff5f38a06fadd8d00ae5125629dc2982"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3ce320e2fc34a864afb4f9dc5e471940"><td class="memItemLeft" align="right" valign="top">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#a3ce320e2fc34a864afb4f9dc5e471940">visitSkipPrimitive&lt; int16_t &gt;</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>, const char *)</td></tr>
-<tr class="separator:a3ce320e2fc34a864afb4f9dc5e471940"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3671db858473c1046ca45776e3095984"><td class="memItemLeft" align="right" valign="top">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#a3671db858473c1046ca45776e3095984">visitSkipPrimitive&lt; int32_t &gt;</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>, const char *)</td></tr>
-<tr class="separator:a3671db858473c1046ca45776e3095984"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a96d3eac40e240f68fad5d0054f4b5e2b"><td class="memItemLeft" align="right" valign="top">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#a96d3eac40e240f68fad5d0054f4b5e2b">visitSkipPrimitive&lt; int64_t &gt;</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>, const char *)</td></tr>
-<tr class="separator:a96d3eac40e240f68fad5d0054f4b5e2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a84ccad8d3388ecbbbbc1aabd8d967cce"><td class="memItemLeft" align="right" valign="top">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#a84ccad8d3388ecbbbbc1aabd8d967cce">visitSkipPrimitive&lt; int8_t &gt;</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>, const char *)</td></tr>
-<tr class="separator:a84ccad8d3388ecbbbbc1aabd8d967cce"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8862fb7afde75bb2a8d10d8cde747348"><td class="memItemLeft" align="right" valign="top">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#a8862fb7afde75bb2a8d10d8cde747348">visitSkipPrimitive&lt; Math::Color3 &gt;</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>, const char *)</td></tr>
-<tr class="separator:a8862fb7afde75bb2a8d10d8cde747348"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad5e9a64f48ceab63626d2d8b36ae7bde"><td class="memItemLeft" align="right" valign="top">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#ad5e9a64f48ceab63626d2d8b36ae7bde">visitSkipPrimitive&lt; Math::Color4 &gt;</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>, const char *)</td></tr>
-<tr class="separator:ad5e9a64f48ceab63626d2d8b36ae7bde"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acf656ba86c547316eaa9c5c5a2903df1"><td class="memItemLeft" align="right" valign="top">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#acf656ba86c547316eaa9c5c5a2903df1">visitSkipPrimitive&lt; Math::Matrix3 &gt;</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>, const char *)</td></tr>
-<tr class="separator:acf656ba86c547316eaa9c5c5a2903df1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a45ade02eac60837231f713197dd8428c"><td class="memItemLeft" align="right" valign="top">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#a45ade02eac60837231f713197dd8428c">visitSkipPrimitive&lt; Math::Quaternion &gt;</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>, const char *)</td></tr>
-<tr class="separator:a45ade02eac60837231f713197dd8428c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab07e8afbff039110cb027f2f13725828"><td class="memItemLeft" align="right" valign="top">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#ab07e8afbff039110cb027f2f13725828">visitSkipPrimitive&lt; Math::Vector2 &gt;</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>, const char *)</td></tr>
-<tr class="separator:ab07e8afbff039110cb027f2f13725828"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a40a6e029e789dcbffee783404c5d6e30"><td class="memItemLeft" align="right" valign="top">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#a40a6e029e789dcbffee783404c5d6e30">visitSkipPrimitive&lt; Math::Vector2i &gt;</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>, const char *)</td></tr>
-<tr class="separator:a40a6e029e789dcbffee783404c5d6e30"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3d54be689c158f56a99fd761a8c1e4e7"><td class="memItemLeft" align="right" valign="top">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#a3d54be689c158f56a99fd761a8c1e4e7">visitSkipPrimitive&lt; Math::Vector3 &gt;</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>, const char *)</td></tr>
-<tr class="separator:a3d54be689c158f56a99fd761a8c1e4e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaa6ab1069ad9f90ce062d0eda80944aa"><td class="memItemLeft" align="right" valign="top">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#aaa6ab1069ad9f90ce062d0eda80944aa">visitSkipPrimitive&lt; Math::Vector4 &gt;</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>, const char *)</td></tr>
-<tr class="separator:aaa6ab1069ad9f90ce062d0eda80944aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6c5b7dc28775520b2b493f15c1a0e42a"><td class="memItemLeft" align="right" valign="top">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#a6c5b7dc28775520b2b493f15c1a0e42a">visitSkipPrimitive&lt; Memory::ByteBuffer &gt;</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>, const char *)</td></tr>
-<tr class="separator:a6c5b7dc28775520b2b493f15c1a0e42a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0c7a3d16f4edab89053a5fef2497e498"><td class="memItemLeft" align="right" valign="top">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#a0c7a3d16f4edab89053a5fef2497e498">visitSkipPrimitive&lt; SerializableDataPtr &gt;</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>, const char *)</td></tr>
-<tr class="separator:a0c7a3d16f4edab89053a5fef2497e498"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4cae3e67ea1d1a46ea2bc3f5a1cc0853"><td class="memItemLeft" align="right" valign="top">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#a4cae3e67ea1d1a46ea2bc3f5a1cc0853">visitSkipPrimitive&lt; SyncableUnitBase * &gt;</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>, const char *)</td></tr>
-<tr class="separator:a4cae3e67ea1d1a46ea2bc3f5a1cc0853"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a50356c0a1f5a0816a77b0a5be338ad8d"><td class="memItemLeft" align="right" valign="top">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#a50356c0a1f5a0816a77b0a5be338ad8d">visitSkipPrimitive&lt; uint16_t &gt;</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>, const char *)</td></tr>
-<tr class="separator:a50356c0a1f5a0816a77b0a5be338ad8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab877d8e7c69623188f3c02c2db7bc8ee"><td class="memItemLeft" align="right" valign="top">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#ab877d8e7c69623188f3c02c2db7bc8ee">visitSkipPrimitive&lt; uint32_t &gt;</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>, const char *)</td></tr>
-<tr class="separator:ab877d8e7c69623188f3c02c2db7bc8ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a11b7846f8144548f922113e8f27caf22"><td class="memItemLeft" align="right" valign="top">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#a11b7846f8144548f922113e8f27caf22">visitSkipPrimitive&lt; uint64_t &gt;</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>, const char *)</td></tr>
-<tr class="separator:a11b7846f8144548f922113e8f27caf22"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aac627eef75b6df4c128cfdbc765f3ddf"><td class="memItemLeft" align="right" valign="top">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#aac627eef75b6df4c128cfdbc765f3ddf">visitSkipPrimitive&lt; uint8_t &gt;</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>, const char *)</td></tr>
-<tr class="separator:aac627eef75b6df4c128cfdbc765f3ddf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1a0181878725d6d28b6063cea76e7c9b"><td class="memItemLeft" align="right" valign="top">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#a1a0181878725d6d28b6063cea76e7c9b">visitSkipPrimitive&lt; Void &gt;</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>, const char *)</td></tr>
-<tr class="separator:a1a0181878725d6d28b6063cea76e7c9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a997a0a538f185335b88076600409b323"><td class="memItemLeft" align="right" valign="top">template&lt;&gt; </td></tr>
+<tr class="memitem:a997a0a538f185335b88076600409b323"><td class="memTemplItemLeft" align="right" valign="top">META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#a997a0a538f185335b88076600409b323">visitSkipPrimitive</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_primitive_holder.html">PrimitiveHolder</a>&lt; EnumTag &gt; holder, <a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a> in, const char *name)</td></tr>
+<tr class="separator:a997a0a538f185335b88076600409b323"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada5c293a8c77784f803c774558593b4d"><td class="memItemLeft" align="right" valign="top">template&lt;&gt; </td></tr>
+<tr class="memitem:ada5c293a8c77784f803c774558593b4d"><td class="memTemplItemLeft" align="right" valign="top">META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#ada5c293a8c77784f803c774558593b4d">visitSkipPrimitive</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_primitive_holder.html">PrimitiveHolder</a>&lt; FlagsTag &gt; holder, <a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a> in, const char *name)</td></tr>
+<tr class="separator:ada5c293a8c77784f803c774558593b4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3728c2345ad852da94e9f1c356df2ecd"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a3728c2345ad852da94e9f1c356df2ecd"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#a3728c2345ad852da94e9f1c356df2ecd">visitSkipPrimitive</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_primitive_holder.html">PrimitiveHolder</a>&lt; T &gt;, <a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a> in, const char *name)</td></tr>
+<tr class="separator:a3728c2345ad852da94e9f1c356df2ecd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a392b0e4a1efab29facb2981777c1f2ac"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a392b0e4a1efab29facb2981777c1f2ac"><td class="memTemplItemLeft" align="right" valign="top">META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#a392b0e4a1efab29facb2981777c1f2ac">visitSkipPrimitive</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_primitive_holder.html">PrimitiveHolder</a>&lt; T &gt;, <a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a> in, const char *name)</td></tr>
+<tr class="separator:a392b0e4a1efab29facb2981777c1f2ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ce606dcfb8c71de53f8dc0eb195da47"><td class="memItemLeft" align="right" valign="top">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#a9ce606dcfb8c71de53f8dc0eb195da47">visitSkipPrimitive&lt; bool &gt;</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_primitive_holder.html">PrimitiveHolder</a>&lt; bool &gt;, <a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>, const char *)</td></tr>
+<tr class="separator:a9ce606dcfb8c71de53f8dc0eb195da47"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a843952913936ec276123e8a9f838a647"><td class="memItemLeft" align="right" valign="top">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#a843952913936ec276123e8a9f838a647">visitSkipPrimitive&lt; float &gt;</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_primitive_holder.html">PrimitiveHolder</a>&lt; float &gt;, <a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>, const char *)</td></tr>
+<tr class="separator:a843952913936ec276123e8a9f838a647"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d86ba0b62d1eca16650181bc42d978c"><td class="memItemLeft" align="right" valign="top">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#a0d86ba0b62d1eca16650181bc42d978c">visitSkipPrimitive&lt; int16_t &gt;</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_primitive_holder.html">PrimitiveHolder</a>&lt; int16_t &gt;, <a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>, const char *)</td></tr>
+<tr class="separator:a0d86ba0b62d1eca16650181bc42d978c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f7dd867f5817478d19e14c34d1d7bfa"><td class="memItemLeft" align="right" valign="top">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#a1f7dd867f5817478d19e14c34d1d7bfa">visitSkipPrimitive&lt; int32_t &gt;</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_primitive_holder.html">PrimitiveHolder</a>&lt; int32_t &gt;, <a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>, const char *)</td></tr>
+<tr class="separator:a1f7dd867f5817478d19e14c34d1d7bfa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab59dbacb1031d41efe803b99a3a0dc92"><td class="memItemLeft" align="right" valign="top">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#ab59dbacb1031d41efe803b99a3a0dc92">visitSkipPrimitive&lt; int64_t &gt;</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_primitive_holder.html">PrimitiveHolder</a>&lt; int64_t &gt;, <a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>, const char *)</td></tr>
+<tr class="separator:ab59dbacb1031d41efe803b99a3a0dc92"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae1d534bbeb059e20b57c04fdc6a6af9c"><td class="memItemLeft" align="right" valign="top">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#ae1d534bbeb059e20b57c04fdc6a6af9c">visitSkipPrimitive&lt; int8_t &gt;</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_primitive_holder.html">PrimitiveHolder</a>&lt; int8_t &gt;, <a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>, const char *)</td></tr>
+<tr class="separator:ae1d534bbeb059e20b57c04fdc6a6af9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a51245e1e397cbe253f8680df7b978f2c"><td class="memItemLeft" align="right" valign="top">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#a51245e1e397cbe253f8680df7b978f2c">visitSkipPrimitive&lt; Math::Color3 &gt;</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_primitive_holder.html">PrimitiveHolder</a>&lt; <a class="el" href="struct_engine_1_1_math_1_1_color3.html">Math::Color3</a> &gt;, <a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>, const char *)</td></tr>
+<tr class="separator:a51245e1e397cbe253f8680df7b978f2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b8d50af64608cfb3f37900c2aeca6a8"><td class="memItemLeft" align="right" valign="top">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#a0b8d50af64608cfb3f37900c2aeca6a8">visitSkipPrimitive&lt; Math::Color4 &gt;</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_primitive_holder.html">PrimitiveHolder</a>&lt; <a class="el" href="struct_engine_1_1_math_1_1_color4.html">Math::Color4</a> &gt;, <a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>, const char *)</td></tr>
+<tr class="separator:a0b8d50af64608cfb3f37900c2aeca6a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b0e616675b0414ec2239ee3d34a8c20"><td class="memItemLeft" align="right" valign="top">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#a5b0e616675b0414ec2239ee3d34a8c20">visitSkipPrimitive&lt; Math::Matrix3 &gt;</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_primitive_holder.html">PrimitiveHolder</a>&lt; <a class="el" href="struct_engine_1_1_math_1_1_matrix3.html">Math::Matrix3</a> &gt;, <a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>, const char *)</td></tr>
+<tr class="separator:a5b0e616675b0414ec2239ee3d34a8c20"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c763f744e821550666583314cd132c9"><td class="memItemLeft" align="right" valign="top">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#a0c763f744e821550666583314cd132c9">visitSkipPrimitive&lt; Math::Quaternion &gt;</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_primitive_holder.html">PrimitiveHolder</a>&lt; <a class="el" href="struct_engine_1_1_math_1_1_quaternion.html">Math::Quaternion</a> &gt;, <a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>, const char *)</td></tr>
+<tr class="separator:a0c763f744e821550666583314cd132c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad1c26f0b8ccb903573d2334e0e15cda"><td class="memItemLeft" align="right" valign="top">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#aad1c26f0b8ccb903573d2334e0e15cda">visitSkipPrimitive&lt; Math::Vector2 &gt;</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_primitive_holder.html">PrimitiveHolder</a>&lt; <a class="el" href="struct_engine_1_1_math_1_1_vector2.html">Math::Vector2</a> &gt;, <a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>, const char *)</td></tr>
+<tr class="separator:aad1c26f0b8ccb903573d2334e0e15cda"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a06f1a0d19f312d65f1808d8bcb388b39"><td class="memItemLeft" align="right" valign="top">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#a06f1a0d19f312d65f1808d8bcb388b39">visitSkipPrimitive&lt; Math::Vector2i &gt;</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_primitive_holder.html">PrimitiveHolder</a>&lt; <a class="el" href="struct_engine_1_1_math_1_1_vector2i.html">Math::Vector2i</a> &gt;, <a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>, const char *)</td></tr>
+<tr class="separator:a06f1a0d19f312d65f1808d8bcb388b39"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed193027a976fac41ea8c834768aa4fb"><td class="memItemLeft" align="right" valign="top">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#aed193027a976fac41ea8c834768aa4fb">visitSkipPrimitive&lt; Math::Vector3 &gt;</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_primitive_holder.html">PrimitiveHolder</a>&lt; <a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Math::Vector3</a> &gt;, <a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>, const char *)</td></tr>
+<tr class="separator:aed193027a976fac41ea8c834768aa4fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ad2cb2ad55c01ec631fa1b0995f63b2"><td class="memItemLeft" align="right" valign="top">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#a6ad2cb2ad55c01ec631fa1b0995f63b2">visitSkipPrimitive&lt; Math::Vector4 &gt;</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_primitive_holder.html">PrimitiveHolder</a>&lt; <a class="el" href="struct_engine_1_1_math_1_1_vector4.html">Math::Vector4</a> &gt;, <a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>, const char *)</td></tr>
+<tr class="separator:a6ad2cb2ad55c01ec631fa1b0995f63b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad247beb34347442367a82b791ee06493"><td class="memItemLeft" align="right" valign="top">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#ad247beb34347442367a82b791ee06493">visitSkipPrimitive&lt; Memory::ByteBuffer &gt;</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_primitive_holder.html">PrimitiveHolder</a>&lt; <a class="el" href="namespace_engine_1_1_memory.html#a38c77c0ee95b21d49869c266e211de78">Memory::ByteBuffer</a> &gt;, <a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>, const char *)</td></tr>
+<tr class="separator:ad247beb34347442367a82b791ee06493"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f4f121d13944974398486d3848a7594"><td class="memItemLeft" align="right" valign="top">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#a7f4f121d13944974398486d3848a7594">visitSkipPrimitive&lt; SerializableDataPtr &gt;</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_primitive_holder.html">PrimitiveHolder</a>&lt; <a class="el" href="struct_engine_1_1_serialize_1_1_serializable_data_ptr.html">SerializableDataPtr</a> &gt;, <a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>, const char *)</td></tr>
+<tr class="separator:a7f4f121d13944974398486d3848a7594"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5df924e8237f4583aee06fb603652383"><td class="memItemLeft" align="right" valign="top">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#a5df924e8237f4583aee06fb603652383">visitSkipPrimitive&lt; SyncableUnitBase * &gt;</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_primitive_holder.html">PrimitiveHolder</a>&lt; <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html">SyncableUnitBase</a> * &gt;, <a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>, const char *)</td></tr>
+<tr class="separator:a5df924e8237f4583aee06fb603652383"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae7931b8733ac7b3c05849a0408a959c8"><td class="memItemLeft" align="right" valign="top">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#ae7931b8733ac7b3c05849a0408a959c8">visitSkipPrimitive&lt; uint16_t &gt;</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_primitive_holder.html">PrimitiveHolder</a>&lt; uint16_t &gt;, <a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>, const char *)</td></tr>
+<tr class="separator:ae7931b8733ac7b3c05849a0408a959c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a889a961533db0cf3e4958fa8685dd90e"><td class="memItemLeft" align="right" valign="top">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#a889a961533db0cf3e4958fa8685dd90e">visitSkipPrimitive&lt; uint32_t &gt;</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_primitive_holder.html">PrimitiveHolder</a>&lt; uint32_t &gt;, <a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>, const char *)</td></tr>
+<tr class="separator:a889a961533db0cf3e4958fa8685dd90e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c767396f0a2a2d09d02de799f7af8fb"><td class="memItemLeft" align="right" valign="top">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#a2c767396f0a2a2d09d02de799f7af8fb">visitSkipPrimitive&lt; uint64_t &gt;</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_primitive_holder.html">PrimitiveHolder</a>&lt; uint64_t &gt;, <a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>, const char *)</td></tr>
+<tr class="separator:a2c767396f0a2a2d09d02de799f7af8fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace7b25e401318263f9ebb93111c5d261"><td class="memItemLeft" align="right" valign="top">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#ace7b25e401318263f9ebb93111c5d261">visitSkipPrimitive&lt; uint8_t &gt;</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_primitive_holder.html">PrimitiveHolder</a>&lt; <a class="el" href="classuint8__t.html">uint8_t</a> &gt;, <a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>, const char *)</td></tr>
+<tr class="separator:ace7b25e401318263f9ebb93111c5d261"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a890a052387183fa9c3be20b00b23294c"><td class="memItemLeft" align="right" valign="top">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#a890a052387183fa9c3be20b00b23294c">visitSkipPrimitive&lt; Void &gt;</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_primitive_holder.html">PrimitiveHolder</a>&lt; <a class="el" href="struct_engine_1_1_void.html">Void</a> &gt;, <a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>, const char *)</td></tr>
+<tr class="separator:a890a052387183fa9c3be20b00b23294c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ade3b2b5dda91683e50026073cb95bdf4"><td class="memTemplParams" colspan="2">template&lt;typename T , typename... Configs&gt; </td></tr>
 <tr class="memitem:ade3b2b5dda91683e50026073cb95bdf4"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#ade3b2b5dda91683e50026073cb95bdf4">visitStream</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a> in, const char *name, const <a class="el" href="struct_engine_1_1_serialize_1_1_stream_visitor.html">StreamVisitor</a> &amp;visitor, size_t depth=0)</td></tr>
 <tr class="separator:ade3b2b5dda91683e50026073cb95bdf4"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -2585,14 +2591,14 @@ template&lt;typename... Configs, typename T &gt; </div>
 
 </div>
 </div>
-<a id="aaa8e5b391ef9853a0a8ca6010f6f3b03" name="aaa8e5b391ef9853a0a8ca6010f6f3b03"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaa8e5b391ef9853a0a8ca6010f6f3b03">&#9670;&#160;</a></span>scanPrimitive() <span class="overload">[1/2]</span></h2>
+<a id="a01adaa0c376c7f6c445c0ed47bcec9ad" name="a01adaa0c376c7f6c445c0ed47bcec9ad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a01adaa0c376c7f6c445c0ed47bcec9ad">&#9670;&#160;</a></span>scanPrimitive() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename <a class="el" href="struct_engine_1_1_compound.html">Compound</a> , typename Primitive , typename F &gt; <br />
-requires (!Reference&lt;F&gt; &amp;&amp; PrimitiveType&lt;Primitive&gt;)</div>
+requires (!Concepts::Reference&lt;F&gt; &amp;&amp; PrimitiveType&lt;Primitive&gt;)</div>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a> Engine::Serialize::scanPrimitive </td>
@@ -2628,14 +2634,14 @@ requires (!Reference&lt;F&gt; &amp;&amp; PrimitiveType&lt;Primitive&gt;)</div>
 
 </div>
 </div>
-<a id="a44e6b54daa2320fcab07b1dd7d3b7f8d" name="a44e6b54daa2320fcab07b1dd7d3b7f8d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a44e6b54daa2320fcab07b1dd7d3b7f8d">&#9670;&#160;</a></span>scanPrimitive() <span class="overload">[2/2]</span></h2>
+<a id="a364b72b58efb0bfceace0a94365590c2" name="a364b72b58efb0bfceace0a94365590c2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a364b72b58efb0bfceace0a94365590c2">&#9670;&#160;</a></span>scanPrimitive() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename Primitive , typename F , typename T &gt; <br />
-requires (!Reference&lt;F&gt; &amp;&amp; PrimitiveType&lt;Primitive&gt;)</div>
+requires (!Concepts::Reference&lt;F&gt; &amp;&amp; PrimitiveType&lt;Primitive&gt;)</div>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a> Engine::Serialize::scanPrimitive </td>
@@ -2677,14 +2683,14 @@ requires (!Reference&lt;F&gt; &amp;&amp; PrimitiveType&lt;Primitive&gt;)</div>
 
 </div>
 </div>
-<a id="a4966bf14f6129040025f88abd782e66b" name="a4966bf14f6129040025f88abd782e66b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4966bf14f6129040025f88abd782e66b">&#9670;&#160;</a></span>scanCompound()</h2>
+<a id="acaaccb1e5d46a5998835d875e55ef29e" name="acaaccb1e5d46a5998835d875e55ef29e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acaaccb1e5d46a5998835d875e55ef29e">&#9670;&#160;</a></span>scanCompound()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename <a class="el" href="struct_engine_1_1_compound.html">Compound</a> , typename TargetCompound , typename... Configs, typename F &gt; <br />
-requires (!Reference&lt;F&gt; &amp;&amp; !PrimitiveType&lt;TargetCompound&gt;)</div>
+requires (!Concepts::Reference&lt;F&gt; &amp;&amp; !PrimitiveType&lt;TargetCompound&gt;)</div>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a> Engine::Serialize::scanCompound </td>
@@ -2832,8 +2838,8 @@ requires (!Reference&lt;F&gt; &amp;&amp; !PrimitiveType&lt;TargetCompound&gt;)</
 
 </div>
 </div>
-<a id="ae419b08e99903c86a3d4c4462f351e12" name="ae419b08e99903c86a3d4c4462f351e12"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae419b08e99903c86a3d4c4462f351e12">&#9670;&#160;</a></span>visitSkipPrimitive() <span class="overload">[1/2]</span></h2>
+<a id="a3728c2345ad852da94e9f1c356df2ecd" name="a3728c2345ad852da94e9f1c356df2ecd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3728c2345ad852da94e9f1c356df2ecd">&#9670;&#160;</a></span>visitSkipPrimitive() <span class="overload">[1/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2843,36 +2849,8 @@ template&lt;typename T &gt; </div>
         <tr>
           <td class="memname"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a> Engine::Serialize::visitSkipPrimitive </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>&#160;</td>
-          <td class="paramname"><em>in</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>name</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a8d810467598ffad00a374c4c238ca479" name="a8d810467598ffad00a374c4c238ca479"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8d810467598ffad00a374c4c238ca479">&#9670;&#160;</a></span>visitSkipEnum()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a> Engine::Serialize::visitSkipEnum </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="struct_engine_1_1_enum_meta_table.html">EnumMetaTable</a> *&#160;</td>
-          <td class="paramname"><em>table</em>, </td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_primitive_holder.html">PrimitiveHolder</a>&lt; T &gt;&#160;</td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -2896,17 +2874,55 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="ad4f8b85e3189fedc55d9e627c01406c8" name="ad4f8b85e3189fedc55d9e627c01406c8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad4f8b85e3189fedc55d9e627c01406c8">&#9670;&#160;</a></span>visitSkipFlags()</h2>
+<a id="a997a0a538f185335b88076600409b323" name="a997a0a538f185335b88076600409b323"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a997a0a538f185335b88076600409b323">&#9670;&#160;</a></span>visitSkipPrimitive() <span class="overload">[2/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a> Engine::Serialize::visitSkipFlags </td>
+          <td class="memname">META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a> Engine::Serialize::visitSkipPrimitive </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="struct_engine_1_1_enum_meta_table.html">EnumMetaTable</a> *&#160;</td>
-          <td class="paramname"><em>table</em>, </td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_primitive_holder.html">PrimitiveHolder</a>&lt; EnumTag &gt;&#160;</td>
+          <td class="paramname"><em>holder</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>&#160;</td>
+          <td class="paramname"><em>in</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>name</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ada5c293a8c77784f803c774558593b4d" name="ada5c293a8c77784f803c774558593b4d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada5c293a8c77784f803c774558593b4d">&#9670;&#160;</a></span>visitSkipPrimitive() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a> Engine::Serialize::visitSkipPrimitive </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_primitive_holder.html">PrimitiveHolder</a>&lt; FlagsTag &gt;&#160;</td>
+          <td class="paramname"><em>holder</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -2976,15 +2992,21 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="a371107607a358d93e0105ebfb3ab14bc" name="a371107607a358d93e0105ebfb3ab14bc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a371107607a358d93e0105ebfb3ab14bc">&#9670;&#160;</a></span>visitSkipPrimitive&lt; bool &gt;()</h2>
+<a id="a9ce606dcfb8c71de53f8dc0eb195da47" name="a9ce606dcfb8c71de53f8dc0eb195da47"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9ce606dcfb8c71de53f8dc0eb195da47">&#9670;&#160;</a></span>visitSkipPrimitive&lt; bool &gt;()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a> <a class="el" href="namespace_engine_1_1_serialize.html#ae419b08e99903c86a3d4c4462f351e12">Engine::Serialize::visitSkipPrimitive</a>&lt; bool &gt; </td>
+          <td class="memname">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a> <a class="el" href="namespace_engine_1_1_serialize.html#a3728c2345ad852da94e9f1c356df2ecd">Engine::Serialize::visitSkipPrimitive</a>&lt; bool &gt; </td>
           <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_primitive_holder.html">PrimitiveHolder</a>&lt; bool &gt;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>&#160;</td>
           <td class="paramname">, </td>
         </tr>
@@ -3004,15 +3026,21 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="aac627eef75b6df4c128cfdbc765f3ddf" name="aac627eef75b6df4c128cfdbc765f3ddf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aac627eef75b6df4c128cfdbc765f3ddf">&#9670;&#160;</a></span>visitSkipPrimitive&lt; uint8_t &gt;()</h2>
+<a id="ace7b25e401318263f9ebb93111c5d261" name="ace7b25e401318263f9ebb93111c5d261"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ace7b25e401318263f9ebb93111c5d261">&#9670;&#160;</a></span>visitSkipPrimitive&lt; uint8_t &gt;()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a> <a class="el" href="namespace_engine_1_1_serialize.html#ae419b08e99903c86a3d4c4462f351e12">Engine::Serialize::visitSkipPrimitive</a>&lt; <a class="el" href="classuint8__t.html">uint8_t</a> &gt; </td>
+          <td class="memname">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a> <a class="el" href="namespace_engine_1_1_serialize.html#a3728c2345ad852da94e9f1c356df2ecd">Engine::Serialize::visitSkipPrimitive</a>&lt; <a class="el" href="classuint8__t.html">uint8_t</a> &gt; </td>
           <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_primitive_holder.html">PrimitiveHolder</a>&lt; <a class="el" href="classuint8__t.html">uint8_t</a> &gt;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>&#160;</td>
           <td class="paramname">, </td>
         </tr>
@@ -3032,15 +3060,21 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="a84ccad8d3388ecbbbbc1aabd8d967cce" name="a84ccad8d3388ecbbbbc1aabd8d967cce"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a84ccad8d3388ecbbbbc1aabd8d967cce">&#9670;&#160;</a></span>visitSkipPrimitive&lt; int8_t &gt;()</h2>
+<a id="ae1d534bbeb059e20b57c04fdc6a6af9c" name="ae1d534bbeb059e20b57c04fdc6a6af9c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae1d534bbeb059e20b57c04fdc6a6af9c">&#9670;&#160;</a></span>visitSkipPrimitive&lt; int8_t &gt;()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a> <a class="el" href="namespace_engine_1_1_serialize.html#ae419b08e99903c86a3d4c4462f351e12">Engine::Serialize::visitSkipPrimitive</a>&lt; int8_t &gt; </td>
+          <td class="memname">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a> <a class="el" href="namespace_engine_1_1_serialize.html#a3728c2345ad852da94e9f1c356df2ecd">Engine::Serialize::visitSkipPrimitive</a>&lt; int8_t &gt; </td>
           <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_primitive_holder.html">PrimitiveHolder</a>&lt; int8_t &gt;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>&#160;</td>
           <td class="paramname">, </td>
         </tr>
@@ -3060,15 +3094,21 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="a50356c0a1f5a0816a77b0a5be338ad8d" name="a50356c0a1f5a0816a77b0a5be338ad8d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a50356c0a1f5a0816a77b0a5be338ad8d">&#9670;&#160;</a></span>visitSkipPrimitive&lt; uint16_t &gt;()</h2>
+<a id="ae7931b8733ac7b3c05849a0408a959c8" name="ae7931b8733ac7b3c05849a0408a959c8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae7931b8733ac7b3c05849a0408a959c8">&#9670;&#160;</a></span>visitSkipPrimitive&lt; uint16_t &gt;()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a> <a class="el" href="namespace_engine_1_1_serialize.html#ae419b08e99903c86a3d4c4462f351e12">Engine::Serialize::visitSkipPrimitive</a>&lt; uint16_t &gt; </td>
+          <td class="memname">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a> <a class="el" href="namespace_engine_1_1_serialize.html#a3728c2345ad852da94e9f1c356df2ecd">Engine::Serialize::visitSkipPrimitive</a>&lt; uint16_t &gt; </td>
           <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_primitive_holder.html">PrimitiveHolder</a>&lt; uint16_t &gt;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>&#160;</td>
           <td class="paramname">, </td>
         </tr>
@@ -3088,15 +3128,21 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="a3ce320e2fc34a864afb4f9dc5e471940" name="a3ce320e2fc34a864afb4f9dc5e471940"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3ce320e2fc34a864afb4f9dc5e471940">&#9670;&#160;</a></span>visitSkipPrimitive&lt; int16_t &gt;()</h2>
+<a id="a0d86ba0b62d1eca16650181bc42d978c" name="a0d86ba0b62d1eca16650181bc42d978c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d86ba0b62d1eca16650181bc42d978c">&#9670;&#160;</a></span>visitSkipPrimitive&lt; int16_t &gt;()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a> <a class="el" href="namespace_engine_1_1_serialize.html#ae419b08e99903c86a3d4c4462f351e12">Engine::Serialize::visitSkipPrimitive</a>&lt; int16_t &gt; </td>
+          <td class="memname">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a> <a class="el" href="namespace_engine_1_1_serialize.html#a3728c2345ad852da94e9f1c356df2ecd">Engine::Serialize::visitSkipPrimitive</a>&lt; int16_t &gt; </td>
           <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_primitive_holder.html">PrimitiveHolder</a>&lt; int16_t &gt;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>&#160;</td>
           <td class="paramname">, </td>
         </tr>
@@ -3116,15 +3162,21 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="ab877d8e7c69623188f3c02c2db7bc8ee" name="ab877d8e7c69623188f3c02c2db7bc8ee"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab877d8e7c69623188f3c02c2db7bc8ee">&#9670;&#160;</a></span>visitSkipPrimitive&lt; uint32_t &gt;()</h2>
+<a id="a889a961533db0cf3e4958fa8685dd90e" name="a889a961533db0cf3e4958fa8685dd90e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a889a961533db0cf3e4958fa8685dd90e">&#9670;&#160;</a></span>visitSkipPrimitive&lt; uint32_t &gt;()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a> <a class="el" href="namespace_engine_1_1_serialize.html#ae419b08e99903c86a3d4c4462f351e12">Engine::Serialize::visitSkipPrimitive</a>&lt; uint32_t &gt; </td>
+          <td class="memname">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a> <a class="el" href="namespace_engine_1_1_serialize.html#a3728c2345ad852da94e9f1c356df2ecd">Engine::Serialize::visitSkipPrimitive</a>&lt; uint32_t &gt; </td>
           <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_primitive_holder.html">PrimitiveHolder</a>&lt; uint32_t &gt;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>&#160;</td>
           <td class="paramname">, </td>
         </tr>
@@ -3144,15 +3196,21 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="a3671db858473c1046ca45776e3095984" name="a3671db858473c1046ca45776e3095984"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3671db858473c1046ca45776e3095984">&#9670;&#160;</a></span>visitSkipPrimitive&lt; int32_t &gt;()</h2>
+<a id="a1f7dd867f5817478d19e14c34d1d7bfa" name="a1f7dd867f5817478d19e14c34d1d7bfa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f7dd867f5817478d19e14c34d1d7bfa">&#9670;&#160;</a></span>visitSkipPrimitive&lt; int32_t &gt;()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a> <a class="el" href="namespace_engine_1_1_serialize.html#ae419b08e99903c86a3d4c4462f351e12">Engine::Serialize::visitSkipPrimitive</a>&lt; int32_t &gt; </td>
+          <td class="memname">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a> <a class="el" href="namespace_engine_1_1_serialize.html#a3728c2345ad852da94e9f1c356df2ecd">Engine::Serialize::visitSkipPrimitive</a>&lt; int32_t &gt; </td>
           <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_primitive_holder.html">PrimitiveHolder</a>&lt; int32_t &gt;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>&#160;</td>
           <td class="paramname">, </td>
         </tr>
@@ -3172,15 +3230,21 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="a11b7846f8144548f922113e8f27caf22" name="a11b7846f8144548f922113e8f27caf22"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a11b7846f8144548f922113e8f27caf22">&#9670;&#160;</a></span>visitSkipPrimitive&lt; uint64_t &gt;()</h2>
+<a id="a2c767396f0a2a2d09d02de799f7af8fb" name="a2c767396f0a2a2d09d02de799f7af8fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2c767396f0a2a2d09d02de799f7af8fb">&#9670;&#160;</a></span>visitSkipPrimitive&lt; uint64_t &gt;()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a> <a class="el" href="namespace_engine_1_1_serialize.html#ae419b08e99903c86a3d4c4462f351e12">Engine::Serialize::visitSkipPrimitive</a>&lt; uint64_t &gt; </td>
+          <td class="memname">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a> <a class="el" href="namespace_engine_1_1_serialize.html#a3728c2345ad852da94e9f1c356df2ecd">Engine::Serialize::visitSkipPrimitive</a>&lt; uint64_t &gt; </td>
           <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_primitive_holder.html">PrimitiveHolder</a>&lt; uint64_t &gt;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>&#160;</td>
           <td class="paramname">, </td>
         </tr>
@@ -3200,15 +3264,21 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="a96d3eac40e240f68fad5d0054f4b5e2b" name="a96d3eac40e240f68fad5d0054f4b5e2b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a96d3eac40e240f68fad5d0054f4b5e2b">&#9670;&#160;</a></span>visitSkipPrimitive&lt; int64_t &gt;()</h2>
+<a id="ab59dbacb1031d41efe803b99a3a0dc92" name="ab59dbacb1031d41efe803b99a3a0dc92"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab59dbacb1031d41efe803b99a3a0dc92">&#9670;&#160;</a></span>visitSkipPrimitive&lt; int64_t &gt;()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a> <a class="el" href="namespace_engine_1_1_serialize.html#ae419b08e99903c86a3d4c4462f351e12">Engine::Serialize::visitSkipPrimitive</a>&lt; int64_t &gt; </td>
+          <td class="memname">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a> <a class="el" href="namespace_engine_1_1_serialize.html#a3728c2345ad852da94e9f1c356df2ecd">Engine::Serialize::visitSkipPrimitive</a>&lt; int64_t &gt; </td>
           <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_primitive_holder.html">PrimitiveHolder</a>&lt; int64_t &gt;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>&#160;</td>
           <td class="paramname">, </td>
         </tr>
@@ -3228,15 +3298,21 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="aff5f38a06fadd8d00ae5125629dc2982" name="aff5f38a06fadd8d00ae5125629dc2982"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aff5f38a06fadd8d00ae5125629dc2982">&#9670;&#160;</a></span>visitSkipPrimitive&lt; float &gt;()</h2>
+<a id="a843952913936ec276123e8a9f838a647" name="a843952913936ec276123e8a9f838a647"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a843952913936ec276123e8a9f838a647">&#9670;&#160;</a></span>visitSkipPrimitive&lt; float &gt;()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a> <a class="el" href="namespace_engine_1_1_serialize.html#ae419b08e99903c86a3d4c4462f351e12">Engine::Serialize::visitSkipPrimitive</a>&lt; float &gt; </td>
+          <td class="memname">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a> <a class="el" href="namespace_engine_1_1_serialize.html#a3728c2345ad852da94e9f1c356df2ecd">Engine::Serialize::visitSkipPrimitive</a>&lt; float &gt; </td>
           <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_primitive_holder.html">PrimitiveHolder</a>&lt; float &gt;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>&#160;</td>
           <td class="paramname">, </td>
         </tr>
@@ -3256,15 +3332,21 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="a4cae3e67ea1d1a46ea2bc3f5a1cc0853" name="a4cae3e67ea1d1a46ea2bc3f5a1cc0853"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4cae3e67ea1d1a46ea2bc3f5a1cc0853">&#9670;&#160;</a></span>visitSkipPrimitive&lt; SyncableUnitBase * &gt;()</h2>
+<a id="a5df924e8237f4583aee06fb603652383" name="a5df924e8237f4583aee06fb603652383"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5df924e8237f4583aee06fb603652383">&#9670;&#160;</a></span>visitSkipPrimitive&lt; SyncableUnitBase * &gt;()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a> <a class="el" href="namespace_engine_1_1_serialize.html#ae419b08e99903c86a3d4c4462f351e12">Engine::Serialize::visitSkipPrimitive</a>&lt; <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html">SyncableUnitBase</a> * &gt; </td>
+          <td class="memname">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a> <a class="el" href="namespace_engine_1_1_serialize.html#a3728c2345ad852da94e9f1c356df2ecd">Engine::Serialize::visitSkipPrimitive</a>&lt; <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html">SyncableUnitBase</a> * &gt; </td>
           <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_primitive_holder.html">PrimitiveHolder</a>&lt; <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html">SyncableUnitBase</a> * &gt;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>&#160;</td>
           <td class="paramname">, </td>
         </tr>
@@ -3284,15 +3366,21 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="a0c7a3d16f4edab89053a5fef2497e498" name="a0c7a3d16f4edab89053a5fef2497e498"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0c7a3d16f4edab89053a5fef2497e498">&#9670;&#160;</a></span>visitSkipPrimitive&lt; SerializableDataPtr &gt;()</h2>
+<a id="a7f4f121d13944974398486d3848a7594" name="a7f4f121d13944974398486d3848a7594"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7f4f121d13944974398486d3848a7594">&#9670;&#160;</a></span>visitSkipPrimitive&lt; SerializableDataPtr &gt;()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a> <a class="el" href="namespace_engine_1_1_serialize.html#ae419b08e99903c86a3d4c4462f351e12">Engine::Serialize::visitSkipPrimitive</a>&lt; <a class="el" href="struct_engine_1_1_serialize_1_1_serializable_data_ptr.html">SerializableDataPtr</a> &gt; </td>
+          <td class="memname">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a> <a class="el" href="namespace_engine_1_1_serialize.html#a3728c2345ad852da94e9f1c356df2ecd">Engine::Serialize::visitSkipPrimitive</a>&lt; <a class="el" href="struct_engine_1_1_serialize_1_1_serializable_data_ptr.html">SerializableDataPtr</a> &gt; </td>
           <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_primitive_holder.html">PrimitiveHolder</a>&lt; <a class="el" href="struct_engine_1_1_serialize_1_1_serializable_data_ptr.html">SerializableDataPtr</a> &gt;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>&#160;</td>
           <td class="paramname">, </td>
         </tr>
@@ -3312,15 +3400,21 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="a6c5b7dc28775520b2b493f15c1a0e42a" name="a6c5b7dc28775520b2b493f15c1a0e42a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6c5b7dc28775520b2b493f15c1a0e42a">&#9670;&#160;</a></span>visitSkipPrimitive&lt; Memory::ByteBuffer &gt;()</h2>
+<a id="ad247beb34347442367a82b791ee06493" name="ad247beb34347442367a82b791ee06493"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad247beb34347442367a82b791ee06493">&#9670;&#160;</a></span>visitSkipPrimitive&lt; Memory::ByteBuffer &gt;()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a> <a class="el" href="namespace_engine_1_1_serialize.html#ae419b08e99903c86a3d4c4462f351e12">Engine::Serialize::visitSkipPrimitive</a>&lt; <a class="el" href="namespace_engine_1_1_memory.html#a38c77c0ee95b21d49869c266e211de78">Memory::ByteBuffer</a> &gt; </td>
+          <td class="memname">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a> <a class="el" href="namespace_engine_1_1_serialize.html#a3728c2345ad852da94e9f1c356df2ecd">Engine::Serialize::visitSkipPrimitive</a>&lt; <a class="el" href="namespace_engine_1_1_memory.html#a38c77c0ee95b21d49869c266e211de78">Memory::ByteBuffer</a> &gt; </td>
           <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_primitive_holder.html">PrimitiveHolder</a>&lt; <a class="el" href="namespace_engine_1_1_memory.html#a38c77c0ee95b21d49869c266e211de78">Memory::ByteBuffer</a> &gt;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>&#160;</td>
           <td class="paramname">, </td>
         </tr>
@@ -3340,15 +3434,21 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="a1a0181878725d6d28b6063cea76e7c9b" name="a1a0181878725d6d28b6063cea76e7c9b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1a0181878725d6d28b6063cea76e7c9b">&#9670;&#160;</a></span>visitSkipPrimitive&lt; Void &gt;()</h2>
+<a id="a890a052387183fa9c3be20b00b23294c" name="a890a052387183fa9c3be20b00b23294c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a890a052387183fa9c3be20b00b23294c">&#9670;&#160;</a></span>visitSkipPrimitive&lt; Void &gt;()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a> <a class="el" href="namespace_engine_1_1_serialize.html#ae419b08e99903c86a3d4c4462f351e12">Engine::Serialize::visitSkipPrimitive</a>&lt; <a class="el" href="struct_engine_1_1_void.html">Void</a> &gt; </td>
+          <td class="memname">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a> <a class="el" href="namespace_engine_1_1_serialize.html#a3728c2345ad852da94e9f1c356df2ecd">Engine::Serialize::visitSkipPrimitive</a>&lt; <a class="el" href="struct_engine_1_1_void.html">Void</a> &gt; </td>
           <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_primitive_holder.html">PrimitiveHolder</a>&lt; <a class="el" href="struct_engine_1_1_void.html">Void</a> &gt;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>&#160;</td>
           <td class="paramname">, </td>
         </tr>
@@ -3368,15 +3468,21 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="ab07e8afbff039110cb027f2f13725828" name="ab07e8afbff039110cb027f2f13725828"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab07e8afbff039110cb027f2f13725828">&#9670;&#160;</a></span>visitSkipPrimitive&lt; Math::Vector2 &gt;()</h2>
+<a id="aad1c26f0b8ccb903573d2334e0e15cda" name="aad1c26f0b8ccb903573d2334e0e15cda"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aad1c26f0b8ccb903573d2334e0e15cda">&#9670;&#160;</a></span>visitSkipPrimitive&lt; Math::Vector2 &gt;()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a> <a class="el" href="namespace_engine_1_1_serialize.html#ae419b08e99903c86a3d4c4462f351e12">Engine::Serialize::visitSkipPrimitive</a>&lt; <a class="el" href="struct_engine_1_1_math_1_1_vector2.html">Math::Vector2</a> &gt; </td>
+          <td class="memname">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a> <a class="el" href="namespace_engine_1_1_serialize.html#a3728c2345ad852da94e9f1c356df2ecd">Engine::Serialize::visitSkipPrimitive</a>&lt; <a class="el" href="struct_engine_1_1_math_1_1_vector2.html">Math::Vector2</a> &gt; </td>
           <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_primitive_holder.html">PrimitiveHolder</a>&lt; <a class="el" href="struct_engine_1_1_math_1_1_vector2.html">Math::Vector2</a> &gt;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>&#160;</td>
           <td class="paramname">, </td>
         </tr>
@@ -3396,15 +3502,21 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="a40a6e029e789dcbffee783404c5d6e30" name="a40a6e029e789dcbffee783404c5d6e30"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a40a6e029e789dcbffee783404c5d6e30">&#9670;&#160;</a></span>visitSkipPrimitive&lt; Math::Vector2i &gt;()</h2>
+<a id="a06f1a0d19f312d65f1808d8bcb388b39" name="a06f1a0d19f312d65f1808d8bcb388b39"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a06f1a0d19f312d65f1808d8bcb388b39">&#9670;&#160;</a></span>visitSkipPrimitive&lt; Math::Vector2i &gt;()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a> <a class="el" href="namespace_engine_1_1_serialize.html#ae419b08e99903c86a3d4c4462f351e12">Engine::Serialize::visitSkipPrimitive</a>&lt; <a class="el" href="struct_engine_1_1_math_1_1_vector2i.html">Math::Vector2i</a> &gt; </td>
+          <td class="memname">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a> <a class="el" href="namespace_engine_1_1_serialize.html#a3728c2345ad852da94e9f1c356df2ecd">Engine::Serialize::visitSkipPrimitive</a>&lt; <a class="el" href="struct_engine_1_1_math_1_1_vector2i.html">Math::Vector2i</a> &gt; </td>
           <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_primitive_holder.html">PrimitiveHolder</a>&lt; <a class="el" href="struct_engine_1_1_math_1_1_vector2i.html">Math::Vector2i</a> &gt;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>&#160;</td>
           <td class="paramname">, </td>
         </tr>
@@ -3424,15 +3536,21 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="a45ade02eac60837231f713197dd8428c" name="a45ade02eac60837231f713197dd8428c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a45ade02eac60837231f713197dd8428c">&#9670;&#160;</a></span>visitSkipPrimitive&lt; Math::Quaternion &gt;()</h2>
+<a id="a0c763f744e821550666583314cd132c9" name="a0c763f744e821550666583314cd132c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0c763f744e821550666583314cd132c9">&#9670;&#160;</a></span>visitSkipPrimitive&lt; Math::Quaternion &gt;()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a> <a class="el" href="namespace_engine_1_1_serialize.html#ae419b08e99903c86a3d4c4462f351e12">Engine::Serialize::visitSkipPrimitive</a>&lt; <a class="el" href="struct_engine_1_1_math_1_1_quaternion.html">Math::Quaternion</a> &gt; </td>
+          <td class="memname">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a> <a class="el" href="namespace_engine_1_1_serialize.html#a3728c2345ad852da94e9f1c356df2ecd">Engine::Serialize::visitSkipPrimitive</a>&lt; <a class="el" href="struct_engine_1_1_math_1_1_quaternion.html">Math::Quaternion</a> &gt; </td>
           <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_primitive_holder.html">PrimitiveHolder</a>&lt; <a class="el" href="struct_engine_1_1_math_1_1_quaternion.html">Math::Quaternion</a> &gt;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>&#160;</td>
           <td class="paramname">, </td>
         </tr>
@@ -3452,15 +3570,21 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="a3d54be689c158f56a99fd761a8c1e4e7" name="a3d54be689c158f56a99fd761a8c1e4e7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3d54be689c158f56a99fd761a8c1e4e7">&#9670;&#160;</a></span>visitSkipPrimitive&lt; Math::Vector3 &gt;()</h2>
+<a id="aed193027a976fac41ea8c834768aa4fb" name="aed193027a976fac41ea8c834768aa4fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aed193027a976fac41ea8c834768aa4fb">&#9670;&#160;</a></span>visitSkipPrimitive&lt; Math::Vector3 &gt;()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a> <a class="el" href="namespace_engine_1_1_serialize.html#ae419b08e99903c86a3d4c4462f351e12">Engine::Serialize::visitSkipPrimitive</a>&lt; <a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Math::Vector3</a> &gt; </td>
+          <td class="memname">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a> <a class="el" href="namespace_engine_1_1_serialize.html#a3728c2345ad852da94e9f1c356df2ecd">Engine::Serialize::visitSkipPrimitive</a>&lt; <a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Math::Vector3</a> &gt; </td>
           <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_primitive_holder.html">PrimitiveHolder</a>&lt; <a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Math::Vector3</a> &gt;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>&#160;</td>
           <td class="paramname">, </td>
         </tr>
@@ -3480,15 +3604,21 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="aaa6ab1069ad9f90ce062d0eda80944aa" name="aaa6ab1069ad9f90ce062d0eda80944aa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaa6ab1069ad9f90ce062d0eda80944aa">&#9670;&#160;</a></span>visitSkipPrimitive&lt; Math::Vector4 &gt;()</h2>
+<a id="a6ad2cb2ad55c01ec631fa1b0995f63b2" name="a6ad2cb2ad55c01ec631fa1b0995f63b2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ad2cb2ad55c01ec631fa1b0995f63b2">&#9670;&#160;</a></span>visitSkipPrimitive&lt; Math::Vector4 &gt;()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a> <a class="el" href="namespace_engine_1_1_serialize.html#ae419b08e99903c86a3d4c4462f351e12">Engine::Serialize::visitSkipPrimitive</a>&lt; <a class="el" href="struct_engine_1_1_math_1_1_vector4.html">Math::Vector4</a> &gt; </td>
+          <td class="memname">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a> <a class="el" href="namespace_engine_1_1_serialize.html#a3728c2345ad852da94e9f1c356df2ecd">Engine::Serialize::visitSkipPrimitive</a>&lt; <a class="el" href="struct_engine_1_1_math_1_1_vector4.html">Math::Vector4</a> &gt; </td>
           <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_primitive_holder.html">PrimitiveHolder</a>&lt; <a class="el" href="struct_engine_1_1_math_1_1_vector4.html">Math::Vector4</a> &gt;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>&#160;</td>
           <td class="paramname">, </td>
         </tr>
@@ -3508,15 +3638,21 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="acf656ba86c547316eaa9c5c5a2903df1" name="acf656ba86c547316eaa9c5c5a2903df1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acf656ba86c547316eaa9c5c5a2903df1">&#9670;&#160;</a></span>visitSkipPrimitive&lt; Math::Matrix3 &gt;()</h2>
+<a id="a5b0e616675b0414ec2239ee3d34a8c20" name="a5b0e616675b0414ec2239ee3d34a8c20"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b0e616675b0414ec2239ee3d34a8c20">&#9670;&#160;</a></span>visitSkipPrimitive&lt; Math::Matrix3 &gt;()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a> <a class="el" href="namespace_engine_1_1_serialize.html#ae419b08e99903c86a3d4c4462f351e12">Engine::Serialize::visitSkipPrimitive</a>&lt; <a class="el" href="struct_engine_1_1_math_1_1_matrix3.html">Math::Matrix3</a> &gt; </td>
+          <td class="memname">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a> <a class="el" href="namespace_engine_1_1_serialize.html#a3728c2345ad852da94e9f1c356df2ecd">Engine::Serialize::visitSkipPrimitive</a>&lt; <a class="el" href="struct_engine_1_1_math_1_1_matrix3.html">Math::Matrix3</a> &gt; </td>
           <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_primitive_holder.html">PrimitiveHolder</a>&lt; <a class="el" href="struct_engine_1_1_math_1_1_matrix3.html">Math::Matrix3</a> &gt;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>&#160;</td>
           <td class="paramname">, </td>
         </tr>
@@ -3536,15 +3672,21 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="a8862fb7afde75bb2a8d10d8cde747348" name="a8862fb7afde75bb2a8d10d8cde747348"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8862fb7afde75bb2a8d10d8cde747348">&#9670;&#160;</a></span>visitSkipPrimitive&lt; Math::Color3 &gt;()</h2>
+<a id="a51245e1e397cbe253f8680df7b978f2c" name="a51245e1e397cbe253f8680df7b978f2c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a51245e1e397cbe253f8680df7b978f2c">&#9670;&#160;</a></span>visitSkipPrimitive&lt; Math::Color3 &gt;()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a> <a class="el" href="namespace_engine_1_1_serialize.html#ae419b08e99903c86a3d4c4462f351e12">Engine::Serialize::visitSkipPrimitive</a>&lt; <a class="el" href="struct_engine_1_1_math_1_1_color3.html">Math::Color3</a> &gt; </td>
+          <td class="memname">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a> <a class="el" href="namespace_engine_1_1_serialize.html#a3728c2345ad852da94e9f1c356df2ecd">Engine::Serialize::visitSkipPrimitive</a>&lt; <a class="el" href="struct_engine_1_1_math_1_1_color3.html">Math::Color3</a> &gt; </td>
           <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_primitive_holder.html">PrimitiveHolder</a>&lt; <a class="el" href="struct_engine_1_1_math_1_1_color3.html">Math::Color3</a> &gt;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>&#160;</td>
           <td class="paramname">, </td>
         </tr>
@@ -3564,15 +3706,21 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="ad5e9a64f48ceab63626d2d8b36ae7bde" name="ad5e9a64f48ceab63626d2d8b36ae7bde"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad5e9a64f48ceab63626d2d8b36ae7bde">&#9670;&#160;</a></span>visitSkipPrimitive&lt; Math::Color4 &gt;()</h2>
+<a id="a0b8d50af64608cfb3f37900c2aeca6a8" name="a0b8d50af64608cfb3f37900c2aeca6a8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0b8d50af64608cfb3f37900c2aeca6a8">&#9670;&#160;</a></span>visitSkipPrimitive&lt; Math::Color4 &gt;()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a> <a class="el" href="namespace_engine_1_1_serialize.html#ae419b08e99903c86a3d4c4462f351e12">Engine::Serialize::visitSkipPrimitive</a>&lt; <a class="el" href="struct_engine_1_1_math_1_1_color4.html">Math::Color4</a> &gt; </td>
+          <td class="memname">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a> <a class="el" href="namespace_engine_1_1_serialize.html#a3728c2345ad852da94e9f1c356df2ecd">Engine::Serialize::visitSkipPrimitive</a>&lt; <a class="el" href="struct_engine_1_1_math_1_1_color4.html">Math::Color4</a> &gt; </td>
           <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_primitive_holder.html">PrimitiveHolder</a>&lt; <a class="el" href="struct_engine_1_1_math_1_1_color4.html">Math::Color4</a> &gt;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>&#160;</td>
           <td class="paramname">, </td>
         </tr>
@@ -3592,8 +3740,8 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="a21e6186c738e690b55e3747d5bee2b57" name="a21e6186c738e690b55e3747d5bee2b57"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a21e6186c738e690b55e3747d5bee2b57">&#9670;&#160;</a></span>visitSkipPrimitive() <span class="overload">[2/2]</span></h2>
+<a id="a392b0e4a1efab29facb2981777c1f2ac" name="a392b0e4a1efab29facb2981777c1f2ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a392b0e4a1efab29facb2981777c1f2ac">&#9670;&#160;</a></span>visitSkipPrimitive() <span class="overload">[4/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3603,6 +3751,80 @@ template&lt;typename T &gt; </div>
         <tr>
           <td class="memname">META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a> Engine::Serialize::visitSkipPrimitive </td>
           <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_primitive_holder.html">PrimitiveHolder</a>&lt; T &gt;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>&#160;</td>
+          <td class="paramname"><em>in</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>name</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8d810467598ffad00a374c4c238ca479" name="a8d810467598ffad00a374c4c238ca479"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8d810467598ffad00a374c4c238ca479">&#9670;&#160;</a></span>visitSkipEnum()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a> Engine::Serialize::visitSkipEnum </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_enum_meta_table.html">EnumMetaTable</a> *&#160;</td>
+          <td class="paramname"><em>table</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>&#160;</td>
+          <td class="paramname"><em>in</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>name</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad4f8b85e3189fedc55d9e627c01406c8" name="ad4f8b85e3189fedc55d9e627c01406c8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad4f8b85e3189fedc55d9e627c01406c8">&#9670;&#160;</a></span>visitSkipFlags()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a> Engine::Serialize::visitSkipFlags </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_enum_meta_table.html">EnumMetaTable</a> *&#160;</td>
+          <td class="paramname"><em>table</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>&#160;</td>
           <td class="paramname"><em>in</em>, </td>
         </tr>
@@ -3877,7 +4099,7 @@ template&lt;typename T &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Jun 6 2026 19:10:39 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Sat Jun 6 2026 19:18:39 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

@@ -638,11 +638,11 @@ template&lt;typename Names , typename... Ty&gt; </div>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line">= []&lt;<span class="keywordtype">size_t</span>... Is&gt;(auto_pack&lt;Is...&gt;) <span class="keyword">constexpr</span> -&gt; std::array&lt;Reflect::Accessor, <span class="keyword">sizeof</span>...(Ty) + 1&gt;</div>
 <div class="line">        {</div>
-<div class="line">            <span class="keywordflow">return</span> { { { Names::template get&lt;Is&gt;.c_str(), <span class="keyword">nullptr</span>, &amp;sGetter&lt;Is&gt;, &amp;sSetter&lt;Is, Ty&gt;, Reflect::toType&lt;Ty&gt;(), <a class="code hl_concept" href="concept_engine_1_1_instance_of_a1.html">InstanceOfA1&lt;Ty, Named&gt;</a> ? <a class="code hl_enumvalue" href="namespace_engine_1_1_reflect.html#a6fd7c8214243940cd69fc1f920070080a30826570324cc14edd8e9c385b95e624">Reflect::AccessorFlags_Named</a> : <a class="code hl_enumvalue" href="namespace_engine_1_1_reflect.html#a6fd7c8214243940cd69fc1f920070080a7f7b1f7c13418981b4bbfabefe0b1bb9">Reflect::AccessorFlags_Default</a> }...,</div>
+<div class="line">            <span class="keywordflow">return</span> { { { Names::template get&lt;Is&gt;.c_str(), <span class="keyword">nullptr</span>, &amp;sGetter&lt;Is&gt;, &amp;sSetter&lt;Is, Ty&gt;, Reflect::toType&lt;Ty&gt;(), <a class="code hl_concept" href="concept_engine_1_1_concepts_1_1_instance_of_a1.html">Concepts::InstanceOfA1&lt;Ty, Named&gt;</a> ? <a class="code hl_enumvalue" href="namespace_engine_1_1_reflect.html#a6fd7c8214243940cd69fc1f920070080a30826570324cc14edd8e9c385b95e624">Reflect::AccessorFlags_Named</a> : <a class="code hl_enumvalue" href="namespace_engine_1_1_reflect.html#a6fd7c8214243940cd69fc1f920070080a7f7b1f7c13418981b4bbfabefe0b1bb9">Reflect::AccessorFlags_Default</a> }...,</div>
 <div class="line">                {} } };</div>
 <div class="line">        }</div>
 <div class="line">        (<a class="code hl_typedef" href="namespace_engine.html#a0ff823d62b1da9027e734a17f57b0d20">index_pack_for</a>&lt;Ty...&gt; {})</div>
-<div class="ttc" id="aconcept_engine_1_1_instance_of_a1_html"><div class="ttname"><a href="concept_engine_1_1_instance_of_a1.html">Engine::InstanceOfA1</a></div><div class="ttdef"><b>Definition:</b> concepts.h:43</div></div>
+<div class="ttc" id="aconcept_engine_1_1_concepts_1_1_instance_of_a1_html"><div class="ttname"><a href="concept_engine_1_1_concepts_1_1_instance_of_a1.html">Engine::Concepts::InstanceOfA1</a></div><div class="ttdef"><b>Definition:</b> concepts.h:45</div></div>
 <div class="ttc" id="anamespace_engine_1_1_reflect_html_a6fd7c8214243940cd69fc1f920070080a30826570324cc14edd8e9c385b95e624"><div class="ttname"><a href="namespace_engine_1_1_reflect.html#a6fd7c8214243940cd69fc1f920070080a30826570324cc14edd8e9c385b95e624">Engine::Reflect::AccessorFlags_Named</a></div><div class="ttdeci">@ AccessorFlags_Named</div><div class="ttdef"><b>Definition:</b> accessor.h:11</div></div>
 <div class="ttc" id="anamespace_engine_1_1_reflect_html_a6fd7c8214243940cd69fc1f920070080a7f7b1f7c13418981b4bbfabefe0b1bb9"><div class="ttname"><a href="namespace_engine_1_1_reflect.html#a6fd7c8214243940cd69fc1f920070080a7f7b1f7c13418981b4bbfabefe0b1bb9">Engine::Reflect::AccessorFlags_Default</a></div><div class="ttdeci">@ AccessorFlags_Default</div><div class="ttdef"><b>Definition:</b> accessor.h:12</div></div>
 </div><!-- fragment -->
@@ -654,7 +654,7 @@ template&lt;typename Names , typename... Ty&gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Jun 6 2026 19:10:37 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Sat Jun 6 2026 19:18:37 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

@@ -304,18 +304,18 @@ Functions</h2></td></tr>
 <tr class="memitem:ab83ee59b0adc80e6aa5f63ca252dc345"><td class="memTemplParams" colspan="2">template&lt;typename T , typename... Configs&gt; </td></tr>
 <tr class="memitem:ab83ee59b0adc80e6aa5f63ca252dc345"><td class="memTemplItemLeft" align="right" valign="top">StreamResult&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#ab83ee59b0adc80e6aa5f63ca252dc345">Engine::Serialize::readState</a> (CallerHierarchyFormattedSerializeStream in, T &amp;t, const char *name)</td></tr>
 <tr class="separator:ab83ee59b0adc80e6aa5f63ca252dc345"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4966bf14f6129040025f88abd782e66b"><td class="memTemplParams" colspan="2">template&lt;typename Compound , typename TargetCompound , typename... Configs, typename F &gt; <br />
-requires (!Reference&lt;F&gt; &amp;&amp; !PrimitiveType&lt;TargetCompound&gt;)</td></tr>
-<tr class="memitem:a4966bf14f6129040025f88abd782e66b"><td class="memTemplItemLeft" align="right" valign="top">StreamResult&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#a4966bf14f6129040025f88abd782e66b">Engine::Serialize::scanCompound</a> (FormattedSerializeStream &amp;in, const char *name, F &amp;&amp;callback, size_t depth=0)</td></tr>
-<tr class="separator:a4966bf14f6129040025f88abd782e66b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaa8e5b391ef9853a0a8ca6010f6f3b03"><td class="memTemplParams" colspan="2">template&lt;typename Compound , typename Primitive , typename F &gt; <br />
-requires (!Reference&lt;F&gt; &amp;&amp; PrimitiveType&lt;Primitive&gt;)</td></tr>
-<tr class="memitem:aaa8e5b391ef9853a0a8ca6010f6f3b03"><td class="memTemplItemLeft" align="right" valign="top">StreamResult&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#aaa8e5b391ef9853a0a8ca6010f6f3b03">Engine::Serialize::scanPrimitive</a> (FormattedSerializeStream &amp;in, const char *name, F &amp;&amp;callback, size_t depth=0)</td></tr>
-<tr class="separator:aaa8e5b391ef9853a0a8ca6010f6f3b03"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a44e6b54daa2320fcab07b1dd7d3b7f8d"><td class="memTemplParams" colspan="2">template&lt;typename Primitive , typename F , typename T &gt; <br />
-requires (!Reference&lt;F&gt; &amp;&amp; PrimitiveType&lt;Primitive&gt;)</td></tr>
-<tr class="memitem:a44e6b54daa2320fcab07b1dd7d3b7f8d"><td class="memTemplItemLeft" align="right" valign="top">StreamResult&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#a44e6b54daa2320fcab07b1dd7d3b7f8d">Engine::Serialize::scanPrimitive</a> (PrimitiveHolder&lt; T &gt; holder, FormattedSerializeStream &amp;in, const char *name, F &amp;&amp;callback, size_t depth=0)</td></tr>
-<tr class="separator:a44e6b54daa2320fcab07b1dd7d3b7f8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acaaccb1e5d46a5998835d875e55ef29e"><td class="memTemplParams" colspan="2">template&lt;typename Compound , typename TargetCompound , typename... Configs, typename F &gt; <br />
+requires (!Concepts::Reference&lt;F&gt; &amp;&amp; !PrimitiveType&lt;TargetCompound&gt;)</td></tr>
+<tr class="memitem:acaaccb1e5d46a5998835d875e55ef29e"><td class="memTemplItemLeft" align="right" valign="top">StreamResult&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#acaaccb1e5d46a5998835d875e55ef29e">Engine::Serialize::scanCompound</a> (FormattedSerializeStream &amp;in, const char *name, F &amp;&amp;callback, size_t depth=0)</td></tr>
+<tr class="separator:acaaccb1e5d46a5998835d875e55ef29e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01adaa0c376c7f6c445c0ed47bcec9ad"><td class="memTemplParams" colspan="2">template&lt;typename Compound , typename Primitive , typename F &gt; <br />
+requires (!Concepts::Reference&lt;F&gt; &amp;&amp; PrimitiveType&lt;Primitive&gt;)</td></tr>
+<tr class="memitem:a01adaa0c376c7f6c445c0ed47bcec9ad"><td class="memTemplItemLeft" align="right" valign="top">StreamResult&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#a01adaa0c376c7f6c445c0ed47bcec9ad">Engine::Serialize::scanPrimitive</a> (FormattedSerializeStream &amp;in, const char *name, F &amp;&amp;callback, size_t depth=0)</td></tr>
+<tr class="separator:a01adaa0c376c7f6c445c0ed47bcec9ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a364b72b58efb0bfceace0a94365590c2"><td class="memTemplParams" colspan="2">template&lt;typename Primitive , typename F , typename T &gt; <br />
+requires (!Concepts::Reference&lt;F&gt; &amp;&amp; PrimitiveType&lt;Primitive&gt;)</td></tr>
+<tr class="memitem:a364b72b58efb0bfceace0a94365590c2"><td class="memTemplItemLeft" align="right" valign="top">StreamResult&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#a364b72b58efb0bfceace0a94365590c2">Engine::Serialize::scanPrimitive</a> (PrimitiveHolder&lt; T &gt; holder, FormattedSerializeStream &amp;in, const char *name, F &amp;&amp;callback, size_t depth=0)</td></tr>
+<tr class="separator:a364b72b58efb0bfceace0a94365590c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ade3b2b5dda91683e50026073cb95bdf4"><td class="memTemplParams" colspan="2">template&lt;typename T , typename... Configs&gt; </td></tr>
 <tr class="memitem:ade3b2b5dda91683e50026073cb95bdf4"><td class="memTemplItemLeft" align="right" valign="top">StreamResult&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#ade3b2b5dda91683e50026073cb95bdf4">Engine::Serialize::visitStream</a> (CallerHierarchyFormattedSerializeStream in, const char *name, const StreamVisitor &amp;visitor, size_t depth=0)</td></tr>
 <tr class="separator:ade3b2b5dda91683e50026073cb95bdf4"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -347,7 +347,7 @@ Variables</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Jun 6 2026 19:10:36 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Sat Jun 6 2026 19:18:37 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>
