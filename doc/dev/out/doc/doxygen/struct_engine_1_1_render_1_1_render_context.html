@@ -275,8 +275,8 @@ requires (!std::is_array_v&lt;T&gt;)</td></tr>
 <tr class="separator:af25dc3cf9b7b32435ddc36e780cf32f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0ee86cbb0de158f1c0b08d2403e91ab6"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_render_1_1_unique_resource_block.html">UniqueResourceBlock</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_context.html#a0ee86cbb0de158f1c0b08d2403e91ab6">createResourceBlock</a> (std::vector&lt; std::variant&lt; <a class="el" href="namespace_engine_1_1_render.html#af28920ed5a8250ed3c89905c6bdd7ebc">ConstTexturePtr</a>, <a class="el" href="struct_engine_1_1_render_1_1_g_p_u_ptr.html">GPUPtr</a>&lt; <a class="el" href="classvoid.html">void</a> &gt;, <a class="el" href="struct_engine_1_1_render_1_1_g_p_u_ptr.html">GPUPtr</a>&lt; <a class="el" href="struct_engine_1_1_void.html">Void</a>[]&gt; &gt; &gt; data)=0</td></tr>
 <tr class="separator:a0ee86cbb0de158f1c0b08d2403e91ab6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac88c578cb67cae2d11b24c7406a0250f"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespace_engine_1_1_render.html#acf4d21ad6f42937445a8ef1b6ff82655">TexturePtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_context.html#ac88c578cb67cae2d11b24c7406a0250f">createTexture</a> (<a class="el" href="namespace_engine_1_1_render.html#a9a12599617d3227875517fefba34a691">TextureType</a> type, <a class="el" href="namespace_engine_1_1_render.html#ad4f85580b5cfb0cb84748f6f4b47153f">TextureFormat</a> format, <a class="el" href="struct_engine_1_1_math_1_1_vector2i.html">Math::Vector2i</a> size={ 0, 0 }, const <a class="el" href="namespace_engine.html#a887943bc4724416349d3201b8e183c49">ByteBuffer</a> &amp;data={})=0</td></tr>
-<tr class="separator:ac88c578cb67cae2d11b24c7406a0250f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9155a08bcab4729207b24e5a52ddbb10"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespace_engine_1_1_render.html#acf4d21ad6f42937445a8ef1b6ff82655">TexturePtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_context.html#a9155a08bcab4729207b24e5a52ddbb10">createTexture</a> (<a class="el" href="namespace_engine_1_1_render.html#a9a12599617d3227875517fefba34a691">TextureType</a> type, <a class="el" href="namespace_engine_1_1_render.html#ad4f85580b5cfb0cb84748f6f4b47153f">TextureFormat</a> format, <a class="el" href="struct_engine_1_1_math_1_1_vector2i.html">Math::Vector2i</a> size={ 0, 0 }, const <a class="el" href="namespace_engine_1_1_memory.html#a38c77c0ee95b21d49869c266e211de78">Memory::ByteBuffer</a> &amp;data={})=0</td></tr>
+<tr class="separator:a9155a08bcab4729207b24e5a52ddbb10"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2640617c81ad5a93804ef6dd267c0bdd"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_context.html#a2640617c81ad5a93804ef6dd267c0bdd">destroyResourceBlock</a> (<a class="el" href="struct_engine_1_1_render_1_1_unique_resource_block.html">UniqueResourceBlock</a> &amp;block)=0</td></tr>
 <tr class="separator:a2640617c81ad5a93804ef6dd267c0bdd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad1ea747638b8cb6e737c379ae32ae3c6"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_context.html#ad1ea747638b8cb6e737c379ae32ae3c6">endFrame</a> ()</td></tr>
@@ -292,8 +292,8 @@ requires (!std::is_array_v&lt;T&gt;)</td></tr>
 <tr class="separator:ab3967e1756e3be5ab3d633543d1f34d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a722ad051bac2e7fe41f1e8ebc80f3bb2"><td class="memItemLeft" align="right" valign="top">std::vector&lt; const <a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_context.html#a722ad051bac2e7fe41f1e8ebc80f3bb2">renderTargets</a> () const</td></tr>
 <tr class="separator:a722ad051bac2e7fe41f1e8ebc80f3bb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a34260a57257cc8fbdbbdea987bf435bc"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_context.html#a34260a57257cc8fbdbbdea987bf435bc">setTextureSubData</a> (const <a class="el" href="namespace_engine_1_1_render.html#acf4d21ad6f42937445a8ef1b6ff82655">TexturePtr</a> &amp;tex, <a class="el" href="struct_engine_1_1_math_1_1_vector2i.html">Math::Vector2i</a> offset, <a class="el" href="struct_engine_1_1_math_1_1_vector2i.html">Math::Vector2i</a> size, const <a class="el" href="namespace_engine.html#a887943bc4724416349d3201b8e183c49">ByteBuffer</a> &amp;data)=0</td></tr>
-<tr class="separator:a34260a57257cc8fbdbbdea987bf435bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade639fa5fc2e3c1d481b67a59852b8a1"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_context.html#ade639fa5fc2e3c1d481b67a59852b8a1">setTextureSubData</a> (const <a class="el" href="namespace_engine_1_1_render.html#acf4d21ad6f42937445a8ef1b6ff82655">TexturePtr</a> &amp;tex, <a class="el" href="struct_engine_1_1_math_1_1_vector2i.html">Math::Vector2i</a> offset, <a class="el" href="struct_engine_1_1_math_1_1_vector2i.html">Math::Vector2i</a> size, const <a class="el" href="namespace_engine_1_1_memory.html#a38c77c0ee95b21d49869c266e211de78">Memory::ByteBuffer</a> &amp;data)=0</td></tr>
+<tr class="separator:ade639fa5fc2e3c1d481b67a59852b8a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae6de1fcb29c4fdf9af7c131775de2fbc"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_context.html#ae6de1fcb29c4fdf9af7c131775de2fbc">supportsMultisampling</a> () const =0</td></tr>
 <tr class="separator:ae6de1fcb29c4fdf9af7c131775de2fbc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af2b58bc4b7db2167b33de3b09f5765bd"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_threading_1_1_task.html">Threading::Task</a>&lt; <a class="el" href="classvoid.html">void</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_context.html#af2b58bc4b7db2167b33de3b09f5765bd">unloadAllResources</a> ()</td></tr>
@@ -314,10 +314,10 @@ Protected Member Functions</h2></td></tr>
 <tr class="separator:a01646c0dcb2d51e538c33100b12dc5ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad1e77ce3275e7f0072330e9aca214b7d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_context.html#ad1e77ce3275e7f0072330e9aca214b7d">checkThread</a> ()</td></tr>
 <tr class="separator:ad1e77ce3275e7f0072330e9aca214b7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac8d396ab14521be7e37945c0fb3ad57b"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespace_engine.html#a21c5817736858b7eb80c75c9b92aff02">WritableByteBuffer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_context.html#ac8d396ab14521be7e37945c0fb3ad57b">mapBufferImpl</a> (const <a class="el" href="struct_engine_1_1_render_1_1_g_p_u_ptr.html">GPUPtr</a>&lt; <a class="el" href="classvoid.html">void</a> &gt; &amp;buffer)</td></tr>
-<tr class="separator:ac8d396ab14521be7e37945c0fb3ad57b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a454c58b855cc135ab31bf6b4b019df56"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespace_engine.html#a21c5817736858b7eb80c75c9b92aff02">WritableByteBuffer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_context.html#a454c58b855cc135ab31bf6b4b019df56">mapBufferImpl</a> (const <a class="el" href="struct_engine_1_1_render_1_1_g_p_u_ptr.html">GPUPtr</a>&lt; <a class="el" href="struct_engine_1_1_void.html">Void</a>[]&gt; &amp;buffer)</td></tr>
-<tr class="separator:a454c58b855cc135ab31bf6b4b019df56"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b9c925896ad293aaa06fc9f61893e06"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespace_engine_1_1_memory.html#aa4fadc0dae2c692ec3843d66a7e28217">Memory::WritableByteBuffer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_context.html#a5b9c925896ad293aaa06fc9f61893e06">mapBufferImpl</a> (const <a class="el" href="struct_engine_1_1_render_1_1_g_p_u_ptr.html">GPUPtr</a>&lt; <a class="el" href="classvoid.html">void</a> &gt; &amp;buffer)</td></tr>
+<tr class="separator:a5b9c925896ad293aaa06fc9f61893e06"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb48402fd7c458c11b6899f8fc0abafc"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespace_engine_1_1_memory.html#aa4fadc0dae2c692ec3843d66a7e28217">Memory::WritableByteBuffer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_context.html#aeb48402fd7c458c11b6899f8fc0abafc">mapBufferImpl</a> (const <a class="el" href="struct_engine_1_1_render_1_1_g_p_u_ptr.html">GPUPtr</a>&lt; <a class="el" href="struct_engine_1_1_void.html">Void</a>[]&gt; &amp;buffer)</td></tr>
+<tr class="separator:aeb48402fd7c458c11b6899f8fc0abafc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-methods" name="pro-static-methods"></a>
 Static Protected Member Functions</h2></td></tr>
@@ -785,8 +785,8 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="ac88c578cb67cae2d11b24c7406a0250f" name="ac88c578cb67cae2d11b24c7406a0250f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac88c578cb67cae2d11b24c7406a0250f">&#9670;&#160;</a></span>createTexture()</h2>
+<a id="a9155a08bcab4729207b24e5a52ddbb10" name="a9155a08bcab4729207b24e5a52ddbb10"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9155a08bcab4729207b24e5a52ddbb10">&#9670;&#160;</a></span>createTexture()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -815,7 +815,7 @@ template&lt;typename T &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="namespace_engine.html#a887943bc4724416349d3201b8e183c49">ByteBuffer</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="namespace_engine_1_1_memory.html#a38c77c0ee95b21d49869c266e211de78">Memory::ByteBuffer</a> &amp;&#160;</td>
           <td class="paramname"><em>data</em> = <code>{}</code>&#160;</td>
         </tr>
         <tr>
@@ -833,8 +833,8 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="a34260a57257cc8fbdbbdea987bf435bc" name="a34260a57257cc8fbdbbdea987bf435bc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a34260a57257cc8fbdbbdea987bf435bc">&#9670;&#160;</a></span>setTextureSubData()</h2>
+<a id="ade639fa5fc2e3c1d481b67a59852b8a1" name="ade639fa5fc2e3c1d481b67a59852b8a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ade639fa5fc2e3c1d481b67a59852b8a1">&#9670;&#160;</a></span>setTextureSubData()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -863,7 +863,7 @@ template&lt;typename T &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="namespace_engine.html#a887943bc4724416349d3201b8e183c49">ByteBuffer</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="namespace_engine_1_1_memory.html#a38c77c0ee95b21d49869c266e211de78">Memory::ByteBuffer</a> &amp;&#160;</td>
           <td class="paramname"><em>data</em>&#160;</td>
         </tr>
         <tr>
@@ -1011,8 +1011,8 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="ac8d396ab14521be7e37945c0fb3ad57b" name="ac8d396ab14521be7e37945c0fb3ad57b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac8d396ab14521be7e37945c0fb3ad57b">&#9670;&#160;</a></span>mapBufferImpl() <span class="overload">[1/2]</span></h2>
+<a id="a5b9c925896ad293aaa06fc9f61893e06" name="a5b9c925896ad293aaa06fc9f61893e06"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b9c925896ad293aaa06fc9f61893e06">&#9670;&#160;</a></span>mapBufferImpl() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1021,7 +1021,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual <a class="el" href="namespace_engine.html#a21c5817736858b7eb80c75c9b92aff02">WritableByteBuffer</a> Engine::Render::RenderContext::mapBufferImpl </td>
+          <td class="memname">virtual <a class="el" href="namespace_engine_1_1_memory.html#aa4fadc0dae2c692ec3843d66a7e28217">Memory::WritableByteBuffer</a> Engine::Render::RenderContext::mapBufferImpl </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="struct_engine_1_1_render_1_1_g_p_u_ptr.html">GPUPtr</a>&lt; <a class="el" href="classvoid.html">void</a> &gt; &amp;&#160;</td>
           <td class="paramname"><em>buffer</em></td><td>)</td>
@@ -1037,8 +1037,8 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="a454c58b855cc135ab31bf6b4b019df56" name="a454c58b855cc135ab31bf6b4b019df56"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a454c58b855cc135ab31bf6b4b019df56">&#9670;&#160;</a></span>mapBufferImpl() <span class="overload">[2/2]</span></h2>
+<a id="aeb48402fd7c458c11b6899f8fc0abafc" name="aeb48402fd7c458c11b6899f8fc0abafc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb48402fd7c458c11b6899f8fc0abafc">&#9670;&#160;</a></span>mapBufferImpl() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1047,7 +1047,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual <a class="el" href="namespace_engine.html#a21c5817736858b7eb80c75c9b92aff02">WritableByteBuffer</a> Engine::Render::RenderContext::mapBufferImpl </td>
+          <td class="memname">virtual <a class="el" href="namespace_engine_1_1_memory.html#aa4fadc0dae2c692ec3843d66a7e28217">Memory::WritableByteBuffer</a> Engine::Render::RenderContext::mapBufferImpl </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="struct_engine_1_1_render_1_1_g_p_u_ptr.html">GPUPtr</a>&lt; <a class="el" href="struct_engine_1_1_void.html">Void</a>[]&gt; &amp;&#160;</td>
           <td class="paramname"><em>buffer</em></td><td>)</td>
@@ -1209,7 +1209,7 @@ template&lt;typename T &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Jun 6 2026 00:05:25 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Sat Jun 6 2026 00:29:41 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

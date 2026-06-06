@@ -279,8 +279,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:aa00d88add126829e32953b7e5243aabf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae246e5cdef050314e1ccc1f2bc8e97b4"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_render_1_1_unique_resource_block.html">UniqueResourceBlock</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_context.html#ae246e5cdef050314e1ccc1f2bc8e97b4">createResourceBlock</a> (std::vector&lt; std::variant&lt; <a class="el" href="namespace_engine_1_1_render.html#af28920ed5a8250ed3c89905c6bdd7ebc">ConstTexturePtr</a>, <a class="el" href="struct_engine_1_1_render_1_1_g_p_u_ptr.html">GPUPtr</a>&lt; <a class="el" href="classvoid.html">void</a> &gt;, <a class="el" href="struct_engine_1_1_render_1_1_g_p_u_ptr.html">GPUPtr</a>&lt; <a class="el" href="struct_engine_1_1_void.html">Void</a>[]&gt; &gt; &gt; textures) override</td></tr>
 <tr class="separator:ae246e5cdef050314e1ccc1f2bc8e97b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a81d93e44b487381f1516b7fdbd8c4efb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_engine_1_1_render.html#acf4d21ad6f42937445a8ef1b6ff82655">TexturePtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_context.html#a81d93e44b487381f1516b7fdbd8c4efb">createTexture</a> (<a class="el" href="namespace_engine_1_1_render.html#a9a12599617d3227875517fefba34a691">TextureType</a> type, <a class="el" href="namespace_engine_1_1_render.html#ad4f85580b5cfb0cb84748f6f4b47153f">TextureFormat</a> format, <a class="el" href="struct_engine_1_1_math_1_1_vector2i.html">Math::Vector2i</a> size, const <a class="el" href="namespace_engine.html#a887943bc4724416349d3201b8e183c49">ByteBuffer</a> &amp;data) override</td></tr>
-<tr class="separator:a81d93e44b487381f1516b7fdbd8c4efb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a57a24d6e2f35d84fbfd2879b8dd68f7f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_engine_1_1_render.html#acf4d21ad6f42937445a8ef1b6ff82655">TexturePtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_context.html#a57a24d6e2f35d84fbfd2879b8dd68f7f">createTexture</a> (<a class="el" href="namespace_engine_1_1_render.html#a9a12599617d3227875517fefba34a691">TextureType</a> type, <a class="el" href="namespace_engine_1_1_render.html#ad4f85580b5cfb0cb84748f6f4b47153f">TextureFormat</a> format, <a class="el" href="struct_engine_1_1_math_1_1_vector2i.html">Math::Vector2i</a> size, const <a class="el" href="namespace_engine_1_1_memory.html#a38c77c0ee95b21d49869c266e211de78">Memory::ByteBuffer</a> &amp;data) override</td></tr>
+<tr class="separator:a57a24d6e2f35d84fbfd2879b8dd68f7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a844e50274357767c1f17be80076bde51"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_context.html#a844e50274357767c1f17be80076bde51">destroyResourceBlock</a> (<a class="el" href="struct_engine_1_1_render_1_1_unique_resource_block.html">UniqueResourceBlock</a> &amp;block) override</td></tr>
 <tr class="separator:a844e50274357767c1f17be80076bde51"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7f8420481a6b8377a75c020e551869e7"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_context.html#a7f8420481a6b8377a75c020e551869e7">endFrame</a> () override</td></tr>
@@ -299,12 +299,12 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a2986a8afb5fe8a45ff6368bd027f0fa0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a198c2b8e8bc6280430f279526227ea0f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_context.html#a198c2b8e8bc6280430f279526227ea0f">isFenceComplete</a> (uint64_t fenceValue)</td></tr>
 <tr class="separator:a198c2b8e8bc6280430f279526227ea0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a81cde2d159574b81b23a77a328a242ff"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_engine.html#a21c5817736858b7eb80c75c9b92aff02">WritableByteBuffer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_context.html#a81cde2d159574b81b23a77a328a242ff">mapBufferImpl</a> (const <a class="el" href="struct_engine_1_1_render_1_1_g_p_u_ptr.html">GPUPtr</a>&lt; <a class="el" href="classvoid.html">void</a> &gt; &amp;buffer) override</td></tr>
-<tr class="separator:a81cde2d159574b81b23a77a328a242ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aab9b5d8b8832e4a6fbaa791f5df17e86"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_engine.html#a21c5817736858b7eb80c75c9b92aff02">WritableByteBuffer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_context.html#aab9b5d8b8832e4a6fbaa791f5df17e86">mapBufferImpl</a> (const <a class="el" href="struct_engine_1_1_render_1_1_g_p_u_ptr.html">GPUPtr</a>&lt; <a class="el" href="struct_engine_1_1_void.html">Void</a>[]&gt; &amp;buffer) override</td></tr>
-<tr class="separator:aab9b5d8b8832e4a6fbaa791f5df17e86"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac14912ae5e81509705f052e5f7aa2c17"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_context.html#ac14912ae5e81509705f052e5f7aa2c17">setTextureSubData</a> (const <a class="el" href="namespace_engine_1_1_render.html#acf4d21ad6f42937445a8ef1b6ff82655">TexturePtr</a> &amp;tex, <a class="el" href="struct_engine_1_1_math_1_1_vector2i.html">Math::Vector2i</a> offset, <a class="el" href="struct_engine_1_1_math_1_1_vector2i.html">Math::Vector2i</a> size, const <a class="el" href="namespace_engine.html#a887943bc4724416349d3201b8e183c49">ByteBuffer</a> &amp;data) override</td></tr>
-<tr class="separator:ac14912ae5e81509705f052e5f7aa2c17"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a694a35fd9296d40bcb0687990f5dbce6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_engine_1_1_memory.html#aa4fadc0dae2c692ec3843d66a7e28217">Memory::WritableByteBuffer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_context.html#a694a35fd9296d40bcb0687990f5dbce6">mapBufferImpl</a> (const <a class="el" href="struct_engine_1_1_render_1_1_g_p_u_ptr.html">GPUPtr</a>&lt; <a class="el" href="classvoid.html">void</a> &gt; &amp;buffer) override</td></tr>
+<tr class="separator:a694a35fd9296d40bcb0687990f5dbce6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6b4121abbee9748273cabecc15bc215"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_engine_1_1_memory.html#aa4fadc0dae2c692ec3843d66a7e28217">Memory::WritableByteBuffer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_context.html#ae6b4121abbee9748273cabecc15bc215">mapBufferImpl</a> (const <a class="el" href="struct_engine_1_1_render_1_1_g_p_u_ptr.html">GPUPtr</a>&lt; <a class="el" href="struct_engine_1_1_void.html">Void</a>[]&gt; &amp;buffer) override</td></tr>
+<tr class="separator:ae6b4121abbee9748273cabecc15bc215"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa81cf9ad0727ed7779d8e06e1a6a4438"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_context.html#aa81cf9ad0727ed7779d8e06e1a6a4438">setTextureSubData</a> (const <a class="el" href="namespace_engine_1_1_render.html#acf4d21ad6f42937445a8ef1b6ff82655">TexturePtr</a> &amp;tex, <a class="el" href="struct_engine_1_1_math_1_1_vector2i.html">Math::Vector2i</a> offset, <a class="el" href="struct_engine_1_1_math_1_1_vector2i.html">Math::Vector2i</a> size, const <a class="el" href="namespace_engine_1_1_memory.html#a38c77c0ee95b21d49869c266e211de78">Memory::ByteBuffer</a> &amp;data) override</td></tr>
+<tr class="separator:aa81cf9ad0727ed7779d8e06e1a6a4438"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac62a0d8126f959d004bea8e73ff56748"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_context.html#ac62a0d8126f959d004bea8e73ff56748">supportsMultisampling</a> () const override</td></tr>
 <tr class="separator:ac62a0d8126f959d004bea8e73ff56748"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abc2390484cb544fb07d58b620d9b24d6"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_context.html#abc2390484cb544fb07d58b620d9b24d6">tempAllocatorMemoryQuota</a> () const</td></tr>
@@ -635,8 +635,8 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a81cde2d159574b81b23a77a328a242ff" name="a81cde2d159574b81b23a77a328a242ff"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a81cde2d159574b81b23a77a328a242ff">&#9670;&#160;</a></span>mapBufferImpl() <span class="overload">[1/2]</span></h2>
+<a id="a694a35fd9296d40bcb0687990f5dbce6" name="a694a35fd9296d40bcb0687990f5dbce6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a694a35fd9296d40bcb0687990f5dbce6">&#9670;&#160;</a></span>mapBufferImpl() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -645,7 +645,7 @@ Public Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespace_engine.html#a21c5817736858b7eb80c75c9b92aff02">WritableByteBuffer</a> Engine::Render::VulkanRenderContext::mapBufferImpl </td>
+          <td class="memname"><a class="el" href="namespace_engine_1_1_memory.html#aa4fadc0dae2c692ec3843d66a7e28217">Memory::WritableByteBuffer</a> Engine::Render::VulkanRenderContext::mapBufferImpl </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="struct_engine_1_1_render_1_1_g_p_u_ptr.html">GPUPtr</a>&lt; <a class="el" href="classvoid.html">void</a> &gt; &amp;&#160;</td>
           <td class="paramname"><em>buffer</em></td><td>)</td>
@@ -661,8 +661,8 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="aab9b5d8b8832e4a6fbaa791f5df17e86" name="aab9b5d8b8832e4a6fbaa791f5df17e86"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aab9b5d8b8832e4a6fbaa791f5df17e86">&#9670;&#160;</a></span>mapBufferImpl() <span class="overload">[2/2]</span></h2>
+<a id="ae6b4121abbee9748273cabecc15bc215" name="ae6b4121abbee9748273cabecc15bc215"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae6b4121abbee9748273cabecc15bc215">&#9670;&#160;</a></span>mapBufferImpl() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -671,7 +671,7 @@ Public Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespace_engine.html#a21c5817736858b7eb80c75c9b92aff02">WritableByteBuffer</a> Engine::Render::VulkanRenderContext::mapBufferImpl </td>
+          <td class="memname"><a class="el" href="namespace_engine_1_1_memory.html#aa4fadc0dae2c692ec3843d66a7e28217">Memory::WritableByteBuffer</a> Engine::Render::VulkanRenderContext::mapBufferImpl </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="struct_engine_1_1_render_1_1_g_p_u_ptr.html">GPUPtr</a>&lt; <a class="el" href="struct_engine_1_1_void.html">Void</a>[]&gt; &amp;&#160;</td>
           <td class="paramname"><em>buffer</em></td><td>)</td>
@@ -687,8 +687,8 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a81d93e44b487381f1516b7fdbd8c4efb" name="a81d93e44b487381f1516b7fdbd8c4efb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a81d93e44b487381f1516b7fdbd8c4efb">&#9670;&#160;</a></span>createTexture()</h2>
+<a id="a57a24d6e2f35d84fbfd2879b8dd68f7f" name="a57a24d6e2f35d84fbfd2879b8dd68f7f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a57a24d6e2f35d84fbfd2879b8dd68f7f">&#9670;&#160;</a></span>createTexture()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -717,7 +717,7 @@ Public Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="namespace_engine.html#a887943bc4724416349d3201b8e183c49">ByteBuffer</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="namespace_engine_1_1_memory.html#a38c77c0ee95b21d49869c266e211de78">Memory::ByteBuffer</a> &amp;&#160;</td>
           <td class="paramname"><em>data</em>&#160;</td>
         </tr>
         <tr>
@@ -735,8 +735,8 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="ac14912ae5e81509705f052e5f7aa2c17" name="ac14912ae5e81509705f052e5f7aa2c17"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac14912ae5e81509705f052e5f7aa2c17">&#9670;&#160;</a></span>setTextureSubData()</h2>
+<a id="aa81cf9ad0727ed7779d8e06e1a6a4438" name="aa81cf9ad0727ed7779d8e06e1a6a4438"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa81cf9ad0727ed7779d8e06e1a6a4438">&#9670;&#160;</a></span>setTextureSubData()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -765,7 +765,7 @@ Public Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="namespace_engine.html#a887943bc4724416349d3201b8e183c49">ByteBuffer</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="namespace_engine_1_1_memory.html#a38c77c0ee95b21d49869c266e211de78">Memory::ByteBuffer</a> &amp;&#160;</td>
           <td class="paramname"><em>data</em>&#160;</td>
         </tr>
         <tr>
@@ -1509,7 +1509,7 @@ Public Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Jun 6 2026 00:05:25 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Sat Jun 6 2026 00:29:41 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>
