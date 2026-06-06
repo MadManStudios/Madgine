@@ -265,7 +265,7 @@ Public Types</h2></td></tr>
 <tr class="separator:a3113573befd2df1826004c60ace0c1df"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa51d5a345f0c228f39535b20e711a295"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_native_behavior.html#aa51d5a345f0c228f39535b20e711a295">parameter_argument_tuple</a> = typename parameter_arguments::template transform&lt; <a class="el" href="namespace_engine_1_1_behavior.html#a65248f3392b0fb6bed335e3780c7cbe3">get_type_t</a> &gt;::template instantiate&lt; std::tuple &gt;</td></tr>
 <tr class="separator:aa51d5a345f0c228f39535b20e711a295"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a454055b15155e662c46538224c7fb0a4"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_native_behavior.html#a454055b15155e662c46538224c7fb0a4">parameter_arguments</a> = typename argument_types::template filter&lt; <a class="el" href="namespace_engine_1_1_behavior.html#a720f4e0049cfc10c7c337b701cbc9abf">is_parameter</a> &gt;</td></tr>
+<tr class="memitem:a454055b15155e662c46538224c7fb0a4"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_native_behavior.html#a454055b15155e662c46538224c7fb0a4">parameter_arguments</a> = typename argument_types::template filter&lt; <a class="el" href="namespace_engine_1_1_behavior.html#a63f68753b815becfc703661601547f8f">is_parameter</a> &gt;</td></tr>
 <tr class="separator:a454055b15155e662c46538224c7fb0a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8999a985ebd1baef6d37607f2a2bdd15"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_native_behavior.html#a8999a985ebd1baef6d37607f2a2bdd15">Sender</a> = decltype(<a class="el" href="struct_engine_1_1_behavior_1_1_native_behavior.html#a67e1cf85be78514c0d58b06b5b0a4f19">buildSender</a>(std::declval&lt; <a class="el" href="struct_engine_1_1_behavior_1_1_native_behavior.html#aa51d5a345f0c228f39535b20e711a295">parameter_argument_tuple</a> &gt;(), std::declval&lt; std::vector&lt; <a class="el" href="struct_engine_1_1_behavior_1_1_behavior.html">Behavior</a> &gt; &gt;()))</td></tr>
 <tr class="separator:a8999a985ebd1baef6d37607f2a2bdd15"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -344,7 +344,7 @@ template&lt;typename T , auto Factory, typename... Arguments&gt; </div>
 template&lt;typename T , auto Factory, typename... Arguments&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="struct_engine_1_1_behavior_1_1_native_behavior.html">Engine::Behavior::NativeBehavior</a>&lt; T, Factory, Arguments &gt;::parameter_arguments =  typename argument_types::template filter&lt;<a class="el" href="namespace_engine_1_1_behavior.html#a720f4e0049cfc10c7c337b701cbc9abf">is_parameter</a>&gt;</td>
+          <td class="memname">using <a class="el" href="struct_engine_1_1_behavior_1_1_native_behavior.html">Engine::Behavior::NativeBehavior</a>&lt; T, Factory, Arguments &gt;::parameter_arguments =  typename argument_types::template filter&lt;<a class="el" href="namespace_engine_1_1_behavior.html#a63f68753b815becfc703661601547f8f">is_parameter</a>&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -915,7 +915,7 @@ template&lt;typename T , auto Factory, typename... Arguments&gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Jun 6 2026 18:44:27 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Sat Jun 6 2026 19:10:36 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

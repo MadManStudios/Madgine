@@ -356,14 +356,14 @@ Typedefs</h2></td></tr>
 <tr class="memitem:a447bc6b0270e3011569fd894496b6e89"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:a447bc6b0270e3011569fd894496b6e89"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior.html#a447bc6b0270e3011569fd894496b6e89">Handler</a> = <a class="el" href="struct_engine_1_1_reflect_1_1_virtual_scope.html">Reflect::VirtualScope</a>&lt; T, HandlerComponent&lt; T &gt; &gt;</td></tr>
 <tr class="separator:a447bc6b0270e3011569fd894496b6e89"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a720f4e0049cfc10c7c337b701cbc9abf"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:a720f4e0049cfc10c7c337b701cbc9abf"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior.html#a720f4e0049cfc10c7c337b701cbc9abf">is_parameter</a> = <a class="el" href="struct_engine_1_1is__instance__auto1.html">is_instance_auto1</a>&lt; <a class="el" href="namespace_engine.html#a6ff33f434fd0deb508ab19a9de61b1c7">meta_decayed_t</a>&lt; T &gt;, <a class="el" href="struct_engine_1_1_behavior_1_1_input_parameter.html">InputParameter</a> &gt;</td></tr>
-<tr class="separator:a720f4e0049cfc10c7c337b701cbc9abf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63f68753b815becfc703661601547f8f"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a63f68753b815becfc703661601547f8f"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior.html#a63f68753b815becfc703661601547f8f">is_parameter</a> = Concepts::is_instance_auto1&lt; <a class="el" href="namespace_engine.html#a6ff33f434fd0deb508ab19a9de61b1c7">meta_decayed_t</a>&lt; T &gt;, <a class="el" href="struct_engine_1_1_behavior_1_1_input_parameter.html">InputParameter</a> &gt;</td></tr>
+<tr class="separator:a63f68753b815becfc703661601547f8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8830d69427b620d968f3a6aea3a603c6"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:a8830d69427b620d968f3a6aea3a603c6"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior.html#a8830d69427b620d968f3a6aea3a603c6">is_sub_behavior</a> = std::is_same&lt; T, <a class="el" href="struct_engine_1_1_behavior_1_1_sub_behavior.html">SubBehavior</a> &gt;</td></tr>
 <tr class="separator:a8830d69427b620d968f3a6aea3a603c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a47aee8818e4205519d9d34b57a04f6ed"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:a47aee8818e4205519d9d34b57a04f6ed"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior.html#a47aee8818e4205519d9d34b57a04f6ed">is_value</a> = std::negation&lt; std::disjunction&lt; <a class="el" href="namespace_engine_1_1_behavior.html#a720f4e0049cfc10c7c337b701cbc9abf">is_parameter</a>&lt; T &gt;, <a class="el" href="namespace_engine_1_1_behavior.html#a8830d69427b620d968f3a6aea3a603c6">is_sub_behavior</a>&lt; T &gt; &gt; &gt;</td></tr>
+<tr class="memitem:a47aee8818e4205519d9d34b57a04f6ed"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior.html#a47aee8818e4205519d9d34b57a04f6ed">is_value</a> = std::negation&lt; std::disjunction&lt; <a class="el" href="namespace_engine_1_1_behavior.html#a63f68753b815becfc703661601547f8f">is_parameter</a>&lt; T &gt;, <a class="el" href="namespace_engine_1_1_behavior.html#a8830d69427b620d968f3a6aea3a603c6">is_sub_behavior</a>&lt; T &gt; &gt; &gt;</td></tr>
 <tr class="separator:a47aee8818e4205519d9d34b57a04f6ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
@@ -385,8 +385,8 @@ Variables</h2></td></tr>
 <tr class="separator:a3a0d55f204331369ae8f0762e761ebb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Typedef Documentation</h2>
-<a id="a720f4e0049cfc10c7c337b701cbc9abf" name="a720f4e0049cfc10c7c337b701cbc9abf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a720f4e0049cfc10c7c337b701cbc9abf">&#9670;&#160;</a></span>is_parameter</h2>
+<a id="a63f68753b815becfc703661601547f8f" name="a63f68753b815becfc703661601547f8f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a63f68753b815becfc703661601547f8f">&#9670;&#160;</a></span>is_parameter</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -394,7 +394,7 @@ Variables</h2></td></tr>
 template&lt;typename T &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="namespace_engine_1_1_behavior.html#a720f4e0049cfc10c7c337b701cbc9abf">Engine::Behavior::is_parameter</a> = typedef <a class="el" href="struct_engine_1_1is__instance__auto1.html">is_instance_auto1</a>&lt;<a class="el" href="namespace_engine.html#a6ff33f434fd0deb508ab19a9de61b1c7">meta_decayed_t</a>&lt;T&gt;, <a class="el" href="struct_engine_1_1_behavior_1_1_input_parameter.html">InputParameter</a>&gt;</td>
+          <td class="memname">using <a class="el" href="namespace_engine_1_1_behavior.html#a63f68753b815becfc703661601547f8f">Engine::Behavior::is_parameter</a> = typedef Concepts::is_instance_auto1&lt;<a class="el" href="namespace_engine.html#a6ff33f434fd0deb508ab19a9de61b1c7">meta_decayed_t</a>&lt;T&gt;, <a class="el" href="struct_engine_1_1_behavior_1_1_input_parameter.html">InputParameter</a>&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -426,7 +426,7 @@ template&lt;typename T &gt; </div>
 template&lt;typename T &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="namespace_engine_1_1_behavior.html#a47aee8818e4205519d9d34b57a04f6ed">Engine::Behavior::is_value</a> = typedef std::negation&lt;std::disjunction&lt;<a class="el" href="namespace_engine_1_1_behavior.html#a720f4e0049cfc10c7c337b701cbc9abf">is_parameter</a>&lt;T&gt;, <a class="el" href="namespace_engine_1_1_behavior.html#a8830d69427b620d968f3a6aea3a603c6">is_sub_behavior</a>&lt;T&gt; &gt;&gt;</td>
+          <td class="memname">using <a class="el" href="namespace_engine_1_1_behavior.html#a47aee8818e4205519d9d34b57a04f6ed">Engine::Behavior::is_value</a> = typedef std::negation&lt;std::disjunction&lt;<a class="el" href="namespace_engine_1_1_behavior.html#a63f68753b815becfc703661601547f8f">is_parameter</a>&lt;T&gt;, <a class="el" href="namespace_engine_1_1_behavior.html#a8830d69427b620d968f3a6aea3a603c6">is_sub_behavior</a>&lt;T&gt; &gt;&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -608,7 +608,7 @@ template&lt;<a class="el" href="struct_engine_1_1fixed__string.html">fixed_strin
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Jun 6 2026 18:44:27 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Sat Jun 6 2026 19:10:36 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

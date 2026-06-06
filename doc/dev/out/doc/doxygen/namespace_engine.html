@@ -421,12 +421,6 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_key_value_3_01_t_01_4.html">KeyValue&lt; T &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_key_value_global.html">KeyValueGlobal</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_key_value_registry.html">KeyValueRegistry</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_key_value_work_group_local.html">KeyValueWorkGroupLocal</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1last.html">last</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1last_3_01_u_00_01_v_00_01_t_8_8_8_01_4.html">last&lt; U, V, T... &gt;</a></td></tr>
@@ -775,10 +769,6 @@ Variables</h2></td></tr>
 <tr class="separator:a05c72dc0c42853aee89b367f9c217a92"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a44f0fdea72d65f33ac869f1167647a84"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine.html#a44f0fdea72d65f33ac869f1167647a84">projectionValue</a> = <a class="el" href="lift_8h.html#a7379f682afaa0970087992e4005fcc55">LIFT</a>(<a class="el" href="namespace_engine.html#a29e0b71b318745944176a0818916b9c9">kvValue</a>)</td></tr>
 <tr class="separator:a44f0fdea72d65f33ac869f1167647a84"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa7da8122589b5c866df2c1a6190a17b3"><td class="memItemLeft" align="right" valign="top">std::map&lt; std::string_view, <a class="el" href="struct_engine_1_1_reflect_1_1_scope_ptr.html">Reflect::ScopePtr</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine.html#aa7da8122589b5c866df2c1a6190a17b3">sGlobalRegistry</a></td></tr>
-<tr class="separator:aa7da8122589b5c866df2c1a6190a17b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1892129bc17ddadf1b4d02ebee13b289"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_engine_1_1_threading.html#a08a884aca2656a974472fc6f773c2098">Threading::WorkgroupLocal</a>&lt; std::map&lt; std::string_view, <a class="el" href="struct_engine_1_1_reflect_1_1_scope_ptr.html">Reflect::ScopePtr</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine.html#a1892129bc17ddadf1b4d02ebee13b289">sWorkGroupLocalRegistry</a></td></tr>
-<tr class="separator:a1892129bc17ddadf1b4d02ebee13b289"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a57cd6caa1de746d8d0a32dbe72186c6d"><td class="memTemplParams" colspan="2">template&lt;size_t I&gt; </td></tr>
 <tr class="memitem:a57cd6caa1de746d8d0a32dbe72186c6d"><td class="memTemplItemLeft" align="right" valign="top">constexpr <a class="el" href="struct_engine_1_1fixed__string.html">fixed_string</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#a57cd6caa1de746d8d0a32dbe72186c6d">to_fixed_string</a> = __generic_impl__::to_fixed_string_helper&lt;I&gt;::value</td></tr>
 <tr class="separator:a57cd6caa1de746d8d0a32dbe72186c6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -2594,38 +2584,10 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="aa7da8122589b5c866df2c1a6190a17b3" name="aa7da8122589b5c866df2c1a6190a17b3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa7da8122589b5c866df2c1a6190a17b3">&#9670;&#160;</a></span>sGlobalRegistry</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::map&lt;std::string_view, <a class="el" href="struct_engine_1_1_reflect_1_1_scope_ptr.html">Reflect::ScopePtr</a>&gt; Engine::sGlobalRegistry</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a1892129bc17ddadf1b4d02ebee13b289" name="a1892129bc17ddadf1b4d02ebee13b289"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1892129bc17ddadf1b4d02ebee13b289">&#9670;&#160;</a></span>sWorkGroupLocalRegistry</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="namespace_engine_1_1_threading.html#a08a884aca2656a974472fc6f773c2098">Threading::WorkgroupLocal</a>&lt;std::map&lt;std::string_view, <a class="el" href="struct_engine_1_1_reflect_1_1_scope_ptr.html">Reflect::ScopePtr</a>&gt; &gt; Engine::sWorkGroupLocalRegistry</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Jun 6 2026 18:44:27 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Sat Jun 6 2026 19:10:36 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

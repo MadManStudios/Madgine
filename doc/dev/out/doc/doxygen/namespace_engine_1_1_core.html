@@ -256,6 +256,12 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_core_1_1_global_a_p_i_base.html">GlobalAPIBase</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_core_1_1_key_value_global.html">KeyValueGlobal</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_core_1_1_key_value_registry.html">KeyValueRegistry</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_core_1_1_key_value_work_group_local.html">KeyValueWorkGroupLocal</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_core_1_1_layout_loader.html">LayoutLoader</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_core_1_1_main_window.html">MainWindow</a></td></tr>
@@ -320,8 +326,12 @@ Variables</h2></td></tr>
 <tr class="separator:a8770a6991664bd6a0211021e33d5c09a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5d7099106b13feeeb97204136cf78cb4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_core_1_1_parameter.html">Parameter</a>&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_core.html#a5d7099106b13feeeb97204136cf78cb4">noPluginCache</a> { { &quot;--no-plugin-cache&quot;, &quot;-npc&quot; }, false, &quot;Disables the loading of the cached plugin selection at startup.&quot; }</td></tr>
 <tr class="separator:a5d7099106b13feeeb97204136cf78cb4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6fc405ba577a864ce6ee6bf62dd0abeb"><td class="memItemLeft" align="right" valign="top">std::map&lt; std::string_view, <a class="el" href="struct_engine_1_1_reflect_1_1_scope_ptr.html">Reflect::ScopePtr</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_core.html#a6fc405ba577a864ce6ee6bf62dd0abeb">sGlobalRegistry</a></td></tr>
+<tr class="separator:a6fc405ba577a864ce6ee6bf62dd0abeb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4bd17d7c3695ccaaae65490b2c4c10a7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_core_1_1_parameter.html">Parameter</a>&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_core.html#a4bd17d7c3695ccaaae65490b2c4c10a7">showHelp</a> { { &quot;--help&quot;, &quot;-h&quot; }, false, &quot;Show this help message&quot; }</td></tr>
 <tr class="separator:a4bd17d7c3695ccaaae65490b2c4c10a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a90fb808ef6942c6f29cc031be36d94"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_engine_1_1_threading.html#a08a884aca2656a974472fc6f773c2098">Threading::WorkgroupLocal</a>&lt; std::map&lt; std::string_view, <a class="el" href="struct_engine_1_1_reflect_1_1_scope_ptr.html">Reflect::ScopePtr</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_core.html#a4a90fb808ef6942c6f29cc031be36d94">sWorkGroupLocalRegistry</a></td></tr>
+<tr class="separator:a4a90fb808ef6942c6f29cc031be36d94"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac135721a194d2a9166a2d860f15ac09f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_core_1_1_parameter.html">Parameter</a>&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_core.html#ac135721a194d2a9166a2d860f15ac09f">toolModeParameter</a> { { &quot;--toolMode&quot;, &quot;-t&quot; }, false, &quot;If set, no application will be started. Only the root will be initialized and then immediately shutdown again.&quot; }</td></tr>
 <tr class="separator:ac135721a194d2a9166a2d860f15ac09f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -386,6 +396,34 @@ template&lt;typename T &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="struct_engine_1_1_core_1_1_parameter.html">Parameter</a>&lt;bool&gt; Engine::Core::showHelp { { &quot;--help&quot;, &quot;-h&quot; }, false, &quot;Show this help message&quot; }</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6fc405ba577a864ce6ee6bf62dd0abeb" name="a6fc405ba577a864ce6ee6bf62dd0abeb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6fc405ba577a864ce6ee6bf62dd0abeb">&#9670;&#160;</a></span>sGlobalRegistry</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::map&lt;std::string_view, <a class="el" href="struct_engine_1_1_reflect_1_1_scope_ptr.html">Reflect::ScopePtr</a>&gt; Engine::Core::sGlobalRegistry</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4a90fb808ef6942c6f29cc031be36d94" name="a4a90fb808ef6942c6f29cc031be36d94"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4a90fb808ef6942c6f29cc031be36d94">&#9670;&#160;</a></span>sWorkGroupLocalRegistry</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespace_engine_1_1_threading.html#a08a884aca2656a974472fc6f773c2098">Threading::WorkgroupLocal</a>&lt;std::map&lt;std::string_view, <a class="el" href="struct_engine_1_1_reflect_1_1_scope_ptr.html">Reflect::ScopePtr</a>&gt; &gt; Engine::Core::sWorkGroupLocalRegistry</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -479,7 +517,7 @@ template&lt;typename T &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Jun 6 2026 18:44:28 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Sat Jun 6 2026 19:10:37 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>
