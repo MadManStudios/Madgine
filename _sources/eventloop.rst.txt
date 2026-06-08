@@ -1,0 +1,245 @@
+.. post:: 2026-06-07
+   :tags: async, event loop
+   :category: async
+   :author: Martin Schütz
+
+
+Building a complete Async execution framework - Part 1: Event Loop
+==================================================================
+
+Recent revisions of the C++ standard introduced several facilities for asynchronous programming to the language, especially coroutines and senders/receivers. 
+In this series I will present a complete implementation of an asynchronous execution framework, as it is used in the Madgine.
+Before we begin I would like to clarify the term asynchronous programming, and put it in relation to concurrency and parallelism.
+Asynchronous programming allows to suspend tasks and resume them at a later point in time. As such the property applies directly to the task and not to the execution of the task.
+Concurrency and parallelism on the other hand are properties of the execution of tasks and their relation to each other. 
+Concurrency allows multiple tasks to make progress independently, while parallelism allows multiple tasks to be executed simultaneously on multiple processing units.
+While those are distinct concepts, asynchronous code lends itself well to concurrent and parallel execution, as I will discuss in a later post in this series.
+
+At the core of any execution framework is always the so called event loop. It is the central unit, that manages execution of tasks. 
+It usually runs a loop for the whole lifetime of the program and checks for pending tasks and executes them.
+A term that is often used in this context is thread pool. It is a common utlity that allows the event loop to move long and potentially blocking tasks to a separate thread, so that the event loop can stay responsive.
+Since we are going to use asynchronous building blocks throughout, we do not have to worry about blocking the event loop, as every task should simply suspend itself should it need to wait for an I/O operation or another task to finish.
+In my opinion this is already a big plus for this approach. While threads are powerful, it is harder to control the execution order or priority. Furthermore, threads might be a limited resource or not available at all on certain platforms.
+Asynchronous features like coroutines and senders/receivers on the other hand are exclusively a language feature and therefore available on all platforms with a compliant compiler.
+With that being said, lets dive right into implementing our single-threaded asynchronous event loop.
+
+The unit of work that the event loop deals in is called a task. It is the description of the work that needs to be done. 
+Coroutines are a perfect fit for this, as they are a way to write asynchronous functions. 
+Functions are the natural way to describe work in most imperative programming languages.
+The most basic coroutine in C++ could look something like this:
+
+.. code:: cpp
+
+   #include <iostream>
+
+   Task my_task(){
+       std::cout << "I am a task!" << std::endl;
+       co_return;
+   }
+
+Even though this is a very simple example, there is already quite a bit to unpack here. The ``co_return`` statement is one of the three keywords that have been introduced with coroutines. 
+The other being ``co_await`` and ``co_yield``. As soon as one of these keywords is present in a function body it is treated as a coroutine, which changes it`s behavior significantly.
+When a coroutine function is called, the compiler creates a coroutine frame, which is typically allocated dynamically, the coroutine is (in our case) suspended and a ``Task`` object is constructed with a handle to the coroutine frame and returned.
+All of those steps are defined and can be customized through the return type of the coroutine function. This is roughly how the compiler transforms the above code:
+
+.. code:: cpp
+
+   Task my_task(){       
+       Task::promise_type promise;
+
+       // This value will be returned to the caller once the coroutine is suspended for the first time or finished execution.
+       Task return_value = promise.get_return_object();
+
+       co_await promise.initial_suspend();
+
+       try
+       {
+           std::cout << "I am a task!" << std::endl;
+           promise.return_void();
+       }
+       catch(...){
+            promise.unhandled_exception();
+       }
+
+       co_await promise.final_suspend();
+
+       // Implicitly delete the coroutine frame
+   }
+
+The first thing you might notice is the use of ``promise_type``. This nested type defines the coroutine through a set of customization points. 
+``get_return_object`` is called to build the actual return object of our coroutine function. In order to interact with our coroutine later on, we need to store a handle to it. 
+The standard library thankfully provides us with ``std::coroutine_handle`` from ``<coroutine>`` for this purpose. While the handle does provide a ``destroy()`` function, it does not handle lifetime automatically.
+In order to prevent any leaks from the dynamically allocated coroutine frame, we need to make sure that we clean it up automatically and provide proper move semantics.
+So far our ``Task`` type could look something like this:
+
+.. code:: cpp
+
+   #include <coroutine>
+   #include <utility>
+
+   struct Task {
+   
+       struct promise_type {
+           Task get_return_object(){
+               return Task{std::coroutine_handle<promise_type>::from_promise(*this)};
+           }
+       };
+
+       Task(std::coroutine_handle<promise_type> handle)
+           : mHandle(handle)
+       {}
+
+       Task(Task &&other) noexcept
+           : mHandle(std::exchange(other.mHandle, {}))
+       {}
+
+       Task(const Task &) = delete;
+
+       ~Task(){
+           if (mHandle)
+               mHandle.destroy();
+       }
+
+       std::coroutine_handle<promise_type> mHandle;
+   };
+
+The member functions ``initial_suspend`` and ``final_suspend`` are expected to return awaitable objects. We will cover how to implement an awaitable in a later post, but for now the standard library will provide us once again with the needed tools.
+We always want the coroutine to be suspended right away, since the execution should only begin once the event loop decides to execute the task. 
+Once the coroutine function reaches the end of the function body or a ``co_return``, there is another suspension point called ``final_suspend``. At the moment, the final suspension point is mostly relevant because it determines what happens to the coroutine frame once execution has completed.
+Since we do not need to interact with the coroutine anymore after the task is finished this is a convenient way for us to clean up memory. Using ``std::suspend_always`` and ``std::suspend_never`` our next functions could look like this:
+
+.. code:: cpp
+
+   ...
+           std::suspend_always initial_suspend() noexcept{
+               return {};
+           }
+           std::suspend_never final_suspend() noexcept {
+               return {};
+           }
+   ...
+
+In my engine I am not using exceptions for error handling. 
+Any exception that is thrown indicates a programming error or an unrecoverable error to me, so I want any unhandled exception to be propagated back to the caller and ultimately crash the program. 
+This is a design decision, but I will hint at the possibilities of handling exceptions gracefully within your own task queue in a later post.
+
+.. code:: cpp
+
+   ...
+           void unhandled_exception() {
+               throw;
+           }
+   ...
+
+The ``return_void`` function is used to communicate that a ``co_return`` statement without an argument has been called. For now we do not need to communicate any values out from the coroutine, so we can leave this empty too.
+
+.. code:: cpp
+
+   ...
+           void return_void() {
+           }
+   ...
+
+Now that we have defined the behavior of our task, all that is left is providing a way to actually execute the task. I prefer to use the call operator for this, but this could just be a function as well. 
+For simplicity, we will assume that tasks will always finish on the first call to resume and therefore delete their coroutine frame automatically. In order to prevent double frees, we need to clear the handle stored inside the task.
+
+.. code:: cpp
+
+   struct Task {
+
+       void operator()() {
+           mHandle.resume();
+           mHandle = {};
+       }
+
+       ...
+
+   };
+
+We got our task object at hand now, all that is left is providing the event loop itself. For that purpose I will introduce the class `TaskQueue`. 
+Given our simple domain of single-threaded execution and simple tasks, the implementation of our TaskQueue is very trivial, so I will put it into our final code right away.
+This is all we need to create and run our asynchronous tasks. You can run the final code with any C++20 compliant compiler.
+
+.. code:: cpp
+
+   #include <iostream>
+   #include <coroutine>
+   #include <utility>
+   #include <queue>
+
+   struct Task {
+   
+       struct promise_type {
+           Task get_return_object(){
+               return Task{std::coroutine_handle<promise_type>::from_promise(*this)};
+           }
+           std::suspend_always initial_suspend() noexcept{
+               return {};
+           }
+           std::suspend_never final_suspend() noexcept {
+               return {};
+           }
+           void unhandled_exception() {
+               throw;
+           }
+           void return_void() {
+           }
+       };
+              
+       Task(std::coroutine_handle<promise_type> handle)
+           : mHandle(handle)
+       {}
+
+       Task(Task &&other) noexcept
+           : mHandle(std::exchange(other.mHandle, {}))
+       {}
+
+       Task(const Task &) = delete;
+
+       ~Task(){
+           if (mHandle)
+               mHandle.destroy();
+       }
+
+       void operator()() {
+           mHandle.resume();
+           mHandle = {};
+       }
+
+       std::coroutine_handle<promise_type> mHandle;
+   };
+
+   struct TaskQueue {
+        
+        void queue(Task task) {
+            mTasks.push(std::move(task));
+        }
+
+        void run() {
+            while (!mTasks.empty()) {
+                Task task = std::move(mTasks.front());
+                mTasks.pop();
+
+                task();
+            }
+        }
+
+        std::queue<Task> mTasks;
+
+   };
+
+   Task my_task(){
+       std::cout << "I am a task!" << std::endl;
+       co_return;
+   }
+
+   int main() {
+       TaskQueue queue;
+       queue.queue(my_task());
+       queue.run();
+   }
+
+Although our options are still limited, we already have built a functioning asynchronous runtime. We introduced the concept of tasks as coroutines.
+However, all tasks currently run to completion once started. This means that, despite using coroutines, our execution model is still effectively synchronous.
+In the next article we will look at awaitables and making sure our event loop can deal with tasks that suspend themselves.
+This will allow multiple tasks to cooperate and make progress independently, bringing us one step closer to a fully featured asynchronous execution framework.

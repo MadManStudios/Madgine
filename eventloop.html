@@ -1,0 +1,347 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Building a complete Async execution framework - Part 1: Event Loop &mdash; Madgine Blog  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Index" href="index.html" />     
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Madgine Blog
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Building a complete Async execution framework - Part 1: Event Loop</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Madgine Blog</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+    </ul>
+    <div class="info admonition rst-footer-buttons">
+        <div class="wy-btn-group">
+            <a class="btn btn-link" href="doc/dev/genindex.html">Madgine Documentation</a>
+            <a class="btn btn-info btn-mini float-right" href="launcher_dev.html">Try live</a>
+        </div>
+    </div>
+    <ul class="wy-breadcrumbs">
+        
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Building a complete Async execution framework - Part 1: Event Loop</li>
+        
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/eventloop.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+              <section id="building-a-complete-async-execution-framework-part-1-event-loop">
+<h1>Building a complete Async execution framework - Part 1: Event Loop<a class="headerlink" href="#building-a-complete-async-execution-framework-part-1-event-loop" title="Link to this heading"></a></h1>
+<p>Recent revisions of the C++ standard introduced several facilities for asynchronous programming to the language, especially coroutines and senders/receivers.
+In this series I will present a complete implementation of an asynchronous execution framework, as it is used in the Madgine.
+Before we begin I would like to clarify the term asynchronous programming, and put it in relation to concurrency and parallelism.
+Asynchronous programming allows to suspend tasks and resume them at a later point in time. As such the property applies directly to the task and not to the execution of the task.
+Concurrency and parallelism on the other hand are properties of the execution of tasks and their relation to each other.
+Concurrency allows multiple tasks to make progress independently, while parallelism allows multiple tasks to be executed simultaneously on multiple processing units.
+While those are distinct concepts, asynchronous code lends itself well to concurrent and parallel execution, as I will discuss in a later post in this series.</p>
+<p>At the core of any execution framework is always the so called event loop. It is the central unit, that manages execution of tasks.
+It usually runs a loop for the whole lifetime of the program and checks for pending tasks and executes them.
+A term that is often used in this context is thread pool. It is a common utlity that allows the event loop to move long and potentially blocking tasks to a separate thread, so that the event loop can stay responsive.
+Since we are going to use asynchronous building blocks throughout, we do not have to worry about blocking the event loop, as every task should simply suspend itself should it need to wait for an I/O operation or another task to finish.
+In my opinion this is already a big plus for this approach. While threads are powerful, it is harder to control the execution order or priority. Furthermore, threads might be a limited resource or not available at all on certain platforms.
+Asynchronous features like coroutines and senders/receivers on the other hand are exclusively a language feature and therefore available on all platforms with a compliant compiler.
+With that being said, lets dive right into implementing our single-threaded asynchronous event loop.</p>
+<p>The unit of work that the event loop deals in is called a task. It is the description of the work that needs to be done.
+Coroutines are a perfect fit for this, as they are a way to write asynchronous functions.
+Functions are the natural way to describe work in most imperative programming languages.
+The most basic coroutine in C++ could look something like this:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+
+<span class="n">Task</span><span class="w"> </span><span class="nf">my_task</span><span class="p">(){</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;I am a task!&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="k">co_return</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Even though this is a very simple example, there is already quite a bit to unpack here. The <code class="docutils literal notranslate"><span class="pre">co_return</span></code> statement is one of the three keywords that have been introduced with coroutines.
+The other being <code class="docutils literal notranslate"><span class="pre">co_await</span></code> and <code class="docutils literal notranslate"><span class="pre">co_yield</span></code>. As soon as one of these keywords is present in a function body it is treated as a coroutine, which changes it`s behavior significantly.
+When a coroutine function is called, the compiler creates a coroutine frame, which is typically allocated dynamically, the coroutine is (in our case) suspended and a <code class="docutils literal notranslate"><span class="pre">Task</span></code> object is constructed with a handle to the coroutine frame and returned.
+All of those steps are defined and can be customized through the return type of the coroutine function. This is roughly how the compiler transforms the above code:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Task</span><span class="w"> </span><span class="nf">my_task</span><span class="p">(){</span>
+<span class="w">    </span><span class="n">Task</span><span class="o">::</span><span class="n">promise_type</span><span class="w"> </span><span class="n">promise</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// This value will be returned to the caller once the coroutine is suspended for the first time or finished execution.</span>
+<span class="w">    </span><span class="n">Task</span><span class="w"> </span><span class="n">return_value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">promise</span><span class="p">.</span><span class="n">get_return_object</span><span class="p">();</span>
+
+<span class="w">    </span><span class="k">co_await</span><span class="w"> </span><span class="n">promise</span><span class="p">.</span><span class="n">initial_suspend</span><span class="p">();</span>
+
+<span class="w">    </span><span class="k">try</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;I am a task!&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">        </span><span class="n">promise</span><span class="p">.</span><span class="n">return_void</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">catch</span><span class="p">(...){</span>
+<span class="w">         </span><span class="n">promise</span><span class="p">.</span><span class="n">unhandled_exception</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">co_await</span><span class="w"> </span><span class="n">promise</span><span class="p">.</span><span class="n">final_suspend</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// Implicitly delete the coroutine frame</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The first thing you might notice is the use of <code class="docutils literal notranslate"><span class="pre">promise_type</span></code>. This nested type defines the coroutine through a set of customization points.
+<code class="docutils literal notranslate"><span class="pre">get_return_object</span></code> is called to build the actual return object of our coroutine function. In order to interact with our coroutine later on, we need to store a handle to it.
+The standard library thankfully provides us with <code class="docutils literal notranslate"><span class="pre">std::coroutine_handle</span></code> from <code class="docutils literal notranslate"><span class="pre">&lt;coroutine&gt;</span></code> for this purpose. While the handle does provide a <code class="docutils literal notranslate"><span class="pre">destroy()</span></code> function, it does not handle lifetime automatically.
+In order to prevent any leaks from the dynamically allocated coroutine frame, we need to make sure that we clean it up automatically and provide proper move semantics.
+So far our <code class="docutils literal notranslate"><span class="pre">Task</span></code> type could look something like this:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;coroutine&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;utility&gt;</span>
+
+<span class="k">struct</span><span class="w"> </span><span class="nc">Task</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">promise_type</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Task</span><span class="w"> </span><span class="nf">get_return_object</span><span class="p">(){</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">Task</span><span class="p">{</span><span class="n">std</span><span class="o">::</span><span class="n">coroutine_handle</span><span class="o">&lt;</span><span class="n">promise_type</span><span class="o">&gt;::</span><span class="n">from_promise</span><span class="p">(</span><span class="o">*</span><span class="k">this</span><span class="p">)};</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">};</span>
+
+<span class="w">    </span><span class="n">Task</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">coroutine_handle</span><span class="o">&lt;</span><span class="n">promise_type</span><span class="o">&gt;</span><span class="w"> </span><span class="n">handle</span><span class="p">)</span>
+<span class="w">        </span><span class="o">:</span><span class="w"> </span><span class="n">mHandle</span><span class="p">(</span><span class="n">handle</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{}</span>
+
+<span class="w">    </span><span class="n">Task</span><span class="p">(</span><span class="n">Task</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="n">other</span><span class="p">)</span><span class="w"> </span><span class="k">noexcept</span>
+<span class="w">        </span><span class="o">:</span><span class="w"> </span><span class="n">mHandle</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">exchange</span><span class="p">(</span><span class="n">other</span><span class="p">.</span><span class="n">mHandle</span><span class="p">,</span><span class="w"> </span><span class="p">{}))</span>
+<span class="w">    </span><span class="p">{}</span>
+
+<span class="w">    </span><span class="n">Task</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Task</span><span class="w"> </span><span class="o">&amp;</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">delete</span><span class="p">;</span>
+
+<span class="w">    </span><span class="o">~</span><span class="n">Task</span><span class="p">(){</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">mHandle</span><span class="p">)</span>
+<span class="w">            </span><span class="n">mHandle</span><span class="p">.</span><span class="n">destroy</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">coroutine_handle</span><span class="o">&lt;</span><span class="n">promise_type</span><span class="o">&gt;</span><span class="w"> </span><span class="n">mHandle</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>The member functions <code class="docutils literal notranslate"><span class="pre">initial_suspend</span></code> and <code class="docutils literal notranslate"><span class="pre">final_suspend</span></code> are expected to return awaitable objects. We will cover how to implement an awaitable in a later post, but for now the standard library will provide us once again with the needed tools.
+We always want the coroutine to be suspended right away, since the execution should only begin once the event loop decides to execute the task.
+Once the coroutine function reaches the end of the function body or a <code class="docutils literal notranslate"><span class="pre">co_return</span></code>, there is another suspension point called <code class="docutils literal notranslate"><span class="pre">final_suspend</span></code>. At the moment, the final suspension point is mostly relevant because it determines what happens to the coroutine frame once execution has completed.
+Since we do not need to interact with the coroutine anymore after the task is finished this is a convenient way for us to clean up memory. Using <code class="docutils literal notranslate"><span class="pre">std::suspend_always</span></code> and <code class="docutils literal notranslate"><span class="pre">std::suspend_never</span></code> our next functions could look like this:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="p">...</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">suspend_always</span><span class="w"> </span><span class="n">initial_suspend</span><span class="p">()</span><span class="w"> </span><span class="k">noexcept</span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="p">{};</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">suspend_never</span><span class="w"> </span><span class="n">final_suspend</span><span class="p">()</span><span class="w"> </span><span class="k">noexcept</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="p">{};</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="p">...</span>
+</pre></div>
+</div>
+<p>In my engine I am not using exceptions for error handling.
+Any exception that is thrown indicates a programming error or an unrecoverable error to me, so I want any unhandled exception to be propagated back to the caller and ultimately crash the program.
+This is a design decision, but I will hint at the possibilities of handling exceptions gracefully within your own task queue in a later post.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="p">...</span>
+<span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="n">unhandled_exception</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">throw</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="p">...</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">return_void</span></code> function is used to communicate that a <code class="docutils literal notranslate"><span class="pre">co_return</span></code> statement without an argument has been called. For now we do not need to communicate any values out from the coroutine, so we can leave this empty too.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="p">...</span>
+<span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="n">return_void</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="p">...</span>
+</pre></div>
+</div>
+<p>Now that we have defined the behavior of our task, all that is left is providing a way to actually execute the task. I prefer to use the call operator for this, but this could just be a function as well.
+For simplicity, we will assume that tasks will always finish on the first call to resume and therefore delete their coroutine frame automatically. In order to prevent double frees, we need to clear the handle stored inside the task.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">Task</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">operator</span><span class="p">()()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">mHandle</span><span class="p">.</span><span class="n">resume</span><span class="p">();</span>
+<span class="w">        </span><span class="n">mHandle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{};</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="p">...</span>
+
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>We got our task object at hand now, all that is left is providing the event loop itself. For that purpose I will introduce the class <cite>TaskQueue</cite>.
+Given our simple domain of single-threaded execution and simple tasks, the implementation of our TaskQueue is very trivial, so I will put it into our final code right away.
+This is all we need to create and run our asynchronous tasks. You can run the final code with any C++20 compliant compiler.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;coroutine&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;utility&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;queue&gt;</span>
+
+<span class="k">struct</span><span class="w"> </span><span class="nc">Task</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">promise_type</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Task</span><span class="w"> </span><span class="nf">get_return_object</span><span class="p">(){</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">Task</span><span class="p">{</span><span class="n">std</span><span class="o">::</span><span class="n">coroutine_handle</span><span class="o">&lt;</span><span class="n">promise_type</span><span class="o">&gt;::</span><span class="n">from_promise</span><span class="p">(</span><span class="o">*</span><span class="k">this</span><span class="p">)};</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">suspend_always</span><span class="w"> </span><span class="nf">initial_suspend</span><span class="p">()</span><span class="w"> </span><span class="k">noexcept</span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="p">{};</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">suspend_never</span><span class="w"> </span><span class="nf">final_suspend</span><span class="p">()</span><span class="w"> </span><span class="k">noexcept</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="p">{};</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="nf">unhandled_exception</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">throw</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="nf">return_void</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">};</span>
+
+<span class="w">    </span><span class="n">Task</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">coroutine_handle</span><span class="o">&lt;</span><span class="n">promise_type</span><span class="o">&gt;</span><span class="w"> </span><span class="n">handle</span><span class="p">)</span>
+<span class="w">        </span><span class="o">:</span><span class="w"> </span><span class="n">mHandle</span><span class="p">(</span><span class="n">handle</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{}</span>
+
+<span class="w">    </span><span class="n">Task</span><span class="p">(</span><span class="n">Task</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="n">other</span><span class="p">)</span><span class="w"> </span><span class="k">noexcept</span>
+<span class="w">        </span><span class="o">:</span><span class="w"> </span><span class="n">mHandle</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">exchange</span><span class="p">(</span><span class="n">other</span><span class="p">.</span><span class="n">mHandle</span><span class="p">,</span><span class="w"> </span><span class="p">{}))</span>
+<span class="w">    </span><span class="p">{}</span>
+
+<span class="w">    </span><span class="n">Task</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Task</span><span class="w"> </span><span class="o">&amp;</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">delete</span><span class="p">;</span>
+
+<span class="w">    </span><span class="o">~</span><span class="n">Task</span><span class="p">(){</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">mHandle</span><span class="p">)</span>
+<span class="w">            </span><span class="n">mHandle</span><span class="p">.</span><span class="n">destroy</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="k">operator</span><span class="p">()()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">mHandle</span><span class="p">.</span><span class="n">resume</span><span class="p">();</span>
+<span class="w">        </span><span class="n">mHandle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{};</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">coroutine_handle</span><span class="o">&lt;</span><span class="n">promise_type</span><span class="o">&gt;</span><span class="w"> </span><span class="n">mHandle</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">struct</span><span class="w"> </span><span class="nc">TaskQueue</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">     </span><span class="kt">void</span><span class="w"> </span><span class="nf">queue</span><span class="p">(</span><span class="n">Task</span><span class="w"> </span><span class="n">task</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">         </span><span class="n">mTasks</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">task</span><span class="p">));</span>
+<span class="w">     </span><span class="p">}</span>
+
+<span class="w">     </span><span class="kt">void</span><span class="w"> </span><span class="nf">run</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">         </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">mTasks</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">             </span><span class="n">Task</span><span class="w"> </span><span class="n">task</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">mTasks</span><span class="p">.</span><span class="n">front</span><span class="p">());</span>
+<span class="w">             </span><span class="n">mTasks</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+
+<span class="w">             </span><span class="n">task</span><span class="p">();</span>
+<span class="w">         </span><span class="p">}</span>
+<span class="w">     </span><span class="p">}</span>
+
+<span class="w">     </span><span class="n">std</span><span class="o">::</span><span class="n">queue</span><span class="o">&lt;</span><span class="n">Task</span><span class="o">&gt;</span><span class="w"> </span><span class="n">mTasks</span><span class="p">;</span>
+
+<span class="p">};</span>
+
+<span class="n">Task</span><span class="w"> </span><span class="nf">my_task</span><span class="p">(){</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;I am a task!&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="k">co_return</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">TaskQueue</span><span class="w"> </span><span class="n">queue</span><span class="p">;</span>
+<span class="w">    </span><span class="n">queue</span><span class="p">.</span><span class="n">queue</span><span class="p">(</span><span class="n">my_task</span><span class="p">());</span>
+<span class="w">    </span><span class="n">queue</span><span class="p">.</span><span class="n">run</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Although our options are still limited, we already have built a functioning asynchronous runtime. We introduced the concept of tasks as coroutines.
+However, all tasks currently run to completion once started. This means that, despite using coroutines, our execution model is still effectively synchronous.
+In the next article we will look at awaitables and making sure our event loop can deal with tasks that suspend themselves.
+This will allow multiple tasks to cooperate and make progress independently, bringing us one step closer to a fully featured asynchronous execution framework.</p>
+</section>
+
+<div class="section ablog__blog_comments">
+     
+<div class="section ablog__prev-next">
+  <span class="ablog__prev">
+    
+  </span>
+  <span class="ablog__spacer">&nbsp;</span>
+  <span class="ablog__next">
+    
+  </span>
+</div>
+  
+</div>
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Index" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Martin Schuetz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
