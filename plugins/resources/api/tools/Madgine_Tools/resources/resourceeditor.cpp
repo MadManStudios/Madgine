@@ -4,6 +4,7 @@
 
 #include "Platform/filesystem/fsapi.h"
 
+#include "Modules/plugins/binaryinfo.h"
 #include "Modules/plugins/plugin.h"
 
 #include "Madgine/resources/resourceloaderbase.h"
@@ -115,11 +116,10 @@ namespace Tools {
 
         bool implicitlyAccepted = false;
         do {
-            
 
             bool enabled = true;
 
-            #if ENABLE_PLUGINS
+#if ENABLE_PLUGINS
             if (PluginSelector("Plugin", plugin, true)) {
                 selected = Platform::Filesystem::Path { SOURCE_DIR } / plugin->info()->mDataPath;
             }
@@ -129,7 +129,7 @@ namespace Tools {
             } else {
                 enabled = false;
             }
-            #endif
+#endif
 
             if (!enabled)
                 ImGui::BeginDisabled();

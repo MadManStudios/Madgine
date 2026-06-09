@@ -1,6 +1,5 @@
 #pragma once
 
-#include "metatable.h"
 #include "type.h"
 #include "result.h"
 
@@ -56,17 +55,6 @@ namespace Reflect {
         void *mScope = nullptr;
         const MetaTable *mType = nullptr;
     };
-
-    template <typename T>
-        requires(!std::is_pointer_v<T>)
-    T *scope_cast(const ScopePtr &ptr)
-    {
-        OffsetPtr offset { 0 };
-        if (!ptr.mType->isDerivedFrom<std::remove_const_t<T>>(&offset))
-            return nullptr;
-
-        return static_cast<T *>(reinterpret_cast<void *>(reinterpret_cast<std::byte *>(ptr.mScope) + offset));
-    }
 
 }
 }

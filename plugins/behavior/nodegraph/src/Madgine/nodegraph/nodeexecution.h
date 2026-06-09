@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Generic/execution/algorithm.h"
+#include "Generic/execution/query.h"
 #include "Generic/execution/concepts.h"
 #include "Generic/execution/execution.h"
 

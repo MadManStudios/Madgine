@@ -2,7 +2,6 @@
 
 #include "formattedmessagestream.h"
 
-#include "../syncmanager.h"
 #include "message_streambuf.h"
 #include "readmessage.h"
 #include "syncstreamdata.h"

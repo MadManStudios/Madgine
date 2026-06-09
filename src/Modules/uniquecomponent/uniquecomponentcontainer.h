@@ -2,8 +2,7 @@
 
 #include "Generic/containers/emplace.h"
 
-#include "uniquecomponent.h"
-#include "uniquecomponentregistry.h"
+#include "component_index.h"
 
 namespace Engine {
 namespace Plugins {

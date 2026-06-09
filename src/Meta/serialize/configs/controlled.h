@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Generic/makeowning.h"
+
 #include "../helper/typedobjectserialize.h"
 #include "../operations.h"
 

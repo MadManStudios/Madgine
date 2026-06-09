@@ -3,7 +3,6 @@
 #include "Generic/bytebuffer.h"
 #include "Generic/execution/concepts.h"
 #include "Generic/execution/virtualstate.h"
-#include "Generic/functor.h"
 #include "Generic/genericresult.h"
 
 #include "path.h"

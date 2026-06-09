@@ -3,6 +3,7 @@
 #include "Generic/containers/compactcontainer.h"
 #include "Generic/containers/freelistcontainer.h"
 #include "Generic/offsetptr.h"
+#include "Generic/replace.h"
 
 #include "Meta/serialize/hierarchy/serializableunit.h"
 #include "Meta/serialize/streams/pendingrequest.h"

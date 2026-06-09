@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Generic/delayedconstruct.h"
-#include "Generic/execution/algorithm.h"
 #include "Generic/execution/concepts.h"
 #include "Generic/execution/execution.h"
 #include "Generic/manuallifetime.h"
@@ -386,7 +385,7 @@ namespace Behavior {
                 {
                     const NodeBase &node = Execution::get_context(receiver).mNode;
                     construct(mState,
-                        DelayedConstruct<State> { [&]() { return Execution::connect(buildSender(node, std::move(args), &mResults) | Execution::stoppable | Execution::with_debug_location(receiver.mDebugLocation.mChild), Receiver { this, std::move(receiver) }); } });
+                        DelayedConstruct { [&]() { return Execution::connect(buildSender(node, std::move(args), &mResults) | Execution::stoppable | Execution::with_debug_location(receiver.mDebugLocation.mChild), Receiver { this, std::move(receiver) }); } });
                     mState->start();
                 }
 

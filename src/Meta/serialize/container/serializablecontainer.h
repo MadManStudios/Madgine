@@ -6,6 +6,7 @@
 #include "Generic/functor.h"
 #include "Generic/memberoffsetptr.h"
 
+#include "../configs/creator.h"
 #include "../operations.h"
 #include "serializable.h"
 

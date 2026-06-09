@@ -2,6 +2,7 @@
 
 #include "serializestreamdata.h"
 
+#include "../hierarchy/serializableunitptr.h"
 #include "../serializemanager.h"
 
 namespace Engine {

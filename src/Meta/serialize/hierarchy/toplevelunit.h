@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../syncmanager.h"
 #include "syncableunit.h"
+#include "../syncmanagerresult.h"
 
 namespace Engine {
 namespace Serialize {

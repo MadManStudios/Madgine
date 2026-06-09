@@ -1,7 +1,5 @@
 #pragma once
 
-#include "Generic/stringutil.h"
-
 DLL_IMPORT_VARIABLE2(const Engine::Plugins::TypeInfo, typeInfo, typename);
 
 namespace Engine {

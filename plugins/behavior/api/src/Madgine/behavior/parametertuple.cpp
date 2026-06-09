@@ -2,6 +2,8 @@
 
 #include "parametertuple.h"
 
+#include "Meta/serialize/streams/formattedserializestream.h"
+
 #include "Meta/reflect/metatable_impl.h"
 
 METATABLE_BEGIN(Engine::Behavior::ParameterTuple)

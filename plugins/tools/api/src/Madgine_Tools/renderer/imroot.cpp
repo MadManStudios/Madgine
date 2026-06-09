@@ -12,6 +12,7 @@
 #include "Meta/serialize/streams/serializestreamdata.h"
 
 #include "Modules/debug/profiler/profile.h"
+#include "Modules/uniquecomponent/uniquecomponentregistry.h"
 
 #include "Meta/reflect/metatable_impl.h"
 

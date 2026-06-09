@@ -22,7 +22,7 @@ namespace Plugins {
     struct Component;
     template <typename Base>
     struct NamedComponent;
-    template <typename Registry>
+    template <typename Registry, typename Base>
     struct Selector;
     template <typename C, typename Registry, typename Base>
     struct Container;

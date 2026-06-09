@@ -2,6 +2,7 @@
 
 #include "Generic/containers/mutable_set.h"
 #include "Generic/customfunctors.h"
+#include "Generic/execution/algorithm.h"
 
 #include "Platform/log/logsenders.h"
 

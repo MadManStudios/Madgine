@@ -3,10 +3,11 @@
 #include "Generic/execution/virtualstate.h"
 
 #include "Meta/reflect/argumentlist.h"
+#include "Meta/reflect/result.h"
 
 #include "Madgine/debug/debuggablesender.h"
 
-#include "named.h"
+#include "named_d.h"
 
 namespace Engine {
 namespace Behavior {

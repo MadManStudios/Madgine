@@ -5,6 +5,7 @@
 #include "Generic/execution/execution.h"
 
 #include "Modules/threading/workgroupstorage.h"
+#include "Modules/uniquecomponent/uniquecomponentregistry.h"
 
 #include "Meta/reflect/metatable_impl.h"
 

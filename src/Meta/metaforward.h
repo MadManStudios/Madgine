@@ -170,6 +170,7 @@ namespace Serialize {
         struct SyncFunctionTable;
     }
 
+    struct set_parent_t;
     struct apply_map_t;
     struct set_synced_t;
     template <typename...>

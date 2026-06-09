@@ -1,6 +1,6 @@
 #include "../behaviorlib.h"
 
-#include "named.h"
+#include "nameddescriptor.h"
 
 #include "Meta/reflectserialize/valuetypeserialize.h"
 

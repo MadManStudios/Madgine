@@ -2,7 +2,7 @@
 
 #include "Platform/filesystem/path.h"
 
-#include "Madgine/behavior/named.h"
+#include "Madgine/behavior/nameddescriptor.h"
 
 #include "nodebase.h"
 

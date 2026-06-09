@@ -5,8 +5,9 @@
 
 #include "Platform/log/logsenders.h"
 
-#include "Meta/reflect/virtualscope.h"
 #include "Meta/math/matrix3.h"
+#include "Meta/reflect/virtualscope.h"
+#include "Meta/serialize/configs/creator.h"
 #include "Meta/serialize/hierarchy/virtualserializableunit.h"
 
 #include "Madgine/behavior/named.h"
@@ -112,7 +113,7 @@ namespace Widgets {
         virtual bool injectAxisEvent(const Platform::Input::AxisEvent &arg);
         virtual bool injectKeyPress(const Platform::Input::KeyPressEvent &arg);
         virtual bool injectKeyRelease(const Platform::Input::KeyReleaseEvent &arg);
-              
+
         Execution::SignalStub<void, const Platform::Input::PointerMoveEvent &> &pointerMoveEvent();
         Execution::SignalStub<void, const PointerClickEvent &> &pointerClickEvent();
         Execution::SignalStub<void, const Platform::Input::PointerMoveEvent &> &pointerEnterEvent();

@@ -11,6 +11,7 @@
 #include "Modules/plugins/pluginmanager.h"
 #include "Modules/threading/awaitables/awaitabletimepoint.h"
 #include "Modules/uniquecomponent/uniquecomponentcollectormanager.h"
+#include "Modules/uniquecomponent/uniquecomponentregistry.h"
 
 #include "Madgine/cli/cli.h"
 #include "Madgine/cli/parameter.h"

@@ -4,6 +4,8 @@
 
 #include "Meta/serialize/operations.h"
 
+#include "Modules/uniquecomponent/uniquecomponentregistry.h"
+
 #include "../scenemanager.h"
 #include "entity.h"
 #include "entitycomponentbase.h"

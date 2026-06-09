@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Generic/execution/stoppable.h"
+
 #include "Meta/reflect/sender.h"
 
 #include "Madgine/behavior/behaviorreceiver.h"
@@ -60,7 +62,7 @@ namespace Behavior {
             requires(is_tag_invocable_v<CPO, BehaviorReceiver &, Args...>)
         auto tag_invoke(CPO f, SenderReceiver &state, Args &&...args) noexcept(is_nothrow_tag_invocable_v<CPO, BehaviorReceiver &, Args...>)
             -> tag_invoke_result_t<CPO, BehaviorReceiver &, Args...>
-        {            
+        {
             return tag_invoke(f, state.mState.mReceiver, std::forward<Args>(args)...);
         }
 

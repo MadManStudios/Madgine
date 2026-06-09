@@ -1,6 +1,5 @@
 #pragma once
 
-#include "Generic/any.h"
 #include "Generic/delayedconstruct.h"
 #include "Generic/functor.h"
 
@@ -89,7 +88,7 @@ namespace Behavior {
         {
             Sender sender = std::forward<Sender>(std::get<Sender>(mData));
             mData.template emplace<State>(
-                DelayedConstruct<State> { [&]() { return Execution::connect(std::forward<Sender>(sender), rec); } });
+                DelayedConstruct { [&]() { return Execution::connect(std::forward<Sender>(sender), rec); } });
         }
 
         void start() override

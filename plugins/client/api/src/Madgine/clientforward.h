@@ -10,6 +10,8 @@ namespace Core {
 
     struct MainWindowComponentBase;
     struct MainWindowComponentComparator;
+
+    struct LayoutLoader;
 }
 
 namespace Render {

@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Meta/reflect/metatable.h"
+
 #include "Madgine/behavior/behaviorcollector.h"
 #include "Madgine/debug/continuation.h"
 

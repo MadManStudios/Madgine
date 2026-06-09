@@ -8,7 +8,6 @@
 #include "Madgine/debug/debuggablelifetime.h"
 #include "Madgine/render/rendercontextcollector.h"
 
-#include "layoutloader.h"
 #include "mainwindowcomponentcollector.h"
 
 namespace Engine {
@@ -46,7 +45,7 @@ namespace Core {
         ~MainWindow();
 
         void saveLayout(const Platform::Filesystem::Path &path);
-        Threading::Task<bool> loadLayout(LayoutLoader::Resource *res);
+        Threading::Task<bool> loadLayout(Resources::Resource<LayoutLoader> *res);
 
         /**
          * @name MadgineObject interface

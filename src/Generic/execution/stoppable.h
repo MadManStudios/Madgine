@@ -3,6 +3,7 @@
 #include "concepts.h"
 #include "stop_callback.h"
 #include "stop_source.h"
+#include "storage.h"
 
 namespace Engine {
 namespace Execution {
@@ -67,7 +68,6 @@ namespace Execution {
                 assert(!(state & FINISH_STARTED) == !(state & FINISH_ENDED));
                 assert(!(state & STOP_STARTED) == !(state & STOP_ENDED));
 
-
                 if (get_stop_token(mRec)->registerCallback(this))
                     this->mState.start();
                 else
@@ -108,7 +108,8 @@ namespace Execution {
                     mRec.set_error(std::forward<R>(result)...);
             }
 
-            friend void tag_invoke(visit_state_t, state* state, auto&& visitor) {
+            friend void tag_invoke(visit_state_t, state *state, auto &&visitor)
+            {
                 visit_state(state ? &state->mState : nullptr, visitor);
             }
 
@@ -147,7 +148,7 @@ namespace Execution {
             template <typename Rec>
             friend auto tag_invoke(connect_t connect, sender &&sender, Rec &&rec)
             {
-                if constexpr (!tag_invocable<get_stop_token_t, Rec&>)                
+                if constexpr (!tag_invocable<get_stop_token_t, Rec &>)
                     return tag_invoke(connect, std::forward<Sender>(sender.mSender), std::forward<Rec>(rec));
                 else
                     return state<Sender, Rec> { std::forward<Sender>(sender.mSender), std::forward<Rec>(rec) };
@@ -177,6 +178,195 @@ namespace Execution {
     };
 
     inline constexpr stoppable_t stoppable;
+
+    struct stop_when_t {
+
+        template <typename Rec, typename Inner, typename Trigger>
+        struct state;
+
+        template <typename Rec, typename Inner, typename Trigger>
+        struct receiver {
+
+            template <typename... V>
+            void set_value(V &&...value)
+            {
+                mState->set_value(std::forward<V>(value)...);
+            }
+
+            void set_done()
+            {
+                mState->set_done();
+            }
+
+            template <typename... R>
+            void set_error(R &&...result)
+            {
+                mState->set_error(std::forward<R>(result)...);
+            }
+
+            template <typename CPO, typename... Args>
+            friend auto tag_invoke(CPO f, receiver &rec, Args &&...args)
+                -> tag_invoke_result_t<CPO, Rec &, Args...>
+            {
+                return f(rec.mState->mRec, std::forward<Args>(args)...);
+            }
+
+            friend StopToken tag_invoke(get_stop_token_t, receiver &rec)
+            {
+                return rec.mState->mStopSource.get_token();
+            }
+
+            state<Rec, Inner, Trigger> *mState;
+        };
+
+        template <typename Rec, typename Inner, typename Trigger>
+        struct stop_receiver {
+            void set_value(auto &&...)
+            {
+                mState->stop();
+            }
+
+            void set_done()
+            {
+                mState->stop();
+            }
+
+            template <typename... R>
+            void set_error(R &&...result)
+            {
+                mState->stop();
+            }
+
+            template <typename CPO, typename... Args>
+            friend auto tag_invoke(CPO f, stop_receiver &rec, Args &&...args)
+                -> tag_invoke_result_t<CPO, Rec &, Args...>
+            {
+                return f(rec.mState->mRec, std::forward<Args>(args)...);
+            }
+
+            friend StopToken tag_invoke(get_stop_token_t, stop_receiver &rec)
+            {
+                return rec.mState->mStopSource.get_token();
+            }
+
+            state<Rec, Inner, Trigger> *mState;
+        };
+
+        template <typename Rec, typename Inner, typename Trigger>
+        struct state {
+
+            using inner_state = connect_result_t<stoppable_t::sender<Inner>, receiver<Rec, Inner, Trigger>>;
+            using stop_state = connect_result_t<stoppable_t::sender<Trigger>, stop_receiver<Rec, Inner, Trigger>>;
+
+            state(Rec &&rec, Inner &&sender, Trigger &&trigger)
+                : mRec(std::forward<Rec>(rec))
+                , mInnerState(connect(std::forward<Inner>(sender) | stoppable, receiver<Rec, Inner, Trigger> { this }))
+                , mStopState(connect(std::forward<Trigger>(trigger) | stoppable, stop_receiver<Rec, Inner, Trigger> { this }))
+            {
+            }
+
+            ~state() { }
+
+            void start()
+            {
+                mInnerState.start();
+                mStopState.start();
+            }
+
+            template <typename... V>
+            void set_value(V &&...values)
+            {
+                if (mStopSource.request_stop()) {
+                    mResult.set_value(std::forward<V>(values)...);
+                }
+                signal();
+            }
+            void set_done()
+            {
+                if (mStopSource.request_stop()) {
+                    mResult.set_done();
+                }
+                signal();
+            }
+            template <typename... R>
+            void set_error(R &&...results)
+            {
+                if (mStopSource.request_stop()) {
+                    mResult.set_error(std::forward<R>(results)...);
+                }
+                signal();
+            }
+
+            void stop()
+            {
+                mStopSource.request_stop();
+                signal();
+            }
+
+            void signal()
+            {
+                if (mFinished.test_and_set()) {
+                    if (mResult.is_null()) {
+                        mRec.set_value();
+                    } else {
+                        ResultStorage<Inner> { std::move(mResult) }.reproduce(mRec);
+                    }
+                }
+            }
+
+            friend void tag_invoke(visit_state_t, state *state, auto &&visitor)
+            {
+                visit_state(state ? &state->mStopState : nullptr, visitor);
+                visit_state(state ? &state->mInnerState : nullptr, visitor);
+            }
+
+            ResultStorage<Inner> mResult;
+            Rec mRec;
+            StopSource mStopSource;
+            inner_state mInnerState;
+            stop_state mStopState;
+            // stop_callback<> mPropagateCallback;
+            std::atomic_flag mFinished;
+        };
+
+        template <AnySender Inner, AnySender Trigger>
+        struct sender : algorithm_sender<Inner> {
+
+            template <template <typename...> typename Tuple>
+            using value_types = typename Inner::template value_types<Tuple>;
+
+            template <typename Rec>
+            friend auto tag_invoke(connect_t, sender &&sender, Rec &&rec)
+            {
+                return state<Rec, Inner, Trigger> { std::forward<Rec>(rec), std::forward<Inner>(sender.mSender), std::forward<Trigger>(sender.mTrigger) };
+            }
+
+            Trigger mTrigger;
+        };
+
+        template <AnySender Inner, AnySender Trigger>
+        friend auto tag_invoke(stop_when_t, Inner &&inner, Trigger &&trigger)
+        {
+            return sender<Inner, Trigger> { { {}, std::forward<Inner>(inner) }, std::forward<Trigger>(trigger) };
+        }
+
+        template <AnySender Inner, AnySender Trigger>
+            requires tag_invocable<stop_when_t, Inner, Trigger>
+        auto operator()(Inner &&sender, Trigger &&trigger) const
+            noexcept(is_nothrow_tag_invocable_v<stop_when_t, Inner, Trigger>)
+                -> tag_invoke_result_t<stop_when_t, Inner, Trigger>
+        {
+            return tag_invoke(*this, std::forward<Inner>(sender), std::forward<Trigger>(trigger));
+        }
+
+        template <AnySender Trigger>
+        auto operator()(Trigger &&trigger) const
+        {
+            return pipable_from_right(*this, std::forward<Trigger>(trigger));
+        }
+    };
+
+    inline constexpr stop_when_t stop_when;
 
 }
 }

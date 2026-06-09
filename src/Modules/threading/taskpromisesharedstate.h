@@ -162,7 +162,7 @@ namespace Threading {
         bool await_suspend(TaskHandle task)
         {
             mTask = std::move(task);
-            construct(mState, DelayedConstruct<S> { [this]() { return Execution::connect(mPromiseState->sender(), TaskFutureAwaitableReceiver<T> { this }); } });
+            construct(mState, DelayedConstruct { [this]() { return Execution::connect(mPromiseState->sender(), TaskFutureAwaitableReceiver<T> { this }); } });
             mState->start();
 
             if (mFlag.test_and_set()) {

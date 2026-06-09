@@ -1,6 +1,7 @@
 #pragma once
 
 #include "undostack.h"
+#include "Generic/closure.h"
 
 namespace Engine {
 namespace Tools {

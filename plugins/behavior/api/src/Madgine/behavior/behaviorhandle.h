@@ -5,6 +5,7 @@
 #include "Modules/threading/taskfuture.h"
 
 #include "behavior.h"
+#include "nameddescriptor.h"
 
 namespace Engine {
 namespace Behavior {

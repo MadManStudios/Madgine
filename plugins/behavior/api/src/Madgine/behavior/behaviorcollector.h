@@ -6,6 +6,8 @@
 #include "Modules/uniquecomponent/uniquecomponent.h"
 #include "Modules/uniquecomponent/uniquecomponentdefine.h"
 
+#include "nameddescriptor.h"
+
 namespace Engine {
 namespace Behavior {
 

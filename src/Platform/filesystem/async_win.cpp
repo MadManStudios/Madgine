@@ -3,6 +3,7 @@
 #if WINDOWS
 
 #    include "Generic/align.h"
+#    include "Generic/functor.h"
 
 #    include "../helpers/win_ptrs.h"
 #    include "async.h"

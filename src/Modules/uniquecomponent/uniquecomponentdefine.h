@@ -1,25 +1,24 @@
 #pragma once
 
-#include "Generic/fixed_string.h"
 #include "Generic/replace.h"
 
 #include "annotations.h"
 
 // base is included in __VA_ARGS__ to circumvent the problem with empty __VA_ARGS__ and ,
-#define DECLARE_UNIQUE_COMPONENT2(ns, prefix, registry, component, /*base, */...)                                                                                                        \
-    namespace ns {                                                                                                                                                                       \
-    constexpr auto prefix##Header() { return __FILE__; }                                                                                                                                 \
-    using prefix##Registry = registry<STRINGIFY(ns::prefix##BaseRegistry), STRINGIFY(ns::prefix##Registry), prefix##Header, __VA_ARGS__>;                                                \
+#define DECLARE_UNIQUE_COMPONENT2(ns, prefix, registry, component, /*base, */...)                                                                                                \
+    namespace ns {                                                                                                                                                               \
+    constexpr auto prefix##Header() { return __FILE__; }                                                                                                                         \
+    using prefix##Registry = registry<STRINGIFY(ns::prefix##BaseRegistry), STRINGIFY(ns::prefix##Registry), prefix##Header, __VA_ARGS__>;                                        \
     using prefix##BaseRegistry = Engine::Plugins::Registry<STRINGIFY(ns::prefix##BaseRegistry), STRINGIFY(ns::prefix##Registry), prefix##Header, __VA_ARGS__>;                   \
     using prefix##Collector = Engine::Plugins::Collector<prefix##Registry>;                                                                                                      \
-    template <typename C>                                                                                                                                                                \
+    template <typename C>                                                                                                                                                        \
     using prefix##Container = Engine::Plugins::Container<typename Engine::replace<C>::template type<std::unique_ptr<FIRST(__VA_ARGS__)>>, prefix##Registry, FIRST(__VA_ARGS__)>; \
-    using prefix##Selector = Engine::Plugins::Selector<prefix##Registry>;                                                                                                        \
-    template <typename T, typename Base = FIRST(__VA_ARGS__)>                                                                                                                            \
+    using prefix##Selector = Engine::Plugins::Selector<prefix##Registry, FIRST(__VA_ARGS__)>;                                                                                    \
+    template <typename T, typename Base = FIRST(__VA_ARGS__)>                                                                                                                    \
     using prefix##Component = component<Engine::Plugins::Component<T, prefix##Collector, Base>>;                                                                                 \
-    template <typename T, typename Base = FIRST(__VA_ARGS__)>                                                                                                                            \
+    template <typename T, typename Base = FIRST(__VA_ARGS__)>                                                                                                                    \
     using prefix##VirtualBase = component<Engine::Plugins::VirtualComponentBase<T, prefix##Collector, Base>>;                                                                    \
-    template <typename T, typename Base>                                                                                                                                                 \
+    template <typename T, typename Base>                                                                                                                                         \
     using prefix##VirtualImpl = Engine::Plugins::VirtualComponentImpl<T, Base>;                                                                                                  \
     }
 

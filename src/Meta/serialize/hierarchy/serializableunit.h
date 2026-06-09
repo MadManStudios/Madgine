@@ -2,7 +2,7 @@
 
 #include "Generic/linestruct.h"
 
-#include "../operations.h"
+#include "serializableunitptr.h"
 
 namespace Engine {
 namespace Serialize {
@@ -41,19 +41,19 @@ namespace Serialize {
         friend struct SyncManager;
 
         template <std::derived_from<SerializableUnitBase> T>
-        friend void tag_invoke(set_parent_t, T &unit, SerializableUnitBase *parent)
+        friend void tag_invoke(const set_parent_t &, T &unit, SerializableUnitBase *parent)
         {
             SerializableUnitPtr { &unit }.setParent(parent);
         }
 
         template <std::derived_from<SerializableUnitBase> T>
-        friend void tag_invoke(set_synced_t cpo, T &unit, bool b, const CallerHierarchyBasePtr &hierarchy)
+        friend void tag_invoke(const set_synced_t &, T &unit, bool b, const CallerHierarchyBasePtr &hierarchy)
         {
             SerializableUnitPtr { &unit }.setSynced(b, hierarchy);
         }
 
         template <std::derived_from<SerializableUnitBase> T, typename... Configs>
-        friend void tag_invoke(set_active_t<Configs...>, T &unit, bool active, bool existenceChanged, const CallerHierarchyBasePtr &hierarchy)
+        friend void tag_invoke(const set_active_t<Configs...> &, T &unit, bool active, bool existenceChanged, const CallerHierarchyBasePtr &hierarchy)
         {
             SerializableUnitPtr { &unit }.setActive(active, existenceChanged);
         }

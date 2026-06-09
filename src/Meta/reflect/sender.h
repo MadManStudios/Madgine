@@ -38,7 +38,7 @@ namespace Reflect {
 
         void connect(Receiver &receiver) override
         {
-            mState.template emplace<State>(DelayedConstruct<State> {
+            mState.template emplace<State>(DelayedConstruct {
                 [&, sender { std::forward<Sender>(std::get<Sender>(mState)) }]() mutable { return Execution::connect(std::move(sender), receiver); } });
         }
 

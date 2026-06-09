@@ -1,20 +1,15 @@
 #pragma once
 
 #include "Generic/execution/signal.h"
-#include "Generic/functor.h"
-#include "Generic/genericresult.h"
 #include "Generic/timeout.h"
 
 #include "serializemanager.h"
 #include "streams/comparestreamid.h"
 #include "streams/formattedmessagestream.h"
+#include "syncmanagerresult.h"
 
 namespace Engine {
 namespace Serialize {
-
-    ENUM_BASE(SyncManagerResult, GenericResult,
-        STREAM_ERROR,
-        TIMEOUT)
 
     struct META_EXPORT SyncManager : SerializeManager {
         SyncManager(const std::string &name);

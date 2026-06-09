@@ -1,7 +1,5 @@
 #pragma once
 
-#include "../hierarchy/serializableunitptr.h"
-
 namespace Engine {
 namespace Serialize {
 

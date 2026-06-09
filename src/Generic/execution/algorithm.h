@@ -4,9 +4,6 @@
 #include "../manuallifetime.h"
 #include "../pipable.h"
 #include "concepts.h"
-#include "stop_source.h"
-#include "stoppable.h"
-#include "storage.h"
 
 #undef ERROR
 
@@ -370,7 +367,7 @@ namespace Execution {
             void start()
             {
                 construct(mState,
-                    DelayedConstruct<State> { [this]() { return connect(mStream.next(), receiver { this }); } });
+                    DelayedConstruct { [this]() { return connect(mStream.next(), receiver { this }); } });
                 mState->start();
             }
 
@@ -631,7 +628,7 @@ namespace Execution {
                 } else {
                     mFlag.clear();
                     construct(mState,
-                        DelayedConstruct<inner_state_t> {
+                        DelayedConstruct {
                             [&]() {
                                 return connect(mF(*mIt), receiver<Rec, C, F> { rec, this });
                             } });
@@ -832,7 +829,7 @@ namespace Execution {
             state(Rec &&rec, Sender &&...senders)
                 : base_state<Rec> { std::forward<Rec>(rec) }
                 , mStates {
-                    DelayedConstruct<inner_state<Is, Sender, Rec, std::index_sequence<Is...>, Sender...>> {
+                    DelayedConstruct {
                         [&]() { return connect(std::forward<Sender>(senders), receiver<Is, Rec, std::index_sequence<Is...>, Sender...> { this }); } }...
                 }
             {
@@ -1007,7 +1004,7 @@ namespace Execution {
             {
                 size_t i = 0;
                 for (auto &&sender : range) {
-                    construct(mStates[i], DelayedConstruct<inner_state> { [&, this, i]() { return connect(std::forward<decltype(sender)>(sender), receiver<Rec, Sender> { i, this }); } });
+                    construct(mStates[i], DelayedConstruct { [&, this, i]() { return connect(std::forward<decltype(sender)>(sender), receiver<Rec, Sender> { i, this }); } });
                     ++i;
                 }
             }
@@ -1185,7 +1182,7 @@ namespace Execution {
             auto stateTupleHelper(std::tuple<Sender...> &&senders, std::index_sequence<Is...>) -> StateTuple
             {
                 return {
-                    DelayedConstruct<connect_result_t<Sender, inner_rec<Is>>> { [&]() { return connect(std::forward<Sender>(std::get<Is>(senders)), inner_rec<Is> { this }); } }...
+                    DelayedConstruct { [&]() { return connect(std::forward<Sender>(std::get<Is>(senders)), inner_rec<Is> { this }); } }...
                 };
             }
 
@@ -1366,7 +1363,7 @@ namespace Execution {
             {
                 mValue.emplace(std::forward<V>(values)...);
                 construct(mInnerState,
-                    DelayedConstruct<inner_state> {
+                    DelayedConstruct {
                         [&]() { return connect(TupleUnpacker::invokeFromTuple(mF, *mValue), receiver<Rec, Sender, F, Rec &, inner_tag> { rec, this }); } });
                 mInnerState->start();
             }
@@ -1646,250 +1643,6 @@ namespace Execution {
 
     template <typename R>
     inline constexpr to_result_t<R> to_result;
-
-    struct with_query_value_t {
-
-        template <typename Rec, typename CPO, typename T>
-        struct receiver : algorithm_receiver<Rec> {
-
-            receiver(Rec &&rec, T &&queryResult)
-                : algorithm_receiver<Rec> { std::forward<Rec>(rec) }
-                , mQueryResult(std::forward<T>(queryResult))
-            {
-            }
-
-            friend T tag_invoke(CPO, receiver &rec)
-            {
-                return rec.mQueryResult;
-            }
-
-            T mQueryResult;
-        };
-
-        template <typename Sender, typename CPO, typename T>
-        struct sender : algorithm_sender<Sender> {
-
-            template <typename Rec>
-            friend auto tag_invoke(connect_t, sender &&sender, Rec &&rec)
-            {
-                return algorithm_state<Sender, receiver<Rec, CPO, T>> { std::forward<Sender>(sender.mSender), receiver<Rec, CPO, T> { std::forward<Rec>(rec), std::forward<T>(sender.mQueryResult) } };
-            }
-
-            T mQueryResult;
-        };
-
-        template <typename Sender, typename CPO, typename T>
-        friend auto tag_invoke(with_query_value_t, Sender &&inner, CPO cpo, T &&queryResult)
-        {
-            return sender<Sender, CPO, T> { { {}, std::forward<Sender>(inner) }, std::forward<T>(queryResult) };
-        }
-
-        template <typename Sender, typename CPO, typename T>
-            requires tag_invocable<with_query_value_t, Sender, CPO, T>
-        auto operator()(Sender &&sender, CPO cpo, T &&queryResult) const
-            noexcept(is_nothrow_tag_invocable_v<with_query_value_t, Sender, CPO, T>)
-                -> tag_invoke_result_t<with_query_value_t, Sender, CPO, T>
-        {
-            return tag_invoke(*this, std::forward<Sender>(sender), cpo, std::forward<T>(queryResult));
-        }
-
-        template <typename CPO, typename T>
-        auto operator()(CPO cpo, T &&queryResult) const
-        {
-            return pipable_from_right(*this, cpo, std::forward<T>(queryResult));
-        }
-    };
-
-    inline constexpr with_query_value_t with_query_value;
-
-    struct stop_when_t {
-
-        template <typename Rec, typename Inner, typename Trigger>
-        struct state;
-
-        template <typename Rec, typename Inner, typename Trigger>
-        struct receiver {
-
-            template <typename... V>
-            void set_value(V &&...value)
-            {
-                mState->set_value(std::forward<V>(value)...);
-            }
-
-            void set_done()
-            {
-                mState->set_done();
-            }
-
-            template <typename... R>
-            void set_error(R &&...result)
-            {
-                mState->set_error(std::forward<R>(result)...);
-            }
-
-            template <typename CPO, typename... Args>
-            friend auto tag_invoke(CPO f, receiver &rec, Args &&...args)
-                -> tag_invoke_result_t<CPO, Rec &, Args...>
-            {
-                return f(rec.mState->mRec, std::forward<Args>(args)...);
-            }
-
-            friend StopToken tag_invoke(get_stop_token_t, receiver &rec)
-            {
-                return rec.mState->mStopSource.get_token();
-            }
-
-            state<Rec, Inner, Trigger> *mState;
-        };
-
-        template <typename Rec, typename Inner, typename Trigger>
-        struct stop_receiver {
-            void set_value(auto &&...)
-            {
-                mState->stop();
-            }
-
-            void set_done()
-            {
-                mState->stop();
-            }
-
-            template <typename... R>
-            void set_error(R &&...result)
-            {
-                mState->stop();
-            }
-
-            template <typename CPO, typename... Args>
-            friend auto tag_invoke(CPO f, stop_receiver &rec, Args &&...args)
-                -> tag_invoke_result_t<CPO, Rec &, Args...>
-            {
-                return f(rec.mState->mRec, std::forward<Args>(args)...);
-            }
-
-            friend StopToken tag_invoke(get_stop_token_t, stop_receiver &rec)
-            {
-                return rec.mState->mStopSource.get_token();
-            }
-
-            state<Rec, Inner, Trigger> *mState;
-        };
-
-        template <typename Rec, typename Inner, typename Trigger>
-        struct state {
-
-            using inner_state = connect_result_t<stoppable_t::sender<Inner>, receiver<Rec, Inner, Trigger>>;
-            using stop_state = connect_result_t<stoppable_t::sender<Trigger>, stop_receiver<Rec, Inner, Trigger>>;
-
-            state(Rec &&rec, Inner &&sender, Trigger &&trigger)
-                : mRec(std::forward<Rec>(rec))
-                , mInnerState(connect(std::forward<Inner>(sender) | stoppable, receiver<Rec, Inner, Trigger> { this }))
-                , mStopState(connect(std::forward<Trigger>(trigger) | stoppable, stop_receiver<Rec, Inner, Trigger> { this }))
-            {
-            }
-
-            ~state() { }
-
-            void start()
-            {
-                mInnerState.start();
-                mStopState.start();
-            }
-
-            template <typename... V>
-            void set_value(V &&...values)
-            {
-                if (mStopSource.request_stop()) {
-                    mResult.set_value(std::forward<V>(values)...);
-                }
-                signal();
-            }
-            void set_done()
-            {
-                if (mStopSource.request_stop()) {
-                    mResult.set_done();
-                }
-                signal();
-            }
-            template <typename... R>
-            void set_error(R &&...results)
-            {
-                if (mStopSource.request_stop()) {
-                    mResult.set_error(std::forward<R>(results)...);
-                }
-                signal();
-            }
-
-            void stop()
-            {
-                mStopSource.request_stop();
-                signal();
-            }
-
-            void signal()
-            {
-                if (mFinished.test_and_set()) {
-                    if (mResult.is_null()) {
-                        mRec.set_value();
-                    } else {
-                        ResultStorage<Inner> { std::move(mResult) }.reproduce(mRec);
-                    }
-                }
-            }
-
-            friend void tag_invoke(visit_state_t, state *state, auto &&visitor)
-            {
-                visit_state(state ? &state->mStopState : nullptr, visitor);
-                visit_state(state ? &state->mInnerState : nullptr, visitor);
-            }
-
-            ResultStorage<Inner> mResult;
-            Rec mRec;
-            StopSource mStopSource;
-            inner_state mInnerState;
-            stop_state mStopState;
-            // stop_callback<> mPropagateCallback;
-            std::atomic_flag mFinished;
-        };
-
-        template <AnySender Inner, AnySender Trigger>
-        struct sender : algorithm_sender<Inner> {
-
-            template <template <typename...> typename Tuple>
-            using value_types = typename Inner::template value_types<Tuple>;
-
-            template <typename Rec>
-            friend auto tag_invoke(connect_t, sender &&sender, Rec &&rec)
-            {
-                return state<Rec, Inner, Trigger> { std::forward<Rec>(rec), std::forward<Inner>(sender.mSender), std::forward<Trigger>(sender.mTrigger) };
-            }
-
-            Trigger mTrigger;
-        };
-
-        template <AnySender Inner, AnySender Trigger>
-        friend auto tag_invoke(stop_when_t, Inner &&inner, Trigger &&trigger)
-        {
-            return sender<Inner, Trigger> { { {}, std::forward<Inner>(inner) }, std::forward<Trigger>(trigger) };
-        }
-
-        template <AnySender Inner, AnySender Trigger>
-            requires tag_invocable<stop_when_t, Inner, Trigger>
-        auto operator()(Inner &&sender, Trigger &&trigger) const
-            noexcept(is_nothrow_tag_invocable_v<stop_when_t, Inner, Trigger>)
-                -> tag_invoke_result_t<stop_when_t, Inner, Trigger>
-        {
-            return tag_invoke(*this, std::forward<Inner>(sender), std::forward<Trigger>(trigger));
-        }
-
-        template <AnySender Trigger>
-        auto operator()(Trigger &&trigger) const
-        {
-            return pipable_from_right(*this, std::forward<Trigger>(trigger));
-        }
-    };
-
-    inline constexpr stop_when_t stop_when;
 
     struct halt_t {
 

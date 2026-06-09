@@ -9,19 +9,7 @@
 #include "Meta/reflect/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
-#include "button.h"
 #include "compoundwidget.h"
-#include "image.h"
-#include "label.h"
-#include "layout.h"
-#include "scenewindow.h"
-#include "tabbar.h"
-#include "tablewidget.h"
-#include "textedit.h"
-#include "widget.h"
-#include "widgetcollector.h"
-#include "widgetmanager.h"
-#include "widgettemplate.h"
 
 RESOURCELOADER(Engine::Widgets::WidgetLoader)
 

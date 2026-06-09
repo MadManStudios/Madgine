@@ -1,6 +1,5 @@
 #pragma once
 
-#include "taskhandle.h"
 #include "taskpromisesharedstate.h"
 
 namespace Engine {

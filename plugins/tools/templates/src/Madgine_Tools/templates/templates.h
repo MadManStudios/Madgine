@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Generic/closure.h"
+
 #include "Madgine_Tools/toolbase.h"
 #include "Madgine_Tools/toolscollector.h"
 

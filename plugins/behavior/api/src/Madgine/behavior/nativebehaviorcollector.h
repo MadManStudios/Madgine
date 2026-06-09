@@ -2,7 +2,7 @@
 
 #include "behavior.h"
 #include "behaviorcollector.h"
-#include "parametertuple.h"
+#include "typedparametertuple.h"
 
 namespace Engine {
 namespace Behavior {

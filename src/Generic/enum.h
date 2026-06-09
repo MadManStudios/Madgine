@@ -1,7 +1,5 @@
 #pragma once
 
-#include "containers/bits/array.h"
-
 namespace Engine {
 
 struct EnumMetaTable {

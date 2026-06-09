@@ -1,14 +1,10 @@
 #pragma once
 
-#include "uniquecomponentregistry.h"
-
 namespace Engine {
 namespace Plugins {
 
-    template <typename Registry>
+    template <typename Registry, typename Base>
     struct Selector {
-        typedef typename Registry::Base Base;
-
         template <typename... Args>
         Selector(Args &&...args)
             : mValue(construct(Registry::sComponents().at(0), std::forward<Args>(args)...))

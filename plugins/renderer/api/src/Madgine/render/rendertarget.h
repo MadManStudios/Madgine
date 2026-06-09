@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Generic/containers/bits/array.h"
+
 #include "Meta/math/rect2i.h"
 
 #include "Madgine/render/resourceblock.h"

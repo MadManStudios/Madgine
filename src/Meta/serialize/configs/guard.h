@@ -13,7 +13,7 @@ namespace Serialize {
 
         static auto guard(const CallerHierarchyBasePtr &hierarchy) -> std::tuple<decltype(Guards::guard(hierarchy))...>
         {
-            return std::make_tuple(DelayedConstruct<decltype(Guards::guard(hierarchy))> { [&]() { return Guards::guard(hierarchy); } }...);
+            return std::make_tuple(DelayedConstruct { [&]() { return Guards::guard(hierarchy); } }...);
         }
     };
 

@@ -49,7 +49,7 @@ namespace Memory {
 
             template <typename... Args, typename... Sizes>
             BucketAllocatorImpl(type_pack<Sizes...>, Args &&...args)
-                : mBuckets { DelayedConstruct<helper<Sizes>> { [&]() { return helper<Sizes> { args... }; } }... }
+                : mBuckets { DelayedConstruct { [&]() { return helper<Sizes> { args... }; } }... }
             {
             }
 

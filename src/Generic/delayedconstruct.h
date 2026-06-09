@@ -1,18 +1,16 @@
 #pragma once
 
-#include "closure.h"
-
 namespace Engine {
 
-template <typename T>
+template <typename F>
 struct DelayedConstruct {
 
-    operator T()
+    operator std::invoke_result_t<F>()
     {
         return mConstructor();
     }
 
-    Closure<T()> mConstructor;
+    F mConstructor;
 };
 
 }

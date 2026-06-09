@@ -3,6 +3,7 @@
 #include "server.h"
 
 #include "Modules/threading/awaitables/awaitabletimepoint.h"
+#include "Modules/uniquecomponent/uniquecomponentregistry.h"
 
 #include "Meta/reflect/metatable_impl.h"
 

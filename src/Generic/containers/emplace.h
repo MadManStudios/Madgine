@@ -1,7 +1,5 @@
 #pragma once
 
-#include "container_traits.h"
-
 namespace Engine {
 namespace Containers {
 

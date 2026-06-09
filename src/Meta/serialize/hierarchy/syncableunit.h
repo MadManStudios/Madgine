@@ -4,6 +4,7 @@
 
 #include "../streams/pendingrequest.h"
 #include "serializableunit.h"
+#include "serializetable_forward.h"
 #include "syncfunction.h"
 
 namespace Engine {

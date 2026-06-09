@@ -4,7 +4,7 @@
 
 #include "Meta/serialize/streams/streamresult.h"
 
-#include "Madgine/behavior/parametertuple.h"
+#include "Madgine/behavior/typedparametertuple.h"
 
 #include "Meta/reflect/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"

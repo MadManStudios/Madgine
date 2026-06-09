@@ -2,7 +2,6 @@
 
 #include "binding.h"
 #include "concepts.h"
-#include "flag.h"
 #include "stop_callback.h"
 #include "stop_source.h"
 #include "stoppable.h"
