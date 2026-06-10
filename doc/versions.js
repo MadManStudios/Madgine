@@ -6,7 +6,7 @@ const versions = [
 versions.forEach(function (version) {
 
     var holder = document.createElement("div");
-    var url = window.location.href.replace(/out\/doc\/[^/]+\//, "out/doc/" + version + "/");
+    var url = window.location.href.replace(/doc\/[^/]+\//, "doc/" + version + "/");
     var dd = document.createElement("dd");
     var link = document.createElement("a");
 
