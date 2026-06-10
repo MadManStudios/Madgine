@@ -1,0 +1,862 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: Engine::Math::Vector4i Struct Reference &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../docs/README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/gettingstarted.html#starting-the-engine">Starting the Engine</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/howtos.html">How-Tos</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/howtos/build.html">Build Instructions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/howtos/build.html#dependencies">Dependencies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/howtos/build.html#setup-the-madgine">Setup The Madgine</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/howtos/build.html#generating-project-files">Generating Project Files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/howtos/build.html#build-configurations">Build Configurations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/howtos/firstUniqueComponent.html">Writing your first UniqueComponent</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/keyvalue.html">KeyValue</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/keyvalue.html#valuetype">ValueType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/keyvalue.html#metatables">MetaTables</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/logging.html">Logging</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/logging.html#message-types">Message Types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/logging.html#building-log-messages">Building Log Messages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/logging.html#default-log">Default Log</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/logging.html#log-listener">Log Listener</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/pluginsystem.html">Plugins &amp; Unique Components</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/pluginsystem.html#plugins">Plugins</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/pluginsystem.html#unique-components">Unique Components</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/serialize.html">Serialization &amp; Synchronization</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#fundamental-data-types">Fundamental Data Types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#unit-hierarchy">Unit Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#serializetables">SerializeTables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#streams">Streams</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#managers">Managers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#state-replication">State Replication</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/threading.html">Threads &amp; Asynchronous Execution</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/threading.html#threads">Threads</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/threading.html#tasks">Tasks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/threading.html#taskqueues">TaskQueues</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/threading.html#workgroups">Workgroups</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/threading.html#scheduler">Scheduler</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#our-pledge">Our Pledge</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#our-standards">Our Standards</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#our-responsibilities">Our Responsibilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#scope">Scope</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#enforcement">Enforcement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#attribution">Attribution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/architecture.html#core-libraries">Core Libraries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../docs/README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+    </ul>
+    <div class="info admonition rst-footer-buttons">
+        <div class="wy-btn-group">
+            <a class="btn btn-link" href="../../../../../index.html">Madgine Blog</a>
+            <a class="btn btn-info btn-mini float-right" href="../../../../../launcher_dev.html">Try live</a>
+        </div>
+    </div>
+    <ul class="wy-breadcrumbs">
+        
+      <li><a href="../../../docs/README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: Engine::Math::Vector4i Struct Reference</li>
+        
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/out/doc/doxygen/struct_engine_1_1_math_1_1_vector4i.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="vector4i-struct-reference">
+<h1>Vector4i Struct Reference<a class="headerlink" href="#vector4i-struct-reference" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: Engine::Math::Vector4i Struct Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.6.0</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespace_engine.html">Engine</a></li><li class="navelem"><a class="el" href="namespace_engine_1_1_math.html">Math</a></li><li class="navelem"><a class="el" href="struct_engine_1_1_math_1_1_vector4i.html">Vector4i</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="#pub-static-attribs">Static Public Attributes</a> &#124;
+<a href="#friends">Friends</a> &#124;
+<a href="struct_engine_1_1_math_1_1_vector4i-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">Engine::Math::Vector4i Struct Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;vector4i.h&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a16b5a24baa4b169e509ac4b52092d15f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector4i.html#a16b5a24baa4b169e509ac4b52092d15f">Vector4i</a> ()</td></tr>
+<tr class="separator:a16b5a24baa4b169e509ac4b52092d15f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af1c0982de2fec0d8371632a5712f6138"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector4i.html#af1c0982de2fec0d8371632a5712f6138">Vector4i</a> (const int afCoordinate[4])</td></tr>
+<tr class="separator:af1c0982de2fec0d8371632a5712f6138"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acca34946cb1036e8d08ea22ddb4a2ef4"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector4i.html#acca34946cb1036e8d08ea22ddb4a2ef4">Vector4i</a> (const int iX, const int iY, const int iZ, const int iW)</td></tr>
+<tr class="separator:acca34946cb1036e8d08ea22ddb4a2ef4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f6d7611c7e4a73acfa1ef087620a08a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector4i.html#a5f6d7611c7e4a73acfa1ef087620a08a">Vector4i</a> (const <a class="el" href="struct_engine_1_1_math_1_1_vector3i.html">Vector3i</a> &amp;xyz, const float <a class="el" href="struct_engine_1_1_math_1_1_vector4i.html#a61bd6fbe067601a9dd17ba901ce1d866">w</a>)</td></tr>
+<tr class="separator:a5f6d7611c7e4a73acfa1ef087620a08a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9174671ee1dc3d38e5115123183ea65"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="struct_engine_1_1_math_1_1_vector4i.html">Vector4i</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector4i.html#aa9174671ee1dc3d38e5115123183ea65">operator+</a> (const <a class="el" href="struct_engine_1_1_math_1_1_vector4i.html">Vector4i</a> &amp;other)</td></tr>
+<tr class="separator:aa9174671ee1dc3d38e5115123183ea65"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e2188bda5031a09eb50e3a33008ffd2"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="struct_engine_1_1_math_1_1_vector4i.html">Vector4i</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector4i.html#a2e2188bda5031a09eb50e3a33008ffd2">operator+=</a> (const <a class="el" href="struct_engine_1_1_math_1_1_vector4i.html">Vector4i</a> &amp;other)</td></tr>
+<tr class="separator:a2e2188bda5031a09eb50e3a33008ffd2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0bc5306452a61f0e7eab6427948eeb21"><td class="memItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector4i.html#a0bc5306452a61f0e7eab6427948eeb21">operator==</a> (const <a class="el" href="struct_engine_1_1_math_1_1_vector4i.html">Vector4i</a> &amp;other) const</td></tr>
+<tr class="separator:a0bc5306452a61f0e7eab6427948eeb21"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4fea170ff9d2276cd4fd18ae99a6f873"><td class="memItemLeft" align="right" valign="top">int &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector4i.html#a4fea170ff9d2276cd4fd18ae99a6f873">operator[]</a> (const size_t i)</td></tr>
+<tr class="separator:a4fea170ff9d2276cd4fd18ae99a6f873"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a581c4fee54587d4a684606595b430667"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector4i.html#a581c4fee54587d4a684606595b430667">operator[]</a> (const size_t i) const</td></tr>
+<tr class="separator:a581c4fee54587d4a684606595b430667"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac29e34c35a5cab93382f9203a9c45ba5"><td class="memItemLeft" align="right" valign="top">int *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector4i.html#ac29e34c35a5cab93382f9203a9c45ba5">ptr</a> ()</td></tr>
+<tr class="separator:ac29e34c35a5cab93382f9203a9c45ba5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b36de791b73ba8fe25507ead1c8cde4"><td class="memItemLeft" align="right" valign="top">const int *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector4i.html#a7b36de791b73ba8fe25507ead1c8cde4">ptr</a> () const</td></tr>
+<tr class="separator:a7b36de791b73ba8fe25507ead1c8cde4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d1bd94479ced2d8254ec8e4a64cd625"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_math_1_1_vector2i.html">Vector2i</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector4i.html#a8d1bd94479ced2d8254ec8e4a64cd625">xy</a> () const</td></tr>
+<tr class="memdesc:a8d1bd94479ced2d8254ec8e4a64cd625"><td class="mdescLeft">&#160;</td><td class="mdescRight">Swizzle-like narrowing operations.  <a href="struct_engine_1_1_math_1_1_vector4i.html#a8d1bd94479ced2d8254ec8e4a64cd625">More...</a><br /></td></tr>
+<tr class="separator:a8d1bd94479ced2d8254ec8e4a64cd625"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a61bd6fbe067601a9dd17ba901ce1d866"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector4i.html#a61bd6fbe067601a9dd17ba901ce1d866">w</a></td></tr>
+<tr class="separator:a61bd6fbe067601a9dd17ba901ce1d866"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a557270e1ebaca5124d9f26c3bf4f71fe"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector4i.html#a557270e1ebaca5124d9f26c3bf4f71fe">x</a></td></tr>
+<tr class="separator:a557270e1ebaca5124d9f26c3bf4f71fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad1c0af46cfaaff2bd9671169e99f9d33"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector4i.html#ad1c0af46cfaaff2bd9671169e99f9d33">y</a></td></tr>
+<tr class="separator:ad1c0af46cfaaff2bd9671169e99f9d33"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22c0d28273acf1b981da6c76cd9c9cf0"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector4i.html#a22c0d28273acf1b981da6c76cd9c9cf0">z</a></td></tr>
+<tr class="separator:a22c0d28273acf1b981da6c76cd9c9cf0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
+Static Public Attributes</h2></td></tr>
+<tr class="memitem:aec00c79b4d1ebc0eea01da63cbc59d93"><td class="memItemLeft" align="right" valign="top">static const constexpr int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector4i.html#aec00c79b4d1ebc0eea01da63cbc59d93">ZERO</a> [] { 0, 0, 0, 0 }</td></tr>
+<tr class="separator:aec00c79b4d1ebc0eea01da63cbc59d93"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
+Friends</h2></td></tr>
+<tr class="memitem:a07e6bade968385a8aa25ef8a17902470"><td class="memItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector4i.html#a07e6bade968385a8aa25ef8a17902470">operator&lt;&lt;</a> (std::ostream &amp;o, const <a class="el" href="struct_engine_1_1_math_1_1_vector4i.html">Vector4i</a> &amp;v)</td></tr>
+<tr class="separator:a07e6bade968385a8aa25ef8a17902470"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a14dd891b357640549f0221479cc01dce"><td class="memItemLeft" align="right" valign="top">std::istream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_math_1_1_vector4i.html#a14dd891b357640549f0221479cc01dce">operator&gt;&gt;</a> (std::istream &amp;in, <a class="el" href="struct_engine_1_1_math_1_1_vector4i.html">Vector4i</a> &amp;v)</td></tr>
+<tr class="separator:a14dd891b357640549f0221479cc01dce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a16b5a24baa4b169e509ac4b52092d15f" name="a16b5a24baa4b169e509ac4b52092d15f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a16b5a24baa4b169e509ac4b52092d15f">&#9670;&#160;</a></span>Vector4i() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::Math::Vector4i::Vector4i </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="acca34946cb1036e8d08ea22ddb4a2ef4" name="acca34946cb1036e8d08ea22ddb4a2ef4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acca34946cb1036e8d08ea22ddb4a2ef4">&#9670;&#160;</a></span>Vector4i() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr Engine::Math::Vector4i::Vector4i </td>
+          <td>(</td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>iX</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>iY</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>iZ</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>iW</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af1c0982de2fec0d8371632a5712f6138" name="af1c0982de2fec0d8371632a5712f6138"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af1c0982de2fec0d8371632a5712f6138">&#9670;&#160;</a></span>Vector4i() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr Engine::Math::Vector4i::Vector4i </td>
+          <td>(</td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>afCoordinate</em>[4]</td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5f6d7611c7e4a73acfa1ef087620a08a" name="a5f6d7611c7e4a73acfa1ef087620a08a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5f6d7611c7e4a73acfa1ef087620a08a">&#9670;&#160;</a></span>Vector4i() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::Math::Vector4i::Vector4i </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_math_1_1_vector3i.html">Vector3i</a> &amp;&#160;</td>
+          <td class="paramname"><em>xyz</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const float&#160;</td>
+          <td class="paramname"><em>w</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="aa9174671ee1dc3d38e5115123183ea65" name="aa9174671ee1dc3d38e5115123183ea65"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa9174671ee1dc3d38e5115123183ea65">&#9670;&#160;</a></span>operator+()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="struct_engine_1_1_math_1_1_vector4i.html">Vector4i</a> Engine::Math::Vector4i::operator+ </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_math_1_1_vector4i.html">Vector4i</a> &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2e2188bda5031a09eb50e3a33008ffd2" name="a2e2188bda5031a09eb50e3a33008ffd2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e2188bda5031a09eb50e3a33008ffd2">&#9670;&#160;</a></span>operator+=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="struct_engine_1_1_math_1_1_vector4i.html">Vector4i</a> &amp; Engine::Math::Vector4i::operator+= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_math_1_1_vector4i.html">Vector4i</a> &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0bc5306452a61f0e7eab6427948eeb21" name="a0bc5306452a61f0e7eab6427948eeb21"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0bc5306452a61f0e7eab6427948eeb21">&#9670;&#160;</a></span>operator==()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr bool Engine::Math::Vector4i::operator== </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_math_1_1_vector4i.html">Vector4i</a> &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a581c4fee54587d4a684606595b430667" name="a581c4fee54587d4a684606595b430667"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a581c4fee54587d4a684606595b430667">&#9670;&#160;</a></span>operator[]() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Engine::Math::Vector4i::operator[] </td>
+          <td>(</td>
+          <td class="paramtype">const size_t&#160;</td>
+          <td class="paramname"><em>i</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4fea170ff9d2276cd4fd18ae99a6f873" name="a4fea170ff9d2276cd4fd18ae99a6f873"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4fea170ff9d2276cd4fd18ae99a6f873">&#9670;&#160;</a></span>operator[]() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int &amp; Engine::Math::Vector4i::operator[] </td>
+          <td>(</td>
+          <td class="paramtype">const size_t&#160;</td>
+          <td class="paramname"><em>i</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac29e34c35a5cab93382f9203a9c45ba5" name="ac29e34c35a5cab93382f9203a9c45ba5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac29e34c35a5cab93382f9203a9c45ba5">&#9670;&#160;</a></span>ptr() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int * Engine::Math::Vector4i::ptr </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7b36de791b73ba8fe25507ead1c8cde4" name="a7b36de791b73ba8fe25507ead1c8cde4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7b36de791b73ba8fe25507ead1c8cde4">&#9670;&#160;</a></span>ptr() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int * Engine::Math::Vector4i::ptr </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8d1bd94479ced2d8254ec8e4a64cd625" name="a8d1bd94479ced2d8254ec8e4a64cd625"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8d1bd94479ced2d8254ec8e4a64cd625">&#9670;&#160;</a></span>xy()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_math_1_1_vector2i.html">Vector2i</a> Engine::Math::Vector4i::xy </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Swizzle-like narrowing operations. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Friends And Related Function Documentation</h2>
+<a id="a07e6bade968385a8aa25ef8a17902470" name="a07e6bade968385a8aa25ef8a17902470"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a07e6bade968385a8aa25ef8a17902470">&#9670;&#160;</a></span>operator&lt;&lt;</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::ostream &amp; operator&lt;&lt; </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>o</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_math_1_1_vector4i.html">Vector4i</a> &amp;&#160;</td>
+          <td class="paramname"><em>v</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a14dd891b357640549f0221479cc01dce" name="a14dd891b357640549f0221479cc01dce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a14dd891b357640549f0221479cc01dce">&#9670;&#160;</a></span>operator&gt;&gt;</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::istream &amp; operator&gt;&gt; </td>
+          <td>(</td>
+          <td class="paramtype">std::istream &amp;&#160;</td>
+          <td class="paramname"><em>in</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_math_1_1_vector4i.html">Vector4i</a> &amp;&#160;</td>
+          <td class="paramname"><em>v</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a557270e1ebaca5124d9f26c3bf4f71fe" name="a557270e1ebaca5124d9f26c3bf4f71fe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a557270e1ebaca5124d9f26c3bf4f71fe">&#9670;&#160;</a></span>x</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Engine::Math::Vector4i::x</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad1c0af46cfaaff2bd9671169e99f9d33" name="ad1c0af46cfaaff2bd9671169e99f9d33"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad1c0af46cfaaff2bd9671169e99f9d33">&#9670;&#160;</a></span>y</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Engine::Math::Vector4i::y</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a22c0d28273acf1b981da6c76cd9c9cf0" name="a22c0d28273acf1b981da6c76cd9c9cf0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a22c0d28273acf1b981da6c76cd9c9cf0">&#9670;&#160;</a></span>z</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Engine::Math::Vector4i::z</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a61bd6fbe067601a9dd17ba901ce1d866" name="a61bd6fbe067601a9dd17ba901ce1d866"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a61bd6fbe067601a9dd17ba901ce1d866">&#9670;&#160;</a></span>w</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Engine::Math::Vector4i::w</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aec00c79b4d1ebc0eea01da63cbc59d93" name="aec00c79b4d1ebc0eea01da63cbc59d93"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aec00c79b4d1ebc0eea01da63cbc59d93">&#9670;&#160;</a></span>ZERO</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const constexpr int Engine::Math::Vector4i::ZERO[] { 0, 0, 0, 0 }</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>src/Meta/math/<a class="el" href="vector4i_8h.html">vector4i.h</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Wed Jun 10 2026 21:25:33 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        Version: 0.6.0
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Versions</dt>
+            <script src="../../../../versions.js"></script>
+        </dl>
+    </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,852 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: Engine::Render::VulkanRenderTexture Struct Reference &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../docs/README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/gettingstarted.html#starting-the-engine">Starting the Engine</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/howtos.html">How-Tos</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/howtos/build.html">Build Instructions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/howtos/build.html#dependencies">Dependencies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/howtos/build.html#setup-the-madgine">Setup The Madgine</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/howtos/build.html#generating-project-files">Generating Project Files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/howtos/build.html#build-configurations">Build Configurations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/howtos/firstUniqueComponent.html">Writing your first UniqueComponent</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/keyvalue.html">KeyValue</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/keyvalue.html#valuetype">ValueType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/keyvalue.html#metatables">MetaTables</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/logging.html">Logging</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/logging.html#message-types">Message Types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/logging.html#building-log-messages">Building Log Messages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/logging.html#default-log">Default Log</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/logging.html#log-listener">Log Listener</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/pluginsystem.html">Plugins &amp; Unique Components</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/pluginsystem.html#plugins">Plugins</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/pluginsystem.html#unique-components">Unique Components</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/serialize.html">Serialization &amp; Synchronization</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#fundamental-data-types">Fundamental Data Types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#unit-hierarchy">Unit Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#serializetables">SerializeTables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#streams">Streams</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#managers">Managers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#state-replication">State Replication</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/threading.html">Threads &amp; Asynchronous Execution</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/threading.html#threads">Threads</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/threading.html#tasks">Tasks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/threading.html#taskqueues">TaskQueues</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/threading.html#workgroups">Workgroups</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/threading.html#scheduler">Scheduler</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#our-pledge">Our Pledge</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#our-standards">Our Standards</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#our-responsibilities">Our Responsibilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#scope">Scope</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#enforcement">Enforcement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#attribution">Attribution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/architecture.html#core-libraries">Core Libraries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../docs/README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+    </ul>
+    <div class="info admonition rst-footer-buttons">
+        <div class="wy-btn-group">
+            <a class="btn btn-link" href="../../../../../index.html">Madgine Blog</a>
+            <a class="btn btn-info btn-mini float-right" href="../../../../../launcher_dev.html">Try live</a>
+        </div>
+    </div>
+    <ul class="wy-breadcrumbs">
+        
+      <li><a href="../../../docs/README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: Engine::Render::VulkanRenderTexture Struct Reference</li>
+        
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/out/doc/doxygen/struct_engine_1_1_render_1_1_vulkan_render_texture.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="vulkanrendertexture-struct-reference">
+<h1>VulkanRenderTexture Struct Reference<a class="headerlink" href="#vulkanrendertexture-struct-reference" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: Engine::Render::VulkanRenderTexture Struct Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.6.0</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespace_engine.html">Engine</a></li><li class="navelem"><a class="el" href="namespace_engine_1_1_render.html">Render</a></li><li class="navelem"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_texture.html">VulkanRenderTexture</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="struct_engine_1_1_render_1_1_vulkan_render_texture-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">Engine::Render::VulkanRenderTexture Struct Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;vulkanrendertexture.h&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for Engine::Render::VulkanRenderTexture:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="struct_engine_1_1_render_1_1_vulkan_render_texture__inherit__graph.svg" width="206" height="286"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a765652d0ad08886c61f2c6c331610c0e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_texture.html#a765652d0ad08886c61f2c6c331610c0e">VulkanRenderTexture</a> (<a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_context.html">VulkanRenderContext</a> *<a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_target.html#a076ab08154ecfbb52735db107ad8ec1a">context</a>, const <a class="el" href="struct_engine_1_1_math_1_1_vector2i.html">Math::Vector2i</a> &amp;<a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_texture.html#a6a380c858e3965478233bcd3fee0b1c2">size</a>, const <a class="el" href="struct_engine_1_1_render_1_1_render_texture_config.html">RenderTextureConfig</a> &amp;config)</td></tr>
+<tr class="separator:a765652d0ad08886c61f2c6c331610c0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6122d29d342fb2383d8f174af4090ae2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_texture.html#a6122d29d342fb2383d8f174af4090ae2">~VulkanRenderTexture</a> ()</td></tr>
+<tr class="separator:a6122d29d342fb2383d8f174af4090ae2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aece3ab8328f030ac6268671119bef765"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_texture.html#aece3ab8328f030ac6268671119bef765">beginFrame</a> () override</td></tr>
+<tr class="separator:aece3ab8328f030ac6268671119bef765"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a454b57546cefffbec97351f0edbaf502"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_texture.html#a454b57546cefffbec97351f0edbaf502">beginIteration</a> (size_t targetIndex, size_t targetCount, size_t targetSubresourceIndex) const override</td></tr>
+<tr class="separator:a454b57546cefffbec97351f0edbaf502"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a53d344a7753d158facb5b0d20d415e7c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_texture.html#a53d344a7753d158facb5b0d20d415e7c">blit</a> (<a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> *input)</td></tr>
+<tr class="separator:a53d344a7753d158facb5b0d20d415e7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ec4685bf0c4a54513a8b569a47114d5"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_render_1_1_render_future.html">RenderFuture</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_texture.html#a6ec4685bf0c4a54513a8b569a47114d5">endFrame</a> () override</td></tr>
+<tr class="separator:a6ec4685bf0c4a54513a8b569a47114d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a23faf9a9b592a7349040a4f589a11f21"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_texture.html#a23faf9a9b592a7349040a4f589a11f21">endIteration</a> (size_t targetIndex, size_t targetCount, size_t targetSubresourceIndex) const override</td></tr>
+<tr class="separator:a23faf9a9b592a7349040a4f589a11f21"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab24ea5d1eb29fc57005bb1322f6fd46"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_texture.html#aab24ea5d1eb29fc57005bb1322f6fd46">resizeImpl</a> (const <a class="el" href="struct_engine_1_1_math_1_1_vector2i.html">Math::Vector2i</a> &amp;<a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_texture.html#a6a380c858e3965478233bcd3fee0b1c2">size</a>) override</td></tr>
+<tr class="separator:aab24ea5d1eb29fc57005bb1322f6fd46"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a380c858e3965478233bcd3fee0b1c2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_math_1_1_vector2i.html">Math::Vector2i</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_texture.html#a6a380c858e3965478233bcd3fee0b1c2">size</a> () const override</td></tr>
+<tr class="separator:a6a380c858e3965478233bcd3fee0b1c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5fd20ae9b6761c58e377415d42ea3416"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespace_engine_1_1_render.html#af28920ed5a8250ed3c89905c6bdd7ebc">ConstTexturePtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_texture.html#a5fd20ae9b6761c58e377415d42ea3416">texture</a> (size_t index) const override</td></tr>
+<tr class="separator:a5fd20ae9b6761c58e377415d42ea3416"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d3187d9a46989d2b05fd2e5335e151d"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_texture.html#a6d3187d9a46989d2b05fd2e5335e151d">textureCount</a> () const override</td></tr>
+<tr class="separator:a6d3187d9a46989d2b05fd2e5335e151d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa04cf903a5a73a5ba4008d888181b824"><td class="memItemLeft" align="right" valign="top">const std::vector&lt; std::shared_ptr&lt; <a class="el" href="struct_engine_1_1_render_1_1_vulkan_texture.html">VulkanTexture</a> &gt; &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_texture.html#aa04cf903a5a73a5ba4008d888181b824">textures</a> () const</td></tr>
+<tr class="separator:aa04cf903a5a73a5ba4008d888181b824"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_struct_engine_1_1_render_1_1_vulkan_render_target"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_struct_engine_1_1_render_1_1_vulkan_render_target')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_target.html">Engine::Render::VulkanRenderTarget</a></td></tr>
+<tr class="memitem:a3a5c4e47bdab738651344cf26c8d5158 inherit pub_methods_struct_engine_1_1_render_1_1_vulkan_render_target"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_target.html#a3a5c4e47bdab738651344cf26c8d5158">VulkanRenderTarget</a> (<a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_context.html">VulkanRenderContext</a> *<a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_target.html#a076ab08154ecfbb52735db107ad8ec1a">context</a>, bool global, std::string <a class="el" href="struct_engine_1_1_render_1_1_render_target.html#a0873448c0238810865cf1f8ccbc81697">name</a>, <a class="el" href="namespace_engine_1_1_render.html#a9a12599617d3227875517fefba34a691">TextureType</a> type, size_t <a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_target.html#a0520653f113a58f8f94bd3f6b908e3da">samples</a>=1, <a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> *<a class="el" href="struct_engine_1_1_render_1_1_render_target.html#a2747fa885cc2bd1888164ed5cbaaeacd">blitSource</a>=nullptr)</td></tr>
+<tr class="separator:a3a5c4e47bdab738651344cf26c8d5158 inherit pub_methods_struct_engine_1_1_render_1_1_vulkan_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af614a11334ee805862d301a9d35713ad inherit pub_methods_struct_engine_1_1_render_1_1_vulkan_render_target"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_target.html#af614a11334ee805862d301a9d35713ad">~VulkanRenderTarget</a> ()</td></tr>
+<tr class="separator:af614a11334ee805862d301a9d35713ad inherit pub_methods_struct_engine_1_1_render_1_1_vulkan_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a13477ddada64d7b556eee597510afd3c inherit pub_methods_struct_engine_1_1_render_1_1_vulkan_render_target"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_target.html#a13477ddada64d7b556eee597510afd3c">beginFrame</a> () override</td></tr>
+<tr class="separator:a13477ddada64d7b556eee597510afd3c inherit pub_methods_struct_engine_1_1_render_1_1_vulkan_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a90910f3c9f95a4e97414db4a6ac62455 inherit pub_methods_struct_engine_1_1_render_1_1_vulkan_render_target"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_target.html#a90910f3c9f95a4e97414db4a6ac62455">beginIteration</a> (size_t targetIndex, size_t targetCount, size_t targetSubresourceIndex) const override</td></tr>
+<tr class="separator:a90910f3c9f95a4e97414db4a6ac62455 inherit pub_methods_struct_engine_1_1_render_1_1_vulkan_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a66cbf4906c28da082007eaf82d5a1806 inherit pub_methods_struct_engine_1_1_render_1_1_vulkan_render_target"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_target.html#a66cbf4906c28da082007eaf82d5a1806">clearDepthBuffer</a> () override</td></tr>
+<tr class="separator:a66cbf4906c28da082007eaf82d5a1806 inherit pub_methods_struct_engine_1_1_render_1_1_vulkan_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a076ab08154ecfbb52735db107ad8ec1a inherit pub_methods_struct_engine_1_1_render_1_1_vulkan_render_target"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_context.html">VulkanRenderContext</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_target.html#a076ab08154ecfbb52735db107ad8ec1a">context</a> () const</td></tr>
+<tr class="separator:a076ab08154ecfbb52735db107ad8ec1a inherit pub_methods_struct_engine_1_1_render_1_1_vulkan_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1723fce0481cbd4fdb9a419f7239fe18 inherit pub_methods_struct_engine_1_1_render_1_1_vulkan_render_target"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_target.html#a1723fce0481cbd4fdb9a419f7239fe18">createRenderPass</a> (size_t colorAttachmentCount, VkFormat format, VkImageLayout layout, bool createDepthBufferView, std::span&lt; VkSubpassDependency &gt; dependencies)</td></tr>
+<tr class="separator:a1723fce0481cbd4fdb9a419f7239fe18 inherit pub_methods_struct_engine_1_1_render_1_1_vulkan_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc6e658f8fd2491b66c9f8ae2eb3d0ac inherit pub_methods_struct_engine_1_1_render_1_1_vulkan_render_target"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespace_engine_1_1_render.html#af28920ed5a8250ed3c89905c6bdd7ebc">ConstTexturePtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_target.html#adc6e658f8fd2491b66c9f8ae2eb3d0ac">depthTexture</a> () const override</td></tr>
+<tr class="separator:adc6e658f8fd2491b66c9f8ae2eb3d0ac inherit pub_methods_struct_engine_1_1_render_1_1_vulkan_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a580e68cc62a1dd92c790faf8ffb3d5cf inherit pub_methods_struct_engine_1_1_render_1_1_vulkan_render_target"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_render_1_1_render_future.html">RenderFuture</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_target.html#a580e68cc62a1dd92c790faf8ffb3d5cf">endFrame</a> () override</td></tr>
+<tr class="separator:a580e68cc62a1dd92c790faf8ffb3d5cf inherit pub_methods_struct_engine_1_1_render_1_1_vulkan_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a307da3de4d0d29fea3ecda5c120837 inherit pub_methods_struct_engine_1_1_render_1_1_vulkan_render_target"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_target.html#a5a307da3de4d0d29fea3ecda5c120837">endIteration</a> (size_t targetIndex, size_t targetCount, size_t targetSubresourceIndex) const override</td></tr>
+<tr class="separator:a5a307da3de4d0d29fea3ecda5c120837 inherit pub_methods_struct_engine_1_1_render_1_1_vulkan_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ee17050ba6b8ff6a499f4f574f18c0b inherit pub_methods_struct_engine_1_1_render_1_1_vulkan_render_target"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_math_1_1_matrix4.html">Math::Matrix4</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_target.html#a7ee17050ba6b8ff6a499f4f574f18c0b">getClipSpaceMatrix</a> () const override</td></tr>
+<tr class="separator:a7ee17050ba6b8ff6a499f4f574f18c0b inherit pub_methods_struct_engine_1_1_render_1_1_vulkan_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21e514c2ccd881c44e5371b78422a39b inherit pub_methods_struct_engine_1_1_render_1_1_vulkan_render_target"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_target.html#a21e514c2ccd881c44e5371b78422a39b">popAnnotation</a> () override</td></tr>
+<tr class="separator:a21e514c2ccd881c44e5371b78422a39b inherit pub_methods_struct_engine_1_1_render_1_1_vulkan_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad1c664afe7d262e06c1982d3d0a3d8d1 inherit pub_methods_struct_engine_1_1_render_1_1_vulkan_render_target"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_target.html#ad1c664afe7d262e06c1982d3d0a3d8d1">pushAnnotation</a> (const char *tag) override</td></tr>
+<tr class="separator:ad1c664afe7d262e06c1982d3d0a3d8d1 inherit pub_methods_struct_engine_1_1_render_1_1_vulkan_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0520653f113a58f8f94bd3f6b908e3da inherit pub_methods_struct_engine_1_1_render_1_1_vulkan_render_target"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_target.html#a0520653f113a58f8f94bd3f6b908e3da">samples</a> () const</td></tr>
+<tr class="separator:a0520653f113a58f8f94bd3f6b908e3da inherit pub_methods_struct_engine_1_1_render_1_1_vulkan_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e2095e4ac15fd055ab14753b570e4f5 inherit pub_methods_struct_engine_1_1_render_1_1_vulkan_render_target"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_target.html#a3e2095e4ac15fd055ab14753b570e4f5">setRenderSpace</a> (const <a class="el" href="struct_engine_1_1_math_1_1_rect2i.html">Math::Rect2i</a> &amp;space) override</td></tr>
+<tr class="separator:a3e2095e4ac15fd055ab14753b570e4f5 inherit pub_methods_struct_engine_1_1_render_1_1_vulkan_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a294ca36f41572e821d28ae2c46675c4e inherit pub_methods_struct_engine_1_1_render_1_1_vulkan_render_target"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_target.html#a294ca36f41572e821d28ae2c46675c4e">setScissorsRect</a> (const <a class="el" href="struct_engine_1_1_math_1_1_rect2i.html">Math::Rect2i</a> &amp;space) override</td></tr>
+<tr class="separator:a294ca36f41572e821d28ae2c46675c4e inherit pub_methods_struct_engine_1_1_render_1_1_vulkan_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab006bc63382401eddf9b738ddf768fca inherit pub_methods_struct_engine_1_1_render_1_1_vulkan_render_target"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_target.html#ab006bc63382401eddf9b738ddf768fca">setup</a> (const <a class="el" href="struct_engine_1_1_math_1_1_vector2i.html">Math::Vector2i</a> &amp;framebufferSize, const <a class="el" href="struct_engine_1_1_math_1_1_vector2i.html">Math::Vector2i</a> &amp;<a class="el" href="struct_engine_1_1_render_1_1_render_target.html#a90a2018d33374208d352a6feb171ee0d">size</a>, bool createDepthBufferView=false)</td></tr>
+<tr class="separator:ab006bc63382401eddf9b738ddf768fca inherit pub_methods_struct_engine_1_1_render_1_1_vulkan_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_struct_engine_1_1_render_1_1_render_target"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_struct_engine_1_1_render_1_1_render_target')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="struct_engine_1_1_render_1_1_render_target.html">Engine::Render::RenderTarget</a></td></tr>
+<tr class="memitem:ac626203a369c26235cefc4e44f312b08 inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html#ac626203a369c26235cefc4e44f312b08">RenderTarget</a> (const <a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> &amp;)=delete</td></tr>
+<tr class="separator:ac626203a369c26235cefc4e44f312b08 inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab0c8d043fa3498d1bc1fa0facdbd98dd inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html#ab0c8d043fa3498d1bc1fa0facdbd98dd">RenderTarget</a> (<a class="el" href="struct_engine_1_1_render_1_1_render_context.html">RenderContext</a> *<a class="el" href="struct_engine_1_1_render_1_1_render_target.html#ad2395ca58380ea839954230afa16efca">context</a>, bool global, std::string <a class="el" href="struct_engine_1_1_render_1_1_render_target.html#a0873448c0238810865cf1f8ccbc81697">name</a>, bool flipFlop=false, <a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> *<a class="el" href="struct_engine_1_1_render_1_1_render_target.html#a2747fa885cc2bd1888164ed5cbaaeacd">blitSource</a>=nullptr)</td></tr>
+<tr class="separator:ab0c8d043fa3498d1bc1fa0facdbd98dd inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a499990b5e234abef69b31ca12919bfb8 inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html#a499990b5e234abef69b31ca12919bfb8">RenderTarget</a> (<a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> &amp;&amp;)=default</td></tr>
+<tr class="separator:a499990b5e234abef69b31ca12919bfb8 inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a20fe88691669b697b4779be732536573 inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html#a20fe88691669b697b4779be732536573">~RenderTarget</a> ()</td></tr>
+<tr class="separator:a20fe88691669b697b4779be732536573 inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb368199097f37374e1c30996e322d82 inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html#abb368199097f37374e1c30996e322d82">addRenderPass</a> (<a class="el" href="struct_engine_1_1_render_1_1_render_pass.html">RenderPass</a> *pass)</td></tr>
+<tr class="separator:abb368199097f37374e1c30996e322d82 inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae5ff776af1d09a65b1ef98380966bb81 inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html#ae5ff776af1d09a65b1ef98380966bb81">beginFrame</a> ()</td></tr>
+<tr class="separator:ae5ff776af1d09a65b1ef98380966bb81 inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1080b1d0ae1d3bde2283c3a2e059b242 inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html#a1080b1d0ae1d3bde2283c3a2e059b242">beginIteration</a> (size_t targetIndex, size_t targetCount, size_t targetSubresourceIndex) const</td></tr>
+<tr class="separator:a1080b1d0ae1d3bde2283c3a2e059b242 inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2747fa885cc2bd1888164ed5cbaaeacd inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html#a2747fa885cc2bd1888164ed5cbaaeacd">blitSource</a> () const</td></tr>
+<tr class="separator:a2747fa885cc2bd1888164ed5cbaaeacd inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a16fc99c5c2848abd47d1bde86b41d2c1 inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html#a16fc99c5c2848abd47d1bde86b41d2c1">canFlipFlop</a> () const</td></tr>
+<tr class="separator:a16fc99c5c2848abd47d1bde86b41d2c1 inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a25e721c5dd8e8d285678fe8af65e5e04 inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html#a25e721c5dd8e8d285678fe8af65e5e04">clearDepthBuffer</a> ()=0</td></tr>
+<tr class="separator:a25e721c5dd8e8d285678fe8af65e5e04 inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad2395ca58380ea839954230afa16efca inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_render_1_1_render_context.html">RenderContext</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html#ad2395ca58380ea839954230afa16efca">context</a> () const</td></tr>
+<tr class="separator:ad2395ca58380ea839954230afa16efca inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b0914233a01849b158daa86f944be46 inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespace_engine_1_1_render.html#af28920ed5a8250ed3c89905c6bdd7ebc">ConstTexturePtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html#a0b0914233a01849b158daa86f944be46">depthTexture</a> () const</td></tr>
+<tr class="separator:a0b0914233a01849b158daa86f944be46 inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7071a75cedfe22adaf15e8a5cc63728e inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_render_1_1_render_future.html">RenderFuture</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html#a7071a75cedfe22adaf15e8a5cc63728e">endFrame</a> ()</td></tr>
+<tr class="separator:a7071a75cedfe22adaf15e8a5cc63728e inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8eb092c7134d57cf8335132dfa84002e inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html#a8eb092c7134d57cf8335132dfa84002e">endIteration</a> (size_t targetIndex, size_t targetCount, size_t targetSubresourceIndex) const</td></tr>
+<tr class="separator:a8eb092c7134d57cf8335132dfa84002e inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a9bd4d161d67444ade9050072d749e4 inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_math_1_1_matrix4.html">Math::Matrix4</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html#a6a9bd4d161d67444ade9050072d749e4">getClipSpaceMatrix</a> () const</td></tr>
+<tr class="separator:a6a9bd4d161d67444ade9050072d749e4 inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0873448c0238810865cf1f8ccbc81697 inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memItemLeft" align="right" valign="top">const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html#a0873448c0238810865cf1f8ccbc81697">name</a> () const</td></tr>
+<tr class="separator:a0873448c0238810865cf1f8ccbc81697 inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae9bdbe66f93b4b51fd760550089093f7 inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html#ae9bdbe66f93b4b51fd760550089093f7">popAnnotation</a> ()=0</td></tr>
+<tr class="separator:ae9bdbe66f93b4b51fd760550089093f7 inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f085594aa1733a009c437cf17012fae inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html#a1f085594aa1733a009c437cf17012fae">pushAnnotation</a> (const char *tag)=0</td></tr>
+<tr class="separator:a1f085594aa1733a009c437cf17012fae inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a680a8a8b22a4b275accea3e342f4f4b9 inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html#a680a8a8b22a4b275accea3e342f4f4b9">removeRenderPass</a> (<a class="el" href="struct_engine_1_1_render_1_1_render_pass.html">RenderPass</a> *pass)</td></tr>
+<tr class="separator:a680a8a8b22a4b275accea3e342f4f4b9 inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b0afbe0f2aff671b107c4495b8b9101 inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memItemLeft" align="right" valign="top">const std::vector&lt; <a class="el" href="struct_engine_1_1_render_1_1_render_pass.html">RenderPass</a> * &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html#a2b0afbe0f2aff671b107c4495b8b9101">renderPasses</a> ()</td></tr>
+<tr class="separator:a2b0afbe0f2aff671b107c4495b8b9101 inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aabc9b7e92937cdef54889521ee2480f5 inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memItemLeft" align="right" valign="top">std::vector&lt; const <a class="el" href="struct_engine_1_1_render_1_1_render_pass.html">RenderPass</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html#aabc9b7e92937cdef54889521ee2480f5">renderPasses</a> () const</td></tr>
+<tr class="separator:aabc9b7e92937cdef54889521ee2480f5 inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab3e6159b787231baf396c8a0008fe52d inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="struct_engine_1_1_math_1_1_rect2i.html">Math::Rect2i</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html#ab3e6159b787231baf396c8a0008fe52d">renderSpace</a> () const</td></tr>
+<tr class="separator:ab3e6159b787231baf396c8a0008fe52d inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6581500d2f59f757c6fd57f8fa9984f3 inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html#a6581500d2f59f757c6fd57f8fa9984f3">resize</a> (const <a class="el" href="struct_engine_1_1_math_1_1_vector2i.html">Math::Vector2i</a> &amp;<a class="el" href="struct_engine_1_1_render_1_1_render_target.html#a90a2018d33374208d352a6feb171ee0d">size</a>)</td></tr>
+<tr class="separator:a6581500d2f59f757c6fd57f8fa9984f3 inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac81f37928d763c69b9c415b0eaa50fc7 inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html#ac81f37928d763c69b9c415b0eaa50fc7">resizeImpl</a> (const <a class="el" href="struct_engine_1_1_math_1_1_vector2i.html">Math::Vector2i</a> &amp;<a class="el" href="struct_engine_1_1_render_1_1_render_target.html#a90a2018d33374208d352a6feb171ee0d">size</a>)=0</td></tr>
+<tr class="separator:ac81f37928d763c69b9c415b0eaa50fc7 inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3530873bfcd0c63ed0e07458786e9099 inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html#a3530873bfcd0c63ed0e07458786e9099">setRenderSpace</a> (const <a class="el" href="struct_engine_1_1_math_1_1_rect2i.html">Math::Rect2i</a> &amp;space)</td></tr>
+<tr class="separator:a3530873bfcd0c63ed0e07458786e9099 inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a93b961828642866394e1953b6ee869ac inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html#a93b961828642866394e1953b6ee869ac">setScissorsRect</a> (const <a class="el" href="struct_engine_1_1_math_1_1_rect2i.html">Math::Rect2i</a> &amp;space)=0</td></tr>
+<tr class="separator:a93b961828642866394e1953b6ee869ac inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a90a2018d33374208d352a6feb171ee0d inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_math_1_1_vector2i.html">Math::Vector2i</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html#a90a2018d33374208d352a6feb171ee0d">size</a> () const =0</td></tr>
+<tr class="separator:a90a2018d33374208d352a6feb171ee0d inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a19ffa9a1f2f74c7c7f81853116e3834d inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html#a19ffa9a1f2f74c7c7f81853116e3834d">skipFrame</a> ()</td></tr>
+<tr class="separator:a19ffa9a1f2f74c7c7f81853116e3834d inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aafe32d6a8d319c216ac89a09fe221b57 inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespace_engine_1_1_render.html#af28920ed5a8250ed3c89905c6bdd7ebc">ConstTexturePtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html#aafe32d6a8d319c216ac89a09fe221b57">texture</a> (size_t index=0) const</td></tr>
+<tr class="separator:aafe32d6a8d319c216ac89a09fe221b57 inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac23a9dd5501a65dd5993588b1470e369 inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html#ac23a9dd5501a65dd5993588b1470e369">textureCount</a> () const</td></tr>
+<tr class="separator:ac23a9dd5501a65dd5993588b1470e369 inherit pub_methods_struct_engine_1_1_render_1_1_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_struct_engine_1_1_render_1_1_render_data"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_struct_engine_1_1_render_1_1_render_data')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="struct_engine_1_1_render_1_1_render_data.html">Engine::Render::RenderData</a></td></tr>
+<tr class="memitem:a263068e2788bfd71831464a93054bdc3 inherit pub_methods_struct_engine_1_1_render_1_1_render_data"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_render_1_1_render_future.html">RenderFuture</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_data.html#a263068e2788bfd71831464a93054bdc3">lastFrame</a> () const</td></tr>
+<tr class="separator:a263068e2788bfd71831464a93054bdc3 inherit pub_methods_struct_engine_1_1_render_1_1_render_data"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a153f8656c9c5bba3fa459690ba877035 inherit pub_methods_struct_engine_1_1_render_1_1_render_data"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_threading_1_1_task_future.html">Threading::TaskFuture</a>&lt; <a class="el" href="struct_engine_1_1_render_1_1_render_future.html">RenderFuture</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_data.html#a153f8656c9c5bba3fa459690ba877035">update</a> (<a class="el" href="struct_engine_1_1_render_1_1_render_context.html">RenderContext</a> *context)</td></tr>
+<tr class="separator:a153f8656c9c5bba3fa459690ba877035 inherit pub_methods_struct_engine_1_1_render_1_1_render_data"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:a9165ca88893214f311b008b679edeab3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_texture.html#a9165ca88893214f311b008b679edeab3">createRenderPass</a> ()</td></tr>
+<tr class="separator:a9165ca88893214f311b008b679edeab3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_methods_struct_engine_1_1_render_1_1_render_target"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_struct_engine_1_1_render_1_1_render_target')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="struct_engine_1_1_render_1_1_render_target.html">Engine::Render::RenderTarget</a></td></tr>
+<tr class="memitem:a909fdb20d6cde2c078c4a616b4e0a9c0 inherit pro_methods_struct_engine_1_1_render_1_1_render_target"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html#a909fdb20d6cde2c078c4a616b4e0a9c0">flipTextures</a> (size_t startIndex, size_t count)</td></tr>
+<tr class="separator:a909fdb20d6cde2c078c4a616b4e0a9c0 inherit pro_methods_struct_engine_1_1_render_1_1_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab53ec031a5cb44377be1c401ad2abf46 inherit pro_methods_struct_engine_1_1_render_1_1_render_target"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespace_engine_1_1_threading.html#a19fdd8ee5e722502a18f3a0bfc61873a">Threading::ImmediateTask</a>&lt; <a class="el" href="struct_engine_1_1_render_1_1_render_future.html">RenderFuture</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html#ab53ec031a5cb44377be1c401ad2abf46">render</a> (<a class="el" href="struct_engine_1_1_render_1_1_render_context.html">RenderContext</a> *<a class="el" href="struct_engine_1_1_render_1_1_render_target.html#ad2395ca58380ea839954230afa16efca">context</a>) override</td></tr>
+<tr class="separator:ab53ec031a5cb44377be1c401ad2abf46 inherit pro_methods_struct_engine_1_1_render_1_1_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a955982d57bac58ed4a1c44e2402c23f0"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespace_engine_1_1_threading.html#a19fdd8ee5e722502a18f3a0bfc61873a">Threading::ImmediateTask</a>&lt; <a class="el" href="struct_engine_1_1_render_1_1_render_future.html">RenderFuture</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_data.html#a955982d57bac58ed4a1c44e2402c23f0">render</a> (<a class="el" href="struct_engine_1_1_render_1_1_render_context.html">RenderContext</a> *context)=0</td></tr>
+<tr class="separator:a955982d57bac58ed4a1c44e2402c23f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pub_attribs_struct_engine_1_1_render_1_1_vulkan_render_target"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_struct_engine_1_1_render_1_1_vulkan_render_target')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_target.html">Engine::Render::VulkanRenderTarget</a></td></tr>
+<tr class="memitem:a039850cf24ba7a3c707b5512d1a74d78 inherit pub_attribs_struct_engine_1_1_render_1_1_vulkan_render_target"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_math_1_1_vector2i.html">Math::Vector2i</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_target.html#a039850cf24ba7a3c707b5512d1a74d78">mBufferSize</a></td></tr>
+<tr class="separator:a039850cf24ba7a3c707b5512d1a74d78 inherit pub_attribs_struct_engine_1_1_render_1_1_vulkan_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a874c89fc00508224890bdef44593b329 inherit pub_attribs_struct_engine_1_1_render_1_1_vulkan_render_target"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_command_list.html">VulkanCommandList</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_target.html#a874c89fc00508224890bdef44593b329">mCommandList</a></td></tr>
+<tr class="separator:a874c89fc00508224890bdef44593b329 inherit pub_attribs_struct_engine_1_1_render_1_1_vulkan_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd8674cb7fbe055bd84809ab4fb7bda1 inherit pub_attribs_struct_engine_1_1_render_1_1_vulkan_render_target"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="struct_engine_1_1_render_1_1_vulkan_texture.html">VulkanTexture</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_target.html#abd8674cb7fbe055bd84809ab4fb7bda1">mDepthTexture</a></td></tr>
+<tr class="separator:abd8674cb7fbe055bd84809ab4fb7bda1 inherit pub_attribs_struct_engine_1_1_render_1_1_vulkan_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a917236a7216b0a99b233357c4c37e22a inherit pub_attribs_struct_engine_1_1_render_1_1_vulkan_render_target"><td class="memItemLeft" align="right" valign="top">VkFramebuffer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_target.html#a917236a7216b0a99b233357c4c37e22a">mFramebuffer</a></td></tr>
+<tr class="separator:a917236a7216b0a99b233357c4c37e22a inherit pub_attribs_struct_engine_1_1_render_1_1_vulkan_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4da9e01928a2723b93cdb381c52cc7f5 inherit pub_attribs_struct_engine_1_1_render_1_1_vulkan_render_target"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_ptr.html">VulkanPtr</a>&lt; VkRenderPass, &amp;vkDestroyRenderPass &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_target.html#a4da9e01928a2723b93cdb381c52cc7f5">mRenderPass</a></td></tr>
+<tr class="separator:a4da9e01928a2723b93cdb381c52cc7f5 inherit pub_attribs_struct_engine_1_1_render_1_1_vulkan_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a60d7ee88ef1ca2d48ac6719e26adecfc inherit pub_attribs_struct_engine_1_1_render_1_1_vulkan_render_target"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_ptr.html">VulkanPtr</a>&lt; VkSemaphore, &amp;vkDestroySemaphore &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_target.html#a60d7ee88ef1ca2d48ac6719e26adecfc">mRenderSemaphore</a></td></tr>
+<tr class="separator:a60d7ee88ef1ca2d48ac6719e26adecfc inherit pub_attribs_struct_engine_1_1_render_1_1_vulkan_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add960b4bb104fc8a63bb3f94f007bd42 inherit pub_attribs_struct_engine_1_1_render_1_1_vulkan_render_target"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_target.html#add960b4bb104fc8a63bb3f94f007bd42">mSamples</a></td></tr>
+<tr class="separator:add960b4bb104fc8a63bb3f94f007bd42 inherit pub_attribs_struct_engine_1_1_render_1_1_vulkan_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f0d1f57e9cb4fe7547cce87345ad502 inherit pub_attribs_struct_engine_1_1_render_1_1_vulkan_render_target"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_math_1_1_vector2i.html">Math::Vector2i</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_target.html#a3f0d1f57e9cb4fe7547cce87345ad502">mSize</a></td></tr>
+<tr class="separator:a3f0d1f57e9cb4fe7547cce87345ad502 inherit pub_attribs_struct_engine_1_1_render_1_1_vulkan_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_attribs_struct_engine_1_1_render_1_1_render_target"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_struct_engine_1_1_render_1_1_render_target')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="struct_engine_1_1_render_1_1_render_target.html">Engine::Render::RenderTarget</a></td></tr>
+<tr class="memitem:aa75e36912c84ca342f2ccda70b92efc1 inherit pro_attribs_struct_engine_1_1_render_1_1_render_target"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html#aa75e36912c84ca342f2ccda70b92efc1">mBlitSource</a></td></tr>
+<tr class="separator:aa75e36912c84ca342f2ccda70b92efc1 inherit pro_attribs_struct_engine_1_1_render_1_1_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e5ceb670f7ef9e667ac867fd492224f inherit pro_attribs_struct_engine_1_1_render_1_1_render_target"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_render_1_1_render_context.html">RenderContext</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html#a7e5ceb670f7ef9e667ac867fd492224f">mContext</a></td></tr>
+<tr class="separator:a7e5ceb670f7ef9e667ac867fd492224f inherit pro_attribs_struct_engine_1_1_render_1_1_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a95ec3233a2098787e6b9a1447ed0c250 inherit pro_attribs_struct_engine_1_1_render_1_1_render_target"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_containers_1_1_bit_array.html">Containers::BitArray</a>&lt; 4 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html#a95ec3233a2098787e6b9a1447ed0c250">mFlipFlopIndices</a></td></tr>
+<tr class="separator:a95ec3233a2098787e6b9a1447ed0c250 inherit pro_attribs_struct_engine_1_1_render_1_1_render_target"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a765652d0ad08886c61f2c6c331610c0e" name="a765652d0ad08886c61f2c6c331610c0e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a765652d0ad08886c61f2c6c331610c0e">&#9670;&#160;</a></span>VulkanRenderTexture()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::Render::VulkanRenderTexture::VulkanRenderTexture </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_context.html">VulkanRenderContext</a> *&#160;</td>
+          <td class="paramname"><em>context</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_math_1_1_vector2i.html">Math::Vector2i</a> &amp;&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_render_1_1_render_texture_config.html">RenderTextureConfig</a> &amp;&#160;</td>
+          <td class="paramname"><em>config</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6122d29d342fb2383d8f174af4090ae2" name="a6122d29d342fb2383d8f174af4090ae2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6122d29d342fb2383d8f174af4090ae2">&#9670;&#160;</a></span>~VulkanRenderTexture()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::Render::VulkanRenderTexture::~VulkanRenderTexture </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="aab24ea5d1eb29fc57005bb1322f6fd46" name="aab24ea5d1eb29fc57005bb1322f6fd46"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aab24ea5d1eb29fc57005bb1322f6fd46">&#9670;&#160;</a></span>resizeImpl()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Engine::Render::VulkanRenderTexture::resizeImpl </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_math_1_1_vector2i.html">Math::Vector2i</a> &amp;&#160;</td>
+          <td class="paramname"><em>size</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implements <a class="el" href="struct_engine_1_1_render_1_1_render_target.html#ac81f37928d763c69b9c415b0eaa50fc7">Engine::Render::RenderTarget</a>.</p>
+
+</div>
+</div>
+<a id="a6a380c858e3965478233bcd3fee0b1c2" name="a6a380c858e3965478233bcd3fee0b1c2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6a380c858e3965478233bcd3fee0b1c2">&#9670;&#160;</a></span>size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_math_1_1_vector2i.html">Math::Vector2i</a> Engine::Render::VulkanRenderTexture::size </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implements <a class="el" href="struct_engine_1_1_render_1_1_render_target.html#a90a2018d33374208d352a6feb171ee0d">Engine::Render::RenderTarget</a>.</p>
+
+</div>
+</div>
+<a id="aece3ab8328f030ac6268671119bef765" name="aece3ab8328f030ac6268671119bef765"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aece3ab8328f030ac6268671119bef765">&#9670;&#160;</a></span>beginFrame()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Render::VulkanRenderTexture::beginFrame </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_target.html#a13477ddada64d7b556eee597510afd3c">Engine::Render::VulkanRenderTarget</a>.</p>
+
+</div>
+</div>
+<a id="a6ec4685bf0c4a54513a8b569a47114d5" name="a6ec4685bf0c4a54513a8b569a47114d5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ec4685bf0c4a54513a8b569a47114d5">&#9670;&#160;</a></span>endFrame()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_render_1_1_render_future.html">RenderFuture</a> Engine::Render::VulkanRenderTexture::endFrame </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_target.html#a580e68cc62a1dd92c790faf8ffb3d5cf">Engine::Render::VulkanRenderTarget</a>.</p>
+
+</div>
+</div>
+<a id="a454b57546cefffbec97351f0edbaf502" name="a454b57546cefffbec97351f0edbaf502"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a454b57546cefffbec97351f0edbaf502">&#9670;&#160;</a></span>beginIteration()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Render::VulkanRenderTexture::beginIteration </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>targetIndex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>targetCount</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>targetSubresourceIndex</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_target.html#a90910f3c9f95a4e97414db4a6ac62455">Engine::Render::VulkanRenderTarget</a>.</p>
+
+</div>
+</div>
+<a id="a23faf9a9b592a7349040a4f589a11f21" name="a23faf9a9b592a7349040a4f589a11f21"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a23faf9a9b592a7349040a4f589a11f21">&#9670;&#160;</a></span>endIteration()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Render::VulkanRenderTexture::endIteration </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>targetIndex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>targetCount</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>targetSubresourceIndex</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_target.html#a5a307da3de4d0d29fea3ecda5c120837">Engine::Render::VulkanRenderTarget</a>.</p>
+
+</div>
+</div>
+<a id="a5fd20ae9b6761c58e377415d42ea3416" name="a5fd20ae9b6761c58e377415d42ea3416"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5fd20ae9b6761c58e377415d42ea3416">&#9670;&#160;</a></span>texture()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespace_engine_1_1_render.html#af28920ed5a8250ed3c89905c6bdd7ebc">ConstTexturePtr</a> Engine::Render::VulkanRenderTexture::texture </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="struct_engine_1_1_render_1_1_render_target.html#aafe32d6a8d319c216ac89a09fe221b57">Engine::Render::RenderTarget</a>.</p>
+
+</div>
+</div>
+<a id="a6d3187d9a46989d2b05fd2e5335e151d" name="a6d3187d9a46989d2b05fd2e5335e151d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6d3187d9a46989d2b05fd2e5335e151d">&#9670;&#160;</a></span>textureCount()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t Engine::Render::VulkanRenderTexture::textureCount </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="struct_engine_1_1_render_1_1_render_target.html#ac23a9dd5501a65dd5993588b1470e369">Engine::Render::RenderTarget</a>.</p>
+
+</div>
+</div>
+<a id="a53d344a7753d158facb5b0d20d415e7c" name="a53d344a7753d158facb5b0d20d415e7c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a53d344a7753d158facb5b0d20d415e7c">&#9670;&#160;</a></span>blit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Render::VulkanRenderTexture::blit </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> *&#160;</td>
+          <td class="paramname"><em>input</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa04cf903a5a73a5ba4008d888181b824" name="aa04cf903a5a73a5ba4008d888181b824"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa04cf903a5a73a5ba4008d888181b824">&#9670;&#160;</a></span>textures()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::vector&lt; std::shared_ptr&lt; <a class="el" href="struct_engine_1_1_render_1_1_vulkan_texture.html">VulkanTexture</a> &gt; &gt; &amp; Engine::Render::VulkanRenderTexture::textures </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9165ca88893214f311b008b679edeab3" name="a9165ca88893214f311b008b679edeab3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9165ca88893214f311b008b679edeab3">&#9670;&#160;</a></span>createRenderPass()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Render::VulkanRenderTexture::createRenderPass </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following files:<ul>
+<li>plugins/renderer/vulkan/src/Vulkan/<a class="el" href="vulkanrendertexture_8h.html">vulkanrendertexture.h</a></li>
+<li>plugins/renderer/vulkan/src/Vulkan/<a class="el" href="vulkanrendertexture_8cpp.html">vulkanrendertexture.cpp</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Wed Jun 10 2026 21:25:34 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        Version: 0.6.0
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Versions</dt>
+            <script src="../../../../versions.js"></script>
+        </dl>
+    </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

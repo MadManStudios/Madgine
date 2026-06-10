@@ -1,0 +1,1416 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: Engine::Widgets::TextRenderData Struct Reference &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../docs/README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/gettingstarted.html#starting-the-engine">Starting the Engine</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/howtos.html">How-Tos</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/howtos/build.html">Build Instructions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/howtos/build.html#dependencies">Dependencies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/howtos/build.html#setup-the-madgine">Setup The Madgine</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/howtos/build.html#generating-project-files">Generating Project Files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/howtos/build.html#build-configurations">Build Configurations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/howtos/firstUniqueComponent.html">Writing your first UniqueComponent</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/keyvalue.html">KeyValue</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/keyvalue.html#valuetype">ValueType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/keyvalue.html#metatables">MetaTables</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/logging.html">Logging</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/logging.html#message-types">Message Types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/logging.html#building-log-messages">Building Log Messages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/logging.html#default-log">Default Log</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/logging.html#log-listener">Log Listener</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/pluginsystem.html">Plugins &amp; Unique Components</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/pluginsystem.html#plugins">Plugins</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/pluginsystem.html#unique-components">Unique Components</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/serialize.html">Serialization &amp; Synchronization</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#fundamental-data-types">Fundamental Data Types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#unit-hierarchy">Unit Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#serializetables">SerializeTables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#streams">Streams</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#managers">Managers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#state-replication">State Replication</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/threading.html">Threads &amp; Asynchronous Execution</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/threading.html#threads">Threads</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/threading.html#tasks">Tasks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/threading.html#taskqueues">TaskQueues</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/threading.html#workgroups">Workgroups</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/threading.html#scheduler">Scheduler</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#our-pledge">Our Pledge</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#our-standards">Our Standards</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#our-responsibilities">Our Responsibilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#scope">Scope</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#enforcement">Enforcement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#attribution">Attribution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/architecture.html#core-libraries">Core Libraries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../docs/README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+    </ul>
+    <div class="info admonition rst-footer-buttons">
+        <div class="wy-btn-group">
+            <a class="btn btn-link" href="../../../../../index.html">Madgine Blog</a>
+            <a class="btn btn-info btn-mini float-right" href="../../../../../launcher_dev.html">Try live</a>
+        </div>
+    </div>
+    <ul class="wy-breadcrumbs">
+        
+      <li><a href="../../../docs/README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: Engine::Widgets::TextRenderData Struct Reference</li>
+        
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/out/doc/doxygen/struct_engine_1_1_widgets_1_1_text_render_data.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="textrenderdata-struct-reference">
+<h1>TextRenderData Struct Reference<a class="headerlink" href="#textrenderdata-struct-reference" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: Engine::Widgets::TextRenderData Struct Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.6.0</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespace_engine.html">Engine</a></li><li class="navelem"><a class="el" href="namespace_engine_1_1_widgets.html">Widgets</a></li><li class="navelem"><a class="el" href="struct_engine_1_1_widgets_1_1_text_render_data.html">TextRenderData</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="struct_engine_1_1_widgets_1_1_text_render_data-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">Engine::Widgets::TextRenderData Struct Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;textrenderdata.h&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for Engine::Widgets::TextRenderData:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="struct_engine_1_1_widgets_1_1_text_render_data__inherit__graph.svg" width="224" height="198"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_text_render_data_1_1_line.html">Line</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:aa073b408631d1117851217904a5521ee"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_text_render_data.html#aa073b408631d1117851217904a5521ee">available</a> () const</td></tr>
+<tr class="separator:aa073b408631d1117851217904a5521ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b3a581c6d5927cfdda87b97e659180c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_math_1_1_rect2.html">Math::Rect2</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_text_render_data.html#a3b3a581c6d5927cfdda87b97e659180c">calculateBoundingBox</a> (const <a class="el" href="struct_engine_1_1_widgets_1_1_text_render_data_1_1_line.html">Line</a> &amp;line, size_t lineCount, size_t lineNr, <a class="el" href="struct_engine_1_1_math_1_1_vector2.html">Math::Vector2</a> pos, <a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Math::Vector3</a> size)</td></tr>
+<tr class="separator:a3b3a581c6d5927cfdda87b97e659180c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a988c1148e24b42daaad93707b0b3bfeb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_math_1_1_rect2.html">Math::Rect2</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_text_render_data.html#a988c1148e24b42daaad93707b0b3bfeb">calculateBoundingBox</a> (std::string_view text, <a class="el" href="struct_engine_1_1_math_1_1_vector2.html">Math::Vector2</a> pos, <a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Math::Vector3</a> size)</td></tr>
+<tr class="separator:a988c1148e24b42daaad93707b0b3bfeb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adadab0ea87091acf3bdc60e5e3d35d52"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_text_render_data.html#adadab0ea87091acf3bdc60e5e3d35d52">calculateLineHeight</a> (float z=1.0f) const</td></tr>
+<tr class="separator:adadab0ea87091acf3bdc60e5e3d35d52"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0980dcfbc29fb4da1faf0efcedee3908"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_text_render_data.html#a0980dcfbc29fb4da1faf0efcedee3908">calculateWidth</a> (char c, float z=1.0f)</td></tr>
+<tr class="separator:a0980dcfbc29fb4da1faf0efcedee3908"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aceb563bcf5fbdc46109537721edcf1b6"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_text_render_data.html#aceb563bcf5fbdc46109537721edcf1b6">calculateWidth</a> (std::string_view text, float z=1.0f)</td></tr>
+<tr class="separator:aceb563bcf5fbdc46109537721edcf1b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae0f6757c0039ce209842aa3197bb89a0"><td class="memItemLeft" align="right" valign="top">Render::FontLoader::Resource *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_text_render_data.html#ae0f6757c0039ce209842aa3197bb89a0">getFont</a> () const</td></tr>
+<tr class="separator:ae0f6757c0039ce209842aa3197bb89a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a226abbf70462e25a1aa07c3206841568"><td class="memItemLeft" align="right" valign="top">std::string_view&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_text_render_data.html#a226abbf70462e25a1aa07c3206841568">getFontName</a> () const</td></tr>
+<tr class="separator:a226abbf70462e25a1aa07c3206841568"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ad927687af534a4c1e458197f204385"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_text_render_data.html#a7ad927687af534a4c1e458197f204385">render</a> (<a class="el" href="struct_engine_1_1_widgets_1_1_widgets_render_data.html">WidgetsRenderData</a> &amp;renderData, std::string_view text, <a class="el" href="struct_engine_1_1_math_1_1_vector2.html">Math::Vector2</a> pos, <a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Math::Vector3</a> size, int cursorIndex=-1) const</td></tr>
+<tr class="separator:a7ad927687af534a4c1e458197f204385"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad1c7392668860f6b297a83e94f42020f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_text_render_data.html#ad1c7392668860f6b297a83e94f42020f">renderSelection</a> (<a class="el" href="struct_engine_1_1_widgets_1_1_widgets_render_data.html">WidgetsRenderData</a> &amp;renderData, std::string_view text, <a class="el" href="struct_engine_1_1_math_1_1_vector2.html">Math::Vector2</a> pos, <a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Math::Vector3</a> size, const <a class="el" href="struct_engine_1_1_math_1_1_atlas2_1_1_entry.html">Math::Atlas2::Entry</a> &amp;entry, int selectionStart, int selectionEnd, <a class="el" href="struct_engine_1_1_widgets_1_1_color_frame.html">ColorFrame</a> color)</td></tr>
+<tr class="separator:ad1c7392668860f6b297a83e94f42020f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee2ae7cd5c84df880cb8d3d6897befd8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_text_render_data.html#aee2ae7cd5c84df880cb8d3d6897befd8">setFont</a> (Render::FontLoader::Resource *font)</td></tr>
+<tr class="separator:aee2ae7cd5c84df880cb8d3d6897befd8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acef04e336736f2323c44b31372f16e7e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_text_render_data.html#acef04e336736f2323c44b31372f16e7e">setFontName</a> (std::string_view name)</td></tr>
+<tr class="separator:acef04e336736f2323c44b31372f16e7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:afa54928d6f4c161b878c3ca2ac8fedbf"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="struct_engine_1_1_math_1_1_rect2.html">Math::Rect2</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_text_render_data.html#afa54928d6f4c161b878c3ca2ac8fedbf">calculateBoundingBox</a> (const <a class="el" href="struct_engine_1_1_widgets_1_1_text_render_data_1_1_line.html">Line</a> &amp;line, size_t lineCount, size_t lineNr, <a class="el" href="struct_engine_1_1_math_1_1_vector2.html">Math::Vector2</a> pos, <a class="el" href="struct_engine_1_1_math_1_1_vector2.html">Math::Vector2</a> size, const <a class="el" href="struct_engine_1_1_render_1_1_type_face.html">Render::TypeFace</a> *typeFace, float fontSize, <a class="el" href="struct_engine_1_1_math_1_1_vector2.html">Math::Vector2</a> pivot)</td></tr>
+<tr class="separator:afa54928d6f4c161b878c3ca2ac8fedbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a49dafc28e5915a8fcd369713a81b64"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="struct_engine_1_1_math_1_1_rect2.html">Math::Rect2</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_text_render_data.html#a5a49dafc28e5915a8fcd369713a81b64">calculateBoundingBox</a> (std::string_view text, <a class="el" href="struct_engine_1_1_math_1_1_vector2.html">Math::Vector2</a> pos, <a class="el" href="struct_engine_1_1_math_1_1_vector2.html">Math::Vector2</a> size, const <a class="el" href="struct_engine_1_1_render_1_1_type_face.html">Render::TypeFace</a> *typeFace, Render::FontStyle style, float fontSize, <a class="el" href="struct_engine_1_1_math_1_1_vector2.html">Math::Vector2</a> pivot)</td></tr>
+<tr class="separator:a5a49dafc28e5915a8fcd369713a81b64"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a838f580ba426dacf00068a4f4d576696"><td class="memItemLeft" align="right" valign="top">static float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_text_render_data.html#a838f580ba426dacf00068a4f4d576696">calculateLineHeight</a> (const <a class="el" href="struct_engine_1_1_render_1_1_type_face.html">Render::TypeFace</a> *typeFace, float fontSize)</td></tr>
+<tr class="separator:a838f580ba426dacf00068a4f4d576696"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a70969670f292b9ee1cb4977bf7adeba0"><td class="memItemLeft" align="right" valign="top">static float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_text_render_data.html#a70969670f292b9ee1cb4977bf7adeba0">calculateWidth</a> (char c, const <a class="el" href="struct_engine_1_1_render_1_1_type_face.html">Render::TypeFace</a> *typeFace, Render::FontStyle style, float fontSize)</td></tr>
+<tr class="separator:a70969670f292b9ee1cb4977bf7adeba0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a98416d9b5d0cb923399a76e4839032fa"><td class="memItemLeft" align="right" valign="top">static float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_text_render_data.html#a98416d9b5d0cb923399a76e4839032fa">calculateWidth</a> (std::string_view text, const <a class="el" href="struct_engine_1_1_render_1_1_type_face.html">Render::TypeFace</a> *typeFace, Render::FontStyle style, float fontSize)</td></tr>
+<tr class="separator:a98416d9b5d0cb923399a76e4839032fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8552f9a052ab8c7184cc67bb24e2b491"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_text_render_data.html#a8552f9a052ab8c7184cc67bb24e2b491">renderLine</a> (<a class="el" href="struct_engine_1_1_widgets_1_1_widgets_render_data.html">WidgetsRenderData</a> &amp;renderData, const <a class="el" href="struct_engine_1_1_widgets_1_1_text_render_data_1_1_line.html">Line</a> &amp;line, float originY, <a class="el" href="struct_engine_1_1_math_1_1_vector2.html">Math::Vector2</a> pos, <a class="el" href="struct_engine_1_1_math_1_1_vector2.html">Math::Vector2</a> size, const <a class="el" href="struct_engine_1_1_render_1_1_type_face.html">Render::TypeFace</a> *typeFace, Render::FontStyle style, float fontSize, <a class="el" href="struct_engine_1_1_widgets_1_1_color_frame.html">ColorFrame</a> color, <a class="el" href="struct_engine_1_1_math_1_1_vector2.html">Math::Vector2</a> pivot, <a class="el" href="struct_engine_1_1_math_1_1_vector2.html">Math::Vector2</a> shadowOffset={ 0.0f, 0.0f }, int cursorIndex=-1)</td></tr>
+<tr class="separator:a8552f9a052ab8c7184cc67bb24e2b491"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c6c0a3baaa6d84ba6a59fb2e46ac284"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_text_render_data.html#a1c6c0a3baaa6d84ba6a59fb2e46ac284">renderSelection</a> (<a class="el" href="struct_engine_1_1_widgets_1_1_widgets_render_data.html">WidgetsRenderData</a> &amp;renderData, std::string_view text, <a class="el" href="struct_engine_1_1_math_1_1_vector2.html">Math::Vector2</a> pos, <a class="el" href="struct_engine_1_1_math_1_1_vector2.html">Math::Vector2</a> size, const <a class="el" href="struct_engine_1_1_render_1_1_type_face.html">Render::TypeFace</a> *typeFace, Render::FontStyle style, float fontSize, <a class="el" href="struct_engine_1_1_math_1_1_vector2.html">Math::Vector2</a> pivot, const <a class="el" href="struct_engine_1_1_math_1_1_atlas2_1_1_entry.html">Math::Atlas2::Entry</a> &amp;entry, int selectionStart, int selectionEnd, <a class="el" href="struct_engine_1_1_widgets_1_1_color_frame.html">ColorFrame</a> color)</td></tr>
+<tr class="separator:a1c6c0a3baaa6d84ba6a59fb2e46ac284"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72a0c9f249a0bd9e2ffc3d3249d4232d"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_text_render_data.html#a72a0c9f249a0bd9e2ffc3d3249d4232d">renderText</a> (<a class="el" href="struct_engine_1_1_widgets_1_1_widgets_render_data.html">WidgetsRenderData</a> &amp;renderData, std::string_view text, <a class="el" href="struct_engine_1_1_math_1_1_vector2.html">Math::Vector2</a> pos, <a class="el" href="struct_engine_1_1_math_1_1_vector2.html">Math::Vector2</a> size, const <a class="el" href="struct_engine_1_1_render_1_1_type_face.html">Render::TypeFace</a> *typeFace, Render::FontStyle style, float fontSize, <a class="el" href="struct_engine_1_1_widgets_1_1_color_frame.html">ColorFrame</a> color, <a class="el" href="struct_engine_1_1_math_1_1_vector2.html">Math::Vector2</a> pivot, <a class="el" href="struct_engine_1_1_math_1_1_vector2.html">Math::Vector2</a> shadowOffset={ 0.0f, 0.0f }, int cursorIndex=-1)</td></tr>
+<tr class="separator:a72a0c9f249a0bd9e2ffc3d3249d4232d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_static_methods_struct_engine_1_1_widgets_1_1_render_data"><td colspan="2" onclick="javascript:toggleInherit('pub_static_methods_struct_engine_1_1_widgets_1_1_render_data')"><img src="closed.png" alt="-"/>&#160;Static Public Member Functions inherited from <a class="el" href="struct_engine_1_1_widgets_1_1_render_data.html">Engine::Widgets::RenderData</a></td></tr>
+<tr class="memitem:a1f5b2d02a763a2101a247025041102b2 inherit pub_static_methods_struct_engine_1_1_widgets_1_1_render_data"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_render_data.html#a1f5b2d02a763a2101a247025041102b2">animationInterval</a> (std::chrono::steady_clock::duration dur, std::chrono::steady_clock::duration on)</td></tr>
+<tr class="separator:a1f5b2d02a763a2101a247025041102b2 inherit pub_static_methods_struct_engine_1_1_widgets_1_1_render_data"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a7d2ed8facb8fe94d4d3a3d3eccba4bee"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_widgets_1_1_color_render_data.html">ColorRenderData</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_text_render_data.html#a7d2ed8facb8fe94d4d3a3d3eccba4bee">mColor</a></td></tr>
+<tr class="separator:a7d2ed8facb8fe94d4d3a3d3eccba4bee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5131e71dd5c5464c07b489c8391a66c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_text_render_data.html#ad5131e71dd5c5464c07b489c8391a66c">mFontSize</a> = 16</td></tr>
+<tr class="separator:ad5131e71dd5c5464c07b489c8391a66c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba44f2bee4a760ed2444954a86c99dc3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_math_1_1_vector2.html">Math::Vector2</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_text_render_data.html#aba44f2bee4a760ed2444954a86c99dc3">mPivot</a> = { 0.5f, 0.5f }</td></tr>
+<tr class="separator:aba44f2bee4a760ed2444954a86c99dc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a27d355ab7989998e2e68391e431af165"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_math_1_1_vector2.html">Math::Vector2</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_text_render_data.html#a27d355ab7989998e2e68391e431af165">mShadowOffset</a> = { 0.0f, 0.0f }</td></tr>
+<tr class="separator:a27d355ab7989998e2e68391e431af165"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a028be060ce1c73cc1325bae2bdd26f36"><td class="memItemLeft" align="right" valign="top">Render::FontStyle&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_text_render_data.html#a028be060ce1c73cc1325bae2bdd26f36">mStyle</a> = Render::FontStyle::Default</td></tr>
+<tr class="separator:a028be060ce1c73cc1325bae2bdd26f36"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:a0daef2126541476bfa1c6a3f5340b70f"><td class="memItemLeft" align="right" valign="top">Render::FontLoader::Handle&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_text_render_data.html#a0daef2126541476bfa1c6a3f5340b70f">mFont</a></td></tr>
+<tr class="separator:a0daef2126541476bfa1c6a3f5340b70f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5cf64e5b557a15fdd4715355fbbe91e7"><td class="memItemLeft" align="right" valign="top">Resources::ImageLoader::Resource *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_text_render_data.html#a5cf64e5b557a15fdd4715355fbbe91e7">mImage</a> = nullptr</td></tr>
+<tr class="separator:a5cf64e5b557a15fdd4715355fbbe91e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a226abbf70462e25a1aa07c3206841568" name="a226abbf70462e25a1aa07c3206841568"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a226abbf70462e25a1aa07c3206841568">&#9670;&#160;</a></span>getFontName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string_view Engine::Widgets::TextRenderData::getFontName </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="acef04e336736f2323c44b31372f16e7e" name="acef04e336736f2323c44b31372f16e7e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acef04e336736f2323c44b31372f16e7e">&#9670;&#160;</a></span>setFontName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Widgets::TextRenderData::setFontName </td>
+          <td>(</td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae0f6757c0039ce209842aa3197bb89a0" name="ae0f6757c0039ce209842aa3197bb89a0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae0f6757c0039ce209842aa3197bb89a0">&#9670;&#160;</a></span>getFont()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Render::FontLoader::Resource * Engine::Widgets::TextRenderData::getFont </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aee2ae7cd5c84df880cb8d3d6897befd8" name="aee2ae7cd5c84df880cb8d3d6897befd8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aee2ae7cd5c84df880cb8d3d6897befd8">&#9670;&#160;</a></span>setFont()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Widgets::TextRenderData::setFont </td>
+          <td>(</td>
+          <td class="paramtype">Render::FontLoader::Resource *&#160;</td>
+          <td class="paramname"><em>font</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa073b408631d1117851217904a5521ee" name="aa073b408631d1117851217904a5521ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa073b408631d1117851217904a5521ee">&#9670;&#160;</a></span>available()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Engine::Widgets::TextRenderData::available </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7ad927687af534a4c1e458197f204385" name="a7ad927687af534a4c1e458197f204385"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7ad927687af534a4c1e458197f204385">&#9670;&#160;</a></span>render()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Widgets::TextRenderData::render </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_widgets_1_1_widgets_render_data.html">WidgetsRenderData</a> &amp;&#160;</td>
+          <td class="paramname"><em>renderData</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>text</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_math_1_1_vector2.html">Math::Vector2</a>&#160;</td>
+          <td class="paramname"><em>pos</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Math::Vector3</a>&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>cursorIndex</em> = <code>-1</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad1c7392668860f6b297a83e94f42020f" name="ad1c7392668860f6b297a83e94f42020f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad1c7392668860f6b297a83e94f42020f">&#9670;&#160;</a></span>renderSelection() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Widgets::TextRenderData::renderSelection </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_widgets_1_1_widgets_render_data.html">WidgetsRenderData</a> &amp;&#160;</td>
+          <td class="paramname"><em>renderData</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>text</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_math_1_1_vector2.html">Math::Vector2</a>&#160;</td>
+          <td class="paramname"><em>pos</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Math::Vector3</a>&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_math_1_1_atlas2_1_1_entry.html">Math::Atlas2::Entry</a> &amp;&#160;</td>
+          <td class="paramname"><em>entry</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>selectionStart</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>selectionEnd</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_widgets_1_1_color_frame.html">ColorFrame</a>&#160;</td>
+          <td class="paramname"><em>color</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aceb563bcf5fbdc46109537721edcf1b6" name="aceb563bcf5fbdc46109537721edcf1b6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aceb563bcf5fbdc46109537721edcf1b6">&#9670;&#160;</a></span>calculateWidth() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Engine::Widgets::TextRenderData::calculateWidth </td>
+          <td>(</td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>text</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>z</em> = <code>1.0f</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0980dcfbc29fb4da1faf0efcedee3908" name="a0980dcfbc29fb4da1faf0efcedee3908"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0980dcfbc29fb4da1faf0efcedee3908">&#9670;&#160;</a></span>calculateWidth() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Engine::Widgets::TextRenderData::calculateWidth </td>
+          <td>(</td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>c</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>z</em> = <code>1.0f</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="adadab0ea87091acf3bdc60e5e3d35d52" name="adadab0ea87091acf3bdc60e5e3d35d52"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adadab0ea87091acf3bdc60e5e3d35d52">&#9670;&#160;</a></span>calculateLineHeight() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Engine::Widgets::TextRenderData::calculateLineHeight </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>z</em> = <code>1.0f</code></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3b3a581c6d5927cfdda87b97e659180c" name="a3b3a581c6d5927cfdda87b97e659180c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b3a581c6d5927cfdda87b97e659180c">&#9670;&#160;</a></span>calculateBoundingBox() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_math_1_1_rect2.html">Math::Rect2</a> Engine::Widgets::TextRenderData::calculateBoundingBox </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_widgets_1_1_text_render_data_1_1_line.html">Line</a> &amp;&#160;</td>
+          <td class="paramname"><em>line</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>lineCount</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>lineNr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_math_1_1_vector2.html">Math::Vector2</a>&#160;</td>
+          <td class="paramname"><em>pos</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Math::Vector3</a>&#160;</td>
+          <td class="paramname"><em>size</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a988c1148e24b42daaad93707b0b3bfeb" name="a988c1148e24b42daaad93707b0b3bfeb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a988c1148e24b42daaad93707b0b3bfeb">&#9670;&#160;</a></span>calculateBoundingBox() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_math_1_1_rect2.html">Math::Rect2</a> Engine::Widgets::TextRenderData::calculateBoundingBox </td>
+          <td>(</td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>text</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_math_1_1_vector2.html">Math::Vector2</a>&#160;</td>
+          <td class="paramname"><em>pos</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Math::Vector3</a>&#160;</td>
+          <td class="paramname"><em>size</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a72a0c9f249a0bd9e2ffc3d3249d4232d" name="a72a0c9f249a0bd9e2ffc3d3249d4232d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a72a0c9f249a0bd9e2ffc3d3249d4232d">&#9670;&#160;</a></span>renderText()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Widgets::TextRenderData::renderText </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_widgets_1_1_widgets_render_data.html">WidgetsRenderData</a> &amp;&#160;</td>
+          <td class="paramname"><em>renderData</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>text</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_math_1_1_vector2.html">Math::Vector2</a>&#160;</td>
+          <td class="paramname"><em>pos</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_math_1_1_vector2.html">Math::Vector2</a>&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_render_1_1_type_face.html">Render::TypeFace</a> *&#160;</td>
+          <td class="paramname"><em>typeFace</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Render::FontStyle&#160;</td>
+          <td class="paramname"><em>style</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>fontSize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_widgets_1_1_color_frame.html">ColorFrame</a>&#160;</td>
+          <td class="paramname"><em>color</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_math_1_1_vector2.html">Math::Vector2</a>&#160;</td>
+          <td class="paramname"><em>pivot</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_math_1_1_vector2.html">Math::Vector2</a>&#160;</td>
+          <td class="paramname"><em>shadowOffset</em> = <code>{&#160;0.0f,&#160;0.0f&#160;}</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>cursorIndex</em> = <code>-1</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8552f9a052ab8c7184cc67bb24e2b491" name="a8552f9a052ab8c7184cc67bb24e2b491"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8552f9a052ab8c7184cc67bb24e2b491">&#9670;&#160;</a></span>renderLine()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Widgets::TextRenderData::renderLine </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_widgets_1_1_widgets_render_data.html">WidgetsRenderData</a> &amp;&#160;</td>
+          <td class="paramname"><em>renderData</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_widgets_1_1_text_render_data_1_1_line.html">Line</a> &amp;&#160;</td>
+          <td class="paramname"><em>line</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>originY</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_math_1_1_vector2.html">Math::Vector2</a>&#160;</td>
+          <td class="paramname"><em>pos</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_math_1_1_vector2.html">Math::Vector2</a>&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_render_1_1_type_face.html">Render::TypeFace</a> *&#160;</td>
+          <td class="paramname"><em>typeFace</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Render::FontStyle&#160;</td>
+          <td class="paramname"><em>style</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>fontSize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_widgets_1_1_color_frame.html">ColorFrame</a>&#160;</td>
+          <td class="paramname"><em>color</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_math_1_1_vector2.html">Math::Vector2</a>&#160;</td>
+          <td class="paramname"><em>pivot</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_math_1_1_vector2.html">Math::Vector2</a>&#160;</td>
+          <td class="paramname"><em>shadowOffset</em> = <code>{&#160;0.0f,&#160;0.0f&#160;}</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>cursorIndex</em> = <code>-1</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1c6c0a3baaa6d84ba6a59fb2e46ac284" name="a1c6c0a3baaa6d84ba6a59fb2e46ac284"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1c6c0a3baaa6d84ba6a59fb2e46ac284">&#9670;&#160;</a></span>renderSelection() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Widgets::TextRenderData::renderSelection </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_widgets_1_1_widgets_render_data.html">WidgetsRenderData</a> &amp;&#160;</td>
+          <td class="paramname"><em>renderData</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>text</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_math_1_1_vector2.html">Math::Vector2</a>&#160;</td>
+          <td class="paramname"><em>pos</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_math_1_1_vector2.html">Math::Vector2</a>&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_render_1_1_type_face.html">Render::TypeFace</a> *&#160;</td>
+          <td class="paramname"><em>typeFace</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Render::FontStyle&#160;</td>
+          <td class="paramname"><em>style</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>fontSize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_math_1_1_vector2.html">Math::Vector2</a>&#160;</td>
+          <td class="paramname"><em>pivot</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_math_1_1_atlas2_1_1_entry.html">Math::Atlas2::Entry</a> &amp;&#160;</td>
+          <td class="paramname"><em>entry</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>selectionStart</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>selectionEnd</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_widgets_1_1_color_frame.html">ColorFrame</a>&#160;</td>
+          <td class="paramname"><em>color</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a98416d9b5d0cb923399a76e4839032fa" name="a98416d9b5d0cb923399a76e4839032fa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a98416d9b5d0cb923399a76e4839032fa">&#9670;&#160;</a></span>calculateWidth() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Engine::Widgets::TextRenderData::calculateWidth </td>
+          <td>(</td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>text</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_render_1_1_type_face.html">Render::TypeFace</a> *&#160;</td>
+          <td class="paramname"><em>typeFace</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Render::FontStyle&#160;</td>
+          <td class="paramname"><em>style</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>fontSize</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a70969670f292b9ee1cb4977bf7adeba0" name="a70969670f292b9ee1cb4977bf7adeba0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a70969670f292b9ee1cb4977bf7adeba0">&#9670;&#160;</a></span>calculateWidth() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Engine::Widgets::TextRenderData::calculateWidth </td>
+          <td>(</td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>c</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_render_1_1_type_face.html">Render::TypeFace</a> *&#160;</td>
+          <td class="paramname"><em>typeFace</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Render::FontStyle&#160;</td>
+          <td class="paramname"><em>style</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>fontSize</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a838f580ba426dacf00068a4f4d576696" name="a838f580ba426dacf00068a4f4d576696"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a838f580ba426dacf00068a4f4d576696">&#9670;&#160;</a></span>calculateLineHeight() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Engine::Widgets::TextRenderData::calculateLineHeight </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_render_1_1_type_face.html">Render::TypeFace</a> *&#160;</td>
+          <td class="paramname"><em>typeFace</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>fontSize</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afa54928d6f4c161b878c3ca2ac8fedbf" name="afa54928d6f4c161b878c3ca2ac8fedbf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afa54928d6f4c161b878c3ca2ac8fedbf">&#9670;&#160;</a></span>calculateBoundingBox() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_math_1_1_rect2.html">Math::Rect2</a> Engine::Widgets::TextRenderData::calculateBoundingBox </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_widgets_1_1_text_render_data_1_1_line.html">Line</a> &amp;&#160;</td>
+          <td class="paramname"><em>line</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>lineCount</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>lineNr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_math_1_1_vector2.html">Math::Vector2</a>&#160;</td>
+          <td class="paramname"><em>pos</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_math_1_1_vector2.html">Math::Vector2</a>&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_render_1_1_type_face.html">Render::TypeFace</a> *&#160;</td>
+          <td class="paramname"><em>typeFace</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>fontSize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_math_1_1_vector2.html">Math::Vector2</a>&#160;</td>
+          <td class="paramname"><em>pivot</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5a49dafc28e5915a8fcd369713a81b64" name="a5a49dafc28e5915a8fcd369713a81b64"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5a49dafc28e5915a8fcd369713a81b64">&#9670;&#160;</a></span>calculateBoundingBox() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_math_1_1_rect2.html">Math::Rect2</a> Engine::Widgets::TextRenderData::calculateBoundingBox </td>
+          <td>(</td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>text</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_math_1_1_vector2.html">Math::Vector2</a>&#160;</td>
+          <td class="paramname"><em>pos</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_math_1_1_vector2.html">Math::Vector2</a>&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_render_1_1_type_face.html">Render::TypeFace</a> *&#160;</td>
+          <td class="paramname"><em>typeFace</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Render::FontStyle&#160;</td>
+          <td class="paramname"><em>style</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>fontSize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_math_1_1_vector2.html">Math::Vector2</a>&#160;</td>
+          <td class="paramname"><em>pivot</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="ad5131e71dd5c5464c07b489c8391a66c" name="ad5131e71dd5c5464c07b489c8391a66c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad5131e71dd5c5464c07b489c8391a66c">&#9670;&#160;</a></span>mFontSize</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Engine::Widgets::TextRenderData::mFontSize = 16</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a028be060ce1c73cc1325bae2bdd26f36" name="a028be060ce1c73cc1325bae2bdd26f36"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a028be060ce1c73cc1325bae2bdd26f36">&#9670;&#160;</a></span>mStyle</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Render::FontStyle Engine::Widgets::TextRenderData::mStyle = Render::FontStyle::Default</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aba44f2bee4a760ed2444954a86c99dc3" name="aba44f2bee4a760ed2444954a86c99dc3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aba44f2bee4a760ed2444954a86c99dc3">&#9670;&#160;</a></span>mPivot</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_math_1_1_vector2.html">Math::Vector2</a> Engine::Widgets::TextRenderData::mPivot = { 0.5f, 0.5f }</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a27d355ab7989998e2e68391e431af165" name="a27d355ab7989998e2e68391e431af165"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a27d355ab7989998e2e68391e431af165">&#9670;&#160;</a></span>mShadowOffset</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_math_1_1_vector2.html">Math::Vector2</a> Engine::Widgets::TextRenderData::mShadowOffset = { 0.0f, 0.0f }</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7d2ed8facb8fe94d4d3a3d3eccba4bee" name="a7d2ed8facb8fe94d4d3a3d3eccba4bee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7d2ed8facb8fe94d4d3a3d3eccba4bee">&#9670;&#160;</a></span>mColor</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_widgets_1_1_color_render_data.html">ColorRenderData</a> Engine::Widgets::TextRenderData::mColor</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0daef2126541476bfa1c6a3f5340b70f" name="a0daef2126541476bfa1c6a3f5340b70f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0daef2126541476bfa1c6a3f5340b70f">&#9670;&#160;</a></span>mFont</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Render::FontLoader::Handle Engine::Widgets::TextRenderData::mFont</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5cf64e5b557a15fdd4715355fbbe91e7" name="a5cf64e5b557a15fdd4715355fbbe91e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5cf64e5b557a15fdd4715355fbbe91e7">&#9670;&#160;</a></span>mImage</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Resources::ImageLoader::Resource* Engine::Widgets::TextRenderData::mImage = nullptr</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following files:<ul>
+<li>plugins/misc/widgets/src/Madgine/widgets/util/<a class="el" href="textrenderdata_8h.html">textrenderdata.h</a></li>
+<li>plugins/misc/widgets/src/Madgine/widgets/util/<a class="el" href="textrenderdata_8cpp.html">textrenderdata.cpp</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Wed Jun 10 2026 21:25:35 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        Version: 0.6.0
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Versions</dt>
+            <script src="../../../../versions.js"></script>
+        </dl>
+    </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

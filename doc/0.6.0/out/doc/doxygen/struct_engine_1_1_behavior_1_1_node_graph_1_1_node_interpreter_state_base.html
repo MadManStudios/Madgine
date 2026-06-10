@@ -1,0 +1,827 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: Engine::Behavior::NodeGraph::NodeInterpreterStateBase Struct Reference &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../docs/README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/gettingstarted.html#starting-the-engine">Starting the Engine</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/howtos.html">How-Tos</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/howtos/build.html">Build Instructions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/howtos/build.html#dependencies">Dependencies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/howtos/build.html#setup-the-madgine">Setup The Madgine</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/howtos/build.html#generating-project-files">Generating Project Files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/howtos/build.html#build-configurations">Build Configurations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/howtos/firstUniqueComponent.html">Writing your first UniqueComponent</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/keyvalue.html">KeyValue</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/keyvalue.html#valuetype">ValueType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/keyvalue.html#metatables">MetaTables</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/logging.html">Logging</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/logging.html#message-types">Message Types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/logging.html#building-log-messages">Building Log Messages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/logging.html#default-log">Default Log</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/logging.html#log-listener">Log Listener</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/pluginsystem.html">Plugins &amp; Unique Components</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/pluginsystem.html#plugins">Plugins</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/pluginsystem.html#unique-components">Unique Components</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/serialize.html">Serialization &amp; Synchronization</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#fundamental-data-types">Fundamental Data Types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#unit-hierarchy">Unit Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#serializetables">SerializeTables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#streams">Streams</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#managers">Managers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#state-replication">State Replication</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/threading.html">Threads &amp; Asynchronous Execution</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/threading.html#threads">Threads</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/threading.html#tasks">Tasks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/threading.html#taskqueues">TaskQueues</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/threading.html#workgroups">Workgroups</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/threading.html#scheduler">Scheduler</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#our-pledge">Our Pledge</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#our-standards">Our Standards</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#our-responsibilities">Our Responsibilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#scope">Scope</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#enforcement">Enforcement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#attribution">Attribution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/architecture.html#core-libraries">Core Libraries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../docs/README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+    </ul>
+    <div class="info admonition rst-footer-buttons">
+        <div class="wy-btn-group">
+            <a class="btn btn-link" href="../../../../../index.html">Madgine Blog</a>
+            <a class="btn btn-info btn-mini float-right" href="../../../../../launcher_dev.html">Try live</a>
+        </div>
+    </div>
+    <ul class="wy-breadcrumbs">
+        
+      <li><a href="../../../docs/README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: Engine::Behavior::NodeGraph::NodeInterpreterStateBase Struct Reference</li>
+        
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/out/doc/doxygen/struct_engine_1_1_behavior_1_1_node_graph_1_1_node_interpreter_state_base.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="nodeinterpreterstatebase-struct-reference">
+<h1>NodeInterpreterStateBase Struct Reference<a class="headerlink" href="#nodeinterpreterstatebase-struct-reference" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: Engine::Behavior::NodeGraph::NodeInterpreterStateBase Struct Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.6.0</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespace_engine.html">Engine</a></li><li class="navelem"><a class="el" href="namespace_engine_1_1_behavior.html">Behavior</a></li><li class="navelem"><a class="el" href="namespace_engine_1_1_behavior_1_1_node_graph.html">NodeGraph</a></li><li class="navelem"><a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_node_interpreter_state_base.html">NodeInterpreterStateBase</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="#friends">Friends</a> &#124;
+<a href="struct_engine_1_1_behavior_1_1_node_graph_1_1_node_interpreter_state_base-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">Engine::Behavior::NodeGraph::NodeInterpreterStateBase Struct Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;nodeinterpreter.h&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for Engine::Behavior::NodeGraph::NodeInterpreterStateBase:</div>
+<div class="dyncontent">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="struct_engine_1_1_behavior_1_1_node_graph_1_1_node_interpreter_state_base__inherit__graph.svg" width="100%" height="404"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a001ffbd49ba55b34604dc3d1a9123407"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_node_interpreter_state_base.html#a001ffbd49ba55b34604dc3d1a9123407">NodeInterpreterStateBase</a> (const <a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_node_graph.html">NodeGraph</a> *<a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_node_interpreter_state_base.html#ad2ec50f4e40983c7799923f5d96142cc">graph</a>, <a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_node_graph_loader_1_1_handle.html">NodeGraphLoader::Handle</a> handle)</td></tr>
+<tr class="separator:a001ffbd49ba55b34604dc3d1a9123407"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaaf68984ddde3f4359b364d602b69bbc"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_node_interpreter_state_base.html#aaaf68984ddde3f4359b364d602b69bbc">NodeInterpreterStateBase</a> (const <a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_node_interpreter_state_base.html">NodeInterpreterStateBase</a> &amp;)=delete</td></tr>
+<tr class="separator:aaaf68984ddde3f4359b364d602b69bbc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8bfd64b0d2d4ce19bdc393d9043ac12a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_node_interpreter_state_base.html#a8bfd64b0d2d4ce19bdc393d9043ac12a">NodeInterpreterStateBase</a> (<a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_node_interpreter_state_base.html">NodeInterpreterStateBase</a> &amp;&amp;)=default</td></tr>
+<tr class="separator:a8bfd64b0d2d4ce19bdc393d9043ac12a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab8b537c2b287ee41c1a5a3ed55509357"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_node_interpreter_state_base.html#ab8b537c2b287ee41c1a5a3ed55509357">~NodeInterpreterStateBase</a> ()=default</td></tr>
+<tr class="separator:ab8b537c2b287ee41c1a5a3ed55509357"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec9f941746bbaaf0e6c3a97ebc8271ae"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="struct_engine_1_1_reflect_1_1_argument_list.html">Reflect::ArgumentList</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_node_interpreter_state_base.html#aec9f941746bbaaf0e6c3a97ebc8271ae">arguments</a> () const</td></tr>
+<tr class="separator:aec9f941746bbaaf0e6c3a97ebc8271ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0317ddd33777829f5ccd69976e6d6cd7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_node_interpreter_state_base.html#a0317ddd33777829f5ccd69976e6d6cd7">branch</a> (<a class="el" href="struct_engine_1_1_behavior_1_1_behavior_receiver.html">BehaviorReceiver</a> &amp;receiver, <a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_pin.html">Pin</a> pin, <a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_node_debug_location.html">NodeDebugLocation</a> &amp;location)</td></tr>
+<tr class="separator:a0317ddd33777829f5ccd69976e6d6cd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a429d2fa7fe9ba95e4607a47f7ba867b0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_node_interpreter_state_base.html#a429d2fa7fe9ba95e4607a47f7ba867b0">branch</a> (<a class="el" href="struct_engine_1_1_behavior_1_1_behavior_receiver.html">BehaviorReceiver</a> &amp;receiver, uint32_t flowIn, <a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_node_debug_location.html">NodeDebugLocation</a> &amp;location)</td></tr>
+<tr class="separator:a429d2fa7fe9ba95e4607a47f7ba867b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ca05676748421365a9b688986659c03"><td class="memItemLeft" align="right" valign="top">std::unique_ptr&lt; <a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_node_interpreter_data.html">NodeInterpreterData</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_node_interpreter_state_base.html#a6ca05676748421365a9b688986659c03">data</a> (uint32_t index)</td></tr>
+<tr class="separator:a6ca05676748421365a9b688986659c03"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad2ec50f4e40983c7799923f5d96142cc"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_node_graph.html">NodeGraph</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_node_interpreter_state_base.html#ad2ec50f4e40983c7799923f5d96142cc">graph</a> () const</td></tr>
+<tr class="separator:ad2ec50f4e40983c7799923f5d96142cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa81f1a9324816cb271fc7ad598b8bb5e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_node_interpreter_state_base.html">NodeInterpreterStateBase</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_node_interpreter_state_base.html#aa81f1a9324816cb271fc7ad598b8bb5e">operator=</a> (const <a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_node_interpreter_state_base.html">NodeInterpreterStateBase</a> &amp;)=delete</td></tr>
+<tr class="separator:aa81f1a9324816cb271fc7ad598b8bb5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d5ce17cb293c89a4009c22d9cbc9d39"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_node_interpreter_state_base.html">NodeInterpreterStateBase</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_node_interpreter_state_base.html#a9d5ce17cb293c89a4009c22d9cbc9d39">operator=</a> (<a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_node_interpreter_state_base.html">NodeInterpreterStateBase</a> &amp;&amp;)=default</td></tr>
+<tr class="separator:a9d5ce17cb293c89a4009c22d9cbc9d39"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab59704b696d097f78f3a85bcc28bc14b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_reflect_1_1_result.html">Reflect::Result</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_node_interpreter_state_base.html#ab59704b696d097f78f3a85bcc28bc14b">read</a> (<a class="el" href="struct_engine_1_1_reflect_1_1_value.html">Reflect::Value</a> &amp;retVal, <a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_pin.html">Pin</a> pin)</td></tr>
+<tr class="separator:ab59704b696d097f78f3a85bcc28bc14b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d8899c548705a9434439cd0e5cbed1b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_reflect_1_1_result.html">Reflect::Result</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_node_interpreter_state_base.html#a3d8899c548705a9434439cd0e5cbed1b">read</a> (<a class="el" href="struct_engine_1_1_reflect_1_1_value.html">Reflect::Value</a> &amp;retVal, uint32_t dataProvider)</td></tr>
+<tr class="separator:a3d8899c548705a9434439cd0e5cbed1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a828278d5dd0209b717399ecd10e8d544"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_node_interpreter_state_base.html#a828278d5dd0209b717399ecd10e8d544">start</a> ()</td></tr>
+<tr class="separator:a828278d5dd0209b717399ecd10e8d544"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aebf9fa950770dd18d4144a45ece56231"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_node_interpreter_state_base.html#aebf9fa950770dd18d4144a45ece56231">stop</a> ()</td></tr>
+<tr class="separator:aebf9fa950770dd18d4144a45ece56231"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_struct_engine_1_1_behavior_1_1_behavior_receiver"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_struct_engine_1_1_behavior_1_1_behavior_receiver')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="struct_engine_1_1_behavior_1_1_behavior_receiver.html">Engine::Behavior::BehaviorReceiver</a></td></tr>
+<tr class="memitem:a6920cdd57f60271bdcbc6f3117f12919 inherit pub_methods_struct_engine_1_1_behavior_1_1_behavior_receiver"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; </td></tr>
+<tr class="memitem:a6920cdd57f60271bdcbc6f3117f12919 inherit pub_methods_struct_engine_1_1_behavior_1_1_behavior_receiver"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_behavior_receiver.html#a6920cdd57f60271bdcbc6f3117f12919">set_value</a> (Args &amp;&amp;...args)</td></tr>
+<tr class="separator:a6920cdd57f60271bdcbc6f3117f12919 inherit pub_methods_struct_engine_1_1_behavior_1_1_behavior_receiver"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:a44433ba1e3a11e7d60c82e84496565ef"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_debug_1_1_continuation.html">Debug::Continuation</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_node_interpreter_state_base.html#a44433ba1e3a11e7d60c82e84496565ef">mContinuation</a></td></tr>
+<tr class="separator:a44433ba1e3a11e7d60c82e84496565ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee42ac159c028a912c3dfabef08aef30"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_node_debug_location.html">NodeDebugLocation</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_node_interpreter_state_base.html#aee42ac159c028a912c3dfabef08aef30">mDebugLocation</a></td></tr>
+<tr class="separator:aee42ac159c028a912c3dfabef08aef30"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
+Friends</h2></td></tr>
+<tr class="memitem:a3cb03eca2a2e96aad53bbfb570a453f4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_node_interpreter_state_base.html#a3cb03eca2a2e96aad53bbfb570a453f4">tag_invoke</a> (<a class="el" href="struct_engine_1_1_execution_1_1visit__state__t.html">Execution::visit_state_t</a>, <a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_node_interpreter_state_base.html">NodeInterpreterStateBase</a> *state, auto &amp;&amp;visitor)</td></tr>
+<tr class="separator:a3cb03eca2a2e96aad53bbfb570a453f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a001ffbd49ba55b34604dc3d1a9123407" name="a001ffbd49ba55b34604dc3d1a9123407"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a001ffbd49ba55b34604dc3d1a9123407">&#9670;&#160;</a></span>NodeInterpreterStateBase() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::Behavior::NodeGraph::NodeInterpreterStateBase::NodeInterpreterStateBase </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_node_graph.html">NodeGraph</a> *&#160;</td>
+          <td class="paramname"><em>graph</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_node_graph_loader_1_1_handle.html">NodeGraphLoader::Handle</a>&#160;</td>
+          <td class="paramname"><em>handle</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aaaf68984ddde3f4359b364d602b69bbc" name="aaaf68984ddde3f4359b364d602b69bbc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaaf68984ddde3f4359b364d602b69bbc">&#9670;&#160;</a></span>NodeInterpreterStateBase() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::Behavior::NodeGraph::NodeInterpreterStateBase::NodeInterpreterStateBase </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_node_interpreter_state_base.html">NodeInterpreterStateBase</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8bfd64b0d2d4ce19bdc393d9043ac12a" name="a8bfd64b0d2d4ce19bdc393d9043ac12a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8bfd64b0d2d4ce19bdc393d9043ac12a">&#9670;&#160;</a></span>NodeInterpreterStateBase() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Engine::Behavior::NodeGraph::NodeInterpreterStateBase::NodeInterpreterStateBase </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_node_interpreter_state_base.html">NodeInterpreterStateBase</a> &amp;&amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab8b537c2b287ee41c1a5a3ed55509357" name="ab8b537c2b287ee41c1a5a3ed55509357"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab8b537c2b287ee41c1a5a3ed55509357">&#9670;&#160;</a></span>~NodeInterpreterStateBase()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual Engine::Behavior::NodeGraph::NodeInterpreterStateBase::~NodeInterpreterStateBase </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="aa81f1a9324816cb271fc7ad598b8bb5e" name="aa81f1a9324816cb271fc7ad598b8bb5e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa81f1a9324816cb271fc7ad598b8bb5e">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_node_interpreter_state_base.html">NodeInterpreterStateBase</a> &amp; Engine::Behavior::NodeGraph::NodeInterpreterStateBase::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_node_interpreter_state_base.html">NodeInterpreterStateBase</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9d5ce17cb293c89a4009c22d9cbc9d39" name="a9d5ce17cb293c89a4009c22d9cbc9d39"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d5ce17cb293c89a4009c22d9cbc9d39">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_node_interpreter_state_base.html">NodeInterpreterStateBase</a> &amp; Engine::Behavior::NodeGraph::NodeInterpreterStateBase::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_node_interpreter_state_base.html">NodeInterpreterStateBase</a> &amp;&amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a429d2fa7fe9ba95e4607a47f7ba867b0" name="a429d2fa7fe9ba95e4607a47f7ba867b0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a429d2fa7fe9ba95e4607a47f7ba867b0">&#9670;&#160;</a></span>branch() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Behavior::NodeGraph::NodeInterpreterStateBase::branch </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_behavior_1_1_behavior_receiver.html">BehaviorReceiver</a> &amp;&#160;</td>
+          <td class="paramname"><em>receiver</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>flowIn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_node_debug_location.html">NodeDebugLocation</a> &amp;&#160;</td>
+          <td class="paramname"><em>location</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0317ddd33777829f5ccd69976e6d6cd7" name="a0317ddd33777829f5ccd69976e6d6cd7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0317ddd33777829f5ccd69976e6d6cd7">&#9670;&#160;</a></span>branch() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Behavior::NodeGraph::NodeInterpreterStateBase::branch </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_behavior_1_1_behavior_receiver.html">BehaviorReceiver</a> &amp;&#160;</td>
+          <td class="paramname"><em>receiver</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_pin.html">Pin</a>&#160;</td>
+          <td class="paramname"><em>pin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_node_debug_location.html">NodeDebugLocation</a> &amp;&#160;</td>
+          <td class="paramname"><em>location</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab59704b696d097f78f3a85bcc28bc14b" name="ab59704b696d097f78f3a85bcc28bc14b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab59704b696d097f78f3a85bcc28bc14b">&#9670;&#160;</a></span>read() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_reflect_1_1_result.html">Reflect::Result</a> Engine::Behavior::NodeGraph::NodeInterpreterStateBase::read </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_reflect_1_1_value.html">Reflect::Value</a> &amp;&#160;</td>
+          <td class="paramname"><em>retVal</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_pin.html">Pin</a>&#160;</td>
+          <td class="paramname"><em>pin</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3d8899c548705a9434439cd0e5cbed1b" name="a3d8899c548705a9434439cd0e5cbed1b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3d8899c548705a9434439cd0e5cbed1b">&#9670;&#160;</a></span>read() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_reflect_1_1_result.html">Reflect::Result</a> Engine::Behavior::NodeGraph::NodeInterpreterStateBase::read </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_reflect_1_1_value.html">Reflect::Value</a> &amp;&#160;</td>
+          <td class="paramname"><em>retVal</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>dataProvider</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad2ec50f4e40983c7799923f5d96142cc" name="ad2ec50f4e40983c7799923f5d96142cc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad2ec50f4e40983c7799923f5d96142cc">&#9670;&#160;</a></span>graph()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_node_graph.html">NodeGraph</a> * Engine::Behavior::NodeGraph::NodeInterpreterStateBase::graph </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aec9f941746bbaaf0e6c3a97ebc8271ae" name="aec9f941746bbaaf0e6c3a97ebc8271ae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aec9f941746bbaaf0e6c3a97ebc8271ae">&#9670;&#160;</a></span>arguments()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="struct_engine_1_1_reflect_1_1_argument_list.html">Reflect::ArgumentList</a> &amp; Engine::Behavior::NodeGraph::NodeInterpreterStateBase::arguments </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6ca05676748421365a9b688986659c03" name="a6ca05676748421365a9b688986659c03"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ca05676748421365a9b688986659c03">&#9670;&#160;</a></span>data()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::unique_ptr&lt; <a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_node_interpreter_data.html">NodeInterpreterData</a> &gt; &amp; Engine::Behavior::NodeGraph::NodeInterpreterStateBase::data </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a828278d5dd0209b717399ecd10e8d544" name="a828278d5dd0209b717399ecd10e8d544"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a828278d5dd0209b717399ecd10e8d544">&#9670;&#160;</a></span>start()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Behavior::NodeGraph::NodeInterpreterStateBase::start </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aebf9fa950770dd18d4144a45ece56231" name="aebf9fa950770dd18d4144a45ece56231"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aebf9fa950770dd18d4144a45ece56231">&#9670;&#160;</a></span>stop()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Behavior::NodeGraph::NodeInterpreterStateBase::stop </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Friends And Related Function Documentation</h2>
+<a id="a3cb03eca2a2e96aad53bbfb570a453f4" name="a3cb03eca2a2e96aad53bbfb570a453f4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3cb03eca2a2e96aad53bbfb570a453f4">&#9670;&#160;</a></span>tag_invoke</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> tag_invoke </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_execution_1_1visit__state__t.html">Execution::visit_state_t</a>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_node_interpreter_state_base.html">NodeInterpreterStateBase</a> *&#160;</td>
+          <td class="paramname"><em>state</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">auto &amp;&amp;&#160;</td>
+          <td class="paramname"><em>visitor</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="aee42ac159c028a912c3dfabef08aef30" name="aee42ac159c028a912c3dfabef08aef30"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aee42ac159c028a912c3dfabef08aef30">&#9670;&#160;</a></span>mDebugLocation</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_node_debug_location.html">NodeDebugLocation</a> Engine::Behavior::NodeGraph::NodeInterpreterStateBase::mDebugLocation</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a44433ba1e3a11e7d60c82e84496565ef" name="a44433ba1e3a11e7d60c82e84496565ef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a44433ba1e3a11e7d60c82e84496565ef">&#9670;&#160;</a></span>mContinuation</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_debug_1_1_continuation.html">Debug::Continuation</a> Engine::Behavior::NodeGraph::NodeInterpreterStateBase::mContinuation</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following files:<ul>
+<li>plugins/behavior/nodegraph/src/Madgine/nodegraph/<a class="el" href="nodeinterpreter_8h.html">nodeinterpreter.h</a></li>
+<li>plugins/behavior/nodegraph/src/Madgine/nodegraph/<a class="el" href="nodeinterpreter_8cpp.html">nodeinterpreter.cpp</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Wed Jun 10 2026 21:25:32 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        Version: 0.6.0
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Versions</dt>
+            <script src="../../../../versions.js"></script>
+        </dl>
+    </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

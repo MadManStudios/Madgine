@@ -1,0 +1,2476 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: Engine Namespace Reference &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../docs/README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/gettingstarted.html#starting-the-engine">Starting the Engine</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/howtos.html">How-Tos</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/howtos/build.html">Build Instructions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/howtos/build.html#dependencies">Dependencies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/howtos/build.html#setup-the-madgine">Setup The Madgine</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/howtos/build.html#generating-project-files">Generating Project Files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/howtos/build.html#build-configurations">Build Configurations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/howtos/firstUniqueComponent.html">Writing your first UniqueComponent</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/keyvalue.html">KeyValue</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/keyvalue.html#valuetype">ValueType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/keyvalue.html#metatables">MetaTables</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/logging.html">Logging</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/logging.html#message-types">Message Types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/logging.html#building-log-messages">Building Log Messages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/logging.html#default-log">Default Log</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/logging.html#log-listener">Log Listener</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/pluginsystem.html">Plugins &amp; Unique Components</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/pluginsystem.html#plugins">Plugins</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/pluginsystem.html#unique-components">Unique Components</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/serialize.html">Serialization &amp; Synchronization</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#fundamental-data-types">Fundamental Data Types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#unit-hierarchy">Unit Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#serializetables">SerializeTables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#streams">Streams</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#managers">Managers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#state-replication">State Replication</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/threading.html">Threads &amp; Asynchronous Execution</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/threading.html#threads">Threads</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/threading.html#tasks">Tasks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/threading.html#taskqueues">TaskQueues</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/threading.html#workgroups">Workgroups</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/threading.html#scheduler">Scheduler</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#our-pledge">Our Pledge</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#our-standards">Our Standards</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#our-responsibilities">Our Responsibilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#scope">Scope</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#enforcement">Enforcement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#attribution">Attribution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/architecture.html#core-libraries">Core Libraries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../docs/README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+    </ul>
+    <div class="info admonition rst-footer-buttons">
+        <div class="wy-btn-group">
+            <a class="btn btn-link" href="../../../../../index.html">Madgine Blog</a>
+            <a class="btn btn-info btn-mini float-right" href="../../../../../launcher_dev.html">Try live</a>
+        </div>
+    </div>
+    <ul class="wy-breadcrumbs">
+        
+      <li><a href="../../../docs/README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: Engine Namespace Reference</li>
+        
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/out/doc/doxygen/namespace_engine.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="engine-namespace-reference">
+<h1>Engine Namespace Reference<a class="headerlink" href="#engine-namespace-reference" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: Engine Namespace Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.6.0</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#concepts">Concepts</a> &#124;
+<a href="#typedef-members">Typedefs</a> &#124;
+<a href="#enum-members">Enumerations</a> &#124;
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle"><div class="title">Engine Namespace Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Main namespace for the Madgine.  
+<a href="namespace_engine.html#details">More...</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:namespace_engine_1_1_audio"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_audio.html">Audio</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespace_engine_1_1_base64"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_base64.html">Base64</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespace_engine_1_1_behavior"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior.html">Behavior</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespace_engine_1_1_concepts"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_concepts.html">Concepts</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespace_engine_1_1_containers"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_containers.html">Containers</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespace_engine_1_1_core"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_core.html">Core</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespace_engine_1_1_debug"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_debug.html">Debug</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespace_engine_1_1_execution"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_execution.html">Execution</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespace_engine_1_1_math"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_math.html">Math</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespace_engine_1_1_memory"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_memory.html">Memory</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespace_engine_1_1_platform"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_platform.html">Platform</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespace_engine_1_1_plugins"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_plugins.html">Plugins</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespace_engine_1_1_reflect"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_reflect.html">Reflect</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespace_engine_1_1_render"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_render.html">Render</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespace_engine_1_1_resources"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_resources.html">Resources</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespace_engine_1_1_scene"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scene.html">Scene</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespace_engine_1_1_serialize"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html">Serialize</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespace_engine_1_1_string_util"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_string_util.html">StringUtil</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespace_engine_1_1_threading"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_threading.html">Threading</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespace_engine_1_1_tuple_unpacker"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_tuple_unpacker.html">TupleUnpacker</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespace_engine_1_1_type_unpacker"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_type_unpacker.html">TypeUnpacker</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespace_engine_1_1_widgets"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_widgets.html">Widgets</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><b>__GenericResultRepresentation_impl__</b></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_any.html">Any</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">can hold anything as value.  <a href="struct_engine_1_1_any.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_area_view.html">AreaView</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1auto__holder.html">auto_holder</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1auto__pack.html">auto_pack</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1auto__pack_3_01head_00_01tail_8_8_8_01_4.html">auto_pack&lt; head, tail... &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1auto__pack_3_4.html">auto_pack&lt;&gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_callable.html">Callable</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_callable_type.html">CallableType</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_callable_view_impl.html">CallableViewImpl</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_caller_hierarchy.html">CallerHierarchy</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_caller_hierarchy_base.html">CallerHierarchyBase</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_caller_hierarchy_base_ptr.html">CallerHierarchyBasePtr</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_caller_hierarchy_ptr.html">CallerHierarchyPtr</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_caller_hierarchy_ptr_3_01_caller_hierarchy_base_ptr_01_4.html">CallerHierarchyPtr&lt; CallerHierarchyBasePtr &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1comparator__traits.html">comparator_traits</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1comparator__traits_3_01_key_compare_3_01___ty_01_4_01_4.html">comparator_traits&lt; KeyCompare&lt; _Ty &gt; &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><b>comparator_traits&lt; std::less&lt; T &gt; &gt;</b></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_compound.html">Compound</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1construct__t.html">construct_t</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1container__api__impl.html">container_api_impl</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_co_w.html">CoW</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_co_w_string.html">CoWString</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_default_assign.html">DefaultAssign</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_delayed_construct.html">DelayedConstruct</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1dependent__bool.html">dependent_bool</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1dependent__constant.html">dependent_constant</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1destruct__t.html">destruct_t</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_enum_impl.html">EnumImpl</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_enum_meta_table.html">EnumMetaTable</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1first.html">first</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1fixed__string.html">fixed_string</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_flags.html">Flags</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_format_tree.html">FormatTree</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_functor.html">Functor</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_guard.html">Guard</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_heap_object.html">HeapObject</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1index__sequence__instantiate.html">index_sequence_instantiate</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><b>index_sequence_instantiate&lt; std::index_sequence&lt; Is... &gt;, T &gt;</b></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_index_type.html">IndexType</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_key_compare.html">KeyCompare</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_key_type.html">KeyType</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_key_value.html">KeyValue</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><b>KeyValue&lt; const std::pair&lt; K, T &gt; &gt;</b></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><b>KeyValue&lt; const std::unique_ptr&lt; T, D &gt; &gt;</b></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><b>KeyValue&lt; std::pair&lt; K, T &gt; &gt;</b></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><b>KeyValue&lt; std::reference_wrapper&lt; T &gt; &gt;</b></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><b>KeyValue&lt; std::unique_ptr&lt; T, D &gt; &gt;</b></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_key_value_3_01_t_01_5_01_4.html">KeyValue&lt; T * &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_key_value_3_01_t_01_5const_01_4.html">KeyValue&lt; T *const &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_key_value_3_01_t_01_4.html">KeyValue&lt; T &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1last.html">last</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1last_3_01_u_00_01_v_00_01_t_8_8_8_01_4.html">last&lt; U, V, T... &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1make__index__pack__helper.html">make_index_pack_helper</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1make__index__pack__helper_3_010_01_4.html">make_index_pack_helper&lt; 0 &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_make_owning.html">MakeOwning</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_make_owning_3_01const_01_t_01_4.html">MakeOwning&lt; const T &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_make_owning_3_01_s_01_4.html">MakeOwning&lt; S &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_make_owning_3_01_t_01_6_01_4.html">MakeOwning&lt; T &amp; &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_make_owning_3_01void_01_4.html">MakeOwning&lt; void &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_manual_lifetime.html">ManualLifetime</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_manual_lifetime_3_01_t_01_6_01_4.html">ManualLifetime&lt; T &amp; &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_member_functor.html">MemberFunctor</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_member_offset_ptr.html">MemberOffsetPtr</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_member_offset_ptr_wrapper.html">MemberOffsetPtrWrapper</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1meta__decayed.html">meta_decayed</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1meta__decayed_3_01_t_00_01_t_01_4.html">meta_decayed&lt; T, T &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1meta__decayed_3_01_t_00_01void_01_4.html">meta_decayed&lt; T, void &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_no_op_functor.html">NoOpFunctor</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_nulled_ptr.html">NulledPtr</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_out_ref.html">OutRef</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1overloaded.html">overloaded</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_parent_functor.html">ParentFunctor</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_pipable_from_left.html">PipableFromLeft</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_pipable_from_right.html">PipableFromRight</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_proxy.html">Proxy</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_proxy_3_01_t_01_5_00_01true_01_4.html">Proxy&lt; T *, true &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1replace.html">replace</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_stream.html">Stream</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_system_variable.html">SystemVariable</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_tagged_placeholder.html">TaggedPlaceholder</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_time_out.html">TimeOut</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1type__holder__t.html">type_holder_t</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1type__pack.html">type_pack</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1type__pack_3_01_head_00_01_ty_8_8_8_01_4.html">type_pack&lt; Head, Ty... &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1type__pack_3_4.html">type_pack&lt;&gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_typed_ptr.html">TypedPtr</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_unique_opaque_ptr.html">UniqueOpaquePtr</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_unpacking_member_functor.html">UnpackingMemberFunctor</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_void.html">Void</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="concepts" name="concepts"></a>
+Concepts</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="concept_engine_1_1_valid_enum_type.html">ValidEnumType</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="concept_engine_1_1_has_key.html">HasKey</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="concept_engine_1_1_f_same_as.html">FSameAs</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:aafd56ca9a2a7711b4878285a3e8f061d"><td class="memTemplParams" colspan="2">template&lt;typename F &gt; </td></tr>
+<tr class="memitem:aafd56ca9a2a7711b4878285a3e8f061d"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#aafd56ca9a2a7711b4878285a3e8f061d">CallableTraits</a> = decltype(__generic_impl__::callableTypeDeducer(std::declval&lt; F &gt;()))</td></tr>
+<tr class="separator:aafd56ca9a2a7711b4878285a3e8f061d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af01988c2c1ea209918743fd4d06dc156"><td class="memTemplParams" colspan="2">template&lt;typename Signature &gt; </td></tr>
+<tr class="memitem:af01988c2c1ea209918743fd4d06dc156"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#af01988c2c1ea209918743fd4d06dc156">CallableView</a> = typename <a class="el" href="namespace_engine.html#aafd56ca9a2a7711b4878285a3e8f061d">CallableTraits</a>&lt; Signature &gt;::template instance&lt; <a class="el" href="struct_engine_1_1_callable_view_impl.html">CallableViewImpl</a> &gt;</td></tr>
+<tr class="separator:af01988c2c1ea209918743fd4d06dc156"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a112937bef202baff8b6ece57a2ec891e"><td class="memTemplParams" colspan="2">template&lt;typename F &gt; </td></tr>
+<tr class="memitem:a112937bef202baff8b6ece57a2ec891e"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#a112937bef202baff8b6ece57a2ec891e">Closure</a> = typename <a class="el" href="namespace_engine.html#aafd56ca9a2a7711b4878285a3e8f061d">CallableTraits</a>&lt; F &gt;::template instance&lt; __generic_impl__::ClosureImpl &gt;</td></tr>
+<tr class="separator:a112937bef202baff8b6ece57a2ec891e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1be2849dc09877d8fb424f23b8ceabee"><td class="memTemplParams" colspan="2">template&lt;bool b, typename T &gt; </td></tr>
+<tr class="memitem:a1be2849dc09877d8fb424f23b8ceabee"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#a1be2849dc09877d8fb424f23b8ceabee">const_if</a> = std::conditional_t&lt; b, const T, T &gt;</td></tr>
+<tr class="separator:a1be2849dc09877d8fb424f23b8ceabee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad20797719c0e946ccbfafd54ea4fe21b"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:ad20797719c0e946ccbfafd54ea4fe21b"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#ad20797719c0e946ccbfafd54ea4fe21b">ctor_t</a> = typename T::ctor</td></tr>
+<tr class="separator:ad20797719c0e946ccbfafd54ea4fe21b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a224bcf97f8c392a3fe99697162edc558"><td class="memTemplParams" colspan="2">template&lt;typename T , typename... &gt; </td></tr>
+<tr class="memitem:a224bcf97f8c392a3fe99697162edc558"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#a224bcf97f8c392a3fe99697162edc558">dependent_t</a> = T</td></tr>
+<tr class="separator:a224bcf97f8c392a3fe99697162edc558"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a590a6c83bb0c787fc76087a4bc0bf486"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; </td></tr>
+<tr class="memitem:a590a6c83bb0c787fc76087a4bc0bf486"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#a590a6c83bb0c787fc76087a4bc0bf486">first_t</a> = typename <a class="el" href="struct_engine_1_1first.html">first</a>&lt; Args... &gt;::type</td></tr>
+<tr class="separator:a590a6c83bb0c787fc76087a4bc0bf486"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1ea2ca5e8f96e113be72baa7a9a703ed"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a1ea2ca5e8f96e113be72baa7a9a703ed"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#a1ea2ca5e8f96e113be72baa7a9a703ed">forward_ref_t</a> = std::conditional_t&lt; std::is_lvalue_reference_v&lt; T &gt; &amp;&amp;!std::is_const_v&lt; std::remove_reference_t&lt; T &gt; &gt;, std::reference_wrapper&lt; std::remove_reference_t&lt; T &gt; &gt;, std::remove_const_t&lt; std::remove_reference_t&lt; T &gt; &gt; &gt;</td></tr>
+<tr class="separator:a1ea2ca5e8f96e113be72baa7a9a703ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d39d4874bd9cf170113bf543505e49e"><td class="memTemplParams" colspan="2">template&lt;template&lt; auto, typename, typename, typename... &gt; typename C, auto f, typename... Args&gt; </td></tr>
+<tr class="memitem:a8d39d4874bd9cf170113bf543505e49e"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#a8d39d4874bd9cf170113bf543505e49e">FunctionCapture</a> = typename <a class="el" href="struct_engine_1_1_callable.html">Callable</a>&lt; f &gt;::template instance&lt; C, Args... &gt;::type</td></tr>
+<tr class="separator:a8d39d4874bd9cf170113bf543505e49e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a266485a460bde69c54e20b6e8ecd5f2a"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine.html#a266485a460bde69c54e20b6e8ecd5f2a">GenericResult</a> = <a class="el" href="struct_engine_1_1_enum_impl.html">Engine::EnumImpl</a>&lt; __GenericResultRepresentation_impl__ &gt;</td></tr>
+<tr class="separator:a266485a460bde69c54e20b6e8ecd5f2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab9aa3cb843e93169f7b654729ddc23a1"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:ab9aa3cb843e93169f7b654729ddc23a1"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#ab9aa3cb843e93169f7b654729ddc23a1">identity</a> = T</td></tr>
+<tr class="separator:ab9aa3cb843e93169f7b654729ddc23a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ff823d62b1da9027e734a17f57b0d20"><td class="memTemplParams" colspan="2">template&lt;typename... Ty&gt; </td></tr>
+<tr class="memitem:a0ff823d62b1da9027e734a17f57b0d20"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#a0ff823d62b1da9027e734a17f57b0d20">index_pack_for</a> = <a class="el" href="namespace_engine.html#a2c124ea16c1ebbd94ffe4b7fdd70680f">make_index_pack</a>&lt; sizeof...(<a class="el" href="class_engine_1_1_ty.html">Ty</a>)&gt;</td></tr>
+<tr class="separator:a0ff823d62b1da9027e734a17f57b0d20"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c20e1169a0f5be101463184c7f7cd29"><td class="memTemplParams" colspan="2">template&lt;typename Sequence , template&lt; size_t... &gt; typename T&gt; </td></tr>
+<tr class="memitem:a3c20e1169a0f5be101463184c7f7cd29"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#a3c20e1169a0f5be101463184c7f7cd29">index_sequence_instantiate_t</a> = typename <a class="el" href="struct_engine_1_1index__sequence__instantiate.html">index_sequence_instantiate</a>&lt; Sequence, T &gt;::type</td></tr>
+<tr class="separator:a3c20e1169a0f5be101463184c7f7cd29"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e883a300403c79187e8684ce0b8d3a0"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a1e883a300403c79187e8684ce0b8d3a0"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#a1e883a300403c79187e8684ce0b8d3a0">KeyType_t</a> = typename <a class="el" href="struct_engine_1_1_key_type.html">KeyType</a>&lt; T &gt;::type</td></tr>
+<tr class="separator:a1e883a300403c79187e8684ce0b8d3a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c124ea16c1ebbd94ffe4b7fdd70680f"><td class="memTemplParams" colspan="2">template&lt;std::size_t N&gt; </td></tr>
+<tr class="memitem:a2c124ea16c1ebbd94ffe4b7fdd70680f"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#a2c124ea16c1ebbd94ffe4b7fdd70680f">make_index_pack</a> = typename <a class="el" href="struct_engine_1_1make__index__pack__helper.html">make_index_pack_helper</a>&lt; N &gt;::type</td></tr>
+<tr class="separator:a2c124ea16c1ebbd94ffe4b7fdd70680f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af1887ab078ddc6c4c769a6dace43bcea"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:af1887ab078ddc6c4c769a6dace43bcea"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#af1887ab078ddc6c4c769a6dace43bcea">MakeOwning_t</a> = typename <a class="el" href="struct_engine_1_1_make_owning.html">MakeOwning</a>&lt; T &gt;::type</td></tr>
+<tr class="separator:af1887ab078ddc6c4c769a6dace43bcea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a879f4834f2b8168c8dd6ac03b8989cd6"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a879f4834f2b8168c8dd6ac03b8989cd6"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#a879f4834f2b8168c8dd6ac03b8989cd6">meta_decay_t</a> = typename __generic_impl__::decayBase&lt; T &gt;::type</td></tr>
+<tr class="separator:a879f4834f2b8168c8dd6ac03b8989cd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ff33f434fd0deb508ab19a9de61b1c7"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a6ff33f434fd0deb508ab19a9de61b1c7"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#a6ff33f434fd0deb508ab19a9de61b1c7">meta_decayed_t</a> = typename <a class="el" href="struct_engine_1_1meta__decayed.html">meta_decayed</a>&lt; T, <a class="el" href="namespace_engine.html#a879f4834f2b8168c8dd6ac03b8989cd6">meta_decay_t</a>&lt; T &gt; &gt;::type</td></tr>
+<tr class="separator:a6ff33f434fd0deb508ab19a9de61b1c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a818de93862634021c19ce3820d3f1a32"><td class="memItemLeft" align="right" valign="top">typedef std::istream::off_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine.html#a818de93862634021c19ce3820d3f1a32">off_type</a></td></tr>
+<tr class="separator:a818de93862634021c19ce3820d3f1a32"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa6923ebc493cfa55cf08a28c061c2924"><td class="memTemplParams" colspan="2">template&lt;typename T , typename R  = Void&gt; </td></tr>
+<tr class="memitem:aa6923ebc493cfa55cf08a28c061c2924"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#aa6923ebc493cfa55cf08a28c061c2924">patch_void_t</a> = std::conditional_t&lt; std::is_void_v&lt; T &gt;, R, T &gt;</td></tr>
+<tr class="separator:aa6923ebc493cfa55cf08a28c061c2924"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73b9d8892b6e907a3def79b7e26353e4"><td class="memTemplParams" colspan="2">template&lt;size_t N&gt; </td></tr>
+<tr class="memitem:a73b9d8892b6e907a3def79b7e26353e4"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#a73b9d8892b6e907a3def79b7e26353e4">Placeholder</a> = <a class="el" href="struct_engine_1_1_tagged_placeholder.html">TaggedPlaceholder</a>&lt; DefaultTag, N &gt;</td></tr>
+<tr class="separator:a73b9d8892b6e907a3def79b7e26353e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4371734c39a5a0405527b2d3bd4f7e02"><td class="memItemLeft" align="right" valign="top">typedef std::istream::pos_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine.html#a4371734c39a5a0405527b2d3bd4f7e02">pos_type</a></td></tr>
+<tr class="separator:a4371734c39a5a0405527b2d3bd4f7e02"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4730eea0dd80156674d4302db2bdf1ce"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a4730eea0dd80156674d4302db2bdf1ce"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#a4730eea0dd80156674d4302db2bdf1ce">to_type_pack</a> = typename __Generic_impl__::to_type_pack_helper&lt; T &gt;::type</td></tr>
+<tr class="separator:a4730eea0dd80156674d4302db2bdf1ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a91bd07072a20dbc8e53cf46f4857326e"><td class="memTemplParams" colspan="2">template&lt;typename Pack &gt; </td></tr>
+<tr class="memitem:a91bd07072a20dbc8e53cf46f4857326e"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#a91bd07072a20dbc8e53cf46f4857326e">type_pack_as_tuple</a> = typename Pack::as_tuple</td></tr>
+<tr class="separator:a91bd07072a20dbc8e53cf46f4857326e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a421167ebc91f53301e0f884b7919cd74"><td class="memTemplParams" colspan="2">template&lt;typename Pack1 , typename Pack2 &gt; </td></tr>
+<tr class="memitem:a421167ebc91f53301e0f884b7919cd74"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#a421167ebc91f53301e0f884b7919cd74">type_pack_concat</a> = typename Pack1::template concat&lt; Pack2 &gt;</td></tr>
+<tr class="separator:a421167ebc91f53301e0f884b7919cd74"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc2edc51f8a8dcd788869f1cb5bada82"><td class="memTemplParams" colspan="2">template&lt;typename Pack &gt; </td></tr>
+<tr class="memitem:acc2edc51f8a8dcd788869f1cb5bada82"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#acc2edc51f8a8dcd788869f1cb5bada82">type_pack_first</a> = typename Pack::first</td></tr>
+<tr class="separator:acc2edc51f8a8dcd788869f1cb5bada82"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a819eef482c038be6b4f33039088599e5"><td class="memTemplParams" colspan="2">template&lt;typename T , size_t n&gt; </td></tr>
+<tr class="memitem:a819eef482c038be6b4f33039088599e5"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#a819eef482c038be6b4f33039088599e5">type_pack_repeat_n_times</a> = typename __generic_impl__::type_pack_repeat_n_times_helper&lt; T, std::make_index_sequence&lt; n &gt; &gt;::type</td></tr>
+<tr class="separator:a819eef482c038be6b4f33039088599e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aacfd5ded1a5e1ea4b628b77fb8f5ed40"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:aacfd5ded1a5e1ea4b628b77fb8f5ed40"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#aacfd5ded1a5e1ea4b628b77fb8f5ed40">ValueType_t</a> = std::decay_t&lt; decltype(<a class="el" href="namespace_engine.html#a29e0b71b318745944176a0818916b9c9">kvValue</a>(std::declval&lt; T &gt;()))&gt;</td></tr>
+<tr class="separator:aacfd5ded1a5e1ea4b628b77fb8f5ed40"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ec103031d01105429898ccfbfa42f46"><td class="memTemplParams" colspan="2">template&lt;typename Base , auto... cpos&gt; </td></tr>
+<tr class="memitem:a6ec103031d01105429898ccfbfa42f46"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#a6ec103031d01105429898ccfbfa42f46">VirtualCPOsBase</a> = typename <a class="el" href="struct_engine_1_1auto__pack.html">Engine::auto_pack</a>&lt; cpos... &gt;::template fold&lt; __generic_impl__::VirtualCPOBase, __generic_impl__::VirtualCPOBaseWrapper&lt; Base &gt; &gt;</td></tr>
+<tr class="separator:a6ec103031d01105429898ccfbfa42f46"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf7e2f3569ac2d23721ed3cb9fcd8d8e"><td class="memTemplParams" colspan="2">template&lt;typename Base &gt; </td></tr>
+<tr class="memitem:abf7e2f3569ac2d23721ed3cb9fcd8d8e"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#abf7e2f3569ac2d23721ed3cb9fcd8d8e">VirtualCPOsImpl</a> = typename Base::mapped_cpos::template fold&lt; __generic_impl__::VirtualCPOsImplHelper, Base &gt;</td></tr>
+<tr class="separator:abf7e2f3569ac2d23721ed3cb9fcd8d8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ffa43baeb2eb6db45932beb44c8cc6c"><td class="memTemplParams" colspan="2">template&lt;typename... &gt; </td></tr>
+<tr class="memitem:a7ffa43baeb2eb6db45932beb44c8cc6c"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#a7ffa43baeb2eb6db45932beb44c8cc6c">void_t</a> = <a class="el" href="classvoid.html">void</a></td></tr>
+<tr class="separator:a7ffa43baeb2eb6db45932beb44c8cc6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:a37c5cc550995f4f14badf14d520dbad8"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine.html#a37c5cc550995f4f14badf14d520dbad8">AccessMode</a> { <a class="el" href="namespace_engine.html#a37c5cc550995f4f14badf14d520dbad8a3466fab4975481651940ed328aa990e4">READ</a>
+, <a class="el" href="namespace_engine.html#a37c5cc550995f4f14badf14d520dbad8ad4b9e47f65b6e79b010582f15785867e">WRITE</a>
+ }</td></tr>
+<tr class="separator:a37c5cc550995f4f14badf14d520dbad8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:af9726e1fb1d996ca54f4ba1bae9a103b"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:af9726e1fb1d996ca54f4ba1bae9a103b"><td class="memTemplItemLeft" align="right" valign="top">decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#af9726e1fb1d996ca54f4ba1bae9a103b">addressOf</a> (T &amp;t)</td></tr>
+<tr class="separator:af9726e1fb1d996ca54f4ba1bae9a103b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a23cb93c34bbb9a44d884300fc21ddf13"><td class="memItemLeft" align="right" valign="top">constexpr size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine.html#a23cb93c34bbb9a44d884300fc21ddf13">alignTo</a> (size_t size, size_t alignment)</td></tr>
+<tr class="memdesc:a23cb93c34bbb9a44d884300fc21ddf13"><td class="mdescLeft">&#160;</td><td class="mdescRight">Aligns size to the specified alignment, rounding up.  <a href="namespace_engine.html#a23cb93c34bbb9a44d884300fc21ddf13">More...</a><br /></td></tr>
+<tr class="separator:a23cb93c34bbb9a44d884300fc21ddf13"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a81e54982fddcb79012cba1028fe1c0f8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine.html#a81e54982fddcb79012cba1028fe1c0f8">alignTo</a> (<a class="el" href="classvoid.html">void</a> *ptr, size_t alignment)</td></tr>
+<tr class="separator:a81e54982fddcb79012cba1028fe1c0f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0848003e6aecc347f7f33170e3abfce4"><td class="memTemplParams" colspan="2">template&lt;typename T , size_t S&gt; </td></tr>
+<tr class="memitem:a0848003e6aecc347f7f33170e3abfce4"><td class="memTemplItemLeft" align="right" valign="top">constexpr size_t&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#a0848003e6aecc347f7f33170e3abfce4">array_size</a> (T(&amp;)[<a class="el" href="class_s.html">S</a>])</td></tr>
+<tr class="separator:a0848003e6aecc347f7f33170e3abfce4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ad337362bb31809aa3536e6fffaaafb"><td class="memTemplParams" colspan="2">template&lt;typename F &gt; </td></tr>
+<tr class="memitem:a9ad337362bb31809aa3536e6fffaaafb"><td class="memTemplItemLeft" align="right" valign="top">constexpr size_t&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#a9ad337362bb31809aa3536e6fffaaafb">callable_argument_count</a> ()</td></tr>
+<tr class="separator:a9ad337362bb31809aa3536e6fffaaafb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a11237b06f9eec6396040237c8c695626"><td class="memTemplParams" colspan="2">template&lt;typename F &gt; </td></tr>
+<tr class="memitem:a11237b06f9eec6396040237c8c695626"><td class="memTemplItemLeft" align="right" valign="top">constexpr size_t&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#a11237b06f9eec6396040237c8c695626">callable_argument_count</a> (size_t expected)</td></tr>
+<tr class="separator:a11237b06f9eec6396040237c8c695626"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af1060a5c6d80a2673d12f71e6dcea942"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:af1060a5c6d80a2673d12f71e6dcea942"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#af1060a5c6d80a2673d12f71e6dcea942">CallerHierarchyPtr</a> (const <a class="el" href="struct_engine_1_1_caller_hierarchy.html">CallerHierarchy</a>&lt; T &gt; &amp;) -&gt; <a class="el" href="struct_engine_1_1_caller_hierarchy_ptr.html">CallerHierarchyPtr</a>&lt; T &gt;</td></tr>
+<tr class="separator:af1060a5c6d80a2673d12f71e6dcea942"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a11dcbb5b2544e044c83e0ce7340c2d34"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a11dcbb5b2544e044c83e0ce7340c2d34"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#a11dcbb5b2544e044c83e0ce7340c2d34">CallerHierarchyPtr</a> (const T &amp;) -&gt; <a class="el" href="struct_engine_1_1_caller_hierarchy_ptr.html">CallerHierarchyPtr</a>&lt; T &gt;</td></tr>
+<tr class="separator:a11dcbb5b2544e044c83e0ce7340c2d34"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a371fbcdb33ab583e49d85e971db02327"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine.html#a371fbcdb33ab583e49d85e971db02327">componentBuilder</a> ()</td></tr>
+<tr class="separator:a371fbcdb33ab583e49d85e971db02327"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace9f682f4e2415fc87602d65fae55bde"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine.html#ace9f682f4e2415fc87602d65fae55bde">componentInit</a> (std::array&lt; <a class="el" href="struct_engine_1_1_reflect_1_1_accessor.html">Reflect::Accessor</a>, 32 &gt; &amp;accessors)</td></tr>
+<tr class="separator:ace9f682f4e2415fc87602d65fae55bde"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad8e68b6706484b3b1bea6c13641946a6"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:ad8e68b6706484b3b1bea6c13641946a6"><td class="memTemplItemLeft" align="right" valign="top">decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#ad8e68b6706484b3b1bea6c13641946a6">deref</a> (T &amp;&amp;t)</td></tr>
+<tr class="separator:ad8e68b6706484b3b1bea6c13641946a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a2ef32acd6b5af90fbafd3e88a7c045"><td class="memTemplParams" colspan="2">template&lt;size_t Size&gt; </td></tr>
+<tr class="memitem:a2a2ef32acd6b5af90fbafd3e88a7c045"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#a2a2ef32acd6b5af90fbafd3e88a7c045">fixed_string</a> (const char(&amp;data)[Size]) -&gt; <a class="el" href="struct_engine_1_1fixed__string.html">fixed_string</a>&lt; Size - 1 &gt;</td></tr>
+<tr class="separator:a2a2ef32acd6b5af90fbafd3e88a7c045"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acac3f73c7f1e5ac7f6809a59ede9784b"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:acac3f73c7f1e5ac7f6809a59ede9784b"><td class="memTemplItemLeft" align="right" valign="top">__generic_impl__::CaptureHelper&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#acac3f73c7f1e5ac7f6809a59ede9784b">forward_capture</a> (T &amp;&amp;t)</td></tr>
+<tr class="separator:acac3f73c7f1e5ac7f6809a59ede9784b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01fc0e722554a7d6dfff2c79b5c7b6a5"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a01fc0e722554a7d6dfff2c79b5c7b6a5"><td class="memTemplItemLeft" align="right" valign="top">__generic_impl__::CaptureHelper&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#a01fc0e722554a7d6dfff2c79b5c7b6a5">forward_capture</a> (T &amp;t)</td></tr>
+<tr class="separator:a01fc0e722554a7d6dfff2c79b5c7b6a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a835493204cded8845b5136ed6896947e"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a835493204cded8845b5136ed6896947e"><td class="memTemplItemLeft" align="right" valign="top">decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#a835493204cded8845b5136ed6896947e">forward_ref</a> (std::remove_reference_t&lt; T &gt; &amp;&amp;t)</td></tr>
+<tr class="separator:a835493204cded8845b5136ed6896947e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21e0f137df0ba1c9c173e7d9d8a824cc"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a21e0f137df0ba1c9c173e7d9d8a824cc"><td class="memTemplItemLeft" align="right" valign="top">decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#a21e0f137df0ba1c9c173e7d9d8a824cc">forward_ref</a> (std::remove_reference_t&lt; T &gt; &amp;t)</td></tr>
+<tr class="separator:a21e0f137df0ba1c9c173e7d9d8a824cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99cae82803597f7f2878bdc4395f7669"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a99cae82803597f7f2878bdc4395f7669"><td class="memTemplItemLeft" align="right" valign="top">decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#a99cae82803597f7f2878bdc4395f7669">kvKey</a> (T &amp;&amp;v)</td></tr>
+<tr class="separator:a99cae82803597f7f2878bdc4395f7669"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae9b714fd1d678c8e8221f479b0f0f993"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:ae9b714fd1d678c8e8221f479b0f0f993"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#ae9b714fd1d678c8e8221f479b0f0f993">kvKeys</a> (T &amp;v)</td></tr>
+<tr class="separator:ae9b714fd1d678c8e8221f479b0f0f993"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a29e0b71b318745944176a0818916b9c9"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a29e0b71b318745944176a0818916b9c9"><td class="memTemplItemLeft" align="right" valign="top">decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#a29e0b71b318745944176a0818916b9c9">kvValue</a> (T &amp;&amp;v)</td></tr>
+<tr class="separator:a29e0b71b318745944176a0818916b9c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c20837d4f2e948fa7d804bea3a244db"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a6c20837d4f2e948fa7d804bea3a244db"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#a6c20837d4f2e948fa7d804bea3a244db">kvValues</a> (T &amp;v)</td></tr>
+<tr class="separator:a6c20837d4f2e948fa7d804bea3a244db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9885a6c0e5ef2389f7fa4ec15dbb60b4"><td class="memItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine.html#a9885a6c0e5ef2389f7fa4ec15dbb60b4">operator&lt;&lt;</a> (std::ostream &amp;stream, typename __GenericResultRepresentation_impl__::EnumType value)</td></tr>
+<tr class="separator:a9885a6c0e5ef2389f7fa4ec15dbb60b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e77372c4579ff0a6b98a1b95ff39108"><td class="memItemLeft" align="right" valign="top">std::istream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine.html#a1e77372c4579ff0a6b98a1b95ff39108">operator&gt;&gt;</a> (std::istream &amp;stream, typename __GenericResultRepresentation_impl__::EnumType &amp;value)</td></tr>
+<tr class="separator:a1e77372c4579ff0a6b98a1b95ff39108"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af79d26601acf4e432a1176abd331979c"><td class="memTemplParams" colspan="2">template&lt;typename... Ts&gt; </td></tr>
+<tr class="memitem:af79d26601acf4e432a1176abd331979c"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#af79d26601acf4e432a1176abd331979c">overloaded</a> (Ts...) -&gt; <a class="el" href="struct_engine_1_1overloaded.html">overloaded</a>&lt; Ts... &gt;</td></tr>
+<tr class="separator:af79d26601acf4e432a1176abd331979c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab11bf2e93b6c0b9e7ce1d72a35e61849"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:ab11bf2e93b6c0b9e7ce1d72a35e61849"><td class="memTemplItemLeft" align="right" valign="top">decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#ab11bf2e93b6c0b9e7ce1d72a35e61849">pairSecond</a> (T &amp;&amp;t)</td></tr>
+<tr class="separator:ab11bf2e93b6c0b9e7ce1d72a35e61849"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a80ffb7b179bfbd177c89dc9910f62930"><td class="memTemplParams" colspan="2">template&lt;typename F , typename R &gt; </td></tr>
+<tr class="memitem:a80ffb7b179bfbd177c89dc9910f62930"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#a80ffb7b179bfbd177c89dc9910f62930">patch_void</a> (F &amp;&amp;f, R &amp;&amp;result)</td></tr>
+<tr class="separator:a80ffb7b179bfbd177c89dc9910f62930"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a159e0ed23d5a6c0a4f33d4928d6b6d61"><td class="memTemplParams" colspan="2">template&lt;typename F , typename... Args&gt; </td></tr>
+<tr class="memitem:a159e0ed23d5a6c0a4f33d4928d6b6d61"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_pipable_from_left.html">PipableFromLeft</a>&lt; F, Args... &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#a159e0ed23d5a6c0a4f33d4928d6b6d61">pipable_from_left</a> (F &amp;&amp;f, Args &amp;&amp;...args)</td></tr>
+<tr class="separator:a159e0ed23d5a6c0a4f33d4928d6b6d61"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a66076b2afca92fbe6f506c5f05338f1a"><td class="memTemplParams" colspan="2">template&lt;typename F , typename... Args&gt; </td></tr>
+<tr class="memitem:a66076b2afca92fbe6f506c5f05338f1a"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_pipable_from_right.html">PipableFromRight</a>&lt; F, Args... &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#a66076b2afca92fbe6f506c5f05338f1a">pipable_from_right</a> (F &amp;&amp;f, Args &amp;&amp;...args)</td></tr>
+<tr class="separator:a66076b2afca92fbe6f506c5f05338f1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a60be1a2f34e7d5b77a4c56434c479d36"><td class="memItemLeft" align="right" valign="top">constexpr std::strong_ordering&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine.html#a60be1a2f34e7d5b77a4c56434c479d36">strcmp</a> (const char *<a class="el" href="struct_engine_1_1first.html">first</a>, const char *second)</td></tr>
+<tr class="separator:a60be1a2f34e7d5b77a4c56434c479d36"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aabda4771026ffa4a022d1c1401fadd00"><td class="memItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine.html#aabda4771026ffa4a022d1c1401fadd00">strcpy_s</a> (char *dest, size_t size, const char *source)</td></tr>
+<tr class="separator:aabda4771026ffa4a022d1c1401fadd00"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5c483514353e775f6b069a3687d56c3"><td class="memItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine.html#ad5c483514353e775f6b069a3687d56c3">streq</a> (const char *lhs, const char *rhs)</td></tr>
+<tr class="separator:ad5c483514353e775f6b069a3687d56c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a3a01a50713c9eec7f43621aadcf1ef"><td class="memItemLeft" align="right" valign="top">constexpr size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine.html#a3a3a01a50713c9eec7f43621aadcf1ef">strlen</a> (const char *s)</td></tr>
+<tr class="separator:a3a3a01a50713c9eec7f43621aadcf1ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae582c6ae8e7c404cef1147198a919be8"><td class="memItemLeft" align="right" valign="top">constexpr const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine.html#ae582c6ae8e7c404cef1147198a919be8">strrchr</a> (const char *s, char c)</td></tr>
+<tr class="separator:ae582c6ae8e7c404cef1147198a919be8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac3d6e550c6ababa1018e27403257bf6e"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:ac3d6e550c6ababa1018e27403257bf6e"><td class="memTemplItemLeft" align="right" valign="top">T *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#ac3d6e550c6ababa1018e27403257bf6e">toPointer</a> (T &amp;t)</td></tr>
+<tr class="separator:ac3d6e550c6ababa1018e27403257bf6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a66ea902b228f6a9a9d151f6c44acf5a9"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a66ea902b228f6a9a9d151f6c44acf5a9"><td class="memTemplItemLeft" align="right" valign="top">decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#a66ea902b228f6a9a9d151f6c44acf5a9">toRawPtr</a> (const T &amp;t)</td></tr>
+<tr class="separator:a66ea902b228f6a9a9d151f6c44acf5a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa79542b0a29be7e1303f2cedb18c3367"><td class="memTemplParams" colspan="2">template&lt;typename T , typename D &gt; </td></tr>
+<tr class="memitem:aa79542b0a29be7e1303f2cedb18c3367"><td class="memTemplItemLeft" align="right" valign="top">T *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#aa79542b0a29be7e1303f2cedb18c3367">uniquePtrToPtr</a> (const std::unique_ptr&lt; T, D &gt; &amp;p)</td></tr>
+<tr class="separator:aa79542b0a29be7e1303f2cedb18c3367"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a82f95acb89fe66deefc97fb8597e17af"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="struct_engine_1_1construct__t.html">construct_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine.html#a82f95acb89fe66deefc97fb8597e17af">construct</a></td></tr>
+<tr class="separator:a82f95acb89fe66deefc97fb8597e17af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c8d1c1afeb0231f14bd65c541188f4f"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="struct_engine_1_1destruct__t.html">destruct_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine.html#a8c8d1c1afeb0231f14bd65c541188f4f">destruct</a></td></tr>
+<tr class="separator:a8c8d1c1afeb0231f14bd65c541188f4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff53dae7a59ec160ca891c619c155874"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine.html#aff53dae7a59ec160ca891c619c155874">projectionAddressOf</a> = <a class="el" href="lift_8h.html#a7379f682afaa0970087992e4005fcc55">LIFT</a>(<a class="el" href="namespace_engine.html#af9726e1fb1d996ca54f4ba1bae9a103b">addressOf</a>)</td></tr>
+<tr class="separator:aff53dae7a59ec160ca891c619c155874"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7499424b4d6c689fa94215b656ff35a"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine.html#ab7499424b4d6c689fa94215b656ff35a">projectionDeref</a> = <a class="el" href="lift_8h.html#a7379f682afaa0970087992e4005fcc55">LIFT</a>(<a class="el" href="namespace_engine.html#ad8e68b6706484b3b1bea6c13641946a6">deref</a>)</td></tr>
+<tr class="separator:ab7499424b4d6c689fa94215b656ff35a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c51e1341ccae0a2142a6c7a5201b196"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine.html#a4c51e1341ccae0a2142a6c7a5201b196">projectionKey</a> = <a class="el" href="lift_8h.html#a7379f682afaa0970087992e4005fcc55">LIFT</a>(<a class="el" href="namespace_engine.html#a99cae82803597f7f2878bdc4395f7669">kvKey</a>)</td></tr>
+<tr class="separator:a4c51e1341ccae0a2142a6c7a5201b196"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4e7d50d70acef16689146f95fbbe2773"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine.html#a4e7d50d70acef16689146f95fbbe2773">projectionPairSecond</a> = <a class="el" href="lift_8h.html#a7379f682afaa0970087992e4005fcc55">LIFT</a>(<a class="el" href="namespace_engine.html#ab11bf2e93b6c0b9e7ce1d72a35e61849">pairSecond</a>)</td></tr>
+<tr class="separator:a4e7d50d70acef16689146f95fbbe2773"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe6a95a9cbbdb4cc7c41d5d33cbd40d6"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine.html#abe6a95a9cbbdb4cc7c41d5d33cbd40d6">projectionToPointer</a> = <a class="el" href="lift_8h.html#a7379f682afaa0970087992e4005fcc55">LIFT</a>(<a class="el" href="namespace_engine.html#ac3d6e550c6ababa1018e27403257bf6e">toPointer</a>)</td></tr>
+<tr class="separator:abe6a95a9cbbdb4cc7c41d5d33cbd40d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adabf4b8bb0a2b3ac7b9f132343a951b4"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine.html#adabf4b8bb0a2b3ac7b9f132343a951b4">projectionToRawPtr</a> = <a class="el" href="lift_8h.html#a7379f682afaa0970087992e4005fcc55">LIFT</a>(<a class="el" href="namespace_engine.html#a66ea902b228f6a9a9d151f6c44acf5a9">toRawPtr</a>)</td></tr>
+<tr class="separator:adabf4b8bb0a2b3ac7b9f132343a951b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a05c72dc0c42853aee89b367f9c217a92"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine.html#a05c72dc0c42853aee89b367f9c217a92">projectionUniquePtrToPtr</a> = <a class="el" href="lift_8h.html#a7379f682afaa0970087992e4005fcc55">LIFT</a>(<a class="el" href="namespace_engine.html#aa79542b0a29be7e1303f2cedb18c3367">uniquePtrToPtr</a>)</td></tr>
+<tr class="separator:a05c72dc0c42853aee89b367f9c217a92"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a44f0fdea72d65f33ac869f1167647a84"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine.html#a44f0fdea72d65f33ac869f1167647a84">projectionValue</a> = <a class="el" href="lift_8h.html#a7379f682afaa0970087992e4005fcc55">LIFT</a>(<a class="el" href="namespace_engine.html#a29e0b71b318745944176a0818916b9c9">kvValue</a>)</td></tr>
+<tr class="separator:a44f0fdea72d65f33ac869f1167647a84"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a57cd6caa1de746d8d0a32dbe72186c6d"><td class="memTemplParams" colspan="2">template&lt;size_t I&gt; </td></tr>
+<tr class="memitem:a57cd6caa1de746d8d0a32dbe72186c6d"><td class="memTemplItemLeft" align="right" valign="top">constexpr <a class="el" href="struct_engine_1_1fixed__string.html">fixed_string</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#a57cd6caa1de746d8d0a32dbe72186c6d">to_fixed_string</a> = __generic_impl__::to_fixed_string_helper&lt;I&gt;::value</td></tr>
+<tr class="separator:a57cd6caa1de746d8d0a32dbe72186c6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6638c07372d57d8a8da119203ae1e419"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a6638c07372d57d8a8da119203ae1e419"><td class="memTemplItemLeft" align="right" valign="top">const constexpr <a class="el" href="struct_engine_1_1type__holder__t.html">type_holder_t</a>&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine.html#a6638c07372d57d8a8da119203ae1e419">type_holder</a> = {}</td></tr>
+<tr class="separator:a6638c07372d57d8a8da119203ae1e419"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p >Main namespace for the Madgine. </p>
+</div><h2 class="groupheader">Typedef Documentation</h2>
+<a id="a2c124ea16c1ebbd94ffe4b7fdd70680f" name="a2c124ea16c1ebbd94ffe4b7fdd70680f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2c124ea16c1ebbd94ffe4b7fdd70680f">&#9670;&#160;</a></span>make_index_pack</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;std::size_t N&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespace_engine.html#a2c124ea16c1ebbd94ffe4b7fdd70680f">Engine::make_index_pack</a> = typedef typename <a class="el" href="struct_engine_1_1make__index__pack__helper.html">make_index_pack_helper</a>&lt;N&gt;::type</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0ff823d62b1da9027e734a17f57b0d20" name="a0ff823d62b1da9027e734a17f57b0d20"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ff823d62b1da9027e734a17f57b0d20">&#9670;&#160;</a></span>index_pack_for</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename... Ty&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespace_engine.html#a0ff823d62b1da9027e734a17f57b0d20">Engine::index_pack_for</a> = typedef <a class="el" href="namespace_engine.html#a2c124ea16c1ebbd94ffe4b7fdd70680f">make_index_pack</a>&lt;sizeof...(<a class="el" href="class_engine_1_1_ty.html">Ty</a>)&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aafd56ca9a2a7711b4878285a3e8f061d" name="aafd56ca9a2a7711b4878285a3e8f061d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aafd56ca9a2a7711b4878285a3e8f061d">&#9670;&#160;</a></span>CallableTraits</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename F &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespace_engine.html#aafd56ca9a2a7711b4878285a3e8f061d">Engine::CallableTraits</a> = typedef decltype(__generic_impl__::callableTypeDeducer(std::declval&lt;F&gt;()))</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8d39d4874bd9cf170113bf543505e49e" name="a8d39d4874bd9cf170113bf543505e49e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8d39d4874bd9cf170113bf543505e49e">&#9670;&#160;</a></span>FunctionCapture</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;template&lt; auto, typename, typename, typename... &gt; typename C, auto f, typename... Args&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespace_engine.html#a8d39d4874bd9cf170113bf543505e49e">Engine::FunctionCapture</a> = typedef typename <a class="el" href="struct_engine_1_1_callable.html">Callable</a>&lt;f&gt;::template instance&lt;C, Args...&gt;::type</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af01988c2c1ea209918743fd4d06dc156" name="af01988c2c1ea209918743fd4d06dc156"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af01988c2c1ea209918743fd4d06dc156">&#9670;&#160;</a></span>CallableView</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Signature &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespace_engine.html#af01988c2c1ea209918743fd4d06dc156">Engine::CallableView</a> = typedef typename <a class="el" href="namespace_engine.html#aafd56ca9a2a7711b4878285a3e8f061d">CallableTraits</a>&lt;Signature&gt;::template instance&lt;<a class="el" href="struct_engine_1_1_callable_view_impl.html">CallableViewImpl</a>&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a112937bef202baff8b6ece57a2ec891e" name="a112937bef202baff8b6ece57a2ec891e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a112937bef202baff8b6ece57a2ec891e">&#9670;&#160;</a></span>Closure</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename F &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespace_engine.html#a112937bef202baff8b6ece57a2ec891e">Engine::Closure</a> = typedef typename <a class="el" href="namespace_engine.html#aafd56ca9a2a7711b4878285a3e8f061d">CallableTraits</a>&lt;F&gt;::template instance&lt;__generic_impl__::ClosureImpl&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad20797719c0e946ccbfafd54ea4fe21b" name="ad20797719c0e946ccbfafd54ea4fe21b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad20797719c0e946ccbfafd54ea4fe21b">&#9670;&#160;</a></span>ctor_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespace_engine.html#ad20797719c0e946ccbfafd54ea4fe21b">Engine::ctor_t</a> = typedef typename T::ctor</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4730eea0dd80156674d4302db2bdf1ce" name="a4730eea0dd80156674d4302db2bdf1ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4730eea0dd80156674d4302db2bdf1ce">&#9670;&#160;</a></span>to_type_pack</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespace_engine.html#a4730eea0dd80156674d4302db2bdf1ce">Engine::to_type_pack</a> = typedef typename __Generic_impl__::to_type_pack_helper&lt;T&gt;::type</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a266485a460bde69c54e20b6e8ecd5f2a" name="a266485a460bde69c54e20b6e8ecd5f2a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a266485a460bde69c54e20b6e8ecd5f2a">&#9670;&#160;</a></span>GenericResult</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespace_engine.html#a266485a460bde69c54e20b6e8ecd5f2a">Engine::GenericResult</a> = typedef <a class="el" href="struct_engine_1_1_enum_impl.html">Engine::EnumImpl</a>&lt;__GenericResultRepresentation_impl__&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1e883a300403c79187e8684ce0b8d3a0" name="a1e883a300403c79187e8684ce0b8d3a0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1e883a300403c79187e8684ce0b8d3a0">&#9670;&#160;</a></span>KeyType_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespace_engine.html#a1e883a300403c79187e8684ce0b8d3a0">Engine::KeyType_t</a> = typedef typename <a class="el" href="struct_engine_1_1_key_type.html">KeyType</a>&lt;T&gt;::type</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aacfd5ded1a5e1ea4b628b77fb8f5ed40" name="aacfd5ded1a5e1ea4b628b77fb8f5ed40"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aacfd5ded1a5e1ea4b628b77fb8f5ed40">&#9670;&#160;</a></span>ValueType_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespace_engine.html#aacfd5ded1a5e1ea4b628b77fb8f5ed40">Engine::ValueType_t</a> = typedef std::decay_t&lt;decltype(<a class="el" href="namespace_engine.html#a29e0b71b318745944176a0818916b9c9">kvValue</a>(std::declval&lt;T&gt;()))&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af1887ab078ddc6c4c769a6dace43bcea" name="af1887ab078ddc6c4c769a6dace43bcea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af1887ab078ddc6c4c769a6dace43bcea">&#9670;&#160;</a></span>MakeOwning_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespace_engine.html#af1887ab078ddc6c4c769a6dace43bcea">Engine::MakeOwning_t</a> = typedef typename <a class="el" href="struct_engine_1_1_make_owning.html">MakeOwning</a>&lt;T&gt;::type</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a73b9d8892b6e907a3def79b7e26353e4" name="a73b9d8892b6e907a3def79b7e26353e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a73b9d8892b6e907a3def79b7e26353e4">&#9670;&#160;</a></span>Placeholder</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;size_t N&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespace_engine.html#a73b9d8892b6e907a3def79b7e26353e4">Engine::Placeholder</a> = typedef <a class="el" href="struct_engine_1_1_tagged_placeholder.html">TaggedPlaceholder</a>&lt;DefaultTag, N&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4371734c39a5a0405527b2d3bd4f7e02" name="a4371734c39a5a0405527b2d3bd4f7e02"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4371734c39a5a0405527b2d3bd4f7e02">&#9670;&#160;</a></span>pos_type</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef std::istream::pos_type <a class="el" href="namespace_engine.html#a4371734c39a5a0405527b2d3bd4f7e02">Engine::pos_type</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a818de93862634021c19ce3820d3f1a32" name="a818de93862634021c19ce3820d3f1a32"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a818de93862634021c19ce3820d3f1a32">&#9670;&#160;</a></span>off_type</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef std::istream::off_type <a class="el" href="namespace_engine.html#a818de93862634021c19ce3820d3f1a32">Engine::off_type</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab9aa3cb843e93169f7b654729ddc23a1" name="ab9aa3cb843e93169f7b654729ddc23a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab9aa3cb843e93169f7b654729ddc23a1">&#9670;&#160;</a></span>identity</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespace_engine.html#ab9aa3cb843e93169f7b654729ddc23a1">Engine::identity</a> = typedef T</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a590a6c83bb0c787fc76087a4bc0bf486" name="a590a6c83bb0c787fc76087a4bc0bf486"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a590a6c83bb0c787fc76087a4bc0bf486">&#9670;&#160;</a></span>first_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename... Args&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespace_engine.html#a590a6c83bb0c787fc76087a4bc0bf486">Engine::first_t</a> = typedef typename <a class="el" href="struct_engine_1_1first.html">first</a>&lt;Args...&gt;::type</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7ffa43baeb2eb6db45932beb44c8cc6c" name="a7ffa43baeb2eb6db45932beb44c8cc6c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7ffa43baeb2eb6db45932beb44c8cc6c">&#9670;&#160;</a></span>void_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename... &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespace_engine.html#a7ffa43baeb2eb6db45932beb44c8cc6c">Engine::void_t</a> = typedef <a class="el" href="classvoid.html">void</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a224bcf97f8c392a3fe99697162edc558" name="a224bcf97f8c392a3fe99697162edc558"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a224bcf97f8c392a3fe99697162edc558">&#9670;&#160;</a></span>dependent_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename... &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespace_engine.html#a224bcf97f8c392a3fe99697162edc558">Engine::dependent_t</a> = typedef T</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa6923ebc493cfa55cf08a28c061c2924" name="aa6923ebc493cfa55cf08a28c061c2924"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa6923ebc493cfa55cf08a28c061c2924">&#9670;&#160;</a></span>patch_void_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename R  = Void&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespace_engine.html#aa6923ebc493cfa55cf08a28c061c2924">Engine::patch_void_t</a> = typedef std::conditional_t&lt;std::is_void_v&lt;T&gt;, R, T&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1be2849dc09877d8fb424f23b8ceabee" name="a1be2849dc09877d8fb424f23b8ceabee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1be2849dc09877d8fb424f23b8ceabee">&#9670;&#160;</a></span>const_if</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;bool b, typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespace_engine.html#a1be2849dc09877d8fb424f23b8ceabee">Engine::const_if</a> = typedef std::conditional_t&lt;b, const T, T&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1ea2ca5e8f96e113be72baa7a9a703ed" name="a1ea2ca5e8f96e113be72baa7a9a703ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1ea2ca5e8f96e113be72baa7a9a703ed">&#9670;&#160;</a></span>forward_ref_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespace_engine.html#a1ea2ca5e8f96e113be72baa7a9a703ed">Engine::forward_ref_t</a> = typedef std::conditional_t&lt; std::is_lvalue_reference_v&lt;T&gt; &amp;&amp; !std::is_const_v&lt;std::remove_reference_t&lt;T&gt; &gt;, std::reference_wrapper&lt;std::remove_reference_t&lt;T&gt; &gt;, std::remove_const_t&lt;std::remove_reference_t&lt;T&gt; &gt;&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3c20e1169a0f5be101463184c7f7cd29" name="a3c20e1169a0f5be101463184c7f7cd29"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c20e1169a0f5be101463184c7f7cd29">&#9670;&#160;</a></span>index_sequence_instantiate_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Sequence , template&lt; size_t... &gt; typename T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespace_engine.html#a3c20e1169a0f5be101463184c7f7cd29">Engine::index_sequence_instantiate_t</a> = typedef typename <a class="el" href="struct_engine_1_1index__sequence__instantiate.html">index_sequence_instantiate</a>&lt;Sequence, T&gt;::type</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="acc2edc51f8a8dcd788869f1cb5bada82" name="acc2edc51f8a8dcd788869f1cb5bada82"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acc2edc51f8a8dcd788869f1cb5bada82">&#9670;&#160;</a></span>type_pack_first</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Pack &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespace_engine.html#acc2edc51f8a8dcd788869f1cb5bada82">Engine::type_pack_first</a> = typedef typename Pack::first</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a91bd07072a20dbc8e53cf46f4857326e" name="a91bd07072a20dbc8e53cf46f4857326e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a91bd07072a20dbc8e53cf46f4857326e">&#9670;&#160;</a></span>type_pack_as_tuple</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Pack &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespace_engine.html#a91bd07072a20dbc8e53cf46f4857326e">Engine::type_pack_as_tuple</a> = typedef typename Pack::as_tuple</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a421167ebc91f53301e0f884b7919cd74" name="a421167ebc91f53301e0f884b7919cd74"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a421167ebc91f53301e0f884b7919cd74">&#9670;&#160;</a></span>type_pack_concat</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Pack1 , typename Pack2 &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespace_engine.html#a421167ebc91f53301e0f884b7919cd74">Engine::type_pack_concat</a> = typedef typename Pack1::template concat&lt;Pack2&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a819eef482c038be6b4f33039088599e5" name="a819eef482c038be6b4f33039088599e5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a819eef482c038be6b4f33039088599e5">&#9670;&#160;</a></span>type_pack_repeat_n_times</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , size_t n&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespace_engine.html#a819eef482c038be6b4f33039088599e5">Engine::type_pack_repeat_n_times</a> = typedef typename __generic_impl__::type_pack_repeat_n_times_helper&lt;T, std::make_index_sequence&lt;n&gt; &gt;::type</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6ec103031d01105429898ccfbfa42f46" name="a6ec103031d01105429898ccfbfa42f46"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ec103031d01105429898ccfbfa42f46">&#9670;&#160;</a></span>VirtualCPOsBase</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Base , auto... cpos&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespace_engine.html#a6ec103031d01105429898ccfbfa42f46">Engine::VirtualCPOsBase</a> = typedef typename <a class="el" href="struct_engine_1_1auto__pack.html">Engine::auto_pack</a>&lt;cpos...&gt;::template fold&lt;__generic_impl__::VirtualCPOBase, __generic_impl__::VirtualCPOBaseWrapper&lt;Base&gt; &gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abf7e2f3569ac2d23721ed3cb9fcd8d8e" name="abf7e2f3569ac2d23721ed3cb9fcd8d8e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abf7e2f3569ac2d23721ed3cb9fcd8d8e">&#9670;&#160;</a></span>VirtualCPOsImpl</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Base &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespace_engine.html#abf7e2f3569ac2d23721ed3cb9fcd8d8e">Engine::VirtualCPOsImpl</a> = typedef typename Base::mapped_cpos::template fold&lt;__generic_impl__::VirtualCPOsImplHelper, Base&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a879f4834f2b8168c8dd6ac03b8989cd6" name="a879f4834f2b8168c8dd6ac03b8989cd6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a879f4834f2b8168c8dd6ac03b8989cd6">&#9670;&#160;</a></span>meta_decay_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespace_engine.html#a879f4834f2b8168c8dd6ac03b8989cd6">Engine::meta_decay_t</a> = typedef typename __generic_impl__::decayBase&lt;T&gt;::type</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6ff33f434fd0deb508ab19a9de61b1c7" name="a6ff33f434fd0deb508ab19a9de61b1c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ff33f434fd0deb508ab19a9de61b1c7">&#9670;&#160;</a></span>meta_decayed_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespace_engine.html#a6ff33f434fd0deb508ab19a9de61b1c7">Engine::meta_decayed_t</a> = typedef typename <a class="el" href="struct_engine_1_1meta__decayed.html">meta_decayed</a>&lt;T, <a class="el" href="namespace_engine.html#a879f4834f2b8168c8dd6ac03b8989cd6">meta_decay_t</a>&lt;T&gt; &gt;::type</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Enumeration Type Documentation</h2>
+<a id="a37c5cc550995f4f14badf14d520dbad8" name="a37c5cc550995f4f14badf14d520dbad8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a37c5cc550995f4f14badf14d520dbad8">&#9670;&#160;</a></span>AccessMode</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum class <a class="el" href="namespace_engine.html#a37c5cc550995f4f14badf14d520dbad8">Engine::AccessMode</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a37c5cc550995f4f14badf14d520dbad8a3466fab4975481651940ed328aa990e4" name="a37c5cc550995f4f14badf14d520dbad8a3466fab4975481651940ed328aa990e4"></a>READ&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a37c5cc550995f4f14badf14d520dbad8ad4b9e47f65b6e79b010582f15785867e" name="a37c5cc550995f4f14badf14d520dbad8ad4b9e47f65b6e79b010582f15785867e"></a>WRITE&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a23cb93c34bbb9a44d884300fc21ddf13" name="a23cb93c34bbb9a44d884300fc21ddf13"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a23cb93c34bbb9a44d884300fc21ddf13">&#9670;&#160;</a></span>alignTo() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr size_t Engine::alignTo </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>alignment</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Aligns size to the specified alignment, rounding up. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">size</td><td>input size </td></tr>
+    <tr><td class="paramname">alignment</td><td>needed alignment </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>the aligned size </dd></dl>
+
+</div>
+</div>
+<a id="a81e54982fddcb79012cba1028fe1c0f8" name="a81e54982fddcb79012cba1028fe1c0f8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a81e54982fddcb79012cba1028fe1c0f8">&#9670;&#160;</a></span>alignTo() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> * Engine::alignTo </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classvoid.html">void</a> *&#160;</td>
+          <td class="paramname"><em>ptr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>alignment</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a11237b06f9eec6396040237c8c695626" name="a11237b06f9eec6396040237c8c695626"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a11237b06f9eec6396040237c8c695626">&#9670;&#160;</a></span>callable_argument_count() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename F &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr size_t Engine::callable_argument_count </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>expected</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9ad337362bb31809aa3536e6fffaaafb" name="a9ad337362bb31809aa3536e6fffaaafb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9ad337362bb31809aa3536e6fffaaafb">&#9670;&#160;</a></span>callable_argument_count() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename F &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr size_t Engine::callable_argument_count </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a11dcbb5b2544e044c83e0ce7340c2d34" name="a11dcbb5b2544e044c83e0ce7340c2d34"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a11dcbb5b2544e044c83e0ce7340c2d34">&#9670;&#160;</a></span>CallerHierarchyPtr() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_caller_hierarchy_ptr.html">Engine::CallerHierarchyPtr</a> </td>
+          <td>(</td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td> -&gt;  <a class="el" href="struct_engine_1_1_caller_hierarchy_ptr.html">CallerHierarchyPtr</a>&lt; T &gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af1060a5c6d80a2673d12f71e6dcea942" name="af1060a5c6d80a2673d12f71e6dcea942"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af1060a5c6d80a2673d12f71e6dcea942">&#9670;&#160;</a></span>CallerHierarchyPtr() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_caller_hierarchy_ptr.html">Engine::CallerHierarchyPtr</a> </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_caller_hierarchy.html">CallerHierarchy</a>&lt; T &gt; &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td> -&gt;  <a class="el" href="struct_engine_1_1_caller_hierarchy_ptr.html">CallerHierarchyPtr</a>&lt; T &gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2a2ef32acd6b5af90fbafd3e88a7c045" name="a2a2ef32acd6b5af90fbafd3e88a7c045"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2a2ef32acd6b5af90fbafd3e88a7c045">&#9670;&#160;</a></span>fixed_string()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;size_t Size&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1fixed__string.html">Engine::fixed_string</a> </td>
+          <td>(</td>
+          <td class="paramtype">const char(&amp;)&#160;</td>
+          <td class="paramname"><em>data</em>[Size]</td><td>)</td>
+          <td> -&gt;  <a class="el" href="struct_engine_1_1fixed__string.html">fixed_string</a>&lt; Size - 1 &gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9885a6c0e5ef2389f7fa4ec15dbb60b4" name="a9885a6c0e5ef2389f7fa4ec15dbb60b4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9885a6c0e5ef2389f7fa4ec15dbb60b4">&#9670;&#160;</a></span>operator&lt;&lt;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::ostream &amp; Engine::operator&lt;&lt; </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>stream</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">typename __GenericResultRepresentation_impl__::EnumType&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1e77372c4579ff0a6b98a1b95ff39108" name="a1e77372c4579ff0a6b98a1b95ff39108"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1e77372c4579ff0a6b98a1b95ff39108">&#9670;&#160;</a></span>operator&gt;&gt;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::istream &amp; Engine::operator&gt;&gt; </td>
+          <td>(</td>
+          <td class="paramtype">std::istream &amp;&#160;</td>
+          <td class="paramname"><em>stream</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">typename __GenericResultRepresentation_impl__::EnumType &amp;&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a29e0b71b318745944176a0818916b9c9" name="a29e0b71b318745944176a0818916b9c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a29e0b71b318745944176a0818916b9c9">&#9670;&#160;</a></span>kvValue()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">decltype(auto) Engine::kvValue </td>
+          <td>(</td>
+          <td class="paramtype">T &amp;&amp;&#160;</td>
+          <td class="paramname"><em>v</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a99cae82803597f7f2878bdc4395f7669" name="a99cae82803597f7f2878bdc4395f7669"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a99cae82803597f7f2878bdc4395f7669">&#9670;&#160;</a></span>kvKey()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">decltype(auto) Engine::kvKey </td>
+          <td>(</td>
+          <td class="paramtype">T &amp;&amp;&#160;</td>
+          <td class="paramname"><em>v</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6c20837d4f2e948fa7d804bea3a244db" name="a6c20837d4f2e948fa7d804bea3a244db"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6c20837d4f2e948fa7d804bea3a244db">&#9670;&#160;</a></span>kvValues()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">auto Engine::kvValues </td>
+          <td>(</td>
+          <td class="paramtype">T &amp;&#160;</td>
+          <td class="paramname"><em>v</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae9b714fd1d678c8e8221f479b0f0f993" name="ae9b714fd1d678c8e8221f479b0f0f993"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae9b714fd1d678c8e8221f479b0f0f993">&#9670;&#160;</a></span>kvKeys()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">auto Engine::kvKeys </td>
+          <td>(</td>
+          <td class="paramtype">T &amp;&#160;</td>
+          <td class="paramname"><em>v</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a66076b2afca92fbe6f506c5f05338f1a" name="a66076b2afca92fbe6f506c5f05338f1a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a66076b2afca92fbe6f506c5f05338f1a">&#9670;&#160;</a></span>pipable_from_right()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename F , typename... Args&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_pipable_from_right.html">PipableFromRight</a>&lt; F, Args... &gt; Engine::pipable_from_right </td>
+          <td>(</td>
+          <td class="paramtype">F &amp;&amp;&#160;</td>
+          <td class="paramname"><em>f</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Args &amp;&amp;...&#160;</td>
+          <td class="paramname"><em>args</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a159e0ed23d5a6c0a4f33d4928d6b6d61" name="a159e0ed23d5a6c0a4f33d4928d6b6d61"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a159e0ed23d5a6c0a4f33d4928d6b6d61">&#9670;&#160;</a></span>pipable_from_left()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename F , typename... Args&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_pipable_from_left.html">PipableFromLeft</a>&lt; F, Args... &gt; Engine::pipable_from_left </td>
+          <td>(</td>
+          <td class="paramtype">F &amp;&amp;&#160;</td>
+          <td class="paramname"><em>f</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Args &amp;&amp;...&#160;</td>
+          <td class="paramname"><em>args</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac3d6e550c6ababa1018e27403257bf6e" name="ac3d6e550c6ababa1018e27403257bf6e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac3d6e550c6ababa1018e27403257bf6e">&#9670;&#160;</a></span>toPointer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">T * Engine::toPointer </td>
+          <td>(</td>
+          <td class="paramtype">T &amp;&#160;</td>
+          <td class="paramname"><em>t</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa79542b0a29be7e1303f2cedb18c3367" name="aa79542b0a29be7e1303f2cedb18c3367"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa79542b0a29be7e1303f2cedb18c3367">&#9670;&#160;</a></span>uniquePtrToPtr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename D &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">T * Engine::uniquePtrToPtr </td>
+          <td>(</td>
+          <td class="paramtype">const std::unique_ptr&lt; T, D &gt; &amp;&#160;</td>
+          <td class="paramname"><em>p</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab11bf2e93b6c0b9e7ce1d72a35e61849" name="ab11bf2e93b6c0b9e7ce1d72a35e61849"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab11bf2e93b6c0b9e7ce1d72a35e61849">&#9670;&#160;</a></span>pairSecond()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">decltype(auto) Engine::pairSecond </td>
+          <td>(</td>
+          <td class="paramtype">T &amp;&amp;&#160;</td>
+          <td class="paramname"><em>t</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af9726e1fb1d996ca54f4ba1bae9a103b" name="af9726e1fb1d996ca54f4ba1bae9a103b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af9726e1fb1d996ca54f4ba1bae9a103b">&#9670;&#160;</a></span>addressOf()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">decltype(auto) Engine::addressOf </td>
+          <td>(</td>
+          <td class="paramtype">T &amp;&#160;</td>
+          <td class="paramname"><em>t</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a66ea902b228f6a9a9d151f6c44acf5a9" name="a66ea902b228f6a9a9d151f6c44acf5a9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a66ea902b228f6a9a9d151f6c44acf5a9">&#9670;&#160;</a></span>toRawPtr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">decltype(auto) Engine::toRawPtr </td>
+          <td>(</td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>t</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad8e68b6706484b3b1bea6c13641946a6" name="ad8e68b6706484b3b1bea6c13641946a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad8e68b6706484b3b1bea6c13641946a6">&#9670;&#160;</a></span>deref()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">decltype(auto) Engine::deref </td>
+          <td>(</td>
+          <td class="paramtype">T &amp;&amp;&#160;</td>
+          <td class="paramname"><em>t</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3a3a01a50713c9eec7f43621aadcf1ef" name="a3a3a01a50713c9eec7f43621aadcf1ef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3a3a01a50713c9eec7f43621aadcf1ef">&#9670;&#160;</a></span>strlen()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr size_t Engine::strlen </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>s</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae582c6ae8e7c404cef1147198a919be8" name="ae582c6ae8e7c404cef1147198a919be8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae582c6ae8e7c404cef1147198a919be8">&#9670;&#160;</a></span>strrchr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr const char * Engine::strrchr </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>c</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad5c483514353e775f6b069a3687d56c3" name="ad5c483514353e775f6b069a3687d56c3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad5c483514353e775f6b069a3687d56c3">&#9670;&#160;</a></span>streq()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr bool Engine::streq </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>lhs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>rhs</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aabda4771026ffa4a022d1c1401fadd00" name="aabda4771026ffa4a022d1c1401fadd00"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aabda4771026ffa4a022d1c1401fadd00">&#9670;&#160;</a></span>strcpy_s()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr bool Engine::strcpy_s </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>dest</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>source</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a60be1a2f34e7d5b77a4c56434c479d36" name="a60be1a2f34e7d5b77a4c56434c479d36"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a60be1a2f34e7d5b77a4c56434c479d36">&#9670;&#160;</a></span>strcmp()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr std::strong_ordering Engine::strcmp </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>first</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>second</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af79d26601acf4e432a1176abd331979c" name="af79d26601acf4e432a1176abd331979c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af79d26601acf4e432a1176abd331979c">&#9670;&#160;</a></span>overloaded()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename... Ts&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1overloaded.html">Engine::overloaded</a> </td>
+          <td>(</td>
+          <td class="paramtype">Ts...&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td> -&gt;  <a class="el" href="struct_engine_1_1overloaded.html">overloaded</a>&lt; Ts... &gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0848003e6aecc347f7f33170e3abfce4" name="a0848003e6aecc347f7f33170e3abfce4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0848003e6aecc347f7f33170e3abfce4">&#9670;&#160;</a></span>array_size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , size_t S&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr size_t Engine::array_size </td>
+          <td>(</td>
+          <td class="paramtype">T(&amp;)&#160;</td>
+          <td class="paramname">[S]</td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="acac3f73c7f1e5ac7f6809a59ede9784b" name="acac3f73c7f1e5ac7f6809a59ede9784b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acac3f73c7f1e5ac7f6809a59ede9784b">&#9670;&#160;</a></span>forward_capture() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">__generic_impl__::CaptureHelper&lt; T &gt; Engine::forward_capture </td>
+          <td>(</td>
+          <td class="paramtype">T &amp;&amp;&#160;</td>
+          <td class="paramname"><em>t</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a01fc0e722554a7d6dfff2c79b5c7b6a5" name="a01fc0e722554a7d6dfff2c79b5c7b6a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a01fc0e722554a7d6dfff2c79b5c7b6a5">&#9670;&#160;</a></span>forward_capture() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">__generic_impl__::CaptureHelper&lt; T &gt; Engine::forward_capture </td>
+          <td>(</td>
+          <td class="paramtype">T &amp;&#160;</td>
+          <td class="paramname"><em>t</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a80ffb7b179bfbd177c89dc9910f62930" name="a80ffb7b179bfbd177c89dc9910f62930"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a80ffb7b179bfbd177c89dc9910f62930">&#9670;&#160;</a></span>patch_void()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename F , typename R &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">auto Engine::patch_void </td>
+          <td>(</td>
+          <td class="paramtype">F &amp;&amp;&#160;</td>
+          <td class="paramname"><em>f</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">R &amp;&amp;&#160;</td>
+          <td class="paramname"><em>result</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a21e0f137df0ba1c9c173e7d9d8a824cc" name="a21e0f137df0ba1c9c173e7d9d8a824cc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a21e0f137df0ba1c9c173e7d9d8a824cc">&#9670;&#160;</a></span>forward_ref() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">decltype(auto) Engine::forward_ref </td>
+          <td>(</td>
+          <td class="paramtype">std::remove_reference_t&lt; T &gt; &amp;&#160;</td>
+          <td class="paramname"><em>t</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a835493204cded8845b5136ed6896947e" name="a835493204cded8845b5136ed6896947e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a835493204cded8845b5136ed6896947e">&#9670;&#160;</a></span>forward_ref() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">decltype(auto) Engine::forward_ref </td>
+          <td>(</td>
+          <td class="paramtype">std::remove_reference_t&lt; T &gt; &amp;&amp;&#160;</td>
+          <td class="paramname"><em>t</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a371fbcdb33ab583e49d85e971db02327" name="a371fbcdb33ab583e49d85e971db02327"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a371fbcdb33ab583e49d85e971db02327">&#9670;&#160;</a></span>componentBuilder()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr auto Engine::componentBuilder </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ace9f682f4e2415fc87602d65fae55bde" name="ace9f682f4e2415fc87602d65fae55bde"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ace9f682f4e2415fc87602d65fae55bde">&#9670;&#160;</a></span>componentInit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::componentInit </td>
+          <td>(</td>
+          <td class="paramtype">std::array&lt; <a class="el" href="struct_engine_1_1_reflect_1_1_accessor.html">Reflect::Accessor</a>, 32 &gt; &amp;&#160;</td>
+          <td class="paramname"><em>accessors</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="a57cd6caa1de746d8d0a32dbe72186c6d" name="a57cd6caa1de746d8d0a32dbe72186c6d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a57cd6caa1de746d8d0a32dbe72186c6d">&#9670;&#160;</a></span>to_fixed_string</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;size_t I&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="struct_engine_1_1fixed__string.html">fixed_string</a> Engine::to_fixed_string = __generic_impl__::to_fixed_string_helper&lt;I&gt;::value</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a44f0fdea72d65f33ac869f1167647a84" name="a44f0fdea72d65f33ac869f1167647a84"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a44f0fdea72d65f33ac869f1167647a84">&#9670;&#160;</a></span>projectionValue</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr auto Engine::projectionValue = <a class="el" href="lift_8h.html#a7379f682afaa0970087992e4005fcc55">LIFT</a>(<a class="el" href="namespace_engine.html#a29e0b71b318745944176a0818916b9c9">kvValue</a>)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4c51e1341ccae0a2142a6c7a5201b196" name="a4c51e1341ccae0a2142a6c7a5201b196"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c51e1341ccae0a2142a6c7a5201b196">&#9670;&#160;</a></span>projectionKey</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr auto Engine::projectionKey = <a class="el" href="lift_8h.html#a7379f682afaa0970087992e4005fcc55">LIFT</a>(<a class="el" href="namespace_engine.html#a99cae82803597f7f2878bdc4395f7669">kvKey</a>)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8c8d1c1afeb0231f14bd65c541188f4f" name="a8c8d1c1afeb0231f14bd65c541188f4f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8c8d1c1afeb0231f14bd65c541188f4f">&#9670;&#160;</a></span>destruct</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="struct_engine_1_1destruct__t.html">destruct_t</a> Engine::destruct</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a82f95acb89fe66deefc97fb8597e17af" name="a82f95acb89fe66deefc97fb8597e17af"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a82f95acb89fe66deefc97fb8597e17af">&#9670;&#160;</a></span>construct</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="struct_engine_1_1construct__t.html">construct_t</a> Engine::construct</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abe6a95a9cbbdb4cc7c41d5d33cbd40d6" name="abe6a95a9cbbdb4cc7c41d5d33cbd40d6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe6a95a9cbbdb4cc7c41d5d33cbd40d6">&#9670;&#160;</a></span>projectionToPointer</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr auto Engine::projectionToPointer = <a class="el" href="lift_8h.html#a7379f682afaa0970087992e4005fcc55">LIFT</a>(<a class="el" href="namespace_engine.html#ac3d6e550c6ababa1018e27403257bf6e">toPointer</a>)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a05c72dc0c42853aee89b367f9c217a92" name="a05c72dc0c42853aee89b367f9c217a92"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a05c72dc0c42853aee89b367f9c217a92">&#9670;&#160;</a></span>projectionUniquePtrToPtr</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr auto Engine::projectionUniquePtrToPtr = <a class="el" href="lift_8h.html#a7379f682afaa0970087992e4005fcc55">LIFT</a>(<a class="el" href="namespace_engine.html#aa79542b0a29be7e1303f2cedb18c3367">uniquePtrToPtr</a>)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4e7d50d70acef16689146f95fbbe2773" name="a4e7d50d70acef16689146f95fbbe2773"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4e7d50d70acef16689146f95fbbe2773">&#9670;&#160;</a></span>projectionPairSecond</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr auto Engine::projectionPairSecond = <a class="el" href="lift_8h.html#a7379f682afaa0970087992e4005fcc55">LIFT</a>(<a class="el" href="namespace_engine.html#ab11bf2e93b6c0b9e7ce1d72a35e61849">pairSecond</a>)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aff53dae7a59ec160ca891c619c155874" name="aff53dae7a59ec160ca891c619c155874"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aff53dae7a59ec160ca891c619c155874">&#9670;&#160;</a></span>projectionAddressOf</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr auto Engine::projectionAddressOf = <a class="el" href="lift_8h.html#a7379f682afaa0970087992e4005fcc55">LIFT</a>(<a class="el" href="namespace_engine.html#af9726e1fb1d996ca54f4ba1bae9a103b">addressOf</a>)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="adabf4b8bb0a2b3ac7b9f132343a951b4" name="adabf4b8bb0a2b3ac7b9f132343a951b4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adabf4b8bb0a2b3ac7b9f132343a951b4">&#9670;&#160;</a></span>projectionToRawPtr</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr auto Engine::projectionToRawPtr = <a class="el" href="lift_8h.html#a7379f682afaa0970087992e4005fcc55">LIFT</a>(<a class="el" href="namespace_engine.html#a66ea902b228f6a9a9d151f6c44acf5a9">toRawPtr</a>)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab7499424b4d6c689fa94215b656ff35a" name="ab7499424b4d6c689fa94215b656ff35a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab7499424b4d6c689fa94215b656ff35a">&#9670;&#160;</a></span>projectionDeref</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr auto Engine::projectionDeref = <a class="el" href="lift_8h.html#a7379f682afaa0970087992e4005fcc55">LIFT</a>(<a class="el" href="namespace_engine.html#ad8e68b6706484b3b1bea6c13641946a6">deref</a>)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6638c07372d57d8a8da119203ae1e419" name="a6638c07372d57d8a8da119203ae1e419"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6638c07372d57d8a8da119203ae1e419">&#9670;&#160;</a></span>type_holder</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const constexpr <a class="el" href="struct_engine_1_1type__holder__t.html">type_holder_t</a>&lt;T&gt; Engine::type_holder = {}</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Wed Jun 10 2026 21:25:32 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        Version: 0.6.0
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Versions</dt>
+            <script src="../../../../versions.js"></script>
+        </dl>
+    </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

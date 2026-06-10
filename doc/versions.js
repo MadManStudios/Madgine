@@ -1,5 +1,6 @@
 const versions = [
 "dev",
+"0.6.0",
 ];
 
 versions.forEach(function (version) {

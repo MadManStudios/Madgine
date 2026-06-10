@@ -1,0 +1,735 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: Engine::Execution::CoroutineHandle&amp;lt; void &amp;gt; Struct Reference &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../docs/README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/gettingstarted.html#starting-the-engine">Starting the Engine</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/howtos.html">How-Tos</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/howtos/build.html">Build Instructions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/howtos/build.html#dependencies">Dependencies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/howtos/build.html#setup-the-madgine">Setup The Madgine</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/howtos/build.html#generating-project-files">Generating Project Files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/howtos/build.html#build-configurations">Build Configurations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/howtos/firstUniqueComponent.html">Writing your first UniqueComponent</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/keyvalue.html">KeyValue</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/keyvalue.html#valuetype">ValueType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/keyvalue.html#metatables">MetaTables</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/logging.html">Logging</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/logging.html#message-types">Message Types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/logging.html#building-log-messages">Building Log Messages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/logging.html#default-log">Default Log</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/logging.html#log-listener">Log Listener</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/pluginsystem.html">Plugins &amp; Unique Components</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/pluginsystem.html#plugins">Plugins</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/pluginsystem.html#unique-components">Unique Components</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/serialize.html">Serialization &amp; Synchronization</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#fundamental-data-types">Fundamental Data Types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#unit-hierarchy">Unit Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#serializetables">SerializeTables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#streams">Streams</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#managers">Managers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#state-replication">State Replication</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/threading.html">Threads &amp; Asynchronous Execution</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/threading.html#threads">Threads</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/threading.html#tasks">Tasks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/threading.html#taskqueues">TaskQueues</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/threading.html#workgroups">Workgroups</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/threading.html#scheduler">Scheduler</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#our-pledge">Our Pledge</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#our-standards">Our Standards</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#our-responsibilities">Our Responsibilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#scope">Scope</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#enforcement">Enforcement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#attribution">Attribution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/architecture.html#core-libraries">Core Libraries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../docs/README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+    </ul>
+    <div class="info admonition rst-footer-buttons">
+        <div class="wy-btn-group">
+            <a class="btn btn-link" href="../../../../../index.html">Madgine Blog</a>
+            <a class="btn btn-info btn-mini float-right" href="../../../../../launcher_dev.html">Try live</a>
+        </div>
+    </div>
+    <ul class="wy-breadcrumbs">
+        
+      <li><a href="../../../docs/README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: Engine::Execution::CoroutineHandle&amp;lt; void &amp;gt; Struct Reference</li>
+        
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/out/doc/doxygen/struct_engine_1_1_execution_1_1_coroutine_handle_3_01void_01_4.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="coroutinehandle-lt-void-gt-struct-reference">
+<h1>CoroutineHandle&amp;lt; void &amp;gt; Struct Reference<a class="headerlink" href="#coroutinehandle-lt-void-gt-struct-reference" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: Engine::Execution::CoroutineHandle&lt; void &gt; Struct Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.6.0</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespace_engine.html">Engine</a></li><li class="navelem"><a class="el" href="namespace_engine_1_1_execution.html">Execution</a></li><li class="navelem"><a class="el" href="struct_engine_1_1_execution_1_1_coroutine_handle_3_01void_01_4.html">CoroutineHandle&lt; void &gt;</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="struct_engine_1_1_execution_1_1_coroutine_handle_3_01void_01_4-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">Engine::Execution::CoroutineHandle&lt; void &gt; Struct Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;handle.h&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a54c1dba1e14c79a6dda150a5d9914ad5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_coroutine_handle_3_01void_01_4.html#a54c1dba1e14c79a6dda150a5d9914ad5">CoroutineHandle</a> ()=default</td></tr>
+<tr class="separator:a54c1dba1e14c79a6dda150a5d9914ad5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a914c69b46a7d99701ad2c9b83ac8a1e9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_coroutine_handle_3_01void_01_4.html#a914c69b46a7d99701ad2c9b83ac8a1e9">CoroutineHandle</a> (const <a class="el" href="struct_engine_1_1_execution_1_1_coroutine_handle.html">CoroutineHandle</a> &amp;)=delete</td></tr>
+<tr class="separator:a914c69b46a7d99701ad2c9b83ac8a1e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a80e10e93bb05f57837e5a4d3a22f5d1e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_coroutine_handle_3_01void_01_4.html#a80e10e93bb05f57837e5a4d3a22f5d1e">CoroutineHandle</a> (<a class="el" href="struct_engine_1_1_execution_1_1_coroutine_handle.html">CoroutineHandle</a> &amp;&amp;other)</td></tr>
+<tr class="separator:a80e10e93bb05f57837e5a4d3a22f5d1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee59e0e6b42bbff416e5b75efe37b947"><td class="memTemplParams" colspan="2">template&lt;typename U &gt; </td></tr>
+<tr class="memitem:aee59e0e6b42bbff416e5b75efe37b947"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_coroutine_handle_3_01void_01_4.html#aee59e0e6b42bbff416e5b75efe37b947">CoroutineHandle</a> (<a class="el" href="struct_engine_1_1_execution_1_1_coroutine_handle.html">CoroutineHandle</a>&lt; U &gt; &amp;&amp;handle)</td></tr>
+<tr class="separator:aee59e0e6b42bbff416e5b75efe37b947"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e817354b499d611b1097843fa54cc8c"><td class="memTemplParams" colspan="2">template&lt;typename U &gt; </td></tr>
+<tr class="memitem:a6e817354b499d611b1097843fa54cc8c"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_coroutine_handle_3_01void_01_4.html#a6e817354b499d611b1097843fa54cc8c">CoroutineHandle</a> (std::coroutine_handle&lt; U &gt; handle)</td></tr>
+<tr class="separator:a6e817354b499d611b1097843fa54cc8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a20ff3c97e217456f5be1d70e4203e69f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_coroutine_handle_3_01void_01_4.html#a20ff3c97e217456f5be1d70e4203e69f">CoroutineHandle</a> (std::coroutine_handle&lt;&gt; handle)</td></tr>
+<tr class="separator:a20ff3c97e217456f5be1d70e4203e69f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae1e478400d84f5a45e8695fd86eb9ccb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_coroutine_handle_3_01void_01_4.html#ae1e478400d84f5a45e8695fd86eb9ccb">~CoroutineHandle</a> ()</td></tr>
+<tr class="separator:ae1e478400d84f5a45e8695fd86eb9ccb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a600383734b4b625034a3824f69a29413"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_coroutine_handle_3_01void_01_4.html#a600383734b4b625034a3824f69a29413">done</a> ()</td></tr>
+<tr class="separator:a600383734b4b625034a3824f69a29413"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af0f3e88805db7e7589e14dc300d2d545"><td class="memItemLeft" align="right" valign="top">std::coroutine_handle&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_coroutine_handle_3_01void_01_4.html#af0f3e88805db7e7589e14dc300d2d545">get</a> ()</td></tr>
+<tr class="separator:af0f3e88805db7e7589e14dc300d2d545"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f495c44ea769ab36123032b66c4f089"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_coroutine_handle_3_01void_01_4.html#a8f495c44ea769ab36123032b66c4f089">operator bool</a> () const</td></tr>
+<tr class="separator:a8f495c44ea769ab36123032b66c4f089"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a646d1becb1bc228ea8aea12fb222cf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_execution_1_1_coroutine_handle.html">CoroutineHandle</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_coroutine_handle_3_01void_01_4.html#a1a646d1becb1bc228ea8aea12fb222cf">operator=</a> (const <a class="el" href="struct_engine_1_1_execution_1_1_coroutine_handle.html">CoroutineHandle</a> &amp;)=delete</td></tr>
+<tr class="separator:a1a646d1becb1bc228ea8aea12fb222cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac3f9e2be87656ee3b42122a522a26a48"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_execution_1_1_coroutine_handle.html">CoroutineHandle</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_coroutine_handle_3_01void_01_4.html#ac3f9e2be87656ee3b42122a522a26a48">operator=</a> (<a class="el" href="struct_engine_1_1_execution_1_1_coroutine_handle.html">CoroutineHandle</a> &amp;&amp;other)</td></tr>
+<tr class="separator:ac3f9e2be87656ee3b42122a522a26a48"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a605743b4a71acae79a3bccb536c21a27"><td class="memItemLeft" align="right" valign="top">std::coroutine_handle&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_coroutine_handle_3_01void_01_4.html#a605743b4a71acae79a3bccb536c21a27">release</a> ()</td></tr>
+<tr class="separator:a605743b4a71acae79a3bccb536c21a27"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c6ab3fa2289b7d8248fad24fd1a2ad2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_coroutine_handle_3_01void_01_4.html#a1c6ab3fa2289b7d8248fad24fd1a2ad2">reset</a> ()</td></tr>
+<tr class="separator:a1c6ab3fa2289b7d8248fad24fd1a2ad2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a710dff2750bf5de6b8fa5f1f4c6d0651"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_coroutine_handle_3_01void_01_4.html#a710dff2750bf5de6b8fa5f1f4c6d0651">resume</a> ()</td></tr>
+<tr class="separator:a710dff2750bf5de6b8fa5f1f4c6d0651"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a54c1dba1e14c79a6dda150a5d9914ad5" name="a54c1dba1e14c79a6dda150a5d9914ad5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a54c1dba1e14c79a6dda150a5d9914ad5">&#9670;&#160;</a></span>CoroutineHandle() <span class="overload">[1/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_execution_1_1_coroutine_handle.html">Engine::Execution::CoroutineHandle</a>&lt; <a class="el" href="classvoid.html">void</a> &gt;::CoroutineHandle </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a914c69b46a7d99701ad2c9b83ac8a1e9" name="a914c69b46a7d99701ad2c9b83ac8a1e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a914c69b46a7d99701ad2c9b83ac8a1e9">&#9670;&#160;</a></span>CoroutineHandle() <span class="overload">[2/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_execution_1_1_coroutine_handle.html">Engine::Execution::CoroutineHandle</a>&lt; <a class="el" href="classvoid.html">void</a> &gt;::CoroutineHandle </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_execution_1_1_coroutine_handle.html">CoroutineHandle</a>&lt; <a class="el" href="classvoid.html">void</a> &gt; &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a80e10e93bb05f57837e5a4d3a22f5d1e" name="a80e10e93bb05f57837e5a4d3a22f5d1e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a80e10e93bb05f57837e5a4d3a22f5d1e">&#9670;&#160;</a></span>CoroutineHandle() <span class="overload">[3/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_execution_1_1_coroutine_handle.html">Engine::Execution::CoroutineHandle</a>&lt; <a class="el" href="classvoid.html">void</a> &gt;::CoroutineHandle </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_execution_1_1_coroutine_handle.html">CoroutineHandle</a>&lt; <a class="el" href="classvoid.html">void</a> &gt; &amp;&amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a20ff3c97e217456f5be1d70e4203e69f" name="a20ff3c97e217456f5be1d70e4203e69f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a20ff3c97e217456f5be1d70e4203e69f">&#9670;&#160;</a></span>CoroutineHandle() <span class="overload">[4/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_execution_1_1_coroutine_handle.html">Engine::Execution::CoroutineHandle</a>&lt; <a class="el" href="classvoid.html">void</a> &gt;::CoroutineHandle </td>
+          <td>(</td>
+          <td class="paramtype">std::coroutine_handle&lt;&gt;&#160;</td>
+          <td class="paramname"><em>handle</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6e817354b499d611b1097843fa54cc8c" name="a6e817354b499d611b1097843fa54cc8c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6e817354b499d611b1097843fa54cc8c">&#9670;&#160;</a></span>CoroutineHandle() <span class="overload">[5/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename U &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_execution_1_1_coroutine_handle.html">Engine::Execution::CoroutineHandle</a>&lt; <a class="el" href="classvoid.html">void</a> &gt;::CoroutineHandle </td>
+          <td>(</td>
+          <td class="paramtype">std::coroutine_handle&lt; U &gt;&#160;</td>
+          <td class="paramname"><em>handle</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aee59e0e6b42bbff416e5b75efe37b947" name="aee59e0e6b42bbff416e5b75efe37b947"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aee59e0e6b42bbff416e5b75efe37b947">&#9670;&#160;</a></span>CoroutineHandle() <span class="overload">[6/6]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename U &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_execution_1_1_coroutine_handle.html">Engine::Execution::CoroutineHandle</a>&lt; <a class="el" href="classvoid.html">void</a> &gt;::CoroutineHandle </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_execution_1_1_coroutine_handle.html">CoroutineHandle</a>&lt; U &gt; &amp;&amp;&#160;</td>
+          <td class="paramname"><em>handle</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae1e478400d84f5a45e8695fd86eb9ccb" name="ae1e478400d84f5a45e8695fd86eb9ccb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae1e478400d84f5a45e8695fd86eb9ccb">&#9670;&#160;</a></span>~CoroutineHandle()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_execution_1_1_coroutine_handle.html">Engine::Execution::CoroutineHandle</a>&lt; <a class="el" href="classvoid.html">void</a> &gt;::~<a class="el" href="struct_engine_1_1_execution_1_1_coroutine_handle.html">CoroutineHandle</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a1a646d1becb1bc228ea8aea12fb222cf" name="a1a646d1becb1bc228ea8aea12fb222cf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1a646d1becb1bc228ea8aea12fb222cf">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_execution_1_1_coroutine_handle.html">CoroutineHandle</a> &amp; <a class="el" href="struct_engine_1_1_execution_1_1_coroutine_handle.html">Engine::Execution::CoroutineHandle</a>&lt; <a class="el" href="classvoid.html">void</a> &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_execution_1_1_coroutine_handle.html">CoroutineHandle</a>&lt; <a class="el" href="classvoid.html">void</a> &gt; &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac3f9e2be87656ee3b42122a522a26a48" name="ac3f9e2be87656ee3b42122a522a26a48"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac3f9e2be87656ee3b42122a522a26a48">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_execution_1_1_coroutine_handle.html">CoroutineHandle</a> &amp; <a class="el" href="struct_engine_1_1_execution_1_1_coroutine_handle.html">Engine::Execution::CoroutineHandle</a>&lt; <a class="el" href="classvoid.html">void</a> &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_execution_1_1_coroutine_handle.html">CoroutineHandle</a>&lt; <a class="el" href="classvoid.html">void</a> &gt; &amp;&amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a605743b4a71acae79a3bccb536c21a27" name="a605743b4a71acae79a3bccb536c21a27"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a605743b4a71acae79a3bccb536c21a27">&#9670;&#160;</a></span>release()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::coroutine_handle <a class="el" href="struct_engine_1_1_execution_1_1_coroutine_handle.html">Engine::Execution::CoroutineHandle</a>&lt; <a class="el" href="classvoid.html">void</a> &gt;::release </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1c6ab3fa2289b7d8248fad24fd1a2ad2" name="a1c6ab3fa2289b7d8248fad24fd1a2ad2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1c6ab3fa2289b7d8248fad24fd1a2ad2">&#9670;&#160;</a></span>reset()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> <a class="el" href="struct_engine_1_1_execution_1_1_coroutine_handle.html">Engine::Execution::CoroutineHandle</a>&lt; <a class="el" href="classvoid.html">void</a> &gt;::reset </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a710dff2750bf5de6b8fa5f1f4c6d0651" name="a710dff2750bf5de6b8fa5f1f4c6d0651"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a710dff2750bf5de6b8fa5f1f4c6d0651">&#9670;&#160;</a></span>resume()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> <a class="el" href="struct_engine_1_1_execution_1_1_coroutine_handle.html">Engine::Execution::CoroutineHandle</a>&lt; <a class="el" href="classvoid.html">void</a> &gt;::resume </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a600383734b4b625034a3824f69a29413" name="a600383734b4b625034a3824f69a29413"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a600383734b4b625034a3824f69a29413">&#9670;&#160;</a></span>done()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="struct_engine_1_1_execution_1_1_coroutine_handle.html">Engine::Execution::CoroutineHandle</a>&lt; <a class="el" href="classvoid.html">void</a> &gt;::done </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af0f3e88805db7e7589e14dc300d2d545" name="af0f3e88805db7e7589e14dc300d2d545"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af0f3e88805db7e7589e14dc300d2d545">&#9670;&#160;</a></span>get()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::coroutine_handle <a class="el" href="struct_engine_1_1_execution_1_1_coroutine_handle.html">Engine::Execution::CoroutineHandle</a>&lt; <a class="el" href="classvoid.html">void</a> &gt;::get </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8f495c44ea769ab36123032b66c4f089" name="a8f495c44ea769ab36123032b66c4f089"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f495c44ea769ab36123032b66c4f089">&#9670;&#160;</a></span>operator bool()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_execution_1_1_coroutine_handle.html">Engine::Execution::CoroutineHandle</a>&lt; <a class="el" href="classvoid.html">void</a> &gt;::operator bool </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>src/Generic/execution/<a class="el" href="src_2_generic_2execution_2handle_8h.html">handle.h</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Wed Jun 10 2026 21:25:33 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        Version: 0.6.0
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Versions</dt>
+            <script src="../../../../versions.js"></script>
+        </dl>
+    </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

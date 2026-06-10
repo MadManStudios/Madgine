@@ -1,0 +1,404 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: Namespace Members &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Namespace Members" href="namespacemembers_t.html" />
+    <link rel="prev" title="Namespace Members" href="namespacemembers_r.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../docs/README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/gettingstarted.html#starting-the-engine">Starting the Engine</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../docs/programming.html">Programmers Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/howtos.html">How-Tos</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/howtos/build.html">Build Instructions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/howtos/build.html#dependencies">Dependencies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/howtos/build.html#setup-the-madgine">Setup The Madgine</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/howtos/build.html#generating-project-files">Generating Project Files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/howtos/build.html#build-configurations">Build Configurations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/howtos/firstUniqueComponent.html">Writing your first UniqueComponent</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/keyvalue.html">KeyValue</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/keyvalue.html#valuetype">ValueType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/keyvalue.html#metatables">MetaTables</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/logging.html">Logging</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/logging.html#message-types">Message Types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/logging.html#building-log-messages">Building Log Messages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/logging.html#default-log">Default Log</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/logging.html#log-listener">Log Listener</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/pluginsystem.html">Plugins &amp; Unique Components</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/pluginsystem.html#plugins">Plugins</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/pluginsystem.html#unique-components">Unique Components</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/serialize.html">Serialization &amp; Synchronization</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#fundamental-data-types">Fundamental Data Types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#unit-hierarchy">Unit Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#serializetables">SerializeTables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#streams">Streams</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#managers">Managers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#state-replication">State Replication</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/threading.html">Threads &amp; Asynchronous Execution</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/threading.html#threads">Threads</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/threading.html#tasks">Tasks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/threading.html#taskqueues">TaskQueues</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/threading.html#workgroups">Workgroups</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/threading.html#scheduler">Scheduler</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#our-pledge">Our Pledge</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#our-standards">Our Standards</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#our-responsibilities">Our Responsibilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#scope">Scope</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#enforcement">Enforcement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#attribution">Attribution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/architecture.html#core-libraries">Core Libraries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../docs/README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+    </ul>
+    <div class="info admonition rst-footer-buttons">
+        <div class="wy-btn-group">
+            <a class="btn btn-link" href="../../../../../index.html">Madgine Blog</a>
+            <a class="btn btn-info btn-mini float-right" href="../../../../../launcher_dev.html">Try live</a>
+        </div>
+    </div>
+    <ul class="wy-breadcrumbs">
+        
+      <li><a href="../../../docs/README.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../docs/programming.html">Programmers Guide</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Madgine - Doxygen Documentation</a></li>
+          <li class="breadcrumb-item"><a href="namespaces_namespaces.html">Namespaces</a></li>
+          <li class="breadcrumb-item"><a href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+          <li class="breadcrumb-item"><a href="namespacemembers_all.html">All</a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: Namespace Members</li>
+        
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/out/doc/doxygen/namespacemembers_s.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="namespace-members">
+<h1>Namespace Members<a class="headerlink" href="#namespace-members" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: Namespace Members</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;0.6.0</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div class="contents">
+<div class="textblock">Here is a list of all namespace members with links to the namespace documentation for each member:</div>
+
+<h3><a id="index_s" name="index_s"></a>- s -</h3><ul>
+<li>S&#160;:&#160;<a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a53797beecc368501b720969206d15a39">Engine::Platform::Input::Key</a></li>
+<li>safeIterate()&#160;:&#160;<a class="el" href="namespace_engine_1_1_containers.html#a070d6d2a12af272d4fbe005830c9eb27">Engine::Containers</a></li>
+<li>ScalingMatrix()&#160;:&#160;<a class="el" href="namespace_engine_1_1_math.html#ad4db27bccf252fda20541d7fa362655b">Engine::Math</a></li>
+<li>scanCompound()&#160;:&#160;<a class="el" href="namespace_engine_1_1_serialize.html#acaaccb1e5d46a5998835d875e55ef29e">Engine::Serialize</a></li>
+<li>scanPrimitive()&#160;:&#160;<a class="el" href="namespace_engine_1_1_serialize.html#a364b72b58efb0bfceace0a94365590c2">Engine::Serialize</a></li>
+<li>SceneBinding&#160;:&#160;<a class="el" href="namespace_engine_1_1_scene.html#a3d288938f13d23aff8052a13a729d22d">Engine::Scene</a></li>
+<li>SceneComponent&#160;:&#160;<a class="el" href="namespace_engine_1_1_scene.html#a806e1fcc8c8735067cb3643c58f3ac83">Engine::Scene</a></li>
+<li>sClearColor&#160;:&#160;<a class="el" href="namespace_engine_1_1_render.html#af695fdc3456faf0a1353431819e0382c">Engine::Render</a></li>
+<li>sContext&#160;:&#160;<a class="el" href="namespace_engine_1_1_render.html#a2101c48aff42566b2f67f0307d2a938d">Engine::Render</a></li>
+<li>scope_cast()&#160;:&#160;<a class="el" href="namespace_engine_1_1_reflect.html#a3902997560f13c1e26e54f7d0968bb7e">Engine::Reflect</a></li>
+<li>ScopeBinding&#160;:&#160;<a class="el" href="namespace_engine_1_1_reflect.html#a641b368370d6f91a06f6504a95314875">Engine::Reflect</a></li>
+<li>sCreateWindow()&#160;:&#160;<a class="el" href="namespace_engine_1_1_platform_1_1_window.html#a52ddcf34b8d1adcc561a6db01ac77184">Engine::Platform::Window</a></li>
+<li>ScrollLock&#160;:&#160;<a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a2c34900a532d1d507b9ef594d015a50f">Engine::Platform::Input::Key</a></li>
+<li>sDebugMessenger&#160;:&#160;<a class="el" href="namespace_engine_1_1_render.html#a5218fc5284feec45164b226d25cb6ec7">Engine::Render</a></li>
+<li>sDevice&#160;:&#160;<a class="el" href="namespace_engine_1_1_render.html#a4ff0f81392da33a56e15dcabb5dedffe">Engine::Render</a></li>
+<li>Select&#160;:&#160;<a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07aab7c3f69a24751a35c1b6886982d0657">Engine::Platform::Input::Key</a></li>
+<li>select()&#160;:&#160;<a class="el" href="namespace_engine_1_1_tuple_unpacker.html#ad67f5a74e86941198c974cf6452bfc0d">Engine::TupleUnpacker</a></li>
+<li>selectPhysicalDevice()&#160;:&#160;<a class="el" href="namespace_engine_1_1_render.html#ae064c4dee8123f49ea31864bf78d141d">Engine::Render</a></li>
+<li>SEND_NAME_MAPPINGS&#160;:&#160;<a class="el" href="namespace_engine_1_1_serialize.html#a6cdffc432a6dbfaaae513508b1434978add5033e11e50916e754c8d875502658e">Engine::Serialize</a></li>
+<li>SenderReceiver&#160;:&#160;<a class="el" href="namespace_engine_1_1_execution.html#a593f7d72e1bb3ea96e2b82dd36cd14ef">Engine::Execution</a></li>
+<li>sequence&#160;:&#160;<a class="el" href="namespace_engine_1_1_execution.html#ad3993b9b11992a8b18c72c7018bf315d">Engine::Execution</a></li>
+<li>SequenceIterator&#160;:&#160;<a class="el" href="namespace_engine_1_1_reflect.html#a603066aa7d1d1e97e069768a3c7f169e">Engine::Reflect</a></li>
+<li>SequenceRange&#160;:&#160;<a class="el" href="namespace_engine_1_1_reflect.html#a40f71d4687f4fcbdb0e365247d80e7db">Engine::Reflect</a></li>
+<li>SerializableContainer&#160;:&#160;<a class="el" href="namespace_engine_1_1_serialize.html#a3e0dab469f84025cb82fc35ee8d24ec5">Engine::Serialize</a></li>
+<li>SerializableIds&#160;:&#160;<a class="el" href="namespace_engine_1_1_serialize.html#ab8642a8034259e78babe8b41d64fc7de">Engine::Serialize</a></li>
+<li>SerializableUnitList&#160;:&#160;<a class="el" href="namespace_engine_1_1_serialize.html#a518c5a6141e5b99931367ab45d0b67af">Engine::Serialize</a></li>
+<li>SerializableUnitMap&#160;:&#160;<a class="el" href="namespace_engine_1_1_serialize.html#a04782520b48766bb80cb63551c03dc29">Engine::Serialize</a></li>
+<li>SERIALIZE_MAGIC_NUMBER&#160;:&#160;<a class="el" href="namespace_engine_1_1_serialize.html#a0d3dbc59ee37e90e377ca3934675e380">Engine::Serialize</a></li>
+<li>SERIALIZE_MANAGER&#160;:&#160;<a class="el" href="namespace_engine_1_1_serialize.html#ab8642a8034259e78babe8b41d64fc7dea32c13c4ee5e2198fd66c6a9003a87a1a">Engine::Serialize</a></li>
+<li>SerializePrimitives&#160;:&#160;<a class="el" href="namespace_engine_1_1_serialize.html#a3b481c8bed2b57bffea757f6053c356d">Engine::Serialize</a></li>
+<li>ServerAPI&#160;:&#160;<a class="el" href="namespace_engine_1_1_core.html#a4116f020209a85cc1b1ee351e0695739">Engine::Core</a></li>
+<li>set_active&#160;:&#160;<a class="el" href="namespace_engine_1_1_serialize.html#a042e918a5c0f770bf931215b115da004">Engine::Serialize</a></li>
+<li>SET_ID&#160;:&#160;<a class="el" href="namespace_engine_1_1_serialize.html#a6cdffc432a6dbfaaae513508b1434978a4a82874dd7787b8ae20f1c09e4d4c7d9">Engine::Serialize</a></li>
+<li>set_parent&#160;:&#160;<a class="el" href="namespace_engine_1_1_serialize.html#a39f98529ca6ca851427e820c4edc71a1">Engine::Serialize</a></li>
+<li>set_synced&#160;:&#160;<a class="el" href="namespace_engine_1_1_serialize.html#a07b09b08af3693b4a908b538b55c4b45">Engine::Serialize</a></li>
+<li>setCurrentThreadName()&#160;:&#160;<a class="el" href="namespace_engine_1_1_platform_1_1_threading.html#ad72b56a50b1210dbdb8404d5ee374630">Engine::Platform::Threading</a></li>
+<li>setCwd()&#160;:&#160;<a class="el" href="namespace_engine_1_1_platform_1_1_filesystem.html#a270dcccc5763154a3317cb3568b42bd1">Engine::Platform::Filesystem</a></li>
+<li>setLog()&#160;:&#160;<a class="el" href="namespace_engine_1_1_platform_1_1_log.html#a87a1324f15e433d9830947b17d72150c">Engine::Platform::Log</a></li>
+<li>setup()&#160;:&#160;<a class="el" href="namespace_engine_1_1_platform_1_1_filesystem.html#aa7cb413cca6b204dad9ca74b62d8e547">Engine::Platform::Filesystem</a></li>
+<li>sFunctionList()&#160;:&#160;<a class="el" href="namespace_engine_1_1_reflect.html#a33630c8cd2b8630aa38c88072677f8a0">Engine::Reflect</a></li>
+<li>sGlobalLog&#160;:&#160;<a class="el" href="namespace_engine_1_1_platform_1_1_log.html#aa671963b24538f3a8477ceedd7a788a5">Engine::Platform::Log</a></li>
+<li>sGlobalRegistry&#160;:&#160;<a class="el" href="namespace_engine_1_1_core.html#a6fc405ba577a864ce6ee6bf62dd0abeb">Engine::Core</a></li>
+<li>shaderCacheInternal()&#160;:&#160;<a class="el" href="namespace_engine_1_1_render.html#a1333012cf0e6f2bfec8a09b1d7d1d3df">Engine::Render</a></li>
+<li>ShaderFileObject&#160;:&#160;<a class="el" href="namespace_engine_1_1_render.html#aaa9f5fccfe23cb531c13439c40432700">Engine::Render</a></li>
+<li>shadergenTarget&#160;:&#160;<a class="el" href="namespace_engine_1_1_render.html#a0e6d637cf8ff4d1383da1ef94a7fc34e">Engine::Render</a></li>
+<li>ShaderType&#160;:&#160;<a class="el" href="namespace_engine_1_1_render.html#aca15bb3bf29d2afc8394dca2a093a6d4">Engine::Render</a></li>
+<li>Shift&#160;:&#160;<a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07ac707846a93bf40201c3638910be0ceac">Engine::Platform::Input::Key</a></li>
+<li>shiftTupleReference()&#160;:&#160;<a class="el" href="namespace_engine_1_1_tuple_unpacker.html#a9dd6b1d940ffad3f7649de864736c094">Engine::TupleUnpacker</a></li>
+<li>shippingPath()&#160;:&#160;<a class="el" href="namespace_engine_1_1_platform_1_1_filesystem.html#a6c3b495c672a185bb56823bbc20b9e50">Engine::Platform::Filesystem</a></li>
+<li>showHelp&#160;:&#160;<a class="el" href="namespace_engine_1_1_core.html#a4bd17d7c3695ccaaae65490b2c4c10a7">Engine::Core</a></li>
+<li>sign()&#160;:&#160;<a class="el" href="namespace_engine_1_1_math.html#a99157d577a7152370d9efa19fea2edd9">Engine::Math</a></li>
+<li>sInitialized&#160;:&#160;<a class="el" href="namespace_engine_1_1_debug.html#ad81f6ab50965ec1332c6c1462964aa7a">Engine::Debug</a></li>
+<li>slerp()&#160;:&#160;<a class="el" href="namespace_engine_1_1_math.html#a4d18d18bbca21115d62e43addc0b64ec">Engine::Math</a></li>
+<li>sListeners&#160;:&#160;<a class="el" href="namespace_engine_1_1_platform_1_1_log.html#ad1a14c24208e112385df081d33acdda6">Engine::Platform::Log</a></li>
+<li>sLocalMasterParticipantId&#160;:&#160;<a class="el" href="namespace_engine_1_1_serialize.html#a663d905744035bb4d7e080b34e7cd9fa">Engine::Serialize</a></li>
+<li>sLog&#160;:&#160;<a class="el" href="namespace_engine_1_1_platform_1_1_log.html#aa6964de901e8a40913966288e972061c">Engine::Platform::Log</a></li>
+<li>sLogLevel&#160;:&#160;<a class="el" href="namespace_engine_1_1_platform_1_1_log.html#a11111d9d4aca35d85dd481460dac8ff6">Engine::Platform::Log</a></li>
+<li>sNoCallerHierarchy&#160;:&#160;<a class="el" href="namespace_engine_1_1_serialize.html#ade3ebacc3e9dd399e06d16b409b5600d">Engine::Serialize</a></li>
+<li>SocketAddress&#160;:&#160;<a class="el" href="namespace_engine_1_1_platform.html#aab2c0691b32ac482ab7db4df7488a79e">Engine::Platform</a></li>
+<li>sourceDirPath&#160;:&#160;<a class="el" href="namespace_engine_1_1_resources.html#a75630f7c968a227633e4d214e543fec6">Engine::Resources</a></li>
+<li>Space&#160;:&#160;<a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a8ffb9600b361021ca7443c89ff9201da">Engine::Platform::Input::Key</a></li>
+<li>sProfiler&#160;:&#160;<a class="el" href="namespace_engine_1_1_debug_1_1_profiler.html#af15c68e79a7debd86d44964beb953049">Engine::Debug::Profiler</a></li>
+<li>sqrtf()&#160;:&#160;<a class="el" href="namespace_engine_1_1_math.html#afc6547beef08f0ad8c2d68af8d196ee1">Engine::Math</a></li>
+<li>sqrtNewtonRaphson()&#160;:&#160;<a class="el" href="namespace_engine_1_1_math.html#a3554ec705134c091f71b69e7ac26e94f">Engine::Math</a></li>
+<li>sReceiver&#160;:&#160;<a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#a9b3b213d9d4c87501814c5b1dd54b71f">Engine::Behavior::Python3</a></li>
+<li>sRoot&#160;:&#160;<a class="el" href="namespace_engine_1_1_debug.html#ac225d3f00f566e6ed855746250c479d9">Engine::Debug</a></li>
+<li>sSingleton&#160;:&#160;<a class="el" href="namespace_engine_1_1_render.html#a9ae53a46c20bbecda89c22eec08d5229">Engine::Render</a></li>
+<li>startsWith()&#160;:&#160;<a class="el" href="namespace_engine_1_1_string_util.html#afbeb440ba1312deca2586d94491f0775">Engine::StringUtil</a></li>
+<li>StateDescriptor&#160;:&#160;<a class="el" href="namespace_engine_1_1_execution.html#a382cc444bcaffa5eb446fbe7fb35aca3">Engine::Execution</a></li>
+<li>Statement&#160;:&#160;<a class="el" href="namespace_code_gen.html#a32f6d03c2564685c24ef7284bacc5652">CodeGen</a></li>
+<li>sThread&#160;:&#160;<a class="el" href="namespace_engine_1_1_debug_1_1_profiler.html#afe20929dbe546eded6c98e2bed717ef3">Engine::Debug::Profiler</a></li>
+<li>STOP_ENDED&#160;:&#160;<a class="el" href="namespace_engine_1_1_execution.html#a8ec75450bc82e54d43e2d2d942f2b306a5415243ec90e7564912164d5b2cc1464">Engine::Execution</a></li>
+<li>STOP_STARTED&#160;:&#160;<a class="el" href="namespace_engine_1_1_execution.html#a8ec75450bc82e54d43e2d2d942f2b306aa937817264c2b3657f174801e82050af">Engine::Execution</a></li>
+<li>stop_when&#160;:&#160;<a class="el" href="namespace_engine_1_1_execution.html#a06c97483f62ca9762b6b2b9da2a9ab47">Engine::Execution</a></li>
+<li>stoppable&#160;:&#160;<a class="el" href="namespace_engine_1_1_execution.html#a5baf3301f166c504febcdfaa288b6d84">Engine::Execution</a></li>
+<li>StopToken&#160;:&#160;<a class="el" href="namespace_engine_1_1_execution.html#a9d54b0f0d186287e871cb1dff3d4684d">Engine::Execution</a></li>
+<li>strcmp()&#160;:&#160;<a class="el" href="namespace_engine.html#a60be1a2f34e7d5b77a4c56434c479d36">Engine</a></li>
+<li>strcpy_s()&#160;:&#160;<a class="el" href="namespace_engine.html#aabda4771026ffa4a022d1c1401fadd00">Engine</a></li>
+<li>streamError()&#160;:&#160;<a class="el" href="namespace_engine_1_1_serialize.html#aae7cc31d8623387ea7bbbd08a3f92ce1">Engine::Serialize</a></li>
+<li>StreamVisitorImpl()&#160;:&#160;<a class="el" href="namespace_engine_1_1_serialize.html#a59b585aba2827344680e72ea8a52c14d">Engine::Serialize</a></li>
+<li>streq()&#160;:&#160;<a class="el" href="namespace_engine.html#ad5c483514353e775f6b069a3687d56c3">Engine</a></li>
+<li>strlen()&#160;:&#160;<a class="el" href="namespace_engine.html#a3a3a01a50713c9eec7f43621aadcf1ef">Engine</a></li>
+<li>strrchr()&#160;:&#160;<a class="el" href="namespace_engine.html#ae582c6ae8e7c404cef1147198a919be8">Engine</a></li>
+<li>sTypeList()&#160;:&#160;<a class="el" href="namespace_engine_1_1_reflect.html#a5184edae9cae82716d2407a8923ef0af">Engine::Reflect</a></li>
+<li>substr()&#160;:&#160;<a class="el" href="namespace_engine_1_1_string_util.html#ad00bbb9f3a12ad36f7923cdc31dd5e70">Engine::StringUtil</a></li>
+<li>SWAP_ERASE&#160;:&#160;<a class="el" href="namespace_engine_1_1_containers.html#ae844b9a63c2211270f08f5392716618ba4c0d15a81bd371fb9409f0bd8d955b8c">Engine::Containers</a></li>
+<li>swapBuffers()&#160;:&#160;<a class="el" href="namespace_engine_1_1_render_1_1_i_o_s_bridge.html#ad3404ec01eebfa4c3bb2638d3802bf0c">Engine::Render::IOSBridge</a>, <a class="el" href="namespace_engine_1_1_render_1_1_o_s_x_bridge.html#a0c7567f6549a28fc21440b81a8d31e1e">Engine::Render::OSXBridge</a>, <a class="el" href="namespace_engine_1_1_render.html#aced1b1f4284236db2772ad4470921a26">Engine::Render</a></li>
+<li>sWorkGroupLocalRegistry&#160;:&#160;<a class="el" href="namespace_engine_1_1_core.html#a4a90fb808ef6942c6f29cc031be36d94">Engine::Core</a></li>
+<li>sync_expect&#160;:&#160;<a class="el" href="namespace_engine_1_1_execution.html#a2c0730cf6d4b8d05957dd5f41225bef9">Engine::Execution</a></li>
+<li>sync_wait&#160;:&#160;<a class="el" href="namespace_engine_1_1_execution.html#a174afe2a25c4f4298a9260817772cc07">Engine::Execution</a></li>
+<li>SyncableContainer&#160;:&#160;<a class="el" href="namespace_engine_1_1_serialize.html#a3e5ec4c9cf47ea6f28892d1424c048c6">Engine::Serialize</a></li>
+<li>SyncableUnit&#160;:&#160;<a class="el" href="namespace_engine_1_1_serialize.html#a65ad05f4be5907c918487965f0bfb877">Engine::Serialize</a></li>
+<li>SyncableUnitMap&#160;:&#160;<a class="el" href="namespace_engine_1_1_serialize.html#a880a2599272d4f9b176c08aa818d0bd0">Engine::Serialize</a></li>
+<li>SyncFunctionTraits&#160;:&#160;<a class="el" href="namespace_engine_1_1_serialize.html#a5caf636407ab3471386970ad4aa0e3a1">Engine::Serialize</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Wed Jun 10 2026 21:25:35 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="namespacemembers_r.html" class="btn btn-neutral float-left" title="Namespace Members" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="namespacemembers_t.html" class="btn btn-neutral float-right" title="Namespace Members" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        Version: 0.6.0
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Versions</dt>
+            <script src="../../../../versions.js"></script>
+        </dl>
+    </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
