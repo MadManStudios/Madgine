@@ -41,6 +41,30 @@ namespace Render {
         glAttachShader(mHandle, vertexShader);
         if (pixelShader)
             glAttachShader(mHandle, pixelShader);
+#if OPENGL_ES
+        else {
+            static GLuint defaultShader = []() {
+                GLuint handle = glCreateShader(GL_FRAGMENT_SHADER);
+                const char *source = R"(#version 300 es
+void main() {})";
+                glShaderSource(handle, 1, &source, NULL);
+                glCompileShader(handle);
+                GLint success;
+                char infoLog[512];
+                glGetShaderiv(handle, GL_COMPILE_STATUS, &success);
+                if (!success) {
+                    glGetShaderInfoLog(handle, 512, NULL, infoLog);
+                    LOG_FATAL("Compilation of default empty PixelShader failed:\n"
+                        << infoLog);
+                    return 0u;
+                }
+                return handle;
+            }();
+            if (!defaultShader)
+                return false;
+            glAttachShader(mHandle, defaultShader);
+        }
+#endif
 
         glLinkProgram(mHandle);
         // check for linking errors

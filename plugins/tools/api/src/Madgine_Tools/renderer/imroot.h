@@ -55,7 +55,7 @@ namespace Tools {
 
         virtual void Image(Render::ConstTexturePtr tex, Math::Vector2i image_size = { -1, -1 }, const Math::Vector2 &uv0 = { 0, 0 }, const Math::Vector2 &uv1 = { 1, 1 }) = 0;
         virtual void Image(const Platform::Filesystem::Path &path, Math::Vector2i image_size = { -1, -1 }) = 0;
-        virtual void DrawImage(const Platform::Filesystem::Path &path, Math::Vector2i pos, Math::Vector2i image_size = { -1, -1 }, float spinnerRadius = 15) = 0;
+        virtual void DrawImage(const Platform::Filesystem::Path &path, EMSCRIPTEN_WORKAROUND(Math::Vector2i) pos, EMSCRIPTEN_WORKAROUND(Math::Vector2i) image_size = { -1, -1 }, float spinnerRadius = 15) = 0;
 
         ::ImGuiTestEngine *testEngine() const;
 

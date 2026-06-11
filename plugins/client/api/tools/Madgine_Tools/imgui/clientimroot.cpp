@@ -759,8 +759,11 @@ namespace Tools {
         }
     }
 
-    void ClientImRoot::DrawImage(const Platform::Filesystem::Path &path, Math::Vector2i pos, Math::Vector2i image_size, float spinnerRadius)
+    void ClientImRoot::DrawImage(const Platform::Filesystem::Path &path, EMSCRIPTEN_WORKAROUND(Math::Vector2i) _pos, EMSCRIPTEN_WORKAROUND(Math::Vector2i) _image_size, float spinnerRadius)
     {
+        Math::Vector2i pos = _pos;
+        Math::Vector2i image_size = _image_size;
+
         std::string_view name = path.stem();
 
         CachedImage &image = mImageCache[path];
