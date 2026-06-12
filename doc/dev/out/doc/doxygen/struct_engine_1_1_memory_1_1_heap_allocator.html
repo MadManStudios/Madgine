@@ -264,8 +264,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a6ddb749997a82542dbf13f7a4403c1c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a39ca81c4a108b2ea13ab8842221bd35b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_memory_1_1_heap_allocator.html#a39ca81c4a108b2ea13ab8842221bd35b">~HeapAllocator</a> ()</td></tr>
 <tr class="separator:a39ca81c4a108b2ea13ab8842221bd35b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8bcfb250f95d370f1c305eb483e4e004"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_memory_1_1_block.html">Memory::Block</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_memory_1_1_heap_allocator.html#a8bcfb250f95d370f1c305eb483e4e004">allocate</a> (size_t size)</td></tr>
-<tr class="separator:a8bcfb250f95d370f1c305eb483e4e004"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a262f0f27567c7700188dfe22e02ddc1a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_memory_1_1_block.html">Memory::Block</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_memory_1_1_heap_allocator.html#a262f0f27567c7700188dfe22e02ddc1a">allocate</a> (size_t size, size_t alignment)</td></tr>
+<tr class="separator:a262f0f27567c7700188dfe22e02ddc1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a252e33196754b944b0065b043ea969c5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_memory_1_1_heap_allocator.html#a252e33196754b944b0065b043ea969c5">deallocate</a> (<a class="el" href="struct_engine_1_1_memory_1_1_block.html">Memory::Block</a> block)</td></tr>
 <tr class="separator:a252e33196754b944b0065b043ea969c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abd35837821a234eb0fc94307c71ba346"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_memory_1_1_heap_allocator.html#abd35837821a234eb0fc94307c71ba346">deallocateAll</a> ()</td></tr>
@@ -337,8 +337,8 @@ template&lt;Allocator Parent, typename BlockSize  = TaggedPlaceholder&lt;Allocat
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a8bcfb250f95d370f1c305eb483e4e004" name="a8bcfb250f95d370f1c305eb483e4e004"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8bcfb250f95d370f1c305eb483e4e004">&#9670;&#160;</a></span>allocate()</h2>
+<a id="a262f0f27567c7700188dfe22e02ddc1a" name="a262f0f27567c7700188dfe22e02ddc1a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a262f0f27567c7700188dfe22e02ddc1a">&#9670;&#160;</a></span>allocate()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -352,8 +352,18 @@ template&lt;Allocator Parent, typename BlockSize  = TaggedPlaceholder&lt;Allocat
           <td class="memname"><a class="el" href="struct_engine_1_1_memory_1_1_block.html">Memory::Block</a> <a class="el" href="struct_engine_1_1_memory_1_1_heap_allocator.html">Engine::Memory::HeapAllocator</a>&lt; Parent, BlockSize, BlockCount &gt;::allocate </td>
           <td>(</td>
           <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>size</em></td><td>)</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>alignment</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -499,7 +509,7 @@ template&lt;Allocator Parent, typename BlockSize  = TaggedPlaceholder&lt;Allocat
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jun 11 2026 23:45:14 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Fri Jun 12 2026 15:05:18 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>
