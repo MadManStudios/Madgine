@@ -1,9 +1,11 @@
 #pragma once
 
+#include "Meta/math/common.h"
+
+#include "../align.h"
 #include "../delayedconstruct.h"
 #include "../replace.h"
 #include "concepts.h"
-#include "Meta/math/common.h"
 
 namespace Engine {
 namespace Memory {
@@ -21,10 +23,10 @@ namespace Memory {
 
             Block allocate(size_t size, size_t alignment = 1)
             {
+                size = alignTo(size, alignment);
                 return TupleUnpacker::select(
                     mBuckets, [size, alignment](auto &bucket) {
-                        assert(alignment == 1);
-                        return bucket.allocate(size);
+                        return bucket.allocate(size, alignment);
                     },
                     BucketStrategy::select(size));
             }

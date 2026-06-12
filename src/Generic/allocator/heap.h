@@ -25,8 +25,11 @@ namespace Memory {
                 mParent.deallocate(mParentMemory);
         }
 
-        Memory::Block allocate(size_t size)
+        Memory::Block allocate(size_t size, size_t alignment)
         {
+            assert(alignment <= blockSize);
+            assert(blockSize % alignment == 0);
+
             if (!mParentMemory.mAddress)
                 mParentMemory = mParent.allocate(blockSize * blockCount);
 

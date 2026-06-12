@@ -102,6 +102,8 @@ METATABLE_END(Engine::Render::OpenGLRenderContext)
 namespace Engine {
 namespace Render {
 
+    extern size_t uniformAlignment();
+
 #if !ANDROID && !EMSCRIPTEN && !OSX && !IOS
     static void __stdcall glDebugOutput(GLenum source,
         GLenum type,
@@ -655,7 +657,7 @@ namespace Render {
             allocation = mIndexAllocator.allocate(size);
         else
 #endif
-            allocation = mBufferAllocator.allocate(size);
+            allocation = mBufferAllocator.allocate(size, uniformAlignment());
 
         if (!allocation.mAddress)
             return {};
@@ -673,7 +675,7 @@ namespace Render {
         else
 #endif
             allocation = mBufferAllocator.allocate(elementSize * count);
-
+        
         if (!allocation.mAddress)
             return {};
 
