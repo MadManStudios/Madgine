@@ -105,22 +105,6 @@ namespace Execution {
 
     struct BindingError;
 
-    namespace State {
-        struct Text;
-        struct Progress;
-        struct BeginBlock;
-        struct EndBlock;
-        struct PushDisabled;
-        struct PopDisabled;
-        struct DebugLocation;
-        struct Breakpoint;
-        struct Marker;
-        struct FunctionPtr;
-    }
-
-    using StateDescriptor = std::variant<State::Text, State::Progress, State::BeginBlock, State::EndBlock, State::PushDisabled, State::PopDisabled, State::DebugLocation, State::Breakpoint, State::Marker, State::FunctionPtr>;
-
-
 }
 
 namespace Containers {

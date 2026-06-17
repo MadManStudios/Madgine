@@ -39,7 +39,7 @@ namespace Behavior {
             void start();
             void stop();
 
-            friend MADGINE_BEHAVIOR_EXPORT void tag_invoke(Execution::visit_state_t, state *state, CallableView<void(const Execution::StateDescriptor &)> visitor);
+            friend MADGINE_BEHAVIOR_EXPORT void tag_invoke(Execution::visit_state_t, state *state, BehaviorStateBase::CB visitor);
 
         protected:
             void connect();
@@ -101,7 +101,7 @@ namespace Behavior {
             std::get<State>(mData).stop();
         }
 
-        void visitState(CallableView<void(const Execution::StateDescriptor &)> visitor) override
+        void visitState(CB visitor) override
         {
             Execution::visit_state(std::holds_alternative<State>(mData) ? &std::get<State>(mData) : nullptr, visitor);
         }

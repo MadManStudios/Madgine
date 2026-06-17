@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Generic/callable_view.h"
-#include "Generic/execution/statedescriptor.h"
+#include "Madgine/debug/statedescriptor.h"
 
 namespace Engine {
 namespace Behavior {
@@ -17,7 +17,10 @@ namespace Behavior {
             delete this;
         }
 
-        virtual void visitState(CallableView<void(const Execution::StateDescriptor &)> visitor) = 0;
+        template <typename T>
+        using helper = void(const T &);
+        using CB = typename Execution::StateTypes::prepend<Execution::State::Value>::template transform<helper>::template instantiate<CallableView>;
+        virtual void visitState(CB visitor) = 0;
     };
 
 }

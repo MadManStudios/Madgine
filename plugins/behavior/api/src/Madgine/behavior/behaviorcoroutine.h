@@ -84,7 +84,7 @@ namespace Behavior {
         void stop() override;
         void destroy() override;
 
-        void visitState(CallableView<void(const Execution::StateDescriptor &)> visitor) override;
+        void visitState(CB visitor) override;
 
         struct MADGINE_BEHAVIOR_EXPORT InitialSuspend {
             bool await_ready() noexcept;

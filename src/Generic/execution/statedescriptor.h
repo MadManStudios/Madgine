@@ -5,7 +5,6 @@
 namespace Engine {
 namespace Debug {
     struct Continuation;
-    struct DebugLocation;
 }
 namespace Execution {
 
@@ -41,6 +40,8 @@ namespace Execution {
             const char *mTypeName;
         };
     }
+
+    using StateTypes = type_pack<State::Text, State::Progress, State::BeginBlock, State::EndBlock, State::PushDisabled, State::PopDisabled, State::DebugLocation, State::Breakpoint, State::Marker, State::FunctionPtr>;
 
     struct visit_state_t {
         template <typename T, typename V>

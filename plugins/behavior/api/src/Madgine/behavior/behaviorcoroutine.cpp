@@ -38,7 +38,7 @@ namespace Behavior {
         std::coroutine_handle<CoroutineBehaviorState>::from_promise(*this).destroy();
     }
 
-    void CoroutineBehaviorState::visitState(CallableView<void(const Execution::StateDescriptor &)> visitor)
+    void CoroutineBehaviorState::visitState(CB visitor)
     {
         visitor(Execution::State::DebugLocation { &mDebugLocation });
     }

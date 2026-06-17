@@ -80,7 +80,7 @@ namespace Execution {
 
             state(Sender &&sender, InnerRec &&rec, Debug::SenderLocation *&parent)
                 : mRec(std::forward<InnerRec>(rec))
-                , mLocation([this](CallableView<void(const Execution::StateDescriptor &)> visitor) { visit_state(&mState, std::move(visitor)); })
+                , mLocation([this](Debug::SenderLocation::CB visitor) { visit_state(&mState, std::move(visitor)); })
                 , mState { connect(std::forward<Sender>(sender), Rec { this }) }
                 , mParent(parent)
             {

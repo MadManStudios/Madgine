@@ -9,6 +9,7 @@
 #include "Madgine/debug/debuggablelifetime.h"
 #include "Madgine/debug/debuggablesender.h"
 #include "Madgine/debug/debugger.h"
+#include "Madgine/debug/statedescriptor.h"
 
 #include "Meta/reflect/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
@@ -70,94 +71,106 @@ namespace Tools {
             size_t breakpointIndex = 0;
             bool lastWasText = false;
 
-            auto visitor = [&, inlineLocation, senderLocation](const Execution::StateDescriptor &desc) {
+            auto visitor = [&, senderLocation, inlineLocation](auto &&val) {
                 float startY = ImGui::GetCursorScreenPos().y;
 
                 bool actualContent = false;
 
-                std::visit(overloaded { [&](const Execution::State::Text &text) {
-                                           ImGui::TextWrapped("%s", text.mText.c_str());
-                                           actualContent = true;
-                                       },
-                               [&](const Execution::State::Progress &progress) {
-                                   ImGui::ProgressBar(progress.mRatio, ImVec2 { 100.0f, 10.0f }, "");
-                                   actualContent = true;
-                               },
-                               [&](const Execution::State::BeginBlock &begin) {
-                                   ImGui::BeginGroupPanel(begin.mName.data(), {}, begin.mCompleted ? IM_COL32(20, 255, 20, 15) : 0);
-                                   actualContent = true;
-                               },
-                               [&](const Execution::State::EndBlock &end) {
-                                   if (lastWasText)
-                                       ImGui::Dummy({ 0.0f, ImGui::GetStyle().ItemSpacing.y });
-                                   ImGui::EndGroupPanel();
-                                   actualContent = true;
-                               },
-                               [](const Execution::State::PushDisabled &) {
-                                   ImGui::BeginDisabled();
-                               },
-                               [](const Execution::State::PopDisabled &) {
-                                   ImGui::EndDisabled();
-                               },
-                               [&, inlineLocation](const Execution::State::DebugLocation &subLoc) {
-                                   std::ranges::move(visualizeDebugLocation(continuations, context, subLoc.mLocation, inlineLocation), std::back_inserter(subLocations));
-                                   actualContent = true;
-                               },
-                               [&](const Execution::State::Breakpoint &bp) {
-                                   if (bp.mContinuation) {
-                                       assert(!continuation);
-                                       continuation = &bp.mContinuation;
+                overloaded {
+                    [&](const Execution::State::Text &text) {
+                        ImGui::TextWrapped("%s", text.mText.c_str());
+                        actualContent = true;
+                    },
+                    [&](const Execution::State::Progress &progress) {
+                        ImGui::ProgressBar(progress.mRatio, ImVec2 { 100.0f, 10.0f }, "");
+                        actualContent = true;
+                    },
+                    [&](const Execution::State::BeginBlock &begin) {
+                        ImGui::BeginGroupPanel(begin.mName.data(), {}, begin.mCompleted ? IM_COL32(20, 255, 20, 15) : 0);
+                        actualContent = true;
+                    },
+                    [&](const Execution::State::EndBlock &end) {
+                        if (lastWasText)
+                            ImGui::Dummy({ 0.0f, ImGui::GetStyle().ItemSpacing.y });
+                        ImGui::EndGroupPanel();
+                        actualContent = true;
+                    },
+                    [](const Execution::State::PushDisabled &) {
+                        ImGui::BeginDisabled();
+                    },
+                    [](const Execution::State::PopDisabled &) {
+                        ImGui::EndDisabled();
+                    },
+                    [&, inlineLocation](const Execution::State::DebugLocation &subLoc) {
+                        std::ranges::move(visualizeDebugLocation(continuations, context, subLoc.mLocation, inlineLocation), std::back_inserter(subLocations));
+                        actualContent = true;
+                    },
+                    [&](const Execution::State::Breakpoint &bp) {
+                        if (bp.mContinuation) {
+                            assert(!continuation);
+                            continuation = &bp.mContinuation;
 
-                                       std::stringstream ss;
-                                       continuation->visitArguments(ss);
-                                       std::string arguments = ss.str();
-                                       if (!arguments.empty()) {
-                                           Debug::ContinuationType type = continuation->type();
-                                           switch (type) {
-                                           case Debug::ContinuationType::Cancelled:
-                                           case Debug::ContinuationType::Error:
-                                               ImGui::PushStyleColor(ImGuiCol_Border, { 1.0f, 0.0f, 0.0f, 1.0f });
-                                               // ImGui::PushStyleColor(ImGuiCol_Text, { 1.0f, 0.0f, 0.0f, 1.0f });
-                                               break;
-                                           case Debug::ContinuationType::Return:
-                                               ImGui::PushStyleColor(ImGuiCol_Border, { 0.0f, 0.78f, 1.0f, 1.0f });
-                                               // ImGui::PushStyleColor(ImGuiCol_Text, { 0.0f, 0.78f, 1.0f, 1.0f });
-                                               break;
-                                           case Debug::ContinuationType::Flow:
-                                               break;
-                                           }
-                                           ImGui::BeginGroupPanel();
-                                           ImGui::Text(arguments);
-                                           ImGui::EndGroupPanel();
-                                           if (type != Debug::ContinuationType::Flow) {
-                                               ImGui::PopStyleColor(1);
-                                           }
-                                       }
-                                   }
-                                   lineFeedback = bp.mLineFeedback;
-                                   breakpoint = breakpointIndex++;
-                               },
-                               [&](const Execution::State::Marker &m) {
-                                   isMarker = true;
-                               },
-                               [](const Execution::State::FunctionPtr &f) {
-                                   const char *name = "function";
-                                   const char *details = f.mTypeName;
+                            std::stringstream ss;
+                            continuation->visitArguments(ss);
+                            std::string arguments = ss.str();
+                            if (!arguments.empty()) {
+                                Debug::ContinuationType type = continuation->type();
+                                switch (type) {
+                                case Debug::ContinuationType::Cancelled:
+                                case Debug::ContinuationType::Error:
+                                    ImGui::PushStyleColor(ImGuiCol_Border, { 1.0f, 0.0f, 0.0f, 1.0f });
+                                    // ImGui::PushStyleColor(ImGuiCol_Text, { 1.0f, 0.0f, 0.0f, 1.0f });
+                                    break;
+                                case Debug::ContinuationType::Return:
+                                    ImGui::PushStyleColor(ImGuiCol_Border, { 0.0f, 0.78f, 1.0f, 1.0f });
+                                    // ImGui::PushStyleColor(ImGuiCol_Text, { 0.0f, 0.78f, 1.0f, 1.0f });
+                                    break;
+                                case Debug::ContinuationType::Flow:
+                                    break;
+                                }
+                                ImGui::BeginGroupPanel();
+                                ImGui::Text(arguments);
+                                ImGui::EndGroupPanel();
+                                if (type != Debug::ContinuationType::Flow) {
+                                    ImGui::PopStyleColor(1);
+                                }
+                            }
+                        }
+                        lineFeedback = bp.mLineFeedback;
+                        breakpoint = breakpointIndex++;
+                    },
+                    [&](const Execution::State::Marker &m) {
+                        isMarker = true;
+                    },
+                    [](const Execution::State::FunctionPtr &f) {
+                        const char *name = "function";
+                        const char *details = f.mTypeName;
 #ifndef NDEBUG
-                                   Debug::TraceBack trace = Debug::resolveSymbols(&f.mFunctionPtr, 1)[0];
-                                   std::string detailsStr = std::string { trace.mFile } + ":" + std::to_string(trace.mLineNr);
+                        Debug::TraceBack trace = Debug::resolveSymbols(&f.mFunctionPtr, 1)[0];
+                        std::string detailsStr = std::string { trace.mFile } + ":" + std::to_string(trace.mLineNr);
 
-                                   name = trace.mFunction;
-                                   details = detailsStr.c_str();
+                        name = trace.mFunction;
+                        details = detailsStr.c_str();
 #endif
 
-                                   ImGui::Text("%s", name);
-                                   ImGui::SetItemTooltip("%s", details);
-                               } },
-                    desc);
+                        ImGui::Text("%s", name);
+                        ImGui::SetItemTooltip("%s", details);
+                    },
+                    [this](const Execution::State::Value &v) {
+                        if (ImGui::BeginTable("columns", 2)) {
+                            UndoStack stack;
+                            TracedRoot<Reflect::Value> value { stack };
+                            v.get(value.get());
+                            bool changed = mInspector->drawValue(v.mName, value, true, v.mType);
+                            if (changed)
+                                v.set(value.get());
+                            ImGui::EndTable();
+                        }
+                    }
+                }(std::forward<decltype(val)>(val));
 
                 if (actualContent) {
-                    lastWasText = std::holds_alternative<Execution::State::Text>(desc);
+                    lastWasText = std::same_as<std::decay_t<decltype(val)>, Execution::State::Text>;
                     if (breakpoint) {
                         if (lineFeedback) {
                             *lineFeedback = breakpoint;

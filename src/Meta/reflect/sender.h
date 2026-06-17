@@ -23,7 +23,10 @@ namespace Reflect {
         virtual void start() = 0;
         virtual void stop() = 0;
 
-        virtual void visitState(CallableView<void(const Execution::StateDescriptor &)> visitor) = 0;
+        template <typename T>
+        using helper = void(const T &);
+        using CB = typename Execution::StateTypes::template transform<helper>::template instantiate<CallableView>;
+        virtual void visitState(CB visitor) = 0;
     };
 
     template <typename Sender>
@@ -52,7 +55,7 @@ namespace Reflect {
             std::get<State>(mState).stop();
         }
 
-        void visitState(CallableView<void(const Execution::StateDescriptor &)> visitor) override
+        void visitState(SenderStateBase::CB visitor) override
         {
             Execution::visit_state(&std::get<State>(mState), visitor);
         }

@@ -7,7 +7,7 @@
 namespace Engine {
 namespace Debug {
 
-    SenderLocation::SenderLocation(Closure<void(CallableView<void(const Execution::StateDescriptor &)>)> state)
+    SenderLocation::SenderLocation(Closure<void(CB)> state)
         : mState(std::move(state))
     {
     }
@@ -26,7 +26,7 @@ namespace Debug {
         location = nullptr;
     }
 
-    void SenderLocation::visit(CallableView<void(const Execution::StateDescriptor &)> visitor) const
+    void SenderLocation::visit(CB visitor) const
     {
         mState(std::move(visitor));
     }

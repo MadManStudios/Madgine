@@ -41,10 +41,10 @@ namespace Behavior {
         mState->connect(*this);
     }
 
-    void tag_invoke(Execution::visit_state_t, Behavior::state *state, CallableView<void(const Execution::StateDescriptor &)> visitor)
+    void tag_invoke(Execution::visit_state_t, Behavior::state *state, BehaviorStateBase::CB visitor)
     {
         if (state)
-            state->mState->visitState(visitor);
+            state->mState->visitState(std::move(visitor));
         else
             visitor(Execution::State::Text { "Behavior" });
     }

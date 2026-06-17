@@ -26,7 +26,10 @@ namespace Execution {
             delete this;
         }
 
-        virtual void visitState(CallableView<void(const StateDescriptor &)> visitor) = 0;
+        template <typename T>
+        using helper = void(const T &);
+        using CB = typename StateTypes::template transform<helper>::template instantiate<CallableView>;
+        virtual void visitState(CB visitor) = 0;
     };
 
     template <typename R, typename... V>
@@ -57,7 +60,7 @@ namespace Execution {
             std::coroutine_handle<CoroutineSenderStateBase>::from_promise(*this).destroy();
         }
 
-        void visitState(CallableView<void(const Execution::StateDescriptor &)> visitor) override
+        void visitState(SenderStateBase<R, V...>::CB visitor) override
         {
             // visitor(Execution::State::SubLocation { mDebugLocation });
             throw 0;

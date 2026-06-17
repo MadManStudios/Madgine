@@ -94,7 +94,7 @@ namespace Behavior {
                 state(NodeReceiver<NodeBase> receiver, Behavior::StatePtr behavior)
                     : mReceiver(std::move(receiver))
                     , mBehavior(std::move(behavior))
-                    , mLocation([this](CallableView<void(const Execution::StateDescriptor &)> visitor) -> void { mBehavior->visitState(visitor); })
+                    , mLocation([this](Debug::SenderLocation::CB visitor) -> void { mBehavior->visitState(visitor); })
                 {
                     receiver.mDebugLocation.mChild = &mLocation;
                 }

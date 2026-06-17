@@ -67,10 +67,10 @@ namespace Execution {
                 mState->stop();
             }
 
-            friend void tag_invoke(visit_state_t, state *state, CallableView<void(const StateDescriptor &)> visitor)
+            friend void tag_invoke(visit_state_t, state *state, auto &&visitor)
             {
                 if (state)
-                    state->mState->visitState(visitor);
+                    state->mState->visitState(std::forward<decltype(visitor)>(visitor));
                 else
                     visitor(Execution::State::Text { "Sender" });
             }
@@ -144,7 +144,7 @@ namespace Execution {
             std::get<State>(mData).stop();
         }
 
-        void visitState(CallableView<void(const Execution::StateDescriptor &)> visitor) override
+        void visitState(CallableView<void(typename SenderStateBase<R, V...>::CB)> visitor) override
         {
             visit_state(std::holds_alternative<State>(mData) ? &std::get<State>(mData) : nullptr, visitor);
         }
