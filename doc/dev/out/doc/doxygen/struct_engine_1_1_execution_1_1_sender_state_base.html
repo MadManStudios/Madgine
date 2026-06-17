@@ -260,8 +260,8 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:a242758dea083734f75c5763751c6fef9"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_sender_state_base.html#a242758dea083734f75c5763751c6fef9">CB</a> = StateTypes::transform&lt; <a class="el" href="struct_engine_1_1_execution_1_1_sender_state_base.html#ac0161aa4684e4fb292738c94c67727ac">helper</a> &gt;::instantiate&lt; <a class="el" href="struct_engine_1_1_callable_view.html">CallableView</a> &gt;</td></tr>
-<tr class="separator:a242758dea083734f75c5763751c6fef9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6cbf6c1454d64c36366cd6909e6b4920"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_sender_state_base.html#a6cbf6c1454d64c36366cd6909e6b4920">CB</a> = typename StateTypes::template transform&lt; <a class="el" href="struct_engine_1_1_execution_1_1_sender_state_base.html#ac0161aa4684e4fb292738c94c67727ac">helper</a> &gt;::template instantiate&lt; <a class="el" href="struct_engine_1_1_callable_view.html">CallableView</a> &gt;</td></tr>
+<tr class="separator:a6cbf6c1454d64c36366cd6909e6b4920"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac0161aa4684e4fb292738c94c67727ac"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:ac0161aa4684e4fb292738c94c67727ac"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_sender_state_base.html#ac0161aa4684e4fb292738c94c67727ac">helper</a> = <a class="el" href="classvoid.html">void</a>(const T &amp;)</td></tr>
 <tr class="separator:ac0161aa4684e4fb292738c94c67727ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -278,7 +278,7 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a06eafde1bc5e63bbba826551e385ef9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa63deb102442a5c5854636c8add422c1"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_sender_state_base.html#aa63deb102442a5c5854636c8add422c1">stop</a> ()=0</td></tr>
 <tr class="separator:aa63deb102442a5c5854636c8add422c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adcd5104e77043d1cfcd4b988e42f430a"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_sender_state_base.html#adcd5104e77043d1cfcd4b988e42f430a">visitState</a> (<a class="el" href="struct_engine_1_1_execution_1_1_sender_state_base.html#a242758dea083734f75c5763751c6fef9">CB</a> visitor)=0</td></tr>
+<tr class="memitem:adcd5104e77043d1cfcd4b988e42f430a"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_sender_state_base.html#adcd5104e77043d1cfcd4b988e42f430a">visitState</a> (<a class="el" href="struct_engine_1_1_execution_1_1_sender_state_base.html#a6cbf6c1454d64c36366cd6909e6b4920">CB</a> visitor)=0</td></tr>
 <tr class="separator:adcd5104e77043d1cfcd4b988e42f430a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Typedef Documentation</h2>
@@ -300,8 +300,8 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="a242758dea083734f75c5763751c6fef9" name="a242758dea083734f75c5763751c6fef9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a242758dea083734f75c5763751c6fef9">&#9670;&#160;</a></span>CB</h2>
+<a id="a6cbf6c1454d64c36366cd6909e6b4920" name="a6cbf6c1454d64c36366cd6909e6b4920"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6cbf6c1454d64c36366cd6909e6b4920">&#9670;&#160;</a></span>CB</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -309,7 +309,7 @@ template&lt;typename T &gt; </div>
 template&lt;typename R , typename... V&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="struct_engine_1_1_execution_1_1_sender_state_base.html">Engine::Execution::SenderStateBase</a>&lt; R, V &gt;::CB =  StateTypes::transform&lt;<a class="el" href="struct_engine_1_1_execution_1_1_sender_state_base.html#ac0161aa4684e4fb292738c94c67727ac">helper</a>&gt;::instantiate&lt;<a class="el" href="struct_engine_1_1_callable_view.html">CallableView</a>&gt;</td>
+          <td class="memname">using <a class="el" href="struct_engine_1_1_execution_1_1_sender_state_base.html">Engine::Execution::SenderStateBase</a>&lt; R, V &gt;::CB =  typename StateTypes::template transform&lt;<a class="el" href="struct_engine_1_1_execution_1_1_sender_state_base.html#ac0161aa4684e4fb292738c94c67727ac">helper</a>&gt;::template instantiate&lt;<a class="el" href="struct_engine_1_1_callable_view.html">CallableView</a>&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -476,7 +476,7 @@ template&lt;typename R , typename... V&gt; </div>
         <tr>
           <td class="memname">virtual <a class="el" href="classvoid.html">void</a> <a class="el" href="struct_engine_1_1_execution_1_1_sender_state_base.html">Engine::Execution::SenderStateBase</a>&lt; R, V &gt;::visitState </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_engine_1_1_execution_1_1_sender_state_base.html#a242758dea083734f75c5763751c6fef9">CB</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_execution_1_1_sender_state_base.html#a6cbf6c1454d64c36366cd6909e6b4920">CB</a>&#160;</td>
           <td class="paramname"><em>visitor</em></td><td>)</td>
           <td></td>
         </tr>
@@ -496,7 +496,7 @@ template&lt;typename R , typename... V&gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Jun 17 2026 21:28:55 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Wed Jun 17 2026 21:43:04 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

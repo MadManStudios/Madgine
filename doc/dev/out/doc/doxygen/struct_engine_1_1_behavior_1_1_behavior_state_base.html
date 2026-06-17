@@ -266,8 +266,8 @@ Inheritance diagram for Engine::Behavior::BehaviorStateBase:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:aca8d6a521b8ba3858d9896287d6e88f5"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_behavior_state_base.html#aca8d6a521b8ba3858d9896287d6e88f5">CB</a> = Execution::StateTypes::prepend&lt; <a class="el" href="struct_engine_1_1_execution_1_1_state_1_1_value.html">Execution::State::Value</a> &gt;::transform&lt; <a class="el" href="struct_engine_1_1_behavior_1_1_behavior_state_base.html#a7359a6feb553dd1115103922f123126e">helper</a> &gt;::instantiate&lt; <a class="el" href="struct_engine_1_1_callable_view.html">CallableView</a> &gt;</td></tr>
-<tr class="separator:aca8d6a521b8ba3858d9896287d6e88f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6507ab59f1c85df9a73d6973cd5e18cb"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_behavior_state_base.html#a6507ab59f1c85df9a73d6973cd5e18cb">CB</a> = typename Execution::StateTypes::prepend&lt; <a class="el" href="struct_engine_1_1_execution_1_1_state_1_1_value.html">Execution::State::Value</a> &gt;::template transform&lt; <a class="el" href="struct_engine_1_1_behavior_1_1_behavior_state_base.html#a7359a6feb553dd1115103922f123126e">helper</a> &gt;::template instantiate&lt; <a class="el" href="struct_engine_1_1_callable_view.html">CallableView</a> &gt;</td></tr>
+<tr class="separator:a6507ab59f1c85df9a73d6973cd5e18cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7359a6feb553dd1115103922f123126e"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:a7359a6feb553dd1115103922f123126e"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_behavior_state_base.html#a7359a6feb553dd1115103922f123126e">helper</a> = <a class="el" href="classvoid.html">void</a>(const T &amp;)</td></tr>
 <tr class="separator:a7359a6feb553dd1115103922f123126e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -284,7 +284,7 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ae8b885d13e1035e7ab076918f7291967"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af5744a47d8b2b0f9c28dd67adcf557f5"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_behavior_state_base.html#af5744a47d8b2b0f9c28dd67adcf557f5">stop</a> ()=0</td></tr>
 <tr class="separator:af5744a47d8b2b0f9c28dd67adcf557f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae85b5051eda0a6bbb36dbff43fc897e0"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_behavior_state_base.html#ae85b5051eda0a6bbb36dbff43fc897e0">visitState</a> (<a class="el" href="struct_engine_1_1_behavior_1_1_behavior_state_base.html#aca8d6a521b8ba3858d9896287d6e88f5">CB</a> visitor)=0</td></tr>
+<tr class="memitem:ae85b5051eda0a6bbb36dbff43fc897e0"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_behavior_state_base.html#ae85b5051eda0a6bbb36dbff43fc897e0">visitState</a> (<a class="el" href="struct_engine_1_1_behavior_1_1_behavior_state_base.html#a6507ab59f1c85df9a73d6973cd5e18cb">CB</a> visitor)=0</td></tr>
 <tr class="separator:ae85b5051eda0a6bbb36dbff43fc897e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Typedef Documentation</h2>
@@ -304,14 +304,14 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="aca8d6a521b8ba3858d9896287d6e88f5" name="aca8d6a521b8ba3858d9896287d6e88f5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aca8d6a521b8ba3858d9896287d6e88f5">&#9670;&#160;</a></span>CB</h2>
+<a id="a6507ab59f1c85df9a73d6973cd5e18cb" name="a6507ab59f1c85df9a73d6973cd5e18cb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6507ab59f1c85df9a73d6973cd5e18cb">&#9670;&#160;</a></span>CB</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="struct_engine_1_1_behavior_1_1_behavior_state_base.html#aca8d6a521b8ba3858d9896287d6e88f5">Engine::Behavior::BehaviorStateBase::CB</a> =  Execution::StateTypes::prepend&lt;<a class="el" href="struct_engine_1_1_execution_1_1_state_1_1_value.html">Execution::State::Value</a>&gt;::transform&lt;<a class="el" href="struct_engine_1_1_behavior_1_1_behavior_state_base.html#a7359a6feb553dd1115103922f123126e">helper</a>&gt;::instantiate&lt;<a class="el" href="struct_engine_1_1_callable_view.html">CallableView</a>&gt;</td>
+          <td class="memname">using <a class="el" href="struct_engine_1_1_behavior_1_1_behavior_state_base.html#a6507ab59f1c85df9a73d6973cd5e18cb">Engine::Behavior::BehaviorStateBase::CB</a> =  typename Execution::StateTypes::prepend&lt;<a class="el" href="struct_engine_1_1_execution_1_1_state_1_1_value.html">Execution::State::Value</a>&gt;::template transform&lt;<a class="el" href="struct_engine_1_1_behavior_1_1_behavior_state_base.html#a7359a6feb553dd1115103922f123126e">helper</a>&gt;::template instantiate&lt;<a class="el" href="struct_engine_1_1_callable_view.html">CallableView</a>&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -466,7 +466,7 @@ template&lt;typename T &gt; </div>
         <tr>
           <td class="memname">virtual <a class="el" href="classvoid.html">void</a> Engine::Behavior::BehaviorStateBase::visitState </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_engine_1_1_behavior_1_1_behavior_state_base.html#aca8d6a521b8ba3858d9896287d6e88f5">CB</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_behavior_1_1_behavior_state_base.html#a6507ab59f1c85df9a73d6973cd5e18cb">CB</a>&#160;</td>
           <td class="paramname"><em>visitor</em></td><td>)</td>
           <td></td>
         </tr>
@@ -488,7 +488,7 @@ template&lt;typename T &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Jun 17 2026 21:28:54 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Wed Jun 17 2026 21:43:03 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>
