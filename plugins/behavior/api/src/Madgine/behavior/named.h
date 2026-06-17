@@ -6,6 +6,7 @@
 #include "Generic/fixed_string.h"
 
 #include "Meta/reflect/util.h"
+#include "Meta/serialize/operations.h"
 #include "Meta/serialize/streams/streamresult.h"
 
 #include "named_d.h"
@@ -145,6 +146,14 @@ namespace Behavior {
         friend decltype(auto) tag_invoke(Reflect::convert_Value_t<isReferenceWrapped> convert_ValueType, Named<Name, T> &&named)
         {
             return convert_ValueType(std::move(named.mValue));
+        }
+
+        friend Serialize::StreamResult tag_invoke(Serialize::apply_map_t, Named<Name, T> &named, Serialize::CallerHierarchyFormattedSerializeStream in, bool success)
+        {
+            if (named.mValue)
+                return Serialize::apply_map(*named.mValue, in, success);
+            else
+                return {};
         }
 
         std::optional<forward_ref_t<T>> mValue;

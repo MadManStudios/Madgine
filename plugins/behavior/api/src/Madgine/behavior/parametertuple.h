@@ -22,6 +22,7 @@ namespace Behavior {
 
         virtual Serialize::StreamResult read(Serialize::CallerHierarchyFormattedSerializeStream in) = 0;
         virtual void write(Serialize::CallerHierarchyFormattedSerializeStream out) = 0;
+        virtual Serialize::StreamResult applyMap(Serialize::CallerHierarchyFormattedSerializeStream in, bool success) = 0;
 
         virtual ~ParameterTupleBase() = default;
     };
@@ -94,10 +95,7 @@ namespace Behavior {
     private:
         friend struct Serialize::Operations<ParameterTuple>;
 
-        friend Serialize::StreamResult tag_invoke(const Serialize::apply_map_t &, ParameterTuple &tuple, Serialize::CallerHierarchyFormattedSerializeStream in, bool success)
-        {
-            return {};
-        }
+        MADGINE_BEHAVIOR_EXPORT friend Serialize::StreamResult tag_invoke(const Serialize::apply_map_t &, ParameterTuple &tuple, Serialize::CallerHierarchyFormattedSerializeStream in, bool success);
 
         template <typename... Configs>
         friend void tag_invoke(Serialize::set_active_t<Configs...>, ParameterTuple &tuple, bool active, bool existenceChanged, const CallerHierarchyBasePtr &)

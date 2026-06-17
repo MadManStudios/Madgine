@@ -249,6 +249,8 @@ namespace Serialize {
 
         StreamResult readState(CallerHierarchyFormattedSerializeStream in, const char *name = nullptr, bool skipId = false) const;
 
+        StreamResult applyMap(CallerHierarchyFormattedSerializeStream in, bool success) const;
+
         void setSynced(bool b, const CallerHierarchyBasePtr &hierarchy = {}) const;
         void setActive(bool active, bool existenceChanged) const;
         void setParent(SerializableUnitBase *parent) const;

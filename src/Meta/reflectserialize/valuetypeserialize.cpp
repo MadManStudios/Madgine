@@ -44,6 +44,16 @@ namespace Serialize {
         });
     }
 
+    StreamResult tag_invoke(apply_map_t, Reflect::Value &v, CallerHierarchyFormattedSerializeStream in, bool success)
+    {
+        return v.visit([&](auto &value) -> StreamResult {
+            if constexpr (tag_invocable<apply_map_t, decltype(value), CallerHierarchyFormattedSerializeStream, bool> && !std::ranges::range<decltype(value)>) // TODO
+                return apply_map(value, in, success);
+            else
+                return {};
+        });
+    }
+
     StreamResult Operations<Reflect::Value>::visitStream(CallerHierarchyFormattedSerializeStream in, const char *name, const StreamVisitor &visitor, size_t depth)
     {
         STREAM_PROPAGATE_ERROR(in.mStream.beginExtendedRead(name, 1));

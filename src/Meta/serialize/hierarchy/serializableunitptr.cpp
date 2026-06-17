@@ -40,6 +40,11 @@ namespace Serialize {
         return in.mStream.endCompoundRead(name);
     }
 
+    StreamResult SerializableDataPtr::applyMap(CallerHierarchyFormattedSerializeStream in, bool success) const
+    {
+        return mType->applyMap(unit(), in, success);
+    }
+
     void SerializableDataPtr::setActive(bool active, bool existenceChanged) const
     {
         // assert(mSynced == active);
@@ -97,11 +102,6 @@ namespace Serialize {
         mType->setParent(unit());
     }
 
-    StreamResult SerializableDataPtr::applyMap(CallerHierarchyFormattedSerializeStream in, bool success) const
-    {
-        return mType->applyMap(unit(), in, success);
-    }
-
     void SerializableUnitPtr::setSynced(bool b, const CallerHierarchyBasePtr &hierarchy) const
     {
         assert(unit()->mSynced != b);
@@ -118,6 +118,11 @@ namespace Serialize {
     SerializableUnitBase *SerializableUnitPtr::unit() const
     {
         return const_cast<SerializableUnitBase *>(SerializableUnitConstPtr::unit());
+    }
+
+    StreamResult SerializableUnitPtr::applyMap(CallerHierarchyFormattedSerializeStream in, bool success) const
+    {
+        return mType->applyMap(unit(), in, success);
     }
 }
 }

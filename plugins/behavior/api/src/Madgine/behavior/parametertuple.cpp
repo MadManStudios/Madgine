@@ -22,6 +22,11 @@ namespace Behavior {
         return mTuple->customScopePtr();
     }
 
+    Serialize::StreamResult tag_invoke(const Serialize::apply_map_t &, ParameterTuple &tuple, Serialize::CallerHierarchyFormattedSerializeStream in, bool success)
+    {
+        return tuple.mTuple->applyMap(in, success);
+    }
+
 }
 
 namespace Serialize {

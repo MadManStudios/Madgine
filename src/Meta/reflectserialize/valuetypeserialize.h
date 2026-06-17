@@ -23,6 +23,8 @@ namespace Serialize {
         static StreamResult visitStream(CallerHierarchyFormattedSerializeStream in, const char *name, const StreamVisitor &visitor, size_t depth);
     };
 
+    META_EXPORT StreamResult tag_invoke(apply_map_t, Reflect::Value &, CallerHierarchyFormattedSerializeStream, bool);
+
     template <>
     struct META_EXPORT Operations<Reflect::ExtendedType> {
         static StreamResult read(CallerHierarchyFormattedSerializeStream in, Reflect::ExtendedType &t, const char *name);

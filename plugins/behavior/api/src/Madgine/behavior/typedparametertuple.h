@@ -82,6 +82,18 @@ namespace Behavior {
             }(index_pack_for<Ty...> {});
         }
 
+        Serialize::StreamResult applyMap(Serialize::CallerHierarchyFormattedSerializeStream in, bool success) override
+        {
+            std::tuple<dependent_t<Serialize::StreamResult, Ty>...> results;
+            [&]<size_t... Is>(auto_pack<Is...>) {
+                ([&]() { std::get<Is>(results) = Serialize::apply_map(std::get<Is>(this->mTuple), in, success); }(), ...);
+            }(index_pack_for<Ty...> {});
+
+            return TupleUnpacker::accumulate(std::move(results), [](Serialize::StreamResult first, Serialize::StreamResult second) {
+                    STREAM_PROPAGATE_ERROR(std::move(first));
+                    return std::move(second); }, Serialize::StreamResult {});
+        }
+
         static const Reflect::MetaTable *sMetaTablePtr;
 
         template <size_t I>

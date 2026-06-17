@@ -175,6 +175,14 @@ namespace Behavior {
                 }
             }
 
+            Serialize::StreamResult applyMap(Serialize::CallerHierarchyFormattedSerializeStream in, bool success) override
+            {
+                for (size_t i = 0; i < mValues.size(); ++i) {
+                    STREAM_PROPAGATE_ERROR(Serialize::apply_map(mValues[i], in, success));
+                }
+                return {};
+            }
+
             const Python3BehaviorFactory::Entry &mEntry;
             Reflect::ArgumentList mValues;
         };
