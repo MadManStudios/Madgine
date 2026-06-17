@@ -380,6 +380,8 @@ Typedefs</h2></td></tr>
 Functions</h2></td></tr>
 <tr class="memitem:ad7668abf5111495420a0b1f427944dfb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior.html#ad7668abf5111495420a0b1f427944dfb">DLL_IMPORT_VARIABLE</a> (const <a class="el" href="struct_engine_1_1_behavior_1_1_native_behavior_info.html">NativeBehaviorInfo</a> *, nativeBehaviorInfo, typename)</td></tr>
 <tr class="separator:ad7668abf5111495420a0b1f427944dfb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a51cffef8543c56dbd424930acf2d8c84"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">Serialize::StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior.html#a51cffef8543c56dbd424930acf2d8c84">tag_invoke</a> (const <a class="el" href="struct_engine_1_1_serialize_1_1apply__map__t.html">Serialize::apply_map_t</a> &amp;, <a class="el" href="struct_engine_1_1_behavior_1_1_parameter_tuple.html">ParameterTuple</a> &amp;tuple, <a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">Serialize::CallerHierarchyFormattedSerializeStream</a> in, bool success)</td></tr>
+<tr class="separator:a51cffef8543c56dbd424930acf2d8c84"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a214d39fd06a33db5e3db6811f989b3d3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior.html#a214d39fd06a33db5e3db6811f989b3d3">tag_invoke</a> (<a class="el" href="struct_engine_1_1_execution_1_1visit__state__t.html">Execution::visit_state_t</a>, <a class="el" href="struct_engine_1_1_behavior_1_1_behavior_1_1state.html">Behavior::state</a> *state, <a class="el" href="struct_engine_1_1_behavior_1_1_behavior_state_base.html#a6507ab59f1c85df9a73d6973cd5e18cb">BehaviorStateBase::CB</a> visitor)</td></tr>
 <tr class="separator:a214d39fd06a33db5e3db6811f989b3d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -477,7 +479,7 @@ template&lt;typename T &gt; </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="a214d39fd06a33db5e3db6811f989b3d3" name="a214d39fd06a33db5e3db6811f989b3d3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a214d39fd06a33db5e3db6811f989b3d3">&#9670;&#160;</a></span>tag_invoke()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a214d39fd06a33db5e3db6811f989b3d3">&#9670;&#160;</a></span>tag_invoke() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -533,6 +535,46 @@ template&lt;typename T &gt; </div>
           <td></td>
           <td class="paramtype">typename&#160;</td>
           <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a51cffef8543c56dbd424930acf2d8c84" name="a51cffef8543c56dbd424930acf2d8c84"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a51cffef8543c56dbd424930acf2d8c84">&#9670;&#160;</a></span>tag_invoke() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">Serialize::StreamResult</a> Engine::Behavior::tag_invoke </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_serialize_1_1apply__map__t.html">Serialize::apply_map_t</a> &amp;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_behavior_1_1_parameter_tuple.html">ParameterTuple</a> &amp;&#160;</td>
+          <td class="paramname"><em>tuple</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">Serialize::CallerHierarchyFormattedSerializeStream</a>&#160;</td>
+          <td class="paramname"><em>in</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>success</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -618,7 +660,7 @@ template&lt;<a class="el" href="struct_engine_1_1fixed__string.html">fixed_strin
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Jun 17 2026 21:43:03 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Wed Jun 17 2026 22:21:32 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

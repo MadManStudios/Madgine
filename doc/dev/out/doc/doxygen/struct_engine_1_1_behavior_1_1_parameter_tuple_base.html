@@ -267,6 +267,8 @@ Inheritance diagram for Engine::Behavior::ParameterTupleBase:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a53f26203e7fd7b9ecf03519652212b0e"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_parameter_tuple_base.html#a53f26203e7fd7b9ecf03519652212b0e">~ParameterTupleBase</a> ()=default</td></tr>
 <tr class="separator:a53f26203e7fd7b9ecf03519652212b0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afc134fba1548476254fad5075dbcbfae"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">Serialize::StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_parameter_tuple_base.html#afc134fba1548476254fad5075dbcbfae">applyMap</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">Serialize::CallerHierarchyFormattedSerializeStream</a> in, bool success)=0</td></tr>
+<tr class="separator:afc134fba1548476254fad5075dbcbfae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa7c0840398f0bbce1bec8c65537083b2"><td class="memItemLeft" align="right" valign="top">virtual std::unique_ptr&lt; <a class="el" href="struct_engine_1_1_behavior_1_1_parameter_tuple_base.html">ParameterTupleBase</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_parameter_tuple_base.html#aa7c0840398f0bbce1bec8c65537083b2">clone</a> ()=0</td></tr>
 <tr class="separator:aa7c0840398f0bbce1bec8c65537083b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaee278a089efdcb0a7aa2a291d40c945"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_reflect_1_1_scope_ptr.html">Reflect::ScopePtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_parameter_tuple_base.html#aaee278a089efdcb0a7aa2a291d40c945">customScopePtr</a> ()=0</td></tr>
@@ -502,13 +504,51 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="afc134fba1548476254fad5075dbcbfae" name="afc134fba1548476254fad5075dbcbfae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afc134fba1548476254fad5075dbcbfae">&#9670;&#160;</a></span>applyMap()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">Serialize::StreamResult</a> Engine::Behavior::ParameterTupleBase::applyMap </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">Serialize::CallerHierarchyFormattedSerializeStream</a>&#160;</td>
+          <td class="paramname"><em>in</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>success</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implemented in <a class="el" href="struct_engine_1_1_behavior_1_1_typed_parameter_tuple_instance.html#ac794de0d2b29b2c87a193551e989288c">Engine::Behavior::TypedParameterTupleInstance&lt; Names, Ty &gt;</a>, and <a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_python3_parameter_tuple.html#ae3c4939993907f115a061cf20fc1f05a">Engine::Behavior::Python3::Python3ParameterTuple</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
 <li>plugins/behavior/api/src/Madgine/behavior/<a class="el" href="parametertuple_8h.html">parametertuple.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Jun 17 2026 21:43:03 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Wed Jun 17 2026 22:21:32 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>
