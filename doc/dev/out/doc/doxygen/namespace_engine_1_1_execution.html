@@ -501,8 +501,8 @@ Typedefs</h2></td></tr>
 <tr class="memitem:a593f7d72e1bb3ea96e2b82dd36cd14ef"><td class="memTemplParams" colspan="2">template&lt;typename R , typename... V&gt; </td></tr>
 <tr class="memitem:a593f7d72e1bb3ea96e2b82dd36cd14ef"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_execution.html#a593f7d72e1bb3ea96e2b82dd36cd14ef">SenderReceiver</a> = <a class="el" href="struct_engine_1_1_execution_1_1_virtual_receiver_base_ex.html">VirtualReceiverBaseEx</a>&lt; <a class="el" href="struct_engine_1_1type__pack.html">type_pack</a>&lt; R &gt;, <a class="el" href="struct_engine_1_1type__pack.html">type_pack</a>&lt; V... &gt;, <a class="el" href="namespace_engine_1_1_execution.html#ae84517eb116580e852a53a1b0a8c5557">get_stop_token</a> &gt;</td></tr>
 <tr class="separator:a593f7d72e1bb3ea96e2b82dd36cd14ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a382cc444bcaffa5eb446fbe7fb35aca3"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_execution.html#a382cc444bcaffa5eb446fbe7fb35aca3">StateDescriptor</a> = std::variant&lt; <a class="el" href="struct_engine_1_1_execution_1_1_state_1_1_text.html">State::Text</a>, <a class="el" href="struct_engine_1_1_execution_1_1_state_1_1_progress.html">State::Progress</a>, <a class="el" href="struct_engine_1_1_execution_1_1_state_1_1_begin_block.html">State::BeginBlock</a>, <a class="el" href="struct_engine_1_1_execution_1_1_state_1_1_end_block.html">State::EndBlock</a>, <a class="el" href="struct_engine_1_1_execution_1_1_state_1_1_push_disabled.html">State::PushDisabled</a>, <a class="el" href="struct_engine_1_1_execution_1_1_state_1_1_pop_disabled.html">State::PopDisabled</a>, <a class="el" href="struct_engine_1_1_execution_1_1_state_1_1_debug_location.html">State::DebugLocation</a>, <a class="el" href="struct_engine_1_1_execution_1_1_state_1_1_breakpoint.html">State::Breakpoint</a>, <a class="el" href="struct_engine_1_1_execution_1_1_state_1_1_marker.html">State::Marker</a>, <a class="el" href="struct_engine_1_1_execution_1_1_state_1_1_function_ptr.html">State::FunctionPtr</a> &gt;</td></tr>
-<tr class="separator:a382cc444bcaffa5eb446fbe7fb35aca3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a90121c277b620c3e329b06c3b6372b47"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_execution.html#a90121c277b620c3e329b06c3b6372b47">StateTypes</a> = <a class="el" href="struct_engine_1_1type__pack.html">type_pack</a>&lt; <a class="el" href="struct_engine_1_1_execution_1_1_state_1_1_text.html">State::Text</a>, <a class="el" href="struct_engine_1_1_execution_1_1_state_1_1_progress.html">State::Progress</a>, <a class="el" href="struct_engine_1_1_execution_1_1_state_1_1_begin_block.html">State::BeginBlock</a>, <a class="el" href="struct_engine_1_1_execution_1_1_state_1_1_end_block.html">State::EndBlock</a>, <a class="el" href="struct_engine_1_1_execution_1_1_state_1_1_push_disabled.html">State::PushDisabled</a>, <a class="el" href="struct_engine_1_1_execution_1_1_state_1_1_pop_disabled.html">State::PopDisabled</a>, <a class="el" href="struct_engine_1_1_execution_1_1_state_1_1_debug_location.html">State::DebugLocation</a>, <a class="el" href="struct_engine_1_1_execution_1_1_state_1_1_breakpoint.html">State::Breakpoint</a>, <a class="el" href="struct_engine_1_1_execution_1_1_state_1_1_marker.html">State::Marker</a>, <a class="el" href="struct_engine_1_1_execution_1_1_state_1_1_function_ptr.html">State::FunctionPtr</a> &gt;</td></tr>
+<tr class="separator:a90121c277b620c3e329b06c3b6372b47"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9d54b0f0d186287e871cb1dff3d4684d"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_execution.html#a9d54b0f0d186287e871cb1dff3d4684d">StopToken</a> = <a class="el" href="struct_engine_1_1_execution_1_1_stop_source.html">StopSource</a> *</td></tr>
 <tr class="separator:a9d54b0f0d186287e871cb1dff3d4684d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa89dab27db331117cfcea43174d7e412"><td class="memTemplParams" colspan="2">template&lt;typename <a class="el" href="struct_engine_1_1_execution_1_1_sender.html">Sender</a> &gt; </td></tr>
@@ -691,6 +691,20 @@ template&lt;typename R , typename... V&gt; </div>
 
 </div>
 </div>
+<a id="a90121c277b620c3e329b06c3b6372b47" name="a90121c277b620c3e329b06c3b6372b47"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a90121c277b620c3e329b06c3b6372b47">&#9670;&#160;</a></span>StateTypes</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespace_engine_1_1_execution.html#a90121c277b620c3e329b06c3b6372b47">Engine::Execution::StateTypes</a> = typedef <a class="el" href="struct_engine_1_1type__pack.html">type_pack</a>&lt;<a class="el" href="struct_engine_1_1_execution_1_1_state_1_1_text.html">State::Text</a>, <a class="el" href="struct_engine_1_1_execution_1_1_state_1_1_progress.html">State::Progress</a>, <a class="el" href="struct_engine_1_1_execution_1_1_state_1_1_begin_block.html">State::BeginBlock</a>, <a class="el" href="struct_engine_1_1_execution_1_1_state_1_1_end_block.html">State::EndBlock</a>, <a class="el" href="struct_engine_1_1_execution_1_1_state_1_1_push_disabled.html">State::PushDisabled</a>, <a class="el" href="struct_engine_1_1_execution_1_1_state_1_1_pop_disabled.html">State::PopDisabled</a>, <a class="el" href="struct_engine_1_1_execution_1_1_state_1_1_debug_location.html">State::DebugLocation</a>, <a class="el" href="struct_engine_1_1_execution_1_1_state_1_1_breakpoint.html">State::Breakpoint</a>, <a class="el" href="struct_engine_1_1_execution_1_1_state_1_1_marker.html">State::Marker</a>, <a class="el" href="struct_engine_1_1_execution_1_1_state_1_1_function_ptr.html">State::FunctionPtr</a>&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="aa89dab27db331117cfcea43174d7e412" name="aa89dab27db331117cfcea43174d7e412"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa89dab27db331117cfcea43174d7e412">&#9670;&#160;</a></span>ValueStorage</h2>
 
@@ -779,20 +793,6 @@ template&lt;typename Base , typename Rec &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">using <a class="el" href="namespace_engine_1_1_execution.html#a9d54b0f0d186287e871cb1dff3d4684d">Engine::Execution::StopToken</a> = typedef <a class="el" href="struct_engine_1_1_execution_1_1_stop_source.html">StopSource</a> *</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a382cc444bcaffa5eb446fbe7fb35aca3" name="a382cc444bcaffa5eb446fbe7fb35aca3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a382cc444bcaffa5eb446fbe7fb35aca3">&#9670;&#160;</a></span>StateDescriptor</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">using <a class="el" href="namespace_engine_1_1_execution.html#a382cc444bcaffa5eb446fbe7fb35aca3">Engine::Execution::StateDescriptor</a> = typedef std::variant&lt;<a class="el" href="struct_engine_1_1_execution_1_1_state_1_1_text.html">State::Text</a>, <a class="el" href="struct_engine_1_1_execution_1_1_state_1_1_progress.html">State::Progress</a>, <a class="el" href="struct_engine_1_1_execution_1_1_state_1_1_begin_block.html">State::BeginBlock</a>, <a class="el" href="struct_engine_1_1_execution_1_1_state_1_1_end_block.html">State::EndBlock</a>, <a class="el" href="struct_engine_1_1_execution_1_1_state_1_1_push_disabled.html">State::PushDisabled</a>, <a class="el" href="struct_engine_1_1_execution_1_1_state_1_1_pop_disabled.html">State::PopDisabled</a>, <a class="el" href="struct_engine_1_1_execution_1_1_state_1_1_debug_location.html">State::DebugLocation</a>, <a class="el" href="struct_engine_1_1_execution_1_1_state_1_1_breakpoint.html">State::Breakpoint</a>, <a class="el" href="struct_engine_1_1_execution_1_1_state_1_1_marker.html">State::Marker</a>, <a class="el" href="struct_engine_1_1_execution_1_1_state_1_1_function_ptr.html">State::FunctionPtr</a>&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1773,7 +1773,7 @@ template&lt;<a class="el" href="struct_engine_1_1fixed__string.html">fixed_strin
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Jun 12 2026 15:05:17 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Wed Jun 17 2026 21:28:55 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

@@ -249,6 +249,7 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="struct_engine_1_1_debug_1_1_sender_location-members.html">List of all members</a>  </div>
@@ -258,25 +259,64 @@ $(function() {
 
 <p><code>#include &lt;senderlocation.h&gt;</code></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:a45ff8d4c9dc100568da4e8cf109163d4"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_debug_1_1_sender_location.html#a45ff8d4c9dc100568da4e8cf109163d4">CB</a> = Execution::StateTypes::prepend&lt; <a class="el" href="struct_engine_1_1_execution_1_1_state_1_1_value.html">Execution::State::Value</a> &gt;::transform&lt; <a class="el" href="struct_engine_1_1_debug_1_1_sender_location.html#ac5815dd4f995f3adf816c353607f37fb">helper</a> &gt;::instantiate&lt; <a class="el" href="struct_engine_1_1_callable_view.html">CallableView</a> &gt;</td></tr>
+<tr class="separator:a45ff8d4c9dc100568da4e8cf109163d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5815dd4f995f3adf816c353607f37fb"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:ac5815dd4f995f3adf816c353607f37fb"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_debug_1_1_sender_location.html#ac5815dd4f995f3adf816c353607f37fb">helper</a> = <a class="el" href="classvoid.html">void</a>(const T &amp;)</td></tr>
+<tr class="separator:ac5815dd4f995f3adf816c353607f37fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a3f770c8da3da471f07542878b1b2c657"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_debug_1_1_sender_location.html#a3f770c8da3da471f07542878b1b2c657">SenderLocation</a> (<a class="el" href="namespace_engine.html#a112937bef202baff8b6ece57a2ec891e">Closure</a>&lt; <a class="el" href="classvoid.html">void</a>(<a class="el" href="namespace_engine.html#af01988c2c1ea209918743fd4d06dc156">CallableView</a>&lt; <a class="el" href="classvoid.html">void</a>(const <a class="el" href="namespace_engine_1_1_execution.html#a382cc444bcaffa5eb446fbe7fb35aca3">Execution::StateDescriptor</a> &amp;)&gt;)&gt; state)</td></tr>
-<tr class="separator:a3f770c8da3da471f07542878b1b2c657"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb6518e3cd3488b6db3859011e7692c0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_debug_1_1_sender_location.html#abb6518e3cd3488b6db3859011e7692c0">SenderLocation</a> (<a class="el" href="namespace_engine.html#a112937bef202baff8b6ece57a2ec891e">Closure</a>&lt; <a class="el" href="classvoid.html">void</a>(<a class="el" href="struct_engine_1_1_debug_1_1_sender_location.html#a45ff8d4c9dc100568da4e8cf109163d4">CB</a>)&gt; state)</td></tr>
+<tr class="separator:abb6518e3cd3488b6db3859011e7692c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5d7c94e579f213757c018e28bee1dbaa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_debug_1_1_sender_location.html#a5d7c94e579f213757c018e28bee1dbaa">stepInto</a> (<a class="el" href="struct_engine_1_1_debug_1_1_sender_location.html">Debug::SenderLocation</a> *&amp;location, <a class="el" href="struct_engine_1_1_debug_1_1_context_info.html">ContextInfo</a> &amp;context)</td></tr>
 <tr class="separator:a5d7c94e579f213757c018e28bee1dbaa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a23c63637259ab235af0cf6d6cb729933"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_debug_1_1_sender_location.html#a23c63637259ab235af0cf6d6cb729933">stepOut</a> (<a class="el" href="struct_engine_1_1_debug_1_1_sender_location.html">Debug::SenderLocation</a> *&amp;location, <a class="el" href="struct_engine_1_1_debug_1_1_context_info.html">ContextInfo</a> &amp;context)</td></tr>
 <tr class="separator:a23c63637259ab235af0cf6d6cb729933"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a121c86db853a3e75452899037b50cdb8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_debug_1_1_sender_location.html#a121c86db853a3e75452899037b50cdb8">visit</a> (<a class="el" href="namespace_engine.html#af01988c2c1ea209918743fd4d06dc156">CallableView</a>&lt; <a class="el" href="classvoid.html">void</a>(const <a class="el" href="namespace_engine_1_1_execution.html#a382cc444bcaffa5eb446fbe7fb35aca3">Execution::StateDescriptor</a> &amp;)&gt; visitor) const</td></tr>
-<tr class="separator:a121c86db853a3e75452899037b50cdb8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a29df87562924e18ace8840efeb5b7bed"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_debug_1_1_sender_location.html#a29df87562924e18ace8840efeb5b7bed">visit</a> (<a class="el" href="struct_engine_1_1_debug_1_1_sender_location.html#a45ff8d4c9dc100568da4e8cf109163d4">CB</a> visitor) const</td></tr>
+<tr class="separator:a29df87562924e18ace8840efeb5b7bed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a75334f05eb6ade2dcff4c0bb68f01ca6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_engine.html#a112937bef202baff8b6ece57a2ec891e">Closure</a>&lt; <a class="el" href="classvoid.html">void</a>(<a class="el" href="namespace_engine.html#af01988c2c1ea209918743fd4d06dc156">CallableView</a>&lt; <a class="el" href="classvoid.html">void</a>(const <a class="el" href="namespace_engine_1_1_execution.html#a382cc444bcaffa5eb446fbe7fb35aca3">Execution::StateDescriptor</a> &amp;)&gt;)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_debug_1_1_sender_location.html#a75334f05eb6ade2dcff4c0bb68f01ca6">mState</a></td></tr>
-<tr class="separator:a75334f05eb6ade2dcff4c0bb68f01ca6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8389804ca840ca68a703379bfabc299b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_engine.html#a112937bef202baff8b6ece57a2ec891e">Closure</a>&lt; <a class="el" href="classvoid.html">void</a>(<a class="el" href="struct_engine_1_1_debug_1_1_sender_location.html#a45ff8d4c9dc100568da4e8cf109163d4">CB</a>)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_debug_1_1_sender_location.html#a8389804ca840ca68a703379bfabc299b">mState</a></td></tr>
+<tr class="separator:a8389804ca840ca68a703379bfabc299b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="ac5815dd4f995f3adf816c353607f37fb" name="ac5815dd4f995f3adf816c353607f37fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac5815dd4f995f3adf816c353607f37fb">&#9670;&#160;</a></span>helper</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="struct_engine_1_1_debug_1_1_sender_location.html#ac5815dd4f995f3adf816c353607f37fb">Engine::Debug::SenderLocation::helper</a> =  <a class="el" href="classvoid.html">void</a>(const T &amp;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a45ff8d4c9dc100568da4e8cf109163d4" name="a45ff8d4c9dc100568da4e8cf109163d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a45ff8d4c9dc100568da4e8cf109163d4">&#9670;&#160;</a></span>CB</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="struct_engine_1_1_debug_1_1_sender_location.html#a45ff8d4c9dc100568da4e8cf109163d4">Engine::Debug::SenderLocation::CB</a> =  Execution::StateTypes::prepend&lt;<a class="el" href="struct_engine_1_1_execution_1_1_state_1_1_value.html">Execution::State::Value</a>&gt;::transform&lt;<a class="el" href="struct_engine_1_1_debug_1_1_sender_location.html#ac5815dd4f995f3adf816c353607f37fb">helper</a>&gt;::instantiate&lt;<a class="el" href="struct_engine_1_1_callable_view.html">CallableView</a>&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a3f770c8da3da471f07542878b1b2c657" name="a3f770c8da3da471f07542878b1b2c657"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3f770c8da3da471f07542878b1b2c657">&#9670;&#160;</a></span>SenderLocation()</h2>
+<a id="abb6518e3cd3488b6db3859011e7692c0" name="abb6518e3cd3488b6db3859011e7692c0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abb6518e3cd3488b6db3859011e7692c0">&#9670;&#160;</a></span>SenderLocation()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -284,7 +324,7 @@ Public Attributes</h2></td></tr>
         <tr>
           <td class="memname">Engine::Debug::SenderLocation::SenderLocation </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespace_engine.html#a112937bef202baff8b6ece57a2ec891e">Closure</a>&lt; <a class="el" href="classvoid.html">void</a>(<a class="el" href="namespace_engine.html#af01988c2c1ea209918743fd4d06dc156">CallableView</a>&lt; <a class="el" href="classvoid.html">void</a>(const <a class="el" href="namespace_engine_1_1_execution.html#a382cc444bcaffa5eb446fbe7fb35aca3">Execution::StateDescriptor</a> &amp;)&gt;)&gt;&#160;</td>
+          <td class="paramtype"><a class="el" href="namespace_engine.html#a112937bef202baff8b6ece57a2ec891e">Closure</a>&lt; <a class="el" href="classvoid.html">void</a>(<a class="el" href="struct_engine_1_1_debug_1_1_sender_location.html#a45ff8d4c9dc100568da4e8cf109163d4">CB</a>)&gt;&#160;</td>
           <td class="paramname"><em>state</em></td><td>)</td>
           <td></td>
         </tr>
@@ -350,8 +390,8 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a121c86db853a3e75452899037b50cdb8" name="a121c86db853a3e75452899037b50cdb8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a121c86db853a3e75452899037b50cdb8">&#9670;&#160;</a></span>visit()</h2>
+<a id="a29df87562924e18ace8840efeb5b7bed" name="a29df87562924e18ace8840efeb5b7bed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a29df87562924e18ace8840efeb5b7bed">&#9670;&#160;</a></span>visit()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -359,7 +399,7 @@ Public Attributes</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Debug::SenderLocation::visit </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespace_engine.html#af01988c2c1ea209918743fd4d06dc156">CallableView</a>&lt; <a class="el" href="classvoid.html">void</a>(const <a class="el" href="namespace_engine_1_1_execution.html#a382cc444bcaffa5eb446fbe7fb35aca3">Execution::StateDescriptor</a> &amp;)&gt;&#160;</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_debug_1_1_sender_location.html#a45ff8d4c9dc100568da4e8cf109163d4">CB</a>&#160;</td>
           <td class="paramname"><em>visitor</em></td><td>)</td>
           <td> const</td>
         </tr>
@@ -369,14 +409,14 @@ Public Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="a75334f05eb6ade2dcff4c0bb68f01ca6" name="a75334f05eb6ade2dcff4c0bb68f01ca6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a75334f05eb6ade2dcff4c0bb68f01ca6">&#9670;&#160;</a></span>mState</h2>
+<a id="a8389804ca840ca68a703379bfabc299b" name="a8389804ca840ca68a703379bfabc299b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8389804ca840ca68a703379bfabc299b">&#9670;&#160;</a></span>mState</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespace_engine.html#a112937bef202baff8b6ece57a2ec891e">Closure</a>&lt;<a class="el" href="classvoid.html">void</a>(<a class="el" href="namespace_engine.html#af01988c2c1ea209918743fd4d06dc156">CallableView</a>&lt;<a class="el" href="classvoid.html">void</a>(const <a class="el" href="namespace_engine_1_1_execution.html#a382cc444bcaffa5eb446fbe7fb35aca3">Execution::StateDescriptor</a> &amp;)&gt;)&gt; Engine::Debug::SenderLocation::mState</td>
+          <td class="memname"><a class="el" href="namespace_engine.html#a112937bef202baff8b6ece57a2ec891e">Closure</a>&lt;<a class="el" href="classvoid.html">void</a>(<a class="el" href="struct_engine_1_1_debug_1_1_sender_location.html#a45ff8d4c9dc100568da4e8cf109163d4">CB</a>)&gt; Engine::Debug::SenderLocation::mState</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -390,7 +430,7 @@ Public Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Jun 12 2026 15:05:17 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Wed Jun 17 2026 21:28:55 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>
