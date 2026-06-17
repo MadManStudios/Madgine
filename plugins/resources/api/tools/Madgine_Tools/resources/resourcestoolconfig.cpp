@@ -41,8 +41,27 @@ namespace Tools {
 
         for (std::unique_ptr<Resources::ResourceLoaderBase> &loader : mgr.mCollector) {
             for (const Reflect::MetaTable *type : loader->resourceTypes()) {
-                inspector.addPtrSuggestion(type, [&]() {
-                    return loader->typedResources();
+                inspector.addTypeHandler(type, [&](const Traced<Reflect::ScopePtr &> &scope, bool editable) {
+                    if (!editable){
+                        ImGui::TextDisabled("%s", scope->mType->mTypeName);
+                        return false;
+                    }
+                    bool modified = false;
+                    if (ImGui::BeginCombo("##suggestions", scope->name().c_str())) {
+                        if (ImGui::Selectable("<None>")) {
+                            scope->mScope = nullptr;
+                            modified = true;
+                        }
+                        for (std::pair<std::string_view, Reflect::ScopePtr> p : loader->typedResources()) {
+                            if (ImGui::Selectable(p.first.data())) {
+                                scope.get() = p.second;
+                                modified = true;
+                            }
+                        }
+                        ImGui::EndCombo();
+                        
+                    }
+                    return modified;                    
                 });
             }
         }

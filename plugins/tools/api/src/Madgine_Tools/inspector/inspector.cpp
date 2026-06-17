@@ -32,14 +32,24 @@ namespace Tools {
     Inspector::Inspector(ImRoot &root)
         : Tool<Inspector>(root)
     {
-        addPtrSuggestion<Reflect::FunctionTable>([]() {
-            std::vector<std::pair<std::string_view, Reflect::ScopePtr>> result;
-            const Reflect::FunctionTable *table = Reflect::sFunctionList();
-            while (table) {
-                result.emplace_back(table->mName, const_cast<Reflect::FunctionTable *>(table));
-                table = table->mNext;
+        addTypeHandler<Reflect::FunctionTable>([](const Traced<Reflect::ScopePtr &> &scope, bool editable) {
+            bool modified = false;
+             if (ImGui::BeginCombo("##suggestions", scope->name().c_str())) {
+                if (ImGui::Selectable("<None>")) {
+                    scope->mScope = nullptr;
+                    modified = true;
+                }
+                const Reflect::FunctionTable *table = Reflect::sFunctionList();
+                while (table) {
+                    if (ImGui::Selectable(table->mName.data())) {
+                        scope.get() = const_cast<Reflect::FunctionTable *>(table);
+                        modified = true;
+                    }
+                    table = table->mNext;
+                }
+                ImGui::EndCombo();
             }
-            return result;
+            return modified;
         });
     }
 
@@ -150,20 +160,8 @@ namespace Tools {
             [&](const Traced<Reflect::ObjectPtr &> &object) {
                 return drawValue(id, object, editable, possibleTypes, &actualType);
             },
-            [&](const Traced<Reflect::Binding &> &binding) {
-                bool result;
-                if (!Execution::access_binding(binding.trace(&Reflect::Binding::mPtr), [&](const Traced<const Reflect::Value &> &v) {
-                        TracedCast<const Reflect::Value &, Reflect::Value> v_copy = v;
-                        result = drawValue(id, v_copy, false, v_copy->type());
-                    })) {
-                    TracedRoot<Reflect::Value> v { binding.undoStack() };
-                    result = drawValue(id, v, false, v->type());
-                }
-                if (!possibleTypes.mType.isRegular()) {
-                    ImGui::SameLine(0, 0);
-                    result |= drawTypeDecorations(actualType, possibleTypes);
-                }
-                return result;
+            [&](const Traced<Reflect::ScopeBinding &> &binding) {
+                return drawValue(id, binding, editable, possibleTypes, &actualType);
             },
             [&]<typename T>(const Traced<T &> &other) {
                 assert(ImGui::TableGetColumnCount() == 2);
@@ -209,8 +207,8 @@ namespace Tools {
         bool modified = false;
         bool changed = false;
 
-        auto it = mPtrSuggestionsByType.find(scope->mType);
-        bool hasSuggestions = editable && it != mPtrSuggestionsByType.end();
+        auto it = mTypeHandlers.find(scope->mType);
+        bool hasHandler = it != mTypeHandlers.end();
 
         ImGui::TableNextRow();
         ImGui::TableNextColumn();
@@ -229,22 +227,10 @@ namespace Tools {
 
         ImGui::TableNextColumn();
 
-        if (hasSuggestions) {
+        if (hasHandler) {
             ImGui::PushID(id.data());
             ImGui::PushItemWidth(-1.0f - (ImGui::GetFrameHeight() * !possibleTypes.mType.isRegular()));
-            if (ImGui::BeginCombo("##suggestions", scope->name().c_str())) {
-                if (ImGui::Selectable("<None>")) {
-                    scope->mScope = nullptr;
-                    modified = true;
-                }
-                for (std::pair<std::string_view, Reflect::ScopePtr> p : it->second()) {
-                    if (ImGui::Selectable(p.first.data())) {
-                        scope.get() = p.second;
-                        modified = true;
-                    }
-                }
-                ImGui::EndCombo();
-            }
+            modified |= it->second(scope, editable);
             ImGui::PopItemWidth();
             ImGui::PopID();
         } else if (scope->mType) {
@@ -439,6 +425,35 @@ namespace Tools {
         ImGui::DraggableValueTypeSource<Reflect::BoundApiFunction>(id, function);
     }
 
+    bool Inspector::drawValue(std::string_view id, const Traced<Reflect::ScopeBinding &> &binding, bool editable, Reflect::ExtendedType possibleTypes, Reflect::Type *type)
+    {
+        bool modified;
+        if (!Execution::access_binding(binding.trace(&Reflect::ScopeBinding::mPtr), [&](const Traced<const Reflect::Value &> &v) {
+                TracedCast<const Reflect::Value &, Reflect::Value> v_copy = v;
+                modified = drawValue(id, v_copy, false, v_copy->type());
+            })) {
+            TracedRoot<Reflect::Value> v { binding.undoStack() };
+            modified = drawValue(id, v, false, v->type());
+        }
+
+        if (!possibleTypes.mType.isRegular() && type) {
+            ImGui::SameLine(0, 0);
+            modified |= drawTypeDecorations(*type, possibleTypes);
+        }
+
+        ImGui::DraggableValueTypeSource<Reflect::ScopeBinding>(id, binding, ImGuiDragDropFlags_SourceAllowNullID);
+        if (editable && ImGui::BeginDragDropTarget()) {
+            Reflect::ScopeBinding newBinding;
+            if (ImGui::AcceptDraggableValueType(newBinding)) {
+                binding.get() = newBinding;                
+                modified = true;
+            }
+            ImGui::EndDragDropTarget();
+        }
+
+        return modified;
+    }
+
     bool Inspector::drawMembers(const Traced<const Reflect::ScopePtr &> &scope, std::set<std::string> drawn)
     {
         assert(scope.get());
@@ -499,14 +514,14 @@ namespace Tools {
         return "Inspector";
     }
 
-    void Inspector::addPtrSuggestion(const Reflect::MetaTable *type, std::function<std::vector<std::pair<std::string_view, Reflect::ScopePtr>>()> getter)
+    void Inspector::addTypeHandler(const Reflect::MetaTable *type, std::function<bool(const Traced<Reflect::ScopePtr &> &scope, bool editable)> getter)
     {
-        mPtrSuggestionsByType[type] = getter;
+        mTypeHandlers[type] = getter;
     }
 
-    bool Inspector::hasPtrSuggestion(const Reflect::MetaTable *type) const
+    bool Inspector::hasTypeHandler(const Reflect::MetaTable *type) const
     {
-        return mPtrSuggestionsByType.contains(type);
+        return mTypeHandlers.contains(type);
     }
 
     void Inspector::addPreviewDefinition(const Reflect::MetaTable *type, std::function<bool(const Traced<const Reflect::ScopePtr &> &)> preview)

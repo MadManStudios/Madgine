@@ -766,5 +766,19 @@ namespace Im3D {
         return c.mHoveredObject || c.mNextHoveredObject;
     }
 
+    void SetItemHoveredNextFrame(const char *name)
+    {
+        return SetItemHoveredNextFrame(GetID(name));
+    }
+
+    void SetItemHoveredNextFrame(Im3DID id)
+    {
+        Im3DContext &c = *sContext;
+
+        c.mNextHoveredObject = CreateObject(id);
+        c.mNextHoveredDistance = 0.0f;
+        c.mNextHoveredPriority = std::numeric_limits<size_t>::max();
+    }
+
 }
 }

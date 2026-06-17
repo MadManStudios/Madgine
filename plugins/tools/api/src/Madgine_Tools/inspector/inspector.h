@@ -30,6 +30,7 @@ namespace Tools {
         bool drawValue(std::string_view id, const Traced<Reflect::SequenceRange &> &range, bool editable);
         bool drawValue(std::string_view id, const Traced<Reflect::AssociativeRange &> &range, bool editable);
         void drawValue(std::string_view id, const Traced<Reflect::BoundApiFunction &> &function, bool editable);
+        bool drawValue(std::string_view id, const Traced<Reflect::ScopeBinding &> &binding, bool editable, Reflect::ExtendedType possibleType = { Reflect::ExtendedTypeEnum::GenericType }, Reflect::Type *type = nullptr);
 
         bool drawMembers(const Traced<const Reflect::ScopePtr &> &scope, std::set<std::string> drawn = {});
 
@@ -37,13 +38,13 @@ namespace Tools {
 
         std::string_view key() const override;
 
-        void addPtrSuggestion(const Reflect::MetaTable *type, std::function<std::vector<std::pair<std::string_view, Reflect::ScopePtr>>()> getter);
+        void addTypeHandler(const Reflect::MetaTable *type, std::function<bool(const Traced<Reflect::ScopePtr &> & scope, bool editable)> getter);
         template <typename T>
-        void addPtrSuggestion(std::function<std::vector<std::pair<std::string_view, Reflect::ScopePtr>>()> getter)
+        void addTypeHandler(std::function<bool(const Traced<Reflect::ScopePtr &> &scope, bool editable)> getter)
         {
-            addPtrSuggestion(table<T>, std::move(getter));
+            addTypeHandler(table<T>, std::move(getter));
         }
-        bool hasPtrSuggestion(const Reflect::MetaTable *type) const;
+        bool hasTypeHandler(const Reflect::MetaTable *type) const;
 
         void addPreviewDefinition(const Reflect::MetaTable *type, std::function<bool(const Traced<const Reflect::ScopePtr &> &)> preview);
         template <typename T, typename F>
@@ -57,7 +58,7 @@ namespace Tools {
         Reflect::AccessorFlags flags() const;
 
     private:
-        std::map<const Reflect::MetaTable *, std::function<std::vector<std::pair<std::string_view, Reflect::ScopePtr>>()>> mPtrSuggestionsByType;
+        std::map<const Reflect::MetaTable *, std::function<bool(const Traced<Reflect::ScopePtr &> &scope, bool editable)>> mTypeHandlers;
         std::map<const Reflect::MetaTable *, std::function<bool(const Traced<const Reflect::ScopePtr &> &)>> mPreviews;
 
         static std::map<std::string, bool (Inspector::*)(Reflect::ScopePtr, std::set<std::string> &, tinyxml2::XMLElement *)> sElements;

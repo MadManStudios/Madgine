@@ -111,6 +111,8 @@ namespace Im3D {
 
     MADGINE_IM3D_EXPORT bool IsObjectHovered();
     MADGINE_IM3D_EXPORT bool IsAnyObjectHovered();
+    MADGINE_IM3D_EXPORT void SetItemHoveredNextFrame(const char *name);
+    MADGINE_IM3D_EXPORT void SetItemHoveredNextFrame(Im3DID id);
 }
 
 }

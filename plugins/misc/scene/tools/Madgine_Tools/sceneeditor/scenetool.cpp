@@ -64,6 +64,17 @@ namespace Tools {
 
         mInspector = &mRoot.getTool<Inspector>();
 
+        mInspector->addTypeHandler<Scene::Entity::Entity>([](const Traced<Reflect::ScopePtr &> &scope, bool editable) {
+            Scene::Entity::Entity *e = scope_cast<Scene::Entity::Entity>(scope.get());
+            if (ImGui::Button(e->name().c_str())) {
+
+            }
+            if (ImGui::IsItemHovered()) {
+                Im3D::SetItemHoveredNextFrame(e->name().c_str());
+            }
+            return false;
+        });
+
         Render::SceneMainWindowComponent &main = mWindow.getWindowComponent<Render::SceneMainWindowComponent>();
 
         mSceneViews.push_back(std::make_unique<SceneView>(*this, ++mRunningViewIndex, main.renderData(), main.pointShadowRenderData(), Im3D::GetCurrentContext()));
