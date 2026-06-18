@@ -45,9 +45,8 @@ namespace Tools {
                 for (const std::pair<const std::string_view, Reflect::ScopePtr> &p : items) {
                     ImGui::TableNextRow();
                     ImGui::TableNextColumn();
-                    if (ImGui::TreeNode(p.first.data())) {
-                        UndoStack stack;
-                        TracedRoot traced { stack, p.second };
+                    if (ImGui::TreeNode(p.first.data())) {                        
+                        TracedRoot traced { mDummyStack, p.second };
                         mInspector->drawMembers(traced, {});
                         ImGui::TreePop();
                     }

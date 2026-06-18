@@ -2,6 +2,7 @@
 
 #include "Madgine_Tools/toolbase.h"
 #include "Madgine_Tools/toolscollector.h"
+#include "Madgine_Tools/util/undostack.h"
 
 namespace Engine {
 namespace Tools {
@@ -18,6 +19,7 @@ namespace Tools {
 
     private:
         Inspector *mInspector;
+        UndoStack mDummyStack;
     };
 
 }
