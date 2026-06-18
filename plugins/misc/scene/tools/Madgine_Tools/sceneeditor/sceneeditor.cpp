@@ -164,7 +164,7 @@ namespace Tools {
 
                 bool open = ImGui::EditableTreeNode(&e, &e.mName, flags);
 
-                if (ImGui::IsItemHovered() && ImGui::IsMouseClicked(0)) {
+                if (ImGui::IsItemHovered() && ImGui::IsMouseReleased(0)) {
                     select(node.mEntity);
                 }
 

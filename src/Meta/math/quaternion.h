@@ -79,6 +79,16 @@ namespace Math {
             return FromMatrix(m);
         }
 
+        static Quaternion FromDirectionLockedUp(const NormalizedVector3 &dir, const NormalizedVector3 &up = { Vector3::UNIT_Y })
+        {
+            NormalizedVector3 side = up.crossProduct(dir);
+            NormalizedVector3 actualDir = side.crossProduct(up);
+
+            Matrix3 m;
+            m.FromAxes(side, up, actualDir);
+            return FromMatrix(m);
+        }
+
         static Quaternion FromMatrix(const Matrix3 &m)
         {
             float qw, qx, qy, qz;

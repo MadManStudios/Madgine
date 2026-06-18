@@ -49,6 +49,18 @@ namespace Scene {
             return result;
         }
 
+        Math::Vector3 Transform::worldPosition() const
+        {
+            return worldMatrix().GetColumn(3).xyz();
+        }
+
+        Math::Quaternion Transform::worldOrientation() const
+        {
+            Math::Quaternion result;
+            Execution::access_binding(mParent, [&](Entity &e) { result = e.getComponent<Transform>()->worldOrientation(); });
+            return result * mOrientation;
+        }
+
         void Transform::setParent(EntityPtr parent)
         {
             if (parent == entity().pointer())

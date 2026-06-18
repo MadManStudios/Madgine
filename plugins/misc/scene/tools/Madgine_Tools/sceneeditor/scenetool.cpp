@@ -163,6 +163,7 @@ namespace Tools {
 
     void SceneTool::run(const Scene::SceneContainer &container)
     {
+        ImGui::SetWindowFocus("Scene##Scene");
         getTool<LifetimeControl>().start();
         mSceneMgr->container("Current").copy(container);
     }

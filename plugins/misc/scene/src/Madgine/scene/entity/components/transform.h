@@ -25,6 +25,9 @@ namespace Scene {
             Math::Matrix4 worldMatrix() const;
             Math::Matrix4 parentMatrix() const;
 
+            Math::Vector3 worldPosition() const;
+            Math::Quaternion worldOrientation() const;
+
             void setParent(EntityPtr parent);
             const EntityPtr &parent() const;
 

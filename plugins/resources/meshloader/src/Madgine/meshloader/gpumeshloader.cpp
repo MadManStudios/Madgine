@@ -22,6 +22,11 @@ METATABLE_BEGIN(Engine::Render::GPUMeshData::Material)
     MEMBER(mDiffuseColor)
 METATABLE_END(Engine::Render::GPUMeshData::Material)
 
+SERIALIZETABLE_BEGIN(Engine::Render::GPUMeshData::Material)
+    FIELD(mName)
+    FIELD(mDiffuseColor)
+SERIALIZETABLE_END(Engine::Render::GPUMeshData::Material)
+
 namespace Engine {
 namespace Render {
 
