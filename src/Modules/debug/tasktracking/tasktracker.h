@@ -10,8 +10,8 @@ namespace Debug {
         MODULES_EXPORT void onAssign(const std::coroutine_handle<> &handle, Engine::Threading::TaskQueue *queue, std::source_location location);
         MODULES_EXPORT void onDestroy(Engine::Threading::TaskPromiseBase &promise);
 
-        MODULES_EXPORT void onResume(const Engine::Threading::TaskHandle &handle);
-        MODULES_EXPORT void onSuspend(Engine::Threading::TaskQueue *queue);
+        MODULES_EXPORT std::pair<Threading::TaskQueue *, void *> onResume(const Engine::Threading::TaskHandle &handle);
+        MODULES_EXPORT void onSuspend(std::pair<Threading::TaskQueue *, void *> data);
 
         MODULES_EXPORT void onEnter(const std::coroutine_handle<> &handle, Engine::Threading::TaskQueue *queue);
         MODULES_EXPORT void onReturn(const std::coroutine_handle<> &handle, Engine::Threading::TaskQueue *queue);
@@ -22,7 +22,7 @@ namespace Debug {
             void onEnter(void *ident, std::chrono::high_resolution_clock::time_point timePoint = std::chrono::high_resolution_clock::now());
             void onReturn(void *ident, std::chrono::high_resolution_clock::time_point timePoint = std::chrono::high_resolution_clock::now());
             void onResume(void *ident, std::chrono::high_resolution_clock::time_point timePoint = std::chrono::high_resolution_clock::now());
-            void onSuspend(std::chrono::high_resolution_clock::time_point timePoint = std::chrono::high_resolution_clock::now());
+            void onSuspend(void *ident, std::chrono::high_resolution_clock::time_point timePoint = std::chrono::high_resolution_clock::now());
             void onDestroy(void *ident);
 
             const std::source_location &getTraceback(void *ident);
@@ -52,9 +52,10 @@ namespace Debug {
 
             std::thread::id mThread;
 
+            std::map<void *, std::source_location> mTasksInFlight;
         private:
             std::deque<Event> mEvents;
-            std::map<void *, std::source_location> mTasksInFlight;
+            
         };
 
     }

@@ -37,10 +37,10 @@ namespace Debug {
             mEvents.emplace_back(Event::RESUME, ident, timePoint);
         }
 
-        void TaskTracker::onSuspend(std::chrono::high_resolution_clock::time_point timePoint)
+        void TaskTracker::onSuspend(void *ident, std::chrono::high_resolution_clock::time_point timePoint)
         {
             std::lock_guard guard { mMutex };
-            mEvents.emplace_back(Event::SUSPEND, nullptr, timePoint);
+            mEvents.emplace_back(Event::SUSPEND, ident, timePoint);
         }
 
         void TaskTracker::onDestroy(void *ident)
@@ -67,29 +67,30 @@ namespace Debug {
             return mTasksInFlight;
         }
 
-        void onAssign(const std::coroutine_handle<> &handle, Engine::Threading::TaskQueue *queue, std::source_location location)
+        void onAssign(const std::coroutine_handle<> &handle, Threading::TaskQueue *queue, std::source_location location)
         {
             queue->mTracker.onAssign(handle.address(), std::move(location));
         }
 
-        void onEnter(const std::coroutine_handle<> &handle, Engine::Threading::TaskQueue *queue)
+        void onEnter(const std::coroutine_handle<> &handle, Threading::TaskQueue *queue)
         {
             queue->mTracker.onEnter(handle.address());
         }
 
-        void onReturn(const std::coroutine_handle<> &handle, Engine::Threading::TaskQueue *queue)
+        void onReturn(const std::coroutine_handle<> &handle, Threading::TaskQueue *queue)
         {
             queue->mTracker.onReturn(handle.address());
         }
 
-        void onResume(const Engine::Threading::TaskHandle &handle)
+        std::pair<Threading::TaskQueue*, void *> onResume(const Threading::TaskHandle &handle)
         {
             handle.queue()->mTracker.onResume(handle.address());
+            return { handle.queue(), handle.address() };
         }
 
-        void onSuspend(Engine::Threading::TaskQueue *queue)
+        void onSuspend(std::pair<Threading::TaskQueue *, void *> data)
         {
-            queue->mTracker.onSuspend();
+            data.first->mTracker.onSuspend(data.second);
         }
 
         void onDestroy(Engine::Threading::TaskPromiseBase &promise)

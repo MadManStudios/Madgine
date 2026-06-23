@@ -21,8 +21,12 @@ namespace Tools {
         void registerCustomTracker(const char *name, Debug::Tasks::TaskTracker &tracker);
 
     protected:
-        Math::Rect2 beginPlot();
+        Math::Rect2 beginPlot(const char *name);
         void endPlot();
+
+        void plot(float x, float x_end, size_t depth, const Math::Rect2 &plotRect, void *id, size_t colorIndex, bool singleDepth = false);
+
+        void *plotRecurse(std::deque<Debug::Tasks::TaskTracker::Event>::const_iterator &it, const std::deque<Debug::Tasks::TaskTracker::Event>::const_iterator &end, float &startX, void *id, size_t depth, const Math::Rect2 &plotRect, size_t selfI);
 
         float getEventCoordinate(std::chrono::high_resolution_clock::time_point t, float pixelWidth);
 
@@ -32,11 +36,15 @@ namespace Tools {
         bool mLocked = false;
         float mZoom = 10.0f;
 
+        float mLastXEnd;
+
         std::vector<std::pair<const char *, std::reference_wrapper<Debug::Tasks::TaskTracker>>> mCustomTrackers;
 
         std::chrono::high_resolution_clock::time_point mHoveredAssignTimepoint;
         Debug::Tasks::TaskTracker *mHoveredTracker = nullptr;
         void *mHoveredId = nullptr;
+        Debug::Tasks::TaskTracker *mNextHoveredTracker = nullptr;
+        void *mNextHoveredId = nullptr;
     };
 
 }
