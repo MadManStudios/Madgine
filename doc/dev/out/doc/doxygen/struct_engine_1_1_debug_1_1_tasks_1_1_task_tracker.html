@@ -280,15 +280,19 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a3cb38557bbe369eda0d5e3382854f0c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a85c00dbf29a7e5a623678ce16eabbdee"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_debug_1_1_tasks_1_1_task_tracker.html#a85c00dbf29a7e5a623678ce16eabbdee">onReturn</a> (<a class="el" href="classvoid.html">void</a> *ident, std::chrono::high_resolution_clock::time_point timePoint=std::chrono::high_resolution_clock::now())</td></tr>
 <tr class="separator:a85c00dbf29a7e5a623678ce16eabbdee"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a838ce30682bfed3be22adf93eab9f823"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_debug_1_1_tasks_1_1_task_tracker.html#a838ce30682bfed3be22adf93eab9f823">onSuspend</a> (std::chrono::high_resolution_clock::time_point timePoint=std::chrono::high_resolution_clock::now())</td></tr>
-<tr class="separator:a838ce30682bfed3be22adf93eab9f823"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73da9f2018d4df10debbe159d482de9b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_debug_1_1_tasks_1_1_task_tracker.html#a73da9f2018d4df10debbe159d482de9b">onSuspend</a> (<a class="el" href="classvoid.html">void</a> *ident, std::chrono::high_resolution_clock::time_point timePoint=std::chrono::high_resolution_clock::now())</td></tr>
+<tr class="separator:a73da9f2018d4df10debbe159d482de9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0250b30e19d74f75faff2fab36f1f120"><td class="memItemLeft" align="right" valign="top">const std::map&lt; <a class="el" href="classvoid.html">void</a> *, std::source_location &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_debug_1_1_tasks_1_1_task_tracker.html#a0250b30e19d74f75faff2fab36f1f120">tasksInFlight</a> () const</td></tr>
 <tr class="separator:a0250b30e19d74f75faff2fab36f1f120"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1ae7d0176b11784687c60b4b6599e0bb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_debug_1_1_tasks_1_1_task_tracker.html#a1ae7d0176b11784687c60b4b6599e0bb">throw0</a> ()</td></tr>
+<tr class="separator:a1ae7d0176b11784687c60b4b6599e0bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a936de6bbfe4b5619feb77d065f18b108"><td class="memItemLeft" align="right" valign="top">std::mutex&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_debug_1_1_tasks_1_1_task_tracker.html#a936de6bbfe4b5619feb77d065f18b108">mMutex</a></td></tr>
 <tr class="separator:a936de6bbfe4b5619feb77d065f18b108"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a70cc46a23410d2fd8b3a8c5398c66a54"><td class="memItemLeft" align="right" valign="top">std::map&lt; <a class="el" href="classvoid.html">void</a> *, std::source_location &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_debug_1_1_tasks_1_1_task_tracker.html#a70cc46a23410d2fd8b3a8c5398c66a54">mTasksInFlight</a></td></tr>
+<tr class="separator:a70cc46a23410d2fd8b3a8c5398c66a54"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2753b44753287d7c9b8aaa08621f0a30"><td class="memItemLeft" align="right" valign="top">std::thread::id&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_debug_1_1_tasks_1_1_task_tracker.html#a2753b44753287d7c9b8aaa08621f0a30">mThread</a></td></tr>
 <tr class="separator:a2753b44753287d7c9b8aaa08621f0a30"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -405,8 +409,8 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a838ce30682bfed3be22adf93eab9f823" name="a838ce30682bfed3be22adf93eab9f823"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a838ce30682bfed3be22adf93eab9f823">&#9670;&#160;</a></span>onSuspend()</h2>
+<a id="a73da9f2018d4df10debbe159d482de9b" name="a73da9f2018d4df10debbe159d482de9b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a73da9f2018d4df10debbe159d482de9b">&#9670;&#160;</a></span>onSuspend()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -414,9 +418,19 @@ Public Attributes</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Debug::Tasks::TaskTracker::onSuspend </td>
           <td>(</td>
-          <td class="paramtype">std::chrono::high_resolution_clock::time_point&#160;</td>
-          <td class="paramname"><em>timePoint</em> = <code>std::chrono::high_resolution_clock::now()</code></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classvoid.html">void</a> *&#160;</td>
+          <td class="paramname"><em>ident</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">std::chrono::high_resolution_clock::time_point&#160;</td>
+          <td class="paramname"><em>timePoint</em> = <code>std::chrono::high_resolution_clock::now()</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -493,6 +507,23 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a1ae7d0176b11784687c60b4b6599e0bb" name="a1ae7d0176b11784687c60b4b6599e0bb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1ae7d0176b11784687c60b4b6599e0bb">&#9670;&#160;</a></span>throw0()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Debug::Tasks::TaskTracker::throw0 </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <h2 class="groupheader">Member Data Documentation</h2>
 <a id="a936de6bbfe4b5619feb77d065f18b108" name="a936de6bbfe4b5619feb77d065f18b108"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a936de6bbfe4b5619feb77d065f18b108">&#9670;&#160;</a></span>mMutex</h2>
@@ -522,6 +553,20 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a70cc46a23410d2fd8b3a8c5398c66a54" name="a70cc46a23410d2fd8b3a8c5398c66a54"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a70cc46a23410d2fd8b3a8c5398c66a54">&#9670;&#160;</a></span>mTasksInFlight</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::map&lt;<a class="el" href="classvoid.html">void</a> *, std::source_location&gt; Engine::Debug::Tasks::TaskTracker::mTasksInFlight</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <hr/>The documentation for this struct was generated from the following files:<ul>
 <li>src/Modules/debug/tasktracking/<a class="el" href="tasktracker_8h.html">tasktracker.h</a></li>
 <li>src/Modules/debug/tasktracking/<a class="el" href="tasktracker_8cpp.html">tasktracker.cpp</a></li>
@@ -529,7 +574,7 @@ Public Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Jun 23 2026 21:48:51 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Tue Jun 23 2026 22:57:08 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>
