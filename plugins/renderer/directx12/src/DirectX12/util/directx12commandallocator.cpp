@@ -68,7 +68,7 @@ namespace Render {
 #endif
 
 #if ENABLE_TASK_TRACKING
-        mTracker.onAssign(this, Debug::StackTrace<1>::getCurrent(0));
+        mTracker.onAssign(this, std::source_location::current());
 #endif
 
         mLastCompletedFenceValue = 5;

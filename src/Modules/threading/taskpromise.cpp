@@ -56,19 +56,17 @@ namespace Threading {
         return mImmediate;
     }
 
-    void TaskInitialSuspend::await_resume() noexcept
+    void TaskInitialSuspend::await_resume(std::source_location location) noexcept
     {
 #if ENABLE_TASK_TRACKING
-        Debug::Tasks::onAssign(std::coroutine_handle<TaskPromiseBase>::from_promise(*mPromise), mPromise->queue(), Debug::StackTrace<1>::getCurrent(1));
+        Debug::Tasks::onAssign(std::coroutine_handle<TaskPromiseBase>::from_promise(*mPromise), mPromise->queue(), std::move(location));
 #endif
     }
 
-#ifndef NDEBUG
-    Debug::FullStackTrace TaskPromiseBase::getSuspensionPoint()
+    const std::source_location &TaskPromiseBase::getSuspensionPoint()
     {
-        return mCurrentSuspensionPoint.calculateReadable();
+        return mCurrentSuspensionPoint;
     }
-#endif
 
 }
 }

@@ -235,7 +235,7 @@ namespace Tools {
                 mHoveredAssignTimepoint = mStart;
             } else if (mHoveredId) {
                 ImGui::BeginTooltip();
-                ImGui::Text("%s", mHoveredTracker->getTraceback(mHoveredId).mFunction);
+                ImGui::Text("%s", mHoveredTracker->getTraceback(mHoveredId).function_name());
                 ImGui::EndTooltip();
             }
 
@@ -246,7 +246,7 @@ namespace Tools {
                     if (ImGui::TreeNode("tasks", "Tasks in Flight (%zu)", queue->taskInFlightCount())) {
                         std::lock_guard guard { queue->mTracker.mMutex };
                         for (auto &[id, stacktrace] : queue->mTracker.tasksInFlight()) {
-                            ImGui::Text("%s", stacktrace.calculateReadable().front().mFunction);
+                            ImGui::Text("%s", stacktrace.function_name());
                         }
                         ImGui::TreePop();
                     }

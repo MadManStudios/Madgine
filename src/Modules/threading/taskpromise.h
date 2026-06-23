@@ -10,10 +10,6 @@
 #    include "../debug/tasktracking/tasktracker.h"
 #endif
 
-#ifndef NDEBUG
-#    include "Platform/debug/stacktrace.h"
-#endif
-
 namespace Engine {
 namespace Threading {
 
@@ -41,7 +37,7 @@ namespace Threading {
             mPromise = &self.promise();
 #endif
         }
-        void await_resume() noexcept;
+        void await_resume(std::source_location location = std::source_location::current()) noexcept;
 
 #if ENABLE_TASK_TRACKING
         TaskPromiseBase *mPromise;
@@ -81,11 +77,10 @@ namespace Threading {
         }
 
         template <typename T>
-        decltype(auto) await_transform(T &&awaitable)
+        decltype(auto) await_transform(T &&awaitable, std::source_location location = std::source_location::current())
         {
-#ifndef NDEBUG
-            mCurrentSuspensionPoint = Debug::StackTrace<1>::getCurrent(1);
-#endif
+            mCurrentSuspensionPoint = std::move(location);
+
             if constexpr (Execution::AnySender<std::remove_reference_t<T>>) {
                 return Execution::AwaitableSender<T, TaskPromiseBase, TaskHandle> { std::forward<T>(awaitable), *this };
             } else {
@@ -119,12 +114,10 @@ namespace Threading {
         TaskQueue *mQueue = nullptr;
         bool mImmediate;
 
-#ifndef NDEBUG
-        Debug::StackTrace<1> mCurrentSuspensionPoint;
+        std::source_location mCurrentSuspensionPoint;
 
     public:
-        Debug::FullStackTrace getSuspensionPoint();
-#endif
+        const std::source_location &getSuspensionPoint();
     };
 
     template <typename T>

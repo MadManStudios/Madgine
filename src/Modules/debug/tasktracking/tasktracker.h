@@ -7,7 +7,7 @@ namespace Debug {
 
     namespace Tasks {
 
-        MODULES_EXPORT void onAssign(const std::coroutine_handle<> &handle, Engine::Threading::TaskQueue *queue, StackTrace<1> stacktrace);
+        MODULES_EXPORT void onAssign(const std::coroutine_handle<> &handle, Engine::Threading::TaskQueue *queue, std::source_location location);
         MODULES_EXPORT void onDestroy(Engine::Threading::TaskPromiseBase &promise);
 
         MODULES_EXPORT void onResume(const Engine::Threading::TaskHandle &handle);
@@ -18,14 +18,14 @@ namespace Debug {
 
         struct MODULES_EXPORT TaskTracker {
 
-            void onAssign(void *ident, StackTrace<1> stacktrace);
+            void onAssign(void *ident, std::source_location location);
             void onEnter(void *ident, std::chrono::high_resolution_clock::time_point timePoint = std::chrono::high_resolution_clock::now());
             void onReturn(void *ident, std::chrono::high_resolution_clock::time_point timePoint = std::chrono::high_resolution_clock::now());
             void onResume(void *ident, std::chrono::high_resolution_clock::time_point timePoint = std::chrono::high_resolution_clock::now());
             void onSuspend(std::chrono::high_resolution_clock::time_point timePoint = std::chrono::high_resolution_clock::now());
             void onDestroy(void *ident);
 
-            TraceBack getTraceback(void *ident);
+            const std::source_location &getTraceback(void *ident);
 
             struct Event {
                 enum Type {
@@ -46,7 +46,7 @@ namespace Debug {
             };
 
             const std::deque<Event> &events() const;
-            const std::map<void *, StackTrace<1>> tasksInFlight() const;
+            const std::map<void *, std::source_location> tasksInFlight() const;
 
             std::mutex mMutex;
 
@@ -54,7 +54,7 @@ namespace Debug {
 
         private:
             std::deque<Event> mEvents;
-            std::map<void *, StackTrace<1>> mTasksInFlight;
+            std::map<void *, std::source_location> mTasksInFlight;
         };
 
     }

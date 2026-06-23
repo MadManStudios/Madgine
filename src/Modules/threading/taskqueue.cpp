@@ -243,8 +243,8 @@ namespace Threading {
     void TaskQueue::reportStuckPromises() {
         std::unique_lock lock { mPromiseMutex };
         for (TaskPromiseBase* promise : mPromises) {
-            Debug::FullStackTrace trace = promise->getSuspensionPoint();
-            LOG_FATAL("Task '" << trace[0].mFunction << "' stuck at \n " << trace[0].mFile << ":" << trace[0].mLineNr);
+            const std::source_location &trace = promise->getSuspensionPoint();
+            LOG_FATAL("Task '" << trace.function_name() << "' stuck at \n " << trace.file_name() << ":" << trace.line());
         }
     }
 #endif

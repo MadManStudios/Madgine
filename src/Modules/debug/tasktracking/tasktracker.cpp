@@ -10,12 +10,12 @@ namespace Debug {
 
     namespace Tasks {
 
-        void TaskTracker::onAssign(void *ident, StackTrace<1> stacktrace)
+        void TaskTracker::onAssign(void *ident, std::source_location location)
         {
             std::lock_guard guard { mMutex };
 
             // mEvents.emplace_back(Event:: { stacktrace }, ident);
-            auto pib = mTasksInFlight.try_emplace(ident, stacktrace);
+            auto pib = mTasksInFlight.try_emplace(ident, std::move(location));
             // assert(pib.second);
         }
 
@@ -51,14 +51,10 @@ namespace Debug {
             // assert(count == 1);
         }
 
-        TraceBack TaskTracker::getTraceback(void *ident)
+        const std::source_location &TaskTracker::getTraceback(void *ident)
         {
             std::lock_guard guard { mMutex };
-            FullStackTrace trace = mTasksInFlight.at(ident).calculateReadable();
-            if (!trace.empty())
-                return trace.front();
-            else
-                return {};
+            return mTasksInFlight.at(ident);
         }
 
         const std::deque<TaskTracker::Event> &TaskTracker::events() const
@@ -66,14 +62,14 @@ namespace Debug {
             return mEvents;
         }
 
-        const std::map<void *, StackTrace<1>> TaskTracker::tasksInFlight() const
+        const std::map<void *, std::source_location> TaskTracker::tasksInFlight() const
         {
             return mTasksInFlight;
         }
 
-        void onAssign(const std::coroutine_handle<> &handle, Engine::Threading::TaskQueue *queue, StackTrace<1> stacktrace)
+        void onAssign(const std::coroutine_handle<> &handle, Engine::Threading::TaskQueue *queue, std::source_location location)
         {
-            queue->mTracker.onAssign(handle.address(), stacktrace);
+            queue->mTracker.onAssign(handle.address(), std::move(location));
         }
 
         void onEnter(const std::coroutine_handle<> &handle, Engine::Threading::TaskQueue *queue)

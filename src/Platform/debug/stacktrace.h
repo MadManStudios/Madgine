@@ -90,6 +90,8 @@ namespace Debug {
             return { mTrace.data() + S, mTrace.data() + S };
         }
 
+        auto operator<=>(const StackTrace<S> &) const = default;
+
     private:
         friend struct std::hash<StackTrace<S>>;
 
