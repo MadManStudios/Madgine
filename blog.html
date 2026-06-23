@@ -49,6 +49,10 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="eventloop.html">Building a complete Async execution framework - Part 1: Event Loop</a></li>
+<li class="toctree-l1"><a class="reference internal" href="suspension.html">Building a complete Async execution framework - Part 2: Suspension Points</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="suspension.html#complete-source">Complete Source</a></li>
+</ul>
+</li>
 </ul>
 
         </div>
@@ -92,6 +96,68 @@
     </span>
   </h1>
    
+  <div class="section ablog-post">
+    <h2 class="ablog-post-title">
+      <a href="suspension.html">Building a complete Async execution framework - Part 2: Suspension Points</a>
+    </h2>
+    <ul class="ablog-archive">
+      <li>
+         
+        <span>23 June 2026</span>
+        
+      </li>
+      <div class="ablog-sidebar-item ablog__postcard2">
+   
+  <li id="ablog-sidebar-item author ablog__author">
+    <span>
+       Author: 
+    </span>
+     
+    <a href="blog/author/martin-schtz.html">Martin Sch?tz</a>
+      
+  </li>
+     
+  <li id="ablog-sidebar-item category ablog__category">
+    <span>
+       Category: 
+    </span>
+     
+    <a href="blog/category/async.html">async</a>
+      
+  </li>
+   
+  <li id="ablog-sidebar-item tags ablog__tags">
+    <span>
+        Tags:  
+    </span>
+     
+    <a href="blog/tag/async.html">async</a>
+        
+    <a href="blog/tag/awaitable.html">awaitable</a>
+        
+    <a href="blog/tag/suspension.html">suspension</a>
+      
+  </li>
+   
+</div>
+    </ul>
+    <p class="ablog-post-excerpt"><p>After building a <code class="docutils literal notranslate"><span class="pre">Task</span></code> class and a simple <code class="docutils literal notranslate"><span class="pre">TaskQueue</span></code> it is now time to make our coroutines truly asynchronous through the use of suspension points.
+But before we look into how we can suspend the execution of tasks we have to make an important design decision for our execution framework.
+Once a task is suspended it needs to be resumed at a later point when the awaited upon operation has completed. There are two general approaches to this.
+In a poll-based approach the task would need to be continuously checked for completion of the current awaitable and ultimately resume execution.
+I am not a fan of this approach, since it forces us to either check for completion very aggressively or run the risk of delaying execution until the next time the task is checked.
+Alternatively, using a push- or event-based approach, it is the awaitable’s obligation to resume task execution on completion. There is no additional checking necessary and
+the completion is signaled immediately. While this is a clear advantage over a poll-based approach, it requires a bit more work to make writing awaitables possible.
+In most cases the best approach for an awaitable object is to put the task back into the queue. In order to do that the task itself needs to carry a reference to its <cite>TaskQueue</cite>.
+This can be added to <code class="docutils literal notranslate"><span class="pre">Task::promise_type</span></code> right away. (see the previous post for the code base we are building on)</p>
+</p>
+
+    <p class="ablog-post-expand">
+      <a href="suspension.html"><em>Read more ...</em></a>
+    </p>
+    <hr />
+  </div>
+  
   <div class="section ablog-post">
     <h2 class="ablog-post-title">
       <a href="eventloop.html">Building a complete Async execution framework - Part 1: Event Loop</a>

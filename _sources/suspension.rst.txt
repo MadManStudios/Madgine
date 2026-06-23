@@ -1,0 +1,358 @@
+.. post:: 2026-06-23
+   :tags: async, awaitable, suspension
+   :category: async
+   :author: Martin Schütz
+
+
+Building a complete Async execution framework - Part 2: Suspension Points
+=========================================================================
+
+After building a ``Task`` class and a simple ``TaskQueue`` it is now time to make our coroutines truly asynchronous through the use of suspension points.
+But before we look into how we can suspend the execution of tasks we have to make an important design decision for our execution framework.
+Once a task is suspended it needs to be resumed at a later point when the awaited upon operation has completed. There are two general approaches to this.
+In a poll-based approach the task would need to be continuously checked for completion of the current awaitable and ultimately resume execution.
+I am not a fan of this approach, since it forces us to either check for completion very aggressively or run the risk of delaying execution until the next time the task is checked.
+Alternatively, using a push- or event-based approach, it is the awaitable's obligation to resume task execution on completion. There is no additional checking necessary and
+the completion is signaled immediately. While this is a clear advantage over a poll-based approach, it requires a bit more work to make writing awaitables possible.
+In most cases the best approach for an awaitable object is to put the task back into the queue. In order to do that the task itself needs to carry a reference to its `TaskQueue`.
+This can be added to ``Task::promise_type`` right away. (see the previous post for the code base we are building on)
+
+.. code:: cpp
+   
+   ...
+   struct TaskQueue;
+   ...
+       struct promise_type{
+           ...
+           TaskQueue *mTaskQueue = nullptr;
+       };
+   ...
+
+We cannot set that value in the constructor, as the TaskQueue becomes available only once the Task is queued for the first time. Another potential issue for a push-based asynchronous
+execution model is that an error - whether a programming error or a runtime error - can cause the task to remain suspended forever and lead to very hard to debug bugs. 
+This can be avoided by introducing a special smart handle for our tasks.
+
+.. code:: cpp
+
+   struct TaskHandle {
+       TaskHandle() = default;
+       TaskHandle(std::coroutine_handle<Task::promise_type> handle)
+           : mHandle(handle)
+       {}
+       TaskHandle(TaskHandle &&other)
+           : mHandle(std::exchange(other.mHandle, {}))
+       {}
+       ~TaskHandle() {
+           if (mHandle)
+               std::terminate();
+       }
+
+       TaskHandle &operator=(TaskHandle &&other) {
+           std::swap(mHandle, other.mHandle);
+           return *this;
+       }
+
+       void operator()() {
+           mHandle.resume();
+           mHandle = {};
+       }
+
+       TaskQueue &queue() const {
+           return *mHandle.promise().mTaskQueue;
+       }
+
+       explicit operator bool() const {
+           return mHandle;
+       }
+
+       std::coroutine_handle<Task::promise_type> mHandle;
+   };
+
+It might seem a little extreme to terminate the whole program execution, but in my experience it helps pinpoint any potential issues, right as they happen during implementation of new features.
+A non-empty ``TaskHandle`` represents a task that has been committed to execution but has not yet reached its final suspension point. Destroying such a handle indicates a logic error and therefore terminates the program.
+You might also notice that we are dereferencing a pointer without additional checks. We are assuming the invariant of a ``Task`` always being assigned to a ``TaskQueue`` before execution there.
+Another benefit of using this helper type is that committed tasks are guaranteed either to reach their final suspension point or terminate the program immediately. As discussed in the previous post, reaching the final suspension point 
+ensures that the coroutine frame allocation is properly cleaned up. As long as we are using `TaskHandle` consistently, there will be no silent leaks caused by abandoned tasks. With these new design decisions and utilities we start rewriting
+the ``TaskQueue`` in a more robust way. Since our first Awaitable will represent a simple delay, let us also add a way to schedule execution for a later point in time.
+
+.. code:: cpp
+
+   #include <chrono>
+   #include <deque>
+   ...
+   struct TaskQueue {
+       struct PendingTask{
+           std::chrono::steady_clock::time_point mScheduledFor;
+           TaskHandle mHandle;
+       };
+
+       void queue(Task task) {
+           task.mHandle.promise().mTaskQueue = this;
+           TaskHandle handle = std::exchange(task.mHandle, {}); //From this moment on the task is committed and needs to run to completion
+           queue_for(std::move(handle));
+       }
+
+       void queue_for(TaskHandle handle, std::chrono::steady_clock::time_point scheduledFor = std::chrono::steady_clock::time_point::min()) {
+           mTasks.push_back({ scheduledFor, std::move(handle) });
+       }
+
+       ...
+
+       std::deque<PendingTask> mTasks;
+   
+   };
+
+The ``TaskQueue`` will internally work with ``TaskHandles`` annotated with a ``time_point``. When a ``Task`` is queued, it will be assigned to that ``TaskQueue`` and then converted to a ``TaskHandle``.
+Also, we will need to iterate over the tasks to find one that is ready to run. We need to be using a ``deque`` instead of a simple FIFO ``queue`` from now on.
+Note that we are using ``std::chrono::steady_clock`` here. The ``time_point`` parameter serves a similar purpose to ``Sleep()`` or ``sleep()`` on most operating systems. It only guarantees that
+execution will not happen before that time point. Since other tasks can take an arbitrary amount of time to execute, the actual point in time at which the task is run may be significantly later
+than the provided timestamp. Therefore, we have no need to use a high-precision clock and using it might even indicate the wrong properties of our system. Finally, in order to respect
+our new scheduling parameters, it becomes beneficial to introduce a ``fetch`` function to facilitate `run` like so.
+
+.. code:: cpp
+   
+   #include <thread>
+   ...
+       TaskHandle fetch() {
+           while(!mTasks.empty()) {
+               std::chrono::steady_clock::time_point now = std::chrono::steady_clock::now();
+               std::chrono::steady_clock::time_point next = std::chrono::steady_clock::time_point::max();
+
+               for (auto it = mTasks.begin(); it != mTasks.end(); ++it) {
+                   if (it->mScheduledFor <= now) {
+                       TaskHandle handle = std::move(it->mHandle);
+                       mTasks.erase(it);
+                       return handle;
+                   }
+                   next = std::min(next, it->mScheduledFor);
+               }
+               std::this_thread::sleep_until(next);
+           }
+           return {};
+       }
+
+       void run() {
+           while(TaskHandle task = fetch()) {
+               task();
+           }           
+       }
+   ...
+
+Finally, after all this preparation, we can look at implementing our first awaitable. As you might have guessed already, we will implement a simple wait that delays execution of the 
+coroutine by a given amount of time. An awaitable type needs to implement three special functions like so.
+
+.. code:: cpp
+   
+   struct AwaitableSleep {
+       bool await_ready() { return false; }
+
+       void await_suspend(TaskHandle handle) {
+           handle.queue().queue_for(std::move(handle), std::chrono::steady_clock::now() + mDuration);
+       }
+
+       void await_resume() {}
+
+       std::chrono::steady_clock::duration mDuration;
+   };
+
+The first function is called ``await_ready``. It serves as a shortcut to skip suspending the coroutine if the awaitable is already ready. Since we always want to sleep, we can
+simply return ``false`` all the time. The second function `await_suspend` is the interesting one. It retrieves the handle to the coroutine on actual suspension. The way the standard is phrased,
+``TaskHandle`` itself can be used as the parameter type, provided it is constructible from ``std::coroutine_handle<Task::promise_type>``. 
+This way there is never a point at which ownership of the handle can be lost. In our case, the awaitable simply requeues the task with a delay. 
+The final function is called ``await_resume``. It is responsible for communicating the result of the asynchronous operation back to the awaiting coroutine. Since we are just waiting,
+an empty void function will be sufficient for now.
+Let's write our very first ``Task`` with a suspension point.
+
+.. code:: cpp
+   
+   Task timed_task(std::chrono::steady_clock::duration interval) {
+       while(true) {
+           std::cout << "I am a " << std::chrono::duration_cast<std::chrono::seconds>(interval).count() << "s task!" << std::endl;
+           co_await AwaitableSleep{ interval };
+       }
+   }
+
+Once we queue this task, you should see a new line printed at the given interval. 
+Even better, if we add two tasks with different intervals, we should already be able to see those messages alternate.
+
+.. code:: cpp
+
+   int main() {
+       using namespace std::literals::chrono_literals;
+       TaskQueue queue;
+       queue.queue(timed_task(2s));
+       queue.queue(timed_task(3s));
+       queue.run();
+   }
+
+You might have noticed that we are able to spawn two separate Tasks running an infinite loop. The fact that both of them are able to make progress independently is proof
+that we have already achieved concurrency in our system, despite still running in a single thread.
+Furthermore, if you check your CPU utilization, you will notice that the program is barely using any CPU time. This is due to the fact that ``sleep_until`` puts the thread to sleep and
+allows the operating system to run other tasks.
+
+With the introduction of awaitables, our runtime has become truly asynchronous. Tasks are now able to suspend themselves and continue execution at a later point in time, 
+allowing multiple tasks to make progress concurrently while keeping the event loop single-threaded and efficient.
+
+In the next post, we will look at how tasks can communicate results back to their callers and how values can propagate through our asynchronous execution framework.
+
+Complete Source
+~~~~~~~~~~~~~~~
+
+For readability, most snippets throughout this article omit unrelated code. The following listing contains the complete state of the framework after implementing suspension points.
+It can be compiled directly with any C++20-compliant compiler.
+
+.. code:: cpp
+
+   #include <iostream>
+   #include <coroutine>
+   #include <utility>
+   #include <deque>
+   #include <chrono>
+   #include <thread>
+
+   struct TaskQueue;
+
+   struct Task {
+   
+       struct promise_type {
+           Task get_return_object() {
+               return Task{std::coroutine_handle<promise_type>::from_promise(*this)};
+           }
+           std::suspend_always initial_suspend() noexcept {
+               return {};
+           }
+           std::suspend_never final_suspend() noexcept {
+               return {};
+           }
+           void unhandled_exception() {
+               throw;
+           }
+           void return_void() {
+           }
+
+           TaskQueue *mTaskQueue = nullptr;
+       };
+              
+       Task(std::coroutine_handle<promise_type> handle)
+           : mHandle(handle)
+       {}
+
+       Task(Task &&other) noexcept
+           : mHandle(std::exchange(other.mHandle, {}))
+       {}
+
+       Task(const Task &) = delete;
+
+       ~Task() {
+           if (mHandle)
+               mHandle.destroy();
+       }
+
+       std::coroutine_handle<promise_type> mHandle;
+   };
+
+   struct TaskHandle {
+       TaskHandle() = default;
+       TaskHandle(std::coroutine_handle<Task::promise_type> handle)
+           : mHandle(handle)
+       {}
+       TaskHandle(TaskHandle &&other)
+           : mHandle(std::exchange(other.mHandle, {}))
+       {}
+       ~TaskHandle() {
+           if (mHandle)
+               std::terminate();
+       }
+
+       TaskHandle &operator=(TaskHandle &&other) {
+           std::swap(mHandle, other.mHandle);
+           return *this;
+       }
+
+       void operator()() {
+           mHandle.resume();
+           mHandle = {};
+       }
+
+       TaskQueue &queue() const {
+           return *mHandle.promise().mTaskQueue;
+       }
+
+       explicit operator bool() const {
+           return static_cast<bool>(mHandle);
+       }
+
+       std::coroutine_handle<Task::promise_type> mHandle;
+   };
+
+   struct TaskQueue {
+       struct PendingTask {
+           std::chrono::steady_clock::time_point mScheduledFor;
+           TaskHandle mHandle;
+       };
+
+       void queue(Task task) {
+           task.mHandle.promise().mTaskQueue = this;
+           TaskHandle handle = std::exchange(task.mHandle, {}); //From this moment on the task is committed and needs to run to completion
+           queue_for(std::move(handle));
+       }
+
+       void queue_for(TaskHandle handle, std::chrono::steady_clock::time_point scheduledFor = std::chrono::steady_clock::time_point::min()) {
+           mTasks.push_back({ scheduledFor, std::move(handle) });
+       }
+
+       TaskHandle fetch() {
+
+            while(!mTasks.empty()) {
+                std::chrono::steady_clock::time_point now = std::chrono::steady_clock::now();
+                std::chrono::steady_clock::time_point next = std::chrono::steady_clock::time_point::max();
+
+                for (auto it = mTasks.begin(); it != mTasks.end(); ++it) {
+                    if (it->mScheduledFor <= now) {
+                        TaskHandle handle = std::move(it->mHandle);
+                        mTasks.erase(it);
+                        return handle;
+                    }
+                    next = std::min(next, it->mScheduledFor);
+                }
+                std::this_thread::sleep_until(next);
+            }
+            return {};
+       }
+
+       void run() {
+           while(TaskHandle task = fetch()) {               
+               task();
+           }           
+       }
+
+       std::deque<PendingTask> mTasks;
+   
+   };
+
+   struct AwaitableSleep {
+       bool await_ready() { return false; }
+
+       void await_suspend(TaskHandle handle) {
+           handle.queue().queue_for(std::move(handle), std::chrono::steady_clock::now() + mDuration);
+       }
+
+       void await_resume() {}
+
+       std::chrono::steady_clock::duration mDuration;
+   };
+
+   Task timed_task(std::chrono::steady_clock::duration interval) {
+       while(true) {
+           std::cout << "I am a " << std::chrono::duration_cast<std::chrono::seconds>(interval).count() << "s task!" << std::endl;
+           co_await AwaitableSleep{ interval };
+       }
+   }
+
+   int main() {
+       using namespace std::literals::chrono_literals;
+       TaskQueue queue;
+       queue.queue(timed_task(2s));
+       queue.queue(timed_task(3s));
+       queue.run();
+   }
