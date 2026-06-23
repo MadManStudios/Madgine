@@ -34,7 +34,7 @@ jobs:
     outputs:
       platforms: "{
         \"Windows\": \"windows-latest\", 
-        \"macOS\": \"macos-latest\", 
+        \"macOS\": \"macos-15\", 
         \"iOS\": \"macos-latest\", 
         \"Linux\": \"ubuntu-latest\", 
         \"Android_arm64\": \"ubuntu-latest\", 
@@ -61,7 +61,7 @@ jobs:
       fail-fast: false
 
       matrix:
-        platform: [ubuntu-latest, windows-latest, macos-latest] 
+        platform: [ubuntu-latest, windows-latest, macos-15] 
 
     steps:
     - uses: actions/checkout@v4
