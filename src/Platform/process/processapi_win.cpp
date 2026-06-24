@@ -70,7 +70,7 @@ namespace Platform {
 
             std::string command = mExecutable;
             for (const std::string &argument : mCommandLine)
-                command += " " + argument;
+                command += " \"" + argument + '"';
 
             result = CreateProcess(nullptr, command.data(), nullptr, nullptr, true, CREATE_NO_WINDOW, nullptr, nullptr, &startup, &mData->mProcessInfo);
             if (!result) {
