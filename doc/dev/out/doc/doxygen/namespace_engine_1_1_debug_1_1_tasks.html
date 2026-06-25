@@ -268,12 +268,12 @@ Functions</h2></td></tr>
 <tr class="separator:a3fb4d098f066fc13d50441f0c91c6e7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5c639b85de10b728d2cd29b9ee5ade9a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_debug_1_1_tasks.html#a5c639b85de10b728d2cd29b9ee5ade9a">onEnter</a> (const std::coroutine_handle&lt;&gt; &amp;handle, <a class="el" href="struct_engine_1_1_threading_1_1_task_queue.html">Threading::TaskQueue</a> *queue)</td></tr>
 <tr class="separator:a5c639b85de10b728d2cd29b9ee5ade9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeda47fad7d5f612369c8d938bafab71d"><td class="memItemLeft" align="right" valign="top">std::pair&lt; <a class="el" href="struct_engine_1_1_threading_1_1_task_queue.html">Threading::TaskQueue</a> *, <a class="el" href="classvoid.html">void</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_debug_1_1_tasks.html#aeda47fad7d5f612369c8d938bafab71d">onResume</a> (const <a class="el" href="struct_engine_1_1_threading_1_1_task_handle.html">Threading::TaskHandle</a> &amp;handle)</td></tr>
-<tr class="separator:aeda47fad7d5f612369c8d938bafab71d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a23b7479da5e2ef3edb957ef1371cc577"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_debug_1_1_tasks.html#a23b7479da5e2ef3edb957ef1371cc577">onReturn</a> (const std::coroutine_handle&lt;&gt; &amp;handle, <a class="el" href="struct_engine_1_1_threading_1_1_task_queue.html">Threading::TaskQueue</a> *queue)</td></tr>
-<tr class="separator:a23b7479da5e2ef3edb957ef1371cc577"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acbeef3cbbacc343e3e4036c2b9c7e5c5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_debug_1_1_tasks.html#acbeef3cbbacc343e3e4036c2b9c7e5c5">onSuspend</a> (std::pair&lt; <a class="el" href="struct_engine_1_1_threading_1_1_task_queue.html">Threading::TaskQueue</a> *, <a class="el" href="classvoid.html">void</a> * &gt; data)</td></tr>
-<tr class="separator:acbeef3cbbacc343e3e4036c2b9c7e5c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab56406205bb9c77f45d1c22c3089aff0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_debug_1_1_tasks.html#ab56406205bb9c77f45d1c22c3089aff0">onResume</a> (<a class="el" href="struct_engine_1_1_threading_1_1_task_queue.html">Threading::TaskQueue</a> *queue, <a class="el" href="classvoid.html">void</a> *id, uint16_t depth)</td></tr>
+<tr class="separator:ab56406205bb9c77f45d1c22c3089aff0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad2f713553ba9d90d1730807b08712c86"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_debug_1_1_tasks.html#ad2f713553ba9d90d1730807b08712c86">onReturn</a> (<a class="el" href="classvoid.html">void</a> *id, <a class="el" href="struct_engine_1_1_threading_1_1_task_queue.html">Threading::TaskQueue</a> *queue)</td></tr>
+<tr class="separator:ad2f713553ba9d90d1730807b08712c86"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acfa95d4c1d4221f4a39a0a770ca13e4e"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_debug_1_1_tasks.html#acfa95d4c1d4221f4a39a0a770ca13e4e">onSuspend</a> (<a class="el" href="struct_engine_1_1_threading_1_1_task_queue.html">Threading::TaskQueue</a> *queue, <a class="el" href="classvoid.html">void</a> *id)</td></tr>
+<tr class="separator:acfa95d4c1d4221f4a39a0a770ca13e4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="aeb80f9d06dc166c31b4147745d71036e" name="aeb80f9d06dc166c31b4147745d71036e"></a>
@@ -338,8 +338,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a23b7479da5e2ef3edb957ef1371cc577" name="a23b7479da5e2ef3edb957ef1371cc577"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a23b7479da5e2ef3edb957ef1371cc577">&#9670;&#160;</a></span>onReturn()</h2>
+<a id="ad2f713553ba9d90d1730807b08712c86" name="ad2f713553ba9d90d1730807b08712c86"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad2f713553ba9d90d1730807b08712c86">&#9670;&#160;</a></span>onReturn()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -347,8 +347,8 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">MODULES_EXPORT <a class="el" href="classvoid.html">void</a> Engine::Debug::Tasks::onReturn </td>
           <td>(</td>
-          <td class="paramtype">const std::coroutine_handle&lt;&gt; &amp;&#160;</td>
-          <td class="paramname"><em>handle</em>, </td>
+          <td class="paramtype"><a class="el" href="classvoid.html">void</a> *&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -366,36 +366,62 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="aeda47fad7d5f612369c8d938bafab71d" name="aeda47fad7d5f612369c8d938bafab71d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aeda47fad7d5f612369c8d938bafab71d">&#9670;&#160;</a></span>onResume()</h2>
+<a id="ab56406205bb9c77f45d1c22c3089aff0" name="ab56406205bb9c77f45d1c22c3089aff0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab56406205bb9c77f45d1c22c3089aff0">&#9670;&#160;</a></span>onResume()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">MODULES_EXPORT std::pair&lt; <a class="el" href="struct_engine_1_1_threading_1_1_task_queue.html">Threading::TaskQueue</a> *, <a class="el" href="classvoid.html">void</a> * &gt; Engine::Debug::Tasks::onResume </td>
+          <td class="memname">MODULES_EXPORT <a class="el" href="classvoid.html">void</a> Engine::Debug::Tasks::onResume </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="struct_engine_1_1_threading_1_1_task_handle.html">Threading::TaskHandle</a> &amp;&#160;</td>
-          <td class="paramname"><em>handle</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_threading_1_1_task_queue.html">Threading::TaskQueue</a> *&#160;</td>
+          <td class="paramname"><em>queue</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype"><a class="el" href="classvoid.html">void</a> *&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>depth</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="acbeef3cbbacc343e3e4036c2b9c7e5c5" name="acbeef3cbbacc343e3e4036c2b9c7e5c5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acbeef3cbbacc343e3e4036c2b9c7e5c5">&#9670;&#160;</a></span>onSuspend()</h2>
+<a id="acfa95d4c1d4221f4a39a0a770ca13e4e" name="acfa95d4c1d4221f4a39a0a770ca13e4e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acfa95d4c1d4221f4a39a0a770ca13e4e">&#9670;&#160;</a></span>onSuspend()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">MODULES_EXPORT <a class="el" href="classvoid.html">void</a> Engine::Debug::Tasks::onSuspend </td>
+          <td class="memname">MODULES_EXPORT uint16_t Engine::Debug::Tasks::onSuspend </td>
           <td>(</td>
-          <td class="paramtype">std::pair&lt; <a class="el" href="struct_engine_1_1_threading_1_1_task_queue.html">Threading::TaskQueue</a> *, <a class="el" href="classvoid.html">void</a> * &gt;&#160;</td>
-          <td class="paramname"><em>data</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_threading_1_1_task_queue.html">Threading::TaskQueue</a> *&#160;</td>
+          <td class="paramname"><em>queue</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype"><a class="el" href="classvoid.html">void</a> *&#160;</td>
+          <td class="paramname"><em>id</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -423,7 +449,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Jun 24 2026 18:18:54 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Thu Jun 25 2026 02:19:04 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

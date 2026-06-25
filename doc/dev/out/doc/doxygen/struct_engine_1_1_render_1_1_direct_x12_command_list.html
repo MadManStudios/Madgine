@@ -270,6 +270,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aaa33a0897591ff729c0bba55b9bc171c"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:aaa33a0897591ff729c0bba55b9bc171c"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_command_list.html#aaa33a0897591ff729c0bba55b9bc171c">attachResource</a> (T resource)</td></tr>
 <tr class="separator:aaa33a0897591ff729c0bba55b9bc171c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab13879219df9606e6a03fd087c6b881f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_command_list.html#ab13879219df9606e6a03fd087c6b881f">bindRootSignature</a> (ID3D12RootSignature *signature)</td></tr>
+<tr class="separator:ab13879219df9606e6a03fd087c6b881f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a02f8e6e85549aa7bd69a7fc56d72f24d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_render_1_1_render_future.html">RenderFuture</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_command_list.html#a02f8e6e85549aa7bd69a7fc56d72f24d">execute</a> ()</td></tr>
 <tr class="separator:a02f8e6e85549aa7bd69a7fc56d72f24d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acab2b4dc592bfc3eb9f5c59542d81e8f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_command_list.html#acab2b4dc592bfc3eb9f5c59542d81e8f">operator ID3D12GraphicsCommandList *</a> ()</td></tr>
@@ -278,6 +280,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a158153237bdb4e30f37b57cf326176a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4ae1faa5c2a549364f242b2fdcb896a9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_command_list.html">DirectX12CommandList</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_command_list.html#a4ae1faa5c2a549364f242b2fdcb896a9">operator=</a> (<a class="el" href="struct_engine_1_1_render_1_1_direct_x12_command_list.html">DirectX12CommandList</a> &amp;&amp;)</td></tr>
 <tr class="separator:a4ae1faa5c2a549364f242b2fdcb896a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a26c4ee46170a8c91ab0c41f640ec3c53"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_command_list.html#a26c4ee46170a8c91ab0c41f640ec3c53">setPipelineState</a> (const <a class="el" href="struct_engine_1_1_platform_1_1_release_ptr.html">Platform::ReleasePtr</a>&lt; ID3D12PipelineState &gt; &amp;pipeline)</td></tr>
+<tr class="separator:a26c4ee46170a8c91ab0c41f640ec3c53"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6712cf9139d359e438ff81570a144766"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_command_list.html#a6712cf9139d359e438ff81570a144766">Transition</a> (ID3D12Resource *res, D3D12_RESOURCE_STATES from, D3D12_RESOURCE_STATES to) const</td></tr>
 <tr class="separator:a6712cf9139d359e438ff81570a144766"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -370,6 +374,42 @@ Public Member Functions</h2></td></tr>
           <td>(</td>
           <td class="paramtype"><a class="el" href="struct_engine_1_1_render_1_1_direct_x12_command_list.html">DirectX12CommandList</a> &amp;&amp;&#160;</td>
           <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab13879219df9606e6a03fd087c6b881f" name="ab13879219df9606e6a03fd087c6b881f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab13879219df9606e6a03fd087c6b881f">&#9670;&#160;</a></span>bindRootSignature()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Render::DirectX12CommandList::bindRootSignature </td>
+          <td>(</td>
+          <td class="paramtype">ID3D12RootSignature *&#160;</td>
+          <td class="paramname"><em>signature</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a26c4ee46170a8c91ab0c41f640ec3c53" name="a26c4ee46170a8c91ab0c41f640ec3c53"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a26c4ee46170a8c91ab0c41f640ec3c53">&#9670;&#160;</a></span>setPipelineState()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Render::DirectX12CommandList::setPipelineState </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_platform_1_1_release_ptr.html">Platform::ReleasePtr</a>&lt; ID3D12PipelineState &gt; &amp;&#160;</td>
+          <td class="paramname"><em>pipeline</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -515,7 +555,7 @@ template&lt;typename T &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Jun 24 2026 18:18:54 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Thu Jun 25 2026 02:19:05 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>
