@@ -557,7 +557,11 @@ bool ValueTypeDrawer::draw(const Engine::Tools::Traced<Engine::Math::Quaternion 
         return changed;
     }));
 
-    return draw(v);
+    bool changed = draw(v);
+    if (changed) {
+        q.get() = Engine::Math::Quaternion::FromDegrees(v.get());
+    }
+    return changed;
 }
 
 bool ValueTypeDrawer::draw(const Engine::Tools::Traced<const Engine::Math::Quaternion &> &q)
