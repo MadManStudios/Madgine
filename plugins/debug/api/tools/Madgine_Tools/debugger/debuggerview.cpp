@@ -173,6 +173,7 @@ namespace Tools {
                     lastWasText = std::same_as<std::decay_t<decltype(val)>, Execution::State::Text>;
                     if (breakpoint) {
                         if (lineFeedback) {
+                            assert(!*lineFeedback || *lineFeedback == breakpoint);
                             *lineFeedback = breakpoint;
                         }
                         bool set = context.getBreakpoint(senderLocation, breakpoint);
