@@ -31,7 +31,7 @@ namespace Serialize {
             SerializableUnitList &list = in.mStream.serializableList();
             if (list.size() <= id)
                 list.resize(id + 1);
-            assert(!list[id]);
+            assert(!list[id] || list[id] == *this);
             list[id] = *this;
         }
 
