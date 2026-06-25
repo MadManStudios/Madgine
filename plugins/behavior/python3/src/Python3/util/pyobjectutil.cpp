@@ -500,7 +500,7 @@ namespace Behavior {
                 Platform::Log::Log *log = unlock.log();
 
                 if (Execution::get_stop_token(*rec)->registerCallback(&debugLine)) {
-                    Debug::get_debug_context(*rec).suspend(frame, { [coro { std::move(coro) }, rec, log](Debug::ContinuationMode mode) mutable {
+                    debugLine.mContinuation = Debug::get_debug_context(*rec).suspend(frame, { [coro { std::move(coro) }, rec, log](Debug::ContinuationMode mode) mutable {
                                                                        Python3Lock lock { rec, log };
                                                                        switch (mode) {
                                                                        case Debug::ContinuationMode::Continue:
@@ -512,8 +512,7 @@ namespace Behavior {
                                                                        }
                                                                        coro.reset();
                                                                    },
-                                                                      Debug::ContinuationType::Flow },
-                        debugLine.mContinuation, Execution::get_stop_token(*rec));
+                                                                      Debug::ContinuationType::Flow });
                 } else {
                     Python3Lock lock { rec, log };
                     resumeCoroutine(coro, nullptr);

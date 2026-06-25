@@ -28,17 +28,12 @@ namespace Debug {
         return pause;
     }
 
-    void ContextInfo::suspend(TypedPtr location, Continuation callback, Continuation &outContinuation, Execution::StopToken st)
+    Continuation ContextInfo::suspend(TypedPtr location, Continuation callback)
     {
-        outContinuation = std::move(callback); // TODO proper syncing with stop_source; see debuggablesender::stop()
-
-        if (mStopRequested || (st && st->stop_requested())) {
-            outContinuation(ContinuationMode::Abort);
-            return;
-        }
-
         for (DebugListener *listener : Debugger::getSingleton().mListeners)
-            listener->onSuspend(*this, location, outContinuation.type());
+            listener->onSuspend(*this, location, callback.type());
+
+        return callback;
     }
 
     ContinuationMode ContextInfo::resume()

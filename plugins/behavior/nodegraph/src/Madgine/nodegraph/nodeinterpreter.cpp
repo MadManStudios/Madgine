@@ -33,12 +33,12 @@ namespace Behavior {
 
             location.mNode = node;
 
-            Debug::get_debug_context(receiver).pass(&mDebugLocation, receiver, [=, this, &location](BehaviorReceiver &receiver) {
+            mContinuation = Debug::get_debug_context(receiver).pass(&mDebugLocation, receiver, [=, this, &location](BehaviorReceiver &receiver) {
                 if (pin && pin.mNode) {
                     node->interpret({ { { { *this }, *node } }, receiver, location }, mData[pin.mNode - 1], pin.mIndex, pin.mGroup);
                 } else {
                     receiver.set_value();
-                } }, mContinuation, Debug::ContinuationType::Flow);
+                } }, Debug::ContinuationType::Flow);
         }
 
         Reflect::Result NodeInterpreterStateBase::read(Reflect::Value &retVal, Pin pin)

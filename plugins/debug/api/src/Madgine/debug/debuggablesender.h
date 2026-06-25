@@ -183,7 +183,7 @@ namespace Execution {
 
                 Debug::SenderLocation *location = get_debug_location(this->mState.mRec);
 
-                Debug::get_debug_context(this->mState.mRec).pass(location, this->mState.mRec, [](Rec &rec, V &&...value) mutable { rec.set_value(std::forward<V>(value)...); }, mState.mContinuation, Debug::ContinuationType::Return, mState.mEndBreakpoint, std::forward<V>(value)...);
+                mState.mContinuation = Debug::get_debug_context(this->mState.mRec).pass(location, this->mState.mRec, [](Rec &rec, V &&...value) mutable { rec.set_value(std::forward<V>(value)...); }, Debug::ContinuationType::Return, mState.mEndBreakpoint, std::forward<V>(value)...);
             }
 
             void set_done()
@@ -192,7 +192,7 @@ namespace Execution {
 
                 Debug::SenderLocation *location = get_debug_location(this->mState.mRec);
 
-                Debug::get_debug_context(this->mState.mRec).pass(location, this->mState.mRec, [](Rec &rec) { rec.set_done(); }, mState.mContinuation, Debug::ContinuationType::Cancelled, mState.mEndBreakpoint);
+                mState.mContinuation = Debug::get_debug_context(this->mState.mRec).pass(location, this->mState.mRec, [](Rec &rec) { rec.set_done(); }, Debug::ContinuationType::Cancelled, mState.mEndBreakpoint);
             }
 
             template <typename... R>
@@ -202,7 +202,7 @@ namespace Execution {
 
                 Debug::SenderLocation *location = get_debug_location(this->mState.mRec);
 
-                Debug::get_debug_context(this->mState.mRec).pass(location, this->mState.mRec, [](Rec &rec, R &&...result) mutable { rec.set_error(std::forward<R>(result)...); }, mState.mContinuation, Debug::ContinuationType::Error, mState.mEndBreakpoint, std::forward<R>(result)...);
+                mState.mContinuation = Debug::get_debug_context(this->mState.mRec).pass(location, this->mState.mRec, [](Rec &rec, R &&...result) mutable { rec.set_error(std::forward<R>(result)...); }, Debug::ContinuationType::Error, mState.mEndBreakpoint, std::forward<R>(result)...);
             }
 
             template <typename CPO, typename... Args>
@@ -234,17 +234,13 @@ namespace Execution {
 
                 Debug::SenderLocation *location = get_debug_location(mRec);
 
-                Debug::get_debug_context(mRec).pass(location, mRec, [this](Rec &rec) { mState.start(); }, mContinuation, Debug::ContinuationType::Flow, mStartBreakpoint);
+                mContinuation = Debug::get_debug_context(mRec).pass(location, mRec, [this](Rec &rec) { mState.start(); }, Debug::ContinuationType::Flow, mStartBreakpoint);
             }
 
             void stop()
             {
-                // TODO proper syncing with stop_source
-                if (mContinuation) {
-                    mContinuation(Debug::ContinuationMode::Abort);
-                } else {
-                    mState.stop();
-                }
+                mContinuation.stop();
+                mState.stop(); // TODO: Maybe add a check if state is actually running
             }
 
             friend auto tag_invoke(visit_state_t, state *state, auto &&visitor)

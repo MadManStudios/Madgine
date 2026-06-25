@@ -15,7 +15,7 @@ namespace Debug {
         Cancelled
     };
 
-    struct Continuation {
+    struct [[nodiscard]] Continuation {
     private:
         struct Base {
             virtual ~Base() = default;
@@ -24,6 +24,8 @@ namespace Debug {
 
             virtual void visitArguments(std::ostream &) = 0;
         };
+
+        static inline Base *const sAborted = reinterpret_cast<Base *>(0x1);
 
         template <typename F, typename... Args>
         struct Impl : Base {
@@ -73,21 +75,70 @@ namespace Debug {
 
         template <typename F, typename... Args>
         Continuation(F &&callback, ContinuationType type, Args &&...args)
-            : mImpl(std::make_unique<Impl<F, Args...>>(std::forward<F>(callback), std::forward<Args>(args)...))
+            : mImpl(new Impl<F, Args...>(std::forward<F>(callback), std::forward<Args>(args)...))
             , mType(type)
         {
         }
-        Continuation(Continuation &&) = default;
+        Continuation(const Continuation &) = delete;
+        Continuation(Continuation &&other)
+        {
+            Base *otherImpl = other.mImpl.exchange(nullptr);
+            assert(otherImpl != sAborted);
+            mImpl = otherImpl;
+        }
         ~Continuation()
         {
-            assert(!mImpl);
+            assert(!*this);
         }
 
-        Continuation &operator=(Continuation &&) = default;
+        template <typename Rec, typename F, typename... Args>
+        static Continuation fromPromise(Rec &rec, F &&callback, ContinuationType type, Args &&...args)
+        {
+            return {
+                [&rec, callback { forward_capture<F>(callback) }](ContinuationMode mode, Args &&...args) mutable {
+                    switch (mode) {
+                    case Debug::ContinuationMode::Continue:
+                        std::forward<F>(callback)(rec, std::forward<Args>(args)...);
+                        break;
+                    case Debug::ContinuationMode::Abort:
+                        rec.set_done();
+                        break;
+                    default:
+                        throw 0;
+                    }
+                },
+                type, std::forward<Args>(args)...
+            };
+        }
+
+        Continuation &operator=(Continuation &&other)
+        {
+            Base *otherImpl = other.mImpl.exchange(nullptr);
+            assert(otherImpl != sAborted);
+            if (otherImpl) {
+                Base *expected = nullptr;
+                if (!mImpl.compare_exchange_strong(expected, otherImpl)) {
+                    assert(expected == sAborted);
+                    otherImpl->call(ContinuationMode::Abort);
+                    delete otherImpl;
+                }
+            }
+            return *this;
+        }
 
         explicit operator bool() const
         {
-            return static_cast<bool>(mImpl);
+            Base *impl = mImpl.load();
+            return impl && impl != sAborted;
+        }
+
+        void stop()
+        {
+            Base *impl = mImpl.exchange(sAborted);
+            if (impl && impl != sAborted) {
+                impl->call(ContinuationMode::Abort);
+                delete impl;
+            }
         }
 
         ContinuationType type() const
@@ -97,18 +148,21 @@ namespace Debug {
 
         void operator()(ContinuationMode mode)
         {
-            std::unique_ptr<Base> impl = std::move(mImpl);
-            mImpl.reset();
+            Base *impl = mImpl.exchange(nullptr);
+            assert(impl && impl != sAborted);
             impl->call(mode);
+            delete impl;
         }
 
         void visitArguments(std::ostream &out) const
         {
-            mImpl->visitArguments(out);
+            Base *impl = mImpl.load();
+            assert(impl && impl != sAborted);
+            impl->visitArguments(out);
         }
 
     private:
-        std::unique_ptr<Base> mImpl;
+        std::atomic<Base *> mImpl = nullptr;
         ContinuationType mType;
     };
 

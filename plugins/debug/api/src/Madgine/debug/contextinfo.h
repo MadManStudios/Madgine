@@ -15,7 +15,7 @@ namespace Debug {
     struct MADGINE_DEBUGGER_EXPORT ContextInfo final {
 
         bool wantsPause(TypedPtr location, ContinuationType type, IndexType<size_t> line);
-        void suspend(TypedPtr location, Continuation callback, Continuation &outContinuation, Execution::StopToken st);
+        Continuation suspend(TypedPtr location, Continuation callback);
 
         ContinuationMode resume();
         ContinuationMode step();
@@ -31,31 +31,13 @@ namespace Debug {
         bool getBreakpoint(const void *location, size_t index) const;
 
         template <typename Rec, typename F, typename... Args>
-        void yield(TypedPtr location, Rec &rec, F &&callback, Continuation &outContinuation, ContinuationType type, Args &&...args)
-        {
-            suspend(location, { [&rec, callback { forward_capture<F>(callback) }](ContinuationMode mode, Args &&...args) mutable {
-                                   switch (mode) {
-                                   case Debug::ContinuationMode::Continue:
-                                       std::forward<F>(callback)(rec, std::forward<Args>(args)...);
-                                       break;
-                                   case Debug::ContinuationMode::Abort:
-                                       rec.set_done();
-                                       break;
-                                   default:
-                                       throw 0;
-                                   }
-                               },
-                                  type, std::forward<Args>(args)... },
-                outContinuation, Execution::get_stop_token(rec));
-        }
-
-        template <typename Rec, typename F, typename... Args>
-        void pass(TypedPtr location, Rec &rec, F &&callback, Continuation &outContinuation, ContinuationType type, IndexType<size_t> line = {}, Args &&...args)
+        Continuation pass(TypedPtr location, Rec &rec, F &&callback, ContinuationType type, IndexType<size_t> line = {}, Args &&...args)
         {
             if (wantsPause(location, type, line)) {
-                yield(location, rec, std::forward<F>(callback), outContinuation, type, std::forward<Args>(args)...);
+                return suspend(location, Continuation::fromPromise(rec, std::forward<F>(callback), type, std::forward<Args>(args)...));
             } else {
                 std::forward<F>(callback)(rec, std::forward<Args>(args)...);
+                return {};
             }
         }
 
