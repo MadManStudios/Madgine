@@ -3,6 +3,7 @@
 #include "Generic/execution/awaitablesender.h"
 #include "Generic/execution/concepts.h"
 
+#include "awaitables/awaitabletimepoint.h"
 #include "taskhandle.h"
 #include "taskpromisesharedstate.h"
 
@@ -13,19 +14,15 @@
 namespace Engine {
 namespace Threading {
 
-    struct TaskFinalSuspend {
-        bool await_ready() noexcept { return !mHandle; }
-        std::coroutine_handle<> await_suspend(std::coroutine_handle<> self) noexcept
-        {
-            assert(mHandle);
-#if MODULES_ENABLE_TASK_TRACKING
-            Debug::Tasks::onReturn(self, mHandle.queue());
-#endif
-            return mHandle.release();
-        }
+    struct MODULES_EXPORT TaskFinalSuspend {
+        bool await_ready() noexcept;
+        std::coroutine_handle<> await_suspend(std::coroutine_handle<> self) noexcept;
         void await_resume() noexcept { }
 
         TaskHandle mHandle;
+#if ENABLE_TASK_TRACKING
+        TaskPromiseBase *mPromise;
+#endif
     };
 
     struct MODULES_EXPORT TaskInitialSuspend {
@@ -44,10 +41,65 @@ namespace Threading {
 #endif
     };
 
+    template <typename Awaiter>
+    struct TaskAwaiterGuard {
+        template <typename... Args>
+        TaskAwaiterGuard(Args &&...args)
+            : mAwaiter(std::forward<Args>(args)...)
+        {
+        }
+
+        bool await_ready() noexcept
+        {
+            return mAwaiter.await_ready();
+        }
+
+        decltype(std::declval<Awaiter>().await_suspend(std::declval<TaskHandle>())) await_suspend(TaskHandle handle)
+        {
+
+            using T = decltype(mAwaiter.await_suspend(std::move(handle)));
+
+            if constexpr (std::same_as<T, bool>) {
+                mQueue = handle.queue();
+                mAddress = handle.address();
+                bool result = mAwaiter.await_suspend(std::move(handle));
+#if MODULES_ENABLE_TASK_TRACKING
+                if (result)
+                    mDepth = Debug::Tasks::onSuspend(mQueue, mAddress);
+#endif
+                return result;
+            } else if constexpr (Concepts::InstanceOf<T, std::coroutine_handle>) {
+                return mAwaiter.await_suspend(std::move(handle));
+            } else {
+#if MODULES_ENABLE_TASK_TRACKING
+                mQueue = handle.queue();
+                mAddress = handle.address();
+                mDepth = Debug::Tasks::onSuspend(mQueue, mAddress);
+#endif
+                return mAwaiter.await_suspend(std::move(handle));
+            }
+        }
+
+        decltype(auto) await_resume()
+        {
+#if MODULES_ENABLE_TASK_TRACKING
+            if (mDepth != std::numeric_limits<uint16_t>::max())
+                Debug::Tasks::onResume(mQueue, mAddress, mDepth);
+#endif
+            return mAwaiter.await_resume();
+        }
+
+        TaskQueue *mQueue = nullptr;
+        void *mAddress = nullptr;
+        uint16_t mDepth = std::numeric_limits<uint16_t>::max();
+        Awaiter mAwaiter;
+    };
+
     struct MODULES_EXPORT TaskPromiseBase {
         TaskPromiseBase(bool immediate = false);
         ~TaskPromiseBase();
 
+        friend struct TaskInitialSuspend;
         TaskInitialSuspend initial_suspend() noexcept
         {
             return {};
@@ -57,7 +109,12 @@ namespace Threading {
         {
             if (mState)
                 mState->finalize();
-            return { std::move(mThenReturn) };
+            return { std::move(mThenReturn)
+#if ENABLE_TASK_TRACKING
+                         ,
+                this
+#endif
+            };
         }
 
         void unhandled_exception()
@@ -80,11 +137,14 @@ namespace Threading {
         decltype(auto) await_transform(T &&awaitable, std::source_location location = std::source_location::current())
         {
             mCurrentSuspensionPoint = std::move(location);
-
             if constexpr (Execution::AnySender<std::remove_reference_t<T>>) {
-                return Execution::AwaitableSender<T, TaskPromiseBase, TaskHandle> { std::forward<T>(awaitable), *this };
+                return TaskAwaiterGuard<Execution::AwaitableSender<T, TaskPromiseBase, TaskHandle>> { std::forward<T>(awaitable), *this };
+            } else if constexpr (requires { operator co_await(std::forward<T>(awaitable)); }) {
+                return TaskAwaiterGuard<decltype(operator co_await(std::forward<T>(awaitable)))> { DelayedConstruct { [&]() { return operator co_await(std::forward<T>(awaitable)); } } };
+            } else if constexpr (requires { std::forward<T>(awaitable).operator co_await(); }) {
+                return TaskAwaiterGuard<decltype(std::forward<T>(awaitable).operator co_await())> { DelayedConstruct { [&]() { return std::forward<T>(awaitable).operator co_await(); } } };
             } else {
-                return std::forward<T>(awaitable);
+                return TaskAwaiterGuard<T> { std::forward<T>(awaitable) };
             }
         }
 

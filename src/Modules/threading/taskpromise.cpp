@@ -60,7 +60,28 @@ namespace Threading {
     {
 #if ENABLE_TASK_TRACKING
         Debug::Tasks::onAssign(std::coroutine_handle<TaskPromiseBase>::from_promise(*mPromise), mPromise->queue(), std::move(location));
+        if (!mPromise->mThenReturn)
+            Debug::Tasks::onResume(mPromise->queue(), std::coroutine_handle<TaskPromiseBase>::from_promise(*mPromise).address(), 0);
 #endif
+    }
+
+    bool TaskFinalSuspend::await_ready() noexcept
+    {
+#if MODULES_ENABLE_TASK_TRACKING
+        if (mHandle) {
+            Debug::Tasks::onReturn(mHandle.address(), mPromise->queue());
+        } else {
+            uint16_t depth = Debug::Tasks::onSuspend(mPromise->queue(), nullptr);
+            assert(depth == 0);
+        }
+#endif
+        return !mHandle;
+    }
+
+    std::coroutine_handle<> TaskFinalSuspend::await_suspend(std::coroutine_handle<> self) noexcept
+    {
+        assert(mHandle);
+        return mHandle.release();
     }
 
     const std::source_location &TaskPromiseBase::getSuspensionPoint()

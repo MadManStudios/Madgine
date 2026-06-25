@@ -13,8 +13,7 @@ namespace Debug {
         void TaskTracker::onAssign(void *ident, std::source_location location)
         {
             std::lock_guard guard { mMutex };
-
-            // mEvents.emplace_back(Event:: { stacktrace }, ident);
+            
             auto pib = mTasksInFlight.try_emplace(ident, std::move(location));
             // assert(pib.second);
         }
@@ -22,25 +21,31 @@ namespace Debug {
         void TaskTracker::onEnter(void *ident, std::chrono::high_resolution_clock::time_point timePoint)
         {
             std::lock_guard guard { mMutex };
-            mEvents.emplace_back(Event::ENTER, ident, timePoint);
+            mEvents.emplace_back(Event::ENTER, ident, timePoint, mDepth++);
         }
 
         void TaskTracker::onReturn(void *ident, std::chrono::high_resolution_clock::time_point timePoint)
         {
             std::lock_guard guard { mMutex };
-            mEvents.emplace_back(Event::RETURN, ident, timePoint);
+            mEvents.emplace_back(Event::RETURN, ident, timePoint, --mDepth);
         }
 
-        void TaskTracker::onResume(void *ident, std::chrono::high_resolution_clock::time_point timePoint)
+        void TaskTracker::onResume(void *ident, uint16_t depth, std::chrono::high_resolution_clock::time_point timePoint)
         {
             std::lock_guard guard { mMutex };
-            mEvents.emplace_back(Event::RESUME, ident, timePoint);
+            mDepthStack.push(mDepth);
+            mDepth += depth;
+            mEvents.emplace_back(Event::RESUME, ident, timePoint, mDepth++);            
         }
 
-        void TaskTracker::onSuspend(void *ident, std::chrono::high_resolution_clock::time_point timePoint)
+        uint16_t TaskTracker::onSuspend(void *ident, std::chrono::high_resolution_clock::time_point timePoint)
         {
-            std::lock_guard guard { mMutex };
-            mEvents.emplace_back(Event::SUSPEND, ident, timePoint);
+            std::lock_guard guard { mMutex };            
+            mEvents.emplace_back(Event::SUSPEND, ident, timePoint, --mDepth);
+            uint16_t depth = mDepth - mDepthStack.top();
+            mDepth = mDepthStack.top();
+            mDepthStack.pop();
+            return depth;            
         }
 
         void TaskTracker::onDestroy(void *ident)
@@ -77,27 +82,25 @@ namespace Debug {
             queue->mTracker.onEnter(handle.address());
         }
 
-        void onReturn(const std::coroutine_handle<> &handle, Threading::TaskQueue *queue)
+        void onReturn(void *id, Threading::TaskQueue *queue)
         {
-            queue->mTracker.onReturn(handle.address());
+            queue->mTracker.onReturn(id);
         }
 
-        std::pair<Threading::TaskQueue*, void *> onResume(const Threading::TaskHandle &handle)
+        void onResume(Threading::TaskQueue *queue, void * id, uint16_t depth)
         {
-            handle.queue()->mTracker.onResume(handle.address());
-            return { handle.queue(), handle.address() };
+            queue->mTracker.onResume(id, depth);            
         }
 
-        void onSuspend(std::pair<Threading::TaskQueue *, void *> data)
+        uint16_t onSuspend(Threading::TaskQueue *queue, void *id)
         {
-            data.first->mTracker.onSuspend(data.second);
+            return queue->mTracker.onSuspend(id);
         }
 
         void onDestroy(Engine::Threading::TaskPromiseBase &promise)
         {
             promise.queue()->mTracker.onDestroy(std::coroutine_handle<Engine::Threading::TaskPromiseBase>::from_promise(promise).address());
         }
-
     }
 
 }

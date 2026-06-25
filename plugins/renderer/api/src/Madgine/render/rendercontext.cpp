@@ -59,15 +59,16 @@ namespace Render {
 
     Threading::Task<void> RenderContext::render()
     {
-        if (beginFrame()) {
-            PROFILE();
-            std::vector<Threading::TaskFuture<RenderFuture>> targets;
-            for (RenderTarget *target : Containers::safeIterate(mRenderTargets))
-                targets.push_back(target->update(this));
-            for (Threading::TaskFuture<RenderFuture> &wait : targets)
-                co_await wait;
-            endFrame();
+        while (!beginFrame()) {
+            co_await 3ms;
         }
+        PROFILE();
+        std::vector<Threading::TaskFuture<RenderFuture>> targets;
+        for (RenderTarget *target : Containers::safeIterate(mRenderTargets))
+            targets.push_back(target->update(this));
+        for (Threading::TaskFuture<RenderFuture> &wait : targets)
+            co_await wait;
+        endFrame();
     }
 
     bool RenderContext::beginFrame()

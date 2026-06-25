@@ -293,12 +293,6 @@ namespace Render {
         return it->second;
     }
 
-    void DirectX12RenderContext::setupRootSignature(ID3D12RootSignature *signature, ID3D12GraphicsCommandList *list)
-    {
-        list->SetGraphicsRootSignature(signature);
-        list->SetGraphicsRootDescriptorTable(3, mBufferMemoryHeap.descriptorTable());
-    }
-
     DirectX12CommandList DirectX12RenderContext::fetchCommandList(D3D12_COMMAND_LIST_TYPE type)
     {
         switch (type) {

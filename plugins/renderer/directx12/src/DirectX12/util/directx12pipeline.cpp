@@ -37,9 +37,10 @@ namespace Render {
         size_t samplesBits = sqrt(target->samples());
         assert(samplesBits * samplesBits == target->samples());
 
-        std::vector<TextureFormat> formats;
+        std::array<std::optional<TextureFormat>, 4> formats;
+        assert(target->textureCount() <= 4);
         for (size_t i = 0; i < target->textureCount(); ++i)
-            formats.emplace_back(target->textureFormat(i));
+            formats[i] = target->textureFormat(i);
         PipelineDescriptor desc {
             vertexFormat,
             groupSize,

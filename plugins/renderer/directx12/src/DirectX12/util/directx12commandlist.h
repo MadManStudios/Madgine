@@ -14,6 +14,8 @@ namespace Render {
 
         DirectX12CommandList &operator=(DirectX12CommandList &&);
 
+        void bindRootSignature(ID3D12RootSignature *signature);
+        void setPipelineState(const Platform::ReleasePtr<ID3D12PipelineState> &pipeline);
         RenderFuture execute();
 
         operator ID3D12GraphicsCommandList *();
@@ -33,6 +35,9 @@ namespace Render {
         Platform::ReleasePtr<ID3D12GraphicsCommandList> mList;
         Platform::ReleasePtr<ID3D12CommandAllocator> mAllocator;
         std::vector<Any> mAttachedResources;
+
+        ID3D12RootSignature *mCurrentSignature = nullptr;
+        ID3D12PipelineState *mCurrentPipelineState = nullptr;
     };
 
 }

@@ -2,6 +2,7 @@
 
 #include "directx12commandlist.h"
 
+#include "../directx12rendercontext.h"
 #include "directx12commandallocator.h"
 
 namespace Engine {
@@ -26,12 +27,34 @@ namespace Render {
         mList = std::move(other.mList);
         mAllocator = std::move(other.mAllocator);
         mAttachedResources = std::move(other.mAttachedResources);
+        mCurrentSignature = std::exchange(other.mCurrentSignature, nullptr);
+        mCurrentPipelineState = std::exchange(other.mCurrentPipelineState, nullptr);
         return *this;
+    }
+
+    void DirectX12CommandList::bindRootSignature(ID3D12RootSignature *signature)
+    {
+        if (mCurrentSignature != signature) {
+            mList->SetGraphicsRootSignature(signature);
+            mList->SetGraphicsRootDescriptorTable(3, DirectX12RenderContext::getSingleton().mBufferMemoryHeap.descriptorTable());
+            mCurrentSignature = signature;
+        }
+    }
+
+    void DirectX12CommandList::setPipelineState(const Platform::ReleasePtr<ID3D12PipelineState> &pipeline)
+    {
+        if (mCurrentPipelineState != pipeline) {
+            mList->SetPipelineState(pipeline);
+            attachResource(Platform::ReleasePtr<ID3D12PipelineState> { pipeline });
+            mCurrentPipelineState = pipeline;
+        }
     }
 
     RenderFuture DirectX12CommandList::execute()
     {
         if (mList) {
+            mCurrentSignature = nullptr;
+            mCurrentPipelineState = nullptr;
             return mManager->ExecuteCommandList(std::move(mList), std::move(mAllocator), std::move(mAttachedResources));
         }
         return {};

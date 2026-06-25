@@ -39,13 +39,12 @@ namespace Render {
         size_t samplesBits = sqrt(target->samples());
         assert(samplesBits * samplesBits == target->samples());
 
-        Platform::ReleasePtr<ID3D12PipelineState> pipeline = mPipeline->get(vertexFormat, groupSize, target, mDepthChecking);
+        const Platform::ReleasePtr<ID3D12PipelineState> &pipeline = mPipeline->get(vertexFormat, groupSize, target, mDepthChecking);
         if (!pipeline) {
             return false;
         }
 
-        commandList->SetPipelineState(pipeline);
-        target->mCommandList.attachResource(std::move(pipeline));
+        target->mCommandList.setPipelineState(pipeline);
 
         assert(groupSize > 0 && groupSize <= 3);
         D3D12_PRIMITIVE_TOPOLOGY mode = sModes[groupSize - 1];
@@ -67,7 +66,7 @@ namespace Render {
 
     void DirectX12PipelineInstance::bindRootSignature(DirectX12RenderTarget *target) const
     {
-        target->context()->setupRootSignature(mPipeline->rootSignature(), target->mCommandList);
+        target->mCommandList.bindRootSignature(mPipeline->rootSignature());        
     }
 
     Memory::WritableByteBuffer DirectX12PipelineInstance::mapParameters(size_t index)

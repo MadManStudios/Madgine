@@ -16,7 +16,7 @@ namespace Render {
 
         VertexFormat mVertexFormat;
         size_t mGroupSize;
-        std::vector<TextureFormat> mTextureFormats;
+        std::array<std::optional<TextureFormat>, 4> mTextureFormats;
         size_t mSamples;
     };
 }
@@ -32,8 +32,9 @@ struct hash<Engine::Render::PipelineDescriptor> {
         std::size_t h3 = desc.mTextureFormats.size();
         std::size_t h4 = desc.mSamples;
         std::size_t h = h1 ^ (h2 << 4) ^ (h3 << 8) ^ (h4 << 12);
-        for (Engine::Render::TextureFormat format : desc.mTextureFormats)
-            h = (h << 1) ^ format;
+        for (const std::optional<Engine::Render::TextureFormat> &format : desc.mTextureFormats)
+            if (format)
+                h = (h << 1) ^ *format;
         return h;
     }
 };

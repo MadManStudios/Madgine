@@ -110,7 +110,9 @@ namespace Tools {
 
                 size_t i = 0;
                 float lastResumeX = 0.0f;
+                void *id = nullptr;
 
+                float currentX = 0.0f;
                 while (it != end) {
                     const Debug::Tasks::TaskTracker::Event &ev = *it;
                     ++it;
@@ -120,28 +122,34 @@ namespace Tools {
                     switch (ev.mType) {
                     case Debug::Tasks::TaskTracker::Event::RESUME: {
                         lastResumeX = x;
-                        void *id = plotRecurse(it, end, x, ev.mIdentifier, 0, plotRect, i++);
-                        assert(id == ev.mIdentifier || (id == nullptr && it == end));
+                        currentX = x;
+                        id = plotRecurse(it, end, currentX, ev.mIdentifier, ev.mDepth, plotRect, i++);
+                        // assert(suspended || it == end);
                         break;
                     }
                     case Debug::Tasks::TaskTracker::Event::SUSPEND:
-                        if (x != lastResumeX) {
-                            plot(lastResumeX, x, 0, plotRect, ev.mIdentifier, ((i++) % 2));
+                        plot(lastResumeX, x, ev.mDepth, plotRect, id, (i++) % 2, 0.0f != currentX);
+                        if (lastResumeX != currentX) {
+                            plot(currentX, x, ev.mDepth + 1, plotRect, id, (i - 1) % 2);
                         }
+                        id = nullptr;
+                        currentX = x;
                         break;
-                    case Debug::Tasks::TaskTracker::Event::ENTER: {
-                        float startX = x;
-                        void *id = plotRecurse(it, end, x, ev.mIdentifier, 1, plotRect, 2 + i++);
-                        if (id != ev.mIdentifier && id != nullptr) {
-                            plot(lastResumeX, x, 0, plotRect, id, ((i++) % 2), startX != x);
-                            if (startX != x) {
-                                plot(lastResumeX, startX, 1, plotRect, id, ((i - 1) % 2));
-                            }
-                        }
-                        break;
-                    }
                     case Debug::Tasks::TaskTracker::Event::RETURN:
-                        plot(lastResumeX, x, 0, plotRect, ev.mIdentifier, ((i++) % 2));
+                        plot(lastResumeX, x, ev.mDepth, plotRect, id, (i++) % 2, 0.0f != currentX);
+                        if (lastResumeX != currentX) {
+                            plot(currentX, x, ev.mDepth + 1, plotRect, id, (i - 1) % 2);
+                        }
+                        id = ev.mIdentifier;
+                        currentX = x;
+                        break;
+                    case Debug::Tasks::TaskTracker::Event::ENTER:
+                        if (x != currentX) {
+                            plot(currentX, x, ev.mDepth, plotRect, id, (i++) % 2);
+                        }
+                        currentX = x;
+                        id = plotRecurse(it, end, currentX, ev.mIdentifier, ev.mDepth, plotRect, i++);
+                        break;
                     }
                 }
 
@@ -208,7 +216,7 @@ namespace Tools {
                             diff = std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(event.mTimePoint - last).count();
                         }
                         last = event.mTimePoint;
-                        ImGui::Text("%s: %s, %f ms", type.c_str(), mHoveredTracker->mTasksInFlight.at(event.mIdentifier).function_name(), diff);
+                        ImGui::Text("%s: (%hu) %s, %f ms", type.c_str(), event.mDepth, mHoveredTracker->mTasksInFlight.at(event.mIdentifier).function_name(), diff);
                     }
                 }
                 ImGui::EndTooltip();
@@ -216,18 +224,20 @@ namespace Tools {
 
             ImGui::Separator();
 
-            for (Threading::TaskQueue *queue : Threading::WorkGroup::self().taskQueues()) {
-                if (ImGui::TreeNode(queue->name().c_str())) {
-                    if (ImGui::TreeNode("tasks", "Tasks in Flight (%zu)", queue->taskInFlightCount())) {
-                        std::lock_guard guard { queue->mTracker.mMutex };
-                        for (auto &[id, stacktrace] : queue->mTracker.tasksInFlight()) {
+            for (auto [name, _tracker] : trackers) {
+                Debug::Tasks::TaskTracker &tracker = _tracker;
+                if (ImGui::TreeNode(name)) {
+                    if (ImGui::TreeNode("tasks", "Tasks in Flight")) {
+                        std::lock_guard guard { tracker.mMutex };
+                        for (auto &[id, stacktrace] : tracker.tasksInFlight()) {
                             ImGui::Text("%s", stacktrace.function_name());
                         }
                         ImGui::TreePop();
                     }
                     if (ImGui::TreeNode("events")) {
-                        std::lock_guard guard { queue->mTracker.mMutex };
-                        for (const auto &event : queue->mTracker.events()) {
+                        int i = 0;
+                        std::lock_guard guard { tracker.mMutex };
+                        for (const auto &event : tracker.events()) {
                             std::string type;
                             switch (event.mType) {
                             case Debug::Tasks::TaskTracker::Event::ENTER:
@@ -243,7 +253,9 @@ namespace Tools {
                                 type = "SUSPEND";
                                 break;
                             }
-                            ImGui::Text("%s: %s", type.c_str(), queue->mTracker.mTasksInFlight.at(event.mIdentifier).function_name());
+                            ImGui::Text("%s: (%hu) %s", type.c_str(), event.mDepth, event.mIdentifier ? tracker.mTasksInFlight.at(event.mIdentifier).function_name() : "");
+                            if (i++ == 1000)
+                                break;
                         }
                         ImGui::TreePop();
                     }
@@ -281,7 +293,7 @@ namespace Tools {
         // This will catch our interactions
         ImGui::InvisibleButton(name, canvas_sz, ImGuiButtonFlags_MouseButtonLeft | ImGuiButtonFlags_MouseButtonRight);
 
-        mLastXEnd = -100.0f;        
+        mLastXEnd = -100.0f;
 
         return { canvas_p0 + Math::Vector2 { 2, 2 }, canvas_sz - Math::Vector2 { 4, 4 } };
     }
@@ -308,6 +320,8 @@ namespace Tools {
 
         if (ImGui::IsMouseHoveringRect({ plotRect.mTopLeft.x + x, top }, { plotRect.mTopLeft.x + x_end, plotRect.bottom() - 5.0f * depth }, false)) {
             mNextHoveredId = id;
+            if (mHoveredId == id && ImGui::IsMouseClicked(ImGuiMouseButton_Left))
+                int i = 3;
         }
         mLastXEnd = x_end;
     }
@@ -330,11 +344,17 @@ namespace Tools {
                     plot(currentX, x, depth + 1, plotRect, id, color);
                 }
                 currentX = x;
-                void *id = plotRecurse(it, end, currentX, ev.mIdentifier, depth + 1, plotRect, i++);
-                assert(id == ev.mIdentifier || (id == nullptr && it == end));
+                void *innerId = plotRecurse(it, end, currentX, ev.mIdentifier, ev.mDepth, plotRect, i++);
+                assert(!innerId || it == end);
                 break;
             }
             case Debug::Tasks::TaskTracker::Event::SUSPEND:
+                plot(startX, x, depth, plotRect, id, color, startX != currentX);
+                if (startX != currentX) {
+                    plot(currentX, x, depth + 1, plotRect, id, color);
+                }
+                currentX = x;
+                return nullptr;
             case Debug::Tasks::TaskTracker::Event::RETURN:
                 plot(startX, x, depth, plotRect, id, color, startX != currentX);
                 if (startX != currentX) {
@@ -347,10 +367,10 @@ namespace Tools {
                     plot(currentX, x, depth + 1, plotRect, id, color);
                 }
                 currentX = x;
-                void *suspendId = plotRecurse(it, end, currentX, ev.mIdentifier, depth + 1, plotRect, i++);
-                if (suspendId != ev.mIdentifier) {
+                void *innerId = plotRecurse(it, end, currentX, ev.mIdentifier, depth + 1, plotRect, i++);
+                if (!innerId) {
                     plot(startX, currentX, depth, plotRect, id, color, true);
-                    return suspendId;
+                    return nullptr;
                 }
                 break;
             }
@@ -362,7 +382,7 @@ namespace Tools {
             plot(currentX, plotRect.mSize.x, depth + 1, plotRect, id, color);
         }
         currentX = plotRect.mSize.x;
-        return nullptr;
+        return id;
     }
 
     float TaskTracker::getEventCoordinate(std::chrono::high_resolution_clock::time_point t, float pixelWidth)

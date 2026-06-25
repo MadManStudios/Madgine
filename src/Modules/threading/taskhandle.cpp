@@ -35,16 +35,10 @@ namespace Threading {
 
     void TaskHandle::operator()()
     {
-#if MODULES_ENABLE_TASK_TRACKING
-        auto id = Debug::Tasks::onResume(*this);
-#endif
         // Reset mHandle to allow exception handling
         std::coroutine_handle<TaskPromiseBase> handle = mHandle;
         mHandle = {};
         handle.resume();
-#if MODULES_ENABLE_TASK_TRACKING
-        Debug::Tasks::onSuspend(id);
-#endif
     }
 
     void TaskHandle::resume()

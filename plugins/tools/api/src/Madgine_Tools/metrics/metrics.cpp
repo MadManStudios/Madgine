@@ -28,10 +28,10 @@ namespace Tools {
         ImGui::SetNextWindowSize({ 500, 125 }, ImGuiCond_FirstUseEver);
 
         if (beginToolPanel("Metrics", &mVisible, ImGuiDir_Down)) {
-            if (ImGui::CollapsingHeader("FPS")) {
+            if (ImGui::CollapsingHeader("Frame Time")) {
                 ImGui::Text("Time/frame: ");
                 ImGui::Duration(std::chrono::microseconds(static_cast<long long>(ImGui::GetIO().DeltaTime * 1000000.0f)));
-                ImGui::PlotHistory(mFramesTrend, "Frames per Second");
+                ImGui::PlotHistory(mFramesTrend, "Frame Time Plot");
             }
 
             for (ToolBase *tool : mRoot.tools() | std::views::transform(projectionUniquePtrToPtr)) {
@@ -45,18 +45,18 @@ namespace Tools {
     void Metrics::update()
     {
         if (ImGui::GetIO().DeltaTime > 0.0f) {
-            float fps = 1.0f / ImGui::GetIO().DeltaTime;
+            float fps = ImGui::GetIO().DeltaTime;
             mFramesPerSecond << fps;
         }
 
         mTimeBank += ImGui::GetIO().DeltaTime;
         if (mTimeBank >= 0.5f) {
             mTimeBank = fmodf(mTimeBank, 0.5f);
-            mFramesTrend << mFramesPerSecond.average();
+            mFramesTrend << 1000.0f * mFramesPerSecond.average();
         }
 
         if (ImGui::BeginStatus()) {
-            ImGui::Text("%.2f FPS", mFramesPerSecond.average());
+            ImGui::Text("%.2f FPS", 1.0f / mFramesPerSecond.average());
             ImGui::EndStatus();
         }
 

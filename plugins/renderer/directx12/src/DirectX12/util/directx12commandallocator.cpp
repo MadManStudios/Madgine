@@ -87,7 +87,7 @@ namespace Render {
 
             if (isComplete(fenceValue)) {
                 alloc = std::move(allocator);
-                mAllocatorPool.erase(mAllocatorPool.begin());
+                mAllocatorPool.pop_front();
                 HRESULT hr = alloc->Reset();
                 DX12_CHECK(hr);
             }
@@ -101,16 +101,15 @@ namespace Render {
         Platform::ReleasePtr<ID3D12GraphicsCommandList> list;
 
         if (!mCommandListPool.empty()) {
-            list = std::move(mCommandListPool.back());
-            mCommandListPool.pop_back();
+            list = std::move(mCommandListPool.front());
+            mCommandListPool.pop();
             HRESULT hr = list->Reset(alloc, nullptr);
             DX12_CHECK(hr);
         } else {
             HRESULT hr = GetDevice()->CreateCommandList(0, mType, alloc, nullptr, IID_PPV_ARGS(&list));
             DX12_CHECK(hr);
+            list->SetName(StringUtil::toWString(mName).c_str());
         }
-
-        list->SetName(StringUtil::toWString(mName).c_str());
 
         if (mType == D3D12_COMMAND_LIST_TYPE_DIRECT) {
             ID3D12DescriptorHeap *heap = mDescriptorHeap->resource();
@@ -154,8 +153,8 @@ namespace Render {
                         std::chrono::nanoseconds {
                             static_cast<long long>((mData->second - mAllocator->mGPUTimestampOffset) / mAllocator->mGPUFrequency) }
                     };
-                    mAllocator->mTracker.onEnter(mAllocator, startTimePoint);
-                    mAllocator->mTracker.onReturn(mAllocator, endTimePoint);
+                    mAllocator->mTracker.onResume(mAllocator, 0, startTimePoint);
+                    mAllocator->mTracker.onSuspend(mAllocator, endTimePoint);
 #    endif
                 }
                 std::pair<uint64_t, uint64_t> *mData;
@@ -179,7 +178,7 @@ namespace Render {
         if (allocator || !discardResources.empty())
             mAllocatorPool.emplace_back(mNextFenceValue, std::move(allocator), std::move(discardResources));
 
-        mCommandListPool.push_back(std::move(list));
+        mCommandListPool.emplace(std::move(list));
 
         return signalFence();
     }

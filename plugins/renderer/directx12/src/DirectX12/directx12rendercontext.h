@@ -49,7 +49,6 @@ namespace Render {
         static DirectX12RenderContext &getSingleton();
         
         ID3D12RootSignature *getRootSignature(const PipelineSignature &signature);
-        void setupRootSignature(ID3D12RootSignature *signature, ID3D12GraphicsCommandList *list);
 
         DirectX12CommandList fetchCommandList(D3D12_COMMAND_LIST_TYPE type);
 

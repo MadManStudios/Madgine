@@ -43,8 +43,8 @@ namespace Render {
         DirectX12DescriptorHeap *mDescriptorHeap;
         DirectX12QueryHeap *mTimestampHeap;
         Platform::ReleasePtr<ID3D12CommandQueue> mCommandQueue;
-        std::vector<std::tuple<RenderFuture, Platform::ReleasePtr<ID3D12CommandAllocator>, std::vector<Any>>> mAllocatorPool;
-        std::vector<Platform::ReleasePtr<ID3D12GraphicsCommandList>> mCommandListPool;
+        std::deque<std::tuple<RenderFuture, Platform::ReleasePtr<ID3D12CommandAllocator>, std::vector<Any>>> mAllocatorPool;
+        std::queue<Platform::ReleasePtr<ID3D12GraphicsCommandList>> mCommandListPool;
 
         uint64_t mLastCompletedFenceValue = 0;
         uint64_t mNextFenceValue;
