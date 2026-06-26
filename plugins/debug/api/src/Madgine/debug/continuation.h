@@ -132,13 +132,15 @@ namespace Debug {
             return impl && impl != sAborted;
         }
 
-        void stop()
+        bool stop()
         {
             Base *impl = mImpl.exchange(sAborted);
             if (impl && impl != sAborted) {
                 impl->call(ContinuationMode::Abort);
                 delete impl;
+                return true;
             }
+            return false;
         }
 
         ContinuationType type() const

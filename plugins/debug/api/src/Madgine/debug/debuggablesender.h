@@ -239,8 +239,8 @@ namespace Execution {
 
             void stop()
             {
-                mContinuation.stop();
-                mState.stop(); // TODO: Maybe add a check if state is actually running
+                if (!mContinuation.stop())
+                    mState.stop();
             }
 
             friend auto tag_invoke(visit_state_t, state *state, auto &&visitor)
