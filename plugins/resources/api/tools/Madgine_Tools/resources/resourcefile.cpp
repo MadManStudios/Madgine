@@ -68,6 +68,18 @@ namespace Tools {
         return visible;
     }
 
+    void ResourceFileBase::Focus()
+    {
+        std::string fileName;
+        if (!mPath.empty()) {
+            fileName = mPath.filename().str();
+        } else {
+            fileName = "<unnamed>";
+        }
+
+        mEditor.focusToolWindow(fileName.c_str());
+    }
+
     void ResourceFileBase::save()
     {
         if (mPath.empty()) {

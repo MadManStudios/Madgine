@@ -13,6 +13,7 @@ namespace Tools {
         ResourceFileBase(ResourceEditor &editor, Platform::Filesystem::Path path);
                 
         bool Begin(bool *open = nullptr, ImGuiWindowFlags flags = 0);
+        void Focus();
 
         void save();
         virtual void saveAs(const Platform::Filesystem::Path &path) = 0;

@@ -10,14 +10,14 @@
 namespace Engine {
 namespace Tools {
 
-    TextDocument::TextDocument(Platform::Filesystem::Path path, TextEditor *editor)
+    TextDocument::TextDocument(Platform::Filesystem::Path path, TextEditor &editor)
         : mPath(std::move(path))
         , mEditor("C:\\Users\\Bub\\Desktop\\GitHub\\Madgine\\plugins\\tools\\texteditor\\data\\zep.cfg", sPixelScale())
     {
         auto &display = static_cast<Zep::ZepDisplay_ImGui &>(mEditor.GetDisplay());
 
-        ImFont *font = editor->font();
-        int fontPixelHeight = editor->fontPixelHeight();
+        ImFont *font = editor.font();
+        int fontPixelHeight = editor.fontPixelHeight();
 
         display.SetFont(Zep::ZepTextType::UI, std::make_shared<Zep::ZepFont_ImGui>(display, font, fontPixelHeight));
         display.SetFont(Zep::ZepTextType::Text, std::make_shared<Zep::ZepFont_ImGui>(display, font, fontPixelHeight));
@@ -46,33 +46,36 @@ namespace Tools {
         bool open = true;
 
         if (ImGui::Begin(mPath.filename().c_str(), &open)) {
+            renderContent(ImGui::GetContentRegionAvail());
 
-            if (ImGui::BeginChild("Debug Panel", { 20, 0 })) {
-            }
-            ImGui::EndChild();
-            ImGui::SameLine();
-            if (ImGui::BeginChild("Content")) {
-
-                auto min = ImGui::GetCursorScreenPos();
-                auto max = ImGui::GetContentRegionAvail();
-                max.x = std::max(1.0f, max.x);
-                max.y = std::max(1.0f, max.y);
-
-                // Fill the window
-                max.x = min.x + max.x;
-                max.y = min.y + max.y;
-                mEditor.SetDisplayRegion(Zep::NVec2f { min.x, min.y }, Zep::NVec2f { max.x, max.y });
-
-                mEditor.Display();
-
-                if (ImGui::IsWindowFocused())
-                    mEditor.HandleInput();
-            }
-            ImGui::EndChild();
+            handleInputs();
         }
         ImGui::End();
 
         return open;
+    }
+
+    void TextDocument::renderContent(ImVec2 size)
+    {
+
+        if (ImGui::BeginChild("Debug Panel", { 20, 0 })) {
+        }
+        ImGui::EndChild();
+        ImGui::SameLine();
+
+        auto pos = ImGui::GetCursorScreenPos();
+
+        mEditor.SetDisplayRegion(Zep::NVec2f { pos.x, pos.y }, Zep::NVec2f { pos.x + size.x - 20.0f, pos.y + size.y });
+
+        mEditor.Display();
+
+    }
+
+    void TextDocument::handleInputs()
+    {
+        if (ImGui::IsWindowFocused(ImGuiFocusedFlags_ChildWindows | ImGuiFocusedFlags_DockHierarchy)) {
+            mEditor.HandleInput();
+        }
     }
 
     void TextDocument::goToLine(size_t line)

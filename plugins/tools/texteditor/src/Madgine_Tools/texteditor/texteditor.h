@@ -9,7 +9,7 @@
 namespace Engine {
 namespace Tools {
 
-    Zep::NVec2f sPixelScale();
+    MADGINE_TEXTEDITOR_EXPORT Zep::NVec2f sPixelScale();
 
     struct MADGINE_TEXTEDITOR_EXPORT TextEditor : Tool<TextEditor> {
 

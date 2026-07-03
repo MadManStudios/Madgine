@@ -9,9 +9,12 @@ namespace Tools {
 
     struct MADGINE_TEXTEDITOR_EXPORT TextDocument : Zep::IZepComponent {
 
-        TextDocument(Platform::Filesystem::Path path, TextEditor *editor);
+        TextDocument(Platform::Filesystem::Path path, TextEditor &editor);
 
         bool render();
+        void renderContent(ImVec2 size = { -1.0f, -1.0f });
+
+        void handleInputs();
 
         void goToLine(size_t lineNr);
 

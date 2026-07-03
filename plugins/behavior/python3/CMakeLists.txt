@@ -73,11 +73,11 @@ endif()
 set(sources "")
 FolderSources(sources "" tools)
 	FolderSources(sources tools Madgine_Tools)
-		FolderSources(sources Madgine_Tools Python3 python3debugvisualizers.cpp python3immediatewindow.cpp python3immediatewindow.h)
+		FolderSources(sources Madgine_Tools Python3 python3debugvisualizers.cpp python3editor.cpp python3editor.h python3file.cpp python3file.h python3immediatewindow.cpp python3immediatewindow.h)
 
 add_tools(Python3 ${sources} PRECOMPILED_HEADER tools/Madgine_Tools/Python3/python3toolslib.h)
 
-target_link_plugins(Python3Tools TextEditor DebuggerTools)
+target_link_plugins(Python3Tools TextEditor DebuggerTools ResourcesTools)
 
 
 

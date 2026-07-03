@@ -261,6 +261,12 @@ namespace Tools {
         return ImGui::Begin(name.c_str(), nullptr, flags | ImGuiWindowFlags_NoMove);
     }
 
+    void ToolBase::focusToolWindow(const char *name)
+    {
+        std::string fullName = std::string { name } + "##" + std::string { key() };
+        ImGui::SetWindowFocus(fullName.c_str());
+    }
+
     ImGuiID ToolBase::dockSpaceId() const
     {
         return mDockSpaceId;

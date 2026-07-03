@@ -8,7 +8,6 @@
 #include "Madgine_Tools/resources/resourcefile.h"
 #include "Madgine_Tools/toolbase.h"
 #include "Madgine_Tools/toolscollector.h"
-#include "nodegraphfile.h"
 
 namespace Engine {
 namespace Tools {

@@ -67,7 +67,6 @@ namespace Tools {
         mInspector->addTypeHandler<Scene::Entity::Entity>([](const Traced<Reflect::ScopePtr &> &scope, bool editable) {
             Scene::Entity::Entity *e = scope_cast<Scene::Entity::Entity>(scope.get());
             if (ImGui::Button(e->name().c_str())) {
-
             }
             if (ImGui::IsItemHovered()) {
                 Im3D::SetItemHoveredNextFrame(e->name().c_str());
@@ -156,9 +155,9 @@ namespace Tools {
     {
         Scene::SceneLoader::Resource *scene = static_cast<Scene::SceneLoader::Resource *>(res);
 
-        mFiles.try_emplace(scene, *this, scene);
+        auto [it, b] = mFiles.try_emplace(scene, *this, scene);
 
-        ImGui::SetWindowFocus(((res ? res->path().str() : "<unnamed>") + "##Scene").c_str());
+        it->second.Focus();
     }
 
     void SceneTool::run(const Scene::SceneContainer &container)

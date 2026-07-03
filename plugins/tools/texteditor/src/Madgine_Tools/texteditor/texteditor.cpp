@@ -96,7 +96,7 @@ namespace Tools {
 
     TextDocument &TextEditor::openDocument(const Platform::Filesystem::Path &path)
     {
-        return mDocuments.try_emplace(path, path, this).first->second;
+        return mDocuments.try_emplace(path, path, *this).first->second;
     }
 
     TextDocument *TextEditor::getDocument(const Platform::Filesystem::Path &path)

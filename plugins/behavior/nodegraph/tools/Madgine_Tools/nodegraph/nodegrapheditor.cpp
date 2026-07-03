@@ -524,7 +524,8 @@ namespace Tools {
         }
 
         mVisible = true;
-        ImGui::SetWindowFocus(((res ? res->path().str() : "<unnamed>") + "##NodeGraphEditor").c_str());
+
+        Focus();
     }
 
     std::string_view NodeGraphEditor::getCurrentName() const

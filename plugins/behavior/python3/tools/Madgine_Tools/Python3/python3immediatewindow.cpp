@@ -16,7 +16,6 @@
 #include "Meta/reflect/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
-#include "Madgine_Tools/debugger/debuggerview.h"
 #include "Madgine_Tools/texteditor/textdocument.h"
 #include "Madgine_Tools/texteditor/texteditor.h"
 #include "Python3/python3behaviors.h"
@@ -42,8 +41,6 @@ UNIQUECOMPONENT(Engine::Tools::Python3ImmediateWindow)
 namespace Engine {
 namespace Tools {
 
-    std::vector<TypedPtr> visualizeBehaviorDebugLocation(ContinuationList &continuations, DebuggerView &view, const Debug::ContextInfo &context, const PyObject *location, TypedPtr inlineLocation);
-
     Python3ImmediateWindow::Python3ImmediateWindow(ImRoot &root)
         : Tool<Python3ImmediateWindow>(root)
     {
@@ -56,9 +53,6 @@ namespace Tools {
 
     Threading::Task<bool> Python3ImmediateWindow::init()
     {
-        getTool<DebuggerView>().registerDebugLocationVisualizer<visualizeBehaviorDebugLocation>();
-
-        Debug::Debugger::getSingleton().addListener(this);
 
         mEnv = &Behavior::Python3::Python3Environment::getSingleton();
 
@@ -67,7 +61,6 @@ namespace Tools {
 
     Threading::Task<void> Python3ImmediateWindow::finalize()
     {
-        Debug::Debugger::getSingleton().removeListener(this);
 
         co_await ToolBase::finalize();
     }
@@ -92,37 +85,6 @@ namespace Tools {
     std::string_view Python3ImmediateWindow::name()
     {
         return "Python3ImmediateWindow";
-    }
-
-    bool Python3ImmediateWindow::wantsPause(Debug::ContextInfo &context, TypedPtr location, Debug::ContinuationType type, IndexType<size_t> line)
-    {
-        /*if (const Behavior::Python3::Python3DebugLocation *pyLocation = location.as<const Behavior::Python3::Python3DebugLocation>()) {
-
-            const Filesystem::Path &path = pyLocation->file();
-
-            if (!path.empty()) {
-                TextDocument *doc = getTool<TextEditor>().getDocument(path);
-                if (doc && doc->hasBreakpoint(line)) {
-                    doc->goToLine(line);
-                    return true;
-                }
-            }
-        }*/
-
-        return false;
-    }
-
-    void Python3ImmediateWindow::onSuspend(Debug::ContextInfo &context, TypedPtr location, Debug::ContinuationType type)
-    {
-        /* if (const Behavior::Python3::Python3DebugLocation *pyLocation = location.as<const Behavior::Python3::Python3DebugLocation>()) {
-
-            const Filesystem::Path &path = pyLocation->file();
-
-            if (!path.empty()) {
-                TextDocument &doc = getTool<TextEditor>().openDocument(path);
-                doc.goToLine(pyLocation->lineNr());
-            }
-        }*/
     }
 
     bool Python3ImmediateWindow::interpret(EMSCRIPTEN_WORKAROUND(std::string_view) command)

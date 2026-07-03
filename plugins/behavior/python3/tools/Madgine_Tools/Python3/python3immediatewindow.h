@@ -1,6 +1,5 @@
 #pragma once
 
-#include "Madgine/debug/debuglistener.h"
 
 #include "Madgine_Tools/texteditor/interactiveprompt.h"
 #include "Madgine_Tools/toolbase.h"
@@ -9,7 +8,7 @@
 namespace Engine {
 namespace Tools {
 
-    struct MADGINE_PYTHON3_TOOLS_EXPORT Python3ImmediateWindow : Tool<Python3ImmediateWindow>, Debug::DebugListener, Interpreter {
+    struct MADGINE_PYTHON3_TOOLS_EXPORT Python3ImmediateWindow : Tool<Python3ImmediateWindow>, Interpreter {
         Python3ImmediateWindow(ImRoot &root);
 
         virtual std::string_view key() const override;
@@ -24,8 +23,6 @@ namespace Tools {
         std::string_view name() override;
 
     protected:
-        bool wantsPause(Debug::ContextInfo &context, TypedPtr location, Debug::ContinuationType type, IndexType<size_t> line) override;
-        void onSuspend(Debug::ContextInfo &context, TypedPtr location, Debug::ContinuationType type) override;
 
         bool interpret(EMSCRIPTEN_WORKAROUND(std::string_view) command) override;        
 

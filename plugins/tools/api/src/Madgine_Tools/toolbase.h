@@ -67,6 +67,7 @@ namespace Tools {
         bool beginSubPanel(const char *name, bool *open, ImGuiDir dockingDir, float ratio = 0.2f, ImGuiWindowFlags flags = 0);
         bool beginContent(ImGuiWindowFlags flags = 0);
         bool beginGame();
+        void focusToolWindow(const char *name);
 
     protected:
         virtual Threading::Task<bool> init();
