@@ -28,6 +28,17 @@ namespace Resources {
             *this = Loader::load(res);
         }
 
+        Handle(std::string_view name)
+        {
+            *this = Loader::load(name);
+        }
+
+        template <size_t N>
+        Handle(const char (&name)[N])
+            : Handle(std::string_view {name})
+        {            
+        }
+
         Handle(Data data)
             : mData(data)
         {
