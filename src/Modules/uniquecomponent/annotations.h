@@ -22,7 +22,7 @@ namespace Plugins {
     struct ConstructorImpl {
         template <typename T, typename ActualType>
         ConstructorImpl(type_holder_t<T>, type_holder_t<ActualType>)
-            : mCtor([](Args &&...args) -> R {
+            : mCtor([](Args &&...args) -> std::unique_ptr<R> {
                 return std::make_unique<ActualType>(std::forward<Args>(args)...);
             })
         {
@@ -33,12 +33,30 @@ namespace Plugins {
             return object.mCtor(std::forward<Args>(args)...);
         }
 
-        R(*mCtor)
-        (Args &&...);
+        std::unique_ptr<R> (*mCtor)(Args &&...);
     };
 
     template <typename... Args>
     using Constructor = ConstructorImpl<Placeholder<0>, Args...>;
+
+    template <typename Base = Placeholder<0>>
+    struct Destructor {
+
+        template <typename T, typename ActualType>
+        Destructor(type_holder_t<T>, type_holder_t<ActualType>)
+            : mDtor([](Base *object) {
+                delete static_cast<ActualType *>(object);
+            })
+        {
+        }
+
+        void destroy(Base *objectToDestroy) const
+        {
+            return mDtor(objectToDestroy);
+        }
+
+        void (*mDtor)(Base *);
+    };
 
     template <typename R, typename... Args>
     struct FactoryImpl {

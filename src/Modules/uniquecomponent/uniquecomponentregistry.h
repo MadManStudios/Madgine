@@ -106,7 +106,7 @@ namespace Plugins {
     struct Registry : RegistryBase {
 
         typedef _Base Base;
-        using Annotations = GroupedAnnotation<typename replace<_Annotations>::template type<std::unique_ptr<Base>>...>;
+        using Annotations = GroupedAnnotation<typename replace<_Annotations>::template type<Base>...>;
 
         struct CollectorInfo : CollectorInfoBase {
             template <typename T, typename ActualType>
