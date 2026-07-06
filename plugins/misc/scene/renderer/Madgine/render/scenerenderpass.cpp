@@ -111,8 +111,8 @@ namespace Render {
             }
 
             size_t i = 0;
-            for (Scene::Entity::PointLight &light : lights | std::ranges::views::take(2)) {
-                Scene::Entity::Transform *t = light.entity().getComponent<Scene::Entity::Transform>();
+            for (auto &[light, entity] : lights | std::ranges::views::take(2)) {
+                Scene::Entity::Transform *t = entity.getComponent<Scene::Entity::Transform>();
                 if (t) {
                     float range = light.mRange;
                     perFrame->pointLights[i].light.position = (v * Math::Vector4 { t->mPosition, 1.0f }).xyz();

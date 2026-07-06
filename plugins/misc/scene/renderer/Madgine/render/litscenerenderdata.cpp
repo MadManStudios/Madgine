@@ -33,7 +33,8 @@ namespace Render {
         co_await mScene.mutex().locked(AccessMode::READ, [this]() {
             // TODO Culling
 
-            for (const auto &mesh : mScene.entityComponentList<Scene::Entity::Mesh>().data()) {
+            for (auto &[mesh, entity] : mScene.entityComponentList<Scene::Entity::Mesh>().data()) {               
+
                 if (!mesh.isVisible())
                     continue;
 
@@ -41,12 +42,12 @@ namespace Render {
                 if (!meshData)
                     continue;
 
-                Scene::Entity::Transform *transform = mesh.entity().getComponent<Scene::Entity::Transform>();
+                Scene::Entity::Transform *transform = entity.getComponent<Scene::Entity::Transform>();
                 if (!transform)
                     continue;
 
                 const GPUMeshData::Material *material = nullptr;
-                Scene::Entity::Material *materialComponent = mesh.entity().getComponent<Scene::Entity::Material>();
+                Scene::Entity::Material *materialComponent = entity.getComponent<Scene::Entity::Material>();
                 if (materialComponent) {
                     material = materialComponent->get();
                 } else if (mesh.material() < meshData->mMaterials.size()) {
@@ -59,7 +60,7 @@ namespace Render {
                     diffuseColor = material->mDiffuseColor;
                 }
 
-                Scene::Entity::Skeleton *skeleton = mesh.entity().getComponent<Scene::Entity::Skeleton>();
+                Scene::Entity::Skeleton *skeleton = entity.getComponent<Scene::Entity::Skeleton>();
                 Engine::Render::GPUPtr<Math::Matrix4[]> bones;
                 if (skeleton)
                     bones = skeleton->mBoneMatrices;

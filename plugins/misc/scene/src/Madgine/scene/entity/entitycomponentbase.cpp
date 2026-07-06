@@ -12,55 +12,9 @@
 METATABLE_BEGIN(Engine::Scene::Entity::EntityComponentBase)
 METATABLE_END(Engine::Scene::Entity::EntityComponentBase)
 
-SERIALIZETABLE_BEGIN(Engine::Scene::Entity::SyncableEntityComponentBase)
-SERIALIZETABLE_END(Engine::Scene::Entity::SyncableEntityComponentBase)
-
 namespace Engine {
 namespace Scene {
     namespace Entity {
-
-        EntityComponentBase::EntityComponentBase(Entity &entity)
-            : mEntity(&entity)
-        {
-        }
-
-        Entity &EntityComponentBase::entity() const
-        {
-            assert(mEntity);
-            return *mEntity;
-        }
-
-        bool EntityComponentBase::isFree() const
-        {
-            return !mEntity;
-        }
-
-        bool SyncableEntityComponentBase::isMaster() const
-        {
-            return entity().handle().isMaster();
-        }
-
-        void SyncableEntityComponentBase::writeAction(OffsetPtr offset, size_t componentIndex, void *data, Serialize::ParticipantId answerTarget, Serialize::MessageId answerId, const std::set<Serialize::ParticipantId> &targets) const
-        {
-            EntityComponentActionPayload payload;
-            payload.mComponentIndex = componentIndex;
-            payload.mOffset = offset;
-            payload.mComponent = this;
-            payload.mData = data;
-
-            std::vector<Serialize::WriteMessage> streams = getMasterActionMessageTargets(&entity().handle(), answerTarget, answerId, targets);
-            entity().handle().serializeType()->writeAction(&entity().handle(), 0, streams, &payload);
-        }
-
-        void Engine::Scene::Entity::SyncableEntityComponentBase::writeRequest(OffsetPtr offset, void *data, Serialize::ParticipantId requester, Serialize::MessageId requesterTransactionId, Serialize::GenericMessageReceiver receiver) const
-        {
-            throw 0;
-        }
-
-        Serialize::WriteMessage getSlaveRequestMessageTarget(const EntityComponentBase *unit, Serialize::ParticipantId requester, Serialize::MessageId requestId, Serialize::GenericMessageReceiver receiver)
-        {
-            throw 0;
-        }
 
     }
 }

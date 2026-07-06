@@ -63,7 +63,7 @@ namespace Scene {
 
         void Transform::setParent(EntityPtr parent)
         {
-            if (parent == entity().pointer())
+            /* if (parent == entity().pointer())
                 return;
             EntityPtr ptr = parent;
             while (Execution::access_binding(ptr, [&](Entity &e) {
@@ -75,7 +75,8 @@ namespace Scene {
                         } else {                            
                             return true;
                         } }))
-                ;
+                ;*/
+            // TODO: check for cycles in parent hierarchy
             mParent = parent;
         }
 

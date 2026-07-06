@@ -25,58 +25,8 @@ namespace Scene {
 
         struct MADGINE_SCENE_EXPORT EntityComponentBase {
             using Container = Containers::FreeListContainer<std::deque<Placeholder<0>>, EntityComponentFreeListConfig<Placeholder<0>>>;
-
-            EntityComponentBase(Entity &entity);
-
-            Entity &entity() const;
-
-            bool isFree() const;
-
-        private:
-            NulledPtr<Entity> mEntity;
         };
 
-        struct MADGINE_SCENE_EXPORT SyncableEntityComponentBase : EntityComponentBase, Serialize::SerializableUnitBase {
-            using Container = Containers::FreeListContainer<std::deque<Placeholder<0>>, EntityComponentFreeListConfig<Placeholder<0>>>;
-
-            using EntityComponentBase::EntityComponentBase;
-
-            bool isMaster() const;
-
-        protected:
-            void writeAction(OffsetPtr offset, size_t componentIndex, void *data, Serialize::ParticipantId answerTarget, Serialize::MessageId answerId, const std::set<Serialize::ParticipantId> &targets = {}) const;
-            void writeRequest(OffsetPtr offset, void *data, Serialize::ParticipantId requester = 0, Serialize::MessageId requesterTransactionId = 0, Serialize::GenericMessageReceiver receiver = {}) const;
-
-            friend MADGINE_SCENE_EXPORT Serialize::WriteMessage getSlaveRequestMessageTarget(const EntityComponentBase *unit, Serialize::ParticipantId requester, Serialize::MessageId requestId, Serialize::GenericMessageReceiver receiver);
-
-            template <typename Ty, typename... Args>
-            void writeAction(Ty *field, Serialize::ParticipantId answerTarget, Serialize::MessageId answerId, Args &&...args) const
-            {
-                size_t componentIndex = std::remove_pointer_t<decltype(field->parent())>::component_index();
-                OffsetPtr offset { this, field };
-                typename Ty::action_payload data { std::forward<Args>(args)... };
-                writeAction(offset, componentIndex, &data, answerTarget, answerId, {});
-            }
-
-            template <typename Ty, typename... Args>
-            void writeRequest(Ty *field, Serialize::ParticipantId requester, Serialize::MessageId requesterTransactionId, Args &&...args) const
-            {
-                OffsetPtr offset { this, field };
-                typename Ty::request_payload data { std::forward<Args>(args)... };
-                writeRequest(offset, &data, requester, requesterTransactionId);
-            }
-
-            template <typename Ty, typename... Args>
-            void writeRequest(Ty *field, Serialize::GenericMessageReceiver receiver, Args &&...args) const
-            {
-                OffsetPtr offset { this, field };
-                typename Ty::request_payload data { std::forward<Args>(args)... };
-                writeRequest(offset, &data, 0, 0, std::move(receiver));
-            }
-
-            template <typename T>
-            friend struct Serialize::Syncable;
-        };
     }
 }
 }
