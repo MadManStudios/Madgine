@@ -15,28 +15,16 @@ namespace Scene {
 
             SERIALIZABLEUNIT(Transform)
 
-            using EntityComponent<Transform>::EntityComponent;
-
-            Transform(Transform &&) = default;
-
-            Transform &operator=(Transform &&) = default;
-
             Math::Matrix4 matrix() const;
-            Math::Matrix4 worldMatrix() const;
-            Math::Matrix4 parentMatrix() const;
+            Math::Matrix4 worldMatrix(Entity &entity) const;
+            Math::Matrix4 parentMatrix(Entity &entity) const;
 
-            Math::Vector3 worldPosition() const;
-            Math::Quaternion worldOrientation() const;
-
-            void setParent(EntityPtr parent);
-            const EntityPtr &parent() const;
+            Math::Vector3 worldPosition(Entity &entity) const;
+            Math::Quaternion worldOrientation(Entity &entity) const;
 
             Math::Vector3 mPosition;
             Math::Vector3 mScale = Math::Vector3::UNIT_SCALE;
             Math::Quaternion mOrientation;
-
-        private:
-            EntityPtr mParent;
         };
 
     }

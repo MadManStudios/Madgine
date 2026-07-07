@@ -62,6 +62,7 @@ METATABLE_BEGIN(Engine::Scene::Entity::Entity)
 METATABLE_DYNAMIC_END(componentBuilder, componentInit, Engine::Scene::Entity::Entity)
 
 SERIALIZETABLE_BEGIN(Engine::Scene::Entity::Entity)
+    FIELD(mParent)
     FIELD(mComponents, Serialize::ParentCreator<&Engine::Scene::Entity::Entity::readComponent, &Engine::Scene::Entity::Entity::writeComponent, &Engine::Scene::Entity::Entity::clearComponents>)
     FIELD(mBehaviors)
 SERIALIZETABLE_END(Engine::Scene::Entity::Entity)
@@ -162,6 +163,18 @@ namespace Scene {
             }
         }
 
+        EntityComponentBase *Entity::copyComponent(size_t i, const EntityComponentBase &component)
+        {
+            auto it = mComponents.physical().find(i);
+            if (it != mComponents.physical().end()) {
+                EntityComponentRegistry::get(i).copy(it->mComponent, component);
+                return &it->mComponent;
+            } else {
+                auto it = mComponents.emplace(i, sceneMgr().entityComponentList(i).emplace(*this, component));
+                return &it->mComponent;
+            }
+        }
+
         void Entity::removeComponent(std::string_view name)
         {
             removeComponent(EntityComponentRegistry::sComponentsByName().at(name));
@@ -234,7 +247,7 @@ namespace Scene {
             case Containers::AFTER | Containers::RESET:
                 throw "TODO";
             case Containers::AFTER | Containers::EMPLACE:
-                sceneMgr().entityComponentList(it->mType).init(it->mComponent);
+                sceneMgr().entityComponentList(it->mType).init(it->mComponent, *this);
                 break;
             case Containers::BEFORE | Containers::ERASE:
                 sceneMgr().entityComponentList(it->mType).finalize(it->mComponent);
@@ -291,6 +304,31 @@ namespace Scene {
             clearComponents();
         }
 
+        
+        void Entity::setParent(EntityPtr parent)
+        {
+            if (parent == mSelf)
+                return;
+            EntityPtr ptr = parent;
+            while (Execution::access_binding(ptr, [&](Entity &e) {
+                        EntityPtr next = e.mParent;
+                        ptr = next;
+                        if (next == mSelf) {
+                            e.setParent({});
+                            return false;
+                        } else {
+                            return true;
+                        } }))
+                ;
+            // TODO: check for cycles in parent hierarchy
+            mParent = parent;
+        }
+
+        const EntityPtr &Entity::parent() const
+        {
+            return mParent;
+        }
+        
     }
 }
 }

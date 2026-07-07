@@ -17,8 +17,8 @@ namespace Tools {
 
         SceneEditor(SceneTool &tool);
 
-        int hoveredAxis() const;
-        Scene::Entity::Transform *const &hoveredTransform() const;
+        IndexType<uint8_t> hoveredAxis() const;
+        const Scene::Entity::EntityPtr &hoveredEntity() const;
 
         void deselect();
         void select(const Scene::Entity::EntityPtr &entity);
@@ -53,8 +53,8 @@ namespace Tools {
     private:
         SceneTool &mTool;
 
-        int mHoveredAxis = -1;
-        Scene::Entity::Transform *mHoveredTransform;        
+        IndexType<uint8_t> mHoveredAxis;
+        Scene::Entity::EntityPtr mHoveredEntity; 
         
     };
 

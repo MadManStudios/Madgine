@@ -124,18 +124,20 @@ namespace Tools {
             int mouseButton = (result & ImGui::InteractiveViewResultFlags_MouseButtonMask_) - 1;
 
             if (ImGui::IsItemActivated() && mouseButton == 0) {
-                if (mEditor.hoveredAxis() >= 0) {
+                if (mEditor.hoveredAxis()) {
                     mDraggedAxis = mEditor.hoveredAxis();
                     mDragStartRay = ray;
-                    mDragStoredPosition = mEditor.hoveredTransform()->mPosition;
+                    Execution::access_binding(mEditor.hoveredEntity(), [this](Scene::Entity::Entity &e) {
+                        mDragStoredPosition = e.getComponent<Scene::Entity::Transform>()->mPosition;
+                        mDragStoredMatrix = e.getComponent<Scene::Entity::Transform>()->matrix();
+                    });
 
                     Math::Vector3 axis = axes[mDraggedAxis];
 
                     Math::Plane plane = cameraPlane(mCamera, mDragStoredPosition, &axis);
 
                     if (auto intersection = Intersect(mDragStartRay, plane)) {
-                        mDragTransform = mEditor.hoveredTransform();
-                        mDragStoredMatrix = mEditor.hoveredTransform()->matrix();
+                        mDragEntity = mEditor.hoveredEntity();                        
                         mDragRelMousePosition = mDragStartRay.point(intersection[0]) - mDragStoredPosition;
                         mAxisDragging = true;
                     } else {
@@ -169,7 +171,9 @@ namespace Tools {
                     if (mDraggedAxis != 2)
                         distance.z = 0.0f;
 
-                    mDragTransform->mPosition = mDragStoredPosition + mDragTransform->parentMatrix().ToMat3().Inverse() * distance;
+                    Execution::access_binding(mDragEntity, [&](Scene::Entity::Entity &e) {
+                        e.getComponent<Scene::Entity::Transform>()->mPosition = mDragStoredPosition + e.getComponent<Scene::Entity::Transform>()->parentMatrix(e).ToMat3().Inverse() * distance;
+                    });
                 }
             }
 
@@ -178,9 +182,12 @@ namespace Tools {
                 UndoStack stack;
                 Render::GPUMeshLoader::Resource *resource = nullptr;
                 if (ImGui::AcceptDraggableValueType(resource)) {
-                    mEditor.sceneMgr().container("Default").createEntity("", [=](Scene::Entity::Entity &e) {
-                        e.addComponent<Scene::Entity::Transform>()->mPosition = pos;
-                        e.addComponent<Scene::Entity::Mesh>()->set(resource); }, [this](Scene::Entity::EntityPtr ptr) { mEditor.select(std::move(ptr)); });
+                    mEditor.sceneMgr().container("Default").createEntity("",
+                        { Scene::Entity::Transform {
+                              .mPosition = pos },
+                            Scene::Entity::Mesh {
+                                .mMesh = resource } },
+                        [this](Scene::Entity::EntityPtr ptr) { mEditor.select(std::move(ptr)); });
                 } else if (ImGui::IsDraggableValueTypeBeingAccepted(resource)) {
                     Render::GPUMeshLoader::Handle handle = resource->loadData();
                     handle.info()->setPersistent(true);

@@ -8,6 +8,7 @@
 #include "Meta/serialize/hierarchy/toplevelunit.h"
 
 #include "entity.h"
+#include "entitydescriptor.h"
 
 namespace Engine {
 namespace Scene {
@@ -17,7 +18,7 @@ namespace Scene {
 
             friend struct SyncableEntityComponentBase;
 
-            EntityHandle(SceneContainer &container, const std::string &name, std::function<void(Entity &)> init = {});
+            EntityHandle(SceneContainer &container, const std::string &name, const EntityDescriptor &init = {});
 
             const EntityPtr &ptr() const;
 

@@ -5,6 +5,7 @@
 
 #include "Madgine/render/camera.h"
 #include "Madgine/render/scenerenderpass.h"
+#include "Madgine/scene/entity/entityptr.h"
 
 #include "Madgine_Tools/im3d/im3drenderpass.h"
 #include "gridpass.h"
@@ -31,9 +32,9 @@ namespace Tools {
 
         SceneEditor &mEditor;
 
-        int mDraggedAxis;
+        IndexType<uint8_t> mDraggedAxis;
         Math::Ray3 mDragStartRay;
-        Scene::Entity::Transform *mDragTransform;
+        Scene::Entity::EntityPtr mDragEntity;
         Math::Matrix4 mDragStoredMatrix;
         Math::Vector3 mDragStoredPosition;
         Math::Vector3 mDragRelMousePosition;

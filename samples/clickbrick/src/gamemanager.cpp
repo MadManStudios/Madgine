@@ -37,7 +37,7 @@ METATABLE_BEGIN_BASE(ClickBrick::GameManager, Engine::Widgets::WidgetHandlerBase
     MEMBER(mCamera)
 METATABLE_END(ClickBrick::GameManager)
 
-//NATIVE_BEHAVIOR(ClickBrick_Brick, ClickBrick::Brick, Engine::Behavior::InputParameter<"Speed", float>, Engine::Behavior::InputParameter<"Direction", Engine::Vector3>, Engine::Behavior::InputParameter<"Rotation", Engine::Quaternion>)
+// NATIVE_BEHAVIOR(ClickBrick_Brick, ClickBrick::Brick, Engine::Behavior::InputParameter<"Speed", float>, Engine::Behavior::InputParameter<"Direction", Engine::Vector3>, Engine::Behavior::InputParameter<"Rotation", Engine::Quaternion>)
 
 namespace ClickBrick {
 
@@ -62,6 +62,8 @@ Engine::Threading::Task<bool> GameManager::init()
 
     mGameRenderTarget = mUI.window().getRenderer()->createRenderTexture({ 1, 1 }, { .mName = "Game", .mFormat = Engine::Render::FORMAT_RGBA8_SRGB });
     mGameRenderTarget->addRenderPass(&mSceneRenderer);
+
+    Engine::Render::GPUMeshLoader::load("Brick").info()->setPersistent(true);
 
     co_return co_await WidgetHandlerBase::init();
 }
@@ -121,16 +123,14 @@ void GameManager::spawnBrick()
     Engine::Math::Vector3 orientation = { static_cast<float>(rand() - RAND_MAX / 2), static_cast<float>(rand() - RAND_MAX / 2), static_cast<float>(rand() - RAND_MAX / 2) };
     Engine::Math::Quaternion q { static_cast<float>(rand()), orientation };
 
-    mUI.app().getGlobalAPIComponent<Engine::Scene::SceneManager>().container("Default").createEntity("", [=](Engine::Scene::Entity::Entity &brick) {
-        Engine::Scene::Entity::Transform *t = brick.addComponent<Engine::Scene::Entity::Transform>();
-        t->mScale = { 0.01f, 0.01f, 0.01f };
-        t->mPosition = dir * -10;        
-        t->mOrientation = q;
-
-        brick.addComponent<Engine::Scene::Entity::Mesh>()->setName("Brick");
-        brick.getComponent<Engine::Scene::Entity::Mesh>()->handle().info()->setPersistent(true);
-
-        return true; }, [=, this](Engine::Scene::Entity::EntityPtr brick) {
+    mUI.app().getGlobalAPIComponent<Engine::Scene::SceneManager>().container("Default").createEntity("",
+        { Engine::Scene::Entity::Transform {
+              .mPosition = dir * -10,
+              .mScale = { 0.01f, 0.01f, 0.01f },
+              .mOrientation = q },
+            Engine::Scene::Entity::Mesh {
+                .mMesh = "Brick" } },
+        [=, this](Engine::Scene::Entity::EntityPtr brick) {
         float speed = rand() / float(RAND_MAX) * 2.0f + 1.0f;
         Engine::Execution::access_binding(brick, [&, this](Engine::Scene::Entity::Entity &e) { e.addBehavior(Brick(speed, dir, q, *this)); });
             mBricks.push_back(brick); });
@@ -152,8 +152,8 @@ void GameManager::onPointerClickHandler(const Engine::Widgets::PointerClickEvent
                     hit = brick;
                     distance = hits[0];
                 }
-            }   
-        });        
+            }
+        });
     }
 
     if (hit) {

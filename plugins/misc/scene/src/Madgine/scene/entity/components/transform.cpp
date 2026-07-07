@@ -20,7 +20,6 @@ METATABLE_BEGIN(Engine::Scene::Entity::Transform)
 METATABLE_END(Engine::Scene::Entity::Transform)
 
 SERIALIZETABLE_BEGIN(Engine::Scene::Entity::Transform)
-    FIELD(mParent)
     FIELD(mPosition)
     FIELD(mScale)
     FIELD(mOrientation)
@@ -36,54 +35,32 @@ namespace Scene {
             return TransformMatrix(mPosition, mScale, mOrientation);
         }
 
-        Math::Matrix4 Transform::worldMatrix() const
+        Math::Matrix4 Transform::worldMatrix(Entity &entity) const
         {
-            return parentMatrix() * matrix();
+            return parentMatrix(entity) * matrix();
         }
 
-        Math::Matrix4 Transform::parentMatrix() const
+        Math::Matrix4 Transform::parentMatrix(Entity &entity) const
         {
             Math::Matrix4 result = Math::Matrix4::IDENTITY;
-            Execution::access_binding(mParent, [&](Entity &e) {
-                result = e.getComponent<Transform>()->worldMatrix(); });
+            Execution::access_binding(entity.parent(), [&](Entity &e) {
+                result = e.getComponent<Transform>()->worldMatrix(e); });
             return result;
         }
 
-        Math::Vector3 Transform::worldPosition() const
+        Math::Vector3 Transform::worldPosition(Entity &entity) const
         {
-            return worldMatrix().GetColumn(3).xyz();
+            return worldMatrix(entity).GetColumn(3).xyz();
         }
 
-        Math::Quaternion Transform::worldOrientation() const
+        Math::Quaternion Transform::worldOrientation(Entity &entity) const
         {
             Math::Quaternion result;
-            Execution::access_binding(mParent, [&](Entity &e) { result = e.getComponent<Transform>()->worldOrientation(); });
+            Execution::access_binding(entity.parent(), [&](Entity &e) { result = e.getComponent<Transform>()->worldOrientation(e); });
             return result * mOrientation;
         }
 
-        void Transform::setParent(EntityPtr parent)
-        {
-            /* if (parent == entity().pointer())
-                return;
-            EntityPtr ptr = parent;
-            while (Execution::access_binding(ptr, [&](Entity &e) {
-                        EntityPtr next = e.getComponent<Transform>()->mParent;
-                        ptr = next;
-                        if (next == entity().pointer()) {
-                            e.getComponent<Transform>()->setParent({});
-                            return false;
-                        } else {                            
-                            return true;
-                        } }))
-                ;*/
-            // TODO: check for cycles in parent hierarchy
-            mParent = parent;
-        }
 
-        const EntityPtr &Transform::parent() const
-        {
-            return mParent;
-        }
     }
 }
 }

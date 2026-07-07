@@ -16,9 +16,11 @@ namespace Scene {
     namespace Entity {
 
         template <typename T>
-        struct EntityComponentStorage {
-            EntityComponentStorage(Entity &entity)
-                : mEntity(&entity)
+        struct EntityComponentStorageImpl {
+            template <typename... Args>
+            EntityComponentStorageImpl(Entity &entity, Args &&...args)
+                : mComponent(std::forward<Args>(args)...)
+                , mEntity(&entity)
             {
             }
 
@@ -62,6 +64,11 @@ namespace Scene {
         };
 
         template <typename T>
+        struct EntityComponentStorage : EntityComponentStorageImpl<T> {
+            using EntityComponentStorageImpl<T>::EntityComponentStorageImpl;
+        };
+
+        template <typename T>
         struct EntityComponentList : EntityComponentListBase {
 
             using Vector = Containers::container_api<typename replace<typename T::Container>::template type<EntityComponentStorage<T>>>;
@@ -96,10 +103,10 @@ namespace Scene {
                 return &::serializeTable<T>();
             }
 
-            void init(EntityComponentBase &comp) override final
+            void init(EntityComponentBase &comp, Entity &entity) override final
             {
                 if constexpr (requires { &T::init; })
-                    static_cast<T &>(comp).init(reinterpret_cast<EntityComponentStorage<T> &>(comp).entity());
+                    static_cast<T &>(comp).init(entity);
             }
 
             void finalize(EntityComponentBase &comp) override final
@@ -111,6 +118,12 @@ namespace Scene {
             EntityComponentBase &emplace(Entity &entity) override final
             {
                 typename Vector::iterator it = Containers::emplace(mData, mData.end(), entity);
+                return it->mComponent;
+            }
+
+            EntityComponentBase &emplace(Entity &entity, const EntityComponentBase &source) override final
+            {
+                typename Vector::iterator it = Containers::emplace(mData, mData.end(), entity, static_cast<const T &>(source));
                 return it->mComponent;
             }
 

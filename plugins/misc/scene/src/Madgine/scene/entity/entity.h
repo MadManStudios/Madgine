@@ -39,6 +39,9 @@ namespace Scene {
             EntityPtr pointer();
             EntityHandle &handle();
 
+            void setParent(EntityPtr parent);
+            const EntityPtr &parent() const;
+
             Debug::DebuggableLifetime<Behavior::get_named_d> &lifetime();
 
             const std::string &key() const;
@@ -49,6 +52,12 @@ namespace Scene {
             T *addComponent()
             {
                 return static_cast<T *>(addComponent(Plugins::component_index<T>()));
+            }
+
+            template <typename T>
+            T *copyComponent(const T &component)
+            {
+                return static_cast<T *>(copyComponent(Plugins::component_index<T>(), component));
             }
 
             template <typename T>
@@ -90,6 +99,7 @@ namespace Scene {
 
             EntityComponentBase *addComponent(std::string_view name);
             EntityComponentBase *addComponent(size_t i);
+            EntityComponentBase *copyComponent(size_t i, const EntityComponentBase &component);
             void removeComponent(std::string_view name);
             void removeComponent(size_t i);
             void clearComponents();
@@ -142,6 +152,8 @@ namespace Scene {
             DEBUGGABLE_LIFETIME(mLifetime, Behavior::get_named_d);
 
             EntityPtr mSelf;
+
+            EntityPtr mParent;
 
             Behavior::BehaviorList mBehaviors;
         };

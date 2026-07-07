@@ -2,7 +2,7 @@
 
 #include "entitycache.h"
 
-#include "Madgine/scene/entity/components/transform.h"
+
 #include "Madgine/scene/scenemanager.h"
 
 #include "sceneeditor.h"
@@ -39,7 +39,7 @@ namespace Tools {
     bool EntityCache::update(Node &node, const Scene::Entity::EntityPtr &parent)
     {
         bool alive = Execution::access_binding(node.mEntity, [&](Scene::Entity::Entity &e) {
-            return (!e.hasComponent<Scene::Entity::Transform>() && !parent) || (e.hasComponent<Scene::Entity::Transform>() && parent == e.getComponent<Scene::Entity::Transform>()->parent());
+            return parent == e.parent();
         });
         if (!alive) {
             eraseNode(node);
@@ -53,12 +53,8 @@ namespace Tools {
     {
         Scene::Entity::EntityPtr parent;
 
-        Execution::access_binding(e, [&](Scene::Entity::Entity &entity) {
-            Scene::Entity::Transform *transform = entity.getComponent<Scene::Entity::Transform>();
-
-            if (transform) {
-                parent = transform->parent();
-            }
+        Execution::access_binding(e, [&](Scene::Entity::Entity &entity) {            
+            parent = entity.parent();
         });
 
         if (parent) {

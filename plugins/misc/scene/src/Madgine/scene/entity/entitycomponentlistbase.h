@@ -11,9 +11,10 @@ namespace Scene {
             virtual Serialize::SerializableDataPtr getSerialized(EntityComponentBase &comp) = 0;
             virtual Serialize::SerializableDataConstPtr getSerialized(const EntityComponentBase &comp) const = 0;
             virtual const Serialize::SerializeTable *serializeTable() const = 0;
-            virtual void init(EntityComponentBase &comp) = 0;
+            virtual void init(EntityComponentBase &comp, Entity &entity) = 0;
             virtual void finalize(EntityComponentBase &comp) = 0;
             virtual EntityComponentBase &emplace(Entity &entity) = 0;
+            virtual EntityComponentBase &emplace(Entity &entity, const EntityComponentBase &source) = 0;
             virtual void erase(EntityComponentBase &comp) = 0;
             virtual bool empty() = 0;
             virtual void clear() = 0;

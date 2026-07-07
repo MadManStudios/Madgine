@@ -33,7 +33,7 @@ namespace Render {
 
             for (auto &[mesh, entity] : mScene.entityComponentList<Scene::Entity::Mesh>()) {
 
-                if (!mesh.isVisible())
+                if (!mesh.mIsVisible)
                     continue;
 
                 const GPUMeshData *meshData = mesh.data();
@@ -49,7 +49,7 @@ namespace Render {
                 if (skeleton)
                     bones = skeleton->mBoneMatrices;
 
-                mInstances[meshData].push_back({ transform->worldMatrix(), bones });
+                mInstances[meshData].push_back({ transform->worldMatrix(entity), bones });
             }
         });
 

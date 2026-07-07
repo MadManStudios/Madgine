@@ -58,6 +58,25 @@ namespace Plugins {
         void (*mDtor)(Base *);
     };
 
+    template <typename Base = Placeholder<0>>
+    struct Copying {
+
+        template <typename T, typename ActualType>
+        Copying(type_holder_t<T>, type_holder_t<ActualType>)
+            : mCopy([](Base &target, const Base &source) {
+                static_cast<ActualType &>(target) = static_cast<const ActualType &>(source);
+            })
+        {
+        }
+
+        void copy(Base &target, const Base &source) const
+        {
+            return mCopy(target, source);
+        }
+
+        void (*mCopy)(Base &, const Base &);
+    };
+
     template <typename R, typename... Args>
     struct FactoryImpl {
         template <typename T, typename ActualType>

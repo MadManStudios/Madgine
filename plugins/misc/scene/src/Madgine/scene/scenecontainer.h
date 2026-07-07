@@ -8,6 +8,7 @@
 #include "Meta/serialize/hierarchy/toplevelunit.h"
 
 #include "entity/entity.h"
+#include "entity/entitydescriptor.h"
 #include "entity/entityhandle.h"
 
 namespace Engine {
@@ -20,8 +21,8 @@ namespace Scene {
 
         SceneContainer(SceneManager &sceneMgr);
 
-        Execution::Sender<Serialize::MessageResult, Entity::EntityPtr> createEntityAsync(const std::string &name = "", std::function<void(Entity::Entity &)> init = {});
-        void createEntity(const std::string &name = "", std::function<void(Entity::Entity &)> init = {}, Closure<void(Entity::EntityPtr)> cb = {}, Closure<void(Serialize::MessageResult)> onError = {});
+        Execution::Sender<Serialize::MessageResult, Entity::EntityPtr> createEntityAsync(const std::string &name = "", Entity::EntityDescriptor init = {});
+        void createEntity(const std::string &name = "", Entity::EntityDescriptor init = {}, Closure<void(Entity::EntityPtr)> cb = {}, Closure<void(Serialize::MessageResult)> onError = {});
 
         void startLifetime();
         void endLifetime();
@@ -62,7 +63,7 @@ namespace Scene {
 
     private:
         Serialize::StreamResult readEntity(Serialize::CallerHierarchyFormattedSerializeStream in, OutRef<SceneContainer> &mgr, std::string &name);
-        std::tuple<SceneContainer &, std::string, std::function<void(Entity::Entity &)>> createEntityData(const std::string &name, std::function<void(Entity::Entity &)> init);
+        std::tuple<SceneContainer &, std::string, Entity::EntityDescriptor> createEntityData(const std::string &name, Entity::EntityDescriptor init);
         const char *writeEntity(Serialize::CallerHierarchyFormattedSerializeStream out, const Entity::EntityHandle &handle) const;
 
         SYNCABLE_CONTAINER(mEntities, EntityContainer, Execution::SignalFunctor<void, const EntityContainer::iterator &, int>);

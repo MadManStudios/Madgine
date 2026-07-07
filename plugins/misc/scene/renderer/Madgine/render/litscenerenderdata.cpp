@@ -35,7 +35,7 @@ namespace Render {
 
             for (auto &[mesh, entity] : mScene.entityComponentList<Scene::Entity::Mesh>().data()) {               
 
-                if (!mesh.isVisible())
+                if (!mesh.mIsVisible)
                     continue;
 
                 const GPUMeshData *meshData = mesh.data();
@@ -49,9 +49,9 @@ namespace Render {
                 const GPUMeshData::Material *material = nullptr;
                 Scene::Entity::Material *materialComponent = entity.getComponent<Scene::Entity::Material>();
                 if (materialComponent) {
-                    material = materialComponent->get();
-                } else if (mesh.material() < meshData->mMaterials.size()) {
-                    material = &meshData->mMaterials[mesh.material()];
+                    material = &materialComponent->mMaterial;
+                } else if (mesh.mMaterial < meshData->mMaterials.size()) {
+                    material = &meshData->mMaterials[mesh.mMaterial];
                 }
                 ResourceBlock resource;
                 Math::Vector4 diffuseColor { 1.0f, 1.0f, 1.0f, 1.0f };
@@ -65,7 +65,7 @@ namespace Render {
                 if (skeleton)
                     bones = skeleton->mBoneMatrices;
 
-                mInstances[NonInstancedData { meshData, resource }].push_back({ transform->worldMatrix(), diffuseColor, bones });
+                mInstances[NonInstancedData { meshData, resource }].push_back({ transform->worldMatrix(entity), diffuseColor, bones });
             }
         });
 

@@ -101,11 +101,10 @@ namespace Engine {
 namespace Scene {
     namespace Entity {
 
-        EntityHandle::EntityHandle(SceneContainer &container, const std::string &name, std::function<void(Entity &)> init)
+        EntityHandle::EntityHandle(SceneContainer &container, const std::string &name, const EntityDescriptor &init)
         {
             container.lifetime().attach(EntitySender { {}, *this, container, name, [&](Entity &e) {
-                                                          if (init)
-                                                              init(e);
+                                                          init.apply(e);                                                              
                                                           mPtr = e.pointer();
                                                       } });
             assert(mPtr);

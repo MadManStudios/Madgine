@@ -88,11 +88,11 @@ namespace Scene {
         return Serialize::read(in, name, "name");
     }
 
-    std::tuple<SceneContainer &, std::string, std::function<void(Entity::Entity &)>> SceneContainer::createEntityData(const std::string &name, std::function<void(Entity::Entity &)> init)
+    std::tuple<SceneContainer &, std::string, Entity::EntityDescriptor> SceneContainer::createEntityData(const std::string &name, Entity::EntityDescriptor init)
     {
         std::string actualName = name.empty() ? generateUniqueName() : name;
 
-        return make_tuple(std::ref(*this), actualName, init);
+        return make_tuple(std::ref(*this), actualName, std::move(init));
     }
 
     const char *SceneContainer::writeEntity(Serialize::CallerHierarchyFormattedSerializeStream out, const Entity::EntityHandle &handle) const
@@ -110,7 +110,7 @@ namespace Scene {
         return "Entity";
     }
 
-    Execution::Sender<Serialize::MessageResult, Entity::EntityPtr> SceneContainer::createEntityAsync(const std::string &name, std::function<void(Entity::Entity &)> init)
+    Execution::Sender<Serialize::MessageResult, Entity::EntityPtr> SceneContainer::createEntityAsync(const std::string &name, Entity::EntityDescriptor init)
     {
         auto fut = co_await mutex().locked(AccessMode::WRITE, [this, name, init { std::move(init) }]() mutable {
             return TupleUnpacker::invokeFlatten(LIFT(mEntities.emplace_async, this), mEntities.end(), createEntityData(name, std::move(init)));
@@ -121,9 +121,9 @@ namespace Scene {
         co_return it->ptr();
     }
 
-    void SceneContainer::createEntity(const std::string &name, std::function<void(Entity::Entity &)> init, Closure<void(Entity::EntityPtr)> cb, Closure<void(Serialize::MessageResult)> onError)
+    void SceneContainer::createEntity(const std::string &name, Entity::EntityDescriptor init, Closure<void(Entity::EntityPtr)> cb, Closure<void(Serialize::MessageResult)> onError)
     {
-        mLifetime.attach(createEntityAsync(name, init) | Execution::then(cb ? std::move(cb) : [](Entity::EntityPtr) { }) | Execution::onError(onError ? std::move(onError) : [](Serialize::MessageResult) { }));
+        mLifetime.attach(createEntityAsync(name, std::move(init)) | Execution::then(cb ? std::move(cb) : [](Entity::EntityPtr) { }) | Execution::onError(onError ? std::move(onError) : [](Serialize::MessageResult) { }));
     }
 
     void SceneContainer::startLifetime()

@@ -21,11 +21,6 @@ namespace Engine {
 namespace Scene {
     namespace Entity {
 
-        const Render::GPUMeshData::Material *Material::get() const
-        {
-            return &mMaterial;
-        }
-
     }
 }
 }

@@ -1,16 +1,16 @@
 <Container syncId=259>
     <mEntities>
-        <Entity name="Madgine_AutoGen_Name_2" syncId=261>
+        <Entity name="Madgine_AutoGen_Name_2" syncId=260>
+            <mParent>0</mParent>
             <mComponents>
                 <Mesh serId=1>
                     <mMesh serId=2>
                         <Name>Cube</Name>
                     </mMesh>
-                    <Material>0</Material>
+                    <mMaterial>0</mMaterial>
                 </Mesh>
                 <Transform serId=3>
-                    <mParent>0</mParent>
-                    <mPosition>[0.762033, 2.27424, -2.08078]</mPosition>
+                    <mPosition>[-0.057, 2.27424, -2.08078]</mPosition>
                     <mScale>[1, 1, 1]</mScale>
                     <mOrientation>{-0.136969, 0.694001, 0.689395, -0.155979}</mOrientation>
                 </Transform>
@@ -19,42 +19,52 @@
                 <mEntries>
                     <Native/Rotate serId=5>
                         <mParameters>
-                            <Axis>[0, 1, 0]</Axis>
-							<Speed>1</Speed>
-                            <Entity value=false></Entity>
+                            <Axis>[0, 1, 0.3]</Axis>
+                            <Speed>1</Speed>
+                            <Entity value=false>
+                            </Entity>
                         </mParameters>
                     </Native/Rotate>
                 </mEntries>
             </mBehaviors>
         </Entity>
-        <Entity name="Madgine_AutoGen_Name_1" syncId=262>
+        <Entity name="Madgine_AutoGen_Name_1" syncId=261>
+            <mParent>260</mParent>
             <mComponents>
                 <Mesh serId=6>
                     <mMesh serId=7>
                         <Name>Cube</Name>
                     </mMesh>
-                    <Material>0</Material>
+                    <mMaterial>0</mMaterial>
                 </Mesh>
-                <Transform serId=8>
-                    <mParent>261</mParent>
+                <Transform serId=8>                    
                     <mPosition>[-1.43923, 3.27748, -0.383336]</mPosition>
                     <mScale>[1, 1, 1]</mScale>
                     <mOrientation>{0, 0, 0, 1}</mOrientation>
                 </Transform>
             </mComponents>
-            <mBehaviors serId=10>
+            <mBehaviors serId=9>
                 <mEntries>
-                    <Native/Rotate serId=11>
+                    <Native/Rotate serId=10>
                         <mParameters>
-							<Axis>[0, 0, 1.35]</Axis>
-							<Speed>-4.05</Speed>
-                            <Entity value=false></Entity>
-						</mParameters>
+                            <Axis>[0, 0, 1.35]</Axis>
+                            <Speed>-4.05</Speed>
+                            <Entity value=false>
+                            </Entity>
+                        </mParameters>
                     </Native/Rotate>
                 </mEntries>
             </mBehaviors>
         </Entity>
-        <Entity name="Madgine_AutoGen_Name_2" syncId=263>
+        <Entity name="Madgine_AutoGen_Name_2" syncId=262>
+            <mComponents>
+            </mComponents>
+            <mBehaviors serId=11>
+                <mEntries>
+                </mEntries>
+            </mBehaviors>
+        </Entity>
+        <Entity name="Madgine_AutoGen_Name_3" syncId=263>
             <mComponents>
             </mComponents>
             <mBehaviors serId=12>
@@ -62,7 +72,7 @@
                 </mEntries>
             </mBehaviors>
         </Entity>
-        <Entity name="Madgine_AutoGen_Name_3" syncId=264>
+        <Entity name="Madgine_AutoGen_Name_4" syncId=264>
             <mComponents>
             </mComponents>
             <mBehaviors serId=13>
@@ -70,7 +80,7 @@
                 </mEntries>
             </mBehaviors>
         </Entity>
-        <Entity name="Madgine_AutoGen_Name_4" syncId=265>
+        <Entity name="Madgine_AutoGen_Name_5" syncId=265>
             <mComponents>
             </mComponents>
             <mBehaviors serId=14>
@@ -78,47 +88,33 @@
                 </mEntries>
             </mBehaviors>
         </Entity>
-        <Entity name="Madgine_AutoGen_Name_5" syncId=266>
+        <Entity name="Madgine_AutoGen_Name_6" syncId=266>
+            <mParent>0</mParent>
             <mComponents>
-            </mComponents>
-            <mBehaviors serId=15>
-                <mEntries>
-                </mEntries>
-            </mBehaviors>
-        </Entity>
-        <Entity name="Madgine_AutoGen_Name_6" syncId=267>
-            <mComponents>
-            </mComponents>
-            <mBehaviors serId=16>
-                <mEntries>
-                </mEntries>
-            </mBehaviors>
-        </Entity>
-        <Entity name="Madgine_AutoGen_Name_7" syncId=268>
-            <mComponents>
-            </mComponents>
-            <mBehaviors serId=17>
-                <mEntries>
-                </mEntries>
-            </mBehaviors>
-        </Entity>
-        <Entity name="Madgine_AutoGen_Name_8" syncId=269>
-            <mComponents>
+                <Mesh serId=15>
+                    <mMesh serId=16>
+                        <Name>Cube</Name>
+                    </mMesh>
+                    <mMaterial>0</mMaterial>
+                </Mesh>
+                <Transform serId=17>
+                    <mPosition>[5.78605, 0, 0]</mPosition>
+                    <mScale>[1, 1, 1]</mScale>
+                    <mOrientation>{-0.20418, -0.587757, -0.156453, 0.767056}</mOrientation>
+                </Transform>
             </mComponents>
             <mBehaviors serId=18>
                 <mEntries>
+                    <Native/Look_At serId=19>
+                        <mParameters>
+                            <Target>261</Target>
+                            <Locked>false</Locked>
+                        </mParameters>
+                    </Native/Look_At>
                 </mEntries>
             </mBehaviors>
         </Entity>
-        <Entity name="Madgine_AutoGen_Name_9" syncId=270>
-            <mComponents>
-            </mComponents>
-            <mBehaviors serId=19>
-                <mEntries>
-                </mEntries>
-            </mBehaviors>
-        </Entity>
-        <Entity name="Madgine_AutoGen_Name_10" syncId=271>
+        <Entity name="Madgine_AutoGen_Name_7" syncId=267>
             <mComponents>
             </mComponents>
             <mBehaviors serId=20>
@@ -126,7 +122,7 @@
                 </mEntries>
             </mBehaviors>
         </Entity>
-        <Entity name="Madgine_AutoGen_Name_11" syncId=272>
+        <Entity name="Madgine_AutoGen_Name_8" syncId=268>
             <mComponents>
             </mComponents>
             <mBehaviors serId=21>
@@ -134,21 +130,23 @@
                 </mEntries>
             </mBehaviors>
         </Entity>
-        <Entity name="Madgine_AutoGen_Name_12" syncId=273>
+        <Entity name="Madgine_AutoGen_Name_9" syncId=269>
             <mComponents>
-                <Transform serId=22>
-                    <mParent>0</mParent>
-                    <mPosition>[0, 0, 0]</mPosition>
-                    <mScale>[1, 1, 1]</mScale>
-                    <mOrientation>{0, 0, 0, 1}</mOrientation>
-                </Transform>
+            </mComponents>
+            <mBehaviors serId=22>
+                <mEntries>
+                </mEntries>
+            </mBehaviors>
+        </Entity>
+        <Entity name="Madgine_AutoGen_Name_10" syncId=270>
+            <mComponents>
             </mComponents>
             <mBehaviors serId=23>
                 <mEntries>
                 </mEntries>
             </mBehaviors>
         </Entity>
-        <Entity name="Madgine_AutoGen_Name_13" syncId=274>
+        <Entity name="Madgine_AutoGen_Name_11" syncId=271>
             <mComponents>
             </mComponents>
             <mBehaviors serId=24>
@@ -156,18 +154,40 @@
                 </mEntries>
             </mBehaviors>
         </Entity>
-        <Entity name="Madgine_AutoGen_Name_14" syncId=275>
+        <Entity name="Madgine_AutoGen_Name_12" syncId=272>
+            <mParent>0</mParent>
             <mComponents>
+                <Transform serId=25>
+                    <mPosition>[0, 0, 0]</mPosition>
+                    <mScale>[1, 1, 1]</mScale>
+                    <mOrientation>{0, 0, 0, 1}</mOrientation>
+                </Transform>
             </mComponents>
-            <mBehaviors serId=25>
+            <mBehaviors serId=26>
                 <mEntries>
                 </mEntries>
             </mBehaviors>
         </Entity>
-        <Entity name="Madgine_AutoGen_Name_15" syncId=276>
+        <Entity name="Madgine_AutoGen_Name_13" syncId=273>
             <mComponents>
             </mComponents>
-            <mBehaviors serId=26>
+            <mBehaviors serId=27>
+                <mEntries>
+                </mEntries>
+            </mBehaviors>
+        </Entity>
+        <Entity name="Madgine_AutoGen_Name_14" syncId=274>
+            <mComponents>
+            </mComponents>
+            <mBehaviors serId=28>
+                <mEntries>
+                </mEntries>
+            </mBehaviors>
+        </Entity>
+        <Entity name="Madgine_AutoGen_Name_15" syncId=275>
+            <mComponents>
+            </mComponents>
+            <mBehaviors serId=29>
                 <mEntries>
                 </mEntries>
             </mBehaviors>

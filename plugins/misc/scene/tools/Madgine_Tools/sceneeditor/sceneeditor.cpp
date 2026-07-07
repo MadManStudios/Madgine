@@ -66,26 +66,26 @@ namespace Tools {
         return behaviorToAdd;
     }
 
-    int SceneEditor::hoveredAxis() const
+    IndexType<uint8_t> SceneEditor::hoveredAxis() const
     {
         return mHoveredAxis;
     }
 
-    Scene::Entity::Transform *const &SceneEditor::hoveredTransform() const
+    const Scene::Entity::EntityPtr &SceneEditor::hoveredEntity() const
     {
-        return mHoveredTransform;
+        return mHoveredEntity;
     }
 
     void SceneEditor::deselect()
     {
         mSelectedEntity = {};
-        mHoveredAxis = -1;
+        mHoveredAxis.reset();
     }
 
     void SceneEditor::select(const Scene::Entity::EntityPtr &entity)
     {
         mSelectedEntity = entity;
-        mHoveredAxis = -1;
+        mHoveredAxis.reset();
     }
 
     std::string SceneEditor::patchIcon(std::string_view name)
@@ -188,10 +188,7 @@ namespace Tools {
                                 return Execution::access_binding(child.get(), [](Scene::Entity::Entity &e) { return e.hasComponent<Scene::Entity::Transform>(); }) ? Reflect::Result {} : REFLECT_UNKNOWN_ERROR();
                             })) {
                             Execution::access_binding(newChild, [&](Scene::Entity::Entity &childEntity) {
-                                Engine::Scene::Entity::Transform *childTransform = childEntity.getComponent<Engine::Scene::Entity::Transform>();
-                                assert(childTransform);
-                                childTransform->setParent(node.mEntity);
-                                return true;
+                                childEntity.setParent(node.mEntity);                                
                             });
                         }
                         ImGui::EndDragDropTarget();
@@ -208,7 +205,7 @@ namespace Tools {
             }
 
             if (transform) {
-                Math::Matrix4 transformM = transform->worldMatrix();
+                Math::Matrix4 transformM = transform->worldMatrix(e);
                 Math::AABB bb = { { -0.2f, -0.2f, -0.2f }, { 0.2f, 0.2f, 0.2f } };
                 if (e.hasComponent<Scene::Entity::Mesh>() && e.getComponent<Scene::Entity::Mesh>()->data())
                     bb = e.getComponent<Scene::Entity::Mesh>()->aabb();
@@ -319,16 +316,16 @@ namespace Tools {
                     "z-move"
                 };
 
-                mHoveredAxis = -1;
-                mHoveredTransform = {};
+                mHoveredAxis.reset();
+                mHoveredEntity = {};
 
-                Math::Vector3 pos = (t->worldMatrix() * Math::Vector4::UNIT_W).xyz();
+                Math::Vector3 pos = (t->worldMatrix(entity) * Math::Vector4::UNIT_W).xyz();
 
                 for (size_t i = 0; i < 3; ++i) {
                     Im3D::Arrow3D(IM3D_TRIANGLES, 0.1f, pos, pos + offsets[i], { .mColor = colors[i] });
                     if (Im3D::BoundingBox(labels[i], 0, 2)) {
                         mHoveredAxis = i;
-                        mHoveredTransform = t;
+                        mHoveredEntity = entity.pointer();
                     }
                 }
 
