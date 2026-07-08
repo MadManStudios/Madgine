@@ -420,7 +420,7 @@ template&lt;typename T , typename Base &gt; </div>
 <div class="line">    }</div>
 <div class="ttc" id="anamespace_engine_1_1_scene_html_a811a39485ffa2a6e5ffbf6c9c85543aa"><div class="ttname"><a href="namespace_engine_1_1_scene.html#a811a39485ffa2a6e5ffbf6c9c85543aa">Engine::Scene::NamedSceneManager</a></div><div class="ttdeci">Behavior::Named&lt;&quot;Scene&quot;, SceneManager &amp; &gt; NamedSceneManager</div><div class="ttdef"><b>Definition:</b> scenesenders.h:16</div></div>
 <div class="ttc" id="astruct_engine_1_1_scene_1_1_scene_manager_html"><div class="ttname"><a href="struct_engine_1_1_scene_1_1_scene_manager.html">Engine::Scene::SceneManager</a></div><div class="ttdef"><b>Definition:</b> scenemanager.h:24</div></div>
-<div class="ttc" id="astruct_engine_1_1_scene_1_1_scene_manager_html_a442eaf63a0a9a37551c8c959d03dbdba"><div class="ttname"><a href="struct_engine_1_1_scene_1_1_scene_manager.html#a442eaf63a0a9a37551c8c959d03dbdba">Engine::Scene::SceneManager::simulationClock</a></div><div class="ttdeci">Execution::IntervalClock&lt; Threading::CustomTimepoint &gt; &amp; simulationClock()</div><div class="ttdef"><b>Definition:</b> scenemanager.cpp:216</div></div>
+<div class="ttc" id="astruct_engine_1_1_scene_1_1_scene_manager_html_a442eaf63a0a9a37551c8c959d03dbdba"><div class="ttname"><a href="struct_engine_1_1_scene_1_1_scene_manager.html#a442eaf63a0a9a37551c8c959d03dbdba">Engine::Scene::SceneManager::simulationClock</a></div><div class="ttdeci">Execution::IntervalClock&lt; Threading::CustomTimepoint &gt; &amp; simulationClock()</div><div class="ttdef"><b>Definition:</b> scenemanager.cpp:218</div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -472,7 +472,7 @@ template&lt;typename T , typename Base &gt; </div>
 <b>Initial value:</b><div class="fragment"><div class="line">= [](std::chrono::steady_clock::duration duration, <a class="code hl_typedef" href="namespace_engine_1_1_scene.html#a811a39485ffa2a6e5ffbf6c9c85543aa">NamedSceneManager</a> scene = {}) {</div>
 <div class="line">        <span class="keywordflow">return</span> std::move(scene) | Execution::let_value([=](<a class="code hl_struct" href="struct_engine_1_1_scene_1_1_scene_manager.html">SceneManager</a> &amp;mgr) { <span class="keywordflow">return</span> mgr.<a class="code hl_function" href="struct_engine_1_1_scene_1_1_scene_manager.html#a4c7dab76a586568999284657335eb2a7">animationClock</a>().wait(duration); });</div>
 <div class="line">    }</div>
-<div class="ttc" id="astruct_engine_1_1_scene_1_1_scene_manager_html_a4c7dab76a586568999284657335eb2a7"><div class="ttname"><a href="struct_engine_1_1_scene_1_1_scene_manager.html#a4c7dab76a586568999284657335eb2a7">Engine::Scene::SceneManager::animationClock</a></div><div class="ttdeci">Execution::IntervalClock&lt; Threading::CustomTimepoint &gt; &amp; animationClock()</div><div class="ttdef"><b>Definition:</b> scenemanager.cpp:221</div></div>
+<div class="ttc" id="astruct_engine_1_1_scene_1_1_scene_manager_html_a4c7dab76a586568999284657335eb2a7"><div class="ttname"><a href="struct_engine_1_1_scene_1_1_scene_manager.html#a4c7dab76a586568999284657335eb2a7">Engine::Scene::SceneManager::animationClock</a></div><div class="ttdeci">Execution::IntervalClock&lt; Threading::CustomTimepoint &gt; &amp; animationClock()</div><div class="ttdef"><b>Definition:</b> scenemanager.cpp:223</div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -542,7 +542,7 @@ template&lt;typename T , typename Base &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Jul 8 2026 16:26:38 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Wed Jul 8 2026 17:01:40 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>
