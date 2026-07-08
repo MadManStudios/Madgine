@@ -7,7 +7,6 @@ namespace Engine {
 
 namespace Reflect {
     struct Value;
-    struct KeyValuePair;
     struct Result;
 
     template <typename T, typename Base>
@@ -47,16 +46,14 @@ namespace Reflect {
     struct ObjectInstance;
     struct ObjectPtr;
 
-    struct Functor_toKeyValuePair;
-    struct Functor_toValue;
-
     template <bool isReferenceWrapped>
     struct convert_Value_t;
 
-    using AssociativeIterator = Containers::VirtualIterator<KeyValuePair>;
-    using AssociativeRange = Containers::VirtualRange<KeyValuePair, Functor_toKeyValuePair>;
-    using SequenceIterator = Containers::VirtualIterator<Value>;
-    using SequenceRange = Containers::VirtualRange<Value, Functor_toValue>;
+    struct VirtualRangeHelper;
+    using AssociativeIterator = Containers::VirtualIterator<const Value &, const Value &>;
+    using AssociativeRange = Containers::VirtualRange<VirtualRangeHelper, const Value&, const Value&>;
+    using SequenceIterator = Containers::VirtualIterator<const Value&>;
+    using SequenceRange = Containers::VirtualRange<VirtualRangeHelper, const Value&>;
 
     using Duration64 = std::chrono::duration<uint64_t, std::nano>;
 }

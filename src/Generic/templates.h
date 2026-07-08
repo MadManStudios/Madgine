@@ -13,6 +13,9 @@ template <typename U, typename V, typename... T>
 struct last<U, V, T...> : last<V, T...> {
 };
 
+template <typename... Args>
+using last_t = typename last<Args...>::type;
+
 template <typename V, typename...>
 struct first {
     typedef V type;

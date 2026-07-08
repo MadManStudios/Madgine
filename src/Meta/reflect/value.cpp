@@ -4,6 +4,7 @@
 
 #include "Generic/execution/execution.h"
 
+#include "argumentlist.h"
 #include "metatable.h"
 #include "scopeiterator.h"
 
@@ -131,10 +132,10 @@ namespace Reflect {
             [](const ObjectPtr &) {
                 return "<object>"s;
             },
-            [](const Enum&e) {
+            [](const Enum &e) {
                 return std::string { e.toString() };
             },
-            [](const Flags&f) {
+            [](const Flags &f) {
                 std::stringstream ss;
                 ss << f;
                 return ss.str();
@@ -176,6 +177,10 @@ namespace Reflect {
             const MetaTable *table = as<Reflect::ScopeBinding>().mType;
             return { i, table ? table->mSelf : nullptr };
         }
+        case TypeEnum::OwnedScopeValue: {
+            const MetaTable *table = as<OwnedScopePtr>().get().mType;
+            return { i, table ? table->mSelf : nullptr };
+        }
         default:
             return { i };
         }
@@ -213,7 +218,7 @@ namespace Reflect {
                 std::get<ApiFunction>(mUnion).mTable = *type.mSecondary.mFunctionTable;
                 break;
             case TypeEnum::OwnedScopeValue:
-                std::get<OwnedScopePtr>(mUnion).construct(*type.mSecondary.mMetaTable);
+                std::get<OwnedScopePtr>(mUnion).construct(*type.mSecondary.mMetaTable, {});
                 break;
             default:
                 break;

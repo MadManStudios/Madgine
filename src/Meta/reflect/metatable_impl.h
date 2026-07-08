@@ -15,6 +15,15 @@
 namespace Engine {
 namespace Reflect {
 
+    template <typename T>
+    struct Derived {
+    };
+
+    template <typename T>
+    struct Variadic {
+        using type = T;
+    };
+
     namespace __Reflect_impl__ {
 
         struct MetaTableTag;
@@ -74,24 +83,82 @@ namespace Reflect {
         }
 
         template <typename T>
-        struct ctorHelper {
-            template <typename... Args>
-            static constexpr Constructor ctor()
-            {
-                if constexpr (std::is_same_v<type_pack<Args...>, type_pack<void>>)
-                    return nullptr;
-                else {
-                    return []() {
-                        return OwnedScopePtr {
-                            std::make_shared<ScopeWrapper<T>>()
-                        };
-                    };
-                }
-            }
+        struct ConstructorParameter {
+            using type = T;
         };
 
-    }
+        template <typename T>
+        struct ConstructorParameter<Variadic<T>> {
+        };
 
+        template <typename T>
+        struct ConstructorParameter<Derived<T>> {
+            using type = ScopePtr;
+        };
+
+        template <typename T, typename... Args>
+            requires(!(Concepts::InstanceOf<Args, Variadic> || ...))
+        static constexpr Constructor ctor(type_pack<Args...>)
+        {
+            return {
+                [](const ArgumentList &args) {
+                    return true;
+                },
+                []<size_t... Is>(std::index_sequence<Is...>) {
+                    return [](std::unique_ptr<ProxyScopeBase> &out, const ArgumentList &args) -> Result {
+                        return invoke([&](ConstructorParameter<Args>::type... arg) {
+                            out = std::make_unique<ScopeWrapper<T>>(std::forward<typename ConstructorParameter<Args>::type>(arg)...);
+                        },
+                            getArgument(args, Is)...);
+                    };
+                }(std::index_sequence_for<Args...> {})
+            };
+        }
+
+        template <typename T>
+        static constexpr Constructor ctor(type_pack<void>)
+        {
+            return {};
+        }
+
+        template <typename VariadicArg, typename CB>
+        static Result variadic_ctor(std::vector<VariadicArg> variadicArgs, const ArgumentList &args, size_t i, CB &&cb)
+        {
+            if (i < argumentCount(args)) {
+                return call([&](VariadicArg arg) {      
+                    variadicArgs.emplace_back(std::forward<VariadicArg>(arg));
+                    return variadic_ctor(std::move(variadicArgs), args, i + 1, std::forward<CB>(cb));
+                },
+                    getArgument(args, i));
+            } else {
+                return cb(std::move(variadicArgs));
+            }
+        }
+
+        template <typename T, typename Arg, typename... Args>
+            requires Concepts::InstanceOf<last_t<Arg, Args...>, Variadic>
+        static constexpr Constructor ctor(type_pack<Arg, Args...>)
+        {
+            using Variadic = last_t<Arg, Args...>;
+            using VariadicArg = ConstructorParameter<typename Variadic::type>::type;
+
+            return {
+                [](const ArgumentList &args) {
+                    return true;
+                },
+                []<size_t... Is>(std::index_sequence<Is...>) {
+                    return [](std::unique_ptr<ProxyScopeBase> &out, const ArgumentList &args) -> Result {
+                        return variadic_ctor<VariadicArg>({}, args, sizeof...(Is),
+                            [&](std::vector<VariadicArg> variadicArgs) { return invoke([&](ConstructorParameter<Args>::type... arg) {
+                                                                             out = std::make_unique<ScopeWrapper<T>>(std::forward<typename ConstructorParameter<Args>::type>(arg)..., std::move(variadicArgs));
+                                                                         },
+                                                                             getArgument(args, Is)...); });
+                    };
+                }(std::index_sequence_for<Args...> {})
+            };
+        }
+
+    }
 }
 }
 
@@ -104,65 +171,55 @@ namespace Reflect {
 #define METATABLE_BEGIN_EX(Idx, T) \
     METATABLE_BEGIN_BASE_EX(Idx, T, void)
 
-#define METATABLE_BEGIN_BASE_EX(Idx, T, Base)                              \
-    namespace Engine {                                                     \
-        namespace __generic_impl__ {                                       \
-            START_STRUCT(Reflect::__Reflect_impl__::MetaTableTag, Idx)     \
-            {                                                              \
-                using BaseT = Base;                                        \
-                using Ty = T;                                              \
-                static constexpr const bool base = true;                   \
-                constexpr const Reflect::Accessor *data() const;           \
-                static constexpr const fixed_string name = #T;             \
-            };                                                             \
-            START_STRUCT(Reflect::__Reflect_impl__::MetaTableCtorTag, Idx) \
-            {                                                              \
-                using Ty = T;                                              \
-                constexpr const Reflect::Constructor *data() const;        \
-                static constexpr const bool base = true;                   \
-            };                                                             \
-        }                                                                  \
+#define METATABLE_BEGIN_BASE_EX(Idx, T, Base)                                                                 \
+    namespace Engine {                                                                                        \
+        namespace __generic_impl__ {                                                                          \
+            START_STRUCT(Reflect::__Reflect_impl__::MetaTableTag, Idx)                                        \
+            {                                                                                                 \
+                using BaseT = Base;                                                                           \
+                using Ty = T;                                                                                 \
+                constexpr const Reflect::Accessor *data(const Reflect::Accessor *p) const { return p; }       \
+                static constexpr const fixed_string name = #T;                                                \
+            };                                                                                                \
+            START_STRUCT(Reflect::__Reflect_impl__::MetaTableCtorTag, Idx)                                    \
+            {                                                                                                 \
+                using Ty = T;                                                                                 \
+                constexpr const Reflect::Constructor *data(const Reflect::Constructor *p) const { return p; } \
+            };                                                                                                \
+        }                                                                                                     \
     }
 
-#define METATABLE_ENTRY_EX(Idx, Acc)                                                               \
-    namespace Engine {                                                                             \
-        namespace __generic_impl__ {                                                               \
-            LINE_STRUCT(Reflect::__Reflect_impl__::MetaTableTag, Idx)                              \
-            {                                                                                      \
-                constexpr const Reflect::Accessor *data() const                                    \
-                {                                                                                  \
-                    if constexpr (BASE_STRUCT(Reflect::__Reflect_impl__::MetaTableTag, Idx)::base) \
-                        return &mData;                                                             \
-                    else                                                                           \
-                        return BASE_STRUCT(Reflect::__Reflect_impl__::MetaTableTag, Idx)::data();  \
-                }                                                                                  \
-                static constexpr const bool base = false;                                          \
-                Reflect::Accessor mData = Acc;                                                     \
-            };                                                                                     \
-        }                                                                                          \
+#define METATABLE_ENTRY_EX(Idx, Acc)                                                                \
+    namespace Engine {                                                                              \
+        namespace __generic_impl__ {                                                                \
+            LINE_STRUCT(Reflect::__Reflect_impl__::MetaTableTag, Idx)                               \
+            {                                                                                       \
+                constexpr const Reflect::Accessor *data(const Reflect::Accessor *) const            \
+                {                                                                                   \
+                    return BASE_STRUCT(Reflect::__Reflect_impl__::MetaTableTag, Idx)::data(&mData); \
+                }                                                                                   \
+                Reflect::Accessor mData = Acc;                                                      \
+            };                                                                                      \
+        }                                                                                           \
     }
 
-#define DYNAMIC_ENTRY_EX(Idx, Builder, Init)                                                       \
-    namespace Engine {                                                                             \
-        namespace __generic_impl__ {                                                               \
-            LINE_STRUCT(Reflect::__Reflect_impl__::MetaTableTag, Idx)                              \
-            {                                                                                      \
-                void init() const                                                                  \
-                {                                                                                  \
-                    mData.init();                                                                  \
-                }                                                                                  \
-                                                                                                   \
-                constexpr const Reflect::Accessor *data() const                                    \
-                {                                                                                  \
-                    if constexpr (BASE_STRUCT(Reflect::__Reflect_impl__::MetaTableTag, Idx)::base) \
-                        return mData.data();                                                       \
-                    else                                                                           \
-                        return BASE_STRUCT(Reflect::__Reflect_impl__::MetaTableTag, Idx)::data();  \
-                }                                                                                  \
-                static constexpr const bool base = false;                                          \
-                mutable Reflect::DynamicAccessorList<Builder, Init> mData;                                  \
-            };                                                                                     \
-        }                                                                                          \
+#define DYNAMIC_ENTRY_EX(Idx, Builder, Init)                                                              \
+    namespace Engine {                                                                                    \
+        namespace __generic_impl__ {                                                                      \
+            LINE_STRUCT(Reflect::__Reflect_impl__::MetaTableTag, Idx)                                     \
+            {                                                                                             \
+                void init() const                                                                         \
+                {                                                                                         \
+                    mData.init();                                                                         \
+                }                                                                                         \
+                                                                                                          \
+                constexpr const Reflect::Accessor *data(const Reflect::Accessor *) const                  \
+                {                                                                                         \
+                    return BASE_STRUCT(Reflect::__Reflect_impl__::MetaTableTag, Idx)::data(mData.data()); \
+                }                                                                                         \
+                mutable Reflect::DynamicAccessorList<Builder, Init> mData;                                \
+            };                                                                                            \
+        }                                                                                                 \
     }
 
 #define DYNAMIC_INITIALIZATION(T)     \
@@ -178,15 +235,11 @@ namespace Reflect {
         namespace __generic_impl__ {                                                                         \
             LINE_STRUCT(Reflect::__Reflect_impl__::MetaTableCtorTag, Idx)                                    \
             {                                                                                                \
-                constexpr const Reflect::Constructor *data() const                                           \
+                constexpr const Reflect::Constructor *data(const Reflect::Constructor *) const               \
                 {                                                                                            \
-                    if constexpr (BASE_STRUCT(Reflect::__Reflect_impl__::MetaTableCtorTag, Idx)::base)       \
-                        return &mData;                                                                       \
-                    else                                                                                     \
-                        return BASE_STRUCT(Reflect::__Reflect_impl__::MetaTableCtorTag, Idx)::data();        \
+                    return BASE_STRUCT(Reflect::__Reflect_impl__::MetaTableCtorTag, Idx)::data(&mData);      \
                 }                                                                                            \
-                static constexpr const bool base = false;                                                    \
-                Reflect::Constructor mData = Reflect::__Reflect_impl__::ctorHelper<Ty>::ctor<__VA_ARGS__>(); \
+                Reflect::Constructor mData = Reflect::__Reflect_impl__::ctor<Ty>(type_pack<__VA_ARGS__> {}); \
             };                                                                                               \
         }                                                                                                    \
     }
@@ -212,16 +265,16 @@ namespace Reflect {
     METATABLE_INSTANTIATION(Idx, T)                     \
     DYNAMIC_INITIALIZATION(T)
 
-#define METATABLE_INSTANTIATION(Idx, T)                                                                                                                                                                                                                                                 \
-    namespace Meta_##T                                                                                                                                                                                                                                                                  \
-    {                                                                                                                                                                                                                                                                                   \
-        static constexpr GET_STRUCT(::Engine::Reflect::__Reflect_impl__::MetaTableTag, Idx) sMembers = {};                                                                                                                                                                              \
-        static constexpr GET_STRUCT(::Engine::Reflect::__Reflect_impl__::MetaTableCtorTag, Idx) sCtors = {};                                                                                                                                                                            \
-    }                                                                                                                                                                                                                                                                                   \
-    DLL_EXPORT_VARIABLE(constexpr, const ::Engine::Reflect::MetaTable, , table, SINGLE_ARG({ #T, ::Engine::type_holder<T>, ::Engine::type_holder<GET_STRUCT(::Engine::Reflect::__Reflect_impl__::MetaTableTag, Idx)::BaseT>, Meta_##T::sMembers.data(), Meta_##T::sCtors.data() }), T); \
-    namespace Meta_##T                                                                                                                                                                                                                                                                  \
-    {                                                                                                                                                                                                                                                                                   \
-        static ::Engine::Reflect::__Reflect_impl__::MetaTableRegistrator<T> __reg;                                                                                                                                                                                                      \
+#define METATABLE_INSTANTIATION(Idx, T)                                                                                                                                                                                                                                                               \
+    namespace Meta_##T                                                                                                                                                                                                                                                                                \
+    {                                                                                                                                                                                                                                                                                                 \
+        static constexpr GET_STRUCT(::Engine::Reflect::__Reflect_impl__::MetaTableTag, Idx) sMembers = {};                                                                                                                                                                                            \
+        static constexpr GET_STRUCT(::Engine::Reflect::__Reflect_impl__::MetaTableCtorTag, Idx) sCtors = {};                                                                                                                                                                                          \
+    }                                                                                                                                                                                                                                                                                                 \
+    DLL_EXPORT_VARIABLE(constexpr, const ::Engine::Reflect::MetaTable, , table, SINGLE_ARG({ #T, ::Engine::type_holder<T>, ::Engine::type_holder<GET_STRUCT(::Engine::Reflect::__Reflect_impl__::MetaTableTag, Idx)::BaseT>, Meta_##T::sMembers.data(nullptr), Meta_##T::sCtors.data(nullptr) }), T); \
+    namespace Meta_##T                                                                                                                                                                                                                                                                                \
+    {                                                                                                                                                                                                                                                                                                 \
+        static ::Engine::Reflect::__Reflect_impl__::MetaTableRegistrator<T> __reg;                                                                                                                                                                                                                    \
     }
 
 #define NAMED_MEMBER_EX(Idx, Name, M) \

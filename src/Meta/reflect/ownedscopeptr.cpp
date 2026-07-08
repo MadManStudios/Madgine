@@ -28,9 +28,14 @@ namespace Reflect {
         return mScope->proxyScopePtr();
     }
 
-    void OwnedScopePtr::construct(const MetaTable *type)
+    Result OwnedScopePtr::construct(const MetaTable *type, const ArgumentList &args)
     {
-        *this = type->mConstructors[0]();
+        std::unique_ptr<ProxyScopeBase> newScope;
+        Result result = type->mConstructors[0].mInvoker(newScope, args);
+        if (!result) {
+            mScope = std::move(newScope);
+        }
+        return result;
     }
 
     const MetaTable *OwnedScopePtr::type() const

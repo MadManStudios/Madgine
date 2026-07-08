@@ -1,24 +1,19 @@
 #include "../metalib.h"
 
 #include "argumentlist.h"
-#include "keyvaluepair.h"
+#include "value.h"
 
 namespace Engine {
 namespace Reflect {
 
-    Value &KeyValuePair_key(KeyValuePair &p)
-    {
-        return p.mKey;
-    }
-
-    Value &KeyValuePair_value(KeyValuePair &p)
-    {
-        return p.mValue;
-    }
-
     const Value &getArgument(const ArgumentList &args, size_t index)
     {
         return args.at(index);
+    }
+
+    size_t argumentCount(const ArgumentList &args)
+    {
+        return args.size();
     }
 
     bool Value_isNull(const Value &v)

@@ -2,7 +2,6 @@
 
 #include "pyvirtualrange.h"
 
-#include "Meta/reflect/keyvaluepair.h"
 #include "Meta/reflect/value.h"
 
 #include "pyobjectutil.h"
@@ -42,12 +41,12 @@ namespace Behavior {
             Reflect::Value val; 
             PYTHON3_PROPAGATE_ERROR(fromPyObject(val, key));
 
-            auto it = std::ranges::find(self->mRange, val, &Reflect::KeyValuePair::mKey);
+            auto it = std::ranges::find(self->mRange, val, LIFT(std::get<0>));
             if (it == self->mRange.end()) {
                 PyErr_Format(PyExc_KeyError, "No key %R in %R!", key, self);
                 return NULL;
             }
-            return toPyObject(it->mValue);
+            return toPyObject(std::get<1>(*it));
         }
 
         static PyMappingMethods PyVirtualAssociativeRangeMapping {

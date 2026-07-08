@@ -2,7 +2,6 @@
 
 #include "pyobjectutil.h"
 
-#include "Meta/reflect/keyvaluepair.h"
 #include "Meta/reflect/objectinstance.h"
 #include "Meta/reflect/objectptr.h"
 #include "Meta/reflect/value.h"
@@ -338,24 +337,29 @@ namespace Behavior {
             return obj;
         }
 
-        struct Functor_to_KeyValuePair {
-            void operator()(Reflect::KeyValuePair &p, const std::pair<PyObject *, PyObject *> &o)
-            {
-                Reflect::Result result = fromPyObject(p.mKey, o.first);
-                if (result)
-                    throw 0;
-                result = fromPyObject(p.mValue, o.second);
-                if (result)
-                    throw 0;
-            }
-        };
+        struct VirtualRangeHelper {
 
-        struct Functor_to_ValueRef {
-            void operator()(Reflect::Value &r, PyObject *o)
+            void operator()(CallableView<void(const Reflect::Value &)> cb, PyObject *o)
             {
-                Reflect::Result result = fromPyObject(r, o);
-                if (result)
-                    throw 0;
+                Reflect::Value_erased([&](Reflect::Value &v) {
+                    fromPyObject(v, o);
+                    cb(v);
+                });
+            }
+
+            void operator()(CallableView<void(const Reflect::Value &, const Reflect::Value &)> cb, const std::pair<PyObject *, PyObject *> &o)
+            {
+                Reflect::Value_erased([&](Reflect::Value &key) {
+                    Reflect::Value_erased([&](Reflect::Value &value) {
+                        Reflect::Result result = fromPyObject(key, o.first);
+                        if (result)
+                            throw 0;
+                        result = fromPyObject(value, o.second);
+                        if (result)
+                            throw 0;
+                        cb(key, value);
+                    });
+                });
             }
         };
 
@@ -383,20 +387,26 @@ namespace Behavior {
                 return {};
             } else if (PyDict_Check(obj)) {
                 Py_INCREF(obj);
-                toValue(result, Reflect::AssociativeRange { PyDictPtr { obj }, Engine::type_holder<Functor_to_KeyValuePair> });
+                toValue(result, Reflect::AssociativeRange { PyDictPtr { obj }, Engine::type_holder<VirtualRangeHelper> });
                 return {};
             } else if (PyList_Check(obj)) {
                 Py_INCREF(obj);
-                toValue(result, Reflect::SequenceRange { PyListPtr { obj }, Engine::type_holder<Functor_to_ValueRef> });
+                toValue(result, Reflect::SequenceRange { PyListPtr { obj }, Engine::type_holder<VirtualRangeHelper> });
                 return {};
             } else if (obj->ob_type == &PyTypedScopePtrType) {
                 toValue(result, reinterpret_cast<PyTypedScopePtr *>(obj)->mPtr);
+                return {};
+            } else if (obj->ob_type == &PyOwnedScopePtrType) {
+                toValue(result, reinterpret_cast<PyOwnedScopePtr *>(obj)->mPtr);
                 return {};
             } else if (obj->ob_type == &PyBindingType) {
                 toValue(result, reinterpret_cast<PyBinding *>(obj)->mBinding);
                 return {};
             } else if (obj->ob_type == &PySenderType) {
                 toValue(result, reinterpret_cast<PySender *>(obj)->mSender);
+                return {};
+            } else if (obj->ob_type == &PyVector3Type){
+                toValue(result, reinterpret_cast<PyVector3 *>(obj)->mVector);
                 return {};
             } else {
                 Py_INCREF(obj);
@@ -436,10 +446,10 @@ namespace Behavior {
                 rec->set_value(i);
             } else if (PyDict_Check(obj)) {
                 Py_INCREF(obj);
-                rec->set_value(Reflect::AssociativeRange { PyDictPtr { obj }, Engine::type_holder<Functor_to_KeyValuePair> });
+                rec->set_value(Reflect::AssociativeRange { PyDictPtr { obj }, Engine::type_holder<VirtualRangeHelper> });
             } else if (PyList_Check(obj)) {
                 Py_INCREF(obj);
-                rec->set_value(Reflect::SequenceRange { PyListPtr { obj }, Engine::type_holder<Functor_to_ValueRef> });
+                rec->set_value(Reflect::SequenceRange { PyListPtr { obj }, Engine::type_holder<VirtualRangeHelper> });
             } else if (obj->ob_type == &PyTypedScopePtrType) {
                 rec->set_value(reinterpret_cast<PyTypedScopePtr *>(obj)->mPtr);
             } else if (PyTuple_Check(obj)) {

@@ -112,9 +112,9 @@ namespace Containers {
     template <typename>
     struct Generator;
 
-    template <typename RefT>
+    template <typename... RefT>
     struct VirtualIterator;
-    template <typename RefT, typename AssignDefault = DefaultAssign>
+    template <typename AssignDefault, typename... RefT>
     struct VirtualRange;
 
 }

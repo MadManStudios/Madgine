@@ -13,7 +13,10 @@ namespace Reflect {
         requires(!std::is_pointer_v<T>)
     T *scope_cast(const ScopePtr &ptr);
 
-    using Constructor = OwnedScopePtr (*)();
+    struct Constructor {
+        bool (*mMatcher)(const ArgumentList &) = nullptr;
+        Result (*mInvoker)(std::unique_ptr<ProxyScopeBase> &, const ArgumentList &) = nullptr;
+    };
 
     struct META_EXPORT MetaTable {
 

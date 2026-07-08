@@ -2,7 +2,7 @@
 
 #include "pyvirtualiterator.h"
 
-#include "Meta/reflect/keyvaluepair.h"
+#include "Meta/reflect/value.h"
 
 #include "pyobjectutil.h"
 
@@ -53,7 +53,7 @@ namespace Behavior {
         {
             if (self->mIt.ended())
                 return NULL;
-            PyObject *result = Py_BuildValue("NN", toPyObject(self->mIt->mKey), toPyObject(self->mIt->mValue));
+            PyObject *result = Py_BuildValue("NN", toPyObject(std::get<0>(*self->mIt)), toPyObject(std::get<1>(*self->mIt)));
             ++self->mIt;
             return result;
         }

@@ -38,7 +38,7 @@ namespace Reflect {
 
         ScopePtr get() const;
 
-        void construct(const MetaTable *type);
+        Result construct(const MetaTable *type, const ArgumentList &args);
 
     private:
         std::shared_ptr<ProxyScopeBase> mScope;

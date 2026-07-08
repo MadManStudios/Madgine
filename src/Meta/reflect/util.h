@@ -30,36 +30,34 @@ namespace Reflect {
         return static_cast<T *>(reinterpret_cast<void *>(reinterpret_cast<std::byte *>(ptr.mScope) + offset));
     }
 
-    META_EXPORT Value &KeyValuePair_key(KeyValuePair &p);
-    META_EXPORT Value &KeyValuePair_value(KeyValuePair &p);
-
     template <typename T>
     void toValue(Value &v, T &&t);
 
-    template <typename T>
-    void toKeyValuePair(KeyValuePair &p, T &&t)
-    {
-        toValue(KeyValuePair_key(p), kvKey(t));
-        toValue(KeyValuePair_value(p), kvValue(forward_ref<T>(t)));
-    }
-
-    struct Functor_toKeyValuePair {
-        template <typename... Args>
-        decltype(auto) operator()(Args &&...args)
+    struct VirtualRangeHelper {
+        template <typename T>
+        void operator()(CallableView<void(const Value &)> cb, T &&t)
         {
-            return toKeyValuePair(std::forward<Args>(args)...);
+            Value_erased([&](Value &v) {
+                toValue(v, forward_ref<T>(t));
+                cb(v);
+            });            
         }
-    };
 
-    struct Functor_toValue {
-        template <typename... Args>
-        decltype(auto) operator()(Args &&...args)
+        template <typename T>
+        void operator()(CallableView<void(const Value &, const Value &)> cb, T &&t)
         {
-            return toValue(forward_ref<Args>(args)...);
+            Value_erased([&](Value &key) {
+                Value_erased([&](Value &value) {
+                    toValue(key, kvKey(t));
+                    toValue(value, kvValue(forward_ref<T>(t)));
+                    cb(key, value);
+                });
+            });
         }
     };
 
     META_EXPORT const Value &getArgument(const ArgumentList &args, size_t index);
+    META_EXPORT size_t argumentCount(const ArgumentList &args);
 
     template <typename T>
     using ValueStorageSelect = ValueStorageList::select<TypeList::index<size_t, T>>;
@@ -95,7 +93,7 @@ namespace Reflect {
                 return std::string { std::forward<T>(t) };
             } else if constexpr (std::ranges::range<T>) {
                 if constexpr (std::same_as<KeyType_t<std::ranges::range_value_t<T>>, Void>)
-                    return SequenceRange { std::forward<T>(t), type_holder<Functor_toValue> };
+                    return SequenceRange { std::forward<T>(t), type_holder<VirtualRangeHelper> };
                 else
                     return AssociativeRange { std::forward<T>(t) };
             } else if constexpr (std::is_enum_v<std::decay_t<T>>) {
@@ -161,6 +159,24 @@ namespace Reflect {
 
     inline constexpr convert_Value_t<false> convert_Value {};
 
+    template <typename T, typename Callable>
+    Result callSequenceRange(T output, SequenceIterator it, Callable &&callable)
+    {
+        if (it.ended()) {
+            return callable(std::forward<T>(output));
+        } else {
+            Result result;
+            (it++).get([&](const Value &v) {
+                result = call([&](T::value_type v) {
+                    output.emplace_back(std::move(v));
+                    return callSequenceRange(std::move(output), std::move(it), std::forward<Callable>(callable));
+                },
+                    v);
+            });
+            return result;
+        }
+    }
+
     template <typename Callable, typename Arg>
     Result call(Callable &&callable, Arg &&arg)
     {
@@ -200,6 +216,14 @@ namespace Reflect {
             }(typename Concepts::is_instance<T, std::variant>::argument_types {});
         } else if constexpr (std::same_as<T, Value>) {
             return callable(arg);
+        } else if constexpr (std::same_as<T, ScopePtr>) {
+            if (Value_is<ScopePtr>(arg)) {
+                return callable(Value_as<ScopePtr>(arg));
+            } else if (Value_is<OwnedScopePtr>(arg)) {
+                return callable(Value_as<OwnedScopePtr>(arg).get());
+            } else {
+                return REFLECT_UNKNOWN_ERROR() << "Cannot form a scope pointer to type " << Value_type(arg).toString();
+            }
         } else if constexpr (PrimitiveType<T>) {
             if (!Value_is<T>(arg))
                 return REFLECT_UNKNOWN_ERROR() << "Expected " << typeid(T).name();
@@ -208,11 +232,13 @@ namespace Reflect {
             if constexpr (std::same_as<KeyType_t<typename T::iterator::value_type>, Void>) {
                 if (!Value_is<SequenceRange>(arg))
                     throw 0;
-                return callable(Value_as<SequenceRange>(arg).template safe_cast<T>());
+
+                return callSequenceRange(T {}, Value_as<SequenceRange>(arg).begin(), std::forward<Callable>(callable));
             } else {
                 if (!Value_is<AssociativeRange>(arg))
                     throw 0;
-                return callable(Value_as<AssociativeRange>(arg).template safe_cast<T>());
+
+                return callAssociatveRange(T {}, Value_as<AssociativeRange>(arg).begin(), std::forward<Callable>(callable));
             }
         } else if constexpr (Concepts::InstanceOf<std::decay_t<T>, EnumImpl>) {
             if (!Value_is<Enum>(arg))
@@ -250,20 +276,22 @@ namespace Reflect {
                     throw 0;
                 }
                 return result;
-            } else if (Value_is<ScopePtr>(arg)) {
-                using Ty = resolveCustomScopePtr_t<T, true>;
-                ScopePtr scope = Value_as<ScopePtr>(arg);
-                std::remove_pointer_t<Ty> *ptr = scope_cast<std::remove_pointer_t<Ty>>(scope);
-                if (!ptr) {
-                    return REFLECT_UNKNOWN_ERROR() << "No known conversion from " << scope.mType->mTypeName << " to " << toType<Ty>().toString();
-                }
-                if constexpr (std::is_pointer_v<Ty>) {
-                    return callable(ptr);
-                } else {
-                    return callable(*ptr);
-                }
+            } else {
+                return call([&](ScopePtr scope) -> Result {
+                    using Ty = resolveCustomScopePtr_t<T, true>;
+                    std::remove_pointer_t<Ty> *ptr = scope_cast<std::remove_pointer_t<Ty>>(scope);
+                    if (!ptr) {
+                        return REFLECT_UNKNOWN_ERROR() << "No known conversion from " << scope.mType->mTypeName << " to " << toType<Ty>().toString();
+                    }
+                    if constexpr (std::is_pointer_v<Ty>) {
+                        return callable(ptr);
+                    } else {
+                        return callable(*ptr);
+                    }
+                },
+                    arg);
             }
-            throw 0;
+
             /*using U = resolveCustomScopePtr_t<std::remove_reference_t<T>, true>;
             std::remove_pointer_t<U> *ptr = scope_cast<std::remove_pointer_t<U>>(ValueType_as_impl<ScopePtr>(v));
             if constexpr (Pointer<U>) {

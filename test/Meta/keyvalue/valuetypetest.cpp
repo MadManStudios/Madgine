@@ -8,8 +8,6 @@
 
 #include "Meta/reflect/lambda.h"
 
-#include "Meta/reflect/keyvaluepair.h"
-
 int testF(int i)
 {
     return 3 + i;

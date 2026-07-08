@@ -2,7 +2,6 @@
 
 #include "inspector.h"
 
-#include "Meta/reflect/keyvaluepair.h"
 #include "Meta/reflect/scopeiterator.h"
 
 #include "Modules/uniquecomponent/uniquecomponentcollector.h"
