@@ -267,45 +267,45 @@ Public Types</h2></td></tr>
 <tr class="separator:a853b605c68b76f72b6291cb7bb9ad7d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af46c759f0dbe68e97c15e1437cbb7269"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html#af46c759f0dbe68e97c15e1437cbb7269">pointer</a> = <a class="el" href="classvoid.html">void</a></td></tr>
 <tr class="separator:af46c759f0dbe68e97c15e1437cbb7269"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1cc9c1f24181af634ba02e9f72800fb5"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html#a1cc9c1f24181af634ba02e9f72800fb5">reference</a> = RefT</td></tr>
-<tr class="separator:a1cc9c1f24181af634ba02e9f72800fb5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1b0782ac1f2e3c6cfbd80386f00f5249"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html#a1b0782ac1f2e3c6cfbd80386f00f5249">value_type</a> = RefT</td></tr>
-<tr class="separator:a1b0782ac1f2e3c6cfbd80386f00f5249"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a79e193fde5774fd5f5ccb47dd770946b"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html#a79e193fde5774fd5f5ccb47dd770946b">reference</a> = <a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html#aa2cc6b62ffff3e7ce38d17d7da629728">value_type</a></td></tr>
+<tr class="separator:a79e193fde5774fd5f5ccb47dd770946b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa2cc6b62ffff3e7ce38d17d7da629728"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html#aa2cc6b62ffff3e7ce38d17d7da629728">value_type</a> = std::conditional_t&lt; sizeof...(RefT)==1, std::decay_t&lt; <a class="el" href="namespace_engine.html#a590a6c83bb0c787fc76087a4bc0bf486">first_t</a>&lt; RefT... &gt; &gt;, std::tuple&lt; std::decay_t&lt; RefT &gt;... &gt; &gt;</td></tr>
+<tr class="separator:aa2cc6b62ffff3e7ce38d17d7da629728"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:affa07294b6fe3b8348fba7df50afd763"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html#affa07294b6fe3b8348fba7df50afd763">VirtualIterator</a> ()=default</td></tr>
 <tr class="separator:affa07294b6fe3b8348fba7df50afd763"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7c8136f74480f85be7694f4184a2a6d9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html#a7c8136f74480f85be7694f4184a2a6d9">VirtualIterator</a> (const <a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html">VirtualIterator</a>&lt; RefT &gt; &amp;other)</td></tr>
-<tr class="separator:a7c8136f74480f85be7694f4184a2a6d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a126e6bc103e50e3d7bad0ce57236ac87"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html#a126e6bc103e50e3d7bad0ce57236ac87">VirtualIterator</a> (std::unique_ptr&lt; __generic_impl__::VirtualIteratorBase&lt; RefT &gt; &gt; impl)</td></tr>
-<tr class="separator:a126e6bc103e50e3d7bad0ce57236ac87"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeab6ef22928bf44792ac218faad17ff6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html#aeab6ef22928bf44792ac218faad17ff6">VirtualIterator</a> (<a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html">VirtualIterator</a>&lt; RefT &gt; &amp;&amp;other)</td></tr>
-<tr class="separator:aeab6ef22928bf44792ac218faad17ff6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a87858b7576dd69dcbe792781dafce586"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html#a87858b7576dd69dcbe792781dafce586">VirtualIterator</a> (const <a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html">VirtualIterator</a>&lt; RefT... &gt; &amp;other)</td></tr>
+<tr class="separator:a87858b7576dd69dcbe792781dafce586"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ce0fd78e832da3274e38cb24cf0efca"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html#a6ce0fd78e832da3274e38cb24cf0efca">VirtualIterator</a> (std::unique_ptr&lt; __generic_impl__::VirtualIteratorBase&lt; RefT... &gt; &gt; impl)</td></tr>
+<tr class="separator:a6ce0fd78e832da3274e38cb24cf0efca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad0ddc1fa26885b40872462cf11b22610"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html#ad0ddc1fa26885b40872462cf11b22610">VirtualIterator</a> (<a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html">VirtualIterator</a>&lt; RefT... &gt; &amp;&amp;other)</td></tr>
+<tr class="separator:ad0ddc1fa26885b40872462cf11b22610"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a44e3e63191a08aa3c2dc7f92c15c8ef0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html#a44e3e63191a08aa3c2dc7f92c15c8ef0">ended</a> () const</td></tr>
 <tr class="separator:a44e3e63191a08aa3c2dc7f92c15c8ef0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa866a7d48a154edd4c6faffc14682f37"><td class="memItemLeft" align="right" valign="top">__generic_impl__::VirtualIteratorBase&lt; RefT &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html#aa866a7d48a154edd4c6faffc14682f37">get</a> () const</td></tr>
-<tr class="separator:aa866a7d48a154edd4c6faffc14682f37"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ad993e21025f452b8c68dcc9bad76a9"><td class="memItemLeft" align="right" valign="top">__generic_impl__::VirtualIteratorBase&lt; RefT... &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html#a5ad993e21025f452b8c68dcc9bad76a9">get</a> () const</td></tr>
+<tr class="separator:a5ad993e21025f452b8c68dcc9bad76a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ba13840ec878af987f988a73742cc52"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html#a3ba13840ec878af987f988a73742cc52">get</a> (<a class="el" href="struct_engine_1_1_callable_view.html">CallableView</a>&lt; <a class="el" href="classvoid.html">void</a>(RefT...)&gt; cb) const</td></tr>
+<tr class="separator:a3ba13840ec878af987f988a73742cc52"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6f103e555de516f02a2e993a52630f9d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html#a6f103e555de516f02a2e993a52630f9d">operator!=</a> (const <a class="el" href="struct_engine_1_1_containers_1_1_virtual_sentinel.html">VirtualSentinel</a> &amp;other) const</td></tr>
 <tr class="separator:a6f103e555de516f02a2e993a52630f9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad0287a702435224756faee51c5768475"><td class="memItemLeft" align="right" valign="top">RefT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html#ad0287a702435224756faee51c5768475">operator*</a> () const</td></tr>
-<tr class="separator:ad0287a702435224756faee51c5768475"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3b2a0d0cdf353b8a676c9ab5340ff5db"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html">VirtualIterator</a>&lt; RefT &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html#a3b2a0d0cdf353b8a676c9ab5340ff5db">operator++</a> ()</td></tr>
-<tr class="separator:a3b2a0d0cdf353b8a676c9ab5340ff5db"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0f73687ced0512642006952df6bb7d35"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html">VirtualIterator</a>&lt; RefT &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html#a0f73687ced0512642006952df6bb7d35">operator++</a> (int)</td></tr>
-<tr class="separator:a0f73687ced0512642006952df6bb7d35"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae3ea9377175d177ec6cc9a0bac646088"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_proxy.html">Proxy</a>&lt; RefT, false &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html#ae3ea9377175d177ec6cc9a0bac646088">operator-&gt;</a> () const</td></tr>
-<tr class="separator:ae3ea9377175d177ec6cc9a0bac646088"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac2c555a902daf7bfafd3df6a185ca275"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html">VirtualIterator</a>&lt; RefT &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html#ac2c555a902daf7bfafd3df6a185ca275">operator=</a> (const <a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html">VirtualIterator</a>&lt; RefT &gt; &amp;other)</td></tr>
-<tr class="separator:ac2c555a902daf7bfafd3df6a185ca275"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac327e2f88a2c2caec07b6c378f5c81db"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html">VirtualIterator</a>&lt; RefT &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html#ac327e2f88a2c2caec07b6c378f5c81db">operator=</a> (<a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html">VirtualIterator</a>&lt; RefT &gt; &amp;&amp;other)</td></tr>
-<tr class="separator:ac327e2f88a2c2caec07b6c378f5c81db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac3df3e58e6ff36ae4afb3fbff43eb634"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html#aa2cc6b62ffff3e7ce38d17d7da629728">value_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html#ac3df3e58e6ff36ae4afb3fbff43eb634">operator*</a> () const</td></tr>
+<tr class="separator:ac3df3e58e6ff36ae4afb3fbff43eb634"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa6545fa091152dfe8f39c78321f9e19e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html">VirtualIterator</a>&lt; RefT... &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html#aa6545fa091152dfe8f39c78321f9e19e">operator++</a> ()</td></tr>
+<tr class="separator:aa6545fa091152dfe8f39c78321f9e19e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a58510c7cc4efe8e41109c168df5afac0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html">VirtualIterator</a>&lt; RefT... &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html#a58510c7cc4efe8e41109c168df5afac0">operator++</a> (int)</td></tr>
+<tr class="separator:a58510c7cc4efe8e41109c168df5afac0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add0f6898348bfe766050eba950222b53"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html">VirtualIterator</a>&lt; RefT... &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html#add0f6898348bfe766050eba950222b53">operator=</a> (const <a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html">VirtualIterator</a>&lt; RefT... &gt; &amp;other)</td></tr>
+<tr class="separator:add0f6898348bfe766050eba950222b53"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b8b116d697897213565daaf91a7251c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html">VirtualIterator</a>&lt; RefT... &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html#a4b8b116d697897213565daaf91a7251c">operator=</a> (<a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html">VirtualIterator</a>&lt; RefT... &gt; &amp;&amp;other)</td></tr>
+<tr class="separator:a4b8b116d697897213565daaf91a7251c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad810948fe15c448c004a21784661d6f9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html#ad810948fe15c448c004a21784661d6f9">operator==</a> (const <a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html">VirtualIterator</a> &amp;other) const</td></tr>
 <tr class="separator:ad810948fe15c448c004a21784661d6f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a873b9c34eefa9706d4891c138454816b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html#a873b9c34eefa9706d4891c138454816b">operator==</a> (const <a class="el" href="struct_engine_1_1_containers_1_1_virtual_sentinel.html">VirtualSentinel</a> &amp;other) const</td></tr>
 <tr class="separator:a873b9c34eefa9706d4891c138454816b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a10c415c5f0ba93bdb3069438bf4d847d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_containers_1_1_virtual_range.html">VirtualRange</a>&lt; RefT &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html#a10c415c5f0ba93bdb3069438bf4d847d">range</a> () const</td></tr>
-<tr class="separator:a10c415c5f0ba93bdb3069438bf4d847d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a65095a64b2b2e01d09a7b6de75c63e44"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_containers_1_1_virtual_range.html">VirtualRange</a>&lt; RefT... &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html#a65095a64b2b2e01d09a7b6de75c63e44">range</a> () const</td></tr>
+<tr class="separator:a65095a64b2b2e01d09a7b6de75c63e44"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
 Friends</h2></td></tr>
@@ -321,7 +321,7 @@ Friends</h2></td></tr>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename RefT &gt; </div>
+template&lt;typename... RefT&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">using <a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html">Engine::Containers::VirtualIterator</a>&lt; RefT &gt;::iterator_category =  std::input_iterator_tag</td>
@@ -331,16 +331,16 @@ template&lt;typename RefT &gt; </div>
 
 </div>
 </div>
-<a id="a1b0782ac1f2e3c6cfbd80386f00f5249" name="a1b0782ac1f2e3c6cfbd80386f00f5249"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1b0782ac1f2e3c6cfbd80386f00f5249">&#9670;&#160;</a></span>value_type</h2>
+<a id="aa2cc6b62ffff3e7ce38d17d7da629728" name="aa2cc6b62ffff3e7ce38d17d7da629728"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa2cc6b62ffff3e7ce38d17d7da629728">&#9670;&#160;</a></span>value_type</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename RefT &gt; </div>
+template&lt;typename... RefT&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html">Engine::Containers::VirtualIterator</a>&lt; RefT &gt;::value_type =  RefT</td>
+          <td class="memname">using <a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html">Engine::Containers::VirtualIterator</a>&lt; RefT &gt;::value_type =  std::conditional_t&lt;sizeof...(RefT) == 1, std::decay_t&lt;<a class="el" href="namespace_engine.html#a590a6c83bb0c787fc76087a4bc0bf486">first_t</a>&lt;RefT...&gt; &gt;, std::tuple&lt;std::decay_t&lt;RefT&gt;...&gt; &gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -353,7 +353,7 @@ template&lt;typename RefT &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename RefT &gt; </div>
+template&lt;typename... RefT&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">using <a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html">Engine::Containers::VirtualIterator</a>&lt; RefT &gt;::difference_type =  ptrdiff_t</td>
@@ -369,7 +369,7 @@ template&lt;typename RefT &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename RefT &gt; </div>
+template&lt;typename... RefT&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">using <a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html">Engine::Containers::VirtualIterator</a>&lt; RefT &gt;::pointer =  <a class="el" href="classvoid.html">void</a></td>
@@ -379,16 +379,16 @@ template&lt;typename RefT &gt; </div>
 
 </div>
 </div>
-<a id="a1cc9c1f24181af634ba02e9f72800fb5" name="a1cc9c1f24181af634ba02e9f72800fb5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1cc9c1f24181af634ba02e9f72800fb5">&#9670;&#160;</a></span>reference</h2>
+<a id="a79e193fde5774fd5f5ccb47dd770946b" name="a79e193fde5774fd5f5ccb47dd770946b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a79e193fde5774fd5f5ccb47dd770946b">&#9670;&#160;</a></span>reference</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename RefT &gt; </div>
+template&lt;typename... RefT&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html">Engine::Containers::VirtualIterator</a>&lt; RefT &gt;::reference =  RefT</td>
+          <td class="memname">using <a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html">Engine::Containers::VirtualIterator</a>&lt; RefT &gt;::reference =  <a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html#aa2cc6b62ffff3e7ce38d17d7da629728">value_type</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -402,7 +402,7 @@ template&lt;typename RefT &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename RefT &gt; </div>
+template&lt;typename... RefT&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -423,13 +423,13 @@ template&lt;typename RefT &gt; </div>
 
 </div>
 </div>
-<a id="a126e6bc103e50e3d7bad0ce57236ac87" name="a126e6bc103e50e3d7bad0ce57236ac87"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a126e6bc103e50e3d7bad0ce57236ac87">&#9670;&#160;</a></span>VirtualIterator() <span class="overload">[2/4]</span></h2>
+<a id="a6ce0fd78e832da3274e38cb24cf0efca" name="a6ce0fd78e832da3274e38cb24cf0efca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ce0fd78e832da3274e38cb24cf0efca">&#9670;&#160;</a></span>VirtualIterator() <span class="overload">[2/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename RefT &gt; </div>
+template&lt;typename... RefT&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -437,7 +437,7 @@ template&lt;typename RefT &gt; </div>
         <tr>
           <td class="memname"><a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html">Engine::Containers::VirtualIterator</a>&lt; RefT &gt;::VirtualIterator </td>
           <td>(</td>
-          <td class="paramtype">std::unique_ptr&lt; __generic_impl__::VirtualIteratorBase&lt; RefT &gt; &gt;&#160;</td>
+          <td class="paramtype">std::unique_ptr&lt; __generic_impl__::VirtualIteratorBase&lt; RefT... &gt; &gt;&#160;</td>
           <td class="paramname"><em>impl</em></td><td>)</td>
           <td></td>
         </tr>
@@ -451,13 +451,13 @@ template&lt;typename RefT &gt; </div>
 
 </div>
 </div>
-<a id="a7c8136f74480f85be7694f4184a2a6d9" name="a7c8136f74480f85be7694f4184a2a6d9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7c8136f74480f85be7694f4184a2a6d9">&#9670;&#160;</a></span>VirtualIterator() <span class="overload">[3/4]</span></h2>
+<a id="a87858b7576dd69dcbe792781dafce586" name="a87858b7576dd69dcbe792781dafce586"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a87858b7576dd69dcbe792781dafce586">&#9670;&#160;</a></span>VirtualIterator() <span class="overload">[3/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename RefT &gt; </div>
+template&lt;typename... RefT&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -465,7 +465,7 @@ template&lt;typename RefT &gt; </div>
         <tr>
           <td class="memname"><a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html">Engine::Containers::VirtualIterator</a>&lt; RefT &gt;::VirtualIterator </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html">VirtualIterator</a>&lt; RefT &gt; &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html">VirtualIterator</a>&lt; RefT... &gt; &amp;&#160;</td>
           <td class="paramname"><em>other</em></td><td>)</td>
           <td></td>
         </tr>
@@ -479,13 +479,13 @@ template&lt;typename RefT &gt; </div>
 
 </div>
 </div>
-<a id="aeab6ef22928bf44792ac218faad17ff6" name="aeab6ef22928bf44792ac218faad17ff6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aeab6ef22928bf44792ac218faad17ff6">&#9670;&#160;</a></span>VirtualIterator() <span class="overload">[4/4]</span></h2>
+<a id="ad0ddc1fa26885b40872462cf11b22610" name="ad0ddc1fa26885b40872462cf11b22610"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad0ddc1fa26885b40872462cf11b22610">&#9670;&#160;</a></span>VirtualIterator() <span class="overload">[4/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename RefT &gt; </div>
+template&lt;typename... RefT&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -493,7 +493,7 @@ template&lt;typename RefT &gt; </div>
         <tr>
           <td class="memname"><a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html">Engine::Containers::VirtualIterator</a>&lt; RefT &gt;::VirtualIterator </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html">VirtualIterator</a>&lt; RefT &gt; &amp;&amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html">VirtualIterator</a>&lt; RefT... &gt; &amp;&amp;&#160;</td>
           <td class="paramname"><em>other</em></td><td>)</td>
           <td></td>
         </tr>
@@ -508,21 +508,21 @@ template&lt;typename RefT &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="ac2c555a902daf7bfafd3df6a185ca275" name="ac2c555a902daf7bfafd3df6a185ca275"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac2c555a902daf7bfafd3df6a185ca275">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
+<a id="add0f6898348bfe766050eba950222b53" name="add0f6898348bfe766050eba950222b53"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#add0f6898348bfe766050eba950222b53">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename RefT &gt; </div>
+template&lt;typename... RefT&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html">VirtualIterator</a>&lt; RefT &gt; &amp; <a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html">Engine::Containers::VirtualIterator</a>&lt; RefT &gt;::operator= </td>
+          <td class="memname"><a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html">VirtualIterator</a>&lt; RefT... &gt; &amp; <a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html">Engine::Containers::VirtualIterator</a>&lt; RefT &gt;::operator= </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html">VirtualIterator</a>&lt; RefT &gt; &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html">VirtualIterator</a>&lt; RefT... &gt; &amp;&#160;</td>
           <td class="paramname"><em>other</em></td><td>)</td>
           <td></td>
         </tr>
@@ -536,21 +536,21 @@ template&lt;typename RefT &gt; </div>
 
 </div>
 </div>
-<a id="ac327e2f88a2c2caec07b6c378f5c81db" name="ac327e2f88a2c2caec07b6c378f5c81db"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac327e2f88a2c2caec07b6c378f5c81db">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
+<a id="a4b8b116d697897213565daaf91a7251c" name="a4b8b116d697897213565daaf91a7251c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4b8b116d697897213565daaf91a7251c">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename RefT &gt; </div>
+template&lt;typename... RefT&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html">VirtualIterator</a>&lt; RefT &gt; &amp; <a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html">Engine::Containers::VirtualIterator</a>&lt; RefT &gt;::operator= </td>
+          <td class="memname"><a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html">VirtualIterator</a>&lt; RefT... &gt; &amp; <a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html">Engine::Containers::VirtualIterator</a>&lt; RefT &gt;::operator= </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html">VirtualIterator</a>&lt; RefT &gt; &amp;&amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html">VirtualIterator</a>&lt; RefT... &gt; &amp;&amp;&#160;</td>
           <td class="paramname"><em>other</em></td><td>)</td>
           <td></td>
         </tr>
@@ -564,19 +564,19 @@ template&lt;typename RefT &gt; </div>
 
 </div>
 </div>
-<a id="a3b2a0d0cdf353b8a676c9ab5340ff5db" name="a3b2a0d0cdf353b8a676c9ab5340ff5db"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3b2a0d0cdf353b8a676c9ab5340ff5db">&#9670;&#160;</a></span>operator++() <span class="overload">[1/2]</span></h2>
+<a id="aa6545fa091152dfe8f39c78321f9e19e" name="aa6545fa091152dfe8f39c78321f9e19e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa6545fa091152dfe8f39c78321f9e19e">&#9670;&#160;</a></span>operator++() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename RefT &gt; </div>
+template&lt;typename... RefT&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html">VirtualIterator</a>&lt; RefT &gt; &amp; <a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html">Engine::Containers::VirtualIterator</a>&lt; RefT &gt;::operator++ </td>
+          <td class="memname"><a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html">VirtualIterator</a>&lt; RefT... &gt; &amp; <a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html">Engine::Containers::VirtualIterator</a>&lt; RefT &gt;::operator++ </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -591,19 +591,19 @@ template&lt;typename RefT &gt; </div>
 
 </div>
 </div>
-<a id="a0f73687ced0512642006952df6bb7d35" name="a0f73687ced0512642006952df6bb7d35"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0f73687ced0512642006952df6bb7d35">&#9670;&#160;</a></span>operator++() <span class="overload">[2/2]</span></h2>
+<a id="a58510c7cc4efe8e41109c168df5afac0" name="a58510c7cc4efe8e41109c168df5afac0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a58510c7cc4efe8e41109c168df5afac0">&#9670;&#160;</a></span>operator++() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename RefT &gt; </div>
+template&lt;typename... RefT&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html">VirtualIterator</a>&lt; RefT &gt; <a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html">Engine::Containers::VirtualIterator</a>&lt; RefT &gt;::operator++ </td>
+          <td class="memname"><a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html">VirtualIterator</a>&lt; RefT... &gt; <a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html">Engine::Containers::VirtualIterator</a>&lt; RefT &gt;::operator++ </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
           <td class="paramname"></td><td>)</td>
@@ -619,21 +619,22 @@ template&lt;typename RefT &gt; </div>
 
 </div>
 </div>
-<a id="ad0287a702435224756faee51c5768475" name="ad0287a702435224756faee51c5768475"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad0287a702435224756faee51c5768475">&#9670;&#160;</a></span>operator*()</h2>
+<a id="a3ba13840ec878af987f988a73742cc52" name="a3ba13840ec878af987f988a73742cc52"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3ba13840ec878af987f988a73742cc52">&#9670;&#160;</a></span>get() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename RefT &gt; </div>
+template&lt;typename... RefT&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">RefT <a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html">Engine::Containers::VirtualIterator</a>&lt; RefT &gt;::operator* </td>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> <a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html">Engine::Containers::VirtualIterator</a>&lt; RefT &gt;::get </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_callable_view.html">CallableView</a>&lt; <a class="el" href="classvoid.html">void</a>(RefT...)&gt;&#160;</td>
+          <td class="paramname"><em>cb</em></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
@@ -646,19 +647,19 @@ template&lt;typename RefT &gt; </div>
 
 </div>
 </div>
-<a id="ae3ea9377175d177ec6cc9a0bac646088" name="ae3ea9377175d177ec6cc9a0bac646088"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae3ea9377175d177ec6cc9a0bac646088">&#9670;&#160;</a></span>operator-&gt;()</h2>
+<a id="ac3df3e58e6ff36ae4afb3fbff43eb634" name="ac3df3e58e6ff36ae4afb3fbff43eb634"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac3df3e58e6ff36ae4afb3fbff43eb634">&#9670;&#160;</a></span>operator*()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename RefT &gt; </div>
+template&lt;typename... RefT&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="struct_engine_1_1_proxy.html">Proxy</a>&lt; RefT, false &gt; <a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html">Engine::Containers::VirtualIterator</a>&lt; RefT &gt;::operator-&gt; </td>
+          <td class="memname"><a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html#aa2cc6b62ffff3e7ce38d17d7da629728">value_type</a> <a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html">Engine::Containers::VirtualIterator</a>&lt; RefT &gt;::operator* </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -679,7 +680,7 @@ template&lt;typename RefT &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename RefT &gt; </div>
+template&lt;typename... RefT&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -707,7 +708,7 @@ template&lt;typename RefT &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename RefT &gt; </div>
+template&lt;typename... RefT&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -735,7 +736,7 @@ template&lt;typename RefT &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename RefT &gt; </div>
+template&lt;typename... RefT&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -757,19 +758,19 @@ template&lt;typename RefT &gt; </div>
 
 </div>
 </div>
-<a id="a10c415c5f0ba93bdb3069438bf4d847d" name="a10c415c5f0ba93bdb3069438bf4d847d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a10c415c5f0ba93bdb3069438bf4d847d">&#9670;&#160;</a></span>range()</h2>
+<a id="a65095a64b2b2e01d09a7b6de75c63e44" name="a65095a64b2b2e01d09a7b6de75c63e44"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a65095a64b2b2e01d09a7b6de75c63e44">&#9670;&#160;</a></span>range()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename RefT &gt; </div>
+template&lt;typename... RefT&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="struct_engine_1_1_containers_1_1_virtual_range.html">VirtualRange</a>&lt; RefT &gt; <a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html">Engine::Containers::VirtualIterator</a>&lt; RefT &gt;::range </td>
+          <td class="memname"><a class="el" href="struct_engine_1_1_containers_1_1_virtual_range.html">VirtualRange</a>&lt; RefT... &gt; <a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html">Engine::Containers::VirtualIterator</a>&lt; RefT &gt;::range </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -790,7 +791,7 @@ template&lt;typename RefT &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename RefT &gt; </div>
+template&lt;typename... RefT&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -811,19 +812,19 @@ template&lt;typename RefT &gt; </div>
 
 </div>
 </div>
-<a id="aa866a7d48a154edd4c6faffc14682f37" name="aa866a7d48a154edd4c6faffc14682f37"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa866a7d48a154edd4c6faffc14682f37">&#9670;&#160;</a></span>get()</h2>
+<a id="a5ad993e21025f452b8c68dcc9bad76a9" name="a5ad993e21025f452b8c68dcc9bad76a9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5ad993e21025f452b8c68dcc9bad76a9">&#9670;&#160;</a></span>get() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename RefT &gt; </div>
+template&lt;typename... RefT&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">__generic_impl__::VirtualIteratorBase&lt; RefT &gt; * <a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html">Engine::Containers::VirtualIterator</a>&lt; RefT &gt;::get </td>
+          <td class="memname">__generic_impl__::VirtualIteratorBase&lt; RefT... &gt; * <a class="el" href="struct_engine_1_1_containers_1_1_virtual_iterator.html">Engine::Containers::VirtualIterator</a>&lt; RefT &gt;::get </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -845,7 +846,7 @@ template&lt;typename RefT &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename RefT &gt; </div>
+template&lt;typename... RefT&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -883,7 +884,7 @@ template&lt;typename RefT &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename RefT &gt; </div>
+template&lt;typename... RefT&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -921,7 +922,7 @@ template&lt;typename RefT &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Jul 7 2026 19:36:16 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Wed Jul 8 2026 14:08:27 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

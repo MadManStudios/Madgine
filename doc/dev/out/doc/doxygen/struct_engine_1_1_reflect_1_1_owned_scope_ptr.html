@@ -271,8 +271,8 @@ Public Member Functions</h2></td></tr>
 requires (!std::same_as&lt;std::decay_t&lt;T&gt;, <a class="el" href="struct_engine_1_1_reflect_1_1_owned_scope_ptr.html">OwnedScopePtr</a>&gt; &amp;&amp; !Concepts::InstanceOf&lt;std::decay_t&lt;T&gt;, std::shared_ptr&gt;)</td></tr>
 <tr class="memitem:a64a349b7d4a5c29107809f76245d05cc"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_reflect_1_1_owned_scope_ptr.html#a64a349b7d4a5c29107809f76245d05cc">OwnedScopePtr</a> (T &amp;&amp;t)</td></tr>
 <tr class="separator:a64a349b7d4a5c29107809f76245d05cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a63a0d251baa41af1f44a83bf985186e1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_reflect_1_1_owned_scope_ptr.html#a63a0d251baa41af1f44a83bf985186e1">construct</a> (const <a class="el" href="struct_engine_1_1_reflect_1_1_meta_table.html">MetaTable</a> *<a class="el" href="struct_engine_1_1_reflect_1_1_owned_scope_ptr.html#acdbf72c5042ba371f4240ba1c005a814">type</a>)</td></tr>
-<tr class="separator:a63a0d251baa41af1f44a83bf985186e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af33d05d7a627c29f092e4d9e715a953a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_reflect_1_1_result.html">Result</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_reflect_1_1_owned_scope_ptr.html#af33d05d7a627c29f092e4d9e715a953a">construct</a> (const <a class="el" href="struct_engine_1_1_reflect_1_1_meta_table.html">MetaTable</a> *<a class="el" href="struct_engine_1_1_reflect_1_1_owned_scope_ptr.html#acdbf72c5042ba371f4240ba1c005a814">type</a>, const <a class="el" href="struct_engine_1_1_reflect_1_1_argument_list.html">ArgumentList</a> &amp;args)</td></tr>
+<tr class="separator:af33d05d7a627c29f092e4d9e715a953a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a67104a111a355ddf3992be19128006e9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_reflect_1_1_scope_ptr.html">ScopePtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_reflect_1_1_owned_scope_ptr.html#a67104a111a355ddf3992be19128006e9">get</a> () const</td></tr>
 <tr class="separator:a67104a111a355ddf3992be19128006e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae2a416d9f2de844793eb829ecf36ceb3"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_reflect_1_1_owned_scope_ptr.html#ae2a416d9f2de844793eb829ecf36ceb3">name</a> () const</td></tr>
@@ -566,18 +566,28 @@ requires (!std::same_as&lt;std::decay_t&lt;T&gt;, <a class="el" href="struct_eng
 
 </div>
 </div>
-<a id="a63a0d251baa41af1f44a83bf985186e1" name="a63a0d251baa41af1f44a83bf985186e1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a63a0d251baa41af1f44a83bf985186e1">&#9670;&#160;</a></span>construct()</h2>
+<a id="af33d05d7a627c29f092e4d9e715a953a" name="af33d05d7a627c29f092e4d9e715a953a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af33d05d7a627c29f092e4d9e715a953a">&#9670;&#160;</a></span>construct()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Reflect::OwnedScopePtr::construct </td>
+          <td class="memname"><a class="el" href="struct_engine_1_1_reflect_1_1_result.html">Result</a> Engine::Reflect::OwnedScopePtr::construct </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="struct_engine_1_1_reflect_1_1_meta_table.html">MetaTable</a> *&#160;</td>
-          <td class="paramname"><em>type</em></td><td>)</td>
+          <td class="paramname"><em>type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_reflect_1_1_argument_list.html">ArgumentList</a> &amp;&#160;</td>
+          <td class="paramname"><em>args</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -591,7 +601,7 @@ requires (!std::same_as&lt;std::decay_t&lt;T&gt;, <a class="el" href="struct_eng
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Jul 7 2026 19:36:17 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Wed Jul 8 2026 14:08:29 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

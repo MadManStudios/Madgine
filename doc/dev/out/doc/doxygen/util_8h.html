@@ -274,9 +274,7 @@ This graph shows which files directly or indirectly include this file:</div>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_reflect_1_1convert___value__t.html">Engine::Reflect::convert_Value_t&lt; isReferenceWrapped &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_reflect_1_1_functor__to_key_value_pair.html">Engine::Reflect::Functor_toKeyValuePair</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_reflect_1_1_functor__to_value.html">Engine::Reflect::Functor_toValue</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_reflect_1_1_virtual_range_helper.html">Engine::Reflect::VirtualRangeHelper</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
@@ -295,9 +293,14 @@ Typedefs</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:ac4d566a1adfcc7b416648f1734d86171"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_reflect.html#ac4d566a1adfcc7b416648f1734d86171">Engine::Reflect::argumentCount</a> (const ArgumentList &amp;args)</td></tr>
+<tr class="separator:ac4d566a1adfcc7b416648f1734d86171"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adf336fa346eb76b16f34ea1c482329c8"><td class="memTemplParams" colspan="2">template&lt;typename Callable , typename Arg &gt; </td></tr>
 <tr class="memitem:adf336fa346eb76b16f34ea1c482329c8"><td class="memTemplItemLeft" align="right" valign="top">Result&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_reflect.html#adf336fa346eb76b16f34ea1c482329c8">Engine::Reflect::call</a> (Callable &amp;&amp;callable, Arg &amp;&amp;arg)</td></tr>
 <tr class="separator:adf336fa346eb76b16f34ea1c482329c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adabd7cad9324415bf84e363c7c26a91b"><td class="memTemplParams" colspan="2">template&lt;typename T , typename Callable &gt; </td></tr>
+<tr class="memitem:adabd7cad9324415bf84e363c7c26a91b"><td class="memTemplItemLeft" align="right" valign="top">Result&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_reflect.html#adabd7cad9324415bf84e363c7c26a91b">Engine::Reflect::callSequenceRange</a> (T output, SequenceIterator it, Callable &amp;&amp;callable)</td></tr>
+<tr class="separator:adabd7cad9324415bf84e363c7c26a91b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afc8a277a39bd31acc4d8c8854aebeead"><td class="memItemLeft" align="right" valign="top">const Value &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_reflect.html#afc8a277a39bd31acc4d8c8854aebeead">Engine::Reflect::getArgument</a> (const ArgumentList &amp;args, size_t index)</td></tr>
 <tr class="separator:afc8a277a39bd31acc4d8c8854aebeead"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae75ffbd4c0f3d89cc2e40e4ac0430867"><td class="memTemplParams" colspan="2">template&lt;typename Callable , typename... Args&gt; </td></tr>
@@ -312,17 +315,10 @@ Functions</h2></td></tr>
 <tr class="memitem:ac5f706f9a3e4e8a8f7208e2b5b7afc0c"><td class="memTemplParams" colspan="2">template&lt;typename Callable &gt; </td></tr>
 <tr class="memitem:ac5f706f9a3e4e8a8f7208e2b5b7afc0c"><td class="memTemplItemLeft" align="right" valign="top">Result&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_reflect.html#ac5f706f9a3e4e8a8f7208e2b5b7afc0c">Engine::Reflect::invoke_impl</a> (type_pack&lt;&gt;, Callable &amp;&amp;callable)</td></tr>
 <tr class="separator:ac5f706f9a3e4e8a8f7208e2b5b7afc0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a66eefc56a6a5720e2851422798caae30"><td class="memItemLeft" align="right" valign="top">Value &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_reflect.html#a66eefc56a6a5720e2851422798caae30">Engine::Reflect::KeyValuePair_key</a> (KeyValuePair &amp;p)</td></tr>
-<tr class="separator:a66eefc56a6a5720e2851422798caae30"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa0a8c771e14fa4533080394b88abe6f4"><td class="memItemLeft" align="right" valign="top">Value &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_reflect.html#aa0a8c771e14fa4533080394b88abe6f4">Engine::Reflect::KeyValuePair_value</a> (KeyValuePair &amp;p)</td></tr>
-<tr class="separator:aa0a8c771e14fa4533080394b88abe6f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3902997560f13c1e26e54f7d0968bb7e"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; <br />
 requires (!std::is_pointer_v&lt;T&gt;)</td></tr>
 <tr class="memitem:a3902997560f13c1e26e54f7d0968bb7e"><td class="memTemplItemLeft" align="right" valign="top">T *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_reflect.html#a3902997560f13c1e26e54f7d0968bb7e">Engine::Reflect::scope_cast</a> (const ScopePtr &amp;ptr)</td></tr>
 <tr class="separator:a3902997560f13c1e26e54f7d0968bb7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa82e3642248360b958cacb1776978214"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:aa82e3642248360b958cacb1776978214"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_reflect.html#aa82e3642248360b958cacb1776978214">Engine::Reflect::toKeyValuePair</a> (KeyValuePair &amp;p, T &amp;&amp;t)</td></tr>
-<tr class="separator:aa82e3642248360b958cacb1776978214"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afc04aa8a36007fd99db114502faf4b03"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:afc04aa8a36007fd99db114502faf4b03"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_reflect.html#afc04aa8a36007fd99db114502faf4b03">Engine::Reflect::toValue</a> (Value &amp;v, T &amp;&amp;t)</td></tr>
 <tr class="separator:afc04aa8a36007fd99db114502faf4b03"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -355,7 +351,7 @@ Variables</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Jul 7 2026 19:36:15 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Wed Jul 8 2026 14:08:26 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>
