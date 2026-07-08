@@ -108,7 +108,7 @@ namespace Behavior {
             Reflect::__Reflect_impl__::unregisterFunction(*this);
         }
 
-        Reflect::Result Python3FileLoader::find_spec(Reflect::Value &result, std::string_view name, std::optional<std::string_view> import_path, std::optional<Reflect::ObjectPtr> target_module)
+        Reflect::Result Python3FileLoader::find_spec(Reflect::Value &result, std::string_view name, std::optional<std::vector<std::string_view>> import_path, std::optional<Reflect::ObjectPtr> target_module)
         {
             Resource *res = get(name, this);
             if (!res)
@@ -152,6 +152,10 @@ namespace Behavior {
             }
 
             PyObject *dict = PyModule_GetDict(moduleObject);
+
+            if (!PyDict_Contains(dict, PyUnicode_FromString("__builtins__"))) {
+                PyDict_SetItemString(dict, "__builtins__", PyEval_GetBuiltins());
+            }
 
             PyObjectPtr status = PyEval_EvalCode(code, dict, dict);
             if (!status) {

@@ -13,6 +13,7 @@
 
 #include "python3behaviors.h"
 #include "python3fileloader.h"
+#include "python3namespaceloader.h"
 #include "python3streamredirect.h"
 #include "util/math/pymatrix3.h"
 #include "util/math/pymatrix4.h"
@@ -110,58 +111,6 @@ namespace Behavior {
                  or -1 if the module keeps state in global variables. */
             PyEnvironmentMethods
         };
-
-        static PyObject *PyNamespace_get(PyObject *self, PyObject *args);
-
-        static PyMethodDef PyNamespaceMethods[] = {
-            { "__getattr__", PyNamespace_get, METH_VARARGS, "" },
-            { NULL, NULL, 0, NULL } /* Sentinel */
-        };
-
-        static PyObject *PyNamespace_get(PyObject *self, PyObject *args)
-        {
-            const char *name;
-
-            if (!PyArg_ParseTuple(args, "s", &name))
-                return NULL;
-
-            std::string fullName = std::string { PyModule_GetName(self) } + "::" + name;
-            std::string namespaceName = fullName + "::";
-
-            const Reflect::MetaTable *list = Reflect::sTypeList();
-            while (list) {
-
-                if (fullName == list->mTypeName) {
-                    PyObject *type = PyObject_CallObject((PyObject *)&PyTypeType, NULL);
-                    if (!type)
-                        return NULL;
-                    reinterpret_cast<PyType *>(type)->mType = list;
-                    [[maybe_unused]] int result = PyModule_AddObjectRef(self, name, type);
-                    assert(result == 0);
-                    return type;
-                } else if (StringUtil::startsWith(list->mTypeName, namespaceName)) {
-                    PyModuleDef *PyNamespace_module = new PyModuleDef {
-                        PyModuleDef_HEAD_INIT,
-                        fullName.c_str(), /* name of module */
-                        "test", /* module documentation, may be NULL */
-                        -1, /* size of per-interpreter state of the module,
-                             or -1 if the module keeps state in global variables. */
-                        PyNamespaceMethods
-                    };
-                    PyObject *module = PyModule_Create(PyNamespace_module);
-                    if (!module)
-                        return NULL;
-                    [[maybe_unused]] int result = PyModule_AddObjectRef(self, name, module);
-                    assert(result == 0);
-                    return module;
-                }
-
-                list = list->mNext;
-            }
-
-            PyErr_Format(PyExc_AttributeError, "Could not find attribute '%s' in %s!", name, PyModule_GetName(self));
-            return NULL;
-        }
 
         static PyMethodDef PyEngineMethods[] = {
             { "__getattr__", PyNamespace_get, METH_VARARGS, "" },
@@ -374,10 +323,12 @@ namespace Behavior {
 
             PyRun_SimpleString("import Environment");
             PyRun_SimpleString("import Engine");
+            PyRun_SimpleString("Engine.__path__ = []");
             sStream.redirect("stdout");
             sStream.redirect("stderr");
 
             Python3FileLoader::getSingleton().setup();
+            Python3NamespaceLoader::getSingleton().setup();
 
             PyEval_SaveThread();
 
