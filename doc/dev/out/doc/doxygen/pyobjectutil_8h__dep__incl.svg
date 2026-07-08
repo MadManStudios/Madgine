@@ -46,7 +46,7 @@ if (edges && edges.length) {
         </defs>
 
 <script type="text/javascript">
-var viewWidth = 4238;
+var viewWidth = 4460;
 var viewHeight = 115;
 var sectionId = 'dynsection-1';
 </script>
@@ -58,9 +58,9 @@ var sectionId = 'dynsection-1';
 <g id="node1" class="node">
 <title>Node1</title>
 <g id="a_node1"><a xlink:title=" ">
-<polygon fill="#999999" stroke="#666666" points="2105,-107 1959,-107 1959,-77 2105,-77 2105,-107"/>
-<text text-anchor="start" x="1967" y="-95" font-family="Helvetica,sans-Serif" font-size="10.00">plugins/behavior/python3</text>
-<text text-anchor="middle" x="2032" y="-84" font-family="Helvetica,sans-Serif" font-size="10.00">/src/Python3/util/pyobjectutil.h</text>
+<polygon fill="#999999" stroke="#666666" points="2233,-107 2087,-107 2087,-77 2233,-77 2233,-107"/>
+<text text-anchor="start" x="2095" y="-95" font-family="Helvetica,sans-Serif" font-size="10.00">plugins/behavior/python3</text>
+<text text-anchor="middle" x="2160" y="-84" font-family="Helvetica,sans-Serif" font-size="10.00">/src/Python3/util/pyobjectutil.h</text>
 </a>
 </g>
 </g>
@@ -77,8 +77,8 @@ var sectionId = 'dynsection-1';
 <!-- Node1&#45;&gt;Node2 -->
 <g id="edge1" class="edge">
 <title>Node1&#45;&gt;Node2</title>
-<path fill="none" stroke="#63b8ff" d="M1947.23,-90.74C1631.88,-89.45 526.74,-82.04 177,-41 166.68,-39.79 155.8,-37.99 145.27,-35.97"/>
-<polygon fill="#63b8ff" stroke="#63b8ff" points="1947.03,-94.24 1957.05,-90.78 1947.06,-87.24 1947.03,-94.24"/>
+<path fill="none" stroke="#63b8ff" d="M2075.23,-90.91C1746.16,-90.25 553.09,-84.8 177,-41 166.68,-39.8 155.8,-38.01 145.27,-35.99"/>
+<polygon fill="#63b8ff" stroke="#63b8ff" points="2075.05,-94.41 2085.05,-90.93 2075.06,-87.41 2075.05,-94.41"/>
 </g>
 <!-- Node3 -->
 <g id="node3" class="node">
@@ -93,8 +93,8 @@ var sectionId = 'dynsection-1';
 <!-- Node1&#45;&gt;Node3 -->
 <g id="edge2" class="edge">
 <title>Node1&#45;&gt;Node3</title>
-<path fill="none" stroke="#63b8ff" d="M1947.85,-90.85C1650.98,-89.95 653.49,-83.76 337,-41 328.07,-39.79 318.7,-38 309.63,-35.98"/>
-<polygon fill="#63b8ff" stroke="#63b8ff" points="1947.42,-94.35 1957.43,-90.88 1947.44,-87.35 1947.42,-94.35"/>
+<path fill="none" stroke="#63b8ff" d="M2075.33,-91.05C1763.51,-90.88 679.52,-86.91 337,-41 328.07,-39.8 318.7,-38.01 309.63,-36"/>
+<polygon fill="#63b8ff" stroke="#63b8ff" points="2075.02,-94.55 2085.02,-91.06 2075.02,-87.55 2075.02,-94.55"/>
 </g>
 <!-- Node4 -->
 <g id="node4" class="node">
@@ -109,366 +109,382 @@ var sectionId = 'dynsection-1';
 <!-- Node1&#45;&gt;Node4 -->
 <g id="edge3" class="edge">
 <title>Node1&#45;&gt;Node4</title>
-<path fill="none" stroke="#63b8ff" d="M1947.77,-90.19C1672.14,-87.23 798.81,-75.33 519,-41 508.9,-39.76 498.25,-37.95 487.95,-35.93"/>
-<polygon fill="#63b8ff" stroke="#63b8ff" points="1947.33,-93.69 1957.37,-90.29 1947.41,-86.69 1947.33,-93.69"/>
+<path fill="none" stroke="#63b8ff" d="M2075.67,-90.44C1784.84,-88.21 824.92,-78.13 519,-41 508.9,-39.77 498.25,-37.97 487.95,-35.95"/>
+<polygon fill="#63b8ff" stroke="#63b8ff" points="2075.42,-93.94 2085.45,-90.52 2075.47,-86.94 2075.42,-93.94"/>
 </g>
 <!-- Node5 -->
 <g id="node5" class="node">
 <title>Node5</title>
-<g id="a_node5"><a xlink:href="python3streamredirect_8cpp.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="#666666" points="716,-35.5 528,-35.5 528,-5.5 716,-5.5 716,-35.5"/>
-<text text-anchor="start" x="536" y="-23.5" font-family="Helvetica,sans-Serif" font-size="10.00">plugins/behavior/python3</text>
-<text text-anchor="middle" x="622" y="-12.5" font-family="Helvetica,sans-Serif" font-size="10.00">/src/Python3/python3streamredirect.cpp</text>
+<g id="a_node5"><a xlink:href="python3namespaceloader_8cpp.html" target="_top" xlink:title=" ">
+<polygon fill="white" stroke="#666666" points="731.5,-35.5 528.5,-35.5 528.5,-5.5 731.5,-5.5 731.5,-35.5"/>
+<text text-anchor="start" x="536.5" y="-23.5" font-family="Helvetica,sans-Serif" font-size="10.00">plugins/behavior/python3</text>
+<text text-anchor="middle" x="630" y="-12.5" font-family="Helvetica,sans-Serif" font-size="10.00">/src/Python3/python3namespaceloader.cpp</text>
 </a>
 </g>
 </g>
 <!-- Node1&#45;&gt;Node5 -->
 <g id="edge4" class="edge">
 <title>Node1&#45;&gt;Node5</title>
-<path fill="none" stroke="#63b8ff" d="M1947.57,-89.41C1697.49,-84.46 963.19,-67.95 725,-41 713.88,-39.74 702.16,-37.96 690.76,-35.99"/>
-<polygon fill="#63b8ff" stroke="#63b8ff" points="1947.18,-92.91 1957.24,-89.6 1947.31,-85.91 1947.18,-92.91"/>
+<path fill="none" stroke="#63b8ff" d="M2075.29,-89.56C1810.74,-84.81 1002.05,-68.4 741,-41 729.03,-39.74 716.41,-37.97 704.14,-35.99"/>
+<polygon fill="#63b8ff" stroke="#63b8ff" points="2075.15,-93.06 2085.21,-89.74 2075.28,-86.06 2075.15,-93.06"/>
 </g>
 <!-- Node6 -->
 <g id="node6" class="node">
 <title>Node6</title>
-<g id="a_node6"><a xlink:href="pymatrix3_8cpp.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="#666666" points="858,-41 734,-41 734,0 858,0 858,-41"/>
-<text text-anchor="start" x="742" y="-29" font-family="Helvetica,sans-Serif" font-size="10.00">plugins/behavior/python3</text>
-<text text-anchor="start" x="742" y="-18" font-family="Helvetica,sans-Serif" font-size="10.00">/src/Python3/util/math</text>
-<text text-anchor="middle" x="796" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">/pymatrix3.cpp</text>
+<g id="a_node6"><a xlink:href="python3streamredirect_8cpp.html" target="_top" xlink:title=" ">
+<polygon fill="white" stroke="#666666" points="938,-35.5 750,-35.5 750,-5.5 938,-5.5 938,-35.5"/>
+<text text-anchor="start" x="758" y="-23.5" font-family="Helvetica,sans-Serif" font-size="10.00">plugins/behavior/python3</text>
+<text text-anchor="middle" x="844" y="-12.5" font-family="Helvetica,sans-Serif" font-size="10.00">/src/Python3/python3streamredirect.cpp</text>
 </a>
 </g>
 </g>
 <!-- Node1&#45;&gt;Node6 -->
 <g id="edge5" class="edge">
 <title>Node1&#45;&gt;Node6</title>
-<path fill="none" stroke="#63b8ff" d="M1947.21,-89.84C1715.52,-86.26 1075.24,-73.64 867,-41 864.1,-40.54 861.14,-40.01 858.17,-39.42"/>
-<polygon fill="#63b8ff" stroke="#63b8ff" points="1947.03,-93.33 1957.08,-89.99 1947.13,-86.33 1947.03,-93.33"/>
+<path fill="none" stroke="#63b8ff" d="M2075.09,-91.75C1876.85,-92.57 1368.39,-89.31 947,-41 935.88,-39.73 924.16,-37.94 912.77,-35.96"/>
+<polygon fill="#63b8ff" stroke="#63b8ff" points="2075.06,-95.25 2085.05,-91.7 2075.03,-88.25 2075.06,-95.25"/>
 </g>
 <!-- Node7 -->
 <g id="node7" class="node">
 <title>Node7</title>
-<g id="a_node7"><a xlink:href="pymatrix4_8cpp.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="#666666" points="1000,-41 876,-41 876,0 1000,0 1000,-41"/>
-<text text-anchor="start" x="884" y="-29" font-family="Helvetica,sans-Serif" font-size="10.00">plugins/behavior/python3</text>
-<text text-anchor="start" x="884" y="-18" font-family="Helvetica,sans-Serif" font-size="10.00">/src/Python3/util/math</text>
-<text text-anchor="middle" x="938" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">/pymatrix4.cpp</text>
+<g id="a_node7"><a xlink:href="pymatrix3_8cpp.html" target="_top" xlink:title=" ">
+<polygon fill="white" stroke="#666666" points="1080,-41 956,-41 956,0 1080,0 1080,-41"/>
+<text text-anchor="start" x="964" y="-29" font-family="Helvetica,sans-Serif" font-size="10.00">plugins/behavior/python3</text>
+<text text-anchor="start" x="964" y="-18" font-family="Helvetica,sans-Serif" font-size="10.00">/src/Python3/util/math</text>
+<text text-anchor="middle" x="1018" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">/pymatrix3.cpp</text>
 </a>
 </g>
 </g>
 <!-- Node1&#45;&gt;Node7 -->
 <g id="edge6" class="edge">
 <title>Node1&#45;&gt;Node7</title>
-<path fill="none" stroke="#63b8ff" d="M1947.36,-89.25C1735.94,-84.5 1188.85,-69.74 1009,-41 1006.1,-40.54 1003.14,-40 1000.17,-39.4"/>
-<polygon fill="#63b8ff" stroke="#63b8ff" points="1947.09,-92.75 1957.17,-89.47 1947.25,-85.75 1947.09,-92.75"/>
+<path fill="none" stroke="#63b8ff" d="M2075.26,-89.47C1856.82,-85.12 1278.41,-71.05 1089,-41 1086.1,-40.54 1083.14,-40 1080.17,-39.41"/>
+<polygon fill="#63b8ff" stroke="#63b8ff" points="2075.06,-92.96 2085.13,-89.66 2075.2,-85.96 2075.06,-92.96"/>
 </g>
 <!-- Node8 -->
 <g id="node8" class="node">
 <title>Node8</title>
-<g id="a_node8"><a xlink:href="pyquaternion_8cpp.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="#666666" points="1142,-41 1018,-41 1018,0 1142,0 1142,-41"/>
-<text text-anchor="start" x="1026" y="-29" font-family="Helvetica,sans-Serif" font-size="10.00">plugins/behavior/python3</text>
-<text text-anchor="start" x="1026" y="-18" font-family="Helvetica,sans-Serif" font-size="10.00">/src/Python3/util/math</text>
-<text text-anchor="middle" x="1080" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">/pyquaternion.cpp</text>
+<g id="a_node8"><a xlink:href="pymatrix4_8cpp.html" target="_top" xlink:title=" ">
+<polygon fill="white" stroke="#666666" points="1222,-41 1098,-41 1098,0 1222,0 1222,-41"/>
+<text text-anchor="start" x="1106" y="-29" font-family="Helvetica,sans-Serif" font-size="10.00">plugins/behavior/python3</text>
+<text text-anchor="start" x="1106" y="-18" font-family="Helvetica,sans-Serif" font-size="10.00">/src/Python3/util/math</text>
+<text text-anchor="middle" x="1160" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">/pymatrix4.cpp</text>
 </a>
 </g>
 </g>
 <!-- Node1&#45;&gt;Node8 -->
 <g id="edge7" class="edge">
 <title>Node1&#45;&gt;Node8</title>
-<path fill="none" stroke="#63b8ff" d="M1947.53,-88.48C1757.81,-82.46 1302.67,-65.85 1151,-41 1148.1,-40.52 1145.15,-39.98 1142.17,-39.37"/>
-<polygon fill="#63b8ff" stroke="#63b8ff" points="1947.2,-91.97 1957.31,-88.79 1947.42,-84.98 1947.2,-91.97"/>
+<path fill="none" stroke="#63b8ff" d="M2075.22,-88.76C1877.82,-83.17 1392.11,-67.15 1231,-41 1228.1,-40.53 1225.14,-39.99 1222.17,-39.39"/>
+<polygon fill="#63b8ff" stroke="#63b8ff" points="2075.06,-92.26 2085.15,-89.04 2075.25,-85.26 2075.06,-92.26"/>
 </g>
 <!-- Node9 -->
 <g id="node9" class="node">
 <title>Node9</title>
-<g id="a_node9"><a xlink:href="pyvector2_8cpp.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="#666666" points="1284,-41 1160,-41 1160,0 1284,0 1284,-41"/>
-<text text-anchor="start" x="1168" y="-29" font-family="Helvetica,sans-Serif" font-size="10.00">plugins/behavior/python3</text>
-<text text-anchor="start" x="1168" y="-18" font-family="Helvetica,sans-Serif" font-size="10.00">/src/Python3/util/math</text>
-<text text-anchor="middle" x="1222" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">/pyvector2.cpp</text>
+<g id="a_node9"><a xlink:href="pyquaternion_8cpp.html" target="_top" xlink:title=" ">
+<polygon fill="white" stroke="#666666" points="1364,-41 1240,-41 1240,0 1364,0 1364,-41"/>
+<text text-anchor="start" x="1248" y="-29" font-family="Helvetica,sans-Serif" font-size="10.00">plugins/behavior/python3</text>
+<text text-anchor="start" x="1248" y="-18" font-family="Helvetica,sans-Serif" font-size="10.00">/src/Python3/util/math</text>
+<text text-anchor="middle" x="1302" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">/pyquaternion.cpp</text>
 </a>
 </g>
 </g>
 <!-- Node1&#45;&gt;Node9 -->
 <g id="edge8" class="edge">
 <title>Node1&#45;&gt;Node9</title>
-<path fill="none" stroke="#63b8ff" d="M1947.23,-90.76C1809.18,-89.15 1527.61,-80.74 1293,-41 1290.1,-40.51 1287.15,-39.95 1284.18,-39.34"/>
-<polygon fill="#63b8ff" stroke="#63b8ff" points="1946.98,-94.26 1957.02,-90.87 1947.06,-87.26 1946.98,-94.26"/>
+<path fill="none" stroke="#63b8ff" d="M2075.32,-91.27C1930.43,-90.48 1626.08,-83.33 1373,-41 1370.1,-40.51 1367.15,-39.96 1364.18,-39.35"/>
+<polygon fill="#63b8ff" stroke="#63b8ff" points="2075.21,-94.77 2085.22,-91.32 2075.24,-87.77 2075.21,-94.77"/>
 </g>
 <!-- Node10 -->
 <g id="node10" class="node">
 <title>Node10</title>
-<g id="a_node10"><a xlink:href="pyvector3_8cpp.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="#666666" points="1426,-41 1302,-41 1302,0 1426,0 1426,-41"/>
-<text text-anchor="start" x="1310" y="-29" font-family="Helvetica,sans-Serif" font-size="10.00">plugins/behavior/python3</text>
-<text text-anchor="start" x="1310" y="-18" font-family="Helvetica,sans-Serif" font-size="10.00">/src/Python3/util/math</text>
-<text text-anchor="middle" x="1364" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">/pyvector3.cpp</text>
+<g id="a_node10"><a xlink:href="pyvector2_8cpp.html" target="_top" xlink:title=" ">
+<polygon fill="white" stroke="#666666" points="1506,-41 1382,-41 1382,0 1506,0 1506,-41"/>
+<text text-anchor="start" x="1390" y="-29" font-family="Helvetica,sans-Serif" font-size="10.00">plugins/behavior/python3</text>
+<text text-anchor="start" x="1390" y="-18" font-family="Helvetica,sans-Serif" font-size="10.00">/src/Python3/util/math</text>
+<text text-anchor="middle" x="1444" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">/pyvector2.cpp</text>
 </a>
 </g>
 </g>
 <!-- Node1&#45;&gt;Node10 -->
 <g id="edge9" class="edge">
 <title>Node1&#45;&gt;Node10</title>
-<path fill="none" stroke="#63b8ff" d="M1947.56,-88.83C1831.33,-84.72 1615.87,-73.13 1435,-41 1432.11,-40.49 1429.16,-39.91 1426.19,-39.28"/>
-<polygon fill="#63b8ff" stroke="#63b8ff" points="1947.21,-92.32 1957.33,-89.16 1947.45,-85.32 1947.21,-92.32"/>
+<path fill="none" stroke="#63b8ff" d="M2075.63,-89.58C1951.82,-86.33 1714.03,-75.72 1515,-41 1512.1,-40.49 1509.15,-39.92 1506.19,-39.3"/>
+<polygon fill="#63b8ff" stroke="#63b8ff" points="2075.29,-93.07 2085.38,-89.82 2075.47,-86.07 2075.29,-93.07"/>
 </g>
 <!-- Node11 -->
 <g id="node11" class="node">
 <title>Node11</title>
-<g id="a_node11"><a xlink:href="pyvector4_8cpp.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="#666666" points="1568,-41 1444,-41 1444,0 1568,0 1568,-41"/>
-<text text-anchor="start" x="1452" y="-29" font-family="Helvetica,sans-Serif" font-size="10.00">plugins/behavior/python3</text>
-<text text-anchor="start" x="1452" y="-18" font-family="Helvetica,sans-Serif" font-size="10.00">/src/Python3/util/math</text>
-<text text-anchor="middle" x="1506" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">/pyvector4.cpp</text>
+<g id="a_node11"><a xlink:href="pyvector3_8cpp.html" target="_top" xlink:title=" ">
+<polygon fill="white" stroke="#666666" points="1648,-41 1524,-41 1524,0 1648,0 1648,-41"/>
+<text text-anchor="start" x="1532" y="-29" font-family="Helvetica,sans-Serif" font-size="10.00">plugins/behavior/python3</text>
+<text text-anchor="start" x="1532" y="-18" font-family="Helvetica,sans-Serif" font-size="10.00">/src/Python3/util/math</text>
+<text text-anchor="middle" x="1586" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">/pyvector3.cpp</text>
 </a>
 </g>
 </g>
 <!-- Node1&#45;&gt;Node11 -->
 <g id="edge10" class="edge">
 <title>Node1&#45;&gt;Node11</title>
-<path fill="none" stroke="#63b8ff" d="M1947.12,-85.71C1855.28,-79.05 1704.82,-65.42 1577,-41 1574.11,-40.45 1571.17,-39.84 1568.21,-39.19"/>
-<polygon fill="#63b8ff" stroke="#63b8ff" points="1946.84,-89.2 1957.07,-86.42 1947.34,-82.22 1946.84,-89.2"/>
+<path fill="none" stroke="#63b8ff" d="M2075.28,-86.95C1974.8,-81.15 1802.6,-68.03 1657,-41 1654.11,-40.46 1651.16,-39.87 1648.2,-39.22"/>
+<polygon fill="#63b8ff" stroke="#63b8ff" points="2074.87,-90.44 2085.06,-87.51 2075.27,-83.45 2074.87,-90.44"/>
 </g>
 <!-- Node12 -->
 <g id="node12" class="node">
 <title>Node12</title>
-<g id="a_node12"><a xlink:href="pyapifunction_8cpp.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="#666666" points="1751.5,-35.5 1586.5,-35.5 1586.5,-5.5 1751.5,-5.5 1751.5,-35.5"/>
-<text text-anchor="start" x="1594.5" y="-23.5" font-family="Helvetica,sans-Serif" font-size="10.00">plugins/behavior/python3</text>
-<text text-anchor="middle" x="1669" y="-12.5" font-family="Helvetica,sans-Serif" font-size="10.00">/src/Python3/util/pyapifunction.cpp</text>
+<g id="a_node12"><a xlink:href="pyvector4_8cpp.html" target="_top" xlink:title=" ">
+<polygon fill="white" stroke="#666666" points="1790,-41 1666,-41 1666,0 1790,0 1790,-41"/>
+<text text-anchor="start" x="1674" y="-29" font-family="Helvetica,sans-Serif" font-size="10.00">plugins/behavior/python3</text>
+<text text-anchor="start" x="1674" y="-18" font-family="Helvetica,sans-Serif" font-size="10.00">/src/Python3/util/math</text>
+<text text-anchor="middle" x="1728" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">/pyvector4.cpp</text>
 </a>
 </g>
 </g>
 <!-- Node1&#45;&gt;Node12 -->
 <g id="edge11" class="edge">
 <title>Node1&#45;&gt;Node12</title>
-<path fill="none" stroke="#63b8ff" d="M1947.38,-76.1C1893.64,-66.48 1822.65,-53.47 1760,-41 1752.08,-39.42 1743.78,-37.72 1735.55,-36"/>
-<polygon fill="#63b8ff" stroke="#63b8ff" points="1946.63,-79.53 1957.09,-77.84 1947.86,-72.63 1946.63,-79.53"/>
+<path fill="none" stroke="#63b8ff" d="M2075.55,-82.46C2002.05,-74.27 1892.88,-60.31 1799,-41 1796.12,-40.41 1793.18,-39.76 1790.23,-39.08"/>
+<polygon fill="#63b8ff" stroke="#63b8ff" points="2074.75,-85.89 2085.07,-83.51 2075.52,-78.93 2074.75,-85.89"/>
 </g>
 <!-- Node13 -->
 <g id="node13" class="node">
 <title>Node13</title>
-<g id="a_node13"><a xlink:href="pybinding_8cpp.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="#666666" points="1918.5,-35.5 1769.5,-35.5 1769.5,-5.5 1918.5,-5.5 1918.5,-35.5"/>
-<text text-anchor="start" x="1777.5" y="-23.5" font-family="Helvetica,sans-Serif" font-size="10.00">plugins/behavior/python3</text>
-<text text-anchor="middle" x="1844" y="-12.5" font-family="Helvetica,sans-Serif" font-size="10.00">/src/Python3/util/pybinding.cpp</text>
+<g id="a_node13"><a xlink:href="pyapifunction_8cpp.html" target="_top" xlink:title=" ">
+<polygon fill="white" stroke="#666666" points="1973.5,-35.5 1808.5,-35.5 1808.5,-5.5 1973.5,-5.5 1973.5,-35.5"/>
+<text text-anchor="start" x="1816.5" y="-23.5" font-family="Helvetica,sans-Serif" font-size="10.00">plugins/behavior/python3</text>
+<text text-anchor="middle" x="1891" y="-12.5" font-family="Helvetica,sans-Serif" font-size="10.00">/src/Python3/util/pyapifunction.cpp</text>
 </a>
 </g>
 </g>
 <!-- Node1&#45;&gt;Node13 -->
 <g id="edge12" class="edge">
 <title>Node1&#45;&gt;Node13</title>
-<path fill="none" stroke="#63b8ff" d="M1982.42,-72.67C1951.31,-61.17 1911.75,-46.55 1882.9,-35.88"/>
-<polygon fill="#63b8ff" stroke="#63b8ff" points="1981.03,-75.89 1991.63,-76.07 1983.46,-69.32 1981.03,-75.89"/>
+<path fill="none" stroke="#63b8ff" d="M2092.82,-73.64C2047.87,-62.03 1989.42,-46.93 1946.99,-35.97"/>
+<polygon fill="#63b8ff" stroke="#63b8ff" points="2091.91,-77.02 2102.47,-76.14 2093.66,-70.25 2091.91,-77.02"/>
 </g>
 <!-- Node14 -->
 <g id="node14" class="node">
 <title>Node14</title>
-<g id="a_node14"><a xlink:href="pyboundapifunction_8cpp.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="#666666" points="2127.5,-35.5 1936.5,-35.5 1936.5,-5.5 2127.5,-5.5 2127.5,-35.5"/>
-<text text-anchor="start" x="1944.5" y="-23.5" font-family="Helvetica,sans-Serif" font-size="10.00">plugins/behavior/python3</text>
-<text text-anchor="middle" x="2032" y="-12.5" font-family="Helvetica,sans-Serif" font-size="10.00">/src/Python3/util/pyboundapifunction.cpp</text>
+<g id="a_node14"><a xlink:href="pybinding_8cpp.html" target="_top" xlink:title=" ">
+<polygon fill="white" stroke="#666666" points="2140.5,-35.5 1991.5,-35.5 1991.5,-5.5 2140.5,-5.5 2140.5,-35.5"/>
+<text text-anchor="start" x="1999.5" y="-23.5" font-family="Helvetica,sans-Serif" font-size="10.00">plugins/behavior/python3</text>
+<text text-anchor="middle" x="2066" y="-12.5" font-family="Helvetica,sans-Serif" font-size="10.00">/src/Python3/util/pybinding.cpp</text>
 </a>
 </g>
 </g>
 <!-- Node1&#45;&gt;Node14 -->
 <g id="edge13" class="edge">
 <title>Node1&#45;&gt;Node14</title>
-<path fill="none" stroke="#63b8ff" d="M2032,-65.26C2032,-55.33 2032,-44.36 2032,-35.88"/>
-<polygon fill="#63b8ff" stroke="#63b8ff" points="2028.5,-65.09 2032,-75.09 2035.5,-65.09 2028.5,-65.09"/>
+<path fill="none" stroke="#63b8ff" d="M2131.68,-70.06C2116.75,-59.02 2098.81,-45.76 2085.45,-35.88"/>
+<polygon fill="#63b8ff" stroke="#63b8ff" points="2129.18,-72.57 2139.31,-75.7 2133.35,-66.94 2129.18,-72.57"/>
 </g>
 <!-- Node15 -->
 <g id="node15" class="node">
 <title>Node15</title>
-<g id="a_node15"><a xlink:href="pyenum_8cpp.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="#666666" points="2288,-35.5 2146,-35.5 2146,-5.5 2288,-5.5 2288,-35.5"/>
-<text text-anchor="start" x="2154" y="-23.5" font-family="Helvetica,sans-Serif" font-size="10.00">plugins/behavior/python3</text>
-<text text-anchor="middle" x="2217" y="-12.5" font-family="Helvetica,sans-Serif" font-size="10.00">/src/Python3/util/pyenum.cpp</text>
+<g id="a_node15"><a xlink:href="pyboundapifunction_8cpp.html" target="_top" xlink:title=" ">
+<polygon fill="white" stroke="#666666" points="2349.5,-35.5 2158.5,-35.5 2158.5,-5.5 2349.5,-5.5 2349.5,-35.5"/>
+<text text-anchor="start" x="2166.5" y="-23.5" font-family="Helvetica,sans-Serif" font-size="10.00">plugins/behavior/python3</text>
+<text text-anchor="middle" x="2254" y="-12.5" font-family="Helvetica,sans-Serif" font-size="10.00">/src/Python3/util/pyboundapifunction.cpp</text>
 </a>
 </g>
 </g>
 <!-- Node1&#45;&gt;Node15 -->
 <g id="edge14" class="edge">
 <title>Node1&#45;&gt;Node15</title>
-<path fill="none" stroke="#63b8ff" d="M2080.79,-72.67C2111.41,-61.17 2150.33,-46.55 2178.72,-35.88"/>
-<polygon fill="#63b8ff" stroke="#63b8ff" points="2079.88,-69.27 2071.75,-76.07 2082.34,-75.83 2079.88,-69.27"/>
+<path fill="none" stroke="#63b8ff" d="M2188.32,-70.06C2203.25,-59.02 2221.19,-45.76 2234.55,-35.88"/>
+<polygon fill="#63b8ff" stroke="#63b8ff" points="2186.65,-66.94 2180.69,-75.7 2190.82,-72.57 2186.65,-66.94"/>
 </g>
 <!-- Node16 -->
 <g id="node16" class="node">
 <title>Node16</title>
-<g id="a_node16"><a xlink:href="pyflags_8cpp.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="#666666" points="2444,-35.5 2306,-35.5 2306,-5.5 2444,-5.5 2444,-35.5"/>
-<text text-anchor="start" x="2314" y="-23.5" font-family="Helvetica,sans-Serif" font-size="10.00">plugins/behavior/python3</text>
-<text text-anchor="middle" x="2375" y="-12.5" font-family="Helvetica,sans-Serif" font-size="10.00">/src/Python3/util/pyflags.cpp</text>
+<g id="a_node16"><a xlink:href="pyenum_8cpp.html" target="_top" xlink:title=" ">
+<polygon fill="white" stroke="#666666" points="2510,-35.5 2368,-35.5 2368,-5.5 2510,-5.5 2510,-35.5"/>
+<text text-anchor="start" x="2376" y="-23.5" font-family="Helvetica,sans-Serif" font-size="10.00">plugins/behavior/python3</text>
+<text text-anchor="middle" x="2439" y="-12.5" font-family="Helvetica,sans-Serif" font-size="10.00">/src/Python3/util/pyenum.cpp</text>
 </a>
 </g>
 </g>
 <!-- Node1&#45;&gt;Node16 -->
 <g id="edge15" class="edge">
 <title>Node1&#45;&gt;Node16</title>
-<path fill="none" stroke="#63b8ff" d="M2116.56,-76.35C2168.73,-66.98 2236.92,-54.17 2297,-41 2304.09,-39.45 2311.52,-37.72 2318.85,-35.95"/>
-<polygon fill="#63b8ff" stroke="#63b8ff" points="2116.06,-72.88 2106.84,-78.08 2117.3,-79.77 2116.06,-72.88"/>
+<path fill="none" stroke="#63b8ff" d="M2229.09,-73.79C2275.78,-62.16 2336.74,-46.97 2380.93,-35.97"/>
+<polygon fill="#63b8ff" stroke="#63b8ff" points="2228.47,-70.34 2219.62,-76.15 2230.17,-77.13 2228.47,-70.34"/>
 </g>
 <!-- Node17 -->
 <g id="node17" class="node">
 <title>Node17</title>
-<g id="a_node17"><a xlink:href="pyframeptr_8cpp.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="#666666" points="2616,-35.5 2462,-35.5 2462,-5.5 2616,-5.5 2616,-35.5"/>
-<text text-anchor="start" x="2470" y="-23.5" font-family="Helvetica,sans-Serif" font-size="10.00">plugins/behavior/python3</text>
-<text text-anchor="middle" x="2539" y="-12.5" font-family="Helvetica,sans-Serif" font-size="10.00">/src/Python3/util/pyframeptr.cpp</text>
+<g id="a_node17"><a xlink:href="pyflags_8cpp.html" target="_top" xlink:title=" ">
+<polygon fill="white" stroke="#666666" points="2666,-35.5 2528,-35.5 2528,-5.5 2666,-5.5 2666,-35.5"/>
+<text text-anchor="start" x="2536" y="-23.5" font-family="Helvetica,sans-Serif" font-size="10.00">plugins/behavior/python3</text>
+<text text-anchor="middle" x="2597" y="-12.5" font-family="Helvetica,sans-Serif" font-size="10.00">/src/Python3/util/pyflags.cpp</text>
 </a>
 </g>
 </g>
 <!-- Node1&#45;&gt;Node17 -->
 <g id="edge16" class="edge">
 <title>Node1&#45;&gt;Node17</title>
-<path fill="none" stroke="#63b8ff" d="M2116.79,-83.56C2202.08,-75.46 2337.19,-60.95 2453,-41 2461.45,-39.54 2470.32,-37.79 2479.02,-35.94"/>
-<polygon fill="#63b8ff" stroke="#63b8ff" points="2116.48,-80.08 2106.86,-84.5 2117.14,-87.04 2116.48,-80.08"/>
+<path fill="none" stroke="#63b8ff" d="M2244.67,-81.79C2317.69,-73.23 2425.76,-59.09 2519,-41 2526.54,-39.54 2534.44,-37.8 2542.19,-35.98"/>
+<polygon fill="#63b8ff" stroke="#63b8ff" points="2244.29,-78.31 2234.76,-82.94 2245.1,-85.26 2244.29,-78.31"/>
 </g>
 <!-- Node18 -->
 <g id="node18" class="node">
 <title>Node18</title>
-<g id="a_node18"><a xlink:href="pyobjectptr_8cpp.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="#666666" points="2789.5,-35.5 2634.5,-35.5 2634.5,-5.5 2789.5,-5.5 2789.5,-35.5"/>
-<text text-anchor="start" x="2642.5" y="-23.5" font-family="Helvetica,sans-Serif" font-size="10.00">plugins/behavior/python3</text>
-<text text-anchor="middle" x="2712" y="-12.5" font-family="Helvetica,sans-Serif" font-size="10.00">/src/Python3/util/pyobjectptr.cpp</text>
+<g id="a_node18"><a xlink:href="pyframeptr_8cpp.html" target="_top" xlink:title=" ">
+<polygon fill="white" stroke="#666666" points="2838,-35.5 2684,-35.5 2684,-5.5 2838,-5.5 2838,-35.5"/>
+<text text-anchor="start" x="2692" y="-23.5" font-family="Helvetica,sans-Serif" font-size="10.00">plugins/behavior/python3</text>
+<text text-anchor="middle" x="2761" y="-12.5" font-family="Helvetica,sans-Serif" font-size="10.00">/src/Python3/util/pyframeptr.cpp</text>
 </a>
 </g>
 </g>
 <!-- Node1&#45;&gt;Node18 -->
 <g id="edge17" class="edge">
 <title>Node1&#45;&gt;Node18</title>
-<path fill="none" stroke="#63b8ff" d="M2116.62,-87.5C2232.06,-81.9 2445.13,-68.61 2625,-41 2634.03,-39.61 2643.51,-37.83 2652.77,-35.91"/>
-<polygon fill="#63b8ff" stroke="#63b8ff" points="2116.75,-83.99 2106.92,-87.96 2117.08,-90.98 2116.75,-83.99"/>
+<path fill="none" stroke="#63b8ff" d="M2244.48,-86.08C2346.85,-79.36 2524.34,-65.29 2675,-41 2683.77,-39.59 2692.97,-37.81 2701.98,-35.91"/>
+<polygon fill="#63b8ff" stroke="#63b8ff" points="2244.55,-82.57 2234.8,-86.71 2245.01,-89.55 2244.55,-82.57"/>
 </g>
 <!-- Node19 -->
 <g id="node19" class="node">
 <title>Node19</title>
-<g id="a_node19"><a xlink:href="pyobjectutil_8cpp.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="#666666" points="2964.5,-35.5 2807.5,-35.5 2807.5,-5.5 2964.5,-5.5 2964.5,-35.5"/>
-<text text-anchor="start" x="2815.5" y="-23.5" font-family="Helvetica,sans-Serif" font-size="10.00">plugins/behavior/python3</text>
-<text text-anchor="middle" x="2886" y="-12.5" font-family="Helvetica,sans-Serif" font-size="10.00">/src/Python3/util/pyobjectutil.cpp</text>
+<g id="a_node19"><a xlink:href="pyobjectptr_8cpp.html" target="_top" xlink:title=" ">
+<polygon fill="white" stroke="#666666" points="3011.5,-35.5 2856.5,-35.5 2856.5,-5.5 3011.5,-5.5 3011.5,-35.5"/>
+<text text-anchor="start" x="2864.5" y="-23.5" font-family="Helvetica,sans-Serif" font-size="10.00">plugins/behavior/python3</text>
+<text text-anchor="middle" x="2934" y="-12.5" font-family="Helvetica,sans-Serif" font-size="10.00">/src/Python3/util/pyobjectptr.cpp</text>
 </a>
 </g>
 </g>
 <!-- Node1&#45;&gt;Node19 -->
 <g id="edge18" class="edge">
 <title>Node1&#45;&gt;Node19</title>
-<path fill="none" stroke="#63b8ff" d="M2116.54,-89.77C2258.33,-86.76 2552.73,-76.41 2799,-41 2808.19,-39.68 2817.86,-37.9 2827.26,-35.96"/>
-<polygon fill="#63b8ff" stroke="#63b8ff" points="2116.8,-86.27 2106.88,-89.97 2116.95,-93.27 2116.8,-86.27"/>
+<path fill="none" stroke="#63b8ff" d="M2244.78,-88.86C2374.93,-84.67 2631.54,-72.81 2847,-41 2856.19,-39.64 2865.85,-37.85 2875.25,-35.9"/>
+<polygon fill="#63b8ff" stroke="#63b8ff" points="2244.74,-85.36 2234.86,-89.17 2244.96,-92.35 2244.74,-85.36"/>
 </g>
 <!-- Node20 -->
 <g id="node20" class="node">
 <title>Node20</title>
-<g id="a_node20"><a xlink:href="pyownedscopeptr_8cpp.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="#666666" points="3167,-35.5 2983,-35.5 2983,-5.5 3167,-5.5 3167,-35.5"/>
-<text text-anchor="start" x="2991" y="-23.5" font-family="Helvetica,sans-Serif" font-size="10.00">plugins/behavior/python3</text>
-<text text-anchor="middle" x="3075" y="-12.5" font-family="Helvetica,sans-Serif" font-size="10.00">/src/Python3/util/pyownedscopeptr.cpp</text>
+<g id="a_node20"><a xlink:href="pyobjectutil_8cpp.html" target="_top" xlink:title=" ">
+<polygon fill="white" stroke="#666666" points="3186.5,-35.5 3029.5,-35.5 3029.5,-5.5 3186.5,-5.5 3186.5,-35.5"/>
+<text text-anchor="start" x="3037.5" y="-23.5" font-family="Helvetica,sans-Serif" font-size="10.00">plugins/behavior/python3</text>
+<text text-anchor="middle" x="3108" y="-12.5" font-family="Helvetica,sans-Serif" font-size="10.00">/src/Python3/util/pyobjectutil.cpp</text>
 </a>
 </g>
 </g>
 <!-- Node1&#45;&gt;Node20 -->
 <g id="edge19" class="edge">
 <title>Node1&#45;&gt;Node20</title>
-<path fill="none" stroke="#63b8ff" d="M2116.33,-90.41C2281.54,-88.39 2659.17,-79.56 2974,-41 2984.64,-39.7 2995.83,-37.93 3006.75,-36"/>
-<polygon fill="#63b8ff" stroke="#63b8ff" points="2116.76,-86.9 2106.8,-90.52 2116.84,-93.9 2116.76,-86.9"/>
+<path fill="none" stroke="#63b8ff" d="M2244.52,-90.63C2399.3,-88.96 2738.37,-80.61 3021,-41 3030.35,-39.69 3040.18,-37.9 3049.74,-35.92"/>
+<polygon fill="#63b8ff" stroke="#63b8ff" points="2244.73,-87.13 2234.76,-90.73 2244.8,-94.13 2244.73,-87.13"/>
 </g>
 <!-- Node21 -->
 <g id="node21" class="node">
 <title>Node21</title>
-<g id="a_node21"><a xlink:href="pyscopeiterator_8cpp.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="#666666" points="3359,-35.5 3185,-35.5 3185,-5.5 3359,-5.5 3359,-35.5"/>
-<text text-anchor="start" x="3193" y="-23.5" font-family="Helvetica,sans-Serif" font-size="10.00">plugins/behavior/python3</text>
-<text text-anchor="middle" x="3272" y="-12.5" font-family="Helvetica,sans-Serif" font-size="10.00">/src/Python3/util/pyscopeiterator.cpp</text>
+<g id="a_node21"><a xlink:href="pyownedscopeptr_8cpp.html" target="_top" xlink:title=" ">
+<polygon fill="white" stroke="#666666" points="3389,-35.5 3205,-35.5 3205,-5.5 3389,-5.5 3389,-35.5"/>
+<text text-anchor="start" x="3213" y="-23.5" font-family="Helvetica,sans-Serif" font-size="10.00">plugins/behavior/python3</text>
+<text text-anchor="middle" x="3297" y="-12.5" font-family="Helvetica,sans-Serif" font-size="10.00">/src/Python3/util/pyownedscopeptr.cpp</text>
 </a>
 </g>
 </g>
 <!-- Node1&#45;&gt;Node21 -->
 <g id="edge20" class="edge">
 <title>Node1&#45;&gt;Node21</title>
-<path fill="none" stroke="#63b8ff" d="M2116.56,-91.82C2306.67,-92.68 2782,-89.32 3176,-41 3186.38,-39.73 3197.32,-37.94 3207.94,-35.96"/>
-<polygon fill="#63b8ff" stroke="#63b8ff" points="2116.8,-88.32 2106.78,-91.77 2116.77,-95.32 2116.8,-88.32"/>
+<path fill="none" stroke="#63b8ff" d="M2244.78,-90.99C2422.05,-90.07 2844.58,-83.19 3196,-41 3206.73,-39.71 3218.03,-37.94 3229.03,-35.99"/>
+<polygon fill="#63b8ff" stroke="#63b8ff" points="2244.96,-87.49 2234.98,-91.03 2245,-94.49 2244.96,-87.49"/>
 </g>
 <!-- Node22 -->
 <g id="node22" class="node">
 <title>Node22</title>
-<g id="a_node22"><a xlink:href="pyscopeptr_8cpp.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="#666666" points="3532.5,-35.5 3377.5,-35.5 3377.5,-5.5 3532.5,-5.5 3532.5,-35.5"/>
-<text text-anchor="start" x="3385.5" y="-23.5" font-family="Helvetica,sans-Serif" font-size="10.00">plugins/behavior/python3</text>
-<text text-anchor="middle" x="3455" y="-12.5" font-family="Helvetica,sans-Serif" font-size="10.00">/src/Python3/util/pyscopeptr.cpp</text>
+<g id="a_node22"><a xlink:href="pyscopeiterator_8cpp.html" target="_top" xlink:title=" ">
+<polygon fill="white" stroke="#666666" points="3581,-35.5 3407,-35.5 3407,-5.5 3581,-5.5 3581,-35.5"/>
+<text text-anchor="start" x="3415" y="-23.5" font-family="Helvetica,sans-Serif" font-size="10.00">plugins/behavior/python3</text>
+<text text-anchor="middle" x="3494" y="-12.5" font-family="Helvetica,sans-Serif" font-size="10.00">/src/Python3/util/pyscopeiterator.cpp</text>
 </a>
 </g>
 </g>
 <!-- Node1&#45;&gt;Node22 -->
 <g id="edge21" class="edge">
 <title>Node1&#45;&gt;Node22</title>
-<path fill="none" stroke="#63b8ff" d="M2116.57,-89.86C2370.6,-86.12 3124.44,-72.58 3368,-41 3377.52,-39.77 3387.53,-37.99 3397.23,-36"/>
-<polygon fill="#63b8ff" stroke="#63b8ff" points="2116.67,-86.36 2106.72,-90 2116.77,-93.36 2116.67,-86.36"/>
+<path fill="none" stroke="#63b8ff" d="M2244.9,-89.34C2486.38,-84.35 3174.1,-68.08 3398,-41 3408.38,-39.74 3419.32,-37.97 3429.94,-35.99"/>
+<polygon fill="#63b8ff" stroke="#63b8ff" points="2244.83,-85.84 2234.91,-89.55 2244.98,-92.84 2244.83,-85.84"/>
 </g>
 <!-- Node23 -->
 <g id="node23" class="node">
 <title>Node23</title>
-<g id="a_node23"><a xlink:href="pysender_8cpp.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="#666666" points="3697.5,-35.5 3550.5,-35.5 3550.5,-5.5 3697.5,-5.5 3697.5,-35.5"/>
-<text text-anchor="start" x="3558.5" y="-23.5" font-family="Helvetica,sans-Serif" font-size="10.00">plugins/behavior/python3</text>
-<text text-anchor="middle" x="3624" y="-12.5" font-family="Helvetica,sans-Serif" font-size="10.00">/src/Python3/util/pysender.cpp</text>
+<g id="a_node23"><a xlink:href="pyscopeptr_8cpp.html" target="_top" xlink:title=" ">
+<polygon fill="white" stroke="#666666" points="3754.5,-35.5 3599.5,-35.5 3599.5,-5.5 3754.5,-5.5 3754.5,-35.5"/>
+<text text-anchor="start" x="3607.5" y="-23.5" font-family="Helvetica,sans-Serif" font-size="10.00">plugins/behavior/python3</text>
+<text text-anchor="middle" x="3677" y="-12.5" font-family="Helvetica,sans-Serif" font-size="10.00">/src/Python3/util/pyscopeptr.cpp</text>
 </a>
 </g>
 </g>
 <!-- Node1&#45;&gt;Node23 -->
 <g id="edge22" class="edge">
 <title>Node1&#45;&gt;Node23</title>
-<path fill="none" stroke="#63b8ff" d="M2116.57,-90.43C2392.28,-88.21 3263.31,-78.37 3542,-41 3551.14,-39.77 3560.74,-37.97 3570.03,-35.95"/>
-<polygon fill="#63b8ff" stroke="#63b8ff" points="2116.94,-86.93 2106.97,-90.5 2116.99,-93.93 2116.94,-86.93"/>
+<path fill="none" stroke="#63b8ff" d="M2244.96,-90.1C2511.26,-86.94 3327.49,-74.71 3590,-41 3599.67,-39.76 3609.85,-37.95 3619.71,-35.92"/>
+<polygon fill="#63b8ff" stroke="#63b8ff" points="2244.93,-86.6 2234.97,-90.21 2245.01,-93.6 2244.93,-86.6"/>
 </g>
 <!-- Node24 -->
 <g id="node24" class="node">
 <title>Node24</title>
-<g id="a_node24"><a xlink:href="pytype_8cpp.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="#666666" points="3852,-35.5 3716,-35.5 3716,-5.5 3852,-5.5 3852,-35.5"/>
-<text text-anchor="start" x="3724" y="-23.5" font-family="Helvetica,sans-Serif" font-size="10.00">plugins/behavior/python3</text>
-<text text-anchor="middle" x="3784" y="-12.5" font-family="Helvetica,sans-Serif" font-size="10.00">/src/Python3/util/pytype.cpp</text>
+<g id="a_node24"><a xlink:href="pysender_8cpp.html" target="_top" xlink:title=" ">
+<polygon fill="white" stroke="#666666" points="3919.5,-35.5 3772.5,-35.5 3772.5,-5.5 3919.5,-5.5 3919.5,-35.5"/>
+<text text-anchor="start" x="3780.5" y="-23.5" font-family="Helvetica,sans-Serif" font-size="10.00">plugins/behavior/python3</text>
+<text text-anchor="middle" x="3846" y="-12.5" font-family="Helvetica,sans-Serif" font-size="10.00">/src/Python3/util/pysender.cpp</text>
 </a>
 </g>
 </g>
 <!-- Node1&#45;&gt;Node24 -->
 <g id="edge23" class="edge">
 <title>Node1&#45;&gt;Node24</title>
-<path fill="none" stroke="#63b8ff" d="M2116.62,-90.91C2411.8,-90.23 3394.95,-84.64 3707,-41 3715.6,-39.8 3724.64,-38 3733.37,-35.99"/>
-<polygon fill="#63b8ff" stroke="#63b8ff" points="2116.66,-87.41 2106.67,-90.93 2116.68,-94.41 2116.66,-87.41"/>
+<path fill="none" stroke="#63b8ff" d="M2244.42,-90.62C2531.11,-88.98 3466.09,-80.65 3764,-41 3773.14,-39.78 3782.74,-37.99 3792.04,-35.96"/>
+<polygon fill="#63b8ff" stroke="#63b8ff" points="2244.77,-87.12 2234.79,-90.67 2244.81,-94.12 2244.77,-87.12"/>
 </g>
 <!-- Node25 -->
 <g id="node25" class="node">
 <title>Node25</title>
-<g id="a_node25"><a xlink:href="pyvirtualiterator_8cpp.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="#666666" points="4044,-35.5 3870,-35.5 3870,-5.5 4044,-5.5 4044,-35.5"/>
-<text text-anchor="start" x="3878" y="-23.5" font-family="Helvetica,sans-Serif" font-size="10.00">plugins/behavior/python3</text>
-<text text-anchor="middle" x="3957" y="-12.5" font-family="Helvetica,sans-Serif" font-size="10.00">/src/Python3/util/pyvirtualiterator.cpp</text>
+<g id="a_node25"><a xlink:href="pytype_8cpp.html" target="_top" xlink:title=" ">
+<polygon fill="white" stroke="#666666" points="4074,-35.5 3938,-35.5 3938,-5.5 4074,-5.5 4074,-35.5"/>
+<text text-anchor="start" x="3946" y="-23.5" font-family="Helvetica,sans-Serif" font-size="10.00">plugins/behavior/python3</text>
+<text text-anchor="middle" x="4006" y="-12.5" font-family="Helvetica,sans-Serif" font-size="10.00">/src/Python3/util/pytype.cpp</text>
 </a>
 </g>
 </g>
 <!-- Node1&#45;&gt;Node25 -->
 <g id="edge24" class="edge">
 <title>Node1&#45;&gt;Node25</title>
-<path fill="none" stroke="#63b8ff" d="M2116.63,-90.63C2428.94,-88.97 3516.43,-80.41 3861,-41 3871.65,-39.78 3882.86,-37.98 3893.73,-35.96"/>
-<polygon fill="#63b8ff" stroke="#63b8ff" points="2116.9,-87.13 2106.92,-90.68 2116.94,-94.13 2116.9,-87.13"/>
+<path fill="none" stroke="#63b8ff" d="M2244.69,-91.07C2550.6,-90.94 3597.75,-87.05 3929,-41 3937.6,-39.8 3946.64,-38.02 3955.37,-36"/>
+<polygon fill="#63b8ff" stroke="#63b8ff" points="2244.78,-87.57 2234.78,-91.07 2244.78,-94.57 2244.78,-87.57"/>
 </g>
 <!-- Node26 -->
 <g id="node26" class="node">
 <title>Node26</title>
-<g id="a_node26"><a xlink:href="pyvirtualrange_8cpp.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="#666666" points="4230,-35.5 4062,-35.5 4062,-5.5 4230,-5.5 4230,-35.5"/>
-<text text-anchor="start" x="4070" y="-23.5" font-family="Helvetica,sans-Serif" font-size="10.00">plugins/behavior/python3</text>
-<text text-anchor="middle" x="4146" y="-12.5" font-family="Helvetica,sans-Serif" font-size="10.00">/src/Python3/util/pyvirtualrange.cpp</text>
+<g id="a_node26"><a xlink:href="pyvirtualiterator_8cpp.html" target="_top" xlink:title=" ">
+<polygon fill="white" stroke="#666666" points="4266,-35.5 4092,-35.5 4092,-5.5 4266,-5.5 4266,-35.5"/>
+<text text-anchor="start" x="4100" y="-23.5" font-family="Helvetica,sans-Serif" font-size="10.00">plugins/behavior/python3</text>
+<text text-anchor="middle" x="4179" y="-12.5" font-family="Helvetica,sans-Serif" font-size="10.00">/src/Python3/util/pyvirtualiterator.cpp</text>
 </a>
 </g>
 </g>
 <!-- Node1&#45;&gt;Node26 -->
 <g id="edge25" class="edge">
 <title>Node1&#45;&gt;Node26</title>
-<path fill="none" stroke="#63b8ff" d="M2116.71,-90.96C2449.67,-90.47 3669.05,-85.63 4053,-41 4063.32,-39.8 4074.2,-38.01 4084.73,-35.99"/>
-<polygon fill="#63b8ff" stroke="#63b8ff" points="2116.75,-87.46 2106.76,-90.97 2116.76,-94.46 2116.75,-87.46"/>
+<path fill="none" stroke="#63b8ff" d="M2244.36,-90.76C2566.48,-89.56 3718.99,-82.38 4083,-41 4093.65,-39.79 4104.87,-37.99 4115.73,-35.97"/>
+<polygon fill="#63b8ff" stroke="#63b8ff" points="2244.76,-87.26 2234.77,-90.8 2244.79,-94.26 2244.76,-87.26"/>
+</g>
+<!-- Node27 -->
+<g id="node27" class="node">
+<title>Node27</title>
+<g id="a_node27"><a xlink:href="pyvirtualrange_8cpp.html" target="_top" xlink:title=" ">
+<polygon fill="white" stroke="#666666" points="4452,-35.5 4284,-35.5 4284,-5.5 4452,-5.5 4452,-35.5"/>
+<text text-anchor="start" x="4292" y="-23.5" font-family="Helvetica,sans-Serif" font-size="10.00">plugins/behavior/python3</text>
+<text text-anchor="middle" x="4368" y="-12.5" font-family="Helvetica,sans-Serif" font-size="10.00">/src/Python3/util/pyvirtualrange.cpp</text>
+</a>
+</g>
+</g>
+<!-- Node1&#45;&gt;Node27 -->
+<g id="edge26" class="edge">
+<title>Node1&#45;&gt;Node27</title>
+<path fill="none" stroke="#63b8ff" d="M2244.65,-91.07C2587.23,-91.02 3871.63,-87.66 4275,-41 4285.41,-39.8 4296.37,-37.99 4306.98,-35.95"/>
+<polygon fill="#63b8ff" stroke="#63b8ff" points="2244.86,-87.57 2234.86,-91.07 2244.86,-94.57 2244.86,-87.57"/>
 </g>
 </g>
 </svg>

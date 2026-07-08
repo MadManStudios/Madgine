@@ -281,8 +281,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a67cadd4355c39f340016c5ef0730e738"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af5acf5bb07a5718961139fabe557d1b7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_reflect_1_1_result.html">Reflect::Result</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_python3_file_loader.html#af5acf5bb07a5718961139fabe557d1b7">exec_module</a> (<a class="el" href="struct_engine_1_1_reflect_1_1_value.html">Reflect::Value</a> &amp;result, <a class="el" href="struct_engine_1_1_reflect_1_1_object_ptr.html">Reflect::ObjectPtr</a> module)</td></tr>
 <tr class="separator:af5acf5bb07a5718961139fabe557d1b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac85ec371184e931fafcd20aa3d4ceab6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_reflect_1_1_result.html">Reflect::Result</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_python3_file_loader.html#ac85ec371184e931fafcd20aa3d4ceab6">find_spec</a> (<a class="el" href="struct_engine_1_1_reflect_1_1_value.html">Reflect::Value</a> &amp;result, std::string_view name, std::optional&lt; std::string_view &gt; import_path, std::optional&lt; <a class="el" href="struct_engine_1_1_reflect_1_1_object_ptr.html">Reflect::ObjectPtr</a> &gt; target_module)</td></tr>
-<tr class="separator:ac85ec371184e931fafcd20aa3d4ceab6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf69d3b4cd9fe783e9f6e9304bfd5e81"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_reflect_1_1_result.html">Reflect::Result</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_python3_file_loader.html#acf69d3b4cd9fe783e9f6e9304bfd5e81">find_spec</a> (<a class="el" href="struct_engine_1_1_reflect_1_1_value.html">Reflect::Value</a> &amp;result, std::string_view name, std::optional&lt; std::vector&lt; std::string_view &gt; &gt; import_path, std::optional&lt; <a class="el" href="struct_engine_1_1_reflect_1_1_object_ptr.html">Reflect::ObjectPtr</a> &gt; target_module)</td></tr>
+<tr class="separator:acf69d3b4cd9fe783e9f6e9304bfd5e81"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad406cffda44383b8e678a69f4732697c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_reflect_1_1_result.html">Reflect::Result</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_python3_file_loader.html#ad406cffda44383b8e678a69f4732697c">get_source</a> (<a class="el" href="struct_engine_1_1_reflect_1_1_value.html">Reflect::Value</a> &amp;result, std::string_view name)</td></tr>
 <tr class="separator:ad406cffda44383b8e678a69f4732697c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a50dff4ec11cc86657eb0fbba810d5218"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_threading_1_1_task.html">Threading::Task</a>&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_python3_file_loader.html#a50dff4ec11cc86657eb0fbba810d5218">loadImpl</a> (<a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_module_ptr.html">PyModulePtr</a> &amp;module, ResourceDataInfo &amp;info, Platform::Filesystem::FileEventType event)</td></tr>
@@ -417,8 +417,8 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ac85ec371184e931fafcd20aa3d4ceab6" name="ac85ec371184e931fafcd20aa3d4ceab6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac85ec371184e931fafcd20aa3d4ceab6">&#9670;&#160;</a></span>find_spec()</h2>
+<a id="acf69d3b4cd9fe783e9f6e9304bfd5e81" name="acf69d3b4cd9fe783e9f6e9304bfd5e81"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acf69d3b4cd9fe783e9f6e9304bfd5e81">&#9670;&#160;</a></span>find_spec()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -438,7 +438,7 @@ Static Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::optional&lt; std::string_view &gt;&#160;</td>
+          <td class="paramtype">std::optional&lt; std::vector&lt; std::string_view &gt; &gt;&#160;</td>
           <td class="paramname"><em>import_path</em>, </td>
         </tr>
         <tr>
@@ -574,7 +574,7 @@ Static Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Jul 8 2026 14:33:04 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Wed Jul 8 2026 16:13:56 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>
