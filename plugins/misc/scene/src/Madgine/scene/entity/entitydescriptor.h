@@ -22,6 +22,8 @@ namespace Scene {
             {
             }            
 
+            ComponentEntry(const Reflect::ScopePtr &component);
+
             ComponentEntry(ComponentEntry &&) = default;
 
             ComponentEntry &operator=(ComponentEntry &&) = default;
@@ -35,6 +37,8 @@ namespace Scene {
             {
                 (mComponents.emplace_back(std::forward<Components>(components)), ...);
             }
+
+            EntityDescriptor(std::span<const Reflect::ScopePtr> components);
 
             void apply(Entity &entity) const;
 

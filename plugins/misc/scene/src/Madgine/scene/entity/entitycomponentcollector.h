@@ -8,6 +8,10 @@ namespace Engine {
 namespace Scene {
     namespace Entity {
 
+        struct EntityComponentListTag {
+
+        };
+
         struct EntityComponentListAnnotation {
             template <typename T, typename ActualType>
             EntityComponentListAnnotation(type_holder_t<T> t, type_holder_t<ActualType> at)
@@ -17,7 +21,7 @@ namespace Scene {
             {
             }
 
-            friend std::unique_ptr<EntityComponentListBase> tag_invoke(construct_t, const EntityComponentListAnnotation &object);
+            friend std::unique_ptr<EntityComponentListBase> tag_invoke(construct_t, const EntityComponentListAnnotation &object, EntityComponentListTag);
 
             std::unique_ptr<EntityComponentListBase> (*mCtor)();
         };
@@ -26,4 +30,4 @@ namespace Scene {
 }
 }
 
-DECLARE_NAMED_UNIQUE_COMPONENT(Engine::Scene::Entity, EntityComponent, EntityComponentBase, Engine::Scene::Entity::EntityComponentListAnnotation, Engine::Reflect::TypeAnnotation, Engine::Plugins::Destructor<>, Engine::Plugins::Copying<>)
+DECLARE_NAMED_UNIQUE_COMPONENT(Engine::Scene::Entity, EntityComponent, EntityComponentBase, Engine::Scene::Entity::EntityComponentListAnnotation, Engine::Reflect::TypeAnnotation, Engine::Plugins::Constructor<>, Engine::Plugins::Destructor<>, Engine::Plugins::Copying<>)

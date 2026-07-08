@@ -14,6 +14,7 @@
 NAMED_UNIQUECOMPONENT(Transform, Engine::Scene::Entity::Transform);
 
 METATABLE_BEGIN(Engine::Scene::Entity::Transform)
+    CONSTRUCTOR()
     MEMBER(mPosition)
     MEMBER(mScale)
     MEMBER(mOrientation)

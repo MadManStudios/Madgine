@@ -57,6 +57,7 @@ namespace Scene {
         , mAnimationClock(mClock.now())
         , mFrameClock(std::chrono::steady_clock::now())
         , mSceneComponents(*this)
+        , mEntityComponentLists(Entity::EntityComponentListTag {})
     {
         pause();
     }
@@ -69,6 +70,7 @@ namespace Scene {
         , mAnimationClock(mClock.now())
         , mFrameClock(std::chrono::steady_clock::now())
         , mSceneComponents(*this)
+        , mEntityComponentLists(Entity::EntityComponentListTag {})
     {
         pause();
     }

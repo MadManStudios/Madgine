@@ -10,6 +10,7 @@
 NAMED_UNIQUECOMPONENT(Mesh, Engine::Scene::Entity::Mesh);
 
 METATABLE_BEGIN(Engine::Scene::Entity::Mesh)
+    CONSTRUCTOR()
     MEMBER(mMesh)
     MEMBER(mIsVisible)
     MEMBER(mMaterial)

@@ -12,7 +12,7 @@ namespace Engine {
 namespace Scene {
     namespace Entity {
 
-        std::unique_ptr<EntityComponentListBase> tag_invoke(construct_t, const EntityComponentListAnnotation &object)
+        std::unique_ptr<EntityComponentListBase> tag_invoke(construct_t, const EntityComponentListAnnotation &object, EntityComponentListTag)
         {
             return object.mCtor();
         }
