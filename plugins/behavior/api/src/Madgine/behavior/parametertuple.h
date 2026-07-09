@@ -34,6 +34,7 @@ namespace Behavior {
             : mTuple(other.mTuple->clone())
         {
         }
+        ParameterTuple(ParameterTuple &&) noexcept = default;
 
         ParameterTuple(std::unique_ptr<ParameterTupleBase> tuple);
 
@@ -48,6 +49,8 @@ namespace Behavior {
             mTuple = other.mTuple->clone();
             return *this;
         }
+
+        ParameterTuple &operator=(ParameterTuple &&) noexcept = default;
 
         Reflect::ScopePtr customScopePtr();
 

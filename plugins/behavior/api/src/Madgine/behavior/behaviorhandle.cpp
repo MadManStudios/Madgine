@@ -44,7 +44,7 @@ namespace Behavior {
         return *this;
     }
 
-    BehaviorHandle &BehaviorHandle::operator=(BehaviorHandle &&other)
+    BehaviorHandle &BehaviorHandle::operator=(BehaviorHandle &&other) noexcept
     {
         std::swap(mIndex, other.mIndex);
         std::swap(mHandle, other.mHandle);

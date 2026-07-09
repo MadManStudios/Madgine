@@ -15,11 +15,11 @@ namespace Behavior {
         BehaviorHandle() = default;
         BehaviorHandle(IndexType<uint32_t> index, std::string_view name);
         BehaviorHandle(const BehaviorHandle &other);
-        BehaviorHandle(BehaviorHandle &&other) = default;
+        BehaviorHandle(BehaviorHandle &&other) noexcept = default;
         ~BehaviorHandle();
 
         BehaviorHandle &operator=(const BehaviorHandle &other);
-        BehaviorHandle &operator=(BehaviorHandle &&other);
+        BehaviorHandle &operator=(BehaviorHandle &&other) noexcept;
 
         void reset();
 
