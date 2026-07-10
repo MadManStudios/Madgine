@@ -67,6 +67,9 @@ struct OffsetPtr;
 
 struct Stream;
 
+template <typename... Signatures>
+struct CallableView;
+
 enum class AccessMode {
     READ,
     WRITE
