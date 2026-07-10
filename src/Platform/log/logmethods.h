@@ -29,7 +29,7 @@ namespace Platform {
         };
 
 #if ENABLE_DEBUG_LOGGING
-#    define LOG_DEBUG(s) Engine::Log::LogDummy { Engine::Log::MessageType::DEBUG_TYPE } << s
+#    define LOG_DEBUG(s) Engine::Platform::Log::LogDummy { Engine::Platform::Log::MessageType::DEBUG_TYPE } << s
 #else
 #    define LOG_DEBUG(s)
 #endif
