@@ -18,20 +18,23 @@ namespace Behavior {
             ~Python3InnerLock();
 
         private:
-            std::optional<PyGILState_STATE> mState;
+            bool mLocked;
         };
 
-        struct MADGINE_PYTHON3_EXPORT Python3Unlock {
-            Python3Unlock();
-            Python3Unlock(const Python3Unlock &) = delete;
-            ~Python3Unlock();
+        struct MADGINE_PYTHON3_EXPORT Python3Suspend {
+            Python3Suspend();
+            Python3Suspend(const Python3Suspend &) = delete;
+            ~Python3Suspend();
 
             BehaviorReceiver *fetchReceiver();
+            BehaviorReceiver *receiver();
             Platform::Log::Log *log() const;
 
         private:
             BehaviorReceiver *mReceiver;
             Platform::Log::Log *mLog;
+
+            PyThreadState *mThreadSave;
         };
     }
 }

@@ -21,71 +21,9 @@
 
 BEHAVIOR_FACTORY(Python3, Engine::Behavior::Python3::Python3BehaviorFactory)
 
-///  @cond
-
-struct _frame { }; // HACK for TypedPtr
-
-///  @endcond
-
 namespace Engine {
 namespace Behavior {
     namespace Python3 {
-
-        void DebugLine::stopRequested()
-        {
-            if (mContinuation) {
-                mContinuation(Debug::ContinuationMode::Abort);
-            }
-        }
-
-        int PyDebugLine_init(PyDebugLine *self, PyObject *args, PyObject *kwds)
-        {
-            new (&self->mLine) DebugLine;
-            return PyArg_ParseTuple(args, "n", &self->mLine.mLineNr);
-        }
-
-        PyObject *PyDebugLine_await(PyObject *self)
-        {
-            Py_IncRef(self);
-            return self;
-        }
-
-        extern BehaviorReceiver *sReceiver;
-
-        PyObject *PyDebugLine_next(PyDebugLine *self)
-        {
-            Debug::ContextInfo &context = Debug::get_debug_context(*sReceiver);
-            DebugLine &line = self->mLine;
-
-            if (line.mLineNr > 0 && context.wantsPause(PyEval_GetFrame(), Debug::ContinuationType::Flow, line.mLineNr)) {
-                line.mLineNr = 0;
-                PyObject *selfObj = reinterpret_cast<PyObject *>(self);
-                Py_IncRef(selfObj);
-                return selfObj;
-            } else {
-                PyErr_SetNone(PyExc_StopIteration);
-                return nullptr;
-            }
-        }
-
-        PyAsyncMethods PyDebugLineAsyncMethods = {
-            .am_await = PyDebugLine_await
-        };
-
-        PyTypeObject PyDebugLineType = {
-            .ob_base = PyVarObject_HEAD_INIT(NULL, 0)
-                .tp_name
-            = "Engine.DebugLine",
-            .tp_basicsize = sizeof(PyDebugLine),
-            .tp_itemsize = 0,
-            .tp_dealloc = &PyDealloc<PyDebugLine, &PyDebugLine::mLine>,
-            .tp_as_async = &PyDebugLineAsyncMethods,
-            .tp_flags = Py_TPFLAGS_DEFAULT,
-            .tp_doc = "Python helper for debugging",
-            .tp_iternext = (iternextfunc)PyDebugLine_next,
-            .tp_init = (initproc)PyDebugLine_init,
-            .tp_new = PyType_GenericNew,
-        };
 
         PyObject *PyNamed_resolve(PyObject *cls, PyObject *nameObj)
         {
@@ -95,7 +33,7 @@ namespace Behavior {
             }
             const char *name = PyUnicode_AsUTF8(nameObj);
             Reflect::Value v;
-            Reflect::Result result = get_named_d(*sReceiver, name, v);
+            Reflect::Result result = get_named_d(*executionState().mReceiver, name, v);
             if (result) {
                 return toPyError(std::move(*result.mError));
             }
@@ -241,7 +179,7 @@ namespace Behavior {
             {
                 Python3Lock lock { this };
                 if (PyExceptionInstance_Check(mCoroutine)) {
-                    handleKeyValueError(fromPyError(mCoroutine));
+                    handleExecutionError(fromPyError(mCoroutine));
                     return;
                 }
 
@@ -387,6 +325,8 @@ namespace Behavior {
         {
             return 0;
         }
+
+        
 
     }
 

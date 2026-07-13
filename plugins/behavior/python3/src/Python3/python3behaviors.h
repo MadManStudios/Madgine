@@ -12,21 +12,7 @@ namespace Engine {
 namespace Behavior {
     namespace Python3 {
 
-        MADGINE_PYTHON3_EXPORT extern PyTypeObject PyDebugLineType;
         MADGINE_PYTHON3_EXPORT extern PyTypeObject PyNamedType;
-
-        struct DebugLine : Execution::StopCallback {
-
-            void stopRequested() override;
-
-            size_t mLineNr;
-            Debug::Continuation mContinuation;
-        };
-
-        struct PyDebugLine {
-            PyObject_HEAD
-                DebugLine mLine;
-        };
 
         PyObject *PyEngine_Behavior_decorator(PyObject *self,
             PyObject *const *args,

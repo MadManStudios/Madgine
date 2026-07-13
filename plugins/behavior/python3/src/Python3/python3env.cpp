@@ -12,6 +12,7 @@
 #include "Meta/reflect/metatable_impl.h"
 
 #include "python3behaviors.h"
+#include "python3behaviorsloader.h"
 #include "python3fileloader.h"
 #include "python3namespaceloader.h"
 #include "python3streamredirect.h"
@@ -25,6 +26,7 @@
 #include "util/pybinding.h"
 #include "util/pyboundapifunction.h"
 #include "util/pydictptr.h"
+#include "util/pyduration.h"
 #include "util/pyenum.h"
 #include "util/pyflags.h"
 #include "util/pyframeptr.h"
@@ -130,7 +132,7 @@ namespace Behavior {
         PyMODINIT_FUNC PyInit_Engine(void)
         {
 
-            if (PyType_Ready(&PyTypedScopePtrType) < 0)
+            if (PyType_Ready(&PyScopePtrType) < 0)
                 return NULL;
             if (PyType_Ready(&PyOwnedScopePtrType) < 0)
                 return NULL;
@@ -162,21 +164,27 @@ namespace Behavior {
                 return NULL;
             if (PyType_Ready(&PySenderType) < 0)
                 return NULL;
-            if (PyType_Ready(&PySenderStateType) < 0)
-                return NULL;
             if (PyType_Ready(&PyFlagsType) < 0)
                 return NULL;
             if (PyType_Ready(&PyEnumType) < 0)
                 return NULL;
+            if (PyType_Ready(&PyDurationType) < 0)
+                return NULL;
             if (PyType_Ready(&PyTypeType) < 0)
                 return NULL;
             if (PyType_Ready(&PyDebugLineType) < 0)
+                return NULL;
+            if (PyType_Ready(&PyStateType) < 0)
                 return NULL;
             if (PyType_Ready(&PyNamedType) < 0)
                 return NULL;
             if (PyType_Ready(&PyBindingType) < 0)
                 return NULL;
             if (PyType_Ready(&PyScopeBindingType) < 0)
+                return NULL;
+            if (PyType_Ready(&PyBehaviorType) < 0)
+                return NULL;
+            if (PyType_Ready(&PyBehaviorHandleType) < 0)
                 return NULL;
 
             PyObject *m = PyModule_Create(&PyEngine_module);
@@ -233,8 +241,7 @@ namespace Behavior {
             return m;
         }
 
-        static Python3StreamRedirect sStream;
-        BehaviorReceiver *sReceiver = nullptr;
+        Python3StreamRedirect sStream;
 
         Python3Environment::Python3Environment(Core::Root &root)
             : RootComponent(root)
@@ -293,14 +300,20 @@ namespace Behavior {
 
             /* Add a built-in module, before Py_Initialize */
             if (PyImport_AppendInittab("Engine", PyInit_Engine) == -1) {
-                LOG("Error: could not extend built-in modules table");
+                LOG_FATAL("Error: could not extend built-in modules table");
                 mErrorCode = -1;
                 co_return false;
             }
 
             /* Add a built-in module, before Py_Initialize */
             if (PyImport_AppendInittab("Environment", PyInit_Environment) == -1) {
-                LOG("Error: could not extend built-in modules table");
+                LOG_FATAL("Error: could not extend built-in modules table");
+                mErrorCode = -1;
+                co_return false;
+            }
+
+            if (PyImport_AppendInittab("Behaviors", PyInit_Behaviors) == -1) {
+                LOG_FATAL("Error: could not extend built-in modules table");
                 mErrorCode = -1;
                 co_return false;
             }
@@ -323,12 +336,15 @@ namespace Behavior {
 
             PyRun_SimpleString("import Environment");
             PyRun_SimpleString("import Engine");
+            PyRun_SimpleString("import Behaviors");
             PyRun_SimpleString("Engine.__path__ = []");
+            PyRun_SimpleString("Behaviors.__path__ = []");
             sStream.redirect("stdout");
             sStream.redirect("stderr");
 
             Python3FileLoader::getSingleton().setup();
             Python3NamespaceLoader::getSingleton().setup();
+            Python3BehaviorsLoader::getSingleton().setup();
 
             PyEval_SaveThread();
 
@@ -371,42 +387,6 @@ namespace Behavior {
 
             PyObjectPtr result = PyRun_String(command.data(), Py_eval_input, main.getDict(), main.getDict());
             return fromPyObject(retVal, result);
-        }
-
-        PyGILState_STATE Python3Environment::lock()
-        {
-            // assert(PyGILState_Check() == 0);
-            PyGILState_STATE handle = PyGILState_Ensure();
-            assert(PyGILState_Check() == 1);
-            return handle;
-        }
-
-        Platform::Log::Log *Python3Environment::unlock(PyGILState_STATE handle)
-        {
-            Platform::Log::Log *result = sStream.log();
-            assert(PyGILState_Check() == 1);
-            PyGILState_Release(handle);
-            return result;
-        }
-
-        void Python3Environment::lock(BehaviorReceiver *rec, Platform::Log::Log *log)
-        {
-            if (rec && !log)
-                log = Platform::Log::get_log(*rec);
-            // assert(PyGILState_Check() == 0);
-            [[maybe_unused]] PyGILState_STATE handle = PyGILState_Ensure();
-            assert(PyGILState_Check() == 1);
-            assert(handle == PyGILState_UNLOCKED);
-            sStream.setLog(log);
-            sReceiver = rec;
-        }
-
-        std::pair<BehaviorReceiver *, Platform::Log::Log *> Python3Environment::unlock()
-        {
-            std::pair<BehaviorReceiver *, Platform::Log::Log *> result = { std::exchange(sReceiver, nullptr), sStream.setLog(nullptr) };
-            assert(PyGILState_Check() == 1);
-            PyGILState_Release(PyGILState_UNLOCKED);
-            return result;
         }
 
         size_t Python3Environment::totalRefCount()

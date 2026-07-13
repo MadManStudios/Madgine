@@ -2,7 +2,8 @@
 
 #include "python3lock.h"
 
-#include "../python3env.h"
+#include "../python3streamredirect.h"
+#include "pyexecution.h"
 
 namespace Engine {
 namespace Behavior {
@@ -10,53 +11,77 @@ namespace Behavior {
 
         Python3Lock::Python3Lock(BehaviorReceiver *rec, Platform::Log::Log *log)
         {
-            Python3Environment::lock(rec, log);
+            [[maybe_unused]] bool locked = lock(rec, log);
+            assert(locked);
         }
 
         Python3Lock::Python3Lock(Platform::Log::Log *log)
         {
-            Python3Environment::lock(nullptr, log);
+            [[maybe_unused]] bool locked = lock(nullptr, log);
+            assert(locked);
         }
 
         Python3Lock::~Python3Lock()
         {
-            Python3Environment::unlock();
+            unlock();
         }
 
         Python3InnerLock::Python3InnerLock()
-            : mState(Python3Environment::lock())
+            : mLocked(PyGILState_Ensure() == PyGILState_UNLOCKED)
         {
+            LOG_DEBUG("[" << std::this_thread::get_id() << "] Inner Lock");
         }
 
         Python3InnerLock::Python3InnerLock(Python3InnerLock &&other)
-            : mState(std::exchange(other.mState, std::nullopt))
+            : mLocked(std::exchange(other.mLocked, false))
         {
         }
 
         Python3InnerLock::~Python3InnerLock()
         {
-            if (mState)
-                Python3Environment::unlock(*mState);
+            if (mLocked) {
+                LOG_DEBUG("[" << std::this_thread::get_id() << "] Inner Release");
+                PyGILState_Release(PyGILState_UNLOCKED);
+            }
         }
 
-        Python3Unlock::Python3Unlock()
+        Python3Suspend::Python3Suspend()
         {
-            std::tie(mReceiver, mLog) = Python3Environment::unlock();
+            auto [receiver, log] = std::exchange(executionState(), {});
+
+            mReceiver = receiver;
+            mLog = log;
+
+            LOG_DEBUG("[" << std::this_thread::get_id() << ", " << PyThreadState_Get() << "] Suspend: " << mReceiver);
+
+            mThreadSave = PyEval_SaveThread();
         }
 
-        Python3Unlock::~Python3Unlock()
+        Python3Suspend::~Python3Suspend()
         {
-            Python3Environment::lock(mReceiver, mLog);
+            PyEval_RestoreThread(mThreadSave);
+
+            LOG_DEBUG("[" << std::this_thread::get_id() << ", " << PyThreadState_Get() << "] Resume: " << mReceiver);
+
+            auto [receiver, log] = std::exchange(executionState(), { mReceiver, mLog });
+
+            assert(receiver == nullptr);
+            assert(log == nullptr);
         }
 
-        BehaviorReceiver *Python3Unlock::fetchReceiver() 
+        BehaviorReceiver *Python3Suspend::fetchReceiver()
         {
             if (mLog == Platform::Log::get_log(mReceiver))
                 mLog = nullptr;
             return std::exchange(mReceiver, nullptr);
         }
 
-        Platform::Log::Log *Python3Unlock::log() const
+        BehaviorReceiver *Python3Suspend::receiver()
+        {
+            return mReceiver;
+        }
+
+        Platform::Log::Log *Python3Suspend::log() const
         {
             return mLog;
         }

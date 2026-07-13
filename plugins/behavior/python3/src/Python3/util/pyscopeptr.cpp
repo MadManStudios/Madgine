@@ -11,7 +11,7 @@ namespace Engine {
 namespace Behavior {
     namespace Python3 {
 
-        static PyObject *PyTypedScopePtr_get(PyTypedScopePtr *self, PyObject *args)
+        static PyObject *PyScopePtr_get(PyScopePtr *self, PyObject *args)
         {
             const char *name;
 
@@ -29,7 +29,7 @@ namespace Behavior {
             return toPyObject(v);
         }
 
-        static PyObject *TypedScopePtr_iter(const Reflect::ScopePtr &p)
+        static PyObject *ScopePtr_iter(const Reflect::ScopePtr &p)
         {
             if (!p) {
                 PyErr_SetString(PyExc_TypeError, "Nullptr is not iterable!");
@@ -40,35 +40,35 @@ namespace Behavior {
                 Reflect::Value proxy;
                 PYTHON3_PROPAGATE_ERROR(proxyIt->value(proxy));
                 if (proxy.is<Reflect::ScopePtr>()) {
-                    return TypedScopePtr_iter(proxy.as<Reflect::ScopePtr>());
+                    return ScopePtr_iter(proxy.as<Reflect::ScopePtr>());
                 }
             }
             return toPyObject(p.begin());
         }
 
-        static PyObject *PyTypedScopePtr_iter(PyTypedScopePtr *self)
+        static PyObject *PyScopePtr_iter(PyScopePtr *self)
         {
-            return TypedScopePtr_iter(self->mPtr);
+            return ScopePtr_iter(self->mPtr);
         }
 
-        static PyObject *PyTypedScopePtr_str(PyTypedScopePtr *self)
+        static PyObject *PyScopePtr_str(PyScopePtr *self)
         {
             return PyUnicode_FromString(self->mPtr.name().c_str());
         }
 
-        PyTypeObject PyTypedScopePtrType = {
+        PyTypeObject PyScopePtrType = {
             .ob_base = PyVarObject_HEAD_INIT(NULL, 0)
                 .tp_name
             = "Engine.ScopePtr",
-            .tp_basicsize = sizeof(PyTypedScopePtr),
+            .tp_basicsize = sizeof(PyScopePtr),
             .tp_itemsize = 0,
-            .tp_dealloc = &PyDealloc<PyTypedScopePtr, &PyTypedScopePtr::mPtr>,
-            .tp_repr = (reprfunc)PyTypedScopePtr_str,
-            .tp_str = (reprfunc)PyTypedScopePtr_str,
-            .tp_getattro = (getattrofunc)PyTypedScopePtr_get,
+            .tp_dealloc = &PyDealloc<PyScopePtr, &PyScopePtr::mPtr>,
+            .tp_repr = (reprfunc)PyScopePtr_str,
+            .tp_str = (reprfunc)PyScopePtr_str,
+            .tp_getattro = (getattrofunc)PyScopePtr_get,
             .tp_flags = Py_TPFLAGS_DEFAULT,
             .tp_doc = "Python implementation of ScopePtr",
-            .tp_iter = (getiterfunc)PyTypedScopePtr_iter,
+            .tp_iter = (getiterfunc)PyScopePtr_iter,
             .tp_new = PyType_GenericNew,
         };
 

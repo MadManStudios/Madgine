@@ -6,6 +6,7 @@
 
 #include "Meta/reflect/metatable_impl.h"
 
+#include "util/pyexecution.h"
 #include "util/pyobjectutil.h"
 
 METATABLE_BEGIN(Engine::Behavior::Python3::Python3StreamRedirect)
@@ -16,8 +17,7 @@ namespace Engine {
 namespace Behavior {
     namespace Python3 {
 
-        Python3StreamRedirect::Python3StreamRedirect(Platform::Log::Log *log)
-            : mLog(log)
+        Python3StreamRedirect::Python3StreamRedirect()
         {
         }
 
@@ -49,26 +49,20 @@ namespace Behavior {
 
         int Python3StreamRedirect::write(std::string_view text)
         {
+            Python3InnerLock lock;
+
             if (text == "\n")
                 return 0;
 
-            if (mLog) {
-                mLog->log(text, Platform::Log::MessageType::INFO_TYPE);
+            Platform::Log::Log *log = executionState().mLog;
+
+            if (log) {
+                log->log(text, Platform::Log::MessageType::INFO_TYPE);
                 return text.size();
             } else {
                 LOG(text);
                 return text.size();
             }
-        }
-
-        Platform::Log::Log *Python3StreamRedirect::setLog(Platform::Log::Log *log)
-        {
-            return std::exchange(mLog, log);
-        }
-
-        Platform::Log::Log *Python3StreamRedirect::log()
-        {
-            return mLog;
         }
 
     }

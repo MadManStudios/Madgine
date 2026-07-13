@@ -6,9 +6,9 @@ namespace Engine {
 namespace Behavior {
     namespace Python3 {
 
-        extern PyTypeObject PyTypedScopePtrType;
+        extern PyTypeObject PyScopePtrType;
 
-        struct PyTypedScopePtr {
+        struct PyScopePtr {
             PyObject_HEAD
                 Reflect::ScopePtr mPtr;
         };

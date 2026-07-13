@@ -101,6 +101,8 @@ namespace Behavior {
                 return std::make_unique<Reflect::Error>(fetchError());
             }
 
+            //TODO: Existence check
+
             PyObjectPtr spec = module.get("ModuleSpec").call("sO", name.data(), toPyObject(Reflect::ScopePtr { this }));
             return fromPyObject(result, spec);
         }

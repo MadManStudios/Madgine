@@ -29,6 +29,11 @@ namespace Behavior {
             return PyUnicode_FromString(ss.str().c_str());
         }
 
+        struct VirtualRangeHelper {
+            void operator()(CallableView<void(const Reflect::Value &)> cb, PyObject *o);
+            void operator()(CallableView<void(const Reflect::Value &, const Reflect::Value &)> cb, const std::pair<PyObject *, PyObject *> &o);
+        };
+
         MADGINE_PYTHON3_EXPORT PyObject *toPyObject(const Reflect::Value &val);
 
         MADGINE_PYTHON3_EXPORT PyObject *toPyObject(std::monostate);
@@ -37,7 +42,7 @@ namespace Behavior {
         MADGINE_PYTHON3_EXPORT PyObject *toPyObject(uint64_t i);
         MADGINE_PYTHON3_EXPORT PyObject *toPyObject(bool b);
         MADGINE_PYTHON3_EXPORT PyObject *toPyObject(float f);
-        MADGINE_PYTHON3_EXPORT PyObject *toPyObject(std::chrono::nanoseconds d);
+        MADGINE_PYTHON3_EXPORT PyObject *toPyObject(Reflect::Duration64 d);
 
         MADGINE_PYTHON3_EXPORT PyObject *toPyObject(const Reflect::ScopePtr &scope);
         MADGINE_PYTHON3_EXPORT PyObject *toPyObject(const Reflect::OwnedScopePtr &scope);
@@ -70,9 +75,6 @@ namespace Behavior {
         MADGINE_PYTHON3_EXPORT PyObject *toPyObject(const Reflect::ScopeBinding &b);
 
         MADGINE_PYTHON3_EXPORT Reflect::Result fromPyObject(Reflect::Value &result, PyObject *obj);
-        MADGINE_PYTHON3_EXPORT void handlePyObject(PyObject *obj);
-        MADGINE_PYTHON3_EXPORT void handleKeyValueError(Reflect::Error error);
-        MADGINE_PYTHON3_EXPORT void resumeCoroutine(PyObject *coroutine, PyObject *value);
 
         MADGINE_PYTHON3_EXPORT PyObject *toPyError(const Reflect::Error &);
         MADGINE_PYTHON3_EXPORT Reflect::Error fromPyError(PyObject *exc, PyObject *traceback = nullptr);
@@ -81,12 +83,12 @@ namespace Behavior {
 
         MADGINE_PYTHON3_EXPORT Reflect::ExtendedType PyToValueTypeDesc(PyObject *obj);
 
-        MADGINE_PYTHON3_EXPORT PyObject *toPyTuple(const Reflect::ArgumentList &args); 
+        MADGINE_PYTHON3_EXPORT PyObject *toPyTuple(const Reflect::ArgumentList &args);
 
     }
 }
 }
 
-#define PYTHON3_PROPAGATE_ERROR(...)                      \
+#define PYTHON3_PROPAGATE_ERROR(...)                       \
     if (::Engine::Reflect::Result _result = (__VA_ARGS__)) \
     return toPyError(*_result.mError)

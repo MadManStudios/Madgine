@@ -21,9 +21,9 @@ namespace Tools {
         if (!location)
             return {};
 
-        Behavior::Python3::Python3Lock lock;
-
         std::vector<TypedPtr> children;
+
+        Behavior::Python3::Python3Lock lock;
 
         Behavior::Python3::PyObjectPtr coro = Behavior::Python3::PyObjectPtr::fromBorrowed(const_cast<PyObject *>(location));
 
@@ -64,9 +64,9 @@ namespace Tools {
                     ImGui::PopFont();
 
                     Behavior::Python3::PyObjectPtr next = coro.get("cr_await");
-                    Behavior::Python3::Python3Unlock unlock;
-                    if (Py_IS_TYPE(next, &Behavior::Python3::PySenderStateType)) {
-                        Behavior::Python3::SenderState &state = reinterpret_cast<Behavior::Python3::PySenderState *>(static_cast<PyObject *>(next))->mState;
+                    Behavior::Python3::Python3Suspend suspend;
+                    if (Py_IS_TYPE(next, &Behavior::Python3::PyStateType)) {
+                        Behavior::Python3::PyStateBase &state = reinterpret_cast<Behavior::Python3::PyStateHelper *>(static_cast<PyObject *>(next))->mState;
                         if (state.mChild) {
                             if (BeginDebuggablePanel("Sender")) {
                                 std::ranges::move(view.visualizeDebugLocation(continuations, context, state.mChild, location), std::back_inserter(children));
@@ -95,7 +95,7 @@ namespace Tools {
         }
 
         ImGui::EndGroupPanel();
-
+        
         return children;
     }
 

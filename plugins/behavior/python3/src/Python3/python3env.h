@@ -19,11 +19,6 @@ namespace Behavior {
 
             Reflect::Result execute(Reflect::Value &retVal, std::string_view command, Platform::Log::Log *log);
 
-            static PyGILState_STATE lock();
-            static Platform::Log::Log *unlock(PyGILState_STATE state);
-            static void lock(BehaviorReceiver *, Platform::Log::Log * = nullptr);
-            static std::pair<BehaviorReceiver *, Platform::Log::Log *> unlock();
-
             static size_t totalRefCount();
         };
 

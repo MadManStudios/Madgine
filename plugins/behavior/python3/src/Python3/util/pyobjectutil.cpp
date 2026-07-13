@@ -20,10 +20,12 @@
 #include "pybinding.h"
 #include "pyboundapifunction.h"
 #include "pydictptr.h"
+#include "pyduration.h"
 #include "pyenum.h"
 #include "pyflags.h"
 #include "pylistptr.h"
 #include "pymoduleptr.h"
+#include "pyobjectinstance.h"
 #include "pyobjectiter.h"
 #include "pyobjectptr.h"
 #include "pyownedscopeptr.h"
@@ -38,63 +40,6 @@
 namespace Engine {
 namespace Behavior {
     namespace Python3 {
-
-        struct PyObjectInstance : Reflect::ObjectInstance {
-
-            PyObjectInstance(PyObject *obj)
-                : mPtr(obj)
-            {
-            }
-
-            ~PyObjectInstance()
-            {
-                Python3InnerLock lock;
-                mPtr.reset();
-            }
-
-            virtual Reflect::Result getValue(Reflect::Value &retVal, std::string_view name) const override
-            {
-                return fromPyObject(retVal, mPtr.get(name));
-            }
-
-            virtual void setValue(std::string_view name, const Reflect::Value &value) override
-            {
-                throw 0;
-            }
-
-            virtual std::map<std::string_view, Reflect::Value> values() const override
-            {
-                Python3InnerLock lock;
-                std::map<std::string_view, Reflect::Value> results;
-                std::ranges::transform(mPtr, std::inserter(results, results.end()), [](std::pair<PyObject *, PyObject *> p) {
-                    Reflect::Value v;
-                    fromPyObject(v, p.second);
-                    return std::make_pair(PyUnicode_AsUTF8(p.first), std::move(v));
-                });
-                return results;
-            }
-
-            virtual Reflect::Result call(Reflect::Value &retVal, const Reflect::ArgumentList &args) override
-            {
-                Python3InnerLock lock;
-
-                return fromPyObject(retVal, mPtr.call(args));
-            }
-
-            virtual std::string descriptor() const override
-            {
-                Python3InnerLock lock;
-                PyObjectPtr repr = PyObject_Repr(mPtr);
-                return PyUnicode_AsUTF8(repr);
-            }
-
-            PyObject *get() const
-            {
-                return mPtr;
-            }
-
-            PyObjectPtr mPtr;
-        };
 
         PyObject *toPyObject(const Reflect::Value &val)
         {
@@ -128,16 +73,17 @@ namespace Behavior {
             return PyFloat_FromDouble(f);
         }
 
-        PyObject *toPyObject(std::chrono::nanoseconds d)
+        PyObject *toPyObject(Reflect::Duration64 d)
         {
-            PyErr_SetString(PyExc_NotImplementedError, "Can't convert type <duration> yet");
-            return NULL;
+            PyObject *obj = PyObject_CallObject((PyObject *)&PyDurationType, NULL);
+            new (&reinterpret_cast<PyDuration *>(obj)->mDuration) Reflect::Duration64(d);
+            return obj;
         }
 
         PyObject *toPyObject(const Reflect::ScopePtr &scope)
         {
-            PyObject *obj = PyObject_CallObject((PyObject *)&PyTypedScopePtrType, NULL);
-            new (&reinterpret_cast<PyTypedScopePtr *>(obj)->mPtr) Reflect::ScopePtr(scope);
+            PyObject *obj = PyObject_CallObject((PyObject *)&PyScopePtrType, NULL);
+            new (&reinterpret_cast<PyScopePtr *>(obj)->mPtr) Reflect::ScopePtr(scope);
             return obj;
         }
 
@@ -337,31 +283,28 @@ namespace Behavior {
             return obj;
         }
 
-        struct VirtualRangeHelper {
+        void VirtualRangeHelper::operator()(CallableView<void(const Reflect::Value &)> cb, PyObject *o)
+        {
+            Reflect::Value_erased([&](Reflect::Value &v) {
+                fromPyObject(v, o);
+                cb(v);
+            });
+        }
 
-            void operator()(CallableView<void(const Reflect::Value &)> cb, PyObject *o)
-            {
-                Reflect::Value_erased([&](Reflect::Value &v) {
-                    fromPyObject(v, o);
-                    cb(v);
+        void VirtualRangeHelper::operator()(CallableView<void(const Reflect::Value &, const Reflect::Value &)> cb, const std::pair<PyObject *, PyObject *> &o)
+        {
+            Reflect::Value_erased([&](Reflect::Value &key) {
+                Reflect::Value_erased([&](Reflect::Value &value) {
+                    Reflect::Result result = fromPyObject(key, o.first);
+                    if (result)
+                        throw 0;
+                    result = fromPyObject(value, o.second);
+                    if (result)
+                        throw 0;
+                    cb(key, value);
                 });
-            }
-
-            void operator()(CallableView<void(const Reflect::Value &, const Reflect::Value &)> cb, const std::pair<PyObject *, PyObject *> &o)
-            {
-                Reflect::Value_erased([&](Reflect::Value &key) {
-                    Reflect::Value_erased([&](Reflect::Value &value) {
-                        Reflect::Result result = fromPyObject(key, o.first);
-                        if (result)
-                            throw 0;
-                        result = fromPyObject(value, o.second);
-                        if (result)
-                            throw 0;
-                        cb(key, value);
-                    });
-                });
-            }
-        };
+            });
+        }
 
         Reflect::Result fromPyObject(Reflect::Value &result, PyObject *obj)
         {
@@ -393,8 +336,8 @@ namespace Behavior {
                 Py_INCREF(obj);
                 toValue(result, Reflect::SequenceRange { PyListPtr { obj }, Engine::type_holder<VirtualRangeHelper> });
                 return {};
-            } else if (obj->ob_type == &PyTypedScopePtrType) {
-                toValue(result, reinterpret_cast<PyTypedScopePtr *>(obj)->mPtr);
+            } else if (obj->ob_type == &PyScopePtrType) {
+                toValue(result, reinterpret_cast<PyScopePtr *>(obj)->mPtr);
                 return {};
             } else if (obj->ob_type == &PyOwnedScopePtrType) {
                 toValue(result, reinterpret_cast<PyOwnedScopePtr *>(obj)->mPtr);
@@ -405,132 +348,13 @@ namespace Behavior {
             } else if (obj->ob_type == &PySenderType) {
                 toValue(result, reinterpret_cast<PySender *>(obj)->mSender);
                 return {};
-            } else if (obj->ob_type == &PyVector3Type){
+            } else if (obj->ob_type == &PyVector3Type) {
                 toValue(result, reinterpret_cast<PyVector3 *>(obj)->mVector);
                 return {};
             } else {
                 Py_INCREF(obj);
                 toValue(result, Reflect::ObjectPtr { std::make_unique<PyObjectInstance>(obj) });
                 return {};
-            }
-        }
-
-        void handlePyObject(PyObject *obj)
-        {
-            if (!obj) {
-                if (PyErr_ExceptionMatches(PyExc_EOFError)) {
-                    Python3Unlock unlock;
-                    unlock.fetchReceiver()->set_done();
-                } else {
-                    handleKeyValueError(fetchError());
-                }
-                return;
-            }
-
-            Python3Unlock unlock;
-            BehaviorReceiver *rec = unlock.fetchReceiver();
-
-            if (obj == Py_None) {
-                rec->set_value();
-            } else if (PyUnicode_Check(obj)) {
-                const char *s;
-                if (!PyArg_Parse(obj, "s", &s))
-                    throw 0;
-                rec->set_value(std::string { s });
-            } else if (PyBool_Check(obj)) {
-                rec->set_value(obj == Py_True);
-            } else if (PyLong_Check(obj)) {
-                int i;
-                if (!PyArg_Parse(obj, "i", &i))
-                    throw 0;
-                rec->set_value(i);
-            } else if (PyDict_Check(obj)) {
-                Py_INCREF(obj);
-                rec->set_value(Reflect::AssociativeRange { PyDictPtr { obj }, Engine::type_holder<VirtualRangeHelper> });
-            } else if (PyList_Check(obj)) {
-                Py_INCREF(obj);
-                rec->set_value(Reflect::SequenceRange { PyListPtr { obj }, Engine::type_holder<VirtualRangeHelper> });
-            } else if (obj->ob_type == &PyTypedScopePtrType) {
-                rec->set_value(reinterpret_cast<PyTypedScopePtr *>(obj)->mPtr);
-            } else if (PyTuple_Check(obj)) {
-                size_t size = PyTuple_Size(obj);
-                Reflect::ArgumentList args { std::true_type {}, size };
-                for (size_t i = 0; i < args.size(); ++i) {
-                    Reflect::Result result = fromPyObject(args[i], PyTuple_GetItem(obj, i));
-                    if (result) {
-                        rec->set_error(std::move(*result.mError));
-                        return;
-                    }
-                }
-                rec->set_value(std::move(args));
-            } else {
-                Py_INCREF(obj);
-                rec->set_value(Reflect::ObjectPtr { std::make_unique<PyObjectInstance>(obj) });
-            }
-        }
-
-        void handleKeyValueError(Reflect::Error error)
-        {
-            Python3Unlock unlock;
-            unlock.fetchReceiver()->set_error(std::move(error));
-        }
-
-        extern PyTypeObject PyDebugLineType;
-
-        void resumeCoroutine(PyObject *coroutine, PyObject *value)
-        {
-            PyObjectPtr coro = PyObjectPtr::fromBorrowed(coroutine);
-            PyObjectPtr result;
-            if (!value) {
-                PyObjectPtr exc = PyObject_CallFunction(PyExc_EOFError, NULL, NULL);
-                result = PyObject_CallFunctionObjArgs(coro.get("throw"), static_cast<PyObject *>(exc), NULL);
-            } else {
-                result = PyObject_Call(coro.get("send"), value, NULL);
-            }
-            if (!result) {
-                if (PyErr_ExceptionMatches(PyExc_StopIteration)) {
-                    PyObjectPtr type, value, traceback;
-                    PyErr_Fetch(&type, &value, &traceback);
-
-                    result = value.get("value");
-                }
-                handlePyObject(result);
-            } else if (Py_IS_TYPE(result, &PySenderStateType)) {
-                SenderState &state = reinterpret_cast<PySenderState *>(static_cast<PyObject *>(result))->mState;
-                state.mCoroutine = std::move(coroutine);
-
-                state.resume();
-            } else if (Py_IS_TYPE(result, &PyDebugLineType)) {
-                DebugLine &debugLine = reinterpret_cast<PyDebugLine *>(static_cast<PyObject *>(result))->mLine;
-                // yield(location, rec, std::forward<F>(callback), outContinuation, type, std::forward<Args>(args)...);
-                PyObject *frame = coro.get("cr_frame");
-
-                Python3Unlock unlock;
-                BehaviorReceiver *rec = unlock.fetchReceiver();
-                Platform::Log::Log *log = unlock.log();
-
-                if (Execution::get_stop_token(*rec)->registerCallback(&debugLine)) {
-                    debugLine.mContinuation = Debug::get_debug_context(*rec).suspend(frame, { [coro { std::move(coro) }, rec, log](Debug::ContinuationMode mode) mutable {
-                                                                       Python3Lock lock { rec, log };
-                                                                       switch (mode) {
-                                                                       case Debug::ContinuationMode::Continue:
-                                                                           resumeCoroutine(coro, toPyTuple(Reflect::ArgumentList { std::monostate {} }));
-                                                                           break;
-                                                                       case Debug::ContinuationMode::Abort:
-                                                                           resumeCoroutine(coro, nullptr);
-                                                                           break;
-                                                                       }
-                                                                       coro.reset();
-                                                                   },
-                                                                      Debug::ContinuationType::Flow });
-                } else {
-                    Python3Lock lock { rec, log };
-                    resumeCoroutine(coro, nullptr);
-                }
-            } else {
-                std::string typeName = PyUnicode_AsUTF8(PyType_GetName(Py_TYPE(result)));
-                Python3Unlock unlock;
-                unlock.fetchReceiver()->set_error(REFLECT_UNKNOWN_ERROR() << "Unknown result type from coroutine: " << typeName);
             }
         }
 
@@ -597,7 +421,12 @@ namespace Behavior {
         {
             PyObject *tuple = PyTuple_New(args.size());
             for (size_t i = 0; i < args.size(); ++i) {
-                PyTuple_SetItem(tuple, i, toPyObject(args[i]));
+                PyObject *element = toPyObject(args[i]);
+                if (!element) {
+                    Py_DecRef(tuple);
+                    return nullptr;
+                }
+                PyTuple_SetItem(tuple, i, element);
             }
             return tuple;
         }
