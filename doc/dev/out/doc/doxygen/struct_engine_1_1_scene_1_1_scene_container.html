@@ -281,8 +281,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a0f7c02054ea296c540ced4a7e6c30a7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8cf2deed883b45653d4cbb0068fd03d2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_scene_container.html#a8cf2deed883b45653d4cbb0068fd03d2">createEntity</a> (const std::string &amp;<a class="el" href="struct_engine_1_1_scene_1_1_scene_container.html#ad62a3ff8bcee0954d9a5372d1e104511">name</a>=&quot;&quot;, <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_descriptor.html">Entity::EntityDescriptor</a> init={}, <a class="el" href="namespace_engine.html#a112937bef202baff8b6ece57a2ec891e">Closure</a>&lt; <a class="el" href="classvoid.html">void</a>(<a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_ptr.html">Entity::EntityPtr</a>)&gt; cb={}, <a class="el" href="namespace_engine.html#a112937bef202baff8b6ece57a2ec891e">Closure</a>&lt; <a class="el" href="classvoid.html">void</a>(Serialize::MessageResult)&gt; onError={})</td></tr>
 <tr class="separator:a8cf2deed883b45653d4cbb0068fd03d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a928b9a6df1cc4e6bf4d8b1881b114d55"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_execution_1_1_sender.html">Execution::Sender</a>&lt; Serialize::MessageResult, <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_ptr.html">Entity::EntityPtr</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_scene_container.html#a928b9a6df1cc4e6bf4d8b1881b114d55">createEntityAsync</a> (const std::string &amp;<a class="el" href="struct_engine_1_1_scene_1_1_scene_container.html#ad62a3ff8bcee0954d9a5372d1e104511">name</a>=&quot;&quot;, <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_descriptor.html">Entity::EntityDescriptor</a> init={})</td></tr>
-<tr class="separator:a928b9a6df1cc4e6bf4d8b1881b114d55"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adec04aaa3c4720d49de5be28d52e9a89"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_execution_1_1_future.html">Execution::Future</a>&lt; Serialize::MessageResult, <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_ptr.html">Entity::EntityPtr</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_scene_container.html#adec04aaa3c4720d49de5be28d52e9a89">createEntityAsync</a> (const std::string &amp;<a class="el" href="struct_engine_1_1_scene_1_1_scene_container.html#ad62a3ff8bcee0954d9a5372d1e104511">name</a>=&quot;&quot;, <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_descriptor.html">Entity::EntityDescriptor</a> init={})</td></tr>
+<tr class="separator:adec04aaa3c4720d49de5be28d52e9a89"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afc3b323eee83a4d9e964ca5c681f292a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_scene_container.html#afc3b323eee83a4d9e964ca5c681f292a">endLifetime</a> ()</td></tr>
 <tr class="separator:afc3b323eee83a4d9e964ca5c681f292a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa76f00ae26c629477c2f9d856b0370a7"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_scene_container.html#aa76f00ae26c629477c2f9d856b0370a7">entities</a> ()</td></tr>
@@ -385,14 +385,14 @@ requires std::constructible_from&lt;typename <a class="el" href="namespace_engin
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a928b9a6df1cc4e6bf4d8b1881b114d55" name="a928b9a6df1cc4e6bf4d8b1881b114d55"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a928b9a6df1cc4e6bf4d8b1881b114d55">&#9670;&#160;</a></span>createEntityAsync()</h2>
+<a id="adec04aaa3c4720d49de5be28d52e9a89" name="adec04aaa3c4720d49de5be28d52e9a89"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adec04aaa3c4720d49de5be28d52e9a89">&#9670;&#160;</a></span>createEntityAsync()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="struct_engine_1_1_execution_1_1_sender.html">Execution::Sender</a>&lt; Serialize::MessageResult, <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_ptr.html">Entity::EntityPtr</a> &gt; Engine::Scene::SceneContainer::createEntityAsync </td>
+          <td class="memname"><a class="el" href="struct_engine_1_1_execution_1_1_future.html">Execution::Future</a>&lt; Serialize::MessageResult, <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_ptr.html">Entity::EntityPtr</a> &gt; Engine::Scene::SceneContainer::createEntityAsync </td>
           <td>(</td>
           <td class="paramtype">const std::string &amp;&#160;</td>
           <td class="paramname"><em>name</em> = <code>&quot;&quot;</code>, </td>
@@ -745,7 +745,7 @@ requires std::constructible_from&lt;typename <a class="el" href="namespace_engin
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jul 13 2026 16:51:31 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Tue Jul 14 2026 18:59:36 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>
