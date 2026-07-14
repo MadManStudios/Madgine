@@ -110,20 +110,18 @@ namespace Scene {
         return "Entity";
     }
 
-    Execution::Sender<Serialize::MessageResult, Entity::EntityPtr> SceneContainer::createEntityAsync(const std::string &name, Entity::EntityDescriptor init)
+    Execution::Future<Serialize::MessageResult, Entity::EntityPtr> SceneContainer::createEntity(const std::string &name, Entity::EntityDescriptor init, Closure<void(Entity::EntityPtr)> cb, Closure<void(Serialize::MessageResult)> onError)
     {
-        auto fut = co_await mutex().locked(AccessMode::WRITE, [this, name, init { std::move(init) }]() mutable {
-            return TupleUnpacker::invokeFlatten(LIFT(mEntities.emplace_async, this), mEntities.end(), createEntityData(name, std::move(init)));
-        });
+        Execution::Promise<Serialize::MessageResult, Entity::EntityPtr> promise;
+        Execution::Future<Serialize::MessageResult, Entity::EntityPtr> future = promise.getFuture();
 
-        auto it = co_await fut;
+        mLifetime.attach(
+            mutex().locked(AccessMode::WRITE, [this, name, init { std::move(init) }]() mutable {
+                return TupleUnpacker::invokeFlatten(LIFT(mEntities.emplace_async, this), mEntities.end(), createEntityData(name, std::move(init)));
+            })
+            | Execution::let_value(std::identity {}) | Execution::then([cb { std::move(cb) }](auto it) { if (cb) cb(it->ptr()); return it->ptr(); }) | Execution::onError(onError ? std::move(onError) : [](Serialize::MessageResult) {}) | Execution::with_receiver(std::move(promise)));
 
-        co_return it->ptr();
-    }
-
-    void SceneContainer::createEntity(const std::string &name, Entity::EntityDescriptor init, Closure<void(Entity::EntityPtr)> cb, Closure<void(Serialize::MessageResult)> onError)
-    {
-        mLifetime.attach(createEntityAsync(name, std::move(init)) | Execution::then(cb ? std::move(cb) : [](Entity::EntityPtr) { }) | Execution::onError(onError ? std::move(onError) : [](Serialize::MessageResult) { }));
+        return future;
     }
 
     void SceneContainer::startLifetime()
