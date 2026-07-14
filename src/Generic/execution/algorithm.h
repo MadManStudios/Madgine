@@ -1681,5 +1681,69 @@ namespace Execution {
 
     inline constexpr halt_t halt;
 
+    struct with_receiver_t {
+
+        template <typename Rec, typename Rec2>
+        struct receiver : algorithm_receiver<Rec> {
+
+            template <typename... V>
+            void set_value(V &&...value)
+            {
+                mReceiver.set_value(V { value }...);
+                this->mRec.set_value(std::forward<V>(value)...);
+            }
+
+            template <typename... R>
+            void set_error(R &&...error)
+            {
+                mReceiver.set_error(R { error }...);
+                this->mRec.set_error(std::forward<R>(error)...);
+            }
+            
+            void set_done()
+            {
+                mReceiver.set_done();
+                this->mRec.set_done();
+            }
+
+            Rec2 mReceiver;
+        };
+
+        template <typename Sender, typename Rec2>
+        struct sender : algorithm_sender<Sender> {
+
+            template <typename Rec>
+            friend auto tag_invoke(connect_t, sender &&sender, Rec &&rec)
+            {
+                return algorithm_state<Sender, receiver<Rec, Rec2>> { std::forward<Sender>(sender.mSender), { { std::forward<Rec>(rec) }, std::forward<Rec2>(sender.mReceiver) } };
+            }
+
+            Rec2 mReceiver;
+        };
+
+        template <typename Sender, typename Rec2>
+        friend auto tag_invoke(with_receiver_t, Sender &&inner, Rec2 &&receiver)
+        {
+            return sender<Sender, Rec2> { { {}, std::forward<Sender>(inner) }, std::forward<Rec2>(receiver) };
+        }
+
+        template <typename Sender, typename Rec2>
+            requires tag_invocable<with_receiver_t, Sender, Rec2>
+        auto operator()(Sender &&sender, Rec2 &&receiver) const
+            noexcept(is_nothrow_tag_invocable_v<with_receiver_t, Sender, Rec2>)
+                -> tag_invoke_result_t<with_receiver_t, Sender, Rec2>
+        {
+            return tag_invoke(*this, std::forward<Sender>(sender), std::forward<Rec2>(receiver));
+        }
+
+        template <typename Rec2>
+        auto operator()(Rec2 &&receiver) const
+        {
+            return pipable_from_right(*this, std::forward<Rec2>(receiver));
+        }
+    };
+
+    inline constexpr with_receiver_t with_receiver;
+
 }
 }
