@@ -3,6 +3,7 @@
 #include "Generic/callerhierarchy.h"
 #include "Generic/closure.h"
 
+#include "../../reflectserialize/typenames.h"
 #include "../primitivetypes.h"
 #include "serializetable_forward.h"
 
@@ -82,6 +83,22 @@ namespace Serialize {
         StreamResult readFunctionRequest(SyncableUnitBase *unit, FormattedMessageStream &in, MessageId id) const;
         StreamResult readFunctionError(SyncableUnitBase *unit, CallerHierarchyFormattedSerializeStream in, PendingRequest &request) const;
     };
+
+    namespace __serialize_impl__ {
+
+        template <typename T>
+        struct SerializeTableRegistrator {
+            SerializeTableRegistrator()
+            {
+                registerSerializeTable(serializeTable<T>());
+            }
+            ~SerializeTableRegistrator()
+            {
+                unregisterSerializeTable(serializeTable<T>());
+            }
+        };
+
+    }
 
 }
 }

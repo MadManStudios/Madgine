@@ -263,12 +263,6 @@ namespace Behavior {
             return obj;
         }
 
-        PyObject *toPyObject(const Reflect::Type &t)
-        {
-            PyErr_SetString(PyExc_NotImplementedError, "Can't convert type <type> yet");
-            return nullptr;
-        }
-
         PyObject *toPyObject(const Reflect::Binding &b)
         {
             PyObject *obj = PyObject_CallObject((PyObject *)&PyBindingType, NULL);
@@ -405,7 +399,7 @@ namespace Behavior {
         Reflect::ExtendedType PyToValueTypeDesc(PyObject *obj)
         {
             if (Py_IS_TYPE(obj, &PyTypeType)) {
-                return { { Reflect::TypeEnum::ScopeValue }, reinterpret_cast<PyType *>(obj)->mType->mSelf };
+                return { { Reflect::TypeEnum::ScopeValue }, reinterpret_cast<PyType *>(obj)->mType->mMetaTable->mSelf };
             } else if (PyType_Check(obj)) {
                 PyTypeObject *type = reinterpret_cast<PyTypeObject *>(obj);
                 if (type == &PyUnicode_Type) {

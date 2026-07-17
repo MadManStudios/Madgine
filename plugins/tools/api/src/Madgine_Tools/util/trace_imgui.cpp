@@ -705,28 +705,35 @@ bool ValueTypeDrawer::draw(const Engine::Tools::Traced<const std::chrono::nanose
     return false;
 }
 
-bool ValueTypeDrawer::draw(const Engine::Tools::Traced<Engine::Reflect::ExtendedType &> &t)
-{
-    return ValueTypeTypePicker(t.get());
+bool TypeIterateHelper(Engine::CallableView<bool(const Engine::TypeName&)> visitor, const std::map<std::string, Engine::TypeName, std::less<>>& names) {
+    bool result = false;
+    for (const auto& [name, type] : names) {
+        BeginLazyMenu(name.c_str());
+        result |= visitor(type);
+        result |= TypeIterateHelper(visitor, type.mMembers);
+        EndLazyMenu();
+    }
+    return result;
 }
 
-bool ValueTypeDrawer::draw(const Engine::Tools::Traced<const Engine::Reflect::ExtendedType &> &t)
+bool TypeIterate(Engine::CallableView<bool(const Engine::TypeName &)> visitor)
 {
-    Text(t->toString());
-    return false;
+    return TypeIterateHelper(visitor, Engine::typeList());
 }
 
 bool ScopeTypePicker(const Engine::Reflect::MetaTable *&t)
 {
-    const Engine::Reflect::MetaTable *type = Engine::Reflect::sTypeList();
-    while (type) {
-        if (Selectable(type->mTypeName)) {
-            t = type;
-            return true;
+    return TypeIterate([&](const Engine::TypeName &type) {
+        if (type.mMetaTable) {
+            if (InstantiateLazyMenus()) {
+                if (Selectable(type.mMetaTable->mTypeName)) {
+                    t = type.mMetaTable;
+                    return true;
+                }
+            }
         }
-        type = type->mNext;
-    }
-    return false;
+        return false;
+    });
 }
 
 template <typename Ty, typename T>

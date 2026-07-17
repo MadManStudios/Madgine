@@ -3,6 +3,7 @@
 #include "Generic/offsetptr.h"
 
 #include "../meta_decay.h"
+#include "../reflectserialize/typenames.h"
 #include "result.h"
 #include "table_forward.h"
 
@@ -91,27 +92,19 @@ namespace Reflect {
         const Accessor *mMembers;
         const Constructor *mConstructors;
         MoveAssign *mMoveAssign;
-
-        mutable const MetaTable *mNext = nullptr;
-        mutable const MetaTable **mPrev = nullptr;
     };
 
-    META_EXPORT const MetaTable *&sTypeList();
-
     namespace __Reflect_impl__ {
-
-        META_EXPORT void registerType(const MetaTable &t);
-        META_EXPORT void unregisterType(const MetaTable &t);
 
         template <typename T>
         struct MetaTableRegistrator {
             MetaTableRegistrator()
             {
-                registerType(*table<T>);
+                registerMetaTable(*table<T>);
             }
             ~MetaTableRegistrator()
             {
-                unregisterType(*table<T>);
+                unregisterMetaTable(*table<T>);
             }
         };
 

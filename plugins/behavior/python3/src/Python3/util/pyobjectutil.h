@@ -70,7 +70,6 @@ namespace Behavior {
         MADGINE_PYTHON3_EXPORT PyObject *toPyObject(const Reflect::Flags &f);
         MADGINE_PYTHON3_EXPORT PyObject *toPyObject(const Reflect::Function &f);
         MADGINE_PYTHON3_EXPORT PyObject *toPyObject(const Reflect::Sender &s);
-        MADGINE_PYTHON3_EXPORT PyObject *toPyObject(const Reflect::Type &t);
         MADGINE_PYTHON3_EXPORT PyObject *toPyObject(const Reflect::Binding &b);
         MADGINE_PYTHON3_EXPORT PyObject *toPyObject(const Reflect::ScopeBinding &b);
 

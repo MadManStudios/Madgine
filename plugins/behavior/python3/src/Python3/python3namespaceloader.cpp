@@ -45,27 +45,22 @@ namespace Behavior {
                 return NULL;
 
             std::string fullName = std::string { PyModule_GetName(self) } + "." + name;
-            std::string cppName = StringUtil::replace(std::as_const(fullName), ".", "::");
-            std::string namespaceName = cppName + "::";
 
-            const Reflect::MetaTable *list = Reflect::sTypeList();
-            while (list) {
-
-                if (cppName == list->mTypeName) {
+            auto typeName = resolveTypeName(fullName, ".");
+            if (typeName) {
+                if (typeName->mMetaTable) {
                     PyObject *type = PyObject_CallObject((PyObject *)&PyTypeType, NULL);
                     if (!type)
                         return NULL;
-                    reinterpret_cast<PyType *>(type)->mType = list;
+                    reinterpret_cast<PyType *>(type)->mType = typeName;
                     [[maybe_unused]] int result = PyModule_AddObjectRef(self, name, type);
                     assert(result == 0);
                     return type;
-                } else if (StringUtil::startsWith(list->mTypeName, namespaceName)) {
-                    return PyImport_ImportModule(fullName.c_str());                    
+                } else {
+                    return PyImport_ImportModule(fullName.c_str());
                 }
-
-                list = list->mNext;
             }
-
+            
             PyErr_Format(PyExc_AttributeError, "Could not find attribute '%s' in %s!", name, PyModule_GetName(self));
             return NULL;
         }

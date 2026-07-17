@@ -17,12 +17,12 @@ namespace Behavior {
 
         static PyObject *PyType_str(PyType *self)
         {
-            return PyUnicode_FromString(self->mType->mTypeName);
+            return PyUnicode_FromString(self->mType->mMetaTable->mTypeName);
         }
 
         static PyObject *PyType_call(PyType *self, PyObject *args, PyObject *kwargs)
         {
-            if (!self->mType->mConstructors[0].mMatcher) {
+            if (!self->mType->mMetaTable || !self->mType->mMetaTable->mConstructors[0].mMatcher) {
                 PyErr_Format(PyExc_TypeError, "%R is not constructible", self);
                 return nullptr;
             }
@@ -37,7 +37,7 @@ namespace Behavior {
             }
 
             Reflect::OwnedScopePtr scope;
-            Reflect::Result result = scope.construct(self->mType, arguments);
+            Reflect::Result result = scope.construct(self->mType->mMetaTable, arguments);
             if (result) {
                 return toPyError(*result.mError);
             }
@@ -52,7 +52,7 @@ namespace Behavior {
 
                     const char *name = PyBytes_AsString(ascii_key);
 
-                    Reflect::ScopeIterator it = self->mType->find(name, Reflect::Value { scope });
+                    Reflect::ScopeIterator it = self->mType->mMetaTable->find(name, Reflect::Value { scope });
                     if (it == it.end()) {
                         PyErr_Format(PyExc_AttributeError, "Could not find attribute '%s' in %R!", name, self);
                         return nullptr;
@@ -77,14 +77,14 @@ namespace Behavior {
         PyTypeObject PyTypeType = {
             .ob_base = PyVarObject_HEAD_INIT(NULL, 0)
                 .tp_name
-            = "Engine.MetaTable",
+            = "Engine.TypeName",
             .tp_basicsize = sizeof(PyType),
             .tp_itemsize = 0,
             .tp_dealloc = &PyDealloc<PyType, &PyType::mType>,
             .tp_repr = (reprfunc)PyType_str,
             .tp_call = (ternaryfunc)PyType_call,
             .tp_flags = Py_TPFLAGS_DEFAULT,
-            .tp_doc = "Python implementation of MetaTable",
+            .tp_doc = "Python implementation of TypeName",
             .tp_new = PyType_GenericNew,
         };
 

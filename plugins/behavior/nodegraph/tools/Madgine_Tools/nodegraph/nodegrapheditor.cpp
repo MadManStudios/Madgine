@@ -26,6 +26,7 @@
 #include "NodeEditor/imgui_node_editor.h"
 #include "debugvisualizer.h"
 #define IMGUI_DEFINE_MATH_OPERATORS
+#include "Madgine_Tools/util/trace_imgui.h"
 #include "imgui/imgui.h"
 #include "imgui/imgui_internal.h"
 #include "imgui/imguiaddons.h"
@@ -347,30 +348,22 @@ namespace Tools {
                                 ImGui::EndMenu();
 
                             if (ImGui::BeginMenu("Accessors")) {
-                                const Reflect::MetaTable *type = Reflect::sTypeList();
-                                while (type) {
-
-                                    bool hasMenu = false;
-                                    for (const Reflect::Accessor *accessor = type->mMembers; accessor->mName; ++accessor) {
-
-                                        if (filter->PassFilter(type->mTypeName) || filter->PassFilter(accessor->mName)) {
-
-                                            if (!hasMenu) {
-                                                hasMenu = ImGui::BeginMenu(type->mTypeName);
-                                                if (!hasMenu)
-                                                    break;
-                                            }
-                                            if (ImGui::MenuItem(accessor->mName)) {
-                                                Behavior::NodeGraph::NodeBase *node = mGraph.addNode(std::make_unique<Behavior::NodeGraph::AccessorNode>(mGraph, "Accessor/"s + type->mTypeName + "/" + accessor->mName));
-                                                ed::SetNodePosition(60000 * mGraph.nodeIndex(node), mPopupPosition);
+                                ImGui::TypeIterate([&](const TypeName &type) {
+                                    const Reflect::MetaTable *table = type.mMetaTable;
+                                    if (table) {
+                                        for (const Reflect::Accessor *accessor = table->mMembers; accessor->mName; ++accessor) {
+                                            if (filter->PassFilter(table->mTypeName) || filter->PassFilter(accessor->mName)) {
+                                                if (ImGui::InstantiateLazyMenus()) {
+                                                    if (ImGui::MenuItem(accessor->mName)) {
+                                                        Behavior::NodeGraph::NodeBase *node = mGraph.addNode(std::make_unique<Behavior::NodeGraph::AccessorNode>(mGraph, "Accessor/"s + table->mTypeName + "/" + accessor->mName));
+                                                        ed::SetNodePosition(60000 * mGraph.nodeIndex(node), mPopupPosition);
+                                                    }
+                                                }
                                             }
                                         }
                                     }
-                                    if (hasMenu)
-                                        ImGui::EndMenu();
-
-                                    type = type->mNext;
-                                }
+                                    return false;
+                                });                                   
                                 ImGui::EndMenu();
                             }
                             ImGui::EndMenu();

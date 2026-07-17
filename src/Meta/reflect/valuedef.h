@@ -56,8 +56,6 @@ VALUE_TYPE(Sender, Sender, const Sender &)
 VALUE_SEP
 VALUE_TYPE(Duration, Duration64, Duration64, std::chrono::nanoseconds, std::chrono::microseconds)
 VALUE_SEP
-VALUE_TYPE(Type, ExtendedType, const ExtendedType &, const Type &)
-VALUE_SEP
 VALUE_TYPE(Binding, Binding, const Binding &)
 VALUE_SEP
 VALUE_TYPE(ScopeBinding, ScopeBinding, const ScopeBinding &)

@@ -69,27 +69,5 @@ namespace Reflect {
         return "<"s + mTypeName + ">";
     }
 
-    const MetaTable *&sTypeList()
-    {
-        static const MetaTable *sDummy = nullptr;
-        return sDummy;
-    }
-
-    namespace __Reflect_impl__ {
-
-        void registerType(const MetaTable &f)
-        {
-            if (sTypeList()) {
-                sTypeList()->mPrev = &f.mNext;
-            }
-            f.mNext = std::exchange(sTypeList(), &f);
-        }
-
-        void unregisterType(const MetaTable &f)
-        {
-        }
-
-    }
-
 }
 }

@@ -9,10 +9,10 @@
 
 METATABLE_BEGIN(Engine::Behavior::NamedDescriptor)
     MEMBER(mName)
-    MEMBER(mType)
+    //MEMBER(mType)
 METATABLE_END(Engine::Behavior::NamedDescriptor)
 
 SERIALIZETABLE_BEGIN(Engine::Behavior::NamedDescriptor)
     FIELD(mName)
-    FIELD(mType)
+    //FIELD(mType)
 SERIALIZETABLE_END(Engine::Behavior::NamedDescriptor)

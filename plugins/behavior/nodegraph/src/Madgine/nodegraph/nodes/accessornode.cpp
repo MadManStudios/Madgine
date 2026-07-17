@@ -133,12 +133,9 @@ namespace Behavior {
 
             std::string_view typeName = path.substr(0, pos);
 
-            const Reflect::MetaTable *type = Reflect::sTypeList();
-            while (type) {
-                if (type->mTypeName == typeName) {
-                    return type;
-                }
-                type = type->mNext;
+            auto type = resolveTypeName(typeName);
+            if (type) {
+                return type->mMetaTable;
             }
             return nullptr;
         }
