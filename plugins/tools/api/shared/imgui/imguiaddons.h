@@ -88,6 +88,10 @@ IMGUI_API bool LED(const char *label, bool *on, const ImVec2 &size = ImVec2(12, 
 
 IMGUI_API bool InlineContextButton(const char *text, bool checked = false);
 
+IMGUI_API void BeginLazyMenu(const char *name);
+IMGUI_API void EndLazyMenu();
+IMGUI_API bool InstantiateLazyMenus();
+
 ///////// Filepicker
 
 struct FilesystemPickerOptions {

@@ -361,6 +361,43 @@ bool InlineContextButton(const char *text, bool checked)
     return pressed;
 }
 
+struct LazyMenu {
+    const char *mName;
+    bool mInstantiated = false;
+    bool mVisible = false;
+};
+
+static std::deque<LazyMenu> sLazyMenuStack;
+
+void BeginLazyMenu(const char *name)
+{
+    sLazyMenuStack.emplace_back(name);
+}
+
+void EndLazyMenu()
+{
+    if (sLazyMenuStack.back().mVisible)
+        ImGui::EndMenu();
+    sLazyMenuStack.pop_back();
+}
+
+bool InstantiateLazyMenus()
+{
+    auto it = sLazyMenuStack.rbegin();
+    while (it != sLazyMenuStack.rend() && !it->mInstantiated)
+        ++it;
+    bool visible = it == sLazyMenuStack.rend() || it->mVisible;
+    while (it != sLazyMenuStack.rbegin()) {
+        --it;
+        if (visible) {
+            visible &= BeginMenu(it->mName);
+            it->mVisible = visible;
+        }
+        it->mInstantiated = true;
+    }
+    return visible;
+}
+
 bool BeginFilesystemPicker(Engine::Platform::Filesystem::Path &path, Engine::Platform::Filesystem::Path &selection, const Engine::Platform::Filesystem::Path &base)
 {
     bool changed = false;
