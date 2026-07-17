@@ -295,6 +295,8 @@ Functions</h2></td></tr>
 <tr class="separator:a9c0da6fe4e18d7b94c45ad3e1f22ccdc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad9d2be40190f955c7bf23db552182448"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_containers_1_1_generator.html">Containers::Generator</a>&lt; std::string_view &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_string_util.html#ad9d2be40190f955c7bf23db552182448">tokenize</a> (std::string_view string, char token)</td></tr>
 <tr class="separator:ad9d2be40190f955c7bf23db552182448"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a60c833c298b074a82dd259b5d92cf746"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_containers_1_1_generator.html">Containers::Generator</a>&lt; std::string_view &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_string_util.html#a60c833c298b074a82dd259b5d92cf746">tokenize</a> (std::string_view string, std::string_view token)</td></tr>
+<tr class="separator:a60c833c298b074a82dd259b5d92cf746"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:accd5c0922307032d785fb8a5c8102279"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_string_util.html#accd5c0922307032d785fb8a5c8102279">toLower</a> (std::string &amp;&amp;s)</td></tr>
 <tr class="separator:accd5c0922307032d785fb8a5c8102279"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac4780f258e865997e7aac9b2c4d354f6"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_string_util.html#ac4780f258e865997e7aac9b2c4d354f6">toLower</a> (std::string_view s)</td></tr>
@@ -862,7 +864,7 @@ template&lt;typename Cont &gt; </div>
 </div>
 </div>
 <a id="a9c0da6fe4e18d7b94c45ad3e1f22ccdc" name="a9c0da6fe4e18d7b94c45ad3e1f22ccdc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9c0da6fe4e18d7b94c45ad3e1f22ccdc">&#9670;&#160;</a></span>tokenize() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a9c0da6fe4e18d7b94c45ad3e1f22ccdc">&#9670;&#160;</a></span>tokenize() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -900,7 +902,7 @@ template&lt;size_t S&gt; </div>
 </div>
 </div>
 <a id="ad9d2be40190f955c7bf23db552182448" name="ad9d2be40190f955c7bf23db552182448"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad9d2be40190f955c7bf23db552182448">&#9670;&#160;</a></span>tokenize() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ad9d2be40190f955c7bf23db552182448">&#9670;&#160;</a></span>tokenize() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -918,6 +920,42 @@ template&lt;size_t S&gt; </div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>token</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a60c833c298b074a82dd259b5d92cf746" name="a60c833c298b074a82dd259b5d92cf746"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a60c833c298b074a82dd259b5d92cf746">&#9670;&#160;</a></span>tokenize() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_containers_1_1_generator.html">Containers::Generator</a>&lt; std::string_view &gt; Engine::StringUtil::tokenize </td>
+          <td>(</td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>string</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string_view&#160;</td>
           <td class="paramname"><em>token</em>&#160;</td>
         </tr>
         <tr>
@@ -964,7 +1002,7 @@ template&lt;size_t S&gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Jul 14 2026 19:21:57 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Fri Jul 17 2026 18:33:51 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>
