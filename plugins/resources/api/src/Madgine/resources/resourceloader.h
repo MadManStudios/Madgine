@@ -414,4 +414,7 @@ namespace Resources {
                                                                                   \
     SERIALIZETABLE_BEGIN_EX(9, Loader::Handle)                                    \
         ENCAPSULATED_FIELD_EX(10, Name, name, loadSerialize)                      \
-    SERIALIZETABLE_END_EX(11, Loader::Handle)
+    SERIALIZETABLE_END_EX(11, Loader::Handle)                                     \
+                                                                                  \
+    STORAGEOPS_BEGIN_EX(13, Loader::Handle)                                       \
+    STORAGEOPS_END_EX(15, Loader::Handle)

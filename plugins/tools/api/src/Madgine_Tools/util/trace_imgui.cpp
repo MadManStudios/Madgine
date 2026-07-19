@@ -705,7 +705,8 @@ bool ValueTypeDrawer::draw(const Engine::Tools::Traced<const std::chrono::nanose
     return false;
 }
 
-bool TypeIterateHelper(Engine::CallableView<bool(const Engine::TypeName&)> visitor, const std::map<std::string, Engine::TypeName, std::less<>>& names) {
+bool TypeIterateHelper(Engine::CallableView<bool(const Engine::Type::TypeName &)> visitor, const std::map<std::string, Engine::Type::TypeName, std::less<>> &names)
+{
     bool result = false;
     for (const auto& [name, type] : names) {
         BeginLazyMenu(name.c_str());
@@ -716,14 +717,14 @@ bool TypeIterateHelper(Engine::CallableView<bool(const Engine::TypeName&)> visit
     return result;
 }
 
-bool TypeIterate(Engine::CallableView<bool(const Engine::TypeName &)> visitor)
+bool TypeIterate(Engine::CallableView<bool(const Engine::Type::TypeName &)> visitor)
 {
-    return TypeIterateHelper(visitor, Engine::typeList());
+    return TypeIterateHelper(visitor, Engine::Type::typeList());
 }
 
 bool ScopeTypePicker(const Engine::Reflect::MetaTable *&t)
 {
-    return TypeIterate([&](const Engine::TypeName &type) {
+    return TypeIterate([&](const Engine::Type::TypeName &type) {
         if (type.mMetaTable) {
             if (InstantiateLazyMenus()) {
                 if (Selectable(type.mMetaTable->mTypeName)) {
@@ -743,12 +744,12 @@ bool SelectValueTypeType(T &t)
 
     bool result = false;
 
-    if constexpr (std::same_as<Ty, Engine::Reflect::OwnedScopePtr>) {
-        if (ImGui::BeginMenu("OwnedScopePtr")) {
+    if constexpr (std::same_as<Ty, Engine::Reflect::OwnedValue>) {
+        if (ImGui::BeginMenu("OwnedValue")) {
             const Engine::Reflect::MetaTable *type;
             result = ScopeTypePicker(type);
             if (result)
-                desc = Engine::Reflect::Type { Engine::Reflect::TypeEnum::OwnedScopeValue, type->mSelf };
+                desc = Engine::Reflect::Type { Engine::Reflect::TypeEnum::OwnedValueValue, type->mSelf };
             ImGui::EndMenu();
         }
     } else if constexpr (std::same_as<Ty, Engine::Reflect::ScopePtr>) {

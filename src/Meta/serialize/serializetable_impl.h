@@ -222,7 +222,7 @@ namespace Serialize {
         constexpr SyncFunction syncFunction()
         {
             using traits = SyncFunctionTraits<typename Callable<f>::traits>;
-            using R = patch_void_t<typename traits::return_type>;
+            using R = patch_void_t<typename traits::return_type, std::monostate>;
             using T = typename traits::class_type;
             using Tuple = typename traits::decay_argument_types::as_tuple;
             using OwningTuple = typename traits::decay_argument_types::template transform<MakeOwning_t>::as_tuple;
@@ -245,7 +245,7 @@ namespace Serialize {
                         STREAM_PROPAGATE_ERROR(apply_map(owningArgs, in, true));
                         Tuple args = owningArgs;
                         writeFunctionAction(unit, index, &args, {}, request.mRequester, request.mRequesterTransactionId);
-                        R result = TupleUnpacker::invokeExpand(patch_void(f, Void {}), static_cast<T *>(unit), traits::patchArgs(std::move(args), { in.mStream.id() }));
+                        R result = TupleUnpacker::invokeExpand(patch_void(f, std::monostate {}), static_cast<T *>(unit), traits::patchArgs(std::move(args), { in.mStream.id() }));
                         request.mReceiver.set_value<R>(result);
                     } break;
                     case QUERY: {
@@ -273,7 +273,7 @@ namespace Serialize {
                     } else if (unit->isMaster()) {
                         if (type == CALL)
                             writeFunctionAction(unit, index, &args, {}, answerId, id);
-                        R result = TupleUnpacker::invokeExpand(patch_void(f, Void {}), unit, traits::patchArgs(std::move(args), context));
+                        R result = TupleUnpacker::invokeExpand(patch_void(f, std::monostate {}), unit, traits::patchArgs(std::move(args), context));
                         if (type == QUERY && id != 0)
                             writeFunctionResult(unit, index, &result, in, id);
                     } else {

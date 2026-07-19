@@ -45,7 +45,7 @@ namespace Behavior {
         MADGINE_PYTHON3_EXPORT PyObject *toPyObject(Reflect::Duration64 d);
 
         MADGINE_PYTHON3_EXPORT PyObject *toPyObject(const Reflect::ScopePtr &scope);
-        MADGINE_PYTHON3_EXPORT PyObject *toPyObject(const Reflect::OwnedScopePtr &scope);
+        MADGINE_PYTHON3_EXPORT PyObject *toPyObject(const Reflect::OwnedValue &value);
         MADGINE_PYTHON3_EXPORT PyObject *toPyObject(const Reflect::ScopeIterator &it);
         MADGINE_PYTHON3_EXPORT PyObject *toPyObject(const Reflect::ApiFunction &function);
         MADGINE_PYTHON3_EXPORT PyObject *toPyObject(const Reflect::BoundApiFunction &function);
@@ -81,6 +81,7 @@ namespace Behavior {
         MADGINE_PYTHON3_EXPORT Reflect::Error fetchError();
 
         MADGINE_PYTHON3_EXPORT Reflect::ExtendedType PyToValueTypeDesc(PyObject *obj);
+        MADGINE_PYTHON3_EXPORT const Type::StorageOps *PyToStorageOps(PyObject *obj);
 
         MADGINE_PYTHON3_EXPORT PyObject *toPyTuple(const Reflect::ArgumentList &args);
 

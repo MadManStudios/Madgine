@@ -46,9 +46,9 @@ namespace Behavior {
 
             std::string fullName = std::string { PyModule_GetName(self) } + "." + name;
 
-            auto typeName = resolveTypeName(fullName, ".");
+            auto typeName = Type::resolveTypeName(fullName, ".");
             if (typeName) {
-                if (typeName->mMetaTable) {
+                if (typeName->mStorageOps) {
                     PyObject *type = PyObject_CallObject((PyObject *)&PyTypeType, NULL);
                     if (!type)
                         return NULL;

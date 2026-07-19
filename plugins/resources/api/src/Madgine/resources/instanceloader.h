@@ -5,8 +5,6 @@
 
 #include "Platform/filesystem/filewatcher.h"
 
-#include "Meta/reflect/ownedscopeptr.h"
-
 #include "Modules/threading/globalstorage.h"
 #include "Modules/uniquecomponent/uniquecomponent.h"
 #include "Modules/uniquecomponent/uniquecomponentcollector.h"

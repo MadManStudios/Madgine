@@ -10,7 +10,7 @@
 #include "Meta/reflect/metatable_impl.h"
 
 METATABLE_BEGIN(Engine::Render::Camera)
-    CONSTRUCTOR()
+    //CONSTRUCTOR()
     MEMBER(mName)
     MEMBER(mPosition)
     MEMBER(mOrientation)

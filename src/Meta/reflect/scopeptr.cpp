@@ -43,11 +43,6 @@ namespace Reflect {
             return "<NULL>";
     }
 
-    void ScopePtr::moveAssign(ScopePtr other) const
-    {
-        mType->moveAssign(*this, other);
-    }
-
     Result ScopePtr::call(Value &retVal, const ArgumentList &args) const
     {
         return mType->call(Value { *this }, retVal, args);

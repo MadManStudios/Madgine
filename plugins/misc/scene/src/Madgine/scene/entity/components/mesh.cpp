@@ -6,11 +6,11 @@
 
 #include "Meta/reflect/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
+#include "Meta/type/storageops_impl.h"
 
 NAMED_UNIQUECOMPONENT(Mesh, Engine::Scene::Entity::Mesh);
 
 METATABLE_BEGIN(Engine::Scene::Entity::Mesh)
-    CONSTRUCTOR()
     MEMBER(mMesh)
     MEMBER(mIsVisible)
     MEMBER(mMaterial)
@@ -20,6 +20,10 @@ SERIALIZETABLE_BEGIN(Engine::Scene::Entity::Mesh)
     FIELD(mMesh)
     FIELD(mMaterial)
 SERIALIZETABLE_END(Engine::Scene::Entity::Mesh)
+
+STORAGEOPS_BEGIN(Engine::Scene::Entity::Mesh)
+    CONSTRUCTOR()
+STORAGEOPS_END(Engine::Scene::Entity::Mesh)
 
 namespace Engine {
 namespace Scene {

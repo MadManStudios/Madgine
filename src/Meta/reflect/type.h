@@ -381,7 +381,7 @@ namespace Reflect {
             else
                 return TypeEnum::ScopeValue;
         } else {
-            return TypeEnum::OwnedScopeValue;
+            return TypeEnum::OwnedValueValue;
         }
     }
 
@@ -407,7 +407,7 @@ namespace Reflect {
             return { { TypeEnum::EnumValue }, &T::Representation::sTable };
         } else if constexpr (Execution::AnyBinding<T>) {
             constexpr ExtendedType inner = toType<std::decay_t<typename std::decay_t<T>::type>, true>();
-            if constexpr (inner.mType == TypeEnum::ScopeValue || inner.mType == TypeEnum::OwnedScopeValue) {
+            if constexpr (inner.mType == TypeEnum::ScopeValue || inner.mType == TypeEnum::OwnedValueValue) {
                 return { { TypeEnum::ScopeBindingValue }, &table<std::remove_pointer_t<std::decay_t<typename std::decay_t<T>::type>>> };
             } else {
                 return { { TypeEnum::BindingValue }, { inner } };
@@ -436,7 +436,7 @@ namespace Reflect {
         } else if constexpr (Concepts::InstanceOf<std::decay_t<T>, std::unique_ptr>) {
             return { { TypeEnum::ScopeValue }, &table<typename Concepts::is_instance<std::decay_t<T>, std::unique_ptr>::argument_types::first> };
         } else {
-            return { { TypeEnum::OwnedScopeValue }, &table<meta_decayed_t<resolveCustomScopePtr_t<T>>> };
+            return { { TypeEnum::OwnedValueValue }, &table<meta_decayed_t<resolveCustomScopePtr_t<T>>> };
         }
     }
 

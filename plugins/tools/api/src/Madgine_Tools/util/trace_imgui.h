@@ -110,7 +110,7 @@ struct MADGINE_TOOLS_EXPORT ValueTypeDrawer {
     static bool draw(const Engine::Tools::Traced<const std::chrono::nanoseconds &> &d);
 };
 
-MADGINE_TOOLS_EXPORT bool TypeIterate(Engine::CallableView<bool(const Engine::TypeName &)> visitor);
+MADGINE_TOOLS_EXPORT bool TypeIterate(Engine::CallableView<bool(const Engine::Type::TypeName &)> visitor);
 
 MADGINE_TOOLS_EXPORT bool ScopeTypePicker(const Engine::Reflect::MetaTable *&t);
 MADGINE_TOOLS_EXPORT bool ValueTypeTypePicker(Engine::Reflect::Type &t);

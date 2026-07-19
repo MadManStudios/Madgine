@@ -58,13 +58,14 @@ namespace Serialize {
     template META_EXPORT StreamResult visitSkipPrimitive<SerializableDataPtr>(PrimitiveHolder<SerializableDataPtr>, CallerHierarchyFormattedSerializeStream, const char *);
     template META_EXPORT StreamResult visitSkipPrimitive<std::string>(PrimitiveHolder<std::string>, CallerHierarchyFormattedSerializeStream, const char *);
     template META_EXPORT StreamResult visitSkipPrimitive<Memory::ByteBuffer>(PrimitiveHolder<Memory::ByteBuffer>, CallerHierarchyFormattedSerializeStream, const char *);
-    template META_EXPORT StreamResult visitSkipPrimitive<Void>(PrimitiveHolder<Void>, CallerHierarchyFormattedSerializeStream, const char *);
+    template META_EXPORT StreamResult visitSkipPrimitive<std::monostate>(PrimitiveHolder<std::monostate>, CallerHierarchyFormattedSerializeStream, const char *);
     template META_EXPORT StreamResult visitSkipPrimitive<Math::Vector2>(PrimitiveHolder<Math::Vector2>, CallerHierarchyFormattedSerializeStream, const char *);
     template META_EXPORT StreamResult visitSkipPrimitive<Math::Vector2i>(PrimitiveHolder<Math::Vector2i>, CallerHierarchyFormattedSerializeStream, const char *);
     template META_EXPORT StreamResult visitSkipPrimitive<Math::Quaternion>(PrimitiveHolder<Math::Quaternion>, CallerHierarchyFormattedSerializeStream, const char *);
     template META_EXPORT StreamResult visitSkipPrimitive<Math::Vector3>(PrimitiveHolder<Math::Vector3>, CallerHierarchyFormattedSerializeStream, const char *);
     template META_EXPORT StreamResult visitSkipPrimitive<Math::Vector4>(PrimitiveHolder<Math::Vector4>, CallerHierarchyFormattedSerializeStream, const char *);
     template META_EXPORT StreamResult visitSkipPrimitive<Math::Matrix3>(PrimitiveHolder<Math::Matrix3>, CallerHierarchyFormattedSerializeStream, const char *);
+    template META_EXPORT StreamResult visitSkipPrimitive<Math::Matrix4>(PrimitiveHolder<Math::Matrix4>, CallerHierarchyFormattedSerializeStream, const char *);
     template META_EXPORT StreamResult visitSkipPrimitive<Math::Color3>(PrimitiveHolder<Math::Color3>, CallerHierarchyFormattedSerializeStream, const char *);
     template META_EXPORT StreamResult visitSkipPrimitive<Math::Color4>(PrimitiveHolder<Math::Color4>, CallerHierarchyFormattedSerializeStream, const char *);
     template META_EXPORT StreamResult visitSkipPrimitive<std::chrono::nanoseconds>(PrimitiveHolder<std::chrono::nanoseconds>, CallerHierarchyFormattedSerializeStream, const char *);

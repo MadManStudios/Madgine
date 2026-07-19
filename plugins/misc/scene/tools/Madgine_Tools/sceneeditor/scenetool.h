@@ -3,7 +3,6 @@
 #include "Meta/reflect/accessor.h"
 
 #include "Madgine/behavior/behaviorhandle.h"
-#include "Madgine/behavior/parametertuple.h"
 #include "Madgine/scene/sceneloader.h"
 
 #include "Madgine_Tools/resources/resourceeditor.h"

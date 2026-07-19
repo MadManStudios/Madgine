@@ -34,11 +34,6 @@ namespace Reflect {
         return f.as<BoundApiFunction>()(retVal, args);
     }
 
-    void MetaTable::moveAssign(ScopePtr scope, ScopePtr other) const
-    {
-        mMoveAssign(scope, other);
-    }
-
     bool MetaTable::isDerivedFrom(const MetaTable *baseType, OffsetPtr *offset) const
     {
         if (this == baseType)

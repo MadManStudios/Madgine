@@ -9,7 +9,6 @@
 
 #include "Madgine/app/application.h"
 #include "Madgine/behavior/behaviorcollector.h"
-#include "Madgine/behavior/parametertuple.h"
 #include "Madgine/render/scenemainwindowcomponent.h"
 #include "Madgine/scene/entity/components/mesh.h"
 #include "Madgine/scene/entity/components/skeleton.h"

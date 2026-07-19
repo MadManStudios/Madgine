@@ -18,7 +18,7 @@
 #include "boundapifunction.h"
 #include "function.h"
 #include "objectptr.h"
-#include "ownedscopeptr.h"
+#include "ownedvalue.h"
 #include "range.h"
 #include "scopeptr.h"
 #include "sender.h"
@@ -138,7 +138,7 @@ namespace Reflect {
         void setType(Type type);
 
         Result call(Value &retVal, const ArgumentList &args) const;
-        template <typename... Args>
+        template <Concepts::DecayedNoneOf<ArgumentList>... Args>
         Result call(Value &retVal, Args &&...args)
         {
             return call(retVal, { Value { std::forward<Args>(args) }... });

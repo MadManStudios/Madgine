@@ -3,7 +3,6 @@
 #include "Meta/math/matrix3.h"
 
 #include "Madgine/behavior/behaviorhandle.h"
-#include "Madgine/behavior/parametertuple.h"
 
 namespace Engine {
 namespace Tools {

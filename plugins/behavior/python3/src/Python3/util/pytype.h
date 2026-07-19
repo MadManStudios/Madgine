@@ -8,7 +8,7 @@ namespace Behavior {
 
         struct PyType {
             PyObject_HEAD 
-                const TypeName *mType;
+                const Type::TypeName *mType;
         };
 
     }

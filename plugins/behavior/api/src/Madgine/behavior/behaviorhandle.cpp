@@ -11,7 +11,7 @@
 #include "parametertuple.h"
 
 METATABLE_BEGIN(Engine::Behavior::BehaviorHandle)
-    CONSTRUCTOR()
+    //CONSTRUCTOR()
 // MEMBER(mName)
 METATABLE_END(Engine::Behavior::BehaviorHandle)
 

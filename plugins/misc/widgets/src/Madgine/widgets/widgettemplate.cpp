@@ -17,12 +17,12 @@ namespace Widgets {
     {
         mMetaTable.mBase = &table<CompoundWidget>;
 
-        registerMetaTable(mMetaTable);
+        Type::registerMetaTable(mMetaTable);
     }
 
     WidgetTemplate::~WidgetTemplate()
     {
-        unregisterMetaTable(mMetaTable);
+        Type::unregisterMetaTable(mMetaTable);
     }
 
     std::unique_ptr<Reflect::Accessor[]> WidgetTemplate::accessors(const std::vector<WidgetData> &widgets)

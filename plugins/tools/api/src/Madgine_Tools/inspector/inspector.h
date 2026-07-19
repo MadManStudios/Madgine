@@ -25,7 +25,7 @@ namespace Tools {
         bool drawMember(const Traced<Reflect::ScopeIterator> &it);
         bool drawValue(std::string_view id, const Traced<Reflect::Value &> &value, bool editable, Reflect::ExtendedType possibleType = { Reflect::ExtendedTypeEnum::GenericType });
         bool drawValue(std::string_view id, const Traced<Reflect::ScopePtr &> &scope, bool isOwned, bool editable, Reflect::ExtendedType possibleTypes = { Reflect::ExtendedTypeEnum::GenericType }, Reflect::Type *type = nullptr);
-        bool drawValue(std::string_view id, const Traced<Reflect::OwnedScopePtr &> &scope, bool editable, Reflect::ExtendedType possibleTypes = { Reflect::ExtendedTypeEnum::GenericType }, Reflect::Type *type = nullptr);
+        bool drawValue(std::string_view id, const Traced<Reflect::OwnedValue &> &value, bool editable, Reflect::ExtendedType possibleTypes = { Reflect::ExtendedTypeEnum::GenericType }, Reflect::Type *type = nullptr);
         bool drawValue(std::string_view id, const Traced<Reflect::ObjectPtr &> &object, bool editable, Reflect::ExtendedType possibleTypes = { Reflect::ExtendedTypeEnum::GenericType }, Reflect::Type *type = nullptr);
         bool drawValue(std::string_view id, const Traced<Reflect::SequenceRange &> &range, bool editable);
         bool drawValue(std::string_view id, const Traced<Reflect::AssociativeRange &> &range, bool editable);

@@ -5,6 +5,7 @@
 #include "Meta/reflect/objectinstance.h"
 #include "Meta/reflect/objectptr.h"
 #include "Meta/reflect/value.h"
+#include "Meta/type/storageops.h"
 
 #include "Madgine/behavior/behaviorreceiver.h"
 
@@ -28,7 +29,7 @@
 #include "pyobjectinstance.h"
 #include "pyobjectiter.h"
 #include "pyobjectptr.h"
-#include "pyownedscopeptr.h"
+#include "pyownedvalue.h"
 #include "pyscopeiterator.h"
 #include "pyscopeptr.h"
 #include "pysender.h"
@@ -87,10 +88,10 @@ namespace Behavior {
             return obj;
         }
 
-        PyObject *toPyObject(const Reflect::OwnedScopePtr &scope)
+        PyObject *toPyObject(const Reflect::OwnedValue &value)
         {
-            PyObject *obj = PyObject_CallObject((PyObject *)&PyOwnedScopePtrType, NULL);
-            new (&reinterpret_cast<PyOwnedScopePtr *>(obj)->mPtr) Reflect::OwnedScopePtr(scope);
+            PyObject *obj = PyObject_CallObject((PyObject *)&PyOwnedValueType, NULL);
+            new (&reinterpret_cast<PyOwnedValue *>(obj)->mValue) Reflect::OwnedValue(value);
             return obj;
         }
 
@@ -333,8 +334,8 @@ namespace Behavior {
             } else if (obj->ob_type == &PyScopePtrType) {
                 toValue(result, reinterpret_cast<PyScopePtr *>(obj)->mPtr);
                 return {};
-            } else if (obj->ob_type == &PyOwnedScopePtrType) {
-                toValue(result, reinterpret_cast<PyOwnedScopePtr *>(obj)->mPtr);
+            } else if (obj->ob_type == &PyOwnedValueType) {
+                toValue(result, reinterpret_cast<PyOwnedValue *>(obj)->mValue);
                 return {};
             } else if (obj->ob_type == &PyBindingType) {
                 toValue(result, reinterpret_cast<PyBinding *>(obj)->mBinding);
@@ -399,7 +400,7 @@ namespace Behavior {
         Reflect::ExtendedType PyToValueTypeDesc(PyObject *obj)
         {
             if (Py_IS_TYPE(obj, &PyTypeType)) {
-                return { { Reflect::TypeEnum::ScopeValue }, reinterpret_cast<PyType *>(obj)->mType->mMetaTable->mSelf };
+                return reinterpret_cast<PyType *>(obj)->mType->mStorageOps->mType;
             } else if (PyType_Check(obj)) {
                 PyTypeObject *type = reinterpret_cast<PyTypeObject *>(obj);
                 if (type == &PyUnicode_Type) {
@@ -409,6 +410,19 @@ namespace Behavior {
                 }
             }
             throw 0;
+        }
+
+        const Type::StorageOps *PyToStorageOps(PyObject *obj)
+        {
+            if (Py_IS_TYPE(obj, &PyTypeType)) {
+                return reinterpret_cast<PyType *>(obj)->mType->mStorageOps;
+            } else if (PyType_Check(obj)) {
+                PyTypeObject *type = reinterpret_cast<PyTypeObject *>(obj);
+                if (type == &PyUnicode_Type) {
+                    return storageOps<std::string>;
+                }
+            }
+            return nullptr;
         }
 
         PyObject *toPyTuple(const Reflect::ArgumentList &args)

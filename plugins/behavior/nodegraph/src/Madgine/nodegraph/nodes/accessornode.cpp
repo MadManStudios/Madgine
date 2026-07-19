@@ -133,7 +133,7 @@ namespace Behavior {
 
             std::string_view typeName = path.substr(0, pos);
 
-            auto type = resolveTypeName(typeName);
+            auto type = Type::resolveTypeName(typeName);
             if (type) {
                 return type->mMetaTable;
             }

@@ -12,7 +12,8 @@
 #include "enum.h"
 #include "flags.h"
 #include "metatable.h"
-#include "ownedscopeptr.h"
+#include "ownedvalue.h"
+#include "scopeptr.h"
 #include "sender.h"
 #include "type.h"
 
@@ -40,7 +41,7 @@ namespace Reflect {
             Value_erased([&](Value &v) {
                 toValue(v, forward_ref<T>(t));
                 cb(v);
-            });            
+            });
         }
 
         template <typename T>
@@ -108,7 +109,7 @@ namespace Reflect {
                 return Flags { std::forward<T>(t) };
             } else if constexpr (Execution::AnyBinding<std::decay_t<T>>) {
                 using Inner = decltype(convert_Value_t<false> {}(std::declval<forward_ref_t<typename std::decay_t<T>::type>>()));
-                if constexpr (Concepts::OneOf<Inner, ScopePtr, OwnedScopePtr>) {
+                if constexpr (Concepts::OneOf<Inner, ScopePtr, OwnedValue>) {
                     return ScopeBinding { std::forward<T>(t), table<std::remove_pointer_t<std::decay_t<typename std::decay_t<T>::type>>> };
                 } else {
                     return Binding { std::forward<T>(t), toTypeIndex<std::decay_t<typename std::decay_t<T>::type>>() };
@@ -124,7 +125,7 @@ namespace Reflect {
             } else if constexpr (isReferenceWrapped) {
                 return ScopePtr { &t };
             } else {
-                return OwnedScopePtr { std::forward<T>(t) };
+                return OwnedValue { std::forward<T>(t) };
             }
             // static_assert(dependent_bool<T, false>::value, "The provided type can not be converted to a ValueType");
         }
@@ -141,6 +142,16 @@ namespace Reflect {
 
         template <typename T>
         friend std::variant<std::reference_wrapper<T>, std::monostate> tag_invoke(convert_Value_t, std::optional<T> &o)
+        {
+            if (o) {
+                return { *o };
+            } else {
+                return { std::monostate {} };
+            }
+        }
+
+        template <typename T>
+        friend std::variant<std::reference_wrapper<const T>, std::monostate> tag_invoke(convert_Value_t, const std::optional<T> &o)
         {
             if (o) {
                 return { *o };
@@ -219,8 +230,13 @@ namespace Reflect {
         } else if constexpr (std::same_as<T, ScopePtr>) {
             if (Value_is<ScopePtr>(arg)) {
                 return callable(Value_as<ScopePtr>(arg));
-            } else if (Value_is<OwnedScopePtr>(arg)) {
-                return callable(Value_as<OwnedScopePtr>(arg).get());
+            } else if (Value_is<OwnedValue>(arg)) {
+                Result result;
+                Value_erased([&](Value &v) {
+                    Value_as<OwnedValue>(arg).get(v);
+                    result = call(std::forward<Callable>(callable), v);
+                });
+                return result;
             } else {
                 return REFLECT_UNKNOWN_ERROR() << "Cannot form a scope pointer to type " << Value_type(arg).toString();
             }
@@ -250,7 +266,7 @@ namespace Reflect {
             return callable(Value_as<Flags>(arg).template safe_cast<T>());
         } else if constexpr (Execution::AnyBinding<T>) {
             using Inner = decltype(convert_Value_t<false> {}(std::declval<forward_ref_t<typename std::decay_t<T>::type>>()));
-            if constexpr (Concepts::OneOf<Inner, ScopePtr, OwnedScopePtr>) {
+            if constexpr (Concepts::OneOf<Inner, ScopePtr, OwnedValue>) {
                 if (!Value_is<ScopeBinding>(arg))
                     return REFLECT_UNKNOWN_ERROR() << "No known conversion to ScopeBinding";
                 return callable(T { Value_as<ScopeBinding>(arg).template unwrap<T>() });

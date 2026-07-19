@@ -348,7 +348,7 @@ namespace Tools {
                                 ImGui::EndMenu();
 
                             if (ImGui::BeginMenu("Accessors")) {
-                                ImGui::TypeIterate([&](const TypeName &type) {
+                                ImGui::TypeIterate([&](const Type::TypeName &type) {
                                     const Reflect::MetaTable *table = type.mMetaTable;
                                     if (table) {
                                         for (const Reflect::Accessor *accessor = table->mMembers; accessor->mName; ++accessor) {

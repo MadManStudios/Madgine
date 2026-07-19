@@ -3,7 +3,7 @@
 #include "Generic/callerhierarchy.h"
 #include "Generic/closure.h"
 
-#include "../../reflectserialize/typenames.h"
+#include "../../type/typenames.h"
 #include "../primitivetypes.h"
 #include "serializetable_forward.h"
 
@@ -90,11 +90,11 @@ namespace Serialize {
         struct SerializeTableRegistrator {
             SerializeTableRegistrator()
             {
-                registerSerializeTable(serializeTable<T>());
+                Type::registerSerializeTable(serializeTable<T>());
             }
             ~SerializeTableRegistrator()
             {
-                unregisterSerializeTable(serializeTable<T>());
+                Type::unregisterSerializeTable(serializeTable<T>());
             }
         };
 

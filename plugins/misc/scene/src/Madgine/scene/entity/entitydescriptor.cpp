@@ -6,13 +6,22 @@
 #include "Modules/uniquecomponent/uniquecomponentregistry.h"
 
 #include "Meta/reflect/metatable_impl.h"
+#include "Meta/serialize/serializetable_impl.h"
+#include "Meta/type/storageops_impl.h"
 
 #include "entity.h"
 #include "entitycomponentbase.h"
 
-METATABLE_BEGIN(Engine::Scene::Entity::EntityDescriptor)
-    CONSTRUCTOR(Engine::Reflect::Variadic<Engine::Reflect::Derived<Engine::Scene::Entity::EntityComponentBase>>)
+METATABLE_BEGIN(Engine::Scene::Entity::EntityDescriptor)    
 METATABLE_END(Engine::Scene::Entity::EntityDescriptor)
+
+SERIALIZETABLE_BEGIN(Engine::Scene::Entity::EntityDescriptor)
+SERIALIZETABLE_END(Engine::Scene::Entity::EntityDescriptor)
+
+STORAGEOPS_BEGIN(Engine::Scene::Entity::EntityDescriptor)
+CONSTRUCTOR(Engine::Type::Variadic<Engine::Type::Derived<Engine::Scene::Entity::EntityComponentBase>>)
+STORAGEOPS_END(Engine::Scene::Entity::EntityDescriptor)
+
 
 namespace Engine {
 namespace Scene {

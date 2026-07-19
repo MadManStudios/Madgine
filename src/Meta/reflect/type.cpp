@@ -52,7 +52,7 @@ namespace Reflect {
         switch (mType) {
         case TypeEnum::ScopeValue:
             return mSecondary.mMetaTable ? std::string { (*mSecondary.mMetaTable)->mTypeName } + "*" : "<no-type>";
-        case TypeEnum::OwnedScopeValue:
+        case TypeEnum::OwnedValueValue:
             return (*mSecondary.mMetaTable)->mTypeName;
         default:
             return std::string { mType.toString() };
@@ -64,7 +64,7 @@ namespace Reflect {
         switch (mType) {
         case TypeEnum::ScopeValue:
             return mSecondary.mMetaTable ? std::string { (*mSecondary.mMetaTable)->mTypeName } + "*" : "<no-type>";
-        case TypeEnum::OwnedScopeValue:
+        case TypeEnum::OwnedValueValue:
             return (*mSecondary.mMetaTable)->mTypeName;
         default:
             return std::string { mType.toTypeName() };

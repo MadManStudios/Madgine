@@ -5,7 +5,15 @@
 
 namespace Engine {
 
-struct TypeName;
+namespace Type {
+    struct TypeName;
+    struct StorageOps;
+
+    struct BaseStorage;
+    struct StorageDeleter;
+
+    struct InlineStorage;
+}
 
 namespace Reflect {
     struct Value;
@@ -15,14 +23,13 @@ namespace Reflect {
     struct VirtualScope;
     template <typename Base>
     struct VirtualScopeBase;
-    struct ProxyScopeBase;
     struct MetaTable;
     struct ScopeIterator;
     struct Accessor;
     using AccessorFlags = uint32_t;
     struct ScopeField;
     struct ScopePtr;
-    struct OwnedScopePtr;
+    struct OwnedValue;
     struct ApiFunction;
     struct BoundApiFunction;
     template <auto f>

@@ -33,7 +33,7 @@ namespace Tools {
     {
         addTypeHandler<Reflect::FunctionTable>([](const Traced<Reflect::ScopePtr &> &scope, bool editable) {
             bool modified = false;
-             if (ImGui::BeginCombo("##suggestions", scope->name().c_str())) {
+            if (ImGui::BeginCombo("##suggestions", scope->name().c_str())) {
                 if (ImGui::Selectable("<None>")) {
                     scope->mScope = nullptr;
                     modified = true;
@@ -143,7 +143,7 @@ namespace Tools {
             [&](const Traced<Reflect::ScopePtr &> &scope) {
                 return drawValue(id, scope, false, editable, possibleTypes, &actualType);
             },
-            [&](const Traced<Reflect::OwnedScopePtr &> &scope) {
+            [&](const Traced<Reflect::OwnedValue &> &scope) {
                 return drawValue(id, scope, editable, possibleTypes, &actualType);
             },
             [&](const Traced<Reflect::SequenceRange &> &range) {
@@ -284,10 +284,18 @@ namespace Tools {
         return modified || (changed && isOwned);
     }
 
-    bool Inspector::drawValue(std::string_view id, const Traced<Reflect::OwnedScopePtr &> &scope, bool editable, Reflect::ExtendedType possibleTypes, Reflect::Type *type)
+    bool Inspector::drawValue(std::string_view id, const Traced<Reflect::OwnedValue &> &value, bool editable, Reflect::ExtendedType possibleTypes, Reflect::Type *type)
     {
-        const Traced<Reflect::ScopePtr> &ptr = scope.trace(&Reflect::OwnedScopePtr::get);
-        return drawValue(id, ptr, true, editable, possibleTypes, type);
+        const Traced<Reflect::Value> &ptr = value.trace([](const Reflect::OwnedValue &value) {
+            Reflect::Value result;
+            value.get(result);
+            return result;
+        });
+        if (drawValue(id, ptr, editable, possibleTypes)) {
+            value.get().set(ptr.get());
+            return true;
+        }
+        return false;
     }
 
     bool Inspector::drawValue(std::string_view id, const Traced<Reflect::ObjectPtr &> &object, bool editable, Reflect::ExtendedType possibleTypes, Reflect::Type *type)
@@ -444,7 +452,7 @@ namespace Tools {
         if (editable && ImGui::BeginDragDropTarget()) {
             Reflect::ScopeBinding newBinding;
             if (ImGui::AcceptDraggableValueType(newBinding)) {
-                binding.get() = newBinding;                
+                binding.get() = newBinding;
                 modified = true;
             }
             ImGui::EndDragDropTarget();

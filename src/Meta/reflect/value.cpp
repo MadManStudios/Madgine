@@ -60,8 +60,8 @@ namespace Reflect {
             [](const ScopePtr &scope) {
                 return scope.name();
             },
-            [](const OwnedScopePtr &scope) {
-                return scope.name();
+            [](const OwnedValue &value) {
+                return value.name();
             },
             [](const Math::Vector2 &v) {
                 std::ostringstream ss;
@@ -177,8 +177,8 @@ namespace Reflect {
             const MetaTable *table = as<Reflect::ScopeBinding>().mType;
             return { i, table ? table->mSelf : nullptr };
         }
-        case TypeEnum::OwnedScopeValue: {
-            const MetaTable *table = as<OwnedScopePtr>().get().mType;
+        case TypeEnum::OwnedValueValue: {
+            const MetaTable *table = as<OwnedValue>().type();
             return { i, table ? table->mSelf : nullptr };
         }
         default:
@@ -217,8 +217,9 @@ namespace Reflect {
             case TypeEnum::ApiFunctionValue:
                 std::get<ApiFunction>(mUnion).mTable = *type.mSecondary.mFunctionTable;
                 break;
-            case TypeEnum::OwnedScopeValue:
-                std::get<OwnedScopePtr>(mUnion).construct(*type.mSecondary.mMetaTable, {});
+            case TypeEnum::OwnedValueValue:
+                throw 0;
+                //std::get<OwnedScopePtr>(mUnion).construct(*type.mSecondary.mMetaTable, {});
                 break;
             default:
                 break;
@@ -241,8 +242,10 @@ namespace Reflect {
                               [&](const ScopePtr &scope) {
                                   return scope.call(retVal, args);
                               },
-                              [&](const OwnedScopePtr &scope) {
-                                  return scope.get().call(retVal, args);
+                              [&](const OwnedValue &value) {
+                                  Value v;
+                                  value.get(v);
+                                  return v.call(retVal, args);
                               },
                               [&](const ObjectPtr &o) {
                                   return o.call(retVal, args);

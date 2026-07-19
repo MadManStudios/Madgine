@@ -8,6 +8,7 @@ namespace Serialize {
     struct DataTag;
 
     using SerializePrimitives = type_pack<
+        std::monostate,
         bool,
         uint8_t,
         int8_t,
@@ -22,12 +23,12 @@ namespace Serialize {
         SerializableDataPtr,
         std::string,
         Memory::ByteBuffer,
-        Void,
         Math::Vector2,
         Math::Vector3,
         Math::Vector4,
         Math::Vector2i,
         Math::Matrix3,
+        Math::Matrix4,
         EnumTag,
         FlagsTag,
         Math::Color3,

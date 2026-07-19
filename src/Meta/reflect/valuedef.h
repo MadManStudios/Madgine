@@ -12,7 +12,7 @@ VALUE_TYPE(Float, float, float)
 VALUE_SEP
 VALUE_TYPE(Scope, ScopePtr, const ScopePtr &)
 VALUE_SEP
-VALUE_TYPE(OwnedScope, OwnedScopePtr, const OwnedScopePtr &)
+VALUE_TYPE(OwnedValue, OwnedValue, const OwnedValue &)
 VALUE_SEP
 VALUE_TYPE(Matrix3, CoW<Math::Matrix3>, const CoW<Math::Matrix3> &, const Math::Matrix3 &)
 VALUE_SEP

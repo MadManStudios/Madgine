@@ -48,8 +48,6 @@ namespace Reflect {
 
         std::string name() const;
 
-        void moveAssign(ScopePtr other) const;
-
         Result call(Value &retVal, const ArgumentList &args) const;
 
         void *mScope = nullptr;

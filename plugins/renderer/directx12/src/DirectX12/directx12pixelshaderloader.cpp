@@ -6,6 +6,7 @@
 
 #include "Meta/reflect/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
+#include "Meta/type/storageops_impl.h"
 
 #include "directx12rendercontext.h"
 

@@ -284,6 +284,34 @@ namespace Math {
             return o;
         }
 
+        inline META_EXPORT friend std::istream &operator>>(std::istream &in, Matrix4 &mat)
+        {
+            char c;
+            in >> c;
+            if (c != '[') {
+                in.setstate(std::ios_base::failbit);
+                return in;
+            }
+            for (int x = 0; x < 4; ++x) {
+                for (int y = 0; y < 4; ++y) {
+                    in >> mat[x][y];
+                    in >> c;
+                    if (x != 3 || y != 3) {
+                        if (c != ',') {
+                            in.setstate(std::ios_base::failbit);
+                            return in;
+                        }
+                    } else {
+                        if (c != ']') {
+                            in.setstate(std::ios_base::failbit);
+                            return in;
+                        }
+                    }
+                }
+            }
+            return in;
+        }
+
         // static const float EPSILON;
         static constexpr float ZERO[4][4] { { 0, 0, 0, 0 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 } };
         static constexpr float IDENTITY[4][4] { { 1, 0, 0, 0 }, { 0, 1, 0, 0 }, { 0, 0, 1, 0 }, { 0, 0, 0, 1 } };

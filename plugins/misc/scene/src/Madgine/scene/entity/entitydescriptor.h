@@ -36,9 +36,15 @@ namespace Scene {
             EntityDescriptor(Components &&...components)
             {
                 (mComponents.emplace_back(std::forward<Components>(components)), ...);
-            }
+            }           
 
             EntityDescriptor(std::span<const Reflect::ScopePtr> components);
+
+            EntityDescriptor(const EntityDescriptor &) = delete; // TODO: implement later
+            EntityDescriptor(EntityDescriptor &&) = default;
+
+            EntityDescriptor &operator=(const EntityDescriptor &) = delete; //TODO: implement later
+            EntityDescriptor &operator=(EntityDescriptor &&) = default;
 
             void apply(Entity &entity) const;
 

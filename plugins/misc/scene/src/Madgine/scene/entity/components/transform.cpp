@@ -8,13 +8,13 @@
 
 #include "Meta/reflect/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
+#include "Meta/type/storageops_impl.h"
 
 #include "../entity.h"
 
 NAMED_UNIQUECOMPONENT(Transform, Engine::Scene::Entity::Transform);
 
 METATABLE_BEGIN(Engine::Scene::Entity::Transform)
-    CONSTRUCTOR()
     MEMBER(mPosition)
     MEMBER(mScale)
     MEMBER(mOrientation)
@@ -25,6 +25,10 @@ SERIALIZETABLE_BEGIN(Engine::Scene::Entity::Transform)
     FIELD(mScale)
     FIELD(mOrientation)
 SERIALIZETABLE_END(Engine::Scene::Entity::Transform)
+
+STORAGEOPS_BEGIN(Engine::Scene::Entity::Transform)
+    CONSTRUCTOR()
+STORAGEOPS_END(Engine::Scene::Entity::Transform)
 
 namespace Engine {
 

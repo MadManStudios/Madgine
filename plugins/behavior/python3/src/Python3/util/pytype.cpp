@@ -3,10 +3,10 @@
 #include "pytype.h"
 
 #include "Meta/reflect/argumentlist.h"
-#include "Meta/reflect/metatable.h"
-#include "Meta/reflect/ownedscopeptr.h"
+#include "Meta/reflect/ownedvalue.h"
 #include "Meta/reflect/scopeiterator.h"
 #include "Meta/reflect/value.h"
+#include "Meta/type/storageops.h"
 
 #include "pydictptr.h"
 #include "pyobjectutil.h"
@@ -22,7 +22,7 @@ namespace Behavior {
 
         static PyObject *PyType_call(PyType *self, PyObject *args, PyObject *kwargs)
         {
-            if (!self->mType->mMetaTable || !self->mType->mMetaTable->mConstructors[0].mMatcher) {
+            if (!self->mType->mStorageOps || !self->mType->mStorageOps->mConstructors[0].mMatcher) {
                 PyErr_Format(PyExc_TypeError, "%R is not constructible", self);
                 return nullptr;
             }
@@ -36,11 +36,15 @@ namespace Behavior {
                 PYTHON3_PROPAGATE_ERROR(fromPyObject(arguments[i], PyTuple_GetItem(args, i)));
             }
 
-            Reflect::OwnedScopePtr scope;
-            Reflect::Result result = scope.construct(self->mType->mMetaTable, arguments);
+            Reflect::Result result; // TODO Error handling
+            Type::AllocationStorage allocation { *self->mType->mStorageOps, arguments };
+
             if (result) {
                 return toPyError(*result.mError);
             }
+            Reflect::OwnedValue object = std::shared_ptr<Type::BaseStorage> { std::move(allocation.mAllocation) };
+            Reflect::Value innerValue;
+            object.get(innerValue);
 
             if (kwargs) {
                 PyDictPtr dict = PyDictPtr::fromBorrowed(kwargs);
@@ -52,7 +56,7 @@ namespace Behavior {
 
                     const char *name = PyBytes_AsString(ascii_key);
 
-                    Reflect::ScopeIterator it = self->mType->mMetaTable->find(name, Reflect::Value { scope });
+                    Reflect::ScopeIterator it = self->mType->mMetaTable->find(name, innerValue);
                     if (it == it.end()) {
                         PyErr_Format(PyExc_AttributeError, "Could not find attribute '%s' in %R!", name, self);
                         return nullptr;
@@ -71,7 +75,7 @@ namespace Behavior {
                 }
             }
 
-            return toPyObject(std::move(scope));
+            return toPyObject(std::move(object));
         }
 
         PyTypeObject PyTypeType = {

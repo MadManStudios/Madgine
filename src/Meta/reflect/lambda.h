@@ -5,7 +5,7 @@
 
 namespace Engine {
 namespace Reflect {
-
+    /*
     template <typename Functor>
     struct LambdaHolder : ProxyScopeBase, Functor {
 
@@ -107,6 +107,6 @@ namespace Reflect {
     {
         return std::static_pointer_cast<ProxyScopeBase>(std::make_shared<LambdaHolder<F>>(std::forward<F>(f)));
     }
-
+    */
 }
 }

@@ -32,7 +32,7 @@
 #include "util/pyframeptr.h"
 #include "util/pylistptr.h"
 #include "util/pyobjectutil.h"
-#include "util/pyownedscopeptr.h"
+#include "util/pyownedvalue.h"
 #include "util/pyscopeiterator.h"
 #include "util/pyscopeptr.h"
 #include "util/pysender.h"
@@ -134,7 +134,7 @@ namespace Behavior {
 
             if (PyType_Ready(&PyScopePtrType) < 0)
                 return NULL;
-            if (PyType_Ready(&PyOwnedScopePtrType) < 0)
+            if (PyType_Ready(&PyOwnedValueType) < 0)
                 return NULL;
             if (PyType_Ready(&PyApiFunctionType) < 0)
                 return NULL;

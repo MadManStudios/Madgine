@@ -104,9 +104,9 @@ namespace Serialize {
 
         StreamResult operator>>(Memory::ByteBuffer &b);
 
-        StreamResult read(Void &);
+        StreamResult read(std::monostate &);
 
-        StreamResult operator>>(Void &);
+        StreamResult operator>>(std::monostate &);
 
         template <typename T>
             requires(!Concepts::Pointer<T> && !Concepts::StringViewable<T>)
@@ -145,9 +145,9 @@ namespace Serialize {
 
         SerializeStream &operator<<(const Memory::ByteBuffer &b);
 
-        void write(const Void &);
+        void write(const std::monostate &);
 
-        SerializeStream &operator<<(const Void &);
+        SerializeStream &operator<<(const std::monostate &);
 
         StreamResult skipWs(bool overwrite = false);
 
