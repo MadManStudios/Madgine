@@ -300,7 +300,7 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr.html">PyObjectPtr</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_owned_scope_ptr.html">PyOwnedScopePtr</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_owned_value.html">PyOwnedValue</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_quaternion.html">PyQuaternion</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -480,8 +480,8 @@ Functions</h2></td></tr>
 <tr class="separator:a8e8e352fbf26dee9b969446a4c88788b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa1fc3efa6bb70bf0bba71d5d69c9e4c6"><td class="memItemLeft" align="right" valign="top">PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#aa1fc3efa6bb70bf0bba71d5d69c9e4c6">toPyObject</a> (const <a class="el" href="struct_engine_1_1_reflect_1_1_object_ptr.html">Reflect::ObjectPtr</a> &amp;o)</td></tr>
 <tr class="separator:aa1fc3efa6bb70bf0bba71d5d69c9e4c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2b23bc0e6818016b86025e7fb447eca6"><td class="memItemLeft" align="right" valign="top">PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#a2b23bc0e6818016b86025e7fb447eca6">toPyObject</a> (const <a class="el" href="struct_engine_1_1_reflect_1_1_owned_scope_ptr.html">Reflect::OwnedScopePtr</a> &amp;scope)</td></tr>
-<tr class="separator:a2b23bc0e6818016b86025e7fb447eca6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c1be99f59cf1799b426491a052b1dc0"><td class="memItemLeft" align="right" valign="top">PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#a0c1be99f59cf1799b426491a052b1dc0">toPyObject</a> (const <a class="el" href="struct_engine_1_1_reflect_1_1_owned_value.html">Reflect::OwnedValue</a> &amp;value)</td></tr>
+<tr class="separator:a0c1be99f59cf1799b426491a052b1dc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6b6898971bf274a41bb574b3e1445394"><td class="memItemLeft" align="right" valign="top">PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#a6b6898971bf274a41bb574b3e1445394">toPyObject</a> (const <a class="el" href="namespace_engine_1_1_reflect.html#a641b368370d6f91a06f6504a95314875">Reflect::ScopeBinding</a> &amp;b)</td></tr>
 <tr class="separator:a6b6898971bf274a41bb574b3e1445394"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab0e670c184e1806850bdf8c993c961d5"><td class="memItemLeft" align="right" valign="top">PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#ab0e670c184e1806850bdf8c993c961d5">toPyObject</a> (const <a class="el" href="struct_engine_1_1_reflect_1_1_scope_iterator.html">Reflect::ScopeIterator</a> &amp;it)</td></tr>
@@ -545,8 +545,8 @@ Variables</h2></td></tr>
 <tr class="separator:a44747dba97a0c58495c7fd1ce46aafb5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a76a43cb9fa5c2a15ca859318223c8012"><td class="memItemLeft" align="right" valign="top">PyTypeObject&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#a76a43cb9fa5c2a15ca859318223c8012">PyNamedType</a></td></tr>
 <tr class="separator:a76a43cb9fa5c2a15ca859318223c8012"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac2d52205c3c3dcb3f04ff2a5dd058b53"><td class="memItemLeft" align="right" valign="top">PyTypeObject&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#ac2d52205c3c3dcb3f04ff2a5dd058b53">PyOwnedScopePtrType</a></td></tr>
-<tr class="separator:ac2d52205c3c3dcb3f04ff2a5dd058b53"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af9cf8ba7a7cb60dd2239808b5c136a7c"><td class="memItemLeft" align="right" valign="top">PyTypeObject&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#af9cf8ba7a7cb60dd2239808b5c136a7c">PyOwnedValueType</a></td></tr>
+<tr class="separator:af9cf8ba7a7cb60dd2239808b5c136a7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae4b756cf36140f093e86a55d28b0ec4a"><td class="memItemLeft" align="right" valign="top">PyTypeObject&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#ae4b756cf36140f093e86a55d28b0ec4a">PyQuaternionType</a></td></tr>
 <tr class="separator:ae4b756cf36140f093e86a55d28b0ec4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a30f5a327107cb08cb66afe0870dfc4ed"><td class="memItemLeft" align="right" valign="top">PyAsyncMethods&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#a30f5a327107cb08cb66afe0870dfc4ed">PyScopeBindingAsyncMethods</a></td></tr>
@@ -1285,8 +1285,8 @@ template&lt;typename Sender &gt; </div>
 
 </div>
 </div>
-<a id="a2b23bc0e6818016b86025e7fb447eca6" name="a2b23bc0e6818016b86025e7fb447eca6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2b23bc0e6818016b86025e7fb447eca6">&#9670;&#160;</a></span>toPyObject() <span class="overload">[9/35]</span></h2>
+<a id="a0c1be99f59cf1799b426491a052b1dc0" name="a0c1be99f59cf1799b426491a052b1dc0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0c1be99f59cf1799b426491a052b1dc0">&#9670;&#160;</a></span>toPyObject() <span class="overload">[9/35]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1294,8 +1294,8 @@ template&lt;typename Sender &gt; </div>
         <tr>
           <td class="memname"><a class="el" href="python3lib_8h.html#aa99f3e22f9b97f597dd1d39ee5ec0070">MADGINE_PYTHON3_EXPORT</a> PyObject * Engine::Behavior::Python3::toPyObject </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="struct_engine_1_1_reflect_1_1_owned_scope_ptr.html">Reflect::OwnedScopePtr</a> &amp;&#160;</td>
-          <td class="paramname"><em>scope</em></td><td>)</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_reflect_1_1_owned_value.html">Reflect::OwnedValue</a> &amp;&#160;</td>
+          <td class="paramname"><em>value</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -2568,29 +2568,29 @@ template&lt;typename T , auto p&gt; </div>
 </div><!-- fragment -->
 </div>
 </div>
-<a id="ac2d52205c3c3dcb3f04ff2a5dd058b53" name="ac2d52205c3c3dcb3f04ff2a5dd058b53"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac2d52205c3c3dcb3f04ff2a5dd058b53">&#9670;&#160;</a></span>PyOwnedScopePtrType</h2>
+<a id="af9cf8ba7a7cb60dd2239808b5c136a7c" name="af9cf8ba7a7cb60dd2239808b5c136a7c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af9cf8ba7a7cb60dd2239808b5c136a7c">&#9670;&#160;</a></span>PyOwnedValueType</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">PyTypeObject Engine::Behavior::Python3::PyOwnedScopePtrType</td>
+          <td class="memname">PyTypeObject Engine::Behavior::Python3::PyOwnedValueType</td>
         </tr>
       </table>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line">= {</div>
 <div class="line">            .ob_base = PyVarObject_HEAD_INIT(NULL, 0)</div>
 <div class="line">                .tp_name</div>
-<div class="line">            = <span class="stringliteral">&quot;Engine.OwnedScopePtr&quot;</span>,</div>
-<div class="line">            .tp_basicsize = <span class="keyword">sizeof</span>(PyOwnedScopePtr),</div>
+<div class="line">            = <span class="stringliteral">&quot;Engine.OwnedValue&quot;</span>,</div>
+<div class="line">            .tp_basicsize = <span class="keyword">sizeof</span>(PyOwnedValue),</div>
 <div class="line">            .tp_itemsize = 0,</div>
-<div class="line">            .tp_dealloc = &amp;PyDealloc&lt;PyOwnedScopePtr, &amp;PyOwnedScopePtr::mPtr&gt;,</div>
-<div class="line">            .tp_str = (reprfunc)PyOwnedScopePtr_str,</div>
-<div class="line">            .tp_getattro = (getattrofunc)PyOwnedScopePtr_get,</div>
+<div class="line">            .tp_dealloc = &amp;PyDealloc&lt;PyOwnedValue, &amp;PyOwnedValue::mValue&gt;,</div>
+<div class="line">            .tp_str = (reprfunc)PyOwnedValue_str,</div>
+<div class="line">            .tp_getattro = (getattrofunc)PyOwnedValue_get,</div>
 <div class="line">            .tp_flags = Py_TPFLAGS_DEFAULT,</div>
-<div class="line">            .tp_doc = <span class="stringliteral">&quot;Python implementation of OwnedScopePtr&quot;</span>,</div>
-<div class="line">            .tp_iter = (getiterfunc)PyOwnedScopePtr_iter,</div>
+<div class="line">            .tp_doc = <span class="stringliteral">&quot;Python implementation of OwnedValue&quot;</span>,</div>
+<div class="line">            .tp_iter = (getiterfunc)PyOwnedValue_iter,</div>
 <div class="line">            .tp_new = PyType_GenericNew,</div>
 <div class="line">        }</div>
 </div><!-- fragment -->
@@ -2833,7 +2833,7 @@ template&lt;typename T , auto p&gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Jul 17 2026 19:14:32 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Sun Jul 19 2026 12:37:28 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>
