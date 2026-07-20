@@ -1,0 +1,869 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: Engine::Type::StorageOps Struct Reference &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../docs/README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/gettingstarted.html#starting-the-engine">Starting the Engine</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/howtos.html">How-Tos</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/howtos/build.html">Build Instructions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/howtos/build.html#dependencies">Dependencies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/howtos/build.html#setup-the-madgine">Setup The Madgine</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/howtos/build.html#generating-project-files">Generating Project Files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/howtos/build.html#build-configurations">Build Configurations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/howtos/firstUniqueComponent.html">Writing your first UniqueComponent</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/keyvalue.html">KeyValue</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/keyvalue.html#valuetype">ValueType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/keyvalue.html#metatables">MetaTables</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/logging.html">Logging</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/logging.html#message-types">Message Types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/logging.html#building-log-messages">Building Log Messages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/logging.html#default-log">Default Log</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/logging.html#log-listener">Log Listener</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/pluginsystem.html">Plugins &amp; Unique Components</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/pluginsystem.html#plugins">Plugins</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/pluginsystem.html#unique-components">Unique Components</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/serialize.html">Serialization &amp; Synchronization</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#fundamental-data-types">Fundamental Data Types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#unit-hierarchy">Unit Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#serializetables">SerializeTables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#streams">Streams</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#managers">Managers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#state-replication">State Replication</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/threading.html">Threads &amp; Asynchronous Execution</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/threading.html#threads">Threads</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/threading.html#tasks">Tasks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/threading.html#taskqueues">TaskQueues</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/threading.html#workgroups">Workgroups</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/threading.html#scheduler">Scheduler</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#our-pledge">Our Pledge</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#our-standards">Our Standards</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#our-responsibilities">Our Responsibilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#scope">Scope</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#enforcement">Enforcement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#attribution">Attribution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/architecture.html#core-libraries">Core Libraries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../docs/README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+    </ul>
+    <div class="info admonition rst-footer-buttons">
+        <div class="wy-btn-group">
+            <a class="btn btn-link" href="../../../../../index.html">Madgine Blog</a>
+            <a class="btn btn-info btn-mini float-right" href="../../../../../launcher_master.html">Try live</a>
+        </div>
+    </div>
+    <ul class="wy-breadcrumbs">
+        
+      <li><a href="../../../docs/README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: Engine::Type::StorageOps Struct Reference</li>
+        
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/out/doc/doxygen/struct_engine_1_1_type_1_1_storage_ops.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="storageops-struct-reference">
+<h1>StorageOps Struct Reference<a class="headerlink" href="#storageops-struct-reference" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: Engine::Type::StorageOps Struct Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;dev</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespace_engine.html">Engine</a></li><li class="navelem"><a class="el" href="namespace_engine_1_1_type.html">Type</a></li><li class="navelem"><a class="el" href="struct_engine_1_1_type_1_1_storage_ops.html">StorageOps</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="struct_engine_1_1_type_1_1_storage_ops-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">Engine::Type::StorageOps Struct Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;storageops.h&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for Engine::Type::StorageOps:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="struct_engine_1_1_type_1_1_storage_ops__inherit__graph.svg" width="222" height="110"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:a9d0e09b9db01d03222810168f98f9026"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">Serialize::StreamResult</a>()&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_type_1_1_storage_ops.html#a9d0e09b9db01d03222810168f98f9026">ApplyMap</a>(<a class="el" href="struct_engine_1_1_type_1_1_base_storage.html">BaseStorage</a> &amp;, <a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">Serialize::CallerHierarchyFormattedSerializeStream</a>, bool, size_t)</td></tr>
+<tr class="separator:a9d0e09b9db01d03222810168f98f9026"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76768fb0378cba9dd47b5c102aee6c79"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="classvoid.html">void</a>()&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_type_1_1_storage_ops.html#a76768fb0378cba9dd47b5c102aee6c79">Destructor</a>(<a class="el" href="struct_engine_1_1_type_1_1_base_storage.html">BaseStorage</a> *, size_t)</td></tr>
+<tr class="separator:a76768fb0378cba9dd47b5c102aee6c79"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9bfbe7e5f6294c135c1b19614e309f31"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="struct_engine_1_1_reflect_1_1_result.html">Reflect::Result</a>()&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_type_1_1_storage_ops.html#a9bfbe7e5f6294c135c1b19614e309f31">FromValue</a>(<a class="el" href="struct_engine_1_1_type_1_1_base_storage.html">BaseStorage</a> &amp;, const <a class="el" href="struct_engine_1_1_reflect_1_1_value.html">Reflect::Value</a> &amp;, size_t)</td></tr>
+<tr class="separator:a9bfbe7e5f6294c135c1b19614e309f31"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a10db1dd05f35de4237719ed1c0959d17"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="classvoid.html">void</a>()&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_type_1_1_storage_ops.html#a10db1dd05f35de4237719ed1c0959d17">MoveAssign</a>(<a class="el" href="struct_engine_1_1_type_1_1_base_storage.html">BaseStorage</a> &amp;, <a class="el" href="struct_engine_1_1_type_1_1_base_storage.html">BaseStorage</a> &amp;&amp;)</td></tr>
+<tr class="separator:a10db1dd05f35de4237719ed1c0959d17"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21f410a5af1221785229be467036c433"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">Serialize::StreamResult</a>()&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_type_1_1_storage_ops.html#a21f410a5af1221785229be467036c433">Read</a>(const <a class="el" href="struct_engine_1_1_type_1_1_storage_ops.html">StorageOps</a> &amp;, <a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">Serialize::CallerHierarchyFormattedSerializeStream</a>, <a class="el" href="struct_engine_1_1_type_1_1_base_storage.html">BaseStorage</a> &amp;, const char *, size_t)</td></tr>
+<tr class="separator:a21f410a5af1221785229be467036c433"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a760bd7aaed4b97635fe48e494053d645"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="classvoid.html">void</a>()&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_type_1_1_storage_ops.html#a760bd7aaed4b97635fe48e494053d645">ToValue</a>(<a class="el" href="struct_engine_1_1_reflect_1_1_value.html">Reflect::Value</a> &amp;, <a class="el" href="struct_engine_1_1_type_1_1_base_storage.html">BaseStorage</a> &amp;, size_t)</td></tr>
+<tr class="separator:a760bd7aaed4b97635fe48e494053d645"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae5dc5bd840015c22b63da055d66c5d6e"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="classvoid.html">void</a>()&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_type_1_1_storage_ops.html#ae5dc5bd840015c22b63da055d66c5d6e">Write</a>(<a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">Serialize::CallerHierarchyFormattedSerializeStream</a>, const <a class="el" href="struct_engine_1_1_type_1_1_base_storage.html">BaseStorage</a> &amp;, const char *, size_t)</td></tr>
+<tr class="separator:ae5dc5bd840015c22b63da055d66c5d6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a97fad576ec6d3fc6506ca125dc405dab"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a97fad576ec6d3fc6506ca125dc405dab"><td class="memTemplItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_type_1_1_storage_ops.html#a97fad576ec6d3fc6506ca125dc405dab">StorageOps</a> (const char *name, <a class="el" href="struct_engine_1_1type__holder__t.html">type_holder_t</a>&lt; T &gt;, const <a class="el" href="struct_engine_1_1_type_1_1_constructor.html">Constructor</a> *constructors)</td></tr>
+<tr class="separator:a97fad576ec6d3fc6506ca125dc405dab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a62987b33656a63806204e006198f61dd"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_type_1_1_storage_ops.html#a62987b33656a63806204e006198f61dd">StorageOps</a> (const <a class="el" href="struct_engine_1_1_type_1_1_storage_ops.html">StorageOps</a> **self, const char *name, const <a class="el" href="struct_engine_1_1_type_1_1_constructor.html">Constructor</a> *constructors, <a class="el" href="struct_engine_1_1_type_1_1_storage_ops.html#a10db1dd05f35de4237719ed1c0959d17">MoveAssign</a> *<a class="el" href="struct_engine_1_1_type_1_1_storage_ops.html#a24ccae11626bd476c1388f0cc264c86c">moveAssign</a>, <a class="el" href="struct_engine_1_1_type_1_1_storage_ops.html#a760bd7aaed4b97635fe48e494053d645">ToValue</a> *toValue, <a class="el" href="struct_engine_1_1_type_1_1_storage_ops.html#a9bfbe7e5f6294c135c1b19614e309f31">FromValue</a> *fromValue, <a class="el" href="struct_engine_1_1_reflect_1_1_extended_type.html">Reflect::ExtendedType</a> type, <a class="el" href="struct_engine_1_1_type_1_1_storage_ops.html#a76768fb0378cba9dd47b5c102aee6c79">Destructor</a> *destructor, <a class="el" href="struct_engine_1_1_type_1_1_storage_ops.html#a21f410a5af1221785229be467036c433">Read</a> *<a class="el" href="struct_engine_1_1_type_1_1_storage_ops.html#a1fc0e8b39522cd80418a5bdec4db09d6">read</a>, <a class="el" href="struct_engine_1_1_type_1_1_storage_ops.html#ae5dc5bd840015c22b63da055d66c5d6e">Write</a> *write, <a class="el" href="struct_engine_1_1_type_1_1_storage_ops.html#a9d0e09b9db01d03222810168f98f9026">ApplyMap</a> *applyMap)</td></tr>
+<tr class="separator:a62987b33656a63806204e006198f61dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ac4c4eb167d091a7080938eaea9d58d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_reflect_1_1_result.html">Reflect::Result</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_type_1_1_storage_ops.html#a6ac4c4eb167d091a7080938eaea9d58d">construct</a> (<a class="el" href="struct_engine_1_1_type_1_1_base_storage.html">BaseStorage</a> &amp;storage, const <a class="el" href="struct_engine_1_1_reflect_1_1_argument_list.html">Reflect::ArgumentList</a> &amp;args, size_t inlineSize) const</td></tr>
+<tr class="separator:a6ac4c4eb167d091a7080938eaea9d58d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a24ccae11626bd476c1388f0cc264c86c"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a24ccae11626bd476c1388f0cc264c86c"><td class="memTemplItemLeft" align="right" valign="top">constexpr <a class="el" href="struct_engine_1_1_type_1_1_storage_ops.html#a10db1dd05f35de4237719ed1c0959d17">MoveAssign</a> *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_type_1_1_storage_ops.html#a24ccae11626bd476c1388f0cc264c86c">moveAssign</a> ()</td></tr>
+<tr class="separator:a24ccae11626bd476c1388f0cc264c86c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1fc0e8b39522cd80418a5bdec4db09d6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">Serialize::StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_type_1_1_storage_ops.html#a1fc0e8b39522cd80418a5bdec4db09d6">read</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">Serialize::CallerHierarchyFormattedSerializeStream</a>, <a class="el" href="struct_engine_1_1_type_1_1_base_storage.html">BaseStorage</a> &amp;, const char *, size_t) const</td></tr>
+<tr class="separator:a1fc0e8b39522cd80418a5bdec4db09d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:ac98e5766a8df96549187d33f027aa3e3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_type_1_1_storage_ops.html#a9d0e09b9db01d03222810168f98f9026">ApplyMap</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_type_1_1_storage_ops.html#ac98e5766a8df96549187d33f027aa3e3">mApplyMap</a></td></tr>
+<tr class="separator:ac98e5766a8df96549187d33f027aa3e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a90e185c5b8587a422a378b5c884929fd"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="struct_engine_1_1_type_1_1_constructor.html">Constructor</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_type_1_1_storage_ops.html#a90e185c5b8587a422a378b5c884929fd">mConstructors</a></td></tr>
+<tr class="separator:a90e185c5b8587a422a378b5c884929fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a15b74a70d67129f8c98ca8b38883a02a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_type_1_1_storage_ops.html#a76768fb0378cba9dd47b5c102aee6c79">Destructor</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_type_1_1_storage_ops.html#a15b74a70d67129f8c98ca8b38883a02a">mDestructor</a></td></tr>
+<tr class="separator:a15b74a70d67129f8c98ca8b38883a02a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae30ae7535c62f73f879f1b0a8de69935"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_type_1_1_storage_ops.html#a9bfbe7e5f6294c135c1b19614e309f31">FromValue</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_type_1_1_storage_ops.html#ae30ae7535c62f73f879f1b0a8de69935">mFromValue</a></td></tr>
+<tr class="separator:ae30ae7535c62f73f879f1b0a8de69935"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac1481131b4a0bf3351dd3a7e11b0a722"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_type_1_1_storage_ops.html#a10db1dd05f35de4237719ed1c0959d17">MoveAssign</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_type_1_1_storage_ops.html#ac1481131b4a0bf3351dd3a7e11b0a722">mMoveAssign</a></td></tr>
+<tr class="separator:ac1481131b4a0bf3351dd3a7e11b0a722"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afcb054d7fb1cd50cc01e60a038739b46"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_type_1_1_storage_ops.html#a21f410a5af1221785229be467036c433">Read</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_type_1_1_storage_ops.html#afcb054d7fb1cd50cc01e60a038739b46">mRead</a></td></tr>
+<tr class="separator:afcb054d7fb1cd50cc01e60a038739b46"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe822b7ea13c38deab186df25b055824"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="struct_engine_1_1_type_1_1_storage_ops.html">StorageOps</a> **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_type_1_1_storage_ops.html#afe822b7ea13c38deab186df25b055824">mSelf</a></td></tr>
+<tr class="separator:afe822b7ea13c38deab186df25b055824"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae2952b5dff4581e01e232dd0df893783"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_type_1_1_storage_ops.html#a760bd7aaed4b97635fe48e494053d645">ToValue</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_type_1_1_storage_ops.html#ae2952b5dff4581e01e232dd0df893783">mToValue</a></td></tr>
+<tr class="separator:ae2952b5dff4581e01e232dd0df893783"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a19017b56ef0e753d4dfbd1772c2279e2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_reflect_1_1_extended_type.html">Reflect::ExtendedType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_type_1_1_storage_ops.html#a19017b56ef0e753d4dfbd1772c2279e2">mType</a></td></tr>
+<tr class="separator:a19017b56ef0e753d4dfbd1772c2279e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a70cc18727c6827e1fe1dec5bbb7e61a5"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_type_1_1_storage_ops.html#a70cc18727c6827e1fe1dec5bbb7e61a5">mTypeName</a></td></tr>
+<tr class="separator:a70cc18727c6827e1fe1dec5bbb7e61a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae3ae2fd7084e2f1d2732be69e67e543a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_type_1_1_storage_ops.html#ae5dc5bd840015c22b63da055d66c5d6e">Write</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_type_1_1_storage_ops.html#ae3ae2fd7084e2f1d2732be69e67e543a">mWrite</a></td></tr>
+<tr class="separator:ae3ae2fd7084e2f1d2732be69e67e543a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="a10db1dd05f35de4237719ed1c0959d17" name="a10db1dd05f35de4237719ed1c0959d17"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a10db1dd05f35de4237719ed1c0959d17">&#9670;&#160;</a></span>MoveAssign</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="classvoid.html">void</a>() Engine::Type::StorageOps::MoveAssign(<a class="el" href="struct_engine_1_1_type_1_1_base_storage.html">BaseStorage</a> &amp;, <a class="el" href="struct_engine_1_1_type_1_1_base_storage.html">BaseStorage</a> &amp;&amp;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a760bd7aaed4b97635fe48e494053d645" name="a760bd7aaed4b97635fe48e494053d645"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a760bd7aaed4b97635fe48e494053d645">&#9670;&#160;</a></span>ToValue</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="classvoid.html">void</a>() Engine::Type::StorageOps::ToValue(<a class="el" href="struct_engine_1_1_reflect_1_1_value.html">Reflect::Value</a> &amp;, <a class="el" href="struct_engine_1_1_type_1_1_base_storage.html">BaseStorage</a> &amp;, size_t)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9bfbe7e5f6294c135c1b19614e309f31" name="a9bfbe7e5f6294c135c1b19614e309f31"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9bfbe7e5f6294c135c1b19614e309f31">&#9670;&#160;</a></span>FromValue</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="struct_engine_1_1_reflect_1_1_result.html">Reflect::Result</a>() Engine::Type::StorageOps::FromValue(<a class="el" href="struct_engine_1_1_type_1_1_base_storage.html">BaseStorage</a> &amp;, const <a class="el" href="struct_engine_1_1_reflect_1_1_value.html">Reflect::Value</a> &amp;, size_t)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a76768fb0378cba9dd47b5c102aee6c79" name="a76768fb0378cba9dd47b5c102aee6c79"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a76768fb0378cba9dd47b5c102aee6c79">&#9670;&#160;</a></span>Destructor</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="classvoid.html">void</a>() Engine::Type::StorageOps::Destructor(<a class="el" href="struct_engine_1_1_type_1_1_base_storage.html">BaseStorage</a> *, size_t)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a21f410a5af1221785229be467036c433" name="a21f410a5af1221785229be467036c433"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a21f410a5af1221785229be467036c433">&#9670;&#160;</a></span>Read</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">Serialize::StreamResult</a>() Engine::Type::StorageOps::Read(const <a class="el" href="struct_engine_1_1_type_1_1_storage_ops.html">StorageOps</a> &amp;, <a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">Serialize::CallerHierarchyFormattedSerializeStream</a>, <a class="el" href="struct_engine_1_1_type_1_1_base_storage.html">BaseStorage</a> &amp;, const char *, size_t)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae5dc5bd840015c22b63da055d66c5d6e" name="ae5dc5bd840015c22b63da055d66c5d6e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae5dc5bd840015c22b63da055d66c5d6e">&#9670;&#160;</a></span>Write</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="classvoid.html">void</a>() Engine::Type::StorageOps::Write(<a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">Serialize::CallerHierarchyFormattedSerializeStream</a>, const <a class="el" href="struct_engine_1_1_type_1_1_base_storage.html">BaseStorage</a> &amp;, const char *, size_t)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9d0e09b9db01d03222810168f98f9026" name="a9d0e09b9db01d03222810168f98f9026"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d0e09b9db01d03222810168f98f9026">&#9670;&#160;</a></span>ApplyMap</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">Serialize::StreamResult</a>() Engine::Type::StorageOps::ApplyMap(<a class="el" href="struct_engine_1_1_type_1_1_base_storage.html">BaseStorage</a> &amp;, <a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">Serialize::CallerHierarchyFormattedSerializeStream</a>, bool, size_t)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a62987b33656a63806204e006198f61dd" name="a62987b33656a63806204e006198f61dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a62987b33656a63806204e006198f61dd">&#9670;&#160;</a></span>StorageOps() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr Engine::Type::StorageOps::StorageOps </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_type_1_1_storage_ops.html">StorageOps</a> **&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_type_1_1_constructor.html">Constructor</a> *&#160;</td>
+          <td class="paramname"><em>constructors</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_type_1_1_storage_ops.html#a10db1dd05f35de4237719ed1c0959d17">MoveAssign</a> *&#160;</td>
+          <td class="paramname"><em>moveAssign</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_type_1_1_storage_ops.html#a760bd7aaed4b97635fe48e494053d645">ToValue</a> *&#160;</td>
+          <td class="paramname"><em>toValue</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_type_1_1_storage_ops.html#a9bfbe7e5f6294c135c1b19614e309f31">FromValue</a> *&#160;</td>
+          <td class="paramname"><em>fromValue</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_reflect_1_1_extended_type.html">Reflect::ExtendedType</a>&#160;</td>
+          <td class="paramname"><em>type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_type_1_1_storage_ops.html#a76768fb0378cba9dd47b5c102aee6c79">Destructor</a> *&#160;</td>
+          <td class="paramname"><em>destructor</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_type_1_1_storage_ops.html#a21f410a5af1221785229be467036c433">Read</a> *&#160;</td>
+          <td class="paramname"><em>read</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_type_1_1_storage_ops.html#ae5dc5bd840015c22b63da055d66c5d6e">Write</a> *&#160;</td>
+          <td class="paramname"><em>write</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_type_1_1_storage_ops.html#a9d0e09b9db01d03222810168f98f9026">ApplyMap</a> *&#160;</td>
+          <td class="paramname"><em>applyMap</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a97fad576ec6d3fc6506ca125dc405dab" name="a97fad576ec6d3fc6506ca125dc405dab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a97fad576ec6d3fc6506ca125dc405dab">&#9670;&#160;</a></span>StorageOps() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr Engine::Type::StorageOps::StorageOps </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1type__holder__t.html">type_holder_t</a>&lt; T &gt;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_type_1_1_constructor.html">Constructor</a> *&#160;</td>
+          <td class="paramname"><em>constructors</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a24ccae11626bd476c1388f0cc264c86c" name="a24ccae11626bd476c1388f0cc264c86c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a24ccae11626bd476c1388f0cc264c86c">&#9670;&#160;</a></span>moveAssign()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="struct_engine_1_1_type_1_1_storage_ops.html#a10db1dd05f35de4237719ed1c0959d17">MoveAssign</a> * Engine::Type::StorageOps::moveAssign </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6ac4c4eb167d091a7080938eaea9d58d" name="a6ac4c4eb167d091a7080938eaea9d58d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ac4c4eb167d091a7080938eaea9d58d">&#9670;&#160;</a></span>construct()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_reflect_1_1_result.html">Reflect::Result</a> Engine::Type::StorageOps::construct </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_type_1_1_base_storage.html">BaseStorage</a> &amp;&#160;</td>
+          <td class="paramname"><em>storage</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_reflect_1_1_argument_list.html">Reflect::ArgumentList</a> &amp;&#160;</td>
+          <td class="paramname"><em>args</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>inlineSize</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1fc0e8b39522cd80418a5bdec4db09d6" name="a1fc0e8b39522cd80418a5bdec4db09d6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1fc0e8b39522cd80418a5bdec4db09d6">&#9670;&#160;</a></span>read()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">Serialize::StreamResult</a> Engine::Type::StorageOps::read </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">Serialize::CallerHierarchyFormattedSerializeStream</a>&#160;</td>
+          <td class="paramname"><em>in</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_type_1_1_base_storage.html">BaseStorage</a> &amp;&#160;</td>
+          <td class="paramname"><em>storage</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>inlineSize</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="afe822b7ea13c38deab186df25b055824" name="afe822b7ea13c38deab186df25b055824"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afe822b7ea13c38deab186df25b055824">&#9670;&#160;</a></span>mSelf</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="struct_engine_1_1_type_1_1_storage_ops.html">StorageOps</a>** Engine::Type::StorageOps::mSelf</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a70cc18727c6827e1fe1dec5bbb7e61a5" name="a70cc18727c6827e1fe1dec5bbb7e61a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a70cc18727c6827e1fe1dec5bbb7e61a5">&#9670;&#160;</a></span>mTypeName</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char* Engine::Type::StorageOps::mTypeName</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a90e185c5b8587a422a378b5c884929fd" name="a90e185c5b8587a422a378b5c884929fd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a90e185c5b8587a422a378b5c884929fd">&#9670;&#160;</a></span>mConstructors</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="struct_engine_1_1_type_1_1_constructor.html">Constructor</a>* Engine::Type::StorageOps::mConstructors</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac1481131b4a0bf3351dd3a7e11b0a722" name="ac1481131b4a0bf3351dd3a7e11b0a722"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac1481131b4a0bf3351dd3a7e11b0a722">&#9670;&#160;</a></span>mMoveAssign</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_type_1_1_storage_ops.html#a10db1dd05f35de4237719ed1c0959d17">MoveAssign</a>* Engine::Type::StorageOps::mMoveAssign</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae2952b5dff4581e01e232dd0df893783" name="ae2952b5dff4581e01e232dd0df893783"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae2952b5dff4581e01e232dd0df893783">&#9670;&#160;</a></span>mToValue</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_type_1_1_storage_ops.html#a760bd7aaed4b97635fe48e494053d645">ToValue</a>* Engine::Type::StorageOps::mToValue</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae30ae7535c62f73f879f1b0a8de69935" name="ae30ae7535c62f73f879f1b0a8de69935"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae30ae7535c62f73f879f1b0a8de69935">&#9670;&#160;</a></span>mFromValue</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_type_1_1_storage_ops.html#a9bfbe7e5f6294c135c1b19614e309f31">FromValue</a>* Engine::Type::StorageOps::mFromValue</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a19017b56ef0e753d4dfbd1772c2279e2" name="a19017b56ef0e753d4dfbd1772c2279e2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a19017b56ef0e753d4dfbd1772c2279e2">&#9670;&#160;</a></span>mType</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_reflect_1_1_extended_type.html">Reflect::ExtendedType</a> Engine::Type::StorageOps::mType</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a15b74a70d67129f8c98ca8b38883a02a" name="a15b74a70d67129f8c98ca8b38883a02a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a15b74a70d67129f8c98ca8b38883a02a">&#9670;&#160;</a></span>mDestructor</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_type_1_1_storage_ops.html#a76768fb0378cba9dd47b5c102aee6c79">Destructor</a>* Engine::Type::StorageOps::mDestructor</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afcb054d7fb1cd50cc01e60a038739b46" name="afcb054d7fb1cd50cc01e60a038739b46"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afcb054d7fb1cd50cc01e60a038739b46">&#9670;&#160;</a></span>mRead</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_type_1_1_storage_ops.html#a21f410a5af1221785229be467036c433">Read</a>* Engine::Type::StorageOps::mRead</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae3ae2fd7084e2f1d2732be69e67e543a" name="ae3ae2fd7084e2f1d2732be69e67e543a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae3ae2fd7084e2f1d2732be69e67e543a">&#9670;&#160;</a></span>mWrite</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_type_1_1_storage_ops.html#ae5dc5bd840015c22b63da055d66c5d6e">Write</a>* Engine::Type::StorageOps::mWrite</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac98e5766a8df96549187d33f027aa3e3" name="ac98e5766a8df96549187d33f027aa3e3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac98e5766a8df96549187d33f027aa3e3">&#9670;&#160;</a></span>mApplyMap</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_type_1_1_storage_ops.html#a9d0e09b9db01d03222810168f98f9026">ApplyMap</a>* Engine::Type::StorageOps::mApplyMap</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following files:<ul>
+<li>src/Meta/type/<a class="el" href="storageops_8h.html">storageops.h</a></li>
+<li>src/Meta/type/<a class="el" href="storageops_8cpp.html">storageops.cpp</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Mon Jul 20 2026 22:40:38 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        Version: dev
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Versions</dt>
+            <script src="../../../../versions.js"></script>
+        </dl>
+    </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,363 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Madgine - Doxygen Documentation: Engine::Type::VariantStorage Struct Reference &mdash; Madgine  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=eafc0fe6" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../docs/README.html" class="icon icon-home">
+            Madgine
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/gettingstarted.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/gettingstarted.html#starting-the-engine">Starting the Engine</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/programming.html">Programmers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/howtos.html">How-Tos</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/howtos/build.html">Build Instructions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/howtos/build.html#dependencies">Dependencies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/howtos/build.html#setup-the-madgine">Setup The Madgine</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/howtos/build.html#generating-project-files">Generating Project Files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/howtos/build.html#build-configurations">Build Configurations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/howtos/firstUniqueComponent.html">Writing your first UniqueComponent</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/core/features.html">Core Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/keyvalue.html">KeyValue</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/keyvalue.html#valuetype">ValueType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/keyvalue.html#metatables">MetaTables</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/logging.html">Logging</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/logging.html#message-types">Message Types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/logging.html#building-log-messages">Building Log Messages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/logging.html#default-log">Default Log</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/logging.html#log-listener">Log Listener</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/pluginsystem.html">Plugins &amp; Unique Components</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/pluginsystem.html#plugins">Plugins</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/pluginsystem.html#unique-components">Unique Components</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/serialize.html">Serialization &amp; Synchronization</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#fundamental-data-types">Fundamental Data Types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#unit-hierarchy">Unit Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#serializetables">SerializeTables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#streams">Streams</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#managers">Managers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#state-replication">State Replication</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/threading.html">Threads &amp; Asynchronous Execution</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/threading.html#threads">Threads</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/threading.html#tasks">Tasks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/threading.html#taskqueues">TaskQueues</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/threading.html#workgroups">Workgroups</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/threading.html#scheduler">Scheduler</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html">Madgine - Doxygen Documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="namespaces_namespaces.html">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespaces.html">Namespace List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespacemembers_namespace_members.html">Namespace Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotated_classes.html">Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="annotated.html">Class List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="classes.html">Class Index</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inherits.html">Class Hierarchy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="functions_class_members.html">Class Members</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files_files.html">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="files.html">File List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="globals_file_members.html">File Members</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/developers.html">Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html">Contributor Covenant Code of Conduct</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#our-pledge">Our Pledge</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#our-standards">Our Standards</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#our-responsibilities">Our Responsibilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#scope">Scope</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#enforcement">Enforcement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/CODE_OF_CONDUCT.html#attribution">Attribution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/core/architecture.html">Architecture Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/architecture.html#folder-hierarchy">Folder hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/architecture.html#core-libraries">Core Libraries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/architecture.html#source-folder-names-namespaces">Source folder names &amp; namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../docs/core/architecture.html#launcher">Launcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../launcher/docs/launcher.html">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/app/api/docs/app.html">App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/audio/api/docs/audio.html">Audio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/behavior/api/docs/behaviors.html">Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/behavior/handler/docs/handler.html">Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/behavior/nodegraph/docs/nodegraph.html">NodeGraph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/behavior/python3/docs/python3.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/client/api/docs/client.html">Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/debug/api/docs/debug.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/misc/scene/docs/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/misc/widgets/docs/widgets.html">Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/renderer/api/docs/render.html">Render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/resources/api/docs/resources.html">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/root/api/docs/root.html">Root</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/server/api/docs/server.html">Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/tools/api/docs/tools.html">Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../plugins/tools/api/docs/tools.html#log-viewer">Log Viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../plugins/tools/api/docs/tools.html#plugin-manager">Plugin Manager</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../LICENSE.html">MIT License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../docs/README.html">Madgine</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+    </ul>
+    <div class="info admonition rst-footer-buttons">
+        <div class="wy-btn-group">
+            <a class="btn btn-link" href="../../../../../index.html">Madgine Blog</a>
+            <a class="btn btn-info btn-mini float-right" href="../../../../../launcher_master.html">Try live</a>
+        </div>
+    </div>
+    <ul class="wy-breadcrumbs">
+        
+      <li><a href="../../../docs/README.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: Engine::Type::VariantStorage Struct Reference</li>
+        
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/out/doc/doxygen/struct_engine_1_1_type_1_1_variant_storage.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="variantstorage-struct-reference">
+<h1>VariantStorage Struct Reference<a class="headerlink" href="#variantstorage-struct-reference" title="Permalink to this heading"></a></h1>
+<div class="doxygen-content docutils container">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Madgine - Doxygen Documentation: Engine::Type::VariantStorage Struct Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Madgine - Doxygen Documentation<span id="projectnumber">&#160;dev</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.5 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',false,false,'search.php','Search');
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="namespace_engine.html">Engine</a></li><li class="navelem"><a class="el" href="namespace_engine_1_1_type.html">Type</a></li><li class="navelem"><a class="el" href="struct_engine_1_1_type_1_1_variant_storage.html">VariantStorage</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="struct_engine_1_1_type_1_1_variant_storage-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">Engine::Type::VariantStorage Struct Reference</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="dynheader">
+Inheritance diagram for Engine::Type::VariantStorage:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="struct_engine_1_1_type_1_1_variant_storage__inherit__graph.svg" width="198" height="198"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:ac53b901afd7e695b6f73f81e77e7d00b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_index_type.html">IndexType</a>&lt; uint32_t, 0 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_type_1_1_variant_storage.html#ac53b901afd7e695b6f73f81e77e7d00b">mIndex</a></td></tr>
+<tr class="separator:ac53b901afd7e695b6f73f81e77e7d00b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_attribs_struct_engine_1_1_type_1_1_allocation_storage"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_struct_engine_1_1_type_1_1_allocation_storage')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="struct_engine_1_1_type_1_1_allocation_storage.html">Engine::Type::AllocationStorage</a></td></tr>
+<tr class="memitem:a6e3a7eb5351b91da5b35ad5495533f71 inherit pub_attribs_struct_engine_1_1_type_1_1_allocation_storage"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_engine_1_1_type.html#a3296a84147678d5533b7a4f14f7c11d0">AllocationPtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_type_1_1_allocation_storage.html#a6e3a7eb5351b91da5b35ad5495533f71">mAllocation</a></td></tr>
+<tr class="separator:a6e3a7eb5351b91da5b35ad5495533f71 inherit pub_attribs_struct_engine_1_1_type_1_1_allocation_storage"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_attribs_struct_engine_1_1_type_1_1_base_storage"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_struct_engine_1_1_type_1_1_base_storage')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="struct_engine_1_1_type_1_1_base_storage.html">Engine::Type::BaseStorage</a></td></tr>
+<tr class="memitem:a9d14a9f0b2fd8a87e82cc5c9f5d0e8c3 inherit pub_attribs_struct_engine_1_1_type_1_1_base_storage"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="struct_engine_1_1_type_1_1_storage_ops.html">StorageOps</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_type_1_1_base_storage.html#a9d14a9f0b2fd8a87e82cc5c9f5d0e8c3">mType</a></td></tr>
+<tr class="separator:a9d14a9f0b2fd8a87e82cc5c9f5d0e8c3 inherit pub_attribs_struct_engine_1_1_type_1_1_base_storage"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pub_methods_struct_engine_1_1_type_1_1_allocation_storage"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_struct_engine_1_1_type_1_1_allocation_storage')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="struct_engine_1_1_type_1_1_allocation_storage.html">Engine::Type::AllocationStorage</a></td></tr>
+<tr class="memitem:a788e758418dc7804c69391ba928c24a4 inherit pub_methods_struct_engine_1_1_type_1_1_allocation_storage"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_type_1_1_allocation_storage.html#a788e758418dc7804c69391ba928c24a4">AllocationStorage</a> (const <a class="el" href="struct_engine_1_1_type_1_1_storage_ops.html">StorageOps</a> &amp;ops, const <a class="el" href="struct_engine_1_1_reflect_1_1_argument_list.html">Reflect::ArgumentList</a> &amp;args)</td></tr>
+<tr class="separator:a788e758418dc7804c69391ba928c24a4 inherit pub_methods_struct_engine_1_1_type_1_1_allocation_storage"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aabb9a344c70488703190b66922c22ca5 inherit pub_methods_struct_engine_1_1_type_1_1_allocation_storage"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">Serialize::StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_type_1_1_allocation_storage.html#aabb9a344c70488703190b66922c22ca5">applyMap</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">Serialize::CallerHierarchyFormattedSerializeStream</a> in, bool success)</td></tr>
+<tr class="separator:aabb9a344c70488703190b66922c22ca5 inherit pub_methods_struct_engine_1_1_type_1_1_allocation_storage"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f15b042b509ccb81a9be31c3b01f75b inherit pub_methods_struct_engine_1_1_type_1_1_allocation_storage"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_reflect_1_1_result.html">Reflect::Result</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_type_1_1_allocation_storage.html#a6f15b042b509ccb81a9be31c3b01f75b">fromValue</a> (const <a class="el" href="struct_engine_1_1_reflect_1_1_value.html">Reflect::Value</a> &amp;val)</td></tr>
+<tr class="separator:a6f15b042b509ccb81a9be31c3b01f75b inherit pub_methods_struct_engine_1_1_type_1_1_allocation_storage"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a16c42fdfc8d02f16e36675dbb5bee5b2 inherit pub_methods_struct_engine_1_1_type_1_1_allocation_storage"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">Serialize::StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_type_1_1_allocation_storage.html#a16c42fdfc8d02f16e36675dbb5bee5b2">read</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">Serialize::CallerHierarchyFormattedSerializeStream</a> in, const char *name)</td></tr>
+<tr class="separator:a16c42fdfc8d02f16e36675dbb5bee5b2 inherit pub_methods_struct_engine_1_1_type_1_1_allocation_storage"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a43c333febcf5482cf4dde3adaf982664 inherit pub_methods_struct_engine_1_1_type_1_1_allocation_storage"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_type_1_1_allocation_storage.html#a43c333febcf5482cf4dde3adaf982664">toValue</a> (<a class="el" href="struct_engine_1_1_reflect_1_1_value.html">Reflect::Value</a> &amp;retVal)</td></tr>
+<tr class="separator:a43c333febcf5482cf4dde3adaf982664 inherit pub_methods_struct_engine_1_1_type_1_1_allocation_storage"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef0df8d38a20efc93ad69fd28f3fbfba inherit pub_methods_struct_engine_1_1_type_1_1_allocation_storage"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_type_1_1_allocation_storage.html#aef0df8d38a20efc93ad69fd28f3fbfba">write</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">Serialize::CallerHierarchyFormattedSerializeStream</a> out, const char *name) const</td></tr>
+<tr class="separator:aef0df8d38a20efc93ad69fd28f3fbfba inherit pub_methods_struct_engine_1_1_type_1_1_allocation_storage"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_struct_engine_1_1_type_1_1_base_storage"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_struct_engine_1_1_type_1_1_base_storage')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="struct_engine_1_1_type_1_1_base_storage.html">Engine::Type::BaseStorage</a></td></tr>
+<tr class="memitem:a89b417599f3dee36091c0f715dd993b4 inherit pub_methods_struct_engine_1_1_type_1_1_base_storage"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_reflect_1_1_result.html">Reflect::Result</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_type_1_1_base_storage.html#a89b417599f3dee36091c0f715dd993b4">fromValue</a> (const <a class="el" href="struct_engine_1_1_reflect_1_1_value.html">Reflect::Value</a> &amp;val)</td></tr>
+<tr class="separator:a89b417599f3dee36091c0f715dd993b4 inherit pub_methods_struct_engine_1_1_type_1_1_base_storage"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4288925de9e71dce09fdda21351c8460 inherit pub_methods_struct_engine_1_1_type_1_1_base_storage"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_type_1_1_base_storage.html#a4288925de9e71dce09fdda21351c8460">toValue</a> (<a class="el" href="struct_engine_1_1_reflect_1_1_value.html">Reflect::Value</a> &amp;retVal)</td></tr>
+<tr class="separator:a4288925de9e71dce09fdda21351c8460 inherit pub_methods_struct_engine_1_1_type_1_1_base_storage"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="ac53b901afd7e695b6f73f81e77e7d00b" name="ac53b901afd7e695b6f73f81e77e7d00b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac53b901afd7e695b6f73f81e77e7d00b">&#9670;&#160;</a></span>mIndex</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_index_type.html">IndexType</a>&lt;uint32_t, 0&gt; Engine::Type::VariantStorage::mIndex</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>src/Meta/type/<a class="el" href="variantstorage_8cpp.html">variantstorage.cpp</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generated on Mon Jul 20 2026 22:40:38 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Martin Schütz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        Version: dev
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Versions</dt>
+            <script src="../../../../versions.js"></script>
+        </dl>
+    </div>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

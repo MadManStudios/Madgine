@@ -255,38 +255,38 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p><code>#include &lt;allocationops.h&gt;</code></p>
+<p><code>#include &lt;storageops.h&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:aed89ef7108d77211c6a6fea38b74681b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_reflect_1_1_result.html">Reflect::Result</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_type_1_1_constructor.html#aed89ef7108d77211c6a6fea38b74681b">mInvoker</a> )(std::unique_ptr&lt; <a class="el" href="struct_engine_1_1_type_1_1_base_allocation.html">BaseAllocation</a>, <a class="el" href="struct_engine_1_1_type_1_1_allocation_deleter.html">AllocationDeleter</a> &gt; &amp;, const <a class="el" href="struct_engine_1_1_type_1_1_allocation_ops.html">AllocationOps</a> &amp;, const <a class="el" href="struct_engine_1_1_reflect_1_1_argument_list.html">Reflect::ArgumentList</a> &amp;) = nullptr</td></tr>
-<tr class="separator:aed89ef7108d77211c6a6fea38b74681b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aed5a7a90b1bf0291673d872c12527270"><td class="memItemLeft" align="right" valign="top">bool(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_type_1_1_constructor.html#aed5a7a90b1bf0291673d872c12527270">mMatcher</a> )(const <a class="el" href="struct_engine_1_1_reflect_1_1_argument_list.html">Reflect::ArgumentList</a> &amp;) = nullptr</td></tr>
-<tr class="separator:aed5a7a90b1bf0291673d872c12527270"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af8799ef5ce6307fc7669fd46e58b27be"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_reflect_1_1_result.html">Reflect::Result</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_type_1_1_constructor.html#af8799ef5ce6307fc7669fd46e58b27be">mInvoker</a> )(const <a class="el" href="struct_engine_1_1_type_1_1_storage_ops.html">StorageOps</a> &amp;, <a class="el" href="struct_engine_1_1_type_1_1_base_storage.html">BaseStorage</a> &amp;, const <a class="el" href="struct_engine_1_1_reflect_1_1_argument_list.html">Reflect::ArgumentList</a> &amp;, size_t) = nullptr</td></tr>
+<tr class="separator:af8799ef5ce6307fc7669fd46e58b27be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e8689f6001ce8493f460912269ee529"><td class="memItemLeft" align="right" valign="top">bool(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_type_1_1_constructor.html#a9e8689f6001ce8493f460912269ee529">mMatcher</a> )(const <a class="el" href="struct_engine_1_1_type_1_1_storage_ops.html">StorageOps</a> &amp;, const <a class="el" href="struct_engine_1_1_reflect_1_1_argument_list.html">Reflect::ArgumentList</a> &amp;) = nullptr</td></tr>
+<tr class="separator:a9e8689f6001ce8493f460912269ee529"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="aed5a7a90b1bf0291673d872c12527270" name="aed5a7a90b1bf0291673d872c12527270"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aed5a7a90b1bf0291673d872c12527270">&#9670;&#160;</a></span>mMatcher</h2>
+<a id="a9e8689f6001ce8493f460912269ee529" name="a9e8689f6001ce8493f460912269ee529"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9e8689f6001ce8493f460912269ee529">&#9670;&#160;</a></span>mMatcher</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool(* Engine::Type::Constructor::mMatcher) (const <a class="el" href="struct_engine_1_1_reflect_1_1_argument_list.html">Reflect::ArgumentList</a> &amp;) = nullptr</td>
+          <td class="memname">bool(* Engine::Type::Constructor::mMatcher) (const <a class="el" href="struct_engine_1_1_type_1_1_storage_ops.html">StorageOps</a> &amp;, const <a class="el" href="struct_engine_1_1_reflect_1_1_argument_list.html">Reflect::ArgumentList</a> &amp;) = nullptr</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="aed89ef7108d77211c6a6fea38b74681b" name="aed89ef7108d77211c6a6fea38b74681b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aed89ef7108d77211c6a6fea38b74681b">&#9670;&#160;</a></span>mInvoker</h2>
+<a id="af8799ef5ce6307fc7669fd46e58b27be" name="af8799ef5ce6307fc7669fd46e58b27be"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af8799ef5ce6307fc7669fd46e58b27be">&#9670;&#160;</a></span>mInvoker</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="struct_engine_1_1_reflect_1_1_result.html">Reflect::Result</a>(* Engine::Type::Constructor::mInvoker) (std::unique_ptr&lt; <a class="el" href="struct_engine_1_1_type_1_1_base_allocation.html">BaseAllocation</a>, <a class="el" href="struct_engine_1_1_type_1_1_allocation_deleter.html">AllocationDeleter</a> &gt; &amp;, const <a class="el" href="struct_engine_1_1_type_1_1_allocation_ops.html">AllocationOps</a> &amp;, const <a class="el" href="struct_engine_1_1_reflect_1_1_argument_list.html">Reflect::ArgumentList</a> &amp;) = nullptr</td>
+          <td class="memname"><a class="el" href="struct_engine_1_1_reflect_1_1_result.html">Reflect::Result</a>(* Engine::Type::Constructor::mInvoker) (const <a class="el" href="struct_engine_1_1_type_1_1_storage_ops.html">StorageOps</a> &amp;, <a class="el" href="struct_engine_1_1_type_1_1_base_storage.html">BaseStorage</a> &amp;, const <a class="el" href="struct_engine_1_1_reflect_1_1_argument_list.html">Reflect::ArgumentList</a> &amp;, size_t) = nullptr</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -294,12 +294,12 @@ Public Attributes</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
-<li>src/Meta/type/<a class="el" href="allocationops_8h.html">allocationops.h</a></li>
+<li>src/Meta/type/<a class="el" href="storageops_8h.html">storageops.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jul 19 2026 13:38:25 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Mon Jul 20 2026 22:40:38 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

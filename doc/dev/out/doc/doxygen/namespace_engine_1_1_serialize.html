@@ -367,6 +367,8 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><b>Operations&lt; Synced&lt; T, Observer, OffsetPtr &gt; &gt;</b></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><b>Operations&lt; Type::InlineStorage &gt;</b></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><b>Operations&lt; Widgets::PropertyList &gt;</b></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_parent_verifier_impl.html">ParentVerifierImpl</a></td></tr>
@@ -581,8 +583,8 @@ Typedefs</h2></td></tr>
 <tr class="separator:a518c5a6141e5b99931367ab45d0b67af"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a04782520b48766bb80cb63551c03dc29"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#a04782520b48766bb80cb63551c03dc29">SerializableUnitMap</a> = std::map&lt; <a class="el" href="struct_engine_1_1_serialize_1_1_serializable_data_const_ptr.html">SerializableDataConstPtr</a>, uint32_t &gt;</td></tr>
 <tr class="separator:a04782520b48766bb80cb63551c03dc29"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3b481c8bed2b57bffea757f6053c356d"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#a3b481c8bed2b57bffea757f6053c356d">SerializePrimitives</a> = <a class="el" href="struct_engine_1_1type__pack.html">type_pack</a>&lt; bool, <a class="el" href="classuint8__t.html">uint8_t</a>, int8_t, uint16_t, int16_t, uint32_t, int32_t, uint64_t, int64_t, float, <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html">SyncableUnitBase</a> *, <a class="el" href="struct_engine_1_1_serialize_1_1_serializable_data_ptr.html">SerializableDataPtr</a>, std::string, <a class="el" href="namespace_engine_1_1_memory.html#a38c77c0ee95b21d49869c266e211de78">Memory::ByteBuffer</a>, <a class="el" href="struct_engine_1_1_void.html">Void</a>, <a class="el" href="struct_engine_1_1_math_1_1_vector2.html">Math::Vector2</a>, <a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Math::Vector3</a>, <a class="el" href="struct_engine_1_1_math_1_1_vector4.html">Math::Vector4</a>, <a class="el" href="struct_engine_1_1_math_1_1_vector2i.html">Math::Vector2i</a>, <a class="el" href="struct_engine_1_1_math_1_1_matrix3.html">Math::Matrix3</a>, EnumTag, FlagsTag, <a class="el" href="struct_engine_1_1_math_1_1_color3.html">Math::Color3</a>, <a class="el" href="struct_engine_1_1_math_1_1_color4.html">Math::Color4</a>, <a class="el" href="struct_engine_1_1_math_1_1_quaternion.html">Math::Quaternion</a>, std::chrono::nanoseconds &gt;</td></tr>
-<tr class="separator:a3b481c8bed2b57bffea757f6053c356d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f2cdfb3dbb1ee775e9f5a1f80e27a7f"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#a4f2cdfb3dbb1ee775e9f5a1f80e27a7f">SerializePrimitives</a> = <a class="el" href="struct_engine_1_1type__pack.html">type_pack</a>&lt; std::monostate, bool, <a class="el" href="classuint8__t.html">uint8_t</a>, int8_t, uint16_t, int16_t, uint32_t, int32_t, uint64_t, int64_t, float, <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html">SyncableUnitBase</a> *, <a class="el" href="struct_engine_1_1_serialize_1_1_serializable_data_ptr.html">SerializableDataPtr</a>, std::string, <a class="el" href="namespace_engine_1_1_memory.html#a38c77c0ee95b21d49869c266e211de78">Memory::ByteBuffer</a>, <a class="el" href="struct_engine_1_1_math_1_1_vector2.html">Math::Vector2</a>, <a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Math::Vector3</a>, <a class="el" href="struct_engine_1_1_math_1_1_vector4.html">Math::Vector4</a>, <a class="el" href="struct_engine_1_1_math_1_1_vector2i.html">Math::Vector2i</a>, <a class="el" href="struct_engine_1_1_math_1_1_matrix3.html">Math::Matrix3</a>, <a class="el" href="struct_engine_1_1_math_1_1_matrix4.html">Math::Matrix4</a>, EnumTag, FlagsTag, <a class="el" href="struct_engine_1_1_math_1_1_color3.html">Math::Color3</a>, <a class="el" href="struct_engine_1_1_math_1_1_color4.html">Math::Color4</a>, <a class="el" href="struct_engine_1_1_math_1_1_quaternion.html">Math::Quaternion</a>, std::chrono::nanoseconds &gt;</td></tr>
+<tr class="separator:a4f2cdfb3dbb1ee775e9f5a1f80e27a7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3e5ec4c9cf47ea6f28892d1424c048c6"><td class="memTemplParams" colspan="2">template&lt;typename C , typename Observer  = NoOpFunctor, typename <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a>  = TaggedPlaceholder&lt;MemberOffsetPtrTag, 0&gt;&gt; </td></tr>
 <tr class="memitem:a3e5ec4c9cf47ea6f28892d1424c048c6"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#a3e5ec4c9cf47ea6f28892d1424c048c6">SyncableContainer</a> = <a class="el" href="namespace_engine_1_1_containers.html#a95530f02d1b2f3ab18f869c5154bdfe8">Containers::container_api</a>&lt; <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_container_impl.html">SyncableContainerImpl</a>&lt; C, Observer, <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a> &gt; &gt;</td></tr>
 <tr class="separator:a3e5ec4c9cf47ea6f28892d1424c048c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -747,6 +749,8 @@ requires (!Concepts::Reference&lt;F&gt; &amp;&amp; PrimitiveType&lt;Primitive&gt
 <tr class="separator:a0b8d50af64608cfb3f37900c2aeca6a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5b0e616675b0414ec2239ee3d34a8c20"><td class="memItemLeft" align="right" valign="top">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#a5b0e616675b0414ec2239ee3d34a8c20">visitSkipPrimitive&lt; Math::Matrix3 &gt;</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_primitive_holder.html">PrimitiveHolder</a>&lt; <a class="el" href="struct_engine_1_1_math_1_1_matrix3.html">Math::Matrix3</a> &gt;, <a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>, const char *)</td></tr>
 <tr class="separator:a5b0e616675b0414ec2239ee3d34a8c20"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a8d6c9be71673817cdccb8db074a2a3"><td class="memItemLeft" align="right" valign="top">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#a8a8d6c9be71673817cdccb8db074a2a3">visitSkipPrimitive&lt; Math::Matrix4 &gt;</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_primitive_holder.html">PrimitiveHolder</a>&lt; <a class="el" href="struct_engine_1_1_math_1_1_matrix4.html">Math::Matrix4</a> &gt;, <a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>, const char *)</td></tr>
+<tr class="separator:a8a8d6c9be71673817cdccb8db074a2a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0c763f744e821550666583314cd132c9"><td class="memItemLeft" align="right" valign="top">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#a0c763f744e821550666583314cd132c9">visitSkipPrimitive&lt; Math::Quaternion &gt;</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_primitive_holder.html">PrimitiveHolder</a>&lt; <a class="el" href="struct_engine_1_1_math_1_1_quaternion.html">Math::Quaternion</a> &gt;, <a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>, const char *)</td></tr>
 <tr class="separator:a0c763f744e821550666583314cd132c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aad1c26f0b8ccb903573d2334e0e15cda"><td class="memItemLeft" align="right" valign="top">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#aad1c26f0b8ccb903573d2334e0e15cda">visitSkipPrimitive&lt; Math::Vector2 &gt;</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_primitive_holder.html">PrimitiveHolder</a>&lt; <a class="el" href="struct_engine_1_1_math_1_1_vector2.html">Math::Vector2</a> &gt;, <a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>, const char *)</td></tr>
@@ -771,8 +775,6 @@ requires (!Concepts::Reference&lt;F&gt; &amp;&amp; PrimitiveType&lt;Primitive&gt
 <tr class="separator:a2c767396f0a2a2d09d02de799f7af8fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ace7b25e401318263f9ebb93111c5d261"><td class="memItemLeft" align="right" valign="top">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#ace7b25e401318263f9ebb93111c5d261">visitSkipPrimitive&lt; uint8_t &gt;</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_primitive_holder.html">PrimitiveHolder</a>&lt; <a class="el" href="classuint8__t.html">uint8_t</a> &gt;, <a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>, const char *)</td></tr>
 <tr class="separator:ace7b25e401318263f9ebb93111c5d261"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a890a052387183fa9c3be20b00b23294c"><td class="memItemLeft" align="right" valign="top">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#a890a052387183fa9c3be20b00b23294c">visitSkipPrimitive&lt; Void &gt;</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_primitive_holder.html">PrimitiveHolder</a>&lt; <a class="el" href="struct_engine_1_1_void.html">Void</a> &gt;, <a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>, const char *)</td></tr>
-<tr class="separator:a890a052387183fa9c3be20b00b23294c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ade3b2b5dda91683e50026073cb95bdf4"><td class="memTemplParams" colspan="2">template&lt;typename T , typename... Configs&gt; </td></tr>
 <tr class="memitem:ade3b2b5dda91683e50026073cb95bdf4"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#ade3b2b5dda91683e50026073cb95bdf4">visitStream</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a> in, const char *name, const <a class="el" href="struct_engine_1_1_serialize_1_1_stream_visitor.html">StreamVisitor</a> &amp;visitor, size_t depth=0)</td></tr>
 <tr class="separator:ade3b2b5dda91683e50026073cb95bdf4"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1213,14 +1215,14 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="a3b481c8bed2b57bffea757f6053c356d" name="a3b481c8bed2b57bffea757f6053c356d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3b481c8bed2b57bffea757f6053c356d">&#9670;&#160;</a></span>SerializePrimitives</h2>
+<a id="a4f2cdfb3dbb1ee775e9f5a1f80e27a7f" name="a4f2cdfb3dbb1ee775e9f5a1f80e27a7f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4f2cdfb3dbb1ee775e9f5a1f80e27a7f">&#9670;&#160;</a></span>SerializePrimitives</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="namespace_engine_1_1_serialize.html#a3b481c8bed2b57bffea757f6053c356d">Engine::Serialize::SerializePrimitives</a> = typedef <a class="el" href="struct_engine_1_1type__pack.html">type_pack</a>&lt; bool, <a class="el" href="classuint8__t.html">uint8_t</a>, int8_t, uint16_t, int16_t, uint32_t, int32_t, uint64_t, int64_t, float, <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html">SyncableUnitBase</a> *, <a class="el" href="struct_engine_1_1_serialize_1_1_serializable_data_ptr.html">SerializableDataPtr</a>, std::string, <a class="el" href="namespace_engine_1_1_memory.html#a38c77c0ee95b21d49869c266e211de78">Memory::ByteBuffer</a>, <a class="el" href="struct_engine_1_1_void.html">Void</a>, <a class="el" href="struct_engine_1_1_math_1_1_vector2.html">Math::Vector2</a>, <a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Math::Vector3</a>, <a class="el" href="struct_engine_1_1_math_1_1_vector4.html">Math::Vector4</a>, <a class="el" href="struct_engine_1_1_math_1_1_vector2i.html">Math::Vector2i</a>, <a class="el" href="struct_engine_1_1_math_1_1_matrix3.html">Math::Matrix3</a>, EnumTag, FlagsTag, <a class="el" href="struct_engine_1_1_math_1_1_color3.html">Math::Color3</a>, <a class="el" href="struct_engine_1_1_math_1_1_color4.html">Math::Color4</a>, <a class="el" href="struct_engine_1_1_math_1_1_quaternion.html">Math::Quaternion</a>, std::chrono::nanoseconds&gt;</td>
+          <td class="memname">using <a class="el" href="namespace_engine_1_1_serialize.html#a4f2cdfb3dbb1ee775e9f5a1f80e27a7f">Engine::Serialize::SerializePrimitives</a> = typedef <a class="el" href="struct_engine_1_1type__pack.html">type_pack</a>&lt; std::monostate, bool, <a class="el" href="classuint8__t.html">uint8_t</a>, int8_t, uint16_t, int16_t, uint32_t, int32_t, uint64_t, int64_t, float, <a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html">SyncableUnitBase</a> *, <a class="el" href="struct_engine_1_1_serialize_1_1_serializable_data_ptr.html">SerializableDataPtr</a>, std::string, <a class="el" href="namespace_engine_1_1_memory.html#a38c77c0ee95b21d49869c266e211de78">Memory::ByteBuffer</a>, <a class="el" href="struct_engine_1_1_math_1_1_vector2.html">Math::Vector2</a>, <a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Math::Vector3</a>, <a class="el" href="struct_engine_1_1_math_1_1_vector4.html">Math::Vector4</a>, <a class="el" href="struct_engine_1_1_math_1_1_vector2i.html">Math::Vector2i</a>, <a class="el" href="struct_engine_1_1_math_1_1_matrix3.html">Math::Matrix3</a>, <a class="el" href="struct_engine_1_1_math_1_1_matrix4.html">Math::Matrix4</a>, EnumTag, FlagsTag, <a class="el" href="struct_engine_1_1_math_1_1_color3.html">Math::Color3</a>, <a class="el" href="struct_engine_1_1_math_1_1_color4.html">Math::Color4</a>, <a class="el" href="struct_engine_1_1_math_1_1_quaternion.html">Math::Quaternion</a>, std::chrono::nanoseconds&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -3490,40 +3492,6 @@ template&lt;&gt; </div>
 
 </div>
 </div>
-<a id="a890a052387183fa9c3be20b00b23294c" name="a890a052387183fa9c3be20b00b23294c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a890a052387183fa9c3be20b00b23294c">&#9670;&#160;</a></span>visitSkipPrimitive&lt; Void &gt;()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a> <a class="el" href="namespace_engine_1_1_serialize.html#a3728c2345ad852da94e9f1c356df2ecd">Engine::Serialize::visitSkipPrimitive</a>&lt; <a class="el" href="struct_engine_1_1_void.html">Void</a> &gt; </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_primitive_holder.html">PrimitiveHolder</a>&lt; <a class="el" href="struct_engine_1_1_void.html">Void</a> &gt;&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname">&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="aad1c26f0b8ccb903573d2334e0e15cda" name="aad1c26f0b8ccb903573d2334e0e15cda"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aad1c26f0b8ccb903573d2334e0e15cda">&#9670;&#160;</a></span>visitSkipPrimitive&lt; Math::Vector2 &gt;()</h2>
 
@@ -3704,6 +3672,40 @@ template&lt;&gt; </div>
           <td class="memname">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a> <a class="el" href="namespace_engine_1_1_serialize.html#a3728c2345ad852da94e9f1c356df2ecd">Engine::Serialize::visitSkipPrimitive</a>&lt; <a class="el" href="struct_engine_1_1_math_1_1_matrix3.html">Math::Matrix3</a> &gt; </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_primitive_holder.html">PrimitiveHolder</a>&lt; <a class="el" href="struct_engine_1_1_math_1_1_matrix3.html">Math::Matrix3</a> &gt;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8a8d6c9be71673817cdccb8db074a2a3" name="a8a8d6c9be71673817cdccb8db074a2a3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8a8d6c9be71673817cdccb8db074a2a3">&#9670;&#160;</a></span>visitSkipPrimitive&lt; Math::Matrix4 &gt;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">template META_EXPORT <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a> <a class="el" href="namespace_engine_1_1_serialize.html#a3728c2345ad852da94e9f1c356df2ecd">Engine::Serialize::visitSkipPrimitive</a>&lt; <a class="el" href="struct_engine_1_1_math_1_1_matrix4.html">Math::Matrix4</a> &gt; </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_primitive_holder.html">PrimitiveHolder</a>&lt; <a class="el" href="struct_engine_1_1_math_1_1_matrix4.html">Math::Matrix4</a> &gt;&#160;</td>
           <td class="paramname">, </td>
         </tr>
         <tr>
@@ -4155,7 +4157,7 @@ template&lt;typename T &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jul 19 2026 13:38:24 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Mon Jul 20 2026 22:40:38 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>
