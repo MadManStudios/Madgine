@@ -7,9 +7,6 @@
 #include "../math/color4.h"
 #include "../math/matrix4.h"
 #include "../math/quaternion.h"
-#include "../reflect/enum.h"
-#include "../reflect/flags.h"
-#include "../reflectserialize/valuetypeserialize.h"
 #include "hierarchy/serializableunitptr.h"
 #include "hierarchy/syncableunit.h"
 #include "streams/formattedserializestream.h"
@@ -28,15 +25,37 @@ namespace Serialize {
     template <>
     META_EXPORT StreamResult visitSkipPrimitive(PrimitiveHolder<EnumTag> holder, CallerHierarchyFormattedSerializeStream in, const char *name)
     {
-        Reflect::Enum dummy { holder.mTable };
-        return in.mStream.readPrimitive<Reflect::Enum>(dummy, name);
+        STREAM_PROPAGATE_ERROR(in.mStream.mFormatter->beginPrimitiveRead(name, PrimitiveTypeIndex_v<EnumTag>));
+        int32_t v;
+        if (in.mStream.isBinary()) {            
+            STREAM_PROPAGATE_ERROR(in.mStream.mFormatter->stream().read(v));
+        } else {
+            if (!holder.mTable->read(in.mStream.mFormatter->stream().stream(), v, holder.mTable->mName)) {
+                auto error = STREAM_ERROR(StreamState::OK, in.mStream.mFormatter->stream(), false);
+                error.mType = streamError(in.mStream.mFormatter->stream().state(), error.mMsg);
+                error.mMsg << "after read";
+                return error;
+            }
+        }
+        return in.mStream.mFormatter->endPrimitiveRead(name, PrimitiveTypeIndex_v<EnumTag>);
     }
 
     template <>
     META_EXPORT StreamResult visitSkipPrimitive(PrimitiveHolder<FlagsTag> holder, CallerHierarchyFormattedSerializeStream in, const char *name)
     {
-        Reflect::Flags dummy { holder.mTable };
-        return in.mStream.readPrimitive<Reflect::Flags>(dummy, name);
+        STREAM_PROPAGATE_ERROR(in.mStream.mFormatter->beginPrimitiveRead(name, PrimitiveTypeIndex_v<FlagsTag>));
+        uint64_t v;
+        if (in.mStream.isBinary()) {
+            STREAM_PROPAGATE_ERROR(in.mStream.mFormatter->stream().read(v));
+        } else {
+            if (!holder.mTable->readFlags(in.mStream.mFormatter->stream().stream(), v)) {
+                auto error = STREAM_ERROR(StreamState::OK, in.mStream.mFormatter->stream(), false);
+                error.mType = streamError(in.mStream.mFormatter->stream().state(), error.mMsg);
+                error.mMsg << "after read";
+                return error;
+            }
+        }
+        return in.mStream.mFormatter->endPrimitiveRead(name, PrimitiveTypeIndex_v<EnumTag>);
     }
 
     StreamResult visitSyncableUnit(const SerializeTable *table, CallerHierarchyFormattedSerializeStream in, const char *name, const StreamVisitor &visitor, size_t depth)

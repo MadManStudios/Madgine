@@ -3,7 +3,6 @@
 #include "python3behaviors.h"
 
 #include "Meta/reflect/value.h"
-#include "Meta/reflectserialize/valuetypeserialize.h"
 
 #include "Modules/uniquecomponent/uniquecomponentcollector.h"
 
@@ -101,7 +100,6 @@ namespace Behavior {
             Serialize::StreamResult read(Serialize::CallerHierarchyFormattedSerializeStream in) override
             {
                 for (size_t i = 0; i < mValues.size(); ++i) {
-                    STREAM_PROPAGATE_ERROR(Serialize::read(in, mValues[i], mEntry.mInfo.mArguments[i].mName.data()));
                 }
                 return {};
             }
@@ -109,14 +107,12 @@ namespace Behavior {
             void write(Serialize::CallerHierarchyFormattedSerializeStream out) override
             {
                 for (size_t i = 0; i < mValues.size(); ++i) {
-                    Serialize::write(out, mValues[i], mEntry.mInfo.mArguments[i].mName.data());
                 }
             }
 
             Serialize::StreamResult applyMap(Serialize::CallerHierarchyFormattedSerializeStream in, bool success) override
             {
                 for (size_t i = 0; i < mValues.size(); ++i) {
-                    STREAM_PROPAGATE_ERROR(Serialize::apply_map(mValues[i], in, success));
                 }
                 return {};
             }

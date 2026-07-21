@@ -2,7 +2,6 @@
 
 #include "behaviornode.h"
 
-#include "Meta/reflectserialize/valuetypeserialize.h"
 
 #include "Madgine/resources/resourcemanager.h"
 

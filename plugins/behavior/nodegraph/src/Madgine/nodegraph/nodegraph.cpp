@@ -7,7 +7,6 @@
 
 #include "Platform/filesystem/fsapi.h"
 
-#include "Meta/reflectserialize/valuetypeserialize.h"
 #include "Meta/serialize/formats.h"
 #include "Meta/serialize/streams/serializestream.h"
 

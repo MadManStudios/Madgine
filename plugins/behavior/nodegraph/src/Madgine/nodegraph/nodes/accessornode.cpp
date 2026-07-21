@@ -4,7 +4,6 @@
 
 #include "Meta/reflect/functiontable.h"
 #include "Meta/reflect/value.h"
-#include "Meta/reflectserialize/valuetypeserialize.h"
 
 #include "Modules/uniquecomponent/uniquecomponentcollector.h"
 

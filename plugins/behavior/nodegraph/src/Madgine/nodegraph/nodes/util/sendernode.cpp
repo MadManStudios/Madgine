@@ -2,8 +2,6 @@
 
 #include "Generic/execution/algorithm.h"
 
-#include "Meta/reflectserialize/valuetypeserialize.h"
-
 #include "sendernode_impl.h"
 
 #include "functors.h"
@@ -26,9 +24,9 @@ SENDER_NODE_END(Divide)
 DEFAULT_SENDER_NODE_BEGIN(Log, Engine::Execution::then, Engine::Behavior::NodeGraph::NodeReader<Engine::Reflect::Value>, Engine::Behavior::NodeGraph::Log)
 SENDER_NODE_END(Log)
 
-CONSTANT_SENDER_NODE_BEGIN(Just, Engine::Execution::just, Engine::Reflect::Value)
+/* CONSTANT_SENDER_NODE_BEGIN(Just, Engine::Execution::just, Engine::Reflect::Value)
     ARGUMENT(Value, 0)
-SENDER_NODE_END(Just)
+SENDER_NODE_END(Just)*/
 
 /* VARIABLE_SENDER_NODE_BEGIN(Variable, Engine::Execution::Variable<"Name">, Engine::NodeGraph::NodeReader<>, Engine::ValueType)
 DYNAMIC_NAME(Name)

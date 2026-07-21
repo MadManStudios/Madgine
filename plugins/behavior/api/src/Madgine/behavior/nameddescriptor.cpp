@@ -2,8 +2,6 @@
 
 #include "nameddescriptor.h"
 
-#include "Meta/reflectserialize/valuetypeserialize.h"
-
 #include "Meta/reflect/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
