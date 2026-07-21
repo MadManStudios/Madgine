@@ -270,8 +270,6 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a32172439962ec030b98efa1c1bc62556"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a51381c219fac09cbf477c02b0a149608"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_behavior_node.html#a51381c219fac09cbf477c02b0a149608">BehaviorNode</a> (<a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_node_graph.html">NodeGraph</a> &amp;graph, <a class="el" href="struct_engine_1_1_behavior_1_1_behavior_handle.html">BehaviorHandle</a> behavior)</td></tr>
 <tr class="separator:a51381c219fac09cbf477c02b0a149608"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad722c0a856364fe0253b55689c09cbab"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_behavior_node.html#ad722c0a856364fe0253b55689c09cbab">BehaviorNode</a> (<a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_node_graph.html">NodeGraph</a> &amp;graph, <a class="el" href="struct_engine_1_1_behavior_1_1_behavior_handle.html">BehaviorHandle</a> behavior, <a class="el" href="struct_engine_1_1_threading_1_1_task_future.html">Threading::TaskFuture</a>&lt; bool &gt; &amp;future)</td></tr>
-<tr class="separator:ad722c0a856364fe0253b55689c09cbab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af3258eb3892c4facdd59aee1f7da85e3"><td class="memItemLeft" align="right" valign="top">std::string_view&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_behavior_node.html#af3258eb3892c4facdd59aee1f7da85e3">className</a> () const override</td></tr>
 <tr class="separator:af3258eb3892c4facdd59aee1f7da85e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a13fda4e3ef0a22976b67497bf13a6294"><td class="memItemLeft" align="right" valign="top">std::unique_ptr&lt; <a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_node_base.html">NodeBase</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_behavior_node.html#a13fda4e3ef0a22976b67497bf13a6294">clone</a> (<a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_node_graph.html">NodeGraph</a> &amp;graph) const override</td></tr>
@@ -319,46 +317,10 @@ Public Member Functions</h2></td></tr>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a36341c890365e3d540d99d720e1a4044"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_behavior_1_1_parameter_tuple.html">ParameterTuple</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_behavior_node.html#a36341c890365e3d540d99d720e1a4044">mDefaultParameters</a></td></tr>
 <tr class="separator:a36341c890365e3d540d99d720e1a4044"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aabce77482a34a7bc3166a671b1d27674"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_behavior_node.html#aabce77482a34a7bc3166a671b1d27674">mSubBehaviorCount</a> = 0</td></tr>
-<tr class="separator:aabce77482a34a7bc3166a671b1d27674"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="ad722c0a856364fe0253b55689c09cbab" name="ad722c0a856364fe0253b55689c09cbab"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad722c0a856364fe0253b55689c09cbab">&#9670;&#160;</a></span>BehaviorNode() <span class="overload">[1/3]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">Engine::Behavior::NodeGraph::BehaviorNode::BehaviorNode </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_node_graph.html">NodeGraph</a> &amp;&#160;</td>
-          <td class="paramname"><em>graph</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="struct_engine_1_1_behavior_1_1_behavior_handle.html">BehaviorHandle</a>&#160;</td>
-          <td class="paramname"><em>behavior</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="struct_engine_1_1_threading_1_1_task_future.html">Threading::TaskFuture</a>&lt; bool &gt; &amp;&#160;</td>
-          <td class="paramname"><em>future</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="a51381c219fac09cbf477c02b0a149608" name="a51381c219fac09cbf477c02b0a149608"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a51381c219fac09cbf477c02b0a149608">&#9670;&#160;</a></span>BehaviorNode() <span class="overload">[2/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a51381c219fac09cbf477c02b0a149608">&#9670;&#160;</a></span>BehaviorNode() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -386,7 +348,7 @@ Public Attributes</h2></td></tr>
 </div>
 </div>
 <a id="a32172439962ec030b98efa1c1bc62556" name="a32172439962ec030b98efa1c1bc62556"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a32172439962ec030b98efa1c1bc62556">&#9670;&#160;</a></span>BehaviorNode() <span class="overload">[3/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a32172439962ec030b98efa1c1bc62556">&#9670;&#160;</a></span>BehaviorNode() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -953,20 +915,6 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="aabce77482a34a7bc3166a671b1d27674" name="aabce77482a34a7bc3166a671b1d27674"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aabce77482a34a7bc3166a671b1d27674">&#9670;&#160;</a></span>mSubBehaviorCount</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint32_t Engine::Behavior::NodeGraph::BehaviorNode::mSubBehaviorCount = 0</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <hr/>The documentation for this struct was generated from the following files:<ul>
 <li>plugins/behavior/nodegraph/src/Madgine/nodegraph/nodes/<a class="el" href="behaviornode_8h.html">behaviornode.h</a></li>
 <li>plugins/behavior/nodegraph/src/Madgine/nodegraph/nodes/<a class="el" href="behaviornode_8cpp.html">behaviornode.cpp</a></li>
@@ -974,7 +922,7 @@ Public Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Jul 21 2026 13:36:52 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Tue Jul 21 2026 13:56:34 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>
