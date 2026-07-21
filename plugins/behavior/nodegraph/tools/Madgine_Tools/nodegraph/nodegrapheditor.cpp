@@ -7,6 +7,8 @@
 #include "Platform/filesystem/fsapi.h"
 #include "Platform/log/logsenders.h"
 
+#include "Meta/type/storageops.h"
+
 #include "Madgine/behavior/behavior.h"
 #include "Madgine/codegen/codegen_cpp.h"
 #include "Madgine/nodegraph/nodebase.h"
@@ -144,8 +146,8 @@ namespace Tools {
 
                 pinId = 0;
                 for (const Behavior::NodeGraph::NodeGraph::NamedInput &input : mGraph.mNamedInputs) {
-                    if (DataOutPin(input.mDescriptor.mName.c_str(), 0, pinId, 1, input.mDescriptor.mType, Behavior::NodeGraph::NodeExecutionMask::ALL, !input.mTargets.empty()))
-                        hoveredPin = input.mDescriptor.mType;
+                    if (DataOutPin(input.mDescriptor.mName.data(), 0, pinId, 1, (*input.mDescriptor.mType)->mType, Behavior::NodeGraph::NodeExecutionMask::ALL, !input.mTargets.empty()))
+                        hoveredPin = (*input.mDescriptor.mType)->mType;
                     ++pinId;
                 }
 
@@ -363,7 +365,7 @@ namespace Tools {
                                         }
                                     }
                                     return false;
-                                });                                   
+                                });
                                 ImGui::EndMenu();
                             }
                             ImGui::EndMenu();

@@ -35,11 +35,11 @@ SERIALIZETABLE_BEGIN(Engine::Behavior::NodeGraph::NodeGraph)
 SERIALIZETABLE_END(Engine::Behavior::NodeGraph::NodeGraph)
 
 METATABLE_BEGIN(Engine::Behavior::NodeGraph::NodeGraph::NamedInput)
-    MEMBER(mDescriptor)
+    //MEMBER(mDescriptor)
 METATABLE_END(Engine::Behavior::NodeGraph::NodeGraph::NamedInput)
 
 SERIALIZETABLE_BEGIN(Engine::Behavior::NodeGraph::NodeGraph::NamedInput)
-    FIELD(mDescriptor)
+    //FIELD(mDescriptor)
 SERIALIZETABLE_END(Engine::Behavior::NodeGraph::NodeGraph::NamedInput)
 
 namespace Engine {
@@ -89,16 +89,9 @@ namespace Behavior {
                 Serialize::FileManager mgr("Graph-Serializer");
                 Serialize::FormattedSerializeStream in = mgr.openRead(path, Serialize::Formats::xml);
 
-                std::vector<Threading::TaskFuture<bool>> futures;
-
-                Serialize::StreamResult result = Serialize::readState({ in, CallerHierarchy { std::ref(futures) } }, *this, "Graph");
+                Serialize::StreamResult result = Serialize::readState(in, *this, "Graph");
                 if (result.mState != ::Engine::Serialize::StreamState::OK)
                     co_return std::move(result);
-
-                for (Threading::TaskFuture<bool> fut : futures) {
-                    if (!co_await fut)
-                        co_return STREAM_UNKNOWN_ERROR(in) << "Failed to load node";
-                }
 
                 for (NodeBase *node : mNodes | std::views::transform(projectionUniquePtrToPtr)) {
                     size_t maxGroupCount = std::max({ node->flowOutGroupCount(),
@@ -654,11 +647,8 @@ namespace Behavior {
                 node = createNode(name);
             } else if (isAccessor) {
                 node = std::make_unique<AccessorNode>(*this, name);
-            } else {
-                Threading::TaskFuture<bool> fut;
-                node = std::make_unique<BehaviorNode>(*this, behavior, fut);
-                std::vector<Threading::TaskFuture<bool>> &futures = static_cast<const std::reference_wrapper<std::vector<Threading::TaskFuture<bool>>> &>(in.mHierarchy);
-                futures.emplace_back(std::move(fut));
+            } else {                
+                node = std::make_unique<BehaviorNode>(*this, behavior);
             }
 
             return {};

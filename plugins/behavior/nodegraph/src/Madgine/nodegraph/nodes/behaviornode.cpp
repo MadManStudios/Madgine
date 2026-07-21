@@ -2,7 +2,7 @@
 
 #include "behaviornode.h"
 
-
+#include "Madgine/behavior/behaviordescriptor.h"
 #include "Madgine/resources/resourcemanager.h"
 
 #include "Meta/reflect/metatable_impl.h"
@@ -40,13 +40,13 @@ namespace Behavior {
             {
             }
 
-            void start(NodeReceiver<NodeBase> receiver, const ParameterTuple &args)
+            void start(NodeReceiver<NodeBase> receiver, const Reflect::ArgumentList &args)
             {
                 NodeInterpretHandle<BehaviorNode> handle { { receiver.mInterpreter }, static_cast<const BehaviorNode &>(receiver.mNode) };
 
                 construct(mState,
                     std::move(receiver),
-                    mType.create(args, buildSubBehaviors(mType.subBehaviorCount(), handle)).connect(*this));
+                    mType.create(args, buildSubBehaviors(mType.descriptor().subBehaviorCount(), handle)).connect(*this));
 
                 mState->mBehavior->start();
             }
@@ -110,29 +110,12 @@ namespace Behavior {
             ManualLifetime<state> mState;
         };
 
-        BehaviorNode::BehaviorNode(NodeGraph &graph, BehaviorHandle behavior, Threading::TaskFuture<bool> &future)
-            : VirtualData(graph)
-            , mBehavior(std::move(behavior))
-            , mFullClassName(mBehavior.toString())
-            , mDefaultParameters(mBehavior.createParameters())
-        {
-            future = Engine::Resources::ResourceManager::getSingleton().taskQueue()->queueTask(mBehavior.state().then([this](bool success) {
-                if (success) {
-                    mSubBehaviorCount = mBehavior.subBehaviorCount();
-                    this->refresh();
-                }
-                return success;
-            }));
-        }
-
         BehaviorNode::BehaviorNode(NodeGraph &graph, BehaviorHandle behavior)
             : VirtualData(graph)
             , mBehavior(std::move(behavior))
             , mFullClassName(mBehavior.toString())
             , mDefaultParameters(mBehavior.createParameters())
         {
-            assert(mBehavior.state());
-            mSubBehaviorCount = mBehavior.subBehaviorCount();
             this->refresh();
         }
 
@@ -141,7 +124,6 @@ namespace Behavior {
             , mBehavior(other.mBehavior)
             , mFullClassName(other.mFullClassName)
             , mDefaultParameters(other.mDefaultParameters)
-            , mSubBehaviorCount(other.mSubBehaviorCount)
         {
         }
 
@@ -175,7 +157,7 @@ namespace Behavior {
             if (group == 0)
                 return 1;
             else
-                return mSubBehaviorCount;
+                return mBehavior.descriptor().subBehaviorCount();
         }
 
         std::string_view BehaviorNode::flowOutName(uint32_t index, uint32_t group) const
@@ -205,9 +187,9 @@ namespace Behavior {
             if (group == 0) {
                 throw 0;
             } else {
-                if (index >= mDefaultParameters.size())
+                if (index >= mBehavior.descriptor().parameterCount())
                     return "<unknown>";
-                return mDefaultParameters.name(index);
+                return mBehavior.descriptor().parameterName(index);
             }
         }
 
@@ -216,20 +198,20 @@ namespace Behavior {
             if (group == 0) {
                 throw 0;
             } else {
-                if (index >= mDefaultParameters.size())
+                if (index >= mBehavior.descriptor().parameterCount())
                     return { Reflect::ExtendedTypeEnum::GenericType };
-                return mDefaultParameters.type(index);
+                return mBehavior.descriptor().parameterType(index);
             }
         }
 
         uint32_t BehaviorNode::dataOutBaseCount(uint32_t group) const
         {
-            return mBehavior.resultTypes().size();
+            return mBehavior.descriptor().resultCount();
         }
 
         Reflect::ExtendedType BehaviorNode::dataOutType(uint32_t index, uint32_t group, bool bidir) const
         {
-            return mBehavior.resultTypes()[index];
+            return mBehavior.descriptor().resultType(index);
         }
 
         void BehaviorNode::setupInterpret(NodeInterpreterStateBase &interpreter, std::unique_ptr<NodeInterpreterData> &data) const

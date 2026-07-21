@@ -63,6 +63,13 @@ namespace Behavior {
             return { this, sMetaTablePtr };
         }
 
+        Reflect::ArgumentList toArgumentList() override
+        {
+            return [this]<size_t... Is>(auto_pack<Is...>) {
+                return Reflect::ArgumentList { std::get<Is>(this->mTuple)... };
+            }(index_pack_for<Ty...> {});
+        }
+
         Serialize::StreamResult read(Serialize::CallerHierarchyFormattedSerializeStream in) override
         {
             std::tuple<dependent_t<Serialize::StreamResult, Ty>...> results;

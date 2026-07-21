@@ -48,7 +48,7 @@ namespace Behavior {
         return info->name();
     }
 
-    Behavior NativeBehaviorFactory::create(const UniqueOpaquePtr &handle, const ParameterTuple &args, std::vector<Behavior> behaviors) const
+    Behavior NativeBehaviorFactory::create(const UniqueOpaquePtr &handle, const Reflect::ArgumentList &args, std::vector<Behavior> behaviors) const
     {
         const NativeBehaviorInfo *info = handle.as<const NativeBehaviorInfo *>();
         return info->create(args, std::move(behaviors));
@@ -60,31 +60,10 @@ namespace Behavior {
         return info->createParameters();
     }
 
-    std::vector<Reflect::ExtendedType> NativeBehaviorFactory::parameterTypes(const UniqueOpaquePtr &handle) const
+    const BehaviorDescriptor &NativeBehaviorFactory::descriptor(const UniqueOpaquePtr &handle) const
     {
         const NativeBehaviorInfo *info = handle.as<const NativeBehaviorInfo *>();
-        auto types = info->parameterTypes();
-        return { types.begin(), types.end() };
-    }
-
-    std::vector<Reflect::ExtendedType> NativeBehaviorFactory::resultTypes(const UniqueOpaquePtr &handle) const
-    {
-        const NativeBehaviorInfo *info = handle.as<const NativeBehaviorInfo *>();
-        auto types = info->resultTypes();
-        return { types.begin(), types.end() };
-    }
-
-    std::vector<NamedDescriptor> NativeBehaviorFactory::namedInputs(const UniqueOpaquePtr &handle) const
-    {
-        const NativeBehaviorInfo *info = handle.as<const NativeBehaviorInfo *>();
-        auto bindings = info->namedInputs();
-        return { bindings.begin(), bindings.end() };
-    }
-
-    size_t NativeBehaviorFactory::subBehaviorCount(const UniqueOpaquePtr &handle) const
-    {
-        const NativeBehaviorInfo *info = handle.as<const NativeBehaviorInfo *>();
-        return info->subBehaviorCount();
+        return info->descriptor();
     }
 
 }

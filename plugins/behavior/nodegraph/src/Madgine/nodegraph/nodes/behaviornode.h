@@ -13,7 +13,6 @@ namespace Behavior {
         // TODO rename to BehaviorNode
         struct MADGINE_NODEGRAPH_EXPORT BehaviorNode : Serialize::VirtualData<BehaviorNode, Reflect::VirtualScope<BehaviorNode, NodeBase>> {
 
-            BehaviorNode(NodeGraph &graph, BehaviorHandle behavior, Threading::TaskFuture<bool> &future);
             BehaviorNode(NodeGraph &graph, BehaviorHandle behavior);
             BehaviorNode(const BehaviorNode &other, NodeGraph &graph);
 
@@ -45,7 +44,6 @@ namespace Behavior {
 
         public:
             ParameterTuple mDefaultParameters;
-            uint32_t mSubBehaviorCount = 0;
         };
 
     }

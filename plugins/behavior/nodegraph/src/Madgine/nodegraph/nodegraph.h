@@ -2,7 +2,7 @@
 
 #include "Platform/filesystem/path.h"
 
-#include "Madgine/behavior/nameddescriptor.h"
+#include "Madgine/behavior/behaviordescriptor.h"
 
 #include "nodebase.h"
 
@@ -75,7 +75,7 @@ namespace Behavior {
             std::string mLayoutData;
 
             struct NamedInput {
-                NamedDescriptor mDescriptor { "Unnamed", Reflect::ExtendedTypeIndex { Reflect::ExtendedTypeEnum::GenericType } };
+                BehaviorDescriptor::Parameter mDescriptor { "Unnamed", nullptr };
                 std::vector<Pin> mTargets;
             };
             std::vector<NamedInput> mNamedInputs;

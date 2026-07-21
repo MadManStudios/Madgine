@@ -3,10 +3,13 @@
 #include "python3behaviors.h"
 
 #include "Meta/reflect/value.h"
+#include "Meta/type/storageops.h"
 
 #include "Modules/uniquecomponent/uniquecomponentcollector.h"
 
 #include "Madgine/behavior/behavior.h"
+#include "Madgine/behavior/behaviordescriptor.h"
+#include "Madgine/behavior/dynamicparametertuple.h"
 #include "Madgine/behavior/named.h"
 #include "Madgine/behavior/parametertuple.h"
 #include "Madgine/debug/debuglocation.h"
@@ -56,103 +59,16 @@ namespace Behavior {
             .tp_new = PyType_GenericNew,
         };
 
-        struct Python3ParameterTuple : ParameterTupleBase {
-
-            Python3ParameterTuple(const Python3BehaviorFactory::Entry &entry)
-                : mEntry(entry)
-                , mValues(std::true_type {}, entry.mInfo.mArguments.size())
-            {
-                for (size_t i = 0; i < mValues.size(); ++i) {
-                    Reflect::ExtendedType type = entry.mInfo.mArguments[i].mType;
-                    if (type.mType == Reflect::ExtendedTypeEnum::VariantType) {
-                        mValues[i].setType(type.unwrapVariant().first);
-                    } else {
-                        mValues[i].setType(type);
-                    }
-                }
-            }
-
-            size_t size() const override
-            {
-                return mValues.size();
-            }
-
-            std::string_view name(size_t index) const override
-            {
-                return mEntry.mInfo.mArguments[index].mName;
-            }
-
-            Reflect::ExtendedType type(size_t index) const override
-            {
-                return mEntry.mInfo.mArguments[index].mType;
-            }
-
-            std::unique_ptr<ParameterTupleBase> clone() override
-            {
-                return std::make_unique<Python3ParameterTuple>(*this);
-            }
-
-            Reflect::ScopePtr customScopePtr() override
-            {
-                return { this, &mEntry.mMetaTable };
-            }
-
-            Serialize::StreamResult read(Serialize::CallerHierarchyFormattedSerializeStream in) override
-            {
-                for (size_t i = 0; i < mValues.size(); ++i) {
-                }
-                return {};
-            }
-
-            void write(Serialize::CallerHierarchyFormattedSerializeStream out) override
-            {
-                for (size_t i = 0; i < mValues.size(); ++i) {
-                }
-            }
-
-            Serialize::StreamResult applyMap(Serialize::CallerHierarchyFormattedSerializeStream in, bool success) override
-            {
-                for (size_t i = 0; i < mValues.size(); ++i) {
-                }
-                return {};
-            }
-
-            const Python3BehaviorFactory::Entry &mEntry;
-            Reflect::ArgumentList mValues;
-        };
-
-        std::unique_ptr<Reflect::Accessor[]> Python3BehaviorFactory::Entry::accessors(const PythonFunctionInfo &info)
-        {
-            std::unique_ptr<Reflect::Accessor[]> accessors = std::make_unique<Reflect::Accessor[]>(info.mArguments.size() + 1);
-
-            for (size_t i = 0; i < info.mArguments.size(); ++i) {
-                accessors[i] = Reflect::Accessor {
-                    info.mArguments[i].mName.data(),
-                    nullptr,
-                    [](const Reflect::Accessor *self, Reflect::Value &out, const Reflect::Value &scope) -> Reflect::Result {
-                        size_t index = self - (*scope.type().mSecondary.mMetaTable)->mMembers;
-                        return invoke(out, [index](Python3ParameterTuple &tuple) { return tuple.mValues[index]; }, scope);
-                    },
-                    [](const Reflect::Accessor *self, const Reflect::Value &scope, const Reflect::Value &val) -> Reflect::Result {
-                        size_t index = self - (*scope.type().mSecondary.mMetaTable)->mMembers;
-                        return invoke([&](Python3ParameterTuple &tuple) { tuple.mValues[index] = val; }, scope);
-                    },
-                    info.mArguments[i].mType,
-                    info.mArguments[i].mFlags
-                };
-            }
-
-            return accessors;
-        }
-
-        Python3BehaviorFactory::Entry::Entry(PyObjectPtr function)
+        Python3BehaviorFactory::Entry::Entry(const char *name, PyObjectPtr function, Reflect::ExtendedType type, std::list<std::string> nameCache, std::vector<BehaviorDescriptor::Parameter> parameters)
             : mFunction(std::move(function))
-            , mInfo(Python3FileLoader::functionInfo(mFunction))
-            , mTupleName(mInfo.mName + "Parameters")
-            , mTupleAccessors(accessors(mInfo))
+            , mNameCache(std::move(nameCache))
+            , mReturnType(Reflect::ExtendedTypeEnum::GenericType)
             , mMetaTable(&mMetaTablePtr, mTupleName.c_str(), mTupleAccessors.get())
+            , mTupleName(name + "Parameters"s)
+            , mParameters(std::move(parameters))
+            , mDescriptor { mParameters, { &mReturnType, 1 }, 0 }
+            , mTupleAccessors(parameterAccessors(mParameters))
         {
-            mMetaTable.mBase = &table<Python3ParameterTuple>;
         }
 
         struct Python3BehaviorState : BehaviorReceiver {
@@ -249,7 +165,44 @@ namespace Behavior {
             if (!patchedFn)
                 return nullptr;
 
-            Python3BehaviorFactory::sFactory.mBehaviorObjects.try_emplace(name, patchedFn);
+            PyObjectPtr signature = PyModulePtr { "inspect" }.get("signature").call("(O)", (PyObject *)patchedFn);
+
+            Reflect::ExtendedType returnType = PyToValueTypeDesc(signature.get("return_annotation"));
+
+            PyObjectPtr parameters = signature.get("parameters");
+
+            PyObjectPtr iter = PyObject_GetIter(parameters);
+
+            std::list<std::string> nameCache;
+            std::vector<BehaviorDescriptor::Parameter> parameterList;
+            while (PyObjectPtr key = PyIter_Next(iter)) {
+                PyObjectPtr parameter = PyObject_GetItem(parameters, key);
+                PyObjectPtr type = parameter.get("annotation");
+
+                PyObjectPtr ascii = PyUnicode_AsASCIIString(key);
+                std::string &name = nameCache.emplace_back(PyBytes_AsString(ascii));
+
+                if (Py_IS_TYPE(type, &Py_GenericAliasType)) {
+                    type = PyTuple_GetItem(type.get("__args__"), 0);
+                    const Type::StorageOps *ops = PyToStorageOps(type);
+                    if (!ops) {
+                        PyErr_Format(PyExc_AssertionError, "Parameter of type %R does not have storage defined!", (PyObject *)type);
+                        return nullptr;
+                    }
+
+                    parameterList.push_back({ name, Type::resolveVariantStorageOps({ storageOps<std::monostate>, ops }).mSelf });
+                } else {
+                    const Type::StorageOps *ops = PyToStorageOps(type);
+                    if (!ops) {
+                        PyErr_Format(PyExc_AssertionError, "Parameter of type %R does not have storage defined!", (PyObject *)type);
+                        return nullptr;
+                    }
+
+                    parameterList.push_back({ name, ops->mSelf });
+                }
+            }
+
+            Python3BehaviorFactory::sFactory.mBehaviorObjects.try_emplace(name, name, patchedFn, returnType, std::move(nameCache), std::move(parameterList));
 
             Py_IncRef(fn);
             return fn;
@@ -264,7 +217,9 @@ namespace Behavior {
         UniqueOpaquePtr Python3BehaviorFactory::load(std::string_view name) const
         {
             UniqueOpaquePtr ptr;
-            ptr.setupAs<std::pair<const std::string_view, Entry> *>() = &*sFactory.mBehaviorObjects.find(name);
+            auto it = sFactory.mBehaviorObjects.find(name);
+            if (it != sFactory.mBehaviorObjects.end())
+                ptr.setupAs<std::pair<const std::string_view, Entry> *>() = &*it;
             return ptr;
         }
 
@@ -285,49 +240,26 @@ namespace Behavior {
             return fn->first;
         }
 
-        Behavior Python3BehaviorFactory::create(const UniqueOpaquePtr &handle, const ParameterTuple &args, std::vector<Behavior> behaviors) const
+        Behavior Python3BehaviorFactory::create(const UniqueOpaquePtr &handle, const Reflect::ArgumentList &args, std::vector<Behavior> behaviors) const
         {
             const std::pair<const std::string_view, Entry> *fn = handle.as<std::pair<const std::string_view, Entry> *>();
-            return Python3BehaviorSender { {}, fn->second.mFunction, args.get<Python3ParameterTuple>().mValues };
+            return Python3BehaviorSender { {}, fn->second.mFunction, args };
         }
 
         ParameterTuple Python3BehaviorFactory::createParameters(const UniqueOpaquePtr &handle) const
         {
             const std::pair<const std::string_view, Entry> *fn = handle.as<std::pair<const std::string_view, Entry> *>();
 
-            return ParameterTuple { std::make_unique<Python3ParameterTuple>(fn->second) };
+            return ParameterTuple { fn->second.mMetaTable, fn->second.mParameters };
         }
 
-        std::vector<Reflect::ExtendedType> Python3BehaviorFactory::parameterTypes(const UniqueOpaquePtr &handle) const
+        const BehaviorDescriptor &Python3BehaviorFactory::descriptor(const UniqueOpaquePtr &handle) const
         {
             const std::pair<const std::string_view, Entry> *fn = handle.as<std::pair<const std::string_view, Entry> *>();
-            auto types = fn->second.mInfo.mArguments | std::views::transform(&PythonFunctionArgument::mType);
-            return { types.begin(), types.end() };
+
+            return fn->second.mDescriptor;
         }
-
-        std::vector<Reflect::ExtendedType> Python3BehaviorFactory::resultTypes(const UniqueOpaquePtr &handle) const
-        {
-            // const Python3FileLoader::Handle &file = handle.as<Python3FileLoader::Handle>();
-            return {};
-        }
-
-        std::vector<NamedDescriptor> Python3BehaviorFactory::namedInputs(const UniqueOpaquePtr &handle) const
-        {
-            // const Python3FileLoader::Handle &file = handle.as<Python3FileLoader::Handle>();
-            return {};
-        }
-
-        size_t Python3BehaviorFactory::subBehaviorCount(const UniqueOpaquePtr &handle) const
-        {
-            return 0;
-        }
-
-        
-
     }
 
 }
 }
-
-METATABLE_BEGIN(Engine::Behavior::Python3::Python3ParameterTuple)
-METATABLE_END(Engine::Behavior::Python3::Python3ParameterTuple);

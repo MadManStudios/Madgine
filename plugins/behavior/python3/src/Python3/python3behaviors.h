@@ -3,6 +3,7 @@
 #include "Meta/reflect/metatable.h"
 
 #include "Madgine/behavior/behaviorcollector.h"
+#include "Madgine/behavior/behaviordescriptor.h"
 #include "Madgine/debug/continuation.h"
 
 #include "python3fileloader.h"
@@ -24,20 +25,19 @@ namespace Behavior {
             Threading::TaskFuture<bool> state(const UniqueOpaquePtr &handle) const override;
             void release(UniqueOpaquePtr &ptr) const override;
             std::string_view name(const UniqueOpaquePtr &handle) const override;
-            Behavior create(const UniqueOpaquePtr &handle, const ParameterTuple &args, std::vector<Behavior> behaviors) const override;
+            Behavior create(const UniqueOpaquePtr &handle, const Reflect::ArgumentList &args, std::vector<Behavior> behaviors) const override;
             ParameterTuple createParameters(const UniqueOpaquePtr &handle) const override;
-            std::vector<Reflect::ExtendedType> parameterTypes(const UniqueOpaquePtr &handle) const override;
-            std::vector<Reflect::ExtendedType> resultTypes(const UniqueOpaquePtr &handle) const override;
-            std::vector<NamedDescriptor> namedInputs(const UniqueOpaquePtr &handle) const override;
-            size_t subBehaviorCount(const UniqueOpaquePtr &handle) const override;
+            const BehaviorDescriptor &descriptor(const UniqueOpaquePtr &handle) const override;
 
             struct Entry {
-                Entry(PyObjectPtr function);
+                Entry(const char *name, PyObjectPtr function, Reflect::ExtendedType type, std::list<std::string> nameCache, std::vector<BehaviorDescriptor::Parameter> parameters);
 
-                static std::unique_ptr<Reflect::Accessor[]> accessors(const PythonFunctionInfo &info);
+                std::list<std::string> mNameCache;
+                std::vector<BehaviorDescriptor::Parameter> mParameters;
+                Reflect::ExtendedType mReturnType;
 
                 PyObjectPtr mFunction;
-                PythonFunctionInfo mInfo;
+                BehaviorDescriptor mDescriptor;                
 
                 std::string mTupleName;
                 std::unique_ptr<Reflect::Accessor[]> mTupleAccessors;

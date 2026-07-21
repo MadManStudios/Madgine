@@ -12,13 +12,12 @@ namespace Behavior {
     struct BehaviorList;
 
     struct ParameterTuple;
+    struct BehaviorDescriptor;
 
     struct BehaviorFactoryBase;
 
     template <fixed_string Name, typename T>
     struct Named;
-
-    struct NamedDescriptor;
 
     struct HandlerBase;
     struct HandlerManager;
@@ -31,7 +30,6 @@ namespace Behavior {
     template <Execution::AnySender Sender>
     struct SenderBehaviorState;
 
-    
     template <typename T>
     struct Bindable;
 

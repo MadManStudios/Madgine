@@ -4,6 +4,7 @@
 
 #include "Meta/serialize/streams/streamresult.h"
 
+#include "Madgine/behavior/behaviordescriptor.h"
 #include "Madgine/behavior/typedparametertuple.h"
 
 #include "Meta/reflect/metatable_impl.h"
@@ -76,7 +77,7 @@ namespace Behavior {
             return graph.name();
         }
 
-        Behavior NodeGraphBehaviorFactory::create(const UniqueOpaquePtr &handle, const ParameterTuple &args, std::vector<Behavior> behaviors) const
+        Behavior NodeGraphBehaviorFactory::create(const UniqueOpaquePtr &handle, const Reflect::ArgumentList &args, std::vector<Behavior> behaviors) const
         {
             const NodeGraphLoader::Handle &graph = handle.as<NodeGraphLoader::Handle>();
             return graph.interpret();
@@ -88,28 +89,11 @@ namespace Behavior {
             return ParameterTuple { std::make_tuple(), auto_pack<> {} };
         }
 
-        std::vector<Reflect::ExtendedType> NodeGraphBehaviorFactory::parameterTypes(const UniqueOpaquePtr &handle) const
+        const BehaviorDescriptor &NodeGraphBehaviorFactory::descriptor(const UniqueOpaquePtr &handle) const
         {
             const NodeGraphLoader::Handle &graph = handle.as<NodeGraphLoader::Handle>();
+            throw "TODO";
             return {};
-        }
-
-        std::vector<Reflect::ExtendedType> NodeGraphBehaviorFactory::resultTypes(const UniqueOpaquePtr &handle) const
-        {
-            const NodeGraphLoader::Handle &graph = handle.as<NodeGraphLoader::Handle>();
-            return {};
-        }
-
-        std::vector<NamedDescriptor> NodeGraphBehaviorFactory::namedInputs(const UniqueOpaquePtr &handle) const
-        {
-            const NodeGraphLoader::Handle &graph = handle.as<NodeGraphLoader::Handle>();
-            auto bindings = graph->mNamedInputs | std::views::transform(&NodeGraph::NamedInput::mDescriptor);
-            return { bindings.begin(), bindings.end() };
-        }
-
-        size_t NodeGraphBehaviorFactory::subBehaviorCount(const UniqueOpaquePtr &handle) const
-        {
-            return 0;
         }
 
     }

@@ -6,14 +6,16 @@
 
 #include "Meta/reflect/metatable_impl.h"
 
+#include "dynamicparametertuple.h"
+
 METATABLE_BEGIN(Engine::Behavior::ParameterTuple)
 METATABLE_END(Engine::Behavior::ParameterTuple)
 
 namespace Engine {
 namespace Behavior {
 
-    ParameterTuple::ParameterTuple(std::unique_ptr<ParameterTupleBase> tuple)
-        : mTuple(std::move(tuple))
+    ParameterTuple::ParameterTuple(const Reflect::MetaTable &metaTable, const std::vector<BehaviorDescriptor::Parameter> &parameters)
+        : mTuple(std::make_unique<DynamicParameterTuple>(metaTable, parameters))
     {
     }
 

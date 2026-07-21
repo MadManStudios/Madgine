@@ -58,14 +58,9 @@ namespace Behavior {
         mIndex.reset();
     }
 
-    Behavior BehaviorHandle::create(const ParameterTuple &args, std::vector<Behavior> behaviors) const
+    Behavior BehaviorHandle::create(const Reflect::ArgumentList &args, std::vector<Behavior> behaviors) const
     {
         return BehaviorFactoryRegistry::get(mIndex).mFactory->create(mHandle, args, std::move(behaviors));
-    }
-
-    Threading::TaskFuture<bool> BehaviorHandle::state() const
-    {
-        return BehaviorFactoryRegistry::get(mIndex).mFactory->state(mHandle);
     }
 
     ParameterTuple BehaviorHandle::createParameters() const
@@ -73,24 +68,14 @@ namespace Behavior {
         return BehaviorFactoryRegistry::get(mIndex).mFactory->createParameters(mHandle);
     }
 
-    std::vector<Reflect::ExtendedType> BehaviorHandle::parameterTypes() const
+    Threading::TaskFuture<bool> BehaviorHandle::state() const
     {
-        return BehaviorFactoryRegistry::get(mIndex).mFactory->parameterTypes(mHandle);
+        return BehaviorFactoryRegistry::get(mIndex).mFactory->state(mHandle);
     }
 
-    std::vector<Reflect::ExtendedType> BehaviorHandle::resultTypes() const
+    const BehaviorDescriptor &BehaviorHandle::descriptor() const
     {
-        return BehaviorFactoryRegistry::get(mIndex).mFactory->resultTypes(mHandle);
-    }
-
-    std::vector<NamedDescriptor> BehaviorHandle::namedInputs() const
-    {
-        return BehaviorFactoryRegistry::get(mIndex).mFactory->namedInputs(mHandle);
-    }
-
-    size_t BehaviorHandle::subBehaviorCount() const
-    {
-        return BehaviorFactoryRegistry::get(mIndex).mFactory->subBehaviorCount(mHandle);
+        return BehaviorFactoryRegistry::get(mIndex).mFactory->descriptor(mHandle);
     }
 
     std::string_view BehaviorHandle::name() const

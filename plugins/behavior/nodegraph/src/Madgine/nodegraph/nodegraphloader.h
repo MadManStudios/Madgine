@@ -36,12 +36,9 @@ namespace Behavior {
             Threading::TaskFuture<bool> state(const UniqueOpaquePtr &handle) const override;
             void release(UniqueOpaquePtr &ptr) const override;
             std::string_view name(const UniqueOpaquePtr &handle) const override;
-            Behavior create(const UniqueOpaquePtr &handle, const ParameterTuple &args, std::vector<Behavior> behaviors) const override;
+            Behavior create(const UniqueOpaquePtr &handle, const Reflect::ArgumentList &args, std::vector<Behavior> behaviors) const override;
             ParameterTuple createParameters(const UniqueOpaquePtr &handle) const override;
-            std::vector<Reflect::ExtendedType> parameterTypes(const UniqueOpaquePtr &handle) const override;
-            std::vector<Reflect::ExtendedType> resultTypes(const UniqueOpaquePtr &handle) const override;
-            std::vector<NamedDescriptor> namedInputs(const UniqueOpaquePtr &handle) const override;
-            size_t subBehaviorCount(const UniqueOpaquePtr &handle) const override;
+            const BehaviorDescriptor &descriptor(const UniqueOpaquePtr &handle) const override;
         };
 
     }

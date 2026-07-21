@@ -5,7 +5,6 @@
 #include "Modules/threading/taskfuture.h"
 
 #include "behavior.h"
-#include "nameddescriptor.h"
 
 namespace Engine {
 namespace Behavior {
@@ -23,13 +22,10 @@ namespace Behavior {
 
         void reset();
 
-        Behavior create(const ParameterTuple &args, std::vector<Behavior> behaviors = {}) const;
-        Threading::TaskFuture<bool> state() const;
+        Behavior create(const Reflect::ArgumentList &args, std::vector<Behavior> behaviors = {}) const;
         ParameterTuple createParameters() const;
-        std::vector<Reflect::ExtendedType> parameterTypes() const;
-        std::vector<Reflect::ExtendedType> resultTypes() const;
-        std::vector<NamedDescriptor> namedInputs() const;
-        size_t subBehaviorCount() const;
+        Threading::TaskFuture<bool> state() const;
+        const BehaviorDescriptor &descriptor() const;
 
         std::string_view name() const;
 

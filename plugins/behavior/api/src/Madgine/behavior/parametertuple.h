@@ -1,7 +1,10 @@
 #pragma once
 
+#include "Meta/reflect/argumentlist.h"
 #include "Meta/reflect/type.h"
 #include "Meta/serialize/streams/streamresult.h"
+
+#include "behaviordescriptor.h"
 
 namespace Engine {
 namespace Behavior {
@@ -19,6 +22,7 @@ namespace Behavior {
 
         virtual std::unique_ptr<ParameterTupleBase> clone() = 0;
         virtual Reflect::ScopePtr customScopePtr() = 0;
+        virtual Reflect::ArgumentList toArgumentList() = 0;
 
         virtual Serialize::StreamResult read(Serialize::CallerHierarchyFormattedSerializeStream in) = 0;
         virtual void write(Serialize::CallerHierarchyFormattedSerializeStream out) = 0;
@@ -36,7 +40,7 @@ namespace Behavior {
         }
         ParameterTuple(ParameterTuple &&) noexcept = default;
 
-        ParameterTuple(std::unique_ptr<ParameterTupleBase> tuple);
+        ParameterTuple(const Reflect::MetaTable &metaTable, const std::vector<BehaviorDescriptor::Parameter> &parameters);
 
         template <typename... Ty, auto... Names>
         ParameterTuple(std::tuple<Ty...> parameters, auto_pack<Names...>)
@@ -54,20 +58,9 @@ namespace Behavior {
 
         Reflect::ScopePtr customScopePtr();
 
-        template <typename... Ty>
-        bool get(std::tuple<Ty...> &out) const
+        operator Reflect::ArgumentList() const
         {
-            ParameterTupleInstance<Ty...> *instance = dynamic_cast<ParameterTupleInstance<Ty...> *>(mTuple.get());
-            if (instance) {
-                out = instance->mTuple;
-            }
-            return instance;
-        }
-
-        template <typename T>
-        const T &get() const
-        {
-            return *static_cast<T *>(mTuple.get());
+            return mTuple->toArgumentList();
         }
 
         size_t size() const

@@ -3,7 +3,7 @@ Project(Behavior)
 set(sources "")
 FolderSources(sources "" src)
 	FolderSources(sources src Madgine behaviorforward.h behaviorlib.h)
-		FolderSources(sources Madgine behavior behavior.cpp behavior.h behaviorcollector.cpp behaviorcollector.h behaviorcoroutine.cpp behaviorcoroutine.h behaviorhandle.cpp behaviorhandle.h behaviorlist.cpp behaviorlist.h behaviorreceiver.cpp behaviorreceiver.h nameddescriptor.cpp nativebehaviorcollector.cpp nativebehaviorcollector.h parametertuple.cpp parametertuple.h)
+		FolderSources(sources Madgine behavior behavior.cpp behavior.h behaviorcollector.cpp behaviorcollector.h behaviorcoroutine.cpp behaviorcoroutine.h behaviordescriptor.cpp behaviordescriptor.h behaviorhandle.cpp behaviorhandle.h behaviorlist.cpp behaviorlist.h behaviorreceiver.cpp behaviorreceiver.h dynamicparametertuple.cpp dynamicparametertuple.h nativebehaviorcollector.cpp nativebehaviorcollector.h parametertuple.cpp parametertuple.h)
 		
 add_plugin(Behavior Madgine Core ${sources} PRECOMPILED_HEADER src/Madgine/behaviorlib.h API_PLUGIN)
 

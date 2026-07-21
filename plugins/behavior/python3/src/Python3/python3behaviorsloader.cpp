@@ -7,7 +7,6 @@
 
 #include "Madgine/behavior/behaviorcollector.h"
 #include "Madgine/behavior/behaviorhandle.h"
-#include "Madgine/behavior/parametertuple.h"
 
 #include "Meta/reflect/metatable_impl.h"
 
@@ -115,17 +114,15 @@ namespace Behavior {
         {
             assert(PyTuple_Check(args));
 
-            ParameterTuple parameters = self->mHandle.createParameters();
-
             size_t argCount = PyTuple_Size(args);
-            /* Reflect::ArgumentList arguments { std::true_type {}, argCount };
+            Reflect::ArgumentList arguments { std::true_type {}, argCount };
 
             for (size_t i = 0; i < argCount; ++i) {
                 PYTHON3_PROPAGATE_ERROR(fromPyObject(arguments[i], PyTuple_GetItem(args, i)));
-            }*/
+            }
 
             PyObject *obj = PyObject_CallObject((PyObject *)&PyBehaviorType, NULL);
-            new (&reinterpret_cast<PyBehavior *>(obj)->mBehavior) Behavior(self->mHandle.create(parameters));
+            new (&reinterpret_cast<PyBehavior *>(obj)->mBehavior) Behavior(self->mHandle.create(arguments));
 
             return obj;
         }
