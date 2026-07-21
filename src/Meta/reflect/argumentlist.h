@@ -6,6 +6,8 @@ namespace Reflect {
     struct META_EXPORT ArgumentList {
 
         using value_type = Value;
+        using iterator = std::vector<Reflect::Value>::iterator;
+        using const_iterator = std::vector<Reflect::Value>::const_iterator;
 
         ArgumentList();
         ArgumentList(std::true_type, size_t size);
@@ -37,12 +39,12 @@ namespace Reflect {
         size_t size() const;
         void push_back(Value &&);
         const Value &at(size_t i) const;
-        void insert(std::vector<Value>::const_iterator where, std::vector<Value>::const_iterator from, std::vector<Value>::const_iterator to);
+        void insert(const_iterator where, const_iterator from, const_iterator to);
 
-        std::vector<Value>::iterator begin();
-        std::vector<Value>::iterator end();
-        std::vector<Value>::const_iterator begin() const;
-        std::vector<Value>::const_iterator end() const;
+        iterator begin();
+        iterator end();
+        const_iterator begin() const;
+        const_iterator end() const;
 
         friend META_EXPORT std::ostream &operator<<(std::ostream &out, const ArgumentList &list);
 

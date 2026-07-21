@@ -25,11 +25,13 @@ namespace Behavior {
 
             Reflect::Value retVal;
             Reflect::Result result;
-            {
-                Python3Suspend suspend;
-                result = self->mFunction(retVal, arguments);
-            }
-            PYTHON3_PROPAGATE_ERROR(std::move(result));
+
+            Py_BEGIN_ALLOW_THREADS
+                result
+                = self->mFunction(retVal, arguments);
+            Py_END_ALLOW_THREADS
+
+                PYTHON3_PROPAGATE_ERROR(std::move(result));
 
             return toPyObject(retVal);
         }

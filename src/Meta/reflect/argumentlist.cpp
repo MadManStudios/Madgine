@@ -69,27 +69,27 @@ namespace Reflect {
         return mElements.at(i);
     }
 
-    void ArgumentList::insert(std::vector<Value>::const_iterator where, std::vector<Value>::const_iterator from, std::vector<Value>::const_iterator to)
+    void ArgumentList::insert(ArgumentList::const_iterator where, ArgumentList::const_iterator from, ArgumentList::const_iterator to)
     {
         mElements.insert(where, from, to);
     }
 
-    std::vector<Value>::iterator ArgumentList::begin()
+    ArgumentList::iterator ArgumentList::begin()
     {
         return mElements.begin();
     }
 
-    std::vector<Value>::iterator ArgumentList::end()
+    ArgumentList::iterator ArgumentList::end()
     {
         return mElements.end();
     }
 
-    std::vector<Value>::const_iterator ArgumentList::begin() const
+    ArgumentList::const_iterator ArgumentList::begin() const
     {
         return mElements.begin();
     }
 
-    std::vector<Value>::const_iterator ArgumentList::end() const
+    ArgumentList::const_iterator ArgumentList::end() const
     {
         return mElements.end();
     }
