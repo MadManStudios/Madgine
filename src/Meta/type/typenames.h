@@ -6,7 +6,6 @@ namespace Type {
     struct TypeName {
         std::map<std::string, TypeName, std::less<>> mMembers;
 
-        const Serialize::SerializeTable *mSerializeTable = nullptr;
         const Reflect::MetaTable *mMetaTable = nullptr;
         const StorageOps *mStorageOps = nullptr;
     };
@@ -15,8 +14,6 @@ namespace Type {
 
     META_EXPORT const std::map<std::string, TypeName, std::less<>> &typeList();
 
-    META_EXPORT void registerSerializeTable(const Serialize::SerializeTable &table);
-    META_EXPORT void unregisterSerializeTable(const Serialize::SerializeTable &table);
     META_EXPORT void registerMetaTable(const Reflect::MetaTable &table);
     META_EXPORT void unregisterMetaTable(const Reflect::MetaTable &table);
     META_EXPORT void registerStorageOps(const Type::StorageOps &ops);

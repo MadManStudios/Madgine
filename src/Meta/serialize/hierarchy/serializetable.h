@@ -84,21 +84,5 @@ namespace Serialize {
         StreamResult readFunctionError(SyncableUnitBase *unit, CallerHierarchyFormattedSerializeStream in, PendingRequest &request) const;
     };
 
-    namespace __serialize_impl__ {
-
-        template <typename T>
-        struct SerializeTableRegistrator {
-            SerializeTableRegistrator()
-            {
-                Type::registerSerializeTable(serializeTable<T>());
-            }
-            ~SerializeTableRegistrator()
-            {
-                Type::unregisterSerializeTable(serializeTable<T>());
-            }
-        };
-
-    }
-
 }
 }

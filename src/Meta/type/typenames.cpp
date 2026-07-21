@@ -57,16 +57,6 @@ namespace Type {
         return *type;
     }
 
-    void registerSerializeTable(const Serialize::SerializeTable &table)
-    {
-        addTypeName(table.mTypeName).mSerializeTable = &table;
-    }
-
-    void unregisterSerializeTable(const Serialize::SerializeTable &table)
-    {
-        addTypeName(table.mTypeName).mSerializeTable = nullptr;
-    }
-
     void registerMetaTable(const Reflect::MetaTable &table)
     {
         addTypeName(table.mTypeName).mMetaTable = &table;
