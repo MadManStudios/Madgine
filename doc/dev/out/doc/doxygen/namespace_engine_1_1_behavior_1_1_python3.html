@@ -424,8 +424,8 @@ Functions</h2></td></tr>
 <tr class="separator:aec2794c8779679af4bea1b4683f32212"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aabb3437db275b8e74be2e8787dcad7db"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#aabb3437db275b8e74be2e8787dcad7db">PyState_Dealloc</a> (<a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_state_helper.html">PyStateHelper</a> *state)</td></tr>
 <tr class="separator:aabb3437db275b8e74be2e8787dcad7db"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afd7297d159e7f42f8e41e0f768a739b6"><td class="memItemLeft" align="right" valign="top">PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#afd7297d159e7f42f8e41e0f768a739b6">PyState_next</a> (PyObject *self)</td></tr>
-<tr class="separator:afd7297d159e7f42f8e41e0f768a739b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a77a7d952466bb58ba1c40fbafe657c0e"><td class="memItemLeft" align="right" valign="top">PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#a77a7d952466bb58ba1c40fbafe657c0e">PyState_next</a> (<a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_state_helper.html">PyStateHelper</a> *self)</td></tr>
+<tr class="separator:a77a7d952466bb58ba1c40fbafe657c0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af54a76485f10e233b06aeb4035534d05"><td class="memItemLeft" align="right" valign="top">PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#af54a76485f10e233b06aeb4035534d05">PyState_send</a> (<a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_state_helper.html">PyStateHelper</a> *self, PyObject *const *args, Py_ssize_t nargs)</td></tr>
 <tr class="separator:af54a76485f10e233b06aeb4035534d05"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acc2026eb8216596cf3816d2f14ab4326"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="struct_engine_1_1_type_1_1_storage_ops.html">Type::StorageOps</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#acc2026eb8216596cf3816d2f14ab4326">PyToStorageOps</a> (PyObject *obj)</td></tr>
@@ -436,6 +436,8 @@ Functions</h2></td></tr>
 <tr class="separator:abc51f0caf02b64689e98dbc47b4615f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7c5039f0811cb62e61bf7164ab32ef5c"><td class="memItemLeft" align="right" valign="top">PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#a7c5039f0811cb62e61bf7164ab32ef5c">toPyError</a> (const <a class="el" href="struct_engine_1_1_reflect_1_1_error.html">Reflect::Error</a> &amp;err)</td></tr>
 <tr class="separator:a7c5039f0811cb62e61bf7164ab32ef5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e45ccc1cc4725abf9e55725bd52d2cd"><td class="memItemLeft" align="right" valign="top">PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#a1e45ccc1cc4725abf9e55725bd52d2cd">toPyException</a> (const <a class="el" href="struct_engine_1_1_reflect_1_1_error.html">Reflect::Error</a> &amp;err)</td></tr>
+<tr class="separator:a1e45ccc1cc4725abf9e55725bd52d2cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a098d0cfe872bed68c0af823a9761528f"><td class="memItemLeft" align="right" valign="top">PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#a098d0cfe872bed68c0af823a9761528f">toPyObject</a> (bool b)</td></tr>
 <tr class="separator:a098d0cfe872bed68c0af823a9761528f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a75a47367b397755e4b8c202f7608668b"><td class="memItemLeft" align="right" valign="top">PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#a75a47367b397755e4b8c202f7608668b">toPyObject</a> (const <a class="el" href="struct_engine_1_1_co_w.html">CoW</a>&lt; <a class="el" href="struct_engine_1_1_math_1_1_matrix3.html">Math::Matrix3</a> &gt; &amp;m)</td></tr>
@@ -1033,24 +1035,6 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="afd7297d159e7f42f8e41e0f768a739b6" name="afd7297d159e7f42f8e41e0f768a739b6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afd7297d159e7f42f8e41e0f768a739b6">&#9670;&#160;</a></span>PyState_next()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">PyObject * Engine::Behavior::Python3::PyState_next </td>
-          <td>(</td>
-          <td class="paramtype">PyObject *&#160;</td>
-          <td class="paramname"><em>self</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="af54a76485f10e233b06aeb4035534d05" name="af54a76485f10e233b06aeb4035534d05"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af54a76485f10e233b06aeb4035534d05">&#9670;&#160;</a></span>PyState_send()</h2>
 
@@ -1079,6 +1063,24 @@ Variables</h2></td></tr>
           <td></td>
           <td>)</td>
           <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a77a7d952466bb58ba1c40fbafe657c0e" name="a77a7d952466bb58ba1c40fbafe657c0e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a77a7d952466bb58ba1c40fbafe657c0e">&#9670;&#160;</a></span>PyState_next()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">PyObject * Engine::Behavior::Python3::PyState_next </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_state_helper.html">PyStateHelper</a> *&#160;</td>
+          <td class="paramname"><em>self</em></td><td>)</td>
+          <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1916,6 +1918,24 @@ template&lt;typename Sender &gt; </div>
 
 </div>
 </div>
+<a id="a1e45ccc1cc4725abf9e55725bd52d2cd" name="a1e45ccc1cc4725abf9e55725bd52d2cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1e45ccc1cc4725abf9e55725bd52d2cd">&#9670;&#160;</a></span>toPyException()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="python3lib_8h.html#aa99f3e22f9b97f597dd1d39ee5ec0070">MADGINE_PYTHON3_EXPORT</a> PyObject * Engine::Behavior::Python3::toPyException </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_reflect_1_1_error.html">Reflect::Error</a> &amp;&#160;</td>
+          <td class="paramname"><em>err</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a4cf62adfbfe0888331e00b248ba946c2" name="a4cf62adfbfe0888331e00b248ba946c2"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4cf62adfbfe0888331e00b248ba946c2">&#9670;&#160;</a></span>PyDealloc() <span class="overload">[1/2]</span></h2>
 
@@ -2550,13 +2570,11 @@ template&lt;typename T , auto p&gt; </div>
 <div class="line">            .tp_dealloc = (destructor)<a class="code hl_function" href="namespace_engine_1_1_behavior_1_1_python3.html#aabb3437db275b8e74be2e8787dcad7db">PyState_Dealloc</a>,</div>
 <div class="line">            .tp_flags = Py_TPFLAGS_DEFAULT,</div>
 <div class="line">            .tp_doc = <span class="stringliteral">&quot;helper for Execution states&quot;</span>,</div>
-<div class="line">            .tp_iternext = <a class="code hl_function" href="namespace_engine_1_1_behavior_1_1_python3.html#afd7297d159e7f42f8e41e0f768a739b6">PyState_next</a>,</div>
-<div class="line">            .tp_methods = <a class="code hl_variable" href="namespace_engine_1_1_behavior_1_1_python3.html#aaf350e2531480f1e68180d880d11cea8">PyStateMethods</a>,</div>
+<div class="line">            .tp_iternext = (iternextfunc)PyState_next,</div>
+<div class="line">            .tp_methods = PyStateMethods,</div>
 <div class="line">            .tp_new = PyType_GenericNew,</div>
 <div class="line">        }</div>
-<div class="ttc" id="anamespace_engine_1_1_behavior_1_1_python3_html_aabb3437db275b8e74be2e8787dcad7db"><div class="ttname"><a href="namespace_engine_1_1_behavior_1_1_python3.html#aabb3437db275b8e74be2e8787dcad7db">Engine::Behavior::Python3::PyState_Dealloc</a></div><div class="ttdeci">void PyState_Dealloc(PyStateHelper *state)</div><div class="ttdef"><b>Definition:</b> pyexecution.cpp:339</div></div>
-<div class="ttc" id="anamespace_engine_1_1_behavior_1_1_python3_html_aaf350e2531480f1e68180d880d11cea8"><div class="ttname"><a href="namespace_engine_1_1_behavior_1_1_python3.html#aaf350e2531480f1e68180d880d11cea8">Engine::Behavior::Python3::PyStateMethods</a></div><div class="ttdeci">PyMethodDef PyStateMethods[]</div><div class="ttdef"><b>Definition:</b> pyexecution.cpp:327</div></div>
-<div class="ttc" id="anamespace_engine_1_1_behavior_1_1_python3_html_afd7297d159e7f42f8e41e0f768a739b6"><div class="ttname"><a href="namespace_engine_1_1_behavior_1_1_python3.html#afd7297d159e7f42f8e41e0f768a739b6">Engine::Behavior::Python3::PyState_next</a></div><div class="ttdeci">PyObject * PyState_next(PyObject *self)</div><div class="ttdef"><b>Definition:</b> pyexecution.cpp:290</div></div>
+<div class="ttc" id="anamespace_engine_1_1_behavior_1_1_python3_html_aabb3437db275b8e74be2e8787dcad7db"><div class="ttname"><a href="namespace_engine_1_1_behavior_1_1_python3.html#aabb3437db275b8e74be2e8787dcad7db">Engine::Behavior::Python3::PyState_Dealloc</a></div><div class="ttdeci">void PyState_Dealloc(PyStateHelper *state)</div><div class="ttdef"><b>Definition:</b> pyexecution.cpp:334</div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -2851,7 +2869,7 @@ template&lt;typename T , auto p&gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Jul 21 2026 14:35:27 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Thu Jul 23 2026 17:35:34 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>
