@@ -270,7 +270,7 @@ namespace Behavior {
             mState.mDestruct = nullptr;
 
             Python3Lock lock { &mReceiver };
-            mState.mResult = toPyError(std::move(error));
+            mState.mResult = toPyException(std::move(error));
 
             mState.resume();
         }
@@ -287,26 +287,6 @@ namespace Behavior {
             mState.resume();
         }
 
-        PyObject *PyState_next(PyObject *self)
-        {
-            PyStateBase &state = reinterpret_cast<PyStateHelper *>(self)->mState;
-            if (state.mFlag.test()) {
-                PyObjectPtr emptyTuple = PyTuple_New(0);
-
-                PyObject *exc = PyObject_Call(PyExc_StopIteration, emptyTuple, NULL);
-                if (!exc)
-                    return nullptr;
-
-                PyObject_SetAttrString(exc, "value", state.mResult);
-
-                PyErr_SetObject(PyExc_StopIteration, exc);
-                return nullptr;
-            } else {
-                Py_IncRef(self);
-                return self;
-            }
-        }
-
         PyObject *PyState_send(PyStateHelper *self,
             PyObject *const *args,
             Py_ssize_t nargs)
@@ -314,14 +294,29 @@ namespace Behavior {
             [[maybe_unused]] PyStateBase &state = self->mState;
             assert(state.mFlag.test());
 
-            PyObjectPtr emptyTuple = PyTuple_New(0);
+            if (PyExceptionInstance_Check(args[0])) {
+                Py_IncRef(args[0]);
+                PyErr_SetRaisedException(args[0]);
+            } else {
+                PyObjectPtr emptyTuple = PyTuple_New(0);
+                PyObject *exc = PyObject_Call(PyExc_StopIteration, emptyTuple, NULL);
+                PyObject_SetAttrString(exc, "value", args[0]);
 
-            PyObject *exc = PyObject_Call(PyExc_StopIteration, emptyTuple, NULL);
-
-            PyObject_SetAttrString(exc, "value", args[0]);
-
-            PyErr_SetObject(PyExc_StopIteration, exc);
+                PyErr_SetObject(PyExc_StopIteration, exc);
+            }
             return nullptr;
+        }
+
+        PyObject *PyState_next(PyStateHelper *self)
+        {
+            PyStateBase &state = self->mState;
+            if (state.mFlag.test()) {
+                PyObject *args = state.mResult;
+                return PyState_send(self, &args, 1);
+            } else {
+                Py_INCREF(self);                
+                return (PyObject*)self;
+            }
         }
 
         PyMethodDef PyStateMethods[] = {
@@ -351,7 +346,7 @@ namespace Behavior {
             .tp_dealloc = (destructor)PyState_Dealloc,
             .tp_flags = Py_TPFLAGS_DEFAULT,
             .tp_doc = "helper for Execution states",
-            .tp_iternext = PyState_next,
+            .tp_iternext = (iternextfunc)PyState_next,
             .tp_methods = PyStateMethods,
             .tp_new = PyType_GenericNew,
         };

@@ -43,7 +43,6 @@ namespace Behavior {
 
         MADGINE_PYTHON3_EXPORT void resumeCoroutine(PyObjectPtr coro, PyObjectPtr value);
 
-        PyObject *PyState_next(PyObject *self);
         extern PyMethodDef PyStateMethods[];
 
         struct PyStateBase {

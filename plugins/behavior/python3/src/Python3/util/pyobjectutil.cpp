@@ -346,6 +346,9 @@ namespace Behavior {
             } else if (obj->ob_type == &PyVector3Type) {
                 toValue(result, reinterpret_cast<PyVector3 *>(obj)->mVector);
                 return {};
+            } else if (obj->ob_type == &PyDurationType){
+                toValue(result, reinterpret_cast<PyDuration *>(obj)->mDuration);
+                return {};
             } else {
                 Py_INCREF(obj);
                 toValue(result, Reflect::ObjectPtr { std::make_unique<PyObjectInstance>(obj) });
@@ -407,6 +410,8 @@ namespace Behavior {
                     return Reflect::toType<std::string>();
                 } else if (obj == PyModulePtr { "inspect" }.get("Parameter").get("empty")) {
                     return Reflect::toType<Reflect::Value>();
+                } else if (type == &PyNamedType) {
+                    return Reflect::toType<std::monostate>();
                 }
             }
             throw 0;
@@ -420,6 +425,8 @@ namespace Behavior {
                 PyTypeObject *type = reinterpret_cast<PyTypeObject *>(obj);
                 if (type == &PyUnicode_Type) {
                     return storageOps<std::string>;
+                } else if (type == &PyNamedType) {
+                    return storageOps<std::monostate>;
                 }
             }
             return nullptr;
@@ -437,6 +444,15 @@ namespace Behavior {
                 PyTuple_SetItem(tuple, i, element);
             }
             return tuple;
+        }
+
+        PyObject *toPyException(const Reflect::Error &err)
+        {
+            PyObjectPtr msg = PyUnicode_FromString(err.mMsg.c_str());
+            if (!msg)
+                return nullptr;
+
+            return PyObject_CallOneArg(PyExc_Exception, msg);            
         }
 
     }

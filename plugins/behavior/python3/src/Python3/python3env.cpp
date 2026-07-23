@@ -227,6 +227,12 @@ namespace Behavior {
                 Py_DECREF(m);
                 return NULL;
             }
+            Py_INCREF(&PyDurationType);
+            if (PyModule_AddObject(m, "Duration", (PyObject *)&PyDurationType) < 0) {
+                Py_DECREF(&PyDurationType);
+                Py_DECREF(m);
+                return NULL;
+            }
 
             return m;
         }

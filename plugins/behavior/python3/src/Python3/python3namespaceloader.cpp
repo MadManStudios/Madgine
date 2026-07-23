@@ -96,7 +96,10 @@ namespace Behavior {
                 return std::make_unique<Reflect::Error>(fetchError());
             }
 
-            //TODO: Existence check
+            const Type::TypeName *type = Type::resolveTypeName(name, ".");
+            if (!type) {
+                return REFLECT_UNKNOWN_ERROR() << "No type name " << name << " found!";
+            }
 
             PyObjectPtr spec = module.get("ModuleSpec").call("sO", name.data(), toPyObject(Reflect::ScopePtr { this }));
             return fromPyObject(result, spec);

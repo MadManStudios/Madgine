@@ -242,7 +242,7 @@ namespace Reflect {
             }
         } else if constexpr (PrimitiveType<T>) {
             if (!Value_is<T>(arg))
-                return REFLECT_UNKNOWN_ERROR() << "Expected " << typeid(T).name();
+                return REFLECT_UNKNOWN_ERROR() << "Expected " << typeid(T).name() << " got " << Value_type(arg).toString();
             return callable(Value_as<ValueStorageSelect<T>>(arg));
         } else if constexpr (std::ranges::range<T> && requires { typename T::iterator; }) {
             if constexpr (std::same_as<KeyType_t<typename T::iterator::value_type>, Void>) {

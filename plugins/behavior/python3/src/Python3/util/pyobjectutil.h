@@ -84,6 +84,7 @@ namespace Behavior {
         MADGINE_PYTHON3_EXPORT const Type::StorageOps *PyToStorageOps(PyObject *obj);
 
         MADGINE_PYTHON3_EXPORT PyObject *toPyTuple(const Reflect::ArgumentList &args);
+        MADGINE_PYTHON3_EXPORT PyObject *toPyException(const Reflect::Error &);
 
     }
 }
