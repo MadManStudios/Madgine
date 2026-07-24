@@ -272,6 +272,8 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_plugins_1_1_container.html">Container</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_plugins_1_1_copy_constructor_impl.html">CopyConstructorImpl</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_plugins_1_1_copying.html">Copying</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_plugins_1_1_destructor.html">Destructor</a></td></tr>
@@ -316,6 +318,8 @@ Typedefs</h2></td></tr>
 <tr class="memitem:a5829486967a366c55a59eca1986a5e1b"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; </td></tr>
 <tr class="memitem:a5829486967a366c55a59eca1986a5e1b"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_plugins.html#a5829486967a366c55a59eca1986a5e1b">Constructor</a> = <a class="el" href="struct_engine_1_1_plugins_1_1_constructor_impl.html">ConstructorImpl</a>&lt; <a class="el" href="namespace_engine.html#a73b9d8892b6e907a3def79b7e26353e4">Placeholder</a>&lt; 0 &gt;, Args... &gt;</td></tr>
 <tr class="separator:a5829486967a366c55a59eca1986a5e1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abee6858419760cf283ef7b3c4d6f401d"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_plugins.html#abee6858419760cf283ef7b3c4d6f401d">CopyConstructor</a> = <a class="el" href="struct_engine_1_1_plugins_1_1_copy_constructor_impl.html">CopyConstructorImpl</a>&lt; <a class="el" href="namespace_engine.html#a73b9d8892b6e907a3def79b7e26353e4">Placeholder</a>&lt; 0 &gt; &gt;</td></tr>
+<tr class="separator:abee6858419760cf283ef7b3c4d6f401d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a98aaca7f0e6a66e1c96b6578e3c6ba66"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; </td></tr>
 <tr class="memitem:a98aaca7f0e6a66e1c96b6578e3c6ba66"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_plugins.html#a98aaca7f0e6a66e1c96b6578e3c6ba66">Factory</a> = <a class="el" href="struct_engine_1_1_plugins_1_1_factory_impl.html">FactoryImpl</a>&lt; <a class="el" href="namespace_engine.html#a73b9d8892b6e907a3def79b7e26353e4">Placeholder</a>&lt; 0 &gt;, Args... &gt;</td></tr>
 <tr class="separator:a98aaca7f0e6a66e1c96b6578e3c6ba66"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -349,6 +353,20 @@ template&lt;typename... Args&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">using <a class="el" href="namespace_engine_1_1_plugins.html#a5829486967a366c55a59eca1986a5e1b">Engine::Plugins::Constructor</a> = typedef <a class="el" href="struct_engine_1_1_plugins_1_1_constructor_impl.html">ConstructorImpl</a>&lt;<a class="el" href="namespace_engine.html#a73b9d8892b6e907a3def79b7e26353e4">Placeholder</a>&lt;0&gt;, Args...&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abee6858419760cf283ef7b3c4d6f401d" name="abee6858419760cf283ef7b3c4d6f401d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abee6858419760cf283ef7b3c4d6f401d">&#9670;&#160;</a></span>CopyConstructor</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespace_engine_1_1_plugins.html#abee6858419760cf283ef7b3c4d6f401d">Engine::Plugins::CopyConstructor</a> = typedef <a class="el" href="struct_engine_1_1_plugins_1_1_copy_constructor_impl.html">CopyConstructorImpl</a>&lt;<a class="el" href="namespace_engine.html#a73b9d8892b6e907a3def79b7e26353e4">Placeholder</a>&lt;0&gt; &gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -575,7 +593,7 @@ template&lt;typename T &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jul 23 2026 17:35:35 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Fri Jul 24 2026 20:03:23 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>
