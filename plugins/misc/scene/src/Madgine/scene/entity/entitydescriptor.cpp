@@ -44,6 +44,17 @@ namespace Scene {
             throw 0;
         }
 
+        ComponentEntry::ComponentEntry(const ComponentEntry &other)
+            : mComponent { construct(EntityComponentRegistry::get(other.mComponent.get_deleter().mType), *other.mComponent).release(), other.mComponent.get_deleter() }
+        {
+        }
+
+        ComponentEntry &ComponentEntry::operator=(const ComponentEntry &other)
+        {
+            mComponent = { construct(EntityComponentRegistry::get(other.mComponent.get_deleter().mType), *other.mComponent).release(), other.mComponent.get_deleter() };
+            return *this;
+        }
+
         EntityDescriptor::EntityDescriptor(std::span<const Reflect::ScopePtr> components)
             : mComponents(components.begin(), components.end())
         {

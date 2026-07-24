@@ -39,6 +39,26 @@ namespace Plugins {
     template <typename... Args>
     using Constructor = ConstructorImpl<Placeholder<0>, Args...>;
 
+    template <typename R>
+    struct CopyConstructorImpl {
+        template <typename T, typename ActualType>
+        CopyConstructorImpl(type_holder_t<T>, type_holder_t<ActualType>)
+            : mCtor([](const R &other) -> std::unique_ptr<R> {
+                return std::make_unique<ActualType>(static_cast<const ActualType &>(other));
+            })
+        {
+        }
+
+        friend auto tag_invoke(construct_t, const CopyConstructorImpl &object, const R &other)
+        {
+            return object.mCtor(other);
+        }
+
+        std::unique_ptr<R> (*mCtor)(const R&);
+    };
+    
+    using CopyConstructor = CopyConstructorImpl<Placeholder<0>>;
+
     template <typename Base = Placeholder<0>>
     struct Destructor {
 

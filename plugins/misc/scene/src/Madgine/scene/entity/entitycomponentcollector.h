@@ -30,4 +30,4 @@ namespace Scene {
 }
 }
 
-DECLARE_NAMED_UNIQUE_COMPONENT(Engine::Scene::Entity, EntityComponent, EntityComponentBase, Engine::Scene::Entity::EntityComponentListAnnotation, Engine::Reflect::TypeAnnotation, Engine::Plugins::Constructor<>, Engine::Plugins::Destructor<>, Engine::Plugins::Copying<>)
+DECLARE_NAMED_UNIQUE_COMPONENT(Engine::Scene::Entity, EntityComponent, EntityComponentBase, Engine::Scene::Entity::EntityComponentListAnnotation, Engine::Reflect::TypeAnnotation, Engine::Plugins::Constructor<>, Engine::Plugins::CopyConstructor, Engine::Plugins::Destructor<>, Engine::Plugins::Copying<>)

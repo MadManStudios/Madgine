@@ -24,8 +24,10 @@ namespace Scene {
 
             ComponentEntry(const Reflect::ScopePtr &component);
 
+            ComponentEntry(const ComponentEntry &other);
             ComponentEntry(ComponentEntry &&) = default;
 
+            ComponentEntry &operator=(const ComponentEntry &other);
             ComponentEntry &operator=(ComponentEntry &&) = default;
 
             std::unique_ptr<EntityComponentBase, ComponentDeleter> mComponent;
@@ -39,12 +41,6 @@ namespace Scene {
             }           
 
             EntityDescriptor(std::span<const Reflect::ScopePtr> components);
-
-            EntityDescriptor(const EntityDescriptor &) = delete; // TODO: implement later
-            EntityDescriptor(EntityDescriptor &&) = default;
-
-            EntityDescriptor &operator=(const EntityDescriptor &) = delete; //TODO: implement later
-            EntityDescriptor &operator=(EntityDescriptor &&) = default;
 
             void apply(Entity &entity) const;
 
