@@ -40,7 +40,7 @@ namespace Reflect {
 
             if constexpr (Setter != nullptr) {
                 setter = [](const Accessor *, const Value &scope, const Value &v) -> Result {
-                    return Reflect::invoke(Setter, scope, v);
+                    return Reflect::invoke_member(Setter, scope, v);
                 };
             }
 
@@ -48,7 +48,7 @@ namespace Reflect {
                 name,
                 nullptr,
                 [](const Accessor *, Value &retVal, const Value &scope) -> Result {
-                    return Reflect::invoke(retVal, Getter, scope);
+                    return Reflect::invoke_member(retVal, Getter, scope);
                 },
                 setter,
                 toType<forward_ref_t<T>>()
@@ -75,10 +75,10 @@ namespace Reflect {
             }
         }
 
-        template <auto F>
-        static constexpr TypedBoundApiFunction<&function<F>> method(ScopePtr scope)
+        template <auto F, typename T>
+        static constexpr TypedBoundApiFunction<&function<F>> method(T &scope)
         {
-            return { scope };
+            return { &scope };
         }
 
     }
@@ -202,7 +202,7 @@ namespace Reflect {
 
 #define NAMED_FUNCTION_EX(Idx, Name, F, ...)                                                                                                                                                                                                                                                                                                          \
     FUNCTIONTABLE_EX(BASE_STRUCT(::Engine::Reflect::__Reflect_impl__::MetaTableTag, Idx)::name + "::" STRINGIFY(Name), ::Engine::Reflect::__Reflect_impl__::MetaMemberFunctionTag<BASE_STRUCT(::Engine::Reflect::__Reflect_impl__::MetaTableTag, Idx)::Ty>, BASE_STRUCT(::Engine::Reflect::__Reflect_impl__::MetaTableTag, Idx)::Ty::F, #__VA_ARGS__) \
-    METATABLE_ENTRY_EX(Idx, SINGLE_ARG(::Engine::Reflect::__Reflect_impl__::property<Ty, &::Engine::Reflect::__Reflect_impl__::method<&Ty::F>, nullptr>(STRINGIFY(Name))))
+    METATABLE_ENTRY_EX(Idx, SINGLE_ARG(::Engine::Reflect::__Reflect_impl__::property<Ty, &::Engine::Reflect::__Reflect_impl__::method<&Ty::F, Ty>, nullptr>(STRINGIFY(Name))))
 
 #define NAMED_FUNCTION(Name, F, ...) \
     NAMED_FUNCTION_EX(, Name, F, __VA_ARGS__)

@@ -397,6 +397,8 @@ namespace Reflect {
             return toType<typename T::type, true>();
         } else if constexpr (Concepts::InstanceOf<T, std::variant>) {
             return { { ExtendedTypeEnum::VariantType }, { toType<typename Concepts::is_instance<T, std::variant>::argument_types::template select<0>>(), toType<typename Concepts::is_instance<T, std::variant>::argument_types::template select<1>>() } };
+        } else if constexpr (std::same_as<T, ScopePtr>) {
+            return { { TypeEnum::ScopeValue }, static_cast<const MetaTable **>(nullptr) };
         } else if constexpr (PrimitiveType<T>) {
             return { toTypeIndex<T>() };
         } else if constexpr (std::same_as<T, Value>) {
@@ -414,8 +416,6 @@ namespace Reflect {
             }
         } else if constexpr (Execution::AnySender<T>) {
             return { { TypeEnum::SenderValue }, nullptr };
-        } else if constexpr (std::same_as<T, ScopePtr>) {
-            return { { TypeEnum::ScopeValue }, static_cast<const MetaTable **>(nullptr) };
         } else if constexpr (std::ranges::range<T>) {
             if constexpr (std::same_as<KeyType_t<std::ranges::range_value_t<T>>, Void>)
                 return { { TypeEnum::SequenceRangeValue }, { toType<std::ranges::range_value_t<T>, true>() } };

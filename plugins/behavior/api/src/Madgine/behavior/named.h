@@ -25,7 +25,7 @@ namespace Behavior {
             auto f = [&](Reflect::Value &v) {
                 result = get_named_d(std::forward<T>(context), Name, v);
                 if (!result)
-                    result = invoke(v, [&](const V &v) { o = v; }, v);
+                    result = invoke_free(v, [&](const V &v) { o = v; }, v);
             };
             Value_erased(CallableView<void(Reflect::Value &)> { f });
             return result;

@@ -11,7 +11,7 @@
 #include "debugger.h"
 
 METATABLE_BEGIN(Engine::Debug::DebuggableLifetimeBase)
-    READONLY_PROPERTY(Owner, owner)
+    //READONLY_PROPERTY(Owner, owner)
     READONLY_PROPERTY(Children, children)
     READONLY_PROPERTY(DebugContexts, debugContexts)
 METATABLE_END(Engine::Debug::DebuggableLifetimeBase)

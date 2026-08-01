@@ -61,7 +61,7 @@ namespace Reflect {
         template <typename T>
         struct Unwrapper {
 
-            using type = T::type;
+            using type = T;
 
             template <typename F>
             friend bool tag_invoke(Execution::access_binding_t access, const Unwrapper &binding, F &&callback)
@@ -69,7 +69,7 @@ namespace Reflect {
                 return tag_invoke(access, binding.mPtr, [&](const Value &v) {
                     Result error;
                     Value_erased([&](Value &result) {
-                        error = invoke(result, std::forward<F>(callback), v);
+                        error = invoke_free(result, std::forward<F>(callback), v);
                     });
                     if (error) {
                         throw 0;

@@ -18,6 +18,7 @@ METATABLE_BEGIN(Engine::Scene::Entity::Transform)
     MEMBER(mPosition)
     MEMBER(mScale)
     MEMBER(mOrientation)
+    READONLY_PROPERTY(WorldPosition, worldPosition)
 METATABLE_END(Engine::Scene::Entity::Transform)
 
 SERIALIZETABLE_BEGIN(Engine::Scene::Entity::Transform)
@@ -27,7 +28,7 @@ SERIALIZETABLE_BEGIN(Engine::Scene::Entity::Transform)
 SERIALIZETABLE_END(Engine::Scene::Entity::Transform)
 
 STORAGEOPS_BEGIN(Engine::Scene::Entity::Transform)
-    CONSTRUCTOR()
+CONSTRUCTOR()
 STORAGEOPS_END(Engine::Scene::Entity::Transform)
 
 namespace Engine {
@@ -40,31 +41,29 @@ namespace Scene {
             return TransformMatrix(mPosition, mScale, mOrientation);
         }
 
-        Math::Matrix4 Transform::worldMatrix(Entity &entity) const
+        Math::Matrix4 Transform::worldMatrix(Contextual<Entity &> entity) const
         {
             return parentMatrix(entity) * matrix();
         }
 
-        Math::Matrix4 Transform::parentMatrix(Entity &entity) const
+        Math::Matrix4 Transform::parentMatrix(Contextual<Entity &> entity) const
         {
             Math::Matrix4 result = Math::Matrix4::IDENTITY;
-            Execution::access_binding(entity.parent(), [&](Entity &e) {
-                result = e.getComponent<Transform>()->worldMatrix(e); });
+            Execution::access_binding(entity->parent(), [&](Entity &e) { result = e.getComponent<Transform>()->worldMatrix(e); });
             return result;
         }
 
-        Math::Vector3 Transform::worldPosition(Entity &entity) const
+        Math::Vector3 Transform::worldPosition(Contextual<Entity &> entity) const
         {
             return worldMatrix(entity).GetColumn(3).xyz();
         }
 
-        Math::Quaternion Transform::worldOrientation(Entity &entity) const
+        Math::Quaternion Transform::worldOrientation(Contextual<Entity &> entity) const
         {
             Math::Quaternion result;
-            Execution::access_binding(entity.parent(), [&](Entity &e) { result = e.getComponent<Transform>()->worldOrientation(e); });
+            Execution::access_binding(entity->parent(), [&](Entity &e) { result = e.getComponent<Transform>()->worldOrientation(e); });
             return result * mOrientation;
         }
-
 
     }
 }

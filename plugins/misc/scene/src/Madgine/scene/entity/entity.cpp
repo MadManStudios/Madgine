@@ -36,12 +36,12 @@ void componentInit(std::array<Reflect::Accessor, 32> &accessors)
                 [](const Reflect::Accessor *self, const Reflect::Value &entity) {
                     uint32_t index = Scene::Entity::EntityComponentRegistry::sComponentsByName().at(self->mName);
                     bool found = false;
-                    Reflect::Result result = invoke([&](Scene::Entity::Entity &entity) { found = entity.hasComponent(index); }, entity);
+                    Reflect::Result result = invoke_member([&](Scene::Entity::Entity &entity) { found = entity.hasComponent(index); }, entity);
                     return !result && found;
                 },
                 [](const Reflect::Accessor *self, Reflect::Value &ret, const Reflect::Value &entity) -> Reflect::Result {
                     uint32_t index = Scene::Entity::EntityComponentRegistry::sComponentsByName().at(self->mName);
-                    return invoke(ret, [&](Scene::Entity::Entity &entity) { return Reflect::ScopePtr { entity.getComponent(index), *Scene::Entity::EntityComponentRegistry::get(index).mType }; }, entity);
+                    return invoke_member(ret, dynamic_scope_cast(*Scene::Entity::EntityComponentRegistry::get(index).mType, [=](Scene::Entity::Entity &entity) { return entity.getComponent(index); }), entity);
                 },
                 nullptr,
                 Reflect::ExtendedType {

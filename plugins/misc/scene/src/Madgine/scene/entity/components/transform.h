@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Generic/contextual.h"
+
 #include "Meta/math/matrix4.h"
 #include "Meta/math/quaternion.h"
 #include "Meta/math/vector3.h"
@@ -16,11 +18,11 @@ namespace Scene {
             SERIALIZABLEUNIT(Transform)
 
             Math::Matrix4 matrix() const;
-            Math::Matrix4 worldMatrix(Entity &entity) const;
-            Math::Matrix4 parentMatrix(Entity &entity) const;
+            Math::Matrix4 worldMatrix(Contextual<Entity &> entity) const;
+            Math::Matrix4 parentMatrix(Contextual<Entity &> entity) const;
 
-            Math::Vector3 worldPosition(Entity &entity) const;
-            Math::Quaternion worldOrientation(Entity &entity) const;
+            Math::Vector3 worldPosition(Contextual<Entity &> entity) const;
+            Math::Quaternion worldOrientation(Contextual<Entity &> entity) const;
 
             Math::Vector3 mPosition;
             Math::Vector3 mScale = Math::Vector3::UNIT_SCALE;

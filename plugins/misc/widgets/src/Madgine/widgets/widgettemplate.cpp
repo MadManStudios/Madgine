@@ -34,7 +34,7 @@ namespace Widgets {
                 widgets[i].mName.c_str(),
                 nullptr,
                 [](const Reflect::Accessor *self, Reflect::Value &out, const Reflect::Value &scope) -> Reflect::Result {
-                    return invoke(out, [self](CompoundWidget &widget) { return widget.getTemplateWidget(self->mName); }, scope);
+                    return invoke_member(out, [self](CompoundWidget &widget) { return widget.getTemplateWidget(self->mName); }, scope);
                 },
                 nullptr,
                 { { Reflect::TypeEnum::ScopeValue }, WidgetLoader::load(widgets[i].mType)->metaTable()->mSelf }

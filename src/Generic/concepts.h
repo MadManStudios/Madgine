@@ -85,10 +85,13 @@ namespace Concepts {
     concept NoneOf = !OneOf<T, Ty...>;
 
     template <typename T, typename... Ty>
+    concept DecayedOneOf = OneOf<std::decay_t<T>, Ty...>;
+
+    template <typename T, typename... Ty>
     concept DecayedNoneOf = NoneOf<std::decay_t<T>, Ty...>;
 
     template <typename T>
-    concept Reference = std::is_reference_v<T> || InstanceOf<T, std::reference_wrapper>;
+    concept Reference = std::is_lvalue_reference_v<T> || InstanceOf<T, std::reference_wrapper>;
 
 }
 }

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Generic/containers/virtualrange.h"
+#include "Generic/contextual.h"
 #include "Generic/cow.h"
 #include "Generic/cowstring.h"
 #include "Generic/execution/binding.h"
@@ -29,6 +30,50 @@ namespace Reflect {
             return nullptr;
 
         return static_cast<T *>(reinterpret_cast<void *>(reinterpret_cast<std::byte *>(ptr.mScope) + offset));
+    }
+
+    template <typename F, typename R, typename T, typename... Args>
+    struct DynamicCastHelper {
+
+        ScopePtr operator()(T &t, Args &&...args) const
+        {
+            R result = mCallable(t, std::forward<Args>(args)...);
+
+            return { result, mType };
+        }
+
+        const MetaTable *dynamic_return_type() const
+        {
+            return mType;
+        }
+
+        const MetaTable *mType;
+        F mCallable;
+    };
+
+    template <typename F, typename R, typename... Args>
+    struct DynamicCastHelper<F, R, void, Args...> {
+
+        ScopePtr operator()(Args &&...args) const
+        {
+            R result = mCallable(std::forward<Args>(args)...);
+
+            return { result, mType };
+        }
+
+        const MetaTable *dynamic_return_type() const
+        {
+            return mType;
+        }
+
+        const MetaTable *mType;
+        F mCallable;
+    };
+
+    template <typename F>
+    auto dynamic_scope_cast(const MetaTable *type, F &&f)
+    {
+        return typename CallableTraits<F>::template instance<DynamicCastHelper, F> { type, std::forward<F>(f) };
     }
 
     template <typename T>
@@ -108,11 +153,11 @@ namespace Reflect {
             } else if constexpr (Concepts::InstanceOf<std::decay_t<T>, Engine::Flags>) {
                 return Flags { std::forward<T>(t) };
             } else if constexpr (Execution::AnyBinding<std::decay_t<T>>) {
-                using Inner = decltype(convert_Value_t<false> {}(std::declval<forward_ref_t<typename std::decay_t<T>::type>>()));
-                if constexpr (Concepts::OneOf<Inner, ScopePtr, OwnedValue>) {
-                    return ScopeBinding { std::forward<T>(t), table<std::remove_pointer_t<std::decay_t<typename std::decay_t<T>::type>>> };
+                constexpr ExtendedType type = toType<forward_ref_t<typename std::decay_t<T>::type>>();
+                if constexpr (type.mType == TypeEnum::ScopeValue || type.mType == TypeEnum::OwnedValueValue) {
+                    return ScopeBinding { std::forward<T>(t), type.mSecondary.mMetaTable ? *type.mSecondary.mMetaTable : nullptr };
                 } else {
-                    return Binding { std::forward<T>(t), toTypeIndex<std::decay_t<typename std::decay_t<T>::type>>() };
+                    return Binding { std::forward<T>(t), type.mType };
                 }
             } else if constexpr (Execution::AnySender<std::decay_t<T>>) {
                 return Sender { std::forward<T>(t) };
@@ -269,11 +314,11 @@ namespace Reflect {
             if constexpr (Concepts::OneOf<Inner, ScopePtr, OwnedValue>) {
                 if (!Value_is<ScopeBinding>(arg))
                     return REFLECT_UNKNOWN_ERROR() << "No known conversion to ScopeBinding";
-                return callable(T { Value_as<ScopeBinding>(arg).template unwrap<T>() });
+                return callable(T { Value_as<ScopeBinding>(arg).template unwrap<typename T::type>() });
             } else {
                 if (!Value_is<Binding>(arg))
                     return REFLECT_UNKNOWN_ERROR() << "No known conversion to Binding";
-                return callable(T { Value_as<Binding>(arg).template unwrap<T>() });
+                return callable(T { Value_as<Binding>(arg).template unwrap<typename T::type>() });
             }
         } else {
             if (Value_is<Binding>(arg)) {
@@ -326,6 +371,7 @@ namespace Reflect {
     }
 
     template <typename Callable, typename Arg, typename... Args, typename Param, typename... Params>
+        requires(!Concepts::InstanceOf<Param, Contextual>)
     Result invoke_impl(type_pack<Param, Params...>, Callable &&callable, Arg &&arg, Args &&...args)
     {
         auto tail = [&](Param param) {
@@ -335,22 +381,23 @@ namespace Reflect {
         return call(tail, std::forward<Arg>(arg));
     }
 
+    template <typename Callable, typename Param, typename... Params>
+    Result invoke_impl(type_pack<Contextual<Param>, Params...>, Callable &&callable)
+    {
+        throw 0;
+
+        // return invoke_impl(type_pack<Params...> {}, [&](Params... params) { return std::invoke(std::forward<Callable>(callable), std::declval<Param>(), std::forward<Params>(params)...); });
+    }
+
     template <typename Callable, typename... Args>
-    Result invoke(Value &result, Callable &&callable, Args &&...args)
+    Result invoke_free(Value &result, Callable &&callable, Args &&...args)
     {
         using traits = CallableTraits<Callable>;
 
         if constexpr (std::same_as<typename traits::argument_types::template resize<1>, type_pack<Value &>>) {
-            if constexpr (std::same_as<typename traits::class_type, void>) {
-                return invoke_impl(typename traits::argument_types::pop_front {}, [&](auto &&...args) { return std::invoke(std::forward<Callable>(callable), result, std::forward<decltype(args)>(args)...); }, std::forward<Args>(args)...);
-            } else {
-                return invoke_impl(typename traits::argument_types::pop_front::template prepend<typename traits::class_type &> {}, [&](auto &&obj, auto &&...args) { return std::invoke(std::forward<Callable>(callable), obj, result, std::forward<decltype(args)>(args)...); }, std::forward<Args>(args)...);
-            }
+            return invoke_impl(typename traits::argument_types::pop_front {}, [&](auto &&...args) { return std::invoke(std::forward<Callable>(callable), result, std::forward<decltype(args)>(args)...); }, std::forward<Args>(args)...);
         } else {
-            using argumentTypes = std::conditional_t<std::same_as<typename traits::class_type, void>,
-                typename traits::argument_types,
-                typename traits::argument_types::template prepend<std::add_lvalue_reference_t<typename traits::class_type>>>;
-            return invoke_impl(argumentTypes {}, [&](auto &&...args) -> Result {
+            return invoke_impl(typename traits::argument_types {}, [&](auto &&...args) -> Result {
             using R = std::invoke_result_t<Callable&&, decltype(args)&&...>;
             if constexpr (std::is_void_v<R>) {
                 std::invoke(std::forward<Callable>(callable), std::forward<decltype(args)>(args)...);
@@ -362,11 +409,114 @@ namespace Reflect {
     }
 
     template <typename Callable, typename... Args>
-    Result invoke(Callable &&callable, Args &&...args)
+    Result invoke_free(Callable &&callable, Args &&...args)
     {
         Result result;
         Value_erased([&](Value &v) {
-            result = invoke(v, std::forward<Callable>(callable), std::forward<Args>(args)...);
+            result = invoke_free(v, std::forward<Callable>(callable), std::forward<Args>(args)...);
+        });
+        return result;
+    }
+
+    template <bool isMember, typename traits>
+    struct invoke_member_helper {
+        using class_type = typename traits::class_type;
+        using argument_types = typename traits::argument_types;
+    };
+
+    template <typename traits>
+    struct invoke_member_helper<false, traits> {
+        static_assert(std::is_lvalue_reference_v<typename traits::argument_types::first> || std::is_pointer_v<typename traits::argument_types::first>, "First argument of a free member-like function must be a reference or a pointer");
+        using class_type = std::remove_reference_t<typename traits::argument_types::first>;
+        using argument_types = typename traits::argument_types::pop_front;
+    };
+
+    template <typename T, typename R, typename argument_types, typename Callable>
+    struct AccessBindingForwarder {
+
+        using type = R;
+
+        AccessBindingForwarder(type_pack<T, R, argument_types>, Callable &&callable, ScopeBinding scope)
+            : mCallable(std::forward<Callable>(callable))
+            , mScope(std::move(scope))
+        {
+        }
+
+        template <typename F>
+        friend bool tag_invoke(Execution::access_binding_t access, const AccessBindingForwarder &binding, F &&callback)
+        {
+            return access(binding.mScope.unwrap<T &>(), [&](T &t) {
+                Result result = invoke_impl(argument_types {}, [&](auto &&...args) {
+                    bool result = patch_void(callback, true)(std::invoke(binding.mCallable, t, std::forward<decltype(args)>(args)...));
+                    assert(result);
+                    return Result {};
+                });
+                return !result;
+            });
+        }
+
+        template <bool isReferenceWrapped>
+        friend decltype(auto) tag_invoke(Reflect::convert_Value_t<isReferenceWrapped> convert_ValueType, AccessBindingForwarder &&forwarder)
+        {
+            constexpr ExtendedType type = toType<forward_ref_t<R>>();
+            if constexpr (type.mType == TypeEnum::ScopeValue || type.mType == TypeEnum::OwnedValueValue) {
+                const MetaTable *table;
+                if constexpr (type.mSecondary.mMetaTable) {
+                    table = *type.mSecondary.mMetaTable;
+                } else {
+                    table = forwarder.mCallable.dynamic_return_type();
+                }
+                return ScopeBinding { std ::move(forwarder), table };
+            } else {
+                return Binding { std ::move(forwarder), type.mType };
+            }
+        }
+
+        Callable mCallable;
+        ScopeBinding mScope;
+    };
+
+    template <typename T, typename R, typename argument_types, typename Callable>
+    AccessBindingForwarder(type_pack<T, R, argument_types>, Callable &&, ScopeBinding) -> AccessBindingForwarder<T, R, argument_types, Callable>;
+
+    template <typename Callable, typename Arg, typename... Args>
+    Result invoke_member(Value &result, Callable &&callable, Arg &&arg, Args &&...args)
+    {
+        using traits = CallableTraits<Callable>;
+
+        using T = typename invoke_member_helper<traits::is_member_function, traits>::class_type;
+        using argument_types = typename invoke_member_helper<traits::is_member_function, traits>::argument_types;
+
+        if constexpr (sizeof...(Args) == 0 && !std::same_as<typename traits::return_type, void> && (!PrimitiveType<std::decay_t<typename traits::return_type>> || std::same_as<ScopePtr, typename traits::return_type>)) {
+            if (Value_is<ScopeBinding>(arg)) {
+                toValue(result, AccessBindingForwarder { type_pack<T, typename traits::return_type, argument_types> {}, std::forward<Callable>(callable), Value_as<ScopeBinding>(arg) });
+                return {};
+            }
+        }
+
+        return call([&](T &t) {
+            if constexpr (std::same_as<typename argument_types::template resize<1>, type_pack<Value &>>) {
+                return invoke_impl(typename argument_types::pop_front {}, [&](auto &&...args) { return std::invoke(std::forward<Callable>(callable), t, result, std::forward<decltype(args)>(args)...); }, std::forward<Args>(args)...);
+            } else {
+                return invoke_impl(argument_types {}, [&](auto &&...args) -> Result {
+            using R = std::invoke_result_t<Callable&&, T&, decltype(args)&&...>;
+            if constexpr (std::is_void_v<R>) {
+                std::invoke(std::forward<Callable>(callable), t, std::forward<decltype(args)>(args)...);
+            } else {
+                toValue(result, forward_ref<R>(std::invoke(std::forward<Callable>(callable), t, std::forward<decltype(args)>(args)...)));
+            }            
+            return {}; }, std::forward<Args>(args)...);
+            }
+        },
+            std::forward<Arg>(arg));
+    }
+
+    template <typename Callable, typename Arg, typename... Args>
+    Result invoke_member(Callable &&callable, Arg &&arg, Args &&...args)
+    {
+        Result result;
+        Value_erased([&](Value &v) {
+            result = invoke_member(v, std::forward<Callable>(callable), std::forward<Arg>(arg), std::forward<Args>(args)...);
         });
         return result;
     }
