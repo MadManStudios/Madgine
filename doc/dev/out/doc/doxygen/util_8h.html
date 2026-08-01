@@ -272,7 +272,17 @@ This graph shows which files directly or indirectly include this file:</div>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_reflect_1_1_access_binding_forwarder.html">Engine::Reflect::AccessBindingForwarder&lt; T, R, argument_types, Callable &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_reflect_1_1convert___value__t.html">Engine::Reflect::convert_Value_t&lt; isReferenceWrapped &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_reflect_1_1_dynamic_cast_helper.html">Engine::Reflect::DynamicCastHelper&lt; F, R, T, Args &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_reflect_1_1_dynamic_cast_helper_3_01_f_00_01_r_00_01void_00_01_args_8_8_8_01_4.html">Engine::Reflect::DynamicCastHelper&lt; F, R, void, Args... &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_reflect_1_1invoke__member__helper.html">Engine::Reflect::invoke_member_helper&lt; isMember, traits &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_reflect_1_1invoke__member__helper_3_01false_00_01traits_01_4.html">Engine::Reflect::invoke_member_helper&lt; false, traits &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_reflect_1_1_virtual_range_helper.html">Engine::Reflect::VirtualRangeHelper</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -293,6 +303,9 @@ Typedefs</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:a5b45beb33917721f1607612f814b2dd3"><td class="memTemplParams" colspan="2">template&lt;typename T , typename R , typename argument_types , typename Callable &gt; </td></tr>
+<tr class="memitem:a5b45beb33917721f1607612f814b2dd3"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_reflect.html#a5b45beb33917721f1607612f814b2dd3">Engine::Reflect::AccessBindingForwarder</a> (type_pack&lt; T, R, argument_types &gt;, Callable &amp;&amp;, ScopeBinding) -&gt; AccessBindingForwarder&lt; T, R, argument_types, Callable &gt;</td></tr>
+<tr class="separator:a5b45beb33917721f1607612f814b2dd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac4d566a1adfcc7b416648f1734d86171"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_reflect.html#ac4d566a1adfcc7b416648f1734d86171">Engine::Reflect::argumentCount</a> (const ArgumentList &amp;args)</td></tr>
 <tr class="separator:ac4d566a1adfcc7b416648f1734d86171"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adf336fa346eb76b16f34ea1c482329c8"><td class="memTemplParams" colspan="2">template&lt;typename Callable , typename Arg &gt; </td></tr>
@@ -301,20 +314,33 @@ Functions</h2></td></tr>
 <tr class="memitem:adabd7cad9324415bf84e363c7c26a91b"><td class="memTemplParams" colspan="2">template&lt;typename T , typename Callable &gt; </td></tr>
 <tr class="memitem:adabd7cad9324415bf84e363c7c26a91b"><td class="memTemplItemLeft" align="right" valign="top">Result&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_reflect.html#adabd7cad9324415bf84e363c7c26a91b">Engine::Reflect::callSequenceRange</a> (T output, SequenceIterator it, Callable &amp;&amp;callable)</td></tr>
 <tr class="separator:adabd7cad9324415bf84e363c7c26a91b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a384fa63ce2de9caea66a99d46f6bba25"><td class="memTemplParams" colspan="2">template&lt;typename F &gt; </td></tr>
+<tr class="memitem:a384fa63ce2de9caea66a99d46f6bba25"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_reflect.html#a384fa63ce2de9caea66a99d46f6bba25">Engine::Reflect::dynamic_scope_cast</a> (const MetaTable *type, F &amp;&amp;f)</td></tr>
+<tr class="separator:a384fa63ce2de9caea66a99d46f6bba25"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afc8a277a39bd31acc4d8c8854aebeead"><td class="memItemLeft" align="right" valign="top">const Value &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_reflect.html#afc8a277a39bd31acc4d8c8854aebeead">Engine::Reflect::getArgument</a> (const ArgumentList &amp;args, size_t index)</td></tr>
 <tr class="separator:afc8a277a39bd31acc4d8c8854aebeead"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae75ffbd4c0f3d89cc2e40e4ac0430867"><td class="memTemplParams" colspan="2">template&lt;typename Callable , typename... Args&gt; </td></tr>
-<tr class="memitem:ae75ffbd4c0f3d89cc2e40e4ac0430867"><td class="memTemplItemLeft" align="right" valign="top">Result&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_reflect.html#ae75ffbd4c0f3d89cc2e40e4ac0430867">Engine::Reflect::invoke</a> (Callable &amp;&amp;callable, Args &amp;&amp;...args)</td></tr>
-<tr class="separator:ae75ffbd4c0f3d89cc2e40e4ac0430867"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab520961d6bcb6998bf072fee150b4d68"><td class="memTemplParams" colspan="2">template&lt;typename Callable , typename... Args&gt; </td></tr>
-<tr class="memitem:ab520961d6bcb6998bf072fee150b4d68"><td class="memTemplItemLeft" align="right" valign="top">Result&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_reflect.html#ab520961d6bcb6998bf072fee150b4d68">Engine::Reflect::invoke</a> (Value &amp;result, Callable &amp;&amp;callable, Args &amp;&amp;...args)</td></tr>
-<tr class="separator:ab520961d6bcb6998bf072fee150b4d68"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afda93ddbd6de4da217c3dba931aad10d"><td class="memTemplParams" colspan="2">template&lt;typename Callable , typename Arg , typename... Args, typename Param , typename... Params&gt; </td></tr>
-<tr class="memitem:afda93ddbd6de4da217c3dba931aad10d"><td class="memTemplItemLeft" align="right" valign="top">Result&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_reflect.html#afda93ddbd6de4da217c3dba931aad10d">Engine::Reflect::invoke_impl</a> (type_pack&lt; Param, Params... &gt;, Callable &amp;&amp;callable, Arg &amp;&amp;arg, Args &amp;&amp;...args)</td></tr>
-<tr class="separator:afda93ddbd6de4da217c3dba931aad10d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad572be4e59a73c9c3dd902e1147064da"><td class="memTemplParams" colspan="2">template&lt;typename Callable , typename... Args&gt; </td></tr>
+<tr class="memitem:ad572be4e59a73c9c3dd902e1147064da"><td class="memTemplItemLeft" align="right" valign="top">Result&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_reflect.html#ad572be4e59a73c9c3dd902e1147064da">Engine::Reflect::invoke_free</a> (Callable &amp;&amp;callable, Args &amp;&amp;...args)</td></tr>
+<tr class="separator:ad572be4e59a73c9c3dd902e1147064da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeaa171a3dccdc47b3ace92df35e0abc7"><td class="memTemplParams" colspan="2">template&lt;typename Callable , typename... Args&gt; </td></tr>
+<tr class="memitem:aeaa171a3dccdc47b3ace92df35e0abc7"><td class="memTemplItemLeft" align="right" valign="top">Result&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_reflect.html#aeaa171a3dccdc47b3ace92df35e0abc7">Engine::Reflect::invoke_free</a> (Value &amp;result, Callable &amp;&amp;callable, Args &amp;&amp;...args)</td></tr>
+<tr class="separator:aeaa171a3dccdc47b3ace92df35e0abc7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acab8a0b24d7c7705a3b472b4bf10ada9"><td class="memTemplParams" colspan="2">template&lt;typename Callable , typename Param , typename... Params&gt; </td></tr>
+<tr class="memitem:acab8a0b24d7c7705a3b472b4bf10ada9"><td class="memTemplItemLeft" align="right" valign="top">Result&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_reflect.html#acab8a0b24d7c7705a3b472b4bf10ada9">Engine::Reflect::invoke_impl</a> (type_pack&lt; Contextual&lt; Param &gt;, Params... &gt;, Callable &amp;&amp;callable)</td></tr>
+<tr class="separator:acab8a0b24d7c7705a3b472b4bf10ada9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f47494aabb4a6a5eaf48caaf7441086"><td class="memTemplParams" colspan="2">template&lt;typename Callable , typename Arg , typename... Args, typename Param , typename... Params&gt; <br />
+requires (!Concepts::InstanceOf&lt;Param, Contextual&gt;)</td></tr>
+<tr class="memitem:a1f47494aabb4a6a5eaf48caaf7441086"><td class="memTemplItemLeft" align="right" valign="top">Result&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_reflect.html#a1f47494aabb4a6a5eaf48caaf7441086">Engine::Reflect::invoke_impl</a> (type_pack&lt; Param, Params... &gt;, Callable &amp;&amp;callable, Arg &amp;&amp;arg, Args &amp;&amp;...args)</td></tr>
+<tr class="separator:a1f47494aabb4a6a5eaf48caaf7441086"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac5f706f9a3e4e8a8f7208e2b5b7afc0c"><td class="memTemplParams" colspan="2">template&lt;typename Callable &gt; </td></tr>
 <tr class="memitem:ac5f706f9a3e4e8a8f7208e2b5b7afc0c"><td class="memTemplItemLeft" align="right" valign="top">Result&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_reflect.html#ac5f706f9a3e4e8a8f7208e2b5b7afc0c">Engine::Reflect::invoke_impl</a> (type_pack&lt;&gt;, Callable &amp;&amp;callable)</td></tr>
 <tr class="separator:ac5f706f9a3e4e8a8f7208e2b5b7afc0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a23e9a71600b0f53e69960f2974291238"><td class="memTemplParams" colspan="2">template&lt;typename Callable , typename Arg , typename... Args&gt; </td></tr>
+<tr class="memitem:a23e9a71600b0f53e69960f2974291238"><td class="memTemplItemLeft" align="right" valign="top">Result&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_reflect.html#a23e9a71600b0f53e69960f2974291238">Engine::Reflect::invoke_member</a> (Callable &amp;&amp;callable, Arg &amp;&amp;arg, Args &amp;&amp;...args)</td></tr>
+<tr class="separator:a23e9a71600b0f53e69960f2974291238"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1fc6e870842fba1bd88dcdd892eac654"><td class="memTemplParams" colspan="2">template&lt;typename Callable , typename Arg , typename... Args&gt; </td></tr>
+<tr class="memitem:a1fc6e870842fba1bd88dcdd892eac654"><td class="memTemplItemLeft" align="right" valign="top">Result&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_reflect.html#a1fc6e870842fba1bd88dcdd892eac654">Engine::Reflect::invoke_member</a> (Value &amp;result, Callable &amp;&amp;callable, Arg &amp;&amp;arg, Args &amp;&amp;...args)</td></tr>
+<tr class="separator:a1fc6e870842fba1bd88dcdd892eac654"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3902997560f13c1e26e54f7d0968bb7e"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; <br />
 requires (!std::is_pointer_v&lt;T&gt;)</td></tr>
 <tr class="memitem:a3902997560f13c1e26e54f7d0968bb7e"><td class="memTemplItemLeft" align="right" valign="top">T *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_reflect.html#a3902997560f13c1e26e54f7d0968bb7e">Engine::Reflect::scope_cast</a> (const ScopePtr &amp;ptr)</td></tr>
@@ -351,7 +377,7 @@ Variables</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Jul 24 2026 20:03:21 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Sat Aug 1 2026 16:30:02 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>
