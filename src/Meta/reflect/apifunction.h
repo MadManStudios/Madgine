@@ -1,6 +1,7 @@
 #pragma once
 
 #include "result.h"
+#include "context.h"
 
 namespace Engine {
 namespace Reflect {
@@ -24,7 +25,7 @@ namespace Reflect {
             return mTable != nullptr;
         }
 
-        Result operator()(Value &retVal, const ArgumentList &args) const;
+        Result operator()(Value &retVal, const ArgumentList &args, ContextPtr context = {}) const;
 
         size_t argumentsCount(bool excludeThis = false) const;
         bool isMemberFunction() const;

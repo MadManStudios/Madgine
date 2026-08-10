@@ -19,8 +19,8 @@ bool Checkbox(const char *label, const Engine::Tools::Traced<bool *> &v)
 
 bool ColorEdit3(const char *label, const Engine::Tools::Traced<float *> &col, ImGuiColorEditFlags flags)
 {
-    auto deref = col.trace([](float *p) { return std::array { p[0], p[1], p[2] }; });
-    std::array<float, 3> value = deref.get();
+    auto deref = col.trace([](float *p) { return Engine::Math::Color3 { p[0], p[1], p[2] }; });
+    Engine::Math::Color3 value = deref.get();
     bool changed = ColorEdit3(label, col.get(), flags);
     if (changed) {
         deref.trackContinuous(value);
@@ -33,8 +33,8 @@ bool ColorEdit3(const char *label, const Engine::Tools::Traced<float *> &col, Im
 
 bool ColorEdit4(const char *label, const Engine::Tools::Traced<float *> &col, ImGuiColorEditFlags flags)
 {
-    auto deref = col.trace([](float *p) { return std::array { p[0], p[1], p[2], p[3] }; });
-    std::array<float, 4> value = deref.get();
+    auto deref = col.trace([](float *p) { return Engine::Math::Color4 { p[0], p[1], p[2], p[3] }; });
+    Engine::Math::Color4 value = deref.get();
     bool changed = ColorEdit4(label, col.get(), flags);
     if (changed) {
         deref.trackContinuous(value);
@@ -60,15 +60,15 @@ bool DragFloat(const char *label, const Engine::Tools::Traced<float *> &v, float
 
 bool DragFloat2(const char *label, const Engine::Tools::Traced<float *> &v, float v_speed, float v_min, float v_max, const char *format, ImGuiSliderFlags flags)
 {
-    auto f = [](float *p) { return std::array { p[0], p[1] }; };
-    auto deref = v.traceEx(std::move(f), static_cast<bool (*)(const Engine::Tools::TracedAccess<float *, decltype(f)> &, bool)>([](const Engine::Tools::TracedAccess<float *, decltype(f)> &array, bool modified) {
+    auto f = [](const Engine::Tools::Traced<float *> &p) { return Engine::Math::Vector2 { p.get()[0], p.get()[1] }; };
+    auto deref = v.traceEx(std::move(f), static_cast<bool (*)(const Engine::Tools::TracedAccess<float *, decltype(f), false> &, bool)>([](const Engine::Tools::TracedAccess<float *, decltype(f), false> &array, bool modified) {
         if (modified) {
             array.mParent.get()[0] = array.get()[0];
             array.mParent.get()[1] = array.get()[1];
         }
         return modified;
     }));
-    std::array<float, 2> value = deref.get();
+    Engine::Math::Vector2 value = deref.get();
     bool changed = DragFloat2(label, v.get(), v_speed, v_min, v_max, format, flags);
     if (changed) {
         deref.trackContinuous(value);
@@ -81,7 +81,7 @@ bool DragFloat2(const char *label, const Engine::Tools::Traced<float *> &v, floa
 
 bool DragFloat3(const char *label, const Engine::Tools::Traced<float *> &v, float v_speed, float v_min, float v_max, const char *format, ImGuiSliderFlags flags)
 {
-    auto f = [](float *p) { return std::array { p[0], p[1], p[2] }; };
+    auto f = [](const Engine::Tools::Traced<float *> &p) { return Engine::Math::Vector3 { p.get()[0], p.get()[1], p.get()[2] }; };
     auto deref = v.traceEx(std::move(f), static_cast<bool (*)(const Engine::Tools::TracedAccess<float *, decltype(f)> &, bool)>([](const Engine::Tools::TracedAccess<float *, decltype(f)> &array, bool modified) {
         if (modified) {
             array.mParent.get()[0] = array.get()[0];
@@ -90,7 +90,7 @@ bool DragFloat3(const char *label, const Engine::Tools::Traced<float *> &v, floa
         }
         return modified;
     }));
-    std::array<float, 3> value = deref.get();
+    Engine::Math::Vector3 value = deref.get();
     bool changed = DragFloat3(label, v.get(), v_speed, v_min, v_max, format, flags);
     if (changed) {
         deref.trackContinuous(value);
@@ -103,7 +103,7 @@ bool DragFloat3(const char *label, const Engine::Tools::Traced<float *> &v, floa
 
 bool DragFloat4(const char *label, const Engine::Tools::Traced<float *> &v, float v_speed, float v_min, float v_max, const char *format, ImGuiSliderFlags flags)
 {
-    auto f = [](float *p) { return std::array { p[0], p[1], p[2], p[3] }; };
+    auto f = [](const Engine::Tools::Traced<float *> &p) { return Engine::Math::Vector4 { p.get()[0], p.get()[1], p.get()[2], p.get()[3] }; };
     auto deref = v.traceEx(std::move(f), static_cast<bool (*)(const Engine::Tools::TracedAccess<float *, decltype(f)> &, bool)>([](const Engine::Tools::TracedAccess<float *, decltype(f)> &array, bool modified) {
         if (modified) {
             array.mParent.get()[0] = array.get()[0];
@@ -113,7 +113,7 @@ bool DragFloat4(const char *label, const Engine::Tools::Traced<float *> &v, floa
         }
         return modified;
     }));
-    std::array<float, 4> value = deref.get();
+    Engine::Math::Vector4 value = deref.get();
     bool changed = DragFloat4(label, v.get(), v_speed, v_min, v_max, format, flags);
     if (changed) {
         deref.trackContinuous(value);
@@ -139,7 +139,7 @@ bool DragInt(const char *label, const Engine::Tools::Traced<int *> &v, float v_s
 
 bool DragInt2(const char *label, const Engine::Tools::Traced<int *> &v, float v_speed, int v_min, int v_max, const char *format, ImGuiSliderFlags flags)
 {
-    auto f = [](int *p) { return std::array { p[0], p[1] }; };
+    auto f = [](const Engine::Tools::Traced<int *> &p) { return Engine::Math::Vector2i { p.get()[0], p.get()[1] }; };
     auto deref = v.traceEx(std::move(f), static_cast<bool (*)(const Engine::Tools::TracedAccess<int *, decltype(f)> &, bool)>([](const Engine::Tools::TracedAccess<int *, decltype(f)> &array, bool modified) {
         if (modified) {
             array.mParent.get()[0] = array.get()[0];
@@ -147,7 +147,7 @@ bool DragInt2(const char *label, const Engine::Tools::Traced<int *> &v, float v_
         }
         return modified;
     }));
-    std::array<int, 2> value = deref.get();
+    Engine::Math::Vector2i value = deref.get();
     bool changed = DragInt2(label, v.get(), v_speed, v_min, v_max, format, flags);
     if (changed) {
         deref.trackContinuous(value);
@@ -160,7 +160,7 @@ bool DragInt2(const char *label, const Engine::Tools::Traced<int *> &v, float v_
 
 bool DragInt3(const char *label, const Engine::Tools::Traced<int *> &v, float v_speed, int v_min, int v_max, const char *format, ImGuiSliderFlags flags)
 {
-    auto f = [](int *p) { return std::array { p[0], p[1], p[2] }; };
+    auto f = [](const Engine::Tools::Traced<int *> &p) { return Engine::Math::Vector3i { p.get()[0], p.get()[1], p.get()[2] }; };
     auto deref = v.traceEx(std::move(f), static_cast<bool (*)(const Engine::Tools::TracedAccess<int *, decltype(f)> &, bool)>([](const Engine::Tools::TracedAccess<int *, decltype(f)> &array, bool modified) {
         if (modified) {
             array.mParent.get()[0] = array.get()[0];
@@ -169,7 +169,7 @@ bool DragInt3(const char *label, const Engine::Tools::Traced<int *> &v, float v_
         }
         return modified;
     }));
-    std::array<int, 3> value = deref.get();
+    Engine::Math::Vector3i value = deref.get();
     bool changed = DragInt3(label, v.get(), v_speed, v_min, v_max, format, flags);
     if (changed) {
         deref.trackContinuous(value);
@@ -182,7 +182,7 @@ bool DragInt3(const char *label, const Engine::Tools::Traced<int *> &v, float v_
 
 bool DragInt4(const char *label, const Engine::Tools::Traced<int *> &v, float v_speed, int v_min, int v_max, const char *format, ImGuiSliderFlags flags)
 {
-    auto f = [](int *p) { return std::array { p[0], p[1], p[2], p[3] }; };
+    auto f = [](const Engine::Tools::Traced<int *> &p) { return Engine::Math::Vector4i { p.get()[0], p.get()[1], p.get()[2], p.get()[3] }; };
     auto deref = v.traceEx(std::move(f), static_cast<bool (*)(const Engine::Tools::TracedAccess<int *, decltype(f)> &, bool)>([](const Engine::Tools::TracedAccess<int *, decltype(f)> &array, bool modified) {
         if (modified) {
             array.mParent.get()[0] = array.get()[0];
@@ -192,7 +192,7 @@ bool DragInt4(const char *label, const Engine::Tools::Traced<int *> &v, float v_
         }
         return modified;
     }));
-    std::array<int, 4> value = deref.get();
+    Engine::Math::Vector4i value = deref.get();
     bool changed = DragInt4(label, v.get(), v_speed, v_min, v_max, format, flags);
     if (changed) {
         deref.trackContinuous(value);
@@ -203,10 +203,10 @@ bool DragInt4(const char *label, const Engine::Tools::Traced<int *> &v, float v_
     return changed;
 }
 
-bool DragDuration(const char *label, const Engine::Tools::Traced<std::chrono::nanoseconds::rep *> &p_data, float v_speed, const void *p_min, const void *p_max, const char *format, ImGuiSliderFlags flags)
+bool DragDuration(const char *label, const Engine::Tools::Traced<Engine::Reflect::Duration64::rep *> &p_data, float v_speed, const void *p_min, const void *p_max, const char *format, ImGuiSliderFlags flags)
 {
-    long long value = *p_data.get();
-    bool changed = DragScalar(label, ImGuiDataType_S64, p_data.get(), v_speed, p_min, p_max, format, flags);
+    Engine::Reflect::Duration64::rep value = *p_data.get();
+    bool changed = DragScalar(label, ImGuiDataType_U64, p_data.get(), v_speed, p_min, p_max, format, flags);
     if (changed) {
         (*p_data).trackContinuous(value);
     }
@@ -218,7 +218,7 @@ bool DragDuration(const char *label, const Engine::Tools::Traced<std::chrono::na
 
 bool DragUInt(const char *label, const Engine::Tools::Traced<uint64_t *> &p_data, float v_speed, const void *p_min, const void *p_max, const char *format, ImGuiSliderFlags flags)
 {
-    long long value = *p_data.get();
+    uint64_t value = *p_data.get();
     bool changed = DragScalar(label, ImGuiDataType_U64, p_data.get(), v_speed, p_min, p_max, format, flags);
     if (changed) {
         (*p_data).trackContinuous(value);
@@ -551,7 +551,8 @@ bool ValueTypeDrawer::draw(const Engine::Tools::Traced<const std::monostate &> &
 
 bool ValueTypeDrawer::draw(const Engine::Tools::Traced<Engine::Math::Quaternion &> &q)
 {
-    const Engine::Tools::Traced<Engine::Math::Vector3 &> &v = q.traceEx(&Engine::Math::Quaternion::toDegrees, static_cast<bool (*)(const Engine::Tools::TracedAccess<Engine::Math::Quaternion &, decltype(&Engine::Math::Quaternion::toDegrees)> &, bool)>([](const Engine::Tools::TracedAccess<Engine::Math::Quaternion &, decltype(&Engine::Math::Quaternion::toDegrees)> &degrees, bool changed) {
+    auto f = [](const Engine::Tools::Traced<Engine::Math::Quaternion &> &q) { return q->toDegrees(); };
+    const Engine::Tools::Traced<Engine::Math::Vector3 &> &v = q.traceEx(std::move(f), static_cast<bool (*)(const Engine::Tools::TracedAccess<Engine::Math::Quaternion &, decltype(f)> &, bool)>([](const Engine::Tools::TracedAccess<Engine::Math::Quaternion &, decltype(f)> &degrees, bool changed) {
         if (changed)
             degrees.mParent.get() = Engine::Math::Quaternion::FromDegrees(degrees.get());
         return changed;
@@ -684,22 +685,23 @@ bool ValueTypeDrawer::draw(const Engine::Tools::Traced<const Engine::Reflect::Sc
     return false;
 }
 
-bool ValueTypeDrawer::draw(const Engine::Tools::Traced<std::chrono::nanoseconds &> &d)
+bool ValueTypeDrawer::draw(const Engine::Tools::Traced<Engine::Reflect::Duration64 &> &d)
 {
-    auto count = d.traceEx(&std::chrono::nanoseconds::count, static_cast<bool (*)(const Engine::Tools::TracedAccess<std::chrono::nanoseconds &, decltype(&std::chrono::nanoseconds::count)> &, bool)>([](const auto &count, bool modified) {
+    auto f = [](const Engine::Tools::Traced<Engine::Reflect::Duration64 &> &d) { return d.get().count(); };
+    auto count = d.traceEx(std::move(f), static_cast<bool (*)(const Engine::Tools::TracedAccess<Engine::Reflect::Duration64 &, decltype(f)> &, bool)>([](const auto &count, bool modified) {
         if (modified) {
-            count.mParent.get() = std::chrono::nanoseconds { count.get() };
+            count.mParent.get() = Engine::Reflect::Duration64 { count.get() };
         }
         return modified;
     }));
     if (ImGui::DragDuration("##ValueTypeDrawer", &count, 100000000.0f)) {
-        d.get() = std::chrono::nanoseconds { count.get() };
+        d.get() = Engine::Reflect::Duration64 { count.get() };
         return true;
     }
     return false;
 }
 
-bool ValueTypeDrawer::draw(const Engine::Tools::Traced<const std::chrono::nanoseconds &> &d)
+bool ValueTypeDrawer::draw(const Engine::Tools::Traced<const Engine::Reflect::Duration64 &> &d)
 {
     Text("<duration>");
     return false;

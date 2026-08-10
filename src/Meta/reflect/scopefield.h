@@ -10,8 +10,8 @@ namespace Reflect {
 
         ScopeField(const Value &ptr, const Accessor *pointer);
 
-        Result value(Value &retVal) const;
-
+        Result value(Value &retVal, ContextPtr context = {}) const;
+        Result set(const Value &val, ContextPtr context = {});
         Result operator=(const Value &v);
 
         const char *key() const;

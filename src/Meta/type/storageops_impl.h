@@ -53,8 +53,7 @@ namespace Type {
                                 new (&static_cast<AllocationStorage &>(out).mAllocation) AllocationPtr { new Storage<T>(type, std::forward<typename ConstructorParameter<Args>::type>(arg)...) };
                             } else {
                                 static_cast<AllocationStorage &>(out).mAllocation = AllocationPtr { new Storage<T>(type, std::forward<typename ConstructorParameter<Args>::type>(arg)...) };
-                            }
-                        },
+                            } }, {},
                             getArgument(args, Is)...);
                     };
                 }(std::index_sequence_for<Args...> {})
@@ -102,8 +101,7 @@ namespace Type {
                                                                                  new (&static_cast<AllocationStorage &>(out).mAllocation) AllocationPtr { new Storage<T>(type, std::forward<typename ConstructorParameter<Args>::type>(arg)..., std::move(variadicArgs)) };
                                                                              } else {
                                                                                  static_cast<AllocationStorage &>(out).mAllocation = AllocationPtr { new Storage<T>(type, std::forward<typename ConstructorParameter<Args>::type>(arg)..., std::move(variadicArgs)) };
-                                                                             }
-                                                                         },
+                                                                             } }, {},
                                                                              getArgument(args, Is)...); });
                     };
                 }(std::index_sequence_for<Args...> {})

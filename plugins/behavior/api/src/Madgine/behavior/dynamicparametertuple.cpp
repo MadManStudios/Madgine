@@ -24,13 +24,13 @@ namespace Behavior {
             accessors[i] = Reflect::Accessor {
                 parameters[i].mName.data(),
                 nullptr,
-                [](const Reflect::Accessor *self, Reflect::Value &out, const Reflect::Value &scope) -> Reflect::Result {
+                [](const Reflect::Accessor *self, Reflect::Value &out, const Reflect::Value &scope, Reflect::ContextPtr context) -> Reflect::Result {
                     size_t index = self - (*scope.type().mSecondary.mMetaTable)->mMembers;
-                    return call([&, index](DynamicParameterTuple &tuple) -> Reflect::Result { tuple.mValues[index].toValue(out); return {}; }, scope);
+                    return call([&, index](DynamicParameterTuple &tuple) -> Reflect::Result { tuple.mValues[index].toValue(out); return {}; }, scope, context);
                 },
-                [](const Reflect::Accessor *self, const Reflect::Value &scope, const Reflect::Value &val) -> Reflect::Result {
+                [](const Reflect::Accessor *self, const Reflect::Value &scope, const Reflect::Value &val, Reflect::ContextPtr context) -> Reflect::Result {
                     size_t index = self - (*scope.type().mSecondary.mMetaTable)->mMembers;
-                    return call([&](DynamicParameterTuple &tuple) { return tuple.mValues[index].fromValue(val); }, scope);
+                    return call([&](DynamicParameterTuple &tuple) { return tuple.mValues[index].fromValue(val); }, scope, context);
                 },
                 (*parameters[i].mType)->mType
             };

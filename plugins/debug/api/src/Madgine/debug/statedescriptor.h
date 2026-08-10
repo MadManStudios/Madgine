@@ -16,7 +16,7 @@ namespace Execution {
                     Reflect::toValue(out, *static_cast<const std::remove_reference_t<V> *>(v));
                 })
                 , mSet([](void *v, const Reflect::Value &in) {
-                    Reflect::invoke_member([v](const std::remove_reference_t<V> &value) { *static_cast<std::remove_reference_t<V> *>(v) = value; }, in);
+                    Reflect::invoke_member([v](const std::remove_reference_t<V> &value) { *static_cast<std::remove_reference_t<V> *>(v) = value; }, {}, in);
                 })
                 , mType(Reflect::toType<std::remove_reference_t<V>>())
             {

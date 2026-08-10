@@ -207,7 +207,7 @@ namespace Behavior {
                             }
                         }
 
-                        Reflect::Result error = invoke_free([this](meta_decayed_t<T>... val) { this->set_value(std::forward<meta_decayed_t<T>>(val)...); }, data.at(I)...);
+                        Reflect::Result error = invoke_free([this](meta_decayed_t<T>... val) { this->set_value(std::forward<meta_decayed_t<T>>(val)...); }, {}, data.at(I)...);
                         if (error)
                             this->set_error(std::move(*error.mError));
                     }

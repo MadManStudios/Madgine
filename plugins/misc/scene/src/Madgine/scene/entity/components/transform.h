@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Generic/contextual.h"
+#include "Generic/context.h"
 
 #include "Meta/math/matrix4.h"
 #include "Meta/math/quaternion.h"

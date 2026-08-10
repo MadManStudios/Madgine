@@ -187,7 +187,7 @@ namespace Tools {
                                 return Execution::access_binding(child.get(), [](Scene::Entity::Entity &e) { return e.hasComponent<Scene::Entity::Transform>(); }) ? Reflect::Result {} : REFLECT_UNKNOWN_ERROR();
                             })) {
                             Execution::access_binding(newChild, [&](Scene::Entity::Entity &childEntity) {
-                                childEntity.setParent(node.mEntity);                                
+                                childEntity.setParent(node.mEntity);
                             });
                         }
                         ImGui::EndDragDropTarget();
@@ -230,15 +230,20 @@ namespace Tools {
     {
         Behavior::BehaviorHandle behaviorToAdd;
 
-        Execution::access_binding(e, [&](Scene::Entity::Entity &entity) {
+        TracedRoot<Scene::Entity::EntityPtr> entityPtr { history, e };
+
+        Execution::access_binding(entityPtr, [&](const Traced<Scene::Entity::Entity &> &_entity) {            
+
+            TracedContext<Scene::Entity::Entity &> entity = _entity;
+
             if (ImGui::BeginPopupCompoundContextWindow()) {
                 if (ImGui::BeginMenu(IMGUI_ICON_PLUS " Add Component")) {
                     for (auto [name, index] : Scene::Entity::EntityComponentRegistry::sComponentsByName()) {
-                        if (!entity.hasComponent(name)) {
+                        if (!entity->hasComponent(name)) {
                             if (ImGui::MenuItem(name.data())) {
-                                entity.addComponent(index);
+                                entity->addComponent(index);
                                 if (name == "Transform") {
-                                    entity.getComponent<Scene::Entity::Transform>()->mPosition = { 0, 0, 0 };
+                                    entity->getComponent<Scene::Entity::Transform>()->mPosition = { 0, 0, 0 };
                                 }
                             }
                         }
@@ -254,11 +259,16 @@ namespace Tools {
 
             if (ImGui::CollapsingHeader("Components")) {
                 IndexType<uint32_t> componentToRemove;
-                for (const Scene::Entity::EntityComponentHandle &component : entity.components()) {
+                for (const Scene::Entity::EntityComponentHandle &component : entity->components()) {
+
+                    const Traced<Reflect::ScopePtr> &componentPtr = entity.trace([](Scene::Entity::Entity &e, uint32_t type) {
+                        return Reflect::ScopePtr { e.getComponent(type), *Scene::Entity::EntityComponentRegistry::get(type).mType };
+                    },
+                        component.mType);
+
                     ImGui::BeginGroupPanel(patchIcon(component.name()).c_str());
                     if (ImGui::BeginTable("columns", 2, ImGuiTableFlags_Resizable)) {
-                        TracedRoot<Reflect::ScopePtr> traced { history, component.getTyped() };
-                        mTool.mInspector->drawMembers(traced);
+                        mTool.mInspector->drawMembers(componentPtr);
                         ImGui::EndTable();
                     }
 
@@ -274,30 +284,29 @@ namespace Tools {
                     }
                 }
                 if (componentToRemove) {
-                    entity.removeComponent(componentToRemove);
+                    entity->removeComponent(componentToRemove);
                 }
             }
 
             if (ImGui::CollapsingHeader("Lifetime")) {
-                mTool.getTool<DebuggerView>().renderLifetime(entity.lifetime());
+                mTool.getTool<DebuggerView>().renderLifetime(entity->lifetime());
             }
 
             if (ImGui::CollapsingHeader("Behaviors")) {
-                ImGui::Dummy({0,0});
+                ImGui::Dummy({ 0, 0 });
                 if (ImGui::InlineContextButton("N", mTool.mBehaviorFlags & Reflect::AccessorFlags_Named)) {
                     mTool.mBehaviorFlags ^= Reflect::AccessorFlags_Named;
                 }
-                ImGui::SetItemTooltip("Show Named Parameters");                
+                ImGui::SetItemTooltip("Show Named Parameters");
 
                 mTool.mInspector->pushFlags(mTool.mBehaviorFlags);
 
-                TracedRoot<Scene::Entity::Entity *> entityPtr { history, &entity };
-                mTool.getTool<BehaviorTool>().drawBehaviorList(entityPtr.trace(&Scene::Entity::Entity::behaviors));
+                mTool.getTool<BehaviorTool>().drawBehaviorList(entity.trace(&Scene::Entity::Entity::behaviors));
 
                 mTool.mInspector->popFlags();
             }
 
-            if (Scene::Entity::Transform *t = entity.getComponent<Scene::Entity::Transform>()) {
+            if (Scene::Entity::Transform *t = entity->getComponent<Scene::Entity::Transform>()) {
                 constexpr Math::Color4 colors[] = {
                     { 0.5f, 0, 0, 0.7f },
                     { 0, 0.5f, 0, 0.7f },
@@ -318,13 +327,13 @@ namespace Tools {
                 mHoveredAxis.reset();
                 mHoveredEntity = {};
 
-                Math::Vector3 pos = (t->worldMatrix(entity) * Math::Vector4::UNIT_W).xyz();
+                Math::Vector3 pos = (t->worldMatrix(entity.get()) * Math::Vector4::UNIT_W).xyz();
 
                 for (size_t i = 0; i < 3; ++i) {
                     Im3D::Arrow3D(IM3D_TRIANGLES, 0.1f, pos, pos + offsets[i], { .mColor = colors[i] });
                     if (Im3D::BoundingBox(labels[i], 0, 2)) {
                         mHoveredAxis = i;
-                        mHoveredEntity = entity.pointer();
+                        mHoveredEntity = entity->pointer();
                     }
                 }
 

@@ -95,7 +95,7 @@ namespace Behavior {
 
             mName = info.mName;
 
-            mFunctionPtr = [](const FunctionTable *self, Reflect::Value &retVal, const Reflect::ArgumentList &args) {
+            mFunctionPtr = [](const FunctionTable *self, Reflect::Value &retVal, const Reflect::ArgumentList &args, Reflect::ContextPtr context) {
                 Python3InnerLock lock;
                 return fromPyObject(retVal, static_cast<const Python3FunctionTable *>(self)->mFunctionObject.call(args));
             };

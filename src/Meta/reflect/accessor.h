@@ -1,6 +1,7 @@
 #pragma once
 
 #include "type.h"
+#include "context.h"
 
 namespace Engine {
 namespace Reflect {
@@ -15,8 +16,8 @@ namespace Reflect {
     struct Accessor {
         const char *mName = nullptr;
         bool (*mCheck)(const Accessor *self, const Value &) = nullptr;
-        Result (*mGetter)(const Accessor *self, Value &, const Value &) = nullptr;
-        Result (*mSetter)(const Accessor *self, const Value &, const Value &) = nullptr;
+        Result (*mGetter)(const Accessor *self, Value &, const Value &, ContextPtr) = nullptr;
+        Result (*mSetter)(const Accessor *self, const Value &, const Value &, ContextPtr) = nullptr;
         ExtendedType mType { ExtendedTypeEnum::GenericType };
         AccessorFlags mFlags = AccessorFlags_Default;
     };

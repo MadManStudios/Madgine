@@ -19,18 +19,39 @@ namespace Tools {
         Closure<Reflect::Result()> mTrace;
     };
 
+    template <typename T, typename U>
+    struct TracedChild : Traced<U> {
+        TracedChild(const Traced<T> &parent, U value)
+            : Traced<U>(std::forward<U>(value))
+            , mParent(parent)
+        {
+        }
+
+        UndoStack &undoStack() const override
+        {
+            return mParent.undoStack();
+        }
+
+        void *context_get(const Reflect::MetaTable *type) const override
+        {
+            return Reflect::get_reflect_contextual(mParent, type);
+        }
+
+        const Traced<T> &mParent;
+    };
+
     template <typename Parent, typename U>
     struct TracedVariantAccess;
 
-    template <typename T, typename F, typename... Args>
-    struct TracedAccess : Traced<std::invoke_result_t<F, std::remove_reference_t<T> &, Args...>> {
-        using V = std::invoke_result_t<F, std::remove_reference_t<T> &, Args...>;
+    template <typename T, typename F, bool simplified = false, typename... Args>
+    struct TracedAccess : TracedChild<T, std::invoke_result_t<F, std::conditional_t<simplified, std::remove_reference_t<T> &, const Traced<T> &>, Args...>> {
+        using type = std::conditional_t<simplified, std::remove_reference_t<T> &, const Traced<T> &>;
+        using V = std::invoke_result_t<F, type, Args...>;
 
-        using Callback = bool (*)(const TracedAccess<T, F, Args...> &, bool);
+        using Callback = bool (*)(const TracedAccess<T, F, simplified, Args...> &, bool);
 
         TracedAccess(const Traced<T> &parent, F f, Callback callback = nullptr, std::tuple<Args...> args = {})
-            : Traced<V>(TupleUnpacker::invokeExpand(std::forward<F>(f), parent.get(), args))
-            , mParent(parent)
+            : TracedChild<T, V>(parent, TupleUnpacker::invokeExpand(std::forward<F>(f), [&]() -> decltype(auto) { if constexpr (simplified) return parent.get(); else return parent; }(), args))
             , mF(std::forward<F>(f))
             , mCallback(callback)
             , mArgs(std::move(args))
@@ -44,7 +65,7 @@ namespace Tools {
 
         auto build() const
         {
-            return [parent { mParent.build() }, f { mF }, args { mArgs }, callback { mCallback }](CallableView<std::pair<Reflect::Result, bool>(const Traced<V> &)> tracer) {
+            return [parent { this->mParent.build() }, f { mF }, args { mArgs }, callback { mCallback }](CallableView<std::pair<Reflect::Result, bool>(const Traced<V> &)> tracer) {
                 return parent([&](const Traced<T> &parent) {
                     TracedAccess access { parent, f, callback, args };
                     auto [result, changed] = tracer(access);
@@ -57,25 +78,18 @@ namespace Tools {
 
         std::ostream &print(std::ostream &out) const override
         {
-            return out << mParent << "\nAccess(" << typeid(F).name() << ")";
+            return this->mParent.print(out) << "\nAccess(" << typeid(F).name() << ")";
         }
 
-        UndoStack &undoStack() const override
-        {
-            return mParent.undoStack();
-        }
-
-        const Traced<T> &mParent;
         F mF;
         Callback mCallback;
         std::tuple<Args...> mArgs;
     };
 
     template <typename T, typename V>
-    struct TracedCast : Traced<V> {
+    struct TracedCast : TracedChild<T, V> {
         TracedCast(const Traced<T> &parent)
-            : Traced<V>(parent.get())
-            , mParent(parent)
+            : TracedChild<T, V>(parent, parent.get())
         {
         }
 
@@ -86,27 +100,19 @@ namespace Tools {
 
         auto build() const
         {
-            return [parent { mParent.build() }](CallableView<std::pair<Reflect::Result, bool>(const Traced<V> &)> tracer) { return parent([&](const Traced<T> &parent) { return tracer(TracedCast { parent }); }); };
+            return [parent { this->mParent.build() }](CallableView<std::pair<Reflect::Result, bool>(const Traced<V> &)> tracer) { return parent([&](const Traced<T> &parent) { return tracer(TracedCast { parent }); }); };
         }
 
         std::ostream &print(std::ostream &stream) const override
         {
-            return stream << mParent;
+            return this->mParent.print(stream);
         }
-
-        UndoStack &undoStack() const override
-        {
-            return mParent.undoStack();
-        }
-
-        const Traced<T> &mParent;
     };
 
     template <typename T, typename It>
-    struct TracedSentinel : Traced<It> {
+    struct TracedSentinel : TracedChild<T, It> {
         TracedSentinel(const Traced<T> &parent)
-            : Traced<It>(parent->end())
-            , mParent(parent)
+            : TracedChild<T, It>(parent, parent->end())
         {
         }
 
@@ -117,27 +123,19 @@ namespace Tools {
 
         auto build() const
         {
-            return [parent { mParent.build() }](CallableView<std::pair<Reflect::Result, bool>(const Traced<It> &)> tracer) { return parent([&](const Traced<T> &parent) { return tracer(TracedSentinel { parent }); }); };
+            return [parent { this->mParent.build() }](CallableView<std::pair<Reflect::Result, bool>(const Traced<It> &)> tracer) { return parent([&](const Traced<T> &parent) { return tracer(TracedSentinel { parent }); }); };
         }
 
         std::ostream &print(std::ostream &out) const override
         {
-            return out << mParent << "\nend()";
+            return this->mParent.print(out) << "\nend()";
         }
-
-        UndoStack &undoStack() const override
-        {
-            return mParent.undoStack();
-        }
-
-        const Traced<T> &mParent;
     };
 
     template <typename T, typename It>
-    struct TracedIterator : Traced<It> {
+    struct TracedIterator : TracedChild<T, It> {
         TracedIterator(const Traced<T> &parent, It it)
-            : Traced<It>(std::forward<It>(it))
-            , mParent(parent)
+            : TracedChild<T, It>(parent, std::forward<It>(it))
         {
         }
 
@@ -149,7 +147,7 @@ namespace Tools {
 
         TracedIterator &operator=(const TracedIterator &other)
         {
-            assert(std::addressof(mParent) == std::addressof(other.mParent));
+            assert(std::addressof(this->mParent) == std::addressof(other.mParent));
             this->mValue = other.mValue;
             return *this;
         }
@@ -173,28 +171,20 @@ namespace Tools {
 
         auto build() const
         {
-            return [parent { mParent.build() }, i { std::ranges::distance(mParent->begin(), this->mValue) }](CallableView<std::pair<Reflect::Result, bool>(const Traced<It> &)> tracer) { return parent([&](const Traced<T> &parent) { return tracer(TracedIterator { parent, std::next(parent->begin(), i) }); }); };
+            return [parent { this->mParent.build() }, i { std::ranges::distance(this->mParent->begin(), this->mValue) }](CallableView<std::pair<Reflect::Result, bool>(const Traced<It> &)> tracer) { return parent([&](const Traced<T> &parent) { return tracer(TracedIterator { parent, std::next(parent->begin(), i) }); }); };
         }
 
         std::ostream &print(std::ostream &out) const override
         {
-            return out << mParent << "\n[" << std::ranges::distance(mParent->begin(), this->mValue) << "]";
+            return this->mParent.print(out) << "\n[" << std::ranges::distance(this->mParent->begin(), this->mValue) << "]";
         }
-
-        UndoStack &undoStack() const override
-        {
-            return mParent.undoStack();
-        }
-
-        const Traced<T> &mParent;
     };
 
     template <typename T, typename V>
-    struct TracedBinding : Traced<V> {
+    struct TracedBinding : TracedChild<T, V> {
 
         TracedBinding(const Traced<T> &parent, V &&v)
-            : Traced<V>(std::forward<V>(v))
-            , mParent(parent)
+            : TracedChild<T, V>(parent, std::forward<V>(v))
         {
         }
 
@@ -205,7 +195,7 @@ namespace Tools {
 
         auto build() const
         {
-            return [parent { mParent.build() }](CallableView<std::pair<Reflect::Result, bool>(const Traced<V> &)> tracer) {
+            return [parent { this->mParent.build() }](CallableView<std::pair<Reflect::Result, bool>(const Traced<V> &)> tracer) {
                 return parent([&](const Traced<T> &parent) {
                     Reflect::Result result;
                     if (!Execution::access_binding(parent.get(), [&](auto &&v) {
@@ -220,15 +210,8 @@ namespace Tools {
 
         std::ostream &print(std::ostream &out) const override
         {
-            return out << mParent << "(bound)";
+            return this->mParent.print(out) << "(bound)";
         }
-
-        UndoStack &undoStack() const override
-        {
-            return mParent.undoStack();
-        }
-
-        const Traced<T> &mParent;
     };
 
     template <typename V, size_t I>
@@ -281,33 +264,33 @@ namespace Tools {
         using TracedStorage<T>::TracedStorage;
 
         template <typename F, typename... Args>
-        TracedAccess<T, F, Args...> trace(F &&f, Args... args) const
+        TracedAccess<T, F, true, Args...> trace(F &&f, Args... args) const
         {
             return { *this, std::forward<F>(f), nullptr, { args... } };
         }
 
         template <typename F>
-        TracedAccess<T, F> traceEx(F &&f, bool (*tracer)(const TracedAccess<T, F> &, bool)) const
+        TracedAccess<T, F, false> traceEx(F &&f, bool (*tracer)(const TracedAccess<T, F, false> &, bool)) const
         {
             return { *this, std::forward<F>(f), tracer };
         }
 
         template <typename R, std::same_as<std::decay_t<T>> _T>
             requires std::is_const_v<std::remove_reference_t<T>>
-        TracedAccess<T, R (_T::*)() const> trace(R (_T::*f)() const) const
+        TracedAccess<T, R (_T::*)() const, true> trace(R (_T::*f)() const) const
         {
             return { *this, f };
         }
 
         template <typename R, std::same_as<std::decay_t<T>> _T>
             requires(!std::is_const_v<std::remove_reference_t<T>>)
-        TracedAccess<T, R (_T::*)()> trace(R (_T::*f)()) const
+        TracedAccess<T, R (_T::*)(), true> trace(R (_T::*f)()) const
         {
             return { *this, f };
         }
 
         template <typename R, std::convertible_to<T> _T>
-        TracedAccess<T, R (*)(_T)> trace(R (*f)(_T)) const
+        TracedAccess<T, R (*)(_T), true> trace(R (*f)(_T)) const
         {
             return { *this, f };
         }
@@ -420,6 +403,16 @@ namespace Tools {
                 return trace(get_helper<T, I>);
             }
         }
+
+        virtual void *context_get(const Reflect::MetaTable *type) const
+        {
+            return nullptr;
+        }
+
+        friend void *tag_invoke(Reflect::get_reflect_contextual_t, const Traced<T> &trace, const Reflect::MetaTable *type)
+        {
+            return trace.context_get(type);
+        }
     };
 
     template <>
@@ -435,7 +428,7 @@ namespace Tools {
         }
 
         template <typename F>
-        TracedAccess<Reflect::Value &, F> trace(F &&f) const
+        TracedAccess<Reflect::Value &, F, true> trace(F &&f) const
         {
             return { *this, std::forward<F>(f) };
         }
@@ -470,8 +463,18 @@ namespace Tools {
         decltype(auto) visit(V &&visitor) const
         {
             return mValue.visit([&](auto &&v) {
-                return visitor(TracedVariantAccess<const Traced<Reflect::Value &> &, decltype(v)> { *this, std::forward<decltype(v)>(v) });
+                return visitor(TracedVariantAccess<Reflect::Value &, decltype(v)> { *this, std::forward<decltype(v)>(v) });
             });
+        }
+
+        virtual void *context_get(const Reflect::MetaTable *type) const
+        {
+            return nullptr;
+        }
+
+        friend void *tag_invoke(Reflect::get_reflect_contextual_t, const Traced<Reflect::Value &> &trace, const Reflect::MetaTable *type)
+        {
+            return trace.context_get(type);
         }
 
         Reflect::Value &mValue;
@@ -513,11 +516,10 @@ namespace Tools {
     };
 
     template <typename T>
-    struct TracedValueTypeCall : Traced<const T &> {
+    struct TracedValueTypeCall : TracedChild<const Reflect::Value &, const T &> {
 
-        TracedValueTypeCall(const Traced<const Reflect::Value&> &parent, const T &v)
-            : Traced<const T &>(v)
-            , mParent(parent)
+        TracedValueTypeCall(const Traced<const Reflect::Value &> &parent, const T &v)
+            : TracedChild<const Reflect::Value &, const T &>(parent, v)
         {
         }
 
@@ -528,7 +530,7 @@ namespace Tools {
 
         auto build() const
         {
-            return [parent { mParent.build() }](CallableView<std::pair<Reflect::Result, bool>(const Traced<const T &> &)> tracer) {
+            return [parent { this->mParent.build() }](CallableView<std::pair<Reflect::Result, bool>(const Traced<const T &> &)> tracer) {
                 return parent([&](const Traced<const Reflect::Value &> &parent) {
                     bool changed = false;
                     Reflect::Result result = Reflect::call([&](const T &v) {
@@ -544,61 +546,15 @@ namespace Tools {
 
         std::ostream &print(std::ostream &out) const override
         {
-            return out << mParent << " -> ValueType_call";
+            return this->mParent.print(out) << " -> ValueType_call";
         }
-
-        UndoStack &undoStack() const override
-        {
-            return mParent.undoStack();
-        }
-
-        const Traced<const Reflect::Value&> &mParent;
     };
 
     template <typename T>
-    struct TracedToValueType : Traced<Reflect::Value> {
+    struct TracedContext : TracedChild<T, T> {
 
-        TracedToValueType(const Traced<T> &parent, Reflect::Value v)
-            : Traced<Reflect::Value>(std::move(v))
-            , mParent(parent)
-        {
-        }
-
-        Closure<Reflect::Result(CallableView<std::pair<Reflect::Result, bool>(const Traced<Reflect::Value> &)>)> vBuild() const override
-        {
-            return build();
-        }
-
-        auto build() const
-        {
-            return [parent { mParent.build() }](CallableView<std::pair<Reflect::Result, bool>(const Traced<Reflect::Value> &)> tracer) {
-                return parent([&](const Traced<const T &> &parent) {
-                    Reflect::Value v;
-                    toValue(v, parent.get());
-                    return tracer(Tools::TracedToValueType { parent, std::move(v) });
-                });
-            };
-        }
-
-        std::ostream &print(std::ostream &out) const override
-        {
-            return out << mParent << " -> ValueType_call";
-        }
-
-        UndoStack &undoStack() const override
-        {
-            return mParent.undoStack();
-        }
-
-        const Traced<const T &> &mParent;
-    };
-
-    template <typename Parent, typename T>
-    struct TracedVariantAccess : Traced<T> {
-
-        TracedVariantAccess(Parent parent, T t)
-            : Traced<T>(std::forward<T>(t))
-            , mParent(std::forward<Parent>(parent))
+        TracedContext(const Traced<T> &parent)
+            : TracedChild<T, T>(parent, parent.get())
         {
         }
 
@@ -609,37 +565,112 @@ namespace Tools {
 
         auto build() const
         {
-            return [parent { mParent.build() }](CallableView<std::pair<Reflect::Result, bool>(const Traced<T> &)> tracer) { return parent([&](Parent parent) { return tracer(TracedVariantAccess { parent, Value_as<std::decay_t<T>>(parent.get()) }); }); };
+            return [parent { this->mParent.build() }](CallableView<std::pair<Reflect::Result, bool>(const Traced<T> &)> tracer) {
+                return parent([&](const Traced<T> &parent) {
+                    return tracer(Tools::TracedContext { parent });
+                });
+            };
+        }
+
+        std::ostream &print(std::ostream &out) const override
+        {
+            return this->mParent.print(out);
+        }
+
+        void *context_get(const Reflect::MetaTable *type) const override
+        {
+            OffsetPtr offset { 0 };
+            if (table<meta_decayed_t<std::remove_reference_t<T>>>->isDerivedFrom(type, &offset)) {
+                return reinterpret_cast<std::byte *>(&this->mValue) + offset;
+            }
+
+            return this->mParent.context_get(type);
+        }
+    };
+
+    template <typename T>
+    struct TracedToValueType : TracedChild<T, Reflect::Value> {
+
+        TracedToValueType(const Traced<T> &parent, Reflect::Value v)
+            : TracedChild<T, Reflect::Value>(parent, std::move(v))
+        {
+        }
+
+        Closure<Reflect::Result(CallableView<std::pair<Reflect::Result, bool>(const Traced<Reflect::Value> &)>)> vBuild() const override
+        {
+            return build();
+        }
+
+        auto build() const
+        {
+            return [parent { this->mParent.build() }](CallableView<std::pair<Reflect::Result, bool>(const Traced<Reflect::Value> &)> tracer) {
+                return parent([&](const Traced<const T &> &parent) {
+                    Reflect::Value v;
+                    toValue(v, parent.get());
+                    return tracer(Tools::TracedToValueType { parent, std::move(v) });
+                });
+            };
+        }
+
+        std::ostream &print(std::ostream &out) const override
+        {
+            return this->mParent.print(out) << " -> ValueType_call";
+        }
+    };
+
+    template <typename Parent, typename T>
+    struct TracedVariantAccess : TracedChild<Parent, T> {
+
+        TracedVariantAccess(const Traced<Parent> &parent, T t)
+            : TracedChild<Parent, T>(parent, std::forward<T>(t))
+        {
+        }
+
+        Closure<Reflect::Result(CallableView<std::pair<Reflect::Result, bool>(const Traced<T> &)>)> vBuild() const override
+        {
+            return build();
+        }
+
+        auto build() const
+        {
+            return [parent { this->mParent.build() }](CallableView<std::pair<Reflect::Result, bool>(const Traced<T> &)> tracer) { return parent([&](const Traced<Parent> &parent) { return tracer(TracedVariantAccess { parent, Value_as<std::decay_t<T>>(parent.get()) }); }); };
         }
 
         std::ostream &print(std::ostream &stream) const override
         {
-            return stream << mParent << " -> " << typeid(std::decay_t<T>).name();
+            return this->mParent.print(stream) << " -> " << typeid(std::decay_t<T>).name();
         }
-
-        UndoStack &undoStack() const override
-        {
-            return mParent.undoStack();
-        }
-
-        Parent mParent;
     };
 
 }
 
 namespace Reflect {
-    template <typename Callable, typename Arg>
-    Result call(Callable &&callable, const Tools::Traced<Arg> &arg)
+    template <typename Callable, typename Arg, typename Context = ContextPtr>
+    Result call(Callable &&_callable, const Tools::Traced<Arg> &arg, Context &&context = {})
     {
-        using T = meta_decayed_t<std::decay_t<typename CallableTraits<Callable>::argument_types::template unpack_unique<>>>;
+        using traits = CallableTraits<Callable>;
+        using argument_types = typename traits::argument_types;
 
-        return call([&](const T &v) { return callable(Tools::TracedValueTypeCall<T> { arg, v }); }, arg.get());
+        static_assert(argument_types::size == 2 || argument_types::size == 1);
+
+        auto callable = [&](auto &&v, Context &context) -> Result {
+            if constexpr (argument_types::size == 1) {
+                return _callable(std::forward<decltype(v)>(v));
+            } else {
+                static_assert(std::convertible_to<Context &, typename argument_types::template select<1>>);
+                return _callable(std::forward<decltype(v)>(v), context);
+            }
+        };
+
+        using T = meta_decayed_t<std::decay_t<typename argument_types::template select<0>>>;
+
+        return call([&](const T &v, Context &context) { return callable(Tools::TracedValueTypeCall<T> { arg, v }, context); }, arg.get(), context);
     }
 
     template <typename T>
     auto Value_as(const Tools::Traced<const Value &> &v)
     {
-        return Tools::TracedVariantAccess<const Tools::Traced<const Value &> &, const T &> { v, Value_as<T>(v.get()) };
+        return Tools::TracedVariantAccess<const Value &, const T &> { v, Value_as<T>(v.get()) };
     }
 
     template <typename T>
@@ -661,13 +692,13 @@ struct tuple_size<T> : tuple_size<std::remove_reference_t<typename T::traced_typ
 template <size_t I, typename T>
     requires(requires { typename T::traced_type; } && requires(T::traced_type t) { t.template get<I>(); })
 struct tuple_element<I, T> {
-    using type = Engine::Tools::TracedAccess<typename T::traced_type, decltype(Engine::Tools::member_get_helper<typename T::traced_type, I>) &>;
+    using type = Engine::Tools::TracedAccess<typename T::traced_type, decltype(Engine::Tools::member_get_helper<typename T::traced_type, I>) &, true>;
 };
 
 template <size_t I, typename T>
     requires(requires { typename T::traced_type; } && !requires(T::traced_type t) { t.template get<I>(); })
 struct tuple_element<I, T> {
-    using type = Engine::Tools::TracedAccess<typename T::traced_type, decltype(Engine::Tools::get_helper<typename T::traced_type, I>) &>;
+    using type = Engine::Tools::TracedAccess<typename T::traced_type, decltype(Engine::Tools::get_helper<typename T::traced_type, I>) &, true>;
 };
 
 }

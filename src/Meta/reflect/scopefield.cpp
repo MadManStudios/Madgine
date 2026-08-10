@@ -16,14 +16,19 @@ namespace Reflect {
         assert(!ptr.is<std::monostate>());
     }
 
-    Result ScopeField::value(Value &retVal) const
+    Result ScopeField::value(Value &retVal, ContextPtr context) const
     {
-        return mPointer->mGetter(mPointer, retVal, Value { mScope });
+        return mPointer->mGetter(mPointer, retVal, Value { mScope }, context);
+    }
+
+    Result ScopeField::set(const Value &val, ContextPtr context)
+    {
+        return mPointer->mSetter(mPointer, Value { mScope }, val, context);
     }
 
     Result ScopeField::operator=(const Value &v)
     {
-        return mPointer->mSetter(mPointer, Value { mScope }, v);
+        return set(v);
     }
 
     const char *ScopeField::key() const

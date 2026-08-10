@@ -18,7 +18,7 @@ MADGINE_TOOLS_EXPORT bool DragInt(const char *label, const Engine::Tools::Traced
 MADGINE_TOOLS_EXPORT bool DragInt2(const char *label, const Engine::Tools::Traced<int *> &v, float v_speed = 1.0f, int v_min = 0, int v_max = 0, const char *format = "%d", ImGuiSliderFlags flags = 0);
 MADGINE_TOOLS_EXPORT bool DragInt3(const char *label, const Engine::Tools::Traced<int *> &v, float v_speed = 1.0f, int v_min = 0, int v_max = 0, const char *format = "%d", ImGuiSliderFlags flags = 0);
 MADGINE_TOOLS_EXPORT bool DragInt4(const char *label, const Engine::Tools::Traced<int *> &v, float v_speed = 1.0f, int v_min = 0, int v_max = 0, const char *format = "%d", ImGuiSliderFlags flags = 0);
-MADGINE_TOOLS_EXPORT bool DragDuration(const char *label, const Engine::Tools::Traced<std::chrono::nanoseconds::rep *> &p_data, float v_speed = 1.0f, const void *p_min = NULL, const void *p_max = NULL, const char *format = NULL, ImGuiSliderFlags flags = 0);
+MADGINE_TOOLS_EXPORT bool DragDuration(const char *label, const Engine::Tools::Traced<Engine::Reflect::Duration64::rep *> &p_data, float v_speed = 1.0f, const void *p_min = NULL, const void *p_max = NULL, const char *format = NULL, ImGuiSliderFlags flags = 0);
 MADGINE_TOOLS_EXPORT bool DragUInt(const char *label, const Engine::Tools::Traced<uint64_t *> &p_data, float v_speed = 1.0f, const void *p_min = NULL, const void *p_max = NULL, const char *format = NULL, ImGuiSliderFlags flags = 0);
 MADGINE_TOOLS_EXPORT bool InputText(const char *label, const Engine::Tools::Traced<Engine::CoWString *> &buf, ImGuiInputTextFlags flags = 0, ImGuiInputTextCallback callback = NULL, void *user_data = NULL);
 
@@ -94,20 +94,23 @@ struct MADGINE_TOOLS_EXPORT ValueTypeDrawer {
     template <typename Rep, typename Ratio>
     static bool draw(const Engine::Tools::Traced<std::chrono::duration<Rep, Ratio> &> &d)
     {
-        auto ns = d.traceEx(&std::chrono::duration_cast<std::chrono::nanoseconds, Rep, Ratio>, static_cast<bool (*)(const Engine::Tools::TracedAccess<std::chrono::duration<Rep, Ratio> &, decltype(&std::chrono::duration_cast<std::chrono::nanoseconds, Rep, Ratio>)> &, bool)>([](const auto &dur, bool modified) {
+        auto f = [](const Engine::Tools::Traced<std::chrono::duration<Rep, Ratio> &> &dur) {
+            return std::chrono::duration_cast<Engine::Reflect::Duration64>(dur.get());
+        };
+        auto ns = d.traceEx(std::move(f), static_cast<bool (*)(const Engine::Tools::TracedAccess<std::chrono::duration<Rep, Ratio> &, decltype(f)> &, bool)>([](const auto &dur, bool modified) {
             if (modified) {
                 dur.mParent.get() = std::chrono::duration_cast<std::chrono::duration<Rep, Ratio>>(dur.get());
             }
             return modified;
         }));
-        if (draw(static_cast<const Engine::Tools::Traced<std::chrono::nanoseconds &> &>(ns))) {
+        if (draw(static_cast<const Engine::Tools::Traced<Engine::Reflect::Duration64 &> &>(ns))) {
             d.get() = std::chrono::duration_cast<std::chrono::duration<Rep, Ratio>>(ns.get());
             return true;
         }
         return false;
     }
-    static bool draw(const Engine::Tools::Traced<std::chrono::nanoseconds &> &d);
-    static bool draw(const Engine::Tools::Traced<const std::chrono::nanoseconds &> &d);
+    static bool draw(const Engine::Tools::Traced<Engine::Reflect::Duration64 &> &d);
+    static bool draw(const Engine::Tools::Traced<const Engine::Reflect::Duration64 &> &d);
 };
 
 MADGINE_TOOLS_EXPORT bool TypeIterate(Engine::CallableView<bool(const Engine::Type::TypeName &)> visitor);

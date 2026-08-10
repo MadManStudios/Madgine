@@ -111,12 +111,12 @@ namespace Behavior {
                 for (size_t i = 0; i < dataInCount(); ++i) {
                     REFLECT_PROPAGATE_ERROR(NodeInterpretHandle<NodeBase> { { interpreter }, *this }.read(arguments[i], i));
                 }
-                return (*accessor()->mType.mSecondary.mFunctionTable)->mFunctionPtr((*accessor()->mType.mSecondary.mFunctionTable), retVal, arguments);
+                return (*accessor()->mType.mSecondary.mFunctionTable)->mFunctionPtr((*accessor()->mType.mSecondary.mFunctionTable), retVal, arguments, {});
             } else {
                 Reflect::Value scope;
                 REFLECT_PROPAGATE_ERROR(NodeInterpretHandle<NodeBase> { { interpreter }, *this }.read(scope, 0));
 
-                return accessor()->mGetter(accessor(), retVal, scope);
+                return accessor()->mGetter(accessor(), retVal, scope, {});
             }
         }
 

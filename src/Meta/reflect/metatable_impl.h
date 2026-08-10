@@ -36,19 +36,19 @@ namespace Reflect {
             using getter_traits = CallableTraits<decltype(Getter)>;
             using T = typename getter_traits::return_type;
 
-            Result (*setter)(const Accessor *, const Value &, const Value &) = nullptr;
+            Result (*setter)(const Accessor *, const Value &, const Value &, ContextPtr) = nullptr;
 
             if constexpr (Setter != nullptr) {
-                setter = [](const Accessor *, const Value &scope, const Value &v) -> Result {
-                    return Reflect::invoke_member(Setter, scope, v);
+                setter = [](const Accessor *, const Value &scope, const Value &v, ContextPtr context) -> Result {
+                    return Reflect::invoke_member(Setter, context, scope, v);
                 };
             }
 
             return {
                 name,
                 nullptr,
-                [](const Accessor *, Value &retVal, const Value &scope) -> Result {
-                    return Reflect::invoke_member(retVal, Getter, scope);
+                [](const Accessor *, Value &retVal, const Value &scope, ContextPtr context) -> Result {
+                    return Reflect::invoke_member(retVal, Getter, context, scope);
                 },
                 setter,
                 toType<forward_ref_t<T>>()

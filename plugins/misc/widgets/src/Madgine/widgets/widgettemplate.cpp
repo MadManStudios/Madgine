@@ -33,8 +33,8 @@ namespace Widgets {
             accessors[i] = {
                 widgets[i].mName.c_str(),
                 nullptr,
-                [](const Reflect::Accessor *self, Reflect::Value &out, const Reflect::Value &scope) -> Reflect::Result {
-                    return invoke_member(out, [self](CompoundWidget &widget) { return widget.getTemplateWidget(self->mName); }, scope);
+                [](const Reflect::Accessor *self, Reflect::Value &out, const Reflect::Value &scope, Reflect::ContextPtr context) -> Reflect::Result {
+                    return invoke_member(out, [self](CompoundWidget &widget) { return widget.getTemplateWidget(self->mName); }, context, scope);
                 },
                 nullptr,
                 { { Reflect::TypeEnum::ScopeValue }, WidgetLoader::load(widgets[i].mType)->metaTable()->mSelf }

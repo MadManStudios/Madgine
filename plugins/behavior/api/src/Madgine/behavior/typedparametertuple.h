@@ -104,15 +104,15 @@ namespace Behavior {
         static const Reflect::MetaTable *sMetaTablePtr;
 
         template <size_t I>
-        static Reflect::Result sGetter(const Reflect::Accessor *, Reflect::Value &retVal, const Reflect::Value &scope)
+        static Reflect::Result sGetter(const Reflect::Accessor *, Reflect::Value &retVal, const Reflect::Value &scope, Reflect::ContextPtr context)
         {
-            return invoke_member(retVal, [](TypedParameterTupleInstance &instance) -> decltype(auto) { return std::get<I>(instance.mTuple); }, scope);
+            return invoke_member(retVal, [](TypedParameterTupleInstance &instance) -> decltype(auto) { return std::get<I>(instance.mTuple); }, context, scope);
         }
 
         template <size_t I, typename T>
-        static Reflect::Result sSetter(const Reflect::Accessor *, const Reflect::Value &scope, const Reflect::Value &val)
+        static Reflect::Result sSetter(const Reflect::Accessor *, const Reflect::Value &scope, const Reflect::Value &val, Reflect::ContextPtr context)
         {
-            return invoke_member([](TypedParameterTupleInstance &instance, T value) { std::get<I>(instance.mTuple) = std::move(value); }, scope, val);
+            return invoke_member([](TypedParameterTupleInstance &instance, T value) { std::get<I>(instance.mTuple) = std::move(value); }, context, scope, val);
         }
 
         static const constexpr auto sMembers = []<size_t... Is>(auto_pack<Is...>) constexpr -> std::array<Reflect::Accessor, sizeof...(Ty) + 1>

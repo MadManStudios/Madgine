@@ -88,12 +88,11 @@ namespace Tools {
     bool BehaviorTool::drawBehaviorList(const Traced<Behavior::BehaviorList &> &list)
     {
         bool deleted = false;
-        const auto &traced = list.trace(&Behavior::BehaviorList::mEntries);
-        for (auto it = traced.begin(); it != traced.end();) {
-            if ([this](const Traced<Behavior::BehaviorList::Entry &> &entry) {
-                    ImGui::BeginGroupPanel(entry->mHandle.name().data());
+        for (auto it = list.get().mEntries.begin(); it != list.get().mEntries.end();) {
+            if ([&, this](Behavior::BehaviorList::Entry &entry) {
+                    ImGui::BeginGroupPanel(entry.mHandle.name().data());
                     ImGui::BeginTable("Entry", 2, ImGuiTableFlags_Resizable);
-                    mInspector->drawMembers(entry.trace(&Behavior::BehaviorList::Entry::mParameters).trace(&Behavior::ParameterTuple::customScopePtr));
+                    mInspector->drawMembers(list.trace([](Behavior::BehaviorList &list, size_t index) { return list.mEntries[index].mParameters.customScopePtr(); }, std::distance(list.get().mEntries.begin(), it)));
                     ImGui::EndTable();
 
                     ImGui::ItemSize({ ImGui::GetItemRectSize().x, 0 });
@@ -103,14 +102,14 @@ namespace Tools {
                     bool remove = false;
 
                     if (ImGui::BeginPopupCompoundContextItem()) {
-                        if (ImGui::MenuItem((IMGUI_ICON_X " Delete " + std::string { entry->mHandle.name() }).c_str())) {
+                        if (ImGui::MenuItem((IMGUI_ICON_X " Delete " + std::string { entry.mHandle.name() }).c_str())) {
                             remove = true;
                         }
                         ImGui::EndPopup();
                     }
                     return remove;
                 }(*it)) {
-                it = traced.erase(it);
+                it = list.get().mEntries.erase(it);
                 deleted = true;
             } else {
                 ++it;

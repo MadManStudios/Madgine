@@ -9,9 +9,9 @@
 namespace Engine {
 namespace Reflect {
 
-    Result ApiFunction::operator()(Value &retVal, const ArgumentList &args) const
+    Result ApiFunction::operator()(Value &retVal, const ArgumentList &args, ContextPtr context) const
     {
-        return mTable->mFunctionPtr(mTable, retVal, args);
+        return mTable->mFunctionPtr(mTable, retVal, args, context);
     }
 
     size_t ApiFunction::argumentsCount(bool excludeThis) const

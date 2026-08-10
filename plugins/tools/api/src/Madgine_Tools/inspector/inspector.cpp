@@ -112,7 +112,7 @@ namespace Tools {
             return false;
         }
 
-        auto f = [](const Reflect::ScopeIterator &it) {Reflect::Value v; it->value(v); return v; };
+        auto f = [](const Traced<const Reflect::ScopeIterator &> &tracedIt) {Reflect::Value v; tracedIt.get()->value(v, tracedIt); return v; };
         const Traced<Reflect::Value> &value = it.traceEx(
             std::move(f),
             static_cast<bool (*)(const TracedAccess<Reflect::ScopeIterator, decltype(f)> &, bool)>([](const TracedAccess<Reflect::ScopeIterator, decltype(f)> &value, bool modified) {
@@ -131,7 +131,7 @@ namespace Tools {
         bool modified = drawValue(id, value, editable, it.get()->type());
 
         if (modified)
-            *it.get() = value.get();
+            it.get()->set(value.get(), it);
         return modified;
     }
 
@@ -435,7 +435,7 @@ namespace Tools {
     bool Inspector::drawValue(std::string_view id, const Traced<Reflect::ScopeBinding &> &binding, bool editable, Reflect::ExtendedType possibleTypes, Reflect::Type *type)
     {
         bool modified;
-        if (!Execution::access_binding(binding.trace(&Reflect::ScopeBinding::mPtr), [&](const Traced<const Reflect::Value &> &v) {
+        if (!Execution::access_binding(binding, [&](const Traced<const Reflect::Value &> &v) {
                 TracedCast<const Reflect::Value &, Reflect::Value> v_copy = v;
                 modified = drawValue(id, v_copy, false, v_copy->type());
             })) {

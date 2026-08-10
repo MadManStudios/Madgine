@@ -80,11 +80,11 @@ namespace Reflect {
         template <auto F, bool IsMember, size_t... Is>
         static constexpr typename FunctionTable::FPtr wrapHelper(std::index_sequence<Is...>)
         {
-            return [](const FunctionTable *, Value &retVal, const ArgumentList &args) {
+            return [](const FunctionTable *, Value &retVal, const ArgumentList &args, ContextPtr context) {
                 if constexpr (IsMember) {
-                    return invoke_member(retVal, F, getArgument(args, Is)...);
+                    return invoke_member(retVal, F, context, getArgument(args, Is)...);
                 } else {
-                    return invoke_free(retVal, F, getArgument(args, Is)...);
+                    return invoke_free(retVal, F, context, getArgument(args, Is)...);
                 }
             };
         }

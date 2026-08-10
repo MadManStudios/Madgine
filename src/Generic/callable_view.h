@@ -102,7 +102,7 @@ struct CallableViewImpl {
         return *this;
     }
 
-    R operator()(Args &&...args)
+    R operator()(Args...args)
     {
         return mEntry(mContext, std::forward<Args>(args)...);
     }

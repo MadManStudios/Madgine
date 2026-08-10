@@ -2,12 +2,13 @@
 
 #include "result.h"
 #include "type.h"
+#include "context.h"
 
 namespace Engine {
 namespace Reflect {
 
     struct FunctionTable {
-        typedef Result (*FPtr)(const FunctionTable *, Value &, const ArgumentList &);
+        typedef Result (*FPtr)(const FunctionTable *, Value &, const ArgumentList &, ContextPtr);
         FPtr mFunctionPtr;
 
         std::string_view mName;
