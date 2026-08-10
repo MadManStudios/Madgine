@@ -252,13 +252,18 @@ $(function() {
 <a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
-<a href="#friends">Friends</a> &#124;
 <a href="struct_engine_1_1_reflect_1_1_access_binding_forwarder-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">Engine::Reflect::AccessBindingForwarder&lt; T, R, argument_types, Callable &gt; Struct Template Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
 <p><code>#include &lt;util.h&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for Engine::Reflect::AccessBindingForwarder&lt; T, R, argument_types, Callable &gt;:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="struct_engine_1_1_reflect_1_1_access_binding_forwarder__inherit__graph.svg" width="234" height="154"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
 Public Types</h2></td></tr>
@@ -269,6 +274,11 @@ Public Types</h2></td></tr>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a58ff513252930dcd9e4095145ad887bf"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_reflect_1_1_access_binding_forwarder.html#a58ff513252930dcd9e4095145ad887bf">AccessBindingForwarder</a> (<a class="el" href="struct_engine_1_1type__pack.html">type_pack</a>&lt; T, R, argument_types &gt;, <a class="el" href="struct_engine_1_1_callable.html">Callable</a> &amp;&amp;callable, <a class="el" href="namespace_engine_1_1_reflect.html#a641b368370d6f91a06f6504a95314875">ScopeBinding</a> scope)</td></tr>
 <tr class="separator:a58ff513252930dcd9e4095145ad887bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4054add40c5056914ee69e04c2538fa5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_reflect_1_1_result.html">Result</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_reflect_1_1_access_binding_forwarder.html#a4054add40c5056914ee69e04c2538fa5">access</a> (<a class="el" href="struct_engine_1_1_callable_view.html">CallableView</a>&lt; <a class="el" href="struct_engine_1_1_reflect_1_1_result.html">Result</a>(const <a class="el" href="struct_engine_1_1_reflect_1_1_value.html">Value</a> &amp;, <a class="el" href="namespace_engine_1_1_reflect.html#a16b3bbb9c4f9eeebc9e5ab7e9640d8bc">ContextPtr</a>)&gt; cb, <a class="el" href="namespace_engine_1_1_reflect.html#a16b3bbb9c4f9eeebc9e5ab7e9640d8bc">ContextPtr</a> context) const override</td></tr>
+<tr class="separator:a4054add40c5056914ee69e04c2538fa5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a40a5421feddc138d8ca78e1628e31abe"><td class="memTemplParams" colspan="2">template&lt;typename F , typename Context &gt; </td></tr>
+<tr class="memitem:a40a5421feddc138d8ca78e1628e31abe"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_reflect_1_1_result.html">Result</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_reflect_1_1_access_binding_forwarder.html#a40a5421feddc138d8ca78e1628e31abe">access</a> (F &amp;&amp;callback, Context &amp;&amp;context) const</td></tr>
+<tr class="separator:a40a5421feddc138d8ca78e1628e31abe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -276,15 +286,6 @@ Public Attributes</h2></td></tr>
 <tr class="separator:a9fe462bfbdac56ab17eb201e443b80f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1b67b746e707ffecf5cb7adbc17c6d2c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_engine_1_1_reflect.html#a641b368370d6f91a06f6504a95314875">ScopeBinding</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_reflect_1_1_access_binding_forwarder.html#a1b67b746e707ffecf5cb7adbc17c6d2c">mScope</a></td></tr>
 <tr class="separator:a1b67b746e707ffecf5cb7adbc17c6d2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
-Friends</h2></td></tr>
-<tr class="memitem:a29f340e330253c2568a84e8c516f39ca"><td class="memTemplParams" colspan="2">template&lt;typename F &gt; </td></tr>
-<tr class="memitem:a29f340e330253c2568a84e8c516f39ca"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_reflect_1_1_access_binding_forwarder.html#a29f340e330253c2568a84e8c516f39ca">tag_invoke</a> (<a class="el" href="struct_engine_1_1_execution_1_1access__binding__t.html">Execution::access_binding_t</a> access, const <a class="el" href="struct_engine_1_1_reflect_1_1_access_binding_forwarder.html">AccessBindingForwarder</a> &amp;binding, F &amp;&amp;callback)</td></tr>
-<tr class="separator:a29f340e330253c2568a84e8c516f39ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a60b240867c0474cef138447405ca0eea"><td class="memTemplParams" colspan="2">template&lt;bool isReferenceWrapped&gt; </td></tr>
-<tr class="memitem:a60b240867c0474cef138447405ca0eea"><td class="memTemplItemLeft" align="right" valign="top">decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_reflect_1_1_access_binding_forwarder.html#a60b240867c0474cef138447405ca0eea">tag_invoke</a> (<a class="el" href="struct_engine_1_1_reflect_1_1convert___value__t.html">Reflect::convert_Value_t</a>&lt; isReferenceWrapped &gt; convert_ValueType, <a class="el" href="struct_engine_1_1_reflect_1_1_access_binding_forwarder.html">AccessBindingForwarder</a> &amp;&amp;forwarder)</td></tr>
-<tr class="separator:a60b240867c0474cef138447405ca0eea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Typedef Documentation</h2>
 <a id="aec86897145691f996b18227eb00975f2" name="aec86897145691f996b18227eb00975f2"></a>
@@ -348,87 +349,79 @@ template&lt;typename T , typename R , typename argument_types , typename <a clas
 
 </div>
 </div>
-<h2 class="groupheader">Friends And Related Function Documentation</h2>
-<a id="a29f340e330253c2568a84e8c516f39ca" name="a29f340e330253c2568a84e8c516f39ca"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a29f340e330253c2568a84e8c516f39ca">&#9670;&#160;</a></span>tag_invoke <span class="overload">[1/2]</span></h2>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a40a5421feddc138d8ca78e1628e31abe" name="a40a5421feddc138d8ca78e1628e31abe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a40a5421feddc138d8ca78e1628e31abe">&#9670;&#160;</a></span>access() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename T , typename R , typename argument_types , typename <a class="el" href="struct_engine_1_1_callable.html">Callable</a> &gt; </div>
 <div class="memtemplate">
-template&lt;typename F &gt; </div>
+template&lt;typename F , typename Context &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool tag_invoke </td>
+          <td class="memname"><a class="el" href="struct_engine_1_1_reflect_1_1_result.html">Result</a> <a class="el" href="struct_engine_1_1_reflect_1_1_access_binding_forwarder.html">Engine::Reflect::AccessBindingForwarder</a>&lt; T, R, argument_types, <a class="el" href="struct_engine_1_1_callable.html">Callable</a> &gt;::access </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_engine_1_1_execution_1_1access__binding__t.html">Execution::access_binding_t</a>&#160;</td>
-          <td class="paramname"><em>access</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="struct_engine_1_1_reflect_1_1_access_binding_forwarder.html">AccessBindingForwarder</a>&lt; T, R, argument_types, <a class="el" href="struct_engine_1_1_callable.html">Callable</a> &gt; &amp;&#160;</td>
-          <td class="paramname"><em>binding</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
           <td class="paramtype">F &amp;&amp;&#160;</td>
-          <td class="paramname"><em>callback</em>&#160;</td>
+          <td class="paramname"><em>callback</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Context &amp;&amp;&#160;</td>
+          <td class="paramname"><em>context</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td></td>
+          <td></td><td> const</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a60b240867c0474cef138447405ca0eea" name="a60b240867c0474cef138447405ca0eea"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a60b240867c0474cef138447405ca0eea">&#9670;&#160;</a></span>tag_invoke <span class="overload">[2/2]</span></h2>
+<a id="a4054add40c5056914ee69e04c2538fa5" name="a4054add40c5056914ee69e04c2538fa5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4054add40c5056914ee69e04c2538fa5">&#9670;&#160;</a></span>access() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename T , typename R , typename argument_types , typename <a class="el" href="struct_engine_1_1_callable.html">Callable</a> &gt; </div>
-<div class="memtemplate">
-template&lt;bool isReferenceWrapped&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">decltype(auto) tag_invoke </td>
+          <td class="memname"><a class="el" href="struct_engine_1_1_reflect_1_1_result.html">Result</a> <a class="el" href="struct_engine_1_1_reflect_1_1_access_binding_forwarder.html">Engine::Reflect::AccessBindingForwarder</a>&lt; T, R, argument_types, <a class="el" href="struct_engine_1_1_callable.html">Callable</a> &gt;::access </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_engine_1_1_reflect_1_1convert___value__t.html">Reflect::convert_Value_t</a>&lt; isReferenceWrapped &gt;&#160;</td>
-          <td class="paramname"><em>convert_ValueType</em>, </td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_callable_view.html">CallableView</a>&lt; <a class="el" href="struct_engine_1_1_reflect_1_1_result.html">Result</a>(const <a class="el" href="struct_engine_1_1_reflect_1_1_value.html">Value</a> &amp;, <a class="el" href="namespace_engine_1_1_reflect.html#a16b3bbb9c4f9eeebc9e5ab7e9640d8bc">ContextPtr</a>)&gt;&#160;</td>
+          <td class="paramname"><em>cb</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="struct_engine_1_1_reflect_1_1_access_binding_forwarder.html">AccessBindingForwarder</a>&lt; T, R, argument_types, <a class="el" href="struct_engine_1_1_callable.html">Callable</a> &gt; &amp;&amp;&#160;</td>
-          <td class="paramname"><em>forwarder</em>&#160;</td>
+          <td class="paramtype"><a class="el" href="namespace_engine_1_1_reflect.html#a16b3bbb9c4f9eeebc9e5ab7e9640d8bc">ContextPtr</a>&#160;</td>
+          <td class="paramname"><em>context</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td></td>
+          <td></td><td> const</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -474,7 +467,7 @@ template&lt;typename T , typename R , typename argument_types , typename <a clas
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Aug 1 2026 16:30:04 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Mon Aug 10 2026 19:21:52 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

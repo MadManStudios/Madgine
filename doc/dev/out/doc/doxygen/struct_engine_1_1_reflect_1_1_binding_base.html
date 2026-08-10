@@ -262,46 +262,59 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_reflect_1_1_binding_base_1_1_inner_binding.html">InnerBinding</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_reflect_1_1_binding_base_1_1_unwrapper.html">Unwrapper</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_reflect_1_1_binding_base_1_1_typed.html">Typed</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ab7836cf8446e78bce5717fe9e56e1ee7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_reflect_1_1_binding_base.html#ab7836cf8446e78bce5717fe9e56e1ee7">BindingBase</a> ()=default</td></tr>
 <tr class="separator:ab7836cf8446e78bce5717fe9e56e1ee7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d06046535419de0caf87360f06776e9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_reflect_1_1_binding_base.html#a7d06046535419de0caf87360f06776e9">BindingBase</a> (__Reflect_impl__::InnerBindingBase *ptr, TypeInfo info)</td></tr>
+<tr class="separator:a7d06046535419de0caf87360f06776e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad036f9e4bd2e8224c930485ec91fc6d0"><td class="memTemplParams" colspan="2">template&lt;Concepts::DecayedNoneOf&lt; <a class="el" href="struct_engine_1_1_reflect_1_1_binding_base.html">BindingBase</a> &gt; Binding&gt; <br />
 requires Execution::AnyBinding&lt;<a class="el" href="namespace_engine_1_1_reflect.html#a24d8d7471dc8e36f350650b10464f903">Binding</a>&gt;</td></tr>
 <tr class="memitem:ad036f9e4bd2e8224c930485ec91fc6d0"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_reflect_1_1_binding_base.html#ad036f9e4bd2e8224c930485ec91fc6d0">BindingBase</a> (<a class="el" href="namespace_engine_1_1_reflect.html#a24d8d7471dc8e36f350650b10464f903">Binding</a> &amp;&amp;binding, TypeInfo info)</td></tr>
 <tr class="separator:ad036f9e4bd2e8224c930485ec91fc6d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af13e704b2fe58ab8c44282c46dd92848"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_reflect_1_1_binding_base.html#af13e704b2fe58ab8c44282c46dd92848">BindingBase</a> (<a class="el" href="struct_engine_1_1_reflect_1_1_binding_base.html">BindingBase</a> &amp;&amp;other) noexcept</td></tr>
+<tr class="separator:af13e704b2fe58ab8c44282c46dd92848"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae3e10564c5c93bd81058aee5090d3580"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_reflect_1_1_binding_base.html#ae3e10564c5c93bd81058aee5090d3580">BindingBase</a> (const <a class="el" href="struct_engine_1_1_reflect_1_1_binding_base.html">BindingBase</a> &amp;other)</td></tr>
+<tr class="separator:ae3e10564c5c93bd81058aee5090d3580"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ca66e559932465d129bd01f835e2887"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_reflect_1_1_binding_base.html#a4ca66e559932465d129bd01f835e2887">~BindingBase</a> ()</td></tr>
+<tr class="separator:a4ca66e559932465d129bd01f835e2887"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af7c5ea4fa14f1f08042a828f87f20cf3"><td class="memTemplParams" colspan="2">template&lt;typename F , typename Context  = ContextPtr&gt; </td></tr>
+<tr class="memitem:af7c5ea4fa14f1f08042a828f87f20cf3"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_reflect_1_1_result.html">Result</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_reflect_1_1_binding_base.html#af7c5ea4fa14f1f08042a828f87f20cf3">access</a> (F &amp;&amp;callback, Context &amp;&amp;context) const</td></tr>
+<tr class="separator:af7c5ea4fa14f1f08042a828f87f20cf3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac543aecccc4960a28a839153c7fdc98f"><td class="memTemplParams" colspan="2">template&lt;typename P &gt; </td></tr>
 <tr class="memitem:ac543aecccc4960a28a839153c7fdc98f"><td class="memTemplItemLeft" align="right" valign="top">decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_reflect_1_1_binding_base.html#ac543aecccc4960a28a839153c7fdc98f">operator-&gt;*</a> (P &amp;&amp;right) const</td></tr>
 <tr class="separator:ac543aecccc4960a28a839153c7fdc98f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4007194901ecedab48d0bea10f024f6b"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_reflect_1_1_binding_base.html#a4007194901ecedab48d0bea10f024f6b">operator&lt;=&gt;</a> (const <a class="el" href="struct_engine_1_1_reflect_1_1_binding_base.html">BindingBase</a> &amp;) const =default</td></tr>
 <tr class="separator:a4007194901ecedab48d0bea10f024f6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab70ca9bfc4447250a0227c51385f0caa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_reflect_1_1_binding_base.html">BindingBase</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_reflect_1_1_binding_base.html#ab70ca9bfc4447250a0227c51385f0caa">operator=</a> (<a class="el" href="struct_engine_1_1_reflect_1_1_binding_base.html">BindingBase</a> &amp;&amp;other) noexcept</td></tr>
+<tr class="separator:ab70ca9bfc4447250a0227c51385f0caa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afbb3ae06300448ab33eb284065a311bc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_reflect_1_1_binding_base.html">BindingBase</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_reflect_1_1_binding_base.html#afbb3ae06300448ab33eb284065a311bc">operator=</a> (const <a class="el" href="struct_engine_1_1_reflect_1_1_binding_base.html">BindingBase</a> &amp;other)</td></tr>
+<tr class="separator:afbb3ae06300448ab33eb284065a311bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a26281d22d777f6bdec267e9a16b152f6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_reflect_1_1_binding_base.html#a26281d22d777f6bdec267e9a16b152f6">operator==</a> (const <a class="el" href="struct_engine_1_1_reflect_1_1_binding_base.html">BindingBase</a> &amp;) const =default</td></tr>
 <tr class="separator:a26281d22d777f6bdec267e9a16b152f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ace4f0283dd3c5fa953f7381aabc4d5f4"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:ace4f0283dd3c5fa953f7381aabc4d5f4"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_reflect_1_1_binding_base_1_1_unwrapper.html">Unwrapper</a>&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_reflect_1_1_binding_base.html#ace4f0283dd3c5fa953f7381aabc4d5f4">unwrap</a> () const</td></tr>
-<tr class="separator:ace4f0283dd3c5fa953f7381aabc4d5f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae29b7ec52db0f59a576e476a9941f961"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:ae29b7ec52db0f59a576e476a9941f961"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_reflect_1_1_binding_base_1_1_typed.html">Typed</a>&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_reflect_1_1_binding_base.html#ae29b7ec52db0f59a576e476a9941f961">typed</a> () const</td></tr>
+<tr class="separator:ae29b7ec52db0f59a576e476a9941f961"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:ac6d164b33291c07e4275a3883a974082"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_execution_1_1_binding_ptr.html">Execution::BindingPtr</a>&lt; const <a class="el" href="struct_engine_1_1_reflect_1_1_value.html">Value</a> &amp; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_reflect_1_1_binding_base.html#ac6d164b33291c07e4275a3883a974082">mPtr</a></td></tr>
-<tr class="separator:ac6d164b33291c07e4275a3883a974082"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a88f6e7334d627dc559ff61b265e4b7"><td class="memItemLeft" align="right" valign="top">__Reflect_impl__::InnerBindingBase *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_reflect_1_1_binding_base.html#a5a88f6e7334d627dc559ff61b265e4b7">mPtr</a> = nullptr</td></tr>
+<tr class="separator:a5a88f6e7334d627dc559ff61b265e4b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac341cecaabdd8b55e4c021d4741c2dfa"><td class="memItemLeft" align="right" valign="top">TypeInfo&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_reflect_1_1_binding_base.html#ac341cecaabdd8b55e4c021d4741c2dfa">mType</a></td></tr>
 <tr class="separator:ac341cecaabdd8b55e4c021d4741c2dfa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
 Friends</h2></td></tr>
-<tr class="memitem:aaa69c733e00d9a988fdca59614ca0b6a"><td class="memTemplParams" colspan="2">template&lt;typename F , std::derived_from&lt; <a class="el" href="struct_engine_1_1_reflect_1_1_binding_base.html">BindingBase</a>&lt; TypeInfo &gt; &gt; T&gt; </td></tr>
-<tr class="memitem:aaa69c733e00d9a988fdca59614ca0b6a"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_reflect_1_1_binding_base.html#aaa69c733e00d9a988fdca59614ca0b6a">tag_invoke</a> (<a class="el" href="struct_engine_1_1_execution_1_1access__binding__t.html">Execution::access_binding_t</a> access, const T &amp;binding, F &amp;&amp;callback)</td></tr>
-<tr class="separator:aaa69c733e00d9a988fdca59614ca0b6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2fdfeff4a99dc8b86bf1592f4c1d9403"><td class="memTemplParams" colspan="2">template&lt;typename F &gt; </td></tr>
+<tr class="memitem:a2fdfeff4a99dc8b86bf1592f4c1d9403"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_reflect_1_1_binding_base.html#a2fdfeff4a99dc8b86bf1592f4c1d9403">tag_invoke</a> (<a class="el" href="struct_engine_1_1_execution_1_1access__binding__t.html">Execution::access_binding_t</a> <a class="el" href="struct_engine_1_1_reflect_1_1_binding_base.html#af7c5ea4fa14f1f08042a828f87f20cf3">access</a>, const <a class="el" href="struct_engine_1_1_reflect_1_1_binding_base.html">BindingBase</a> &amp;binding, F &amp;&amp;callback)</td></tr>
+<tr class="separator:a2fdfeff4a99dc8b86bf1592f4c1d9403"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ab7836cf8446e78bce5717fe9e56e1ee7" name="ab7836cf8446e78bce5717fe9e56e1ee7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab7836cf8446e78bce5717fe9e56e1ee7">&#9670;&#160;</a></span>BindingBase() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ab7836cf8446e78bce5717fe9e56e1ee7">&#9670;&#160;</a></span>BindingBase() <span class="overload">[1/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -328,7 +341,7 @@ template&lt;typename TypeInfo &gt; </div>
 </div>
 </div>
 <a id="ad036f9e4bd2e8224c930485ec91fc6d0" name="ad036f9e4bd2e8224c930485ec91fc6d0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad036f9e4bd2e8224c930485ec91fc6d0">&#9670;&#160;</a></span>BindingBase() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ad036f9e4bd2e8224c930485ec91fc6d0">&#9670;&#160;</a></span>BindingBase() <span class="overload">[2/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -368,7 +381,184 @@ requires Execution::AnyBinding&lt;<a class="el" href="namespace_engine_1_1_refle
 
 </div>
 </div>
+<a id="a7d06046535419de0caf87360f06776e9" name="a7d06046535419de0caf87360f06776e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7d06046535419de0caf87360f06776e9">&#9670;&#160;</a></span>BindingBase() <span class="overload">[3/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename TypeInfo &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_reflect_1_1_binding_base.html">Engine::Reflect::BindingBase</a>&lt; TypeInfo &gt;::BindingBase </td>
+          <td>(</td>
+          <td class="paramtype">__Reflect_impl__::InnerBindingBase&lt; TypeInfo &gt; *&#160;</td>
+          <td class="paramname"><em>ptr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">TypeInfo&#160;</td>
+          <td class="paramname"><em>info</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae3e10564c5c93bd81058aee5090d3580" name="ae3e10564c5c93bd81058aee5090d3580"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae3e10564c5c93bd81058aee5090d3580">&#9670;&#160;</a></span>BindingBase() <span class="overload">[4/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename TypeInfo &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_reflect_1_1_binding_base.html">Engine::Reflect::BindingBase</a>&lt; TypeInfo &gt;::BindingBase </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_reflect_1_1_binding_base.html">BindingBase</a>&lt; TypeInfo &gt; &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af13e704b2fe58ab8c44282c46dd92848" name="af13e704b2fe58ab8c44282c46dd92848"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af13e704b2fe58ab8c44282c46dd92848">&#9670;&#160;</a></span>BindingBase() <span class="overload">[5/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename TypeInfo &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_reflect_1_1_binding_base.html">Engine::Reflect::BindingBase</a>&lt; TypeInfo &gt;::BindingBase </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_reflect_1_1_binding_base.html">BindingBase</a>&lt; TypeInfo &gt; &amp;&amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4ca66e559932465d129bd01f835e2887" name="a4ca66e559932465d129bd01f835e2887"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4ca66e559932465d129bd01f835e2887">&#9670;&#160;</a></span>~BindingBase()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename TypeInfo &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_reflect_1_1_binding_base.html">Engine::Reflect::BindingBase</a>&lt; TypeInfo &gt;::~<a class="el" href="struct_engine_1_1_reflect_1_1_binding_base.html">BindingBase</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="afbb3ae06300448ab33eb284065a311bc" name="afbb3ae06300448ab33eb284065a311bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afbb3ae06300448ab33eb284065a311bc">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename TypeInfo &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_reflect_1_1_binding_base.html">BindingBase</a> &amp; <a class="el" href="struct_engine_1_1_reflect_1_1_binding_base.html">Engine::Reflect::BindingBase</a>&lt; TypeInfo &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_reflect_1_1_binding_base.html">BindingBase</a>&lt; TypeInfo &gt; &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab70ca9bfc4447250a0227c51385f0caa" name="ab70ca9bfc4447250a0227c51385f0caa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab70ca9bfc4447250a0227c51385f0caa">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename TypeInfo &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_reflect_1_1_binding_base.html">BindingBase</a> &amp; <a class="el" href="struct_engine_1_1_reflect_1_1_binding_base.html">Engine::Reflect::BindingBase</a>&lt; TypeInfo &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_reflect_1_1_binding_base.html">BindingBase</a>&lt; TypeInfo &gt; &amp;&amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="ac543aecccc4960a28a839153c7fdc98f" name="ac543aecccc4960a28a839153c7fdc98f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac543aecccc4960a28a839153c7fdc98f">&#9670;&#160;</a></span>operator-&gt;*()</h2>
 
@@ -399,8 +589,8 @@ template&lt;typename P &gt; </div>
 
 </div>
 </div>
-<a id="ace4f0283dd3c5fa953f7381aabc4d5f4" name="ace4f0283dd3c5fa953f7381aabc4d5f4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ace4f0283dd3c5fa953f7381aabc4d5f4">&#9670;&#160;</a></span>unwrap()</h2>
+<a id="ae29b7ec52db0f59a576e476a9941f961" name="ae29b7ec52db0f59a576e476a9941f961"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae29b7ec52db0f59a576e476a9941f961">&#9670;&#160;</a></span>typed()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -413,10 +603,50 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="struct_engine_1_1_reflect_1_1_binding_base_1_1_unwrapper.html">Unwrapper</a>&lt; T &gt; <a class="el" href="struct_engine_1_1_reflect_1_1_binding_base.html">Engine::Reflect::BindingBase</a>&lt; TypeInfo &gt;::unwrap </td>
+          <td class="memname"><a class="el" href="struct_engine_1_1_reflect_1_1_binding_base_1_1_typed.html">Typed</a>&lt; T &gt; <a class="el" href="struct_engine_1_1_reflect_1_1_binding_base.html">Engine::Reflect::BindingBase</a>&lt; TypeInfo &gt;::typed </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af7c5ea4fa14f1f08042a828f87f20cf3" name="af7c5ea4fa14f1f08042a828f87f20cf3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af7c5ea4fa14f1f08042a828f87f20cf3">&#9670;&#160;</a></span>access()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename TypeInfo &gt; </div>
+<div class="memtemplate">
+template&lt;typename F , typename Context  = ContextPtr&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_reflect_1_1_result.html">Result</a> <a class="el" href="struct_engine_1_1_reflect_1_1_binding_base.html">Engine::Reflect::BindingBase</a>&lt; TypeInfo &gt;::access </td>
+          <td>(</td>
+          <td class="paramtype">F &amp;&amp;&#160;</td>
+          <td class="paramname"><em>callback</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Context &amp;&amp;&#160;</td>
+          <td class="paramname"><em>context</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
         </tr>
       </table>
   </td>
@@ -485,15 +715,15 @@ template&lt;typename TypeInfo &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Friends And Related Function Documentation</h2>
-<a id="aaa69c733e00d9a988fdca59614ca0b6a" name="aaa69c733e00d9a988fdca59614ca0b6a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaa69c733e00d9a988fdca59614ca0b6a">&#9670;&#160;</a></span>tag_invoke</h2>
+<a id="a2fdfeff4a99dc8b86bf1592f4c1d9403" name="a2fdfeff4a99dc8b86bf1592f4c1d9403"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2fdfeff4a99dc8b86bf1592f4c1d9403">&#9670;&#160;</a></span>tag_invoke</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename TypeInfo &gt; </div>
 <div class="memtemplate">
-template&lt;typename F , std::derived_from&lt; <a class="el" href="struct_engine_1_1_reflect_1_1_binding_base.html">BindingBase</a>&lt; TypeInfo &gt; &gt; T&gt; </div>
+template&lt;typename F &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -507,7 +737,7 @@ template&lt;typename F , std::derived_from&lt; <a class="el" href="struct_engine
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_reflect_1_1_binding_base.html">BindingBase</a>&lt; TypeInfo &gt; &amp;&#160;</td>
           <td class="paramname"><em>binding</em>, </td>
         </tr>
         <tr>
@@ -532,8 +762,8 @@ template&lt;typename F , std::derived_from&lt; <a class="el" href="struct_engine
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="ac6d164b33291c07e4275a3883a974082" name="ac6d164b33291c07e4275a3883a974082"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac6d164b33291c07e4275a3883a974082">&#9670;&#160;</a></span>mPtr</h2>
+<a id="a5a88f6e7334d627dc559ff61b265e4b7" name="a5a88f6e7334d627dc559ff61b265e4b7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5a88f6e7334d627dc559ff61b265e4b7">&#9670;&#160;</a></span>mPtr</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -541,7 +771,7 @@ template&lt;typename F , std::derived_from&lt; <a class="el" href="struct_engine
 template&lt;typename TypeInfo &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="struct_engine_1_1_execution_1_1_binding_ptr.html">Execution::BindingPtr</a>&lt;const <a class="el" href="struct_engine_1_1_reflect_1_1_value.html">Value</a> &amp;&gt; <a class="el" href="struct_engine_1_1_reflect_1_1_binding_base.html">Engine::Reflect::BindingBase</a>&lt; TypeInfo &gt;::mPtr</td>
+          <td class="memname">__Reflect_impl__::InnerBindingBase* <a class="el" href="struct_engine_1_1_reflect_1_1_binding_base.html">Engine::Reflect::BindingBase</a>&lt; TypeInfo &gt;::mPtr = nullptr</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -571,7 +801,7 @@ template&lt;typename TypeInfo &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Aug 1 2026 16:30:04 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Mon Aug 10 2026 19:21:52 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>
