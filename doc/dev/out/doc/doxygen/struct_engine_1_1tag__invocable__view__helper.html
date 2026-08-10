@@ -263,10 +263,10 @@ $(function() {
 Public Member Functions</h2></td></tr>
 <tr class="memitem:af846c9c8a08d600c6d4d06d621283e85"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1tag__invocable__view__helper.html#af846c9c8a08d600c6d4d06d621283e85">tag_invocable_view_helper</a> ()=default</td></tr>
 <tr class="separator:af846c9c8a08d600c6d4d06d621283e85"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7137c48bc904314df0dd933f46784538"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; <br />
-requires <a class="el" href="concepttag__invocable.html">tag_invocable</a>&lt;CPO, T &amp;, Args...&gt;</td></tr>
-<tr class="memitem:a7137c48bc904314df0dd933f46784538"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1tag__invocable__view__helper.html#a7137c48bc904314df0dd933f46784538">tag_invocable_view_helper</a> (T &amp;&amp;t)</td></tr>
-<tr class="separator:a7137c48bc904314df0dd933f46784538"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a03936f55babb0409017a12b3860d0df1"><td class="memTemplParams" colspan="2">template&lt;typename U &gt; <br />
+requires <a class="el" href="concepttag__invocable.html">tag_invocable</a>&lt;CPO, U &amp;, Args...&gt;</td></tr>
+<tr class="memitem:a03936f55babb0409017a12b3860d0df1"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1tag__invocable__view__helper.html#a03936f55babb0409017a12b3860d0df1">tag_invocable_view_helper</a> (U &amp;&amp;t)</td></tr>
+<tr class="separator:a03936f55babb0409017a12b3860d0df1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -277,9 +277,9 @@ Public Attributes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
 Friends</h2></td></tr>
-<tr class="memitem:a191a2b6e28945848b6ff5c10577d469c"><td class="memTemplParams" colspan="2">template&lt;Concepts::DecayedOneOf&lt; <a class="el" href="struct_engine_1_1tag__invocable__view__helper.html">tag_invocable_view_helper</a> &gt; T&gt; </td></tr>
-<tr class="memitem:a191a2b6e28945848b6ff5c10577d469c"><td class="memTemplItemLeft" align="right" valign="top">R&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1tag__invocable__view__helper.html#a191a2b6e28945848b6ff5c10577d469c">tag_invoke</a> (CPO, T &amp;&amp;self, Args...args)</td></tr>
-<tr class="separator:a191a2b6e28945848b6ff5c10577d469c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a75bd85fb211ef5a70161fa5a47127967"><td class="memTemplParams" colspan="2">template&lt;Concepts::DecayedOneOf&lt; <a class="el" href="struct_engine_1_1tag__invocable__view__helper.html">tag_invocable_view_helper</a> &gt; U&gt; </td></tr>
+<tr class="memitem:a75bd85fb211ef5a70161fa5a47127967"><td class="memTemplItemLeft" align="right" valign="top">R&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1tag__invocable__view__helper.html#a75bd85fb211ef5a70161fa5a47127967">tag_invoke</a> (CPO, U &amp;&amp;self, Args...args)</td></tr>
+<tr class="separator:a75bd85fb211ef5a70161fa5a47127967"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="af846c9c8a08d600c6d4d06d621283e85" name="af846c9c8a08d600c6d4d06d621283e85"></a>
@@ -309,16 +309,16 @@ template&lt;typename CPO , typename R , std::same_as&lt; <a class="el" href="cla
 
 </div>
 </div>
-<a id="a7137c48bc904314df0dd933f46784538" name="a7137c48bc904314df0dd933f46784538"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7137c48bc904314df0dd933f46784538">&#9670;&#160;</a></span>tag_invocable_view_helper() <span class="overload">[2/2]</span></h2>
+<a id="a03936f55babb0409017a12b3860d0df1" name="a03936f55babb0409017a12b3860d0df1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a03936f55babb0409017a12b3860d0df1">&#9670;&#160;</a></span>tag_invocable_view_helper() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename CPO , typename R , std::same_as&lt; <a class="el" href="classvoid.html">void</a> &gt; T, std::same_as&lt; <a class="el" href="namespace_engine.html#a73b9d8892b6e907a3def79b7e26353e4">Placeholder</a>&lt; 0 &gt; &gt; Placeholder, typename... Args&gt; </div>
 <div class="memtemplate">
-template&lt;typename T &gt; <br />
-requires <a class="el" href="concepttag__invocable.html">tag_invocable</a>&lt;CPO, T &amp;, Args...&gt;</div>
+template&lt;typename U &gt; <br />
+requires <a class="el" href="concepttag__invocable.html">tag_invocable</a>&lt;CPO, U &amp;, Args...&gt;</div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -326,7 +326,7 @@ requires <a class="el" href="concepttag__invocable.html">tag_invocable</a>&lt;CP
         <tr>
           <td class="memname"><a class="el" href="struct_engine_1_1tag__invocable__view__helper.html">Engine::tag_invocable_view_helper</a>&lt; CPO, R, T, <a class="el" href="namespace_engine.html#a73b9d8892b6e907a3def79b7e26353e4">Placeholder</a>, Args &gt;::tag_invocable_view_helper </td>
           <td>(</td>
-          <td class="paramtype">T &amp;&amp;&#160;</td>
+          <td class="paramtype">U &amp;&amp;&#160;</td>
           <td class="paramname"><em>t</em></td><td>)</td>
           <td></td>
         </tr>
@@ -341,15 +341,15 @@ requires <a class="el" href="concepttag__invocable.html">tag_invocable</a>&lt;CP
 </div>
 </div>
 <h2 class="groupheader">Friends And Related Function Documentation</h2>
-<a id="a191a2b6e28945848b6ff5c10577d469c" name="a191a2b6e28945848b6ff5c10577d469c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a191a2b6e28945848b6ff5c10577d469c">&#9670;&#160;</a></span>tag_invoke</h2>
+<a id="a75bd85fb211ef5a70161fa5a47127967" name="a75bd85fb211ef5a70161fa5a47127967"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a75bd85fb211ef5a70161fa5a47127967">&#9670;&#160;</a></span>tag_invoke</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename CPO , typename R , std::same_as&lt; <a class="el" href="classvoid.html">void</a> &gt; T, std::same_as&lt; <a class="el" href="namespace_engine.html#a73b9d8892b6e907a3def79b7e26353e4">Placeholder</a>&lt; 0 &gt; &gt; Placeholder, typename... Args&gt; </div>
 <div class="memtemplate">
-template&lt;Concepts::DecayedOneOf&lt; <a class="el" href="struct_engine_1_1tag__invocable__view__helper.html">tag_invocable_view_helper</a> &gt; T&gt; </div>
+template&lt;Concepts::DecayedOneOf&lt; <a class="el" href="struct_engine_1_1tag__invocable__view__helper.html">tag_invocable_view_helper</a> &gt; U&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -363,7 +363,7 @@ template&lt;Concepts::DecayedOneOf&lt; <a class="el" href="struct_engine_1_1tag_
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">T &amp;&amp;&#160;</td>
+          <td class="paramtype">U &amp;&amp;&#160;</td>
           <td class="paramname"><em>self</em>, </td>
         </tr>
         <tr>
@@ -426,7 +426,7 @@ template&lt;typename CPO , typename R , std::same_as&lt; <a class="el" href="cla
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Aug 10 2026 19:21:51 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Mon Aug 10 2026 19:38:12 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>
