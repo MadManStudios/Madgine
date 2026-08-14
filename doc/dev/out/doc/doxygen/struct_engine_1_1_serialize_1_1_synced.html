@@ -336,12 +336,15 @@ Protected Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
 Friends</h2></td></tr>
-<tr class="memitem:afaaa6d33d5262bae1d76f4ff10472820"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_synced.html#afaaa6d33d5262bae1d76f4ff10472820">tag_invoke</a> (<a class="el" href="struct_engine_1_1_serialize_1_1apply__map__t.html">apply_map_t</a> cpo, <a class="el" href="struct_engine_1_1_serialize_1_1_synced.html">Synced</a> &amp;synced, <a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html">FormattedSerializeStream</a> &amp;in, bool success=true, const <a class="el" href="struct_engine_1_1_caller_hierarchy_base_ptr.html">CallerHierarchyBasePtr</a> &amp;hierarchy={})</td></tr>
-<tr class="separator:afaaa6d33d5262bae1d76f4ff10472820"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a096c5a05ca599b022f8186e09ca8d968"><td class="memTemplParams" colspan="2">template&lt;typename Context &gt; </td></tr>
+<tr class="memitem:a096c5a05ca599b022f8186e09ca8d968"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_synced.html#a096c5a05ca599b022f8186e09ca8d968">tag_invoke</a> (<a class="el" href="struct_engine_1_1_serialize_1_1apply__map__t.html">apply_map_t</a> cpo, <a class="el" href="struct_engine_1_1_serialize_1_1_synced.html">Synced</a> &amp;synced, <a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html">FormattedSerializeStream</a> &amp;in, bool success=true, Context &amp;&amp;context)</td></tr>
+<tr class="separator:a096c5a05ca599b022f8186e09ca8d968"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0ce37e47a46967683868bd76f3ad4f15"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_synced.html#a0ce37e47a46967683868bd76f3ad4f15">tag_invoke</a> (<a class="el" href="struct_engine_1_1_serialize_1_1set__parent__t.html">set_parent_t</a> cpo, <a class="el" href="struct_engine_1_1_serialize_1_1_synced.html">Synced</a> &amp;synced, <a class="el" href="struct_engine_1_1_serialize_1_1_serializable_unit_base.html">SerializableUnitBase</a> *<a class="el" href="struct_engine_1_1_serialize_1_1_syncable.html#a9ad35123411d6fd93eb0214d3a9778ba">parent</a>)</td></tr>
 <tr class="separator:a0ce37e47a46967683868bd76f3ad4f15"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abc3711673600db96724f2c1e29242495"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_synced.html#abc3711673600db96724f2c1e29242495">tag_invoke</a> (<a class="el" href="struct_engine_1_1_serialize_1_1set__synced__t.html">set_synced_t</a> cpo, <a class="el" href="struct_engine_1_1_serialize_1_1_synced.html">Synced</a> &amp;synced, bool b, const <a class="el" href="struct_engine_1_1_caller_hierarchy_base_ptr.html">CallerHierarchyBasePtr</a> &amp;hierarchy)</td></tr>
-<tr class="separator:abc3711673600db96724f2c1e29242495"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c9802e897eb622defde53308d2a5570"><td class="memTemplParams" colspan="2">template&lt;typename Context &gt; <br />
+requires (<a class="el" href="concepttag__invocable.html">tag_invocable</a>&lt;<a class="el" href="struct_engine_1_1_serialize_1_1set__parent__t.html">set_parent_t</a>, T &amp;, bool, Context&gt;)</td></tr>
+<tr class="memitem:a3c9802e897eb622defde53308d2a5570"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_synced.html#a3c9802e897eb622defde53308d2a5570">tag_invoke</a> (<a class="el" href="struct_engine_1_1_serialize_1_1set__synced__t.html">set_synced_t</a> cpo, <a class="el" href="struct_engine_1_1_serialize_1_1_synced.html">Synced</a> &amp;synced, bool b, Context &amp;&amp;context)</td></tr>
+<tr class="separator:a3c9802e897eb622defde53308d2a5570"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Enumeration Documentation</h2>
 <a id="aa2b2c952faf6ed3a513f24b1d3be187b" name="aa2b2c952faf6ed3a513f24b1d3be187b"></a>
@@ -692,13 +695,15 @@ template&lt;typename T , typename Observer  = NoOpFunctor, typename <a class="el
 
 </div>
 </div>
-<a id="afaaa6d33d5262bae1d76f4ff10472820" name="afaaa6d33d5262bae1d76f4ff10472820"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afaaa6d33d5262bae1d76f4ff10472820">&#9670;&#160;</a></span>tag_invoke <span class="overload">[2/3]</span></h2>
+<a id="a096c5a05ca599b022f8186e09ca8d968" name="a096c5a05ca599b022f8186e09ca8d968"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a096c5a05ca599b022f8186e09ca8d968">&#9670;&#160;</a></span>tag_invoke <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename T , typename Observer  = NoOpFunctor, typename <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a>  = TaggedPlaceholder&lt;MemberOffsetPtrTag, 0&gt;&gt; </div>
+<div class="memtemplate">
+template&lt;typename Context &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -730,8 +735,8 @@ template&lt;typename T , typename Observer  = NoOpFunctor, typename <a class="el
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="struct_engine_1_1_caller_hierarchy_base_ptr.html">CallerHierarchyBasePtr</a> &amp;&#160;</td>
-          <td class="paramname"><em>hierarchy</em> = <code>{}</code>&#160;</td>
+          <td class="paramtype">Context &amp;&amp;&#160;</td>
+          <td class="paramname"><em>context</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -748,13 +753,16 @@ template&lt;typename T , typename Observer  = NoOpFunctor, typename <a class="el
 
 </div>
 </div>
-<a id="abc3711673600db96724f2c1e29242495" name="abc3711673600db96724f2c1e29242495"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abc3711673600db96724f2c1e29242495">&#9670;&#160;</a></span>tag_invoke <span class="overload">[3/3]</span></h2>
+<a id="a3c9802e897eb622defde53308d2a5570" name="a3c9802e897eb622defde53308d2a5570"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c9802e897eb622defde53308d2a5570">&#9670;&#160;</a></span>tag_invoke <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename T , typename Observer  = NoOpFunctor, typename <a class="el" href="struct_engine_1_1_offset_ptr.html">OffsetPtr</a>  = TaggedPlaceholder&lt;MemberOffsetPtrTag, 0&gt;&gt; </div>
+<div class="memtemplate">
+template&lt;typename Context &gt; <br />
+requires (<a class="el" href="concepttag__invocable.html">tag_invocable</a>&lt;<a class="el" href="struct_engine_1_1_serialize_1_1set__parent__t.html">set_parent_t</a>, T &amp;, bool, Context&gt;)</div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -780,8 +788,8 @@ template&lt;typename T , typename Observer  = NoOpFunctor, typename <a class="el
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="struct_engine_1_1_caller_hierarchy_base_ptr.html">CallerHierarchyBasePtr</a> &amp;&#160;</td>
-          <td class="paramname"><em>hierarchy</em>&#160;</td>
+          <td class="paramtype">Context &amp;&amp;&#160;</td>
+          <td class="paramname"><em>context</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -804,7 +812,7 @@ template&lt;typename T , typename Observer  = NoOpFunctor, typename <a class="el
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Aug 11 2026 00:42:27 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Fri Aug 14 2026 16:21:39 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

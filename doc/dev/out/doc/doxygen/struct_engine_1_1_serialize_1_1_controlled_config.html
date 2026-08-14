@@ -266,18 +266,18 @@ Public Types</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:acffdf79e7260ca21db5eed079ecd443b"><td class="memTemplParams" colspan="2">template&lt;typename <a class="el" href="class_op.html">Op</a> &gt; </td></tr>
-<tr class="memitem:acffdf79e7260ca21db5eed079ecd443b"><td class="memTemplItemLeft" align="right" valign="top">static <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_controlled_config.html#acffdf79e7260ca21db5eed079ecd443b">clear</a> (<a class="el" href="class_op.html">Op</a> &amp;op)</td></tr>
-<tr class="separator:acffdf79e7260ca21db5eed079ecd443b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac1f622618c62564be8ade862a2a01183"><td class="memTemplParams" colspan="2">template&lt;typename <a class="el" href="class_op.html">Op</a> &gt; </td></tr>
-<tr class="memitem:ac1f622618c62564be8ade862a2a01183"><td class="memTemplItemLeft" align="right" valign="top">static <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_controlled_config.html#ac1f622618c62564be8ade862a2a01183">readItem</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a> in, <a class="el" href="class_op.html">Op</a> &amp;op, std::ranges::iterator_t&lt; <a class="el" href="class_op.html">Op</a> &gt; &amp;it)</td></tr>
-<tr class="separator:ac1f622618c62564be8ade862a2a01183"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abcf5cdee33b3e4154c1c4d68c065c811"><td class="memTemplParams" colspan="2">template&lt;typename C &gt; </td></tr>
-<tr class="memitem:abcf5cdee33b3e4154c1c4d68c065c811"><td class="memTemplItemLeft" align="right" valign="top">static <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_controlled_config.html#abcf5cdee33b3e4154c1c4d68c065c811">visitStream</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a> in, const <a class="el" href="struct_engine_1_1_serialize_1_1_stream_visitor.html">StreamVisitor</a> &amp;visitor, size_t depth)</td></tr>
-<tr class="separator:abcf5cdee33b3e4154c1c4d68c065c811"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6f75830ca94b519bccec92baae0bb107"><td class="memTemplParams" colspan="2">template&lt;typename C &gt; </td></tr>
-<tr class="memitem:a6f75830ca94b519bccec92baae0bb107"><td class="memTemplItemLeft" align="right" valign="top">static <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_controlled_config.html#a6f75830ca94b519bccec92baae0bb107">writeItem</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a> out, const std::ranges::range_value_t&lt; C &gt; &amp;t)</td></tr>
-<tr class="separator:a6f75830ca94b519bccec92baae0bb107"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a520dabbc6fca3d80c5d1ba5d028aa8cf"><td class="memTemplParams" colspan="2">template&lt;typename <a class="el" href="class_op.html">Op</a> , typename Context &gt; </td></tr>
+<tr class="memitem:a520dabbc6fca3d80c5d1ba5d028aa8cf"><td class="memTemplItemLeft" align="right" valign="top">static <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_controlled_config.html#a520dabbc6fca3d80c5d1ba5d028aa8cf">clear</a> (<a class="el" href="class_op.html">Op</a> &amp;op, Context &amp;&amp;)</td></tr>
+<tr class="separator:a520dabbc6fca3d80c5d1ba5d028aa8cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ba56f0e919b2abea7f34041053f98bd"><td class="memTemplParams" colspan="2">template&lt;typename <a class="el" href="class_op.html">Op</a> , typename Context &gt; </td></tr>
+<tr class="memitem:a8ba56f0e919b2abea7f34041053f98bd"><td class="memTemplItemLeft" align="right" valign="top">static <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_controlled_config.html#a8ba56f0e919b2abea7f34041053f98bd">readItem</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html">FormattedSerializeStream</a> &amp;in, <a class="el" href="class_op.html">Op</a> &amp;op, std::ranges::iterator_t&lt; <a class="el" href="class_op.html">Op</a> &gt; &amp;it, const std::ranges::iterator_t&lt; <a class="el" href="class_op.html">Op</a> &gt; &amp;where, Context &amp;&amp;context)</td></tr>
+<tr class="separator:a8ba56f0e919b2abea7f34041053f98bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac81a9d009004c6db7cd053eddb2db468"><td class="memTemplParams" colspan="2">template&lt;typename C &gt; </td></tr>
+<tr class="memitem:ac81a9d009004c6db7cd053eddb2db468"><td class="memTemplItemLeft" align="right" valign="top">static <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_controlled_config.html#ac81a9d009004c6db7cd053eddb2db468">visitStream</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html">FormattedSerializeStream</a> &amp;in, const <a class="el" href="struct_engine_1_1_serialize_1_1_stream_visitor.html">StreamVisitor</a> &amp;visitor, size_t depth)</td></tr>
+<tr class="separator:ac81a9d009004c6db7cd053eddb2db468"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54c83a99733a82488908d73c8d217ff5"><td class="memTemplParams" colspan="2">template&lt;typename C , typename Context &gt; </td></tr>
+<tr class="memitem:a54c83a99733a82488908d73c8d217ff5"><td class="memTemplItemLeft" align="right" valign="top">static <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_controlled_config.html#a54c83a99733a82488908d73c8d217ff5">writeItem</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html">FormattedSerializeStream</a> &amp;out, const std::ranges::range_value_t&lt; C &gt; &amp;t, Context &amp;&amp;context)</td></tr>
+<tr class="separator:a54c83a99733a82488908d73c8d217ff5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
@@ -302,15 +302,15 @@ template&lt;typename Cmp , auto staticTypeResolve = nullptr&gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a6f75830ca94b519bccec92baae0bb107" name="a6f75830ca94b519bccec92baae0bb107"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6f75830ca94b519bccec92baae0bb107">&#9670;&#160;</a></span>writeItem()</h2>
+<a id="a54c83a99733a82488908d73c8d217ff5" name="a54c83a99733a82488908d73c8d217ff5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a54c83a99733a82488908d73c8d217ff5">&#9670;&#160;</a></span>writeItem()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename Cmp , auto staticTypeResolve = nullptr&gt; </div>
 <div class="memtemplate">
-template&lt;typename C &gt; </div>
+template&lt;typename C , typename Context &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -318,14 +318,20 @@ template&lt;typename C &gt; </div>
         <tr>
           <td class="memname">static <a class="el" href="classvoid.html">void</a> <a class="el" href="struct_engine_1_1_serialize_1_1_controlled_config.html">Engine::Serialize::ControlledConfig</a>&lt; Cmp, staticTypeResolve &gt;::writeItem </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html">FormattedSerializeStream</a> &amp;&#160;</td>
           <td class="paramname"><em>out</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const std::ranges::range_value_t&lt; C &gt; &amp;&#160;</td>
-          <td class="paramname"><em>t</em>&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Context &amp;&amp;&#160;</td>
+          <td class="paramname"><em>context</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -342,15 +348,15 @@ template&lt;typename C &gt; </div>
 
 </div>
 </div>
-<a id="ac1f622618c62564be8ade862a2a01183" name="ac1f622618c62564be8ade862a2a01183"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac1f622618c62564be8ade862a2a01183">&#9670;&#160;</a></span>readItem()</h2>
+<a id="a8ba56f0e919b2abea7f34041053f98bd" name="a8ba56f0e919b2abea7f34041053f98bd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8ba56f0e919b2abea7f34041053f98bd">&#9670;&#160;</a></span>readItem()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename Cmp , auto staticTypeResolve = nullptr&gt; </div>
 <div class="memtemplate">
-template&lt;typename <a class="el" href="class_op.html">Op</a> &gt; </div>
+template&lt;typename <a class="el" href="class_op.html">Op</a> , typename Context &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -358,7 +364,7 @@ template&lt;typename <a class="el" href="class_op.html">Op</a> &gt; </div>
         <tr>
           <td class="memname">static <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a> <a class="el" href="struct_engine_1_1_serialize_1_1_controlled_config.html">Engine::Serialize::ControlledConfig</a>&lt; Cmp, staticTypeResolve &gt;::readItem </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html">FormattedSerializeStream</a> &amp;&#160;</td>
           <td class="paramname"><em>in</em>, </td>
         </tr>
         <tr>
@@ -371,7 +377,19 @@ template&lt;typename <a class="el" href="class_op.html">Op</a> &gt; </div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">std::ranges::iterator_t&lt; <a class="el" href="class_op.html">Op</a> &gt; &amp;&#160;</td>
-          <td class="paramname"><em>it</em>&#160;</td>
+          <td class="paramname"><em>it</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::ranges::iterator_t&lt; <a class="el" href="class_op.html">Op</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>where</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Context &amp;&amp;&#160;</td>
+          <td class="paramname"><em>context</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -388,8 +406,8 @@ template&lt;typename <a class="el" href="class_op.html">Op</a> &gt; </div>
 
 </div>
 </div>
-<a id="abcf5cdee33b3e4154c1c4d68c065c811" name="abcf5cdee33b3e4154c1c4d68c065c811"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abcf5cdee33b3e4154c1c4d68c065c811">&#9670;&#160;</a></span>visitStream()</h2>
+<a id="ac81a9d009004c6db7cd053eddb2db468" name="ac81a9d009004c6db7cd053eddb2db468"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac81a9d009004c6db7cd053eddb2db468">&#9670;&#160;</a></span>visitStream()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -404,7 +422,7 @@ template&lt;typename C &gt; </div>
         <tr>
           <td class="memname">static <a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a> <a class="el" href="struct_engine_1_1_serialize_1_1_controlled_config.html">Engine::Serialize::ControlledConfig</a>&lt; Cmp, staticTypeResolve &gt;::visitStream </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html">FormattedSerializeStream</a> &amp;&#160;</td>
           <td class="paramname"><em>in</em>, </td>
         </tr>
         <tr>
@@ -434,15 +452,15 @@ template&lt;typename C &gt; </div>
 
 </div>
 </div>
-<a id="acffdf79e7260ca21db5eed079ecd443b" name="acffdf79e7260ca21db5eed079ecd443b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acffdf79e7260ca21db5eed079ecd443b">&#9670;&#160;</a></span>clear()</h2>
+<a id="a520dabbc6fca3d80c5d1ba5d028aa8cf" name="a520dabbc6fca3d80c5d1ba5d028aa8cf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a520dabbc6fca3d80c5d1ba5d028aa8cf">&#9670;&#160;</a></span>clear()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename Cmp , auto staticTypeResolve = nullptr&gt; </div>
 <div class="memtemplate">
-template&lt;typename <a class="el" href="class_op.html">Op</a> &gt; </div>
+template&lt;typename <a class="el" href="class_op.html">Op</a> , typename Context &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -451,8 +469,18 @@ template&lt;typename <a class="el" href="class_op.html">Op</a> &gt; </div>
           <td class="memname">static <a class="el" href="classvoid.html">void</a> <a class="el" href="struct_engine_1_1_serialize_1_1_controlled_config.html">Engine::Serialize::ControlledConfig</a>&lt; Cmp, staticTypeResolve &gt;::clear </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="class_op.html">Op</a> &amp;&#160;</td>
-          <td class="paramname"><em>op</em></td><td>)</td>
+          <td class="paramname"><em>op</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">Context &amp;&amp;&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -495,7 +523,7 @@ template&lt;typename Cmp , auto staticTypeResolve = nullptr&gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Aug 11 2026 00:42:27 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Fri Aug 14 2026 16:21:38 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

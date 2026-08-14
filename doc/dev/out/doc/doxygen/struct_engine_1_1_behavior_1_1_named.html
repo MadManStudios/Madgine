@@ -308,8 +308,9 @@ Friends</h2></td></tr>
 <tr class="memitem:a9054ae04dc80cd500dac5ff3ab82e864"><td class="memTemplParams" colspan="2">template&lt;bool isReferenceWrapped&gt; </td></tr>
 <tr class="memitem:a9054ae04dc80cd500dac5ff3ab82e864"><td class="memTemplItemLeft" align="right" valign="top">decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_named.html#a9054ae04dc80cd500dac5ff3ab82e864">tag_invoke</a> (<a class="el" href="struct_engine_1_1_reflect_1_1convert___value__t.html">Reflect::convert_Value_t</a>&lt; isReferenceWrapped &gt; convert_ValueType, <a class="el" href="struct_engine_1_1_behavior_1_1_named.html">Named</a>&lt; Name, T &gt; &amp;named)</td></tr>
 <tr class="separator:a9054ae04dc80cd500dac5ff3ab82e864"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a147dce38fba69cf34933b4550309dcdd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">Serialize::StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_named.html#a147dce38fba69cf34933b4550309dcdd">tag_invoke</a> (<a class="el" href="struct_engine_1_1_serialize_1_1apply__map__t.html">Serialize::apply_map_t</a>, <a class="el" href="struct_engine_1_1_behavior_1_1_named.html">Named</a>&lt; Name, T &gt; &amp;named, <a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">Serialize::CallerHierarchyFormattedSerializeStream</a> in, bool success)</td></tr>
-<tr class="separator:a147dce38fba69cf34933b4550309dcdd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d82dc0aba8fc9a363e9ddfef80f2c32"><td class="memTemplParams" colspan="2">template&lt;typename Context &gt; </td></tr>
+<tr class="memitem:a5d82dc0aba8fc9a363e9ddfef80f2c32"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">Serialize::StreamResult</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_named.html#a5d82dc0aba8fc9a363e9ddfef80f2c32">tag_invoke</a> (<a class="el" href="struct_engine_1_1_serialize_1_1apply__map__t.html">Serialize::apply_map_t</a>, <a class="el" href="struct_engine_1_1_behavior_1_1_named.html">Named</a>&lt; Name, T &gt; &amp;named, <a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html">Serialize::FormattedSerializeStream</a> &amp;in, bool success, Context &amp;&amp;context)</td></tr>
+<tr class="separator:a5d82dc0aba8fc9a363e9ddfef80f2c32"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Typedef Documentation</h2>
 <a id="a6e4fcce392e77679da15ff0d4ad2ee6b" name="a6e4fcce392e77679da15ff0d4ad2ee6b"></a>
@@ -746,13 +747,15 @@ template&lt;bool isReferenceWrapped&gt; </div>
 
 </div>
 </div>
-<a id="a147dce38fba69cf34933b4550309dcdd" name="a147dce38fba69cf34933b4550309dcdd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a147dce38fba69cf34933b4550309dcdd">&#9670;&#160;</a></span>tag_invoke <span class="overload">[5/5]</span></h2>
+<a id="a5d82dc0aba8fc9a363e9ddfef80f2c32" name="a5d82dc0aba8fc9a363e9ddfef80f2c32"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5d82dc0aba8fc9a363e9ddfef80f2c32">&#9670;&#160;</a></span>tag_invoke <span class="overload">[5/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;<a class="el" href="struct_engine_1_1fixed__string.html">fixed_string</a> Name, typename T &gt; </div>
+<div class="memtemplate">
+template&lt;typename Context &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -772,14 +775,20 @@ template&lt;<a class="el" href="struct_engine_1_1fixed__string.html">fixed_strin
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">Serialize::CallerHierarchyFormattedSerializeStream</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html">Serialize::FormattedSerializeStream</a> &amp;&#160;</td>
           <td class="paramname"><em>in</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>success</em>&#160;</td>
+          <td class="paramname"><em>success</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Context &amp;&amp;&#160;</td>
+          <td class="paramname"><em>context</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -819,7 +828,7 @@ template&lt;<a class="el" href="struct_engine_1_1fixed__string.html">fixed_strin
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Aug 11 2026 00:42:24 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Fri Aug 14 2026 16:21:36 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

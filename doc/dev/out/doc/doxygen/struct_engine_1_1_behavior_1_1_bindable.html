@@ -303,11 +303,12 @@ Friends</h2></td></tr>
 <tr class="memitem:a173fc37ea3044205a127668535b80c40"><td class="memTemplParams" colspan="2">template&lt;bool isReferenceWrapped&gt; </td></tr>
 <tr class="memitem:a173fc37ea3044205a127668535b80c40"><td class="memTemplItemLeft" align="right" valign="top">std::variant&lt; T, <a class="el" href="struct_engine_1_1_execution_1_1_binding_ptr.html">Execution::BindingPtr</a>&lt; T &gt; &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_bindable.html#a173fc37ea3044205a127668535b80c40">tag_invoke</a> (<a class="el" href="struct_engine_1_1_reflect_1_1convert___value__t.html">Reflect::convert_Value_t</a>&lt; isReferenceWrapped &gt;, <a class="el" href="struct_engine_1_1_behavior_1_1_bindable.html">Bindable</a>&lt; T &gt; &amp;bindable)</td></tr>
 <tr class="separator:a173fc37ea3044205a127668535b80c40"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a96e9a154531adf1006a885a185fb2275"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">Serialize::StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_bindable.html#a96e9a154531adf1006a885a185fb2275">tag_invoke</a> (<a class="el" href="struct_engine_1_1_serialize_1_1apply__map__t.html">Serialize::apply_map_t</a>, <a class="el" href="struct_engine_1_1_behavior_1_1_bindable.html">Bindable</a> &amp;, <a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">Serialize::CallerHierarchyFormattedSerializeStream</a>, bool)</td></tr>
-<tr class="separator:a96e9a154531adf1006a885a185fb2275"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a65ae91fb2c86ea53f62fc2c4a745aed0"><td class="memTemplParams" colspan="2">template&lt;typename... Configs&gt; </td></tr>
-<tr class="memitem:a65ae91fb2c86ea53f62fc2c4a745aed0"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_bindable.html#a65ae91fb2c86ea53f62fc2c4a745aed0">tag_invoke</a> (<a class="el" href="struct_engine_1_1_serialize_1_1set__active__t.html">Serialize::set_active_t</a>&lt; Configs... &gt;, <a class="el" href="struct_engine_1_1_behavior_1_1_bindable.html">Bindable</a> &amp;, bool active, bool existenceChanged, const <a class="el" href="struct_engine_1_1_caller_hierarchy_base_ptr.html">CallerHierarchyBasePtr</a> &amp;)</td></tr>
-<tr class="separator:a65ae91fb2c86ea53f62fc2c4a745aed0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac292782387c428d226b1ba5834c094e1"><td class="memTemplParams" colspan="2">template&lt;typename Context &gt; </td></tr>
+<tr class="memitem:ac292782387c428d226b1ba5834c094e1"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">Serialize::StreamResult</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_bindable.html#ac292782387c428d226b1ba5834c094e1">tag_invoke</a> (<a class="el" href="struct_engine_1_1_serialize_1_1apply__map__t.html">Serialize::apply_map_t</a>, <a class="el" href="struct_engine_1_1_behavior_1_1_bindable.html">Bindable</a> &amp;, <a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html">Serialize::FormattedSerializeStream</a> &amp;, bool, Context &amp;&amp;)</td></tr>
+<tr class="separator:ac292782387c428d226b1ba5834c094e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adbeea10c310ed6f6d760477d9d3b8328"><td class="memTemplParams" colspan="2">template&lt;typename... Configs, typename Context &gt; </td></tr>
+<tr class="memitem:adbeea10c310ed6f6d760477d9d3b8328"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_bindable.html#adbeea10c310ed6f6d760477d9d3b8328">tag_invoke</a> (<a class="el" href="struct_engine_1_1_serialize_1_1set__active__t.html">Serialize::set_active_t</a>&lt; Configs... &gt;, <a class="el" href="struct_engine_1_1_behavior_1_1_bindable.html">Bindable</a> &amp;, bool active, bool existenceChanged, Context &amp;&amp;)</td></tr>
+<tr class="separator:adbeea10c310ed6f6d760477d9d3b8328"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Typedef Documentation</h2>
 <a id="ae61f12fa5184619a6675789981adbdf5" name="ae61f12fa5184619a6675789981adbdf5"></a>
@@ -677,13 +678,15 @@ template&lt;bool isReferenceWrapped&gt; </div>
 
 </div>
 </div>
-<a id="a96e9a154531adf1006a885a185fb2275" name="a96e9a154531adf1006a885a185fb2275"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a96e9a154531adf1006a885a185fb2275">&#9670;&#160;</a></span>tag_invoke <span class="overload">[3/4]</span></h2>
+<a id="ac292782387c428d226b1ba5834c094e1" name="ac292782387c428d226b1ba5834c094e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac292782387c428d226b1ba5834c094e1">&#9670;&#160;</a></span>tag_invoke <span class="overload">[3/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename T &gt; </div>
+<div class="memtemplate">
+template&lt;typename Context &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -703,13 +706,19 @@ template&lt;typename T &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">Serialize::CallerHierarchyFormattedSerializeStream</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html">Serialize::FormattedSerializeStream</a> &amp;&#160;</td>
           <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">bool&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Context &amp;&amp;&#160;</td>
           <td class="paramname">&#160;</td>
         </tr>
         <tr>
@@ -727,15 +736,15 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="a65ae91fb2c86ea53f62fc2c4a745aed0" name="a65ae91fb2c86ea53f62fc2c4a745aed0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a65ae91fb2c86ea53f62fc2c4a745aed0">&#9670;&#160;</a></span>tag_invoke <span class="overload">[4/4]</span></h2>
+<a id="adbeea10c310ed6f6d760477d9d3b8328" name="adbeea10c310ed6f6d760477d9d3b8328"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adbeea10c310ed6f6d760477d9d3b8328">&#9670;&#160;</a></span>tag_invoke <span class="overload">[4/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename T &gt; </div>
 <div class="memtemplate">
-template&lt;typename... Configs&gt; </div>
+template&lt;typename... Configs, typename Context &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -767,7 +776,7 @@ template&lt;typename... Configs&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="struct_engine_1_1_caller_hierarchy_base_ptr.html">CallerHierarchyBasePtr</a> &amp;&#160;</td>
+          <td class="paramtype">Context &amp;&amp;&#160;</td>
           <td class="paramname">&#160;</td>
         </tr>
         <tr>
@@ -808,7 +817,7 @@ template&lt;typename T &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Aug 11 2026 00:42:24 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Fri Aug 14 2026 16:21:36 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

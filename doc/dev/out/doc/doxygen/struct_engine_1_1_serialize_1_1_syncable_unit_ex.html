@@ -269,21 +269,21 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:aef5f36e522398141841ccd78ba2f563a"><td class="memTemplParams" colspan="2">template&lt;auto f, typename... Args&gt; </td></tr>
 <tr class="memitem:aef5f36e522398141841ccd78ba2f563a"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_ex.html#aef5f36e522398141841ccd78ba2f563a">call</a> (Args &amp;&amp;...args)</td></tr>
 <tr class="separator:aef5f36e522398141841ccd78ba2f563a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac1b59c9972d45298597f957e45a3c953"><td class="memTemplParams" colspan="2">template&lt;auto f, typename... Args&gt; <br />
-requires std::constructible_from&lt;typename <a class="el" href="namespace_engine_1_1_serialize.html#a5caf636407ab3471386970ad4aa0e3a1">SyncFunctionTraits</a>&lt;typename <a class="el" href="struct_engine_1_1_callable.html">Callable</a>&lt;f&gt;::traits&gt;::decay_argument_types::as_tuple, Args...&gt;</td></tr>
-<tr class="memitem:ac1b59c9972d45298597f957e45a3c953"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_ex.html#ac1b59c9972d45298597f957e45a3c953">command</a> (Args &amp;&amp;...args)</td></tr>
-<tr class="separator:ac1b59c9972d45298597f957e45a3c953"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a37c22a276e9b3a77c0394bdd399a8466"><td class="memTemplParams" colspan="2">template&lt;auto f, typename... Args&gt; <br />
-requires std::constructible_from&lt;typename <a class="el" href="namespace_engine_1_1_serialize.html#a5caf636407ab3471386970ad4aa0e3a1">SyncFunctionTraits</a>&lt;typename <a class="el" href="struct_engine_1_1_callable.html">Callable</a>&lt;f&gt;::traits&gt;::decay_argument_types::as_tuple, Args...&gt;</td></tr>
-<tr class="memitem:a37c22a276e9b3a77c0394bdd399a8466"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_ex.html#a37c22a276e9b3a77c0394bdd399a8466">notify</a> (Args &amp;&amp;...args)</td></tr>
-<tr class="separator:a37c22a276e9b3a77c0394bdd399a8466"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9412469a20471c4fee08183bb87f27c1"><td class="memTemplParams" colspan="2">template&lt;auto f, typename... Args&gt; <br />
+requires std::constructible_from&lt;typename <a class="el" href="namespace_engine_1_1_serialize.html#ac7de08c50df7207f1f053e9145b3a0fa">context_args</a>&lt;decltype(f)&gt;::as_tuple, Args...&gt;</td></tr>
+<tr class="memitem:a9412469a20471c4fee08183bb87f27c1"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_ex.html#a9412469a20471c4fee08183bb87f27c1">command</a> (Args &amp;&amp;...args)</td></tr>
+<tr class="separator:a9412469a20471c4fee08183bb87f27c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a812ace7bc9653cad3250dc1b40a87649"><td class="memTemplParams" colspan="2">template&lt;auto f, typename... Args&gt; <br />
+requires std::constructible_from&lt;typename <a class="el" href="namespace_engine_1_1_serialize.html#ac7de08c50df7207f1f053e9145b3a0fa">context_args</a>&lt;decltype(f)&gt;::as_tuple, Args...&gt;</td></tr>
+<tr class="memitem:a812ace7bc9653cad3250dc1b40a87649"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_ex.html#a812ace7bc9653cad3250dc1b40a87649">notify</a> (Args &amp;&amp;...args)</td></tr>
+<tr class="separator:a812ace7bc9653cad3250dc1b40a87649"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a64f4e32f09a6fafe9b1069714206c579"><td class="memTemplParams" colspan="2">template&lt;auto f, typename... Args&gt; </td></tr>
 <tr class="memitem:a64f4e32f09a6fafe9b1069714206c579"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_ex.html#a64f4e32f09a6fafe9b1069714206c579">notify_some</a> (const std::set&lt; <a class="el" href="namespace_engine_1_1_serialize.html#a5d626324da272e03438d42b9db24cf5f">ParticipantId</a> &gt; &amp;targets, Args &amp;&amp;...args)</td></tr>
 <tr class="separator:a64f4e32f09a6fafe9b1069714206c579"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5ab1c837b644f682e5ed78029921425c"><td class="memTemplParams" colspan="2">template&lt;auto f, typename... Args&gt; <br />
-requires std::constructible_from&lt;typename <a class="el" href="namespace_engine_1_1_serialize.html#a5caf636407ab3471386970ad4aa0e3a1">SyncFunctionTraits</a>&lt;typename <a class="el" href="struct_engine_1_1_callable.html">Callable</a>&lt;f&gt;::traits&gt;::decay_argument_types::as_tuple, Args...&gt;</td></tr>
-<tr class="memitem:a5ab1c837b644f682e5ed78029921425c"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_ex.html#a5ab1c837b644f682e5ed78029921425c">query</a> (Args &amp;&amp;...args)</td></tr>
-<tr class="separator:a5ab1c837b644f682e5ed78029921425c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00bc68a31f0c52e49488edf79c46a9d6"><td class="memTemplParams" colspan="2">template&lt;auto f, typename... Args&gt; <br />
+requires std::constructible_from&lt;typename <a class="el" href="namespace_engine_1_1_serialize.html#ac7de08c50df7207f1f053e9145b3a0fa">context_args</a>&lt;decltype(f)&gt;::as_tuple, Args...&gt;</td></tr>
+<tr class="memitem:a00bc68a31f0c52e49488edf79c46a9d6"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_ex.html#a00bc68a31f0c52e49488edf79c46a9d6">query</a> (Args &amp;&amp;...args)</td></tr>
+<tr class="separator:a00bc68a31f0c52e49488edf79c46a9d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a19d817d8ca1ea7c842baee5861707a8c"><td class="memTemplParams" colspan="2">template&lt;typename <a class="el" href="class_engine_1_1_ty.html">Ty</a> , typename... Args&gt; </td></tr>
 <tr class="memitem:a19d817d8ca1ea7c842baee5861707a8c"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_ex.html#a19d817d8ca1ea7c842baee5861707a8c">writeAction</a> (<a class="el" href="class_engine_1_1_ty.html">Ty</a> *field, <a class="el" href="namespace_engine_1_1_serialize.html#a5d626324da272e03438d42b9db24cf5f">ParticipantId</a> answerTarget, <a class="el" href="namespace_engine_1_1_serialize.html#a4bc1ad203de8fe2bd02eda080569e663">MessageId</a> answerId, Args &amp;&amp;...args) const</td></tr>
 <tr class="separator:a19d817d8ca1ea7c842baee5861707a8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -374,8 +374,8 @@ template&lt;auto f, typename... Args&gt; </div>
 
 </div>
 </div>
-<a id="a37c22a276e9b3a77c0394bdd399a8466" name="a37c22a276e9b3a77c0394bdd399a8466"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a37c22a276e9b3a77c0394bdd399a8466">&#9670;&#160;</a></span>notify()</h2>
+<a id="a812ace7bc9653cad3250dc1b40a87649" name="a812ace7bc9653cad3250dc1b40a87649"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a812ace7bc9653cad3250dc1b40a87649">&#9670;&#160;</a></span>notify()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -383,7 +383,7 @@ template&lt;auto f, typename... Args&gt; </div>
 template&lt;typename T , typename _Base &gt; </div>
 <div class="memtemplate">
 template&lt;auto f, typename... Args&gt; <br />
-requires std::constructible_from&lt;typename <a class="el" href="namespace_engine_1_1_serialize.html#a5caf636407ab3471386970ad4aa0e3a1">SyncFunctionTraits</a>&lt;typename <a class="el" href="struct_engine_1_1_callable.html">Callable</a>&lt;f&gt;::traits&gt;::decay_argument_types::as_tuple, Args...&gt;</div>
+requires std::constructible_from&lt;typename <a class="el" href="namespace_engine_1_1_serialize.html#ac7de08c50df7207f1f053e9145b3a0fa">context_args</a>&lt;decltype(f)&gt;::as_tuple, Args...&gt;</div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -405,8 +405,8 @@ requires std::constructible_from&lt;typename <a class="el" href="namespace_engin
 
 </div>
 </div>
-<a id="a5ab1c837b644f682e5ed78029921425c" name="a5ab1c837b644f682e5ed78029921425c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5ab1c837b644f682e5ed78029921425c">&#9670;&#160;</a></span>query()</h2>
+<a id="a00bc68a31f0c52e49488edf79c46a9d6" name="a00bc68a31f0c52e49488edf79c46a9d6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a00bc68a31f0c52e49488edf79c46a9d6">&#9670;&#160;</a></span>query()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -414,7 +414,7 @@ requires std::constructible_from&lt;typename <a class="el" href="namespace_engin
 template&lt;typename T , typename _Base &gt; </div>
 <div class="memtemplate">
 template&lt;auto f, typename... Args&gt; <br />
-requires std::constructible_from&lt;typename <a class="el" href="namespace_engine_1_1_serialize.html#a5caf636407ab3471386970ad4aa0e3a1">SyncFunctionTraits</a>&lt;typename <a class="el" href="struct_engine_1_1_callable.html">Callable</a>&lt;f&gt;::traits&gt;::decay_argument_types::as_tuple, Args...&gt;</div>
+requires std::constructible_from&lt;typename <a class="el" href="namespace_engine_1_1_serialize.html#ac7de08c50df7207f1f053e9145b3a0fa">context_args</a>&lt;decltype(f)&gt;::as_tuple, Args...&gt;</div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -436,8 +436,8 @@ requires std::constructible_from&lt;typename <a class="el" href="namespace_engin
 
 </div>
 </div>
-<a id="ac1b59c9972d45298597f957e45a3c953" name="ac1b59c9972d45298597f957e45a3c953"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac1b59c9972d45298597f957e45a3c953">&#9670;&#160;</a></span>command()</h2>
+<a id="a9412469a20471c4fee08183bb87f27c1" name="a9412469a20471c4fee08183bb87f27c1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9412469a20471c4fee08183bb87f27c1">&#9670;&#160;</a></span>command()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -445,7 +445,7 @@ requires std::constructible_from&lt;typename <a class="el" href="namespace_engin
 template&lt;typename T , typename _Base &gt; </div>
 <div class="memtemplate">
 template&lt;auto f, typename... Args&gt; <br />
-requires std::constructible_from&lt;typename <a class="el" href="namespace_engine_1_1_serialize.html#a5caf636407ab3471386970ad4aa0e3a1">SyncFunctionTraits</a>&lt;typename <a class="el" href="struct_engine_1_1_callable.html">Callable</a>&lt;f&gt;::traits&gt;::decay_argument_types::as_tuple, Args...&gt;</div>
+requires std::constructible_from&lt;typename <a class="el" href="namespace_engine_1_1_serialize.html#ac7de08c50df7207f1f053e9145b3a0fa">context_args</a>&lt;decltype(f)&gt;::as_tuple, Args...&gt;</div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -702,7 +702,7 @@ template&lt;typename <a class="el" href="struct_engine_1_1_offset_ptr.html">Offs
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Aug 11 2026 00:42:27 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Fri Aug 14 2026 16:21:39 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

@@ -308,8 +308,8 @@ Functions</h2></td></tr>
 <tr class="separator:aeeb7b9ead4048cddd21bb21b70a89390"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4e4a77f1e26ca28bdc0f162a884e18b7"><td class="memItemLeft" align="right" valign="top">META_EXPORT const <a class="el" href="struct_engine_1_1_type_1_1_storage_ops.html">StorageOps</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_type.html#a4e4a77f1e26ca28bdc0f162a884e18b7">resolveVariantStorageOps</a> (const std::vector&lt; const <a class="el" href="struct_engine_1_1_type_1_1_storage_ops.html">StorageOps</a> * &gt; &amp;)</td></tr>
 <tr class="separator:a4e4a77f1e26ca28bdc0f162a884e18b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab09db7919e835fc3f0206a4d1b145af9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">Serialize::StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_type.html#ab09db7919e835fc3f0206a4d1b145af9">tag_invoke</a> (const <a class="el" href="struct_engine_1_1_serialize_1_1apply__map__t.html">Serialize::apply_map_t</a> &amp;, <a class="el" href="struct_engine_1_1_type_1_1_inline_storage.html">InlineStorage</a> &amp;storage, <a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">Serialize::CallerHierarchyFormattedSerializeStream</a> in, bool success)</td></tr>
-<tr class="separator:ab09db7919e835fc3f0206a4d1b145af9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a16cb10ccb03159468b4b95e7c96b590a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">Serialize::StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_type.html#a16cb10ccb03159468b4b95e7c96b590a">tag_invoke</a> (const <a class="el" href="struct_engine_1_1_serialize_1_1apply__map__t.html">Serialize::apply_map_t</a> &amp;, <a class="el" href="struct_engine_1_1_type_1_1_inline_storage.html">InlineStorage</a> &amp;storage, <a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html">Serialize::FormattedSerializeStream</a> &amp;in, bool success, <a class="el" href="namespace_engine_1_1_serialize.html#a709a54509cec297f0cc972145d963d0a">Serialize::ContextPtr</a> context)</td></tr>
+<tr class="separator:a16cb10ccb03159468b4b95e7c96b590a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a665c16e47cf80c645ca5dd8b9905e3ae"><td class="memItemLeft" align="right" valign="top">const std::map&lt; std::string, <a class="el" href="struct_engine_1_1_type_1_1_type_name.html">TypeName</a>, std::less&lt;&gt; &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_type.html#a665c16e47cf80c645ca5dd8b9905e3ae">typeList</a> ()</td></tr>
 <tr class="separator:a665c16e47cf80c645ca5dd8b9905e3ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a873478d1039baf56f986a0fc9bc38f82"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_type.html#a873478d1039baf56f986a0fc9bc38f82">unregisterMetaTable</a> (const <a class="el" href="struct_engine_1_1_reflect_1_1_meta_table.html">Reflect::MetaTable</a> &amp;table)</td></tr>
@@ -339,8 +339,8 @@ Variables</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="ab09db7919e835fc3f0206a4d1b145af9" name="ab09db7919e835fc3f0206a4d1b145af9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab09db7919e835fc3f0206a4d1b145af9">&#9670;&#160;</a></span>tag_invoke()</h2>
+<a id="a16cb10ccb03159468b4b95e7c96b590a" name="a16cb10ccb03159468b4b95e7c96b590a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a16cb10ccb03159468b4b95e7c96b590a">&#9670;&#160;</a></span>tag_invoke()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -360,14 +360,20 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">Serialize::CallerHierarchyFormattedSerializeStream</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html">Serialize::FormattedSerializeStream</a> &amp;&#160;</td>
           <td class="paramname"><em>in</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>success</em>&#160;</td>
+          <td class="paramname"><em>success</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespace_engine_1_1_serialize.html#a709a54509cec297f0cc972145d963d0a">Serialize::ContextPtr</a>&#160;</td>
+          <td class="paramname"><em>context</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -596,7 +602,7 @@ template&lt;typename... T&gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Aug 11 2026 00:42:27 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Fri Aug 14 2026 16:21:39 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

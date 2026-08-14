@@ -260,33 +260,33 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:afc951d09a0e8e796e4824eaefa2e6d0e"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:afc951d09a0e8e796e4824eaefa2e6d0e"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1set__synced__t.html#afc951d09a0e8e796e4824eaefa2e6d0e">operator()</a> (T &amp;item, bool b, const <a class="el" href="struct_engine_1_1_caller_hierarchy_base_ptr.html">CallerHierarchyBasePtr</a> &amp;hierarchy={}) const noexcept(<a class="el" href="tag__invoke_8h.html#ac9297785bc1cff48dae735a140253041">is_nothrow_tag_invocable_v</a>&lt; <a class="el" href="struct_engine_1_1_serialize_1_1set__synced__t.html">set_synced_t</a>, T &amp;, bool, const <a class="el" href="struct_engine_1_1_caller_hierarchy_base_ptr.html">CallerHierarchyBasePtr</a> &amp; &gt;) -&gt; tag_invoke_result_t&lt; <a class="el" href="struct_engine_1_1_serialize_1_1set__synced__t.html">set_synced_t</a>, T &amp;, bool, const <a class="el" href="struct_engine_1_1_caller_hierarchy_base_ptr.html">CallerHierarchyBasePtr</a> &amp; &gt;</td></tr>
-<tr class="separator:afc951d09a0e8e796e4824eaefa2e6d0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac72e69193c62404397701e75de9c2e15"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; <br />
-requires (!<a class="el" href="tag__invoke_8h.html#a8d6152fc933c4e17119094e28bb953d1">is_tag_invocable_v</a>&lt;<a class="el" href="struct_engine_1_1_serialize_1_1set__synced__t.html">set_synced_t</a>, T &amp;, bool, const <a class="el" href="struct_engine_1_1_caller_hierarchy_base_ptr.html">CallerHierarchyBasePtr</a> &amp;&gt;)</td></tr>
-<tr class="memitem:ac72e69193c62404397701e75de9c2e15"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1set__synced__t.html#ac72e69193c62404397701e75de9c2e15">operator()</a> (T &amp;t, bool b, const <a class="el" href="struct_engine_1_1_caller_hierarchy_base_ptr.html">CallerHierarchyBasePtr</a> &amp;hierarchy={}) const</td></tr>
-<tr class="separator:ac72e69193c62404397701e75de9c2e15"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a69593e6a902d4c81e512d16f4f9f338c"><td class="memTemplParams" colspan="2">template&lt;typename T , typename Context  = ContextPtr&gt; </td></tr>
+<tr class="memitem:a69593e6a902d4c81e512d16f4f9f338c"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1set__synced__t.html#a69593e6a902d4c81e512d16f4f9f338c">operator()</a> (T &amp;item, bool b, Context &amp;&amp;context={}) const noexcept(<a class="el" href="tag__invoke_8h.html#ac9297785bc1cff48dae735a140253041">is_nothrow_tag_invocable_v</a>&lt; <a class="el" href="struct_engine_1_1_serialize_1_1set__synced__t.html">set_synced_t</a>, T &amp;, bool, Context &gt;) -&gt; tag_invoke_result_t&lt; <a class="el" href="struct_engine_1_1_serialize_1_1set__synced__t.html">set_synced_t</a>, T &amp;, bool, Context &gt;</td></tr>
+<tr class="separator:a69593e6a902d4c81e512d16f4f9f338c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3794e5f5d95412bd08b56f64edbff73a"><td class="memTemplParams" colspan="2">template&lt;typename T , typename Context  = ContextPtr&gt; <br />
+requires (!<a class="el" href="tag__invoke_8h.html#a8d6152fc933c4e17119094e28bb953d1">is_tag_invocable_v</a>&lt;<a class="el" href="struct_engine_1_1_serialize_1_1set__synced__t.html">set_synced_t</a>, T &amp;, bool, Context&gt;)</td></tr>
+<tr class="memitem:a3794e5f5d95412bd08b56f64edbff73a"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1set__synced__t.html#a3794e5f5d95412bd08b56f64edbff73a">operator()</a> (T &amp;t, bool b, Context &amp;&amp;context={}) const</td></tr>
+<tr class="separator:a3794e5f5d95412bd08b56f64edbff73a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
 Friends</h2></td></tr>
-<tr class="memitem:a8997ac7db35996ecf081069f18e7962d"><td class="memTemplParams" colspan="2">template&lt;SerializeRange C&gt; </td></tr>
-<tr class="memitem:a8997ac7db35996ecf081069f18e7962d"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1set__synced__t.html#a8997ac7db35996ecf081069f18e7962d">tag_invoke</a> (<a class="el" href="struct_engine_1_1_serialize_1_1set__synced__t.html">set_synced_t</a> cpo, C &amp;c, bool b, const <a class="el" href="struct_engine_1_1_caller_hierarchy_base_ptr.html">CallerHierarchyBasePtr</a> &amp;hierarchy)</td></tr>
-<tr class="separator:a8997ac7db35996ecf081069f18e7962d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a737c26b65d4802f639beccf6e8fc4243"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; <br />
-requires <a class="el" href="concepttag__invocable.html">tag_invocable</a>&lt;<a class="el" href="struct_engine_1_1_serialize_1_1set__synced__t.html">set_synced_t</a>, T &amp;, bool, const <a class="el" href="struct_engine_1_1_caller_hierarchy_base_ptr.html">CallerHierarchyBasePtr</a> &amp;&gt;</td></tr>
-<tr class="memitem:a737c26b65d4802f639beccf6e8fc4243"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1set__synced__t.html#a737c26b65d4802f639beccf6e8fc4243">tag_invoke</a> (<a class="el" href="struct_engine_1_1_serialize_1_1set__synced__t.html">set_synced_t</a> cpo, const std::unique_ptr&lt; T &gt; &amp;p, bool b, const <a class="el" href="struct_engine_1_1_caller_hierarchy_base_ptr.html">CallerHierarchyBasePtr</a> &amp;hierarchy={})</td></tr>
-<tr class="separator:a737c26b65d4802f639beccf6e8fc4243"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a98f85eef202be85366d3e4dae47276e8"><td class="memTemplParams" colspan="2">template&lt;SerializeRange C, typename Context &gt; </td></tr>
+<tr class="memitem:a98f85eef202be85366d3e4dae47276e8"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1set__synced__t.html#a98f85eef202be85366d3e4dae47276e8">tag_invoke</a> (<a class="el" href="struct_engine_1_1_serialize_1_1set__synced__t.html">set_synced_t</a> cpo, C &amp;c, bool b, Context &amp;&amp;context)</td></tr>
+<tr class="separator:a98f85eef202be85366d3e4dae47276e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a916a5b71775896321f999e205a963723"><td class="memTemplParams" colspan="2">template&lt;typename T , typename Context &gt; <br />
+requires <a class="el" href="concepttag__invocable.html">tag_invocable</a>&lt;<a class="el" href="struct_engine_1_1_serialize_1_1set__synced__t.html">set_synced_t</a>, T &amp;, bool, Context&gt;</td></tr>
+<tr class="memitem:a916a5b71775896321f999e205a963723"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1set__synced__t.html#a916a5b71775896321f999e205a963723">tag_invoke</a> (<a class="el" href="struct_engine_1_1_serialize_1_1set__synced__t.html">set_synced_t</a> cpo, const std::unique_ptr&lt; T &gt; &amp;p, bool b, Context &amp;&amp;context={})</td></tr>
+<tr class="separator:a916a5b71775896321f999e205a963723"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="ac72e69193c62404397701e75de9c2e15" name="ac72e69193c62404397701e75de9c2e15"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac72e69193c62404397701e75de9c2e15">&#9670;&#160;</a></span>operator()() <span class="overload">[1/2]</span></h2>
+<a id="a3794e5f5d95412bd08b56f64edbff73a" name="a3794e5f5d95412bd08b56f64edbff73a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3794e5f5d95412bd08b56f64edbff73a">&#9670;&#160;</a></span>operator()() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T &gt; <br />
-requires (!<a class="el" href="tag__invoke_8h.html#a8d6152fc933c4e17119094e28bb953d1">is_tag_invocable_v</a>&lt;<a class="el" href="struct_engine_1_1_serialize_1_1set__synced__t.html">set_synced_t</a>, T &amp;, bool, const <a class="el" href="struct_engine_1_1_caller_hierarchy_base_ptr.html">CallerHierarchyBasePtr</a> &amp;&gt;)</div>
+template&lt;typename T , typename Context  = ContextPtr&gt; <br />
+requires (!<a class="el" href="tag__invoke_8h.html#a8d6152fc933c4e17119094e28bb953d1">is_tag_invocable_v</a>&lt;<a class="el" href="struct_engine_1_1_serialize_1_1set__synced__t.html">set_synced_t</a>, T &amp;, bool, Context&gt;)</div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -306,8 +306,8 @@ requires (!<a class="el" href="tag__invoke_8h.html#a8d6152fc933c4e17119094e28bb9
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="struct_engine_1_1_caller_hierarchy_base_ptr.html">CallerHierarchyBasePtr</a> &amp;&#160;</td>
-          <td class="paramname"><em>hierarchy</em> = <code>{}</code>&#160;</td>
+          <td class="paramtype">Context &amp;&amp;&#160;</td>
+          <td class="paramname"><em>context</em> = <code>{}</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -324,13 +324,13 @@ requires (!<a class="el" href="tag__invoke_8h.html#a8d6152fc933c4e17119094e28bb9
 
 </div>
 </div>
-<a id="afc951d09a0e8e796e4824eaefa2e6d0e" name="afc951d09a0e8e796e4824eaefa2e6d0e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afc951d09a0e8e796e4824eaefa2e6d0e">&#9670;&#160;</a></span>operator()() <span class="overload">[2/2]</span></h2>
+<a id="a69593e6a902d4c81e512d16f4f9f338c" name="a69593e6a902d4c81e512d16f4f9f338c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a69593e6a902d4c81e512d16f4f9f338c">&#9670;&#160;</a></span>operator()() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T &gt; </div>
+template&lt;typename T , typename Context  = ContextPtr&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -350,13 +350,13 @@ template&lt;typename T &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="struct_engine_1_1_caller_hierarchy_base_ptr.html">CallerHierarchyBasePtr</a> &amp;&#160;</td>
-          <td class="paramname"><em>hierarchy</em> = <code>{}</code>&#160;</td>
+          <td class="paramtype">Context &amp;&amp;&#160;</td>
+          <td class="paramname"><em>context</em> = <code>{}</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td> const -&gt; tag_invoke_result_t&lt;<a class="el" href="struct_engine_1_1_serialize_1_1set__synced__t.html">set_synced_t</a>, T &amp;, bool, const <a class="el" href="struct_engine_1_1_caller_hierarchy_base_ptr.html">CallerHierarchyBasePtr</a> &amp;&gt;
+          <td></td><td> const -&gt; tag_invoke_result_t&lt;<a class="el" href="struct_engine_1_1_serialize_1_1set__synced__t.html">set_synced_t</a>, T &amp;, bool, Context&gt;
         </td>
         </tr>
       </table>
@@ -370,13 +370,13 @@ template&lt;typename T &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Friends And Related Function Documentation</h2>
-<a id="a8997ac7db35996ecf081069f18e7962d" name="a8997ac7db35996ecf081069f18e7962d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8997ac7db35996ecf081069f18e7962d">&#9670;&#160;</a></span>tag_invoke <span class="overload">[1/2]</span></h2>
+<a id="a98f85eef202be85366d3e4dae47276e8" name="a98f85eef202be85366d3e4dae47276e8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a98f85eef202be85366d3e4dae47276e8">&#9670;&#160;</a></span>tag_invoke <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;SerializeRange C&gt; </div>
+template&lt;SerializeRange C, typename Context &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -402,8 +402,8 @@ template&lt;SerializeRange C&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="struct_engine_1_1_caller_hierarchy_base_ptr.html">CallerHierarchyBasePtr</a> &amp;&#160;</td>
-          <td class="paramname"><em>hierarchy</em>&#160;</td>
+          <td class="paramtype">Context &amp;&amp;&#160;</td>
+          <td class="paramname"><em>context</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -420,14 +420,14 @@ template&lt;SerializeRange C&gt; </div>
 
 </div>
 </div>
-<a id="a737c26b65d4802f639beccf6e8fc4243" name="a737c26b65d4802f639beccf6e8fc4243"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a737c26b65d4802f639beccf6e8fc4243">&#9670;&#160;</a></span>tag_invoke <span class="overload">[2/2]</span></h2>
+<a id="a916a5b71775896321f999e205a963723" name="a916a5b71775896321f999e205a963723"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a916a5b71775896321f999e205a963723">&#9670;&#160;</a></span>tag_invoke <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T &gt; <br />
-requires <a class="el" href="concepttag__invocable.html">tag_invocable</a>&lt;<a class="el" href="struct_engine_1_1_serialize_1_1set__synced__t.html">set_synced_t</a>, T &amp;, bool, const <a class="el" href="struct_engine_1_1_caller_hierarchy_base_ptr.html">CallerHierarchyBasePtr</a> &amp;&gt;</div>
+template&lt;typename T , typename Context &gt; <br />
+requires <a class="el" href="concepttag__invocable.html">tag_invocable</a>&lt;<a class="el" href="struct_engine_1_1_serialize_1_1set__synced__t.html">set_synced_t</a>, T &amp;, bool, Context&gt;</div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -453,8 +453,8 @@ requires <a class="el" href="concepttag__invocable.html">tag_invocable</a>&lt;<a
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="struct_engine_1_1_caller_hierarchy_base_ptr.html">CallerHierarchyBasePtr</a> &amp;&#160;</td>
-          <td class="paramname"><em>hierarchy</em> = <code>{}</code>&#160;</td>
+          <td class="paramtype">Context &amp;&amp;&#160;</td>
+          <td class="paramname"><em>context</em> = <code>{}</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -477,7 +477,7 @@ requires <a class="el" href="concepttag__invocable.html">tag_invocable</a>&lt;<a
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Aug 11 2026 00:42:27 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Fri Aug 14 2026 16:21:39 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

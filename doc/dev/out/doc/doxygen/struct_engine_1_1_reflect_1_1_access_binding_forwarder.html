@@ -274,7 +274,7 @@ Public Types</h2></td></tr>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a58ff513252930dcd9e4095145ad887bf"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_reflect_1_1_access_binding_forwarder.html#a58ff513252930dcd9e4095145ad887bf">AccessBindingForwarder</a> (<a class="el" href="struct_engine_1_1type__pack.html">type_pack</a>&lt; T, R, argument_types &gt;, <a class="el" href="struct_engine_1_1_callable.html">Callable</a> &amp;&amp;callable, <a class="el" href="namespace_engine_1_1_reflect.html#a641b368370d6f91a06f6504a95314875">ScopeBinding</a> scope)</td></tr>
 <tr class="separator:a58ff513252930dcd9e4095145ad887bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4054add40c5056914ee69e04c2538fa5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_reflect_1_1_result.html">Result</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_reflect_1_1_access_binding_forwarder.html#a4054add40c5056914ee69e04c2538fa5">access</a> (<a class="el" href="struct_engine_1_1_callable_view.html">CallableView</a>&lt; <a class="el" href="struct_engine_1_1_reflect_1_1_result.html">Result</a>(const <a class="el" href="struct_engine_1_1_reflect_1_1_value.html">Value</a> &amp;, <a class="el" href="namespace_engine_1_1_reflect.html#a16b3bbb9c4f9eeebc9e5ab7e9640d8bc">ContextPtr</a>)&gt; cb, <a class="el" href="namespace_engine_1_1_reflect.html#a16b3bbb9c4f9eeebc9e5ab7e9640d8bc">ContextPtr</a> context) const override</td></tr>
+<tr class="memitem:a4054add40c5056914ee69e04c2538fa5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_reflect_1_1_result.html">Result</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_reflect_1_1_access_binding_forwarder.html#a4054add40c5056914ee69e04c2538fa5">access</a> (<a class="el" href="struct_engine_1_1_callable_view.html">CallableView</a>&lt; <a class="el" href="struct_engine_1_1_reflect_1_1_result.html">Result</a>(const <a class="el" href="struct_engine_1_1_reflect_1_1_value.html">Value</a> &amp;, <a class="el" href="namespace_engine_1_1_reflect.html#a32b5c75292e0d1dd1dfc43483b87377f">ContextPtr</a>)&gt; cb, <a class="el" href="namespace_engine_1_1_reflect.html#a32b5c75292e0d1dd1dfc43483b87377f">ContextPtr</a> context) const override</td></tr>
 <tr class="separator:a4054add40c5056914ee69e04c2538fa5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a40a5421feddc138d8ca78e1628e31abe"><td class="memTemplParams" colspan="2">template&lt;typename F , typename Context &gt; </td></tr>
 <tr class="memitem:a40a5421feddc138d8ca78e1628e31abe"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_reflect_1_1_result.html">Result</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_reflect_1_1_access_binding_forwarder.html#a40a5421feddc138d8ca78e1628e31abe">access</a> (F &amp;&amp;callback, Context &amp;&amp;context) const</td></tr>
@@ -404,13 +404,13 @@ template&lt;typename T , typename R , typename argument_types , typename <a clas
         <tr>
           <td class="memname"><a class="el" href="struct_engine_1_1_reflect_1_1_result.html">Result</a> <a class="el" href="struct_engine_1_1_reflect_1_1_access_binding_forwarder.html">Engine::Reflect::AccessBindingForwarder</a>&lt; T, R, argument_types, <a class="el" href="struct_engine_1_1_callable.html">Callable</a> &gt;::access </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_engine_1_1_callable_view.html">CallableView</a>&lt; <a class="el" href="struct_engine_1_1_reflect_1_1_result.html">Result</a>(const <a class="el" href="struct_engine_1_1_reflect_1_1_value.html">Value</a> &amp;, <a class="el" href="namespace_engine_1_1_reflect.html#a16b3bbb9c4f9eeebc9e5ab7e9640d8bc">ContextPtr</a>)&gt;&#160;</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_callable_view.html">CallableView</a>&lt; <a class="el" href="struct_engine_1_1_reflect_1_1_result.html">Result</a>(const <a class="el" href="struct_engine_1_1_reflect_1_1_value.html">Value</a> &amp;, <a class="el" href="namespace_engine_1_1_reflect.html#a32b5c75292e0d1dd1dfc43483b87377f">ContextPtr</a>)&gt;&#160;</td>
           <td class="paramname"><em>cb</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespace_engine_1_1_reflect.html#a16b3bbb9c4f9eeebc9e5ab7e9640d8bc">ContextPtr</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="namespace_engine_1_1_reflect.html#a32b5c75292e0d1dd1dfc43483b87377f">ContextPtr</a>&#160;</td>
           <td class="paramname"><em>context</em>&#160;</td>
         </tr>
         <tr>
@@ -467,7 +467,7 @@ template&lt;typename T , typename R , typename argument_types , typename <a clas
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Aug 11 2026 00:42:26 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Fri Aug 14 2026 16:21:38 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

@@ -251,7 +251,6 @@ $(function() {
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#namespaces">Namespaces</a> &#124;
-<a href="#typedef-members">Typedefs</a> &#124;
 <a href="#func-members">Functions</a> &#124;
 <a href="#var-members">Variables</a>  </div>
   <div class="headertitle"><div class="title">context.h File Reference</div></div>
@@ -285,21 +284,16 @@ Namespaces</h2></td></tr>
 <tr class="memitem:namespace_engine_1_1_reflect"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_reflect.html">Engine::Reflect</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
-Typedefs</h2></td></tr>
-<tr class="memitem:a16b3bbb9c4f9eeebc9e5ab7e9640d8bc"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_reflect.html#a16b3bbb9c4f9eeebc9e5ab7e9640d8bc">Engine::Reflect::ContextPtr</a> = tag_invocable_view&lt; get_reflect_contextual_t &gt;</td></tr>
-<tr class="separator:a16b3bbb9c4f9eeebc9e5ab7e9640d8bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a49d0faa4b4f1db4d6096a048c04f8684"><td class="memTemplParams" colspan="2">template&lt;typename Context , typename T &gt; <br />
+<tr class="memitem:af200875b856f740a791822b9e4e9f2ab"><td class="memTemplParams" colspan="2">template&lt;typename T , typename Context &gt; <br />
 requires (<a class="el" href="tag__invoke_8h.html#a8d6152fc933c4e17119094e28bb953d1">is_tag_invocable_v</a>&lt;get_reflect_contextual_t, Context, const MetaTable *&gt;)</td></tr>
-<tr class="memitem:a49d0faa4b4f1db4d6096a048c04f8684"><td class="memTemplItemLeft" align="right" valign="top">T *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_reflect.html#a49d0faa4b4f1db4d6096a048c04f8684">Engine::Reflect::tag_invoke</a> (context_get_t&lt; T &gt;, Context &amp;&amp;context)</td></tr>
-<tr class="separator:a49d0faa4b4f1db4d6096a048c04f8684"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1c6b99ec5928c3dddcf4df32211109a2"><td class="memTemplParams" colspan="2">template&lt;typename Context , typename T &gt; <br />
+<tr class="memitem:af200875b856f740a791822b9e4e9f2ab"><td class="memTemplItemLeft" align="right" valign="top">T *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_reflect.html#af200875b856f740a791822b9e4e9f2ab">Engine::Reflect::context_get</a> (Context &amp;&amp;context)</td></tr>
+<tr class="separator:af200875b856f740a791822b9e4e9f2ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b3d3a67b5c83e1c2a2079ca80b6e3f0"><td class="memTemplParams" colspan="2">template&lt;typename Context , typename T &gt; <br />
 requires (<a class="el" href="tag__invoke_8h.html#a8d6152fc933c4e17119094e28bb953d1">is_tag_invocable_v</a>&lt;get_reflect_contextual_t, Context, const MetaTable *&gt; &amp;&amp; !std::is_const_v&lt;T&gt;)</td></tr>
-<tr class="memitem:a1c6b99ec5928c3dddcf4df32211109a2"><td class="memTemplItemLeft" align="right" valign="top">ContextReference&lt; T, Context &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_reflect.html#a1c6b99ec5928c3dddcf4df32211109a2">Engine::Reflect::tag_invoke</a> (context_set_t, Context &amp;&amp;context, T &amp;value)</td></tr>
-<tr class="separator:a1c6b99ec5928c3dddcf4df32211109a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b3d3a67b5c83e1c2a2079ca80b6e3f0"><td class="memTemplItemLeft" align="right" valign="top">ContextReference&lt; T, Context &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_reflect.html#a4b3d3a67b5c83e1c2a2079ca80b6e3f0">Engine::Reflect::context_set</a> (Context &amp;&amp;context, T &amp;value)</td></tr>
+<tr class="separator:a4b3d3a67b5c83e1c2a2079ca80b6e3f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
@@ -309,7 +303,7 @@ Variables</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Aug 11 2026 00:42:23 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Fri Aug 14 2026 16:21:35 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

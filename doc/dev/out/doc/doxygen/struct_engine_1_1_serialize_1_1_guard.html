@@ -265,8 +265,9 @@ Public Types</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:af134f8dbef77d83c0422238027054be5"><td class="memItemLeft" align="right" valign="top">static auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_guard.html#af134f8dbef77d83c0422238027054be5">guard</a> (const <a class="el" href="struct_engine_1_1_caller_hierarchy_base_ptr.html">CallerHierarchyBasePtr</a> &amp;hierarchy) -&gt; std::tuple&lt; decltype(Guards::guard(hierarchy))... &gt;</td></tr>
-<tr class="separator:af134f8dbef77d83c0422238027054be5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55e2deb5ffced7f314013184a8ec63f2"><td class="memTemplParams" colspan="2">template&lt;typename Context &gt; </td></tr>
+<tr class="memitem:a55e2deb5ffced7f314013184a8ec63f2"><td class="memTemplItemLeft" align="right" valign="top">static auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_guard.html#a55e2deb5ffced7f314013184a8ec63f2">guard</a> (Context &amp;context) -&gt; std::tuple&lt; decltype(Guards::guard(context))... &gt;</td></tr>
+<tr class="separator:a55e2deb5ffced7f314013184a8ec63f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Typedef Documentation</h2>
 <a id="a0e815e94eb35f2b0287c24b6cd1eb5bf" name="a0e815e94eb35f2b0287c24b6cd1eb5bf"></a>
@@ -286,13 +287,15 @@ template&lt;typename... Guards&gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="af134f8dbef77d83c0422238027054be5" name="af134f8dbef77d83c0422238027054be5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af134f8dbef77d83c0422238027054be5">&#9670;&#160;</a></span>guard()</h2>
+<a id="a55e2deb5ffced7f314013184a8ec63f2" name="a55e2deb5ffced7f314013184a8ec63f2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a55e2deb5ffced7f314013184a8ec63f2">&#9670;&#160;</a></span>guard()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename... Guards&gt; </div>
+<div class="memtemplate">
+template&lt;typename Context &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -300,9 +303,9 @@ template&lt;typename... Guards&gt; </div>
         <tr>
           <td class="memname">static auto <a class="el" href="struct_engine_1_1_serialize_1_1_guard.html">Engine::Serialize::Guard</a>&lt; Guards &gt;::guard </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="struct_engine_1_1_caller_hierarchy_base_ptr.html">CallerHierarchyBasePtr</a> &amp;&#160;</td>
-          <td class="paramname"><em>hierarchy</em></td><td>)</td>
-          <td> -&gt; std::tuple&lt;decltype(Guards::guard(hierarchy))...&gt;
+          <td class="paramtype">Context &amp;&#160;</td>
+          <td class="paramname"><em>context</em></td><td>)</td>
+          <td> -&gt; std::tuple&lt;decltype(Guards::guard(context))...&gt;
         </td>
         </tr>
       </table>
@@ -321,7 +324,7 @@ template&lt;typename... Guards&gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Aug 11 2026 00:42:27 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Fri Aug 14 2026 16:21:38 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

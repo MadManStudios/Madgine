@@ -276,6 +276,9 @@ Public Types</h2></td></tr>
 <tr class="memitem:ab77cf27ff58af40bfdb3c9dbc694b853"><td class="memTemplParams" colspan="2">template&lt;typename Pack2 &gt; </td></tr>
 <tr class="memitem:ab77cf27ff58af40bfdb3c9dbc694b853"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1type__pack_3_01_head_00_01_ty_8_8_8_01_4.html#ab77cf27ff58af40bfdb3c9dbc694b853">concat</a> = typename Pack2::template <a class="el" href="struct_engine_1_1type__pack_3_01_head_00_01_ty_8_8_8_01_4.html#a8eebfbcc30d1db629197773f984caecb">prepend</a>&lt; Head, Ty... &gt;</td></tr>
 <tr class="separator:ab77cf27ff58af40bfdb3c9dbc694b853"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a279c1c6f40ea25c78eef4b2b6dd08e30"><td class="memTemplParams" colspan="2">template&lt;size_t n&gt; </td></tr>
+<tr class="memitem:a279c1c6f40ea25c78eef4b2b6dd08e30"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1type__pack_3_01_head_00_01_ty_8_8_8_01_4.html#a279c1c6f40ea25c78eef4b2b6dd08e30">drop</a> = typename helpers::template recurse&lt; n &gt;::tail</td></tr>
+<tr class="separator:a279c1c6f40ea25c78eef4b2b6dd08e30"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a188d2042a1e116f1424fe6b71b86ad1c"><td class="memTemplParams" colspan="2">template&lt;template&lt; typename... &gt; typename Filter, typename... Args&gt; </td></tr>
 <tr class="memitem:a188d2042a1e116f1424fe6b71b86ad1c"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1type__pack_3_01_head_00_01_ty_8_8_8_01_4.html#a188d2042a1e116f1424fe6b71b86ad1c">filter</a> = typename Tail::template <a class="el" href="struct_engine_1_1type__pack_3_01_head_00_01_ty_8_8_8_01_4.html#a188d2042a1e116f1424fe6b71b86ad1c">filter</a>&lt; Filter &gt;::template <a class="el" href="struct_engine_1_1type__pack_3_01_head_00_01_ty_8_8_8_01_4.html#a96225e24b6c54ed39cf2695ec5377405">prepend_if</a>&lt; Filter&lt; Head, Args... &gt;::value, Head &gt;</td></tr>
 <tr class="separator:a188d2042a1e116f1424fe6b71b86ad1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -508,6 +511,24 @@ template&lt;size_t n, typename Fill  = void&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">using <a class="el" href="struct_engine_1_1type__pack.html">Engine::type_pack</a>&lt; Head, Ty... &gt;::resize =  typename helpers::template resize_helper&lt;n, Fill&gt;::type</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a279c1c6f40ea25c78eef4b2b6dd08e30" name="a279c1c6f40ea25c78eef4b2b6dd08e30"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a279c1c6f40ea25c78eef4b2b6dd08e30">&#9670;&#160;</a></span>drop</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Head , typename... Ty&gt; </div>
+<div class="memtemplate">
+template&lt;size_t n&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="struct_engine_1_1type__pack.html">Engine::type_pack</a>&lt; Head, Ty... &gt;::drop =  typename helpers::template recurse&lt;n&gt;::tail</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -811,7 +832,7 @@ template&lt;typename IntType , typename T &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Aug 11 2026 00:42:24 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Fri Aug 14 2026 16:21:36 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

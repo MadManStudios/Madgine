@@ -319,8 +319,8 @@ Functions</h2></td></tr>
 <tr class="separator:ab0cb9da2298c9cd123916e3c395c2f53"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a80815027f3a9bf898d7fdeb1b6ce6d8b"><td class="memItemLeft" align="right" valign="top">WriteMessage&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#a80815027f3a9bf898d7fdeb1b6ce6d8b">Engine::Serialize::getMasterRequestResponseTarget</a> (const SyncableUnitBase *unit, ParticipantId answerTarget, MessageId answerId)</td></tr>
 <tr class="separator:a80815027f3a9bf898d7fdeb1b6ce6d8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac855840b66edac2534c84f32d246c783"><td class="memItemLeft" align="right" valign="top">StreamResult META_EXPORT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#ac855840b66edac2534c84f32d246c783">Engine::Serialize::readState</a> (const SerializeTable *table, <a class="el" href="classvoid.html">void</a> *unit, CallerHierarchyFormattedSerializeStream in)</td></tr>
-<tr class="separator:ac855840b66edac2534c84f32d246c783"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad5ea350e6f42d8d6c787e00f1b440b7"><td class="memItemLeft" align="right" valign="top">StreamResult META_EXPORT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#aad5ea350e6f42d8d6c787e00f1b440b7">Engine::Serialize::readState</a> (const SerializeTable *table, <a class="el" href="classvoid.html">void</a> *unit, FormattedSerializeStream &amp;in, ContextPtr context)</td></tr>
+<tr class="separator:aad5ea350e6f42d8d6c787e00f1b440b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5a3ea3f1e0f020c1daef3604447bae95"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#a5a3ea3f1e0f020c1daef3604447bae95">Engine::Serialize::writeFunctionAction</a> (SyncableUnitBase *unit, uint16_t index, const <a class="el" href="classvoid.html">void</a> *args, const std::set&lt; ParticipantId &gt; &amp;targets, ParticipantId answerTarget, MessageId answerId)</td></tr>
 <tr class="separator:a5a3ea3f1e0f020c1daef3604447bae95"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae8e675225f502fac5dda271c273406b5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_serialize.html#ae8e675225f502fac5dda271c273406b5">Engine::Serialize::writeFunctionError</a> (SyncableUnitBase *unit, uint16_t index, MessageResult error, FormattedMessageStream &amp;target, MessageId answerId)</td></tr>
@@ -721,7 +721,7 @@ Functions</h2></td></tr>
 <div class="line">    DLL_EXPORT_VARIABLE2(<span class="keyword">constexpr</span>, const ::Engine::Serialize::SerializeTable, ::, serializeTable, <a class="code hl_define" href="macros_8h.html#afa8624400132dca5f52f93deec70706b">SINGLE_ARG</a>({ #<a class="code hl_enumvalue" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a5428d0fe98f428e5c4ecbc58cb745d9b">T</a>, ::Engine::type_holder&lt;T&gt;, ::Serialize_##T::baseType, ::Serialize_##T::readState, ::Serialize_##T::fields.data(), ::Serialize_##T::functions.data(), std::derived_from&lt;T, ::Engine::Serialize::TopLevelUnitBase&gt; }), T);</div>
 <div class="ttc" id="alinestruct_8h_html_a4ae633e4399b0687c9bdf030cbf5b2a2"><div class="ttname"><a href="linestruct_8h.html#a4ae633e4399b0687c9bdf030cbf5b2a2">GET_STRUCT</a></div><div class="ttdeci">#define GET_STRUCT(Tag,...)</div><div class="ttdef"><b>Definition:</b> linestruct.h:33</div></div>
 <div class="ttc" id="amacros_8h_html_afa8624400132dca5f52f93deec70706b"><div class="ttname"><a href="macros_8h.html#afa8624400132dca5f52f93deec70706b">SINGLE_ARG</a></div><div class="ttdeci">#define SINGLE_ARG(...)</div><div class="ttdef"><b>Definition:</b> macros.h:16</div></div>
-<div class="ttc" id="aserializetable__impl_8h_html_ad3279570e995d9467abf41e4f7c89f3d"><div class="ttname"><a href="serializetable__impl_8h.html#ad3279570e995d9467abf41e4f7c89f3d">SERIALIZETABLE_ENTRY_EX</a></div><div class="ttdeci">#define SERIALIZETABLE_ENTRY_EX(Idx, Ser)</div><div class="ttdef"><b>Definition:</b> serializetable_impl.h:334</div></div>
+<div class="ttc" id="aserializetable__impl_8h_html_ad3279570e995d9467abf41e4f7c89f3d"><div class="ttname"><a href="serializetable__impl_8h.html#ad3279570e995d9467abf41e4f7c89f3d">SERIALIZETABLE_ENTRY_EX</a></div><div class="ttdeci">#define SERIALIZETABLE_ENTRY_EX(Idx, Ser)</div><div class="ttdef"><b>Definition:</b> serializetable_impl.h:353</div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -742,7 +742,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line">    <a class="code hl_define" href="serializetable__impl_8h.html#a0c77e34af79ce62f77d0b1037734c125">SERIALIZETABLE_END_EX</a>     \</div>
 <div class="line">    (, T)</div>
-<div class="ttc" id="aserializetable__impl_8h_html_a0c77e34af79ce62f77d0b1037734c125"><div class="ttname"><a href="serializetable__impl_8h.html#a0c77e34af79ce62f77d0b1037734c125">SERIALIZETABLE_END_EX</a></div><div class="ttdeci">#define SERIALIZETABLE_END_EX(Idx, T)</div><div class="ttdef"><b>Definition:</b> serializetable_impl.h:381</div></div>
+<div class="ttc" id="aserializetable__impl_8h_html_a0c77e34af79ce62f77d0b1037734c125"><div class="ttname"><a href="serializetable__impl_8h.html#a0c77e34af79ce62f77d0b1037734c125">SERIALIZETABLE_END_EX</a></div><div class="ttdeci">#define SERIALIZETABLE_END_EX(Idx, T)</div><div class="ttdef"><b>Definition:</b> serializetable_impl.h:400</div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -943,7 +943,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Aug 11 2026 00:42:24 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Fri Aug 14 2026 16:21:35 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

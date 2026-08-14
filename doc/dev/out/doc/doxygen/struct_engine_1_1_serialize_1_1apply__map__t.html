@@ -260,52 +260,52 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ad42a0bd0a9a894ffed48052aa2b473e8"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:ad42a0bd0a9a894ffed48052aa2b473e8"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1apply__map__t.html#ad42a0bd0a9a894ffed48052aa2b473e8">operator()</a> (T &amp;item, <a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a> in, bool success) const noexcept(<a class="el" href="tag__invoke_8h.html#ac9297785bc1cff48dae735a140253041">is_nothrow_tag_invocable_v</a>&lt; <a class="el" href="struct_engine_1_1_serialize_1_1apply__map__t.html">apply_map_t</a>, T &amp;, <a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>, bool &gt;) -&gt; tag_invoke_result_t&lt; <a class="el" href="struct_engine_1_1_serialize_1_1apply__map__t.html">apply_map_t</a>, T &amp;, <a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>, bool &gt;</td></tr>
-<tr class="separator:ad42a0bd0a9a894ffed48052aa2b473e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a520b25eb94b184be06ec328f943e2a09"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; <br />
-requires (!<a class="el" href="concepttag__invocable.html">tag_invocable</a>&lt;<a class="el" href="struct_engine_1_1_serialize_1_1apply__map__t.html">apply_map_t</a>, T &amp;, <a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>, bool&gt;)</td></tr>
-<tr class="memitem:a520b25eb94b184be06ec328f943e2a09"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1apply__map__t.html#a520b25eb94b184be06ec328f943e2a09">operator()</a> (T &amp;t, <a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a> in, bool success) const</td></tr>
-<tr class="separator:a520b25eb94b184be06ec328f943e2a09"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a83f194bece846e07b1a9fce274427685"><td class="memTemplParams" colspan="2">template&lt;typename T , typename Context  = ContextPtr&gt; </td></tr>
+<tr class="memitem:a83f194bece846e07b1a9fce274427685"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1apply__map__t.html#a83f194bece846e07b1a9fce274427685">operator()</a> (T &amp;item, <a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html">FormattedSerializeStream</a> &amp;in, bool success, Context &amp;&amp;context={}) const noexcept(<a class="el" href="tag__invoke_8h.html#ac9297785bc1cff48dae735a140253041">is_nothrow_tag_invocable_v</a>&lt; <a class="el" href="struct_engine_1_1_serialize_1_1apply__map__t.html">apply_map_t</a>, T &amp;, <a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html">FormattedSerializeStream</a> &amp;, bool, Context &gt;) -&gt; tag_invoke_result_t&lt; <a class="el" href="struct_engine_1_1_serialize_1_1apply__map__t.html">apply_map_t</a>, T &amp;, <a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html">FormattedSerializeStream</a> &amp;, bool, Context &gt;</td></tr>
+<tr class="separator:a83f194bece846e07b1a9fce274427685"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c3d77b6c24615460d972f0feb69b07d"><td class="memTemplParams" colspan="2">template&lt;typename T , typename Context  = ContextPtr&gt; <br />
+requires (!<a class="el" href="concepttag__invocable.html">tag_invocable</a>&lt;<a class="el" href="struct_engine_1_1_serialize_1_1apply__map__t.html">apply_map_t</a>, T &amp;, <a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html">FormattedSerializeStream</a> &amp;, bool, Context&gt;)</td></tr>
+<tr class="memitem:a7c3d77b6c24615460d972f0feb69b07d"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1apply__map__t.html#a7c3d77b6c24615460d972f0feb69b07d">operator()</a> (T &amp;t, <a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html">FormattedSerializeStream</a> &amp;in, bool success, Context &amp;&amp;context={}) const</td></tr>
+<tr class="separator:a7c3d77b6c24615460d972f0feb69b07d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
 Friends</h2></td></tr>
-<tr class="memitem:a4c9589a28e4be1b17b985ffbbf14d3c1"><td class="memTemplParams" colspan="2">template&lt;SerializeRange C&gt; </td></tr>
-<tr class="memitem:a4c9589a28e4be1b17b985ffbbf14d3c1"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1apply__map__t.html#a4c9589a28e4be1b17b985ffbbf14d3c1">tag_invoke</a> (<a class="el" href="struct_engine_1_1_serialize_1_1apply__map__t.html">apply_map_t</a> cpo, C &amp;c, <a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a> in, bool success)</td></tr>
-<tr class="separator:a4c9589a28e4be1b17b985ffbbf14d3c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a68288d1ec3790f384796393b86429b76"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:a68288d1ec3790f384796393b86429b76"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1apply__map__t.html#a68288d1ec3790f384796393b86429b76">tag_invoke</a> (<a class="el" href="struct_engine_1_1_serialize_1_1apply__map__t.html">apply_map_t</a> cpo, const std::unique_ptr&lt; T &gt; &amp;p, <a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a> in, bool success)</td></tr>
-<tr class="separator:a68288d1ec3790f384796393b86429b76"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a64116e7ca2f96b894a879ccfe12e47c3"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:a64116e7ca2f96b894a879ccfe12e47c3"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1apply__map__t.html#a64116e7ca2f96b894a879ccfe12e47c3">tag_invoke</a> (<a class="el" href="struct_engine_1_1_serialize_1_1apply__map__t.html">apply_map_t</a> cpo, std::optional&lt; T &gt; &amp;o, <a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a> in, bool success)</td></tr>
-<tr class="separator:a64116e7ca2f96b894a879ccfe12e47c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a017d9eb02edbca75062d69c548fe1c95"><td class="memTemplParams" colspan="2">template&lt;typename T1 , typename T2 &gt; </td></tr>
-<tr class="memitem:a017d9eb02edbca75062d69c548fe1c95"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1apply__map__t.html#a017d9eb02edbca75062d69c548fe1c95">tag_invoke</a> (<a class="el" href="struct_engine_1_1_serialize_1_1apply__map__t.html">apply_map_t</a> cpo, std::pair&lt; T1, T2 &gt; &amp;p, <a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a> in, bool success)</td></tr>
-<tr class="separator:a017d9eb02edbca75062d69c548fe1c95"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0d779b11cf55eb63969d5e25c1478b6f"><td class="memTemplParams" colspan="2">template&lt;typename... Ty&gt; </td></tr>
-<tr class="memitem:a0d779b11cf55eb63969d5e25c1478b6f"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1apply__map__t.html#a0d779b11cf55eb63969d5e25c1478b6f">tag_invoke</a> (<a class="el" href="struct_engine_1_1_serialize_1_1apply__map__t.html">apply_map_t</a> cpo, std::tuple&lt; Ty... &gt; &amp;t, <a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a> in, bool success)</td></tr>
-<tr class="separator:a0d779b11cf55eb63969d5e25c1478b6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad77929713a7de7000ce19f3ba9e38e59"><td class="memTemplParams" colspan="2">template&lt;PrimitiveType T&gt; <br />
+<tr class="memitem:ab7e9aa3b550b3172f817b2b8a604164b"><td class="memTemplParams" colspan="2">template&lt;SerializeRange C, typename Context &gt; </td></tr>
+<tr class="memitem:ab7e9aa3b550b3172f817b2b8a604164b"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1apply__map__t.html#ab7e9aa3b550b3172f817b2b8a604164b">tag_invoke</a> (<a class="el" href="struct_engine_1_1_serialize_1_1apply__map__t.html">apply_map_t</a> cpo, C &amp;c, <a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html">FormattedSerializeStream</a> &amp;in, bool success, Context &amp;&amp;context)</td></tr>
+<tr class="separator:ab7e9aa3b550b3172f817b2b8a604164b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a59dffc9ba656fdfcfaa0d268c6cb59cc"><td class="memTemplParams" colspan="2">template&lt;typename T , typename Context &gt; </td></tr>
+<tr class="memitem:a59dffc9ba656fdfcfaa0d268c6cb59cc"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1apply__map__t.html#a59dffc9ba656fdfcfaa0d268c6cb59cc">tag_invoke</a> (<a class="el" href="struct_engine_1_1_serialize_1_1apply__map__t.html">apply_map_t</a> cpo, const std::unique_ptr&lt; T &gt; &amp;p, <a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html">FormattedSerializeStream</a> &amp;in, bool success, Context &amp;&amp;context)</td></tr>
+<tr class="separator:a59dffc9ba656fdfcfaa0d268c6cb59cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a92e50bb7c477cd8fda59da62d5f604"><td class="memTemplParams" colspan="2">template&lt;typename T , typename Context &gt; </td></tr>
+<tr class="memitem:a9a92e50bb7c477cd8fda59da62d5f604"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1apply__map__t.html#a9a92e50bb7c477cd8fda59da62d5f604">tag_invoke</a> (<a class="el" href="struct_engine_1_1_serialize_1_1apply__map__t.html">apply_map_t</a> cpo, std::optional&lt; T &gt; &amp;o, <a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html">FormattedSerializeStream</a> &amp;in, bool success, Context &amp;&amp;context)</td></tr>
+<tr class="separator:a9a92e50bb7c477cd8fda59da62d5f604"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a97511d25e52a66dfc3c123502960f1bb"><td class="memTemplParams" colspan="2">template&lt;typename T1 , typename T2 , typename Context &gt; </td></tr>
+<tr class="memitem:a97511d25e52a66dfc3c123502960f1bb"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1apply__map__t.html#a97511d25e52a66dfc3c123502960f1bb">tag_invoke</a> (<a class="el" href="struct_engine_1_1_serialize_1_1apply__map__t.html">apply_map_t</a> cpo, std::pair&lt; T1, T2 &gt; &amp;p, <a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html">FormattedSerializeStream</a> &amp;in, bool success, Context &amp;&amp;context)</td></tr>
+<tr class="separator:a97511d25e52a66dfc3c123502960f1bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f0066a27023bda2f1f19e33cf1636e1"><td class="memTemplParams" colspan="2">template&lt;typename... Ty, typename Context &gt; </td></tr>
+<tr class="memitem:a3f0066a27023bda2f1f19e33cf1636e1"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1apply__map__t.html#a3f0066a27023bda2f1f19e33cf1636e1">tag_invoke</a> (<a class="el" href="struct_engine_1_1_serialize_1_1apply__map__t.html">apply_map_t</a> cpo, std::tuple&lt; Ty... &gt; &amp;t, <a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html">FormattedSerializeStream</a> &amp;in, bool success, Context &amp;&amp;context)</td></tr>
+<tr class="separator:a3f0066a27023bda2f1f19e33cf1636e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad6306c42548a974664a1a3ae058d3644"><td class="memTemplParams" colspan="2">template&lt;PrimitiveType T, typename Context &gt; <br />
 requires (!std::is_const_v&lt;T&gt;)</td></tr>
-<tr class="memitem:ad77929713a7de7000ce19f3ba9e38e59"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1apply__map__t.html#ad77929713a7de7000ce19f3ba9e38e59">tag_invoke</a> (<a class="el" href="struct_engine_1_1_serialize_1_1apply__map__t.html">apply_map_t</a> cpo, T &amp;t, <a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a> in, bool success)</td></tr>
-<tr class="separator:ad77929713a7de7000ce19f3ba9e38e59"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a97acaef061f00e99400b5e942857c94e"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; <br />
+<tr class="memitem:ad6306c42548a974664a1a3ae058d3644"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1apply__map__t.html#ad6306c42548a974664a1a3ae058d3644">tag_invoke</a> (<a class="el" href="struct_engine_1_1_serialize_1_1apply__map__t.html">apply_map_t</a> cpo, T &amp;t, <a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html">FormattedSerializeStream</a> &amp;in, bool success, Context &amp;&amp;context)</td></tr>
+<tr class="separator:ad6306c42548a974664a1a3ae058d3644"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21a39addc7521aa3f730274f0ceec8e2"><td class="memTemplParams" colspan="2">template&lt;typename T , typename Context &gt; <br />
 requires std::is_const_v&lt;T&gt;</td></tr>
-<tr class="memitem:a97acaef061f00e99400b5e942857c94e"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1apply__map__t.html#a97acaef061f00e99400b5e942857c94e">tag_invoke</a> (<a class="el" href="struct_engine_1_1_serialize_1_1apply__map__t.html">apply_map_t</a> cpo, T &amp;t, <a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a> in, bool success)</td></tr>
-<tr class="separator:a97acaef061f00e99400b5e942857c94e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3f06ecc14be3d2bfd5a418d3e9de595d"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:a3f06ecc14be3d2bfd5a418d3e9de595d"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1apply__map__t.html#a3f06ecc14be3d2bfd5a418d3e9de595d">tag_invoke</a> (<a class="el" href="struct_engine_1_1_serialize_1_1apply__map__t.html">apply_map_t</a> cpo, T *&amp;p, <a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a> in, bool success=true)</td></tr>
-<tr class="separator:a3f06ecc14be3d2bfd5a418d3e9de595d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21a39addc7521aa3f730274f0ceec8e2"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1apply__map__t.html#a21a39addc7521aa3f730274f0ceec8e2">tag_invoke</a> (<a class="el" href="struct_engine_1_1_serialize_1_1apply__map__t.html">apply_map_t</a> cpo, T &amp;t, <a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html">FormattedSerializeStream</a> &amp;in, bool success, Context &amp;&amp;context)</td></tr>
+<tr class="separator:a21a39addc7521aa3f730274f0ceec8e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8127fb0df04347383fe48e789ecec15"><td class="memTemplParams" colspan="2">template&lt;typename T , typename Context &gt; </td></tr>
+<tr class="memitem:ac8127fb0df04347383fe48e789ecec15"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1apply__map__t.html#ac8127fb0df04347383fe48e789ecec15">tag_invoke</a> (<a class="el" href="struct_engine_1_1_serialize_1_1apply__map__t.html">apply_map_t</a> cpo, T *&amp;p, <a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html">FormattedSerializeStream</a> &amp;in, bool success=true, Context &amp;&amp;context={})</td></tr>
+<tr class="separator:ac8127fb0df04347383fe48e789ecec15"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a520b25eb94b184be06ec328f943e2a09" name="a520b25eb94b184be06ec328f943e2a09"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a520b25eb94b184be06ec328f943e2a09">&#9670;&#160;</a></span>operator()() <span class="overload">[1/2]</span></h2>
+<a id="a7c3d77b6c24615460d972f0feb69b07d" name="a7c3d77b6c24615460d972f0feb69b07d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7c3d77b6c24615460d972f0feb69b07d">&#9670;&#160;</a></span>operator()() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T &gt; <br />
-requires (!<a class="el" href="concepttag__invocable.html">tag_invocable</a>&lt;<a class="el" href="struct_engine_1_1_serialize_1_1apply__map__t.html">apply_map_t</a>, T &amp;, <a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>, bool&gt;)</div>
+template&lt;typename T , typename Context  = ContextPtr&gt; <br />
+requires (!<a class="el" href="concepttag__invocable.html">tag_invocable</a>&lt;<a class="el" href="struct_engine_1_1_serialize_1_1apply__map__t.html">apply_map_t</a>, T &amp;, <a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html">FormattedSerializeStream</a> &amp;, bool, Context&gt;)</div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -319,14 +319,20 @@ requires (!<a class="el" href="concepttag__invocable.html">tag_invocable</a>&lt;
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html">FormattedSerializeStream</a> &amp;&#160;</td>
           <td class="paramname"><em>in</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>success</em>&#160;</td>
+          <td class="paramname"><em>success</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Context &amp;&amp;&#160;</td>
+          <td class="paramname"><em>context</em> = <code>{}</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -343,13 +349,13 @@ requires (!<a class="el" href="concepttag__invocable.html">tag_invocable</a>&lt;
 
 </div>
 </div>
-<a id="ad42a0bd0a9a894ffed48052aa2b473e8" name="ad42a0bd0a9a894ffed48052aa2b473e8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad42a0bd0a9a894ffed48052aa2b473e8">&#9670;&#160;</a></span>operator()() <span class="overload">[2/2]</span></h2>
+<a id="a83f194bece846e07b1a9fce274427685" name="a83f194bece846e07b1a9fce274427685"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a83f194bece846e07b1a9fce274427685">&#9670;&#160;</a></span>operator()() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T &gt; </div>
+template&lt;typename T , typename Context  = ContextPtr&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -363,19 +369,25 @@ template&lt;typename T &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html">FormattedSerializeStream</a> &amp;&#160;</td>
           <td class="paramname"><em>in</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>success</em>&#160;</td>
+          <td class="paramname"><em>success</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Context &amp;&amp;&#160;</td>
+          <td class="paramname"><em>context</em> = <code>{}</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td> const -&gt; tag_invoke_result_t&lt;<a class="el" href="struct_engine_1_1_serialize_1_1apply__map__t.html">apply_map_t</a>, T &amp;, <a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>, bool&gt;
+          <td></td><td> const -&gt; tag_invoke_result_t&lt;<a class="el" href="struct_engine_1_1_serialize_1_1apply__map__t.html">apply_map_t</a>, T &amp;, <a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html">FormattedSerializeStream</a> &amp;, bool, Context&gt;
         </td>
         </tr>
       </table>
@@ -389,13 +401,13 @@ template&lt;typename T &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Friends And Related Function Documentation</h2>
-<a id="a3f06ecc14be3d2bfd5a418d3e9de595d" name="a3f06ecc14be3d2bfd5a418d3e9de595d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3f06ecc14be3d2bfd5a418d3e9de595d">&#9670;&#160;</a></span>tag_invoke <span class="overload">[1/8]</span></h2>
+<a id="ac8127fb0df04347383fe48e789ecec15" name="ac8127fb0df04347383fe48e789ecec15"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac8127fb0df04347383fe48e789ecec15">&#9670;&#160;</a></span>tag_invoke <span class="overload">[1/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T &gt; </div>
+template&lt;typename T , typename Context &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -415,14 +427,20 @@ template&lt;typename T &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html">FormattedSerializeStream</a> &amp;&#160;</td>
           <td class="paramname"><em>in</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>success</em> = <code>true</code>&#160;</td>
+          <td class="paramname"><em>success</em> = <code>true</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Context &amp;&amp;&#160;</td>
+          <td class="paramname"><em>context</em> = <code>{}</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -439,13 +457,13 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="a0d779b11cf55eb63969d5e25c1478b6f" name="a0d779b11cf55eb63969d5e25c1478b6f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0d779b11cf55eb63969d5e25c1478b6f">&#9670;&#160;</a></span>tag_invoke <span class="overload">[2/8]</span></h2>
+<a id="a3f0066a27023bda2f1f19e33cf1636e1" name="a3f0066a27023bda2f1f19e33cf1636e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f0066a27023bda2f1f19e33cf1636e1">&#9670;&#160;</a></span>tag_invoke <span class="overload">[2/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename... Ty&gt; </div>
+template&lt;typename... Ty, typename Context &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -465,14 +483,20 @@ template&lt;typename... Ty&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html">FormattedSerializeStream</a> &amp;&#160;</td>
           <td class="paramname"><em>in</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>success</em>&#160;</td>
+          <td class="paramname"><em>success</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Context &amp;&amp;&#160;</td>
+          <td class="paramname"><em>context</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -489,13 +513,13 @@ template&lt;typename... Ty&gt; </div>
 
 </div>
 </div>
-<a id="a017d9eb02edbca75062d69c548fe1c95" name="a017d9eb02edbca75062d69c548fe1c95"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a017d9eb02edbca75062d69c548fe1c95">&#9670;&#160;</a></span>tag_invoke <span class="overload">[3/8]</span></h2>
+<a id="a97511d25e52a66dfc3c123502960f1bb" name="a97511d25e52a66dfc3c123502960f1bb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a97511d25e52a66dfc3c123502960f1bb">&#9670;&#160;</a></span>tag_invoke <span class="overload">[3/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T1 , typename T2 &gt; </div>
+template&lt;typename T1 , typename T2 , typename Context &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -515,14 +539,20 @@ template&lt;typename T1 , typename T2 &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html">FormattedSerializeStream</a> &amp;&#160;</td>
           <td class="paramname"><em>in</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>success</em>&#160;</td>
+          <td class="paramname"><em>success</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Context &amp;&amp;&#160;</td>
+          <td class="paramname"><em>context</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -539,13 +569,13 @@ template&lt;typename T1 , typename T2 &gt; </div>
 
 </div>
 </div>
-<a id="a64116e7ca2f96b894a879ccfe12e47c3" name="a64116e7ca2f96b894a879ccfe12e47c3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a64116e7ca2f96b894a879ccfe12e47c3">&#9670;&#160;</a></span>tag_invoke <span class="overload">[4/8]</span></h2>
+<a id="a9a92e50bb7c477cd8fda59da62d5f604" name="a9a92e50bb7c477cd8fda59da62d5f604"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9a92e50bb7c477cd8fda59da62d5f604">&#9670;&#160;</a></span>tag_invoke <span class="overload">[4/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T &gt; </div>
+template&lt;typename T , typename Context &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -565,14 +595,20 @@ template&lt;typename T &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html">FormattedSerializeStream</a> &amp;&#160;</td>
           <td class="paramname"><em>in</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>success</em>&#160;</td>
+          <td class="paramname"><em>success</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Context &amp;&amp;&#160;</td>
+          <td class="paramname"><em>context</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -589,13 +625,13 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="a4c9589a28e4be1b17b985ffbbf14d3c1" name="a4c9589a28e4be1b17b985ffbbf14d3c1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4c9589a28e4be1b17b985ffbbf14d3c1">&#9670;&#160;</a></span>tag_invoke <span class="overload">[5/8]</span></h2>
+<a id="ab7e9aa3b550b3172f817b2b8a604164b" name="ab7e9aa3b550b3172f817b2b8a604164b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab7e9aa3b550b3172f817b2b8a604164b">&#9670;&#160;</a></span>tag_invoke <span class="overload">[5/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;SerializeRange C&gt; </div>
+template&lt;SerializeRange C, typename Context &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -615,14 +651,20 @@ template&lt;SerializeRange C&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html">FormattedSerializeStream</a> &amp;&#160;</td>
           <td class="paramname"><em>in</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>success</em>&#160;</td>
+          <td class="paramname"><em>success</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Context &amp;&amp;&#160;</td>
+          <td class="paramname"><em>context</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -639,13 +681,13 @@ template&lt;SerializeRange C&gt; </div>
 
 </div>
 </div>
-<a id="ad77929713a7de7000ce19f3ba9e38e59" name="ad77929713a7de7000ce19f3ba9e38e59"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad77929713a7de7000ce19f3ba9e38e59">&#9670;&#160;</a></span>tag_invoke <span class="overload">[6/8]</span></h2>
+<a id="ad6306c42548a974664a1a3ae058d3644" name="ad6306c42548a974664a1a3ae058d3644"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad6306c42548a974664a1a3ae058d3644">&#9670;&#160;</a></span>tag_invoke <span class="overload">[6/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;PrimitiveType T&gt; <br />
+template&lt;PrimitiveType T, typename Context &gt; <br />
 requires (!std::is_const_v&lt;T&gt;)</div>
 <table class="mlabels">
   <tr>
@@ -666,14 +708,20 @@ requires (!std::is_const_v&lt;T&gt;)</div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html">FormattedSerializeStream</a> &amp;&#160;</td>
           <td class="paramname"><em>in</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>success</em>&#160;</td>
+          <td class="paramname"><em>success</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Context &amp;&amp;&#160;</td>
+          <td class="paramname"><em>context</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -690,13 +738,13 @@ requires (!std::is_const_v&lt;T&gt;)</div>
 
 </div>
 </div>
-<a id="a97acaef061f00e99400b5e942857c94e" name="a97acaef061f00e99400b5e942857c94e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a97acaef061f00e99400b5e942857c94e">&#9670;&#160;</a></span>tag_invoke <span class="overload">[7/8]</span></h2>
+<a id="a21a39addc7521aa3f730274f0ceec8e2" name="a21a39addc7521aa3f730274f0ceec8e2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a21a39addc7521aa3f730274f0ceec8e2">&#9670;&#160;</a></span>tag_invoke <span class="overload">[7/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T &gt; <br />
+template&lt;typename T , typename Context &gt; <br />
 requires std::is_const_v&lt;T&gt;</div>
 <table class="mlabels">
   <tr>
@@ -717,14 +765,20 @@ requires std::is_const_v&lt;T&gt;</div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html">FormattedSerializeStream</a> &amp;&#160;</td>
           <td class="paramname"><em>in</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>success</em>&#160;</td>
+          <td class="paramname"><em>success</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Context &amp;&amp;&#160;</td>
+          <td class="paramname"><em>context</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -741,13 +795,13 @@ requires std::is_const_v&lt;T&gt;</div>
 
 </div>
 </div>
-<a id="a68288d1ec3790f384796393b86429b76" name="a68288d1ec3790f384796393b86429b76"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a68288d1ec3790f384796393b86429b76">&#9670;&#160;</a></span>tag_invoke <span class="overload">[8/8]</span></h2>
+<a id="a59dffc9ba656fdfcfaa0d268c6cb59cc" name="a59dffc9ba656fdfcfaa0d268c6cb59cc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a59dffc9ba656fdfcfaa0d268c6cb59cc">&#9670;&#160;</a></span>tag_invoke <span class="overload">[8/8]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T &gt; </div>
+template&lt;typename T , typename Context &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -767,14 +821,20 @@ template&lt;typename T &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">CallerHierarchyFormattedSerializeStream</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html">FormattedSerializeStream</a> &amp;&#160;</td>
           <td class="paramname"><em>in</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>success</em>&#160;</td>
+          <td class="paramname"><em>success</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Context &amp;&amp;&#160;</td>
+          <td class="paramname"><em>context</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -797,7 +857,7 @@ template&lt;typename T &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Aug 11 2026 00:42:27 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Fri Aug 14 2026 16:21:38 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

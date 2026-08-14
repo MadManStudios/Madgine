@@ -309,11 +309,11 @@ requires (!std::same_as&lt;std::remove_cvref_t&lt;Binding&gt;, <a class="el" hre
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
 Friends</h2></td></tr>
-<tr class="memitem:a3203b05c0ce77f224fcc5c31a5d944be"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">Serialize::StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_ptr.html#a3203b05c0ce77f224fcc5c31a5d944be">tag_invoke</a> (<a class="el" href="struct_engine_1_1_serialize_1_1apply__map__t.html">Serialize::apply_map_t</a>, <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_ptr.html">EntityPtr</a> &amp;, <a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">Serialize::CallerHierarchyFormattedSerializeStream</a>, bool)</td></tr>
-<tr class="separator:a3203b05c0ce77f224fcc5c31a5d944be"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a44c3547414f562c6e71bbde9c16e13b3"><td class="memTemplParams" colspan="2">template&lt;typename... Configs&gt; </td></tr>
-<tr class="memitem:a44c3547414f562c6e71bbde9c16e13b3"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_ptr.html#a44c3547414f562c6e71bbde9c16e13b3">tag_invoke</a> (<a class="el" href="struct_engine_1_1_serialize_1_1set__active__t.html">Serialize::set_active_t</a>&lt; Configs... &gt;, <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_ptr.html">EntityPtr</a> &amp;, bool, bool, const <a class="el" href="struct_engine_1_1_caller_hierarchy_base_ptr.html">CallerHierarchyBasePtr</a> &amp;)</td></tr>
-<tr class="separator:a44c3547414f562c6e71bbde9c16e13b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a624a7130a351e628c3cccf9ea73c84d2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">Serialize::StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_ptr.html#a624a7130a351e628c3cccf9ea73c84d2">tag_invoke</a> (<a class="el" href="struct_engine_1_1_serialize_1_1apply__map__t.html">Serialize::apply_map_t</a>, <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_ptr.html">EntityPtr</a> &amp;, <a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html">Serialize::FormattedSerializeStream</a> &amp;, bool, <a class="el" href="namespace_engine_1_1_serialize.html#a709a54509cec297f0cc972145d963d0a">Serialize::ContextPtr</a>)</td></tr>
+<tr class="separator:a624a7130a351e628c3cccf9ea73c84d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a246ae3b4038992ec25035b3c498ebcca"><td class="memTemplParams" colspan="2">template&lt;typename... Configs, typename Context &gt; </td></tr>
+<tr class="memitem:a246ae3b4038992ec25035b3c498ebcca"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_ptr.html#a246ae3b4038992ec25035b3c498ebcca">tag_invoke</a> (<a class="el" href="struct_engine_1_1_serialize_1_1set__active__t.html">Serialize::set_active_t</a>&lt; Configs... &gt;, <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_ptr.html">EntityPtr</a> &amp;, bool, bool, Context &amp;&amp;)</td></tr>
+<tr class="separator:a246ae3b4038992ec25035b3c498ebcca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Typedef Documentation</h2>
 <a id="a50c589944539ef29a930a23d12786daf" name="a50c589944539ef29a930a23d12786daf"></a>
@@ -581,8 +581,8 @@ requires (!std::same_as&lt;std::remove_cvref_t&lt;Binding&gt;, <a class="el" hre
 </div>
 </div>
 <h2 class="groupheader">Friends And Related Function Documentation</h2>
-<a id="a3203b05c0ce77f224fcc5c31a5d944be" name="a3203b05c0ce77f224fcc5c31a5d944be"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3203b05c0ce77f224fcc5c31a5d944be">&#9670;&#160;</a></span>tag_invoke <span class="overload">[1/2]</span></h2>
+<a id="a624a7130a351e628c3cccf9ea73c84d2" name="a624a7130a351e628c3cccf9ea73c84d2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a624a7130a351e628c3cccf9ea73c84d2">&#9670;&#160;</a></span>tag_invoke <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -605,14 +605,20 @@ requires (!std::same_as&lt;std::remove_cvref_t&lt;Binding&gt;, <a class="el" hre
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_caller_hierarchy_formatted_serialize_stream.html">Serialize::CallerHierarchyFormattedSerializeStream</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html">Serialize::FormattedSerializeStream</a> &amp;&#160;</td>
           <td class="paramname"><em>in</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>success</em>&#160;</td>
+          <td class="paramname"><em>success</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespace_engine_1_1_serialize.html#a709a54509cec297f0cc972145d963d0a">Serialize::ContextPtr</a>&#160;</td>
+          <td class="paramname"><em>context</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -629,13 +635,13 @@ requires (!std::same_as&lt;std::remove_cvref_t&lt;Binding&gt;, <a class="el" hre
 
 </div>
 </div>
-<a id="a44c3547414f562c6e71bbde9c16e13b3" name="a44c3547414f562c6e71bbde9c16e13b3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a44c3547414f562c6e71bbde9c16e13b3">&#9670;&#160;</a></span>tag_invoke <span class="overload">[2/2]</span></h2>
+<a id="a246ae3b4038992ec25035b3c498ebcca" name="a246ae3b4038992ec25035b3c498ebcca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a246ae3b4038992ec25035b3c498ebcca">&#9670;&#160;</a></span>tag_invoke <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename... Configs&gt; </div>
+template&lt;typename... Configs, typename Context &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -667,7 +673,7 @@ template&lt;typename... Configs&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="struct_engine_1_1_caller_hierarchy_base_ptr.html">CallerHierarchyBasePtr</a> &amp;&#160;</td>
+          <td class="paramtype">Context &amp;&amp;&#160;</td>
           <td class="paramname">&#160;</td>
         </tr>
         <tr>
@@ -692,7 +698,7 @@ template&lt;typename... Configs&gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Aug 11 2026 00:42:27 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Fri Aug 14 2026 16:21:38 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>
