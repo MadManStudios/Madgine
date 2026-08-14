@@ -1,19 +1,21 @@
 #pragma once
 
+#include "Generic/context.h"
+
 #include "Meta/math/atlas2.h"
 #include "Meta/math/color4.h"
 
 #include "Madgine/imageloader/imageloader.h"
 
-#include "renderdata.h"
 #include "colorrenderdata.h"
+#include "renderdata.h"
 
 namespace Engine {
 namespace Widgets {
 
     struct MADGINE_WIDGETS_EXPORT ScalableImageRenderData : RenderData {
 
-        void setImageName(std::string_view name, WidgetManager *mgr);
+        void setImageName(std::string_view name, Contextual<WidgetManager &> mgr);
         void setImage(Resources::ImageLoader::Resource *image);
 
         std::string_view imageName() const;

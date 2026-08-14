@@ -6,6 +6,7 @@
 #include "configs/guard.h"
 #include "configs/tags.h"
 #include "container/physical.h"
+#include "context.h"
 #include "hierarchy/serializableunitptr.h"
 #include "streams/formattedmessagestream.h"
 #include "streams/serializablemapholder.h"
@@ -61,8 +62,8 @@ namespace Serialize {
     inline constexpr set_parent_t set_parent;
 
     struct apply_map_t {
-        template <typename T>
-        friend StreamResult tag_invoke(apply_map_t cpo, T *&p, CallerHierarchyFormattedSerializeStream in, bool success = true)
+        template <typename T, typename Context>
+        friend StreamResult tag_invoke(apply_map_t cpo, T *&p, FormattedSerializeStream &in, bool success = true, Context &&context = {})
         {
             if (success) {
                 uint32_t ptr = reinterpret_cast<uintptr_t>(p);
@@ -73,7 +74,7 @@ namespace Serialize {
                             UnitId id = (ptr >> 2);
                             SyncableUnitBase *unit;
                             const SerializeTable *type;
-                            STREAM_PROPAGATE_ERROR(convertSyncablePtr(in.mStream, id, unit, type));
+                            STREAM_PROPAGATE_ERROR(convertSyncablePtr(in, id, unit, type));
                             if (type != &serializeTable<T>())
                                 throw 0;
                             p = static_cast<T *>(unit);
@@ -85,7 +86,7 @@ namespace Serialize {
                         if constexpr (!std::derived_from<T, SyncableUnitBase>) {
                             uint32_t id = (ptr >> 2);
                             SerializableDataPtr unit;
-                            STREAM_PROPAGATE_ERROR(convertSerializablePtr(in.mStream, id, unit));
+                            STREAM_PROPAGATE_ERROR(convertSerializablePtr(in, id, unit));
                             static_assert(!std::same_as<T, SerializableUnitBase>);
                             if (unit.mType != &serializeTable<T>())
                                 throw 0;
@@ -104,8 +105,8 @@ namespace Serialize {
             return {};
         }
 
-        template <typename... Ty>
-        friend StreamResult tag_invoke(apply_map_t cpo, std::tuple<Ty...> &t, CallerHierarchyFormattedSerializeStream in, bool success)
+        template <typename... Ty, typename Context>
+        friend StreamResult tag_invoke(apply_map_t cpo, std::tuple<Ty...> &t, FormattedSerializeStream &in, bool success, Context &&context)
         {
             return TupleUnpacker::accumulate(
                 t, [&](auto &e, StreamResult r) {
@@ -115,15 +116,15 @@ namespace Serialize {
                 StreamResult {});
         }
 
-        template <typename T1, typename T2>
-        friend StreamResult tag_invoke(apply_map_t cpo, std::pair<T1, T2> &p, CallerHierarchyFormattedSerializeStream in, bool success)
+        template <typename T1, typename T2, typename Context>
+        friend StreamResult tag_invoke(apply_map_t cpo, std::pair<T1, T2> &p, FormattedSerializeStream &in, bool success, Context &&context)
         {
             STREAM_PROPAGATE_ERROR(cpo(p.first, in, success));
             return cpo(p.second, in, success);
         }
 
-        template <typename T>
-        friend StreamResult tag_invoke(apply_map_t cpo, std::optional<T> &o, CallerHierarchyFormattedSerializeStream in, bool success)
+        template <typename T, typename Context>
+        friend StreamResult tag_invoke(apply_map_t cpo, std::optional<T> &o, FormattedSerializeStream &in, bool success, Context &&context)
         {
             if (o)
                 return cpo(*o, in, success);
@@ -131,48 +132,48 @@ namespace Serialize {
                 return {};
         }
 
-        template <SerializeRange C>
-        friend StreamResult tag_invoke(apply_map_t cpo, C &c, CallerHierarchyFormattedSerializeStream in, bool success)
+        template <SerializeRange C, typename Context>
+        friend StreamResult tag_invoke(apply_map_t cpo, C &c, FormattedSerializeStream &in, bool success, Context &&context)
         {
             for (auto &t : physical(c)) {
-                STREAM_PROPAGATE_ERROR(cpo(t, in, success));
+                STREAM_PROPAGATE_ERROR(cpo(t, in, success, context));
             }
             return {};
         }
 
-        template <PrimitiveType T>
+        template <PrimitiveType T, typename Context>
             requires(!std::is_const_v<T>)
-        friend StreamResult tag_invoke(apply_map_t cpo, T &t, CallerHierarchyFormattedSerializeStream in, bool success)
+        friend StreamResult tag_invoke(apply_map_t cpo, T &t, FormattedSerializeStream &in, bool success, Context &&context)
         {
             return {};
         }
 
-        template <typename T>
+        template <typename T, typename Context>
             requires std::is_const_v<T>
-        friend StreamResult tag_invoke(apply_map_t cpo, T &t, CallerHierarchyFormattedSerializeStream in, bool success)
+        friend StreamResult tag_invoke(apply_map_t cpo, T &t, FormattedSerializeStream &in, bool success, Context &&context)
         {
             return {};
         }
 
-        template <typename T>
-        friend StreamResult tag_invoke(apply_map_t cpo, const std::unique_ptr<T> &p, CallerHierarchyFormattedSerializeStream in, bool success)
+        template <typename T, typename Context>
+        friend StreamResult tag_invoke(apply_map_t cpo, const std::unique_ptr<T> &p, FormattedSerializeStream &in, bool success, Context &&context)
         {
             return cpo(*p, in, success);
         }
 
-        template <typename T>
-            requires(!tag_invocable<apply_map_t, T &, CallerHierarchyFormattedSerializeStream, bool>)
-        StreamResult operator()(T &t, CallerHierarchyFormattedSerializeStream in, bool success) const
+        template <typename T, typename Context = ContextPtr>
+            requires(!tag_invocable<apply_map_t, T &, FormattedSerializeStream &, bool, Context>)
+        StreamResult operator()(T &t, FormattedSerializeStream &in, bool success, Context &&context = {}) const
         {
-            return SerializableDataPtr { &t }.applyMap(in, success);
+            return SerializableDataPtr { &t }.applyMap(in, success, context);
         }
 
-        template <typename T>
-        auto operator()(T &item, CallerHierarchyFormattedSerializeStream in, bool success) const
-            noexcept(is_nothrow_tag_invocable_v<apply_map_t, T &, CallerHierarchyFormattedSerializeStream, bool>)
-                -> tag_invoke_result_t<apply_map_t, T &, CallerHierarchyFormattedSerializeStream, bool>
+        template <typename T, typename Context = ContextPtr>
+        auto operator()(T &item, FormattedSerializeStream &in, bool success, Context &&context = {}) const
+            noexcept(is_nothrow_tag_invocable_v<apply_map_t, T &, FormattedSerializeStream &, bool, Context>)
+                -> tag_invoke_result_t<apply_map_t, T &, FormattedSerializeStream &, bool, Context>
         {
-            return tag_invoke(*this, item, in, success);
+            return tag_invoke(*this, item, in, success, context);
         }
     };
 
@@ -180,33 +181,33 @@ namespace Serialize {
 
     struct set_synced_t {
 
-        template <SerializeRange C>
-        friend void tag_invoke(set_synced_t cpo, C &c, bool b, const CallerHierarchyBasePtr &hierarchy)
+        template <SerializeRange C, typename Context>
+        friend void tag_invoke(set_synced_t cpo, C &c, bool b, Context &&context)
         {
             for (auto &t : physical(c)) {
-                cpo(t, b, hierarchy);
+                cpo(t, b, std::forward<Context>(context));
             }
         }
 
-        template <typename T>
-            requires tag_invocable<set_synced_t, T &, bool, const CallerHierarchyBasePtr &>
-        friend void tag_invoke(set_synced_t cpo, const std::unique_ptr<T> &p, bool b, const CallerHierarchyBasePtr &hierarchy = {})
+        template <typename T, typename Context>
+            requires tag_invocable<set_synced_t, T &, bool, Context>
+        friend void tag_invoke(set_synced_t cpo, const std::unique_ptr<T> &p, bool b, Context &&context = {})
         {
-            tag_invoke(cpo, *p, b, hierarchy);
+            tag_invoke(cpo, *p, b, std::forward<Context>(context));
         }
 
-        template <typename T>
-            requires(!is_tag_invocable_v<set_synced_t, T &, bool, const CallerHierarchyBasePtr &>)
-        void operator()(T &t, bool b, const CallerHierarchyBasePtr &hierarchy = {}) const
+        template <typename T, typename Context = ContextPtr>
+            requires(!is_tag_invocable_v<set_synced_t, T &, bool, Context>)
+        void operator()(T &t, bool b, Context &&context = {}) const
         {
         }
 
-        template <typename T>
-        auto operator()(T &item, bool b, const CallerHierarchyBasePtr &hierarchy = {}) const
-            noexcept(is_nothrow_tag_invocable_v<set_synced_t, T &, bool, const CallerHierarchyBasePtr &>)
-                -> tag_invoke_result_t<set_synced_t, T &, bool, const CallerHierarchyBasePtr &>
+        template <typename T, typename Context = ContextPtr>
+        auto operator()(T &item, bool b, Context &&context = {}) const
+            noexcept(is_nothrow_tag_invocable_v<set_synced_t, T &, bool, Context>)
+                -> tag_invoke_result_t<set_synced_t, T &, bool, Context>
         {
-            return tag_invoke(*this, item, b, hierarchy);
+            return tag_invoke(*this, item, b, std::forward<Context>(context));
         }
     };
 
@@ -215,107 +216,107 @@ namespace Serialize {
     template <typename... Configs>
     struct set_active_t {
 
-        template <typename U, typename V>
-        friend void tag_invoke(set_active_t cpo, std::pair<U, V> &p, bool active, bool existenceChanged, CallerHierarchyBasePtr hierarchy = {})
+        template <typename U, typename V, typename Context>
+        friend void tag_invoke(set_active_t cpo, std::pair<U, V> &p, bool active, bool existenceChanged, Context &&context)
         {
-            cpo(p.first, active, existenceChanged, hierarchy);
-            cpo(p.second, active, existenceChanged, hierarchy);
+            cpo(p.first, active, existenceChanged, context);
+            cpo(p.second, active, existenceChanged, context);
         }
 
-        template <typename T>
-        friend void tag_invoke(set_active_t cpo, const std::unique_ptr<T> &p, bool active, bool existenceChanged, CallerHierarchyBasePtr hierarchy = {})
+        template <typename T, typename Context>
+        friend void tag_invoke(set_active_t cpo, const std::unique_ptr<T> &p, bool active, bool existenceChanged, Context &&context)
         {
-            cpo(*p, active, existenceChanged, hierarchy);
+            cpo(*p, active, existenceChanged, context);
         }
 
-        template <SerializeRange C>
+        template <SerializeRange C, typename Context>
             requires(!requires { typename C::is_serializable_container; })
-        friend void tag_invoke(set_active_t cpo, C &c, bool active, bool existenceChanged, CallerHierarchyBasePtr hierarchy = {})
+        friend void tag_invoke(set_active_t cpo, C &c, bool active, bool existenceChanged, Context &&context)
         {
             for (auto &t : physical(c)) {
-                cpo(t, active, existenceChanged);
+                cpo(t, active, existenceChanged, context);
             }
         }
 
-        template <PrimitiveType T>
-        friend void tag_invoke(set_active_t cpo, T &t, bool active, bool existenceChanged, CallerHierarchyBasePtr hierarchy)
+        template <PrimitiveType T, typename Context>
+        friend void tag_invoke(set_active_t cpo, T &t, bool active, bool existenceChanged, Context &&context)
         {
         }
 
-        template <typename T>
-            requires(!is_tag_invocable_v<set_active_t, T &, bool, bool, const CallerHierarchyBasePtr &>)
-        void operator()(T &item, bool active, bool existenceChanged, CallerHierarchyBasePtr hierarchy = {}) const
+        template <typename T, typename Context = ContextPtr>
+            requires(!is_tag_invocable_v<set_active_t, T &, bool, bool, Context>)
+        void operator()(T &item, bool active, bool existenceChanged, Context &&context = {}) const
         {
             if constexpr (!std::is_const_v<T>)
-                SerializableDataPtr { &item }.setActive(active, existenceChanged);
+                SerializableDataPtr { &item }.setActive(active, existenceChanged, context);
         }
 
-        template <typename T>
-        auto operator()(T &item, bool active, bool existenceChanged, const CallerHierarchyBasePtr &hierarchy = {}) const
-            noexcept(is_nothrow_tag_invocable_v<set_active_t, T &, bool, bool, const CallerHierarchyBasePtr &>)
-                -> tag_invoke_result_t<set_active_t, T &, bool, bool, const CallerHierarchyBasePtr &>
+        template <typename T, typename Context = ContextPtr>
+        auto operator()(T &item, bool active, bool existenceChanged, Context &&context = {}) const
+            noexcept(is_nothrow_tag_invocable_v<set_active_t, T &, bool, bool, Context>)
+                -> tag_invoke_result_t<set_active_t, T &, bool, bool, Context>
         {
-            return tag_invoke(*this, item, active, existenceChanged, hierarchy);
+            return tag_invoke(*this, item, active, existenceChanged, context);
         }
     };
 
     template <typename... Configs>
     inline constexpr set_active_t<Configs...> set_active;
 
-    template <typename T, typename... Configs>
-    StreamResult readState(CallerHierarchyFormattedSerializeStream in, T &t, const char *name)
+    template <typename T, typename... Configs, typename Context = ContextPtr>
+    StreamResult readState(FormattedSerializeStream &in, T &t, const char *name, Context &&context = {})
     {
-        set_active<Configs...>(t, false, false);
+        set_active<Configs...>(t, false, false, context);
 
-        StreamResult result = read(in, t, name);
+        StreamResult result = read(in, t, name, context);
 
-        assert(in.mStream.manager());
+        assert(in.manager());
         STREAM_PROPAGATE_ERROR(apply_map(t, in, result.mState == StreamState::OK));
 
-        set_active<Configs...>(t, true, false);
+        set_active<Configs...>(t, true, false, context);
 
         return result;
     }
 
-    template <typename T, typename... Configs>
-    StreamResult read(CallerHierarchyFormattedSerializeStream in, T &t, const char *name)
+    template <typename T, typename... Configs, typename Context>
+    StreamResult read(FormattedSerializeStream &in, T &t, const char *name, Context &&context)
     {
-        return TupleUnpacker::invoke(Operations<T, Configs...>::read, in, t, name);
+        return Operations<T, Configs...>::read(in, t, name, context);
+    }
+
+    template <typename T, typename... Configs, typename Context>
+    void write(FormattedSerializeStream &out, const T &t, const char *name, Context &&context)
+    {
+        Operations<T, Configs...>::write(out, t, name, context);
+    }
+
+    template <typename T, typename... Configs, typename Context>
+    StreamResult readAction(T &t, FormattedSerializeStream &in, PendingRequest &request, Context &&context)
+    {
+        [[maybe_unused]] auto guard = GuardSelector<Configs...>::guard(context);
+        return Operations<T, Configs...>::readAction(t, in, request, context);
+    }
+
+    template <typename T, typename... Configs, typename Context>
+    StreamResult readRequest(T &t, FormattedMessageStream &inout, MessageId id, Context &&context = {})
+    {
+        return Operations<T, Configs...>::readRequest(t, inout, id, context);
+    }
+
+    template <typename T, typename... Configs, typename Payload, typename Context>
+    void writeAction(const T &t, const std::vector<WriteMessage> &outStreams, Payload &&payload, Context &&context = {})
+    {
+        Operations<T, Configs...>::writeAction(t, outStreams, std::forward<Payload>(payload), context);
+    }
+
+    template <typename T, typename... Configs, typename Payload, typename Context>
+    void writeRequest(const T &t, FormattedSerializeStream &out, Payload &&payload, Context &&context)
+    {
+        Operations<T, Configs...>::writeRequest(t, out, std::forward<Payload>(payload), context);
     }
 
     template <typename T, typename... Configs>
-    void write(CallerHierarchyFormattedSerializeStream out, const T &t, const char *name)
-    {
-        TupleUnpacker::invoke(Operations<T, Configs...>::write, out, t, name);
-    }
-
-    template <typename T, typename... Configs>
-    StreamResult readAction(T &t, CallerHierarchyFormattedSerializeStream in, PendingRequest &request)
-    {
-        [[maybe_unused]] auto guard = GuardSelector<Configs...>::guard(in.mHierarchy);
-        return Operations<T, Configs...>::readAction(t, in, request);
-    }
-
-    template <typename T, typename... Configs>
-    StreamResult readRequest(T &t, FormattedMessageStream &inout, MessageId id, const CallerHierarchyBasePtr &hierarchy = {})
-    {
-        return Operations<T, Configs...>::readRequest(t, inout, id, hierarchy);
-    }
-
-    template <typename T, typename... Configs, typename Payload>
-    void writeAction(const T &t, const std::vector<WriteMessage> &outStreams, Payload &&payload, const CallerHierarchyBasePtr &hierarchy = {})
-    {
-        Operations<T, Configs...>::writeAction(t, outStreams, std::forward<Payload>(payload), hierarchy);
-    }
-
-    template <typename T, typename... Configs, typename Payload>
-    void writeRequest(const T &t, CallerHierarchyFormattedSerializeStream out, Payload &&payload)
-    {
-        Operations<T, Configs...>::writeRequest(t, out, std::forward<Payload>(payload));
-    }
-
-    template <typename T, typename... Configs>
-    StreamResult visitStream(CallerHierarchyFormattedSerializeStream in, const char *name, const StreamVisitor &visitor, size_t depth)
+    StreamResult visitStream(FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor, size_t depth)
     {
         return Operations<T, Configs...>::visitStream(in, name, visitor, depth);
     }
@@ -331,9 +332,9 @@ namespace Serialize {
         requires(!Concepts::Reference<F> && PrimitiveType<Primitive>)
     StreamResult scanPrimitive(FormattedSerializeStream &in, const char *name, F &&callback, size_t depth = 0)
     {
-        return visitStream<Compound>(in, name, StreamVisitorImpl { [callback { std::move(callback) }](PrimitiveHolder<Primitive>, CallerHierarchyFormattedSerializeStream stream, const char *name, std::span<std::string_view> tags, size_t depth) -> StreamResult {
+        return visitStream<Compound>(in, name, StreamVisitorImpl { [callback { std::move(callback) }](PrimitiveHolder<Primitive>, FormattedSerializeStream &stream, const char *name, std::span<std::string_view> tags, size_t depth) -> StreamResult {
             Primitive v;
-            STREAM_PROPAGATE_ERROR(stream.mStream.readPrimitive(v, name));
+            STREAM_PROPAGATE_ERROR(stream.readPrimitive(v, name));
             callback(v, name, tags, depth);
             return {};
         } },
@@ -344,9 +345,9 @@ namespace Serialize {
         requires(!Concepts::Reference<F> && PrimitiveType<Primitive>)
     StreamResult scanPrimitive(PrimitiveHolder<T> holder, FormattedSerializeStream &in, const char *name, F &&callback, size_t depth = 0)
     {
-        return visitStream(holder, in, name, StreamVisitorImpl { [callback { std::move(callback) }](PrimitiveHolder<Primitive>, CallerHierarchyFormattedSerializeStream stream, const char *name, std::span<std::string_view> tags, size_t depth) -> StreamResult {
+        return visitStream(holder, in, name, StreamVisitorImpl { [callback { std::move(callback) }](PrimitiveHolder<Primitive>, FormattedSerializeStream &stream, const char *name, std::span<std::string_view> tags, size_t depth) -> StreamResult {
             Primitive v;
-            STREAM_PROPAGATE_ERROR(stream.mStream.readPrimitive(v, name));
+            STREAM_PROPAGATE_ERROR(stream.readPrimitive(v, name));
             callback(v, name, tags, depth);
             return {};
         } },
@@ -359,7 +360,7 @@ namespace Serialize {
     {
         using BaseType = std::conditional_t<std::derived_from<TargetCompound, SyncableUnitBase>, SyncableUnitBase, DataTag>;
         StreamVisitorImpl visitor {
-            [&, callback { std::move(callback) }](PrimitiveHolder<BaseType> holder, CallerHierarchyFormattedSerializeStream stream, const char *name, std::span<std::string_view> tags, size_t depth) -> std::optional<StreamResult> {
+            [&, callback { std::move(callback) }](PrimitiveHolder<BaseType> holder, FormattedSerializeStream &stream, const char *name, std::span<std::string_view> tags, size_t depth) -> std::optional<StreamResult> {
                 if (holder.mTable == &serializeTable<TargetCompound>()) {
                     return callback(stream, name, depth);
                 } else {
@@ -372,36 +373,38 @@ namespace Serialize {
 
     template <typename T, typename... Configs>
     struct Operations {
-        static StreamResult read(CallerHierarchyFormattedSerializeStream in, T &t, const char *name)
+        template <typename Context>
+        static StreamResult read(FormattedSerializeStream &in, T &t, const char *name, Context &&context)
         {
             if constexpr (std::is_const_v<T>) {
                 // Don't do anything here
                 return {};
             } else if constexpr (PrimitiveType<T>) {
-                return in.mStream.readPrimitive(t, name);
+                return in.readPrimitive(t, name);
                 // mLog.log(t);
             } else if constexpr (std::derived_from<T, SyncableUnitBase>) {
                 return t.readState(in, name);
             } else {
-                return SerializableDataPtr { &t }.readState(in, name);
+                return SerializableDataPtr { &t }.readState(in, name, false, context);
             }
         }
 
-        static void write(CallerHierarchyFormattedSerializeStream out, const T &t, const char *name)
+        template <typename Context>
+        static void write(FormattedSerializeStream &out, const T &t, const char *name, Context &&context)
         {
             if constexpr (std::is_const_v<T>) {
                 // Don't do anything here
             } else if constexpr (PrimitiveType<T>) {
-                out.mStream.writePrimitive(t, name);
+                out.writePrimitive(t, name);
                 // mLog.log(t);
             } else if constexpr (std::derived_from<T, SyncableUnitBase>) {
                 t.writeState(out, name);
             } else {
-                SerializableDataConstPtr { &t }.writeState(out, name);
+                SerializableDataConstPtr { &t }.writeState(out, name, false, context);
             }
         }
 
-        static StreamResult visitStream(CallerHierarchyFormattedSerializeStream in, const char *name, const StreamVisitor &visitor, size_t depth)
+        static StreamResult visitStream(FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor, size_t depth)
         {
             auto tags = TagsSelector<Configs...>::getTags();
             if constexpr (std::is_const_v<T>) {
@@ -423,18 +426,18 @@ namespace Serialize {
 
     template <typename T, typename... Configs>
     struct Operations<std::unique_ptr<T>, Configs...> {
-
-        static StreamResult read(CallerHierarchyFormattedSerializeStream in, const std::unique_ptr<T> &p, const char *name)
+        template <typename Context>
+        static StreamResult read(FormattedSerializeStream &in, const std::unique_ptr<T> &p, const char *name, Context &&context)
         {
-            return Operations<T, Configs...>::read(in, *p, name);
+            return Operations<T, Configs...>::read(in, *p, name, context);
+        }
+        template <typename Context>
+        static void write(FormattedSerializeStream &out, const std::unique_ptr<T> &p, const char *name, Context &&context)
+        {
+            Operations<T, Configs...>::write(out, *p, name, context);
         }
 
-        static void write(CallerHierarchyFormattedSerializeStream &out, const std::unique_ptr<T> &p, const char *name)
-        {
-            Operations<T, Configs...>::write(out, *p, name);
-        }
-
-        static StreamResult visitStream(CallerHierarchyFormattedSerializeStream in, const char *name, const StreamVisitor &visitor, size_t depth)
+        static StreamResult visitStream(FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor, size_t depth)
         {
             return Operations<T, Configs...>::visitStream(in, name, visitor, depth);
         }
@@ -447,25 +450,27 @@ namespace Serialize {
     template <typename... Ty, typename... Configs>
     struct Operations<std::tuple<Ty...>, Configs...> {
 
-        static StreamResult read(CallerHierarchyFormattedSerializeStream in, std::tuple<Ty...> &t, const char *name)
+        template <typename Context>
+        static StreamResult read(FormattedSerializeStream &in, std::tuple<Ty...> &t, const char *name, Context &&context)
         {
-            STREAM_PROPAGATE_ERROR(in.mStream.beginContainerRead(name, false));
+            STREAM_PROPAGATE_ERROR(in.beginContainerRead(name, false));
             STREAM_PROPAGATE_ERROR(TupleUnpacker::accumulate(
                 t, [&](auto &e, StreamResult r) {
                     STREAM_PROPAGATE_ERROR(std::move(r));
-                    return Serialize::read(in, e, nullptr);
+                    return Serialize::read(in, e, nullptr, context);
                 },
                 StreamResult {}));
-            return in.mStream.endContainerRead(name);
+            return in.endContainerRead(name);
         }
 
-        static void write(CallerHierarchyFormattedSerializeStream out, const std::tuple<Ty...> &t, const char *name)
+        template <typename Context>
+        static void write(FormattedSerializeStream &out, const std::tuple<Ty...> &t, const char *name, Context &&context)
         {
-            out.mStream.beginContainerWrite(name);
+            out.beginContainerWrite(name);
             TupleUnpacker::forEach(t, [&](const auto &e) {
-                Serialize::write(out, e, "Element");
+                Serialize::write(out, e, "Element", context);
             });
-            out.mStream.endContainerWrite(name);
+            out.endContainerWrite(name);
         }
 
         struct VisitHelper {
@@ -493,26 +498,26 @@ namespace Serialize {
 
     template <typename... Ty, typename... Configs>
     struct Operations<std::tuple<Ty &...>, Configs...> {
-
-        static StreamResult read(CallerHierarchyFormattedSerializeStream in, std::tuple<Ty &...> t, const char *name)
+        template <typename Context>
+        static StreamResult read(FormattedSerializeStream &in, std::tuple<Ty &...> t, const char *name, Context &&context)
         {
-            STREAM_PROPAGATE_ERROR(in.mStream.beginContainerRead(name, false));
+            STREAM_PROPAGATE_ERROR(in.beginContainerRead(name, false));
             STREAM_PROPAGATE_ERROR(TupleUnpacker::accumulate(
                 t, [&](auto &e, StreamResult r) {
                     STREAM_PROPAGATE_ERROR(std::move(r));
-                    return Serialize::read(in, e, nullptr);
+                    return Serialize::read(in, e, nullptr, context);
                 },
                 StreamResult {}));
-            return in.mStream.endContainerRead(name);
+            return in.endContainerRead(name);
         }
-
-        static void write(CallerHierarchyFormattedSerializeStream out, const std::tuple<const Ty &...> t, const char *name)
+        template <typename Context>
+        static void write(FormattedSerializeStream &out, const std::tuple<const Ty &...> t, const char *name, Context &&context)
         {
-            out.mStream.beginContainerWrite(name);
+            out.beginContainerWrite(name);
             TupleUnpacker::forEach(t, [&](const auto &e) {
-                Serialize::write(out, e, "Element");
+                Serialize::write(out, e, "Element", context);
             });
-            out.mStream.endContainerWrite(name);
+            out.endContainerWrite(name);
         }
 
         struct VisitHelper {
@@ -541,59 +546,61 @@ namespace Serialize {
     template <typename U, typename V, typename... Configs>
     struct Operations<std::pair<U, V>, Configs...> {
 
-        static StreamResult read(CallerHierarchyFormattedSerializeStream in, std::pair<U, V> &t, const char *name)
+        template <typename Context>
+        static StreamResult read(FormattedSerializeStream &in, std::pair<U, V> &t, const char *name, Context &&context)
         {
-            STREAM_PROPAGATE_ERROR(in.mStream.beginCompoundRead(name));
-            STREAM_PROPAGATE_ERROR(Serialize::read<U>(in, t.first, nullptr));
-            STREAM_PROPAGATE_ERROR(Serialize::read<V>(in, t.second, nullptr));
-            return in.mStream.endCompoundRead(name);
+            STREAM_PROPAGATE_ERROR(in.beginCompoundRead(name));
+            STREAM_PROPAGATE_ERROR(Serialize::read<U>(in, t.first, nullptr, context));
+            STREAM_PROPAGATE_ERROR(Serialize::read<V>(in, t.second, nullptr, context));
+            return in.endCompoundRead(name);
         }
 
-        static void write(CallerHierarchyFormattedSerializeStream out, const std::pair<U, V> &t, const char *name)
+        template <typename Context>
+        static void write(FormattedSerializeStream &out, const std::pair<U, V> &t, const char *name, Context &&context)
         {
-            out.mStream.beginCompoundWrite(name);
-            Serialize::write<U>(out, t.first, "First");
-            Serialize::write<V>(out, t.second, "Second");
-            out.mStream.endCompoundWrite(name);
+            out.beginCompoundWrite(name);
+            Serialize::write<U>(out, t.first, "First", context);
+            Serialize::write<V>(out, t.second, "Second", context);
+            out.endCompoundWrite(name);
         }
 
-        static StreamResult visitStream(CallerHierarchyFormattedSerializeStream in, const char *name, const StreamVisitor &visitor, size_t depth)
+        static StreamResult visitStream(FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor, size_t depth)
         {
-            STREAM_PROPAGATE_ERROR(in.mStream.beginCompoundRead(name));
+            STREAM_PROPAGATE_ERROR(in.beginCompoundRead(name));
             STREAM_PROPAGATE_ERROR(Serialize::visitStream<U>(in, nullptr, visitor, depth + 1));
             STREAM_PROPAGATE_ERROR(Serialize::visitStream<V>(in, nullptr, visitor, depth + 1));
-            return in.mStream.endCompoundRead(name);
+            return in.endCompoundRead(name);
         }
     };
 
     template <typename T, typename... Configs>
     struct Operations<std::optional<T>, Configs...> {
-
-        static StreamResult read(CallerHierarchyFormattedSerializeStream in, std::optional<T> &p, const char *name)
+        template <typename Context>
+        static StreamResult read(FormattedSerializeStream &in, std::optional<T> &p, const char *name, Context &&context)
         {
-            STREAM_PROPAGATE_ERROR(in.mStream.beginExtendedRead(name, 1));
+            STREAM_PROPAGATE_ERROR(in.beginExtendedRead(name, 1));
             bool hasValue;
             STREAM_PROPAGATE_ERROR(Serialize::read(in, hasValue, "value"));
             if (!hasValue) {
                 p.reset();
-                STREAM_PROPAGATE_ERROR(in.mStream.beginCompoundRead(name));
-                STREAM_PROPAGATE_ERROR(in.mStream.endCompoundRead(name));
+                STREAM_PROPAGATE_ERROR(in.beginCompoundRead(name));
+                STREAM_PROPAGATE_ERROR(in.endCompoundRead(name));
                 return {};
             } else {
                 p.emplace();
-                return Serialize::read(in, *p, name);
+                return Serialize::read(in, *p, name, context);
             }
         }
-
-        static void write(CallerHierarchyFormattedSerializeStream out, const std::optional<T> &p, const char *name)
+        template <typename Context>
+        static void write(FormattedSerializeStream &out, const std::optional<T> &p, const char *name, Context &&context)
         {
-            out.mStream.beginExtendedWrite(name, 1);
+            out.beginExtendedWrite(name, 1);
             Serialize::write(out, p.has_value(), "value");
             if (p) {
-                Serialize::write(out, *p, name);
+                Serialize::write(out, *p, name, context);
             } else {
-                out.mStream.beginCompoundWrite(name);
-                out.mStream.endCompoundWrite(name);
+                out.beginCompoundWrite(name);
+                out.endCompoundWrite(name);
             }
         }
     };

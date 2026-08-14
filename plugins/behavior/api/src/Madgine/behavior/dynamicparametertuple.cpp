@@ -81,25 +81,25 @@ namespace Behavior {
         return { this, &mMetaTable };
     }
 
-    Serialize::StreamResult DynamicParameterTuple::read(Serialize::CallerHierarchyFormattedSerializeStream in)
+    Serialize::StreamResult DynamicParameterTuple::read(Serialize::FormattedSerializeStream &in, Serialize::ContextPtr context)
     {
         for (size_t i = 0; i < mValues.size(); ++i) {
-            STREAM_PROPAGATE_ERROR(Serialize::read(in, mValues[i], mMetaTable.mMembers[i].mName));
+            STREAM_PROPAGATE_ERROR(Serialize::read(in, mValues[i], mMetaTable.mMembers[i].mName, context));
         }
         return {};
     }
 
-    void DynamicParameterTuple::write(Serialize::CallerHierarchyFormattedSerializeStream out)
+    void DynamicParameterTuple::write(Serialize::FormattedSerializeStream &out, Serialize::ContextPtr context)
     {
         for (size_t i = 0; i < mValues.size(); ++i) {
-            Serialize::write(out, mValues[i], mMetaTable.mMembers[i].mName);
+            Serialize::write(out, mValues[i], mMetaTable.mMembers[i].mName, context);
         }
     }
 
-    Serialize::StreamResult DynamicParameterTuple::applyMap(Serialize::CallerHierarchyFormattedSerializeStream in, bool success)
+    Serialize::StreamResult DynamicParameterTuple::applyMap(Serialize::FormattedSerializeStream &in, bool success, Serialize::ContextPtr context)
     {
         for (size_t i = 0; i < mValues.size(); ++i) {
-            STREAM_PROPAGATE_ERROR(Serialize::apply_map(mValues[i], in, success));
+            STREAM_PROPAGATE_ERROR(Serialize::apply_map(mValues[i], in, success, context));
         }
         return {};
     }

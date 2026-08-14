@@ -49,7 +49,6 @@ namespace Serialize {
         }
 
         StreamResultBuilder(StreamState type, FormattedSerializeStream &stream, const char *file, size_t line);
-        StreamResultBuilder(StreamState type, CallerHierarchyFormattedSerializeStream stream, const char *file, size_t line);
 
         StreamResultBuilder(StreamState type, const char *file, size_t line)
             : mType(type)

@@ -24,30 +24,30 @@ namespace Behavior {
         return mTuple->customScopePtr();
     }
 
-    Serialize::StreamResult tag_invoke(const Serialize::apply_map_t &, ParameterTuple &tuple, Serialize::CallerHierarchyFormattedSerializeStream in, bool success)
+    Serialize::StreamResult tag_invoke(const Serialize::apply_map_t &, ParameterTuple &tuple, Serialize::FormattedSerializeStream &in, bool success, Serialize::ContextPtr context)
     {
-        return tuple.mTuple->applyMap(in, success);
+        return tuple.mTuple->applyMap(in, success, context);
     }
 
 }
 
 namespace Serialize {
 
-    StreamResult Operations<Behavior::ParameterTuple>::read(Serialize::CallerHierarchyFormattedSerializeStream in, Behavior::ParameterTuple &tuple, const char *name)
+    StreamResult Operations<Behavior::ParameterTuple>::read(Serialize::FormattedSerializeStream &in, Behavior::ParameterTuple &tuple, const char *name, ContextPtr context)
     {
-        STREAM_PROPAGATE_ERROR(in.mStream.beginCompoundRead(name));
-        STREAM_PROPAGATE_ERROR(tuple.mTuple->read(in));
-        return in.mStream.endCompoundRead(name);
+        STREAM_PROPAGATE_ERROR(in.beginCompoundRead(name));
+        STREAM_PROPAGATE_ERROR(tuple.mTuple->read(in, context));
+        return in.endCompoundRead(name);
     }
 
-    void Operations<Behavior::ParameterTuple>::write(Serialize::CallerHierarchyFormattedSerializeStream out, const Behavior::ParameterTuple &tuple, const char *name)
+    void Operations<Behavior::ParameterTuple>::write(Serialize::FormattedSerializeStream &out, const Behavior::ParameterTuple &tuple, const char *name, ContextPtr context)
     {
-        out.mStream.beginCompoundWrite(name);
-        tuple.mTuple->write(out);
-        out.mStream.endCompoundWrite(name);
+        out.beginCompoundWrite(name);
+        tuple.mTuple->write(out, context);
+        out.endCompoundWrite(name);
     }
 
-    StreamResult Operations<Behavior::ParameterTuple>::visitStream(CallerHierarchyFormattedSerializeStream in, const char *name, const StreamVisitor &visitor, size_t depth)
+    StreamResult Operations<Behavior::ParameterTuple>::visitStream(FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor, size_t depth)
     {
         throw 0;
         return {};

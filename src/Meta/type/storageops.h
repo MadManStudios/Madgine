@@ -22,9 +22,9 @@ namespace Type {
         typedef Reflect::Result(FromValue)(BaseStorage &, const Reflect::Value &, size_t);
         typedef void(Destructor)(BaseStorage *, size_t);
 
-        typedef Serialize::StreamResult(Read)(const StorageOps &, Serialize::CallerHierarchyFormattedSerializeStream, BaseStorage &, const char *, size_t);
-        typedef void(Write)(Serialize::CallerHierarchyFormattedSerializeStream, const BaseStorage &, const char *, size_t);
-        typedef Serialize::StreamResult(ApplyMap)(BaseStorage &, Serialize::CallerHierarchyFormattedSerializeStream, bool, size_t);
+        typedef Serialize::StreamResult(Read)(const StorageOps &, Serialize::FormattedSerializeStream &, BaseStorage &, const char *, size_t, Serialize::ContextPtr);
+        typedef void(Write)(Serialize::FormattedSerializeStream &, const BaseStorage &, const char *, size_t, Serialize::ContextPtr context);
+        typedef Serialize::StreamResult(ApplyMap)(BaseStorage &, Serialize::FormattedSerializeStream &, bool, size_t, Serialize::ContextPtr context);
 
         template <typename T>
         constexpr MoveAssign *moveAssign()
@@ -90,32 +90,32 @@ namespace Type {
                     delete &static_cast<AllocationStorage *>(storage)->mAllocation;
                 }
             })
-            , mRead([](const StorageOps &ops, Serialize::CallerHierarchyFormattedSerializeStream in, BaseStorage &storage, const char *name, size_t inlineSize) {
+            , mRead([](const StorageOps &ops, Serialize::FormattedSerializeStream &in, BaseStorage &storage, const char *name, size_t inlineSize, Serialize::ContextPtr context) {
                 if (inlineSize >= sizeof(T)) {
-                    return Serialize::read(in, static_cast<Storage<T> &>(storage).mObject, name);
+                    return Serialize::read(in, static_cast<Storage<T> &>(storage).mObject, name, context);
                 } else {
-                    return static_cast<AllocationStorage &>(storage).read(in, name);
+                    return static_cast<AllocationStorage &>(storage).read(in, name, context);
                 }
             })
-            , mWrite([](Serialize::CallerHierarchyFormattedSerializeStream out, const BaseStorage &storage, const char *name, size_t inlineSize) {
+            , mWrite([](Serialize::FormattedSerializeStream &out, const BaseStorage &storage, const char *name, size_t inlineSize, Serialize::ContextPtr context) {
                 if (inlineSize >= sizeof(T)) {
-                    Serialize::write(out, static_cast<const Storage<T> &>(storage).mObject, name);
+                    Serialize::write(out, static_cast<const Storage<T> &>(storage).mObject, name, context);
                 } else {
-                    static_cast<const AllocationStorage &>(storage).write(out, name);
+                    static_cast<const AllocationStorage &>(storage).write(out, name, context);
                 }
             })
-            , mApplyMap([](BaseStorage &storage, Serialize::CallerHierarchyFormattedSerializeStream in, bool success, size_t inlineSize) {
+            , mApplyMap([](BaseStorage &storage, Serialize::FormattedSerializeStream &in, bool success, size_t inlineSize, Serialize::ContextPtr context) {
                 if (inlineSize >= sizeof(T)) {
-                    return Serialize::apply_map(static_cast<Storage<T> &>(storage).mObject, in, success);
+                    return Serialize::apply_map(static_cast<Storage<T> &>(storage).mObject, in, success, context);
                 } else {
-                    return static_cast<AllocationStorage &>(storage).applyMap(in, success);
+                    return static_cast<AllocationStorage &>(storage).applyMap(in, success, context);
                 }
             })
         {
         }
 
         Reflect::Result construct(BaseStorage &storage, const Reflect::ArgumentList &args, size_t inlineSize) const;
-        Serialize::StreamResult read(Serialize::CallerHierarchyFormattedSerializeStream, BaseStorage &, const char *, size_t) const;
+        Serialize::StreamResult read(Serialize::FormattedSerializeStream &, BaseStorage &, const char *, size_t, Serialize::ContextPtr) const;
 
         const StorageOps **mSelf;
         const char *mTypeName;

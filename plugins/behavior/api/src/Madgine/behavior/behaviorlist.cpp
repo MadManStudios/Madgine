@@ -7,18 +7,18 @@
 #include "Meta/reflect/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
-Engine::Serialize::StreamResult readBehavior(Engine::Serialize::CallerHierarchyFormattedSerializeStream in, Engine::Behavior::BehaviorHandle &handle)
+Engine::Serialize::StreamResult readBehavior(Engine::Serialize::FormattedSerializeStream &in, Engine::Behavior::BehaviorHandle &handle)
 {
     std::string tag;
     STREAM_PROPAGATE_ERROR(Engine::Serialize::beginExtendedTypedRead(in, tag));
 
     if (!handle.fromString(tag)) {
-        return STREAM_INTEGRITY_ERROR(in.mStream) << "Unknown Behavior descriptor: " << tag;
+        return STREAM_INTEGRITY_ERROR(in) << "Unknown Behavior descriptor: " << tag;
     }
     return {};
 }
 
-const char *writeBehavior(Engine::Serialize::CallerHierarchyFormattedSerializeStream out, const Engine::Behavior::BehaviorList::Entry &entry)
+const char *writeBehavior(Engine::Serialize::FormattedSerializeStream &out, const Engine::Behavior::BehaviorList::Entry &entry)
 {
     static std::string dummy;
     dummy = entry.mHandle.toString();

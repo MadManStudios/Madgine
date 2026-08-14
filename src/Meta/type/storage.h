@@ -1,5 +1,7 @@
 #pragma once
 
+#include "../serialize/context.h"
+
 namespace Engine {
 namespace Type {
 
@@ -40,11 +42,11 @@ namespace Type {
 
     private:
         friend struct Serialize::Operations<InlineStorage>;
+        
+        META_EXPORT friend Serialize::StreamResult tag_invoke(const Serialize::apply_map_t &, InlineStorage &storage, Serialize::FormattedSerializeStream &in, bool success, Serialize::ContextPtr context);
 
-        META_EXPORT friend Serialize::StreamResult tag_invoke(const Serialize::apply_map_t &, InlineStorage &storage, Serialize::CallerHierarchyFormattedSerializeStream in, bool success);
-
-        template <typename... Configs>
-        friend void tag_invoke(Serialize::set_active_t<Configs...>, InlineStorage &storage, bool active, bool existenceChanged, const CallerHierarchyBasePtr &)
+        template <typename... Configs, typename Context>
+        friend void tag_invoke(Serialize::set_active_t<Configs...>, InlineStorage &storage, bool active, bool existenceChanged, Context &&)
         {
         }
     };
@@ -56,9 +58,9 @@ namespace Type {
         void toValue(Reflect::Value &retVal);
         Reflect::Result fromValue(const Reflect::Value &val);
 
-        Serialize::StreamResult read(Serialize::CallerHierarchyFormattedSerializeStream in, const char *name);
-        void write(Serialize::CallerHierarchyFormattedSerializeStream out, const char *name) const;
-        Serialize::StreamResult applyMap(Serialize::CallerHierarchyFormattedSerializeStream in, bool success);
+        Serialize::StreamResult read(Serialize::FormattedSerializeStream &in, const char *name, Serialize::ContextPtr context);
+        void write(Serialize::FormattedSerializeStream &out, const char *name, Serialize::ContextPtr context) const;
+        Serialize::StreamResult applyMap(Serialize::FormattedSerializeStream &in, bool success, Serialize::ContextPtr context);
 
         AllocationPtr mAllocation;
     };
@@ -69,10 +71,10 @@ namespace Serialize {
 
     template <>
     struct META_EXPORT Operations<Type::InlineStorage> {
-        static StreamResult read(Serialize::CallerHierarchyFormattedSerializeStream in, Type::InlineStorage &storage, const char *name);
-        static void write(Serialize::CallerHierarchyFormattedSerializeStream out, const Type::InlineStorage &storage, const char *name);
+        static StreamResult read(Serialize::FormattedSerializeStream &in, Type::InlineStorage &storage, const char *name, ContextPtr context);
+        static void write(Serialize::FormattedSerializeStream &out, const Type::InlineStorage &storage, const char *name, ContextPtr context);
 
-        static StreamResult visitStream(CallerHierarchyFormattedSerializeStream in, const char *name, const StreamVisitor &visitor, size_t depth);
+        static StreamResult visitStream(FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor, size_t depth);
     };
 
 }

@@ -19,7 +19,6 @@ namespace Serialize {
         SerializeStream &stream();
 
         operator FormattedMessageStream &() const;
-        operator CallerHierarchyFormattedSerializeStream() const;
 
         FormattedMessageStream *mStream;
         ParticipantId mRequester = 0;

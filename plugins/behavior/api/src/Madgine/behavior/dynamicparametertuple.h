@@ -24,9 +24,9 @@ namespace Behavior {
 
         Reflect::ScopePtr customScopePtr() override;
 
-        Serialize::StreamResult read(Serialize::CallerHierarchyFormattedSerializeStream in) override;
-        void write(Serialize::CallerHierarchyFormattedSerializeStream out) override;
-        Serialize::StreamResult applyMap(Serialize::CallerHierarchyFormattedSerializeStream in, bool success) override;
+        Serialize::StreamResult read(Serialize::FormattedSerializeStream &in, Serialize::ContextPtr context) override;
+        void write(Serialize::FormattedSerializeStream &out, Serialize::ContextPtr context) override;
+        Serialize::StreamResult applyMap(Serialize::FormattedSerializeStream &in, bool success, Serialize::ContextPtr context) override;
 
         Reflect::ArgumentList toArgumentList() override;
 

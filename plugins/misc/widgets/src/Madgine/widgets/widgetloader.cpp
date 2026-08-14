@@ -55,7 +55,7 @@ namespace Widgets {
 
         Serialize::StreamVisitorImpl visitor {
             [&](Serialize::PrimitiveHolder<Serialize::DataTag> holder, Serialize::FormattedSerializeStream &in, const char *name, std::span<std::string_view> tags, size_t depth) -> std::optional<Serialize::StreamResult> {
-                if (depth != 2) {
+                if (depth != 2 || holder.mTable == &serializeTable<Engine::Widgets::Condition>()) { //TODO make cleaner
                     return {};
                 }
                 WidgetData &data = widgets.emplace_back();

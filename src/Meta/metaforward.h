@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Generic/callerhierarchy.h"
 #include "Generic/enum.h"
+#include "Generic/tag_invocable_view.h"
 
 namespace Engine {
 
@@ -65,6 +65,10 @@ namespace Reflect {
     using SequenceRange = Containers::VirtualRange<VirtualRangeHelper, const Value &>;
 
     using Duration64 = std::chrono::duration<uint64_t, std::nano>;
+
+    struct get_reflect_contextual_t;
+
+    using ContextPtr = tag_invocable_view<get_reflect_contextual_t, void *(const MetaTable *)>;
 }
 
 namespace Serialize {
@@ -182,32 +186,17 @@ namespace Serialize {
     template <typename...>
     struct set_active_t;
 
-    constexpr CallerHierarchyBasePtr sNoCallerHierarchy;
-
-    struct CallerHierarchyFormattedSerializeStream {
-
-        CallerHierarchyFormattedSerializeStream(FormattedSerializeStream &stream)
-            : mStream(stream)
-            , mHierarchy(sNoCallerHierarchy)
-        {
-        }
-        CallerHierarchyFormattedSerializeStream(FormattedSerializeStream &stream, const CallerHierarchyBasePtr &hierarchy)
-            : mStream(stream)
-            , mHierarchy(hierarchy)
-        {
-        }
-
-        FormattedSerializeStream &mStream;
-        const CallerHierarchyBasePtr &mHierarchy;
-    };
-
     template <typename T, typename... Configs>
-    StreamResult visitStream(CallerHierarchyFormattedSerializeStream in, const char *name, const StreamVisitor &visitor, size_t depth = 0);
+    StreamResult visitStream(FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor, size_t depth = 0);
 
-    template <typename T, typename... Configs>
-    void write(CallerHierarchyFormattedSerializeStream out, const T &t, const char *name);
-    template <typename T, typename... Configs>
-    StreamResult read(CallerHierarchyFormattedSerializeStream in, T &t, const char *name);
+    struct get_serialize_contextual_t;
+
+    using ContextPtr = tag_invocable_view<get_serialize_contextual_t, void *(const SerializeTable *)>;
+
+    template <typename T, typename... Configs, typename Context = ContextPtr>
+    void write(FormattedSerializeStream &out, const T &t, const char *name, Context &&context = {});
+    template <typename T, typename... Configs, typename Context = ContextPtr>
+    StreamResult read(FormattedSerializeStream &in, T &t, const char *name, Context &&context = {});
 }
 
 namespace Math {

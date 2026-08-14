@@ -15,33 +15,33 @@ namespace Engine {
 namespace Scene {
     namespace Entity {
 
-        void entityComponentHelperWrite(Serialize::CallerHierarchyFormattedSerializeStream out, const EntityComponentHandle &index, const char *name)
+        void entityComponentHelperWrite(Serialize::FormattedSerializeStream &out, const EntityComponentHandle &index, const char *name, Serialize::ContextPtr context)
         {
-            const SceneContainer *container = out.mHierarchy;
+            const SceneContainer *container = context_get<const SceneContainer>(context);
             container->sceneMgr().entityComponentList(index.mType).writeState(index.mComponent, out, name);
         }
 
-        Serialize::StreamResult entityComponentHelperRead(Serialize::CallerHierarchyFormattedSerializeStream in, const EntityComponentHandle &index, const char *name)
+        Serialize::StreamResult entityComponentHelperRead(Serialize::FormattedSerializeStream &in, const EntityComponentHandle &index, const char *name, Serialize::ContextPtr context)
         {
-            SceneContainer *container = in.mHierarchy;
+            SceneContainer *container = context_get<SceneContainer>(context);
             return container->sceneMgr().entityComponentList(index.mType).readState(index.mComponent, in, name);
         }
 
-        Serialize::StreamResult entityComponentHelperApplyMap(Serialize::CallerHierarchyFormattedSerializeStream in, EntityComponentHandle &index, bool success)
+        Serialize::StreamResult entityComponentHelperApplyMap(Serialize::FormattedSerializeStream &in, EntityComponentHandle &index, bool success, Serialize::ContextPtr context)
         {
-            SceneContainer *container = in.mHierarchy;
+            SceneContainer *container = context_get<SceneContainer>(context);
             return container->sceneMgr().entityComponentList(index.mType).applyMap(index.mComponent, in, success);
         }
 
-        void entityComponentHelperSetSynced(EntityComponentHandle &index, bool synced, CallerHierarchyBasePtr hierarchy)
+        void entityComponentHelperSetSynced(EntityComponentHandle &index, bool synced, Serialize::ContextPtr context)
         {
-            Entity *entity = hierarchy;
+            Entity *entity = context_get<Entity>(context);
             entity->sceneMgr().entityComponentList(index.mType).setSynced(index.mComponent, synced);
         }
 
-        void entityComponentHelperSetActive(EntityComponentHandle &index, bool active, bool existenceChanged, CallerHierarchyBasePtr hierarchy)
+        void entityComponentHelperSetActive(EntityComponentHandle &index, bool active, bool existenceChanged, Serialize::ContextPtr context)
         {
-            Entity *entity = hierarchy;
+            Entity *entity = context_get<Entity>(context);
             entity->sceneMgr().entityComponentList(index.mType).setActive(index.mComponent, active, existenceChanged);
         }
 

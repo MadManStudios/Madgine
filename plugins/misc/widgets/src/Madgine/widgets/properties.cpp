@@ -197,49 +197,49 @@ namespace Serialize {
         "mask"
     };
 
-    static StreamResult readPropertyDescriptor(Serialize::CallerHierarchyFormattedSerializeStream &in, Widgets::PropertyDescriptor &desc, std::vector<float> &values)
+    static StreamResult readPropertyDescriptor(Serialize::FormattedSerializeStream &in, Widgets::PropertyDescriptor &desc, std::vector<float> &values)
     {
         STREAM_PROPAGATE_ERROR(Serialize::beginExtendedTypedRead(in, desc.mType, sTags));
         const char *annotator1Name = sAnnotator1Names[desc.mType];
         if (annotator1Name) {
-            STREAM_PROPAGATE_ERROR(in.mStream.beginExtendedRead(nullptr, 1));
+            STREAM_PROPAGATE_ERROR(in.beginExtendedRead(nullptr, 1));
             STREAM_PROPAGATE_ERROR(Serialize::read(in, desc.mAnnotator1, annotator1Name));
         }
         if (desc.mType != Widgets::PropertyType::CONDITIONAL) {
-            STREAM_PROPAGATE_ERROR(in.mStream.readPrimitive(values.emplace_back(), nullptr));
+            STREAM_PROPAGATE_ERROR(in.readPrimitive(values.emplace_back(), nullptr));
         }
         return {};
     }
 
-    StreamResult Operations<Widgets::PropertyList>::read(Serialize::CallerHierarchyFormattedSerializeStream &in, Widgets::PropertyList &list, const char *name)
+    StreamResult Operations<Widgets::PropertyList>::read(Serialize::FormattedSerializeStream &in, Widgets::PropertyList &list, const char *name, ContextPtr context)
     {
-        STREAM_PROPAGATE_ERROR(in.mStream.beginContainerRead(name, true));
+        STREAM_PROPAGATE_ERROR(in.beginContainerRead(name, true));
 
         list.clear();
 
-        while (in.mStream.hasContainerItem()) {
+        while (in.hasContainerItem()) {
             Widgets::PropertyDescriptor desc;
             std::vector<float> values;
             STREAM_PROPAGATE_ERROR(readPropertyDescriptor(in, desc, values));
             if (desc.mType == Widgets::PropertyType::CONDITIONAL) {
                 uint16_t mask = desc.mAnnotator1;
-                STREAM_PROPAGATE_ERROR(in.mStream.beginContainerRead("Conditional", true));
-                while (in.mStream.hasContainerItem()) {
+                STREAM_PROPAGATE_ERROR(in.beginContainerRead("Conditional", true));
+                while (in.hasContainerItem()) {
                     STREAM_PROPAGATE_ERROR(readPropertyDescriptor(in, desc, values));
                     list.setConditional(mask, desc, std::move(values));
                 }
-                STREAM_PROPAGATE_ERROR(in.mStream.endContainerRead("Conditional"));
+                STREAM_PROPAGATE_ERROR(in.endContainerRead("Conditional"));
             } else {
                 list.set(desc, std::move(values));
             }
         }
 
-        return in.mStream.endContainerRead(name);
+        return in.endContainerRead(name);
     }
 
-    void Operations<Widgets::PropertyList>::write(Serialize::CallerHierarchyFormattedSerializeStream &out, Widgets::PropertyRange list, const char *name)
+    void Operations<Widgets::PropertyList>::write(Serialize::FormattedSerializeStream &out, Widgets::PropertyRange list, const char *name, ContextPtr context)
     {
-        out.mStream.beginContainerWrite(name, list.size());
+        out.beginContainerWrite(name, list.size());
         for (auto it = list.begin(); it != list.end(); ++it) {
             const Widgets::PropertyDescriptor &desc = *it;
 
@@ -247,37 +247,37 @@ namespace Serialize {
 
             const char *annotator1Name = sAnnotator1Names[desc.mType];
             if (annotator1Name) {
-                out.mStream.beginExtendedWrite(tag, 1);
+                out.beginExtendedWrite(tag, 1);
                 Serialize::write(out, desc.mAnnotator1, annotator1Name);
             }
 
             if (desc.mType == Widgets::PropertyType::CONDITIONAL) {
-                write(out, it.conditionalRange(), tag);
+                write(out, it.conditionalRange(), tag, context);
             } else {
-                out.mStream.writePrimitive(it.value(0), tag);
+                out.writePrimitive(it.value(0), tag);
             }
         }
-        out.mStream.endContainerWrite(name);
+        out.endContainerWrite(name);
     }
 
-    StreamResult Operations<Widgets::PropertyList>::visitStream(CallerHierarchyFormattedSerializeStream &in, const char *name, const StreamVisitor &visitor, size_t depth)
+    StreamResult Operations<Widgets::PropertyList>::visitStream(FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor, size_t depth)
     {
-        STREAM_PROPAGATE_ERROR(in.mStream.beginContainerRead(name, true));
+        STREAM_PROPAGATE_ERROR(in.beginContainerRead(name, true));
 
-        while (in.mStream.hasContainerItem()) {
+        while (in.hasContainerItem()) {
             Widgets::PropertyDescriptor desc;
             std::vector<float> values;
             STREAM_PROPAGATE_ERROR(readPropertyDescriptor(in, desc, values));
             if (desc.mType == Widgets::PropertyType::CONDITIONAL) {
-                STREAM_PROPAGATE_ERROR(in.mStream.beginContainerRead("Conditional", true));
-                while (in.mStream.hasContainerItem()) {
+                STREAM_PROPAGATE_ERROR(in.beginContainerRead("Conditional", true));
+                while (in.hasContainerItem()) {
                     STREAM_PROPAGATE_ERROR(readPropertyDescriptor(in, desc, values));
                 }
-                STREAM_PROPAGATE_ERROR(in.mStream.endContainerRead("Conditional"));
+                STREAM_PROPAGATE_ERROR(in.endContainerRead("Conditional"));
             }
         }
 
-        return in.mStream.endContainerRead(name);
+        return in.endContainerRead(name);
     }
 
 }

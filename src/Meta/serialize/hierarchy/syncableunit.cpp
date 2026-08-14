@@ -51,40 +51,40 @@ namespace Serialize {
         return *this;
     }
 
-    void SyncableUnitBase::writeState(CallerHierarchyFormattedSerializeStream out, const char *name) const
+    void SyncableUnitBase::writeState(FormattedSerializeStream &out, const char *name) const
     {
         writeId(out, name);
         customUnitPtr().writeState(out, name, true);
     }
 
-    StreamResult SyncableUnitBase::readState(CallerHierarchyFormattedSerializeStream in, const char *name)
+    StreamResult SyncableUnitBase::readState(FormattedSerializeStream &in, const char *name)
     {
         STREAM_PROPAGATE_ERROR(readId(in, name));
         return customUnitPtr().readState(in, name, true);
     }
 
-    void SyncableUnitBase::setActive(bool active, bool existenceChanged)
+    void SyncableUnitBase::setActive(bool active, bool existenceChanged, ContextPtr context)
     {
-        mType->setActive(this, active, existenceChanged);
+        mType->setActive(this, active, existenceChanged, context);
     }
 
-    StreamResult SyncableUnitBase::visitStream(const SerializeTable *table, CallerHierarchyFormattedSerializeStream in, const char *name, const StreamVisitor &visitor, size_t depth)
+    StreamResult SyncableUnitBase::visitStream(const SerializeTable *table, FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor, size_t depth)
     {
-        assert(!in.mStream.isMaster(AccessMode::READ));
-        STREAM_PROPAGATE_ERROR(in.mStream.beginExtendedRead(name, 1));
+        assert(!in.isMaster(AccessMode::READ));
+        STREAM_PROPAGATE_ERROR(in.beginExtendedRead(name, 1));
         UnitId id;
         STREAM_PROPAGATE_ERROR(read(in, id, "syncId"));
         return SerializableDataPtr::visitStream(table, in, name, visitor, depth);
     }
 
-    StreamResult SyncableUnitBase::readAction(CallerHierarchyFormattedSerializeStream in, PendingRequest &request)
+    StreamResult SyncableUnitBase::readAction(FormattedSerializeStream &in, PendingRequest &request, ContextPtr context)
     {
-        return mType->readAction(this, in, request);
+        return mType->readAction(this, in, request, context);
     }
 
-    StreamResult SyncableUnitBase::readRequest(FormattedMessageStream &in, MessageId id)
+    StreamResult SyncableUnitBase::readRequest(FormattedMessageStream &in, MessageId id, ContextPtr context)
     {
-        return mType->readRequest(this, in, id);
+        return mType->readRequest(this, in, id, context);
     }
 
     std::set<std::reference_wrapper<FormattedMessageStream>, CompareStreamId> SyncableUnitBase::getMasterMessageTargets(const std::set<ParticipantId> &targets) const
@@ -211,19 +211,19 @@ namespace Serialize {
         mType->writeFunctionError(target, index, error);
     }
 
-    StreamResult SyncableUnitBase::readFunctionAction(CallerHierarchyFormattedSerializeStream in, PendingRequest &request)
+    StreamResult SyncableUnitBase::readFunctionAction(FormattedSerializeStream &in, PendingRequest &request, ContextPtr context)
     {
-        return mType->readFunctionAction(this, in, request);
+        return mType->readFunctionAction(this, in, request, context);
     }
 
-    StreamResult SyncableUnitBase::readFunctionRequest(FormattedMessageStream &in, MessageId id)
+    StreamResult SyncableUnitBase::readFunctionRequest(FormattedMessageStream &in, MessageId id, ContextPtr context)
     {
-        return mType->readFunctionRequest(this, in, id);
+        return mType->readFunctionRequest(this, in, id, context);
     }
 
-    StreamResult SyncableUnitBase::readFunctionError(CallerHierarchyFormattedSerializeStream in, PendingRequest &request)
+    StreamResult SyncableUnitBase::readFunctionError(FormattedSerializeStream &in, PendingRequest &request, ContextPtr context)
     {
-        return mType->readFunctionError(this, in, request);
+        return mType->readFunctionError(this, in, request, context);
     }
 
     std::vector<WriteMessage> getMasterActionMessageTargets(const SyncableUnitBase *unit, ParticipantId answerTarget, MessageId answerId,
@@ -294,23 +294,23 @@ namespace Serialize {
         return msg;
     }
 
-    void SyncableUnitBase::writeId(CallerHierarchyFormattedSerializeStream out, const char *name) const
+    void SyncableUnitBase::writeId(FormattedSerializeStream &out, const char *name) const
     {
-        if (out.mStream.isMaster(AccessMode::WRITE) && out.mStream.data()) {
-            out.mStream.beginExtendedWrite(name, 1);
+        if (out.isMaster(AccessMode::WRITE) && out.data()) {
+            out.beginExtendedWrite(name, 1);
             Serialize::write(out, mMasterId, "syncId");
         }
     }
 
-    StreamResult SyncableUnitBase::readId(CallerHierarchyFormattedSerializeStream in, const char *name)
+    StreamResult SyncableUnitBase::readId(FormattedSerializeStream &in, const char *name)
     {
-        if (!in.mStream.isMaster(AccessMode::READ) && in.mStream.data()) {
-            STREAM_PROPAGATE_ERROR(in.mStream.beginExtendedRead(name, 1));
+        if (!in.isMaster(AccessMode::READ) && in.data()) {
+            STREAM_PROPAGATE_ERROR(in.beginExtendedRead(name, 1));
             UnitId id;
             STREAM_PROPAGATE_ERROR(Serialize::read(in, id, "syncId"));
 
-            if (in.mStream.manager() && in.mStream.manager()->getSlaveStreamData() == in.mStream.data()) {
-                setSlaveId(id, in.mStream.manager());
+            if (in.manager() && in.manager()->getSlaveStreamData() == in.data()) {
+                setSlaveId(id, in.manager());
             }
         }
         return {};
@@ -323,11 +323,11 @@ namespace Serialize {
         mType->writeAction(static_cast<const SerializableUnitBase *>(this), index, messages, data);
     }
 
-    void SyncableUnitBase::writeRequest(OffsetPtr offset, void *data, ParticipantId requester, MessageId requesterTransactionId, GenericMessageReceiver receiver) const
+    void SyncableUnitBase::writeRequest(OffsetPtr offset, void *data, ParticipantId requester, MessageId requesterTransactionId, GenericMessageReceiver receiver, ContextPtr context) const
     {
         uint16_t index = mType->getIndex(offset);
         WriteMessage msg = getSlaveRequestMessageTarget(this, requester, requesterTransactionId, std::move(receiver));
-        mType->writeRequest(static_cast<const SerializableUnitBase *>(this), index, msg, data);
+        mType->writeRequest(static_cast<const SerializableUnitBase *>(this), index, msg, data, context);
     }
 
     void SyncableUnitBase::writeRequestResponse(OffsetPtr offset, void *data, ParticipantId answerTarget, MessageId answerId) const
@@ -341,9 +341,9 @@ namespace Serialize {
         }
     }
 
-    StreamResult tag_invoke(apply_map_t, SyncableUnitBase &unit, CallerHierarchyFormattedSerializeStream in, bool success = true)
+    StreamResult tag_invoke(apply_map_t, SyncableUnitBase &unit, FormattedSerializeStream &in, bool success = true, ContextPtr context = {})
     {
-        return unit.mType->applyMap(&unit, in, success);
+        return unit.mType->applyMap(&unit, in, success, context);
     }
 
 }

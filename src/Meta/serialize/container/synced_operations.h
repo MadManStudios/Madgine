@@ -8,7 +8,8 @@ namespace Serialize {
 
     template <typename T, typename Observer, typename OffsetPtr>
     struct Operations<Synced<T, Observer, OffsetPtr>> {
-        static StreamResult readRequest(Synced<T, Observer, OffsetPtr> &synced, FormattedMessageStream &inout, MessageId id, const CallerHierarchyBasePtr &hierarchy = {})
+        template <typename Context>
+        static StreamResult readRequest(Synced<T, Observer, OffsetPtr> &synced, FormattedMessageStream &inout, MessageId id, Context &&context)
         {
             if (synced.isMaster()) {
                 typename Synced<T, Observer, OffsetPtr>::Operation op;
@@ -41,13 +42,15 @@ namespace Serialize {
             return {};
         }
 
-        static void writeRequest(const Synced<T, Observer, OffsetPtr> &synced, FormattedMessageStream &out, Synced<T, Observer, OffsetPtr>::request_payload &&payload, const CallerHierarchyBasePtr &hierarchy = {})
+        template <typename Context>
+        static void writeRequest(const Synced<T, Observer, OffsetPtr> &synced, FormattedMessageStream &out, Synced<T, Observer, OffsetPtr>::request_payload &&payload, Context &&context)
         {
-            Serialize::write(out, payload.mOperation, nullptr);
-            Serialize::write(out, payload.mValue, nullptr);
+            Serialize::write(out, payload.mOperation, nullptr, context);
+            Serialize::write(out, payload.mValue, nullptr, context);
         }
 
-        static StreamResult readAction(Synced<T, Observer, OffsetPtr> &synced, FormattedMessageStream &in, PendingRequest &request, const CallerHierarchyBasePtr &hierarchy = {})
+        template <typename Context>
+        static StreamResult readAction(Synced<T, Observer, OffsetPtr> &synced, FormattedMessageStream &in, PendingRequest &request, Context &&context)
         {
             typename Synced<T, Observer, OffsetPtr>::Operation op;
             STREAM_PROPAGATE_ERROR(Serialize::read(in, op, nullptr));
@@ -75,25 +78,28 @@ namespace Serialize {
             return {};
         }
 
-        static void writeAction(const Synced<T, Observer, OffsetPtr> &synced, const std::vector<WriteMessage> &outStreams, Synced<T, Observer, OffsetPtr>::action_payload &&payload, const CallerHierarchyBasePtr &hierarchy = {})
+        template <typename Context>
+        static void writeAction(const Synced<T, Observer, OffsetPtr> &synced, const std::vector<WriteMessage> &outStreams, Synced<T, Observer, OffsetPtr>::action_payload &&payload, Context &&context)
         {
             for (const WriteMessage &out : outStreams) {
-                Serialize::write(out, payload.mOperation, nullptr);
-                Serialize::write(out, payload.mValue, nullptr);
+                Serialize::write(out, payload.mOperation, nullptr, context);
+                Serialize::write(out, payload.mValue, nullptr, context);
             }
         }
 
-        static StreamResult read(FormattedSerializeStream &in, Synced<T, Observer, OffsetPtr> &synced, const char *name, const CallerHierarchyBasePtr &hierarchy = {})
+        template <typename Context>
+        static StreamResult read(FormattedSerializeStream &in, Synced<T, Observer, OffsetPtr> &synced, const char *name, Context &&context)
         {
             T old = synced.mData;
-            STREAM_PROPAGATE_ERROR(Serialize::read(in, synced.mData, name));
+            STREAM_PROPAGATE_ERROR(Serialize::read(in, synced.mData, name, context));
             synced.notify(old);
             return {};
         }
 
-        static void write(FormattedSerializeStream &out, const Synced<T, Observer, OffsetPtr> &synced, const char *name, const CallerHierarchyBasePtr &hierarchy = {})
+        template <typename Context>
+        static void write(FormattedSerializeStream &out, const Synced<T, Observer, OffsetPtr> &synced, const char *name, Context &&context)
         {
-            Serialize::write(out, synced.mData, name);
+            Serialize::write(out, synced.mData, name, context);
         }
 
         static void setActive(Synced<T, Observer, OffsetPtr> &synced, bool active, bool existenceChanged)

@@ -1,7 +1,6 @@
 #pragma once
 
 #include "type.h"
-#include "context.h"
 
 namespace Engine {
 namespace Reflect {

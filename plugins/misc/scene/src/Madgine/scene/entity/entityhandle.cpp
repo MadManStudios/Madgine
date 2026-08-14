@@ -17,13 +17,13 @@ using namespace Engine::Serialize;
 static constexpr Serializer sComponentSynchronizer {
     "ComponentSynchronizer",
     {},
-    [](const void *, CallerHierarchyFormattedSerializeStream, const char *) {
+    [](const void *, FormattedSerializeStream &, const char *, ContextPtr context) {
     },
-    [](void *, CallerHierarchyFormattedSerializeStream, const char *) -> StreamResult {
+    [](void *, FormattedSerializeStream &, const char *, ContextPtr context) -> StreamResult {
         throw 0;
         return {};
     },
-    [](void *unit, CallerHierarchyFormattedSerializeStream in, PendingRequest &request) -> StreamResult {
+    [](void *unit, FormattedSerializeStream &in, PendingRequest &request, ContextPtr context) -> StreamResult {
         Engine::Scene::Entity::EntityHandle *handle = unit_cast<Engine::Scene::Entity::EntityHandle>(unit);
 
         Engine::Serialize::StreamResult result;
@@ -40,7 +40,7 @@ static constexpr Serializer sComponentSynchronizer {
                 if (!component)
                     return STREAM_INTEGRITY_ERROR(in) << "Received message for component '" << name << "', which is not a component of this Entity.";
                 SerializableDataPtr serializedComponent = entity.sceneMgr().entityComponentList(it->second).getSerialized(*component);
-                return serializedComponent.mType->readAction(serializedComponent.unit(), in, request);
+                return serializedComponent.mType->readAction(serializedComponent.unit(), in, request, context);
             }();
         });
 
@@ -50,24 +50,24 @@ static constexpr Serializer sComponentSynchronizer {
         throw 0;
         return {};
     },
-    [](const Serializer *, void *unit, CallerHierarchyFormattedSerializeStream in, bool success) -> StreamResult {
+    [](const Serializer *, void *unit, FormattedSerializeStream &in, bool success, ContextPtr context) -> StreamResult {
         Engine::Scene::Entity::EntityHandle *handle = unit_cast<Engine::Scene::Entity::EntityHandle>(unit);
         Engine::Serialize::StreamResult result;
         Engine::Execution::access_binding(handle->ptr(), [&](Engine::Scene::Entity::Entity &entity) {
-            result = Engine::Serialize::apply_map(entity, in, success);
+            result = Engine::Serialize::apply_map(entity, in, success, context);
         });
         return result;
     },
-    [](const Serializer *, void *unit, bool b, const Engine::CallerHierarchyBasePtr &hierarchy) {
+    [](const Serializer *, void *unit, bool b, ContextPtr context) {
         Engine::Scene::Entity::EntityHandle *handle = unit_cast<Engine::Scene::Entity::EntityHandle>(unit);
         Engine::Execution::access_binding(handle->ptr(), [&](Engine::Scene::Entity::Entity &entity) {
-            Engine::Serialize::set_synced(entity, b, hierarchy);
+            Engine::Serialize::set_synced(entity, b, context);
         });
     },
-    [](const Serializer *, void *unit, bool active, bool existenceChanged) {
+    [](const Serializer *, void *unit, bool active, bool existenceChanged, ContextPtr context) {
         Engine::Scene::Entity::EntityHandle *handle = unit_cast<Engine::Scene::Entity::EntityHandle>(unit);
         Engine::Execution::access_binding(handle->ptr(), [&](Engine::Scene::Entity::Entity &entity) {
-            Engine::Serialize::set_active<>(entity, active, existenceChanged);
+            Engine::Serialize::set_active<>(entity, active, existenceChanged, context);
         });
     },
     [](const Serializer *, void *unit) {
@@ -90,7 +90,7 @@ static constexpr Serializer sComponentSynchronizer {
             type->writeAction(payload.mComponent, index, outStreams, payload.mData);
         });
     },
-    [](const void *, CallerHierarchyFormattedSerializeStream out, void *) { throw 0; }
+    [](const void *, FormattedSerializeStream &out, void *, ContextPtr context) { throw 0; }
 };
 
 SERIALIZETABLE_BEGIN(Engine::Scene::Entity::EntityHandle)

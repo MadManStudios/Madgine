@@ -36,18 +36,18 @@ namespace Serialize {
         unit->writeFunctionError(index, error, target, answerId);
     }
 
-    StreamResult META_EXPORT readState(const SerializeTable *table, void *unit, CallerHierarchyFormattedSerializeStream in)
+    StreamResult META_EXPORT readState(const SerializeTable *table, void *unit, FormattedSerializeStream &in, ContextPtr context)
     {
-        if (in.mStream.supportsNameLookup()) {
+        if (in.supportsNameLookup()) {
             std::string name;
-            STREAM_PROPAGATE_ERROR(in.mStream.lookupFieldName(name));
+            STREAM_PROPAGATE_ERROR(in.lookupFieldName(name));
             while (!name.empty()) {
                 bool found = false;
                 const SerializeTable *tableAcc = table;
                 while (tableAcc && !found) {
                     for (const Serializer *it = tableAcc->mFields; it->mFieldName; ++it) {
                         if (name == it->mFieldName) {
-                            STREAM_PROPAGATE_ERROR(it->mReadState(unit, in, it->mFieldName));
+                            STREAM_PROPAGATE_ERROR(it->mReadState(unit, in, it->mFieldName, context));
                             found = true;
                             break;
                         }
@@ -56,13 +56,13 @@ namespace Serialize {
                 }
                 if (!found)
                     return STREAM_PARSE_ERROR(in) << "Could not find field '" << name << "' in type '" << table->mTypeName << "'";
-                STREAM_PROPAGATE_ERROR(in.mStream.lookupFieldName(name));
+                STREAM_PROPAGATE_ERROR(in.lookupFieldName(name));
             }
         } else {
             const SerializeTable *tableAcc = table;
             while (tableAcc) {
                 for (const Serializer *it = tableAcc->mFields; it->mFieldName; ++it) {
-                    STREAM_PROPAGATE_ERROR(it->mReadState(unit, in, it->mFieldName));
+                    STREAM_PROPAGATE_ERROR(it->mReadState(unit, in, it->mFieldName, context));
                 }
                 tableAcc = tableAcc->mBaseType ? &tableAcc->mBaseType() : nullptr;
             }
@@ -70,60 +70,60 @@ namespace Serialize {
         return {};
     }
 
-    void SerializeTable::writeState(const void *unit, CallerHierarchyFormattedSerializeStream out) const
+    void SerializeTable::writeState(const void *unit, FormattedSerializeStream &out, ContextPtr context) const
     {
         const SerializeTable *table = this;
         while (table) {
             for (const Serializer *it = table->mFields; it->mFieldName; ++it) {
-                it->mWriteState(unit, out, it->mFieldName);
+                it->mWriteState(unit, out, it->mFieldName, context);
             }
             table = table->mBaseType ? &table->mBaseType() : nullptr;
         }
     }
 
-    StreamResult SerializeTable::readState(void *unit, CallerHierarchyFormattedSerializeStream in) const
+    StreamResult SerializeTable::readState(void *unit, FormattedSerializeStream &in, ContextPtr context) const
     {
-        return mReadState(this, unit, in);
+        return mReadState(this, unit, in, context);
     }
 
-    StreamResult SerializeTable::readAction(void *unit, CallerHierarchyFormattedSerializeStream in, PendingRequest &request) const
+    StreamResult SerializeTable::readAction(void *unit, FormattedSerializeStream &in, PendingRequest &request, ContextPtr context) const
     {
         uint16_t index;
-        STREAM_PROPAGATE_ERROR(Serialize::read(in, index, "index"));
-        return get(index).mReadAction(unit, in, request);
+        STREAM_PROPAGATE_ERROR(Serialize::read(in, index, "index", context));
+        return get(index).mReadAction(unit, in, request, context);
     }
 
-    StreamResult SerializeTable::readRequest(void *unit, FormattedMessageStream &inout, MessageId id) const
+    StreamResult SerializeTable::readRequest(void *unit, FormattedMessageStream &inout, MessageId id, ContextPtr context) const
     {
         uint16_t index;
-        STREAM_PROPAGATE_ERROR(read(inout, index, "index"));
+        STREAM_PROPAGATE_ERROR(read(inout, index, "index", context));
         return get(index).mReadRequest(unit, inout, id);
     }
 
-    StreamResult SerializeTable::applyMap(void *unit, CallerHierarchyFormattedSerializeStream in, bool success) const
+    StreamResult SerializeTable::applyMap(void *unit, FormattedSerializeStream &in, bool success, ContextPtr context) const
     {
         const SerializeTable *table = this;
         while (table) {
             for (const Serializer *it = table->mFields; it->mFieldName; ++it) {
-                STREAM_PROPAGATE_ERROR(it->mApplySerializableMap(it, unit, in, success));
+                STREAM_PROPAGATE_ERROR(it->mApplySerializableMap(it, unit, in, success, context));
             }
             table = table->mBaseType ? &table->mBaseType() : nullptr;
         }
         return {};
     }
 
-    void SerializeTable::setSynced(SerializableUnitBase *unit, bool b, const CallerHierarchyBasePtr &hierarchy) const
+    void SerializeTable::setSynced(SerializableUnitBase *unit, bool b, ContextPtr context) const
     {
         const SerializeTable *table = this;
         while (table) {
             for (const Serializer *it = table->mFields; it->mFieldName; ++it) {
-                it->mSetDataSynced(it, unit, b, hierarchy);
+                it->mSetDataSynced(it, unit, b, context);
             }
             table = table->mBaseType ? &table->mBaseType() : nullptr;
         }
     }
 
-    void SerializeTable::setActive(void *unit, bool active, bool existenceChanged) const
+    void SerializeTable::setActive(void *unit, bool active, bool existenceChanged, ContextPtr context) const
     {
         if (mCallbacks.onActivate)
             mCallbacks.onActivate(unit, CallbackTiming::BEFORE, active, existenceChanged);
@@ -132,7 +132,7 @@ namespace Serialize {
         const SerializeTable *table = this;
         while (table) {
             for (const Serializer *it = table->mFields; it->mFieldName; ++it) {
-                it->mSetActive(it, unit, active, existenceChanged);
+                it->mSetActive(it, unit, active, existenceChanged, context);
             }
             table = table->mBaseType ? &table->mBaseType() : nullptr;
         }
@@ -140,7 +140,7 @@ namespace Serialize {
             mCallbacks.onActivate(unit, CallbackTiming::AFTER, active, existenceChanged);
     }
 
-    void SerializeTable::setActive(SerializableUnitBase *unit, bool active, bool existenceChanged) const
+    void SerializeTable::setActive(SerializableUnitBase *unit, bool active, bool existenceChanged, ContextPtr context) const
     {
         if (active)
             assert(unit->mActiveIndex == 0);
@@ -158,7 +158,7 @@ namespace Serialize {
                     assert(unit->mActiveIndex > 0);
                     --unit->mActiveIndex;
                 }
-                it->mSetActive(it, unit, active, existenceChanged);
+                it->mSetActive(it, unit, active, existenceChanged, context);
             }
             table = table->mBaseType ? &table->mBaseType() : nullptr;
         }
@@ -189,17 +189,17 @@ namespace Serialize {
         get(index).mWriteAction(unit, outStreams, data);
     }
 
-    void SerializeTable::writeRequest(const void *unit, uint16_t index, CallerHierarchyFormattedSerializeStream out, void *data) const
+    void SerializeTable::writeRequest(const void *unit, uint16_t index, FormattedSerializeStream &out, void *data, ContextPtr context) const
     {
         write(out, index, "index");
-        get(index).mWriteRequest(unit, out, data);
+        get(index).mWriteRequest(unit, out, data, context);
     }
 
-    StreamResult SerializeTable::visitStream(CallerHierarchyFormattedSerializeStream in, const StreamVisitor &visitor, size_t depth) const
+    StreamResult SerializeTable::visitStream(FormattedSerializeStream &in, const StreamVisitor &visitor, size_t depth) const
     {
-        if (in.mStream.supportsNameLookup()) {
+        if (in.supportsNameLookup()) {
             std::string name;
-            STREAM_PROPAGATE_ERROR(in.mStream.lookupFieldName(name));
+            STREAM_PROPAGATE_ERROR(in.lookupFieldName(name));
             while (!name.empty()) {
                 bool found = false;
                 const SerializeTable *tableAcc = this;
@@ -215,7 +215,7 @@ namespace Serialize {
                 }
                 if (!found)
                     return STREAM_PARSE_ERROR(in) << "Could not find field '" << name << "'";
-                STREAM_PROPAGATE_ERROR(in.mStream.lookupFieldName(name));
+                STREAM_PROPAGATE_ERROR(in.lookupFieldName(name));
             }
         } else {
             const SerializeTable *tableAcc = this;
@@ -312,40 +312,40 @@ namespace Serialize {
         getFunction(index).mWriteFunctionArguments(outStreams, args);
     }
 
-    void SerializeTable::writeFunctionResult(CallerHierarchyFormattedSerializeStream out, uint16_t index, const void *args) const
+    void SerializeTable::writeFunctionResult(FormattedSerializeStream &out, uint16_t index, const void *args) const
     {
         Serialize::write(out, index, "index");
         Serialize::write(out, QUERY, "functionType");
         getFunction(index).mWriteFunctionResult(out, args);
     }
 
-    void SerializeTable::writeFunctionError(CallerHierarchyFormattedSerializeStream out, uint16_t index, MessageResult error) const
+    void SerializeTable::writeFunctionError(FormattedSerializeStream &out, uint16_t index, MessageResult error) const
     {
         write(out, error, "error");
     }
 
-    StreamResult SerializeTable::readFunctionAction(SyncableUnitBase *unit, CallerHierarchyFormattedSerializeStream in, PendingRequest &request) const
+    StreamResult SerializeTable::readFunctionAction(SyncableUnitBase *unit, FormattedSerializeStream &in, PendingRequest &request, ContextPtr context) const
     {
         uint16_t index;
-        STREAM_PROPAGATE_ERROR(Serialize::read(in, index, "index"));
+        STREAM_PROPAGATE_ERROR(Serialize::read(in, index, "index", context));
         FunctionType type;
-        STREAM_PROPAGATE_ERROR(Serialize::read(in, type, "functionType"));
+        STREAM_PROPAGATE_ERROR(Serialize::read(in, type, "functionType", context));
         return getFunction(index).mReadFunctionAction(unit, in, index, type, request);
     }
 
-    StreamResult SerializeTable::readFunctionRequest(SyncableUnitBase *unit, FormattedMessageStream &in, MessageId id) const
+    StreamResult SerializeTable::readFunctionRequest(SyncableUnitBase *unit, FormattedMessageStream &in, MessageId id, ContextPtr context) const
     {
         uint16_t index;
-        STREAM_PROPAGATE_ERROR(Serialize::read(in, index, "index"));
+        STREAM_PROPAGATE_ERROR(Serialize::read(in, index, "index", context));
         FunctionType type;
-        STREAM_PROPAGATE_ERROR(Serialize::read(in, type, "functionType"));
+        STREAM_PROPAGATE_ERROR(Serialize::read(in, type, "functionType", context));
         return getFunction(index).mReadFunctionRequest(unit, in, index, type, id);
     }
 
-    StreamResult SerializeTable::readFunctionError(SyncableUnitBase *unit, CallerHierarchyFormattedSerializeStream in, PendingRequest &request) const
+    StreamResult SerializeTable::readFunctionError(SyncableUnitBase *unit, FormattedSerializeStream &in, PendingRequest &request, ContextPtr context) const
     {
         MessageResult error;
-        STREAM_PROPAGATE_ERROR(Serialize::read(in, error, "error"));
+        STREAM_PROPAGATE_ERROR(Serialize::read(in, error, "error", context));
         request.mReceiver.set_error(error);
         return {};
     }

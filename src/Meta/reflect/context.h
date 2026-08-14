@@ -2,7 +2,6 @@
 
 #include "Generic/context.h"
 #include "Generic/offsetptr.h"
-#include "Generic/replace.h"
 #include "Generic/tag_invocable_view.h"
 
 #include "../meta_decay.h"
@@ -12,7 +11,7 @@ namespace Engine {
 namespace Reflect {
 
     struct get_reflect_contextual_t {
-        using signature = void *(Placeholder<0>, const MetaTable *);
+        using signature = void *(const MetaTable *);
 
         template <typename Context>
             requires(is_tag_invocable_v<get_reflect_contextual_t, Context, const MetaTable *>)
@@ -23,9 +22,9 @@ namespace Reflect {
         }
     };
 
-    using ContextPtr = tag_invocable_view<get_reflect_contextual_t>;
-
     inline constexpr get_reflect_contextual_t get_reflect_contextual;
+    
+    using ContextPtr = tag_invocable_view<get_reflect_contextual_t>;    
 
     template <typename T, typename Context>
     struct ContextReference {
@@ -46,14 +45,14 @@ namespace Reflect {
 
     template <typename Context, typename T>
         requires(is_tag_invocable_v<get_reflect_contextual_t, Context, const MetaTable *> && !std::is_const_v<T>)
-    ContextReference<T, Context> tag_invoke(context_set_t, Context &&context, T &value)
+    ContextReference<T, Context> context_set(Context &&context, T &value)
     {
         return { std::forward<Context>(context), value };
     }
 
-    template <typename Context, typename T>
+    template <typename T, typename Context>
         requires(is_tag_invocable_v<get_reflect_contextual_t, Context, const MetaTable *>)
-    T *tag_invoke(context_get_t<T>, Context &&context)
+    T *context_get(Context &&context)
     {
         return static_cast<T *>(get_reflect_contextual(std::forward<Context>(context), table<meta_decayed_t<T>>));
     }

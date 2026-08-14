@@ -114,15 +114,17 @@ namespace Serialize {
             return tag_invoke(cpo, synced.mData, parent);
         }
 
-        friend StreamResult tag_invoke(apply_map_t cpo, Synced &synced, FormattedSerializeStream &in, bool success = true, const CallerHierarchyBasePtr &hierarchy = {})
+        template <typename Context>
+        friend StreamResult tag_invoke(apply_map_t cpo, Synced &synced, FormattedSerializeStream &in, bool success = true, Context &&context)
         {
-            return tag_invoke(cpo, synced.mData, in, success, hierarchy);
+            return tag_invoke(cpo, synced.mData, in, success, context);
         }
 
-        friend auto tag_invoke(set_synced_t cpo, Synced &synced, bool b, const CallerHierarchyBasePtr &hierarchy)
-            requires(tag_invocable<set_parent_t, T &, bool, const CallerHierarchyBasePtr &>)
+        template <typename Context>
+        friend auto tag_invoke(set_synced_t cpo, Synced &synced, bool b, Context &&context)
+            requires(tag_invocable<set_parent_t, T &, bool, Context>)
         {
-            tag_invoke(cpo, synced.mData, b, hierarchy);
+            tag_invoke(cpo, synced.mData, b, context);
         }
 
     private:

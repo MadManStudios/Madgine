@@ -70,11 +70,11 @@ namespace Behavior {
             }(index_pack_for<Ty...> {});
         }
 
-        Serialize::StreamResult read(Serialize::CallerHierarchyFormattedSerializeStream in) override
+        Serialize::StreamResult read(Serialize::FormattedSerializeStream &in, Serialize::ContextPtr context) override
         {
             std::tuple<dependent_t<Serialize::StreamResult, Ty>...> results;
             [&]<size_t... Is>(auto_pack<Is...>) {
-                ([&]() { std::get<Is>(results) = Serialize::read(in, std::get<Is>(this->mTuple), Names::template get<Is>.c_str()); }(), ...);
+                ([&]() { std::get<Is>(results) = Serialize::read(in, std::get<Is>(this->mTuple), Names::template get<Is>.c_str(), context); }(), ...);
             }(index_pack_for<Ty...> {});
 
             return TupleUnpacker::accumulate(std::move(results), [](Serialize::StreamResult first, Serialize::StreamResult second) {
@@ -82,18 +82,18 @@ namespace Behavior {
                     return std::move(second); }, Serialize::StreamResult {});
         }
 
-        void write(Serialize::CallerHierarchyFormattedSerializeStream out) override
+        void write(Serialize::FormattedSerializeStream &out, Serialize::ContextPtr context) override
         {
-            [this, &out]<size_t... Is>(auto_pack<Is...>) {
-                (Serialize::write(out, std::get<Is>(this->mTuple), Names::template get<Is>.c_str()), ...);
+            [&]<size_t... Is>(auto_pack<Is...>) {
+                (Serialize::write(out, std::get<Is>(this->mTuple), Names::template get<Is>.c_str(), context), ...);
             }(index_pack_for<Ty...> {});
         }
 
-        Serialize::StreamResult applyMap(Serialize::CallerHierarchyFormattedSerializeStream in, bool success) override
+        Serialize::StreamResult applyMap(Serialize::FormattedSerializeStream &in, bool success, Serialize::ContextPtr context) override
         {
             std::tuple<dependent_t<Serialize::StreamResult, Ty>...> results;
             [&]<size_t... Is>(auto_pack<Is...>) {
-                ([&]() { std::get<Is>(results) = Serialize::apply_map(std::get<Is>(this->mTuple), in, success); }(), ...);
+                ([&]() { std::get<Is>(results) = Serialize::apply_map(std::get<Is>(this->mTuple), in, success, context); }(), ...);
             }(index_pack_for<Ty...> {});
 
             return TupleUnpacker::accumulate(std::move(results), [](Serialize::StreamResult first, Serialize::StreamResult second) {

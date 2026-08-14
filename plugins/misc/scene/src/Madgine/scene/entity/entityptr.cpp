@@ -36,10 +36,10 @@ namespace Scene {
             Base::operator=(static_cast<Base &&>(e.pointer()));
         }
 
-        Serialize::StreamResult tag_invoke(Serialize::apply_map_t, EntityPtr &ptr, Serialize::CallerHierarchyFormattedSerializeStream in, bool success)
+        Serialize::StreamResult tag_invoke(Serialize::apply_map_t, EntityPtr &ptr, Serialize::FormattedSerializeStream &in, bool success, Serialize::ContextPtr context)
         {
             Scene::Entity::EntityHandle *h = std::exchange(reinterpret_cast<Scene::Entity::EntityHandle *&>(ptr), nullptr);
-            STREAM_PROPAGATE_ERROR(Serialize::apply_map(h, in, success));
+            STREAM_PROPAGATE_ERROR(Serialize::apply_map(h, in, success, context));
             if (h) {
                 ptr = h->ptr();
             }
@@ -50,22 +50,22 @@ namespace Scene {
 }
 namespace Serialize {
 
-    StreamResult Operations<Scene::Entity::EntityPtr>::read(CallerHierarchyFormattedSerializeStream in, Scene::Entity::EntityPtr &e, const char *name)
+    StreamResult Operations<Scene::Entity::EntityPtr>::read(FormattedSerializeStream &in, Scene::Entity::EntityPtr &e, const char *name, ContextPtr context)
     {
         e = {};
-        return Serialize::read(in, reinterpret_cast<Scene::Entity::EntityHandle *&>(e), name);
+        return Serialize::read(in, reinterpret_cast<Scene::Entity::EntityHandle *&>(e), name, context);
     }
 
-    void Operations<Scene::Entity::EntityPtr>::write(CallerHierarchyFormattedSerializeStream out, const Scene::Entity::EntityPtr &e, const char *name)
+    void Operations<Scene::Entity::EntityPtr>::write(FormattedSerializeStream &out, const Scene::Entity::EntityPtr &e, const char *name, ContextPtr context)
     {
         if (!Execution::access_binding(e, [&](Scene::Entity::Entity &e) {
                 Serialize::write(out, &e.handle(), name);
             })) {
-            Serialize::write(out, static_cast<Scene::Entity::EntityHandle *>(nullptr), name);
+            Serialize::write(out, static_cast<Scene::Entity::EntityHandle *>(nullptr), name, context);
         }
     }
 
-    StreamResult Operations<Scene::Entity::EntityPtr>::visitStream(CallerHierarchyFormattedSerializeStream in, const char *name, const StreamVisitor &visitor, size_t depth)
+    StreamResult Operations<Scene::Entity::EntityPtr>::visitStream(FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor, size_t depth)
     {
         throw 0;
     }

@@ -87,11 +87,6 @@ namespace Serialize {
     {
     }
 
-    StreamResultBuilder::StreamResultBuilder(StreamState type, CallerHierarchyFormattedSerializeStream stream, const char *file, size_t line)
-        : StreamResultBuilder(type, stream.mStream, file, line)
-    {
-    }
-
     StreamResultBuilder::operator StreamResult()
     {
         assert(mType != StreamState::OK);

@@ -103,7 +103,7 @@ namespace Widgets {
         using RenderPass::addDependency;
         using RenderPass::removeDependency;
 
-        static Serialize::StreamResult scanWidget(const Serialize::SerializeTable *&out, Serialize::CallerHierarchyFormattedSerializeStream &in);
+        static Serialize::StreamResult scanWidget(const Serialize::SerializeTable *&out, Serialize::FormattedSerializeStream &in);
 
     protected:
         WidgetBase *getHoveredWidget(const Math::Vector2 &pos, WidgetBase *current);
@@ -112,9 +112,9 @@ namespace Widgets {
 
         void resetPointerState();
 
-        Serialize::StreamResult readWidget(Serialize::CallerHierarchyFormattedSerializeStream &in, std::unique_ptr<WidgetBase> &widget, WidgetBase *parent);
-        Serialize::StreamResult readWidgetStub(Serialize::CallerHierarchyFormattedSerializeStream &in, std::unique_ptr<WidgetBase> &widget);
-        const char *writeWidget(Serialize::CallerHierarchyFormattedSerializeStream &out, const std::unique_ptr<WidgetBase> &widget) const;
+        Serialize::StreamResult readWidget(Serialize::FormattedSerializeStream &in, std::unique_ptr<WidgetBase> &widget, WidgetBase *parent);
+        Serialize::StreamResult readWidgetStub(Serialize::FormattedSerializeStream &in, std::unique_ptr<WidgetBase> &widget);
+        const char *writeWidget(Serialize::FormattedSerializeStream &out, const std::unique_ptr<WidgetBase> &widget) const;
 
         friend struct WidgetBase;
 

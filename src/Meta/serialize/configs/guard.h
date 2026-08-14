@@ -11,9 +11,10 @@ namespace Serialize {
     struct Guard {
         using Category = GuardCategory;
 
-        static auto guard(const CallerHierarchyBasePtr &hierarchy) -> std::tuple<decltype(Guards::guard(hierarchy))...>
+        template <typename Context>
+        static auto guard(Context &context) -> std::tuple<decltype(Guards::guard(context))...>
         {
-            return std::make_tuple(DelayedConstruct { [&]() { return Guards::guard(hierarchy); } }...);
+            return std::make_tuple(DelayedConstruct { [&]() { return Guards::guard(context); } }...);
         }
     };
 
@@ -21,9 +22,10 @@ namespace Serialize {
     struct CallableGuard {
         using Category = GuardCategory;
 
-        static decltype(auto) guard(const CallerHierarchyBasePtr &hierarchy)
+        template <typename Context>
+        static decltype(auto) guard(Context &&context)
         {
-            return TupleUnpacker::invoke(Guard, hierarchy);
+            return TupleUnpacker::invoke(Guard, context);
         }
     };
 

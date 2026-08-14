@@ -85,13 +85,14 @@ namespace Behavior {
             return bindable.mValue;
         }        
 
-        friend Serialize::StreamResult tag_invoke(Serialize::apply_map_t, Bindable &, Serialize::CallerHierarchyFormattedSerializeStream, bool)
+        template <typename Context>
+        friend Serialize::StreamResult tag_invoke(Serialize::apply_map_t, Bindable &, Serialize::FormattedSerializeStream &, bool, Context &&)
         {
             return {};
         }
 
-        template <typename... Configs>
-        friend void tag_invoke(Serialize::set_active_t<Configs...>, Bindable &, bool active, bool existenceChanged, const CallerHierarchyBasePtr &)
+        template <typename... Configs, typename Context>
+        friend void tag_invoke(Serialize::set_active_t<Configs...>, Bindable &, bool active, bool existenceChanged, Context &&)
         {
         }
 
@@ -173,12 +174,14 @@ namespace Behavior {
             return bindable.mValue;
         }        
 
-        friend Serialize::StreamResult tag_invoke(Serialize::apply_map_t, Bindable&, Serialize::CallerHierarchyFormattedSerializeStream, bool) {
+        template <typename Context>
+        friend Serialize::StreamResult tag_invoke(Serialize::apply_map_t, Bindable &, Serialize::FormattedSerializeStream &, bool, Context &&)
+        {
             return {};
         }
 
-        template <typename... Configs>
-        friend void tag_invoke(Serialize::set_active_t<Configs...>, Bindable &, bool active, bool existenceChanged, const CallerHierarchyBasePtr &)
+        template <typename... Configs, typename Context>
+        friend void tag_invoke(Serialize::set_active_t<Configs...>, Bindable &, bool active, bool existenceChanged, Context &&)
         {
         }
 
@@ -191,15 +194,17 @@ namespace Behavior {
 namespace Serialize {
     template <typename T>
     struct Operations<Behavior::Bindable<T>> {
-        static StreamResult read(CallerHierarchyFormattedSerializeStream in, Behavior::Bindable<T> &b, const char *name)
+        template <typename Context>
+        static StreamResult read(FormattedSerializeStream &in, Behavior::Bindable<T> &b, const char *name, Context &&context)
         {            
-            return Serialize::read(in, b.mValue.template emplace<T>(), name);
+            return Serialize::read(in, b.mValue.template emplace<T>(), name, context);
         }
-        static void write(CallerHierarchyFormattedSerializeStream out, const Behavior::Bindable<T> &b, const char *name)
+        template <typename Context>
+        static void write(FormattedSerializeStream &out, const Behavior::Bindable<T> &b, const char *name, Context &&context)
         {
-            Serialize::write(out, b.get(), name);
+            Serialize::write(out, b.get(), name, context);
         }
-        static StreamResult visitStream(CallerHierarchyFormattedSerializeStream in, const char *name, const StreamVisitor &visitor, size_t depth)
+        static StreamResult visitStream(FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor, size_t depth)
         {
             return Serialize::visitStream<T>(in, name, visitor, depth);
         }

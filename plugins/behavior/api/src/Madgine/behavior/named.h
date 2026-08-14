@@ -148,10 +148,11 @@ namespace Behavior {
             return convert_ValueType(std::move(named.mValue));
         }
 
-        friend Serialize::StreamResult tag_invoke(Serialize::apply_map_t, Named<Name, T> &named, Serialize::CallerHierarchyFormattedSerializeStream in, bool success)
+        template <typename Context>
+        friend Serialize::StreamResult tag_invoke(Serialize::apply_map_t, Named<Name, T> &named, Serialize::FormattedSerializeStream &in, bool success, Context &&context)
         {
             if (named.mValue)
-                return Serialize::apply_map(*named.mValue, in, success);
+                return Serialize::apply_map(*named.mValue, in, success, context);
             else
                 return {};
         }
@@ -225,15 +226,17 @@ namespace Behavior {
 namespace Serialize {
     template <fixed_string Name, typename T>
     struct Operations<Behavior::Named<Name, T>> {
-        static StreamResult read(CallerHierarchyFormattedSerializeStream in, Behavior::Named<Name, T> &n, const char *name)
+        template <typename Context>
+        static StreamResult read(FormattedSerializeStream &in, Behavior::Named<Name, T> &n, const char *name, Context && context)
         {
-            return Serialize::read(in, n.mValue, name);
+            return Serialize::read(in, n.mValue, name, context);
         }
-        static void write(CallerHierarchyFormattedSerializeStream out, const Behavior::Named<Name, T> &n, const char *name)
+        template <typename Context>
+        static void write(FormattedSerializeStream &out, const Behavior::Named<Name, T> &n, const char *name, Context && context)
         {
-            Serialize::write(out, n.mValue, name);
+            Serialize::write(out, n.mValue, name, context);
         }
-        static StreamResult visitStream(CallerHierarchyFormattedSerializeStream in, const char *name, const StreamVisitor &visitor, size_t depth)
+        static StreamResult visitStream(FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor, size_t depth)
         {
             Serialize::visitStream<std::optional<forward_ref_t<T>>>(in, name, visitor, depth);
         }

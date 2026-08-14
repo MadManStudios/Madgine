@@ -1,7 +1,5 @@
 #pragma once
 
-#include "Generic/callerhierarchy.h"
-
 #include "Meta/serialize/hierarchy/serializableunitptr.h"
 #include "Meta/serialize/streams/streamresult.h"
 
@@ -12,11 +10,11 @@ namespace Scene {
 
     namespace Entity {
 
-        void entityComponentHelperWrite(Serialize::CallerHierarchyFormattedSerializeStream out, const EntityComponentHandle &index, const char *name);
-        Serialize::StreamResult entityComponentHelperRead(Serialize::CallerHierarchyFormattedSerializeStream in, const EntityComponentHandle &index, const char *name);
-        Serialize::StreamResult entityComponentHelperApplyMap(Serialize::CallerHierarchyFormattedSerializeStream in, EntityComponentHandle &index, bool success);
-        void entityComponentHelperSetSynced(EntityComponentHandle &index, bool synced, CallerHierarchyBasePtr hierarchy);
-        void entityComponentHelperSetActive(EntityComponentHandle &index, bool active, bool existenceChanged, CallerHierarchyBasePtr hierarchy);
+        void entityComponentHelperWrite(Serialize::FormattedSerializeStream &out, const EntityComponentHandle &index, const char *name, Serialize::ContextPtr context);
+        Serialize::StreamResult entityComponentHelperRead(Serialize::FormattedSerializeStream &in, const EntityComponentHandle &index, const char *name, Serialize::ContextPtr context);
+        Serialize::StreamResult entityComponentHelperApplyMap(Serialize::FormattedSerializeStream &in, EntityComponentHandle &index, bool success, Serialize::ContextPtr context);
+        void entityComponentHelperSetSynced(EntityComponentHandle &index, bool synced, Serialize::ContextPtr context);
+        void entityComponentHelperSetActive(EntityComponentHandle &index, bool active, bool existenceChanged, Serialize::ContextPtr context);
 
         struct MADGINE_SCENE_EXPORT EntityComponentHandle {
 
@@ -42,20 +40,22 @@ namespace Scene {
                 return mType <=> type;
             }
 
-            friend Serialize::StreamResult tag_invoke(const Serialize::apply_map_t &, EntityComponentHandle &handle, Serialize::CallerHierarchyFormattedSerializeStream in, bool success)
+            template <typename Context>
+            friend Serialize::StreamResult tag_invoke(const Serialize::apply_map_t &, EntityComponentHandle &handle, Serialize::FormattedSerializeStream &in, bool success, Context &&context)
             {
-                return entityComponentHelperApplyMap(in, handle, success);
+                return entityComponentHelperApplyMap(in, handle, success, context);
             }
 
-            friend void tag_invoke(const Serialize::set_synced_t &, EntityComponentHandle &handle, bool synced, CallerHierarchyBasePtr hierarchy)
+            template <typename Context>
+            friend void tag_invoke(const Serialize::set_synced_t &, EntityComponentHandle &handle, bool synced, Context &&context)
             {
-                entityComponentHelperSetSynced(handle, synced, hierarchy);
+                entityComponentHelperSetSynced(handle, synced, context);
             }
 
-            template <typename... Configs>
-            friend void tag_invoke(Serialize::set_active_t<Configs...>, EntityComponentHandle &handle, bool active, bool existenceChanged, const CallerHierarchyBasePtr &hierarchy)
+            template <typename... Configs, typename Context>
+            friend void tag_invoke(Serialize::set_active_t<Configs...>, EntityComponentHandle &handle, bool active, bool existenceChanged, Context &&context)
             {
-                entityComponentHelperSetActive(handle, active, existenceChanged, hierarchy);
+                entityComponentHelperSetActive(handle, active, existenceChanged, context);
             }
         };
 
@@ -68,17 +68,20 @@ namespace Serialize {
     template <typename... Configs>
     struct Operations<Scene::Entity::EntityComponentHandle, Configs...> {
 
-        static StreamResult read(Serialize::CallerHierarchyFormattedSerializeStream in, Scene::Entity::EntityComponentHandle &handle, const char *name)
+        template <typename Context>
+        static StreamResult read(Serialize::FormattedSerializeStream &in, Scene::Entity::EntityComponentHandle &handle, const char *name, Context &&context)
         {
-            return entityComponentHelperRead(in, handle, name);
+            return entityComponentHelperRead(in, handle, name, context);
         }
 
-        static void write(Serialize::CallerHierarchyFormattedSerializeStream out, const Scene::Entity::EntityComponentHandle &handle, const char *name)
+        template <typename Context>
+        static void write(Serialize::FormattedSerializeStream &out, const Scene::Entity::EntityComponentHandle &handle, const char *name, Context &&context)
         {
-            entityComponentHelperWrite(out, handle, name);
+            entityComponentHelperWrite(out, handle, name, context);
         }
 
-        static StreamResult visitStream(CallerHierarchyFormattedSerializeStream in, const char *name, const StreamVisitor &visitor)
+        template <typename Context>
+        static StreamResult visitStream(FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor)
         {
             throw 0;
             // return SerializableDataPtr::visitStream<T>(in, name, visitor);

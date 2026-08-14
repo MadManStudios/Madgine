@@ -36,27 +36,28 @@ namespace Serialize {
 
     template <typename... Configs>
     struct Operations<Scene::Entity::EntityHandle, Configs...> {
-
-        static StreamResult read(Serialize::CallerHierarchyFormattedSerializeStream in, Scene::Entity::EntityHandle &handle, const char *name)
+        template <typename Context>
+        static StreamResult read(Serialize::FormattedSerializeStream &in, Scene::Entity::EntityHandle &handle, const char *name, Context &&context)
         {
             STREAM_PROPAGATE_ERROR(handle.readId(in, name));
             StreamResult result;
             Execution::access_binding(handle.ptr(), [&](Scene::Entity::Entity &entity) {
-                result = SerializableDataPtr { &entity }.readState(in, name, true);
+                result = SerializableDataPtr { &entity }.readState(in, name, true, context);
             });
             return result;
         }
 
-        static void write(Serialize::CallerHierarchyFormattedSerializeStream out, const Scene::Entity::EntityHandle &handle, const char *name)
+        template <typename Context>
+        static void write(Serialize::FormattedSerializeStream &out, const Scene::Entity::EntityHandle &handle, const char *name, Context &&context)
         {
             handle.writeId(out, name);
             [[maybe_unused]] bool success = Execution::access_binding(handle.ptr(), [&](Scene::Entity::Entity &entity) {
-                SerializableDataConstPtr { &entity }.writeState(out, name, true);
+                SerializableDataConstPtr { &entity }.writeState(out, name, true, context);
             });
             assert(success);
         }
 
-        static StreamResult visitStream(CallerHierarchyFormattedSerializeStream in, const char *name, const StreamVisitor &visitor)
+        static StreamResult visitStream(FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor)
         {
             return Serialize::visitStream<Scene::Entity::Entity>(in, name, visitor);
         }

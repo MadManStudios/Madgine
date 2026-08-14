@@ -46,16 +46,16 @@ namespace Serialize {
             SerializableUnitPtr { &unit }.setParent(parent);
         }
 
-        template <std::derived_from<SerializableUnitBase> T>
-        friend void tag_invoke(const set_synced_t &, T &unit, bool b, const CallerHierarchyBasePtr &hierarchy)
+        template <std::derived_from<SerializableUnitBase> T, typename Context>
+        friend void tag_invoke(const set_synced_t &, T &unit, bool b, Context &&context)
         {
-            SerializableUnitPtr { &unit }.setSynced(b, hierarchy);
+            SerializableUnitPtr { &unit }.setSynced(b, context);
         }
 
-        template <std::derived_from<SerializableUnitBase> T, typename... Configs>
-        friend void tag_invoke(const set_active_t<Configs...> &, T &unit, bool active, bool existenceChanged, const CallerHierarchyBasePtr &hierarchy)
+        template <std::derived_from<SerializableUnitBase> T, typename... Configs, typename Context>
+        friend void tag_invoke(const set_active_t<Configs...> &, T &unit, bool active, bool existenceChanged, Context &&context)
         {
-            SerializableUnitPtr { &unit }.setActive(active, existenceChanged);
+            SerializableUnitPtr { &unit }.setActive(active, existenceChanged, context);
         }
 
     private:

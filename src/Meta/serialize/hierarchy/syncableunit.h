@@ -29,19 +29,19 @@ namespace Serialize {
         SyncableUnitBase &operator=(SyncableUnitBase &&other);
 
     public:
-        void writeState(CallerHierarchyFormattedSerializeStream out, const char *name = nullptr) const;
-        StreamResult readState(CallerHierarchyFormattedSerializeStream in, const char *name = nullptr);
+        void writeState(FormattedSerializeStream &out, const char *name = nullptr) const;
+        StreamResult readState(FormattedSerializeStream &in, const char *name = nullptr);
 
-        void setActive(bool active, bool existenceChanged);
+        void setActive(bool active, bool existenceChanged, ContextPtr context);
 
-        static StreamResult visitStream(const SerializeTable *table, CallerHierarchyFormattedSerializeStream in, const char *name, const StreamVisitor &visitor, size_t depth);
+        static StreamResult visitStream(const SerializeTable *table, FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor, size_t depth);
 
-        StreamResult readAction(CallerHierarchyFormattedSerializeStream in, PendingRequest &request);
-        StreamResult readRequest(FormattedMessageStream &in, MessageId id);
+        StreamResult readAction(FormattedSerializeStream &in, PendingRequest &request, ContextPtr context = {});
+        StreamResult readRequest(FormattedMessageStream &in, MessageId id, ContextPtr context = {});
 
-        StreamResult readFunctionAction(CallerHierarchyFormattedSerializeStream in, PendingRequest &request);
-        StreamResult readFunctionRequest(FormattedMessageStream &in, MessageId id);
-        StreamResult readFunctionError(CallerHierarchyFormattedSerializeStream in, PendingRequest &request);
+        StreamResult readFunctionAction(FormattedSerializeStream &in, PendingRequest &request, ContextPtr context = {});
+        StreamResult readFunctionRequest(FormattedMessageStream &in, MessageId id, ContextPtr context = {});
+        StreamResult readFunctionError(FormattedSerializeStream &in, PendingRequest &request, ContextPtr context = {});
 
         UnitId slaveId() const;
         UnitId masterId() const;
@@ -58,8 +58,8 @@ namespace Serialize {
         friend META_EXPORT WriteMessage beginRequestResponseMessage(const SyncableUnitBase *unit, FormattedMessageStream &stream, MessageId id);
 
     protected:
-        void writeId(CallerHierarchyFormattedSerializeStream out, const char *name = nullptr) const;
-        StreamResult readId(CallerHierarchyFormattedSerializeStream in, const char *name = nullptr);
+        void writeId(FormattedSerializeStream &out, const char *name = nullptr) const;
+        StreamResult readId(FormattedSerializeStream &in, const char *name = nullptr);
         void setSlaveId(UnitId id, SerializeManager *mgr);
 
         const SerializeTable *serializeType() const;
@@ -77,7 +77,7 @@ namespace Serialize {
         void writeFunctionError(uint16_t index, MessageResult error, FormattedMessageStream &target, MessageId answerId);
 
         void writeAction(OffsetPtr offset, void *data, ParticipantId answerTarget, MessageId answerId, const std::set<ParticipantId> &targets = {}) const;
-        void writeRequest(OffsetPtr offset, void *data, ParticipantId requester = 0, MessageId requesterTransactionId = 0, GenericMessageReceiver receiver = {}) const;
+        void writeRequest(OffsetPtr offset, void *data, ParticipantId requester = 0, MessageId requesterTransactionId = 0, GenericMessageReceiver receiver = {}, ContextPtr context = {}) const;
         void writeRequestResponse(OffsetPtr offset, void *data, ParticipantId answerTarget, MessageId answerId) const;
 
     private:
@@ -93,11 +93,11 @@ namespace Serialize {
         friend struct SerializableUnitPtr;
         friend struct SerializableDataPtr;
 
-        friend META_EXPORT StreamResult tag_invoke(apply_map_t, SyncableUnitBase &unit, CallerHierarchyFormattedSerializeStream in, bool success);
-        template <typename... Configs>
-        friend void tag_invoke(set_active_t<Configs...>, SyncableUnitBase &unit, bool active, bool existenceChanged, const CallerHierarchyBasePtr &hierarchy)
+        friend META_EXPORT StreamResult tag_invoke(apply_map_t, SyncableUnitBase &unit, FormattedSerializeStream &in, bool success, ContextPtr context);
+        template <typename... Configs, typename Context>
+        friend void tag_invoke(set_active_t<Configs...>, SyncableUnitBase &unit, bool active, bool existenceChanged, Context &&context)
         {
-            unit.setActive(active, existenceChanged);
+            unit.setActive(active, existenceChanged, context);
         }
         friend META_EXPORT StreamResult convertSyncablePtr(FormattedSerializeStream &in, UnitId id, SyncableUnitBase *&out, const SerializeTable *&type);
 
@@ -158,13 +158,12 @@ namespace Serialize {
         template <auto f, typename... Args>
         auto call(Args &&...args)
         {
-            using traits = typename Callable<f>::traits;
-            using R = typename traits::return_type;
+            using R = typename Callable<f>::traits::return_type;
 
             if constexpr (std::same_as<R, void>) {
                 Execution::Promise<MessageResult> promise;
                 Execution::Future<MessageResult> future = promise.getFuture();
-                typename traits::decay_argument_types::as_tuple argTuple { std::forward<Args>(args)... };
+                typename context_args<decltype(f)>::as_tuple argTuple { std::forward<Args>(args)... };
                 if (this->isMaster()) {
                     this->writeFunctionAction(functionIndex<f>, &argTuple);
                     TupleUnpacker::invokeExpand(f, static_cast<T *>(this), argTuple);
@@ -176,7 +175,7 @@ namespace Serialize {
             } else {
                 Execution::Promise<MessageResult, R> promise;
                 Execution::Future<MessageResult, R> future = promise.getFuture();
-                typename traits::decay_argument_types::as_tuple argTuple { std::forward<Args>(args)... };
+                typename context_args<decltype(f)>::as_tuple argTuple { std::forward<Args>(args)... };
                 if (this->isMaster()) {
                     this->writeFunctionAction(functionIndex<f>, &argTuple);
                     promise.set_value(TupleUnpacker::invokeExpand(f, static_cast<T *>(this), argTuple));
@@ -192,39 +191,47 @@ namespace Serialize {
         {
             assert(this->isMaster());
             if (!targets.empty()) {
-                using traits = typename Callable<f>::traits;
-                typename traits::decay_argument_types::as_tuple argTuple { std::forward<Args>(args)... };
+                typename context_args<decltype(f)>::as_tuple argTuple { std::forward<Args>(args)... };
                 this->writeFunctionAction(functionIndex<f>, &argTuple, targets);
             }
         }
 
         template <auto f, typename... Args>
-            requires std::constructible_from<typename SyncFunctionTraits<typename Callable<f>::traits>::decay_argument_types::as_tuple, Args...>
+            requires std::constructible_from<typename context_args<decltype(f)>::as_tuple, Args...>
         void notify(Args &&...args)
         {
             assert(this->isMaster());
-            using traits = typename Callable<f>::traits;
-            typename traits::decay_argument_types::as_tuple argTuple { std::forward<Args>(args)... };
+            typename context_args<decltype(f)>::as_tuple argTuple { std::forward<Args>(args)... };
             this->writeFunctionAction(functionIndex<f>, &argTuple);
         }
 
         template <auto f, typename... Args>
         auto query(Args &&...args)
-            requires std::constructible_from<typename SyncFunctionTraits<typename Callable<f>::traits>::decay_argument_types::as_tuple, Args...>
+            requires std::constructible_from<typename context_args<decltype(f)>::as_tuple, Args...>
         {
-            using traits = SyncFunctionTraits<typename Callable<f>::traits>;
-            using R = typename traits::return_type;
-            using Tuple = traits::decay_argument_types::as_tuple;
+            using R = typename Callable<f>::traits::return_type;
+            using Tuple = typename context_args<decltype(f)>::as_tuple;
             Tuple argsTuple { std::forward<Args>(args)... };
             Execution::Promise<MessageResult, R> promise;
             Execution::Future<MessageResult, R> future = promise.getFuture();
             if (this->isMaster()) {
-                if constexpr (std::same_as<decltype(TupleUnpacker::invokeExpand(f, static_cast<T *>(this), traits::patchArgs(std::move(argsTuple), { sLocalMasterParticipantId }))), void>) {
-                    TupleUnpacker::invokeExpand(f, static_cast<T *>(this), traits::patchArgs(std::move(argsTuple), { sLocalMasterParticipantId }));
-                    promise.set_value();
-                } else {
-                    promise.set_value(TupleUnpacker::invokeExpand(f, static_cast<T *>(this), traits::patchArgs(std::move(argsTuple), { sLocalMasterParticipantId })));
-                }
+
+                StreamResult result = context_invoke([&](auto &&...contextArgs) -> StreamResult {
+                    TupleUnpacker::invokeFromTuple([&](auto &&...args) {
+                        if constexpr (std::same_as<R, void>) {
+                            std::invoke(f, static_cast<T *>(this), std::forward<decltype(args)>(args)..., std::forward<decltype(contextArgs)>(contextArgs)...);
+                            promise.set_value();
+                        } else {
+                            promise.set_value(std::invoke(f, static_cast<T *>(this), std::forward<decltype(args)>(args)..., std::forward<decltype(contextArgs)>(contextArgs)...));
+                        }
+                    },
+                        std::move(argsTuple));
+                    return {};
+                },
+                    context_contextual<decltype(f)> {}, SyncFunctionContext { sLocalMasterParticipantId });
+
+                assert(!result.mError);
+
             } else {
                 this->writeFunctionRequest(functionIndex<f>, QUERY, &argsTuple, 0, 0, std::move(promise));
             }
@@ -233,13 +240,21 @@ namespace Serialize {
 
         template <auto f, typename... Args>
         void command(Args &&...args)
-            requires std::constructible_from<typename SyncFunctionTraits<typename Callable<f>::traits>::decay_argument_types::as_tuple, Args...>
+            requires std::constructible_from<typename context_args<decltype(f)>::as_tuple, Args...>
         {
-            using traits = SyncFunctionTraits<typename Callable<f>::traits>;
-            using Tuple = typename traits::decay_argument_types::as_tuple;
+            using Tuple = typename context_args<decltype(f)>::as_tuple;
             Tuple argTuple { std::forward<Args>(args)... };
             if (this->isMaster()) {
-                TupleUnpacker::invokeExpand(f, static_cast<T *>(this), traits::patchArgs(std::move(argTuple), { sLocalMasterParticipantId }));
+                StreamResult result = context_invoke([&](auto &&...contextArgs) -> StreamResult {
+                    TupleUnpacker::invokeFromTuple([&](auto &&...args) {
+                        std::invoke(f, static_cast<T *>(this), std::forward<decltype(args)>(args)..., std::forward<decltype(contextArgs)>(contextArgs)...);
+                    },
+                        std::move(argTuple));
+                    return {};
+                },
+                    context_contextual<decltype(f)> {}, SyncFunctionContext { sLocalMasterParticipantId });
+
+                assert(!result.mError);
             } else {
                 this->writeFunctionRequest(functionIndex<f>, QUERY, &argTuple);
             }

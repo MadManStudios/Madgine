@@ -31,6 +31,14 @@ struct type_pack<> {
         struct resize_helper<0, Fill, T...> {
             using type = type_pack<T...>;
         };
+
+        template <size_t>
+        struct recurse;
+
+        template <>
+        struct recurse<0> {
+            using tail = type_pack<>;
+        };
     };
 
     using indices = std::index_sequence<>;
@@ -92,6 +100,7 @@ struct type_pack<Head, Ty...> {
         template <>
         struct recurse<0> {
             using type = Head;
+            using tail = type_pack<Head, Ty...>;
         };
 
         template <typename, typename T>
@@ -141,6 +150,8 @@ struct type_pack<Head, Ty...> {
     using concat = typename Pack2::template prepend<Head, Ty...>;
     template <size_t n, typename Fill = void>
     using resize = typename helpers::template resize_helper<n, Fill>::type;
+    template <size_t n>
+    using drop = typename helpers::template recurse<n>::tail;
 
     template <template <typename> typename F>
     using transform = type_pack<F<Head>, F<Ty>...>;

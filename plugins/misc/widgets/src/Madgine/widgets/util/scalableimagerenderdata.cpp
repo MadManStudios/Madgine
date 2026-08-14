@@ -28,7 +28,7 @@ SERIALIZETABLE_END(Engine::Widgets::ScalableImageRenderData)
 namespace Engine {
 namespace Widgets {
 
-    void ScalableImageRenderData::setImageName(std::string_view name, WidgetManager *mgr)
+    void ScalableImageRenderData::setImageName(std::string_view name, Contextual<WidgetManager&> mgr)
     {
         setImage(mgr->getImage(name));
     }

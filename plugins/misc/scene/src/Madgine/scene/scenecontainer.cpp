@@ -23,9 +23,9 @@ METATABLE_BEGIN(Engine::Scene::SceneContainer)
     READONLY_PROPERTY(entities, entities)
 METATABLE_END(Engine::Scene::SceneContainer)
 
-static Engine::Threading::DataMutex::Lock static_lock(Engine::Scene::SceneContainer *container)
+static Engine::Threading::DataMutex::Lock static_lock(Engine::Serialize::ContextPtr context)
 {
-    return container->mutex().lock(Engine::AccessMode::WRITE);
+    return context_get<Engine::Scene::SceneContainer>(context)->mutex().lock(Engine::AccessMode::WRITE);
 }
 
 SERIALIZETABLE_BEGIN(Engine::Scene::SceneContainer,
@@ -81,10 +81,10 @@ namespace Scene {
         mEntities.erase(it);
     }
 
-    Serialize::StreamResult SceneContainer::readEntity(Serialize::CallerHierarchyFormattedSerializeStream in, OutRef<SceneContainer> &mgr, std::string &name)
+    Serialize::StreamResult SceneContainer::readEntity(Serialize::FormattedSerializeStream &in, OutRef<SceneContainer> &mgr, std::string &name)
     {
         mgr = *this;
-        STREAM_PROPAGATE_ERROR(in.mStream.beginExtendedRead("Entity", 1));
+        STREAM_PROPAGATE_ERROR(in.beginExtendedRead("Entity", 1));
         return Serialize::read(in, name, "name");
     }
 
@@ -95,7 +95,7 @@ namespace Scene {
         return make_tuple(std::ref(*this), actualName, std::move(init));
     }
 
-    const char *SceneContainer::writeEntity(Serialize::CallerHierarchyFormattedSerializeStream out, const Entity::EntityHandle &handle) const
+    const char *SceneContainer::writeEntity(Serialize::FormattedSerializeStream &out, const Entity::EntityHandle &handle) const
     {
         std::string name;
         Execution::access_binding(handle.ptr(), [&](Entity::Entity &entity) {
@@ -104,7 +104,7 @@ namespace Scene {
         if (name.empty()) {
             return nullptr;
         }
-        out.mStream.beginExtendedWrite("Entity", 1);
+        out.beginExtendedWrite("Entity", 1);
         write(out, name, "name");
 
         return "Entity";

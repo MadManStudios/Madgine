@@ -25,9 +25,9 @@ namespace Type {
         return mConstructors[matchedIndex].mInvoker(*this, storage, args, inlineSize);
     }
 
-    Serialize::StreamResult StorageOps::read(Serialize::CallerHierarchyFormattedSerializeStream in, BaseStorage &storage, const char *name, size_t inlineSize) const
+    Serialize::StreamResult StorageOps::read(Serialize::FormattedSerializeStream &in, BaseStorage &storage, const char *name, size_t inlineSize, Serialize::ContextPtr context) const
     {
-        return mRead(*this, in, storage, name, inlineSize);
+        return mRead(*this, in, storage, name, inlineSize, context);
     }
 
 }

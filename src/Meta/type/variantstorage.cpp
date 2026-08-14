@@ -62,15 +62,15 @@ namespace Type {
             return { Reflect::ExtendedTypeEnum::VariantType, { typeList[0]->mType, typeList[1]->mType } };
         }
 
-        static Serialize::StreamResult sRead(const StorageOps &ops, Serialize::CallerHierarchyFormattedSerializeStream in, BaseStorage &storage, const char *name, size_t inlineSize)
+        static Serialize::StreamResult sRead(const StorageOps &ops, Serialize::FormattedSerializeStream &in, BaseStorage &storage, const char *name, size_t inlineSize, Serialize::ContextPtr context)
         {
             assert(inlineSize > 0);
             assert(inlineSize >= sizeof(AllocationPtr) + sizeof(uintptr_t));
 
             uint32_t newIndex;
-            STREAM_PROPAGATE_ERROR(in.mStream.beginExtendedRead(name, 1));
+            STREAM_PROPAGATE_ERROR(in.beginExtendedRead(name, 1));
 
-            STREAM_PROPAGATE_ERROR(Serialize::read(in, newIndex, "type"));
+            STREAM_PROPAGATE_ERROR(Serialize::read(in, newIndex, "type", context));
 
             VariantStorage &vStorage = static_cast<VariantStorage &>(storage);
             const VariantStorageOps &vOps = static_cast<const VariantStorageOps &>(ops);
@@ -87,10 +87,10 @@ namespace Type {
                 vStorage.mIndex = newIndex + 1;
             }
 
-            return vOps.mTypeList[vStorage.mIndex - 1]->read(in, storage, name, sizeof(AllocationPtr));
+            return vOps.mTypeList[vStorage.mIndex - 1]->read(in, storage, name, sizeof(AllocationPtr), context);
         }
 
-        static void sWrite(Serialize::CallerHierarchyFormattedSerializeStream out, const BaseStorage &storage, const char *name, size_t inlineSize)
+        static void sWrite(Serialize::FormattedSerializeStream &out, const BaseStorage &storage, const char *name, size_t inlineSize, Serialize::ContextPtr context)
         {
             assert(inlineSize > 0);
             assert(inlineSize >= sizeof(AllocationPtr) + sizeof(uintptr_t));
@@ -98,18 +98,18 @@ namespace Type {
             const VariantStorage &vStorage = static_cast<const VariantStorage &>(storage);
             const VariantStorageOps &vOps = static_cast<const VariantStorageOps &>(storage.mType);
 
-            out.mStream.beginExtendedWrite(name, 1);
+            out.beginExtendedWrite(name, 1);
             Serialize::write(out, vStorage.mIndex - 1, "type");
 
-            return vOps.mTypeList[vStorage.mIndex - 1]->mWrite(out, storage, name, sizeof(AllocationPtr));
+            return vOps.mTypeList[vStorage.mIndex - 1]->mWrite(out, storage, name, sizeof(AllocationPtr), context);
         }
 
-        static Serialize::StreamResult sApplyMap(BaseStorage &storage, Serialize::CallerHierarchyFormattedSerializeStream in, bool success, size_t inlineSize)
+        static Serialize::StreamResult sApplyMap(BaseStorage &storage, Serialize::FormattedSerializeStream &in, bool success, size_t inlineSize, Serialize::ContextPtr context)
         {
             assert(inlineSize > 0);
             assert(inlineSize >= sizeof(AllocationPtr) + sizeof(uintptr_t));
 
-            return static_cast<const VariantStorageOps &>(storage.mType).mTypeList[static_cast<VariantStorage &>(storage).mIndex - 1]->mApplyMap(storage, in, success, sizeof(AllocationPtr));
+            return static_cast<const VariantStorageOps &>(storage.mType).mTypeList[static_cast<VariantStorage &>(storage).mIndex - 1]->mApplyMap(storage, in, success, sizeof(AllocationPtr), context);
         }
 
         static constexpr Constructor sConstructors[2] { { sMatcher, sConstructor }, {} };

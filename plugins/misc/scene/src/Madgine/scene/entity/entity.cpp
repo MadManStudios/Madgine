@@ -18,14 +18,14 @@
 
 namespace Engine {
 
-constexpr auto componentBuilder()
+static constexpr auto componentBuilder()
 {
     std::array<Reflect::Accessor, 32> accessors;
 
     return accessors;
 }
 
-void componentInit(std::array<Reflect::Accessor, 32> &accessors)
+static void componentInit(std::array<Reflect::Accessor, 32> &accessors)
 {
 #if ENABLE_PLUGINS
     Scene::Entity::EntityComponentCollector::addInitializer([&]() {
@@ -225,7 +225,7 @@ namespace Scene {
             return mLifetime;
         }
 
-        Serialize::StreamResult Entity::readComponent(Serialize::CallerHierarchyFormattedSerializeStream in, uint32_t &type, OutRef<EntityComponentBase> &ptr)
+        Serialize::StreamResult Entity::readComponent(Serialize::FormattedSerializeStream &in, uint32_t &type, OutRef<EntityComponentBase> &ptr)
         {
             std::string name;
             STREAM_PROPAGATE_ERROR(Serialize::beginExtendedTypedRead(in, name));
@@ -234,7 +234,7 @@ namespace Scene {
             return {};
         }
 
-        const char *Entity::writeComponent(Serialize::CallerHierarchyFormattedSerializeStream out, const EntityComponentHandle &p) const
+        const char *Entity::writeComponent(Serialize::FormattedSerializeStream &out, const EntityComponentHandle &p) const
         {
             return Serialize::beginExtendedTypedWrite(out, EntityComponentRegistry::sComponentName(p.mType));
         }

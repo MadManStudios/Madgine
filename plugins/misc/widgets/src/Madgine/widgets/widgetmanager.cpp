@@ -118,7 +118,7 @@ namespace Widgets {
         return w;
     }
 
-    Serialize::StreamResult WidgetManager::readWidget(Serialize::CallerHierarchyFormattedSerializeStream &in, std::unique_ptr<WidgetBase> &widget, WidgetBase *parent)
+    Serialize::StreamResult WidgetManager::readWidget(Serialize::FormattedSerializeStream &in, std::unique_ptr<WidgetBase> &widget, WidgetBase *parent)
     {
         std::string _class;
         STREAM_PROPAGATE_ERROR(Serialize::beginExtendedTypedRead(in, _class));
@@ -145,17 +145,17 @@ namespace Widgets {
         return {};
     }
 
-    Serialize::StreamResult WidgetManager::readWidgetStub(Serialize::CallerHierarchyFormattedSerializeStream &in, std::unique_ptr<WidgetBase> &widget)
+    Serialize::StreamResult WidgetManager::readWidgetStub(Serialize::FormattedSerializeStream &in, std::unique_ptr<WidgetBase> &widget)
     {
         return readWidget(in, widget, nullptr);
     }
 
-    const char *WidgetManager::writeWidget(Serialize::CallerHierarchyFormattedSerializeStream &out, const std::unique_ptr<WidgetBase> &widget) const
+    const char *WidgetManager::writeWidget(Serialize::FormattedSerializeStream &out, const std::unique_ptr<WidgetBase> &widget) const
     {
         return Serialize::beginExtendedTypedWrite(out, widget->getClass());
     }
 
-    Serialize::StreamResult WidgetManager::scanWidget(const Serialize::SerializeTable *&out, Serialize::CallerHierarchyFormattedSerializeStream &in)
+    Serialize::StreamResult WidgetManager::scanWidget(const Serialize::SerializeTable *&out, Serialize::FormattedSerializeStream &in)
     {
         std::string _class;
         STREAM_PROPAGATE_ERROR(Serialize::beginExtendedTypedRead(in, _class));
@@ -165,7 +165,7 @@ namespace Widgets {
         } else {
             auto it = WidgetRegistry::sComponentsByName().find(_class);
             if (it != WidgetRegistry::sComponentsByName().end()) {
-                out = WidgetRegistry::get(it->second).mType;
+                out = WidgetRegistry::get(it->second).Serialize::TypeAnnotation::mType;
             } else {
                 WidgetLoader::Resource *res = WidgetLoader::get(_class);
                 if (res) {

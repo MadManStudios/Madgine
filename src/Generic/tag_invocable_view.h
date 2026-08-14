@@ -4,24 +4,24 @@
 
 namespace Engine {
 
-template <typename CPO, typename R, std::same_as<void> T, std::same_as<Placeholder<0>> Placeholder, typename... Args>
+template <typename CPO, typename R, std::same_as<void> T, typename... Args>
 struct tag_invocable_view_helper {
 
     tag_invocable_view_helper() = default;
 
-    template <typename U>
+    template <Concepts::DecayedNoneOf<tag_invocable_view_helper> U>
         requires tag_invocable<CPO, U &, Args...>
     tag_invocable_view_helper(U &&t)
         : mPtr(std::addressof(t))
-        , mF([](const void *p, Args...args) -> R {
-            U &t = *static_cast<std::remove_reference_t<U> *>(const_cast<void*>(p));
+        , mF([](const void *p, Args... args) -> R {
+            U &t = *static_cast<std::remove_reference_t<U> *>(const_cast<void *>(p));
             return CPO {}(t, std::forward<Args>(args)...);
         })
     {
     }
 
     template <Concepts::DecayedOneOf<tag_invocable_view_helper> U>
-    friend R tag_invoke(CPO, U &&self, Args...args)
+    friend R tag_invoke(CPO, U &&self, Args... args)
     {
         return self.mF(self.mPtr, std::forward<Args>(args)...);
     }
@@ -30,7 +30,7 @@ struct tag_invocable_view_helper {
     R (*mF)(const void *, Args...) = nullptr;
 };
 
-template <typename CPO>
-using tag_invocable_view = CallableTraits<typename CPO::signature>::template instance<tag_invocable_view_helper, CPO>;
+template <typename CPO, typename Signature = CPO::signature>
+using tag_invocable_view = CallableTraits<Signature>::template instance<tag_invocable_view_helper, CPO>;
 
 }

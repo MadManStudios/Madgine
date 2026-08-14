@@ -1,9 +1,9 @@
 #pragma once
 
-#include "Generic/callerhierarchy.h"
 #include "Generic/closure.h"
 
 #include "../../type/typenames.h"
+#include "../context.h"
 #include "../primitivetypes.h"
 #include "serializetable_forward.h"
 
@@ -49,27 +49,27 @@ namespace Serialize {
         const char *mTypeName;
         SerializeTableCallbacks mCallbacks;
         const SerializeTable &(*mBaseType)();
-        StreamResult (*mReadState)(const SerializeTable *, void *, CallerHierarchyFormattedSerializeStream);
+        StreamResult (*mReadState)(const SerializeTable *, void *, FormattedSerializeStream &, ContextPtr);
         const Serializer *mFields;
         const SyncFunction *mFunctions;
         bool mIsTopLevelUnit;
 
-        void writeState(const void *unit, CallerHierarchyFormattedSerializeStream out) const;
-        StreamResult readState(void *unit, CallerHierarchyFormattedSerializeStream in) const;
+        void writeState(const void *unit, FormattedSerializeStream &out, ContextPtr context) const;
+        StreamResult readState(void *unit, FormattedSerializeStream &in, ContextPtr context) const;
 
-        StreamResult readAction(void *unit, CallerHierarchyFormattedSerializeStream in, PendingRequest &request) const;
-        StreamResult readRequest(void *unit, FormattedMessageStream &in, MessageId id) const;
+        StreamResult readAction(void *unit, FormattedSerializeStream &in, PendingRequest &request, ContextPtr context) const;
+        StreamResult readRequest(void *unit, FormattedMessageStream &in, MessageId id, ContextPtr context) const;
 
-        StreamResult applyMap(void *unit, CallerHierarchyFormattedSerializeStream in, bool success) const;
-        void setSynced(SerializableUnitBase *unit, bool b, const CallerHierarchyBasePtr &hierarchy = {}) const;
-        void setActive(void *unit, bool active, bool existenceChanged) const;
-        void setActive(SerializableUnitBase *unit, bool active, bool existenceChanged) const;
+        StreamResult applyMap(void *unit, FormattedSerializeStream &in, bool success, ContextPtr context) const;
+        void setSynced(SerializableUnitBase *unit, bool b, ContextPtr context = {}) const;
+        void setActive(void *unit, bool active, bool existenceChanged, ContextPtr context) const;
+        void setActive(SerializableUnitBase *unit, bool active, bool existenceChanged, ContextPtr context) const;
         void setParent(SerializableUnitBase *unit) const;
 
         void writeAction(const void *unit, uint16_t index, const std::vector<WriteMessage> &outStreams, void *data) const;
-        void writeRequest(const void *unit, uint16_t index, CallerHierarchyFormattedSerializeStream out, void *data) const;
+        void writeRequest(const void *unit, uint16_t index, FormattedSerializeStream &out, void *data, ContextPtr context) const;
 
-        StreamResult visitStream(CallerHierarchyFormattedSerializeStream in, const StreamVisitor &visitor, size_t depth) const;
+        StreamResult visitStream(FormattedSerializeStream &in, const StreamVisitor &visitor, size_t depth) const;
 
         uint16_t getIndex(OffsetPtr offset) const;
         const Serializer &get(uint16_t index) const;
@@ -77,12 +77,13 @@ namespace Serialize {
         const SyncFunction &getFunction(uint16_t index) const;
 
         void writeFunctionArguments(const std::vector<WriteMessage> &outStreams, uint16_t index, FunctionType type, const void *args) const;
-        void writeFunctionResult(CallerHierarchyFormattedSerializeStream out, uint16_t index, const void *args) const;
-        void writeFunctionError(CallerHierarchyFormattedSerializeStream out, uint16_t index, MessageResult error) const;
-        StreamResult readFunctionAction(SyncableUnitBase *unit, CallerHierarchyFormattedSerializeStream in, PendingRequest &request) const;
-        StreamResult readFunctionRequest(SyncableUnitBase *unit, FormattedMessageStream &in, MessageId id) const;
-        StreamResult readFunctionError(SyncableUnitBase *unit, CallerHierarchyFormattedSerializeStream in, PendingRequest &request) const;
+        void writeFunctionResult(FormattedSerializeStream &out, uint16_t index, const void *args) const;
+        void writeFunctionError(FormattedSerializeStream &out, uint16_t index, MessageResult error) const;
+        StreamResult readFunctionAction(SyncableUnitBase *unit, FormattedSerializeStream &in, PendingRequest &request, ContextPtr context) const;
+        StreamResult readFunctionRequest(SyncableUnitBase *unit, FormattedMessageStream &in, MessageId id, ContextPtr context) const;
+        StreamResult readFunctionError(SyncableUnitBase *unit, FormattedSerializeStream &in, PendingRequest &request, ContextPtr context) const;
     };
 
 }
 }
+

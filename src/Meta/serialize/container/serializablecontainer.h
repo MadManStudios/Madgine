@@ -198,15 +198,16 @@ namespace Serialize {
             return temp;
         }
 
-        friend void tag_invoke(set_synced_t cpo, container &c, bool b, const CallerHierarchyBasePtr &hierarchy)
+        template <typename Context>
+        friend void tag_invoke(set_synced_t cpo, container &c, bool b, Context &&context)
         {
             for (auto &e : c.physical()) {
-                cpo(e, b, CallerHierarchyPtr { OffsetPtr::parent(&c) });
+                cpo(e, b, context_set(context, *OffsetPtr::parent(&c)));
             }
         }
 
-        template <typename... Configs>
-        friend void tag_invoke(set_active_t<Configs...> cpo, container &c, bool active, bool existenceChanged, const CallerHierarchyBasePtr &hierarchy)
+        template <typename... Configs, typename Context>
+        friend void tag_invoke(set_active_t<Configs...> cpo, container &c, bool active, bool existenceChanged, Context &&context)
         {
             c.setActive(active, existenceChanged, CreatorSelector<Configs...>::controlled);
         }
@@ -280,13 +281,13 @@ namespace Serialize {
                 }
                 if (mInserted) {
                     if (this->mContainer.isSynced())
-                        set_synced(*mIt, true, CallerHierarchyPtr { OffsetPtr::parent(&this->mContainer) });
+                        set_synced(*mIt, true, context_set(ContextPtr{}, *OffsetPtr::parent(&this->mContainer)));
                 }
                 if (this->mContainer.isItemActive(mIt)) {
                     this->mContainer.Observer::operator()(mIt, (mInserted ? Containers::AFTER : Containers::ABORTED) | Containers::EMPLACE);
                     if (mInserted) {
                         this->mContainer.Observer::operator()(mIt, Containers::BEFORE | Containers::ACTIVATE_ITEM);
-                        set_active<>(*mIt, true, true, CallerHierarchyPtr { OffsetPtr::parent(&this->mContainer) });
+                        set_active<>(*mIt, true, true, context_set(ContextPtr {}, *OffsetPtr::parent(&this->mContainer)));
                         this->mContainer.Observer::operator()(mIt, Containers::AFTER | Containers::ACTIVATE_ITEM);
                     }
                 }
@@ -337,13 +338,13 @@ namespace Serialize {
                     bool inserted = std::get<1>(handle);
                     if (inserted) {
                         if (this->mContainer.isSynced())
-                            set_synced(*it, true, CallerHierarchyPtr { OffsetPtr::parent(&this->mContainer) });
+                            set_synced(*it, true, context_set(ContextPtr {}, *OffsetPtr::parent(&this->mContainer)));
                     }
                     if (this->mContainer.isItemActive(it)) {
                         this->mContainer.Observer::operator()(it, (inserted ? Containers::AFTER : Containers::ABORTED) | Containers::EMPLACE);
                         if (inserted) {
                             this->mContainer.Observer::operator()(it, Containers::BEFORE | Containers::ACTIVATE_ITEM);
-                            set_active<>(*it, true, true, CallerHierarchyPtr { OffsetPtr::parent(&this->mContainer) });
+                            set_active<>(*it, true, true, context_set(ContextPtr {}, *OffsetPtr::parent(&this->mContainer)));
                             this->mContainer.Observer::operator()(it, Containers::AFTER | Containers::ACTIVATE_ITEM);
                         }
                     }
@@ -359,11 +360,11 @@ namespace Serialize {
                 : Operation(c)
             {
                 if (this->mContainer.isSynced()) {
-                    set_synced(*it, false, CallerHierarchyPtr { OffsetPtr::parent(&this->mContainer) });
+                    set_synced(*it, false, context_set(ContextPtr {}, *OffsetPtr::parent(&this->mContainer)));
                 }
                 if (this->mContainer.isItemActive(it)) {
                     this->mContainer.Observer::operator()(it, Containers::BEFORE | Containers::DEACTIVATE_ITEM);
-                    set_active<>(*it, false, true, CallerHierarchyPtr { OffsetPtr::parent(&this->mContainer) });
+                    set_active<>(*it, false, true, context_set(ContextPtr {}, *OffsetPtr::parent(&this->mContainer)));
                     this->mContainer.Observer::operator()(it, Containers::AFTER | Containers::DEACTIVATE_ITEM);
                     this->mContainer.Observer::operator()(it, Containers::BEFORE | Containers::ERASE);
                     mWasActive = true;
@@ -398,12 +399,12 @@ namespace Serialize {
             {
                 if (this->mContainer.isSynced()) {
                     for (iterator it = from; it != to; ++it) {
-                        set_synced(*it, false, CallerHierarchyPtr { OffsetPtr::parent(&this->mContainer) });
+                        set_synced(*it, false, context_set(ContextPtr{}, *OffsetPtr::parent(&this->mContainer)));
                     }
                 }
                 for (iterator it = from; it != to && this->mContainer.isItemActive(it); ++it) {
                     this->mContainer.Observer::operator()(it, Containers::BEFORE | Containers::DEACTIVATE_ITEM);
-                    set_Active(*it, false, true, CallerHierarchyPtr { OffsetPtr::parent(&this->mContainer) });
+                    set_Active(*it, false, true, context_set(ContextPtr {}, *OffsetPtr::parent(&this->mContainer)));
                     this->mContainer.Observer::operator()(it, Containers::AFTER | Containers::DEACTIVATE_ITEM);
                     this->mContainer.Observer::operator()(it, Containers::BEFORE | Containers::ERASE);
                     ++mCount;
@@ -505,7 +506,7 @@ namespace Serialize {
                         Observer::operator()(it, Containers::AFTER | Containers::EMPLACE);
                     }
                     Observer::operator()(it, Containers::BEFORE | Containers::ACTIVATE_ITEM);
-                    set_active<>(*it, active, existenceChange || !controlled, CallerHierarchyPtr { OffsetPtr::parent(this) });
+                    set_active<>(*it, active, existenceChange || !controlled, context_set(ContextPtr {}, *OffsetPtr::parent(this)));
                     Observer::operator()(it, Containers::AFTER | Containers::ACTIVATE_ITEM);
                 }
             } else {
@@ -513,7 +514,7 @@ namespace Serialize {
                     mActiveIterator = _traits::prev(*this, mActiveIterator);
                     iterator it = _traits::toIterator(*this, mActiveIterator);
                     Observer::operator()(it, Containers::BEFORE | Containers::DEACTIVATE_ITEM);
-                    set_active<>(*it, active, existenceChange || !controlled, CallerHierarchyPtr { OffsetPtr::parent(this) });
+                    set_active<>(*it, active, existenceChange || !controlled, context_set(ContextPtr {}, *OffsetPtr::parent(this)));
                     Observer::operator()(it, Containers::AFTER | Containers::DEACTIVATE_ITEM);
                     if (existenceChange) {
                         Observer::operator()(it, Containers::BEFORE | Containers::ERASE);

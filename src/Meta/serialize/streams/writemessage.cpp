@@ -56,10 +56,5 @@ namespace Serialize {
         return *mStream;
     }
 
-    WriteMessage::operator CallerHierarchyFormattedSerializeStream() const
-    {
-        return *mStream;
-    }
-
 }
 }

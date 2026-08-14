@@ -623,9 +623,9 @@ namespace Behavior {
             return construct(NodeRegistry::get(NodeRegistry::sComponentsByName().at(name)), *this);
         }
 
-        Serialize::StreamResult NodeGraph::readNode(Serialize::CallerHierarchyFormattedSerializeStream in, std::unique_ptr<NodeBase> &node)
+        Serialize::StreamResult NodeGraph::readNode(Serialize::FormattedSerializeStream &in, std::unique_ptr<NodeBase> &node)
         {
-            STREAM_PROPAGATE_ERROR(in.mStream.beginExtendedRead("Node", 1));
+            STREAM_PROPAGATE_ERROR(in.beginExtendedRead("Node", 1));
 
             std::string name;
             STREAM_PROPAGATE_ERROR(read(in, name, "type"));
@@ -654,9 +654,9 @@ namespace Behavior {
             return {};
         }
 
-        const char *NodeGraph::writeNode(Serialize::CallerHierarchyFormattedSerializeStream out, const std::unique_ptr<NodeBase> &node) const
+        const char *NodeGraph::writeNode(Serialize::FormattedSerializeStream &out, const std::unique_ptr<NodeBase> &node) const
         {
-            out.mStream.beginExtendedWrite("Node", 1);
+            out.beginExtendedWrite("Node", 1);
 
             write(out, node->className(), "type");
 

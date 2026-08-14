@@ -61,39 +61,39 @@ namespace Type {
         return mType.mFromValue(*this, value, 0);
     }
 
-    Serialize::StreamResult AllocationStorage::read(Serialize::CallerHierarchyFormattedSerializeStream in, const char *name)
+    Serialize::StreamResult AllocationStorage::read(Serialize::FormattedSerializeStream &in, const char *name, Serialize::ContextPtr context)
     {
-        return mAllocation->mType.mRead(mAllocation->mType, in, *mAllocation, name, 0);
+        return mAllocation->mType.mRead(mAllocation->mType, in, *mAllocation, name, 0, context);
     }
 
-    void AllocationStorage::write(Serialize::CallerHierarchyFormattedSerializeStream out, const char *name) const
+    void AllocationStorage::write(Serialize::FormattedSerializeStream &out, const char *name, Serialize::ContextPtr context) const
     {
-        mAllocation->mType.mWrite(out, *mAllocation, name, 0);
+        mAllocation->mType.mWrite(out, *mAllocation, name, 0, context);
     }
 
-    Serialize::StreamResult AllocationStorage::applyMap(Serialize::CallerHierarchyFormattedSerializeStream in, bool success)
+    Serialize::StreamResult AllocationStorage::applyMap(Serialize::FormattedSerializeStream &in, bool success, Serialize::ContextPtr context)
     {
-        return mAllocation->mType.mApplyMap(*mAllocation, in, success, 0);
+        return mAllocation->mType.mApplyMap(*mAllocation, in, success, 0, context);
     }
 
-    Serialize::StreamResult tag_invoke(const Serialize::apply_map_t &, InlineStorage &storage, Serialize::CallerHierarchyFormattedSerializeStream in, bool success)
+    Serialize::StreamResult tag_invoke(const Serialize::apply_map_t &, InlineStorage &storage, Serialize::FormattedSerializeStream &in, bool success, Serialize::ContextPtr context)
     {
-        return storage.mType.mApplyMap(storage, in, success, sizeof(storage.mDummy));
+        return storage.mType.mApplyMap(storage, in, success, sizeof(storage.mDummy), context);
     }
 }
 
 namespace Serialize {
-    StreamResult Operations<Type::InlineStorage>::read(Serialize::CallerHierarchyFormattedSerializeStream in, Type::InlineStorage &storage, const char *name)
+    StreamResult Operations<Type::InlineStorage>::read(Serialize::FormattedSerializeStream &in, Type::InlineStorage &storage, const char *name, ContextPtr context)
     {
-        return storage.mType.read(in, storage, name, sizeof(storage.mDummy));
+        return storage.mType.read(in, storage, name, sizeof(storage.mDummy), context);
     }
 
-    void Operations<Type::InlineStorage>::write(Serialize::CallerHierarchyFormattedSerializeStream out, const Type::InlineStorage &storage, const char *name)
+    void Operations<Type::InlineStorage>::write(Serialize::FormattedSerializeStream &out, const Type::InlineStorage &storage, const char *name, ContextPtr context)
     {
-        storage.mType.mWrite(out, storage, name, sizeof(storage.mDummy));
+        storage.mType.mWrite(out, storage, name, sizeof(storage.mDummy), context);
     }
 
-    StreamResult Operations<Type::InlineStorage>::visitStream(CallerHierarchyFormattedSerializeStream in, const char *name, const StreamVisitor &visitor, size_t depth)
+    StreamResult Operations<Type::InlineStorage>::visitStream(FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor, size_t depth)
     {
         throw "TODO";
     }

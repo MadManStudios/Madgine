@@ -2,6 +2,7 @@
 
 #include "Meta/reflect/argumentlist.h"
 #include "Meta/reflect/type.h"
+#include "Meta/serialize/context.h"
 #include "Meta/serialize/streams/streamresult.h"
 
 #include "behaviordescriptor.h"
@@ -24,9 +25,9 @@ namespace Behavior {
         virtual Reflect::ScopePtr customScopePtr() = 0;
         virtual Reflect::ArgumentList toArgumentList() = 0;
 
-        virtual Serialize::StreamResult read(Serialize::CallerHierarchyFormattedSerializeStream in) = 0;
-        virtual void write(Serialize::CallerHierarchyFormattedSerializeStream out) = 0;
-        virtual Serialize::StreamResult applyMap(Serialize::CallerHierarchyFormattedSerializeStream in, bool success) = 0;
+        virtual Serialize::StreamResult read(Serialize::FormattedSerializeStream &in, Serialize::ContextPtr context) = 0;
+        virtual void write(Serialize::FormattedSerializeStream &out, Serialize::ContextPtr context) = 0;
+        virtual Serialize::StreamResult applyMap(Serialize::FormattedSerializeStream &in, bool success, Serialize::ContextPtr context) = 0;
 
         virtual ~ParameterTupleBase() = default;
     };
@@ -91,10 +92,10 @@ namespace Behavior {
     private:
         friend struct Serialize::Operations<ParameterTuple>;
 
-        MADGINE_BEHAVIOR_EXPORT friend Serialize::StreamResult tag_invoke(const Serialize::apply_map_t &, ParameterTuple &tuple, Serialize::CallerHierarchyFormattedSerializeStream in, bool success);
+        MADGINE_BEHAVIOR_EXPORT friend Serialize::StreamResult tag_invoke(const Serialize::apply_map_t &, ParameterTuple &tuple, Serialize::FormattedSerializeStream &in, bool success, Serialize::ContextPtr context);
 
-        template <typename... Configs>
-        friend void tag_invoke(Serialize::set_active_t<Configs...>, ParameterTuple &tuple, bool active, bool existenceChanged, const CallerHierarchyBasePtr &)
+        template <typename... Configs, typename Context>
+        friend void tag_invoke(Serialize::set_active_t<Configs...>, ParameterTuple &tuple, bool active, bool existenceChanged, Context &&)
         {
         }
 
@@ -105,10 +106,10 @@ namespace Behavior {
 namespace Serialize {
     template <>
     struct MADGINE_BEHAVIOR_EXPORT Operations<Behavior::ParameterTuple> {
-        static StreamResult read(Serialize::CallerHierarchyFormattedSerializeStream in, Behavior::ParameterTuple &tuple, const char *name);
-        static void write(Serialize::CallerHierarchyFormattedSerializeStream out, const Behavior::ParameterTuple &tuple, const char *name);
+        static StreamResult read(Serialize::FormattedSerializeStream &in, Behavior::ParameterTuple &tuple, const char *name, ContextPtr context);
+        static void write(Serialize::FormattedSerializeStream &out, const Behavior::ParameterTuple &tuple, const char *name, ContextPtr context);
 
-        static StreamResult visitStream(CallerHierarchyFormattedSerializeStream in, const char *name, const StreamVisitor &visitor, size_t depth);
+        static StreamResult visitStream(FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor, size_t depth);
     };
 }
 

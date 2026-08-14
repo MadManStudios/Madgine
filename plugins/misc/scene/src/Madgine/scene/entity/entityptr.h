@@ -53,10 +53,10 @@ namespace Scene {
         private:
             void fromEntity(Entity &e);
 
-            friend Serialize::StreamResult tag_invoke(Serialize::apply_map_t, EntityPtr &, Serialize::CallerHierarchyFormattedSerializeStream, bool);
+            friend Serialize::StreamResult tag_invoke(Serialize::apply_map_t, EntityPtr &, Serialize::FormattedSerializeStream &, bool, Serialize::ContextPtr);
 
-            template <typename... Configs>
-            friend void tag_invoke(Serialize::set_active_t<Configs...>, EntityPtr &, bool, bool, const CallerHierarchyBasePtr &)
+            template <typename... Configs, typename Context>
+            friend void tag_invoke(Serialize::set_active_t<Configs...>, EntityPtr &, bool, bool, Context &&)
             {
             }
         };
@@ -67,9 +67,9 @@ namespace Scene {
 namespace Serialize {
     template <>
     struct Operations<Scene::Entity::EntityPtr> {
-        static StreamResult read(CallerHierarchyFormattedSerializeStream in, Scene::Entity::EntityPtr &e, const char *name);
-        static void write(CallerHierarchyFormattedSerializeStream out, const Scene::Entity::EntityPtr &e, const char *name);
-        static StreamResult visitStream(CallerHierarchyFormattedSerializeStream in, const char *name, const StreamVisitor &visitor, size_t depth);
+        static StreamResult read(FormattedSerializeStream &in, Scene::Entity::EntityPtr &e, const char *name, ContextPtr context);
+        static void write(FormattedSerializeStream &out, const Scene::Entity::EntityPtr &e, const char *name, ContextPtr context);
+        static StreamResult visitStream(FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor, size_t depth);
     };
 }
 

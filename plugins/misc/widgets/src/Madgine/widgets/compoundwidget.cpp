@@ -32,7 +32,7 @@ namespace Widgets {
         Serialize::SerializeManager serializeMgr { "CompoundWidget" };
         Serialize::FormattedSerializeStream stream { Serialize::Formats::xml(), serializeMgr.wrapStream(mDescriptor.resource()->readAsStream(), true) };
 
-        Serialize::StreamResult result = Serialize::read({ stream, CallerHierarchyBasePtr { CallerHierarchy<WidgetBase *> { this } }.append(&manager()) }, *this, "Widget");
+        Serialize::StreamResult result = Serialize::read(stream, *this, "Widget", context_set(context_set(Serialize::ContextPtr {}, *this), manager()));
         if (result.mState != Serialize::StreamState::OK) {
             LOG_ERROR(result);
             throw 0;

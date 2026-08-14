@@ -30,6 +30,15 @@ namespace Widgets {
         std::unique_ptr<Reflect::Accessor[]> accessors = std::make_unique<Reflect::Accessor[]>(widgets.size() + 1);
 
         for (size_t i = 0; i < widgets.size(); i++) {
+
+            const Reflect::MetaTable **type;
+            auto it = WidgetRegistry::sComponentsByName().find(widgets[i].mType);
+            if (it == WidgetRegistry::sComponentsByName().end()) {
+                type = WidgetLoader::load(widgets[i].mType)->metaTable()->mSelf;
+            } else {
+                type = WidgetRegistry::get(it->second).Reflect::TypeAnnotation::mType;
+            }
+
             accessors[i] = {
                 widgets[i].mName.c_str(),
                 nullptr,
@@ -37,7 +46,7 @@ namespace Widgets {
                     return invoke_member(out, [self](CompoundWidget &widget) { return widget.getTemplateWidget(self->mName); }, context, scope);
                 },
                 nullptr,
-                { { Reflect::TypeEnum::ScopeValue }, WidgetLoader::load(widgets[i].mType)->metaTable()->mSelf }
+                { { Reflect::TypeEnum::ScopeValue }, type }
             };
         }
 
