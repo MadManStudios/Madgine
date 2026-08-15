@@ -22,6 +22,7 @@ namespace Scene {
             Math::Matrix4 parentMatrix(Contextual<Entity &> entity) const;
 
             Math::Vector3 worldPosition(Contextual<Entity &> entity) const;
+            void setWorldPosition(const Math::Vector3 &position, Contextual<Entity &> entity);
             Math::Quaternion worldOrientation(Contextual<Entity &> entity) const;
 
             Math::Vector3 mPosition;

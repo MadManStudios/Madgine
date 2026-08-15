@@ -18,7 +18,7 @@ METATABLE_BEGIN(Engine::Scene::Entity::Transform)
     MEMBER(mPosition)
     MEMBER(mScale)
     MEMBER(mOrientation)
-    READONLY_PROPERTY(WorldPosition, worldPosition)
+    PROPERTY(WorldPosition, worldPosition, setWorldPosition)
 METATABLE_END(Engine::Scene::Entity::Transform)
 
 SERIALIZETABLE_BEGIN(Engine::Scene::Entity::Transform)
@@ -56,6 +56,14 @@ namespace Scene {
         Math::Vector3 Transform::worldPosition(Contextual<Entity &> entity) const
         {
             return worldMatrix(entity).GetColumn(3).xyz();
+        }
+
+        void Transform::setWorldPosition(const Math::Vector3 &position, Contextual<Entity &> entity)
+        {
+            Math::Matrix4 parentMat = parentMatrix(entity);
+            Math::Matrix4 invParentMat = parentMat.Inverse();
+            Math::Vector3 localPos = (invParentMat * Math::Vector4(position, 1.0f)).xyz();
+            mPosition = localPos;
         }
 
         Math::Quaternion Transform::worldOrientation(Contextual<Entity &> entity) const
