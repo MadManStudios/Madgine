@@ -187,6 +187,7 @@ namespace Tools {
                               .mPosition = pos },
                             Scene::Entity::Mesh {
                                 .mMesh = resource } },
+                        {},
                         [this](Scene::Entity::EntityPtr ptr) { mEditor.select(std::move(ptr)); });
                 } else if (ImGui::IsDraggableValueTypeBeingAccepted(resource)) {
                     Render::GPUMeshLoader::Handle handle = resource->loadData();

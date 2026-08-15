@@ -119,7 +119,7 @@ namespace Tools {
 
                 if (ImGui::BeginPopupCompoundContextWindow()) {
                     if (ImGui::MenuItem(IMGUI_ICON_PLUS " New Entity")) {
-                        sceneMgr().container("Editor").createEntity("", {}, [this](Scene::Entity::EntityPtr ptr) { select(std::move(ptr)); });
+                        sceneMgr().container("Editor").createEntity("", {}, {}, [this](Scene::Entity::EntityPtr ptr) { select(std::move(ptr)); });
                     }
                     ImGui::EndPopup();
                 }
@@ -400,7 +400,7 @@ namespace Tools {
 
             ImGui::SetNextItemShortcut(ImGuiMod_Ctrl | ImGuiKey_N);
             if (ImGui::Button(IMGUI_ICON_PLUS)) {
-                sceneMgr().container("Editor").createEntity("", {}, [this](Scene::Entity::EntityPtr ptr) { select(std::move(ptr)); });
+                sceneMgr().container("Editor").createEntity("", {}, {}, [this](Scene::Entity::EntityPtr ptr) { select(std::move(ptr)); });
             }
 
             ImGui::EndToolBar();

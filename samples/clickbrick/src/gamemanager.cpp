@@ -130,6 +130,7 @@ void GameManager::spawnBrick()
               .mOrientation = q },
             Engine::Scene::Entity::Mesh {
                 .mMesh = "Brick" } },
+        {},
         [=, this](Engine::Scene::Entity::EntityPtr brick) {
         float speed = rand() / float(RAND_MAX) * 2.0f + 1.0f;
         Engine::Execution::access_binding(brick, [&, this](Engine::Scene::Entity::Entity &e) { e.addBehavior(Brick(speed, dir, q, *this)); });

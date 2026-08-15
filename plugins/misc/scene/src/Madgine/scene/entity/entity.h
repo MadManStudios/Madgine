@@ -29,7 +29,7 @@ namespace Scene {
             //             Entity(Entity &&, bool local);
             Entity(Entity &&) = delete;
 
-            Entity(EntityHandle &handle, SceneContainer &container, const std::string &name);
+            Entity(EntityHandle &handle, SceneContainer &container, const std::string &name, EntityPtr parent = {});
             Entity(const Entity &) = delete;
             ~Entity();
 

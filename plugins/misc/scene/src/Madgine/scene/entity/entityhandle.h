@@ -18,7 +18,7 @@ namespace Scene {
 
             friend struct SyncableEntityComponentBase;
 
-            EntityHandle(SceneContainer &container, const std::string &name, const EntityDescriptor &init = {});
+            EntityHandle(SceneContainer &container, const std::string &name, const EntityDescriptor &init = {}, EntityPtr parent = {});
 
             const EntityPtr &ptr() const;
 

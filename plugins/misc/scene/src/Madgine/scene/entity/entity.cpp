@@ -88,11 +88,12 @@ namespace Scene {
         {
         }*/
 
-        Entity::Entity(EntityHandle &handle, SceneContainer &container, const std::string &name)
+        Entity::Entity(EntityHandle &handle, SceneContainer &container, const std::string &name, EntityPtr parent)
             : mName(name)
             , mHandle(handle)
             , mContainer(container)
             , mLifetime(&container.lifetime())
+            , mParent(std::move(parent))
         {
         }
 

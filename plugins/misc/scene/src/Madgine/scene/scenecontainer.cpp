@@ -88,11 +88,11 @@ namespace Scene {
         return Serialize::read(in, name, "name");
     }
 
-    std::tuple<SceneContainer &, std::string, Entity::EntityDescriptor> SceneContainer::createEntityData(const std::string &name, Entity::EntityDescriptor init)
+    std::tuple<SceneContainer &, std::string, Entity::EntityDescriptor, Entity::EntityPtr> SceneContainer::createEntityData(const std::string &name, Entity::EntityDescriptor init, Entity::EntityPtr parent)
     {
         std::string actualName = name.empty() ? generateUniqueName() : name;
 
-        return make_tuple(std::ref(*this), actualName, std::move(init));
+        return make_tuple(std::ref(*this), actualName, std::move(init), parent);
     }
 
     const char *SceneContainer::writeEntity(Serialize::FormattedSerializeStream &out, const Entity::EntityHandle &handle) const
@@ -110,14 +110,14 @@ namespace Scene {
         return "Entity";
     }
 
-    Execution::Future<Serialize::MessageResult, Entity::EntityPtr> SceneContainer::createEntity(const std::string &name, Entity::EntityDescriptor init, Closure<void(Entity::EntityPtr)> cb, Closure<void(Serialize::MessageResult)> onError)
+    Execution::Future<Serialize::MessageResult, Entity::EntityPtr> SceneContainer::createEntity(const std::string &name, Entity::EntityDescriptor init, Entity::EntityPtr parent, Closure<void(Entity::EntityPtr)> cb, Closure<void(Serialize::MessageResult)> onError)
     {
         Execution::Promise<Serialize::MessageResult, Entity::EntityPtr> promise;
         Execution::Future<Serialize::MessageResult, Entity::EntityPtr> future = promise.getFuture();
 
         mLifetime.attach(
-            mutex().locked(AccessMode::WRITE, [this, name, init { std::move(init) }]() mutable {
-                return TupleUnpacker::invokeFlatten(LIFT(mEntities.emplace_async, this), mEntities.end(), createEntityData(name, std::move(init)));
+            mutex().locked(AccessMode::WRITE, [this, name, init { std::move(init) }, parent {std::move(parent)}]() mutable {
+                return TupleUnpacker::invokeFlatten(LIFT(mEntities.emplace_async, this), mEntities.end(), createEntityData(name, std::move(init), std::move(parent)));
             })
             | Execution::let_value(std::identity {}) | Execution::then([cb { std::move(cb) }](auto it) { if (cb) cb(it->ptr()); return it->ptr(); }) | Execution::onError(onError ? std::move(onError) : [](Serialize::MessageResult) {}) | Execution::with_receiver(std::move(promise)));
 

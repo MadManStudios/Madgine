@@ -101,9 +101,9 @@ namespace Engine {
 namespace Scene {
     namespace Entity {
 
-        EntityHandle::EntityHandle(SceneContainer &container, const std::string &name, const EntityDescriptor &init)
+        EntityHandle::EntityHandle(SceneContainer &container, const std::string &name, const EntityDescriptor &init, EntityPtr parent)
         {
-            container.lifetime().attach(EntitySender { {}, *this, container, name, [&](Entity &e) {
+            container.lifetime().attach(EntitySender { {}, *this, container, name, std::move(parent), [&](Entity &e) {
                                                           init.apply(e);                                                              
                                                           mPtr = e.pointer();
                                                       } });

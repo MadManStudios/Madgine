@@ -21,7 +21,8 @@ namespace Scene {
 
         SceneContainer(SceneManager &sceneMgr);
 
-        Execution::Future<Serialize::MessageResult, Entity::EntityPtr> createEntity(const std::string &name = "", Entity::EntityDescriptor init = {}, Closure<void(Entity::EntityPtr)> cb = {}, Closure<void(Serialize::MessageResult)> onError = {});
+        
+        Execution::Future<Serialize::MessageResult, Entity::EntityPtr> createEntity(const std::string &name = "", Entity::EntityDescriptor init = {}, Entity::EntityPtr parent = {}, Closure<void(Entity::EntityPtr)> cb = {}, Closure<void(Serialize::MessageResult)> onError = {});
 
         void startLifetime();
         void endLifetime();
@@ -62,7 +63,7 @@ namespace Scene {
 
     private:
         Serialize::StreamResult readEntity(Serialize::FormattedSerializeStream &in, OutRef<SceneContainer> &mgr, std::string &name);
-        std::tuple<SceneContainer &, std::string, Entity::EntityDescriptor> createEntityData(const std::string &name, Entity::EntityDescriptor init);
+        std::tuple<SceneContainer &, std::string, Entity::EntityDescriptor, Entity::EntityPtr> createEntityData(const std::string &name, Entity::EntityDescriptor init, Entity::EntityPtr parent);
         const char *writeEntity(Serialize::FormattedSerializeStream &out, const Entity::EntityHandle &handle) const;
 
         SYNCABLE_CONTAINER(mEntities, EntityContainer, Execution::SignalFunctor<void, const EntityContainer::iterator &, int>);
