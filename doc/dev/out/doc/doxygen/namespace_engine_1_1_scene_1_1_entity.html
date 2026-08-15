@@ -341,9 +341,9 @@ Functions</h2></td></tr>
 <tr class="separator:a11fa513facf5c6c658abc580de14a4dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af9c4bfbccf3c1b5eea73e16b26fef04d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scene_1_1_entity.html#af9c4bfbccf3c1b5eea73e16b26fef04d">entityComponentHelperWrite</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html">Serialize::FormattedSerializeStream</a> &amp;out, const <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_handle.html">EntityComponentHandle</a> &amp;index, const char *name, <a class="el" href="namespace_engine_1_1_serialize.html#a709a54509cec297f0cc972145d963d0a">Serialize::ContextPtr</a> context)</td></tr>
 <tr class="separator:af9c4bfbccf3c1b5eea73e16b26fef04d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abd79a214e16ed8a9573202a7dc8d8f36"><td class="memTemplParams" colspan="2">template&lt;typename F &gt; </td></tr>
-<tr class="memitem:abd79a214e16ed8a9573202a7dc8d8f36"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scene_1_1_entity.html#abd79a214e16ed8a9573202a7dc8d8f36">EntitySender</a> (<a class="el" href="struct_engine_1_1_execution_1_1base__sender.html">Execution::base_sender</a>, <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_handle.html">EntityHandle</a> &amp;, <a class="el" href="struct_engine_1_1_scene_1_1_scene_container.html">SceneContainer</a> &amp;, const std::string &amp;, F &amp;&amp;) -&gt; <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_sender.html">EntitySender</a>&lt; F &gt;</td></tr>
-<tr class="separator:abd79a214e16ed8a9573202a7dc8d8f36"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a30c0d9a3c57df1ff54b152483f6f9a85"><td class="memTemplParams" colspan="2">template&lt;typename F &gt; </td></tr>
+<tr class="memitem:a30c0d9a3c57df1ff54b152483f6f9a85"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scene_1_1_entity.html#a30c0d9a3c57df1ff54b152483f6f9a85">EntitySender</a> (<a class="el" href="struct_engine_1_1_execution_1_1base__sender.html">Execution::base_sender</a>, <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_handle.html">EntityHandle</a> &amp;, <a class="el" href="struct_engine_1_1_scene_1_1_scene_container.html">SceneContainer</a> &amp;, const std::string &amp;, <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_ptr.html">EntityPtr</a>, F &amp;&amp;) -&gt; <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_sender.html">EntitySender</a>&lt; F &gt;</td></tr>
+<tr class="separator:a30c0d9a3c57df1ff54b152483f6f9a85"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0b03c62c58e7fea44f0e4d47e9eadedf"><td class="memItemLeft" align="right" valign="top">std::unique_ptr&lt; <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_list_base.html">EntityComponentListBase</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scene_1_1_entity.html#a0b03c62c58e7fea44f0e4d47e9eadedf">tag_invoke</a> (<a class="el" href="struct_engine_1_1construct__t.html">construct_t</a>, const <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_list_annotation.html">EntityComponentListAnnotation</a> &amp;object, <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_list_tag.html">EntityComponentListTag</a>)</td></tr>
 <tr class="separator:a0b03c62c58e7fea44f0e4d47e9eadedf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afe02e68f4b546dd83f93237d9ecea851"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scene_1_1_entity.html#afe02e68f4b546dd83f93237d9ecea851">tag_invoke</a> (<a class="el" href="struct_engine_1_1_execution_1_1visit__state__t.html">Execution::visit_state_t</a>, <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_animation_state.html">AnimationState</a> *state, auto &amp;&amp;visitor)</td></tr>
@@ -765,8 +765,8 @@ template&lt;typename T , typename Base  = EntityComponentBase&gt; </div>
 
 </div>
 </div>
-<a id="abd79a214e16ed8a9573202a7dc8d8f36" name="abd79a214e16ed8a9573202a7dc8d8f36"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abd79a214e16ed8a9573202a7dc8d8f36">&#9670;&#160;</a></span>EntitySender()</h2>
+<a id="a30c0d9a3c57df1ff54b152483f6f9a85" name="a30c0d9a3c57df1ff54b152483f6f9a85"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a30c0d9a3c57df1ff54b152483f6f9a85">&#9670;&#160;</a></span>EntitySender()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -800,6 +800,12 @@ template&lt;typename F &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_ptr.html">EntityPtr</a>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">F &amp;&amp;&#160;</td>
           <td class="paramname">&#160;</td>
         </tr>
@@ -816,7 +822,7 @@ template&lt;typename F &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Aug 14 2026 16:21:38 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Sat Aug 15 2026 00:44:59 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>
