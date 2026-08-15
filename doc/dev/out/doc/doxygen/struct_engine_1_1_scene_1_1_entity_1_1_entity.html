@@ -272,8 +272,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ad83d68393a4f5eaee7b2cf5de739c7ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a891b3e249d255fac0675e5f49f2d2512"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity.html#a891b3e249d255fac0675e5f49f2d2512">Entity</a> (<a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity.html">Entity</a> &amp;&amp;)=delete</td></tr>
 <tr class="separator:a891b3e249d255fac0675e5f49f2d2512"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2c3970fd8fe45bc72ba4911bfe6a10fc"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity.html#a2c3970fd8fe45bc72ba4911bfe6a10fc">Entity</a> (<a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_handle.html">EntityHandle</a> &amp;<a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity.html#ace15709aef03080549daf380bd214cab">handle</a>, <a class="el" href="struct_engine_1_1_scene_1_1_scene_container.html">SceneContainer</a> &amp;<a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity.html#a9179d0bf04d3614cc258ccf5cc2d5fbd">container</a>, const std::string &amp;<a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity.html#a5f248e70b429fe7d9415bfe7bb5c3e38">name</a>)</td></tr>
-<tr class="separator:a2c3970fd8fe45bc72ba4911bfe6a10fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d4869dbfab1db7211334320ecbe06fa"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity.html#a8d4869dbfab1db7211334320ecbe06fa">Entity</a> (<a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_handle.html">EntityHandle</a> &amp;<a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity.html#ace15709aef03080549daf380bd214cab">handle</a>, <a class="el" href="struct_engine_1_1_scene_1_1_scene_container.html">SceneContainer</a> &amp;<a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity.html#a9179d0bf04d3614cc258ccf5cc2d5fbd">container</a>, const std::string &amp;<a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity.html#a5f248e70b429fe7d9415bfe7bb5c3e38">name</a>, <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_ptr.html">EntityPtr</a> <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity.html#a31e181c9de3d945a735a021098aaff5b">parent</a>={})</td></tr>
+<tr class="separator:a8d4869dbfab1db7211334320ecbe06fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3ca08c75aadcac670a8a8476d8b12563"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity.html#a3ca08c75aadcac670a8a8476d8b12563">~Entity</a> ()</td></tr>
 <tr class="separator:a3ca08c75aadcac670a8a8476d8b12563"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab5f7ce2e0264e85546c968b34e27e910"><td class="memTemplParams" colspan="2">template&lt;typename Sender &gt; </td></tr>
@@ -418,8 +418,8 @@ Friends</h2></td></tr>
 
 </div>
 </div>
-<a id="a2c3970fd8fe45bc72ba4911bfe6a10fc" name="a2c3970fd8fe45bc72ba4911bfe6a10fc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2c3970fd8fe45bc72ba4911bfe6a10fc">&#9670;&#160;</a></span>Entity() <span class="overload">[2/3]</span></h2>
+<a id="a8d4869dbfab1db7211334320ecbe06fa" name="a8d4869dbfab1db7211334320ecbe06fa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8d4869dbfab1db7211334320ecbe06fa">&#9670;&#160;</a></span>Entity() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -440,7 +440,13 @@ Friends</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>name</em>&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_ptr.html">EntityPtr</a>&#160;</td>
+          <td class="paramname"><em>parent</em> = <code>{}</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1358,7 +1364,7 @@ template&lt;typename Sender &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Aug 15 2026 00:44:59 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Sat Aug 15 2026 00:52:50 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>
