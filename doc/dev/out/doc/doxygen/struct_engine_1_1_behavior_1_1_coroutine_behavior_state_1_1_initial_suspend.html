@@ -263,8 +263,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a82eb675c5d3badf7c76afc6936e2f6da"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abdd9bed51dcc8e883e3e2a291fdb88df"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_coroutine_behavior_state_1_1_initial_suspend.html#abdd9bed51dcc8e883e3e2a291fdb88df">await_resume</a> () noexcept</td></tr>
 <tr class="separator:abdd9bed51dcc8e883e3e2a291fdb88df"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a37a93108eb5792a0178fcd401e71bd7b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_coroutine_behavior_state_1_1_initial_suspend.html#a37a93108eb5792a0178fcd401e71bd7b">await_suspend</a> (std::coroutine_handle&lt; <a class="el" href="struct_engine_1_1_behavior_1_1_coroutine_behavior_state.html">CoroutineBehaviorState</a> &gt; handle) noexcept</td></tr>
-<tr class="separator:a37a93108eb5792a0178fcd401e71bd7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d62124d4ca2f7f8a0f45008b9e0d363"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_coroutine_behavior_state_1_1_initial_suspend.html#a5d62124d4ca2f7f8a0f45008b9e0d363">await_suspend</a> (std::coroutine_handle&lt; <a class="el" href="struct_engine_1_1_behavior_1_1_coroutine_behavior_state.html">CoroutineBehaviorState</a> &gt; handle, std::source_location location=std::source_location::current()) noexcept</td></tr>
+<tr class="separator:a5d62124d4ca2f7f8a0f45008b9e0d363"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a id="a82eb675c5d3badf7c76afc6936e2f6da" name="a82eb675c5d3badf7c76afc6936e2f6da"></a>
@@ -292,8 +292,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a37a93108eb5792a0178fcd401e71bd7b" name="a37a93108eb5792a0178fcd401e71bd7b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a37a93108eb5792a0178fcd401e71bd7b">&#9670;&#160;</a></span>await_suspend()</h2>
+<a id="a5d62124d4ca2f7f8a0f45008b9e0d363" name="a5d62124d4ca2f7f8a0f45008b9e0d363"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5d62124d4ca2f7f8a0f45008b9e0d363">&#9670;&#160;</a></span>await_suspend()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -305,8 +305,18 @@ Public Member Functions</h2></td></tr>
           <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Behavior::CoroutineBehaviorState::InitialSuspend::await_suspend </td>
           <td>(</td>
           <td class="paramtype">std::coroutine_handle&lt; <a class="el" href="struct_engine_1_1_behavior_1_1_coroutine_behavior_state.html">CoroutineBehaviorState</a> &gt;&#160;</td>
-          <td class="paramname"><em>handle</em></td><td>)</td>
+          <td class="paramname"><em>handle</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">std::source_location&#160;</td>
+          <td class="paramname"><em>location</em> = <code>std::source_location::current()</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -350,7 +360,7 @@ Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Aug 16 2026 16:29:32 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Sun Aug 16 2026 17:37:32 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

@@ -260,24 +260,26 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:acb750aa91c2ff2b596ce79f18ab1d78c"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; </td></tr>
-<tr class="memitem:acb750aa91c2ff2b596ce79f18ab1d78c"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_coroutine_awaiter_guard.html#acb750aa91c2ff2b596ce79f18ab1d78c">CoroutineAwaiterGuard</a> (Args &amp;&amp;...args)</td></tr>
-<tr class="separator:acb750aa91c2ff2b596ce79f18ab1d78c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac9f97a6866a7a0d734ca8026365ecf09"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_coroutine_awaiter_guard.html#ac9f97a6866a7a0d734ca8026365ecf09">await_ready</a> () noexcept</td></tr>
-<tr class="separator:ac9f97a6866a7a0d734ca8026365ecf09"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2975aec25ddd027207da710f893b7e53"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; </td></tr>
+<tr class="memitem:a2975aec25ddd027207da710f893b7e53"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_coroutine_awaiter_guard.html#a2975aec25ddd027207da710f893b7e53">CoroutineAwaiterGuard</a> (<a class="el" href="struct_engine_1_1_behavior_1_1_coroutine_behavior_state.html">CoroutineBehaviorState</a> &amp;state, Args &amp;&amp;...args)</td></tr>
+<tr class="separator:a2975aec25ddd027207da710f893b7e53"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a984a0a0effbd769c8564de93a5a9f83b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_coroutine_awaiter_guard.html#a984a0a0effbd769c8564de93a5a9f83b">await_ready</a> (std::source_location location=std::source_location::current()) noexcept</td></tr>
+<tr class="separator:a984a0a0effbd769c8564de93a5a9f83b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0727a56cd0319620fc0ba772d951fbbc"><td class="memItemLeft" align="right" valign="top">decltype(auto)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_coroutine_awaiter_guard.html#a0727a56cd0319620fc0ba772d951fbbc">await_resume</a> ()</td></tr>
 <tr class="separator:a0727a56cd0319620fc0ba772d951fbbc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2b1234246063a1fde5700f75129d1eb8"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_coroutine_awaiter_guard.html#a2b1234246063a1fde5700f75129d1eb8">await_suspend</a> (<a class="el" href="struct_engine_1_1_behavior_1_1_behavior_coroutine_handle.html">BehaviorCoroutineHandle</a> handle)</td></tr>
-<tr class="separator:a2b1234246063a1fde5700f75129d1eb8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f02a398155ad1a8a331c7e5c089102f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_coroutine_awaiter_guard.html#a4f02a398155ad1a8a331c7e5c089102f">await_suspend</a> (<a class="el" href="struct_engine_1_1_behavior_1_1_behavior_coroutine_handle.html">BehaviorCoroutineHandle</a> handle)</td></tr>
+<tr class="separator:a4f02a398155ad1a8a331c7e5c089102f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a43514ed56b142c4adecd1e61099536f5"><td class="memItemLeft" align="right" valign="top">Awaiter&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_coroutine_awaiter_guard.html#a43514ed56b142c4adecd1e61099536f5">mAwaiter</a></td></tr>
 <tr class="separator:a43514ed56b142c4adecd1e61099536f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e04715b146cc94759ce04c2df8d7e7b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_behavior_1_1_coroutine_behavior_state.html">CoroutineBehaviorState</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_coroutine_awaiter_guard.html#a1e04715b146cc94759ce04c2df8d7e7b">mState</a></td></tr>
+<tr class="separator:a1e04715b146cc94759ce04c2df8d7e7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="acb750aa91c2ff2b596ce79f18ab1d78c" name="acb750aa91c2ff2b596ce79f18ab1d78c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acb750aa91c2ff2b596ce79f18ab1d78c">&#9670;&#160;</a></span>CoroutineAwaiterGuard()</h2>
+<a id="a2975aec25ddd027207da710f893b7e53" name="a2975aec25ddd027207da710f893b7e53"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2975aec25ddd027207da710f893b7e53">&#9670;&#160;</a></span>CoroutineAwaiterGuard()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -292,9 +294,19 @@ template&lt;typename... Args&gt; </div>
         <tr>
           <td class="memname"><a class="el" href="struct_engine_1_1_behavior_1_1_coroutine_awaiter_guard.html">Engine::Behavior::CoroutineAwaiterGuard</a>&lt; Awaiter &gt;::CoroutineAwaiterGuard </td>
           <td>(</td>
-          <td class="paramtype">Args &amp;&amp;...&#160;</td>
-          <td class="paramname"><em>args</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_behavior_1_1_coroutine_behavior_state.html">CoroutineBehaviorState</a> &amp;&#160;</td>
+          <td class="paramname"><em>state</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">Args &amp;&amp;...&#160;</td>
+          <td class="paramname"><em>args</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -307,8 +319,8 @@ template&lt;typename... Args&gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="ac9f97a6866a7a0d734ca8026365ecf09" name="ac9f97a6866a7a0d734ca8026365ecf09"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac9f97a6866a7a0d734ca8026365ecf09">&#9670;&#160;</a></span>await_ready()</h2>
+<a id="a984a0a0effbd769c8564de93a5a9f83b" name="a984a0a0effbd769c8564de93a5a9f83b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a984a0a0effbd769c8564de93a5a9f83b">&#9670;&#160;</a></span>await_ready()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -321,7 +333,8 @@ template&lt;typename Awaiter &gt; </div>
         <tr>
           <td class="memname">bool <a class="el" href="struct_engine_1_1_behavior_1_1_coroutine_awaiter_guard.html">Engine::Behavior::CoroutineAwaiterGuard</a>&lt; Awaiter &gt;::await_ready </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">std::source_location&#160;</td>
+          <td class="paramname"><em>location</em> = <code>std::source_location::current()</code></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -334,8 +347,8 @@ template&lt;typename Awaiter &gt; </div>
 
 </div>
 </div>
-<a id="a2b1234246063a1fde5700f75129d1eb8" name="a2b1234246063a1fde5700f75129d1eb8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2b1234246063a1fde5700f75129d1eb8">&#9670;&#160;</a></span>await_suspend()</h2>
+<a id="a4f02a398155ad1a8a331c7e5c089102f" name="a4f02a398155ad1a8a331c7e5c089102f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4f02a398155ad1a8a331c7e5c089102f">&#9670;&#160;</a></span>await_suspend()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -346,7 +359,7 @@ template&lt;typename Awaiter &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto <a class="el" href="struct_engine_1_1_behavior_1_1_coroutine_awaiter_guard.html">Engine::Behavior::CoroutineAwaiterGuard</a>&lt; Awaiter &gt;::await_suspend </td>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> <a class="el" href="struct_engine_1_1_behavior_1_1_coroutine_awaiter_guard.html">Engine::Behavior::CoroutineAwaiterGuard</a>&lt; Awaiter &gt;::await_suspend </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="struct_engine_1_1_behavior_1_1_behavior_coroutine_handle.html">BehaviorCoroutineHandle</a>&#160;</td>
           <td class="paramname"><em>handle</em></td><td>)</td>
@@ -406,13 +419,29 @@ template&lt;typename Awaiter &gt; </div>
 
 </div>
 </div>
+<a id="a1e04715b146cc94759ce04c2df8d7e7b" name="a1e04715b146cc94759ce04c2df8d7e7b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1e04715b146cc94759ce04c2df8d7e7b">&#9670;&#160;</a></span>mState</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Awaiter &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_behavior_1_1_coroutine_behavior_state.html">CoroutineBehaviorState</a>&amp; <a class="el" href="struct_engine_1_1_behavior_1_1_coroutine_awaiter_guard.html">Engine::Behavior::CoroutineAwaiterGuard</a>&lt; Awaiter &gt;::mState</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
 <li>plugins/behavior/api/src/Madgine/behavior/<a class="el" href="behaviorcoroutine_8h.html">behaviorcoroutine.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Aug 16 2026 16:29:32 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Sun Aug 16 2026 17:37:32 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

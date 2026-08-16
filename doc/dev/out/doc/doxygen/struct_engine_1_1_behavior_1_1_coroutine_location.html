@@ -261,8 +261,12 @@ $(function() {
 Public Attributes</h2></td></tr>
 <tr class="memitem:af69733c0abe73ad603c51d723473657a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_debug_1_1_sender_location.html">Debug::SenderLocation</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_coroutine_location.html#af69733c0abe73ad603c51d723473657a">mChild</a> = nullptr</td></tr>
 <tr class="separator:af69733c0abe73ad603c51d723473657a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab15531e11a65236b6494702dde822a17"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_debug_1_1_stack_trace.html">Debug::StackTrace</a>&lt; 1 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_coroutine_location.html#ab15531e11a65236b6494702dde822a17">mStacktrace</a></td></tr>
-<tr class="separator:ab15531e11a65236b6494702dde822a17"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aabfcfc51fee2cf331e3b6e80699f9e2e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_debug_1_1_continuation.html">Debug::Continuation</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_coroutine_location.html#aabfcfc51fee2cf331e3b6e80699f9e2e">mContinuation</a></td></tr>
+<tr class="separator:aabfcfc51fee2cf331e3b6e80699f9e2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b39a1d7868f11ab08c06ce7816bca88"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_index_type.html">IndexType</a>&lt; size_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_coroutine_location.html#a7b39a1d7868f11ab08c06ce7816bca88">mLine</a></td></tr>
+<tr class="separator:a7b39a1d7868f11ab08c06ce7816bca88"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88dbd8ef1fedcc6a6eae2d70cec861dd"><td class="memItemLeft" align="right" valign="top">std::source_location&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_coroutine_location.html#a88dbd8ef1fedcc6a6eae2d70cec861dd">mLocation</a></td></tr>
+<tr class="separator:a88dbd8ef1fedcc6a6eae2d70cec861dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Data Documentation</h2>
 <a id="af69733c0abe73ad603c51d723473657a" name="af69733c0abe73ad603c51d723473657a"></a>
@@ -279,14 +283,50 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="ab15531e11a65236b6494702dde822a17" name="ab15531e11a65236b6494702dde822a17"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab15531e11a65236b6494702dde822a17">&#9670;&#160;</a></span>mStacktrace</h2>
+<a id="aabfcfc51fee2cf331e3b6e80699f9e2e" name="aabfcfc51fee2cf331e3b6e80699f9e2e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aabfcfc51fee2cf331e3b6e80699f9e2e">&#9670;&#160;</a></span>mContinuation</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_debug_1_1_continuation.html">Debug::Continuation</a> Engine::Behavior::CoroutineLocation::mContinuation</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">mutable</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7b39a1d7868f11ab08c06ce7816bca88" name="a7b39a1d7868f11ab08c06ce7816bca88"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7b39a1d7868f11ab08c06ce7816bca88">&#9670;&#160;</a></span>mLine</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="struct_engine_1_1_debug_1_1_stack_trace.html">Debug::StackTrace</a>&lt;1&gt; Engine::Behavior::CoroutineLocation::mStacktrace</td>
+          <td class="memname"><a class="el" href="struct_engine_1_1_index_type.html">IndexType</a>&lt;size_t&gt; Engine::Behavior::CoroutineLocation::mLine</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a88dbd8ef1fedcc6a6eae2d70cec861dd" name="a88dbd8ef1fedcc6a6eae2d70cec861dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a88dbd8ef1fedcc6a6eae2d70cec861dd">&#9670;&#160;</a></span>mLocation</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::source_location Engine::Behavior::CoroutineLocation::mLocation</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -299,7 +339,7 @@ Public Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Aug 16 2026 16:29:32 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Sun Aug 16 2026 17:37:32 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>
