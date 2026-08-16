@@ -8,6 +8,16 @@ namespace Engine {
 namespace Behavior {
     namespace Python3 {
 
+        int PyVector3_init(PyVector3 *self, PyObject *args, PyObject *kwds)
+        {
+            float x, y, z;
+            if (!PyArg_ParseTuple(args, "fff", &x, &y, &z))
+                return -1;
+
+            self->mVector = { x, y, z };
+            return 0;
+        }
+
         PyTypeObject PyVector3Type = {
             .ob_base = PyVarObject_HEAD_INIT(NULL, 0)
                 .tp_name
@@ -18,7 +28,8 @@ namespace Behavior {
             .tp_str = &PyStr<PyVector3, &PyVector3::mVector>,
             .tp_flags = Py_TPFLAGS_DEFAULT,
             .tp_doc = "Python implementation of Vector3",
-            .tp_new = PyType_GenericNew,
+            .tp_init = (initproc)PyVector3_init,
+            .tp_new = PyType_GenericNew
         };
 
     }

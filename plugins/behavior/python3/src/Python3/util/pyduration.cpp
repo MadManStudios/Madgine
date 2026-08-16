@@ -12,6 +12,15 @@ namespace Behavior {
 
         };
 
+        int PyDuration_init(PyDuration* self, PyObject* args, PyObject* kwds) {
+            unsigned long long value;
+            if (!PyArg_ParseTuple(args, "K", &value))
+                return -1;
+
+            self->mDuration = Reflect::Duration64 { value };
+            return 0;
+        }
+
         PyObject* PyDuration_compare(PyObject*, PyObject*, int) {            
             Py_RETURN_NOTIMPLEMENTED;
         }
@@ -28,6 +37,7 @@ namespace Behavior {
             .tp_flags = Py_TPFLAGS_DEFAULT,
             .tp_doc = "Python implementation of Duration",
             .tp_richcompare = PyDuration_compare,
+            .tp_init = (initproc)PyDuration_init,
             .tp_new = PyType_GenericNew,
         };
 

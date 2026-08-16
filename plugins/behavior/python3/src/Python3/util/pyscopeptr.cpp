@@ -29,6 +29,25 @@ namespace Behavior {
             return toPyObject(v);
         }
 
+        static int PyScopePtr_set(PyScopePtr *self, PyObject *args, PyObject *value)
+        {
+            const char *name;
+
+            if (!PyArg_Parse(args, "s", &name))
+                return NULL;
+
+            Reflect::ScopeIterator it = self->mPtr.find(name);
+
+            if (it == self->mPtr.end()) {
+                PyErr_Format(PyExc_AttributeError, "Could not find attribute '%s' in %R!", name, self);
+                return NULL;
+            }
+            Reflect::Value v;
+            PYTHON3_PROPAGATE_ERROR(fromPyObject(v, value));
+            PYTHON3_PROPAGATE_ERROR((*it) = v);
+            return 0;
+        }
+
         static PyObject *ScopePtr_iter(const Reflect::ScopePtr &p)
         {
             if (!p) {
@@ -66,6 +85,7 @@ namespace Behavior {
             .tp_repr = (reprfunc)PyScopePtr_str,
             .tp_str = (reprfunc)PyScopePtr_str,
             .tp_getattro = (getattrofunc)PyScopePtr_get,
+            .tp_setattro = (setattrofunc)PyScopePtr_set,
             .tp_flags = Py_TPFLAGS_DEFAULT,
             .tp_doc = "Python implementation of ScopePtr",
             .tp_iter = (getiterfunc)PyScopePtr_iter,

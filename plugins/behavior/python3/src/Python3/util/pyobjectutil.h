@@ -75,7 +75,12 @@ namespace Behavior {
 
         MADGINE_PYTHON3_EXPORT Reflect::Result fromPyObject(Reflect::Value &result, PyObject *obj);
 
-        MADGINE_PYTHON3_EXPORT PyObject *toPyError(const Reflect::Error &);
+        struct PyErrorToken {
+            operator int() { return -1; }
+            operator PyObject *() { return nullptr; }
+        };
+
+        MADGINE_PYTHON3_EXPORT PyErrorToken toPyError(const Reflect::Error &);
         MADGINE_PYTHON3_EXPORT Reflect::Error fromPyError(PyObject *exc, PyObject *traceback = nullptr);
 
         MADGINE_PYTHON3_EXPORT Reflect::Error fetchError();

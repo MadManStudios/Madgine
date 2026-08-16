@@ -53,7 +53,7 @@ namespace Behavior {
             .tp_flags = Py_TPFLAGS_DEFAULT,
             .tp_doc = "Python implementation of KeyValueBinding",
             //.tp_iter = (getiterfunc)PyBinding_iter,
-            .tp_new = PyType_GenericNew,            
+            .tp_new = PyType_GenericNew,
         };
 
         static PyObject *PyScopeBinding_get(PyScopeBinding *self, PyObject *args)
@@ -71,6 +71,24 @@ namespace Behavior {
             Reflect::Value v;
             PYTHON3_PROPAGATE_ERROR(it->value(v));
             return toPyObject(v);
+        }
+
+        static int PyScopeBinding_set(PyScopeBinding *self, PyObject *args, PyObject *value)
+        {
+            const char *name;
+
+            if (!PyArg_Parse(args, "s", &name))
+                return NULL;
+
+            Reflect::ScopeIterator it = self->mBinding.mType->find(name, Reflect::Value { self->mBinding });
+            if (it == Reflect::ScopeIterator { Reflect::Value { self->mBinding }, nullptr }) {
+                PyErr_Format(PyExc_AttributeError, "Could not find attribute '%s' in %R!", name, self);
+                return NULL;
+            }
+            Reflect::Value v;
+            PYTHON3_PROPAGATE_ERROR(fromPyObject(v, value));
+            PYTHON3_PROPAGATE_ERROR((*it) = v);
+            return 0;
         }
 
         /* static PyObject *TypedScopePtr_iter(const ScopePtr &p)
@@ -135,6 +153,7 @@ namespace Behavior {
             .tp_repr = (reprfunc)PyScopeBinding_str,
             .tp_str = (reprfunc)PyScopeBinding_str,
             .tp_getattro = (getattrofunc)PyScopeBinding_get,
+            .tp_setattro = (setattrofunc)PyScopeBinding_set,
             .tp_flags = Py_TPFLAGS_DEFAULT,
             .tp_doc = "Python implementation of KeyValueScopeBinding",
             //.tp_iter = (getiterfunc)PyBinding_iter,

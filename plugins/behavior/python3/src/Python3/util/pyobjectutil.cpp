@@ -76,8 +76,8 @@ namespace Behavior {
 
         PyObject *toPyObject(Reflect::Duration64 d)
         {
-            PyObject *obj = PyObject_CallObject((PyObject *)&PyDurationType, NULL);
-            new (&reinterpret_cast<PyDuration *>(obj)->mDuration) Reflect::Duration64(d);
+            PyObject *obj = PyObject_CallFunction((PyObject *)&PyDurationType, "K", d.count());
+            //new (&reinterpret_cast<PyDuration *>(obj)->mDuration) Reflect::Duration64(d);
             return obj;
         }
 
@@ -158,8 +158,8 @@ namespace Behavior {
 
         PyObject *toPyObject(const Math::Vector3 &v)
         {
-            PyObject *obj = PyObject_CallObject((PyObject *)&PyVector3Type, NULL);
-            new (&reinterpret_cast<PyVector3 *>(obj)->mVector) Math::Vector3(v);
+            PyObject *obj = PyObject_CallFunction((PyObject *)&PyVector3Type, "fff", v.x, v.y, v.z);
+            //new (&reinterpret_cast<PyVector3 *>(obj)->mVector) Math::Vector3(v);
             return obj;
         }
 
@@ -356,11 +356,11 @@ namespace Behavior {
             }
         }
 
-        PyObject *toPyError(const Reflect::Error &err)
+        PyErrorToken toPyError(const Reflect::Error &err)
         {
             PyErr_SetString(PyExc_Exception, err.mMsg.c_str());
 
-            return nullptr;
+            return {};
         }
 
         Reflect::Error fetchError()
