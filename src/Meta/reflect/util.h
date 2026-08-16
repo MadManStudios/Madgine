@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Generic/closure.h"
 #include "Generic/containers/virtualrange.h"
 #include "Generic/context.h"
 #include "Generic/cow.h"
@@ -234,7 +235,7 @@ namespace Reflect {
     }
 
     template <typename T>
-    struct call_t {};
+    struct call_t { };
 
     template <typename T, typename Callable, typename Context>
     Result tag_invoke(call_t<T> call, Callable &&callable, const Value &arg, Context &&context)
@@ -316,6 +317,13 @@ namespace Reflect {
                     return REFLECT_UNKNOWN_ERROR_NOTRACE() << "No known conversion from " << Value_type(arg).toString() << " to Binding";
                 return callable(T { Value_as<Binding>(arg).template typed<typename T::type>() }, context);
             }
+        } else if constexpr (Concepts::InstanceOf<std::decay_t<T>, Engine::__generic_impl__::ClosureImpl>) {
+            if (Value_isNull(arg)) {
+                return callable(T {}, context);
+            } else {
+                throw 0;
+            }
+            throw 0;
         } else {
             if (Value_is<Binding>(arg)) {
                 return Value_as<Binding>(arg).access([&](const Value &v, auto &&context) {

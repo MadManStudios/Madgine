@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Generic/closure.h"
 #include "Generic/containers/bits/array.h"
 #include "Generic/execution/concepts.h"
 #include "Generic/keyvalue.h"
@@ -423,6 +424,8 @@ namespace Reflect {
                 return { { TypeEnum::AssociativeRangeValue }, { toType<KeyType_t<std::ranges::range_reference_t<T>>, true>(), toType<ValueType_t<std::ranges::range_reference_t<T>>, true>() } };
         } else if constexpr (Concepts::InstanceOfA<T, TypedBoundApiFunction>) {
             return { { TypeEnum::BoundApiFunctionValue }, Concepts::is_instance_auto<T, TypedBoundApiFunction>::arguments::value };
+        } else if constexpr (Concepts::InstanceOf<T, Engine::__generic_impl__::ClosureImpl>) {
+            return { { TypeEnum::FunctionValue }, nullptr };
         } else if constexpr (Concepts::Pointer<T>) {
             if constexpr (Concepts::Function<std::remove_pointer_t<T>>)
                 // return { { ValueTypeEnum::ApiFunctionValue }, nullptr };
