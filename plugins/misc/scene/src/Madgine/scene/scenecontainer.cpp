@@ -18,6 +18,7 @@
 #include "scenemanager.h"
 
 METATABLE_BEGIN(Engine::Scene::SceneContainer)
+    FUNCTION(createEntity, name, descriptor, parent, onSuccess, onError)
     // TODO
     // SYNCABLEUNIT_MEMBERS()
     READONLY_PROPERTY(entities, entities)
@@ -126,7 +127,7 @@ namespace Scene {
 
     void SceneContainer::startLifetime()
     {
-        mManager.mLifetime.attach(mLifetime);
+        mManager.mLifetime.attach(mLifetime | Behavior::with_named<"SceneContainer">(this));
     }
 
     void SceneContainer::endLifetime()
