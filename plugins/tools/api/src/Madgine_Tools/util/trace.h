@@ -385,7 +385,7 @@ namespace Tools {
         template <typename V>
         decltype(auto) visit(V &&visitor) const
         {
-            return mValue.visit([&](auto &&v) {
+            return this->mValue.visit([&](auto &&v) {
                 return visitor(TracedVariantAccess<Reflect::Value &, decltype(v)> { *this, std::forward<decltype(v)>(v) });
             });
         }
