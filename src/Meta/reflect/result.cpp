@@ -24,7 +24,8 @@ namespace Reflect {
     Error::Error(Enum state, const std::string &msg, const char *function, const char *file, size_t sourceLine)
         : Error(state, msg)
     {
-        mStackTrace.emplace_back(StackEntry { function, file, sourceLine });
+        if (function)
+            mStackTrace.emplace_back(StackEntry { function, file, sourceLine });
     }
 
     Error::Error(Enum state, const std::string &msg, std::vector<StackEntry> stack)

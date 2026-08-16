@@ -11,7 +11,11 @@ namespace Reflect {
 
     Result ApiFunction::operator()(Value &retVal, const ArgumentList &args, ContextPtr context) const
     {
-        return mTable->mFunctionPtr(mTable, retVal, args, context);
+        Result result = mTable->mFunctionPtr(mTable, retVal, args, context);
+        if (result && result.mError->mStackTrace.empty()) {
+            result.mError->mMsg += "\nnote: trying to call " + std::string { mTable->mName };
+        }
+        return result;
     }
 
     size_t ApiFunction::argumentsCount(bool excludeThis) const

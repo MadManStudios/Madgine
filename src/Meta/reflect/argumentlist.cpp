@@ -66,6 +66,9 @@ namespace Reflect {
 
     const Value &ArgumentList::at(size_t i) const
     {
+        static Value sEmpty;
+        if (i >= mElements.size())
+            return sEmpty;
         return mElements.at(i);
     }
 

@@ -268,7 +268,7 @@ namespace Reflect {
                 ([&]() {
                     if (Value_is<Ty>(arg)) {
                         if (matched) {
-                            result = REFLECT_UNKNOWN_ERROR() << "More than one variant type could match";
+                            result = REFLECT_UNKNOWN_ERROR_NOTRACE() << "More than one variant type could match";
                             return;
                         }
                         matched = true;
@@ -280,7 +280,7 @@ namespace Reflect {
                 }(),
                     ...);
                 if (!matched) {
-                    result = REFLECT_UNKNOWN_ERROR() << "No variant type matched argument";
+                    result = REFLECT_UNKNOWN_ERROR_NOTRACE() << "No variant type matched argument";
                 }
                 return result;
             }(typename Concepts::is_instance<T, std::variant>::argument_types {});
@@ -297,11 +297,11 @@ namespace Reflect {
                 });
                 return result;
             } else {
-                return REFLECT_UNKNOWN_ERROR() << "Cannot form a scope pointer to type " << Value_type(arg).toString();
+                return REFLECT_UNKNOWN_ERROR_NOTRACE() << "Cannot form a scope pointer to type " << Value_type(arg).toString();
             }
         } else if constexpr (PrimitiveType<T>) {
             if (!Value_is<T>(arg))
-                return REFLECT_UNKNOWN_ERROR() << "Expected " << typeid(T).name() << " got " << Value_type(arg).toString();
+                return REFLECT_UNKNOWN_ERROR_NOTRACE() << "Expected " << typeid(T).name() << " got " << Value_type(arg).toString();
             return callable(Value_as<ValueStorageSelect<T>>(arg), context);
         } else if constexpr (std::ranges::range<T> && requires { typename T::iterator; }) {
             if constexpr (std::same_as<KeyType_t<typename T::iterator::value_type>, Void>) {
@@ -327,11 +327,11 @@ namespace Reflect {
             using Inner = decltype(convert_Value_t<false> {}(std::declval<forward_ref_t<typename std::decay_t<T>::type>>()));
             if constexpr (Concepts::OneOf<Inner, ScopePtr, OwnedValue>) {
                 if (!Value_is<ScopeBinding>(arg))
-                    return REFLECT_UNKNOWN_ERROR() << "No known conversion to ScopeBinding";
+                    return REFLECT_UNKNOWN_ERROR_NOTRACE() << "No known conversion from " << Value_type(arg).toString() << " to ScopeBinding";
                 return callable(T { Value_as<ScopeBinding>(arg).template typed<typename T::type>() }, context);
             } else {
                 if (!Value_is<Binding>(arg))
-                    return REFLECT_UNKNOWN_ERROR() << "No known conversion to Binding";
+                    return REFLECT_UNKNOWN_ERROR_NOTRACE() << "No known conversion from " << Value_type(arg).toString() << " to Binding";
                 return callable(T { Value_as<Binding>(arg).template typed<typename T::type>() }, context);
             }
         } else {
@@ -350,7 +350,7 @@ namespace Reflect {
                     using Ty = resolveCustomScopePtr_t<T, true>;
                     std::remove_pointer_t<Ty> *ptr = scope_cast<std::remove_pointer_t<Ty>>(scope);
                     if (!ptr) {
-                        return REFLECT_UNKNOWN_ERROR() << "No known conversion from " << scope.mType->mTypeName << " to " << toType<Ty>().toString();
+                        return REFLECT_UNKNOWN_ERROR_NOTRACE() << "No known conversion from " << scope.mType->mTypeName << " to " << toType<Ty>().toString();
                     }
                     if constexpr (std::is_pointer_v<Ty>) {
                         return callable(ptr, context);
@@ -373,24 +373,31 @@ namespace Reflect {
     }
 
     template <typename Callable, typename Context>
-    Result invoke_impl(type_pack<>, Callable &&callable, Context &&context)
+    Result invoke_impl(type_pack<>, size_t index, Callable &&callable, Context &&context)
     {
         return std::invoke(std::forward<Callable>(callable));
     }
 
     template <typename Callable, typename Context, typename Arg, typename... Args, typename Param, typename... Params>
         requires(!Concepts::InstanceOf<Param, Contextual>)
-    Result invoke_impl(type_pack<Param, Params...>, Callable &&callable, Context &&context, Arg &&arg, Args &&...args)
+    Result invoke_impl(type_pack<Param, Params...>, size_t index, Callable &&callable, Context &&context, Arg &&arg, Args &&...args)
     {
+        bool passed = false;
+
         auto tail = [&](Param param) {
-            return invoke_impl(type_pack<Params...> {}, [&](Params... params) { return std::invoke(std::forward<Callable>(callable), std::forward<Param>(param), std::forward<Params>(params)...); }, context, std::forward<Args>(args)...);
+            passed = true;
+            return invoke_impl(type_pack<Params...> {}, index + 1, [&](Params... params) { return std::invoke(std::forward<Callable>(callable), std::forward<Param>(param), std::forward<Params>(params)...); }, context, std::forward<Args>(args)...);
         };
 
-        return call(tail, std::forward<Arg>(arg), context);
+        Result result = call(tail, std::forward<Arg>(arg), context);
+        if (result && !passed) {
+            result.mError->mMsg += "\nnote: in parameter " + std::to_string(index);
+        }
+        return result;
     }
 
     template <typename Callable, typename Context, typename Param, typename... Params>
-    Result invoke_impl(type_pack<Contextual<Param>, Params...>, Callable &&callable, Context &&context)
+    Result invoke_impl(type_pack<Contextual<Param>, Params...>, size_t index, Callable &&callable, Context &&context)
     {
         using T = std::remove_reference_t<Param>;
         T *ptr = context_get<T>(context);
@@ -398,7 +405,7 @@ namespace Reflect {
         if (!ptr)
             throw 0;
 
-        return invoke_impl(type_pack<Params...> {}, [&](Params... params) { return std::invoke(std::forward<Callable>(callable), *ptr, std::forward<Params>(params)...); }, context);
+        return invoke_impl(type_pack<Params...> {}, index + 1, [&](Params... params) { return std::invoke(std::forward<Callable>(callable), *ptr, std::forward<Params>(params)...); }, context);
     }
 
     template <typename Callable, typename... Args, typename Context = ContextPtr>
@@ -407,9 +414,9 @@ namespace Reflect {
         using traits = CallableTraits<Callable>;
 
         if constexpr (std::same_as<typename traits::argument_types::template resize<1>, type_pack<Value &>>) {
-            return invoke_impl(typename traits::argument_types::pop_front {}, [&](auto &&...args) { return std::invoke(std::forward<Callable>(callable), result, std::forward<decltype(args)>(args)...); }, context, std::forward<Args>(args)...);
+            return invoke_impl(typename traits::argument_types::pop_front {}, 1, [&](auto &&...args) { return std::invoke(std::forward<Callable>(callable), result, std::forward<decltype(args)>(args)...); }, context, std::forward<Args>(args)...);
         } else {
-            return invoke_impl(typename traits::argument_types {}, [&](auto &&...args) -> Result {
+            return invoke_impl(typename traits::argument_types {}, 1, [&](auto &&...args) -> Result {
             using R = std::invoke_result_t<Callable&&, decltype(args)&&...>;
             if constexpr (std::is_void_v<R>) {
                 std::invoke(std::forward<Callable>(callable), std::forward<decltype(args)>(args)...);
@@ -458,7 +465,7 @@ namespace Reflect {
         Result access(F &&callback, Context &&context) const
         {
             return mScope.typed<T>().access([&](T &t, Context &context) {
-                return invoke_impl(argument_types {}, [&](auto &&...args) { return callback(std::invoke(mCallable, t, std::forward<decltype(args)>(args)...), context_set(context, t)); }, context_set(context, t));
+                return invoke_impl(argument_types {}, 1, [&](auto &&...args) { return callback(std::invoke(mCallable, t, std::forward<decltype(args)>(args)...), context_set(context, t)); }, context_set(context, t));
             },
                 context);
         }
@@ -513,9 +520,9 @@ namespace Reflect {
 
         return call([&](T &t, Context &context) {
             if constexpr (std::same_as<typename argument_types::template resize<1>, type_pack<Value &>>) {
-                return invoke_impl(typename argument_types::pop_front {}, [&](auto &&...args) { return std::invoke(std::forward<Callable>(callable), t, result, std::forward<decltype(args)>(args)...); }, context, std::forward<Args>(args)...);
+                return invoke_impl(typename argument_types::pop_front {}, 1, [&](auto &&...args) { return std::invoke(std::forward<Callable>(callable), t, result, std::forward<decltype(args)>(args)...); }, context, std::forward<Args>(args)...);
             } else {
-                return invoke_impl(argument_types {}, [&](auto &&...args) -> Result {
+                return invoke_impl(argument_types {}, 1, [&](auto &&...args) -> Result {
             using R = std::invoke_result_t<Callable&&, T&, decltype(args)&&...>;
             if constexpr (std::is_void_v<R>) {
                 std::invoke(std::forward<Callable>(callable), t, std::forward<decltype(args)>(args)...);
