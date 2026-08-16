@@ -325,16 +325,16 @@ Functions</h2></td></tr>
 <tr class="memitem:a094322a30a050f666b3ed37e02865eea"><td class="memTemplParams" colspan="2">template&lt;typename Callable , typename... Args, typename Context  = ContextPtr&gt; </td></tr>
 <tr class="memitem:a094322a30a050f666b3ed37e02865eea"><td class="memTemplItemLeft" align="right" valign="top">Result&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_reflect.html#a094322a30a050f666b3ed37e02865eea">Engine::Reflect::invoke_free</a> (Value &amp;result, Callable &amp;&amp;callable, Context &amp;&amp;context={}, Args &amp;&amp;...args)</td></tr>
 <tr class="separator:a094322a30a050f666b3ed37e02865eea"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6053f642b4afc04253cf761d930f28db"><td class="memTemplParams" colspan="2">template&lt;typename Callable , typename Context , typename Param , typename... Params&gt; </td></tr>
-<tr class="memitem:a6053f642b4afc04253cf761d930f28db"><td class="memTemplItemLeft" align="right" valign="top">Result&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_reflect.html#a6053f642b4afc04253cf761d930f28db">Engine::Reflect::invoke_impl</a> (type_pack&lt; Contextual&lt; Param &gt;, Params... &gt;, Callable &amp;&amp;callable, Context &amp;&amp;context)</td></tr>
-<tr class="separator:a6053f642b4afc04253cf761d930f28db"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3707546997d068c1103df298fb363a6a"><td class="memTemplParams" colspan="2">template&lt;typename Callable , typename Context , typename Arg , typename... Args, typename Param , typename... Params&gt; <br />
+<tr class="memitem:ab1367d8ec06bacd67aa68192584d46f8"><td class="memTemplParams" colspan="2">template&lt;typename Callable , typename Context , typename Param , typename... Params&gt; </td></tr>
+<tr class="memitem:ab1367d8ec06bacd67aa68192584d46f8"><td class="memTemplItemLeft" align="right" valign="top">Result&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_reflect.html#ab1367d8ec06bacd67aa68192584d46f8">Engine::Reflect::invoke_impl</a> (type_pack&lt; Contextual&lt; Param &gt;, Params... &gt;, size_t index, Callable &amp;&amp;callable, Context &amp;&amp;context)</td></tr>
+<tr class="separator:ab1367d8ec06bacd67aa68192584d46f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7fe1382cd9cbaee3883295e3b0bf3c6a"><td class="memTemplParams" colspan="2">template&lt;typename Callable , typename Context , typename Arg , typename... Args, typename Param , typename... Params&gt; <br />
 requires (!Concepts::InstanceOf&lt;Param, Contextual&gt;)</td></tr>
-<tr class="memitem:a3707546997d068c1103df298fb363a6a"><td class="memTemplItemLeft" align="right" valign="top">Result&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_reflect.html#a3707546997d068c1103df298fb363a6a">Engine::Reflect::invoke_impl</a> (type_pack&lt; Param, Params... &gt;, Callable &amp;&amp;callable, Context &amp;&amp;context, Arg &amp;&amp;arg, Args &amp;&amp;...args)</td></tr>
-<tr class="separator:a3707546997d068c1103df298fb363a6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab01496dcecf856ce9e35a909fb76c0d8"><td class="memTemplParams" colspan="2">template&lt;typename Callable , typename Context &gt; </td></tr>
-<tr class="memitem:ab01496dcecf856ce9e35a909fb76c0d8"><td class="memTemplItemLeft" align="right" valign="top">Result&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_reflect.html#ab01496dcecf856ce9e35a909fb76c0d8">Engine::Reflect::invoke_impl</a> (type_pack&lt;&gt;, Callable &amp;&amp;callable, Context &amp;&amp;context)</td></tr>
-<tr class="separator:ab01496dcecf856ce9e35a909fb76c0d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7fe1382cd9cbaee3883295e3b0bf3c6a"><td class="memTemplItemLeft" align="right" valign="top">Result&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_reflect.html#a7fe1382cd9cbaee3883295e3b0bf3c6a">Engine::Reflect::invoke_impl</a> (type_pack&lt; Param, Params... &gt;, size_t index, Callable &amp;&amp;callable, Context &amp;&amp;context, Arg &amp;&amp;arg, Args &amp;&amp;...args)</td></tr>
+<tr class="separator:a7fe1382cd9cbaee3883295e3b0bf3c6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a87b667f2e1e390a10e6464e2a5471596"><td class="memTemplParams" colspan="2">template&lt;typename Callable , typename Context &gt; </td></tr>
+<tr class="memitem:a87b667f2e1e390a10e6464e2a5471596"><td class="memTemplItemLeft" align="right" valign="top">Result&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_reflect.html#a87b667f2e1e390a10e6464e2a5471596">Engine::Reflect::invoke_impl</a> (type_pack&lt;&gt;, size_t index, Callable &amp;&amp;callable, Context &amp;&amp;context)</td></tr>
+<tr class="separator:a87b667f2e1e390a10e6464e2a5471596"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:add92184f9635f587bce703e0d27888d4"><td class="memTemplParams" colspan="2">template&lt;typename Callable , typename Arg , typename... Args, typename Context  = ContextPtr&gt; </td></tr>
 <tr class="memitem:add92184f9635f587bce703e0d27888d4"><td class="memTemplItemLeft" align="right" valign="top">Result&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_reflect.html#add92184f9635f587bce703e0d27888d4">Engine::Reflect::invoke_member</a> (Callable &amp;&amp;callable, Context &amp;&amp;context, Arg &amp;&amp;arg, Args &amp;&amp;...args)</td></tr>
 <tr class="separator:add92184f9635f587bce703e0d27888d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -377,7 +377,7 @@ Variables</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Aug 15 2026 01:08:10 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Sun Aug 16 2026 14:00:30 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

@@ -279,8 +279,8 @@ requires (!std::same_as&lt;<a class="el" href="struct_engine_1_1_serialize_1_1_s
 <tr class="separator:a5b313deb422c0705ad9eefcaf0aa19ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a900535973b4d68b5a8591ce1a629bd8c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_serializable_unit_ptr.html#a900535973b4d68b5a8591ce1a629bd8c">operator bool</a> () const</td></tr>
 <tr class="separator:a900535973b4d68b5a8591ce1a629bd8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa4b65abbd6c2a225e1c70c4d05c0b503"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_serializable_unit_ptr.html#aa4b65abbd6c2a225e1c70c4d05c0b503">readState</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html">FormattedSerializeStream</a> &amp;in, const char *name=nullptr, bool skipId=false) const</td></tr>
-<tr class="separator:aa4b65abbd6c2a225e1c70c4d05c0b503"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9dd1e24959aa2e881f81d1907fdcb502"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_serializable_unit_ptr.html#a9dd1e24959aa2e881f81d1907fdcb502">readState</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html">FormattedSerializeStream</a> &amp;in, const char *name=nullptr, bool skipId=false, <a class="el" href="namespace_engine_1_1_serialize.html#a709a54509cec297f0cc972145d963d0a">ContextPtr</a> context={}) const</td></tr>
+<tr class="separator:a9dd1e24959aa2e881f81d1907fdcb502"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abe89e0182a174b8a30c83e194a0831cf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_serializable_unit_ptr.html#abe89e0182a174b8a30c83e194a0831cf">setActive</a> (bool active, bool existenceChanged, <a class="el" href="namespace_engine_1_1_serialize.html#a709a54509cec297f0cc972145d963d0a">ContextPtr</a> context={}) const</td></tr>
 <tr class="separator:abe89e0182a174b8a30c83e194a0831cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a84a523f132c41bda0d4f55081716b626"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_serializable_unit_ptr.html#a84a523f132c41bda0d4f55081716b626">setParent</a> (<a class="el" href="struct_engine_1_1_serialize_1_1_serializable_unit_base.html">SerializableUnitBase</a> *parent) const</td></tr>
@@ -480,8 +480,8 @@ requires (!std::same_as&lt;<a class="el" href="struct_engine_1_1_serialize_1_1_s
 
 </div>
 </div>
-<a id="aa4b65abbd6c2a225e1c70c4d05c0b503" name="aa4b65abbd6c2a225e1c70c4d05c0b503"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa4b65abbd6c2a225e1c70c4d05c0b503">&#9670;&#160;</a></span>readState()</h2>
+<a id="a9dd1e24959aa2e881f81d1907fdcb502" name="a9dd1e24959aa2e881f81d1907fdcb502"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9dd1e24959aa2e881f81d1907fdcb502">&#9670;&#160;</a></span>readState()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -502,7 +502,13 @@ requires (!std::same_as&lt;<a class="el" href="struct_engine_1_1_serialize_1_1_s
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>skipId</em> = <code>false</code>&#160;</td>
+          <td class="paramname"><em>skipId</em> = <code>false</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespace_engine_1_1_serialize.html#a709a54509cec297f0cc972145d963d0a">ContextPtr</a>&#160;</td>
+          <td class="paramname"><em>context</em> = <code>{}</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -652,7 +658,7 @@ requires (!std::same_as&lt;<a class="el" href="struct_engine_1_1_serialize_1_1_s
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Aug 15 2026 01:08:12 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Sun Aug 16 2026 14:00:33 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

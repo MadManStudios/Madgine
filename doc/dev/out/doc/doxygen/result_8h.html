@@ -291,10 +291,14 @@ Namespaces</h2></td></tr>
 Macros</h2></td></tr>
 <tr class="memitem:a1e8feca184dad02628bd916450159f90"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="result_8h.html#a1e8feca184dad02628bd916450159f90">REFLECT_ERROR</a>(Type)&#160;&#160;&#160;    <a class="el" href="struct_engine_1_1_reflect_1_1_result_builder.html">::Engine::Reflect::ResultBuilder</a> { Type, __func__, __FILE__, __LINE__ }</td></tr>
 <tr class="separator:a1e8feca184dad02628bd916450159f90"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1288d2d5e1df88fabb845626edc28f50"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="result_8h.html#a1288d2d5e1df88fabb845626edc28f50">REFLECT_ERROR_NOTRACE</a>(Type)&#160;&#160;&#160;    <a class="el" href="struct_engine_1_1_reflect_1_1_result_builder.html">::Engine::Reflect::ResultBuilder</a> { Type }</td></tr>
+<tr class="separator:a1288d2d5e1df88fabb845626edc28f50"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acd5d6c8d2a5e4db79307e0c90e7afb54"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="result_8h.html#acd5d6c8d2a5e4db79307e0c90e7afb54">REFLECT_PROPAGATE_ERROR</a>(...)</td></tr>
 <tr class="separator:acd5d6c8d2a5e4db79307e0c90e7afb54"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5e813dc0aaf2aa662228b6241969c2b8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="result_8h.html#a5e813dc0aaf2aa662228b6241969c2b8">REFLECT_UNKNOWN_ERROR</a>()&#160;&#160;&#160;<a class="el" href="result_8h.html#a1e8feca184dad02628bd916450159f90">REFLECT_ERROR</a>(<a class="el" href="namespace_engine.html#a266485a460bde69c54e20b6e8ecd5f2a">::Engine::GenericResult</a> { ::Engine::GenericResult::UNKNOWN_ERROR })</td></tr>
 <tr class="separator:a5e813dc0aaf2aa662228b6241969c2b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a884bb048f1407a78fe3ffaa81444788e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="result_8h.html#a884bb048f1407a78fe3ffaa81444788e">REFLECT_UNKNOWN_ERROR_NOTRACE</a>()&#160;&#160;&#160;<a class="el" href="result_8h.html#a1288d2d5e1df88fabb845626edc28f50">REFLECT_ERROR_NOTRACE</a>(<a class="el" href="namespace_engine.html#a266485a460bde69c54e20b6e8ecd5f2a">::Engine::GenericResult</a> { ::Engine::GenericResult::UNKNOWN_ERROR })</td></tr>
+<tr class="separator:a884bb048f1407a78fe3ffaa81444788e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="a1e8feca184dad02628bd916450159f90" name="a1e8feca184dad02628bd916450159f90"></a>
@@ -315,6 +319,24 @@ Macros</h2></td></tr>
 
 </div>
 </div>
+<a id="a1288d2d5e1df88fabb845626edc28f50" name="a1288d2d5e1df88fabb845626edc28f50"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1288d2d5e1df88fabb845626edc28f50">&#9670;&#160;</a></span>REFLECT_ERROR_NOTRACE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define REFLECT_ERROR_NOTRACE</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Type</td><td>)</td>
+          <td>&#160;&#160;&#160;    <a class="el" href="struct_engine_1_1_reflect_1_1_result_builder.html">::Engine::Reflect::ResultBuilder</a> { Type }</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a5e813dc0aaf2aa662228b6241969c2b8" name="a5e813dc0aaf2aa662228b6241969c2b8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5e813dc0aaf2aa662228b6241969c2b8">&#9670;&#160;</a></span>REFLECT_UNKNOWN_ERROR</h2>
 
@@ -326,6 +348,23 @@ Macros</h2></td></tr>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td>&#160;&#160;&#160;<a class="el" href="result_8h.html#a1e8feca184dad02628bd916450159f90">REFLECT_ERROR</a>(<a class="el" href="namespace_engine.html#a266485a460bde69c54e20b6e8ecd5f2a">::Engine::GenericResult</a> { ::Engine::GenericResult::UNKNOWN_ERROR })</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a884bb048f1407a78fe3ffaa81444788e" name="a884bb048f1407a78fe3ffaa81444788e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a884bb048f1407a78fe3ffaa81444788e">&#9670;&#160;</a></span>REFLECT_UNKNOWN_ERROR_NOTRACE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define REFLECT_UNKNOWN_ERROR_NOTRACE</td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>&#160;&#160;&#160;<a class="el" href="result_8h.html#a1288d2d5e1df88fabb845626edc28f50">REFLECT_ERROR_NOTRACE</a>(<a class="el" href="namespace_engine.html#a266485a460bde69c54e20b6e8ecd5f2a">::Engine::GenericResult</a> { ::Engine::GenericResult::UNKNOWN_ERROR })</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -356,7 +395,7 @@ Macros</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Aug 15 2026 01:08:09 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Sun Aug 16 2026 14:00:29 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>
