@@ -255,6 +255,9 @@ namespace Tools {
     };
 
     template <typename T>
+    struct TracedValueTypeCall;
+
+    template <typename T>
     struct Traced : TracedStorage<T> {
 
         using meta_t = std::decay_t<T>;
@@ -378,6 +381,14 @@ namespace Tools {
         {
             return { *this };
         }
+        
+        template <typename V>
+        decltype(auto) visit(V &&visitor) const
+        {
+            return mValue.visit([&](auto &&v) {
+                return visitor(TracedVariantAccess<Reflect::Value &, decltype(v)> { *this, std::forward<decltype(v)>(v) });
+            });
+        }
 
         virtual std::ostream &print(std::ostream &stream) const = 0;
 
@@ -413,71 +424,13 @@ namespace Tools {
         {
             return trace.context_get(type);
         }
-    };
-
-    template <>
-    struct Traced<Reflect::Value &> {
-
-        using meta_t = Reflect::Value &;
-
-        using traced_type = Reflect::Value &;
-
-        Traced(Reflect::Value &value)
-            : mValue(value)
+                        
+        template <typename U, typename Callable, typename Context>
+        friend Reflect::Result tag_invoke(Reflect::call_t<U>, Callable &&callable, const Traced<T> &arg, Context &&context)
         {
+            return call([&](const U &v, Context &context) { return callable(TracedValueTypeCall<U> { arg, v }, context); }, arg.get(), context);
         }
 
-        template <typename F>
-        TracedAccess<Reflect::Value &, F, true> trace(F &&f) const
-        {
-            return { *this, std::forward<F>(f) };
-        }
-
-        virtual UndoStack &undoStack() const = 0;
-
-        virtual Closure<Reflect::Result(CallableView<std::pair<Reflect::Result, bool>(const Traced<Reflect::Value &> &)>)> vBuild() const = 0;
-
-        Closure<Reflect::Result(CallableView<std::pair<Reflect::Result, bool>(const Traced<Reflect::Value &> &)>)> build() const
-        {
-            return vBuild();
-        }
-
-        Reflect::Value &get() const
-        {
-            return mValue;
-        }
-
-        Reflect::Value *operator->() const
-        {
-            return &mValue;
-        }
-
-        virtual std::ostream &print(std::ostream &stream) const = 0;
-
-        friend std::ostream &operator<<(std::ostream &stream, const Traced<Reflect::Value &> &trace)
-        {
-            return trace.print(stream);
-        }
-
-        template <typename V>
-        decltype(auto) visit(V &&visitor) const
-        {
-            return mValue.visit([&](auto &&v) {
-                return visitor(TracedVariantAccess<Reflect::Value &, decltype(v)> { *this, std::forward<decltype(v)>(v) });
-            });
-        }
-
-        virtual void *context_get(const Reflect::MetaTable *type) const
-        {
-            return nullptr;
-        }
-
-        friend void *tag_invoke(Reflect::get_reflect_contextual_t, const Traced<Reflect::Value &> &trace, const Reflect::MetaTable *type)
-        {
-            return trace.context_get(type);
-        }
-
-        Reflect::Value &mValue;
     };
 
     template <typename T>
@@ -645,28 +598,7 @@ namespace Tools {
 }
 
 namespace Reflect {
-    template <typename Callable, typename Arg, typename Context = ContextPtr>
-    Result call(Callable &&_callable, const Tools::Traced<Arg> &arg, Context &&context = {})
-    {
-        using traits = CallableTraits<Callable>;
-        using argument_types = typename traits::argument_types;
-
-        static_assert(argument_types::size == 2 || argument_types::size == 1);
-
-        auto callable = [&](auto &&v, Context &context) -> Result {
-            if constexpr (argument_types::size == 1) {
-                return _callable(std::forward<decltype(v)>(v));
-            } else {
-                static_assert(std::convertible_to<Context &, typename argument_types::template select<1>>);
-                return _callable(std::forward<decltype(v)>(v), context);
-            }
-        };
-
-        using T = meta_decayed_t<std::decay_t<typename argument_types::template select<0>>>;
-
-        return call([&](const T &v, Context &context) { return callable(Tools::TracedValueTypeCall<T> { arg, v }, context); }, arg.get(), context);
-    }
-
+    
     template <typename T>
     auto Value_as(const Tools::Traced<const Value &> &v)
     {

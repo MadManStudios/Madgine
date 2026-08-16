@@ -59,6 +59,15 @@ namespace Scene {
             friend void tag_invoke(Serialize::set_active_t<Configs...>, EntityPtr &, bool, bool, Context &&)
             {
             }
+
+            template <Concepts::DecayedOneOf<EntityPtr> T, typename Callable, typename Context>
+            friend Reflect::Result tag_invoke(Reflect::call_t<T> call, Callable &&callable, const Reflect::Value &arg, Context &&context)
+            {
+                if (Reflect::Value_is<std::monostate>(arg)) {
+                    return callable(EntityPtr {}, context);
+                }
+                return tag_invoke(Reflect::call_t<Reflect::ScopeBinding> {}, [&](const Reflect::ScopeBinding &binding, Context &context) { return callable(EntityPtr { binding.typed<Entity &>() }, context); }, arg, context);                
+            }
         };
 
     }
