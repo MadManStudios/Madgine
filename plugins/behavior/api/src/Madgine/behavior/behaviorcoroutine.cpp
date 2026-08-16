@@ -31,6 +31,7 @@ namespace Behavior {
 
     void CoroutineBehaviorState::stop()
     {
+        mDebugLocation.mContinuation.stop();
     }
 
     void CoroutineBehaviorState::destroy()
@@ -41,6 +42,30 @@ namespace Behavior {
     void CoroutineBehaviorState::visitState(CB visitor)
     {
         visitor(Execution::State::DebugLocation { &mDebugLocation });
+    }
+
+    bool CoroutineBehaviorState::wantsPause()
+    {
+        return Debug::get_debug_context(*mReceiver).wantsPause(&mDebugLocation, Debug::ContinuationType::Flow, mDebugLocation.mLine);
+    }
+
+    void CoroutineBehaviorState::pass(Closure<void()> callback)
+    {
+        Debug::ContextInfo &context = Debug::get_debug_context(*mReceiver);
+        if (wantsPause())
+            mDebugLocation.mContinuation = context.suspend(&mDebugLocation, { [this, callback { std::move(callback) }](Debug::ContinuationMode mode) mutable {
+                switch (mode) {
+                case Debug::ContinuationMode::Continue:
+                    callback();
+                    break;
+                case Debug::ContinuationMode::Abort:
+                    mReceiver->set_done();
+                    break;
+                default:
+                    throw 0;
+                } }, Debug::ContinuationType::Flow });
+        else
+            callback();
     }
 
     CoroutineBehaviorState::InitialSuspend CoroutineBehaviorState::initial_suspend() noexcept
@@ -95,11 +120,9 @@ namespace Behavior {
         return false;
     }
 
-    void CoroutineBehaviorState::InitialSuspend::await_suspend(std::coroutine_handle<CoroutineBehaviorState> handle) noexcept
+    void CoroutineBehaviorState::InitialSuspend::await_suspend(std::coroutine_handle<CoroutineBehaviorState> handle, std::source_location location) noexcept
     {
-#ifndef NDEBUG
-        handle.promise().mDebugLocation.mStacktrace = Debug::StackTrace<1>::getCurrent(1);
-#endif
+        handle.promise().mDebugLocation.mLocation = std::move(location);
     }
 
     void CoroutineBehaviorState::InitialSuspend::await_resume() noexcept
@@ -134,7 +157,7 @@ namespace Behavior {
         return true;
     }
 
-    void BehaviorCoroutineHandle::resume()
+    void BehaviorCoroutineHandle::resume() const
     {
         if (!promise().mNext->resumeImpl()) {
             promise().set_error(Reflect::Error { GenericResult { GenericResult::UNKNOWN_ERROR }, "A bound object has become unavailable" });

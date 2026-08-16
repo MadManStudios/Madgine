@@ -15,6 +15,7 @@
 #include "Madgine_Tools/imguiicons.h"
 #include "Madgine_Tools/inspector/inspector.h"
 #include "Madgine_Tools/renderer/dialogs.h"
+#include "Madgine_Tools/texteditor/texteditor.h"
 
 #define IMGUI_DEFINE_MATH_OPERATORS
 #include "imgui/imgui.h"
@@ -37,21 +38,77 @@ namespace Tools {
         if (!location)
             return {};
 
-        const char *name = "<unknown>";
-#ifndef NDEBUG
-        Debug::FullStackTrace trace = location->mStacktrace.calculateReadable();
-        if (!trace.empty()) {
-            name = trace[0].mFunction;
-        }
-#endif
-        ImGui::BeginGroupPanel(name);
+        ImGui::BeginGroupPanel(location->mLocation.function_name());
         std::vector<TypedPtr> content;
-        if (location->mChild) {
-            if (BeginDebuggablePanel("Sender")) {
-                content = view.visualizeDebugLocation(continuations, context, location->mChild, inlineLocation);
-                EndDebuggablePanel();
+
+        if (ImGui::BeginTable("Code", 2, ImGuiTableFlags_SizingFixedFit)) {
+
+            ImGui::TableSetupColumn("Line", 0);
+            ImGui::TableSetupColumn("Source", ImGuiTableColumnFlags_WidthStretch);
+
+            size_t baseLine = location->mLocation.line();
+            IndexType<size_t> lineNr = location->mLine;
+
+            ImGui::PushFont(view.getTool<TextEditor>().font());
+
+            static std::map<std::string, std::vector<std::string>> sSourceCache;
+
+            auto [it, b] = sSourceCache.try_emplace(location->mLocation.file_name());
+
+            if (b) {
+                std::ifstream ifs { location->mLocation.file_name() };
+                std::string line;
+                while (std::getline(ifs, line)) {
+                    it->second.push_back(line);
+                }
             }
+
+            size_t bracketAcc = 0;
+            bool wasGreaterZero = false;
+
+            for (const std::string &line : it->second | std::ranges::views::drop(baseLine - 1)) {
+                ImGui::TableNextRow();
+                ImGui::TableNextColumn();
+                ImGui::Text(std::to_string(baseLine));
+                ImGui::TableNextColumn();
+
+                float startY = ImGui::GetCursorScreenPos().y;
+
+                ImGui::Text("%s", line.c_str());
+
+                bool set = context.getBreakpoint(location, baseLine);
+                if (Breakpoint(startY, ImGui::GetCursorScreenPos().y, &set))
+                    context.setBreakpoint(location, baseLine, set);
+
+                if (baseLine == lineNr) {
+                    DrawDebugMarker(0.5f * (ImGui::GetCursorScreenPos().y + startY));
+
+                    ImGui::PopFont();
+
+                    if (location->mChild) {
+                        if (BeginDebuggablePanel("Sender")) {
+                            content = view.visualizeDebugLocation(continuations, context, location->mChild, inlineLocation);
+                            EndDebuggablePanel();
+                        }
+                    }
+
+                    ImGui::PushFont(view.getTool<TextEditor>().font());
+                }
+
+                baseLine++;
+
+                bracketAcc += std::ranges::count(line, '{') - std::ranges::count(line, '}');
+                wasGreaterZero |= bracketAcc > 0;
+                if (bracketAcc + !wasGreaterZero == 0) {
+                    break;
+                }
+            }
+
+            ImGui::PopFont();
+
+            ImGui::EndTable();
         }
+
         ImGui::EndGroupPanel();
 
         return content;
@@ -163,7 +220,7 @@ namespace Tools {
     {
         UndoStack history;
 
-        Behavior::ParameterTuple parameters = handle.createParameters();        
+        Behavior::ParameterTuple parameters = handle.createParameters();
 
         DialogSettings &settings = co_await get_dialog_settings;
 

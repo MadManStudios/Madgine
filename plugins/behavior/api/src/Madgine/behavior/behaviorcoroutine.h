@@ -3,8 +3,6 @@
 #include "Generic/closure.h"
 #include "Generic/execution/awaitablesender.h"
 
-#include "Platform/debug/stacktrace.h"
-
 #include "Meta/reflect/result.h"
 
 #include "Madgine/debug/debuggablesender.h"
@@ -18,10 +16,10 @@ namespace Behavior {
 
     struct MADGINE_BEHAVIOR_EXPORT CoroutineLocation {
         Debug::SenderLocation *mChild = nullptr;
+        mutable Debug::Continuation mContinuation;
+        IndexType<size_t> mLine;
 
-#ifndef NDEBUG
-        Debug::StackTrace<1> mStacktrace;
-#endif
+        std::source_location mLocation;
     };
 
     struct MADGINE_BEHAVIOR_EXPORT BoundValueBase {
@@ -36,22 +34,20 @@ namespace Behavior {
     template <typename Awaiter>
     struct CoroutineAwaiterGuard;
 
-    
     struct MADGINE_BEHAVIOR_EXPORT BehaviorCoroutineHandle {
         BehaviorCoroutineHandle() = default;
         BehaviorCoroutineHandle(std::coroutine_handle<CoroutineBehaviorState> handle);
 
         CoroutineBehaviorState &promise() const;
 
-        void resume();
+        void resume() const;
 
     private:
         std::coroutine_handle<CoroutineBehaviorState> mHandle;
     };
 
-
     struct MADGINE_BEHAVIOR_EXPORT CoroutineBehaviorState : BehaviorStateBase, BoundValueBase {
-        
+
         static Reflect::Result resolveNames(BehaviorReceiver &rec)
         {
             return {};
@@ -64,7 +60,7 @@ namespace Behavior {
                 Reflect::Result result = arg.resolve(rec);
                 if (result)
                     return result;
-            } 
+            }
             return resolveNames(rec, std::forward<Args>(args)...);
         }
 
@@ -86,9 +82,12 @@ namespace Behavior {
 
         void visitState(CB visitor) override;
 
+        bool wantsPause();
+        void pass(Closure<void()> callback);
+
         struct MADGINE_BEHAVIOR_EXPORT InitialSuspend {
             bool await_ready() noexcept;
-            void await_suspend(std::coroutine_handle<CoroutineBehaviorState> handle) noexcept;
+            void await_suspend(std::coroutine_handle<CoroutineBehaviorState> handle, std::source_location location = std::source_location::current()) noexcept;
             void await_resume() noexcept;
         };
 
@@ -100,7 +99,7 @@ namespace Behavior {
 
         InitialSuspend initial_suspend() noexcept;
         FinalSuspend final_suspend() noexcept;
-             
+
         bool resumeImpl() override;
         void return_void();
         void unhandled_exception();
@@ -120,11 +119,11 @@ namespace Behavior {
         decltype(auto) await_transform(T &&awaitable)
         {
             if constexpr (Execution::AnySender<std::remove_reference_t<T>>) {
-                return CoroutineAwaiterGuard<Execution::AwaitableSender<Execution::with_debug_location_t::sender<T>, CoroutineBehaviorState, BehaviorCoroutineHandle>> { std::forward<T>(awaitable) | Execution::with_debug_location(mDebugLocation.mChild), *this };
+                return CoroutineAwaiterGuard<Execution::AwaitableSender<Execution::with_debug_location_t::sender<T>, CoroutineBehaviorState, BehaviorCoroutineHandle>> { *this, std::forward<T>(awaitable) | Execution::with_debug_location(mDebugLocation.mChild), *this };
             } else if constexpr (Execution::AnyBinding<std::remove_reference_t<T>>) {
-                return CoroutineAwaiterGuard<BehaviorAwaitableBinding<T>> { std::forward<T>(awaitable) };
+                return CoroutineAwaiterGuard<BehaviorAwaitableBinding<T>> { *this, std::forward<T>(awaitable) };
             } else {
-                return CoroutineAwaiterGuard<T> { std::forward<T>(awaitable) };
+                return CoroutineAwaiterGuard<T> { *this, std::forward<T>(awaitable) };
             }
         }
 
@@ -148,19 +147,39 @@ namespace Behavior {
     template <typename Awaiter>
     struct CoroutineAwaiterGuard {
         template <typename... Args>
-        CoroutineAwaiterGuard(Args &&...args)
+        CoroutineAwaiterGuard(CoroutineBehaviorState &state, Args &&...args)
             : mAwaiter(std::forward<Args>(args)...)
+            , mState(state)
         {
         }
 
-        bool await_ready() noexcept
+        bool await_ready(std::source_location location = std::source_location::current()) noexcept
         {
+            mState.mDebugLocation.mLine = location.line();
+
+            if (mState.wantsPause())
+                return false;
+
             return mAwaiter.await_ready();
         }
 
-        auto await_suspend(BehaviorCoroutineHandle handle)
+        void await_suspend(BehaviorCoroutineHandle handle)
         {
-            return mAwaiter.await_suspend(std::move(handle));
+            mState.pass([this, handle, wasPaused {mState.wantsPause()}]() {
+                if (wasPaused && mAwaiter.await_ready()) {
+                    handle.resume();
+                } else {
+                    using R = decltype(mAwaiter.await_suspend(handle));
+                    if constexpr (std::same_as<bool, R>) {
+                        if (!mAwaiter.await_suspend(handle)) {
+                            handle.resume();
+                        }
+                    } else {
+                        static_assert(std::same_as<void, R>);
+                        mAwaiter.await_suspend(handle);
+                    }
+                }
+            });
         }
 
         decltype(auto) await_resume()
@@ -168,8 +187,8 @@ namespace Behavior {
             return mAwaiter.await_resume();
         }
 
-        Awaiter mAwaiter;        
+        Awaiter mAwaiter;
+        CoroutineBehaviorState &mState;
     };
-
 }
 }

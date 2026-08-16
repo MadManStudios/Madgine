@@ -4,6 +4,7 @@
 
 #include "Madgine/behaviorlib.h"
 #include "Madgine_Tools/debugtoolslib.h"
+#include "Madgine_Tools/texteditorlib.h"
 #include "Madgine_Tools/toolslib.h"
 
 #if defined(BehaviorTools_EXPORTS)
