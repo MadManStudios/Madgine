@@ -42,6 +42,9 @@ namespace Scene {
 
             EntityDescriptor(std::span<const Reflect::ScopePtr> components);
 
+            bool hasComponent(size_t index) const;
+            EntityComponentBase *getComponent(size_t index) const;
+
             void apply(Entity &entity) const;
 
             std::vector<ComponentEntry> mComponents;
