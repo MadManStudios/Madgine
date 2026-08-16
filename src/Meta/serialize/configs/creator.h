@@ -320,9 +320,9 @@ namespace Serialize {
             template <typename C, typename Context>
             static void writeItem(FormattedSerializeStream &out, const std::ranges::range_value_t<C> &arg, Context &&context)
             {
-                const char *name = writeCreationData<std::ranges::range_value_t<C>>(out, arg);
+                const char *name = writeCreationData<std::ranges::range_value_t<C>>(out, arg, context);
                 if (name) { // TODO find clean solution
-                    write<std::ranges::range_value_t<C>>(out, arg, name);
+                    write<std::ranges::range_value_t<C>>(out, arg, name, context);
                 }
             }
 

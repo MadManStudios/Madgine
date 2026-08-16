@@ -383,7 +383,7 @@ namespace Serialize {
                 return in.readPrimitive(t, name);
                 // mLog.log(t);
             } else if constexpr (std::derived_from<T, SyncableUnitBase>) {
-                return t.readState(in, name);
+                return t.readState(in, name, context);
             } else {
                 return SerializableDataPtr { &t }.readState(in, name, false, context);
             }
@@ -398,7 +398,7 @@ namespace Serialize {
                 out.writePrimitive(t, name);
                 // mLog.log(t);
             } else if constexpr (std::derived_from<T, SyncableUnitBase>) {
-                t.writeState(out, name);
+                t.writeState(out, name, context);
             } else {
                 SerializableDataConstPtr { &t }.writeState(out, name, false, context);
             }

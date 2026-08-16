@@ -90,9 +90,9 @@ namespace Serialize {
         return mType->getIndex(offset) < unit()->mActiveIndex;
     }
 
-    StreamResult SerializableUnitPtr::readState(FormattedSerializeStream &in, const char *name, bool skipId) const
+    StreamResult SerializableUnitPtr::readState(FormattedSerializeStream &in, const char *name, bool skipId, ContextPtr context) const
     {
-        return SerializableDataPtr { unit(), mType }.readState(in, name, skipId);
+        return SerializableDataPtr { unit(), mType }.readState(in, name, skipId, context);
     }
 
     void SerializableUnitPtr::setParent(SerializableUnitBase *parent) const

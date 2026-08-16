@@ -51,16 +51,16 @@ namespace Serialize {
         return *this;
     }
 
-    void SyncableUnitBase::writeState(FormattedSerializeStream &out, const char *name) const
+    void SyncableUnitBase::writeState(FormattedSerializeStream &out, const char *name, ContextPtr context) const
     {
         writeId(out, name);
-        customUnitPtr().writeState(out, name, true);
+        customUnitPtr().writeState(out, name, true, context);
     }
 
-    StreamResult SyncableUnitBase::readState(FormattedSerializeStream &in, const char *name)
+    StreamResult SyncableUnitBase::readState(FormattedSerializeStream &in, const char *name, ContextPtr context)
     {
         STREAM_PROPAGATE_ERROR(readId(in, name));
-        return customUnitPtr().readState(in, name, true);
+        return customUnitPtr().readState(in, name, true, context);
     }
 
     void SyncableUnitBase::setActive(bool active, bool existenceChanged, ContextPtr context)

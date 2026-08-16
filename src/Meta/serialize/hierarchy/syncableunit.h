@@ -29,8 +29,8 @@ namespace Serialize {
         SyncableUnitBase &operator=(SyncableUnitBase &&other);
 
     public:
-        void writeState(FormattedSerializeStream &out, const char *name = nullptr) const;
-        StreamResult readState(FormattedSerializeStream &in, const char *name = nullptr);
+        void writeState(FormattedSerializeStream &out, const char *name = nullptr, ContextPtr context = {}) const;
+        StreamResult readState(FormattedSerializeStream &in, const char *name = nullptr, ContextPtr context = {});
 
         void setActive(bool active, bool existenceChanged, ContextPtr context);
 

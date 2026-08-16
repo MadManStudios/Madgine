@@ -248,7 +248,7 @@ namespace Serialize {
             return mUnit != nullptr;
         }
 
-        StreamResult readState(FormattedSerializeStream &in, const char *name = nullptr, bool skipId = false) const;
+        StreamResult readState(FormattedSerializeStream &in, const char *name = nullptr, bool skipId = false, ContextPtr context = {}) const;
 
         StreamResult applyMap(FormattedSerializeStream &in, bool success, ContextPtr context = {}) const;
 
