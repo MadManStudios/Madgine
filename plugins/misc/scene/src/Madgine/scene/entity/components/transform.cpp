@@ -73,6 +73,15 @@ namespace Scene {
             return result * mOrientation;
         }
 
+        void Transform::setWorldOrientation(const Math::Quaternion orientation, Contextual<Entity &> entity)
+        {
+            Math::Quaternion parentOrientation;
+            Execution::access_binding(entity->parent(), [&](Entity &e) { parentOrientation = e.getComponent<Transform>()->worldOrientation(e); });
+            Math::Quaternion invParentOrientation = parentOrientation.inverse();
+            Math::Quaternion localOrientation = invParentOrientation * orientation;
+            mOrientation = localOrientation;
+        }
+
     }
 }
 }

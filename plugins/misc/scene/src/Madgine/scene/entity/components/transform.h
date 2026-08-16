@@ -24,6 +24,7 @@ namespace Scene {
             Math::Vector3 worldPosition(Contextual<Entity &> entity) const;
             void setWorldPosition(const Math::Vector3 &position, Contextual<Entity &> entity);
             Math::Quaternion worldOrientation(Contextual<Entity &> entity) const;
+            void setWorldOrientation(const Math::Quaternion orientation, Contextual<Entity &> entity);
 
             Math::Vector3 mPosition;
             Math::Vector3 mScale = Math::Vector3::UNIT_SCALE;
