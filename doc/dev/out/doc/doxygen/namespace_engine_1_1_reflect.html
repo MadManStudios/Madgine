@@ -273,6 +273,8 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_reflect_1_1_bound_api_function.html">BoundApiFunction</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_reflect_1_1call__t.html">call_t</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_reflect_1_1_context_reference.html">ContextReference</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_reflect_1_1convert___value__t.html">convert_Value_t</a></td></tr>
@@ -507,6 +509,9 @@ requires (!std::is_pointer_v&lt;T&gt;)</td></tr>
 <tr class="separator:a3902997560f13c1e26e54f7d0968bb7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a33630c8cd2b8630aa38c88072677f8a0"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="struct_engine_1_1_reflect_1_1_function_table.html">FunctionTable</a> *&amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_reflect.html#a33630c8cd2b8630aa38c88072677f8a0">sFunctionList</a> ()</td></tr>
 <tr class="separator:a33630c8cd2b8630aa38c88072677f8a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e81c74af496ac336c9712004effa7da"><td class="memTemplParams" colspan="2">template&lt;typename T , typename <a class="el" href="struct_engine_1_1_callable.html">Callable</a> , typename Context &gt; </td></tr>
+<tr class="memitem:a6e81c74af496ac336c9712004effa7da"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_reflect_1_1_result.html">Result</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_reflect.html#a6e81c74af496ac336c9712004effa7da">tag_invoke</a> (<a class="el" href="struct_engine_1_1_reflect_1_1call__t.html">call_t</a>&lt; T &gt; <a class="el" href="namespace_engine_1_1_reflect.html#aea7e58e6e559d52dcf24b42541294382">call</a>, <a class="el" href="struct_engine_1_1_callable.html">Callable</a> &amp;&amp;callable, const <a class="el" href="struct_engine_1_1_reflect_1_1_value.html">Value</a> &amp;arg, Context &amp;&amp;context)</td></tr>
+<tr class="separator:a6e81c74af496ac336c9712004effa7da"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae1db99233b88e17ccf06c6fdc7f6a929"><td class="memTemplParams" colspan="2">template&lt;typename T , bool isReferenceWrapped = false&gt; </td></tr>
 <tr class="memitem:ae1db99233b88e17ccf06c6fdc7f6a929"><td class="memTemplItemLeft" align="right" valign="top">constexpr <a class="el" href="struct_engine_1_1_reflect_1_1_extended_type.html">ExtendedType</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_reflect.html#ae1db99233b88e17ccf06c6fdc7f6a929">toType</a> ()</td></tr>
 <tr class="separator:ae1db99233b88e17ccf06c6fdc7f6a929"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1687,6 +1692,48 @@ template&lt;typename T , typename <a class="el" href="struct_engine_1_1_callable
 
 </div>
 </div>
+<a id="a6e81c74af496ac336c9712004effa7da" name="a6e81c74af496ac336c9712004effa7da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6e81c74af496ac336c9712004effa7da">&#9670;&#160;</a></span>tag_invoke()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename <a class="el" href="struct_engine_1_1_callable.html">Callable</a> , typename Context &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_reflect_1_1_result.html">Result</a> Engine::Reflect::tag_invoke </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_reflect_1_1call__t.html">Reflect::call_t</a>&lt; T &gt;&#160;</td>
+          <td class="paramname"><em>call</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_callable.html">Callable</a> &amp;&amp;&#160;</td>
+          <td class="paramname"><em>callable</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_reflect_1_1_value.html">Value</a> &amp;&#160;</td>
+          <td class="paramname"><em>arg</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Context &amp;&amp;&#160;</td>
+          <td class="paramname"><em>context</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="aea7e58e6e559d52dcf24b42541294382" name="aea7e58e6e559d52dcf24b42541294382"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aea7e58e6e559d52dcf24b42541294382">&#9670;&#160;</a></span>call()</h2>
 
@@ -2235,7 +2282,7 @@ template&lt;typename... V&gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Aug 16 2026 14:00:32 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Sun Aug 16 2026 16:07:19 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

@@ -274,6 +274,8 @@ This graph shows which files directly or indirectly include this file:</div>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_reflect_1_1_access_binding_forwarder.html">Engine::Reflect::AccessBindingForwarder&lt; T, R, argument_types, Callable &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_reflect_1_1call__t.html">Engine::Reflect::call_t&lt; T &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_reflect_1_1convert___value__t.html">Engine::Reflect::convert_Value_t&lt; isReferenceWrapped &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_reflect_1_1_dynamic_cast_helper.html">Engine::Reflect::DynamicCastHelper&lt; F, R, T, Args &gt;</a></td></tr>
@@ -345,6 +347,9 @@ requires (!Concepts::InstanceOf&lt;Param, Contextual&gt;)</td></tr>
 requires (!std::is_pointer_v&lt;T&gt;)</td></tr>
 <tr class="memitem:a3902997560f13c1e26e54f7d0968bb7e"><td class="memTemplItemLeft" align="right" valign="top">T *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_reflect.html#a3902997560f13c1e26e54f7d0968bb7e">Engine::Reflect::scope_cast</a> (const ScopePtr &amp;ptr)</td></tr>
 <tr class="separator:a3902997560f13c1e26e54f7d0968bb7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e81c74af496ac336c9712004effa7da"><td class="memTemplParams" colspan="2">template&lt;typename T , typename Callable , typename Context &gt; </td></tr>
+<tr class="memitem:a6e81c74af496ac336c9712004effa7da"><td class="memTemplItemLeft" align="right" valign="top">Result&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_reflect.html#a6e81c74af496ac336c9712004effa7da">Engine::Reflect::tag_invoke</a> (call_t&lt; T &gt; call, Callable &amp;&amp;callable, const Value &amp;arg, Context &amp;&amp;context)</td></tr>
+<tr class="separator:a6e81c74af496ac336c9712004effa7da"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afc04aa8a36007fd99db114502faf4b03"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:afc04aa8a36007fd99db114502faf4b03"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_reflect.html#afc04aa8a36007fd99db114502faf4b03">Engine::Reflect::toValue</a> (Value &amp;v, T &amp;&amp;t)</td></tr>
 <tr class="separator:afc04aa8a36007fd99db114502faf4b03"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -377,7 +382,7 @@ Variables</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Aug 16 2026 14:00:30 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Sun Aug 16 2026 16:07:17 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>
