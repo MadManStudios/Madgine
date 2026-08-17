@@ -76,7 +76,7 @@ namespace Scene {
             for (size_t i = 0; i < EntityComponentRegistry::sComponents().size(); ++i) {
                 const EntityComponentRegistry::Annotations &annotation = EntityComponentRegistry::get(i);
                 if (*annotation.mType == component.mType) {
-                    mComponent = { construct(annotation).release(), { i } };
+                    mComponent = { construct(annotation, *static_cast<const EntityComponentBase*>(component.mScope)).release(), { i } };
                     return;
                 }
             }
