@@ -334,7 +334,7 @@ namespace Reflect {
                 if (Value_is<ScopePtr>(arg)) {
                     using Ty = resolveCustomScopePtr_t<T, true>;
                     std::remove_pointer_t<Ty> *ptr = scope_cast<std::remove_pointer_t<Ty>>(Value_as<ScopePtr>(arg));
-                    if (ptr) {
+                    if (ptr || (!Value_as<ScopePtr>(arg).mScope && std::is_pointer_v<Ty>)) {
                         if constexpr (std::is_pointer_v<Ty>) {
                             return callable(ptr, context);
                         } else {
