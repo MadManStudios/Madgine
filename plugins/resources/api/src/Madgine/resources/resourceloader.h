@@ -216,6 +216,9 @@ namespace Resources {
 
         static Handle load(Resource *resource, Platform::Filesystem::FileEventType event, T *loader = nullptr)
         {
+            if (!resource)
+                return {};
+
             Handle handle { (typename traits::handle) * resource->mData };
 
             if (!handle || event != Platform::Filesystem::FileEventType::FILE_CREATED) {
