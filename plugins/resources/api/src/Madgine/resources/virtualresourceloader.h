@@ -175,7 +175,11 @@ namespace Resources {
                                                                                   \
     SERIALIZETABLE_BEGIN_EX(8, Loader::Handle)                                    \
         ENCAPSULATED_FIELD_EX(9, Name, name, loadSerialize)                       \
-    SERIALIZETABLE_END_EX(10, Loader::Handle)
+    SERIALIZETABLE_END_EX(10, Loader::Handle)                                     \
+                                                                                  \
+    STORAGEOPS_BEGIN_EX(12, Loader::Handle)                                       \
+    CONSTRUCTOR_EX(13, std::string)                                               \
+    STORAGEOPS_END_EX(14, Loader::Handle)
 
 #define VIRTUALRESOURCELOADERIMPL(Loader, Base)                  \
     UNIQUECOMPONENT(Loader)                                      \
