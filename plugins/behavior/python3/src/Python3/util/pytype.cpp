@@ -17,7 +17,7 @@ namespace Behavior {
 
         static PyObject *PyType_str(PyType *self)
         {
-            return PyUnicode_FromString(self->mType->mMetaTable->mTypeName);
+            return PyUnicode_FromString(self->mType->mStorageOps->mTypeName);
         }
 
         static PyObject *PyType_call(PyType *self, PyObject *args, PyObject *kwargs)
@@ -78,6 +78,34 @@ namespace Behavior {
             return toPyObject(std::move(object));
         }
 
+        PyObject *PyType_get(PyType *self, PyObject *args)
+        {
+            const char *name;
+
+            if (!PyArg_ParseTuple(args, "s", &name))
+                return NULL;
+
+            std::string fullName = StringUtil::replace(std::string { self->mType->mStorageOps->mTypeName }, "::", ".") + "." + name;
+
+            auto typeName = Type::resolveTypeName(fullName, ".");
+            if (typeName) {
+                if (typeName->mStorageOps) {
+                    PyObject *type = PyObject_CallObject((PyObject *)&PyTypeType, NULL);
+                    if (!type)
+                        return NULL;
+                    reinterpret_cast<PyType *>(type)->mType = typeName;
+                    [[maybe_unused]] int result = PyObject_SetAttrString((PyObject*)self, name, type);
+                    assert(result == 0);
+                    return type;
+                } else {
+                    return PyImport_ImportModule(fullName.c_str());
+                }
+            }
+
+            PyErr_Format(PyExc_AttributeError, "Could not find attribute '%s' in %s!", name, self->mType->mStorageOps->mTypeName);
+            return NULL;
+        }
+
         PyTypeObject PyTypeType = {
             .ob_base = PyVarObject_HEAD_INIT(NULL, 0)
                 .tp_name
@@ -87,6 +115,7 @@ namespace Behavior {
             .tp_dealloc = &PyDealloc<PyType, &PyType::mType>,
             .tp_repr = (reprfunc)PyType_str,
             .tp_call = (ternaryfunc)PyType_call,
+            .tp_getattro = (getattrofunc)PyType_get,
             .tp_flags = Py_TPFLAGS_DEFAULT,
             .tp_doc = "Python implementation of TypeName",
             .tp_new = PyType_GenericNew,
