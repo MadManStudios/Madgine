@@ -436,6 +436,8 @@ Functions</h2></td></tr>
 <tr class="separator:acc2026eb8216596cf3816d2f14ab4326"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9cd54e8ead7823d0d777f46c65c7b6a6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_reflect_1_1_extended_type.html">Reflect::ExtendedType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#a9cd54e8ead7823d0d777f46c65c7b6a6">PyToValueTypeDesc</a> (PyObject *obj)</td></tr>
 <tr class="separator:a9cd54e8ead7823d0d777f46c65c7b6a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a23099a13e3b6ef5bd9f56ad4fceed93c"><td class="memItemLeft" align="right" valign="top">PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#a23099a13e3b6ef5bd9f56ad4fceed93c">PyType_get</a> (<a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_type.html">PyType</a> *self, PyObject *args)</td></tr>
+<tr class="separator:a23099a13e3b6ef5bd9f56ad4fceed93c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8405c7811c49df0c078c7ea829eb4443"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#a8405c7811c49df0c078c7ea829eb4443">PyVector3_init</a> (<a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_vector3.html">PyVector3</a> *self, PyObject *args, PyObject *kwds)</td></tr>
 <tr class="separator:a8405c7811c49df0c078c7ea829eb4443"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abc51f0caf02b64689e98dbc47b4615f0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#abc51f0caf02b64689e98dbc47b4615f0">resumeCoroutine</a> (<a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr.html">PyObjectPtr</a> coro, <a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_object_ptr.html">PyObjectPtr</a> value)</td></tr>
@@ -2078,6 +2080,34 @@ template&lt;typename T , auto p&gt; </div>
 
 </div>
 </div>
+<a id="a23099a13e3b6ef5bd9f56ad4fceed93c" name="a23099a13e3b6ef5bd9f56ad4fceed93c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a23099a13e3b6ef5bd9f56ad4fceed93c">&#9670;&#160;</a></span>PyType_get()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">PyObject * Engine::Behavior::Python3::PyType_get </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_type.html">PyType</a> *&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">PyObject *&#160;</td>
+          <td class="paramname"><em>args</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <h2 class="groupheader">Variable Documentation</h2>
 <a id="a76a43cb9fa5c2a15ca859318223c8012" name="a76a43cb9fa5c2a15ca859318223c8012"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a76a43cb9fa5c2a15ca859318223c8012">&#9670;&#160;</a></span>PyNamedType</h2>
@@ -2832,10 +2862,12 @@ template&lt;typename T , auto p&gt; </div>
 <div class="line">            .tp_dealloc = &amp;PyDealloc&lt;PyType, &amp;PyType::mType&gt;,</div>
 <div class="line">            .tp_repr = (reprfunc)PyType_str,</div>
 <div class="line">            .tp_call = (ternaryfunc)PyType_call,</div>
+<div class="line">            .tp_getattro = (getattrofunc)<a class="code hl_function" href="namespace_engine_1_1_behavior_1_1_python3.html#a23099a13e3b6ef5bd9f56ad4fceed93c">PyType_get</a>,</div>
 <div class="line">            .tp_flags = Py_TPFLAGS_DEFAULT,</div>
 <div class="line">            .tp_doc = <span class="stringliteral">&quot;Python implementation of TypeName&quot;</span>,</div>
 <div class="line">            .tp_new = PyType_GenericNew,</div>
 <div class="line">        }</div>
+<div class="ttc" id="anamespace_engine_1_1_behavior_1_1_python3_html_a23099a13e3b6ef5bd9f56ad4fceed93c"><div class="ttname"><a href="namespace_engine_1_1_behavior_1_1_python3.html#a23099a13e3b6ef5bd9f56ad4fceed93c">Engine::Behavior::Python3::PyType_get</a></div><div class="ttdeci">PyObject * PyType_get(PyType *self, PyObject *args)</div><div class="ttdef"><b>Definition:</b> pytype.cpp:81</div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -2949,7 +2981,7 @@ template&lt;typename T , auto p&gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Aug 16 2026 19:50:57 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Mon Aug 17 2026 08:16:38 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>
