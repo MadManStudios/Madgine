@@ -240,6 +240,14 @@ namespace Reflect {
     template <typename T, typename Callable, typename Context>
     Result tag_invoke(call_t<T> call, Callable &&callable, const Value &arg, Context &&context)
     {
+        if (Value_is<OwnedValue>(arg)) {
+            Result result;
+            Value_erased([&](Value &v) {
+                Value_as<OwnedValue>(arg).get(v);
+                result = tag_invoke(call, std::forward<Callable>(callable), v, context);
+            });
+            return result;
+        }
 
         if constexpr (Concepts::InstanceOf<T, std::optional>) {
             if (Value_isNull(arg))
@@ -269,19 +277,6 @@ namespace Reflect {
             }(typename Concepts::is_instance<T, std::variant>::argument_types {});
         } else if constexpr (std::same_as<T, Value>) {
             return callable(arg, context);
-        } else if constexpr (std::same_as<T, ScopePtr>) {
-            if (Value_is<ScopePtr>(arg)) {
-                return callable(Value_as<ScopePtr>(arg), context);
-            } else if (Value_is<OwnedValue>(arg)) {
-                Result result;
-                Value_erased([&](Value &v) {
-                    Value_as<OwnedValue>(arg).get(v);
-                    result = tag_invoke(call, std::forward<Callable>(callable), v, context);
-                });
-                return result;
-            } else {
-                return REFLECT_UNKNOWN_ERROR_NOTRACE() << "Cannot form a scope pointer to type " << Value_type(arg).toString();
-            }
         } else if constexpr (PrimitiveType<T>) {
             if (!Value_is<T>(arg))
                 return REFLECT_UNKNOWN_ERROR_NOTRACE() << "Expected " << typeid(T).name() << " got " << Value_type(arg).toString();
@@ -336,26 +331,20 @@ namespace Reflect {
                 },
                     context);
             } else {
-                return tag_invoke(call_t<ScopePtr> {}, [&](ScopePtr scope, Context &context) -> Result {
-                        using Ty = resolveCustomScopePtr_t<T, true>;
-                        std::remove_pointer_t<Ty> *ptr = scope_cast<std::remove_pointer_t<Ty>>(scope);
-                        if (!ptr) {
-                            return REFLECT_UNKNOWN_ERROR_NOTRACE() << "No known conversion from " << scope.mType->mTypeName << " to " << toType<Ty>().toString();
-                        }
+                if (Value_is<ScopePtr>(arg)) {
+                    using Ty = resolveCustomScopePtr_t<T, true>;
+                    std::remove_pointer_t<Ty> *ptr = scope_cast<std::remove_pointer_t<Ty>>(Value_as<ScopePtr>(arg));
+                    if (ptr) {
                         if constexpr (std::is_pointer_v<Ty>) {
                             return callable(ptr, context);
                         } else {
                             return callable(*ptr, context);
-                        } }, arg, context);
-            }
+                        }    
+                    }                    
+                }
 
-            /*using U = resolveCustomScopePtr_t<std::remove_reference_t<T>, true>;
-            std::remove_pointer_t<U> *ptr = scope_cast<std::remove_pointer_t<U>>(ValueType_as_impl<ScopePtr>(v));
-            if constexpr (Pointer<U>) {
-                return ptr;
-            } else {
-                return *ptr;
-            }*/
+                return REFLECT_UNKNOWN_ERROR_NOTRACE() << "No known conversion from " << Value_type(arg).toString() << " to " << toType<T>().toString();
+            }
         }
         // static_assert(dependent_bool<T, false>::value, "A ValueType can not be converted to the given target type");
     }
