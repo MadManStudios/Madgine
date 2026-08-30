@@ -192,7 +192,7 @@ void GameManager::start()
     mLifetime.attach(game() | Engine::Behavior::context_set(mSceneMgr));
 }
 
-Engine::Behavior::Behavior Brick(float speed, Engine::Math::Vector3 dir, Engine::Math::Quaternion q, GameManager &manager, Engine::Scene::EntityBinding entity)
+Engine::Behavior::Behavior Brick(float speed, Engine::Math::Vector3 dir, Engine::Math::Quaternion q, GameManager &manager, Engine::Scene::EntityContext entity)
 {
 
     float qAcc = 1.0f;

@@ -8,7 +8,7 @@
 namespace Engine {
 namespace Scene {
 
-    constexpr auto rotate = [](Math::Vector3 axis, float speed, EntityBinding entity = {}) {
+    constexpr auto rotate = [](Math::Vector3 axis, float speed, EntityContext entity = {}) {
         return std::move(entity) | Execution::let_value([=](auto e) {
             return yield_simulation() | Execution::then([=](std::chrono::microseconds timeSinceLastFrame) {
                 Execution::access_binding(e, [=](Entity::Entity &e) {

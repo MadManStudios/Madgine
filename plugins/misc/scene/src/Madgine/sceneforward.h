@@ -27,8 +27,8 @@ namespace Scene {
     struct LightManager;
     struct Light;
 
-    using EntityBinding = Behavior::ContextParameter<Entity::EntityPtr>;
-    using SceneBinding = Behavior::ContextParameter<SceneManager &>;
+    using EntityContext = Behavior::ContextParameter<Entity::EntityPtr>;
+    using SceneContext = Behavior::ContextParameter<SceneManager &>;
 }
 
 }

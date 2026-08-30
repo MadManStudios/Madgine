@@ -62,6 +62,6 @@ namespace ClickBrick {
         std::vector<Engine::Scene::Entity::EntityPtr> mBricks;
     };
 
-    Engine::Behavior::Behavior Brick(float speed, Engine::Math::Vector3 dir, Engine::Math::Quaternion q, GameManager &manager, Engine::Scene::EntityBinding entity = {});
+    Engine::Behavior::Behavior Brick(float speed, Engine::Math::Vector3 dir, Engine::Math::Quaternion q, GameManager &manager, Engine::Scene::EntityContext entity = {});
 
 }

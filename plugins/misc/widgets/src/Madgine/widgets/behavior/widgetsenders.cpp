@@ -15,9 +15,9 @@ NATIVE_BEHAVIOR(Animate_Opacity, Engine::Widgets::animate_opacity, Engine::Behav
 namespace Engine {
 namespace Widgets {
 
-    Behavior::Behavior animate_move(Math::Matrix3 dist, std::chrono::nanoseconds duration, WidgetBinding widgetBinding)
+    Behavior::Behavior animate_move(Math::Matrix3 dist, std::chrono::nanoseconds duration, WidgetContext widgetContext)
     {
-        auto widget = co_await *widgetBinding;
+        auto widget = co_await *widgetContext;
 
         Math::Matrix3 start = widget->getPos();
         Math::Matrix3 end = start + dist;
@@ -32,9 +32,9 @@ namespace Widgets {
         widget->setPos(end);
     }
 
-    Behavior::Behavior animate_opacity(float dist, std::chrono::nanoseconds duration, WidgetBinding widgetBinding)
+    Behavior::Behavior animate_opacity(float dist, std::chrono::nanoseconds duration, WidgetContext widgetContext)
     {
-        auto widget = co_await *widgetBinding;
+        auto widget = co_await *widgetContext;
 
         float start = widget->opacity();
         float end = start + dist;
