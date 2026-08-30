@@ -77,7 +77,7 @@ namespace Behavior {
         PyObject *toPyObject(Reflect::Duration64 d)
         {
             PyObject *obj = PyObject_CallFunction((PyObject *)&PyDurationType, "K", d.count());
-            //new (&reinterpret_cast<PyDuration *>(obj)->mDuration) Reflect::Duration64(d);
+            // new (&reinterpret_cast<PyDuration *>(obj)->mDuration) Reflect::Duration64(d);
             return obj;
         }
 
@@ -159,7 +159,7 @@ namespace Behavior {
         PyObject *toPyObject(const Math::Vector3 &v)
         {
             PyObject *obj = PyObject_CallFunction((PyObject *)&PyVector3Type, "fff", v.x, v.y, v.z);
-            //new (&reinterpret_cast<PyVector3 *>(obj)->mVector) Math::Vector3(v);
+            // new (&reinterpret_cast<PyVector3 *>(obj)->mVector) Math::Vector3(v);
             return obj;
         }
 
@@ -346,7 +346,10 @@ namespace Behavior {
             } else if (obj->ob_type == &PyVector3Type) {
                 toValue(result, reinterpret_cast<PyVector3 *>(obj)->mVector);
                 return {};
-            } else if (obj->ob_type == &PyDurationType){
+            } else if (obj->ob_type == &PyQuaternionType) {
+                toValue(result, reinterpret_cast<PyQuaternion *>(obj)->mQuaternion);
+                return {};
+            } else if (obj->ob_type == &PyDurationType) {
                 toValue(result, reinterpret_cast<PyDuration *>(obj)->mDuration);
                 return {};
             } else {
@@ -425,8 +428,6 @@ namespace Behavior {
                 PyTypeObject *type = reinterpret_cast<PyTypeObject *>(obj);
                 if (type == &PyUnicode_Type) {
                     return storageOps<std::string>;
-                } else if (type == &PyNamedType) {
-                    return storageOps<std::monostate>;
                 }
             }
             return nullptr;
@@ -452,7 +453,7 @@ namespace Behavior {
             if (!msg)
                 return nullptr;
 
-            return PyObject_CallOneArg(PyExc_Exception, msg);            
+            return PyObject_CallOneArg(PyExc_Exception, msg);
         }
 
     }

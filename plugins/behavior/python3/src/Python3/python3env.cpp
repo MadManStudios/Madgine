@@ -176,7 +176,7 @@ namespace Behavior {
                 return NULL;
             if (PyType_Ready(&PyStateType) < 0)
                 return NULL;
-            if (PyType_Ready(&PyNamedType) < 0)
+            if (PyType_Ready(&PyContextualType) < 0)
                 return NULL;
             if (PyType_Ready(&PyBindingType) < 0)
                 return NULL;
@@ -221,9 +221,9 @@ namespace Behavior {
                 Py_DECREF(m);
                 return NULL;
             }
-            Py_INCREF(&PyNamedType);
-            if (PyModule_AddObject(m, "Named", (PyObject *)&PyNamedType) < 0) {
-                Py_DECREF(&PyNamedType);
+            Py_INCREF(&PyContextualType);
+            if (PyModule_AddObject(m, "Contextual", (PyObject *)&PyContextualType) < 0) {
+                Py_DECREF(&PyContextualType);
                 Py_DECREF(m);
                 return NULL;
             }

@@ -13,7 +13,7 @@ namespace Engine {
 namespace Behavior {
     namespace Python3 {
 
-        MADGINE_PYTHON3_EXPORT extern PyTypeObject PyNamedType;
+        MADGINE_PYTHON3_EXPORT extern PyTypeObject PyContextualType;
 
         PyObject *PyEngine_Behavior_decorator(PyObject *self,
             PyObject *const *args,

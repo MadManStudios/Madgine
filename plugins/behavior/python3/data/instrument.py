@@ -11,7 +11,7 @@ class Visitor(ast.NodeTransformer):
 
         for arg in node.args.args:
             if (isinstance(arg.annotation, ast.Subscript)):
-                node.body.insert(0, ast.If(ast.UnaryOp(ast.Not(), ast.Name(arg.arg, ast.Load())), [ast.Assign([ast.Name(arg.arg, ast.Store())], ast.Call(ast.Attribute(ast.Attribute(ast.Call(ast.Name(id="__import__", ctx=ast.Load()), [ast.Constant("Engine")], []), "Named", ast.Load()), "resolve", ast.Load()), [arg.annotation.slice], []))], []))            
+                node.body.insert(0, ast.If(ast.UnaryOp(ast.Not(), ast.Name(arg.arg, ast.Load())), [ast.Assign([ast.Name(arg.arg, ast.Store())], ast.Call(ast.Attribute(ast.Attribute(ast.Call(ast.Name(id="__import__", ctx=ast.Load()), [ast.Constant("Engine")], []), "Contextual", ast.Load()), "resolve", ast.Load()), [arg.annotation.slice], []))], []))            
 
         return node;
 

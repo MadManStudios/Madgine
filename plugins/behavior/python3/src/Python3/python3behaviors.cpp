@@ -28,7 +28,7 @@ namespace Engine {
 namespace Behavior {
     namespace Python3 {
 
-        PyObject *PyNamed_resolve(PyObject *cls, PyObject *typeObj)
+        PyObject *PyContextual_resolve(PyObject *cls, PyObject *typeObj)
         {
 
             const Type::TypeName *type = nullptr;
@@ -52,20 +52,20 @@ namespace Behavior {
             return toPyObject(v);
         }
 
-        static PyMethodDef PyNamedMethods[] = {
+        static PyMethodDef PyContextualMethods[] = {
             { "__class_getitem__", Py_GenericAlias, METH_O | METH_CLASS, "" },
-            { "resolve", PyNamed_resolve, METH_O | METH_CLASS, "" },
+            { "resolve", PyContextual_resolve, METH_O | METH_CLASS, "" },
             { NULL, NULL, 0, NULL } /* Sentinel */
         };
 
-        PyTypeObject PyNamedType = {
+        PyTypeObject PyContextualType = {
             .ob_base = PyObject_HEAD_INIT(NULL)
                 .tp_name
-            = "Engine.Named",
+            = "Engine.Contextual",
             .tp_itemsize = 0,
             .tp_flags = Py_TPFLAGS_DEFAULT,
             .tp_doc = "Python helper for Named annotations",
-            .tp_methods = PyNamedMethods,
+            .tp_methods = PyContextualMethods,
             .tp_new = PyType_GenericNew,
         };
 
