@@ -256,6 +256,12 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><div class="dynheader">
+Include dependency graph for storageops_forward.h:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="storageops__forward_8h__incl.svg" width="204" height="271"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+</div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="storageops__forward_8h__dep__incl.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
@@ -283,7 +289,7 @@ Functions</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
 <tr class="memitem:ae4f2508649dc6f65e93d7442ed0320c9"><td class="memTemplParams" colspan="2">template&lt;typename... T&gt; </td></tr>
-<tr class="memitem:ae4f2508649dc6f65e93d7442ed0320c9"><td class="memTemplItemLeft" align="right" valign="top">const StorageOps *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_type.html#ae4f2508649dc6f65e93d7442ed0320c9">Engine::Type::sLocalVariantStorage</a> = &amp;resolveVariantStorageOps({ storageOps&lt;T&gt;... })</td></tr>
+<tr class="memitem:ae4f2508649dc6f65e93d7442ed0320c9"><td class="memTemplItemLeft" align="right" valign="top">const StorageOps *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_type.html#ae4f2508649dc6f65e93d7442ed0320c9">Engine::Type::sLocalVariantStorage</a> = &amp;resolveVariantStorageOps({ *resolveStorageOps&lt;T&gt;()... })</td></tr>
 <tr class="separator:ae4f2508649dc6f65e93d7442ed0320c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
@@ -324,7 +330,7 @@ Variables</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Aug 17 2026 08:16:37 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Sun Aug 30 2026 16:15:29 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

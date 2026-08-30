@@ -335,6 +335,14 @@ Macros</h2></td></tr>
 <tr class="separator:ae6a4c9fca7b618e801eb06bfe2e0a386"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abd71b34cd0f125cd88211d18e2e37bc4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="metatable__impl_8h.html#abd71b34cd0f125cd88211d18e2e37bc4">READONLY_PROPERTY_EX</a>(Idx,  Name,  Getter)&#160;&#160;&#160;    <a class="el" href="metatable__impl_8h.html#a32dc03f7cd2e739aab50a794c2bc7349">METATABLE_ENTRY_EX</a>(Idx, <a class="el" href="macros_8h.html#afa8624400132dca5f52f93deec70706b">SINGLE_ARG</a>(::Engine::Reflect::__Reflect_impl__::property&lt;Ty, &amp;Ty::Getter, nullptr&gt;(#Name)))</td></tr>
 <tr class="separator:abd71b34cd0f125cd88211d18e2e37bc4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa061bbfd8a693b945de7f136e115374f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="metatable__impl_8h.html#aa061bbfd8a693b945de7f136e115374f">STORAGE_BEGIN</a>(T,  Type)&#160;&#160;&#160;<a class="el" href="metatable__impl_8h.html#a54d9521fdd0ea9019b866037193a9a32">STORAGE_BEGIN_EX</a>(, T, Type)</td></tr>
+<tr class="separator:aa061bbfd8a693b945de7f136e115374f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54d9521fdd0ea9019b866037193a9a32"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="metatable__impl_8h.html#a54d9521fdd0ea9019b866037193a9a32">STORAGE_BEGIN_EX</a>(Idx,  T,  Type)&#160;&#160;&#160;<a class="el" href="storageops__impl_8h.html#ad68bbdd12a857723c95f56358e2aa7ea">STORAGEOPS_BEGIN_EX</a>(Idx, T, Type)</td></tr>
+<tr class="separator:a54d9521fdd0ea9019b866037193a9a32"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af14fa6c33deb1627fb6c49f5c9e35b9b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="metatable__impl_8h.html#af14fa6c33deb1627fb6c49f5c9e35b9b">STORAGE_END</a>(T)&#160;&#160;&#160;<a class="el" href="functiontable_8cpp.html#a4f400552c404c1c94384ad13324d5329">STORAGE_END_EX</a>(, T)</td></tr>
+<tr class="separator:af14fa6c33deb1627fb6c49f5c9e35b9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f400552c404c1c94384ad13324d5329"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="metatable__impl_8h.html#a4f400552c404c1c94384ad13324d5329">STORAGE_END_EX</a>(Idx,  T)</td></tr>
+<tr class="separator:a4f400552c404c1c94384ad13324d5329"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="a88e567b1b7603ee46a1d7a70c78fda29" name="a88e567b1b7603ee46a1d7a70c78fda29"></a>
@@ -450,10 +458,12 @@ Macros</h2></td></tr>
 <div class="line">                <span class="keyword">using </span>Ty = T;                                                                           \</div>
 <div class="line">                <span class="keyword">constexpr</span> <span class="keyword">const</span> Reflect::Accessor *data(<span class="keyword">const</span> Reflect::Accessor *p)<span class="keyword"> const </span>{ <span class="keywordflow">return</span> p; } \</div>
 <div class="line">                <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keyword">const</span> fixed_string name = #T;                                          \</div>
+<div class="line">                <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keyword">const</span> <a class="code hl_struct" href="struct_engine_1_1_type_1_1_storage_ops.html">Engine::Type::StorageOps</a> **storage = <span class="keyword">nullptr</span>;                    \</div>
 <div class="line">            };                                                                                          \</div>
 <div class="line">        }                                                                                               \</div>
 <div class="line">    }</div>
 <div class="ttc" id="anamespace_engine_html"><div class="ttname"><a href="namespace_engine.html">Engine</a></div><div class="ttdoc">Main namespace for the Madgine.</div><div class="ttdef"><b>Definition:</b> align.h:3</div></div>
+<div class="ttc" id="astruct_engine_1_1_type_1_1_storage_ops_html"><div class="ttname"><a href="struct_engine_1_1_type_1_1_storage_ops.html">Engine::Type::StorageOps</a></div><div class="ttdef"><b>Definition:</b> storageops.h:18</div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -591,7 +601,7 @@ Macros</h2></td></tr>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line">    <a class="code hl_define" href="metatable__impl_8h.html#ad0c124b26252fef1385e7a29191b0e30">METATABLE_END_EX</a>     \</div>
 <div class="line">    (, T)</div>
-<div class="ttc" id="ametatable__impl_8h_html_ad0c124b26252fef1385e7a29191b0e30"><div class="ttname"><a href="metatable__impl_8h.html#ad0c124b26252fef1385e7a29191b0e30">METATABLE_END_EX</a></div><div class="ttdeci">#define METATABLE_END_EX(Idx, T)</div><div class="ttdef"><b>Definition:</b> metatable_impl.h:159</div></div>
+<div class="ttc" id="ametatable__impl_8h_html_ad0c124b26252fef1385e7a29191b0e30"><div class="ttname"><a href="metatable__impl_8h.html#ad0c124b26252fef1385e7a29191b0e30">METATABLE_END_EX</a></div><div class="ttdeci">#define METATABLE_END_EX(Idx, T)</div><div class="ttdef"><b>Definition:</b> metatable_impl.h:161</div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -628,7 +638,7 @@ Macros</h2></td></tr>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line">    <a class="code hl_define" href="metatable__impl_8h.html#aa0e408af4f87b833851c9331acd5cb8a">METATABLE_DYNAMIC_END_EX</a>                    \</div>
 <div class="line">    (, Builder, Init, T)</div>
-<div class="ttc" id="ametatable__impl_8h_html_aa0e408af4f87b833851c9331acd5cb8a"><div class="ttname"><a href="metatable__impl_8h.html#aa0e408af4f87b833851c9331acd5cb8a">METATABLE_DYNAMIC_END_EX</a></div><div class="ttdeci">#define METATABLE_DYNAMIC_END_EX(Idx, Builder, Init, T)</div><div class="ttdef"><b>Definition:</b> metatable_impl.h:163</div></div>
+<div class="ttc" id="ametatable__impl_8h_html_aa0e408af4f87b833851c9331acd5cb8a"><div class="ttname"><a href="metatable__impl_8h.html#aa0e408af4f87b833851c9331acd5cb8a">METATABLE_DYNAMIC_END_EX</a></div><div class="ttdeci">#define METATABLE_DYNAMIC_END_EX(Idx, Builder, Init, T)</div><div class="ttdef"><b>Definition:</b> metatable_impl.h:165</div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -659,8 +669,8 @@ Macros</h2></td></tr>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line">    <a class="code hl_define" href="metatable__impl_8h.html#a32dc03f7cd2e739aab50a794c2bc7349">METATABLE_ENTRY_EX</a>(Idx, Reflect::Accessor {}) \</div>
 <div class="line">    <a class="code hl_define" href="metatable__impl_8h.html#a46cab48af3f402a351409062c4dd311e">METATABLE_INSTANTIATION</a>(Idx, T)</div>
-<div class="ttc" id="ametatable__impl_8h_html_a32dc03f7cd2e739aab50a794c2bc7349"><div class="ttname"><a href="metatable__impl_8h.html#a32dc03f7cd2e739aab50a794c2bc7349">METATABLE_ENTRY_EX</a></div><div class="ttdeci">#define METATABLE_ENTRY_EX(Idx, Acc)</div><div class="ttdef"><b>Definition:</b> metatable_impl.h:110</div></div>
-<div class="ttc" id="ametatable__impl_8h_html_a46cab48af3f402a351409062c4dd311e"><div class="ttname"><a href="metatable__impl_8h.html#a46cab48af3f402a351409062c4dd311e">METATABLE_INSTANTIATION</a></div><div class="ttdeci">#define METATABLE_INSTANTIATION(Idx, T)</div><div class="ttdef"><b>Definition:</b> metatable_impl.h:168</div></div>
+<div class="ttc" id="ametatable__impl_8h_html_a32dc03f7cd2e739aab50a794c2bc7349"><div class="ttname"><a href="metatable__impl_8h.html#a32dc03f7cd2e739aab50a794c2bc7349">METATABLE_ENTRY_EX</a></div><div class="ttdeci">#define METATABLE_ENTRY_EX(Idx, Acc)</div><div class="ttdef"><b>Definition:</b> metatable_impl.h:112</div></div>
+<div class="ttc" id="ametatable__impl_8h_html_a46cab48af3f402a351409062c4dd311e"><div class="ttname"><a href="metatable__impl_8h.html#a46cab48af3f402a351409062c4dd311e">METATABLE_INSTANTIATION</a></div><div class="ttdeci">#define METATABLE_INSTANTIATION(Idx, T)</div><div class="ttdef"><b>Definition:</b> metatable_impl.h:170</div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -704,7 +714,7 @@ Macros</h2></td></tr>
 <b>Value:</b><div class="fragment"><div class="line">    <a class="code hl_define" href="metatable__impl_8h.html#aae5a2910456767bcb075ebb799e75416">DYNAMIC_ENTRY_EX</a>(Idx, Builder, Init)                \</div>
 <div class="line">    METATABLE_INSTANTIATION(Idx, T)                     \</div>
 <div class="line">    DYNAMIC_INITIALIZATION(T)</div>
-<div class="ttc" id="ametatable__impl_8h_html_aae5a2910456767bcb075ebb799e75416"><div class="ttname"><a href="metatable__impl_8h.html#aae5a2910456767bcb075ebb799e75416">DYNAMIC_ENTRY_EX</a></div><div class="ttdeci">#define DYNAMIC_ENTRY_EX(Idx, Builder, Init)</div><div class="ttdef"><b>Definition:</b> metatable_impl.h:124</div></div>
+<div class="ttc" id="ametatable__impl_8h_html_aae5a2910456767bcb075ebb799e75416"><div class="ttname"><a href="metatable__impl_8h.html#aae5a2910456767bcb075ebb799e75416">DYNAMIC_ENTRY_EX</a></div><div class="ttdeci">#define DYNAMIC_ENTRY_EX(Idx, Builder, Init)</div><div class="ttdef"><b>Definition:</b> metatable_impl.h:126</div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -733,14 +743,14 @@ Macros</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">    <span class="keyword">namespace </span>Meta_##T                                                                                                                                                                                                                                                \</div>
-<div class="line">    {                                                                                                                                                                                                                                                                 \</div>
-<div class="line">        <span class="keyword">static</span> <span class="keyword">constexpr</span> <a class="code hl_define" href="linestruct_8h.html#a4ae633e4399b0687c9bdf030cbf5b2a2">GET_STRUCT</a>(::Engine::Reflect::__Reflect_impl__::MetaTableTag, Idx) sMembers = {};                                                                                                                                                            \</div>
-<div class="line">    }                                                                                                                                                                                                                                                                 \</div>
-<div class="line">    DLL_EXPORT_VARIABLE(<span class="keyword">constexpr</span>, const ::Engine::Reflect::MetaTable, , table, <a class="code hl_define" href="macros_8h.html#afa8624400132dca5f52f93deec70706b">SINGLE_ARG</a>({ #<a class="code hl_enumvalue" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a5428d0fe98f428e5c4ecbc58cb745d9b">T</a>, ::Engine::type_holder&lt;T&gt;, <a class="code hl_variable" href="namespace_engine.html#a6638c07372d57d8a8da119203ae1e419">::Engine::type_holder</a>&lt;<a class="code hl_define" href="linestruct_8h.html#a4ae633e4399b0687c9bdf030cbf5b2a2">GET_STRUCT</a>(::Engine::Reflect::__Reflect_impl__::MetaTableTag, Idx)::BaseT&gt;, Meta_##<a class="code hl_enumvalue" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a5428d0fe98f428e5c4ecbc58cb745d9b">T</a>::sMembers.data(nullptr) }), <a class="code hl_enumvalue" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a5428d0fe98f428e5c4ecbc58cb745d9b">T</a>); \</div>
-<div class="line">    <span class="keyword">namespace </span>Meta_##<a class="code hl_enumvalue" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a5428d0fe98f428e5c4ecbc58cb745d9b">T</a>                                                                                                                                                                                                                                                \</div>
-<div class="line">    {                                                                                                                                                                                                                                                                 \</div>
-<div class="line">        static ::Engine::Reflect::__Reflect_impl__::MetaTableRegistrator&lt;T&gt; <a class="code hl_variable" href="namespace_meta___engine_1_1_reflect_1_1_function_table.html#a35ba7064896b65ebe237c7679740a8e4">__reg</a>;                                                                                                                                                                                    \</div>
+<b>Value:</b><div class="fragment"><div class="line">    <span class="keyword">namespace </span>Meta_##T                                                                                                                                                                                                                                                                                                                             \</div>
+<div class="line">    {                                                                                                                                                                                                                                                                                                                                              \</div>
+<div class="line">        <span class="keyword">static</span> <span class="keyword">constexpr</span> <a class="code hl_define" href="linestruct_8h.html#a4ae633e4399b0687c9bdf030cbf5b2a2">GET_STRUCT</a>(::Engine::Reflect::__Reflect_impl__::MetaTableTag, Idx) sMembers = {};                                                                                                                                                                                                                                         \</div>
+<div class="line">    }                                                                                                                                                                                                                                                                                                                                              \</div>
+<div class="line">    DLL_EXPORT_VARIABLE(<span class="keyword">constexpr</span>, const ::Engine::Reflect::MetaTable, , table, <a class="code hl_define" href="macros_8h.html#afa8624400132dca5f52f93deec70706b">SINGLE_ARG</a>({ #<a class="code hl_enumvalue" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a5428d0fe98f428e5c4ecbc58cb745d9b">T</a>, ::Engine::type_holder&lt;T&gt;, <a class="code hl_variable" href="namespace_engine.html#a6638c07372d57d8a8da119203ae1e419">::Engine::type_holder</a>&lt;<a class="code hl_define" href="linestruct_8h.html#a4ae633e4399b0687c9bdf030cbf5b2a2">GET_STRUCT</a>(::Engine::Reflect::__Reflect_impl__::MetaTableTag, Idx)::BaseT&gt;, Meta_##<a class="code hl_enumvalue" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a5428d0fe98f428e5c4ecbc58cb745d9b">T</a>::sMembers.data(nullptr), <a class="code hl_define" href="linestruct_8h.html#a4ae633e4399b0687c9bdf030cbf5b2a2">GET_STRUCT</a>(::<a class="code hl_namespace" href="namespace_engine.html">Engine</a>::Reflect::__Reflect_impl__::MetaTableTag, Idx)::storage }), <a class="code hl_enumvalue" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a5428d0fe98f428e5c4ecbc58cb745d9b">T</a>); \</div>
+<div class="line">    <span class="keyword">namespace </span>Meta_##<a class="code hl_enumvalue" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a5428d0fe98f428e5c4ecbc58cb745d9b">T</a>                                                                                                                                                                                                                                                                                                                             \</div>
+<div class="line">    {                                                                                                                                                                                                                                                                                                                                              \</div>
+<div class="line">        static ::Engine::Reflect::__Reflect_impl__::MetaTableRegistrator&lt;T&gt; <a class="code hl_variable" href="namespace_meta___engine_1_1_reflect_1_1_function_table.html#a35ba7064896b65ebe237c7679740a8e4">__reg</a>;                                                                                                                                                                                                                                                                 \</div>
 <div class="line">    }</div>
 <div class="ttc" id="alinestruct_8h_html_a4ae633e4399b0687c9bdf030cbf5b2a2"><div class="ttname"><a href="linestruct_8h.html#a4ae633e4399b0687c9bdf030cbf5b2a2">GET_STRUCT</a></div><div class="ttdeci">#define GET_STRUCT(Tag,...)</div><div class="ttdef"><b>Definition:</b> linestruct.h:33</div></div>
 <div class="ttc" id="amacros_8h_html_afa8624400132dca5f52f93deec70706b"><div class="ttname"><a href="macros_8h.html#afa8624400132dca5f52f93deec70706b">SINGLE_ARG</a></div><div class="ttdeci">#define SINGLE_ARG(...)</div><div class="ttdef"><b>Definition:</b> macros.h:16</div></div>
@@ -1226,10 +1236,128 @@ Macros</h2></td></tr>
 
 </div>
 </div>
+<a id="aa061bbfd8a693b945de7f136e115374f" name="aa061bbfd8a693b945de7f136e115374f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa061bbfd8a693b945de7f136e115374f">&#9670;&#160;</a></span>STORAGE_BEGIN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define STORAGE_BEGIN</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">T, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Type&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;<a class="el" href="metatable__impl_8h.html#a54d9521fdd0ea9019b866037193a9a32">STORAGE_BEGIN_EX</a>(, T, Type)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a54d9521fdd0ea9019b866037193a9a32" name="a54d9521fdd0ea9019b866037193a9a32"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a54d9521fdd0ea9019b866037193a9a32">&#9670;&#160;</a></span>STORAGE_BEGIN_EX</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define STORAGE_BEGIN_EX</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Idx, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">T, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Type&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;<a class="el" href="storageops__impl_8h.html#ad68bbdd12a857723c95f56358e2aa7ea">STORAGEOPS_BEGIN_EX</a>(Idx, T, Type)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af14fa6c33deb1627fb6c49f5c9e35b9b" name="af14fa6c33deb1627fb6c49f5c9e35b9b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af14fa6c33deb1627fb6c49f5c9e35b9b">&#9670;&#160;</a></span>STORAGE_END</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define STORAGE_END</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">T</td><td>)</td>
+          <td>&#160;&#160;&#160;<a class="el" href="functiontable_8cpp.html#a4f400552c404c1c94384ad13324d5329">STORAGE_END_EX</a>(, T)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4f400552c404c1c94384ad13324d5329" name="a4f400552c404c1c94384ad13324d5329"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4f400552c404c1c94384ad13324d5329">&#9670;&#160;</a></span>STORAGE_END_EX</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define STORAGE_END_EX</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Idx, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">T&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line">    <a class="code hl_define" href="storageops__impl_8h.html#ae5f0990db9372e519574b788de9ec224">STORAGEOPS_END_EX</a>(Idx, T)                                                               \</div>
+<div class="line">    <span class="keyword">namespace </span><a class="code hl_namespace" href="namespace_engine.html">Engine</a> {                                                                      \</div>
+<div class="line">        <span class="keyword">namespace </span>__generic_impl__ {                                                        \</div>
+<div class="line">            LINE_STRUCT(Reflect::__Reflect_impl__::MetaTableTag, Idx)                       \</div>
+<div class="line">            {                                                                               \</div>
+<div class="line">                <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keyword">const</span> <a class="code hl_struct" href="struct_engine_1_1_type_1_1_storage_ops.html">Engine::Type::StorageOps</a> **storage = &amp;storageOps&lt;T&gt;; \</div>
+<div class="line">            };                                                                              \</div>
+<div class="line">        }                                                                                   \</div>
+<div class="line">    }</div>
+<div class="ttc" id="astorageops__impl_8h_html_ae5f0990db9372e519574b788de9ec224"><div class="ttname"><a href="storageops__impl_8h.html#ae5f0990db9372e519574b788de9ec224">STORAGEOPS_END_EX</a></div><div class="ttdeci">#define STORAGEOPS_END_EX(Idx, T)</div><div class="ttdef"><b>Definition:</b> storageops_impl.h:189</div></div>
+</div><!-- fragment -->
+</div>
+</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Aug 17 2026 08:16:36 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Sun Aug 30 2026 16:15:29 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

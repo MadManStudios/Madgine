@@ -260,25 +260,29 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:ac90789c4f74e9f37e50f320b968f86d2"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_reflect_1_1get__reflect__contextual__t.html#ac90789c4f74e9f37e50f320b968f86d2">signature</a> = <a class="el" href="classvoid.html">void</a> *(const <a class="el" href="struct_engine_1_1_reflect_1_1_meta_table.html">MetaTable</a> *)</td></tr>
-<tr class="separator:ac90789c4f74e9f37e50f320b968f86d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa29b38a4a85a488d4b7b4e3d0ce51eef"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_reflect_1_1get__reflect__contextual__t.html#aa29b38a4a85a488d4b7b4e3d0ce51eef">signature</a> = <a class="el" href="struct_engine_1_1_reflect_1_1_result.html">Result</a>(<a class="el" href="struct_engine_1_1_reflect_1_1_value.html">Value</a> &amp;, const <a class="el" href="struct_engine_1_1_reflect_1_1_meta_table.html">MetaTable</a> *)</td></tr>
+<tr class="separator:aa29b38a4a85a488d4b7b4e3d0ce51eef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ac10217d08ff79f23bd048ffb3ce1bbc8"><td class="memTemplParams" colspan="2">template&lt;typename Context &gt; <br />
-requires (<a class="el" href="tag__invoke_8h.html#a8d6152fc933c4e17119094e28bb953d1">is_tag_invocable_v</a>&lt;<a class="el" href="struct_engine_1_1_reflect_1_1get__reflect__contextual__t.html">get_reflect_contextual_t</a>, Context, const <a class="el" href="struct_engine_1_1_reflect_1_1_meta_table.html">MetaTable</a> *&gt;)</td></tr>
-<tr class="memitem:ac10217d08ff79f23bd048ffb3ce1bbc8"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a> *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_reflect_1_1get__reflect__contextual__t.html#ac10217d08ff79f23bd048ffb3ce1bbc8">operator()</a> (Context &amp;&amp;context, const <a class="el" href="struct_engine_1_1_reflect_1_1_meta_table.html">MetaTable</a> *type) const noexcept(<a class="el" href="tag__invoke_8h.html#ac9297785bc1cff48dae735a140253041">is_nothrow_tag_invocable_v</a>&lt; <a class="el" href="struct_engine_1_1_reflect_1_1get__reflect__contextual__t.html">get_reflect_contextual_t</a>, Context, const <a class="el" href="struct_engine_1_1_reflect_1_1_meta_table.html">MetaTable</a> * &gt;)</td></tr>
-<tr class="separator:ac10217d08ff79f23bd048ffb3ce1bbc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f2cfff5aa849334c2113c83f7d6b8e4"><td class="memTemplParams" colspan="2">template&lt;typename Context &gt; <br />
+requires (!<a class="el" href="tag__invoke_8h.html#a8d6152fc933c4e17119094e28bb953d1">is_tag_invocable_v</a>&lt;<a class="el" href="struct_engine_1_1_reflect_1_1get__reflect__contextual__t.html">get_reflect_contextual_t</a>, Context, <a class="el" href="struct_engine_1_1_reflect_1_1_value.html">Value</a> &amp;, const <a class="el" href="struct_engine_1_1_reflect_1_1_meta_table.html">MetaTable</a> *&gt;)</td></tr>
+<tr class="memitem:a7f2cfff5aa849334c2113c83f7d6b8e4"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_reflect_1_1_result.html">Result</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_reflect_1_1get__reflect__contextual__t.html#a7f2cfff5aa849334c2113c83f7d6b8e4">operator()</a> (Context &amp;&amp;context, <a class="el" href="struct_engine_1_1_reflect_1_1_value.html">Value</a> &amp;retVal, const <a class="el" href="struct_engine_1_1_reflect_1_1_meta_table.html">MetaTable</a> *type) const</td></tr>
+<tr class="separator:a7f2cfff5aa849334c2113c83f7d6b8e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d3e5da8ae46424b2b144dc4b8a38c84"><td class="memTemplParams" colspan="2">template&lt;typename Context &gt; <br />
+requires (<a class="el" href="tag__invoke_8h.html#a8d6152fc933c4e17119094e28bb953d1">is_tag_invocable_v</a>&lt;<a class="el" href="struct_engine_1_1_reflect_1_1get__reflect__contextual__t.html">get_reflect_contextual_t</a>, Context, <a class="el" href="struct_engine_1_1_reflect_1_1_value.html">Value</a> &amp;, const <a class="el" href="struct_engine_1_1_reflect_1_1_meta_table.html">MetaTable</a> *&gt;)</td></tr>
+<tr class="memitem:a0d3e5da8ae46424b2b144dc4b8a38c84"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_reflect_1_1_result.html">Result</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_reflect_1_1get__reflect__contextual__t.html#a0d3e5da8ae46424b2b144dc4b8a38c84">operator()</a> (Context &amp;&amp;context, <a class="el" href="struct_engine_1_1_reflect_1_1_value.html">Value</a> &amp;retVal, const <a class="el" href="struct_engine_1_1_reflect_1_1_meta_table.html">MetaTable</a> *type) const noexcept(<a class="el" href="tag__invoke_8h.html#ac9297785bc1cff48dae735a140253041">is_nothrow_tag_invocable_v</a>&lt; <a class="el" href="struct_engine_1_1_reflect_1_1get__reflect__contextual__t.html">get_reflect_contextual_t</a>, Context, <a class="el" href="struct_engine_1_1_reflect_1_1_value.html">Value</a>, const <a class="el" href="struct_engine_1_1_reflect_1_1_meta_table.html">MetaTable</a> * &gt;)</td></tr>
+<tr class="separator:a0d3e5da8ae46424b2b144dc4b8a38c84"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Typedef Documentation</h2>
-<a id="ac90789c4f74e9f37e50f320b968f86d2" name="ac90789c4f74e9f37e50f320b968f86d2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac90789c4f74e9f37e50f320b968f86d2">&#9670;&#160;</a></span>signature</h2>
+<a id="aa29b38a4a85a488d4b7b4e3d0ce51eef" name="aa29b38a4a85a488d4b7b4e3d0ce51eef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa29b38a4a85a488d4b7b4e3d0ce51eef">&#9670;&#160;</a></span>signature</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="struct_engine_1_1_reflect_1_1get__reflect__contextual__t.html#ac90789c4f74e9f37e50f320b968f86d2">Engine::Reflect::get_reflect_contextual_t::signature</a> =  <a class="el" href="classvoid.html">void</a> *(const <a class="el" href="struct_engine_1_1_reflect_1_1_meta_table.html">MetaTable</a> *)</td>
+          <td class="memname">using <a class="el" href="struct_engine_1_1_reflect_1_1get__reflect__contextual__t.html#aa29b38a4a85a488d4b7b4e3d0ce51eef">Engine::Reflect::get_reflect_contextual_t::signature</a> =  <a class="el" href="struct_engine_1_1_reflect_1_1_result.html">Result</a> (<a class="el" href="struct_engine_1_1_reflect_1_1_value.html">Value</a> &amp;, const <a class="el" href="struct_engine_1_1_reflect_1_1_meta_table.html">MetaTable</a> *)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -286,23 +290,74 @@ requires (<a class="el" href="tag__invoke_8h.html#a8d6152fc933c4e17119094e28bb95
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="ac10217d08ff79f23bd048ffb3ce1bbc8" name="ac10217d08ff79f23bd048ffb3ce1bbc8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac10217d08ff79f23bd048ffb3ce1bbc8">&#9670;&#160;</a></span>operator()()</h2>
+<a id="a7f2cfff5aa849334c2113c83f7d6b8e4" name="a7f2cfff5aa849334c2113c83f7d6b8e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7f2cfff5aa849334c2113c83f7d6b8e4">&#9670;&#160;</a></span>operator()() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename Context &gt; <br />
-requires (<a class="el" href="tag__invoke_8h.html#a8d6152fc933c4e17119094e28bb953d1">is_tag_invocable_v</a>&lt;<a class="el" href="struct_engine_1_1_reflect_1_1get__reflect__contextual__t.html">get_reflect_contextual_t</a>, Context, const <a class="el" href="struct_engine_1_1_reflect_1_1_meta_table.html">MetaTable</a> *&gt;)</div>
+requires (!<a class="el" href="tag__invoke_8h.html#a8d6152fc933c4e17119094e28bb953d1">is_tag_invocable_v</a>&lt;<a class="el" href="struct_engine_1_1_reflect_1_1get__reflect__contextual__t.html">get_reflect_contextual_t</a>, Context, <a class="el" href="struct_engine_1_1_reflect_1_1_value.html">Value</a> &amp;, const <a class="el" href="struct_engine_1_1_reflect_1_1_meta_table.html">MetaTable</a> *&gt;)</div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classvoid.html">void</a> * Engine::Reflect::get_reflect_contextual_t::operator() </td>
+          <td class="memname"><a class="el" href="struct_engine_1_1_reflect_1_1_result.html">Result</a> Engine::Reflect::get_reflect_contextual_t::operator() </td>
           <td>(</td>
           <td class="paramtype">Context &amp;&amp;&#160;</td>
           <td class="paramname"><em>context</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_reflect_1_1_value.html">Value</a> &amp;&#160;</td>
+          <td class="paramname"><em>retVal</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_reflect_1_1_meta_table.html">MetaTable</a> *&#160;</td>
+          <td class="paramname"><em>type</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0d3e5da8ae46424b2b144dc4b8a38c84" name="a0d3e5da8ae46424b2b144dc4b8a38c84"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d3e5da8ae46424b2b144dc4b8a38c84">&#9670;&#160;</a></span>operator()() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Context &gt; <br />
+requires (<a class="el" href="tag__invoke_8h.html#a8d6152fc933c4e17119094e28bb953d1">is_tag_invocable_v</a>&lt;<a class="el" href="struct_engine_1_1_reflect_1_1get__reflect__contextual__t.html">get_reflect_contextual_t</a>, Context, <a class="el" href="struct_engine_1_1_reflect_1_1_value.html">Value</a> &amp;, const <a class="el" href="struct_engine_1_1_reflect_1_1_meta_table.html">MetaTable</a> *&gt;)</div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_reflect_1_1_result.html">Result</a> Engine::Reflect::get_reflect_contextual_t::operator() </td>
+          <td>(</td>
+          <td class="paramtype">Context &amp;&amp;&#160;</td>
+          <td class="paramname"><em>context</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_reflect_1_1_value.html">Value</a> &amp;&#160;</td>
+          <td class="paramname"><em>retVal</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -326,12 +381,12 @@ requires (<a class="el" href="tag__invoke_8h.html#a8d6152fc933c4e17119094e28bb95
 </div>
 </div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
-<li>src/Meta/reflect/<a class="el" href="_meta_2reflect_2context_8h.html">context.h</a></li>
+<li>src/Meta/reflect/<a class="el" href="src_2_meta_2reflect_2context_8h.html">context.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Aug 17 2026 08:16:39 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Sun Aug 30 2026 16:15:31 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

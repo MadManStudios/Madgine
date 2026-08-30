@@ -249,8 +249,10 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="#friends">Friends</a> &#124;
 <a href="struct_engine_1_1_resources_1_1_handle-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">Engine::Resources::Handle&lt; Loader, Data &gt; Struct Template Reference</div></div>
 </div><!--header-->
@@ -258,6 +260,11 @@ $(function() {
 
 <p><code>#include &lt;handle.h&gt;</code></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:a32d9ca8c8942bdf3a43a8c4fe304fad9"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_handle.html#a32d9ca8c8942bdf3a43a8c4fe304fad9">meta_t</a> = typename Loader::Resource *</td></tr>
+<tr class="separator:a32d9ca8c8942bdf3a43a8c4fe304fad9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:af1c5041903ea8b44a243cebc1358d4b2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_handle.html#af1c5041903ea8b44a243cebc1358d4b2">Handle</a> ()=default</td></tr>
@@ -329,7 +336,33 @@ Public Member Functions</h2></td></tr>
 Public Attributes</h2></td></tr>
 <tr class="memitem:ad01a7b2bec48bfe4beb50d4c0e4666be"><td class="memItemLeft" align="right" valign="top">Data&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_handle.html#ad01a7b2bec48bfe4beb50d4c0e4666be">mData</a> = {}</td></tr>
 <tr class="separator:ad01a7b2bec48bfe4beb50d4c0e4666be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
+Friends</h2></td></tr>
+<tr class="memitem:af8bea29ce9ac6d04c121b835d79d7a20"><td class="memTemplParams" colspan="2">template&lt;typename Context &gt; </td></tr>
+<tr class="memitem:af8bea29ce9ac6d04c121b835d79d7a20"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">Serialize::StreamResult</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_handle.html#af8bea29ce9ac6d04c121b835d79d7a20">tag_invoke</a> (const <a class="el" href="struct_engine_1_1_serialize_1_1apply__map__t.html">Serialize::apply_map_t</a> &amp;, <a class="el" href="struct_engine_1_1_resources_1_1_handle.html">Handle</a> &amp;h, <a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html">Serialize::FormattedSerializeStream</a> &amp;in, bool success, Context &amp;&amp;context)</td></tr>
+<tr class="separator:af8bea29ce9ac6d04c121b835d79d7a20"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8bcf7526c3f2243d46853c131fb3da18"><td class="memTemplParams" colspan="2">template&lt;typename... Configs, typename Context &gt; </td></tr>
+<tr class="memitem:a8bcf7526c3f2243d46853c131fb3da18"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_handle.html#a8bcf7526c3f2243d46853c131fb3da18">tag_invoke</a> (<a class="el" href="struct_engine_1_1_serialize_1_1set__active__t.html">Serialize::set_active_t</a>&lt; Configs... &gt;, <a class="el" href="struct_engine_1_1_resources_1_1_handle.html">Handle</a> &amp;h, bool active, bool existenceChanged, Context &amp;&amp;)</td></tr>
+<tr class="separator:a8bcf7526c3f2243d46853c131fb3da18"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="a32d9ca8c8942bdf3a43a8c4fe304fad9" name="a32d9ca8c8942bdf3a43a8c4fe304fad9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a32d9ca8c8942bdf3a43a8c4fe304fad9">&#9670;&#160;</a></span>meta_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Loader , typename Data &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="struct_engine_1_1_resources_1_1_handle.html">Engine::Resources::Handle</a>&lt; Loader, Data &gt;::meta_t =  typename Loader::Resource *</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="af1c5041903ea8b44a243cebc1358d4b2" name="af1c5041903ea8b44a243cebc1358d4b2"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af1c5041903ea8b44a243cebc1358d4b2">&#9670;&#160;</a></span>Handle() <span class="overload">[1/8]</span></h2>
@@ -1230,6 +1263,123 @@ template&lt;typename Loader , typename Data &gt; </div>
 
 </div>
 </div>
+<h2 class="groupheader">Friends And Related Function Documentation</h2>
+<a id="af8bea29ce9ac6d04c121b835d79d7a20" name="af8bea29ce9ac6d04c121b835d79d7a20"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af8bea29ce9ac6d04c121b835d79d7a20">&#9670;&#160;</a></span>tag_invoke <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Loader , typename Data &gt; </div>
+<div class="memtemplate">
+template&lt;typename Context &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">Serialize::StreamResult</a> tag_invoke </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_serialize_1_1apply__map__t.html">Serialize::apply_map_t</a> &amp;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_resources_1_1_handle.html">Handle</a>&lt; Loader, Data &gt; &amp;&#160;</td>
+          <td class="paramname"><em>h</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html">Serialize::FormattedSerializeStream</a> &amp;&#160;</td>
+          <td class="paramname"><em>in</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>success</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Context &amp;&amp;&#160;</td>
+          <td class="paramname"><em>context</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8bcf7526c3f2243d46853c131fb3da18" name="a8bcf7526c3f2243d46853c131fb3da18"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8bcf7526c3f2243d46853c131fb3da18">&#9670;&#160;</a></span>tag_invoke <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Loader , typename Data &gt; </div>
+<div class="memtemplate">
+template&lt;typename... Configs, typename Context &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> tag_invoke </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1set__active__t.html">Serialize::set_active_t</a>&lt; Configs... &gt;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_resources_1_1_handle.html">Handle</a>&lt; Loader, Data &gt; &amp;&#160;</td>
+          <td class="paramname"><em>h</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>active</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>existenceChanged</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Context &amp;&amp;&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <h2 class="groupheader">Member Data Documentation</h2>
 <a id="ad01a7b2bec48bfe4beb50d4c0e4666be" name="ad01a7b2bec48bfe4beb50d4c0e4666be"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad01a7b2bec48bfe4beb50d4c0e4666be">&#9670;&#160;</a></span>mData</h2>
@@ -1253,7 +1403,7 @@ template&lt;typename Loader , typename Data &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Aug 17 2026 08:16:39 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Sun Aug 30 2026 16:15:31 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

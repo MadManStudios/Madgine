@@ -383,7 +383,7 @@ Typedefs</h2></td></tr>
 <tr class="separator:a95927a131c0002bae4498438dc0b56ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a24d8d7471dc8e36f350650b10464f903"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_reflect.html#a24d8d7471dc8e36f350650b10464f903">Binding</a> = <a class="el" href="struct_engine_1_1_reflect_1_1_binding_base.html">BindingBase</a>&lt; <a class="el" href="struct_engine_1_1_reflect_1_1_type_index.html">TypeIndex</a> &gt;</td></tr>
 <tr class="separator:a24d8d7471dc8e36f350650b10464f903"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a32b5c75292e0d1dd1dfc43483b87377f"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_reflect.html#a32b5c75292e0d1dd1dfc43483b87377f">ContextPtr</a> = <a class="el" href="namespace_engine.html#ab99e0ab1db1959066c5879a86ba1a6b7">tag_invocable_view</a>&lt; <a class="el" href="struct_engine_1_1_reflect_1_1get__reflect__contextual__t.html">get_reflect_contextual_t</a>, <a class="el" href="classvoid.html">void</a> *(const <a class="el" href="struct_engine_1_1_reflect_1_1_meta_table.html">MetaTable</a> *)&gt;</td></tr>
+<tr class="memitem:a32b5c75292e0d1dd1dfc43483b87377f"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_reflect.html#a32b5c75292e0d1dd1dfc43483b87377f">ContextPtr</a> = <a class="el" href="namespace_engine.html#ab99e0ab1db1959066c5879a86ba1a6b7">tag_invocable_view</a>&lt; <a class="el" href="struct_engine_1_1_reflect_1_1get__reflect__contextual__t.html">get_reflect_contextual_t</a>, <a class="el" href="struct_engine_1_1_reflect_1_1_result.html">Result</a>(<a class="el" href="struct_engine_1_1_reflect_1_1_value.html">Value</a> &amp;, const <a class="el" href="struct_engine_1_1_reflect_1_1_meta_table.html">MetaTable</a> *)&gt;</td></tr>
 <tr class="separator:a32b5c75292e0d1dd1dfc43483b87377f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8cfcd886a465fa111bf1803e019f8c15"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_reflect.html#a8cfcd886a465fa111bf1803e019f8c15">Duration64</a> = std::chrono::duration&lt; uint64_t, std::nano &gt;</td></tr>
 <tr class="separator:a8cfcd886a465fa111bf1803e019f8c15"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -406,7 +406,7 @@ Typedefs</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
 Enumerations</h2></td></tr>
-<tr class="memitem:a6fd7c8214243940cd69fc1f920070080"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_reflect.html#a6fd7c8214243940cd69fc1f920070080">AccessorFlags_</a> { <a class="el" href="namespace_engine_1_1_reflect.html#a6fd7c8214243940cd69fc1f920070080a30826570324cc14edd8e9c385b95e624">AccessorFlags_Named</a> = (1 &lt;&lt; 0)
+<tr class="memitem:a6fd7c8214243940cd69fc1f920070080"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_reflect.html#a6fd7c8214243940cd69fc1f920070080">AccessorFlags_</a> { <a class="el" href="namespace_engine_1_1_reflect.html#a6fd7c8214243940cd69fc1f920070080a955e2c787b40b8bafd6f5cdeb1a06f6f">AccessorFlags_Contextual</a> = (1 &lt;&lt; 0)
 , <a class="el" href="namespace_engine_1_1_reflect.html#a6fd7c8214243940cd69fc1f920070080a7f7b1f7c13418981b4bbfabefe0b1bb9">AccessorFlags_Default</a> = 0
  }</td></tr>
 <tr class="separator:a6fd7c8214243940cd69fc1f920070080"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -434,14 +434,14 @@ Functions</h2></td></tr>
 <tr class="memitem:af8d92b1bba46076e3e5626f206b41d77"><td class="memTemplParams" colspan="2">template&lt;typename T , typename <a class="el" href="struct_engine_1_1_callable.html">Callable</a> , typename Context &gt; </td></tr>
 <tr class="memitem:af8d92b1bba46076e3e5626f206b41d77"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_reflect_1_1_result.html">Result</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_reflect.html#af8d92b1bba46076e3e5626f206b41d77">callSequenceRange</a> (T output, <a class="el" href="namespace_engine_1_1_reflect.html#a446720b8423290f2832df258c5cb406d">SequenceIterator</a> it, <a class="el" href="struct_engine_1_1_callable.html">Callable</a> &amp;&amp;callable, Context &amp;&amp;context)</td></tr>
 <tr class="separator:af8d92b1bba46076e3e5626f206b41d77"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af200875b856f740a791822b9e4e9f2ab"><td class="memTemplParams" colspan="2">template&lt;typename T , typename Context &gt; <br />
-requires (<a class="el" href="tag__invoke_8h.html#a8d6152fc933c4e17119094e28bb953d1">is_tag_invocable_v</a>&lt;<a class="el" href="struct_engine_1_1_reflect_1_1get__reflect__contextual__t.html">get_reflect_contextual_t</a>, Context, const <a class="el" href="struct_engine_1_1_reflect_1_1_meta_table.html">MetaTable</a> *&gt;)</td></tr>
-<tr class="memitem:af200875b856f740a791822b9e4e9f2ab"><td class="memTemplItemLeft" align="right" valign="top">T *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_reflect.html#af200875b856f740a791822b9e4e9f2ab">context_get</a> (Context &amp;&amp;context)</td></tr>
-<tr class="separator:af200875b856f740a791822b9e4e9f2ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4b3d3a67b5c83e1c2a2079ca80b6e3f0"><td class="memTemplParams" colspan="2">template&lt;typename Context , typename T &gt; <br />
-requires (<a class="el" href="tag__invoke_8h.html#a8d6152fc933c4e17119094e28bb953d1">is_tag_invocable_v</a>&lt;<a class="el" href="struct_engine_1_1_reflect_1_1get__reflect__contextual__t.html">get_reflect_contextual_t</a>, Context, const <a class="el" href="struct_engine_1_1_reflect_1_1_meta_table.html">MetaTable</a> *&gt; &amp;&amp; !std::is_const_v&lt;T&gt;)</td></tr>
-<tr class="memitem:a4b3d3a67b5c83e1c2a2079ca80b6e3f0"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_reflect_1_1_context_reference.html">ContextReference</a>&lt; T, Context &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_reflect.html#a4b3d3a67b5c83e1c2a2079ca80b6e3f0">context_set</a> (Context &amp;&amp;context, T &amp;value)</td></tr>
-<tr class="separator:a4b3d3a67b5c83e1c2a2079ca80b6e3f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9a8f7d1c195d794fdda0a3ea28127c6"><td class="memTemplParams" colspan="2">template&lt;typename T , typename Context &gt; <br />
+requires (<a class="el" href="tag__invoke_8h.html#a8d6152fc933c4e17119094e28bb953d1">is_tag_invocable_v</a>&lt;<a class="el" href="struct_engine_1_1_reflect_1_1get__reflect__contextual__t.html">get_reflect_contextual_t</a>, Context, <a class="el" href="struct_engine_1_1_reflect_1_1_value.html">Value</a> &amp;, const <a class="el" href="struct_engine_1_1_reflect_1_1_meta_table.html">MetaTable</a> *&gt;)</td></tr>
+<tr class="memitem:aa9a8f7d1c195d794fdda0a3ea28127c6"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_reflect_1_1_result.html">Result</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_reflect.html#aa9a8f7d1c195d794fdda0a3ea28127c6">context_get</a> (Context &amp;&amp;context, <a class="el" href="struct_engine_1_1_reflect_1_1_value.html">Value</a> &amp;retVal)</td></tr>
+<tr class="separator:aa9a8f7d1c195d794fdda0a3ea28127c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa2e602728fa14118784397dbfb18cefd"><td class="memTemplParams" colspan="2">template&lt;typename Context , typename T &gt; <br />
+requires (<a class="el" href="tag__invoke_8h.html#a8d6152fc933c4e17119094e28bb953d1">is_tag_invocable_v</a>&lt;<a class="el" href="struct_engine_1_1_reflect_1_1get__reflect__contextual__t.html">get_reflect_contextual_t</a>, Context, <a class="el" href="struct_engine_1_1_reflect_1_1_value.html">Value</a>&amp;, const <a class="el" href="struct_engine_1_1_reflect_1_1_meta_table.html">MetaTable</a> *&gt; &amp;&amp; !std::is_const_v&lt;T&gt;)</td></tr>
+<tr class="memitem:aa2e602728fa14118784397dbfb18cefd"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_reflect_1_1_context_reference.html">ContextReference</a>&lt; T, Context &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_reflect.html#aa2e602728fa14118784397dbfb18cefd">context_set</a> (Context &amp;&amp;context, T &amp;value)</td></tr>
+<tr class="separator:aa2e602728fa14118784397dbfb18cefd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a74875e8549245c30a439252918cafcef"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_reflect.html#a74875e8549245c30a439252918cafcef">DERIVE_OPERATOR</a> (Equal,==)</td></tr>
 <tr class="separator:a74875e8549245c30a439252918cafcef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a384fa63ce2de9caea66a99d46f6bba25"><td class="memTemplParams" colspan="2">template&lt;typename F &gt; </td></tr>
@@ -765,7 +765,7 @@ template&lt;typename T &gt; </div>
       </table>
 </div><div class="memdoc">
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a6fd7c8214243940cd69fc1f920070080a30826570324cc14edd8e9c385b95e624" name="a6fd7c8214243940cd69fc1f920070080a30826570324cc14edd8e9c385b95e624"></a>AccessorFlags_Named&#160;</td><td class="fielddoc"></td></tr>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a6fd7c8214243940cd69fc1f920070080a955e2c787b40b8bafd6f5cdeb1a06f6f" name="a6fd7c8214243940cd69fc1f920070080a955e2c787b40b8bafd6f5cdeb1a06f6f"></a>AccessorFlags_Contextual&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a6fd7c8214243940cd69fc1f920070080a7f7b1f7c13418981b4bbfabefe0b1bb9" name="a6fd7c8214243940cd69fc1f920070080a7f7b1f7c13418981b4bbfabefe0b1bb9"></a>AccessorFlags_Default&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
@@ -872,14 +872,14 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="a4b3d3a67b5c83e1c2a2079ca80b6e3f0" name="a4b3d3a67b5c83e1c2a2079ca80b6e3f0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4b3d3a67b5c83e1c2a2079ca80b6e3f0">&#9670;&#160;</a></span>context_set()</h2>
+<a id="aa2e602728fa14118784397dbfb18cefd" name="aa2e602728fa14118784397dbfb18cefd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa2e602728fa14118784397dbfb18cefd">&#9670;&#160;</a></span>context_set()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename Context , typename T &gt; <br />
-requires (<a class="el" href="tag__invoke_8h.html#a8d6152fc933c4e17119094e28bb953d1">is_tag_invocable_v</a>&lt;<a class="el" href="struct_engine_1_1_reflect_1_1get__reflect__contextual__t.html">get_reflect_contextual_t</a>, Context, const <a class="el" href="struct_engine_1_1_reflect_1_1_meta_table.html">MetaTable</a> *&gt; &amp;&amp; !std::is_const_v&lt;T&gt;)</div>
+requires (<a class="el" href="tag__invoke_8h.html#a8d6152fc933c4e17119094e28bb953d1">is_tag_invocable_v</a>&lt;<a class="el" href="struct_engine_1_1_reflect_1_1get__reflect__contextual__t.html">get_reflect_contextual_t</a>, Context, <a class="el" href="struct_engine_1_1_reflect_1_1_value.html">Value</a>&amp;, const <a class="el" href="struct_engine_1_1_reflect_1_1_meta_table.html">MetaTable</a> *&gt; &amp;&amp; !std::is_const_v&lt;T&gt;)</div>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="struct_engine_1_1_reflect_1_1_context_reference.html">ContextReference</a>&lt; T, Context &gt; Engine::Reflect::context_set </td>
@@ -903,21 +903,31 @@ requires (<a class="el" href="tag__invoke_8h.html#a8d6152fc933c4e17119094e28bb95
 
 </div>
 </div>
-<a id="af200875b856f740a791822b9e4e9f2ab" name="af200875b856f740a791822b9e4e9f2ab"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af200875b856f740a791822b9e4e9f2ab">&#9670;&#160;</a></span>context_get()</h2>
+<a id="aa9a8f7d1c195d794fdda0a3ea28127c6" name="aa9a8f7d1c195d794fdda0a3ea28127c6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa9a8f7d1c195d794fdda0a3ea28127c6">&#9670;&#160;</a></span>context_get()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename T , typename Context &gt; <br />
-requires (<a class="el" href="tag__invoke_8h.html#a8d6152fc933c4e17119094e28bb953d1">is_tag_invocable_v</a>&lt;<a class="el" href="struct_engine_1_1_reflect_1_1get__reflect__contextual__t.html">get_reflect_contextual_t</a>, Context, const <a class="el" href="struct_engine_1_1_reflect_1_1_meta_table.html">MetaTable</a> *&gt;)</div>
+requires (<a class="el" href="tag__invoke_8h.html#a8d6152fc933c4e17119094e28bb953d1">is_tag_invocable_v</a>&lt;<a class="el" href="struct_engine_1_1_reflect_1_1get__reflect__contextual__t.html">get_reflect_contextual_t</a>, Context, <a class="el" href="struct_engine_1_1_reflect_1_1_value.html">Value</a> &amp;, const <a class="el" href="struct_engine_1_1_reflect_1_1_meta_table.html">MetaTable</a> *&gt;)</div>
       <table class="memname">
         <tr>
-          <td class="memname">T * Engine::Reflect::context_get </td>
+          <td class="memname"><a class="el" href="struct_engine_1_1_reflect_1_1_result.html">Result</a> Engine::Reflect::context_get </td>
           <td>(</td>
           <td class="paramtype">Context &amp;&amp;&#160;</td>
-          <td class="paramname"><em>context</em></td><td>)</td>
+          <td class="paramname"><em>context</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_reflect_1_1_value.html">Value</a> &amp;&#160;</td>
+          <td class="paramname"><em>retVal</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -2282,7 +2292,7 @@ template&lt;typename... V&gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Aug 17 2026 08:16:39 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Sun Aug 30 2026 16:15:31 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>
