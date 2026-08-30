@@ -63,7 +63,7 @@ namespace Scene {
         void startLifetime() override;
         bool endLifetime();
 
-        Debug::DebuggableLifetime<Behavior::get_named_d> &lifetime();
+        Debug::DebuggableLifetime<Reflect::get_reflect_contextual> &lifetime();
 
         template <typename Sender>
         void addBehavior(Sender &&sender)
@@ -111,7 +111,7 @@ namespace Scene {
         friend struct SceneContainer;
 
         Threading::DataMutex mMutex;
-        DEBUGGABLE_LIFETIME(mLifetime, Behavior::get_named_d);
+        DEBUGGABLE_LIFETIME(mLifetime, Reflect::get_reflect_contextual);
 
         Execution::IntervalClock<Threading::CustomTimepoint> mSimulationClock;
         Execution::IntervalClock<Threading::CustomTimepoint> mAnimationClock;

@@ -4,6 +4,7 @@
 #include "Generic/guard.h"
 #include "Generic/linestruct.h"
 
+#include "../type/storageops_impl.h"
 #include "functiontable_impl.h"
 
 #include "accessor.h"
@@ -103,6 +104,7 @@ namespace Reflect {
                 using Ty = T;                                                                           \
                 constexpr const Reflect::Accessor *data(const Reflect::Accessor *p) const { return p; } \
                 static constexpr const fixed_string name = #T;                                          \
+                static constexpr const Engine::Type::StorageOps **storage = nullptr;                    \
             };                                                                                          \
         }                                                                                               \
     }
@@ -165,15 +167,15 @@ namespace Reflect {
     METATABLE_INSTANTIATION(Idx, T)                     \
     DYNAMIC_INITIALIZATION(T)
 
-#define METATABLE_INSTANTIATION(Idx, T)                                                                                                                                                                                                                               \
-    namespace Meta_##T                                                                                                                                                                                                                                                \
-    {                                                                                                                                                                                                                                                                 \
-        static constexpr GET_STRUCT(::Engine::Reflect::__Reflect_impl__::MetaTableTag, Idx) sMembers = {};                                                                                                                                                            \
-    }                                                                                                                                                                                                                                                                 \
-    DLL_EXPORT_VARIABLE(constexpr, const ::Engine::Reflect::MetaTable, , table, SINGLE_ARG({ #T, ::Engine::type_holder<T>, ::Engine::type_holder<GET_STRUCT(::Engine::Reflect::__Reflect_impl__::MetaTableTag, Idx)::BaseT>, Meta_##T::sMembers.data(nullptr) }), T); \
-    namespace Meta_##T                                                                                                                                                                                                                                                \
-    {                                                                                                                                                                                                                                                                 \
-        static ::Engine::Reflect::__Reflect_impl__::MetaTableRegistrator<T> __reg;                                                                                                                                                                                    \
+#define METATABLE_INSTANTIATION(Idx, T)                                                                                                                                                                                                                                                                                                            \
+    namespace Meta_##T                                                                                                                                                                                                                                                                                                                             \
+    {                                                                                                                                                                                                                                                                                                                                              \
+        static constexpr GET_STRUCT(::Engine::Reflect::__Reflect_impl__::MetaTableTag, Idx) sMembers = {};                                                                                                                                                                                                                                         \
+    }                                                                                                                                                                                                                                                                                                                                              \
+    DLL_EXPORT_VARIABLE(constexpr, const ::Engine::Reflect::MetaTable, , table, SINGLE_ARG({ #T, ::Engine::type_holder<T>, ::Engine::type_holder<GET_STRUCT(::Engine::Reflect::__Reflect_impl__::MetaTableTag, Idx)::BaseT>, Meta_##T::sMembers.data(nullptr), GET_STRUCT(::Engine::Reflect::__Reflect_impl__::MetaTableTag, Idx)::storage }), T); \
+    namespace Meta_##T                                                                                                                                                                                                                                                                                                                             \
+    {                                                                                                                                                                                                                                                                                                                                              \
+        static ::Engine::Reflect::__Reflect_impl__::MetaTableRegistrator<T> __reg;                                                                                                                                                                                                                                                                 \
     }
 
 #define NAMED_MEMBER_EX(Idx, Name, M) \
@@ -224,3 +226,20 @@ namespace Reflect {
 
 #define CALL_OPERATOR(...) \
     CALL_OPERATOR_EX(, __VA_ARGS__)
+
+#define STORAGE_BEGIN(T, Type) STORAGE_BEGIN_EX(, T, Type)
+
+#define STORAGE_BEGIN_EX(Idx, T, Type) STORAGEOPS_BEGIN_EX(Idx, T, Type)
+
+#define STORAGE_END(T) STORAGE_END_EX(, T)
+
+#define STORAGE_END_EX(Idx, T)                                                              \
+    STORAGEOPS_END_EX(Idx, T)                                                               \
+    namespace Engine {                                                                      \
+        namespace __generic_impl__ {                                                        \
+            LINE_STRUCT(Reflect::__Reflect_impl__::MetaTableTag, Idx)                       \
+            {                                                                               \
+                static constexpr const Engine::Type::StorageOps **storage = &storageOps<T>; \
+            };                                                                              \
+        }                                                                                   \
+    }

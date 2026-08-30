@@ -3,7 +3,7 @@
 #include "Meta/math/matrix3.h"
 
 #include "Madgine/behavior/behavior.h"
-#include "Madgine/behavior/named.h"
+#include "Madgine/behavior/context.h"
 
 #include "../widgetloader.h"
 
@@ -30,13 +30,13 @@ namespace Widgets {
             void set_error(Reflect::Error error);
             void set_done();
 
-            friend Reflect::Result tag_invoke(Behavior::get_named_d_t, receiver &rec, std::string_view name, Reflect::ValueRef &out)
+            friend Reflect::Result tag_invoke(Reflect::get_reflect_contextual_t, receiver &rec, Reflect::Value &out, const Reflect::MetaTable *type)
             {
-                if (name == "Widget") {
-                    out = Execution::ConstantBinding { rec.mState.widget() };
+                if (table<WidgetBase>->isDerivedFrom(type)){
+                    toValue(out, rec.mState.widget());
                     return {};
                 } else {
-                    return Behavior::get_named_d(rec.mRec, name, out);
+                    return Reflect::get_reflect_contextual(rec.mRec, out, type);
                 }
             }
 

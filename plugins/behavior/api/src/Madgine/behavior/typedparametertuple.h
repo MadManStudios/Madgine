@@ -117,7 +117,7 @@ namespace Behavior {
 
         static const constexpr auto sMembers = []<size_t... Is>(auto_pack<Is...>) constexpr -> std::array<Reflect::Accessor, sizeof...(Ty) + 1>
         {
-            return { { { Names::template get<Is>.c_str(), nullptr, &sGetter<Is>, &sSetter<Is, Ty>, Reflect::toType<Ty>(), Concepts::InstanceOfA1<Ty, Named> ? Reflect::AccessorFlags_Named : Reflect::AccessorFlags_Default }...,
+            return { { { Names::template get<Is>.c_str(), nullptr, &sGetter<Is>, &sSetter<Is, Ty>, Reflect::toType<Ty>(), Concepts::InstanceOf<Ty, ContextParameter> ? Reflect::AccessorFlags_Contextual : Reflect::AccessorFlags_Default }...,
                 {} } };
         }
         (index_pack_for<Ty...> {});
@@ -130,7 +130,8 @@ template <typename Names, typename... Ty>
 constexpr const Engine::Reflect::MetaTable table_instance<Engine::Behavior::TypedParameterTupleInstance<Names, Ty...>> = {
     &Engine::Behavior::TypedParameterTupleInstance<Names, Ty...>::sMetaTablePtr,
     "<ParameterTuple>",
-    Engine::Behavior::TypedParameterTupleInstance<Names, Ty...>::sMembers.data()
+    Engine::Behavior::TypedParameterTupleInstance<Names, Ty...>::sMembers.data(),
+    nullptr
 };
 
 template <typename Names, typename... Ty>

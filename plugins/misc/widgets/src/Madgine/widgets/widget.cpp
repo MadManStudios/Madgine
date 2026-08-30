@@ -484,7 +484,7 @@ namespace Widgets {
         renderData.setLayer(oldLayer);
     }
 
-    Debug::DebuggableLifetime<Behavior::get_named_d> &WidgetBase::lifetime()
+    Debug::DebuggableLifetime<Reflect::get_reflect_contextual> &WidgetBase::lifetime()
     {
         return mManager.lifetime();
     }

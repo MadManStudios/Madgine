@@ -17,12 +17,12 @@ namespace Behavior {
 
         static PyObject *PyType_str(PyType *self)
         {
-            return PyUnicode_FromString(self->mType->mStorageOps->mTypeName);
+            return PyUnicode_FromString(self->mType->mMetaTable->mTypeName);
         }
 
         static PyObject *PyType_call(PyType *self, PyObject *args, PyObject *kwargs)
         {
-            if (!self->mType->mStorageOps || !self->mType->mStorageOps->mConstructors[0].mMatcher) {
+            if (!self->mType->mMetaTable->mStorage || !(*self->mType->mMetaTable->mStorage)->mConstructors[0].mMatcher) {
                 PyErr_Format(PyExc_TypeError, "%R is not constructible", self);
                 return nullptr;
             }
@@ -37,7 +37,7 @@ namespace Behavior {
             }
 
             Reflect::Result result; // TODO Error handling
-            Type::AllocationStorage allocation { *self->mType->mStorageOps, arguments };
+            Type::AllocationStorage allocation { **self->mType->mMetaTable->mStorage, arguments };
 
             if (result) {
                 return toPyError(*result.mError);
@@ -85,11 +85,11 @@ namespace Behavior {
             if (!PyArg_ParseTuple(args, "s", &name))
                 return NULL;
 
-            std::string fullName = StringUtil::replace(std::string { self->mType->mStorageOps->mTypeName }, "::", ".") + "." + name;
+            std::string fullName = StringUtil::replace(std::string { self->mType->mMetaTable->mTypeName }, "::", ".") + "." + name;
 
             auto typeName = Type::resolveTypeName(fullName, ".");
             if (typeName) {
-                if (typeName->mStorageOps) {
+                if (typeName->mMetaTable) {
                     PyObject *type = PyObject_CallObject((PyObject *)&PyTypeType, NULL);
                     if (!type)
                         return NULL;
@@ -102,7 +102,7 @@ namespace Behavior {
                 }
             }
 
-            PyErr_Format(PyExc_AttributeError, "Could not find attribute '%s' in %s!", name, self->mType->mStorageOps->mTypeName);
+            PyErr_Format(PyExc_AttributeError, "Could not find attribute '%s' in %s!", name, self->mType->mMetaTable->mTypeName);
             return NULL;
         }
 

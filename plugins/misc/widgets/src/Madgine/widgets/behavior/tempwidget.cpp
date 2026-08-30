@@ -56,8 +56,8 @@ namespace Widgets {
 
     void TempWidgetState::start()
     {
-        WidgetManager *mgr;
-        Reflect::Result result = Behavior::get_named<"WidgetManager", WidgetManager *>(*this, mgr);
+        Behavior::ContextParameter<WidgetManager &> mgr;
+        Reflect::Result result = mgr.resolve(*this);
         if (result) {
             set_error(std::move(*result.mError));
             return;
@@ -67,7 +67,7 @@ namespace Widgets {
         mWidget = mDesc.create(*mgr);
         mWidget->setPos(mPos);
         mWidget->setSize(mSize);
-        mgr->openOverlay(mWidget.get());
+        (*mgr).openOverlay(mWidget.get());
         mState.start();
     }
 
@@ -83,8 +83,8 @@ namespace Widgets {
 
     void TempWidgetState::receiver::set_value(Reflect::ArgumentList args)
     {
-        WidgetManager *mgr;
-        [[maybe_unused]] Reflect::Result result = Behavior::get_named<"WidgetManager", WidgetManager *>(*this, mgr);
+        Behavior::ContextParameter<WidgetManager *> mgr;
+        [[maybe_unused]] Reflect::Result result = mgr.resolve(*this);
         assert(!result);
 
         mgr->closeOverlay(mState.mWidget.get());
@@ -93,8 +93,8 @@ namespace Widgets {
 
     void TempWidgetState::receiver::set_error(Reflect::Error error)
     {
-        WidgetManager *mgr;
-        [[maybe_unused]] Reflect::Result result = Behavior::get_named<"WidgetManager", WidgetManager *>(*this, mgr);
+        Behavior::ContextParameter<WidgetManager *> mgr;
+        [[maybe_unused]] Reflect::Result result = mgr.resolve(*this);
         assert(!result);
 
         mgr->closeOverlay(mState.mWidget.get());
@@ -103,8 +103,8 @@ namespace Widgets {
 
     void TempWidgetState::receiver::set_done()
     {
-        WidgetManager *mgr;
-        [[maybe_unused]] Reflect::Result result = Behavior::get_named<"WidgetManager", WidgetManager *>(*this, mgr);
+        Behavior::ContextParameter<WidgetManager *> mgr;
+        [[maybe_unused]] Reflect::Result result = mgr.resolve(*this);
         assert(!result);
 
         mgr->closeOverlay(mState.mWidget.get());

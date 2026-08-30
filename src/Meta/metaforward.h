@@ -68,7 +68,7 @@ namespace Reflect {
 
     struct get_reflect_contextual_t;
 
-    using ContextPtr = tag_invocable_view<get_reflect_contextual_t, void *(const MetaTable *)>;
+    using ContextPtr = tag_invocable_view<get_reflect_contextual_t, Result (Value &, const MetaTable *)>;
 }
 
 namespace Serialize {

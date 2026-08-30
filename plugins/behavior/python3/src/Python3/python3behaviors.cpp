@@ -9,8 +9,8 @@
 
 #include "Madgine/behavior/behavior.h"
 #include "Madgine/behavior/behaviordescriptor.h"
+#include "Madgine/behavior/context.h"
 #include "Madgine/behavior/dynamicparametertuple.h"
-#include "Madgine/behavior/named.h"
 #include "Madgine/behavior/parametertuple.h"
 #include "Madgine/debug/debuglocation.h"
 
@@ -20,6 +20,7 @@
 #include "util/pyobjectutil.h"
 #include "util/pysender.h"
 #include "util/python3lock.h"
+#include "util/pytype.h"
 
 BEHAVIOR_FACTORY(Python3, Engine::Behavior::Python3::Python3BehaviorFactory)
 
@@ -27,15 +28,24 @@ namespace Engine {
 namespace Behavior {
     namespace Python3 {
 
-        PyObject *PyNamed_resolve(PyObject *cls, PyObject *nameObj)
+        PyObject *PyNamed_resolve(PyObject *cls, PyObject *typeObj)
         {
-            if (!PyUnicode_Check(nameObj)) {
-                PyErr_SetString(PyExc_TypeError, "Name must be a string");
-                return nullptr;
+
+            const Type::TypeName *type = nullptr;
+
+            if (PyObject_TypeCheck(typeObj, &PyTypeType)) {
+                type = ((PyType *)typeObj)->mType;
+            } else if (PyModule_Check(typeObj)) {
+                type = Type::resolveTypeName(PyModule_GetName(typeObj), ".");
             }
-            const char *name = PyUnicode_AsUTF8(nameObj);
+
+            if (!type) {
+                PyErr_SetString(PyExc_TypeError, "type must be a TypeName");
+                return nullptr;
+            }            
+
             Reflect::Value v;
-            Reflect::Result result = get_named_d(*executionState().mReceiver, name, v);
+            Reflect::Result result = Reflect::get_reflect_contextual(*executionState().mReceiver, v, type->mMetaTable);
             if (result) {
                 return toPyError(std::move(*result.mError));
             }
@@ -63,7 +73,7 @@ namespace Behavior {
             : mFunction(std::move(function))
             , mNameCache(std::move(nameCache))
             , mReturnType(Reflect::ExtendedTypeEnum::GenericType)
-            , mMetaTable(&mMetaTablePtr, mTupleName.c_str(), mTupleAccessors.get())
+            , mMetaTable(&mMetaTablePtr, mTupleName.c_str(), mTupleAccessors.get(), nullptr)
             , mTupleName(name + "Parameters"s)
             , mParameters(std::move(parameters))
             , mDescriptor { mParameters, { &mReturnType, 1 }, 0 }
@@ -186,11 +196,12 @@ namespace Behavior {
                     type = PyTuple_GetItem(type.get("__args__"), 0);
                     const Type::StorageOps *ops = PyToStorageOps(type);
                     if (!ops) {
-                        PyErr_Format(PyExc_AssertionError, "Parameter of type %R does not have storage defined!", (PyObject *)type);
-                        return nullptr;
+                        /* PyErr_Format(PyExc_AssertionError, "Parameter of type %R does not have storage defined!", (PyObject *)type);
+                        return nullptr;*/
+                        parameterList.push_back({ name, &storageOps<std::monostate> });
+                    } else {
+                        parameterList.push_back({ name, Type::resolveVariantStorageOps({ storageOps<std::monostate>, ops }).mSelf });
                     }
-
-                    parameterList.push_back({ name, Type::resolveVariantStorageOps({ storageOps<std::monostate>, ops }).mSelf });
                 } else {
                     const Type::StorageOps *ops = PyToStorageOps(type);
                     if (!ops) {

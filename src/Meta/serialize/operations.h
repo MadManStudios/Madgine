@@ -63,7 +63,7 @@ namespace Serialize {
 
     struct apply_map_t {
         template <typename T, typename Context>
-        friend StreamResult tag_invoke(apply_map_t cpo, T *&p, FormattedSerializeStream &in, bool success = true, Context &&context = {})
+        friend StreamResult tag_invoke(const apply_map_t &cpo, T *&p, FormattedSerializeStream &in, bool success = true, Context &&context = {})
         {
             if (success) {
                 uint32_t ptr = reinterpret_cast<uintptr_t>(p);

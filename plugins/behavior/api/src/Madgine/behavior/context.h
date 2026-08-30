@@ -9,45 +9,13 @@
 #include "Meta/serialize/operations.h"
 #include "Meta/serialize/streams/streamresult.h"
 
-#include "named_d.h"
-
 namespace Engine {
 namespace Behavior {
 
-    template <fixed_string Name, typename V>
-    struct get_named_t {
+    template <typename Rec, typename T>
+    struct ContextParameterState : Execution::base_state<Rec> {
 
-        template <typename T, typename O>
-            requires(!is_tag_invocable_v<get_named_t, T, O>)
-        Reflect::Result operator()(T &&context, O &o) const
-        {
-            Reflect::Result result;
-            auto f = [&](Reflect::Value &v) {
-                result = get_named_d(std::forward<T>(context), Name, v);
-                if (!result)
-                    result = invoke_free(v, [&](const V &v) { o = v; }, {}, v);
-            };
-            Value_erased(CallableView<void(Reflect::Value &)> { f });
-            return result;
-        }
-
-        template <typename T, typename O>
-            requires(is_tag_invocable_v<get_named_t, T, O>)
-        auto operator()(T &&context, O &&o) const
-            noexcept(is_nothrow_tag_invocable_v<get_named_t, T, O>)
-                -> tag_invoke_result_t<get_named_t, T, O>
-        {
-            return tag_invoke(*this, std::forward<T>(context), std::forward<O>(o));
-        }
-    };
-
-    template <fixed_string Name, typename V>
-    inline constexpr get_named_t<Name, V> get_named;
-
-    template <typename Rec, fixed_string Name, typename T>
-    struct NamedState : Execution::base_state<Rec> {
-
-        NamedState(Named<Name, T> value, Rec &&rec)
+        ContextParameterState(ContextParameter<T> value, Rec &&rec)
             : Execution::base_state<Rec>(std::forward<Rec>(rec))
             , mValue(std::move(value))
 
@@ -71,24 +39,24 @@ namespace Behavior {
         {
         }
 
-        friend auto tag_invoke(Execution::visit_state_t, NamedState *state, auto &&visitor)
+        friend auto tag_invoke(Execution::visit_state_t, ContextParameterState *state, auto &&visitor)
         {
         }
 
-        Named<Name, T> mValue;
+        ContextParameter<T> mValue;
     };
 
-    template <fixed_string Name, typename T>
-    struct Named {
+    template <typename T>
+    struct ContextParameter {
 
-        Named() = default;
+        ContextParameter() = default;
 
-        Named(T &&value)
+        ContextParameter(T &&value)
             : mValue(std::in_place, std::forward<T>(value))
         {
         }
 
-        Named(std::optional<forward_ref_t<T>> value)
+        ContextParameter(std::optional<forward_ref_t<T>> value)
             : mValue(std::move(value))
         {
         }
@@ -101,10 +69,20 @@ namespace Behavior {
 
         Reflect::Result resolve(auto &context)
         {
+            Reflect::Result result;
             if (!mValue) {
-                return get_named<Name, T>(context, mValue);
+                Reflect::Value_erased([&](Reflect::Value &v) {
+                    result = Reflect::get_reflect_contextual(context, v, *Reflect::toType<std::decay_t<T>>().mSecondary.mMetaTable);
+                    if (!result) {
+                        result = Reflect::call([&](T val) -> Reflect::Result {
+                            mValue.emplace(std::forward<T>(val));
+                            return {};
+                        },
+                            v);
+                    }
+                });
             }
-            return {};
+            return result;
         }
 
         T &operator->()
@@ -123,33 +101,33 @@ namespace Behavior {
         }
 
         template <typename Rec>
-        friend auto tag_invoke(Execution::connect_t, Named &&sender, Rec &&rec)
+        friend auto tag_invoke(Execution::connect_t, ContextParameter &&sender, Rec &&rec)
         {
-            return NamedState<Rec, Name, T> { std::move(sender), std::forward<Rec>(rec) };
+            return ContextParameterState<Rec, T> { std::move(sender), std::forward<Rec>(rec) };
         }
 
         template <typename Rec>
-        friend auto tag_invoke(Execution::connect_t, Named &sender, Rec &&rec)
+        friend auto tag_invoke(Execution::connect_t, ContextParameter &sender, Rec &&rec)
         {
-            return NamedState<Rec, Name, T> { sender, std::forward<Rec>(rec) };
+            return ContextParameterState<Rec, T> { sender, std::forward<Rec>(rec) };
         }
 
         using meta_t = std::optional<forward_ref_t<T>>;
 
         template <bool isReferenceWrapped>
-        friend decltype(auto) tag_invoke(Reflect::convert_Value_t<isReferenceWrapped> convert_ValueType, Named<Name, T> &named)
+        friend decltype(auto) tag_invoke(Reflect::convert_Value_t<isReferenceWrapped> convert_ValueType, ContextParameter<T> &named)
         {
             return convert_ValueType(named.mValue);
         }
 
         template <bool isReferenceWrapped>
-        friend decltype(auto) tag_invoke(Reflect::convert_Value_t<isReferenceWrapped> convert_ValueType, Named<Name, T> &&named)
+        friend decltype(auto) tag_invoke(Reflect::convert_Value_t<isReferenceWrapped> convert_ValueType, ContextParameter<T> &&named)
         {
             return convert_ValueType(std::move(named.mValue));
         }
 
         template <typename Context>
-        friend Serialize::StreamResult tag_invoke(Serialize::apply_map_t, Named<Name, T> &named, Serialize::FormattedSerializeStream &in, bool success, Context &&context)
+        friend Serialize::StreamResult tag_invoke(Serialize::apply_map_t, ContextParameter<T> &named, Serialize::FormattedSerializeStream &in, bool success, Context &&context)
         {
             if (named.mValue)
                 return Serialize::apply_map(*named.mValue, in, success, context);
@@ -160,8 +138,7 @@ namespace Behavior {
         std::optional<forward_ref_t<T>> mValue;
     };
 
-    template <fixed_string Name>
-    struct with_named_t {
+    struct context_set_t {
 
         template <typename Rec, typename T>
         struct receiver : Execution::algorithm_receiver<Rec> {
@@ -172,14 +149,14 @@ namespace Behavior {
             {
             }
 
-            friend Reflect::Result tag_invoke(get_named_d_t, receiver &rec, std::string_view name, Reflect::ValueRef out)
+            friend Reflect::Result tag_invoke(Reflect::get_reflect_contextual_t, receiver &rec, Reflect::Value &retVal, const Reflect::MetaTable *type)
             {
-                if (name == Name) {
-                    toValue(out, rec.mValue);
+                if ((*Reflect::toType<std::decay_t<T>>().mSecondary.mMetaTable)->isDerivedFrom(type)) {
+                    toValue(retVal, forward_ref<T>(rec.mValue));
                     return {};
-                } else {
-                    return get_named_d(rec.mRec, name, out);
                 }
+
+                return Reflect::get_reflect_contextual(rec.mRec, retVal, type);
             }
 
             T mValue;
@@ -197,16 +174,16 @@ namespace Behavior {
         };
 
         template <Execution::AnySender Sender, typename T>
-        friend auto tag_invoke(with_named_t, Sender &&inner, T &&value)
+        friend auto tag_invoke(context_set_t, Sender &&inner, T &&value)
         {
             return sender<Sender, T> { { {}, std::forward<Sender>(inner) }, std::forward<T>(value) };
         }
 
         template <typename Sender, typename T>
-            requires tag_invocable<with_named_t, Sender, T>
+            requires tag_invocable<context_set_t, Sender, T>
         auto operator()(Sender &&sender, T &&value) const
-            noexcept(is_nothrow_tag_invocable_v<with_named_t, Sender, T>)
-                -> tag_invoke_result_t<with_named_t, Sender, T>
+            noexcept(is_nothrow_tag_invocable_v<context_set_t, Sender, T>)
+                -> tag_invoke_result_t<context_set_t, Sender, T>
         {
             return tag_invoke(*this, std::forward<Sender>(sender), std::forward<T>(value));
         }
@@ -218,21 +195,20 @@ namespace Behavior {
         }
     };
 
-    template <fixed_string Name>
-    constexpr with_named_t<Name> with_named;
+    inline constexpr context_set_t context_set;
 
 }
 
 namespace Serialize {
-    template <fixed_string Name, typename T>
-    struct Operations<Behavior::Named<Name, T>> {
+    template <typename T>
+    struct Operations<Behavior::ContextParameter<T>> {
         template <typename Context>
-        static StreamResult read(FormattedSerializeStream &in, Behavior::Named<Name, T> &n, const char *name, Context && context)
+        static StreamResult read(FormattedSerializeStream &in, Behavior::ContextParameter<T> &n, const char *name, Context &&context)
         {
             return Serialize::read(in, n.mValue, name, context);
         }
         template <typename Context>
-        static void write(FormattedSerializeStream &out, const Behavior::Named<Name, T> &n, const char *name, Context && context)
+        static void write(FormattedSerializeStream &out, const Behavior::ContextParameter<T> &n, const char *name, Context &&context)
         {
             Serialize::write(out, n.mValue, name, context);
         }

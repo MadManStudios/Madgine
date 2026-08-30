@@ -13,7 +13,7 @@ namespace Widgets {
         : mName(std::move(name))
         , mWidgets(std::move(widgets))
         , mAccessors(accessors(mWidgets))
-        , mMetaTable(&mSelfTable, mName.c_str(), mAccessors.get())
+        , mMetaTable(&mSelfTable, mName.c_str(), mAccessors.get(), nullptr)
     {
         mMetaTable.mBase = &table<CompoundWidget>;
 

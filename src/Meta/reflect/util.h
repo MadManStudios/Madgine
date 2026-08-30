@@ -399,12 +399,16 @@ namespace Reflect {
     Result invoke_impl(type_pack<Contextual<Param>, Params...>, size_t index, Callable &&callable, Context &&context)
     {
         using T = std::remove_reference_t<Param>;
-        T *ptr = context_get<T>(context);
 
-        if (!ptr)
-            throw 0;
+        Result result;
+        Value_erased([&](Value &val) {
+            result = context_get<T>(context, val);
+            if (!result) {
+                result = invoke_impl(type_pack<Param, Params...> {}, index, std::forward<Callable>(callable), context, val);
+            }
+        });
 
-        return invoke_impl(type_pack<Params...> {}, index + 1, [&](Params... params) { return std::invoke(std::forward<Callable>(callable), *ptr, std::forward<Params>(params)...); }, context);
+        return result;
     }
 
     template <typename Callable, typename... Args, typename Context = ContextPtr>

@@ -48,7 +48,7 @@ namespace Behavior {
 
             auto typeName = Type::resolveTypeName(fullName, ".");
             if (typeName) {
-                if (typeName->mStorageOps) {
+                if (typeName->mMetaTable && typeName->mMetaTable->mStorage) {
                     PyObject *type = PyObject_CallObject((PyObject *)&PyTypeType, NULL);
                     if (!type)
                         return NULL;

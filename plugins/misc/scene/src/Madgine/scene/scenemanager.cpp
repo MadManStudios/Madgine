@@ -255,9 +255,9 @@ namespace Scene {
     void SceneManager::startLifetime()
     {
         if (mLifetime.parent()) {
-            mApp.lifetime().attach(mLifetime | Execution::after([this]() { unpause(); }) | Execution::finally([this]() { pause(); }) | Behavior::with_named<"Scene">(this));
+            mApp.lifetime().attach(mLifetime | Execution::after([this]() { unpause(); }) | Execution::finally([this]() { pause(); }) | Behavior::context_set(this));
         } else {
-            Execution::detach(mLifetime | Behavior::with_named<"Scene">(this));
+            Execution::detach(mLifetime | Behavior::context_set(this));
         }
         for (ContainerData &container : kvValues(mContainers)) {
             container.mContainer.startLifetime();
@@ -269,7 +269,7 @@ namespace Scene {
         return mLifetime.end();
     }
 
-    Debug::DebuggableLifetime<Behavior::get_named_d> &SceneManager::lifetime()
+    Debug::DebuggableLifetime<Reflect::get_reflect_contextual> &SceneManager::lifetime()
     {
         return mLifetime;
     }

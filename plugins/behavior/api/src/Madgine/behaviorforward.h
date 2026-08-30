@@ -16,8 +16,8 @@ namespace Behavior {
 
     struct BehaviorFactoryBase;
 
-    template <fixed_string Name, typename T>
-    struct Named;
+    template <typename T>
+    struct ContextParameter;
 
     struct HandlerBase;
     struct HandlerManager;

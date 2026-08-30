@@ -48,6 +48,8 @@ namespace Resources {
 
         struct Resource : ResourceLoaderBase::Resource {
 
+            using Loader = T;
+
             using ResourceLoaderBase::Resource::Resource;
 
             Handle loadData()
@@ -413,11 +415,6 @@ namespace Resources {
     METATABLE_END_EX(4, Loader)                                                   \
                                                                                   \
     METATABLE_BEGIN_BASE_EX(5, Loader::Resource, Engine::Resources::ResourceBase) \
-    METATABLE_END_EX(6, Loader::Resource)                                         \
-                                                                                  \
-    SERIALIZETABLE_BEGIN_EX(9, Loader::Handle)                                    \
-        ENCAPSULATED_FIELD_EX(10, Name, name, loadSerialize)                      \
-    SERIALIZETABLE_END_EX(11, Loader::Handle)                                     \
-                                                                                  \
-    STORAGEOPS_BEGIN_EX(13, Loader::Handle)                                       \
-    STORAGEOPS_END_EX(15, Loader::Handle)
+        STORAGE_BEGIN_EX(6, Loader::Resource, Loader::Resource *)                 \
+        STORAGE_END_EX(7, Loader::Resource)                                       \
+    METATABLE_END_EX(8, Loader::Resource)

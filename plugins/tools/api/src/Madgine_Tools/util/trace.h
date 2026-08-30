@@ -32,9 +32,9 @@ namespace Tools {
             return mParent.undoStack();
         }
 
-        void *context_get(const Reflect::MetaTable *type) const override
+        Reflect::Result context_get(Reflect::Value &retVal, const Reflect::MetaTable *type) const override
         {
-            return Reflect::get_reflect_contextual(mParent, type);
+            return Reflect::get_reflect_contextual(mParent, retVal, type);
         }
 
         const Traced<T> &mParent;
@@ -415,14 +415,14 @@ namespace Tools {
             }
         }
 
-        virtual void *context_get(const Reflect::MetaTable *type) const
+        virtual Reflect::Result context_get(Reflect::Value &retVal, const Reflect::MetaTable *type) const
         {
-            return nullptr;
+            throw 0;            
         }
 
-        friend void *tag_invoke(Reflect::get_reflect_contextual_t, const Traced<T> &trace, const Reflect::MetaTable *type)
+        friend Reflect::Result tag_invoke(Reflect::get_reflect_contextual_t, const Traced<T> &trace, Reflect::Value &retVal, const Reflect::MetaTable *type)
         {
-            return trace.context_get(type);
+            return trace.context_get(retVal, type);
         }
                         
         template <typename U, typename Callable, typename Context>
@@ -530,14 +530,14 @@ namespace Tools {
             return this->mParent.print(out);
         }
 
-        void *context_get(const Reflect::MetaTable *type) const override
+        Reflect::Result context_get(Reflect::Value &retVal, const Reflect::MetaTable *type) const override
         {
-            OffsetPtr offset { 0 };
-            if (table<meta_decayed_t<std::remove_reference_t<T>>>->isDerivedFrom(type, &offset)) {
-                return reinterpret_cast<std::byte *>(&this->mValue) + offset;
+            if (table<meta_decayed_t<std::remove_reference_t<T>>>->isDerivedFrom(type)) {
+                toValue(retVal, forward_ref<T>(this->mValue));
+                return {};
             }
 
-            return this->mParent.context_get(type);
+            return this->mParent.context_get(retVal, type);
         }
     };
 

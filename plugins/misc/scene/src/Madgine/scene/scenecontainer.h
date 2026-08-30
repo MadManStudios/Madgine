@@ -29,7 +29,7 @@ namespace Scene {
 
         void copy(const SceneContainer &other);
 
-        Debug::DebuggableLifetime<Behavior::get_named_d> &lifetime();
+        Debug::DebuggableLifetime<Reflect::get_reflect_contextual> &lifetime();
 
         Entity::EntityPtr findEntity(const std::string &name);
         void remove(Entity::EntityPtr e);
@@ -55,7 +55,7 @@ namespace Scene {
     private:
         friend struct Entity::Entity;
 
-        DEBUGGABLE_LIFETIME(mLifetime, Behavior::get_named_d);
+        DEBUGGABLE_LIFETIME(mLifetime, Reflect::get_reflect_contextual);
 
         SceneManager &mManager;
 

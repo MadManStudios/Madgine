@@ -54,4 +54,10 @@ namespace Widgets {
     };
 
 }
+
+namespace Serialize {
+    template <>
+    struct Operations<Widgets::WidgetLoader::Handle> : Operations<Resources::ResourceLoader<Widgets::WidgetLoader, Widgets::WidgetDescriptor>::Handle> { };
+}
+
 }

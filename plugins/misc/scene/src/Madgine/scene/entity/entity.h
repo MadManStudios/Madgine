@@ -42,7 +42,7 @@ namespace Scene {
             void setParent(EntityPtr parent);
             const EntityPtr &parent() const;
 
-            Debug::DebuggableLifetime<Behavior::get_named_d> &lifetime();
+            Debug::DebuggableLifetime<Reflect::get_reflect_contextual> &lifetime();
 
             const std::string &key() const;
 
@@ -113,7 +113,7 @@ namespace Scene {
             auto lifetimeSender()
             {
                 return Execution::sequence(mLifetime.tracked([this](auto lifetimePtr) { mSelf = EntityPtr { std::move(lifetimePtr), Execution::ConstantBinding { *this } }; })
-                        | Behavior::with_named<"Entity">(mSelf),
+                        | Behavior::context_set(mSelf),
                     mutex().locked(AccessMode::WRITE, [this]() { dtor(); }));
             }
 
@@ -149,7 +149,7 @@ namespace Scene {
 
             SceneContainer &mContainer;
 
-            DEBUGGABLE_LIFETIME(mLifetime, Behavior::get_named_d);
+            DEBUGGABLE_LIFETIME(mLifetime, Reflect::get_reflect_contextual);
 
             EntityPtr mSelf;
 

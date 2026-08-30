@@ -54,8 +54,8 @@ namespace Type {
         }
 
         template <typename T>
-        constexpr StorageOps(const char *name, type_holder_t<T>, const Constructor *constructors)
-            : mSelf(&storageOps<T>)
+        constexpr StorageOps(const StorageOps **self, const char *name, type_holder_t<T>, const Constructor *constructors)
+            : mSelf(self)
             , mTypeName(name)
             , mConstructors(constructors)
             , mMoveAssign(moveAssign<T>())
@@ -131,20 +131,5 @@ namespace Type {
         ApplyMap *mApplyMap;
     };
 
-    namespace __Type_impl__ {
-
-        template <typename T>
-        struct StorageOpsRegistrator {
-            StorageOpsRegistrator()
-            {
-                registerStorageOps(*storageOps<T>);
-            }
-            ~StorageOpsRegistrator()
-            {
-                unregisterStorageOps(*storageOps<T>);
-            }
-        };
-
-    }
 }
 }

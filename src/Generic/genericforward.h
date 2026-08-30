@@ -122,4 +122,7 @@ namespace Containers {
 
 }
 
+template <typename T>
+struct Contextual;
+
 }

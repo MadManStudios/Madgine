@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Madgine/behavior/behaviorhandle.h"
-#include "Madgine/behavior/named.h"
+#include "Madgine/behavior/context.h"
 #include "Madgine/behavior/parametertuple.h"
 
 #include "../nodebase.h"

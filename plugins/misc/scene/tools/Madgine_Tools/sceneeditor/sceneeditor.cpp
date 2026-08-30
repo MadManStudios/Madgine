@@ -294,8 +294,8 @@ namespace Tools {
 
             if (ImGui::CollapsingHeader("Behaviors")) {
                 ImGui::Dummy({ 0, 0 });
-                if (ImGui::InlineContextButton("N", mTool.mBehaviorFlags & Reflect::AccessorFlags_Named)) {
-                    mTool.mBehaviorFlags ^= Reflect::AccessorFlags_Named;
+                if (ImGui::InlineContextButton("C", mTool.mBehaviorFlags & Reflect::AccessorFlags_Contextual)) {
+                    mTool.mBehaviorFlags ^= Reflect::AccessorFlags_Contextual;
                 }
                 ImGui::SetItemTooltip("Show Named Parameters");
 

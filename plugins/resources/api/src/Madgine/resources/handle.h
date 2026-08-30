@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Meta/serialize/streams/streamresult.h"
+
 #include "Modules/threading/task.h"
 #include "Modules/threading/taskfuture.h"
 
@@ -8,6 +10,8 @@ namespace Resources {
 
     template <typename Loader, typename Data>
     struct Handle {
+
+        using meta_t = typename Loader::Resource *;
 
         Handle() = default;
 
@@ -35,8 +39,8 @@ namespace Resources {
 
         template <size_t N>
         Handle(const char (&name)[N])
-            : Handle(std::string_view {name})
-        {            
+            : Handle(std::string_view { name })
+        {
         }
 
         Handle(Data data)
@@ -195,8 +199,44 @@ namespace Resources {
             return resource();
         }
 
+        template <typename Context>
+        friend Serialize::StreamResult tag_invoke(const Serialize::apply_map_t &, Handle &h, Serialize::FormattedSerializeStream &in, bool success, Context &&context)
+        {
+            return {};
+        }
+
+        template <typename... Configs, typename Context>
+        friend void tag_invoke(Serialize::set_active_t<Configs...>, Handle &h, bool active, bool existenceChanged, Context &&)
+        {
+        }
+
         Data mData = {};
     };
 
 }
+
+namespace Serialize {
+    template <typename Loader, typename Data>
+    struct Operations<Resources::Handle<Loader, Data>> {
+        template <typename Context>
+        static StreamResult read(Serialize::FormattedSerializeStream &in, Resources::Handle<Loader, Data> &handle, const char *name, Context &&context)
+        {
+            std::string resourceName;
+            STREAM_PROPAGATE_ERROR(Serialize::read(in, resourceName, name));
+            handle.load(resourceName);
+            return {};
+        }
+        template <typename Context>
+        static void write(Serialize::FormattedSerializeStream &out, const Resources::Handle<Loader, Data> &handle, const char *name, Context &&context)
+        {
+            Serialize::write(out, handle.name(), name);
+        }
+
+        static StreamResult visitStream(FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor, size_t depth)
+        {
+            throw 0;
+        }
+    };
+}
+
 }

@@ -16,32 +16,35 @@ namespace Reflect {
 
     struct META_EXPORT MetaTable {
 
-        constexpr MetaTable(const MetaTable **self, const char *name, const Accessor *members)
+        constexpr MetaTable(const MetaTable **self, const char *name, const Accessor *members, const Engine::Type::StorageOps **storage)
             : mSelf(self)
             , mTypeName(name)
             , mBase(nullptr)
             , mBaseOffset(nullptr)
             , mMembers(members)
+            , mStorage(storage)
         {
         }
 
         template <typename T, typename Base>
-        constexpr MetaTable(const char *name, type_holder_t<T>, type_holder_t<Base>, const Accessor *members)
+        constexpr MetaTable(const char *name, type_holder_t<T>, type_holder_t<Base>, const Accessor *members, const Engine::Type::StorageOps **storage)
             : mSelf(&table<T>)
             , mTypeName(name)
             , mBase(&table<Base>)
             , mBaseOffset([]() { return OffsetPtr { type_holder<T>, type_holder<Base> }; })
             , mMembers(members)
+            , mStorage(storage)
         {
         }
 
         template <typename T>
-        constexpr MetaTable(const char *name, type_holder_t<T>, type_holder_t<void>, const Accessor *members)
+        constexpr MetaTable(const char *name, type_holder_t<T>, type_holder_t<void>, const Accessor *members, const Engine::Type::StorageOps **storage)
             : mSelf(&table<T>)
             , mTypeName(name)
             , mBase(nullptr)
             , mBaseOffset(nullptr)
             , mMembers(members)
+            , mStorage(storage)
         {
         }
 
@@ -63,6 +66,7 @@ namespace Reflect {
         const MetaTable **mBase;
         OffsetPtr (*mBaseOffset)();
         const Accessor *mMembers;
+        const Engine::Type::StorageOps **mStorage;
     };
 
     namespace __Reflect_impl__ {

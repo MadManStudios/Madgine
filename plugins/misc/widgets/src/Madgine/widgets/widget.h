@@ -10,7 +10,7 @@
 #include "Meta/serialize/configs/creator.h"
 #include "Meta/serialize/hierarchy/virtualserializableunit.h"
 
-#include "Madgine/behavior/named.h"
+#include "Madgine/behavior/context.h"
 #include "Madgine/debug/debuggablelifetime.h"
 #include "Madgine/debug/debuggablesender.h"
 #include "Madgine/render/texturedescriptor.h"
@@ -161,9 +161,9 @@ namespace Widgets {
         template <typename Sender>
         void addBehavior(Sender &&sender)
         {
-            lifetime().attach(std::forward<Sender>(sender) | Behavior::with_named<"Widget">(Execution::ConstantBinding { this }) | Platform::Log::log_result());
+            lifetime().attach(std::forward<Sender>(sender) | Behavior::context_set(this) | Platform::Log::log_result());
         }
-        Debug::DebuggableLifetime<Behavior::get_named_d> &lifetime();
+        Debug::DebuggableLifetime<Reflect::get_reflect_contextual> &lifetime();
 
         bool mVisible = true;
         std::string mName = "Unnamed";

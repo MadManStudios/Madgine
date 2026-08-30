@@ -5,12 +5,7 @@
 #include "Meta/serialize/operations.h"
 #include "Meta/serialize/streams/streamresult.h"
 
-#include "Meta/type/storageops_impl.h"
-
 #include "entityhandle.h"
-
-STORAGEOPS_BEGIN(Engine::Scene::Entity::EntityPtr)
-STORAGEOPS_END(Engine::Scene::Entity::EntityPtr)
 
 namespace Engine {
 namespace Scene {

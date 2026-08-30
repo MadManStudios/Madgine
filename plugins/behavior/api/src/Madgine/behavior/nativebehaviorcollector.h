@@ -144,7 +144,7 @@ namespace Behavior {
                 return std::span<const BehaviorDescriptor::Parameter> {};
             } else {
                 return []<typename... P>(type_pack<P...>) {
-                    return std::array<BehaviorDescriptor::Parameter, sizeof...(P)> { { { get_name<P>::value.c_str(), Type::resolveStorageOps<meta_decayed_t<get_type_t<P>>>() }... } };
+                    return std::array<BehaviorDescriptor::Parameter, sizeof...(P)> { { { get_name<P>::value.c_str(), Type::resolveStorageOps<get_type_t<P>>() }... } };
                 }(parameter_arguments {});
             }
         }();

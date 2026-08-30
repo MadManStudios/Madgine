@@ -20,9 +20,6 @@ METATABLE_END(Engine::Render::VulkanShaderLoader)
 METATABLE_BEGIN_BASE(Engine::Render::VulkanShaderLoader::Resource, Engine::Resources::ResourceBase)
 METATABLE_END(Engine::Render::VulkanShaderLoader::Resource)
 
-SERIALIZETABLE_BEGIN(Engine::Render::VulkanShaderLoader::Handle)
-SERIALIZETABLE_END(Engine::Render::VulkanShaderLoader::Handle)
-
 namespace Engine {
 namespace Render {
 

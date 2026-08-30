@@ -403,16 +403,16 @@ namespace Behavior {
         Reflect::ExtendedType PyToValueTypeDesc(PyObject *obj)
         {
             if (Py_IS_TYPE(obj, &PyTypeType)) {
-                return reinterpret_cast<PyType *>(obj)->mType->mStorageOps->mType;
+                return { { Reflect::TypeEnum::ScopeValue }, reinterpret_cast<PyType *>(obj)->mType->mMetaTable->mSelf };
             } else if (PyType_Check(obj)) {
                 PyTypeObject *type = reinterpret_cast<PyTypeObject *>(obj);
                 if (type == &PyUnicode_Type) {
                     return Reflect::toType<std::string>();
                 } else if (obj == PyModulePtr { "inspect" }.get("Parameter").get("empty")) {
                     return Reflect::toType<Reflect::Value>();
-                } else if (type == &PyNamedType) {
-                    return Reflect::toType<std::monostate>();
                 }
+            } else if (PyModule_Check(obj)) {
+                return { { Reflect::TypeEnum::ScopeValue }, Type::resolveTypeName(PyModule_GetName(obj), ".")->mMetaTable->mSelf };
             }
             throw 0;
         }
@@ -420,7 +420,7 @@ namespace Behavior {
         const Type::StorageOps *PyToStorageOps(PyObject *obj)
         {
             if (Py_IS_TYPE(obj, &PyTypeType)) {
-                return reinterpret_cast<PyType *>(obj)->mType->mStorageOps;
+                return *reinterpret_cast<PyType *>(obj)->mType->mMetaTable->mStorage;
             } else if (PyType_Check(obj)) {
                 PyTypeObject *type = reinterpret_cast<PyTypeObject *>(obj);
                 if (type == &PyUnicode_Type) {

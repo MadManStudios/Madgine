@@ -205,7 +205,7 @@ namespace Behavior {
 
                 if (Py_IS_TYPE(type, &Py_GenericAliasType)) {
                     type = PyTuple_GetItem(type.get("__args__"), 0);                    
-                    result.mArguments.push_back({ PyBytes_AsString(ascii), Reflect::ExtendedType { Reflect::ExtendedTypeEnum::VariantType, { Reflect::toType<std::monostate>(), PyToValueTypeDesc(type) } }, Reflect::AccessorFlags_Named });
+                    result.mArguments.push_back({ PyBytes_AsString(ascii), Reflect::ExtendedType { Reflect::ExtendedTypeEnum::VariantType, { Reflect::toType<std::monostate>(), PyToValueTypeDesc(type) } }, Reflect::AccessorFlags_Contextual });
                 } else {
                     result.mArguments.push_back({ PyBytes_AsString(ascii), PyToValueTypeDesc(type) });
                 }

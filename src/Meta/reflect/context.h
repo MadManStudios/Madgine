@@ -11,14 +11,21 @@ namespace Engine {
 namespace Reflect {
 
     struct get_reflect_contextual_t {
-        using signature = void *(const MetaTable *);
+        using signature = Result (Value &, const MetaTable *);
 
         template <typename Context>
-            requires(is_tag_invocable_v<get_reflect_contextual_t, Context, const MetaTable *>)
-        void *operator()(Context &&context, const MetaTable *type) const
-            noexcept(is_nothrow_tag_invocable_v<get_reflect_contextual_t, Context, const MetaTable *>)
+            requires(!is_tag_invocable_v<get_reflect_contextual_t, Context, Value &, const MetaTable *>)
+        Result operator()(Context &&context, Value &retVal, const MetaTable *type) const            
         {
-            return tag_invoke(*this, std::forward<Context>(context), type);
+            throw 0;
+        }
+
+        template <typename Context>
+            requires(is_tag_invocable_v<get_reflect_contextual_t, Context, Value &, const MetaTable *>)
+        Result operator()(Context &&context, Value &retVal, const MetaTable *type) const
+            noexcept(is_nothrow_tag_invocable_v<get_reflect_contextual_t, Context, Value, const MetaTable *>)
+        {
+            return tag_invoke(*this, std::forward<Context>(context), retVal, type);
         }
     };
 
@@ -29,14 +36,14 @@ namespace Reflect {
     template <typename T, typename Context>
     struct ContextReference {
 
-        friend void *tag_invoke(get_reflect_contextual_t, ContextReference &context, const MetaTable *type)
-        {
-            OffsetPtr offset { 0 };
-            if (table<meta_decayed_t<T>>->isDerivedFrom(type, &offset)) {
-                return reinterpret_cast<std::byte *>(&context.mValue) + offset;
+        friend Result tag_invoke(get_reflect_contextual_t, ContextReference &context, Value &retVal, const MetaTable *type)
+        {            
+            if ((*toType<T>().mSecondary.mMetaTable)->isDerivedFrom(type)) {
+                toValue(retVal, std::ref(context.mValue));
+                return {};
             }
 
-            return get_reflect_contextual(context.mContext, type);
+            return get_reflect_contextual(context.mContext, retVal, type);
         }
 
         Context mContext;
@@ -44,17 +51,17 @@ namespace Reflect {
     };
 
     template <typename Context, typename T>
-        requires(is_tag_invocable_v<get_reflect_contextual_t, Context, const MetaTable *> && !std::is_const_v<T>)
+        requires(is_tag_invocable_v<get_reflect_contextual_t, Context, Value&, const MetaTable *> && !std::is_const_v<T>)
     ContextReference<T, Context> context_set(Context &&context, T &value)
     {
         return { std::forward<Context>(context), value };
     }
 
     template <typename T, typename Context>
-        requires(is_tag_invocable_v<get_reflect_contextual_t, Context, const MetaTable *>)
-    T *context_get(Context &&context)
+        requires(is_tag_invocable_v<get_reflect_contextual_t, Context, Value &, const MetaTable *>)
+    Result context_get(Context &&context, Value &retVal)
     {
-        return static_cast<T *>(get_reflect_contextual(std::forward<Context>(context), table<meta_decayed_t<T>>));
+        return get_reflect_contextual(std::forward<Context>(context), retVal, *toType<T>().mSecondary.mMetaTable);
     }
 
 }

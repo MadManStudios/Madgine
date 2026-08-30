@@ -53,14 +53,15 @@ static void componentInit(std::array<Reflect::Accessor, 32> &accessors)
 }
 
 METATABLE_BEGIN(Engine::Scene::Entity::EntityDescriptor)
+    STORAGE_BEGIN(Engine::Scene::Entity::EntityDescriptor, Engine::Scene::Entity::EntityDescriptor)
+        CONSTRUCTOR(Engine::Type::Variadic<Engine::Type::Derived<Engine::Scene::Entity::EntityComponentBase>>)
+    STORAGE_END(Engine::Scene::Entity::EntityDescriptor)
 METATABLE_DYNAMIC_END(componentBuilder, componentInit, Engine::Scene::Entity::EntityDescriptor)
 
 SERIALIZETABLE_BEGIN(Engine::Scene::Entity::EntityDescriptor)
 SERIALIZETABLE_END(Engine::Scene::Entity::EntityDescriptor)
 
-STORAGEOPS_BEGIN(Engine::Scene::Entity::EntityDescriptor)
-CONSTRUCTOR(Engine::Type::Variadic<Engine::Type::Derived<Engine::Scene::Entity::EntityComponentBase>>)
-STORAGEOPS_END(Engine::Scene::Entity::EntityDescriptor)
+
 
 namespace Engine {
 namespace Scene {

@@ -19,9 +19,6 @@ METATABLE_END(Engine::Render::OpenGLShaderLoader)
 METATABLE_BEGIN_BASE(Engine::Render::OpenGLShaderLoader::Resource, Engine::Resources::ResourceBase)
 METATABLE_END(Engine::Render::OpenGLShaderLoader::Resource)
 
-SERIALIZETABLE_BEGIN(Engine::Render::OpenGLShaderLoader::Handle)
-SERIALIZETABLE_END(Engine::Render::OpenGLShaderLoader::Handle)
-
 namespace Engine {
 namespace Render {
 

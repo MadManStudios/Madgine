@@ -9,7 +9,7 @@
 
 #include "Meta/math/atlas2.h"
 
-#include "Madgine/behavior/named.h"
+#include "Madgine/behavior/context.h"
 #include "Madgine/debug/debuggablelifetime.h"
 #include "Madgine/imageloader/imageloader.h"
 #include "Madgine/window/mainwindowcomponent.h"
@@ -96,7 +96,7 @@ namespace Widgets {
         bool dragging(const WidgetBase *widget);
         void abortDrag(WidgetBase *widget);
 
-        Debug::DebuggableLifetime<Behavior::get_named_d> &lifetime();
+        Debug::DebuggableLifetime<Reflect::get_reflect_contextual> &lifetime();
 
         Execution::IntervalClock<> &clock();
 
@@ -137,7 +137,7 @@ namespace Widgets {
         std::vector<WidgetBase *> mModalWidgetList;
         std::vector<WidgetBase *> mOverlays;
 
-        DEBUGGABLE_LIFETIME(mLifetime, Behavior::get_named_d);
+        DEBUGGABLE_LIFETIME(mLifetime, Reflect::get_reflect_contextual);
 
         Execution::IntervalClock<> mFrameClock = std::chrono::steady_clock::now();
 

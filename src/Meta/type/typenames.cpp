@@ -67,15 +67,5 @@ namespace Type {
         addTypeName(table.mTypeName).mMetaTable = nullptr;
     }
 
-    void registerStorageOps(const Type::StorageOps &ops)
-    {
-        addTypeName(ops.mTypeName).mStorageOps = &ops;
-    }
-
-    META_EXPORT void unregisterStorageOps(const Type::StorageOps &ops)
-    {
-        addTypeName(ops.mTypeName).mStorageOps = nullptr;
-    }
-
 }
 }

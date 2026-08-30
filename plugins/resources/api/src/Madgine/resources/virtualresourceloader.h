@@ -14,6 +14,11 @@ namespace Resources {
 
         using ResourceLoaderVirtualBase<T, ResourceLoaderInterface<T, _Data, _Container, _Storage>>::ResourceLoaderVirtualBase;
 
+        static Base::Resource *get(std::string_view name, T *loader = &Base::getSingleton())
+        {
+            return loader->getVImpl(name);
+        }
+
         static typename Base::Handle load(std::string_view name, T *loader = &Base::getSingleton())
         {
             return loader->loadVImpl(name);
@@ -99,6 +104,7 @@ namespace Resources {
 
         virtual typename Base::Handle loadManualVImpl(std::string_view name, const Platform::Filesystem::Path &path = {}, typename Base::Ctor ctor = {}) = 0;
         virtual typename Base::Ptr createUnnamedVImpl() = 0;
+        virtual typename Base::Resource *getVImpl(std::string_view name) = 0;
         virtual typename Base::Handle loadVImpl(std::string_view name) = 0;
         virtual typename Base::Handle loadVImpl(typename Base::Resource *resource) = 0;
         virtual Threading::TaskFuture<void> unloadVImpl(typename Base::Resource *resource) = 0;
@@ -126,6 +132,10 @@ namespace Resources {
         virtual typename Base::OriginalPtr createUnnamedVImpl() override
         {
             return Self::createUnnamed();
+        }
+        virtual typename Base::Resource *getVImpl(std::string_view name) override
+        {
+            return Self::get(name, static_cast<T *>(this));
         }
         virtual typename Base::OriginalHandle loadVImpl(std::string_view name) override
         {
@@ -171,15 +181,10 @@ namespace Resources {
     METATABLE_END_EX(2, Loader)                                                   \
                                                                                   \
     METATABLE_BEGIN_BASE_EX(3, Loader::Resource, Engine::Resources::ResourceBase) \
-    METATABLE_END_EX(4, Loader::Resource)                                         \
-                                                                                  \
-    SERIALIZETABLE_BEGIN_EX(8, Loader::Handle)                                    \
-        ENCAPSULATED_FIELD_EX(9, Name, name, loadSerialize)                       \
-    SERIALIZETABLE_END_EX(10, Loader::Handle)                                     \
-                                                                                  \
-    STORAGEOPS_BEGIN_EX(12, Loader::Handle)                                       \
-    CONSTRUCTOR_EX(13, std::string)                                               \
-    STORAGEOPS_END_EX(14, Loader::Handle)
+        STORAGE_BEGIN_EX(4, Loader::Resource, Loader::Resource *)                 \
+        FACTORY_EX(5, [](std::string_view name){return Loader::get(name);}, std::string)                                   \
+        STORAGE_END_EX(6, Loader::Resource)                                       \
+    METATABLE_END_EX(7, Loader::Resource)
 
 #define VIRTUALRESOURCELOADERIMPL(Loader, Base)                  \
     UNIQUECOMPONENT(Loader)                                      \
@@ -189,8 +194,4 @@ namespace Resources {
     METATABLE_END_EX(3, Loader)                                  \
                                                                  \
     METATABLE_BEGIN_BASE_EX(4, Loader::Resource, Base::Resource) \
-    METATABLE_END_EX(5, Loader::Resource)                        \
-                                                                 \
-    SERIALIZETABLE_BEGIN_EX(9, Loader::Handle)                   \
-        ENCAPSULATED_FIELD_EX(10, Name, name, loadSerialize)     \
-    SERIALIZETABLE_END_EX(11, Loader::Handle)
+    METATABLE_END_EX(5, Loader::Resource)

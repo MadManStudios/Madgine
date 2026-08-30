@@ -4,7 +4,7 @@
 #include "Generic/execution/concepts.h"
 #include "Generic/execution/execution.h"
 
-#include "Madgine/behavior/named.h"
+#include "Madgine/behavior/context.h"
 
 #include "nodebase.h"
 #include "nodeinterpreter.h"

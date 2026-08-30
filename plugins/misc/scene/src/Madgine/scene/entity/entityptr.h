@@ -4,15 +4,15 @@
 
 #include "Generic/execution/lifetime.h"
 
-#include "Madgine/behavior/named.h"
+#include "Madgine/behavior/context.h"
 
 namespace Engine {
 namespace Scene {
     namespace Entity {
 
-        struct MADGINE_SCENE_EXPORT EntityPtr : Execution::Lifetime<Behavior::get_named_d>::BindingPoint<Execution::ConstantBinding<Entity&>> {
+        struct MADGINE_SCENE_EXPORT EntityPtr : Execution::Lifetime<Reflect::get_reflect_contextual>::BindingPoint<Execution::ConstantBinding<Entity &>> {
 
-            using Base = Execution::Lifetime<Behavior::get_named_d>::BindingPoint<Execution::ConstantBinding<Entity&>>;
+            using Base = Execution::Lifetime<Reflect::get_reflect_contextual>::BindingPoint<Execution::ConstantBinding<Entity&>>;
 
             EntityPtr() = default;
             EntityPtr(const EntityPtr &) = default;

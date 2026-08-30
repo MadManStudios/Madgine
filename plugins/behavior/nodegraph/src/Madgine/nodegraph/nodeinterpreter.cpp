@@ -50,8 +50,9 @@ namespace Behavior {
                 if (pin.mGroup == 0) {
                     return mArguments.get(retVal, pin.mIndex);
                 } else {
-                    std::string_view name = mGraph->mNamedInputs[pin.mIndex].mDescriptor.mName;
-                    return get_named_d(*this, name, retVal);
+                    throw 0; //TODO: Move into single group, resolve contextual on call
+                    //std::string_view name = mGraph->mNamedInputs[pin.mIndex].mDescriptor.mName;
+                    //return get_named_d(*this, name, retVal);
                 }
             } else {
                 return mGraph->node(pin.mNode)->interpretRead(*this, retVal, mData[pin.mNode - 1], pin.mIndex, pin.mGroup);

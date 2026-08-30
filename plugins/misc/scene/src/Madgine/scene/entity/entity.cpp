@@ -56,6 +56,8 @@ static void componentInit(std::array<Reflect::Accessor, 32> &accessors)
 }
 
 METATABLE_BEGIN(Engine::Scene::Entity::Entity)
+    STORAGE_BEGIN(Engine::Scene::Entity::Entity, Engine::Scene::Entity::EntityPtr)
+    STORAGE_END(Engine::Scene::Entity::Entity)
     NAMED_MEMBER(Name, mName)
     READONLY_PROPERTY(Behaviors, behaviors)
     READONLY_PROPERTY(Lifetime, lifetimeBase)
@@ -216,7 +218,7 @@ namespace Scene {
             return mHandle;
         }
 
-        Debug::DebuggableLifetime<Behavior::get_named_d> &Entity::lifetime()
+        Debug::DebuggableLifetime<Reflect::get_reflect_contextual> &Entity::lifetime()
         {
             return mLifetime;
         }

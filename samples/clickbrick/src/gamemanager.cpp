@@ -189,7 +189,7 @@ void GameManager::start()
     mLife = 3;
     mLifeLabel->mText = "Life: " + std::to_string(mLife);
 
-    mLifetime.attach(game() | Engine::Behavior::with_named<"Scene">(mSceneMgr));
+    mLifetime.attach(game() | Engine::Behavior::context_set(mSceneMgr));
 }
 
 Engine::Behavior::Behavior Brick(float speed, Engine::Math::Vector3 dir, Engine::Math::Quaternion q, GameManager &manager, Engine::Scene::EntityBinding entity)

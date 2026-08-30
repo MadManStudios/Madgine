@@ -6,33 +6,25 @@
             <mWidgetsLayout>
                 <Item serId=4>
                     <mName>MainMenu</mName>
-                    <mWidgetTemplate serId=5>
-                        <Name>mainmenu</Name>
-                    </mWidgetTemplate>
+                    <mWidgetTemplate>mainmenu</mWidgetTemplate>
                     <mType>WidgetType::ROOT_WIDGET</mType>
                     <mDefaultVisibility>true</mDefaultVisibility>
                 </Item>
                 <Item serId=6>
                     <mName>Ingame</mName>
-                    <mWidgetTemplate serId=7>
-                        <Name>ingame</Name>
-                    </mWidgetTemplate>
+                    <mWidgetTemplate>ingame</mWidgetTemplate>
                     <mType>WidgetType::ROOT_WIDGET</mType>
                     <mDefaultVisibility>false</mDefaultVisibility>
                 </Item>
                 <Item serId=8>
                     <mName>GameOver</mName>
-                    <mWidgetTemplate serId=9>
-                        <Name>gameover</Name>
-                    </mWidgetTemplate>
+                    <mWidgetTemplate>gameover</mWidgetTemplate>
                     <mType>WidgetType::MODAL_OVERLAY</mType>
                     <mDefaultVisibility>false</mDefaultVisibility>
                 </Item>
                 <Item serId=10>
                     <mName>Test</mName>
-                    <mWidgetTemplate serId=11>
-                        <Name>test</Name>
-                    </mWidgetTemplate>
+                    <mWidgetTemplate>test</mWidgetTemplate>
                     <mType>WidgetType::ROOT_WIDGET</mType>
                     <mDefaultVisibility>false</mDefaultVisibility>
                 </Item>

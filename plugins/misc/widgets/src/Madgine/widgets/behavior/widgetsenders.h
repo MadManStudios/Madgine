@@ -4,7 +4,7 @@
 #include "Generic/execution/binding.h"
 #include "Generic/execution/intervalclock.h"
 
-#include "Madgine/behavior/named.h"
+#include "Madgine/behavior/context.h"
 
 #include "../widget.h"
 #include "../widgetmanager.h"
@@ -12,8 +12,8 @@
 namespace Engine {
 namespace Widgets {
 
-    using WidgetBinding = Behavior::Named<"Widget", Execution::BindingPtr<WidgetBase &>>;
-    using NamedWidgetManager = Behavior::Named<"WidgetManager", WidgetManager &>;
+    using WidgetBinding = Behavior::ContextParameter<Execution::BindingPtr<WidgetBase &>>;
+    using NamedWidgetManager = Behavior::ContextParameter<WidgetManager &>;
 
     constexpr auto wait_frame = [](std::chrono::steady_clock::duration duration, NamedWidgetManager manager = {}, std::chrono::steady_clock::duration durationOverride = -1s, std::chrono::steady_clock::duration acc = 0s) {
         return std::move(manager) | Execution::let_value([=](auto &&manager) { return manager.clock().wait(duration, durationOverride, acc); });

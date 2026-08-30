@@ -127,7 +127,7 @@ namespace Scene {
 
     void SceneContainer::startLifetime()
     {
-        mManager.mLifetime.attach(mLifetime | Behavior::with_named<"SceneContainer">(this));
+        mManager.mLifetime.attach(mLifetime | Behavior::context_set(this));
     }
 
     void SceneContainer::endLifetime()
@@ -152,7 +152,7 @@ namespace Scene {
         Serialize::readState(in, *this, "Scene");
     }
 
-    Debug::DebuggableLifetime<Behavior::get_named_d> &SceneContainer::lifetime()
+    Debug::DebuggableLifetime<Reflect::get_reflect_contextual> &SceneContainer::lifetime()
     {
         return mLifetime;
     }

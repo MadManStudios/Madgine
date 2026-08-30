@@ -184,16 +184,16 @@ namespace Scene {
 
         Entity *AnimationState::entity()
         {
-            Entity *entity;
-            Behavior::get_named<"Entity", Entity *>(*this, entity);
-            return entity;
+            Behavior::ContextParameter<Entity *> entity;
+            entity.resolve(*this);
+            return *entity;            
         }
 
         SceneManager *AnimationState::scene()
         {
-            SceneManager *scene;
-            Behavior::get_named<"Scene", SceneManager *>(*this, scene);
-            return scene;
+            Behavior::ContextParameter<SceneManager *> sceneMgr;
+            sceneMgr.resolve(*this);
+            return *sceneMgr;
         }
 
         Behavior::Behavior animation(Render::AnimationLoader::Handle handle, Render::AnimationDescriptor *desc)
