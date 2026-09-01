@@ -273,6 +273,11 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a702a31d4143d8eb14349b587220b3b09"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a45b3ceaac67f16dc424da9cd4f28a6bc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_reflect_1_1_scope_ptr.html">Reflect::ScopePtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_parameter_tuple.html#a45b3ceaac67f16dc424da9cd4f28a6bc">customScopePtr</a> ()</td></tr>
 <tr class="separator:a45b3ceaac67f16dc424da9cd4f28a6bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3cfcbe872405b0ae3016ca5e645a4efe"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_reflect_1_1_result.html">Reflect::Result</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_parameter_tuple.html#a3cfcbe872405b0ae3016ca5e645a4efe">fromArguments</a> (const <a class="el" href="struct_engine_1_1_reflect_1_1_argument_list.html">Reflect::ArgumentList</a> &amp;args)</td></tr>
+<tr class="separator:a3cfcbe872405b0ae3016ca5e645a4efe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5ac0007c0251b0272a83e316b71c910"><td class="memTemplParams" colspan="2">template&lt;typename... Ty&gt; </td></tr>
+<tr class="memitem:ac5ac0007c0251b0272a83e316b71c910"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_parameter_tuple.html#ac5ac0007c0251b0272a83e316b71c910">get</a> (std::tuple&lt; Ty... &gt; &amp;out) const</td></tr>
+<tr class="separator:ac5ac0007c0251b0272a83e316b71c910"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a17418683493860ae8ee8c8724c80a576"><td class="memItemLeft" align="right" valign="top">std::string_view&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_parameter_tuple.html#a17418683493860ae8ee8c8724c80a576">name</a> (size_t index) const</td></tr>
 <tr class="separator:a17418683493860ae8ee8c8724c80a576"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4ad03927a3829fb36b7e8e9d5a096a43"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_parameter_tuple.html#a4ad03927a3829fb36b7e8e9d5a096a43">operator bool</a> () const</td></tr>
@@ -512,6 +517,34 @@ template&lt;typename... Ty, auto... Names&gt; </div>
 
 </div>
 </div>
+<a id="ac5ac0007c0251b0272a83e316b71c910" name="ac5ac0007c0251b0272a83e316b71c910"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac5ac0007c0251b0272a83e316b71c910">&#9670;&#160;</a></span>get()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename... Ty&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Engine::Behavior::ParameterTuple::get </td>
+          <td>(</td>
+          <td class="paramtype">std::tuple&lt; Ty... &gt; &amp;&#160;</td>
+          <td class="paramname"><em>out</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="ae0f4d811ed0adde6cdc90f4d0076dda2" name="ae0f4d811ed0adde6cdc90f4d0076dda2"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae0f4d811ed0adde6cdc90f4d0076dda2">&#9670;&#160;</a></span>operator Reflect::ArgumentList()</h2>
 
@@ -526,6 +559,32 @@ template&lt;typename... Ty, auto... Names&gt; </div>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3cfcbe872405b0ae3016ca5e645a4efe" name="a3cfcbe872405b0ae3016ca5e645a4efe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3cfcbe872405b0ae3016ca5e645a4efe">&#9670;&#160;</a></span>fromArguments()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_reflect_1_1_result.html">Reflect::Result</a> Engine::Behavior::ParameterTuple::fromArguments </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_reflect_1_1_argument_list.html">Reflect::ArgumentList</a> &amp;&#160;</td>
+          <td class="paramname"><em>args</em></td><td>)</td>
+          <td></td>
         </tr>
       </table>
   </td>
@@ -782,7 +841,7 @@ template&lt;typename... Configs, typename Context &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Aug 30 2026 16:15:30 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Tue Sep 1 2026 18:02:39 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>
