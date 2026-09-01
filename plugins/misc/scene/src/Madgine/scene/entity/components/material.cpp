@@ -9,7 +9,7 @@
 
 NAMED_UNIQUECOMPONENT(Material, Engine::Scene::Entity::Material);
 
-METATABLE_BEGIN(Engine::Scene::Entity::Material)
+METATABLE_BEGIN_BASE(Engine::Scene::Entity::Material, Engine::Scene::Entity::EntityComponentBase)
     MEMBER(mMaterial)
 METATABLE_END(Engine::Scene::Entity::Material)
 

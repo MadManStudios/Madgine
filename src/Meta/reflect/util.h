@@ -15,6 +15,7 @@
 #include "flags.h"
 #include "metatable.h"
 #include "ownedvalue.h"
+#include "ptr.h"
 #include "scopeptr.h"
 #include "sender.h"
 #include "type.h"
@@ -249,7 +250,13 @@ namespace Reflect {
             return result;
         }
 
-        if constexpr (Concepts::InstanceOf<T, std::optional>) {
+        if constexpr (Concepts::InstanceOf<T, Pointer>) {
+            if (!toType<typename T::type *>().canAccept(Value_type(arg)))
+                return REFLECT_UNKNOWN_ERROR_NOTRACE() << "Expected " << typeid(typename T::type).name() << " got " << Value_type(arg).toString();
+            return tag_invoke(call_t<ScopePtr> {}, std::forward<Callable>(callable), arg, context);
+        } else if constexpr (Concepts::InstanceOf<T, std::reference_wrapper>) {
+            return tag_invoke(call_t<typename T::type> {}, std::forward<Callable>(callable), arg, context);
+        } else if constexpr (Concepts::InstanceOf<T, std::optional>) {
             if (Value_isNull(arg))
                 return callable(T {}, context);
             else {
@@ -259,15 +266,18 @@ namespace Reflect {
             return [&]<typename... Ty>(type_pack<Ty...>) {
                 bool matched = false;
                 Result result;
-                ([&]() {
-                    if (Value_is<Ty>(arg)) {
+                ([&]() {                    
+                    bool called = false;
+                    Result inner = tag_invoke(call_t<Ty> {}, [&](const Ty &t, Context &context) -> Result { 
+                        called = true;
                         if (matched) {
-                            result = REFLECT_UNKNOWN_ERROR_NOTRACE() << "More than one variant type could match";
-                            return;
+                            return REFLECT_UNKNOWN_ERROR_NOTRACE() << "More than one variant type could match";                            
                         }
                         matched = true;
-                        result = tag_invoke(call_t<Ty> {}, [&](const Ty &t, Context &context) { return callable(T { t }, context); }, arg, context);
-                    }
+                        return callable(T { t }, context); 
+                    }, arg, context);
+                    if (called)
+                        result = std::move(inner);
                 }(),
                     ...);
                 if (!matched) {
@@ -339,8 +349,8 @@ namespace Reflect {
                             return callable(ptr, context);
                         } else {
                             return callable(*ptr, context);
-                        }    
-                    }                    
+                        }
+                    }
                 }
 
                 return REFLECT_UNKNOWN_ERROR_NOTRACE() << "No known conversion from " << Value_type(arg).toString() << " to " << toType<T>().toString();

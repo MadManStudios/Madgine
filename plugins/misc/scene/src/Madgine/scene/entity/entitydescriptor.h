@@ -1,8 +1,12 @@
 #pragma once
 
-#include "entitycomponentcollector.h"
+#include "Meta/reflect/ptr.h"
 
 #include "Modules/uniquecomponent/component_index.h"
+
+#include "Madgine/behavior/behaviorlist.h"
+
+#include "entitycomponentcollector.h"
 
 namespace Engine {
 namespace Scene {
@@ -16,13 +20,13 @@ namespace Scene {
 
         struct ComponentEntry {
             template <Concepts::DecayedNoneOf<ComponentEntry> ComponentType>
-                requires std::derived_from<ComponentType ,EntityComponentBase>
+                requires std::derived_from<ComponentType, EntityComponentBase>
             ComponentEntry(ComponentType &&component)
                 : mComponent(new ComponentType(std::forward<ComponentType>(component)), { Plugins::component_index<ComponentType>() })
             {
-            }            
+            }
 
-            ComponentEntry(const Reflect::ScopePtr &component);
+            ComponentEntry(const Reflect::Pointer<EntityComponentBase> &component);
 
             ComponentEntry(const ComponentEntry &other);
             ComponentEntry(ComponentEntry &&) = default;
@@ -38,9 +42,9 @@ namespace Scene {
             EntityDescriptor(Components &&...components)
             {
                 (mComponents.emplace_back(std::forward<Components>(components)), ...);
-            }           
+            }
 
-            EntityDescriptor(std::span<const Reflect::ScopePtr> components);
+            EntityDescriptor(std::span<const std::variant<Reflect::Pointer<EntityComponentBase>, std::reference_wrapper<Behavior::BehaviorSender>>> inputs);
 
             bool hasComponent(size_t index) const;
             EntityComponentBase *getComponent(size_t index) const;
@@ -48,6 +52,7 @@ namespace Scene {
             void apply(Entity &entity) const;
 
             std::vector<ComponentEntry> mComponents;
+            Behavior::BehaviorList mBehaviors;
         };
 
     }

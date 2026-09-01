@@ -9,7 +9,7 @@
 
 NAMED_UNIQUECOMPONENT(Mesh, Engine::Scene::Entity::Mesh);
 
-METATABLE_BEGIN(Engine::Scene::Entity::Mesh)
+METATABLE_BEGIN_BASE(Engine::Scene::Entity::Mesh, Engine::Scene::Entity::EntityComponentBase)
     STORAGE_BEGIN(Engine::Scene::Entity::Mesh, Engine::Scene::Entity::Mesh)
     CONSTRUCTOR()
     STORAGE_END(Engine::Scene::Entity::Mesh)

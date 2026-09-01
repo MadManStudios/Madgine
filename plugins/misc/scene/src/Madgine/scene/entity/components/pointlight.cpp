@@ -9,7 +9,7 @@
 
 NAMED_UNIQUECOMPONENT(PointLight, Engine::Scene::Entity::PointLight);
 
-METATABLE_BEGIN(Engine::Scene::Entity::PointLight)
+METATABLE_BEGIN_BASE(Engine::Scene::Entity::PointLight, Engine::Scene::Entity::EntityComponentBase)
     MEMBER(mRange)
     MEMBER(mColor)
 METATABLE_END(Engine::Scene::Entity::PointLight)

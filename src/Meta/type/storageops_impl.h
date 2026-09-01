@@ -10,10 +10,6 @@ namespace Engine {
 namespace Type {
 
     template <typename T>
-    struct Derived {
-    };
-
-    template <typename T>
     struct Variadic {
         using type = T;
     };
@@ -21,20 +17,6 @@ namespace Type {
     namespace __Type_impl__ {
 
         struct StorageOpsCtorTag;
-
-        template <typename T>
-        struct ConstructorParameter {
-            using type = T;
-        };
-
-        template <typename T>
-        struct ConstructorParameter<Variadic<T>> {
-        };
-
-        template <typename T>
-        struct ConstructorParameter<Derived<T>> {
-            using type = Reflect::ScopePtr;
-        };
 
         template <typename T, typename... Args>
             requires(!(Concepts::InstanceOf<Args, Variadic> || ...))
@@ -46,13 +28,13 @@ namespace Type {
                 },
                 []<size_t... Is>(std::index_sequence<Is...>) {
                     return [](const StorageOps &type, BaseStorage &out, const Reflect::ArgumentList &args, size_t inlineSize) -> Reflect::Result {
-                        return Reflect::invoke_free([&](ConstructorParameter<Args>::type... arg) {
+                        return Reflect::invoke_free([&](Args... arg) {
                             if (inlineSize >= sizeof(T)) {
-                                new (&static_cast<Storage<T> &>(out).mObject) T(std::forward<typename ConstructorParameter<Args>::type>(arg)...);
+                                new (&static_cast<Storage<T> &>(out).mObject) T(std::forward<Args>(arg)...);
                             } else if (inlineSize > 0) {
-                                new (&static_cast<AllocationStorage &>(out).mAllocation) AllocationPtr { new Storage<T>(type, std::forward<typename ConstructorParameter<Args>::type>(arg)...) };
+                                new (&static_cast<AllocationStorage &>(out).mAllocation) AllocationPtr { new Storage<T>(type, std::forward<Args>(arg)...) };
                             } else {
-                                static_cast<AllocationStorage &>(out).mAllocation = AllocationPtr { new Storage<T>(type, std::forward<typename ConstructorParameter<Args>::type>(arg)...) };
+                                static_cast<AllocationStorage &>(out).mAllocation = AllocationPtr { new Storage<T>(type, std::forward<Args>(arg)...) };
                             } }, {},
                             getArgument(args, Is)...);
                     };
@@ -85,7 +67,7 @@ namespace Type {
         static constexpr Constructor ctor(type_pack<Arg, Args...>)
         {
             using Variadic = last_t<Arg, Args...>;
-            using VariadicArg = ConstructorParameter<typename Variadic::type>::type;
+            using VariadicArg = typename Variadic::type;
 
             return {
                 [](const StorageOps &, const Reflect::ArgumentList &args) {
@@ -94,13 +76,13 @@ namespace Type {
                 []<size_t... Is>(std::index_sequence<Is...>) {
                     return [](const StorageOps &type, BaseStorage &out, const Reflect::ArgumentList &args, size_t inlineSize) -> Reflect::Result {
                         return variadic_ctor<VariadicArg>({}, args, sizeof...(Is),
-                            [&](std::vector<VariadicArg> variadicArgs) { return Reflect::invoke_free([&](ConstructorParameter<Args>::type... arg) {
+                            [&](std::vector<VariadicArg> variadicArgs) { return Reflect::invoke_free([&](Args... arg) {
                                                                              if (inlineSize >= sizeof(T)) {
-                                                                                 new (&static_cast<Storage<T> &>(out).mObject) T(std::forward<typename ConstructorParameter<Args>::type>(arg)..., std::move(variadicArgs));
+                                                                                 new (&static_cast<Storage<T> &>(out).mObject) T(std::forward<Args>(arg)..., std::move(variadicArgs));
                                                                              } else if (inlineSize > 0) {
-                                                                                 new (&static_cast<AllocationStorage &>(out).mAllocation) AllocationPtr { new Storage<T>(type, std::forward<typename ConstructorParameter<Args>::type>(arg)..., std::move(variadicArgs)) };
+                                                                                 new (&static_cast<AllocationStorage &>(out).mAllocation) AllocationPtr { new Storage<T>(type, std::forward<Args>(arg)..., std::move(variadicArgs)) };
                                                                              } else {
-                                                                                 static_cast<AllocationStorage &>(out).mAllocation = AllocationPtr { new Storage<T>(type, std::forward<typename ConstructorParameter<Args>::type>(arg)..., std::move(variadicArgs)) };
+                                                                                 static_cast<AllocationStorage &>(out).mAllocation = AllocationPtr { new Storage<T>(type, std::forward<Args>(arg)..., std::move(variadicArgs)) };
                                                                              } }, {},
                                                                              getArgument(args, Is)...); });
                     };
@@ -118,13 +100,13 @@ namespace Type {
                 },
                 []<size_t... Is>(std::index_sequence<Is...>) {
                     return [](const StorageOps &type, BaseStorage &out, const Reflect::ArgumentList &args, size_t inlineSize) -> Reflect::Result {
-                        return Reflect::invoke_free([&](ConstructorParameter<Args>::type... arg) {
+                        return Reflect::invoke_free([&](Args... arg) {
                             if (inlineSize >= sizeof(T)) {
-                                new (&static_cast<Storage<T> &>(out).mObject) T(f(std::forward<typename ConstructorParameter<Args>::type>(arg)...));
+                                new (&static_cast<Storage<T> &>(out).mObject) T(f(std::forward<Args>(arg)...));
                             } else if (inlineSize > 0) {
-                                new (&static_cast<AllocationStorage &>(out).mAllocation) AllocationPtr { new Storage<T>(type, f(std::forward<typename ConstructorParameter<Args>::type>(arg)...)) };
+                                new (&static_cast<AllocationStorage &>(out).mAllocation) AllocationPtr { new Storage<T>(type, f(std::forward<Args>(arg)...)) };
                             } else {
-                                static_cast<AllocationStorage &>(out).mAllocation = AllocationPtr { new Storage<T>(type, f(std::forward<typename ConstructorParameter<Args>::type>(arg)...)) };
+                                static_cast<AllocationStorage &>(out).mAllocation = AllocationPtr { new Storage<T>(type, f(std::forward<Args>(arg)...)) };
                             } }, {},
                             getArgument(args, Is)...);
                     };

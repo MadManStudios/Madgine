@@ -13,7 +13,7 @@
 
 NAMED_UNIQUECOMPONENT(Transform, Engine::Scene::Entity::Transform);
 
-METATABLE_BEGIN(Engine::Scene::Entity::Transform)
+METATABLE_BEGIN_BASE(Engine::Scene::Entity::Transform, Engine::Scene::Entity::EntityComponentBase)
     STORAGE_BEGIN(Engine::Scene::Entity::Transform, Engine::Scene::Entity::Transform)
         CONSTRUCTOR()
     STORAGE_END(Engine::Scene::Entity::Transform)

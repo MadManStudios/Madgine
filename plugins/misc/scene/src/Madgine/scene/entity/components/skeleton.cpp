@@ -12,7 +12,7 @@
 
 NAMED_UNIQUECOMPONENT(Skeleton, Engine::Scene::Entity::Skeleton);
 
-METATABLE_BEGIN(Engine::Scene::Entity::Skeleton)
+METATABLE_BEGIN_BASE(Engine::Scene::Entity::Skeleton, Engine::Scene::Entity::EntityComponentBase)
     PROPERTY(Skeleton, get, set)
 METATABLE_END(Engine::Scene::Entity::Skeleton)
 

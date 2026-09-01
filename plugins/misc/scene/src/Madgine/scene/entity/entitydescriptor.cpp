@@ -3,6 +3,8 @@
 
 #include "entitydescriptor.h"
 
+#include "Meta/reflect/ptr.h"
+
 #include "Modules/uniquecomponent/uniquecomponentcollector.h"
 #include "Modules/uniquecomponent/uniquecomponentregistry.h"
 
@@ -38,7 +40,7 @@ static void componentInit(std::array<Reflect::Accessor, 32> &accessors)
                 },
                 [](const Reflect::Accessor *self, Reflect::Value &ret, const Reflect::Value &desc, Reflect::ContextPtr context) -> Reflect::Result {
                     uint32_t index = Scene::Entity::EntityComponentRegistry::sComponentsByName().at(self->mName);
-                    return invoke_member(ret, dynamic_scope_cast(*Scene::Entity::EntityComponentRegistry::get(index).mType, [=](Scene::Entity::EntityDescriptor & desc) { return desc.getComponent(index); }), context, desc);
+                    return invoke_member(ret, dynamic_scope_cast(*Scene::Entity::EntityComponentRegistry::get(index).mType, [=](Scene::Entity::EntityDescriptor &desc) { return desc.getComponent(index); }), context, desc);
                 },
                 nullptr,
                 Reflect::ExtendedType {
@@ -54,14 +56,12 @@ static void componentInit(std::array<Reflect::Accessor, 32> &accessors)
 
 METATABLE_BEGIN(Engine::Scene::Entity::EntityDescriptor)
     STORAGE_BEGIN(Engine::Scene::Entity::EntityDescriptor, Engine::Scene::Entity::EntityDescriptor)
-        CONSTRUCTOR(Engine::Type::Variadic<Engine::Type::Derived<Engine::Scene::Entity::EntityComponentBase>>)
+    CONSTRUCTOR(Engine::Type::Variadic<std::variant<Reflect::Pointer<Engine::Scene::Entity::EntityComponentBase>, std::reference_wrapper<Engine::Behavior::BehaviorSender>>>)
     STORAGE_END(Engine::Scene::Entity::EntityDescriptor)
 METATABLE_DYNAMIC_END(componentBuilder, componentInit, Engine::Scene::Entity::EntityDescriptor)
 
 SERIALIZETABLE_BEGIN(Engine::Scene::Entity::EntityDescriptor)
 SERIALIZETABLE_END(Engine::Scene::Entity::EntityDescriptor)
-
-
 
 namespace Engine {
 namespace Scene {
@@ -72,12 +72,12 @@ namespace Scene {
             EntityComponentRegistry::get(mType).destroy(component);
         }
 
-        ComponentEntry::ComponentEntry(const Reflect::ScopePtr &component)
+        ComponentEntry::ComponentEntry(const Reflect::Pointer<EntityComponentBase> &component)
         {
             for (size_t i = 0; i < EntityComponentRegistry::sComponents().size(); ++i) {
                 const EntityComponentRegistry::Annotations &annotation = EntityComponentRegistry::get(i);
                 if (*annotation.mType == component.mType) {
-                    mComponent = { construct(annotation, *static_cast<const EntityComponentBase*>(component.mScope)).release(), { i } };
+                    mComponent = { construct(annotation, *static_cast<const EntityComponentBase *>(component.mScope)).release(), { i } };
                     return;
                 }
             }
@@ -95,15 +95,26 @@ namespace Scene {
             return *this;
         }
 
-        EntityDescriptor::EntityDescriptor(std::span<const Reflect::ScopePtr> components)
-            : mComponents(components.begin(), components.end())
+        EntityDescriptor::EntityDescriptor(std::span<const std::variant<Reflect::Pointer<EntityComponentBase>, std::reference_wrapper<Behavior::BehaviorSender>>> inputs)
         {
+            for (const auto &v : inputs) {
+                std::visit(overloaded { [&](const Reflect::Pointer<EntityComponentBase> &component) {
+                                           mComponents.emplace_back(component);
+                                       },
+                               [&](const std::reference_wrapper<const Behavior::BehaviorSender> &behavior) {
+                                   mBehaviors.addBehavior(behavior);
+                               } },
+                    v);
+            }
         }
 
         void EntityDescriptor::apply(Entity &entity) const
         {
             for (const ComponentEntry &entry : mComponents) {
                 entity.copyComponent(entry.mComponent.get_deleter().mType, *entry.mComponent);
+            }
+            for (const Behavior::BehaviorSender &sender : mBehaviors.mEntries) {
+                entity.behaviors().addBehavior(sender);
             }
         }
 

@@ -29,6 +29,8 @@ namespace Reflect {
     using AccessorFlags = uint32_t;
     struct ScopeField;
     struct ScopePtr;
+    template <typename T>
+    struct Pointer;
     struct OwnedValue;
     struct ApiFunction;
     struct BoundApiFunction;
