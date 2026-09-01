@@ -70,7 +70,19 @@ namespace Behavior {
             }(index_pack_for<Ty...> {});
         }
 
-        Serialize::StreamResult read(Serialize::FormattedSerializeStream &in, Serialize::ContextPtr context) override
+        Reflect::Result fromArgumentList(const Reflect::ArgumentList &args) override
+        {
+            auto results = [&]<size_t... Is>(auto_pack<Is...>) {
+                return std::array<Reflect::Result, sizeof...(Ty)> { Reflect::call([&](const Ty &v) -> Reflect::Result { std::get<Is>(this->mTuple) = v; return {}; }, args.at(Is))... };
+            }(index_pack_for<Ty...> {});
+            for (size_t i = 0; i < sizeof...(Ty); ++i) {
+                REFLECT_PROPAGATE_ERROR(results[i]);
+            }
+            return {};
+        }
+
+        Serialize::StreamResult
+        read(Serialize::FormattedSerializeStream &in, Serialize::ContextPtr context) override
         {
             std::tuple<dependent_t<Serialize::StreamResult, Ty>...> results;
             [&]<size_t... Is>(auto_pack<Is...>) {

@@ -22,8 +22,8 @@ namespace Behavior {
 
         void reset();
 
-        Behavior create(const Reflect::ArgumentList &args, std::vector<Behavior> behaviors = {}) const;
-        ParameterTuple createParameters() const;
+        Behavior create(const ParameterTuple &args, std::vector<Behavior> behaviors = {}) const;
+        BehaviorSender sender() const;
         Threading::TaskFuture<bool> state() const;
         const BehaviorDescriptor &descriptor() const;
 

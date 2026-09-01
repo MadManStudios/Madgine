@@ -116,9 +116,9 @@ namespace Tools {
             Behavior::BehaviorHandle behaviorToAdd = SceneEditor::render(mHistory, mSceneViews);
 
             if (behaviorToAdd) {
-                mRoot.dialogs().show(BehaviorParameterDialog(std::move(behaviorToAdd), *mInspector), [this](Behavior::Behavior behavior) {
+                mRoot.dialogs().show(BehaviorParameterDialog(std::move(behaviorToAdd), *mInspector), [this](Behavior::BehaviorSender behavior) {
                     Execution::access_binding(mSelectedEntity, [&](Scene::Entity::Entity &e) {
-                        e.addBehavior(std::move(behavior));
+                        e.addBehavior(std::move(behavior).create());
                     });
                 });
             }

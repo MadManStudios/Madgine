@@ -113,5 +113,13 @@ namespace Behavior {
         return result;
     }
 
+    Reflect::Result DynamicParameterTuple::fromArgumentList(const Reflect::ArgumentList &args)
+    {
+        for (size_t i = 0; i < mValues.size(); ++i) {            
+            REFLECT_PROPAGATE_ERROR(mValues[i].fromValue(args.at(i)));
+        }
+        return {};
+    }
+
 }
 }

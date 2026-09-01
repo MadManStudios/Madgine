@@ -14,6 +14,7 @@
 #include "Madgine/widgets/widgetloader.h"
 #include "Madgine/widgets/widgetmanager.h"
 #include "Madgine/window/mainwindow.h"
+#include "Madgine/behavior/behaviorsender.h"
 
 #include "Meta/reflect/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
@@ -183,8 +184,8 @@ namespace Tools {
 
                         if (ImGui::BeginMenu(IMGUI_ICON_PLUS " Add Behavior")) {
                             if (Behavior::BehaviorHandle behavior = BehaviorSelector()) {
-                                mRoot.dialogs().show(BehaviorParameterDialog(std::move(behavior), *mInspector), [&](Behavior::Behavior behavior) {
-                                    mSelected->addBehavior(std::move(behavior));
+                                mRoot.dialogs().show(BehaviorParameterDialog(std::move(behavior), *mInspector), [&](Behavior::BehaviorSender behavior) {
+                                    mSelected->addBehavior(std::move(behavior).create());
                                     });
                             }
                             ImGui::EndMenu();

@@ -48,7 +48,7 @@ namespace Behavior {
         return info->name();
     }
 
-    Behavior NativeBehaviorFactory::create(const UniqueOpaquePtr &handle, const Reflect::ArgumentList &args, std::vector<Behavior> behaviors) const
+    Behavior NativeBehaviorFactory::create(const UniqueOpaquePtr &handle, const ParameterTuple &args, std::vector<Behavior> behaviors) const
     {
         const NativeBehaviorInfo *info = handle.as<const NativeBehaviorInfo *>();
         return info->create(args, std::move(behaviors));

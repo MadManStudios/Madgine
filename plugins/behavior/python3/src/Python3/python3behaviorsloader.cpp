@@ -7,6 +7,7 @@
 
 #include "Madgine/behavior/behaviorcollector.h"
 #include "Madgine/behavior/behaviorhandle.h"
+#include "Madgine/behavior/behaviorsender.h"
 
 #include "Meta/reflect/metatable_impl.h"
 
@@ -76,32 +77,27 @@ namespace Behavior {
             return m;
         }
 
-        struct PyBehavior {
-            PyObject_HEAD
-                Behavior mBehavior;
-        };
-
-        PyObject *PyBehavior_await(PyObject *self)
+        PyObject *PyBehaviorSender_await(PyObject *self)
         {
-            Behavior behavior = std::move(reinterpret_cast<PyBehavior *>(self)->mBehavior);
+            Behavior behavior = reinterpret_cast<PyBehaviorSender *>(self)->mBehavior.create();
 
             return PyAwait(std::move(behavior));
         }
 
-        PyAsyncMethods PyBehaviorAsyncMethods = {
-            .am_await = PyBehavior_await
+        PyAsyncMethods PyBehaviorSenderAsyncMethods = {
+            .am_await = PyBehaviorSender_await
         };
 
-        PyTypeObject PyBehaviorType = {
+        PyTypeObject PyBehaviorSenderType = {
             .ob_base = PyVarObject_HEAD_INIT(NULL, 0)
                 .tp_name
-            = "Engine.Behavior.Behavior",
-            .tp_basicsize = sizeof(PyBehavior),
+            = "Engine.Behavior.BehaviorSender",
+            .tp_basicsize = sizeof(PyBehaviorSender),
             .tp_itemsize = 0,
-            .tp_dealloc = &PyDealloc<PyBehavior, &PyBehavior::mBehavior>,
-            .tp_as_async = &PyBehaviorAsyncMethods,
+            .tp_dealloc = &PyDealloc<PyBehaviorSender, &PyBehaviorSender::mBehavior>,
+            .tp_as_async = &PyBehaviorSenderAsyncMethods,
             .tp_flags = Py_TPFLAGS_DEFAULT,
-            .tp_doc = "Python implementation of Behavior",
+            .tp_doc = "Python implementation of BehaviorSender",
             .tp_new = PyType_GenericNew,
         };
 
@@ -121,8 +117,10 @@ namespace Behavior {
                 PYTHON3_PROPAGATE_ERROR(fromPyObject(arguments[i], PyTuple_GetItem(args, i)));
             }
 
-            PyObject *obj = PyObject_CallObject((PyObject *)&PyBehaviorType, NULL);
-            new (&reinterpret_cast<PyBehavior *>(obj)->mBehavior) Behavior(self->mHandle.create(arguments));
+            PyObject *obj = PyObject_CallObject((PyObject *)&PyBehaviorSenderType, NULL);
+            new (&reinterpret_cast<PyBehaviorSender *>(obj)->mBehavior) BehaviorSender(self->mHandle.sender());
+
+            PYTHON3_PROPAGATE_ERROR(reinterpret_cast<PyBehaviorSender *>(obj)->mBehavior.mParameters.fromArguments(arguments));
 
             return obj;
         }

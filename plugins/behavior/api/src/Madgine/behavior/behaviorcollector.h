@@ -15,7 +15,7 @@ namespace Behavior {
         virtual Threading::TaskFuture<bool> state(const UniqueOpaquePtr &handle) const = 0;
         virtual void release(UniqueOpaquePtr &ptr) const = 0;
         virtual std::string_view name(const UniqueOpaquePtr &handle) const = 0;
-        virtual Behavior create(const UniqueOpaquePtr &handle, const Reflect::ArgumentList &args, std::vector<Behavior> behaviors) const = 0;
+        virtual Behavior create(const UniqueOpaquePtr &handle, const ParameterTuple &args, std::vector<Behavior> behaviors) const = 0;
         virtual ParameterTuple createParameters(const UniqueOpaquePtr &handle) const = 0;
         virtual const BehaviorDescriptor &descriptor(const UniqueOpaquePtr &handle) const = 0;
     };

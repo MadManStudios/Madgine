@@ -77,7 +77,7 @@ namespace Behavior {
             return graph.name();
         }
 
-        Behavior NodeGraphBehaviorFactory::create(const UniqueOpaquePtr &handle, const Reflect::ArgumentList &args, std::vector<Behavior> behaviors) const
+        Behavior NodeGraphBehaviorFactory::create(const UniqueOpaquePtr &handle, const ParameterTuple &args, std::vector<Behavior> behaviors) const
         {
             const NodeGraphLoader::Handle &graph = handle.as<NodeGraphLoader::Handle>();
             return graph.interpret();

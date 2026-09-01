@@ -18,10 +18,10 @@ Engine::Serialize::StreamResult readBehavior(Engine::Serialize::FormattedSeriali
     return {};
 }
 
-const char *writeBehavior(Engine::Serialize::FormattedSerializeStream &out, const Engine::Behavior::BehaviorList::Entry &entry)
+const char *writeBehavior(Engine::Serialize::FormattedSerializeStream &out, const Engine::Behavior::BehaviorSender &sender)
 {
     static std::string dummy;
-    dummy = entry.mHandle.toString();
+    dummy = sender.mHandle.toString();
     return Engine::Serialize::beginExtendedTypedWrite(out, dummy);
 }
 
@@ -29,25 +29,15 @@ SERIALIZETABLE_BEGIN(Engine::Behavior::BehaviorList)
     FIELD(mEntries, Engine::Serialize::CustomCreator<readBehavior, writeBehavior>)
 SERIALIZETABLE_END(Engine::Behavior::BehaviorList)
 
-SERIALIZETABLE_BEGIN(Engine::Behavior::BehaviorList::Entry)
-    FIELD(mParameters)
-SERIALIZETABLE_END(Engine::Behavior::BehaviorList::Entry)
-
 METATABLE_BEGIN(Engine::Behavior::BehaviorList)
 METATABLE_END(Engine::Behavior::BehaviorList)
 
 namespace Engine {
 namespace Behavior {
 
-    void BehaviorList::addBehavior(BehaviorHandle handle)
+    void BehaviorList::addBehavior(BehaviorSender behavior)
     {
-        mEntries.emplace_back(std::move(handle));
-    }
-
-    BehaviorList::Entry::Entry(BehaviorHandle handle)
-        : mHandle(std::move(handle))
-        , mParameters(mHandle.createParameters())
-    {
+        mEntries.emplace_back(std::move(behavior));
     }
 
 }

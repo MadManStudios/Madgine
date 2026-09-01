@@ -12,7 +12,7 @@ namespace Engine {
 namespace Behavior {
 
     struct NativeBehaviorInfo {
-        virtual Behavior create(const Reflect::ArgumentList &args, std::vector<Behavior> behaviors) const = 0;
+        virtual Behavior create(const ParameterTuple &args, std::vector<Behavior> behaviors) const = 0;
         virtual ParameterTuple createParameters() const = 0;
         virtual const BehaviorDescriptor &descriptor() const = 0;
         virtual std::string_view name() const = 0;
@@ -88,53 +88,56 @@ namespace Behavior {
         using parameter_argument_tuple = typename parameter_arguments::template transform<get_type_t>::template instantiate<std::tuple>;
         using parameter_argument_names = typename parameter_arguments::template value_transform<get_name>;
 
-        template <uint32_t I, typename... Args>
-        static auto buildSenderHelper(const Reflect::ArgumentList &parameters, type_pack<> types, std::vector<Behavior> behaviors, Args &&...args)
+        template <uint32_t I>
+        static auto buildArgs(const std::tuple<> &parameters, type_pack<> args, std::vector<Behavior> behaviors)
         {
             assert(behaviors.empty());
-            return Factory(std::forward<Args>(args)...);
+            return std::make_tuple();
         }
 
-        template <uint32_t I, typename V, typename... Vs, typename... Args>
-        static Behavior buildSenderHelper(const Reflect::ArgumentList &parameters, type_pack<V, Vs...> types, std::vector<Behavior> behaviors, Args &&...args)
+        template <uint32_t I, typename... Vs, typename U, typename... Us>
+        static auto buildArgs(std::tuple<Vs...> &&parameters, type_pack<U, Us...> args, std::vector<Behavior> behaviors)
         {
-            if constexpr (is_value<V>::value) {
-                return buildSenderHelper<I>(std::move(parameters), type_pack<Vs...> {}, std::move(behaviors), std::forward<Args>(args)..., V {});
-            } else if constexpr (is_sub_behavior<V>::value) {
+            if constexpr (is_value<U>::value) {
+                return std::tuple_cat(
+                    std::make_tuple(U {}),
+                    buildArgs<I>(std::move(parameters), type_pack<Us...> {}, std::move(behaviors)));
+            } else if constexpr (is_sub_behavior<U>::value) {
                 Behavior behavior = std::move(behaviors.front());
                 behaviors.erase(behaviors.begin());
-                return buildSenderHelper<I>(std::move(parameters), type_pack<Vs...> {}, std::move(behaviors), std::forward<Args>(args)..., std::move(behavior));
+                return std::tuple_cat(
+                    std::make_tuple(std::move(behavior)),
+                    buildArgs<I>(std::move(parameters), type_pack<Us...> {}, std::move(behaviors)));
             } else {
-                Behavior result;
-                if (Reflect::Result error = Reflect::call([&](const get_type_t<V> &value) {
-                        result = buildSenderHelper<I + 1>(parameters, type_pack<Vs...> {}, std::move(behaviors), std::forward<Args>(args)..., value);
-                        return Reflect::Result {};
-                    },
-                        parameters.at(I))) {
-                    result = Execution::just_error(std::move(*error.mError));
-                }
-                return result;
+                return TupleUnpacker::prepend<first_t<Vs...>>(
+                    std::get<0>(std::move(parameters)),
+                    buildArgs<I>(TupleUnpacker::popFront(std::move(parameters)), type_pack<Us...> {}, std::move(behaviors)));
             }
         }
 
-        static Behavior buildSender(const Reflect::ArgumentList &args, std::vector<Behavior> behaviors)
+        static auto buildSender(parameter_argument_tuple &&parameters, std::vector<Behavior> behaviors)
         {
-            return buildSenderHelper<0>(args, argument_types {}, std::move(behaviors));
+            return TupleUnpacker::invokeFromTuple(Factory, buildArgs<0>(std::move(parameters), argument_types {}, std::move(behaviors)));
         }
 
-        using Sender = std::invoke_result_t<decltype(Factory), get_type_t<Arguments>...>;
+        using Sender = decltype(buildSender(std::declval<parameter_argument_tuple>(), std::declval<std::vector<Behavior>>()));
 
         NativeBehavior(std::string_view name)
             : mName(name)
         {
         }
 
-        Behavior create(const Reflect::ArgumentList &args, std::vector<Behavior> behaviors) const override
+        Behavior create(const ParameterTuple &args, std::vector<Behavior> behaviors) const override
         {
-            return buildSender(args, std::move(behaviors));
+            parameter_argument_tuple parameters;
+
+            if (!args.get(parameters))
+                throw 0;
+
+            return buildSender(std::move(parameters), std::move(behaviors));
         };
 
-        virtual ParameterTuple createParameters() const override
+        ParameterTuple createParameters() const override
         {
             return { parameter_argument_tuple {}, parameter_argument_names {} };
         }
@@ -188,7 +191,7 @@ namespace Behavior {
         Threading::TaskFuture<bool> state(const UniqueOpaquePtr &handle) const override;
         void release(UniqueOpaquePtr &ptr) const override;
         std::string_view name(const UniqueOpaquePtr &handle) const override;
-        Behavior create(const UniqueOpaquePtr &handle, const Reflect::ArgumentList &args, std::vector<Behavior> behaviors) const override;
+        Behavior create(const UniqueOpaquePtr &handle, const ParameterTuple &args, std::vector<Behavior> behaviors) const override;
         ParameterTuple createParameters(const UniqueOpaquePtr &handle) const override;
         const BehaviorDescriptor &descriptor(const UniqueOpaquePtr &handle) const override;
     };

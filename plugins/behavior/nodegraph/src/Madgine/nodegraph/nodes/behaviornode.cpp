@@ -12,11 +12,11 @@
 #include "../nodeinterpreter.h"
 
 METATABLE_BEGIN_BASE(Engine::Behavior::NodeGraph::BehaviorNode, Engine::Behavior::NodeGraph::NodeBase)
-    MEMBER(mDefaultParameters)
+    MEMBER(mBehavior)
 METATABLE_END(Engine::Behavior::NodeGraph::BehaviorNode)
 
 SERIALIZETABLE_INHERIT_BEGIN(Engine::Behavior::NodeGraph::BehaviorNode, Engine::Behavior::NodeGraph::NodeBase)
-    FIELD(mDefaultParameters)
+    FIELD(mBehavior)
 SERIALIZETABLE_END(Engine::Behavior::NodeGraph::BehaviorNode)
 
 namespace Engine {
@@ -40,7 +40,7 @@ namespace Behavior {
             {
             }
 
-            void start(NodeReceiver<NodeBase> receiver, const Reflect::ArgumentList &args)
+            void start(NodeReceiver<NodeBase> receiver, const ParameterTuple &args)
             {
                 NodeInterpretHandle<BehaviorNode> handle { { receiver.mInterpreter }, static_cast<const BehaviorNode &>(receiver.mNode) };
 
@@ -113,23 +113,21 @@ namespace Behavior {
         BehaviorNode::BehaviorNode(NodeGraph &graph, BehaviorHandle behavior)
             : VirtualData(graph)
             , mBehavior(std::move(behavior))
-            , mFullClassName(mBehavior.toString())
-            , mDefaultParameters(mBehavior.createParameters())
+            , mFullClassName(mBehavior.mHandle.toString())            
         {
             this->refresh();
         }
 
         BehaviorNode::BehaviorNode(const BehaviorNode &other, NodeGraph &graph)
-            : VirtualData(other, graph)
-            , mBehavior(other.mBehavior)
+            : VirtualData(other, graph)            
             , mFullClassName(other.mFullClassName)
-            , mDefaultParameters(other.mDefaultParameters)
+            , mBehavior(other.mBehavior)
         {
         }
 
         std::string_view BehaviorNode::name() const
         {
-            return mBehavior.name();
+            return mBehavior.mHandle.name();
         }
 
         std::string_view BehaviorNode::className() const
@@ -157,7 +155,7 @@ namespace Behavior {
             if (group == 0)
                 return 1;
             else
-                return mBehavior.descriptor().subBehaviorCount();
+                return mBehavior.mHandle.descriptor().subBehaviorCount();
         }
 
         std::string_view BehaviorNode::flowOutName(uint32_t index, uint32_t group) const
@@ -178,7 +176,7 @@ namespace Behavior {
             if (group == 0) {
                 return 0;
             } else {
-                return mDefaultParameters.size();
+                return mBehavior.mParameters.size();
             }
         }
 
@@ -187,9 +185,9 @@ namespace Behavior {
             if (group == 0) {
                 throw 0;
             } else {
-                if (index >= mBehavior.descriptor().parameterCount())
+                if (index >= mBehavior.mHandle.descriptor().parameterCount())
                     return "<unknown>";
-                return mBehavior.descriptor().parameterName(index);
+                return mBehavior.mHandle.descriptor().parameterName(index);
             }
         }
 
@@ -198,30 +196,30 @@ namespace Behavior {
             if (group == 0) {
                 throw 0;
             } else {
-                if (index >= mBehavior.descriptor().parameterCount())
+                if (index >= mBehavior.mHandle.descriptor().parameterCount())
                     return { Reflect::ExtendedTypeEnum::GenericType };
-                return mBehavior.descriptor().parameterType(index);
+                return mBehavior.mHandle.descriptor().parameterType(index);
             }
         }
 
         uint32_t BehaviorNode::dataOutBaseCount(uint32_t group) const
         {
-            return mBehavior.descriptor().resultCount();
+            return mBehavior.mHandle.descriptor().resultCount();
         }
 
         Reflect::ExtendedType BehaviorNode::dataOutType(uint32_t index, uint32_t group, bool bidir) const
         {
-            return mBehavior.descriptor().resultType(index);
+            return mBehavior.mHandle.descriptor().resultType(index);
         }
 
         void BehaviorNode::setupInterpret(NodeInterpreterStateBase &interpreter, std::unique_ptr<NodeInterpreterData> &data) const
         {
-            data = std::make_unique<BehaviorInterpretData>(mBehavior);
+            data = std::make_unique<BehaviorInterpretData>(mBehavior.mHandle);
         }
 
         void BehaviorNode::interpret(NodeReceiver<NodeBase> receiver, std::unique_ptr<NodeInterpreterData> &data, uint32_t flowIn, uint32_t group) const
         {
-            static_cast<BehaviorInterpretData *>(data.get())->start(std::move(receiver), mDefaultParameters);
+            static_cast<BehaviorInterpretData *>(data.get())->start(std::move(receiver), mBehavior.mParameters);
         }
 
         Reflect::Result BehaviorNode::interpretRead(NodeInterpreterStateBase &interpreter, Reflect::Value &retVal, std::unique_ptr<NodeInterpreterData> &data, uint32_t providerIndex, uint32_t group) const

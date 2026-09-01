@@ -182,7 +182,7 @@ namespace Behavior {
                 return NULL;
             if (PyType_Ready(&PyScopeBindingType) < 0)
                 return NULL;
-            if (PyType_Ready(&PyBehaviorType) < 0)
+            if (PyType_Ready(&PyBehaviorSenderType) < 0)
                 return NULL;
             if (PyType_Ready(&PyBehaviorHandleType) < 0)
                 return NULL;

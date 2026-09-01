@@ -2,33 +2,24 @@
 
 #include "Platform/log/logsenders.h"
 
-#include "behavior.h"
-#include "behaviorhandle.h"
-#include "parametertuple.h"
+#include "behaviorsender.h"
 
 namespace Engine {
 namespace Behavior {
 
     struct MADGINE_BEHAVIOR_EXPORT BehaviorList {
 
-        void addBehavior(BehaviorHandle handle);
+        void addBehavior(BehaviorSender behavior);
 
         template <typename Lifetime>
         void instantiate(Lifetime &lifetime)
         {
-            for (const Entry &entry : mEntries) {
-                lifetime.attach(entry.mHandle.create(entry.mParameters) | Platform::Log::log_result());
+            for (const BehaviorSender &sender: mEntries) {
+                lifetime.attach(sender.create() | Platform::Log::log_result());
             }
         }
 
-        struct Entry {
-            Entry(BehaviorHandle handle);
-
-            BehaviorHandle mHandle;
-            ParameterTuple mParameters;
-        };
-
-        std::vector<Entry> mEntries;
+        std::vector<BehaviorSender> mEntries;
     };
 
 }

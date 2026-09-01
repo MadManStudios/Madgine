@@ -29,6 +29,7 @@ namespace Behavior {
         Serialize::StreamResult applyMap(Serialize::FormattedSerializeStream &in, bool success, Serialize::ContextPtr context) override;
 
         Reflect::ArgumentList toArgumentList() override;
+        Reflect::Result fromArgumentList(const Reflect::ArgumentList &args) override;
 
         const Reflect::MetaTable &mMetaTable;
         std::vector<Type::InlineStorage> mValues;

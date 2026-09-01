@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Madgine/behavior/behaviorhandle.h"
+#include "Madgine/behavior/behaviorsender.h"
 #include "Madgine/behavior/context.h"
 #include "Madgine/behavior/parametertuple.h"
 
@@ -38,12 +39,12 @@ namespace Behavior {
             void interpret(NodeReceiver<NodeBase> receiver, std::unique_ptr<NodeInterpreterData> &data, uint32_t flowIn, uint32_t group) const override;
             Reflect::Result interpretRead(NodeInterpreterStateBase &interpreter, Reflect::Value &retVal, std::unique_ptr<NodeInterpreterData> &data, uint32_t providerIndex, uint32_t group = 0) const override;
 
+        public:
+            BehaviorSender mBehavior;
+            
         private:
-            BehaviorHandle mBehavior;
             std::string mFullClassName;
 
-        public:
-            ParameterTuple mDefaultParameters;
         };
 
     }

@@ -146,8 +146,8 @@ namespace Tools {
     {
         bool deleted = false;
         for (auto it = list.get().mEntries.begin(); it != list.get().mEntries.end();) {
-            if ([&, this](Behavior::BehaviorList::Entry &entry) {
-                    ImGui::BeginGroupPanel(entry.mHandle.name().data());
+            if ([&, this](Behavior::BehaviorSender &sender) {
+                    ImGui::BeginGroupPanel(sender.mHandle.name().data());
                     ImGui::BeginTable("Entry", 2, ImGuiTableFlags_Resizable);
                     mInspector->drawMembers(list.trace([](Behavior::BehaviorList &list, size_t index) { return list.mEntries[index].mParameters.customScopePtr(); }, std::distance(list.get().mEntries.begin(), it)));
                     ImGui::EndTable();
@@ -159,7 +159,7 @@ namespace Tools {
                     bool remove = false;
 
                     if (ImGui::BeginPopupCompoundContextItem()) {
-                        if (ImGui::MenuItem((IMGUI_ICON_X " Delete " + std::string { entry.mHandle.name() }).c_str())) {
+                        if (ImGui::MenuItem((IMGUI_ICON_X " Delete " + std::string { sender.mHandle.name() }).c_str())) {
                             remove = true;
                         }
                         ImGui::EndPopup();
@@ -216,11 +216,11 @@ namespace Tools {
         return result;
     }
 
-    Dialog<Behavior::Behavior> BehaviorParameterDialog(Behavior::BehaviorHandle handle, Inspector &inspector)
+    Dialog<Behavior::BehaviorSender> BehaviorParameterDialog(Behavior::BehaviorHandle handle, Inspector &inspector)
     {
         UndoStack history;
 
-        Behavior::ParameterTuple parameters = handle.createParameters();
+        Behavior::BehaviorSender behavior = handle.sender();
 
         DialogSettings &settings = co_await get_dialog_settings;
 
@@ -230,13 +230,13 @@ namespace Tools {
             history.handleShortcuts();
 
             if (ImGui::BeginTable("columns", 2, ImGuiTableFlags_SizingStretchProp)) {
-                TracedRoot<Reflect::ScopePtr> traced { history, &parameters };
+                TracedRoot<Reflect::ScopePtr> traced { history, &behavior.mParameters};
                 inspector.drawMembers(traced);
                 ImGui::EndTable();
             }
         } while (co_yield settings);
 
-        co_return handle.create(parameters);
+        co_return behavior;
     }
 
 }

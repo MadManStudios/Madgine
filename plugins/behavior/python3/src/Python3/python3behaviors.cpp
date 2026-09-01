@@ -251,7 +251,7 @@ namespace Behavior {
             return fn->first;
         }
 
-        Behavior Python3BehaviorFactory::create(const UniqueOpaquePtr &handle, const Reflect::ArgumentList &args, std::vector<Behavior> behaviors) const
+        Behavior Python3BehaviorFactory::create(const UniqueOpaquePtr &handle, const ParameterTuple &args, std::vector<Behavior> behaviors) const
         {
             const std::pair<const std::string_view, Entry> *fn = handle.as<std::pair<const std::string_view, Entry> *>();
             return Python3BehaviorSender { {}, fn->second.mFunction, args };

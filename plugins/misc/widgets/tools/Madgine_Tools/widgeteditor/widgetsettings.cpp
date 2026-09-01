@@ -2,7 +2,7 @@
 
 #include "widgetsettings.h"
 
-#include "Madgine/behavior/behavior.h"
+#include "Madgine/behavior/behaviorsender.h"
 #include "Madgine/widgets/geometry.h"
 #include "Madgine/widgets/widget.h"
 
@@ -278,8 +278,8 @@ namespace Tools {
 
             if (ImGui::BeginMenu(IMGUI_ICON_PLUS " Add Behavior")) {
                 if (Behavior::BehaviorHandle behavior = BehaviorSelector()) {
-                    mInspector.root().dialogs().show(BehaviorParameterDialog(std::move(behavior), mInspector), [&](Behavior::Behavior behavior) {
-                        mWidget->addBehavior(std::move(behavior));
+                    mInspector.root().dialogs().show(BehaviorParameterDialog(std::move(behavior), mInspector), [&](Behavior::BehaviorSender behavior) {
+                        mWidget->addBehavior(std::move(behavior).create());
                     });
                 }
                 ImGui::EndMenu();

@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Madgine/behavior/behaviorsender.h"
 #include "Madgine/resources/resourceloader.h"
 
 #include "util/pymoduleptr.h"
@@ -8,9 +9,14 @@ namespace Engine {
 namespace Behavior {
     namespace Python3 {
 
-        MADGINE_PYTHON3_EXPORT extern PyTypeObject PyBehaviorType;
+        struct PyBehaviorSender {
+            PyObject_HEAD
+                BehaviorSender mBehavior;
+        };
+
+        MADGINE_PYTHON3_EXPORT extern PyTypeObject PyBehaviorSenderType;
         MADGINE_PYTHON3_EXPORT extern PyTypeObject PyBehaviorHandleType;
-                
+
         PyMODINIT_FUNC PyInit_Behaviors(void);
 
         struct MADGINE_PYTHON3_EXPORT Python3BehaviorsLoader : Resources::ResourceLoader<Python3BehaviorsLoader, PyModulePtr, std::list<Placeholder<0>>> {

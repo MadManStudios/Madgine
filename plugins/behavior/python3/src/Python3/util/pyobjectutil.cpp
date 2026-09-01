@@ -10,6 +10,7 @@
 #include "Madgine/behavior/behaviorreceiver.h"
 
 #include "../python3behaviors.h"
+#include "../python3behaviorsloader.h"
 #include "../python3env.h"
 #include "math/pymatrix3.h"
 #include "math/pymatrix4.h"
@@ -323,6 +324,12 @@ namespace Behavior {
                     throw 0;
                 toValue(result, i);
                 return {};
+            } else if (PyFloat_Check(obj)) {
+                float f;
+                if (!PyArg_Parse(obj, "f", &f))
+                    throw 0;
+                toValue(result, f);
+                return {};
             } else if (PyDict_Check(obj)) {
                 Py_INCREF(obj);
                 toValue(result, Reflect::AssociativeRange { PyDictPtr { obj }, Engine::type_holder<VirtualRangeHelper> });
@@ -351,6 +358,9 @@ namespace Behavior {
                 return {};
             } else if (obj->ob_type == &PyDurationType) {
                 toValue(result, reinterpret_cast<PyDuration *>(obj)->mDuration);
+                return {};
+            } else if (obj->ob_type == &PyBehaviorSenderType) {
+                toValue(result, Reflect::ScopePtr { &reinterpret_cast<PyBehaviorSender *>(obj)->mBehavior });
                 return {};
             } else {
                 Py_INCREF(obj);

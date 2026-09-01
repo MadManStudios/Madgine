@@ -7,6 +7,7 @@ namespace Engine {
 namespace Behavior {
 
     struct Behavior;
+    struct BehaviorSender;
     struct BehaviorStateBase;
     struct BehaviorReceiver;
     struct BehaviorList;

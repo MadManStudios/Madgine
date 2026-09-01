@@ -6,7 +6,7 @@
 
 #include "Meta/reflect/metatable_impl.h"
 
-#include "behavior.h"
+#include "behaviorsender.h"
 #include "behaviorcollector.h"
 #include "parametertuple.h"
 
@@ -58,14 +58,14 @@ namespace Behavior {
         mIndex.reset();
     }
 
-    Behavior BehaviorHandle::create(const Reflect::ArgumentList &args, std::vector<Behavior> behaviors) const
+    Behavior BehaviorHandle::create(const ParameterTuple &args, std::vector<Behavior> behaviors) const
     {
         return BehaviorFactoryRegistry::get(mIndex).mFactory->create(mHandle, args, std::move(behaviors));
     }
 
-    ParameterTuple BehaviorHandle::createParameters() const
+    BehaviorSender BehaviorHandle::sender() const
     {
-        return BehaviorFactoryRegistry::get(mIndex).mFactory->createParameters(mHandle);
+        return { *this };
     }
 
     Threading::TaskFuture<bool> BehaviorHandle::state() const

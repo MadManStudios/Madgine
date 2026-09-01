@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Meta/reflect/argumentlist.h"
+#include "Meta/reflect/result.h"
 #include "Meta/reflect/type.h"
 #include "Meta/serialize/context.h"
 #include "Meta/serialize/streams/streamresult.h"
@@ -24,6 +25,7 @@ namespace Behavior {
         virtual std::unique_ptr<ParameterTupleBase> clone() = 0;
         virtual Reflect::ScopePtr customScopePtr() = 0;
         virtual Reflect::ArgumentList toArgumentList() = 0;
+        virtual Reflect::Result fromArgumentList(const Reflect::ArgumentList &args) = 0;
 
         virtual Serialize::StreamResult read(Serialize::FormattedSerializeStream &in, Serialize::ContextPtr context) = 0;
         virtual void write(Serialize::FormattedSerializeStream &out, Serialize::ContextPtr context) = 0;
@@ -59,9 +61,24 @@ namespace Behavior {
 
         Reflect::ScopePtr customScopePtr();
 
+        template <typename... Ty>
+        bool get(std::tuple<Ty...> &out) const
+        {
+            ParameterTupleInstance<Ty...> *instance = dynamic_cast<ParameterTupleInstance<Ty...> *>(mTuple.get());
+            if (instance) {
+                out = instance->mTuple;
+            }
+            return instance;
+        }
+
         operator Reflect::ArgumentList() const
         {
             return mTuple->toArgumentList();
+        }
+
+        Reflect::Result fromArguments(const Reflect::ArgumentList &args)
+        {
+            return mTuple->fromArgumentList(args);
         }
 
         size_t size() const
