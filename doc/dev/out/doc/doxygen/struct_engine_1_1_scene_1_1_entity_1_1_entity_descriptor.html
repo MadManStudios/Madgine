@@ -263,8 +263,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:abb2e678eb06f92b2bdae350e6a6eef65"><td class="memTemplParams" colspan="2">template&lt;std::derived_from&lt; <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_base.html">EntityComponentBase</a> &gt;... Components&gt; </td></tr>
 <tr class="memitem:abb2e678eb06f92b2bdae350e6a6eef65"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_descriptor.html#abb2e678eb06f92b2bdae350e6a6eef65">EntityDescriptor</a> (Components &amp;&amp;...components)</td></tr>
 <tr class="separator:abb2e678eb06f92b2bdae350e6a6eef65"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9e791120307f34bfc64c53511a97b5de"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_descriptor.html#a9e791120307f34bfc64c53511a97b5de">EntityDescriptor</a> (std::span&lt; const <a class="el" href="struct_engine_1_1_reflect_1_1_scope_ptr.html">Reflect::ScopePtr</a> &gt; components)</td></tr>
-<tr class="separator:a9e791120307f34bfc64c53511a97b5de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf9c35c6485ba48dad994714c5c8a5b6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_descriptor.html#abf9c35c6485ba48dad994714c5c8a5b6">EntityDescriptor</a> (std::span&lt; const std::variant&lt; <a class="el" href="struct_engine_1_1_reflect_1_1_pointer.html">Reflect::Pointer</a>&lt; <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_base.html">EntityComponentBase</a> &gt;, std::reference_wrapper&lt; <a class="el" href="struct_engine_1_1_behavior_1_1_behavior_sender.html">Behavior::BehaviorSender</a> &gt; &gt; &gt; inputs)</td></tr>
+<tr class="separator:abf9c35c6485ba48dad994714c5c8a5b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af912e273f2036c7061b8ee18d5ef5d71"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_descriptor.html#af912e273f2036c7061b8ee18d5ef5d71">apply</a> (<a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity.html">Entity</a> &amp;entity) const</td></tr>
 <tr class="separator:af912e273f2036c7061b8ee18d5ef5d71"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7e1f814f851a650e791dcf93d246de8e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_base.html">EntityComponentBase</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_descriptor.html#a7e1f814f851a650e791dcf93d246de8e">getComponent</a> (size_t index) const</td></tr>
@@ -274,6 +274,8 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
+<tr class="memitem:a701baf4aa0b0016af2f09170b9bd84e6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_behavior_1_1_behavior_list.html">Behavior::BehaviorList</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_descriptor.html#a701baf4aa0b0016af2f09170b9bd84e6">mBehaviors</a></td></tr>
+<tr class="separator:a701baf4aa0b0016af2f09170b9bd84e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8fdbf058ac571bbdd1ebbc6e21cf61d0"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_component_entry.html">ComponentEntry</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_descriptor.html#a8fdbf058ac571bbdd1ebbc6e21cf61d0">mComponents</a></td></tr>
 <tr class="separator:a8fdbf058ac571bbdd1ebbc6e21cf61d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -306,8 +308,8 @@ template&lt;std::derived_from&lt; <a class="el" href="struct_engine_1_1_scene_1_
 
 </div>
 </div>
-<a id="a9e791120307f34bfc64c53511a97b5de" name="a9e791120307f34bfc64c53511a97b5de"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9e791120307f34bfc64c53511a97b5de">&#9670;&#160;</a></span>EntityDescriptor() <span class="overload">[2/2]</span></h2>
+<a id="abf9c35c6485ba48dad994714c5c8a5b6" name="abf9c35c6485ba48dad994714c5c8a5b6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abf9c35c6485ba48dad994714c5c8a5b6">&#9670;&#160;</a></span>EntityDescriptor() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -315,8 +317,8 @@ template&lt;std::derived_from&lt; <a class="el" href="struct_engine_1_1_scene_1_
         <tr>
           <td class="memname">Engine::Scene::Entity::EntityDescriptor::EntityDescriptor </td>
           <td>(</td>
-          <td class="paramtype">std::span&lt; const <a class="el" href="struct_engine_1_1_reflect_1_1_scope_ptr.html">Reflect::ScopePtr</a> &gt;&#160;</td>
-          <td class="paramname"><em>components</em></td><td>)</td>
+          <td class="paramtype">std::span&lt; const std::variant&lt; <a class="el" href="struct_engine_1_1_reflect_1_1_pointer.html">Reflect::Pointer</a>&lt; <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity_component_base.html">EntityComponentBase</a> &gt;, std::reference_wrapper&lt; <a class="el" href="struct_engine_1_1_behavior_1_1_behavior_sender.html">Behavior::BehaviorSender</a> &gt; &gt; &gt;&#160;</td>
+          <td class="paramname"><em>inputs</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -394,6 +396,20 @@ template&lt;std::derived_from&lt; <a class="el" href="struct_engine_1_1_scene_1_
 
 </div>
 </div>
+<a id="a701baf4aa0b0016af2f09170b9bd84e6" name="a701baf4aa0b0016af2f09170b9bd84e6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a701baf4aa0b0016af2f09170b9bd84e6">&#9670;&#160;</a></span>mBehaviors</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_behavior_1_1_behavior_list.html">Behavior::BehaviorList</a> Engine::Scene::Entity::EntityDescriptor::mBehaviors</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <hr/>The documentation for this struct was generated from the following files:<ul>
 <li>plugins/misc/scene/src/Madgine/scene/entity/<a class="el" href="entitydescriptor_8h.html">entitydescriptor.h</a></li>
 <li>plugins/misc/scene/src/Madgine/scene/entity/<a class="el" href="entitydescriptor_8cpp.html">entitydescriptor.cpp</a></li>
@@ -401,7 +417,7 @@ template&lt;std::derived_from&lt; <a class="el" href="struct_engine_1_1_scene_1_
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Sep 1 2026 18:02:41 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Tue Sep 1 2026 19:34:05 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>
