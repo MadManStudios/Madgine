@@ -285,17 +285,14 @@ Friends</h2></td></tr>
 <tr class="memitem:a3f0066a27023bda2f1f19e33cf1636e1"><td class="memTemplParams" colspan="2">template&lt;typename... Ty, typename Context &gt; </td></tr>
 <tr class="memitem:a3f0066a27023bda2f1f19e33cf1636e1"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1apply__map__t.html#a3f0066a27023bda2f1f19e33cf1636e1">tag_invoke</a> (<a class="el" href="struct_engine_1_1_serialize_1_1apply__map__t.html">apply_map_t</a> cpo, std::tuple&lt; Ty... &gt; &amp;t, <a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html">FormattedSerializeStream</a> &amp;in, bool success, Context &amp;&amp;context)</td></tr>
 <tr class="separator:a3f0066a27023bda2f1f19e33cf1636e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad6306c42548a974664a1a3ae058d3644"><td class="memTemplParams" colspan="2">template&lt;PrimitiveType T, typename Context &gt; <br />
-requires (!std::is_const_v&lt;T&gt;)</td></tr>
-<tr class="memitem:ad6306c42548a974664a1a3ae058d3644"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1apply__map__t.html#ad6306c42548a974664a1a3ae058d3644">tag_invoke</a> (<a class="el" href="struct_engine_1_1_serialize_1_1apply__map__t.html">apply_map_t</a> cpo, T &amp;t, <a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html">FormattedSerializeStream</a> &amp;in, bool success, Context &amp;&amp;context)</td></tr>
-<tr class="separator:ad6306c42548a974664a1a3ae058d3644"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4d4b7460adfb2031dc99d08d07bfb126"><td class="memTemplParams" colspan="2">template&lt;PrimitiveType T, typename Context &gt; <br />
+requires (!std::is_const_v&lt;T&gt; &amp;&amp; !std::is_pointer_v&lt;T&gt;)</td></tr>
+<tr class="memitem:a4d4b7460adfb2031dc99d08d07bfb126"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1apply__map__t.html#a4d4b7460adfb2031dc99d08d07bfb126">tag_invoke</a> (<a class="el" href="struct_engine_1_1_serialize_1_1apply__map__t.html">apply_map_t</a> cpo, T &amp;t, <a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html">FormattedSerializeStream</a> &amp;in, bool success, Context &amp;&amp;context)</td></tr>
+<tr class="separator:a4d4b7460adfb2031dc99d08d07bfb126"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a21a39addc7521aa3f730274f0ceec8e2"><td class="memTemplParams" colspan="2">template&lt;typename T , typename Context &gt; <br />
 requires std::is_const_v&lt;T&gt;</td></tr>
 <tr class="memitem:a21a39addc7521aa3f730274f0ceec8e2"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1apply__map__t.html#a21a39addc7521aa3f730274f0ceec8e2">tag_invoke</a> (<a class="el" href="struct_engine_1_1_serialize_1_1apply__map__t.html">apply_map_t</a> cpo, T &amp;t, <a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html">FormattedSerializeStream</a> &amp;in, bool success, Context &amp;&amp;context)</td></tr>
 <tr class="separator:a21a39addc7521aa3f730274f0ceec8e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aca6fba674ebb3466b5cef343b9675491"><td class="memTemplParams" colspan="2">template&lt;typename T , typename Context &gt; </td></tr>
-<tr class="memitem:aca6fba674ebb3466b5cef343b9675491"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1apply__map__t.html#aca6fba674ebb3466b5cef343b9675491">tag_invoke</a> (const <a class="el" href="struct_engine_1_1_serialize_1_1apply__map__t.html">apply_map_t</a> &amp;cpo, T *&amp;p, <a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html">FormattedSerializeStream</a> &amp;in, bool success=true, Context &amp;&amp;context={})</td></tr>
-<tr class="separator:aca6fba674ebb3466b5cef343b9675491"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a id="a7c3d77b6c24615460d972f0feb69b07d" name="a7c3d77b6c24615460d972f0feb69b07d"></a>
@@ -401,64 +398,8 @@ template&lt;typename T , typename Context  = ContextPtr&gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Friends And Related Function Documentation</h2>
-<a id="aca6fba674ebb3466b5cef343b9675491" name="aca6fba674ebb3466b5cef343b9675491"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aca6fba674ebb3466b5cef343b9675491">&#9670;&#160;</a></span>tag_invoke <span class="overload">[1/8]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T , typename Context &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="struct_engine_1_1_serialize_1_1_stream_result.html">StreamResult</a> tag_invoke </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="struct_engine_1_1_serialize_1_1apply__map__t.html">apply_map_t</a> &amp;&#160;</td>
-          <td class="paramname"><em>cpo</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">T *&amp;&#160;</td>
-          <td class="paramname"><em>p</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="struct_engine_1_1_serialize_1_1_formatted_serialize_stream.html">FormattedSerializeStream</a> &amp;&#160;</td>
-          <td class="paramname"><em>in</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>success</em> = <code>true</code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Context &amp;&amp;&#160;</td>
-          <td class="paramname"><em>context</em> = <code>{}</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="a3f0066a27023bda2f1f19e33cf1636e1" name="a3f0066a27023bda2f1f19e33cf1636e1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3f0066a27023bda2f1f19e33cf1636e1">&#9670;&#160;</a></span>tag_invoke <span class="overload">[2/8]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f0066a27023bda2f1f19e33cf1636e1">&#9670;&#160;</a></span>tag_invoke <span class="overload">[1/7]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -514,7 +455,7 @@ template&lt;typename... Ty, typename Context &gt; </div>
 </div>
 </div>
 <a id="a97511d25e52a66dfc3c123502960f1bb" name="a97511d25e52a66dfc3c123502960f1bb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a97511d25e52a66dfc3c123502960f1bb">&#9670;&#160;</a></span>tag_invoke <span class="overload">[3/8]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a97511d25e52a66dfc3c123502960f1bb">&#9670;&#160;</a></span>tag_invoke <span class="overload">[2/7]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -570,7 +511,7 @@ template&lt;typename T1 , typename T2 , typename Context &gt; </div>
 </div>
 </div>
 <a id="a9a92e50bb7c477cd8fda59da62d5f604" name="a9a92e50bb7c477cd8fda59da62d5f604"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9a92e50bb7c477cd8fda59da62d5f604">&#9670;&#160;</a></span>tag_invoke <span class="overload">[4/8]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a9a92e50bb7c477cd8fda59da62d5f604">&#9670;&#160;</a></span>tag_invoke <span class="overload">[3/7]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -626,7 +567,7 @@ template&lt;typename T , typename Context &gt; </div>
 </div>
 </div>
 <a id="ab7e9aa3b550b3172f817b2b8a604164b" name="ab7e9aa3b550b3172f817b2b8a604164b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab7e9aa3b550b3172f817b2b8a604164b">&#9670;&#160;</a></span>tag_invoke <span class="overload">[5/8]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ab7e9aa3b550b3172f817b2b8a604164b">&#9670;&#160;</a></span>tag_invoke <span class="overload">[4/7]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -681,14 +622,14 @@ template&lt;SerializeRange C, typename Context &gt; </div>
 
 </div>
 </div>
-<a id="ad6306c42548a974664a1a3ae058d3644" name="ad6306c42548a974664a1a3ae058d3644"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad6306c42548a974664a1a3ae058d3644">&#9670;&#160;</a></span>tag_invoke <span class="overload">[6/8]</span></h2>
+<a id="a4d4b7460adfb2031dc99d08d07bfb126" name="a4d4b7460adfb2031dc99d08d07bfb126"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4d4b7460adfb2031dc99d08d07bfb126">&#9670;&#160;</a></span>tag_invoke <span class="overload">[5/7]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;PrimitiveType T, typename Context &gt; <br />
-requires (!std::is_const_v&lt;T&gt;)</div>
+requires (!std::is_const_v&lt;T&gt; &amp;&amp; !std::is_pointer_v&lt;T&gt;)</div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -739,7 +680,7 @@ requires (!std::is_const_v&lt;T&gt;)</div>
 </div>
 </div>
 <a id="a21a39addc7521aa3f730274f0ceec8e2" name="a21a39addc7521aa3f730274f0ceec8e2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a21a39addc7521aa3f730274f0ceec8e2">&#9670;&#160;</a></span>tag_invoke <span class="overload">[7/8]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a21a39addc7521aa3f730274f0ceec8e2">&#9670;&#160;</a></span>tag_invoke <span class="overload">[6/7]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -796,7 +737,7 @@ requires std::is_const_v&lt;T&gt;</div>
 </div>
 </div>
 <a id="a59dffc9ba656fdfcfaa0d268c6cb59cc" name="a59dffc9ba656fdfcfaa0d268c6cb59cc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a59dffc9ba656fdfcfaa0d268c6cb59cc">&#9670;&#160;</a></span>tag_invoke <span class="overload">[8/8]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a59dffc9ba656fdfcfaa0d268c6cb59cc">&#9670;&#160;</a></span>tag_invoke <span class="overload">[7/7]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -857,7 +798,7 @@ template&lt;typename T , typename Context &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Sep 1 2026 19:34:05 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Thu Sep 3 2026 20:04:48 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>
