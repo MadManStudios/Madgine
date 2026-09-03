@@ -440,10 +440,10 @@ Functions</h2></td></tr>
 requires (<a class="el" href="tag__invoke_8h.html#a8d6152fc933c4e17119094e28bb953d1">is_tag_invocable_v</a>&lt;<a class="el" href="struct_engine_1_1_reflect_1_1get__reflect__contextual__t.html">get_reflect_contextual_t</a>, Context, <a class="el" href="struct_engine_1_1_reflect_1_1_value.html">Value</a> &amp;, const <a class="el" href="struct_engine_1_1_reflect_1_1_meta_table.html">MetaTable</a> *&gt;)</td></tr>
 <tr class="memitem:aa9a8f7d1c195d794fdda0a3ea28127c6"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_reflect_1_1_result.html">Result</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_reflect.html#aa9a8f7d1c195d794fdda0a3ea28127c6">context_get</a> (Context &amp;&amp;context, <a class="el" href="struct_engine_1_1_reflect_1_1_value.html">Value</a> &amp;retVal)</td></tr>
 <tr class="separator:aa9a8f7d1c195d794fdda0a3ea28127c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa2e602728fa14118784397dbfb18cefd"><td class="memTemplParams" colspan="2">template&lt;typename Context , typename T &gt; <br />
-requires (<a class="el" href="tag__invoke_8h.html#a8d6152fc933c4e17119094e28bb953d1">is_tag_invocable_v</a>&lt;<a class="el" href="struct_engine_1_1_reflect_1_1get__reflect__contextual__t.html">get_reflect_contextual_t</a>, Context, <a class="el" href="struct_engine_1_1_reflect_1_1_value.html">Value</a>&amp;, const <a class="el" href="struct_engine_1_1_reflect_1_1_meta_table.html">MetaTable</a> *&gt; &amp;&amp; !std::is_const_v&lt;T&gt;)</td></tr>
-<tr class="memitem:aa2e602728fa14118784397dbfb18cefd"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_reflect_1_1_context_reference.html">ContextReference</a>&lt; T, Context &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_reflect.html#aa2e602728fa14118784397dbfb18cefd">context_set</a> (Context &amp;&amp;context, T &amp;value)</td></tr>
-<tr class="separator:aa2e602728fa14118784397dbfb18cefd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b41f7f70263b240c40b108f3dfccca5"><td class="memTemplParams" colspan="2">template&lt;typename Context , typename T &gt; <br />
+requires (<a class="el" href="tag__invoke_8h.html#a8d6152fc933c4e17119094e28bb953d1">is_tag_invocable_v</a>&lt;<a class="el" href="struct_engine_1_1_reflect_1_1get__reflect__contextual__t.html">get_reflect_contextual_t</a>, Context, <a class="el" href="struct_engine_1_1_reflect_1_1_value.html">Value</a> &amp;, const <a class="el" href="struct_engine_1_1_reflect_1_1_meta_table.html">MetaTable</a> *&gt; &amp;&amp; !std::is_const_v&lt;T&gt;)</td></tr>
+<tr class="memitem:a3b41f7f70263b240c40b108f3dfccca5"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_reflect_1_1_context_reference.html">ContextReference</a>&lt; T, Context &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_reflect.html#a3b41f7f70263b240c40b108f3dfccca5">context_set</a> (Context &amp;&amp;context, T &amp;value)</td></tr>
+<tr class="separator:a3b41f7f70263b240c40b108f3dfccca5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a74875e8549245c30a439252918cafcef"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_reflect.html#a74875e8549245c30a439252918cafcef">DERIVE_OPERATOR</a> (Equal,==)</td></tr>
 <tr class="separator:a74875e8549245c30a439252918cafcef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a384fa63ce2de9caea66a99d46f6bba25"><td class="memTemplParams" colspan="2">template&lt;typename F &gt; </td></tr>
@@ -874,14 +874,14 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="aa2e602728fa14118784397dbfb18cefd" name="aa2e602728fa14118784397dbfb18cefd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa2e602728fa14118784397dbfb18cefd">&#9670;&#160;</a></span>context_set()</h2>
+<a id="a3b41f7f70263b240c40b108f3dfccca5" name="a3b41f7f70263b240c40b108f3dfccca5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b41f7f70263b240c40b108f3dfccca5">&#9670;&#160;</a></span>context_set()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename Context , typename T &gt; <br />
-requires (<a class="el" href="tag__invoke_8h.html#a8d6152fc933c4e17119094e28bb953d1">is_tag_invocable_v</a>&lt;<a class="el" href="struct_engine_1_1_reflect_1_1get__reflect__contextual__t.html">get_reflect_contextual_t</a>, Context, <a class="el" href="struct_engine_1_1_reflect_1_1_value.html">Value</a>&amp;, const <a class="el" href="struct_engine_1_1_reflect_1_1_meta_table.html">MetaTable</a> *&gt; &amp;&amp; !std::is_const_v&lt;T&gt;)</div>
+requires (<a class="el" href="tag__invoke_8h.html#a8d6152fc933c4e17119094e28bb953d1">is_tag_invocable_v</a>&lt;<a class="el" href="struct_engine_1_1_reflect_1_1get__reflect__contextual__t.html">get_reflect_contextual_t</a>, Context, <a class="el" href="struct_engine_1_1_reflect_1_1_value.html">Value</a> &amp;, const <a class="el" href="struct_engine_1_1_reflect_1_1_meta_table.html">MetaTable</a> *&gt; &amp;&amp; !std::is_const_v&lt;T&gt;)</div>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="struct_engine_1_1_reflect_1_1_context_reference.html">ContextReference</a>&lt; T, Context &gt; Engine::Reflect::context_set </td>
@@ -2294,7 +2294,7 @@ template&lt;typename... V&gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Sep 3 2026 20:46:07 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Thu Sep 3 2026 21:03:42 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

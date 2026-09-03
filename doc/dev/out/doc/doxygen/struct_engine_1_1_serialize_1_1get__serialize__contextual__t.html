@@ -265,6 +265,10 @@ Public Types</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:a63f85ed9a2dd1ab19c33cc55d4d2d846"><td class="memTemplParams" colspan="2">template&lt;typename Context &gt; <br />
+requires (!<a class="el" href="tag__invoke_8h.html#a8d6152fc933c4e17119094e28bb953d1">is_tag_invocable_v</a>&lt;<a class="el" href="struct_engine_1_1_serialize_1_1get__serialize__contextual__t.html">get_serialize_contextual_t</a>, Context, const <a class="el" href="struct_engine_1_1_serialize_1_1_serialize_table.html">SerializeTable</a> *&gt;)</td></tr>
+<tr class="memitem:a63f85ed9a2dd1ab19c33cc55d4d2d846"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a> *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1get__serialize__contextual__t.html#a63f85ed9a2dd1ab19c33cc55d4d2d846">operator()</a> (Context &amp;&amp;context, const <a class="el" href="struct_engine_1_1_serialize_1_1_serialize_table.html">SerializeTable</a> *type) const</td></tr>
+<tr class="separator:a63f85ed9a2dd1ab19c33cc55d4d2d846"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a08a8306ce6752432b57bd8f42f3b32d1"><td class="memTemplParams" colspan="2">template&lt;typename Context &gt; <br />
 requires (<a class="el" href="tag__invoke_8h.html#a8d6152fc933c4e17119094e28bb953d1">is_tag_invocable_v</a>&lt;<a class="el" href="struct_engine_1_1_serialize_1_1get__serialize__contextual__t.html">get_serialize_contextual_t</a>, Context, const <a class="el" href="struct_engine_1_1_serialize_1_1_serialize_table.html">SerializeTable</a> *&gt;)</td></tr>
 <tr class="memitem:a08a8306ce6752432b57bd8f42f3b32d1"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a> *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1get__serialize__contextual__t.html#a08a8306ce6752432b57bd8f42f3b32d1">operator()</a> (Context &amp;&amp;context, const <a class="el" href="struct_engine_1_1_serialize_1_1_serialize_table.html">SerializeTable</a> *type) const noexcept(<a class="el" href="tag__invoke_8h.html#ac9297785bc1cff48dae735a140253041">is_nothrow_tag_invocable_v</a>&lt; <a class="el" href="struct_engine_1_1_serialize_1_1get__serialize__contextual__t.html">get_serialize_contextual_t</a>, Context, const <a class="el" href="struct_engine_1_1_serialize_1_1_serialize_table.html">SerializeTable</a> * &gt;)</td></tr>
@@ -286,8 +290,47 @@ requires (<a class="el" href="tag__invoke_8h.html#a8d6152fc933c4e17119094e28bb95
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a63f85ed9a2dd1ab19c33cc55d4d2d846" name="a63f85ed9a2dd1ab19c33cc55d4d2d846"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a63f85ed9a2dd1ab19c33cc55d4d2d846">&#9670;&#160;</a></span>operator()() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Context &gt; <br />
+requires (!<a class="el" href="tag__invoke_8h.html#a8d6152fc933c4e17119094e28bb953d1">is_tag_invocable_v</a>&lt;<a class="el" href="struct_engine_1_1_serialize_1_1get__serialize__contextual__t.html">get_serialize_contextual_t</a>, Context, const <a class="el" href="struct_engine_1_1_serialize_1_1_serialize_table.html">SerializeTable</a> *&gt;)</div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> * Engine::Serialize::get_serialize_contextual_t::operator() </td>
+          <td>(</td>
+          <td class="paramtype">Context &amp;&amp;&#160;</td>
+          <td class="paramname"><em>context</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_serialize_1_1_serialize_table.html">SerializeTable</a> *&#160;</td>
+          <td class="paramname"><em>type</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a08a8306ce6752432b57bd8f42f3b32d1" name="a08a8306ce6752432b57bd8f42f3b32d1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a08a8306ce6752432b57bd8f42f3b32d1">&#9670;&#160;</a></span>operator()()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a08a8306ce6752432b57bd8f42f3b32d1">&#9670;&#160;</a></span>operator()() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -331,7 +374,7 @@ requires (<a class="el" href="tag__invoke_8h.html#a8d6152fc933c4e17119094e28bb95
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Sep 3 2026 20:46:08 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Thu Sep 3 2026 21:03:43 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>
