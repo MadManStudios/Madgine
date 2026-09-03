@@ -5,19 +5,20 @@
 #include "Generic/tag_invocable_view.h"
 
 #include "../meta_decay.h"
+#include "metatable.h"
 #include "table_forward.h"
 
 namespace Engine {
 namespace Reflect {
 
     struct get_reflect_contextual_t {
-        using signature = Result (Value &, const MetaTable *);
+        using signature = Result(Value &, const MetaTable *);
 
         template <typename Context>
             requires(!is_tag_invocable_v<get_reflect_contextual_t, Context, Value &, const MetaTable *>)
-        Result operator()(Context &&context, Value &retVal, const MetaTable *type) const            
+        Result operator()(Context &&context, Value &retVal, const MetaTable *type) const
         {
-            throw 0;
+            return REFLECT_UNKNOWN_ERROR() << "Unable to retrieve '" << type->mTypeName << "' from context!";
         }
 
         template <typename Context>
@@ -30,14 +31,14 @@ namespace Reflect {
     };
 
     inline constexpr get_reflect_contextual_t get_reflect_contextual;
-    
-    using ContextPtr = tag_invocable_view<get_reflect_contextual_t>;    
+
+    using ContextPtr = tag_invocable_view<get_reflect_contextual_t>;
 
     template <typename T, typename Context>
     struct ContextReference {
 
         friend Result tag_invoke(get_reflect_contextual_t, ContextReference &context, Value &retVal, const MetaTable *type)
-        {            
+        {
             if ((*toType<T>().mSecondary.mMetaTable)->isDerivedFrom(type)) {
                 toValue(retVal, std::ref(context.mValue));
                 return {};
@@ -51,7 +52,7 @@ namespace Reflect {
     };
 
     template <typename Context, typename T>
-        requires(is_tag_invocable_v<get_reflect_contextual_t, Context, Value&, const MetaTable *> && !std::is_const_v<T>)
+        requires(is_tag_invocable_v<get_reflect_contextual_t, Context, Value &, const MetaTable *> && !std::is_const_v<T>)
     ContextReference<T, Context> context_set(Context &&context, T &value)
     {
         return { std::forward<Context>(context), value };

@@ -15,6 +15,13 @@ namespace Serialize {
         using signature = void *(const SerializeTable *);
 
         template <typename Context>
+            requires(!is_tag_invocable_v<get_serialize_contextual_t, Context, const SerializeTable *>)
+        void *operator()(Context &&context, const SerializeTable *type) const
+        {
+            return nullptr;
+        }
+
+        template <typename Context>
             requires(is_tag_invocable_v<get_serialize_contextual_t, Context, const SerializeTable *>)
         void *operator()(Context &&context, const SerializeTable *type) const
             noexcept(is_nothrow_tag_invocable_v<get_serialize_contextual_t, Context, const SerializeTable *>)
@@ -76,7 +83,7 @@ namespace Serialize {
         if constexpr (std::same_as<ParticipantId, std::remove_const_t<T>>) {
             return get_serialize_id(std::forward<Context>(context));
         } else {
-            return static_cast<T *>(get_serialize_contextual(std::forward<Context>(context), &serializeTable<meta_decayed_t<std::remove_const_t<T>>>()));
+            return static_cast<T *>(get_serialize_contextual(std::forward<Context>(context), &serializeTable<meta_decayed_t<std::remove_const_t<std::remove_pointer_t<T>>>>()));
         }
     }
 

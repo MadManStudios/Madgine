@@ -63,12 +63,11 @@ namespace Tools {
 
         mInspector = &mRoot.getTool<Inspector>();
 
-        mInspector->addTypeHandler<Scene::Entity::Entity>([](const Traced<Reflect::ScopePtr &> &scope, bool editable) {
-            Scene::Entity::Entity *e = scope_cast<Scene::Entity::Entity>(scope.get());
-            if (ImGui::Button(e->name().c_str())) {
+        mInspector->addTypeHandler<Scene::Entity::Entity>([](const Traced<Scene::Entity::Entity*> &e, bool editable) {
+            if (ImGui::Button(e.get()->name().c_str())) {
             }
             if (ImGui::IsItemHovered()) {
-                Im3D::SetItemHoveredNextFrame(e->name().c_str());
+                Im3D::SetItemHoveredNextFrame(e.get()->name().c_str());
             }
             return false;
         });

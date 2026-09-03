@@ -109,10 +109,10 @@ namespace Scene {
                     static_cast<T &>(comp).init(entity);
             }
 
-            void finalize(EntityComponentBase &comp) override final
+            void finalize(EntityComponentBase &comp, Entity &entity) override final
             {
                 if constexpr (requires { &T::finalize; })
-                    static_cast<T &>(comp).finalize();
+                    static_cast<T &>(comp).finalize(entity);
             }
 
             EntityComponentBase &emplace(Entity &entity) override final

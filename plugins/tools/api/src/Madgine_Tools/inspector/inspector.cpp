@@ -31,17 +31,17 @@ namespace Tools {
     Inspector::Inspector(ImRoot &root)
         : Tool<Inspector>(root)
     {
-        addTypeHandler<Reflect::FunctionTable>([](const Traced<Reflect::ScopePtr &> &scope, bool editable) {
+        addTypeHandler<Reflect::FunctionTable>([](const Traced<Reflect::FunctionTable *&> &outTable, bool editable) {
             bool modified = false;
-            if (ImGui::BeginCombo("##suggestions", scope->name().c_str())) {
+            if (ImGui::BeginCombo("##suggestions", outTable.get()->mName.data())) {
                 if (ImGui::Selectable("<None>")) {
-                    scope->mScope = nullptr;
+                    outTable.get() = nullptr;
                     modified = true;
                 }
                 const Reflect::FunctionTable *table = Reflect::sFunctionList();
                 while (table) {
                     if (ImGui::Selectable(table->mName.data())) {
-                        scope.get() = const_cast<Reflect::FunctionTable *>(table);
+                        outTable.get() = const_cast<Reflect::FunctionTable *>(table);
                         modified = true;
                     }
                     table = table->mNext;

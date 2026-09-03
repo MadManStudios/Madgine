@@ -12,7 +12,7 @@ namespace Scene {
             virtual Serialize::SerializableDataConstPtr getSerialized(const EntityComponentBase &comp) const = 0;
             virtual const Serialize::SerializeTable *serializeTable() const = 0;
             virtual void init(EntityComponentBase &comp, Entity &entity) = 0;
-            virtual void finalize(EntityComponentBase &comp) = 0;
+            virtual void finalize(EntityComponentBase &comp, Entity &entity) = 0;
             virtual EntityComponentBase &emplace(Entity &entity) = 0;
             virtual EntityComponentBase &emplace(Entity &entity, const EntityComponentBase &source) = 0;
             virtual void erase(EntityComponentBase &comp) = 0;
@@ -23,9 +23,9 @@ namespace Scene {
             virtual void setSynced(EntityComponentBase &comp, bool synced) = 0;
             virtual void setActive(EntityComponentBase &comp, bool active, bool existenceChanged) = 0;
 
-            Serialize::StreamResult readState(EntityComponentBase &comp, Serialize::FormattedSerializeStream &in, const char *name);
+            Serialize::StreamResult readState(EntityComponentBase &comp, Serialize::FormattedSerializeStream &in, const char *name, Serialize::ContextPtr context);
 
-            void writeState(EntityComponentBase &comp, Serialize::FormattedSerializeStream &out, const char *name) const;
+            void writeState(EntityComponentBase &comp, Serialize::FormattedSerializeStream &out, const char *name, Serialize::ContextPtr context) const;
 
             Serialize::StreamResult applyMap(EntityComponentBase &comp, Serialize::FormattedSerializeStream &in, bool success);
         };

@@ -266,7 +266,7 @@ namespace Reflect {
             return [&]<typename... Ty>(type_pack<Ty...>) {
                 bool matched = false;
                 Result result;
-                ([&]() {                    
+                ([&]() {
                     bool called = false;
                     Result inner = tag_invoke(call_t<Ty> {}, [&](const Ty &t, Context &context) -> Result { 
                         called = true;
@@ -274,8 +274,7 @@ namespace Reflect {
                             return REFLECT_UNKNOWN_ERROR_NOTRACE() << "More than one variant type could match";                            
                         }
                         matched = true;
-                        return callable(T { t }, context); 
-                    }, arg, context);
+                        return callable(T { t }, context); }, arg, context);
                     if (called)
                         result = std::move(inner);
                 }(),
@@ -288,8 +287,21 @@ namespace Reflect {
         } else if constexpr (std::same_as<T, Value>) {
             return callable(arg, context);
         } else if constexpr (PrimitiveType<T>) {
-            if (!Value_is<T>(arg))
-                return REFLECT_UNKNOWN_ERROR_NOTRACE() << "Expected " << typeid(T).name() << " got " << Value_type(arg).toString();
+            if (!Value_is<T>(arg)) {
+                if (Value_is<Binding>(arg)) {
+                    return Value_as<Binding>(arg).access([&](const Value &v, auto &&context) {
+                        return tag_invoke(call, std::forward<Callable>(callable), v, context);
+                    },
+                        context);
+                } else if (Value_is<ScopeBinding>(arg)) {
+                    return Value_as<ScopeBinding>(arg).access([&](const Value &v, auto &&context) {
+                        return tag_invoke(call, std::forward<Callable>(callable), v, context);
+                    },
+                        context);
+                } else {
+                    return REFLECT_UNKNOWN_ERROR_NOTRACE() << "Expected " << typeid(T).name() << " got " << Value_type(arg).toString();
+                }
+            }
             return callable(Value_as<ValueStorageSelect<T>>(arg), context);
         } else if constexpr (std::ranges::range<T> && requires { typename T::iterator; }) {
             if constexpr (std::same_as<KeyType_t<typename T::iterator::value_type>, Void>) {
@@ -341,8 +353,9 @@ namespace Reflect {
                 },
                     context);
             } else {
-                if (Value_is<ScopePtr>(arg)) {
-                    using Ty = resolveCustomScopePtr_t<T, true>;
+                using Ty = resolveCustomScopePtr_t<T, true>;
+
+                if (Value_is<ScopePtr>(arg)) {                   
                     std::remove_pointer_t<Ty> *ptr = scope_cast<std::remove_pointer_t<Ty>>(Value_as<ScopePtr>(arg));
                     if (ptr || (!Value_as<ScopePtr>(arg).mScope && std::is_pointer_v<Ty>)) {
                         if constexpr (std::is_pointer_v<Ty>) {
@@ -350,6 +363,12 @@ namespace Reflect {
                         } else {
                             return callable(*ptr, context);
                         }
+                    }
+                }
+
+                if constexpr (std::is_pointer_v<Ty>) {
+                    if (Value_isNull(arg)) {
+                        return callable(nullptr, context);
                     }
                 }
 
@@ -413,7 +432,7 @@ namespace Reflect {
         Result result;
         Value_erased([&](Value &val) {
             result = context_get<T>(context, val);
-            if (!result) {
+            if (!result || std::is_pointer_v<T>) {
                 result = invoke_impl(type_pack<Param, Params...> {}, index, std::forward<Callable>(callable), context, val);
             }
         });

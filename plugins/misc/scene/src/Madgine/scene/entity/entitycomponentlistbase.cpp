@@ -8,14 +8,14 @@ namespace Engine {
 namespace Scene {
     namespace Entity {
 
-        Serialize::StreamResult EntityComponentListBase::readState(EntityComponentBase &comp, Serialize::FormattedSerializeStream &in, const char *name)
+        Serialize::StreamResult EntityComponentListBase::readState(EntityComponentBase &comp, Serialize::FormattedSerializeStream &in, const char *name, Serialize::ContextPtr context)
         {
-            return getSerialized(comp).readState(in, name);
+            return getSerialized(comp).readState(in, name, false, context);
         }
 
-        void EntityComponentListBase::writeState(EntityComponentBase &comp, Serialize::FormattedSerializeStream &out, const char *name) const
+        void EntityComponentListBase::writeState(EntityComponentBase &comp, Serialize::FormattedSerializeStream &out, const char *name, Serialize::ContextPtr context) const
         {
-            getSerialized(comp).writeState(out, name);
+            getSerialized(comp).writeState(out, name, false, context);
         }
 
         Serialize::StreamResult EntityComponentListBase::applyMap(EntityComponentBase &comp, Serialize::FormattedSerializeStream &in, bool success)

@@ -57,9 +57,9 @@ namespace Reflect {
         }
 
         template <auto P, typename Scope, typename T>
-        void setField(Scope *s, const T &t)
+        void setField(Scope &s, const T &t)
         {
-            s->*P = t;
+            s.*P = t;
         }
 
         template <typename Scope, auto P>

@@ -27,6 +27,11 @@ namespace Resources {
         {
         }
 
+        Handle(std::nullptr_t)
+            : Handle()
+        {
+        }
+
         Handle(typename Loader::Resource *res)
         {
             *this = Loader::load(res);

@@ -38,11 +38,17 @@ namespace Tools {
 
         std::string_view key() const override;
 
-        void addTypeHandler(const Reflect::MetaTable *type, std::function<bool(const Traced<Reflect::ScopePtr &> & scope, bool editable)> getter);
-        template <typename T>
-        void addTypeHandler(std::function<bool(const Traced<Reflect::ScopePtr &> &scope, bool editable)> getter)
+        void addTypeHandler(const Reflect::MetaTable *type, std::function<bool(const Traced<Reflect::ScopePtr &> &scope, bool editable)> getter);
+        template <typename T, typename F>
+        void addTypeHandler(F &&render)
         {
-            addTypeHandler(table<T>, std::move(getter));
+            addTypeHandler(table<T>, [render { forward_capture<F>(render) }](const Traced<Reflect::ScopePtr &> &p, bool editable) {
+                const auto &typed = p.trace(&Reflect::scope_cast<T>);
+                bool changed = render(typed, editable);
+                if (changed)
+                    p.get() = typed.get();
+                return changed;
+            });
         }
         bool hasTypeHandler(const Reflect::MetaTable *type) const;
 

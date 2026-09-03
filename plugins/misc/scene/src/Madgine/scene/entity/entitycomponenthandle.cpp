@@ -18,13 +18,13 @@ namespace Scene {
         void entityComponentHelperWrite(Serialize::FormattedSerializeStream &out, const EntityComponentHandle &index, const char *name, Serialize::ContextPtr context)
         {
             const SceneContainer *container = context_get<const SceneContainer>(context);
-            container->sceneMgr().entityComponentList(index.mType).writeState(index.mComponent, out, name);
+            container->sceneMgr().entityComponentList(index.mType).writeState(index.mComponent, out, name, context);
         }
 
         Serialize::StreamResult entityComponentHelperRead(Serialize::FormattedSerializeStream &in, const EntityComponentHandle &index, const char *name, Serialize::ContextPtr context)
         {
             SceneContainer *container = context_get<SceneContainer>(context);
-            return container->sceneMgr().entityComponentList(index.mType).readState(index.mComponent, in, name);
+            return container->sceneMgr().entityComponentList(index.mType).readState(index.mComponent, in, name, context);
         }
 
         Serialize::StreamResult entityComponentHelperApplyMap(Serialize::FormattedSerializeStream &in, EntityComponentHandle &index, bool success, Serialize::ContextPtr context)

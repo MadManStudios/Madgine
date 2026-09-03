@@ -253,7 +253,7 @@ namespace Scene {
                 sceneMgr().entityComponentList(it->mType).init(it->mComponent, *this);
                 break;
             case Containers::BEFORE | Containers::ERASE:
-                sceneMgr().entityComponentList(it->mType).finalize(it->mComponent);
+                sceneMgr().entityComponentList(it->mType).finalize(it->mComponent, *this);
                 break;
             }
         }
