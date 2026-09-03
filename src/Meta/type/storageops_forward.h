@@ -2,6 +2,8 @@
 
 #include "Generic/execution/concepts.h"
 
+#include "../meta_decay.h"
+
 DLL_IMPORT_VARIABLE(const Engine::Type::StorageOps, storageOps, SINGLE_ARG(Engine::Concepts::NoneOf<Engine::Void, Engine::Reflect::ScopePtr, Engine::Reflect::Value, Engine::Reflect::Result>));
 
 namespace Engine {

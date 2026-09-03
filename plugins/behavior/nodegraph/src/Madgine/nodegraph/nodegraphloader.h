@@ -21,7 +21,7 @@ namespace Behavior {
                 {
                 }
 
-                Resources::with_handle_t::sender<NodeInterpreterSender, Handle> interpret() const;
+                Resources::with_handle_t::sender<NodeInterpreterSender, Handle> interpret(ParameterTuple args) const;
             };
 
             NodeGraphLoader();

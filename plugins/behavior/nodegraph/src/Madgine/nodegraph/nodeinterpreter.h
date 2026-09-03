@@ -4,6 +4,7 @@
 
 #include "Madgine/behavior/behavior.h"
 #include "Madgine/behavior/behaviorcollector.h"
+#include "Madgine/behavior/parametertuple.h"
 
 #include "nodegraphloader.h"
 
@@ -23,7 +24,7 @@ namespace Behavior {
             NodeDebugLocation(NodeInterpreterStateBase *interpreter)
                 : mInterpreter(interpreter)
             {
-            }            
+            }
 
             Debug::SenderLocation *mChild = nullptr;
 
@@ -41,7 +42,7 @@ namespace Behavior {
         };
 
         struct MADGINE_NODEGRAPH_EXPORT NodeInterpreterStateBase : BehaviorReceiver {
-            NodeInterpreterStateBase(const NodeGraph *graph, NodeGraphLoader::Handle handle);
+            NodeInterpreterStateBase(const NodeGraph *graph, NodeGraphLoader::Handle handle, ParameterTuple args);
             NodeInterpreterStateBase(const NodeInterpreterStateBase &) = delete;
             NodeInterpreterStateBase(NodeInterpreterStateBase &&) = default;
             virtual ~NodeInterpreterStateBase() = default;
@@ -80,7 +81,7 @@ namespace Behavior {
             Debug::Continuation mContinuation;
 
         private:
-            Reflect::ArgumentList mArguments;
+            ParameterTuple mArguments;
 
             const NodeGraph *mGraph;
 
@@ -94,14 +95,16 @@ namespace Behavior {
 
         struct NodeInterpreterSender : Execution::base_sender {
 
-            NodeInterpreterSender(const NodeGraph *graph)
+            NodeInterpreterSender(const NodeGraph *graph, ParameterTuple args)
                 : mGraph(graph)
+                , mArgs(std::move(args))
             {
             }
 
-            NodeInterpreterSender(NodeGraphLoader::Handle handle)
+            NodeInterpreterSender(NodeGraphLoader::Handle handle, ParameterTuple args)
                 : mHandle(std::move(handle))
                 , mGraph(mHandle)
+                , mArgs(std::move(args))
             {
             }
 
@@ -112,17 +115,18 @@ namespace Behavior {
             template <typename Rec>
             friend auto tag_invoke(Execution::connect_t, NodeInterpreterSender &&sender, Rec &&rec)
             {
-                return NodeInterpreterState<Rec> { std::forward<Rec>(rec), sender.mGraph, std::move(sender.mHandle) };
+                return NodeInterpreterState<Rec> { std::forward<Rec>(rec), sender.mGraph, std::move(sender.mHandle), std::move(sender.mArgs) };
             }
 
             template <typename Rec>
             friend auto tag_invoke(Execution::connect_t, NodeInterpreterSender &sender, Rec &&rec)
             {
-                return NodeInterpreterState<Rec> { std::forward<Rec>(rec), sender.mGraph, sender.mHandle };
+                return NodeInterpreterState<Rec> { std::forward<Rec>(rec), sender.mGraph, sender.mHandle, sender.mArgs };
             }
 
             NodeGraphLoader::Handle mHandle;
             const NodeGraph *mGraph;
+            ParameterTuple mArgs;
         };
 
     }

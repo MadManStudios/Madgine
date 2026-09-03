@@ -2,6 +2,8 @@
 
 #include "Platform/filesystem/path.h"
 
+#include "Meta/type/storageops_forward.h"
+
 #include "Madgine/behavior/behaviordescriptor.h"
 
 #include "nodebase.h"
@@ -74,13 +76,13 @@ namespace Behavior {
 
             std::string mLayoutData;
 
-            struct NamedInput {
-                BehaviorDescriptor::Parameter mDescriptor { "Unnamed", nullptr };
+            struct ContextualInput {
+                BehaviorDescriptor::ParameterStorage mDescriptor { "Unnamed", storageOps<std::monostate> };
                 std::vector<Pin> mTargets;
             };
-            std::vector<NamedInput> mNamedInputs;
+            std::vector<ContextualInput> mContextualInputs;
 
-            NodeInterpreterSender interpret() const;
+            NodeInterpreterSender interpret(ParameterTuple args) const;
 
         protected:
             std::unique_ptr<NodeBase> createNode(std::string_view name);

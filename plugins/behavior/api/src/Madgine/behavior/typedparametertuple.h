@@ -63,6 +63,15 @@ namespace Behavior {
             return { this, sMetaTablePtr };
         }
 
+        void get(Reflect::Value &retVal, size_t index) override
+        {
+            if constexpr (sizeof...(Ty) > 0) {
+                TupleUnpacker::select(this->mTuple, [&](auto &&a) { toValue(retVal, std::forward<decltype(a)>(a)); }, index);
+            } else {
+                throw 0;
+            }
+        }
+
         Reflect::ArgumentList toArgumentList() override
         {
             return [this]<size_t... Is>(auto_pack<Is...>) {

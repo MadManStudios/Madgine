@@ -21,9 +21,9 @@ namespace Engine {
 namespace Behavior {
     namespace NodeGraph {
 
-        Resources::with_handle_t::sender<NodeInterpreterSender, NodeGraphLoader::Handle> NodeGraphLoader::Handle::interpret() const
+        Resources::with_handle_t::sender<NodeInterpreterSender, NodeGraphLoader::Handle> NodeGraphLoader::Handle::interpret(ParameterTuple args) const
         {
-            return NodeInterpreterSender { *this } | Resources::with_handle(Handle { *this });
+            return NodeInterpreterSender { *this, std::move(args) } | Resources::with_handle(Handle { *this });
         }
 
         NodeGraphLoader::NodeGraphLoader()
@@ -80,7 +80,7 @@ namespace Behavior {
         Behavior NodeGraphBehaviorFactory::create(const UniqueOpaquePtr &handle, const ParameterTuple &args, std::vector<Behavior> behaviors) const
         {
             const NodeGraphLoader::Handle &graph = handle.as<NodeGraphLoader::Handle>();
-            return graph.interpret();
+            return graph.interpret(args);
         }
 
         ParameterTuple NodeGraphBehaviorFactory::createParameters(const UniqueOpaquePtr &handle) const

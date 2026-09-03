@@ -89,7 +89,7 @@ namespace Tools {
                     if (ImGui::MenuItem("Debug", "", false)) {
                         Debug::ContextInfo &context = Debug::Debugger::getSingleton().createContext();
                         Execution::detach(
-                            Behavior::Behavior { mGraph.interpret() }
+                            Behavior::Behavior { mGraph.interpret({}) }
                             | Execution::then([](Reflect::ArgumentList) { LOG("SUCCESS"); })
                             | Execution::with_debug_location(context.mChild)
                             | Debug::with_debug_context(context)
@@ -145,9 +145,9 @@ namespace Tools {
                 }
 
                 pinId = 0;
-                for (const Behavior::NodeGraph::NodeGraph::NamedInput &input : mGraph.mNamedInputs) {
-                    if (DataOutPin(input.mDescriptor.mName.data(), 0, pinId, 1, (*input.mDescriptor.mType)->mType, Behavior::NodeGraph::NodeExecutionMask::ALL, !input.mTargets.empty()))
-                        hoveredPin = (*input.mDescriptor.mType)->mType;
+                for (const Behavior::NodeGraph::NodeGraph::ContextualInput &input : mGraph.mContextualInputs) {
+                    if (DataOutPin(input.mDescriptor.mName.data(), 0, pinId, 1, input.mDescriptor.mType->mType, Behavior::NodeGraph::NodeExecutionMask::ALL, !input.mTargets.empty()))
+                        hoveredPin = input.mDescriptor.mType->mType;
                     ++pinId;
                 }
 
@@ -438,7 +438,7 @@ namespace Tools {
             if (beginSubPanel("Node Details", &mNodeDetailsVisible, ImGuiDir_Right)) {
                 if (mSelectedInputs) {
                     if (ImGui::BeginTable("inputs", 2, ImGuiTableFlags_Resizable)) {
-                        TracedRoot<Reflect::SequenceRange> range { mHistory, Reflect::SequenceRange { mGraph.mNamedInputs } };
+                        TracedRoot<Reflect::SequenceRange> range { mHistory, Reflect::SequenceRange { mGraph.mContextualInputs } };
                         getTool<Inspector>().drawValue("Inputs", range, true);
                         ImGui::EndTable();
                     }

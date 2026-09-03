@@ -10,6 +10,11 @@ namespace Behavior {
 
     struct MADGINE_BEHAVIOR_EXPORT BehaviorDescriptor {
 
+        struct ParameterStorage {
+            std::string mName;
+            const Type::StorageOps *mType;
+        };
+
         struct Parameter {
             std::string_view mName;
             const Type::StorageOps **mType;

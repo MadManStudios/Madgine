@@ -104,6 +104,11 @@ namespace Behavior {
         return {};
     }
 
+    void DynamicParameterTuple::get(Reflect::Value &retVal, size_t index)
+    {
+        mValues[index].toValue(retVal);
+    }
+
     Reflect::ArgumentList DynamicParameterTuple::toArgumentList()
     {
         Reflect::ArgumentList result { std::true_type {}, mValues.size() };

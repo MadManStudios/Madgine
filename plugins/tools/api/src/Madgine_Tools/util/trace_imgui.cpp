@@ -729,8 +729,25 @@ bool ScopeTypePicker(const Engine::Reflect::MetaTable *&t)
     return TypeIterate([&](const Engine::Type::TypeName &type) {
         if (type.mMetaTable) {
             if (InstantiateLazyMenus()) {
-                if (Selectable(type.mMetaTable->mTypeName)) {
+                if (Selectable(type.mMetaTable->mTypeName)) { //TODO strrchr
                     t = type.mMetaTable;
+                    return true;
+                }
+            }
+        }
+        return false;
+    });
+}
+
+bool StoragePicker(const Engine::Type::StorageOps *&t)
+{
+
+
+    return TypeIterate([&](const Engine::Type::TypeName &type) {
+        if (type.mMetaTable && type.mMetaTable->mStorage) {
+            if (InstantiateLazyMenus()) {
+                if (Selectable(type.mMetaTable->mTypeName)) { //TODO strrchr
+                    t = *type.mMetaTable->mStorage;
                     return true;
                 }
             }

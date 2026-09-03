@@ -116,6 +116,7 @@ struct MADGINE_TOOLS_EXPORT ValueTypeDrawer {
 MADGINE_TOOLS_EXPORT bool TypeIterate(Engine::CallableView<bool(const Engine::Type::TypeName &)> visitor);
 
 MADGINE_TOOLS_EXPORT bool ScopeTypePicker(const Engine::Reflect::MetaTable *&t);
+MADGINE_TOOLS_EXPORT bool StoragePicker(const Engine::Type::StorageOps *&t);
 MADGINE_TOOLS_EXPORT bool ValueTypeTypePicker(Engine::Reflect::Type &t);
 MADGINE_TOOLS_EXPORT bool ValueTypeTypePicker(Engine::Reflect::ExtendedType &t);
 

@@ -14,7 +14,7 @@ namespace Tools {
 
     void ShowLabel(std::string_view label, ImColor color)
     {
-        ImVec2 labelPos = ImGui::GetCursorPos() + ImGui::GetWindowPos();
+        ImVec2 labelPos = ImGui::GetMousePos();
         labelPos.y -= ImGui::GetTextLineHeight();
         auto size = ImGui::CalcTextSize(label.data(), label.data() + label.size());
 
@@ -167,7 +167,7 @@ namespace Tools {
 
     bool DataOutPin(const char *name, uint32_t nodeId, uint32_t pinId, uint32_t group, Reflect::ExtendedType type, uint32_t mask, bool connected)
     {
-        int id = 60000 * nodeId + Behavior::NodeGraph::NodeBase::dataOutId(pinId, group);
+        uint32_t id = 60000 * nodeId + Behavior::NodeGraph::NodeBase::dataOutId(pinId, group);
 
         ImGui::BeginHorizontal(id, ImVec2 { 0, 0 }, 0.5f);
 
@@ -186,7 +186,7 @@ namespace Tools {
         ed::PinPivotRect(pivot, pivot);
         ed::EndPin();
 
-        return ImGui::IsItemHovered();
+        return ed::GetHoveredPin() == ed::PinId { id };
     }
 
     void DataInPin(const char *name, Reflect::ExtendedType type, uint32_t mask, bool connected)
@@ -201,7 +201,7 @@ namespace Tools {
 
     bool DataInPin(const char *name, uint32_t nodeId, uint32_t pinId, uint32_t group, Reflect::ExtendedType type, uint32_t mask, bool connected)
     {
-        int id = 60000 * nodeId + Behavior::NodeGraph::NodeBase::dataInId(pinId, group);
+        uint32_t id = 60000 * nodeId + Behavior::NodeGraph::NodeBase::dataInId(pinId, group);
         
 
         ImGui::BeginHorizontal(id, ImVec2 { 0, 0 }, 0.5f);
@@ -221,19 +221,19 @@ namespace Tools {
         ed::PinPivotRect(pivot, pivot);
         ed::EndPin();
 
-        return ImGui::IsItemHovered();
+        return ed::GetHoveredPin() == ed::PinId { id };
     }
 
     void HoverPin(Reflect::ExtendedType type)
     {
-        ImVec2 cursor = ImGui::GetCursorPos();
-        ImGui::SetCursorScreenPos(ImGui::GetMousePos());
+        //ImVec2 cursor = ImGui::GetCursorPos();
+        //ImGui::SetCursorScreenPos(ImGui::GetMousePos());
         if (type.mType == Reflect::ExtendedTypeEnum::VariantType) {
             ShowLabel(type.unwrapVariant().first.toString());
         } else {
             ShowLabel(type.toString());
         }
-        ImGui::SetCursorPos(cursor);
+        //ImGui::SetCursorPos(cursor);
     }
 
     std::optional<Reflect::ExtendedType> BeginNode(const Behavior::NodeGraph::NodeBase *node, uint32_t nodeId, std::optional<Behavior::NodeGraph::PinDesc> dragPin, std::optional<Reflect::ExtendedType> dragType)

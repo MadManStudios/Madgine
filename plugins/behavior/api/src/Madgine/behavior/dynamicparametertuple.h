@@ -28,6 +28,7 @@ namespace Behavior {
         void write(Serialize::FormattedSerializeStream &out, Serialize::ContextPtr context) override;
         Serialize::StreamResult applyMap(Serialize::FormattedSerializeStream &in, bool success, Serialize::ContextPtr context) override;
 
+        void get(Reflect::Value &retVal, size_t index)  override;
         Reflect::ArgumentList toArgumentList() override;
         Reflect::Result fromArgumentList(const Reflect::ArgumentList &args) override;
 

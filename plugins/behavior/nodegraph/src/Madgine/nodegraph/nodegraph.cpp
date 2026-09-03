@@ -24,6 +24,7 @@
 #include "nodes/behaviornode.h"
 
 METATABLE_BEGIN(Engine::Behavior::NodeGraph::NodeGraph)
+    MEMBER(mContextualInputs)
 METATABLE_END(Engine::Behavior::NodeGraph::NodeGraph)
 
 SERIALIZETABLE_BEGIN(Engine::Behavior::NodeGraph::NodeGraph)
@@ -31,16 +32,16 @@ SERIALIZETABLE_BEGIN(Engine::Behavior::NodeGraph::NodeGraph)
     FIELD(mFlowOutPins)
     FIELD(mDataInPins)
     FIELD(mLayoutData)
-    FIELD(mNamedInputs)
+    FIELD(mContextualInputs)
 SERIALIZETABLE_END(Engine::Behavior::NodeGraph::NodeGraph)
 
-METATABLE_BEGIN(Engine::Behavior::NodeGraph::NodeGraph::NamedInput)
-    //MEMBER(mDescriptor)
-METATABLE_END(Engine::Behavior::NodeGraph::NodeGraph::NamedInput)
+METATABLE_BEGIN(Engine::Behavior::NodeGraph::NodeGraph::ContextualInput)
+    PROXY(mDescriptor)
+METATABLE_END(Engine::Behavior::NodeGraph::NodeGraph::ContextualInput)
 
-SERIALIZETABLE_BEGIN(Engine::Behavior::NodeGraph::NodeGraph::NamedInput)
-    //FIELD(mDescriptor)
-SERIALIZETABLE_END(Engine::Behavior::NodeGraph::NodeGraph::NamedInput)
+SERIALIZETABLE_BEGIN(Engine::Behavior::NodeGraph::NodeGraph::ContextualInput)
+    FIELD(mDescriptor)
+SERIALIZETABLE_END(Engine::Behavior::NodeGraph::NodeGraph::ContextualInput)
 
 namespace Engine {
 namespace Behavior {
@@ -55,7 +56,7 @@ namespace Behavior {
             , mDataInPins(other.mDataInPins)
             , mDataOutPins(other.mDataOutPins)
             , mLayoutData(other.mLayoutData)
-            , mNamedInputs(other.mNamedInputs)
+            , mContextualInputs(other.mContextualInputs)
         {
             mNodes.reserve(other.mNodes.size());
             std::ranges::transform(other.mNodes, std::back_inserter(mNodes), [&](const std::unique_ptr<NodeBase> &node) { return node->clone(*this); });
@@ -72,7 +73,7 @@ namespace Behavior {
             mFlowOutPins = other.mFlowOutPins;
             mDataInPins = other.mDataInPins;
             mDataOutPins = other.mDataOutPins;
-            mNamedInputs = other.mNamedInputs;
+            mContextualInputs = other.mContextualInputs;
 
             mLayoutData = other.mLayoutData;
 
@@ -142,7 +143,7 @@ namespace Behavior {
                                             outPins.resize(pin.mIndex + 1);
                                         outPins[pin.mIndex] = DataOutPinPrototype { { { nodeIndex(node), i, group } } };
                                     } else {
-                                        mNamedInputs[pin.mIndex].mTargets.push_back({ nodeIndex(node), i, group });
+                                        mContextualInputs[pin.mIndex].mTargets.push_back({ nodeIndex(node), i, group });
                                     }
                                 } else {
                                     NodeBase *targetNode = this->node(pin.mNode);
@@ -473,7 +474,7 @@ namespace Behavior {
                         mDataOutPins.emplace_back();
                     mDataOutPins[source.mIndex].mTargets.push_back(target);
                 } else {
-                    mNamedInputs[source.mIndex].mTargets.push_back(target);
+                    mContextualInputs[source.mIndex].mTargets.push_back(target);
                 }
             } else {
                 node(source.mNode)->onDataOutUpdate(source, CONNECT);
@@ -527,10 +528,14 @@ namespace Behavior {
             }
 
             if (!source.mNode) {
+                if (source.mGroup == 0) {
                 std::erase(mDataOutPins[source.mIndex].mTargets, target);
                 if (mDataOutPins[source.mIndex].mTargets.empty()) {
                     onDataOutRemove(source);
                     mDataOutPins.erase(mDataOutPins.begin() + source.mIndex);
+                }
+            } else {
+                    std::erase(mContextualInputs[source.mIndex].mTargets, target);
                 }
             } else {
                 [[maybe_unused]] auto result = std::erase(node(source.mNode)->mDataOutPins[source.mGroup][source.mIndex].mTargets, target);
@@ -613,9 +618,9 @@ namespace Behavior {
             }
         }
 
-        NodeInterpreterSender NodeGraph::interpret() const
+        NodeInterpreterSender NodeGraph::interpret(ParameterTuple args) const
         {
-            return { this };
+            return { this, std::move(args) };
         }
 
         std::unique_ptr<NodeBase> NodeGraph::createNode(std::string_view name)

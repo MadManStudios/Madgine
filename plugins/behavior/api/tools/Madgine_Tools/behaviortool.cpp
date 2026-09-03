@@ -16,6 +16,7 @@
 #include "Madgine_Tools/inspector/inspector.h"
 #include "Madgine_Tools/renderer/dialogs.h"
 #include "Madgine_Tools/texteditor/texteditor.h"
+#include "Madgine_Tools/util/trace_imgui.h"
 
 #define IMGUI_DEFINE_MATH_OPERATORS
 #include "imgui/imgui.h"
@@ -129,6 +130,19 @@ namespace Tools {
             return drawBehaviorList(*list);
         });
 
+        mInspector->addPreviewDefinition<Behavior::BehaviorDescriptor::ParameterStorage>([this](const Traced<Behavior::BehaviorDescriptor::ParameterStorage *> &param) {
+            bool changed = false;
+
+            if (ImGui::BeginCombo("##storage", param.get()->mType->mTypeName)) {
+
+                changed = ImGui::StoragePicker(param.get()->mType);
+
+                ImGui::EndCombo();
+            }
+
+            return changed;
+        });
+
         co_return co_await ToolBase::init();
     }
 
@@ -230,7 +244,7 @@ namespace Tools {
             history.handleShortcuts();
 
             if (ImGui::BeginTable("columns", 2, ImGuiTableFlags_SizingStretchProp)) {
-                TracedRoot<Reflect::ScopePtr> traced { history, &behavior.mParameters};
+                TracedRoot<Reflect::ScopePtr> traced { history, &behavior.mParameters };
                 inspector.drawMembers(traced);
                 ImGui::EndTable();
             }

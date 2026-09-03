@@ -62,48 +62,6 @@ namespace Serialize {
     inline constexpr set_parent_t set_parent;
 
     struct apply_map_t {
-        template <typename T, typename Context>
-        friend StreamResult tag_invoke(const apply_map_t &cpo, T *&p, FormattedSerializeStream &in, bool success = true, Context &&context = {})
-        {
-            if (success) {
-                uint32_t ptr = reinterpret_cast<uintptr_t>(p);
-                if (ptr & 0x3) {
-                    switch (static_cast<UnitIdTag>(ptr & 0x3)) {
-                    case UnitIdTag::SYNCABLE:
-                        if constexpr (std::derived_from<T, SyncableUnitBase>) {
-                            UnitId id = (ptr >> 2);
-                            SyncableUnitBase *unit;
-                            const SerializeTable *type;
-                            STREAM_PROPAGATE_ERROR(convertSyncablePtr(in, id, unit, type));
-                            if (type != &serializeTable<T>())
-                                throw 0;
-                            p = static_cast<T *>(unit);
-                        } else {
-                            throw 0;
-                        }
-                        break;
-                    case UnitIdTag::SERIALIZABLE:
-                        if constexpr (!std::derived_from<T, SyncableUnitBase>) {
-                            uint32_t id = (ptr >> 2);
-                            SerializableDataPtr unit;
-                            STREAM_PROPAGATE_ERROR(convertSerializablePtr(in, id, unit));
-                            static_assert(!std::same_as<T, SerializableUnitBase>);
-                            if (unit.mType != &serializeTable<T>())
-                                throw 0;
-                            p = static_cast<T *>(unit.unit());
-                        } else {
-                            throw 0;
-                        }
-                        break;
-                    default:
-                        throw 0;
-                    }
-                }
-            } else {
-                p = nullptr;
-            }
-            return {};
-        }
 
         template <typename... Ty, typename Context>
         friend StreamResult tag_invoke(apply_map_t cpo, std::tuple<Ty...> &t, FormattedSerializeStream &in, bool success, Context &&context)
@@ -142,7 +100,7 @@ namespace Serialize {
         }
 
         template <PrimitiveType T, typename Context>
-            requires(!std::is_const_v<T>)
+            requires(!std::is_const_v<T> && !std::is_pointer_v<T>)
         friend StreamResult tag_invoke(apply_map_t cpo, T &t, FormattedSerializeStream &in, bool success, Context &&context)
         {
             return {};
@@ -165,7 +123,48 @@ namespace Serialize {
             requires(!tag_invocable<apply_map_t, T &, FormattedSerializeStream &, bool, Context>)
         StreamResult operator()(T &t, FormattedSerializeStream &in, bool success, Context &&context = {}) const
         {
-            return SerializableDataPtr { &t }.applyMap(in, success, context);
+            if constexpr (std::is_pointer_v<T>) {
+                if (success) {
+                    uint32_t ptr = reinterpret_cast<uintptr_t>(t);
+                    if (ptr & 0x3) {
+                        switch (static_cast<UnitIdTag>(ptr & 0x3)) {
+                        case UnitIdTag::SYNCABLE:
+                            if constexpr (std::derived_from<std::remove_pointer_t<T>, SyncableUnitBase>) {
+                                UnitId id = (ptr >> 2);
+                                SyncableUnitBase *unit;
+                                const SerializeTable *type;
+                                STREAM_PROPAGATE_ERROR(convertSyncablePtr(in, id, unit, type));
+                                if (type != &serializeTable<std::remove_pointer_t<T>>())
+                                    throw 0;
+                                t = static_cast<T>(unit);
+                            } else {
+                                throw 0;
+                            }
+                            break;
+                        case UnitIdTag::SERIALIZABLE:
+                            if constexpr (!std::derived_from<std::remove_pointer_t<T>, SyncableUnitBase>) {
+                                uint32_t id = (ptr >> 2);
+                                SerializableDataPtr unit;
+                                STREAM_PROPAGATE_ERROR(convertSerializablePtr(in, id, unit));
+                                static_assert(!std::same_as<T, SerializableUnitBase*>);
+                                if (unit.mType != &serializeTable<std::remove_pointer_t<T>>())
+                                    throw 0;
+                                t = static_cast<T>(unit.unit());
+                            } else {
+                                throw 0;
+                            }
+                            break;
+                        default:
+                            throw 0;
+                        }
+                    }
+                } else {
+                    t = nullptr;
+                }
+                return {};
+            } else {
+                return SerializableDataPtr { &t }.applyMap(in, success, context);
+            }
         }
 
         template <typename T, typename Context = ContextPtr>

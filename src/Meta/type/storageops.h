@@ -129,7 +129,23 @@ namespace Type {
         Read *mRead;
         Write *mWrite;
         ApplyMap *mApplyMap;
+
+        friend Serialize::StreamResult tag_invoke(const Serialize::apply_map_t &, const StorageOps *&storage, Serialize::FormattedSerializeStream &in, bool success, Serialize::ContextPtr context)
+        {
+            return {};
+        }
     };
 
 }
+
+namespace Serialize {
+    template <>
+    struct META_EXPORT Operations<const Type::StorageOps *> {
+        static void write(FormattedSerializeStream &out, const Type::StorageOps *const &t, const char *name, ContextPtr context);
+        static StreamResult read(FormattedSerializeStream &in, const Type::StorageOps *&t, const char *name, ContextPtr context);
+
+        static StreamResult visitStream(FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor, size_t depth);
+    };
+}
+
 }

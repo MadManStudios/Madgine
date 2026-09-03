@@ -6,6 +6,18 @@
 #include "Meta/reflect/value.h"
 #include "Meta/type/storageops.h"
 
+#include "Meta/reflect/metatable_impl.h"
+#include "Meta/serialize/serializetable_impl.h"
+
+METATABLE_BEGIN(Engine::Behavior::BehaviorDescriptor::ParameterStorage)
+    MEMBER(mName)
+METATABLE_END(Engine::Behavior::BehaviorDescriptor::ParameterStorage)
+
+SERIALIZETABLE_BEGIN(Engine::Behavior::BehaviorDescriptor::ParameterStorage)
+    FIELD(mName)
+    FIELD(mType)
+SERIALIZETABLE_END(Engine::Behavior::BehaviorDescriptor::ParameterStorage)
+
 namespace Engine {
 namespace Behavior {
 

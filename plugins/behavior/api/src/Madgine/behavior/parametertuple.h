@@ -24,6 +24,7 @@ namespace Behavior {
 
         virtual std::unique_ptr<ParameterTupleBase> clone() = 0;
         virtual Reflect::ScopePtr customScopePtr() = 0;
+        virtual void get(Reflect::Value &retVal, size_t index) = 0;
         virtual Reflect::ArgumentList toArgumentList() = 0;
         virtual Reflect::Result fromArgumentList(const Reflect::ArgumentList &args) = 0;
 
@@ -69,6 +70,11 @@ namespace Behavior {
                 out = instance->mTuple;
             }
             return instance;
+        }
+
+        void get(Reflect::Value &retVal, size_t index) const
+        {
+            mTuple->get(retVal, index);
         }
 
         operator Reflect::ArgumentList() const

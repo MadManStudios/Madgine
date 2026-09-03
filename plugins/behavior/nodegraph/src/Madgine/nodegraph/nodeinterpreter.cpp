@@ -2,6 +2,8 @@
 
 #include "nodeinterpreter.h"
 
+#include "Meta/type/storageops.h"
+
 #include "Madgine/debug/debugger.h"
 
 #include "nodeexecution.h"
@@ -11,10 +13,11 @@ namespace Engine {
 namespace Behavior {
     namespace NodeGraph {
 
-        NodeInterpreterStateBase::NodeInterpreterStateBase(const NodeGraph *graph, NodeGraphLoader::Handle handle)
+        NodeInterpreterStateBase::NodeInterpreterStateBase(const NodeGraph *graph, NodeGraphLoader::Handle handle, ParameterTuple args)
             : mDebugLocation(this)
             , mGraph(graph)
             , mHandle(std::move(handle))
+            , mArguments(std::move(args))
         {
         }
 
@@ -48,11 +51,13 @@ namespace Behavior {
             } else if (!pin.mNode) {
                 assert(pin.mGroup < 2);
                 if (pin.mGroup == 0) {
-                    return mArguments.get(retVal, pin.mIndex);
+                    mArguments.get(retVal, pin.mIndex);
+                    return {};
                 } else {
-                    throw 0; //TODO: Move into single group, resolve contextual on call
-                    //std::string_view name = mGraph->mNamedInputs[pin.mIndex].mDescriptor.mName;
-                    //return get_named_d(*this, name, retVal);
+                    return Reflect::get_reflect_contextual(*this, retVal, *mGraph->mContextualInputs[pin.mIndex].mDescriptor.mType->mType.mSecondary.mMetaTable);
+                    throw 0; // TODO: Move into single group, resolve contextual on call
+                    // std::string_view name = mGraph->mNamedInputs[pin.mIndex].mDescriptor.mName;
+                    // return get_named_d(*this, name, retVal);
                 }
             } else {
                 return mGraph->node(pin.mNode)->interpretRead(*this, retVal, mData[pin.mNode - 1], pin.mIndex, pin.mGroup);
