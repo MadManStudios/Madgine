@@ -303,6 +303,8 @@ Variables</h2></td></tr>
 <tr class="separator:a911eafefd01b033ca5f9d916ff1ec32d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaa3f2989338465bf7a1ba9cdc185e3ab"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scene.html#aaa3f2989338465bf7a1ba9cdc185e3ab">rotate</a></td></tr>
 <tr class="separator:aaa3f2989338465bf7a1ba9cdc185e3ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22cf9c57e0d3d4aae8b3639a5d920ff6"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scene.html#a22cf9c57e0d3d4aae8b3639a5d920ff6">translate</a></td></tr>
+<tr class="separator:a22cf9c57e0d3d4aae8b3639a5d920ff6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a82943a49aae5c33eda607bfde185e43b"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scene.html#a82943a49aae5c33eda607bfde185e43b">wait_animation</a></td></tr>
 <tr class="separator:a82943a49aae5c33eda607bfde185e43b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1b7793967872db21d52a9f6522fdb99a"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_scene.html#a1b7793967872db21d52a9f6522fdb99a">wait_simulation</a></td></tr>
@@ -616,10 +618,41 @@ template&lt;typename T , typename Base &gt; </div>
 </div><!-- fragment -->
 </div>
 </div>
+<a id="a22cf9c57e0d3d4aae8b3639a5d920ff6" name="a22cf9c57e0d3d4aae8b3639a5d920ff6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a22cf9c57e0d3d4aae8b3639a5d920ff6">&#9670;&#160;</a></span>translate</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr auto Engine::Scene::translate</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= [](Math::NormalizedVector3 dir, <span class="keywordtype">float</span> speed, <a class="code hl_typedef" href="namespace_engine_1_1_scene.html#aea776973d44c96e1cca075617b3b91a7">EntityContext</a> entity = {}) {</div>
+<div class="line">        <span class="keywordflow">return</span> std::move(entity) | Execution::let_value([=](<span class="keyword">auto</span> e) {</div>
+<div class="line">            <span class="keywordflow">return</span> <a class="code hl_variable" href="namespace_engine_1_1_scene.html#a64d96d147ec00535ea2c781685ac1f64">yield_simulation</a>() | Execution::then([=](std::chrono::microseconds timeSinceLastFrame) {</div>
+<div class="line">                Execution::access_binding(e, [=](<a class="code hl_struct" href="struct_engine_1_1_scene_1_1_entity_1_1_entity.html">Entity::Entity</a> &amp;e) {</div>
+<div class="line">                    e.<a class="code hl_function" href="struct_engine_1_1_scene_1_1_entity_1_1_entity.html#a5124e4dc641916a5469b4f6f06660670">getComponent</a>&lt;<a class="code hl_struct" href="struct_engine_1_1_scene_1_1_entity_1_1_transform.html">Entity::Transform</a>&gt;()-&gt;mPosition += timeSinceLastFrame.count() * 0.000001f * speed * dir;</div>
+<div class="line">                });</div>
+<div class="line">            }) | Execution::repeat;</div>
+<div class="line">        });</div>
+<div class="line">    }</div>
+</div><!-- fragment -->
+</div>
+</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Sep 3 2026 21:11:39 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Thu Sep 3 2026 21:37:08 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

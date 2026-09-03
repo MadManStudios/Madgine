@@ -284,6 +284,8 @@ Public Types</h2></td></tr>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a12f51fecf2da6776785ee364551f6abf"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_plugins_1_1_registry.html#a12f51fecf2da6776785ee364551f6abf">Registry</a> ()</td></tr>
 <tr class="separator:a12f51fecf2da6776785ee364551f6abf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad8dcf936674335cb2f3cfd127976b6ce"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_plugins_1_1_registry.html#ad8dcf936674335cb2f3cfd127976b6ce">init</a> ()</td></tr>
+<tr class="separator:ad8dcf936674335cb2f3cfd127976b6ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac28a630853a35f2081513b6c4f6db161"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_plugins_1_1_registry.html#ac28a630853a35f2081513b6c4f6db161">onPluginLoad</a> (const <a class="el" href="struct_engine_1_1_plugins_1_1_binary_info.html">Plugins::BinaryInfo</a> *bin)</td></tr>
 <tr class="separator:ac28a630853a35f2081513b6c4f6db161"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5dc44250ecd3bdc1298d6af2ff1c0a72"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_plugins_1_1_registry.html#a5dc44250ecd3bdc1298d6af2ff1c0a72">onPluginUnload</a> (const <a class="el" href="struct_engine_1_1_plugins_1_1_binary_info.html">Plugins::BinaryInfo</a> *bin)</td></tr>
@@ -299,6 +301,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a623b3b51b40368f1365a32cc124c64d7 inherit pub_methods_struct_engine_1_1_plugins_1_1_registry_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a839ee8e2002a0584cf349f78a8905e5d inherit pub_methods_struct_engine_1_1_plugins_1_1_registry_base"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="struct_engine_1_1_plugins_1_1_collector_info_base.html">CollectorInfoBase</a> * &gt;::iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_plugins_1_1_registry_base.html#a839ee8e2002a0584cf349f78a8905e5d">end</a> ()</td></tr>
 <tr class="separator:a839ee8e2002a0584cf349f78a8905e5d inherit pub_methods_struct_engine_1_1_plugins_1_1_registry_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5bbdabd6b2f70c648f02dfcffe2fdcb inherit pub_methods_struct_engine_1_1_plugins_1_1_registry_base"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_plugins_1_1_registry_base.html#ac5bbdabd6b2f70c648f02dfcffe2fdcb">init</a> ()=0</td></tr>
+<tr class="separator:ac5bbdabd6b2f70c648f02dfcffe2fdcb inherit pub_methods_struct_engine_1_1_plugins_1_1_registry_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af73e107f8d8137bb2c4297cbe2f8b749 inherit pub_methods_struct_engine_1_1_plugins_1_1_registry_base"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="struct_engine_1_1_plugins_1_1_type_info.html">TypeInfo</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_plugins_1_1_registry_base.html#af73e107f8d8137bb2c4297cbe2f8b749">named_type_info</a> () const</td></tr>
 <tr class="separator:af73e107f8d8137bb2c4297cbe2f8b749 inherit pub_methods_struct_engine_1_1_plugins_1_1_registry_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4cab107eae73b9e6eb9a500ca649bc06 inherit pub_methods_struct_engine_1_1_plugins_1_1_registry_base"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_plugins_1_1_registry_base.html#a4cab107eae73b9e6eb9a500ca649bc06">onPluginLoad</a> (const <a class="el" href="struct_engine_1_1_plugins_1_1_binary_info.html">Plugins::BinaryInfo</a> *)=0</td></tr>
@@ -577,6 +581,35 @@ template&lt;<a class="el" href="struct_engine_1_1fixed__string.html">fixed_strin
 
 </div>
 </div>
+<a id="ad8dcf936674335cb2f3cfd127976b6ce" name="ad8dcf936674335cb2f3cfd127976b6ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad8dcf936674335cb2f3cfd127976b6ce">&#9670;&#160;</a></span>init()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="struct_engine_1_1fixed__string.html">fixed_string</a> ti, <a class="el" href="struct_engine_1_1fixed__string.html">fixed_string</a> namedTi, const auto &amp; header, typename _Base , typename... _Annotations&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> <a class="el" href="struct_engine_1_1_plugins_1_1_registry.html">Engine::Plugins::Registry</a>&lt; ti, namedTi, header, _Base, _Annotations &gt;::init </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implements <a class="el" href="struct_engine_1_1_plugins_1_1_registry_base.html#ac5bbdabd6b2f70c648f02dfcffe2fdcb">Engine::Plugins::RegistryBase</a>.</p>
+
+</div>
+</div>
 <h2 class="groupheader">Member Data Documentation</h2>
 <a id="ac36ecbdee289c63ecf89ec8f73816744" name="ac36ecbdee289c63ecf89ec8f73816744"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac36ecbdee289c63ecf89ec8f73816744">&#9670;&#160;</a></span>sSelf</h2>
@@ -633,7 +666,7 @@ template&lt;<a class="el" href="struct_engine_1_1fixed__string.html">fixed_strin
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Sep 3 2026 21:11:38 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Thu Sep 3 2026 21:37:07 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

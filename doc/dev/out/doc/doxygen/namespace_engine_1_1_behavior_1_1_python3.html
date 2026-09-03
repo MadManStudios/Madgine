@@ -422,6 +422,8 @@ Functions</h2></td></tr>
 <tr class="separator:ad9d841f0359c0f726e5f3506192df3e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7092da511fa6f8ce3b8acb4c06ea414d"><td class="memItemLeft" align="right" valign="top">PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#a7092da511fa6f8ce3b8acb4c06ea414d">PyNamespace_get</a> (PyObject *self, PyObject *args)</td></tr>
 <tr class="separator:a7092da511fa6f8ce3b8acb4c06ea414d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed578b4b62a430056f9fbba2d9ae6f28"><td class="memItemLeft" align="right" valign="top">PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#aed578b4b62a430056f9fbba2d9ae6f28">PyQuaternion_multiply</a> (<a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_quaternion.html">PyQuaternion</a> *q, PyObject *other)</td></tr>
+<tr class="separator:aed578b4b62a430056f9fbba2d9ae6f28"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa899033082b9adff6f1dfd1225eced84"><td class="memItemLeft" align="right" valign="top">PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#aa899033082b9adff6f1dfd1225eced84">PySender_await</a> (PyObject *self)</td></tr>
 <tr class="separator:aa899033082b9adff6f1dfd1225eced84"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aec2794c8779679af4bea1b4683f32212"><td class="memItemLeft" align="right" valign="top">PyObject *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#aec2794c8779679af4bea1b4683f32212">PyState_Alloc</a> (size_t size)</td></tr>
@@ -557,6 +559,8 @@ Variables</h2></td></tr>
 <tr class="separator:a44747dba97a0c58495c7fd1ce46aafb5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af9cf8ba7a7cb60dd2239808b5c136a7c"><td class="memItemLeft" align="right" valign="top">PyTypeObject&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#af9cf8ba7a7cb60dd2239808b5c136a7c">PyOwnedValueType</a></td></tr>
 <tr class="separator:af9cf8ba7a7cb60dd2239808b5c136a7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a246d0fd92f029dc2521a858bc9cb0688"><td class="memItemLeft" align="right" valign="top">PyNumberMethods&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#a246d0fd92f029dc2521a858bc9cb0688">PyQuaternionNumberMethods</a></td></tr>
+<tr class="separator:a246d0fd92f029dc2521a858bc9cb0688"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae4b756cf36140f093e86a55d28b0ec4a"><td class="memItemLeft" align="right" valign="top">PyTypeObject&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#ae4b756cf36140f093e86a55d28b0ec4a">PyQuaternionType</a></td></tr>
 <tr class="separator:ae4b756cf36140f093e86a55d28b0ec4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a30f5a327107cb08cb66afe0870dfc4ed"><td class="memItemLeft" align="right" valign="top">PyAsyncMethods&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_behavior_1_1_python3.html#a30f5a327107cb08cb66afe0870dfc4ed">PyScopeBindingAsyncMethods</a></td></tr>
@@ -802,6 +806,34 @@ Variables</h2></td></tr>
           <td></td>
           <td class="paramtype">PyObject *&#160;</td>
           <td class="paramname"><em>args</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aed578b4b62a430056f9fbba2d9ae6f28" name="aed578b4b62a430056f9fbba2d9ae6f28"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aed578b4b62a430056f9fbba2d9ae6f28">&#9670;&#160;</a></span>PyQuaternion_multiply()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">PyObject * Engine::Behavior::Python3::PyQuaternion_multiply </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_quaternion.html">PyQuaternion</a> *&#160;</td>
+          <td class="paramname"><em>q</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">PyObject *&#160;</td>
+          <td class="paramname"><em>other</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -2269,6 +2301,23 @@ template&lt;typename T , auto p&gt; </div>
 </div><!-- fragment -->
 </div>
 </div>
+<a id="a246d0fd92f029dc2521a858bc9cb0688" name="a246d0fd92f029dc2521a858bc9cb0688"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a246d0fd92f029dc2521a858bc9cb0688">&#9670;&#160;</a></span>PyQuaternionNumberMethods</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">PyNumberMethods Engine::Behavior::Python3::PyQuaternionNumberMethods</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
+<div class="line">            .nb_multiply = (binaryfunc)&amp;PyQuaternion_multiply,</div>
+<div class="line">        }</div>
+</div><!-- fragment -->
+</div>
+</div>
 <a id="ae4b756cf36140f093e86a55d28b0ec4a" name="ae4b756cf36140f093e86a55d28b0ec4a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae4b756cf36140f093e86a55d28b0ec4a">&#9670;&#160;</a></span>PyQuaternionType</h2>
 
@@ -2286,6 +2335,7 @@ template&lt;typename T , auto p&gt; </div>
 <div class="line">            = <span class="stringliteral">&quot;Engine.Quaternion&quot;</span>,</div>
 <div class="line">            .tp_basicsize = <span class="keyword">sizeof</span>(PyQuaternion),</div>
 <div class="line">            .tp_itemsize = 0,</div>
+<div class="line">            .tp_as_number = &amp;PyQuaternionNumberMethods,</div>
 <div class="line">            .tp_dealloc = &amp;PyDealloc&lt;PyQuaternion, &amp;PyQuaternion::mQuaternion&gt;,</div>
 <div class="line">            .tp_str = &amp;PyStr&lt;PyQuaternion, &amp;PyQuaternion::mQuaternion&gt;,</div>
 <div class="line">            .tp_flags = Py_TPFLAGS_DEFAULT,</div>
@@ -2983,7 +3033,7 @@ template&lt;typename T , auto p&gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Sep 3 2026 21:11:37 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Thu Sep 3 2026 21:37:06 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>
