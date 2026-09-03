@@ -16,6 +16,7 @@
 #include "Madgine/nodegraph/nodeinterpreter.h"
 #include "Madgine/nodegraph/nodes/accessornode.h"
 #include "Madgine/nodegraph/nodes/behaviornode.h"
+#include "Madgine/nodegraph/nodes/functionnode.h"
 
 #include "Meta/reflect/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
@@ -330,44 +331,54 @@ namespace Tools {
                             if (Behavior::BehaviorHandle behavior = BehaviorSelector(&filter)) {
                                 mPendingLibraryBehavior = behavior;
                             }
-                            bool hasMenu = false;
+
+                            ImGui::BeginLazyMenu("Nodes");
                             for (const std::pair<const std::string_view, IndexType<uint32_t>> &nodeDesc : Behavior::NodeGraph::NodeRegistry::sComponentsByName()) {
                                 if (filter->PassFilter(nodeDesc.first.data())) {
-
-                                    if (!hasMenu) {
-                                        hasMenu = ImGui::BeginMenu("Nodes");
-                                        if (!hasMenu)
-                                            break;
-                                    }
-
-                                    if (ImGui::MenuItem(nodeDesc.first.data())) {
-                                        Behavior::NodeGraph::NodeBase *node = mGraph.addNode(construct(Behavior::NodeGraph::NodeRegistry::get(nodeDesc.second), mGraph));
-                                        ed::SetNodePosition(60000 * mGraph.nodeIndex(node), mPopupPosition);
+                                    if (ImGui::InstantiateLazyMenus()) {
+                                        if (ImGui::MenuItem(nodeDesc.first.data())) {
+                                            Behavior::NodeGraph::NodeBase *node = mGraph.addNode(construct(Behavior::NodeGraph::NodeRegistry::get(nodeDesc.second), mGraph));
+                                            ed::SetNodePosition(60000 * mGraph.nodeIndex(node), mPopupPosition);
+                                        }
                                     }
                                 }
                             }
-                            if (hasMenu)
-                                ImGui::EndMenu();
+                            ImGui::EndLazyMenu();
 
-                            if (ImGui::BeginMenu("Accessors")) {
-                                ImGui::TypeIterate([&](const Type::TypeName &type) {
-                                    const Reflect::MetaTable *table = type.mMetaTable;
-                                    if (table) {
-                                        for (const Reflect::Accessor *accessor = table->mMembers; accessor->mName; ++accessor) {
-                                            if (filter->PassFilter(table->mTypeName) || filter->PassFilter(accessor->mName)) {
-                                                if (ImGui::InstantiateLazyMenus()) {
-                                                    if (ImGui::MenuItem(accessor->mName)) {
-                                                        Behavior::NodeGraph::NodeBase *node = mGraph.addNode(std::make_unique<Behavior::NodeGraph::AccessorNode>(mGraph, "Accessor/"s + table->mTypeName + "/" + accessor->mName));
-                                                        ed::SetNodePosition(60000 * mGraph.nodeIndex(node), mPopupPosition);
-                                                    }
+                            ImGui::BeginLazyMenu("Accessors");
+                            ImGui::TypeIterate([&](const Type::TypeName &type) {
+                                const Reflect::MetaTable *table = type.mMetaTable;
+                                if (table) {
+                                    for (const Reflect::Accessor *accessor = table->mMembers; accessor->mName; ++accessor) {
+                                        if (filter->PassFilter(table->mTypeName) || filter->PassFilter(accessor->mName)) {
+                                            if (ImGui::InstantiateLazyMenus()) {
+                                                if (ImGui::MenuItem(accessor->mName)) {
+                                                    Behavior::NodeGraph::NodeBase *node = mGraph.addNode(std::make_unique<Behavior::NodeGraph::AccessorNode>(mGraph, "Accessor/"s + table->mTypeName + "/" + accessor->mName));
+                                                    ed::SetNodePosition(60000 * mGraph.nodeIndex(node), mPopupPosition);
                                                 }
                                             }
                                         }
                                     }
-                                    return false;
-                                });
-                                ImGui::EndMenu();
+                                }
+                                return false;
+                            });
+                            ImGui::EndLazyMenu();
+
+                            ImGui::BeginLazyMenu("Function");
+                            const Reflect::FunctionTable *f = Reflect::sFunctionList();
+                            while (f) {
+                                if (filter->PassFilter(f->mName.data())) {
+                                    if (ImGui::InstantiateLazyMenus()) {
+                                        if (ImGui::MenuItem(f->mName.data())) {
+                                            Behavior::NodeGraph::NodeBase *node = mGraph.addNode(std::make_unique<Behavior::NodeGraph::FunctionNode>(mGraph, "Function/"s + std::string { f->mName }));
+                                            ed::SetNodePosition(60000 * mGraph.nodeIndex(node), mPopupPosition);
+                                        }
+                                    }
+                                }
+                                f = f->mNext;
                             }
+                            ImGui::EndLazyMenu();
+
                             ImGui::EndMenu();
                         }
                     }

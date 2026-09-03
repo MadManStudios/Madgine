@@ -22,6 +22,7 @@
 #include "nodeinterpreter.h"
 #include "nodes/accessornode.h"
 #include "nodes/behaviornode.h"
+#include "nodes/functionnode.h"
 
 METATABLE_BEGIN(Engine::Behavior::NodeGraph::NodeGraph)
     MEMBER(mContextualInputs)
@@ -529,12 +530,12 @@ namespace Behavior {
 
             if (!source.mNode) {
                 if (source.mGroup == 0) {
-                std::erase(mDataOutPins[source.mIndex].mTargets, target);
-                if (mDataOutPins[source.mIndex].mTargets.empty()) {
-                    onDataOutRemove(source);
-                    mDataOutPins.erase(mDataOutPins.begin() + source.mIndex);
-                }
-            } else {
+                    std::erase(mDataOutPins[source.mIndex].mTargets, target);
+                    if (mDataOutPins[source.mIndex].mTargets.empty()) {
+                        onDataOutRemove(source);
+                        mDataOutPins.erase(mDataOutPins.begin() + source.mIndex);
+                    }
+                } else {
                     std::erase(mContextualInputs[source.mIndex].mTargets, target);
                 }
             } else {
@@ -640,19 +641,22 @@ namespace Behavior {
             bool isBehaviorNode = behavior.fromString(name);
 
             bool isAccessor = StringUtil::startsWith(name, "Accessor/");
+            bool isFunction = StringUtil::startsWith(name, "Function/");
 
-            if (!isNativeNode && !isBehaviorNode && !isAccessor)
+            if (!isNativeNode && !isBehaviorNode && !isAccessor && !isFunction)
                 return STREAM_INTEGRITY_ERROR(in) << "No Node \"" << name << "\" available.\n"
                                                   << "Make sure to check the loaded plugins.";
 
-            if (isNativeNode + isBehaviorNode + isAccessor > 1)
+            if (isNativeNode + isBehaviorNode + isAccessor + isFunction > 1)
                 return STREAM_INTEGRITY_ERROR(in) << "Multiple Nodes found with same name: " << name;
 
             if (isNativeNode) {
                 node = createNode(name);
             } else if (isAccessor) {
                 node = std::make_unique<AccessorNode>(*this, name);
-            } else {                
+            } else if (isFunction) {
+                node = std::make_unique<FunctionNode>(*this, name);
+            } else {
                 node = std::make_unique<BehaviorNode>(*this, behavior);
             }
 
