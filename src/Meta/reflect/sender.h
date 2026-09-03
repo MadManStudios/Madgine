@@ -42,7 +42,7 @@ namespace Reflect {
         void connect(Receiver &receiver) override
         {
             mState.template emplace<State>(DelayedConstruct {
-                [&, sender { std::forward<Sender>(std::get<Sender>(mState)) }]() mutable { return Execution::connect(std::move(sender), receiver); } });
+                [&, sender { std::move(std::get<forward_ref_t<Sender>>(mState)) }]() mutable { return Execution::connect(std::forward<Sender>(sender), receiver); } });
         }
 
         void start() override
@@ -60,7 +60,7 @@ namespace Reflect {
             Execution::visit_state(&std::get<State>(mState), visitor);
         }
 
-        std::variant<Sender, State> mState;
+        std::variant<forward_ref_t<Sender>, State> mState;
     };
 
     struct Sender {

@@ -93,7 +93,8 @@ namespace Behavior {
 
             mIsMemberFunction = false;
 
-            mName = info.mName;
+            mNameHolder = info.mName;
+            mName = mNameHolder;
 
             mFunctionPtr = [](const FunctionTable *self, Reflect::Value &retVal, const Reflect::ArgumentList &args, Reflect::ContextPtr context) {
                 Python3InnerLock lock;

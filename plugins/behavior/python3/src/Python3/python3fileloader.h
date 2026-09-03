@@ -51,6 +51,7 @@ namespace Behavior {
                 ~Python3FunctionTable();
 
                 std::vector<Reflect::FunctionArgument> mArgumentsHolder;
+                std::string mNameHolder;
 
                 PyObjectPtr mFunctionObject;
             };

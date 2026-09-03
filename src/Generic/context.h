@@ -14,9 +14,13 @@ struct Contextual {
         return mValue;
     }
 
-    std::remove_reference_t<T> *operator->()
+    auto operator->()
     {
-        return &mValue;
+        if constexpr (std::is_pointer_v<T>) {
+            return mValue;
+        } else {
+            return &mValue;
+        }
     }
 
     T mValue;

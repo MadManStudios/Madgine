@@ -61,6 +61,7 @@ METATABLE_BEGIN(Engine::Scene::Entity::Entity)
     NAMED_MEMBER(Name, mName)
     READONLY_PROPERTY(Behaviors, behaviors)
     READONLY_PROPERTY(Lifetime, lifetimeBase)
+    FUNCTION(endLifetime)
 METATABLE_DYNAMIC_END(componentBuilder, componentInit, Engine::Scene::Entity::Entity)
 
 SERIALIZETABLE_BEGIN(Engine::Scene::Entity::Entity)

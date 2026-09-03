@@ -17,10 +17,12 @@ namespace Execution {
         }
 
         SignalStub(const SignalStub<R, Ty...> &other)
+            : mName(other.mName)
         {
         }
 
-        SignalStub(SignalStub<R, Ty...> &&) noexcept
+        SignalStub(SignalStub<R, Ty...> &&other) noexcept
+            : mName(std::move(other.mName))
         {
         }
 

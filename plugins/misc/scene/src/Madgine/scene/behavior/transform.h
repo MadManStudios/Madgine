@@ -18,5 +18,15 @@ namespace Scene {
         });
     };
 
+    constexpr auto translate = [](Math::NormalizedVector3 dir, float speed, EntityContext entity = {}) {
+        return std::move(entity) | Execution::let_value([=](auto e) {
+            return yield_simulation() | Execution::then([=](std::chrono::microseconds timeSinceLastFrame) {
+                Execution::access_binding(e, [=](Entity::Entity &e) {
+                    e.getComponent<Entity::Transform>()->mPosition += timeSinceLastFrame.count() * 0.000001f * speed * dir;
+                });
+            }) | Execution::repeat;
+        });
+    };
+
 }
 }

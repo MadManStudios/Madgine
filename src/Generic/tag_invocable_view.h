@@ -7,10 +7,13 @@ namespace Engine {
 template <typename CPO, typename R, std::same_as<void> T, typename... Args>
 struct tag_invocable_view_helper {
 
-    tag_invocable_view_helper() = default;
+    tag_invocable_view_helper()
+        : tag_invocable_view_helper(Void {})
+    {
+    }
 
     template <Concepts::DecayedNoneOf<tag_invocable_view_helper> U>
-        requires tag_invocable<CPO, U &, Args...>
+        requires std::invocable<CPO, U &, Args...>
     tag_invocable_view_helper(U &&t)
         : mPtr(std::addressof(t))
         , mF([](const void *p, Args... args) -> R {

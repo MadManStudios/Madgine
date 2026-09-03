@@ -407,14 +407,15 @@ namespace Resources {
 }
 }
 
-#define RESOURCELOADER(Loader)                                                    \
-    UNIQUECOMPONENT(Loader)                                                       \
-                                                                                  \
-    METATABLE_BEGIN_EX(1, Loader)                                                 \
-        MEMBER_EX(2, mResources)                                                  \
-    METATABLE_END_EX(4, Loader)                                                   \
-                                                                                  \
-    METATABLE_BEGIN_BASE_EX(5, Loader::Resource, Engine::Resources::ResourceBase) \
-        STORAGE_BEGIN_EX(6, Loader::Resource, Loader::Resource *)                 \
-        STORAGE_END_EX(7, Loader::Resource)                                       \
-    METATABLE_END_EX(8, Loader::Resource)
+#define RESOURCELOADER(Loader)                                                              \
+    UNIQUECOMPONENT(Loader)                                                                 \
+                                                                                            \
+    METATABLE_BEGIN_EX(1, Loader)                                                           \
+        MEMBER_EX(2, mResources)                                                            \
+    METATABLE_END_EX(4, Loader)                                                             \
+                                                                                            \
+    METATABLE_BEGIN_BASE_EX(5, Loader::Resource, Engine::Resources::ResourceBase)           \
+        STORAGE_BEGIN_EX(6, Loader::Resource, Loader::Resource *)                           \
+        FACTORY_EX(7, [](std::string_view name) { return Loader::get(name); }, std::string) \
+        STORAGE_END_EX(8, Loader::Resource)                                                 \
+    METATABLE_END_EX(9, Loader::Resource)

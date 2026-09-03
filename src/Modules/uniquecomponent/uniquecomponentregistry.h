@@ -52,6 +52,7 @@ namespace Plugins {
             std::erase(registryRegistry(), this);
         }
 
+        virtual void init() = 0;
         virtual void onPluginLoad(const Plugins::BinaryInfo *) = 0;
         virtual void onPluginUnload(const Plugins::BinaryInfo *) = 0;
 
@@ -169,7 +170,6 @@ namespace Plugins {
                     for (const Annotations &annotations : info->mComponents) {
                         mComponents.push_back(annotations);
                     }
-                    info->init();
                 }
             }
         }
@@ -188,6 +188,16 @@ namespace Plugins {
                     }
 
                     info->mBaseIndex.reset();
+                }
+            }
+        }
+
+        void init()
+        {
+            for (CollectorInfoBase *_info : mCollectors) {
+                CollectorInfo *info = static_cast<CollectorInfo *>(_info);
+                if (info->mBaseIndex) {
+                    info->init();
                 }
             }
         }

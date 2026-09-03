@@ -22,6 +22,9 @@ namespace Plugins {
                 }
             }
         }
+        for (RegistryBase *reg : registryRegistry()) {
+            reg->init();
+        }
     }
 
 }
