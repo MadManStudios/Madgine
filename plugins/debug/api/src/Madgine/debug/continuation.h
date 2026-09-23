@@ -1,10 +1,17 @@
 #pragma once
 
+#include "Generic/typed_ptr.h"
+
+#include "contextinfo.h"
+#include "debuglocation.h"
+
 namespace Engine {
 namespace Debug {
 
     enum class ContinuationMode {
         Continue,
+        Step,
+        StepInto,
         Abort
     };
 
@@ -20,12 +27,10 @@ namespace Debug {
         struct Base {
             virtual ~Base() = default;
 
-            virtual void call(ContinuationMode mode) = 0;
+            virtual void call() = 0;
 
             virtual void visitArguments(std::ostream &) = 0;
         };
-
-        static inline Base *const sAborted = reinterpret_cast<Base *>(0x1);
 
         template <typename F, typename... Args>
         struct Impl : Base {
@@ -35,23 +40,9 @@ namespace Debug {
             {
             }
 
-            /* virtual void call(ContinuationMode mode) override
+            virtual void call() override
             {
-                switch (mode) {
-                case Debug::ContinuationMode::Continue:
-                    TupleUnpacker::invokeExpand(std::forward<F>(mCallback), mRec, std::move(mArgs));
-                    break;
-                case Debug::ContinuationMode::Abort:
-                    mRec.set_done();
-                    break;
-                default:
-                    throw 0;
-                }
-            }*/
-
-            virtual void call(ContinuationMode mode) override
-            {
-                TupleUnpacker::invokeExpand(std::forward<F>(mCallback), mode, std::move(mArgs));
+                TupleUnpacker::invokeFromTuple(std::forward<F>(mCallback), std::move(mArgs));
             }
 
             virtual void visitArguments(std::ostream &out) override
@@ -70,74 +61,72 @@ namespace Debug {
             std::tuple<Args...> mArgs;
         };
 
+        static constexpr uintptr_t sModeMask = 0x7;
+
     public:
         Continuation() = default;
-
-        template <typename F, typename... Args>
-        Continuation(F &&callback, ContinuationType type, Args &&...args)
-            : mImpl(new Impl<F, Args...>(std::forward<F>(callback), std::forward<Args>(args)...))
-            , mType(type)
-        {
-        }
         Continuation(const Continuation &) = delete;
-        Continuation(Continuation &&other)
-        {
-            Base *otherImpl = other.mImpl.exchange(nullptr);
-            assert(otherImpl != sAborted);
-            mImpl = otherImpl;
-        }
         ~Continuation()
         {
-            assert(!*this);
+            assert(!implPtr());
         }
 
         template <typename Rec, typename F, typename... Args>
-        static Continuation fromPromise(Rec &rec, F &&callback, ContinuationType type, Args &&...args)
+        void suspend(TypedPtr location, Rec &rec, F &&callback, ContinuationType type, Args &&...args)
         {
-            return {
-                [&rec, callback { forward_capture<F>(callback) }](ContinuationMode mode, Args &&...args) mutable {
-                    switch (mode) {
-                    case Debug::ContinuationMode::Continue:
-                        std::forward<F>(callback)(rec, std::forward<Args>(args)...);
-                        break;
-                    case Debug::ContinuationMode::Abort:
-                        rec.set_done();
-                        break;
-                    default:
-                        throw 0;
-                    }
-                },
-                type, std::forward<Args>(args)...
+            auto f = [&rec, this, callback { forward_capture<F>(callback) }](Args &&...args) mutable {
+                if (mode() == Debug::ContinuationMode::Abort) {
+                    rec.set_done();
+                } else {
+                    std::forward<F>(callback)(rec, std::forward<Args>(args)...);
+                }
             };
+
+            Base *impl = new Impl<decltype(f), Args...>(std::move(f), std::forward<Args>(args)...);
+
+            ContextInfo &debugContext = get_debug_context(rec);
+
+            uintptr_t prev = mImpl.load();
+            do {
+                assert(!toImpl(prev));
+                ContinuationMode prevMode = static_cast<ContinuationMode>(prev);
+                if (prevMode == ContinuationMode::Abort) {
+                    impl->call();
+                    delete impl;
+                    return;
+                }
+
+            } while (!mImpl.compare_exchange_weak(prev, reinterpret_cast<uintptr_t>(impl) | static_cast<uintptr_t>(type)));
+
+            debugContext.suspend(location, type);
         }
 
-        Continuation &operator=(Continuation &&other)
+        template <typename Rec, typename F, typename... Args>
+        void pass(TypedPtr location, Rec &rec, F &&callback, ContinuationType type, IndexType<size_t> line = {}, Args &&...args)
         {
-            Base *otherImpl = other.mImpl.exchange(nullptr);
-            assert(otherImpl != sAborted);
-            if (otherImpl) {
-                Base *expected = nullptr;
-                if (!mImpl.compare_exchange_strong(expected, otherImpl)) {
-                    assert(expected == sAborted);
-                    otherImpl->call(ContinuationMode::Abort);
-                    delete otherImpl;
-                }
+            ContinuationMode currentMode = mode();
+            if (currentMode == ContinuationMode::Abort) {
+                rec.set_done();
+            } else if (currentMode != ContinuationMode::Continue || get_debug_context(rec).wantsPause(location, type, line)) {
+                suspend(location, rec, std::forward<F>(callback), type, std::forward<Args>(args)...);
+            } else {
+                std::forward<F>(callback)(rec, std::forward<Args>(args)...);
             }
-            return *this;
         }
 
         explicit operator bool() const
         {
-            Base *impl = mImpl.load();
-            return impl && impl != sAborted;
+            Base *impl = implPtr();
+            return impl;
         }
 
         bool stop()
         {
-            Base *impl = mImpl.exchange(sAborted);
-            if (impl && impl != sAborted) {
-                impl->call(ContinuationMode::Abort);
-                delete impl;
+            uintptr_t impl = mImpl.exchange(static_cast<uintptr_t>(ContinuationMode::Abort));
+            Base *ptr = toImpl(impl);
+            if (ptr) {
+                ptr->call();
+                delete ptr;
                 return true;
             }
             return false;
@@ -145,27 +134,82 @@ namespace Debug {
 
         ContinuationType type() const
         {
-            return mType;
+            uintptr_t impl = mImpl.load();
+            assert(toImpl(impl));
+            return static_cast<ContinuationType>(impl & sModeMask);
         }
 
-        void operator()(ContinuationMode mode)
+        void setMode(ContinuationMode mode)
         {
-            Base *impl = mImpl.exchange(nullptr);
-            assert(impl && impl != sAborted);
-            impl->call(mode);
-            delete impl;
+            uintptr_t prev = mImpl.load();
+            do {
+                assert(!toImpl(prev));
+                if (prev == static_cast<uintptr_t>(ContinuationMode::Abort))
+                    return;
+            } while (!mImpl.compare_exchange_weak(prev, static_cast<uintptr_t>(mode)));
+        }
+
+        ContinuationMode mode() const
+        {
+            uintptr_t impl = mImpl.load();
+            assert(!toImpl(impl));
+            return static_cast<ContinuationMode>(impl & sModeMask);
+        }
+
+        void operator()(ContinuationMode newMode)
+        {
+            if (newMode == ContinuationMode::Abort) {
+                stop();
+                return;
+            }
+
+            uintptr_t prev = mImpl.load();
+            do {
+                if (!toImpl(prev) && (prev & sModeMask) == static_cast<uintptr_t>(ContinuationMode::Abort)) {
+                    return;
+                }
+            } while (!mImpl.compare_exchange_weak(prev, static_cast<uintptr_t>(newMode)));
+
+            Base *impl = toImpl(prev);
+            if (impl) {
+                impl->call();
+                delete impl;
+            }
+        }
+
+        void pause()
+        {
+            uintptr_t prev = mImpl.load();
+            do {
+                if (toImpl(prev)) {
+                    return;
+                }
+                if ((prev & sModeMask) == static_cast<uintptr_t>(ContinuationMode::Abort)) {
+                    return;
+                }
+            } while (!mImpl.compare_exchange_weak(prev, static_cast<uintptr_t>(ContinuationMode::StepInto)));
         }
 
         void visitArguments(std::ostream &out) const
         {
-            Base *impl = mImpl.load();
-            assert(impl && impl != sAborted);
+            Base *impl = implPtr();
+            assert(impl);
             impl->visitArguments(out);
         }
 
+    protected:
+        static Base *toImpl(uintptr_t p)
+        {
+            return reinterpret_cast<Base *>(p & ~sModeMask);
+        }
+
+        Base *implPtr() const
+        {
+            return toImpl(mImpl.load());
+        }
+
     private:
-        std::atomic<Base *> mImpl = nullptr;
-        ContinuationType mType;
+        std::atomic<uintptr_t> mImpl = 0;
     };
 
 }

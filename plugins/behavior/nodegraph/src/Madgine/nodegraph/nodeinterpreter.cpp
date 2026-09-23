@@ -35,8 +35,8 @@ namespace Behavior {
             }
 
             location.mNode = node;
-
-            mContinuation = Debug::get_debug_context(receiver).pass(&mDebugLocation, receiver, [=, this, &location](BehaviorReceiver &receiver) {
+           
+            mContinuation.pass(&mDebugLocation, receiver, [=, this, &location](BehaviorReceiver &receiver) {
                 if (pin && pin.mNode) {
                     node->interpret({ { { { *this }, *node } }, receiver, location }, mData[pin.mNode - 1], pin.mIndex, pin.mGroup);
                 } else {

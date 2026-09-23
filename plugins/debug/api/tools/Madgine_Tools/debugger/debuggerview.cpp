@@ -137,6 +137,7 @@ namespace Tools {
                                 if (type != Debug::ContinuationType::Flow) {
                                     ImGui::PopStyleColor(1);
                                 }
+                                actualContent = true;
                             }
                         }
                         lineFeedback = bp.mLineFeedback;
@@ -219,7 +220,11 @@ namespace Tools {
         }
         ImGui::SameLine(0, 0);
         if (ImGui::Button(IMGUI_ICON_STEP)) {
-            button = ControlButton::STEP;
+            button = ControlButton::STEPOVER;
+        }
+        ImGui::SameLine(0, 0);
+        if (ImGui::Button(IMGUI_ICON_STEP)) {
+            button = ControlButton::STEPINTO;
         }
         if (running)
             ImGui::EndDisabled();

@@ -7,7 +7,8 @@ namespace Tools {
     enum class ControlButton {
         NONE,
         PLAY,
-        STEP,
+        STEPOVER,
+        STEPINTO,
         PAUSE,
         STOP
     };
@@ -23,7 +24,7 @@ namespace Tools {
 
     private:
         ControlButton mButton;
-        std::vector<std::pair<Debug::Continuation, Debug::ContinuationMode>> mContinuations;
+        std::vector<std::pair<Debug::Continuation&, Debug::ContinuationMode>> mContinuations;
     };
 
 }
