@@ -34,7 +34,11 @@ namespace Tools {
         }
 
         if (ImGui::InlineContextButton(IMGUI_ICON_STEP)) {
-            button = ControlButton::STEP;
+            button = ControlButton::STEPOVER;
+        }
+
+        if (ImGui::InlineContextButton(IMGUI_ICON_STEP)) {
+            button = ControlButton::STEPINTO;
         }
 
         if (ImGui::InlineContextButton(IMGUI_ICON_PLAY)) {
@@ -44,13 +48,16 @@ namespace Tools {
         ImGui::PopID();
         switch (button) {
         case ControlButton::PLAY:
-            mContinuations.emplace_back(std::move(continuation), Debug::ContinuationMode::Continue);
+            mContinuations.emplace_back(continuation, Debug::ContinuationMode::Continue);
             break;
-        case ControlButton::STEP:
-            mContinuations.emplace_back(std::move(continuation), Debug::ContinuationMode::Continue);
+        case ControlButton::STEPOVER:
+            mContinuations.emplace_back(continuation, Debug::ContinuationMode::Step);
+            break;
+        case ControlButton::STEPINTO:
+            mContinuations.emplace_back(continuation, Debug::ContinuationMode::StepInto);
             break;
         case ControlButton::STOP:
-            mContinuations.emplace_back(std::move(continuation), Debug::ContinuationMode::Abort);
+            mContinuations.emplace_back(continuation, Debug::ContinuationMode::Abort);
             break;
         case ControlButton::PAUSE:
             throw 0;

@@ -6,6 +6,7 @@
 
 #include "Meta/reflect/metatable_impl.h"
 
+#include "continuation.h"
 #include "debugger.h"
 #include "debuglistener.h"
 
@@ -18,7 +19,7 @@ namespace Debug {
 
     bool ContextInfo::wantsPause(TypedPtr location, ContinuationType type, IndexType<size_t> line)
     {
-        bool pause = (line && (mPauseRequested || type == Debug::ContinuationType::Error || getBreakpoint(location.ptr(), line)))
+        bool pause = (line && (type == Debug::ContinuationType::Error || getBreakpoint(location.ptr(), line)))
             || mStopRequested;
 
         for (DebugListener *listener : Debugger::getSingleton().mListeners) {
@@ -28,29 +29,24 @@ namespace Debug {
         return pause;
     }
 
-    Continuation ContextInfo::suspend(TypedPtr location, Continuation callback)
+    void ContextInfo::suspend(TypedPtr location, ContinuationType type)
     {
         for (DebugListener *listener : Debugger::getSingleton().mListeners)
-            listener->onSuspend(*this, location, callback.type());
-
-        return callback;
+            listener->onSuspend(*this, location, type);
     }
 
     ContinuationMode ContextInfo::resume()
     {
-        mPauseRequested = false;
         return ContinuationMode::Continue;
     }
 
     ContinuationMode ContextInfo::step()
     {
-        mPauseRequested = true;
-        return ContinuationMode::Continue;
+        return ContinuationMode::Step;
     }
 
     std::nullopt_t ContextInfo::pause()
     {
-        mPauseRequested = true;
         return std::nullopt;
     }
 

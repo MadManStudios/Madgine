@@ -210,20 +210,16 @@ namespace Behavior {
                 Platform::Log::Log *log = suspend.log();
 
                 if (Execution::get_stop_token(*rec)->registerCallback(&debugLine)) {
-                    debugLine.mContinuation = Debug::get_debug_context(*rec).suspend(frame, { [coro { std::move(coro) }, rec, log, ptr = &debugLine](Debug::ContinuationMode mode) mutable {
-                                                                                                 Execution::get_stop_token(*rec)->unregisterCallback(ptr);
-                                                                                                 Python3Lock lock { rec, log };
-                                                                                                 switch (mode) {
-                                                                                                 case Debug::ContinuationMode::Continue:
-                                                                                                     resumeCoroutine(coro, toPyTuple(Reflect::ArgumentList { std::monostate {} }));
-                                                                                                     break;
-                                                                                                 case Debug::ContinuationMode::Abort:
-                                                                                                     resumeCoroutine(coro, nullptr);
-                                                                                                     break;
-                                                                                                 }
-                                                                                                 coro.reset();
-                                                                                             },
-                                                                                                Debug::ContinuationType::Flow });
+                    debugLine.mContinuation.suspend(frame, *rec, [coro { std::move(coro) }, log, &debugLine](BehaviorReceiver &rec) mutable {
+                        Execution::get_stop_token(rec)->unregisterCallback(&debugLine);
+                        Python3Lock lock { &rec, log };
+                        if (debugLine.mContinuation.mode() == Debug::ContinuationMode::Abort) {
+                            resumeCoroutine(coro, nullptr);
+                        } else {
+                            resumeCoroutine(coro, toPyTuple(Reflect::ArgumentList { std::monostate {} }));
+                        }
+                        coro.reset();
+                    }, Debug::ContinuationType::Flow);
                 } else {
                     Python3Lock lock { rec, log };
                     resumeCoroutine(coro, nullptr);
@@ -314,8 +310,8 @@ namespace Behavior {
                 PyObject *args = state.mResult;
                 return PyState_send(self, &args, 1);
             } else {
-                Py_INCREF(self);                
-                return (PyObject*)self;
+                Py_INCREF(self);
+                return (PyObject *)self;
             }
         }
 

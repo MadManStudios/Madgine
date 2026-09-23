@@ -51,21 +51,7 @@ namespace Behavior {
 
     void CoroutineBehaviorState::pass(Closure<void()> callback)
     {
-        Debug::ContextInfo &context = Debug::get_debug_context(*mReceiver);
-        if (wantsPause())
-            mDebugLocation.mContinuation = context.suspend(&mDebugLocation, { [this, callback { std::move(callback) }](Debug::ContinuationMode mode) mutable {
-                switch (mode) {
-                case Debug::ContinuationMode::Continue:
-                    callback();
-                    break;
-                case Debug::ContinuationMode::Abort:
-                    mReceiver->set_done();
-                    break;
-                default:
-                    throw 0;
-                } }, Debug::ContinuationType::Flow });
-        else
-            callback();
+        mDebugLocation.mContinuation.pass(&mDebugLocation, *mReceiver, [this, callback { std::move(callback) }](BehaviorReceiver &rec) { callback(); }, Debug::ContinuationType::Flow, mDebugLocation.mLine);
     }
 
     CoroutineBehaviorState::InitialSuspend CoroutineBehaviorState::initial_suspend() noexcept

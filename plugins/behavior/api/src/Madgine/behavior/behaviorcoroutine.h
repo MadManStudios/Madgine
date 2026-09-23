@@ -64,6 +64,11 @@ namespace Behavior {
             return resolveNames(rec, std::forward<Args>(args)...);
         }
 
+        CoroutineBehaviorState()
+            : BoundValueBase(this)
+        {
+        }
+
         template <typename... Args>
         CoroutineBehaviorState(Args &&...args)
             : BoundValueBase(this)
@@ -165,7 +170,7 @@ namespace Behavior {
 
         void await_suspend(BehaviorCoroutineHandle handle)
         {
-            mState.pass([this, handle, wasPaused {mState.wantsPause()}]() {
+            mState.pass([this, handle, wasPaused { mState.wantsPause() }]() {
                 if (wasPaused && mAwaiter.await_ready()) {
                     handle.resume();
                 } else {
