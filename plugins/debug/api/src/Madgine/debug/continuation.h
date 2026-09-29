@@ -22,7 +22,7 @@ namespace Debug {
         Cancelled
     };
 
-    struct [[nodiscard]] Continuation {
+    struct Continuation {
     private:
         struct Base {
             virtual ~Base() = default;

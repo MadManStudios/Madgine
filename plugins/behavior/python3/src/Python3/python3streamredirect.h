@@ -4,6 +4,8 @@ namespace Engine {
 namespace Behavior {
     namespace Python3 {
 
+        MADGINE_PYTHON3_EXPORT extern PyObject *sPyLogContextVar;
+
         struct Python3StreamRedirect {
 
             Python3StreamRedirect();

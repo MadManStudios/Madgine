@@ -352,6 +352,11 @@ namespace Behavior {
             Python3NamespaceLoader::getSingleton().setup();
             Python3BehaviorsLoader::getSingleton().setup();
 
+            sPyContinuationContextVar = PyContextVar_New("Continuation", NULL);
+            sPyReceiverContextVar = PyContextVar_New("Receiver", NULL);
+            sPyLogContextVar = PyContextVar_New("Log", NULL);
+            assert(sPyContinuationContextVar && sPyReceiverContextVar && sPyLogContextVar);
+
             PyEval_SaveThread();
 
             co_return true;
@@ -368,7 +373,7 @@ namespace Behavior {
                 co_await res.second.forceUnload();
             }
 
-            lock(nullptr);
+            lock();
 
             Python3BehaviorFactory::sFactory.mBehaviorObjects.clear();
             loader.cleanup();
@@ -387,11 +392,16 @@ namespace Behavior {
 
         Reflect::Result Python3Environment::execute(Reflect::Value &retVal, std::string_view command, Platform::Log::Log *log)
         {
-            Python3Lock lock { log };
+            Python3Lock lock;
 
             PyModulePtr main { "__main__" };
 
+            PyObjectPtr context = PyContext_New();
+            PyContext_Enter(context);
+            PyObjectPtr token = PyContextVar_Set(sPyLogContextVar, PyCapsule_New(log, "Log", nullptr));
             PyObjectPtr result = PyRun_String(command.data(), Py_eval_input, main.getDict(), main.getDict());
+            PyContext_Exit(context);
+
             return fromPyObject(retVal, result);
         }
 

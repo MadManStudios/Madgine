@@ -13,27 +13,21 @@ namespace Engine {
 namespace Behavior {
     namespace Python3 {
 
-        MADGINE_PYTHON3_EXPORT void handleExecutionObject(PyObject *obj);
-        MADGINE_PYTHON3_EXPORT void handleExecutionError(Reflect::Error error);
+        MADGINE_PYTHON3_EXPORT void handleExecutionObject(BehaviorReceiver &rec, PyObject *obj);
+        MADGINE_PYTHON3_EXPORT void handleExecutionError(BehaviorReceiver &rec, Reflect::Error error);
 
-        struct ExecutionState {
-            BehaviorReceiver *mReceiver = nullptr;
-            Platform::Log::Log *mLog = nullptr;
-        };
-        ExecutionState &executionState();
-
-        bool lock(BehaviorReceiver * = nullptr, Platform::Log::Log * = nullptr);
-        ExecutionState unlock();
+        bool lock();
+        void unlock();
 
         MADGINE_PYTHON3_EXPORT extern PyTypeObject PyDebugLineType;
         MADGINE_PYTHON3_EXPORT extern PyTypeObject PyStateType;
 
-        struct DebugLine : Execution::StopCallback {
+        MADGINE_PYTHON3_EXPORT extern PyObject *sPyContinuationContextVar;
+        MADGINE_PYTHON3_EXPORT extern PyObject *sPyReceiverContextVar;
 
-            void stopRequested() override;
+        struct DebugLine {
 
             size_t mLineNr;
-            Debug::Continuation mContinuation;
         };
 
         struct PyDebugLine {
@@ -41,7 +35,13 @@ namespace Behavior {
                 DebugLine mLine;
         };
 
-        MADGINE_PYTHON3_EXPORT void resumeCoroutine(PyObjectPtr coro, PyObjectPtr value);
+        struct Python3Coroutine {
+            mutable Debug::Continuation mContinuation;
+            PyObjectPtr mCoroutine;
+            PyObjectPtr mContext;
+        };
+
+        MADGINE_PYTHON3_EXPORT void resumeCoroutine(Python3Coroutine &coro, BehaviorReceiver &rec, PyObjectPtr value);
 
         extern PyMethodDef PyStateMethods[];
 
@@ -51,7 +51,8 @@ namespace Behavior {
             void resume();
 
             std::atomic_flag mFlag;
-            PyObjectPtr mCoroutine;
+            Python3Coroutine *mCoroutine = nullptr;
+            BehaviorReceiver *mRec = nullptr;
             PyObjectPtr mResult;
 
             Debug::SenderLocation *mChild = nullptr;
@@ -78,8 +79,14 @@ namespace Behavior {
                 return tag_invoke(f, rec.mReceiver, std::forward<Args>(args)...);
             }
 
+            friend Debug::Continuation *tag_invoke(Execution::get_continuation_t, PyReceiver &rec)
+            {
+                return &rec.mContinuation;
+            }
+
             PyStateBase &mState;
             BehaviorReceiver &mReceiver;
+            Debug::Continuation &mContinuation;
         };
 
         template <typename Sender>
@@ -101,12 +108,23 @@ namespace Behavior {
         PyObject *PyAwait(Sender &&sender)
         {
             PyObject *obj = PyState_Alloc(sizeof(PyStateWrapper<Sender>));
+            PyObjectPtr pyContinuation;
+            if (PyContextVar_Get(sPyContinuationContextVar, NULL, &pyContinuation) < 0)
+                return nullptr;
+            Debug::Continuation *continuation = static_cast<Debug::Continuation *>(PyCapsule_GetPointer(pyContinuation, "Continuation"));
+            if (!continuation)
+                return nullptr;
+            PyObjectPtr pyReceiver;
+            if (PyContextVar_Get(sPyReceiverContextVar, NULL, &pyReceiver) < 0)
+                return nullptr;
+            BehaviorReceiver *receiver = static_cast<BehaviorReceiver *>(PyCapsule_GetPointer(pyReceiver, "Receiver"));
+            if (!receiver)
+                return nullptr;
             Python3Suspend suspend;
             PyState<Sender> *state = &reinterpret_cast<PyStateWrapper<Sender> *>(obj)->mState;
-            assert(suspend.receiver());
             new (state) PyState<Sender>;
 
-            construct(state->mInnerState, DelayedConstruct { [&]() { return Execution::connect(std::forward<Sender>(sender) | Execution::stoppable | Execution::with_debug_location(state->mChild), PyReceiver { *state, *suspend.receiver() }); } });
+            construct(state->mInnerState, DelayedConstruct { [&]() { return Execution::connect(std::forward<Sender>(sender) | Execution::stoppable | Execution::with_debug_location(state->mChild), PyReceiver { *state, *receiver, *continuation }); } });
             state->mDestruct = [](PyStateBase &state) { destruct(static_cast<PyState<Sender> &>(state).mInnerState); };
             state->mInnerState->start();
 

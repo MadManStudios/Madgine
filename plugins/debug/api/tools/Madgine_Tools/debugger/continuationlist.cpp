@@ -37,7 +37,7 @@ namespace Tools {
             button = ControlButton::STEPOVER;
         }
 
-        if (ImGui::InlineContextButton(IMGUI_ICON_STEP)) {
+        if (ImGui::InlineContextButton(IMGUI_ICON_STEP "##1")) {
             button = ControlButton::STEPINTO;
         }
 

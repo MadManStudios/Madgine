@@ -17,6 +17,8 @@ namespace Engine {
 namespace Behavior {
     namespace Python3 {
 
+        PyObject *sPyLogContextVar = nullptr;
+
         Python3StreamRedirect::Python3StreamRedirect()
         {
         }
@@ -54,12 +56,17 @@ namespace Behavior {
             if (text == "\n")
                 return 0;
 
-            Platform::Log::Log *log = executionState().mLog;
+            Platform::Log::Log *log = nullptr;
+            PyObjectPtr pyLog;
+            int result = PyContextVar_Get(sPyLogContextVar, NULL, &pyLog);
+            if (result == 0)
+                log = static_cast<Platform::Log::Log *>(PyCapsule_GetPointer(pyLog, "Log"));            
 
             if (log) {
                 log->log(text, Platform::Log::MessageType::INFO_TYPE);
                 return text.size();
             } else {
+                PyErr_Clear();
                 LOG(text);
                 return text.size();
             }

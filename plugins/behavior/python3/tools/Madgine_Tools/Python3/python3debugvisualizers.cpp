@@ -16,7 +16,7 @@
 namespace Engine {
 namespace Tools {
 
-    std::vector<TypedPtr> visualizeBehaviorDebugLocation(ContinuationList &continuations, DebuggerView &view, const Debug::ContextInfo &context, const PyObject *location, TypedPtr inlineLocation)
+    std::vector<TypedPtr> visualizeBehaviorDebugLocation(ContinuationList &continuations, DebuggerView &view, const Debug::ContextInfo &context, const Behavior::Python3::Python3Coroutine *location, TypedPtr inlineLocation)
     {
         if (!location)
             return {};
@@ -25,7 +25,7 @@ namespace Tools {
 
         Behavior::Python3::Python3Lock lock;
 
-        Behavior::Python3::PyObjectPtr coro = Behavior::Python3::PyObjectPtr::fromBorrowed(const_cast<PyObject *>(location));
+        Behavior::Python3::PyObjectPtr coro = location->mCoroutine;
 
         ImGui::BeginGroupPanel(PyUnicode_AsUTF8(coro.get("__name__")));
 
@@ -74,8 +74,7 @@ namespace Tools {
                             }
                         }
                     } else if (Py_IS_TYPE(next, &Behavior::Python3::PyDebugLineType)) {
-                        Behavior::Python3::DebugLine &debugLine = reinterpret_cast<Behavior::Python3::PyDebugLine *>(static_cast<PyObject *>(next))->mLine;
-                        continuations.controls(debugLine.mContinuation);
+                        continuations.controls(location->mContinuation);
                     } else if (!Py_IsNone(next)) {
                         if (BeginDebuggablePanel("Frame")) {
                             std::ranges::move(view.visualizeDebugLocation(continuations, context, static_cast<PyObject *>(next), location), std::back_inserter(children));

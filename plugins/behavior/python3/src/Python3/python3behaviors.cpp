@@ -17,6 +17,7 @@
 #include "Meta/reflect/metatable_impl.h"
 
 #include "python3env.h"
+#include "python3streamredirect.h"
 #include "util/pyobjectutil.h"
 #include "util/pysender.h"
 #include "util/python3lock.h"
@@ -42,10 +43,17 @@ namespace Behavior {
             if (!type) {
                 PyErr_SetString(PyExc_TypeError, "type must be a TypeName");
                 return nullptr;
-            }            
+            }
+
+            PyObjectPtr pyReceiver;
+            if (PyContextVar_Get(sPyReceiverContextVar, NULL, &pyReceiver) < 0)
+                return nullptr;
+            BehaviorReceiver *rec = static_cast<BehaviorReceiver *>(PyCapsule_GetPointer(pyReceiver, "Receiver"));
+            if (!rec)
+                return nullptr;
 
             Reflect::Value v;
-            Reflect::Result result = Reflect::get_reflect_contextual(*executionState().mReceiver, v, type->mMetaTable);
+            Reflect::Result result = Reflect::get_reflect_contextual(*rec, v, type->mMetaTable);
             if (result) {
                 return toPyError(std::move(*result.mError));
             }
@@ -85,39 +93,61 @@ namespace Behavior {
             Python3BehaviorState(PyObjectPtr function, const Reflect::ArgumentList &args)
             {
                 Python3Lock lock;
-                mCoroutine = function.call(args);
-                if (!mCoroutine) {
-                    mCoroutine = PyErr_GetRaisedException();
+                mCoroutine.mCoroutine = function.call(args);
+                if (!mCoroutine.mCoroutine) {
+                    mCoroutine.mCoroutine = PyErr_GetRaisedException();
                 }
             }
 
             ~Python3BehaviorState()
             {
                 Python3Lock lock;
-                mCoroutine.reset();
+                mCoroutine.mCoroutine.reset();
+                mCoroutine.mContext.reset();
             }
 
             void start()
             {
-                Python3Lock lock { this };
-                if (PyExceptionInstance_Check(mCoroutine)) {
-                    handleExecutionError(fromPyError(mCoroutine));
+                Debug::Continuation *parent = Execution::get_continuation(*this);
+                mCoroutine.mContinuation.setMode(parent && (parent->mode() == Debug::ContinuationMode::StepInto) ? Debug::ContinuationMode::Step : Debug::ContinuationMode::Continue);
+
+                Python3Lock lock;
+                if (PyExceptionInstance_Check(mCoroutine.mCoroutine)) {
+                    handleExecutionError(*this, fromPyError(mCoroutine.mCoroutine));
                     return;
                 }
+                
+                if (!mCoroutine.mContext) {
+                    mCoroutine.mContext = PyContext_New();
+                    if (PyContext_Enter(mCoroutine.mContext) < 0)
+                        handleExecutionError(*this, fetchError());
+                    PyObjectPtr token = PyContextVar_Set(sPyContinuationContextVar, PyCapsule_New(&mCoroutine.mContinuation, "Continuation", nullptr));
+                    if (!token)
+                        handleExecutionError(*this, fetchError());
+                    token = PyContextVar_Set(sPyReceiverContextVar, PyCapsule_New(this, "Receiver", nullptr));
+                    if (!token)
+                        handleExecutionError(*this, fetchError());
+                    Platform::Log::Log *log = Platform::Log::get_log(*this);
+                    if (log)
+                        token = PyContextVar_Set(sPyLogContextVar, PyCapsule_New(log, "Log", nullptr));
+                    if (PyContext_Exit(mCoroutine.mContext) < 0)
+                        handleExecutionError(*this, fetchError());
+                }
 
-                resumeCoroutine(mCoroutine, toPyTuple(Reflect::ArgumentList { std::monostate {} }));
+                resumeCoroutine(mCoroutine, *this, toPyTuple(Reflect::ArgumentList { std::monostate {} }));
             }
 
             void stop()
             {
+                mCoroutine.mContinuation.stop();
             }
 
             friend auto tag_invoke(Execution::visit_state_t, Python3BehaviorState *state, auto &&visitor)
             {
-                visitor(Execution::State::DebugLocation { state ? static_cast<PyObject *>(state->mCoroutine) : nullptr });
+                visitor(Execution::State::DebugLocation { state ? &state->mCoroutine : nullptr });
             }
 
-            PyObjectPtr mCoroutine;
+            Python3Coroutine mCoroutine;
         };
 
         struct Python3BehaviorSender : Execution::base_sender {

@@ -22,111 +22,80 @@ namespace Engine {
 namespace Behavior {
     namespace Python3 {
 
-        void handleExecutionError(Reflect::Error error)
+        PyObject *sPyContinuationContextVar = nullptr;
+        PyObject *sPyReceiverContextVar = nullptr;
+
+        void handleExecutionError(BehaviorReceiver &rec, Reflect::Error error)
         {
             Python3Suspend suspend;
-            suspend.fetchReceiver()->set_error(std::move(error));
+            rec.set_error(std::move(error));
         }
 
-        void handleExecutionObject(PyObject *obj)
+        void handleExecutionObject(BehaviorReceiver &rec, PyObject *obj)
         {
             if (!obj) {
                 if (PyErr_ExceptionMatches(PyExc_EOFError)) {
                     Python3Suspend suspend;
-                    suspend.fetchReceiver()->set_done();
+                    rec.set_done();
                 } else {
-                    handleExecutionError(fetchError());
+                    handleExecutionError(rec, fetchError());
                 }
                 return;
             }
 
             Python3Suspend suspend;
-            BehaviorReceiver *rec = suspend.fetchReceiver();
 
             if (obj == Py_None) {
-                rec->set_value();
+                rec.set_value();
             } else if (PyUnicode_Check(obj)) {
                 const char *s;
                 if (!PyArg_Parse(obj, "s", &s))
                     throw 0;
-                rec->set_value(std::string { s });
+                rec.set_value(std::string { s });
             } else if (PyBool_Check(obj)) {
-                rec->set_value(obj == Py_True);
+                rec.set_value(obj == Py_True);
             } else if (PyLong_Check(obj)) {
                 int i;
                 if (!PyArg_Parse(obj, "i", &i))
                     throw 0;
-                rec->set_value(i);
+                rec.set_value(i);
             } else if (PyDict_Check(obj)) {
                 Py_INCREF(obj);
-                rec->set_value(Reflect::AssociativeRange { PyDictPtr { obj }, Engine::type_holder<VirtualRangeHelper> });
+                rec.set_value(Reflect::AssociativeRange { PyDictPtr { obj }, Engine::type_holder<VirtualRangeHelper> });
             } else if (PyList_Check(obj)) {
                 Py_INCREF(obj);
-                rec->set_value(Reflect::SequenceRange { PyListPtr { obj }, Engine::type_holder<VirtualRangeHelper> });
+                rec.set_value(Reflect::SequenceRange { PyListPtr { obj }, Engine::type_holder<VirtualRangeHelper> });
             } else if (obj->ob_type == &PyScopePtrType) {
-                rec->set_value(reinterpret_cast<PyScopePtr *>(obj)->mPtr);
+                rec.set_value(reinterpret_cast<PyScopePtr *>(obj)->mPtr);
             } else if (PyTuple_Check(obj)) {
                 size_t size = PyTuple_Size(obj);
                 Reflect::ArgumentList args { std::true_type {}, size };
                 for (size_t i = 0; i < args.size(); ++i) {
                     Reflect::Result result = fromPyObject(args[i], PyTuple_GetItem(obj, i));
                     if (result) {
-                        rec->set_error(std::move(*result.mError));
+                        rec.set_error(std::move(*result.mError));
                         return;
                     }
                 }
-                rec->set_value(std::move(args));
+                rec.set_value(std::move(args));
             } else {
                 Py_INCREF(obj);
-                rec->set_value(Reflect::ObjectPtr { std::make_unique<PyObjectInstance>(obj) });
+                rec.set_value(Reflect::ObjectPtr { std::make_unique<PyObjectInstance>(obj) });
             }
         }
 
-        static std::map<PyThreadState *, ExecutionState> sExecutionState;
-
-        ExecutionState &executionState()
+        bool lock()
         {
-            return sExecutionState.at(PyThreadState_Get());
-        }
-
-        bool lock(BehaviorReceiver *rec, Platform::Log::Log *log)
-        {
-            if (rec && !log)
-                log = Platform::Log::get_log(*rec);
             // assert(PyGILState_Check() == 0);
             [[maybe_unused]] PyGILState_STATE handle = PyGILState_Ensure();
             assert(PyGILState_Check() == 1);
-            if (handle == PyGILState_UNLOCKED) {
-
-                auto &state = sExecutionState.try_emplace(PyThreadState_Get()).first->second;
-
-                assert(state.mReceiver == nullptr);
-                assert(state.mLog == nullptr);
-                state.mLog = log;
-                state.mReceiver = rec;
-
-                LOG_DEBUG("[" << std::this_thread::get_id() << ", " << PyThreadState_Get() << "] Lock: " << rec);
-
-                return true;
-            }
-            return false;
+            return handle == PyGILState_UNLOCKED;
         }
 
-        ExecutionState unlock()
+        void unlock()
         {
-            auto &state = executionState();
-
-            LOG_DEBUG("[" << std::this_thread::get_id() << ", " << PyThreadState_Get() << "] Unlock: " << state.mReceiver);
-
-            ExecutionState result = std::exchange(state, {});
             assert(PyGILState_Check() == 1);
             PyGILState_Release(PyGILState_UNLOCKED);
-            return result;
-        }
-
-        void DebugLine::stopRequested()
-        {
-            mContinuation.stop();
         }
 
         int PyDebugLine_init(PyDebugLine *self, PyObject *args, PyObject *kwds)
@@ -143,10 +112,23 @@ namespace Behavior {
 
         PyObject *PyDebugLine_next(PyDebugLine *self)
         {
-            Debug::ContextInfo &context = Debug::get_debug_context(*executionState().mReceiver);
+            PyObjectPtr pyReceiver;
+            if (PyContextVar_Get(sPyReceiverContextVar, NULL, &pyReceiver) < 0)
+                return nullptr;
+            BehaviorReceiver *rec = static_cast<BehaviorReceiver *>(PyCapsule_GetPointer(pyReceiver, "Receiver"));
+            if (!rec)
+                return nullptr;
+            Debug::ContextInfo &context = Debug::get_debug_context(*rec);
             DebugLine &line = self->mLine;
 
-            if (line.mLineNr > 0 && context.wantsPause(PyEval_GetFrame(), Debug::ContinuationType::Flow, line.mLineNr)) {
+            PyObjectPtr continuation;
+            if (PyContextVar_Get(sPyContinuationContextVar, NULL, &continuation) < 0)
+                return nullptr;
+            Debug::Continuation *cont = static_cast<Debug::Continuation *>(PyCapsule_GetPointer(continuation, "Continuation"));
+            if (!cont)
+                return nullptr;
+
+            if (line.mLineNr > 0 && (context.wantsPause(PyEval_GetFrame(), Debug::ContinuationType::Flow, line.mLineNr) || cont->mode() != Debug::ContinuationMode::Continue)) {
                 line.mLineNr = 0;
                 PyObject *selfObj = reinterpret_cast<PyObject *>(self);
                 Py_IncRef(selfObj);
@@ -176,17 +158,19 @@ namespace Behavior {
             .tp_new = PyType_GenericNew,
         };
 
-        void resumeCoroutine(PyObjectPtr coro, PyObjectPtr value)
+        void resumeCoroutine(Python3Coroutine &coro, BehaviorReceiver &rec, PyObjectPtr value)
         {
             PyObjectPtr result;
+            PyContext_Enter(coro.mContext);
             if (!value) {
                 PyObjectPtr exc = PyObject_CallFunction(PyExc_EOFError, NULL, NULL);
-                result = PyObject_CallFunctionObjArgs(coro.get("throw"), static_cast<PyObject *>(exc), NULL);
+                result = PyObject_CallFunctionObjArgs(coro.mCoroutine.get("throw"), static_cast<PyObject *>(exc), NULL);
             } else if (PyExceptionInstance_Check(value)) {
-                result = PyObject_CallFunctionObjArgs(coro.get("throw"), static_cast<PyObject *>(value), NULL);
+                result = PyObject_CallFunctionObjArgs(coro.mCoroutine.get("throw"), static_cast<PyObject *>(value), NULL);
             } else {
-                result = PyObject_Call(coro.get("send"), value, NULL);
+                result = PyObject_Call(coro.mCoroutine.get("send"), value, NULL);
             }
+            PyContext_Exit(coro.mContext);
             if (!result) {
                 if (PyErr_ExceptionMatches(PyExc_StopIteration)) {
                     PyObjectPtr type, value, traceback;
@@ -194,36 +178,20 @@ namespace Behavior {
 
                     result = value.get("value");
                 }
-                handleExecutionObject(result);
+                handleExecutionObject(rec, result);
             } else if (Py_IS_TYPE(result, &PyStateType)) {
                 PyStateBase &state = reinterpret_cast<PyStateHelper *>(static_cast<PyObject *>(result))->mState;
-                state.mCoroutine = std::move(coro);
-
+                state.mCoroutine = &coro;
+                state.mRec = &rec;
                 state.resume();
             } else if (Py_IS_TYPE(result, &PyDebugLineType)) {
-                DebugLine &debugLine = reinterpret_cast<PyDebugLine *>(static_cast<PyObject *>(result))->mLine;
-                // yield(location, rec, std::forward<F>(callback), outContinuation, type, std::forward<Args>(args)...);
-                PyObject *frame = coro.get("cr_frame");
-
                 Python3Suspend suspend;
-                BehaviorReceiver *rec = suspend.fetchReceiver();
-                Platform::Log::Log *log = suspend.log();
 
-                if (Execution::get_stop_token(*rec)->registerCallback(&debugLine)) {
-                    debugLine.mContinuation.suspend(frame, *rec, [coro { std::move(coro) }, log, &debugLine](BehaviorReceiver &rec) mutable {
-                        Execution::get_stop_token(rec)->unregisterCallback(&debugLine);
-                        Python3Lock lock { &rec, log };
-                        if (debugLine.mContinuation.mode() == Debug::ContinuationMode::Abort) {
-                            resumeCoroutine(coro, nullptr);
-                        } else {
-                            resumeCoroutine(coro, toPyTuple(Reflect::ArgumentList { std::monostate {} }));
-                        }
-                        coro.reset();
-                    }, Debug::ContinuationType::Flow);
-                } else {
-                    Python3Lock lock { rec, log };
-                    resumeCoroutine(coro, nullptr);
-                }
+                coro.mContinuation.suspend(&coro, rec, [&coro](BehaviorReceiver &rec) mutable { // TODO: Proper wrapping receiver
+                    Python3Lock lock;
+                    resumeCoroutine(coro, rec, toPyTuple(Reflect::ArgumentList { std::monostate {} }));
+                },
+                    Debug::ContinuationType::Flow);
             } else {
                 std::string typeName = PyUnicode_AsUTF8(PyType_GetName(Py_TYPE(result)));
                 Python3Suspend suspend;
@@ -241,7 +209,7 @@ namespace Behavior {
         void PyStateBase::resume()
         {
             if (mFlag.test_and_set()) {
-                resumeCoroutine(std::move(mCoroutine), std::move(mResult));
+                resumeCoroutine(*mCoroutine, *mRec, std::move(mResult));
             }
         }
 
@@ -251,7 +219,7 @@ namespace Behavior {
             mState.mDestruct(mState);
             mState.mDestruct = nullptr;
 
-            Python3Lock lock { &mReceiver };
+            Python3Lock lock;
             mState.mResult = toPyTuple(values);
             if (!mState.mResult)
                 mState.mResult = PyErr_GetRaisedException();
@@ -265,7 +233,7 @@ namespace Behavior {
             mState.mDestruct(mState);
             mState.mDestruct = nullptr;
 
-            Python3Lock lock { &mReceiver };
+            Python3Lock lock;
             mState.mResult = toPyException(std::move(error));
 
             mState.resume();
@@ -277,7 +245,7 @@ namespace Behavior {
             mState.mDestruct(mState);
             mState.mDestruct = nullptr;
 
-            Python3Lock lock { &mReceiver };
+            Python3Lock lock;
             mState.mResult.reset();
 
             mState.resume();

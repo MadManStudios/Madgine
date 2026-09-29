@@ -6,6 +6,7 @@
 #include "Meta/serialize/serializetable_impl.h"
 
 #include "Madgine_Tools/debugger/debuggerview.h"
+#include "Python3/util/pyexecution.h"
 
 UNIQUECOMPONENT(Engine::Tools::Python3Editor);
 
@@ -19,7 +20,7 @@ SERIALIZETABLE_END(Engine::Tools::Python3Editor)
 namespace Engine {
 namespace Tools {
 
-    std::vector<TypedPtr> visualizeBehaviorDebugLocation(ContinuationList &continuations, DebuggerView &view, const Debug::ContextInfo &context, const PyObject *location, TypedPtr inlineLocation);
+    std::vector<TypedPtr> visualizeBehaviorDebugLocation(ContinuationList &continuations, DebuggerView &view, const Debug::ContextInfo &context, const Behavior::Python3::Python3Coroutine *location, TypedPtr inlineLocation);
 
     Python3Editor::Python3Editor(ImRoot &root)
         : Tool<Python3Editor, ResourceEditor>(root)
@@ -75,7 +76,6 @@ namespace Tools {
 
         auto [it, b] = mFiles.try_emplace(pythonFile, *this, pythonFile);
         it->second.Focus();
-
     }
 
     Dialog<> Python3Editor::closeDialog()
@@ -86,7 +86,6 @@ namespace Tools {
         co_return {};
     }
 
-    
     bool Python3Editor::wantsPause(Debug::ContextInfo &context, TypedPtr location, Debug::ContinuationType type, IndexType<size_t> line)
     {
         /*if (const Behavior::Python3::Python3DebugLocation *pyLocation = location.as<const Behavior::Python3::Python3DebugLocation>()) {
