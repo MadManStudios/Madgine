@@ -270,6 +270,8 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
+<tr class="memitem:a82c7b5d805dd49afb4c87426b0f78178"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_debug_1_1_continuation.html">Debug::Continuation</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_receiver.html#a82c7b5d805dd49afb4c87426b0f78178">mContinuation</a></td></tr>
+<tr class="separator:a82c7b5d805dd49afb4c87426b0f78178"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5f8d5037b6d32f8a389702fce7d1efea"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_behavior_1_1_behavior_receiver.html">BehaviorReceiver</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_receiver.html#a5f8d5037b6d32f8a389702fce7d1efea">mReceiver</a></td></tr>
 <tr class="separator:a5f8d5037b6d32f8a389702fce7d1efea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab3ab1b45bb4c6091b4b0cfef128cf990"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_state_base.html">PyStateBase</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_receiver.html#ab3ab1b45bb4c6091b4b0cfef128cf990">mState</a></td></tr>
@@ -281,6 +283,8 @@ Friends</h2></td></tr>
 requires (<a class="el" href="tag__invoke_8h.html#a8d6152fc933c4e17119094e28bb953d1">is_tag_invocable_v</a>&lt;CPO, <a class="el" href="struct_engine_1_1_behavior_1_1_behavior_receiver.html">BehaviorReceiver</a> &amp;, Args...&gt;)</td></tr>
 <tr class="memitem:ae5c45bdb5d519c3d0fbd416b7ccae017"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_receiver.html#ae5c45bdb5d519c3d0fbd416b7ccae017">tag_invoke</a> (CPO f, <a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_receiver.html">PyReceiver</a> &amp;rec, Args &amp;&amp;...args) noexcept(<a class="el" href="tag__invoke_8h.html#ac9297785bc1cff48dae735a140253041">is_nothrow_tag_invocable_v</a>&lt; CPO, <a class="el" href="struct_engine_1_1_behavior_1_1_behavior_receiver.html">BehaviorReceiver</a> &amp;, Args... &gt;) -&gt; tag_invoke_result_t&lt; CPO, <a class="el" href="struct_engine_1_1_behavior_1_1_behavior_receiver.html">BehaviorReceiver</a> &amp;, Args... &gt;</td></tr>
 <tr class="separator:ae5c45bdb5d519c3d0fbd416b7ccae017"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa6f21f98a1f87d9a8c6bf37cdcf9d210"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_debug_1_1_continuation.html">Debug::Continuation</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_receiver.html#aa6f21f98a1f87d9a8c6bf37cdcf9d210">tag_invoke</a> (<a class="el" href="struct_engine_1_1_execution_1_1get__continuation__t.html">Execution::get_continuation_t</a>, <a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_receiver.html">PyReceiver</a> &amp;rec)</td></tr>
+<tr class="separator:aa6f21f98a1f87d9a8c6bf37cdcf9d210"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a id="a3de18455144d98c047e5b23e2e80fc8b" name="a3de18455144d98c047e5b23e2e80fc8b"></a>
@@ -338,7 +342,7 @@ requires (<a class="el" href="tag__invoke_8h.html#a8d6152fc933c4e17119094e28bb95
 </div>
 <h2 class="groupheader">Friends And Related Function Documentation</h2>
 <a id="ae5c45bdb5d519c3d0fbd416b7ccae017" name="ae5c45bdb5d519c3d0fbd416b7ccae017"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae5c45bdb5d519c3d0fbd416b7ccae017">&#9670;&#160;</a></span>tag_invoke</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ae5c45bdb5d519c3d0fbd416b7ccae017">&#9670;&#160;</a></span>tag_invoke <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -383,6 +387,42 @@ requires (<a class="el" href="tag__invoke_8h.html#a8d6152fc933c4e17119094e28bb95
 
 </div>
 </div>
+<a id="aa6f21f98a1f87d9a8c6bf37cdcf9d210" name="aa6f21f98a1f87d9a8c6bf37cdcf9d210"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa6f21f98a1f87d9a8c6bf37cdcf9d210">&#9670;&#160;</a></span>tag_invoke <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_debug_1_1_continuation.html">Debug::Continuation</a> * tag_invoke </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_execution_1_1get__continuation__t.html">Execution::get_continuation_t</a>&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_py_receiver.html">PyReceiver</a> &amp;&#160;</td>
+          <td class="paramname"><em>rec</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <h2 class="groupheader">Member Data Documentation</h2>
 <a id="ab3ab1b45bb4c6091b4b0cfef128cf990" name="ab3ab1b45bb4c6091b4b0cfef128cf990"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab3ab1b45bb4c6091b4b0cfef128cf990">&#9670;&#160;</a></span>mState</h2>
@@ -412,6 +452,20 @@ requires (<a class="el" href="tag__invoke_8h.html#a8d6152fc933c4e17119094e28bb95
 
 </div>
 </div>
+<a id="a82c7b5d805dd49afb4c87426b0f78178" name="a82c7b5d805dd49afb4c87426b0f78178"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a82c7b5d805dd49afb4c87426b0f78178">&#9670;&#160;</a></span>mContinuation</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_debug_1_1_continuation.html">Debug::Continuation</a>&amp; Engine::Behavior::Python3::PyReceiver::mContinuation</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <hr/>The documentation for this struct was generated from the following files:<ul>
 <li>plugins/behavior/python3/src/Python3/util/<a class="el" href="pyexecution_8h.html">pyexecution.h</a></li>
 <li>plugins/behavior/python3/src/Python3/util/<a class="el" href="pyexecution_8cpp.html">pyexecution.cpp</a></li>
@@ -419,7 +473,7 @@ requires (<a class="el" href="tag__invoke_8h.html#a8d6152fc933c4e17119094e28bb95
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 27 2026 18:39:30 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Tue Sep 29 2026 16:28:32 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>
