@@ -9,31 +9,34 @@ namespace Serialize {
 
         XMLFormatter();
 
-        virtual void setupStream(std::iostream &) override;
+        void setupStream(std::iostream &) override;
 
-        virtual void beginExtendedWrite(const char *name, size_t count) override;
+        void beginExtendedWrite(const char *name, size_t count) override;
 
-        virtual void beginCompoundWrite(const char *name) override;
-        virtual void endCompoundWrite(const char *name) override;
+        void beginCompoundWrite(const char *name) override;
+        void endCompoundWrite(const char *name) override;
 
-        virtual StreamResult beginExtendedRead(const char *name, size_t count) override;
+        StreamResult beginExtendedRead(const char *name, size_t count) override;
 
-        virtual StreamResult beginCompoundRead(const char *name) override;
-        virtual StreamResult endCompoundRead(const char *name) override;
+        StreamResult beginCompoundRead(const char *name) override;
+        StreamResult endCompoundRead(const char *name) override;
 
-        virtual void beginPrimitiveWrite(const char *name, uint8_t typeId) override;
-        virtual void endPrimitiveWrite(const char *name, uint8_t typeId) override;
+        void beginPrimitiveWrite(const char *name, uint8_t typeId) override;
+        void endPrimitiveWrite(const char *name, uint8_t typeId) override;
 
-        virtual StreamResult beginPrimitiveRead(const char *name, uint8_t typeId) override;
-        virtual StreamResult endPrimitiveRead(const char *name, uint8_t typeId) override;
+        StreamResult beginPrimitiveRead(const char *name, uint8_t typeId) override;
+        StreamResult endPrimitiveRead(const char *name, uint8_t typeId) override;
 
-        virtual StreamResult lookupFieldName(std::string &name) override;
+        StreamResult lookupFieldName(std::string &name) override;
 
-        virtual void beginContainerWrite(const char *name, uint32_t size) override;
-        virtual void endContainerWrite(const char *name) override;
-        virtual StreamResult beginContainerRead(const char *name, bool sized) override;
-        virtual StreamResult endContainerRead(const char *name) override;
-        virtual bool hasContainerItem() override;
+        void beginContainerWrite(const char *name, uint32_t size) override;
+        void endContainerWrite(const char *name) override;
+        StreamResult beginContainerRead(const char *name, bool sized) override;
+        StreamResult endContainerRead(const char *name) override;
+        bool hasContainerItem() override;
+
+        StreamResult readString(std::string &s) override;
+        void writeString(const std::string &s) override;
 
         std::string indent();
 

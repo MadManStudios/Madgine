@@ -64,11 +64,16 @@ namespace Serialize {
             return STREAM_INTEGRITY_ERROR(mStream, mBinary) << "Name lookup is not implemented in Formatter!";
         }
 
+        virtual StreamResult readString(std::string &s);
+        virtual void writeString(const std::string &s);
+
         template <typename T>
         StreamResult read(T &t)
         {
             if (mBinary) {
                 return mStream.read(t);
+            } else if constexpr (std::same_as<T, std::string>) {
+                return readString(t);
             } else {
                 return mStream >> t;
             }
@@ -79,6 +84,8 @@ namespace Serialize {
         {
             if (mBinary) {
                 mStream.write(t);
+            } else if constexpr (std::same_as<T, std::string>) {
+                writeString(t);
             } else {
                 mStream << t;
             }

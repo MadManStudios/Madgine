@@ -86,6 +86,16 @@ namespace Serialize {
         return {};
     }
 
+    StreamResult Formatter::readString(std::string &s)
+    {
+        return mStream >> s;
+    }
+
+    void Formatter::writeString(const std::string &s)
+    {
+        mStream << s;
+    }
+
     StreamResult Formatter::expect(std::string_view expected)
     {
         std::string actual;

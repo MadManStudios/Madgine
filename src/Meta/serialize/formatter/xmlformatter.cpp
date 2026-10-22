@@ -251,6 +251,68 @@ namespace Serialize {
         return prefix[1] != '/';
     }
 
+    StreamResult XMLFormatter::readString(std::string &s)
+    {
+        STREAM_PROPAGATE_ERROR(mStream >> s);
+
+        auto it = s.find('&');
+        while (it != std::string::npos) {
+            auto end = s.find(';', it);
+            if (end == std::string::npos)
+                return STREAM_PARSE_ERROR(mStream, mBinary) << "Unterminated &-escape sequence";
+            
+            std::string_view token { s.begin() + it, s.begin() + end + 1 };
+            char out;
+            if (token == "&lt;") {
+                out = '<';
+            } else if (token == "&gt;") {
+                out = '>';
+            } else if (token == "&amp;") {
+                out = '&';
+            } else if (token == "&quot;") {
+                out = '"';
+            } else {
+                return STREAM_PARSE_ERROR(mStream, mBinary) << "Unrecognized escape sequence: " << token;
+            }
+            s.replace(it, end - it + 1, 1, out);
+
+            it = s.find('&', it);
+        }
+
+        return {};
+    }
+
+    void XMLFormatter::writeString(const std::string &s)
+    {
+        const char *escapeSet = mCurrentExtended ? "&\"" : "&<>";
+
+        std::string_view view = s;
+        auto it = view.find_first_of(escapeSet);
+        auto pos = 0;
+        while (it != std::string_view::npos) {
+            mStream << view.substr(pos, it);
+            switch (view.at(it)) {
+            case '<':
+                mStream << "&lt;";
+                break;
+            case '>':
+                mStream << "&gt;";
+                break;
+            case '&':
+                mStream << "&amp;";
+                break;
+            case '"':
+                mStream << "&quot;";
+                break;
+            default:
+                throw 0;
+            }
+            pos = it + 1;
+            it = view.find_first_of(escapeSet, pos);
+        }
+        mStream << view.substr(pos);
+    }
+
     std::string XMLFormatter::indent()
     {
         return std::string(4 * mLevel, ' ');
