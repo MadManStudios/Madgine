@@ -34,7 +34,7 @@ namespace Widgets {
         const std::map<size_t, std::map<TextureSettings, WidgetsVertexData>> &vertexData() const;
         const std::vector<Vertex> &lineVertices() const;
 
-        struct WidgetsRenderDataClipRectKeep {
+        struct MADGINE_WIDGETS_EXPORT WidgetsRenderDataClipRectKeep {
             ~WidgetsRenderDataClipRectKeep();
             Math::Rect2 mOldRect;
             WidgetsRenderData &mRenderData;
