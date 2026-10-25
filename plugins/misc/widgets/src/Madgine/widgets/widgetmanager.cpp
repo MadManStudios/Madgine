@@ -453,38 +453,32 @@ namespace Widgets {
 
     void WidgetManager::updateHovered()
     {
-        WidgetBase *hoveredWidget = getHoveredWidget(Math::Vector2 { Math::Vector2i { &mCachedPointerMoveEvent.mWindowPosition.x } }, mHoveredWidget);
+        mHoveredWidget = getHoveredWidget(Math::Vector2 { Math::Vector2i { &mCachedPointerMoveEvent.mWindowPosition.x } }, mHoveredWidget);
 
-        bool enter = false;
-        if (mHoveredWidget != hoveredWidget) {
+        WidgetBase *newPointerEventTarget = mHoveredWidget;
+        while (newPointerEventTarget && !newPointerEventTarget->acceptsPointerEvents()) {
+            newPointerEventTarget = newPointerEventTarget->getParent();
+        }
 
-            WidgetBase *newPointerEventTarget = hoveredWidget;
-            while (newPointerEventTarget && !newPointerEventTarget->acceptsPointerEvents()) {
-                newPointerEventTarget = newPointerEventTarget->getParent();
+        if (mPointerEventTargetWidget != newPointerEventTarget) {
+
+            Platform::PlatformVector storedWindowPosition = mCachedPointerMoveEvent.mWindowPosition;
+
+            if (mPointerEventTargetWidget) {
+                Math::Vector2i pos = mPointerEventTargetWidget->getAbsolutePosition().floor();
+                mCachedPointerMoveEvent.mWindowPosition = mCachedPointerMoveEvent.mWindowPosition - Platform::PlatformVector { pos.x, pos.y };
+                mPointerEventTargetWidget->injectPointerLeave(mCachedPointerMoveEvent);
             }
 
-            if (mPointerEventTargetWidget != newPointerEventTarget) {
+            mPointerEventTargetWidget = newPointerEventTarget;
 
-                Platform::PlatformVector storedWindowPosition = mCachedPointerMoveEvent.mWindowPosition;
-
-                if (mPointerEventTargetWidget) {
-                    Math::Vector2i pos = mPointerEventTargetWidget->getAbsolutePosition().floor();
-                    mCachedPointerMoveEvent.mWindowPosition = mCachedPointerMoveEvent.mWindowPosition - Platform::PlatformVector { pos.x, pos.y };
-                    mPointerEventTargetWidget->injectPointerLeave(mCachedPointerMoveEvent);
-                }
-
-                mPointerEventTargetWidget = newPointerEventTarget;
-
-                if (mPointerEventTargetWidget) {
-                    Math::Vector2i pos = mPointerEventTargetWidget->getAbsolutePosition().floor();
-                    mCachedPointerMoveEvent.mWindowPosition = mCachedPointerMoveEvent.mWindowPosition - Platform::PlatformVector { pos.x, pos.y };
-                    mPointerEventTargetWidget->injectPointerEnter(mCachedPointerMoveEvent);
-                }
-
-                mCachedPointerMoveEvent.mWindowPosition = storedWindowPosition;
+            if (mPointerEventTargetWidget) {
+                Math::Vector2i pos = mPointerEventTargetWidget->getAbsolutePosition().floor();
+                mCachedPointerMoveEvent.mWindowPosition = mCachedPointerMoveEvent.mWindowPosition - Platform::PlatformVector { pos.x, pos.y };
+                mPointerEventTargetWidget->injectPointerEnter(mCachedPointerMoveEvent);
             }
 
-            mHoveredWidget = hoveredWidget;
+            mCachedPointerMoveEvent.mWindowPosition = storedWindowPosition;
         }
     }
 
