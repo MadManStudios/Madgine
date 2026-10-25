@@ -43,6 +43,13 @@ namespace Render {
     {
     }
 
+    Threading::Task<void> GPUMeshLoader::finalize()
+    {
+        mQuad.reset();
+
+        co_await VirtualResourceLoaderBase::finalize();
+    }
+
     Threading::Task<bool> GPUMeshLoader::loadImpl(GPUMeshData &mesh, ResourceDataInfo &info)
     {
         MeshLoader::Handle handle;
@@ -85,5 +92,3 @@ namespace Render {
 
 }
 }
-
-

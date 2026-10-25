@@ -25,6 +25,8 @@ namespace Render {
 
         GPUMeshLoader();
 
+        Threading::Task<void> finalize() override;
+
         Threading::Task<bool> loadImpl(GPUMeshData &data, ResourceDataInfo &info);
         void unloadImpl(GPUMeshData &data);
 
