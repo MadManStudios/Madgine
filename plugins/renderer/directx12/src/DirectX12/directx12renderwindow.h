@@ -14,6 +14,8 @@ namespace Render {
         virtual void beginFrame() override;
         virtual RenderFuture endFrame() override;
 
+        virtual void readBack(Closure<void (AreaView<const uint32_t, 2> &)> cb) override;
+
         virtual void beginIteration(size_t targetIndex, size_t targetCount, size_t targetSubresourceIndex) const override;
         virtual void endIteration(size_t targetIndex, size_t targetCount, size_t targetSubresourceIndex) const override;
 

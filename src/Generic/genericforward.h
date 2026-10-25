@@ -125,4 +125,7 @@ namespace Containers {
 template <typename T>
 struct Contextual;
 
+template <typename T, size_t Dim, size_t Storage = Dim>
+struct AreaView;
+
 }

@@ -8,7 +8,7 @@ FolderSources(sources "" src)
 	FolderSources(sources src Madgine renderforward.h renderlib.h)
 		FolderSources(sources Madgine render camera.cpp camera.h pipelineloader.cpp pipelineloader.h rendercontext.cpp rendercontext.h renderdata.cpp renderdata.h rendermeshloader.cpp rendermeshloader.h renderpass.cpp renderpass.h rendertarget.cpp rendertarget.h rendercontextcollector.cpp rendercontextcollector.h shadercache.cpp shadercache.h shaderobject.cpp)	
 			FolderSources(sources render fonts font.h fontloader.cpp fontloader.h glyph.cpp glyph.h)
-			FolderSources(sources render passes bloompass.cpp bloompass.h blurpass.cpp blurpass.h)
+			FolderSources(sources render passes bloompass.cpp bloompass.h blurpass.cpp blurpass.h readbackpass.cpp readbackpass.h)
 				FolderSources(sources passes shaders bloom.hlsl blur.hlsl)
 		
 add_plugin(Render Madgine Core ${sources} PRECOMPILED_HEADER src/Madgine/renderlib.h EXTERNAL_DEPS freetype API_PLUGIN EXCLUSIVE ATLEAST_ONE)

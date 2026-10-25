@@ -2,6 +2,8 @@
 
 #include "directx12renderwindow.h"
 
+#include "Generic/areaview.h"
+
 #include "Platform/window/windowapi.h"
 
 #include "Meta/math/vector2i.h"
@@ -112,6 +114,70 @@ namespace Render {
         mSwapChain->Present(0, 0);
 
         return context()->graphicsQueue()->signalFence();
+    }
+
+    void DirectX12RenderWindow::readBack(Closure<void(AreaView<const uint32_t, 2> &)> cb)
+    {
+        ID3D12Resource *backBuffer = mBackBuffers[mSwapChain->GetCurrentBackBufferIndex()];
+
+        D3D12_RESOURCE_DESC desc = backBuffer->GetDesc();
+
+        D3D12_PLACED_SUBRESOURCE_FOOTPRINT layout;
+        UINT numRows;
+        UINT64 rowSize;
+        UINT64 totalSize;
+        GetDevice()->GetCopyableFootprints(&desc, 0, 1, 0, &layout, &numRows, &rowSize, &totalSize);
+
+        auto heapDesc = CD3DX12_HEAP_PROPERTIES(D3D12_HEAP_TYPE_READBACK);
+        auto resourceDesc = CD3DX12_RESOURCE_DESC::Buffer(totalSize);
+        Platform::ReleasePtr<ID3D12Resource> readbackHeap;
+        HRESULT hr = GetDevice()->CreateCommittedResource(
+            &heapDesc,
+            D3D12_HEAP_FLAG_NONE,
+            &resourceDesc,
+            D3D12_RESOURCE_STATE_COPY_DEST,
+            nullptr,
+            IID_PPV_ARGS(&readbackHeap));
+        DX12_CHECK(hr);
+
+        mCommandList.Transition(backBuffer, D3D12_RESOURCE_STATE_RENDER_TARGET, D3D12_RESOURCE_STATE_COPY_SOURCE);
+
+        CD3DX12_TEXTURE_COPY_LOCATION dst { readbackHeap, layout };
+        CD3DX12_TEXTURE_COPY_LOCATION src { backBuffer, 0 };
+        mCommandList->CopyTextureRegion(&dst, 0, 0, 0, &src, nullptr);
+
+        mCommandList.Transition(backBuffer, D3D12_RESOURCE_STATE_COPY_SOURCE, D3D12_RESOURCE_STATE_RENDER_TARGET);
+
+        struct ReadbackCallback {
+
+            ReadbackCallback(Platform::ReleasePtr<ID3D12Resource> resource, const D3D12_PLACED_SUBRESOURCE_FOOTPRINT &footprint, Closure<void(AreaView<const uint32_t, 2> &)> cb)
+                : mResource(std::move(resource))
+                , mLayout(footprint)
+                , mCallback(std::move(cb))
+            {
+            }
+            ReadbackCallback(ReadbackCallback &&) = default;
+            ~ReadbackCallback()
+            {
+                if (mResource) {
+                    Math::Vector2i size { static_cast<int>(mLayout.Footprint.Width), static_cast<int>(mLayout.Footprint.Height) };
+                    void *data = nullptr;
+                    // The whole buffer: its last row is not padded to the row pitch
+                    D3D12_RANGE range { 0, static_cast<SIZE_T>(mResource->GetDesc().Width) };
+                    HRESULT hr = mResource->Map(0, &range, &data);
+                    DX12_CHECK(hr);
+                    AreaView<const uint32_t, 2> view = AreaView<const uint32_t, 2> { reinterpret_cast<const uint32_t *>(static_cast<const std::byte *>(data) + mLayout.Offset), { mLayout.Footprint.RowPitch / sizeof(uint32_t), static_cast<size_t>(size.y) } }.subArea({ 0, 0 }, { static_cast<size_t>(size.x), static_cast<size_t>(size.y) });
+                    mCallback(view);
+                    mResource->Unmap(0, nullptr);
+                }
+            }
+
+            Platform::ReleasePtr<ID3D12Resource> mResource;
+            D3D12_PLACED_SUBRESOURCE_FOOTPRINT mLayout;
+            Closure<void(AreaView<const uint32_t, 2> &)> mCallback;
+        };
+
+        mCommandList.attachResource(ReadbackCallback { std::move(readbackHeap), layout, std::move(cb) });
     }
 
     void DirectX12RenderWindow::beginIteration(size_t targetIndex, size_t targetCount, size_t targetSubresourceIndex) const

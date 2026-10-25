@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Generic/areaview.h"
 #include "Generic/containers/bits/array.h"
 
 #include "Meta/math/rect2i.h"
@@ -46,6 +47,8 @@ namespace Render {
 
         virtual void beginFrame();
         virtual RenderFuture endFrame();
+
+        virtual void readBack(Closure<void (AreaView<const uint32_t, 2> &)> cb);
 
         virtual void pushAnnotation(const char *tag) = 0;
         virtual void popAnnotation() = 0;

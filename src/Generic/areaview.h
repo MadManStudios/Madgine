@@ -2,7 +2,7 @@
 
 namespace Engine {
 
-template <typename T, size_t Dim, size_t Storage = Dim>
+template <typename T, size_t Dim, size_t Storage>
 struct AreaView {
 
     AreaView(T *buffer, const std::array<size_t, Storage> &sizes)
@@ -69,6 +69,16 @@ struct AreaView {
     const T &at(const std::array<size_t, Dim> &indices) const
     {
         return mBuffer[index(indices)];
+    }
+
+    const std::array<size_t, Dim> &size() const
+    {
+        return mSizes;
+    }
+
+    const std::array<size_t, Dim> &fullSize() const
+    {
+        return mFullSizes;
     }
 
     void flip(size_t dim)

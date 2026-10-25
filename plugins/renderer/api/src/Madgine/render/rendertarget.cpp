@@ -135,6 +135,10 @@ namespace Render {
         return {};
     }
 
+    void RenderTarget::readBack(Closure<void(AreaView<const uint32_t, 2> &)> cb)
+    {
+    }
+
     void RenderTarget::beginIteration(size_t targetIndex, size_t targetCount, size_t targetSubresourceIndex) const
     {
     }
