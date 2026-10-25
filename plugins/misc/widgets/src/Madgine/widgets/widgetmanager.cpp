@@ -618,7 +618,7 @@ namespace Widgets {
 
         MainWindowComponentBase::render(target, iteration);
 
-        WidgetsRenderData renderData;
+        WidgetsRenderData renderData { *this };
         auto keep = renderData.pushClipRect(Math::Vector2::ZERO, Math::Vector2 { mClientSpace.mSize });
 
         for (LayoutWidget &layoutWidget : mWidgetsLayout) {

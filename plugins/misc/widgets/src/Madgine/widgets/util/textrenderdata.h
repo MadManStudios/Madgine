@@ -38,10 +38,10 @@ namespace Widgets {
         Math::Rect2 calculateBoundingBox(std::string_view text, Math::Vector2 pos, Math::Vector3 size);
 
         static void renderText(WidgetsRenderData &renderData, std::string_view text, Math::Vector2 pos, Math::Vector2 size, const Render::TypeFace *typeFace, Render::FontStyle style, float fontSize, ColorFrame color, Math::Vector2 pivot, Math::Vector2 shadowOffset = { 0.0f, 0.0f }, int cursorIndex = -1);
-        static void renderLine(WidgetsRenderData &renderData, const Line &line, float originY, Math::Vector2 pos, Math::Vector2 size, const Render::TypeFace *typeFace, Render::FontStyle style, float fontSize, ColorFrame color, Math::Vector2 pivot, Math::Vector2 shadowOffset = { 0.0f, 0.0f }, int cursorIndex = -1);
+        static void renderLine(WidgetsRenderData &renderData, const Line &line, float originY, Math::Vector2 pos, Math::Vector2 size, FormattingStack &stack, Math::Vector2 pivot, Math::Vector2 shadowOffset = { 0.0f, 0.0f }, int cursorIndex = -1);
         static void renderSelection(WidgetsRenderData &renderData, std::string_view text, Math::Vector2 pos, Math::Vector2 size, const Render::TypeFace *typeFace, Render::FontStyle style, float fontSize, Math::Vector2 pivot, const Math::Atlas2::Entry &entry, int selectionStart, int selectionEnd, ColorFrame color);
-        static float calculateWidth(std::string_view text, const Render::TypeFace *typeFace, Render::FontStyle style, float fontSize);
-        static float calculateWidth(char c, const Render::TypeFace *typeFace, Render::FontStyle style, float fontSize);
+        static float calculateWidth(std::string_view text, FormattingStack &stack);
+        static float calculateWidth(char c, FormattingStack &stack);
         static float calculateLineHeight(const Render::TypeFace *typeFace, float fontSize);
         static Math::Rect2 calculateBoundingBox(const Line &line, size_t lineCount, size_t lineNr, Math::Vector2 pos, Math::Vector2 size, const Render::TypeFace *typeFace, float fontSize, Math::Vector2 pivot);
         static Math::Rect2 calculateBoundingBox(std::string_view text, Math::Vector2 pos, Math::Vector2 size, const Render::TypeFace *typeFace, Render::FontStyle style, float fontSize, Math::Vector2 pivot);

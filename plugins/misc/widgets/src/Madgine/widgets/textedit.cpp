@@ -74,7 +74,7 @@ namespace Widgets {
     void TextEdit::setText(std::string_view text)
     {
         mText = text;
-        mTextRenderData.updateText(mText, getAbsoluteTextSize());
+        mTextRenderData.updateText(manager(), mText, getAbsoluteTextSize());
         stb_textedit_clamp(this, &mState);
     }
 
@@ -96,13 +96,13 @@ namespace Widgets {
     void TextEdit::erase(size_t where, size_t n)
     {
         mText.erase(where, n);
-        mTextRenderData.updateText(mText, getAbsoluteTextSize());
+        mTextRenderData.updateText(manager(), mText, getAbsoluteTextSize());
     }
 
     bool TextEdit::insert(size_t where, std::string_view s)
     {
         mText.insert(where, s);
-        mTextRenderData.updateText(mText, getAbsoluteTextSize());
+        mTextRenderData.updateText(manager(), mText, getAbsoluteTextSize());
         return true;
     }
 
@@ -128,7 +128,7 @@ namespace Widgets {
 
             if (mTextRenderData.available()) {
                 if (mTextRenderData.lines().empty() && !mText.empty())
-                    mTextRenderData.updateText(mText, getAbsoluteTextSize());
+                    mTextRenderData.updateText(manager(), mText, getAbsoluteTextSize());
 
                 Math::Vector2 textPos = pos + mBorder;
                 Math::Vector3 textSize = getAbsoluteTextSize();
@@ -151,12 +151,12 @@ namespace Widgets {
 
     void TextEdit::sizeChanged(const Math::Vector3 &pixelSize)
     {
-        mTextRenderData.updateText(mText, getAbsoluteTextSize());
+        mTextRenderData.updateText(manager(), mText, getAbsoluteTextSize());
     }
 
     void TextEdit::onActivate(Serialize::CallbackTiming, bool b)
     {
-        mTextRenderData.updateText(mText, getAbsoluteTextSize());
+        mTextRenderData.updateText(manager(), mText, getAbsoluteTextSize());
     }
 
     void TextEdit::injectPointerClick(const PointerClickEvent &arg)
@@ -198,7 +198,7 @@ namespace Widgets {
             } else if (arg.mControlKeys.mCtrl && arg.mScancode == Platform::Input::Key::V) {
                 std::string s = Platform::Window::OSWindow::getClipboardString();
                 stb_textedit_paste(this, &mState, s.c_str(), s.size());
-                mTextRenderData.updateText(mText, getAbsoluteTextSize());
+                mTextRenderData.updateText(manager(), mText, getAbsoluteTextSize());
             } else if (arg.mControlKeys.mCtrl && arg.mScancode == Platform::Input::Key::C) {
                 std::string_view s = mText;
                 int start = mState.select_start;
@@ -267,7 +267,7 @@ namespace Widgets {
     void TextEdit::setBorder(Math::Vector2 border)
     {
         mBorder = border;
-        mTextRenderData.updateText(mText, getAbsoluteTextSize());
+        mTextRenderData.updateText(manager(), mText, getAbsoluteTextSize());
     }
 
     Math::Vector2 TextEdit::border() const

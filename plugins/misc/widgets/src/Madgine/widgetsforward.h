@@ -40,6 +40,7 @@ namespace Widgets {
     struct DragEndEvent;
     
     struct ColorFrame;
+    struct FormattingStack;
 
 }
 

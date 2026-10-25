@@ -5,6 +5,8 @@
 #include "Meta/reflect/metatable_impl.h"
 #include "Meta/serialize/serializetable_impl.h"
 
+#include "../widgetmanager.h"
+#include "formattingstack.h"
 #include "widgetsrenderdata.h"
 
 METATABLE_BEGIN_BASE(Engine::Widgets::MultilineTextRenderData, Engine::Widgets::TextRenderData)
@@ -31,13 +33,17 @@ namespace Widgets {
         renderSelection(renderData, mLines, pos, size.xy(), mFont, mStyle, size.z * mFontSize, mPivot, entry, selectionStart, selectionEnd, color);
     }
 
-    void MultilineTextRenderData::updateText(std::string_view text, Math::Vector3 size, std::locale loc)
+    void MultilineTextRenderData::updateText(WidgetManager &manager, std::string_view text, Math::Vector3 size, std::locale loc)
     {
-        mLines = calculateLines(text, size.xy(), mFont, mStyle, size.z * mFontSize, loc);
+        FormattingStack stack { mFont, mStyle, size.z * mFontSize };
+
+        mLines = calculateLines(manager, text, size.xy(), stack, loc);
     }
 
     float MultilineTextRenderData::calculateTotalHeight(float z)
     {
+        if (!mFont.available())
+            return 0.0f;
         return calculateTotalHeight(mLines.size(), mFont, z * mFontSize);
     }
 
@@ -51,10 +57,12 @@ namespace Widgets {
 
         float originY = std::max(size.y - lineHeight * lines.size(), 0.0f) * pivot.y + minY;
 
+        FormattingStack stack { typeFace, style, fontSize, color };
+
         for (const Line &line : lines) {
             originY += lineHeight;
 
-            renderLine(renderData, line, originY, pos, size, typeFace, style, fontSize, color, pivot, shadowOffset, cursorIndex == -1 ? -1 : cursorIndex - (line.mBegin - lines.front().mBegin));
+            renderLine(renderData, line, originY, pos, size, stack, pivot, shadowOffset, cursorIndex == -1 ? -1 : cursorIndex - (line.mBegin - lines.front().mBegin));
         }
     }
 
@@ -118,14 +126,12 @@ namespace Widgets {
         }
     }
 
-    std::vector<TextRenderData::Line> MultilineTextRenderData::calculateLines(std::string_view text, Math::Vector2 size, const Render::TypeFace *typeFace, Render::FontStyle style, float fontSize, std::locale loc)
+    std::vector<TextRenderData::Line> MultilineTextRenderData::calculateLines(WidgetManager &manager, std::string_view text, Math::Vector2 size, FormattingStack &stack, std::locale loc)
     {
-        if (!typeFace)
+        if (!stack.typeFace())
             return {};
 
         const std::ctype<char> &ctype = std::use_facet<std::ctype<char>>(loc);
-
-        float scale = fontSize / Render::FontLoader::sFontSize;
 
         std::vector<Line> lines;
 
@@ -136,10 +142,22 @@ namespace Widgets {
         float lastSpaceWidth = 0.0f;
         float lastSpaceGlyphWidth = 0.0f;
         for (const char *cursor = sol; cursor != end; ++cursor) {
-            const Render::Glyph &g = typeFace->mFonts.at(style)[static_cast<unsigned char>(*cursor)];
 
-            float width = g.mAdvance / 64.0f * scale;
+            float width;
 
+            auto [consumed, image] = stack.parse(static_cast<unsigned char>(*cursor));
+
+            if (!image.empty()) {
+                const Math::Atlas2::Entry *entry = manager.lookUpImage(image);
+                if (!entry)
+                    continue;
+                width = stack.place(entry->mArea.mSize.y).second * entry->mArea.mSize.x;
+            } else if (consumed) {
+                continue;
+            } else {
+                width = stack.advance(static_cast<unsigned char>(*cursor));
+            }
+                        
             if (ctype.is(std::ctype_base::space, *cursor)) {
                 lastSpace = cursor;
                 lastSpaceWidth = currentLineWidth;

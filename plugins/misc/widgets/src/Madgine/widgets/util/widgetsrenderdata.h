@@ -26,6 +26,8 @@ namespace Widgets {
 
     struct MADGINE_WIDGETS_EXPORT WidgetsRenderData {
 
+        WidgetsRenderData(WidgetManager &manager);
+
         void renderQuad(Math::Vector2 pos, Math::Vector2 size, ColorFrame color = {}, TextureSettings tex = {}, Math::Vector2 topLeftUV = { 0.0f, 0.0f }, Math::Vector2 bottomRightUV = { 1.0f, 1.0f }, bool flippedUV = false);
         void renderQuadUV(Math::Vector2 pos, Math::Vector2 size, ColorFrame color, TextureSettings tex, Math::Rect2i rect, Math::Vector2i textureSize, bool flippedUV = false);
 
@@ -50,6 +52,8 @@ namespace Widgets {
         void setSubLayer(size_t layer);
         size_t subLayer() const;
 
+        WidgetManager &manager();
+
     protected:
         WidgetsVertexData &vertexData(const TextureSettings &tex);
 
@@ -63,6 +67,7 @@ namespace Widgets {
         float mAlpha = 1.0f;
         size_t mLayer = 0;
         size_t mSubLayer = 0;
+        WidgetManager &mManager;
     };
 
 }

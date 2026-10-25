@@ -106,6 +106,16 @@ namespace Widgets {
         mLineVertices.push_back({ line.mPointB, color, { 0, 0 } });
     }
 
+    WidgetsRenderData::WidgetsRenderData(WidgetManager &manager)
+        : mManager(manager)
+    {
+    }
+
+    WidgetManager &WidgetsRenderData::manager()
+    {
+        return mManager;
+    }
+
     void WidgetsRenderData::renderQuad(Math::Vector2 pos, Math::Vector2 size, ColorFrame color, TextureSettings tex, Math::Vector2 topLeftUV, Math::Vector2 bottomRightUV, bool flippedUV)
     {
         color.mRenderData.mColor.a *= mAlpha;

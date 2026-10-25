@@ -6,7 +6,7 @@
 
 #include "util/colortintrenderdata.h"
 #include "util/scalableimagerenderdata.h"
-#include "util/textrenderdata.h"
+#include "util/multilinetextrenderdata.h"
 #include "widget.h"
 
 namespace Engine {
@@ -26,7 +26,7 @@ namespace Widgets {
 
         void render(WidgetsRenderData &renderData) override;
 
-        TextRenderData mTextRenderData;
+        MultilineTextRenderData mTextRenderData;
         ScalableImageRenderData mImageRenderData;
         ColorTintRenderData mColorTintRenderData;
 
