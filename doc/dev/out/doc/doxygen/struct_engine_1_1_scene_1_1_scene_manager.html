@@ -375,14 +375,16 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a361bb6405dd79068fcfbc681ca919717"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_math_1_1_color3.html">Math::Color3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_scene_manager.html#a361bb6405dd79068fcfbc681ca919717">mAmbientLightColor</a> = { 1.0f, 1.0f, 1.0f }</td></tr>
+<tr class="memitem:a361bb6405dd79068fcfbc681ca919717"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_math_1_1_color3.html">Math::Color3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_scene_manager.html#a361bb6405dd79068fcfbc681ca919717">mAmbientLightColor</a> = { 0.5f, 0.5f, 0.5f }</td></tr>
 <tr class="separator:a361bb6405dd79068fcfbc681ca919717"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad4d3d9426ba7826b715592d277218e34"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_math_1_1_normalized_vector3.html">Math::NormalizedVector3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_scene_manager.html#ad4d3d9426ba7826b715592d277218e34">mAmbientLightDirection</a> = { -0.0f, -1.0f, 1.5f }</td></tr>
-<tr class="separator:ad4d3d9426ba7826b715592d277218e34"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5a090997365d36f192af90f9846248c3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_scene_manager.html#a5a090997365d36f192af90f9846248c3">mAmbientLightOrthographic</a> = false</td></tr>
-<tr class="separator:a5a090997365d36f192af90f9846248c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abbd28641a3c9de3b35b55d8db6719604"><td class="memItemLeft" align="right" valign="top">std::map&lt; std::string, <a class="el" href="struct_engine_1_1_scene_1_1_scene_manager_1_1_container_data.html">ContainerData</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_scene_manager.html#abbd28641a3c9de3b35b55d8db6719604">mContainers</a></td></tr>
 <tr class="separator:abbd28641a3c9de3b35b55d8db6719604"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a370d5ae14d819f8655590e7c478a0e18"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_math_1_1_color3.html">Math::Color3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_scene_manager.html#a370d5ae14d819f8655590e7c478a0e18">mSunLightColor</a> = { 1.0f, 1.0f, 1.0f }</td></tr>
+<tr class="separator:a370d5ae14d819f8655590e7c478a0e18"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7365c2e7479f41be7337084ce0726c64"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_math_1_1_normalized_vector3.html">Math::NormalizedVector3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_scene_manager.html#a7365c2e7479f41be7337084ce0726c64">mSunLightDirection</a> = { -0.0f, -1.0f, 1.5f }</td></tr>
+<tr class="separator:a7365c2e7479f41be7337084ce0726c64"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adacf9958b8748e1bbf1f77c4074753cd"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_scene_manager.html#adacf9958b8748e1bbf1f77c4074753cd">mSunLightOrthographic</a> = false</td></tr>
+<tr class="separator:adacf9958b8748e1bbf1f77c4074753cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -1092,35 +1094,49 @@ template&lt;typename T &gt; </div>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="struct_engine_1_1_math_1_1_color3.html">Math::Color3</a> Engine::Scene::SceneManager::mAmbientLightColor = { 1.0f, 1.0f, 1.0f }</td>
+          <td class="memname"><a class="el" href="struct_engine_1_1_math_1_1_color3.html">Math::Color3</a> Engine::Scene::SceneManager::mAmbientLightColor = { 0.5f, 0.5f, 0.5f }</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="ad4d3d9426ba7826b715592d277218e34" name="ad4d3d9426ba7826b715592d277218e34"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad4d3d9426ba7826b715592d277218e34">&#9670;&#160;</a></span>mAmbientLightDirection</h2>
+<a id="a370d5ae14d819f8655590e7c478a0e18" name="a370d5ae14d819f8655590e7c478a0e18"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a370d5ae14d819f8655590e7c478a0e18">&#9670;&#160;</a></span>mSunLightColor</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="struct_engine_1_1_math_1_1_normalized_vector3.html">Math::NormalizedVector3</a> Engine::Scene::SceneManager::mAmbientLightDirection = { -0.0f, -1.0f, 1.5f }</td>
+          <td class="memname"><a class="el" href="struct_engine_1_1_math_1_1_color3.html">Math::Color3</a> Engine::Scene::SceneManager::mSunLightColor = { 1.0f, 1.0f, 1.0f }</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a5a090997365d36f192af90f9846248c3" name="a5a090997365d36f192af90f9846248c3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5a090997365d36f192af90f9846248c3">&#9670;&#160;</a></span>mAmbientLightOrthographic</h2>
+<a id="a7365c2e7479f41be7337084ce0726c64" name="a7365c2e7479f41be7337084ce0726c64"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7365c2e7479f41be7337084ce0726c64">&#9670;&#160;</a></span>mSunLightDirection</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool Engine::Scene::SceneManager::mAmbientLightOrthographic = false</td>
+          <td class="memname"><a class="el" href="struct_engine_1_1_math_1_1_normalized_vector3.html">Math::NormalizedVector3</a> Engine::Scene::SceneManager::mSunLightDirection = { -0.0f, -1.0f, 1.5f }</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="adacf9958b8748e1bbf1f77c4074753cd" name="adacf9958b8748e1bbf1f77c4074753cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adacf9958b8748e1bbf1f77c4074753cd">&#9670;&#160;</a></span>mSunLightOrthographic</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Engine::Scene::SceneManager::mSunLightOrthographic = false</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1134,7 +1150,7 @@ template&lt;typename T &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Oct 25 2026 19:22:33 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Sun Oct 25 2026 21:43:21 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>
