@@ -10,7 +10,7 @@ namespace Engine {
 namespace Render {
 
     VulkanRenderTexture::VulkanRenderTexture(VulkanRenderContext *context, const Math::Vector2i &size, const RenderTextureConfig &config)
-        : VulkanRenderTarget(context, false, config.mName, config.mType, config.mSamples, config.mBlitSource)
+        : VulkanRenderTarget(context, false, config.mName, config.mType, config.mSamples, config.mBlitSource, config.mClearOnBeginFrame)
         , mSize { 0, 0 }
         , mCreateDepthBufferView(config.mCreateDepthBufferView)
     {

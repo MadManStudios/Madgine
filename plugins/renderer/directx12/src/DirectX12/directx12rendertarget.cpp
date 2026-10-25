@@ -16,8 +16,8 @@ namespace Render {
 
     constexpr FLOAT sClearColor[4] = { 0.033f, 0.073f, 0.073f, 1.0f };
 
-    DirectX12RenderTarget::DirectX12RenderTarget(DirectX12RenderContext *context, bool global, std::string name, TextureType type, size_t samples, bool flipFlop, RenderTarget *blitSource)
-        : RenderTarget(context, global, name, flipFlop, blitSource)
+    DirectX12RenderTarget::DirectX12RenderTarget(DirectX12RenderContext *context, bool global, std::string name, TextureType type, size_t samples, bool flipFlop, RenderTarget *blitSource, bool clearOnBeginFrame)
+        : RenderTarget(context, global, name, flipFlop, blitSource, clearOnBeginFrame)
         , mSamples(samples)
         , mDepthTexture(std::make_shared<DirectX12Texture>(type, false, FORMAT_D24, samples))
     {
@@ -105,7 +105,7 @@ namespace Render {
 
         mCommandList->RSSetScissorRects(1, &scissorRect);
 
-        if (!mBlitSource) {
+        if (!mBlitSource && mClearOnBeginFrame) {
             int bufferCount = canFlipFlop() ? 2 : 1;
             size_t size = mTargetViews.size() / bufferCount;
             for (size_t index = 0; index < size; ++index) {

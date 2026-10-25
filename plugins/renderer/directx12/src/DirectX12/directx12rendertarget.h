@@ -10,7 +10,7 @@ namespace Render {
 
     struct MADGINE_DIRECTX12_EXPORT DirectX12RenderTarget : RenderTarget {
 
-        DirectX12RenderTarget(DirectX12RenderContext *context, bool global, std::string name, TextureType type, size_t samples = 1, bool flipFlop = false, RenderTarget *blitSource = nullptr);
+        DirectX12RenderTarget(DirectX12RenderContext *context, bool global, std::string name, TextureType type, size_t samples = 1, bool flipFlop = false, RenderTarget *blitSource = nullptr, bool clearOnBeginFrame = true);
         ~DirectX12RenderTarget();
 
         void setup(std::vector<std::array<OffsetPtr, 6>> targetViews, const Math::Vector2i &size);

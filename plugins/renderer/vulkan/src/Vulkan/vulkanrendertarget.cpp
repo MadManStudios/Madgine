@@ -13,8 +13,8 @@ namespace Render {
     extern uint32_t findMemoryType(uint32_t typeFilter, VkMemoryPropertyFlags properties);
     extern void transitionImageLayout(VkCommandBuffer commandList, VkImage image, VkFormat format, VkImageAspectFlags aspectMask, VkImageLayout oldLayout, VkImageLayout newLayout);
 
-    VulkanRenderTarget::VulkanRenderTarget(VulkanRenderContext *context, bool global, std::string name, TextureType type, size_t samples, RenderTarget *blitSource)
-        : RenderTarget(context, global, name, 1, blitSource)
+    VulkanRenderTarget::VulkanRenderTarget(VulkanRenderContext *context, bool global, std::string name, TextureType type, size_t samples, RenderTarget *blitSource, bool clearOnBeginFrame)
+        : RenderTarget(context, global, name, 1, blitSource, clearOnBeginFrame)
         , mDepthTexture(std::make_shared<VulkanTexture>(type, false, FORMAT_D24, samples))
         , mSamples(samples)
     {
@@ -50,7 +50,7 @@ namespace Render {
             attachments[i + 1].format = format;
             attachments[i + 1].samples = static_cast<VkSampleCountFlagBits>(mSamples);
 
-            attachments[i + 1].loadOp = mBlitSource ? VK_ATTACHMENT_LOAD_OP_LOAD : VK_ATTACHMENT_LOAD_OP_CLEAR;
+            attachments[i + 1].loadOp = mBlitSource || !mClearOnBeginFrame ? VK_ATTACHMENT_LOAD_OP_LOAD : VK_ATTACHMENT_LOAD_OP_CLEAR;
             attachments[i + 1].storeOp = VK_ATTACHMENT_STORE_OP_STORE;
 
             attachments[i + 1].stencilLoadOp = VK_ATTACHMENT_LOAD_OP_DONT_CARE;

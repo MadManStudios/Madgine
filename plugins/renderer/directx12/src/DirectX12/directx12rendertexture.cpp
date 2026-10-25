@@ -8,7 +8,7 @@ namespace Engine {
 namespace Render {
 
     DirectX12RenderTexture::DirectX12RenderTexture(DirectX12RenderContext *context, const Math::Vector2i &size, const RenderTextureConfig &config)
-        : DirectX12RenderTarget(context, false, config.mName, config.mType, config.mSamples, config.mFlipFlop, config.mBlitSource)
+        : DirectX12RenderTarget(context, false, config.mName, config.mType, config.mSamples, config.mFlipFlop, config.mBlitSource, config.mClearOnBeginFrame)
     {
         size_t bufferCount = config.mFlipFlop ? 2 : 1;
 

@@ -17,6 +17,7 @@ namespace Render {
         size_t mTextureCount = 1;
         bool mFlipFlop = false;
 
+        bool mClearOnBeginFrame = true;
         RenderTarget *mBlitSource = nullptr;
     };
 

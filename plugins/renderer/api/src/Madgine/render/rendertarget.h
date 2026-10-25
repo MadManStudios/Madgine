@@ -15,7 +15,7 @@ namespace Engine {
 namespace Render {
 
     struct MADGINE_RENDER_EXPORT RenderTarget : RenderData {
-        RenderTarget(RenderContext *context, bool global, std::string name, bool flipFlop = false, RenderTarget *blitSource = nullptr);
+        RenderTarget(RenderContext *context, bool global, std::string name, bool flipFlop = false, RenderTarget *blitSource = nullptr, bool clearOnBeginFrame = true);
         RenderTarget(const RenderTarget &) = delete;
         RenderTarget(RenderTarget &&) = default;
         virtual ~RenderTarget();
@@ -71,6 +71,8 @@ namespace Render {
         virtual void flipTextures(size_t startIndex, size_t count);
 
         RenderTarget *mBlitSource;
+
+        bool mClearOnBeginFrame;
 
         RenderContext *mContext;
 

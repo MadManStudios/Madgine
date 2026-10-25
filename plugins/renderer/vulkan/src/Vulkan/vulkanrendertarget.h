@@ -10,7 +10,7 @@ namespace Render {
 
     struct MADGINE_VULKAN_EXPORT VulkanRenderTarget : RenderTarget {
 
-        VulkanRenderTarget(VulkanRenderContext *context, bool global, std::string name, TextureType type, size_t samples = 1, RenderTarget *blitSource = nullptr);
+        VulkanRenderTarget(VulkanRenderContext *context, bool global, std::string name, TextureType type, size_t samples = 1, RenderTarget *blitSource = nullptr, bool clearOnBeginFrame = true);
         ~VulkanRenderTarget();
 
         void createRenderPass(size_t colorAttachmentCount, VkFormat format, VkImageLayout layout, bool createDepthBufferView, std::span<VkSubpassDependency> dependencies);

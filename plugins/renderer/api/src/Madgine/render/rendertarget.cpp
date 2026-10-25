@@ -19,8 +19,9 @@ METATABLE_END(Engine::Render::RenderTarget)
 namespace Engine {
 namespace Render {
 
-    RenderTarget::RenderTarget(RenderContext *context, bool global, std::string name, bool flipFlop, RenderTarget *blitSource)
+    RenderTarget::RenderTarget(RenderContext *context, bool global, std::string name, bool flipFlop, RenderTarget *blitSource, bool clearOnBeginFrame)
         : mBlitSource(blitSource)
+        , mClearOnBeginFrame(clearOnBeginFrame)
         , mContext(context)
         , mGlobal(global)
         , mName(std::move(name))
