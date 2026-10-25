@@ -31,7 +31,7 @@ namespace Widgets {
 
         void renderQuad(Math::Vector2 pos, Math::Vector2 size, ColorFrame color = {}, TextureSettings tex = {}, Math::Vector2 topLeftUV = { 0.0f, 0.0f }, Math::Vector2 bottomRightUV = { 1.0f, 1.0f }, bool flippedUV = false);
         void renderQuadUV(Math::Vector2 pos, Math::Vector2 size, ColorFrame color, TextureSettings tex, Math::Rect2i rect, Math::Vector2i textureSize, bool flippedUV = false);
-        void renderTriangles(std::span<const Vertex> vertices, TextureSettings tex);
+        void renderTriangles(std::span<const Vertex> vertices, TextureSettings tex = {});
 
         void renderLine(const Math::Line2 &line, Math::Color4 color = { 1.0f, 1.0f, 1.0f, 1.0f });
 
