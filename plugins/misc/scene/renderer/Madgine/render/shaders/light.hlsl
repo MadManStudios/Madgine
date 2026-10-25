@@ -55,6 +55,8 @@ struct HDRShaderOutput
 
 struct LightPerFrame
 {
+    float3 ambient;
+    
     int pointLightCount;
 
     DirectionalShadowLight light;
@@ -74,8 +76,6 @@ Texture2DMS<float> shadowDepthMap : register(t0, space3);
 TextureCube<float> pointShadowDepthMaps0 : register(t1, space3);
 TextureCube<float> pointShadowDepthMaps1 : register(t2, space3);
 #endif
-
-static const float ambientFactor = 0.5;
 
 float4 projectShadow(
     ShadowCaster caster,
@@ -244,7 +244,7 @@ export HDRShaderOutput lighting(LightingInput IN)
     float3 specularColor = float3(1.0, 1.0, 1.0);
 	
 
-    float3 lightDiffuseIntensity = ambientFactor.rrr;
+    float3 lightDiffuseIntensity = frame.ambient;
     float3 lightSpecularIntensity = float3(0.0, 0.0, 0.0);
 		
     castDirectionalShadowLight(

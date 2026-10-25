@@ -121,9 +121,10 @@ namespace Scene {
         };
         std::map<std::string, ContainerData> mContainers;
 
-        Math::Color3 mAmbientLightColor = { 1.0f, 1.0f, 1.0f };
-        Math::NormalizedVector3 mAmbientLightDirection = { -0.0f, -1.0f, 1.5f };
-        bool mAmbientLightOrthographic = false;
+        Math::Color3 mAmbientLightColor = { 0.5f, 0.5f, 0.5f };
+        Math::Color3 mSunLightColor = { 1.0f, 1.0f, 1.0f };
+        Math::NormalizedVector3 mSunLightDirection = { -0.0f, -1.0f, 1.5f };
+        bool mSunLightOrthographic = false;
     };
 
 }

@@ -95,13 +95,15 @@ namespace Render {
         {
             auto perFrame = mPipeline->mapParameters<HLSL::LightPerFrame>(1);
 
+            perFrame->ambient = Math::Vector3 { mData.mScene.mAmbientLightColor };
+
             perFrame->light.caster.reprojectionMatrix = mShadowPass.viewProjectionMatrix() * v.Inverse();
 
             perFrame->light.caster.shadowSamples = 4;
 
-            perFrame->light.light.color = Math::Vector3 { mData.mScene.mAmbientLightColor };
-            perFrame->light.light.dir = (v * Math::Vector4 { mData.mScene.mAmbientLightDirection, 0.0f }).xyz();
-            perFrame->light.light.orthographic = mData.mScene.mAmbientLightOrthographic;
+            perFrame->light.light.color = Math::Vector3 { mData.mScene.mSunLightColor };
+            perFrame->light.light.dir = (v * Math::Vector4 { mData.mScene.mSunLightDirection, 0.0f }).xyz();
+            perFrame->light.light.orthographic = mData.mScene.mSunLightOrthographic;
 
             // The forward renderer supports two point lights, both with shadow maps: the first two shadow casting lights
             // that are switched on (see PointShadowRenderPass)

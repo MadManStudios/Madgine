@@ -61,8 +61,8 @@ namespace Render {
         {
             auto perFrame = mPipeline->mapParameters<HLSL::LightPerFrame>(1);
 
-            perFrame->light.light.color = Math::Vector3 { mData.mScene.mAmbientLightColor };
-            perFrame->light.light.dir = (v * Math::Vector4 { mData.mScene.mAmbientLightDirection, 0.0f }).xyz();
+            perFrame->light.light.color = Math::Vector3 { mData.mScene.mSunLightColor };
+            perFrame->light.light.dir = (v * Math::Vector4 { mData.mScene.mSunLightDirection, 0.0f }).xyz();
         }
 
         for (const std::pair<GPUMeshLoader::Handle const, std::vector<ShadowSceneRenderData::ObjectData>> &instance : mData.mInstances) {
@@ -185,7 +185,7 @@ namespace Render {
         Math::Vector3 maxBounds = std::numeric_limits<float>::lowest() * Math::Vector3 { Math::Vector3::UNIT_SCALE };
 
         // The light space turns with the camera for the best fit of the view in the shadow map
-        const Math::NormalizedVector3 &lightDir = mData.mScene.mAmbientLightDirection;
+        const Math::NormalizedVector3 &lightDir = mData.mScene.mSunLightDirection;
         Math::Quaternion q = Math::Quaternion::FromDirection(lightDir, (mCamera.mOrientation * Math::Vector3 { Math::Vector3::UNIT_Z }).crossProduct(lightDir));
         Math::Quaternion qInv = q.inverse();
 
