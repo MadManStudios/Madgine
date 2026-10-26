@@ -83,6 +83,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#streams">Streams</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#managers">Managers</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#state-replication">State Replication</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#rpcs">RPCs</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../../../docs/core/threading.html">Threads &amp; Asynchronous Execution</a><ul>
@@ -301,6 +302,10 @@ Inheritance diagram for Engine::Serialize::SyncableUnitBase:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:af1315558e0f2e1272947185eb384989c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_serializable_unit_ptr.html">SerializableUnitPtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html#af1315558e0f2e1272947185eb384989c">customUnitPtr</a> ()</td></tr>
+<tr class="separator:af1315558e0f2e1272947185eb384989c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ee474f544baebf63cecfb06ffe03cff"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_serialize_1_1_serializable_unit_const_ptr.html">SerializableUnitConstPtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html#a5ee474f544baebf63cecfb06ffe03cff">customUnitPtr</a> () const</td></tr>
+<tr class="separator:a5ee474f544baebf63cecfb06ffe03cff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6ab3b5edd8e4d76498261057e8f98ae0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html#a6ab3b5edd8e4d76498261057e8f98ae0">isMaster</a> () const</td></tr>
 <tr class="separator:a6ab3b5edd8e4d76498261057e8f98ae0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abf706f526379dfee750bd6579c60c1f0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_engine_1_1_serialize.html#a123dbc7288ea5a02a758dbde25ce10ce">UnitId</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_serialize_1_1_syncable_unit_base.html#abf706f526379dfee750bd6579c60c1f0">masterId</a> () const</td></tr>
@@ -967,6 +972,40 @@ Friends</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">bool Engine::Serialize::SyncableUnitBase::isMaster </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af1315558e0f2e1272947185eb384989c" name="af1315558e0f2e1272947185eb384989c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af1315558e0f2e1272947185eb384989c">&#9670;&#160;</a></span>customUnitPtr() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_serialize_1_1_serializable_unit_ptr.html">SerializableUnitPtr</a> Engine::Serialize::SyncableUnitBase::customUnitPtr </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5ee474f544baebf63cecfb06ffe03cff" name="a5ee474f544baebf63cecfb06ffe03cff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5ee474f544baebf63cecfb06ffe03cff">&#9670;&#160;</a></span>customUnitPtr() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_serialize_1_1_serializable_unit_const_ptr.html">SerializableUnitConstPtr</a> Engine::Serialize::SyncableUnitBase::customUnitPtr </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -2235,7 +2274,7 @@ template&lt;typename... Configs, typename Context &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Oct 26 2026 13:37:49 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Mon Oct 26 2026 14:37:32 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

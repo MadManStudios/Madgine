@@ -83,6 +83,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#streams">Streams</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#managers">Managers</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#state-replication">State Replication</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#rpcs">RPCs</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../../../docs/core/threading.html">Threads &amp; Asynchronous Execution</a><ul>
@@ -299,8 +300,8 @@ Inheritance diagram for Engine::Reflect::Value:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:a35a580e5499cf6a125827d30a967eb5f"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_reflect_1_1_value.html#a35a580e5499cf6a125827d30a967eb5f">Union</a> = std::variant&lt; #define <a class="el" href="namespace_engine_1_1_reflect.html#a342f029723ba3f0f4b789abb21b93d69afb988eceb7e82617188f20c3b9a7b920">VALUE_SEP</a> #define <a class="el" href="namespace_engine_1_1_reflect.html#a342f029723ba3f0f4b789abb21b93d69a8c7bbf2a613daf9dd50e8e1057f94451">VALUE_TYPE</a>(Name, Storage,...) # 38 &quot;/github/workspace/src/Meta/reflect/value.h&quot; 2 &gt;</td></tr>
-<tr class="separator:a35a580e5499cf6a125827d30a967eb5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeed8dd4f9ebcfb712181ac1b87262c5c"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_reflect_1_1_value.html#aeed8dd4f9ebcfb712181ac1b87262c5c">Union</a> = std::variant&lt; #define <a class="el" href="namespace_engine_1_1_reflect.html#a342f029723ba3f0f4b789abb21b93d69afb988eceb7e82617188f20c3b9a7b920">VALUE_SEP</a> #define <a class="el" href="namespace_engine_1_1_reflect.html#a342f029723ba3f0f4b789abb21b93d69a8c7bbf2a613daf9dd50e8e1057f94451">VALUE_TYPE</a>(Name, Storage,...) # 36 &quot;/github/workspace/src/Meta/reflect/value.h&quot; 2 &gt;</td></tr>
+<tr class="separator:aeed8dd4f9ebcfb712181ac1b87262c5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -373,14 +374,14 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a94dcb72d3abaaefc8b43bb549584939d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Typedef Documentation</h2>
-<a id="a35a580e5499cf6a125827d30a967eb5f" name="a35a580e5499cf6a125827d30a967eb5f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a35a580e5499cf6a125827d30a967eb5f">&#9670;&#160;</a></span>Union</h2>
+<a id="aeed8dd4f9ebcfb712181ac1b87262c5c" name="aeed8dd4f9ebcfb712181ac1b87262c5c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeed8dd4f9ebcfb712181ac1b87262c5c">&#9670;&#160;</a></span>Union</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="struct_engine_1_1_reflect_1_1_value.html#a35a580e5499cf6a125827d30a967eb5f">Engine::Reflect::Value::Union</a> =  std::variant&lt; #define <a class="el" href="namespace_engine_1_1_reflect.html#a342f029723ba3f0f4b789abb21b93d69afb988eceb7e82617188f20c3b9a7b920">VALUE_SEP</a> #define <a class="el" href="namespace_engine_1_1_reflect.html#a342f029723ba3f0f4b789abb21b93d69a8c7bbf2a613daf9dd50e8e1057f94451">VALUE_TYPE</a>(Name, Storage, ...) # 38 &quot;/github/workspace/src/Meta/reflect/value.h&quot; 2 &gt;</td>
+          <td class="memname">using <a class="el" href="struct_engine_1_1_reflect_1_1_value.html#aeed8dd4f9ebcfb712181ac1b87262c5c">Engine::Reflect::Value::Union</a> =  std::variant&lt; #define <a class="el" href="namespace_engine_1_1_reflect.html#a342f029723ba3f0f4b789abb21b93d69afb988eceb7e82617188f20c3b9a7b920">VALUE_SEP</a> #define <a class="el" href="namespace_engine_1_1_reflect.html#a342f029723ba3f0f4b789abb21b93d69a8c7bbf2a613daf9dd50e8e1057f94451">VALUE_TYPE</a>(Name, Storage, ...) # 36 &quot;/github/workspace/src/Meta/reflect/value.h&quot; 2 &gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -996,7 +997,7 @@ template&lt;Concepts::DecayedNoneOf&lt; <a class="el" href="struct_engine_1_1_re
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Oct 26 2026 13:37:48 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Mon Oct 26 2026 14:37:31 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

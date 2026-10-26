@@ -83,6 +83,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#streams">Streams</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#managers">Managers</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#state-replication">State Replication</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/core/serialize.html#rpcs">RPCs</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../../../docs/core/threading.html">Threads &amp; Asynchronous Execution</a><ul>
@@ -477,8 +478,6 @@ requires (<a class="el" href="tag__invoke_8h.html#a8d6152fc933c4e17119094e28bb95
 requires (<a class="el" href="tag__invoke_8h.html#a8d6152fc933c4e17119094e28bb953d1">is_tag_invocable_v</a>&lt;<a class="el" href="struct_engine_1_1_reflect_1_1get__reflect__contextual__t.html">get_reflect_contextual_t</a>, Context, <a class="el" href="struct_engine_1_1_reflect_1_1_value.html">Value</a> &amp;, const <a class="el" href="struct_engine_1_1_reflect_1_1_meta_table.html">MetaTable</a> *&gt; &amp;&amp; !std::is_const_v&lt;T&gt;)</td></tr>
 <tr class="memitem:a3b41f7f70263b240c40b108f3dfccca5"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_reflect_1_1_context_reference.html">ContextReference</a>&lt; T, Context &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_reflect.html#a3b41f7f70263b240c40b108f3dfccca5">context_set</a> (Context &amp;&amp;context, T &amp;value)</td></tr>
 <tr class="separator:a3b41f7f70263b240c40b108f3dfccca5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a74875e8549245c30a439252918cafcef"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_reflect.html#a74875e8549245c30a439252918cafcef">DERIVE_OPERATOR</a> (Equal,==)</td></tr>
-<tr class="separator:a74875e8549245c30a439252918cafcef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a384fa63ce2de9caea66a99d46f6bba25"><td class="memTemplParams" colspan="2">template&lt;typename F &gt; </td></tr>
 <tr class="memitem:a384fa63ce2de9caea66a99d46f6bba25"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_reflect.html#a384fa63ce2de9caea66a99d46f6bba25">dynamic_scope_cast</a> (const <a class="el" href="struct_engine_1_1_reflect_1_1_meta_table.html">MetaTable</a> *type, F &amp;&amp;f)</td></tr>
 <tr class="separator:a384fa63ce2de9caea66a99d46f6bba25"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -2247,24 +2246,6 @@ template&lt;typename... V&gt; </div>
 
 </div>
 </div>
-<a id="a74875e8549245c30a439252918cafcef" name="a74875e8549245c30a439252918cafcef"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a74875e8549245c30a439252918cafcef">&#9670;&#160;</a></span>DERIVE_OPERATOR()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">Engine::Reflect::DERIVE_OPERATOR </td>
-          <td>(</td>
-          <td class="paramtype">Equal&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <h2 class="groupheader">Variable Documentation</h2>
 <a id="a7ea7f8b8f6553c8ca815d2738b4c8be7" name="a7ea7f8b8f6553c8ca815d2738b4c8be7"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7ea7f8b8f6553c8ca815d2738b4c8be7">&#9670;&#160;</a></span>get_reflect_contextual</h2>
@@ -2327,7 +2308,7 @@ template&lt;typename... V&gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Oct 26 2026 13:37:48 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Mon Oct 26 2026 14:37:31 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

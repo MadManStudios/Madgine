@@ -125,3 +125,28 @@ Activation is only relevant during deserialization as serialization is not chang
 Note that compound units/containers store an index indicating activation progress. For that reason the activation state of an object can only be queried from its parent. ``SerializableContainer::end()`` returns an iterator defined by the activation index. This means that during activation only parts of the container are visible to the user. When operating on an object, callbacks are only called, if the object is active at that moment. If an object is inserted into a container before the activation index, it will be activated immediately and callbacks are invoked. If it is inserted after the activation index, nothing will be done. If the parent is currently deactivated/deactivating, no callback would be necessary at all. If the parent is currently activating, the index will be incremented further and ultimately activate the newly inserted object.
 
 The activation system removes many constraints that would otherwise be necessary within the callback implementations. Still, changes to a container/unit during deserialization should be treated with great caution as they could lead to state inconsistencies.
+
+RPCs
+~~~~
+
+The presented Unit hierarchy in combination with SyncManagers provide the layout of the available communication channels. RPCs are a fundamental use case of synchronisation between clients.
+They are defined using the `SYNCFUNCTION` entry in a serializetable. A function registered that way can be invoked through one of the calling policies exposed in SyncableUnitBase:
+
++----------------------------+----------------+----------------+------------------+
+| Function name              | Runs on Server | Runs on Client | Returns          |
++============================+================+================+==================+
+| call                       | yes            | yes            | Future of local  |
+|                            |                |                | Return value     |
++----------------------------+----------------+----------------+------------------+
+| notify                     | no             | yes            | void             |
++----------------------------+----------------+----------------+------------------+
+| query                      | yes            | no             | Future of server |
+|                            |                |                | Return value     |
++----------------------------+----------------+----------------+------------------+
+| command                    | yes            | no             | void             |
++----------------------------+----------------+----------------+------------------+
+
+(Note: Those calls are templates, that take the function pointer as a template parameter. They do only work in the same file *after* `SYNCFUNCTION`.)
+
+The parameters of those calls are serialized themselves, so they need to be one of the supported fundamental data types or have a serializetable.
+

@@ -85,6 +85,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#streams">Streams</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#managers">Managers</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#state-replication">State Replication</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rpcs">RPCs</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="threading.html">Threads &amp; Asynchronous Execution</a><ul>
@@ -359,6 +360,46 @@
 <p>Note that compound units/containers store an index indicating activation progress. For that reason the activation state of an object can only be queried from its parent. <code class="docutils literal notranslate"><span class="pre">SerializableContainer::end()</span></code> returns an iterator defined by the activation index. This means that during activation only parts of the container are visible to the user. When operating on an object, callbacks are only called, if the object is active at that moment. If an object is inserted into a container before the activation index, it will be activated immediately and callbacks are invoked. If it is inserted after the activation index, nothing will be done. If the parent is currently deactivated/deactivating, no callback would be necessary at all. If the parent is currently activating, the index will be incremented further and ultimately activate the newly inserted object.</p>
 <p>The activation system removes many constraints that would otherwise be necessary within the callback implementations. Still, changes to a container/unit during deserialization should be treated with great caution as they could lead to state inconsistencies.</p>
 </section>
+</section>
+<section id="rpcs">
+<h2>RPCs<a class="headerlink" href="#rpcs" title="Permalink to this heading"></a></h2>
+<p>The presented Unit hierarchy in combination with SyncManagers provide the layout of the available communication channels. RPCs are a fundamental use case of synchronisation between clients.
+They are defined using the <cite>SYNCFUNCTION</cite> entry in a serializetable. A function registered that way can be invoked through one of the calling policies exposed in SyncableUnitBase:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Function name</p></th>
+<th class="head"><p>Runs on Server</p></th>
+<th class="head"><p>Runs on Client</p></th>
+<th class="head"><p>Returns</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>call</p></td>
+<td><p>yes</p></td>
+<td><p>yes</p></td>
+<td><p>Future of local
+Return value</p></td>
+</tr>
+<tr class="row-odd"><td><p>notify</p></td>
+<td><p>no</p></td>
+<td><p>yes</p></td>
+<td><p>void</p></td>
+</tr>
+<tr class="row-even"><td><p>query</p></td>
+<td><p>yes</p></td>
+<td><p>no</p></td>
+<td><p>Future of server
+Return value</p></td>
+</tr>
+<tr class="row-odd"><td><p>command</p></td>
+<td><p>yes</p></td>
+<td><p>no</p></td>
+<td><p>void</p></td>
+</tr>
+</tbody>
+</table>
+<p>(Note: Those calls are templates, that take the function pointer as a template parameter. They do only work in the same file <em>after</em> <cite>SYNCFUNCTION</cite>.)</p>
+<p>The parameters of those calls are serialized themselves, so they need to be one of the supported fundamental data types or have a serializetable.</p>
 </section>
 </section>
 
