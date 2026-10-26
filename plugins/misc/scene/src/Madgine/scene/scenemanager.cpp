@@ -60,7 +60,6 @@ namespace Scene {
         , mSceneComponents(*this)
         , mEntityComponentLists(Entity::EntityComponentListTag {})
     {
-
     }
 
     SceneManager::SceneManager(Core::Application &app, std::nullopt_t)
@@ -130,18 +129,18 @@ namespace Scene {
         return mMutex;
     }
 
-    void SceneManager::updateFrame(Closure<Memory::TypedByteBuffer<Math::Matrix4[]>(Entity::Skeleton *)> callback)
+    Threading::Task<void> SceneManager::updateFrame(Closure<Memory::TypedByteBuffer<Math::Matrix4[]>(Entity::Skeleton *)> callback)
     {
         std::chrono::microseconds frameTimeSinceLastFrame = mFrameClock.tick(std::chrono::steady_clock::now());
         std::chrono::microseconds sceneTimeSinceLastFrame = mAnimationClock.tick(now());
 
-        for (const std::unique_ptr<SceneComponentBase> &comp : mSceneComponents) {
-            comp->updateFrame(frameTimeSinceLastFrame, sceneTimeSinceLastFrame);
-        }
-
         std::vector<Entity::AnimationState *> doneAnimations;
 
-        {
+        co_await mMutex.locked(Engine::AccessMode::READ, [this, &callback, &doneAnimations, frameTimeSinceLastFrame, sceneTimeSinceLastFrame]() {
+            for (const std::unique_ptr<SceneComponentBase> &comp : mSceneComponents) {
+                comp->updateFrame(frameTimeSinceLastFrame, sceneTimeSinceLastFrame);
+            }
+
             std::unique_lock lock { mAnimationMutex };
             for (auto it = mAnimationStates.begin(); it != mAnimationStates.end();) {
 
@@ -151,7 +150,7 @@ namespace Scene {
 
                 const Render::SkeletonDescriptor *data = skeleton->data();
                 if (data) {
-                    //size_t boneCount = data->mBones.size();
+                    // size_t boneCount = data->mBones.size();
                     auto buffer = callback(skeleton);
 
                     if (animation->updateRender(frameTimeSinceLastFrame, sceneTimeSinceLastFrame, buffer.mData)) {
@@ -177,7 +176,7 @@ namespace Scene {
                     ++it;
                 }
             }
-        }
+        });
 
         for (Entity::AnimationState *state : doneAnimations) {
             state->set_value();

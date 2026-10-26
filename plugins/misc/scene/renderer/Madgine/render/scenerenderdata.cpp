@@ -23,13 +23,11 @@ namespace Render {
 
     Threading::ImmediateTask<RenderFuture> SceneRenderData::render(RenderContext *context)
     {
-        co_await mScene.mutex().locked(Engine::AccessMode::READ, [this, context]() {
-            mScene.updateFrame([context](Scene::Entity::Skeleton *skeleton) {
+        co_await mScene.updateFrame([context](Scene::Entity::Skeleton *skeleton) {
                 if (!skeleton->mBoneMatrices) {
                     skeleton->mBoneMatrices = context->allocateBuffer<Math::Matrix4[]>(skeleton->data()->mBones.size());
                 }
                 return context->mapBuffer(skeleton->mBoneMatrices); });
-        });
 
         co_return {};
     }
