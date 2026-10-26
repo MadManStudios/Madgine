@@ -85,13 +85,13 @@ namespace Widgets {
         return WidgetBase::getChildRecursive(name);
     }
 
-    WidgetBase *CompoundWidget::getHoveredDown(const Math::Vector2 &point, const Math::Rect2i &screenSpace)
+    WidgetBase *CompoundWidget::getHoveredDown(const Math::Vector2 &point, const Math::Rect2i &screenSpace, bool isPointerEvent)
     {
-        WidgetBase *hovered = WidgetBase::getHoveredDown(point, screenSpace);
+        WidgetBase *hovered = WidgetBase::getHoveredDown(point, screenSpace, isPointerEvent);
 
         if (hovered == this) {
             for (WidgetBase *w : mTemplateWidgets | std::views::transform(projectionUniquePtrToPtr)) {
-                if (WidgetBase *hovered = w->getHoveredDown(point, screenSpace)) {
+                if (WidgetBase *hovered = w->getHoveredDown(point, screenSpace, isPointerEvent)) {
                     return hovered;
                 }
             }

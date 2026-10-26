@@ -228,7 +228,7 @@ namespace Widgets {
 
     bool WidgetManager::injectKeyPress(const Platform::Input::KeyPressEvent &arg)
     {
-        for (WidgetBase *modalWidget : mModalWidgetList) {
+        for (WidgetBase *modalWidget : std::views::reverse(mModalWidgetList)) {
             while (modalWidget) {
                 if (modalWidget->injectKeyPress(arg))
                     return true;
@@ -248,7 +248,7 @@ namespace Widgets {
 
     bool WidgetManager::injectKeyRelease(const Platform::Input::KeyReleaseEvent &arg)
     {
-        for (WidgetBase *modalWidget : mModalWidgetList) {
+        for (WidgetBase *modalWidget : std::views::reverse(mModalWidgetList)) {
             while (modalWidget) {
                 if (modalWidget->injectKeyRelease(arg))
                     return true;
@@ -291,22 +291,27 @@ namespace Widgets {
         return false;
     }
 
-    WidgetBase *WidgetManager::getHoveredWidgetUp(const Math::Vector2 &pos, WidgetBase *current)
+    WidgetBase *WidgetManager::getHoveredWidgetUp(const Math::Vector2 &pos, WidgetBase *current, bool isPointerEvent)
     {
-        return current ? current->getHoveredUp(pos, { { 0, 0 }, mClientSpace.mSize }) : nullptr;
+        return current ? current->getHoveredUp(pos, { { 0, 0 }, mClientSpace.mSize }, isPointerEvent) : nullptr;
     }
 
-    WidgetBase *WidgetManager::getHoveredWidgetDown(const Math::Vector2 &pos, WidgetBase *current)
+    WidgetBase *WidgetManager::getHoveredWidgetDown(const Math::Vector2 &pos, WidgetBase *current, bool isPointerEvent)
     {
         if (current) {
-            return current->getHoveredDown(pos, { { 0, 0 }, mClientSpace.mSize });
+            return current->getHoveredDown(pos, { { 0, 0 }, mClientSpace.mSize }, isPointerEvent);
         } else {
             if (!mModalWidgetList.empty()) {
-                assert(mModalWidgetList.front()->mVisible);
-                return mModalWidgetList.front()->getHoveredDown(pos, { { 0, 0 }, mClientSpace.mSize });
+                assert(mModalWidgetList.back()->mVisible);
+                return mModalWidgetList.back()->getHoveredDown(pos, { { 0, 0 }, mClientSpace.mSize }, isPointerEvent);
+            }
+            for (WidgetBase *w : std::views::reverse(mOverlays)) {
+                if (WidgetBase *hovered = w->getHoveredDown(pos, { { 0, 0 }, mClientSpace.mSize }, isPointerEvent)) {
+                    return hovered;
+                }
             }
             for (WidgetBase *w : widgets()) {
-                if (WidgetBase *hovered = w->getHoveredDown(pos, { { 0, 0 }, mClientSpace.mSize })) {
+                if (WidgetBase *hovered = w->getHoveredDown(pos, { { 0, 0 }, mClientSpace.mSize }, isPointerEvent)) {
                     return hovered;
                 }
             }
@@ -314,15 +319,13 @@ namespace Widgets {
         }
     }
 
-    WidgetBase *WidgetManager::getHoveredWidget(const Math::Vector2 &pos, WidgetBase *current)
+    WidgetBase *WidgetManager::getHoveredWidget(const Math::Vector2 &pos, WidgetBase *current, bool isPointerEvent)
     {
-        return getHoveredWidgetDown(pos, getHoveredWidgetUp(pos, current));
+        return getHoveredWidgetDown(pos, getHoveredWidgetUp(pos, current, isPointerEvent), isPointerEvent);
     }
 
     bool WidgetManager::injectPointerMove(const Platform::Input::PointerMoveEvent &arg)
     {
-        if (mHoveredWidget && std::ranges::find(mWidgets, mHoveredWidget) == mWidgets.end())
-            mHoveredWidget = nullptr;
 
         if (mDragStartEvent.mButton != Platform::Input::MouseButton::NO_BUTTON) {
 
@@ -346,7 +349,7 @@ namespace Widgets {
 
         mCachedPointerMoveEvent = arg;
 
-        updateHovered();
+        updatePointerState();
 
         if (mPointerEventTargetWidget) {
             Math::Vector2i pos = mPointerEventTargetWidget->getClientSpacePosition().floor();
@@ -382,6 +385,8 @@ namespace Widgets {
         auto it = std::ranges::find(mTopLevelWidgets, w, projectionToRawPtr);
         assert(it != mTopLevelWidgets.end());
         mTopLevelWidgets.erase(it);
+
+        updatePointerState();
     }
 
     void WidgetManager::clear()
@@ -434,31 +439,19 @@ namespace Widgets {
         // assert(count == 1);
     }
 
-    void WidgetManager::resetPointerState()
+    void WidgetManager::updatePointerState()
     {
-        if (mFocusedWidget) {
-            mFocusedWidget->onFocusLost();
-        }
-        mFocusedWidget = nullptr;
-        mHoveredWidget = nullptr;
-        if (mPointerEventTargetWidget) {
-            Platform::Input::PointerMoveEvent arg {
-                { 0, 0 }, { 0, 0 }, { 0, 0 }
-            };
-            mPointerEventTargetWidget->injectPointerLeave(arg);
-            mPointerEventTargetWidget = nullptr;
-        }
-        updateHovered();
-    }
+        if (mHoveredWidget && std::ranges::find(mWidgets, mHoveredWidget) == mWidgets.end())
+            mHoveredWidget = nullptr;
 
-    void WidgetManager::updateHovered()
-    {
-        mHoveredWidget = getHoveredWidget(Math::Vector2 { Math::Vector2i { &mCachedPointerMoveEvent.mWindowPosition.x } }, mHoveredWidget);
+        if (mFocusedWidget && std::ranges::find(mWidgets, mFocusedWidget) == mWidgets.end())
+            mFocusedWidget = nullptr;        
 
-        WidgetBase *newPointerEventTarget = mHoveredWidget;
-        while (newPointerEventTarget && !newPointerEventTarget->acceptsPointerEvents()) {
-            newPointerEventTarget = newPointerEventTarget->getParent();
-        }
+        if (mPointerEventTargetWidget && std::ranges::find(mWidgets, mPointerEventTargetWidget) == mWidgets.end())
+            mPointerEventTargetWidget = nullptr;        
+        
+        mHoveredWidget = getHoveredWidget(Math::Vector2 { Math::Vector2i { &mCachedPointerMoveEvent.mWindowPosition.x } }, mHoveredWidget, false);
+        WidgetBase *newPointerEventTarget = getHoveredWidget(Math::Vector2 { Math::Vector2i { &mCachedPointerMoveEvent.mWindowPosition.x } }, mPointerEventTargetWidget, true);
 
         if (mPointerEventTargetWidget != newPointerEventTarget) {
 
@@ -494,7 +487,7 @@ namespace Widgets {
         if (mCurrentRoot)
             mCurrentRoot->hide();
 
-        resetPointerState();
+        updatePointerState();
 
         mCurrentRoot = newRoot;
         newRoot->show();
@@ -502,9 +495,9 @@ namespace Widgets {
 
     void WidgetManager::openModalWidget(WidgetBase *widget)
     {
-        resetPointerState();
+        updatePointerState();
 
-        mModalWidgetList.emplace(mModalWidgetList.begin(), widget);
+        mModalWidgetList.emplace(mModalWidgetList.end(), widget);
         widget->show();
     }
 
@@ -515,11 +508,11 @@ namespace Widgets {
 
     void WidgetManager::closeModalWidget(WidgetBase *widget)
     {
-        resetPointerState();
+        updatePointerState();
 
-        assert(mModalWidgetList.size() > 0 && mModalWidgetList.front() == widget);
+        assert(mModalWidgetList.size() > 0 && mModalWidgetList.back() == widget);
         widget->hide();
-        mModalWidgetList.erase(mModalWidgetList.begin());
+        mModalWidgetList.erase(std::prev(mModalWidgetList.end()));
     }
 
     void WidgetManager::closeWidget(WidgetBase *widget)
@@ -529,6 +522,8 @@ namespace Widgets {
 
     void WidgetManager::openOverlay(WidgetBase *widget)
     {
+        updatePointerState();
+
         mOverlays.push_back(widget);
         widget->show();
         widget->applyGeometry(Math::Vector3 { Math::Vector2 { mClientSpace.mSize }, Platform::Window::platformCapabilities.mScalingFactor });
@@ -536,8 +531,18 @@ namespace Widgets {
 
     void WidgetManager::closeOverlay(WidgetBase *widget)
     {
+        updatePointerState();
+
         widget->hide();
         std::erase(mOverlays, widget);
+    }
+
+    void WidgetManager::bringOverlayToFront(WidgetBase *widget)
+    {
+        auto it = std::ranges::find(mOverlays, widget);
+        if (it != mOverlays.end()) {
+            std::ranges::rotate(it, std::next(it), mOverlays.end());
+        }
     }
 
     void WidgetManager::openLayout(std::string_view name)
@@ -636,18 +641,17 @@ namespace Widgets {
         }
 
         int layer = 0;
-        for (Widgets::WidgetBase *w : std::ranges::views::reverse(mModalWidgetList)) {
+        for (Widgets::WidgetBase *w : mOverlays) {
             if (w->mVisible) {
                 renderData.setAlpha(w->opacity());
                 renderData.setLayer(20 * ++layer);
                 w->render(renderData);
             }
         }
-        ++layer;
-        for (Widgets::WidgetBase *w : mOverlays) {
+        for (Widgets::WidgetBase *w : mModalWidgetList) {
             if (w->mVisible) {
                 renderData.setAlpha(w->opacity());
-                renderData.setLayer(20 * layer);
+                renderData.setLayer(20 * ++layer);
                 w->render(renderData);
             }
         }
@@ -758,15 +762,7 @@ namespace Widgets {
 
     void WidgetManager::onWidgetHidden(WidgetBase *w)
     {
-        WidgetBase *check = mHoveredWidget;
-        while (check) {
-            if (check == w) {
-                mHoveredWidget = check->getParent();
-                updateHovered();
-                return;
-            }
-            check = check->getParent();
-        }
+        updatePointerState();
     }
 
     bool WidgetManager::dragging(const WidgetBase *widget)

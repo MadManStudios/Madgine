@@ -142,8 +142,8 @@ namespace Widgets {
         Execution::SignalStub<void, const Platform::Input::KeyReleaseEvent &> &keyReleaseEvent();
 
         virtual bool containsPoint(const Math::Vector2 &point, const Math::Rect2i &screenSpace, float extend = 0.0f) const;
-        WidgetBase *getHoveredUp(const Math::Vector2 &point, const Math::Rect2i &screenSpace);
-        virtual WidgetBase *getHoveredDown(const Math::Vector2 &point, const Math::Rect2i &screenSpace);
+        WidgetBase *getHoveredUp(const Math::Vector2 &point, const Math::Rect2i &screenSpace, bool isPointerEvent);
+        virtual WidgetBase *getHoveredDown(const Math::Vector2 &point, const Math::Rect2i &screenSpace, bool isPointerEvent);
 
         virtual void render(WidgetsRenderData &renderData);
 

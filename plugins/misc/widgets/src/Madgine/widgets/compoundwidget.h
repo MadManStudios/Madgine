@@ -32,7 +32,7 @@ namespace Widgets {
 
         WidgetBase *getChildRecursive(std::string_view name) override;
 
-        WidgetBase *getHoveredDown(const Math::Vector2 &point, const Math::Rect2i &screenSpace) override;
+        WidgetBase *getHoveredDown(const Math::Vector2 &point, const Math::Rect2i &screenSpace, bool isPointerEvent) override;
 
     private:
         std::vector<std::unique_ptr<WidgetBase>> mTemplateWidgets;

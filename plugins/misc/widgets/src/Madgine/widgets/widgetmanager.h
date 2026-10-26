@@ -38,6 +38,7 @@ namespace Widgets {
         void closeWidget(WidgetBase *widget);
         void openOverlay(WidgetBase *widget);
         void closeOverlay(WidgetBase *widget);
+        void bringOverlayToFront(WidgetBase *widget);
 
         void openLayout(std::string_view name);
         void closeLayout(std::string_view name);
@@ -106,12 +107,11 @@ namespace Widgets {
         static Serialize::StreamResult scanWidget(const Serialize::SerializeTable *&out, Serialize::FormattedSerializeStream &in);
 
     protected:
-        WidgetBase *getHoveredWidget(const Math::Vector2 &pos, WidgetBase *current);
-        WidgetBase *getHoveredWidgetUp(const Math::Vector2 &pos, WidgetBase *current);
-        WidgetBase *getHoveredWidgetDown(const Math::Vector2 &pos, WidgetBase *current);
+        WidgetBase *getHoveredWidget(const Math::Vector2 &pos, WidgetBase *current, bool isPointerEvent);
+        WidgetBase *getHoveredWidgetUp(const Math::Vector2 &pos, WidgetBase *current, bool isPointerEvent);
+        WidgetBase *getHoveredWidgetDown(const Math::Vector2 &pos, WidgetBase *current, bool isPointerEvent);
 
-        void resetPointerState();
-        void updateHovered();
+        void updatePointerState();        
 
         Serialize::StreamResult readWidget(Serialize::FormattedSerializeStream &in, std::unique_ptr<WidgetBase> &widget, WidgetBase *parent);
         Serialize::StreamResult readWidgetStub(Serialize::FormattedSerializeStream &in, std::unique_ptr<WidgetBase> &widget);

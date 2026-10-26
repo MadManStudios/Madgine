@@ -458,24 +458,24 @@ namespace Widgets {
         return min.x <= point.x && min.y <= point.y && max.x >= point.x && max.y >= point.y;
     }
 
-    WidgetBase *WidgetBase::getHoveredUp(const Math::Vector2 &point, const Math::Rect2i &screenSpace)
+    WidgetBase *WidgetBase::getHoveredUp(const Math::Vector2 &point, const Math::Rect2i &screenSpace, bool isPointerEvent)
     {
-        if (mVisible && containsPoint(point, screenSpace)) {
+        if (mVisible && containsPoint(point, screenSpace) && (!isPointerEvent || acceptsPointerEvents())) {
             return this;
         } else if (mParent) {
-            return mParent->getHoveredUp(point, screenSpace);
+            return mParent->getHoveredUp(point, screenSpace, isPointerEvent);
         } else {
             return nullptr;
         }
     }
 
-    WidgetBase *WidgetBase::getHoveredDown(const Math::Vector2 &point, const Math::Rect2i &screenSpace)
+    WidgetBase *WidgetBase::getHoveredDown(const Math::Vector2 &point, const Math::Rect2i &screenSpace, bool isPointerEvent)
     {
-        if (!mVisible || !containsPoint(point, screenSpace))
+        if (!mVisible || !containsPoint(point, screenSpace) || (isPointerEvent && !acceptsPointerEvents()))
             return nullptr;
 
         for (WidgetBase *w : mChildren | std::views::transform(projectionUniquePtrToPtr)) {
-            if (WidgetBase *hovered = w->getHoveredDown(point, screenSpace)) {
+            if (WidgetBase *hovered = w->getHoveredDown(point, screenSpace, isPointerEvent)) {
                 return hovered;
             }
         }
