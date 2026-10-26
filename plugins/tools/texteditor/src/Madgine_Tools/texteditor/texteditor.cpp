@@ -57,7 +57,7 @@ namespace Tools {
 
         auto fontResult = co_await Platform::Filesystem::readFileAsync(fontPath);
         if (fontResult.is_value()) {
-            mFontData = std::move(fontResult).value().get();
+            mFontData = std::move(fontResult).value();
 
             auto &io = ImGui::GetIO();
             static ImVector<ImWchar> ranges;

@@ -114,7 +114,7 @@ namespace Behavior {
 
         static decltype(auto) unpack_storage(auto &&result)
         {
-            return std::forward<decltype(result)>(result).value().get();
+            return std::forward<decltype(result)>(result).value();
         }
 
         template <typename T>

@@ -437,7 +437,7 @@ namespace Behavior {
                         }
                     }
                     retVal = TupleUnpacker::select(
-                        std::move(rec.mStorage).value().mValues,
+                        std::move(rec.mStorage).valueTuple(),
                         [](auto &&v) -> Reflect::Value {
                             return Reflect::Value { std::forward<decltype(v)>(v) };
                         },

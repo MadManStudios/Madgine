@@ -208,9 +208,14 @@ namespace Execution {
             mState.template emplace<DoneStorage>();
         }
 
-        Value value() &&
+        decltype(auto) value() &&
         {
-            return std::move(std::get<Value>(mState));
+            return std::move(std::get<Value>(mState)).get();
+        }
+
+        decltype(auto) valueTuple() &&
+        {
+            return std::move(std::get<Value>(mState)).mValues;
         }
 
         Error error() &&
@@ -223,9 +228,14 @@ namespace Execution {
             return std::move(std::get<DoneStorage>(mState));
         }
 
-        Value &value() &
+        decltype(auto) value() &
         {
-            return std::get<Value>(mState);
+            return std::get<Value>(mState).get();
+        }
+
+        decltype(auto) valueTuple() &
+        {
+            return std::get<Value>(mState).mValues;
         }
 
         Error &error() &
@@ -241,6 +251,11 @@ namespace Execution {
         const Value &value() const &
         {
             return std::get<Value>(mState);
+        }
+
+        decltype(auto) valueTuple() const &
+        {
+            return std::get<Value>(mState).mValues;
         }
 
         const Error &error() const &

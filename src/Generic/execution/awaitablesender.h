@@ -63,13 +63,9 @@ namespace Execution {
                 return false;
 
             static_assert(!std::same_as<decltype(mResult.error().reproduce(mHandle.promise())), bool>);
-            if (mResult.is_done()) {
-                return !decltype(mResult.error().reproduce(mHandle.promise())) {};
-            } else if (mResult.is_error()) {
-                return !decltype(mResult.done().reproduce(mHandle.promise())) {};
-            } else {
-                return !decltype(mResult.value().reproduce(mHandle.promise())) {};
-            }
+            return std::visit([](auto &storage) {
+                return !decltype(storage.reproduce(mHandle.promise())) {};
+            }, mResult.mState);
         }
 
         template <typename T>

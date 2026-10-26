@@ -117,7 +117,7 @@ namespace Execution {
 
         static decltype(auto) unpack_storage(auto &&result)
         {
-            return std::forward<decltype(result)>(result).value().get();
+            return std::forward<decltype(result)>(result).value();
         }
 
         template <typename CPO, typename... Args>

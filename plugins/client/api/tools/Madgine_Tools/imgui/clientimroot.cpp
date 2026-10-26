@@ -289,7 +289,7 @@ namespace Tools {
         Platform::Filesystem::Path iconsPath = Resources::ResourceManager::getSingleton().findResourceFile("icons.ttf");
         auto iconsResult = co_await Platform::Filesystem::readFileAsync(iconsPath);
         if (iconsResult.is_value()) {
-            mIconsData = std::move(iconsResult).value().get();
+            mIconsData = std::move(iconsResult).value();
 
             static const ImWchar icons_ranges[] = { 0xf100, 0xf1ff, 0 };
 
