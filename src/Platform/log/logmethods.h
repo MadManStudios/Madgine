@@ -29,20 +29,20 @@ namespace Platform {
         };
 
 #if ENABLE_DEBUG_LOGGING
-#    define LOG_DEBUG(s) Engine::Platform::Log::LogDummy { Engine::Platform::Log::MessageType::DEBUG_TYPE } << s
+#    define LOG_DEBUG(...) Engine::Platform::Log::LogDummy { Engine::Platform::Log::MessageType::DEBUG_TYPE } << __VA_ARGS__
 #else
-#    define LOG_DEBUG(s)
+#    define LOG_DEBUG(...)
 #endif
-#define LOG(s) Engine::Platform::Log::LogDummy { Engine::Platform::Log::MessageType::INFO_TYPE, __FILE__, __LINE__ } << s
-#define LOG_WARNING(s) Engine::Platform::Log::LogDummy { Engine::Platform::Log::MessageType::WARNING_TYPE, __FILE__, __LINE__ } << s
-#define LOG_ERROR(s) Engine::Platform::Log::LogDummy { Engine::Platform::Log::MessageType::ERROR_TYPE, __FILE__, __LINE__ } << s
-#define LOG_FATAL(s) Engine::Platform::Log::LogDummy { Engine::Platform::Log::MessageType::FATAL_TYPE, __FILE__, __LINE__ } << s
+#define LOG(...) Engine::Platform::Log::LogDummy { Engine::Platform::Log::MessageType::INFO_TYPE, __FILE__, __LINE__ } << __VA_ARGS__
+#define LOG_WARNING(...) Engine::Platform::Log::LogDummy { Engine::Platform::Log::MessageType::WARNING_TYPE, __FILE__, __LINE__ } << __VA_ARGS__
+#define LOG_ERROR(...) Engine::Platform::Log::LogDummy { Engine::Platform::Log::MessageType::ERROR_TYPE, __FILE__, __LINE__ } << __VA_ARGS__
+#define LOG_FATAL(...) Engine::Platform::Log::LogDummy { Engine::Platform::Log::MessageType::FATAL_TYPE, __FILE__, __LINE__ } << __VA_ARGS__
 
 #define ONCE(f) std::call_once([]() -> std::once_flag & {static std::once_flag dummy; return dummy; }(), [&]() { f; })
 
-#define LOG_ONCE(s) ONCE(LOG(s))
-#define LOG_WARNING_ONCE(s) ONCE(LOG_WARNING(s))
-#define LOG_ERROR_ONCE(s) ONCE(LOG_ERROR(s))
+#define LOG_ONCE(...) ONCE(LOG(__VA_ARGS__))
+#define LOG_WARNING_ONCE(...) ONCE(LOG_WARNING(__VA_ARGS__))
+#define LOG_ERROR_ONCE(...) ONCE(LOG_ERROR(__VA_ARGS__))
 
         struct get_file_name_t {
             template <typename T>
