@@ -40,16 +40,14 @@ namespace Math {
         you interpret the values.
         */
     struct META_EXPORT Vector2 {
-        float x, y;
+        float x = 0.0f, y = 0.0f;
 
     public:
         /** Default constructor.
                     @note
                     It does <b>NOT</b> initialize the vector for efficiency.
                     */
-        Vector2()
-        {
-        }
+        constexpr Vector2() = default;
 
         constexpr Vector2(const float fX, const float fY)
             : x(fX)
@@ -57,31 +55,31 @@ namespace Math {
         {
         }
 
-        explicit Vector2(const float scaler)
+        explicit constexpr Vector2(const float scaler)
             : x(scaler)
             , y(scaler)
         {
         }
 
-        Vector2(const float afCoordinate[2])
+        constexpr Vector2(const float afCoordinate[2])
             : x(afCoordinate[0])
             , y(afCoordinate[1])
         {
         }
 
-        explicit Vector2(const Vector2i &v)
+        explicit constexpr Vector2(const Vector2i &v)
             : x(static_cast<float>(v.x))
             , y(static_cast<float>(v.y))
         {
         }
 
-        explicit Vector2(const int afCoordinate[2])
+        explicit constexpr Vector2(const int afCoordinate[2])
         {
             x = static_cast<float>(afCoordinate[0]);
             y = static_cast<float>(afCoordinate[1]);
         }
 
-        explicit Vector2(float *const r)
+        explicit constexpr Vector2(float *const r)
             : x(r[0])
             , y(r[1])
         {
@@ -89,20 +87,20 @@ namespace Math {
 
         /** Exchange the contents of this vector with another.
          */
-        void swap(Vector2 &other) noexcept
+        constexpr void swap(Vector2 &other) noexcept
         {
             std::swap(x, other.x);
             std::swap(y, other.y);
         }
 
-        float operator[](const size_t i) const
+        constexpr float operator[](const size_t i) const
         {
             assert(i < 2);
 
             return *(&x + i);
         }
 
-        float &operator[](const size_t i)
+        constexpr float &operator[](const size_t i)
         {
             assert(i < 2);
 
@@ -110,28 +108,18 @@ namespace Math {
         }
 
         /// Pointer accessor for direct copying
-        float *ptr()
+        constexpr float *ptr()
         {
             return &x;
         }
 
         /// Pointer accessor for direct copying
-        const float *ptr() const
+        constexpr const float *ptr() const
         {
             return &x;
         }
 
-        /** Assigns the value of the other vector.
-                    @param
-                    rkVector The other vector
-                    */
-        constexpr Vector2 &operator=(const Vector2 &rkVector)
-        {
-            x = rkVector.x;
-            y = rkVector.y;
-
-            return *this;
-        }
+        constexpr Vector2 &operator=(const Vector2 &rkVector) = default;
 
         Vector2 &operator=(const float fScalar)
         {
@@ -141,12 +129,12 @@ namespace Math {
             return *this;
         }
 
-        bool operator==(const Vector2 &rkVector) const
+        constexpr bool operator==(const Vector2 &rkVector) const
         {
             return x == rkVector.x && y == rkVector.y;
         }
 
-        bool operator!=(const Vector2 &rkVector) const
+        constexpr bool operator!=(const Vector2 &rkVector) const
         {
             return x != rkVector.x || y != rkVector.y;
         }
@@ -159,14 +147,14 @@ namespace Math {
                 y + rkVector.y);
         }
 
-        Vector2 operator-(const Vector2 &rkVector) const
+        constexpr Vector2 operator-(const Vector2 &rkVector) const
         {
             return Vector2(
                 x - rkVector.x,
                 y - rkVector.y);
         }
 
-        Vector2 operator-(const Vector2i &other) const
+        constexpr Vector2 operator-(const Vector2i &other) const
         {
             return {
                 x - other.x, y - other.y
@@ -198,32 +186,32 @@ namespace Math {
                 y * fInv);
         }
 
-        Vector2 operator/(const Vector2 &rhs) const
+        constexpr Vector2 operator/(const Vector2 &rhs) const
         {
             return Vector2(
                 x / rhs.x,
                 y / rhs.y);
         }
 
-        const Vector2 &operator+() const
+        constexpr const Vector2 &operator+() const
         {
             return *this;
         }
 
-        Vector2 operator-() const
+        constexpr Vector2 operator-() const
         {
             return Vector2(-x, -y);
         }
 
         // overloaded operators to help Vector2
-        friend Vector2 operator*(const float fScalar, const Vector2 &rkVector)
+        friend constexpr Vector2 operator*(const float fScalar, const Vector2 &rkVector)
         {
             return Vector2(
                 fScalar * rkVector.x,
                 fScalar * rkVector.y);
         }
 
-        friend Vector2 operator/(const float fScalar, const Vector2 &rkVector)
+        friend constexpr Vector2 operator/(const float fScalar, const Vector2 &rkVector)
         {
             return Vector2(
                 fScalar / rkVector.x,
@@ -244,14 +232,14 @@ namespace Math {
                 lhs + rhs.y);
         }
 
-        friend Vector2 operator-(const Vector2 &lhs, const float rhs)
+        friend constexpr Vector2 operator-(const Vector2 &lhs, const float rhs)
         {
             return Vector2(
                 lhs.x - rhs,
                 lhs.y - rhs);
         }
 
-        friend Vector2 operator-(const float lhs, const Vector2 &rhs)
+        friend constexpr Vector2 operator-(const float lhs, const Vector2 &rhs)
         {
             return Vector2(
                 lhs - rhs.x,
@@ -259,7 +247,7 @@ namespace Math {
         }
 
         // arithmetic updates
-        Vector2 &operator+=(const Vector2 &rkVector)
+        constexpr Vector2 &operator+=(const Vector2 &rkVector)
         {
             x += rkVector.x;
             y += rkVector.y;
@@ -267,7 +255,7 @@ namespace Math {
             return *this;
         }
 
-        Vector2 &operator+=(const float fScaler)
+        constexpr Vector2 &operator+=(const float fScaler)
         {
             x += fScaler;
             y += fScaler;
@@ -275,7 +263,7 @@ namespace Math {
             return *this;
         }
 
-        Vector2 &operator-=(const Vector2 &rkVector)
+        constexpr Vector2 &operator-=(const Vector2 &rkVector)
         {
             x -= rkVector.x;
             y -= rkVector.y;
@@ -283,7 +271,7 @@ namespace Math {
             return *this;
         }
 
-        Vector2 &operator-=(const float fScaler)
+        constexpr Vector2 &operator-=(const float fScaler)
         {
             x -= fScaler;
             y -= fScaler;
@@ -291,7 +279,7 @@ namespace Math {
             return *this;
         }
 
-        Vector2 &operator*=(const float fScalar)
+        constexpr Vector2 &operator*=(const float fScalar)
         {
             x *= fScalar;
             y *= fScalar;
@@ -299,7 +287,7 @@ namespace Math {
             return *this;
         }
 
-        Vector2 &operator*=(const Vector2 &rkVector)
+        constexpr Vector2 &operator*=(const Vector2 &rkVector)
         {
             x *= rkVector.x;
             y *= rkVector.y;
@@ -307,7 +295,7 @@ namespace Math {
             return *this;
         }
 
-        Vector2 &operator/=(const float fScalar)
+        constexpr Vector2 &operator/=(const float fScalar)
         {
             assert(fScalar != 0.0);
 
@@ -319,7 +307,7 @@ namespace Math {
             return *this;
         }
 
-        Vector2 &operator/=(const Vector2 &rkVector)
+        constexpr Vector2 &operator/=(const Vector2 &rkVector)
         {
             x /= rkVector.x;
             y /= rkVector.y;
@@ -328,31 +316,31 @@ namespace Math {
         }
 
         /// @copydoc Vector3::length
-        float length() const
+        constexpr float length() const
         {
             return sqrtf(x * x + y * y);
         }
 
         /// @copydoc Vector3::squaredLength
-        float squaredLength() const
+        constexpr float squaredLength() const
         {
             return x * x + y * y;
         }
 
         /// @copydoc Vector3::distance
-        float distance(const Vector2 &rhs) const
+        constexpr float distance(const Vector2 &rhs) const
         {
             return (*this - rhs).length();
         }
 
         /// @copydoc Vector3::squaredDistance
-        float squaredDistance(const Vector2 &rhs) const
+        constexpr float squaredDistance(const Vector2 &rhs) const
         {
             return (*this - rhs).squaredLength();
         }
 
         /// @copydoc Vector3::dotProduct
-        float dotProduct(const Vector2 &vec) const
+        constexpr float dotProduct(const Vector2 &vec) const
         {
             return x * vec.x + y * vec.y;
         }
@@ -377,7 +365,7 @@ namespace Math {
         /** Returns a vector at a point half way between this and the passed
                     in vector.
                     */
-        Vector2 midPoint(const Vector2 &vec) const
+        constexpr Vector2 midPoint(const Vector2 &vec) const
         {
             return Vector2(
                 (x + vec.x) * 0.5f,
@@ -411,7 +399,7 @@ namespace Math {
                     value of x, y and z from both vectors. Lowest is taken just
                     numerically, not magnitude, so -1 < 0.
                     */
-        void makeFloor(const Vector2 &cmp)
+        constexpr void makeFloor(const Vector2 &cmp)
         {
             if (cmp.x < x)
                 x = cmp.x;
@@ -426,7 +414,7 @@ namespace Math {
                     value of x, y and z from both vectors. Highest is taken just
                     numerically, not magnitude, so 1 > -3.
                     */
-        void makeCeil(const Vector2 &cmp)
+        constexpr void makeCeil(const Vector2 &cmp)
         {
             if (cmp.x > x)
                 x = cmp.x;
@@ -441,7 +429,7 @@ namespace Math {
                     method will guarantee to generate one of them. If you need more
                     control you should use the Quaternion class.
                     */
-        Vector2 perpendicular() const
+        constexpr Vector2 perpendicular() const
         {
             return Vector2(-y, x);
         }
@@ -449,7 +437,7 @@ namespace Math {
         /** Calculates the 2 dimensional cross-product of 2 vectors, which results
                     in a single floating point value which is 2 times the area of the triangle.
                     */
-        float crossProduct(const Vector2 &rkVector) const
+        constexpr float crossProduct(const Vector2 &rkVector) const
         {
             return x * rkVector.y - y * rkVector.x;
         }
@@ -476,7 +464,7 @@ namespace Math {
                     }*/
 
         /** Returns true if this vector is zero length. */
-        bool isZeroLength() const
+        constexpr bool isZeroLength() const
         {
             float sqlen = x * x + y * y;
             return sqlen < 1e-06 * 1e-06;
@@ -484,7 +472,7 @@ namespace Math {
 
         /** As normalise, except that this vector is unaffected and the
                     normalised vector is returned as a copy. */
-        Vector2 normalizedCopy() const
+        constexpr Vector2 normalizedCopy() const
         {
             Vector2 ret = *this;
             ret.normalize();
@@ -494,7 +482,7 @@ namespace Math {
         /** Calculates a reflection vector to the plane with the given normal .
                     @remarks NB assumes 'this' is pointing AWAY FROM the plane, invert if it is not.
                     */
-        Vector2 reflect(const Vector2 &normal) const
+        constexpr Vector2 reflect(const Vector2 &normal) const
         {
             return Vector2(*this - 2 * this->dotProduct(normal) * normal);
         }

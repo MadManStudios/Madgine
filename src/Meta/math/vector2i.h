@@ -4,9 +4,9 @@ namespace Engine {
 namespace Math {
 
     struct Vector2i {
-        int x, y;
+        int x = 0, y = 0;
 
-        Vector2i() = default;
+        constexpr Vector2i() = default;
 
         constexpr Vector2i(int x, int y)
             : x(x)
@@ -14,7 +14,7 @@ namespace Math {
         {
         }
 
-        explicit Vector2i(int *const r)
+        explicit constexpr Vector2i(int *const r)
             : x(r[0])
             , y(r[1])
         {
@@ -68,12 +68,12 @@ namespace Math {
             return *(&x + i);
         }
 
-        int *ptr()
+        constexpr int *ptr()
         {
             return &x;
         }
 
-        const int *ptr() const
+        constexpr const int *ptr() const
         {
             return &x;
         }

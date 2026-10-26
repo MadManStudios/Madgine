@@ -6,9 +6,9 @@ namespace Engine {
 namespace Math {
 
     struct Vector3i {
-        int x, y, z;
+        int x = 0, y = 0, z = 0;
 
-        Vector3i() { }
+        constexpr Vector3i() = default;
 
         constexpr Vector3i(const int iX, const int iY, const int iZ)
             : x(iX)
@@ -24,7 +24,7 @@ namespace Math {
         {
         }
 
-        explicit Vector3i(const Vector2i &xy, const float z)
+        explicit constexpr Vector3i(const Vector2i &xy, const float z)
             : x(xy.x)
             , y(xy.y)
             , z(z)
@@ -49,33 +49,33 @@ namespace Math {
             return x == other.x && y == other.y && z == other.z;
         }
 
-        int operator[](const size_t i) const
+        constexpr int operator[](const size_t i) const
         {
             assert(i < 3);
 
             return *(&x + i);
         }
 
-        int &operator[](const size_t i)
+        constexpr int &operator[](const size_t i)
         {
             assert(i < 3);
 
             return *(&x + i);
         }
 
-        int *ptr()
+        constexpr int *ptr()
         {
             return &x;
         }
 
-        const int *ptr() const
+        constexpr const int *ptr() const
         {
             return &x;
         }
 
         /** Swizzle-like narrowing operations
          */
-        Vector2i xy() const
+        constexpr Vector2i xy() const
         {
             return { x, y };
         }
