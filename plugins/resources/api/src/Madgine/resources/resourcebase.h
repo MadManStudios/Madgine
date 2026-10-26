@@ -47,7 +47,7 @@ namespace Serialize {
         static StreamResult read(FormattedSerializeStream &in, T *&p, const char *name, Context &&context)
         {
             std::string resourceName;
-            STREAM_PROPAGATE_ERROR(Serialize::read(in, resourceName, name));
+            STREAM_PROPAGATE_ERROR(Serialize::read(in, resourceName, name, context));
             p = T::Loader::getSingleton().get(resourceName);
             return {};
         }
@@ -55,7 +55,7 @@ namespace Serialize {
         template <typename Context>
         static void write(FormattedSerializeStream &out, T *const &p, const char *name, Context &&context)
         {
-            Serialize::write(out, p->name(), name);
+            Serialize::write(out, p->name(), name, context);
         }
     };
 

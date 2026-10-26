@@ -7,6 +7,8 @@ namespace Engine {
 template <typename CPO, typename R, std::same_as<void> T, typename... Args>
 struct tag_invocable_view_helper {
 
+    static_assert(sizeof(CPO) > 0, "If this triggers, probably the template is instantiated at a place where it should not be");
+
     tag_invocable_view_helper()
         : tag_invocable_view_helper(Void {})
     {

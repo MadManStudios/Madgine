@@ -227,14 +227,14 @@ namespace Serialize {
         static StreamResult read(Serialize::FormattedSerializeStream &in, Resources::Handle<Loader, Data> &handle, const char *name, Context &&context)
         {
             std::string resourceName;
-            STREAM_PROPAGATE_ERROR(Serialize::read(in, resourceName, name));
+            STREAM_PROPAGATE_ERROR(Serialize::read(in, resourceName, name, context));
             handle.load(resourceName);
             return {};
         }
         template <typename Context>
         static void write(Serialize::FormattedSerializeStream &out, const Resources::Handle<Loader, Data> &handle, const char *name, Context &&context)
         {
-            Serialize::write(out, handle.name(), name);
+            Serialize::write(out, handle.name(), name, context);
         }
 
         static StreamResult visitStream(FormattedSerializeStream &in, const char *name, const StreamVisitor &visitor, size_t depth)
