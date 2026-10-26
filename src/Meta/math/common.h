@@ -37,6 +37,11 @@ namespace Math {
             return std::sqrt(x);
     }
 
+    constexpr float fabs(float x)
+    {
+        return x < 0.0f ? -x : x;
+    }
+
     template <typename T>
     constexpr T min(const T &a, const T &b)
     {
