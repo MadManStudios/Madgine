@@ -169,6 +169,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../../resources/api/docs/resources.html">Resources</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../root/api/docs/root.html">Root</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Scene</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#conventions">Conventions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#behaviors">Behaviors</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#locking">Locking</a></li>
 </ul>
@@ -247,6 +248,10 @@
 </dd></dl>
 
 <p>The Scene plugin contains a comprehensive implementation of a Scene system, including a full Entity-Component-System (ECS). It is built upon the Base plugin and the SceneManager is implemented as a GlobalAPIComponent.</p>
+<section id="conventions">
+<h2>Conventions<a class="headerlink" href="#conventions" title="Permalink to this heading"></a></h2>
+<p>The 3D world uses a left-handed coordinate system, with forward being z+, right being x+ and up being y+.</p>
+</section>
 <section id="behaviors">
 <h2>Behaviors<a class="headerlink" href="#behaviors" title="Permalink to this heading"></a></h2>
 <p>The Scene plugin integrates seamlessly with the Behavior system. Every Entity holds a lifetime, that is itself embedded in an asynchronous lifetime. Behaviors are the preferred way to assign

@@ -169,6 +169,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../../plugins/resources/api/docs/resources.html">Resources</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../plugins/root/api/docs/root.html">Root</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../plugins/misc/scene/docs/scene.html">Scene</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../plugins/misc/scene/docs/scene.html#conventions">Conventions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../plugins/misc/scene/docs/scene.html#behaviors">Behaviors</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../plugins/misc/scene/docs/scene.html#locking">Locking</a></li>
 </ul>
@@ -314,8 +315,8 @@ $(function() {
 <li>MainWindowComponentBase()&#160;:&#160;<a class="el" href="struct_engine_1_1_core_1_1_main_window_component_base.html#a5535b595e2c21789d769f392644da8d4">Engine::Core::MainWindowComponentBase</a></li>
 <li>make_ready()&#160;:&#160;<a class="el" href="struct_engine_1_1_threading_1_1_task_future_3_01void_01_4.html#a0c6488862a5dd04b8f9a120b576412c2">Engine::Threading::TaskFuture&lt; void &gt;</a></li>
 <li>MakeBinding&#160;:&#160;<a class="el" href="struct_engine_1_1_execution_1_1_function_binding.html#a21cd238dcd65808587d9be0069b2bd2b">Engine::Execution::FunctionBinding&lt; F &gt;</a></li>
-<li>makeCeil()&#160;:&#160;<a class="el" href="struct_engine_1_1_math_1_1_vector2.html#a11ff9c52a179d4e55232dd0f35c22fcc">Engine::Math::Vector2</a>, <a class="el" href="struct_engine_1_1_math_1_1_vector3.html#a2203db1cc5ef86dc8f396b6ff936dbd8">Engine::Math::Vector3</a>, <a class="el" href="struct_engine_1_1_math_1_1_vector4.html#aa54c73a37f1ea8727afaf99d5db9f77a">Engine::Math::Vector4</a></li>
-<li>makeFloor()&#160;:&#160;<a class="el" href="struct_engine_1_1_math_1_1_vector2.html#a9f83f820aabcc83fe5811390d77de4e7">Engine::Math::Vector2</a>, <a class="el" href="struct_engine_1_1_math_1_1_vector3.html#a1165aaa953ef5708fe78d95ddfac0dcd">Engine::Math::Vector3</a>, <a class="el" href="struct_engine_1_1_math_1_1_vector4.html#ae91907ffc365f0ff4db9f4bb7f40e5eb">Engine::Math::Vector4</a></li>
+<li>makeCeil()&#160;:&#160;<a class="el" href="struct_engine_1_1_math_1_1_vector2.html#a2bd44b5707e921bbfb4d0cbe798e586f">Engine::Math::Vector2</a>, <a class="el" href="struct_engine_1_1_math_1_1_vector3.html#a6535d73e235296c58d4c9479baad367b">Engine::Math::Vector3</a>, <a class="el" href="struct_engine_1_1_math_1_1_vector4.html#aa54c73a37f1ea8727afaf99d5db9f77a">Engine::Math::Vector4</a></li>
+<li>makeFloor()&#160;:&#160;<a class="el" href="struct_engine_1_1_math_1_1_vector2.html#a704b01045e51ada6b34f84267b4e480b">Engine::Math::Vector2</a>, <a class="el" href="struct_engine_1_1_math_1_1_vector3.html#a4ec4ec8dd3adf4047fe3f6c2027b7e38">Engine::Math::Vector3</a>, <a class="el" href="struct_engine_1_1_math_1_1_vector4.html#ae91907ffc365f0ff4db9f4bb7f40e5eb">Engine::Math::Vector4</a></li>
 <li>makeRelative()&#160;:&#160;<a class="el" href="struct_engine_1_1_resources_1_1_resource_manager.html#a52858564a6b30997c2165f841d952470">Engine::Resources::ResourceManager</a></li>
 <li>mAlive&#160;:&#160;<a class="el" href="struct_engine_1_1_manual_lifetime.html#a2329d6aa7d2fb0e8548cc4490f5d96f7">Engine::ManualLifetime&lt; T &gt;</a></li>
 <li>mAllocation&#160;:&#160;<a class="el" href="struct_engine_1_1_type_1_1_allocation_storage.html#a6e3a7eb5351b91da5b35ad5495533f71">Engine::Type::AllocationStorage</a></li>
@@ -610,7 +611,7 @@ $(function() {
 <li>mIconPath&#160;:&#160;<a class="el" href="struct_engine_1_1_resources_1_1_resource_loader_base.html#a72e67955b663e17b9a7126e8c1e39b35">Engine::Resources::ResourceLoaderBase</a></li>
 <li>mId&#160;:&#160;<a class="el" href="struct_engine_1_1_debug_1_1_profiler_1_1_profiler_thread.html#a89ab659dc77a5f768e837b84afaac8d5">Engine::Debug::Profiler::ProfilerThread</a>, <a class="el" href="struct_engine_1_1_execution_1_1_state_1_1_function_ptr.html#a0ba49ed8008c76d28ab8dee1c4ca8ab4">Engine::Execution::State::FunctionPtr</a>, <a class="el" href="struct_engine_1_1_serialize_1_1_pending_request.html#adf9292c05421806ba4a925738bd0f77a">Engine::Serialize::PendingRequest</a>, <a class="el" href="struct_engine_1_1_serialize_1_1_read_message.html#a4d3fc725dffe984e55b3f3cb09eb1d1b">Engine::Serialize::ReadMessage</a>, <a class="el" href="struct_engine_1_1_serialize_1_1_sync_function_context.html#a9c439cf070be1540c3662eecc86e0108">Engine::Serialize::SyncFunctionContext</a></li>
 <li>mIdentifier&#160;:&#160;<a class="el" href="struct_engine_1_1_debug_1_1_tasks_1_1_task_tracker_1_1_event.html#a88d09cb28556009b388e566beb567824">Engine::Debug::Tasks::TaskTracker::Event</a></li>
-<li>midPoint()&#160;:&#160;<a class="el" href="struct_engine_1_1_math_1_1_vector2.html#a61da0bb3d60ec73e6dced9b330454b19">Engine::Math::Vector2</a>, <a class="el" href="struct_engine_1_1_math_1_1_vector3.html#a655f0b40c49e7a19ad41cba35287f14e">Engine::Math::Vector3</a>, <a class="el" href="struct_engine_1_1_math_1_1_vector4.html#afe5fd05afa3b5eb5281417ceeaea43d2">Engine::Math::Vector4</a></li>
+<li>midPoint()&#160;:&#160;<a class="el" href="struct_engine_1_1_math_1_1_vector2.html#aa7acd9a0606e84589e4b2b10a83ad57b">Engine::Math::Vector2</a>, <a class="el" href="struct_engine_1_1_math_1_1_vector3.html#adcb5b72fbab048b8ececc9930aa61b0f">Engine::Math::Vector3</a>, <a class="el" href="struct_engine_1_1_math_1_1_vector4.html#afe5fd05afa3b5eb5281417ceeaea43d2">Engine::Math::Vector4</a></li>
 <li>mIgnoreSource&#160;:&#160;<a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_ignore.html#a87afd9241616e3843f0e03720dd8afb9">Engine::Behavior::NodeGraph::Ignore</a></li>
 <li>mIgnoreTarget&#160;:&#160;<a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_ignore.html#a063183e5a7b0a60f32388487a55c1936">Engine::Behavior::NodeGraph::Ignore</a></li>
 <li>mImage&#160;:&#160;<a class="el" href="struct_engine_1_1_widgets_1_1_text_render_data.html#a5cf64e5b557a15fdd4715355fbbe91e7">Engine::Widgets::TextRenderData</a></li>
@@ -996,7 +997,7 @@ $(function() {
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Oct 25 2026 21:43:23 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Mon Oct 26 2026 13:37:50 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

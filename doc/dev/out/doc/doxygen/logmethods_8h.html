@@ -167,6 +167,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../../plugins/resources/api/docs/resources.html">Resources</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../plugins/root/api/docs/root.html">Root</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../plugins/misc/scene/docs/scene.html">Scene</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../plugins/misc/scene/docs/scene.html#conventions">Conventions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../plugins/misc/scene/docs/scene.html#behaviors">Behaviors</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../plugins/misc/scene/docs/scene.html#locking">Locking</a></li>
 </ul>
@@ -319,22 +320,22 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:a570713ca4a493fc4d2130a405f3b87ea"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="logmethods_8h.html#a570713ca4a493fc4d2130a405f3b87ea">LOG</a>(s)&#160;&#160;&#160;<a class="el" href="struct_engine_1_1_platform_1_1_log_1_1_log_dummy.html">Engine::Platform::Log::LogDummy</a> { Engine::Platform::Log::MessageType::INFO_TYPE, __FILE__, __LINE__ } &lt;&lt; s</td></tr>
-<tr class="separator:a570713ca4a493fc4d2130a405f3b87ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a79b566624ad59981eb413691e65eed66"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="logmethods_8h.html#a79b566624ad59981eb413691e65eed66">LOG_DEBUG</a>(s)</td></tr>
-<tr class="separator:a79b566624ad59981eb413691e65eed66"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2539da8e94361d3c44c3192641267826"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="logmethods_8h.html#a2539da8e94361d3c44c3192641267826">LOG_ERROR</a>(s)&#160;&#160;&#160;<a class="el" href="struct_engine_1_1_platform_1_1_log_1_1_log_dummy.html">Engine::Platform::Log::LogDummy</a> { Engine::Platform::Log::MessageType::ERROR_TYPE, __FILE__, __LINE__ } &lt;&lt; s</td></tr>
-<tr class="separator:a2539da8e94361d3c44c3192641267826"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab7d022610b4569cf2824d791faed2591"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="logmethods_8h.html#ab7d022610b4569cf2824d791faed2591">LOG_ERROR_ONCE</a>(s)&#160;&#160;&#160;<a class="el" href="logmethods_8h.html#a2c974866a853f5152a242e10aef8af3b">ONCE</a>(<a class="el" href="logmethods_8h.html#a2539da8e94361d3c44c3192641267826">LOG_ERROR</a>(s))</td></tr>
-<tr class="separator:ab7d022610b4569cf2824d791faed2591"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a152095749a91e401d8569ac5d03bd0cb"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="logmethods_8h.html#a152095749a91e401d8569ac5d03bd0cb">LOG_FATAL</a>(s)&#160;&#160;&#160;<a class="el" href="struct_engine_1_1_platform_1_1_log_1_1_log_dummy.html">Engine::Platform::Log::LogDummy</a> { Engine::Platform::Log::MessageType::FATAL_TYPE, __FILE__, __LINE__ } &lt;&lt; s</td></tr>
-<tr class="separator:a152095749a91e401d8569ac5d03bd0cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac9828ce3e87d72373b49982b0a3489c3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="logmethods_8h.html#ac9828ce3e87d72373b49982b0a3489c3">LOG_ONCE</a>(s)&#160;&#160;&#160;<a class="el" href="logmethods_8h.html#a2c974866a853f5152a242e10aef8af3b">ONCE</a>(<a class="el" href="logmethods_8h.html#a570713ca4a493fc4d2130a405f3b87ea">LOG</a>(s))</td></tr>
-<tr class="separator:ac9828ce3e87d72373b49982b0a3489c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac01663a424ffb6470b2df5513f13ac51"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="logmethods_8h.html#ac01663a424ffb6470b2df5513f13ac51">LOG_WARNING</a>(s)&#160;&#160;&#160;<a class="el" href="struct_engine_1_1_platform_1_1_log_1_1_log_dummy.html">Engine::Platform::Log::LogDummy</a> { Engine::Platform::Log::MessageType::WARNING_TYPE, __FILE__, __LINE__ } &lt;&lt; s</td></tr>
-<tr class="separator:ac01663a424ffb6470b2df5513f13ac51"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5a9458fdec0246421afcb5c31a355686"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="logmethods_8h.html#a5a9458fdec0246421afcb5c31a355686">LOG_WARNING_ONCE</a>(s)&#160;&#160;&#160;<a class="el" href="logmethods_8h.html#a2c974866a853f5152a242e10aef8af3b">ONCE</a>(<a class="el" href="logmethods_8h.html#ac01663a424ffb6470b2df5513f13ac51">LOG_WARNING</a>(s))</td></tr>
-<tr class="separator:a5a9458fdec0246421afcb5c31a355686"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3577749fb48d57a158b8ac1a0b3ab57e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="logmethods_8h.html#a3577749fb48d57a158b8ac1a0b3ab57e">LOG</a>(...)&#160;&#160;&#160;<a class="el" href="struct_engine_1_1_platform_1_1_log_1_1_log_dummy.html">Engine::Platform::Log::LogDummy</a> { Engine::Platform::Log::MessageType::INFO_TYPE, __FILE__, __LINE__ } &lt;&lt; __VA_ARGS__</td></tr>
+<tr class="separator:a3577749fb48d57a158b8ac1a0b3ab57e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a754b3d074e0af4ad3c7b918dd77ecb2d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="logmethods_8h.html#a754b3d074e0af4ad3c7b918dd77ecb2d">LOG_DEBUG</a>(...)</td></tr>
+<tr class="separator:a754b3d074e0af4ad3c7b918dd77ecb2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad4a9117ce894e3319e903142347a0f63"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="logmethods_8h.html#ad4a9117ce894e3319e903142347a0f63">LOG_ERROR</a>(...)&#160;&#160;&#160;<a class="el" href="struct_engine_1_1_platform_1_1_log_1_1_log_dummy.html">Engine::Platform::Log::LogDummy</a> { Engine::Platform::Log::MessageType::ERROR_TYPE, __FILE__, __LINE__ } &lt;&lt; __VA_ARGS__</td></tr>
+<tr class="separator:ad4a9117ce894e3319e903142347a0f63"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa31e1ae8f8ff8ee0aba7a2e6b53f6734"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="logmethods_8h.html#aa31e1ae8f8ff8ee0aba7a2e6b53f6734">LOG_ERROR_ONCE</a>(...)&#160;&#160;&#160;<a class="el" href="logmethods_8h.html#a2c974866a853f5152a242e10aef8af3b">ONCE</a>(<a class="el" href="logmethods_8h.html#ad4a9117ce894e3319e903142347a0f63">LOG_ERROR</a>(__VA_ARGS__))</td></tr>
+<tr class="separator:aa31e1ae8f8ff8ee0aba7a2e6b53f6734"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a89cecd05aeaafc715ebc091cf74d10fe"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="logmethods_8h.html#a89cecd05aeaafc715ebc091cf74d10fe">LOG_FATAL</a>(...)&#160;&#160;&#160;<a class="el" href="struct_engine_1_1_platform_1_1_log_1_1_log_dummy.html">Engine::Platform::Log::LogDummy</a> { Engine::Platform::Log::MessageType::FATAL_TYPE, __FILE__, __LINE__ } &lt;&lt; __VA_ARGS__</td></tr>
+<tr class="separator:a89cecd05aeaafc715ebc091cf74d10fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a39d3b8cbc0996513f9c56ae438a43e68"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="logmethods_8h.html#a39d3b8cbc0996513f9c56ae438a43e68">LOG_ONCE</a>(...)&#160;&#160;&#160;<a class="el" href="logmethods_8h.html#a2c974866a853f5152a242e10aef8af3b">ONCE</a>(<a class="el" href="logmethods_8h.html#a3577749fb48d57a158b8ac1a0b3ab57e">LOG</a>(__VA_ARGS__))</td></tr>
+<tr class="separator:a39d3b8cbc0996513f9c56ae438a43e68"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afef5ff03ea272d388345cf47148953d4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="logmethods_8h.html#afef5ff03ea272d388345cf47148953d4">LOG_WARNING</a>(...)&#160;&#160;&#160;<a class="el" href="struct_engine_1_1_platform_1_1_log_1_1_log_dummy.html">Engine::Platform::Log::LogDummy</a> { Engine::Platform::Log::MessageType::WARNING_TYPE, __FILE__, __LINE__ } &lt;&lt; __VA_ARGS__</td></tr>
+<tr class="separator:afef5ff03ea272d388345cf47148953d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a1bc3f938c2b2ca0fc3fd7bec405b73"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="logmethods_8h.html#a5a1bc3f938c2b2ca0fc3fd7bec405b73">LOG_WARNING_ONCE</a>(...)&#160;&#160;&#160;<a class="el" href="logmethods_8h.html#a2c974866a853f5152a242e10aef8af3b">ONCE</a>(<a class="el" href="logmethods_8h.html#afef5ff03ea272d388345cf47148953d4">LOG_WARNING</a>(__VA_ARGS__))</td></tr>
+<tr class="separator:a5a1bc3f938c2b2ca0fc3fd7bec405b73"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2c974866a853f5152a242e10aef8af3b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="logmethods_8h.html#a2c974866a853f5152a242e10aef8af3b">ONCE</a>(f)&#160;&#160;&#160;std::call_once([]() -&gt; std::once_flag &amp; {static std::once_flag dummy; return dummy; }(), [&amp;]() { f; })</td></tr>
 <tr class="separator:a2c974866a853f5152a242e10aef8af3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -355,8 +356,8 @@ Variables</h2></td></tr>
 <tr class="separator:a9b114e8e47987fd017fcf9c9c30a22b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
-<a id="a79b566624ad59981eb413691e65eed66" name="a79b566624ad59981eb413691e65eed66"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a79b566624ad59981eb413691e65eed66">&#9670;&#160;</a></span>LOG_DEBUG</h2>
+<a id="a754b3d074e0af4ad3c7b918dd77ecb2d" name="a754b3d074e0af4ad3c7b918dd77ecb2d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a754b3d074e0af4ad3c7b918dd77ecb2d">&#9670;&#160;</a></span>LOG_DEBUG</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -365,7 +366,7 @@ Variables</h2></td></tr>
           <td class="memname">#define LOG_DEBUG</td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname">s</td><td>)</td>
+          <td class="paramname"><em>...</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -373,8 +374,8 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a570713ca4a493fc4d2130a405f3b87ea" name="a570713ca4a493fc4d2130a405f3b87ea"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a570713ca4a493fc4d2130a405f3b87ea">&#9670;&#160;</a></span>LOG</h2>
+<a id="a3577749fb48d57a158b8ac1a0b3ab57e" name="a3577749fb48d57a158b8ac1a0b3ab57e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3577749fb48d57a158b8ac1a0b3ab57e">&#9670;&#160;</a></span>LOG</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -383,16 +384,16 @@ Variables</h2></td></tr>
           <td class="memname">#define LOG</td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname">s</td><td>)</td>
-          <td>&#160;&#160;&#160;<a class="el" href="struct_engine_1_1_platform_1_1_log_1_1_log_dummy.html">Engine::Platform::Log::LogDummy</a> { Engine::Platform::Log::MessageType::INFO_TYPE, __FILE__, __LINE__ } &lt;&lt; s</td>
+          <td class="paramname"><em>...</em></td><td>)</td>
+          <td>&#160;&#160;&#160;<a class="el" href="struct_engine_1_1_platform_1_1_log_1_1_log_dummy.html">Engine::Platform::Log::LogDummy</a> { Engine::Platform::Log::MessageType::INFO_TYPE, __FILE__, __LINE__ } &lt;&lt; __VA_ARGS__</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="ac01663a424ffb6470b2df5513f13ac51" name="ac01663a424ffb6470b2df5513f13ac51"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac01663a424ffb6470b2df5513f13ac51">&#9670;&#160;</a></span>LOG_WARNING</h2>
+<a id="afef5ff03ea272d388345cf47148953d4" name="afef5ff03ea272d388345cf47148953d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afef5ff03ea272d388345cf47148953d4">&#9670;&#160;</a></span>LOG_WARNING</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -401,16 +402,16 @@ Variables</h2></td></tr>
           <td class="memname">#define LOG_WARNING</td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname">s</td><td>)</td>
-          <td>&#160;&#160;&#160;<a class="el" href="struct_engine_1_1_platform_1_1_log_1_1_log_dummy.html">Engine::Platform::Log::LogDummy</a> { Engine::Platform::Log::MessageType::WARNING_TYPE, __FILE__, __LINE__ } &lt;&lt; s</td>
+          <td class="paramname"><em>...</em></td><td>)</td>
+          <td>&#160;&#160;&#160;<a class="el" href="struct_engine_1_1_platform_1_1_log_1_1_log_dummy.html">Engine::Platform::Log::LogDummy</a> { Engine::Platform::Log::MessageType::WARNING_TYPE, __FILE__, __LINE__ } &lt;&lt; __VA_ARGS__</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a2539da8e94361d3c44c3192641267826" name="a2539da8e94361d3c44c3192641267826"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2539da8e94361d3c44c3192641267826">&#9670;&#160;</a></span>LOG_ERROR</h2>
+<a id="ad4a9117ce894e3319e903142347a0f63" name="ad4a9117ce894e3319e903142347a0f63"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad4a9117ce894e3319e903142347a0f63">&#9670;&#160;</a></span>LOG_ERROR</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -419,16 +420,16 @@ Variables</h2></td></tr>
           <td class="memname">#define LOG_ERROR</td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname">s</td><td>)</td>
-          <td>&#160;&#160;&#160;<a class="el" href="struct_engine_1_1_platform_1_1_log_1_1_log_dummy.html">Engine::Platform::Log::LogDummy</a> { Engine::Platform::Log::MessageType::ERROR_TYPE, __FILE__, __LINE__ } &lt;&lt; s</td>
+          <td class="paramname"><em>...</em></td><td>)</td>
+          <td>&#160;&#160;&#160;<a class="el" href="struct_engine_1_1_platform_1_1_log_1_1_log_dummy.html">Engine::Platform::Log::LogDummy</a> { Engine::Platform::Log::MessageType::ERROR_TYPE, __FILE__, __LINE__ } &lt;&lt; __VA_ARGS__</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a152095749a91e401d8569ac5d03bd0cb" name="a152095749a91e401d8569ac5d03bd0cb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a152095749a91e401d8569ac5d03bd0cb">&#9670;&#160;</a></span>LOG_FATAL</h2>
+<a id="a89cecd05aeaafc715ebc091cf74d10fe" name="a89cecd05aeaafc715ebc091cf74d10fe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a89cecd05aeaafc715ebc091cf74d10fe">&#9670;&#160;</a></span>LOG_FATAL</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -437,8 +438,8 @@ Variables</h2></td></tr>
           <td class="memname">#define LOG_FATAL</td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname">s</td><td>)</td>
-          <td>&#160;&#160;&#160;<a class="el" href="struct_engine_1_1_platform_1_1_log_1_1_log_dummy.html">Engine::Platform::Log::LogDummy</a> { Engine::Platform::Log::MessageType::FATAL_TYPE, __FILE__, __LINE__ } &lt;&lt; s</td>
+          <td class="paramname"><em>...</em></td><td>)</td>
+          <td>&#160;&#160;&#160;<a class="el" href="struct_engine_1_1_platform_1_1_log_1_1_log_dummy.html">Engine::Platform::Log::LogDummy</a> { Engine::Platform::Log::MessageType::FATAL_TYPE, __FILE__, __LINE__ } &lt;&lt; __VA_ARGS__</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -463,8 +464,8 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="ac9828ce3e87d72373b49982b0a3489c3" name="ac9828ce3e87d72373b49982b0a3489c3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac9828ce3e87d72373b49982b0a3489c3">&#9670;&#160;</a></span>LOG_ONCE</h2>
+<a id="a39d3b8cbc0996513f9c56ae438a43e68" name="a39d3b8cbc0996513f9c56ae438a43e68"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a39d3b8cbc0996513f9c56ae438a43e68">&#9670;&#160;</a></span>LOG_ONCE</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -473,16 +474,16 @@ Variables</h2></td></tr>
           <td class="memname">#define LOG_ONCE</td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname">s</td><td>)</td>
-          <td>&#160;&#160;&#160;<a class="el" href="logmethods_8h.html#a2c974866a853f5152a242e10aef8af3b">ONCE</a>(<a class="el" href="logmethods_8h.html#a570713ca4a493fc4d2130a405f3b87ea">LOG</a>(s))</td>
+          <td class="paramname"><em>...</em></td><td>)</td>
+          <td>&#160;&#160;&#160;<a class="el" href="logmethods_8h.html#a2c974866a853f5152a242e10aef8af3b">ONCE</a>(<a class="el" href="logmethods_8h.html#a3577749fb48d57a158b8ac1a0b3ab57e">LOG</a>(__VA_ARGS__))</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a5a9458fdec0246421afcb5c31a355686" name="a5a9458fdec0246421afcb5c31a355686"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5a9458fdec0246421afcb5c31a355686">&#9670;&#160;</a></span>LOG_WARNING_ONCE</h2>
+<a id="a5a1bc3f938c2b2ca0fc3fd7bec405b73" name="a5a1bc3f938c2b2ca0fc3fd7bec405b73"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5a1bc3f938c2b2ca0fc3fd7bec405b73">&#9670;&#160;</a></span>LOG_WARNING_ONCE</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -491,16 +492,16 @@ Variables</h2></td></tr>
           <td class="memname">#define LOG_WARNING_ONCE</td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname">s</td><td>)</td>
-          <td>&#160;&#160;&#160;<a class="el" href="logmethods_8h.html#a2c974866a853f5152a242e10aef8af3b">ONCE</a>(<a class="el" href="logmethods_8h.html#ac01663a424ffb6470b2df5513f13ac51">LOG_WARNING</a>(s))</td>
+          <td class="paramname"><em>...</em></td><td>)</td>
+          <td>&#160;&#160;&#160;<a class="el" href="logmethods_8h.html#a2c974866a853f5152a242e10aef8af3b">ONCE</a>(<a class="el" href="logmethods_8h.html#afef5ff03ea272d388345cf47148953d4">LOG_WARNING</a>(__VA_ARGS__))</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="ab7d022610b4569cf2824d791faed2591" name="ab7d022610b4569cf2824d791faed2591"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab7d022610b4569cf2824d791faed2591">&#9670;&#160;</a></span>LOG_ERROR_ONCE</h2>
+<a id="aa31e1ae8f8ff8ee0aba7a2e6b53f6734" name="aa31e1ae8f8ff8ee0aba7a2e6b53f6734"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa31e1ae8f8ff8ee0aba7a2e6b53f6734">&#9670;&#160;</a></span>LOG_ERROR_ONCE</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -509,8 +510,8 @@ Variables</h2></td></tr>
           <td class="memname">#define LOG_ERROR_ONCE</td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname">s</td><td>)</td>
-          <td>&#160;&#160;&#160;<a class="el" href="logmethods_8h.html#a2c974866a853f5152a242e10aef8af3b">ONCE</a>(<a class="el" href="logmethods_8h.html#a2539da8e94361d3c44c3192641267826">LOG_ERROR</a>(s))</td>
+          <td class="paramname"><em>...</em></td><td>)</td>
+          <td>&#160;&#160;&#160;<a class="el" href="logmethods_8h.html#a2c974866a853f5152a242e10aef8af3b">ONCE</a>(<a class="el" href="logmethods_8h.html#ad4a9117ce894e3319e903142347a0f63">LOG_ERROR</a>(__VA_ARGS__))</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -520,7 +521,7 @@ Variables</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Oct 25 2026 21:43:19 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Mon Oct 26 2026 13:37:47 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

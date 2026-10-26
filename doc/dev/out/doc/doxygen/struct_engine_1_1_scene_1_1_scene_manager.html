@@ -167,6 +167,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../../plugins/resources/api/docs/resources.html">Resources</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../plugins/root/api/docs/root.html">Root</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../plugins/misc/scene/docs/scene.html">Scene</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../plugins/misc/scene/docs/scene.html#conventions">Conventions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../plugins/misc/scene/docs/scene.html#behaviors">Behaviors</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../plugins/misc/scene/docs/scene.html#locking">Locking</a></li>
 </ul>
@@ -365,8 +366,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a3b12c63ac5ffef2eb7cc156e3716f04d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae83c5d2e4996f33fcdaeaf4803f1180a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_scene_manager.html#ae83c5d2e4996f33fcdaeaf4803f1180a">stopAnimation</a> (<a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_animation_state.html">Entity::AnimationState</a> *animation)</td></tr>
 <tr class="separator:ae83c5d2e4996f33fcdaeaf4803f1180a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a135f1cb0bea304776db7cf2e90bdbedb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_scene_manager.html#a135f1cb0bea304776db7cf2e90bdbedb">updateFrame</a> (<a class="el" href="namespace_engine.html#a112937bef202baff8b6ece57a2ec891e">Closure</a>&lt; <a class="el" href="struct_engine_1_1_memory_1_1_typed_byte_buffer.html">Memory::TypedByteBuffer</a>&lt; <a class="el" href="struct_engine_1_1_math_1_1_matrix4.html">Math::Matrix4</a>[]&gt;(<a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_skeleton.html">Entity::Skeleton</a> *)&gt; callback)</td></tr>
-<tr class="separator:a135f1cb0bea304776db7cf2e90bdbedb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae7d9a37e8446e39cc724d654af2cb133"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_threading_1_1_task.html">Threading::Task</a>&lt; <a class="el" href="classvoid.html">void</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_scene_1_1_scene_manager.html#ae7d9a37e8446e39cc724d654af2cb133">updateFrame</a> (<a class="el" href="namespace_engine.html#a112937bef202baff8b6ece57a2ec891e">Closure</a>&lt; <a class="el" href="struct_engine_1_1_memory_1_1_typed_byte_buffer.html">Memory::TypedByteBuffer</a>&lt; <a class="el" href="struct_engine_1_1_math_1_1_matrix4.html">Math::Matrix4</a>[]&gt;(<a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_skeleton.html">Entity::Skeleton</a> *)&gt; callback)</td></tr>
+<tr class="separator:ae7d9a37e8446e39cc724d654af2cb133"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_struct_engine_1_1_reflect_1_1_virtual_scope"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_struct_engine_1_1_reflect_1_1_virtual_scope')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="struct_engine_1_1_reflect_1_1_virtual_scope.html">Engine::Reflect::VirtualScope&lt; T, Base &gt;</a></td></tr>
 <tr class="memitem:ab01a0fcceedfb0f0d62c7a250d7a3a94 inherit pub_methods_struct_engine_1_1_reflect_1_1_virtual_scope"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_reflect_1_1_scope_ptr.html">ScopePtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_reflect_1_1_virtual_scope.html#ab01a0fcceedfb0f0d62c7a250d7a3a94">customScopePtr</a> () override</td></tr>
 <tr class="separator:ab01a0fcceedfb0f0d62c7a250d7a3a94 inherit pub_methods_struct_engine_1_1_reflect_1_1_virtual_scope"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -560,14 +561,14 @@ Friends</h2></td></tr>
 
 </div>
 </div>
-<a id="a135f1cb0bea304776db7cf2e90bdbedb" name="a135f1cb0bea304776db7cf2e90bdbedb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a135f1cb0bea304776db7cf2e90bdbedb">&#9670;&#160;</a></span>updateFrame()</h2>
+<a id="ae7d9a37e8446e39cc724d654af2cb133" name="ae7d9a37e8446e39cc724d654af2cb133"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae7d9a37e8446e39cc724d654af2cb133">&#9670;&#160;</a></span>updateFrame()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Scene::SceneManager::updateFrame </td>
+          <td class="memname"><a class="el" href="struct_engine_1_1_threading_1_1_task.html">Threading::Task</a>&lt; <a class="el" href="classvoid.html">void</a> &gt; Engine::Scene::SceneManager::updateFrame </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="namespace_engine.html#a112937bef202baff8b6ece57a2ec891e">Closure</a>&lt; <a class="el" href="struct_engine_1_1_memory_1_1_typed_byte_buffer.html">Memory::TypedByteBuffer</a>&lt; <a class="el" href="struct_engine_1_1_math_1_1_matrix4.html">Math::Matrix4</a>[]&gt;(<a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_skeleton.html">Entity::Skeleton</a> *)&gt;&#160;</td>
           <td class="paramname"><em>callback</em></td><td>)</td>
@@ -1150,7 +1151,7 @@ template&lt;typename T &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Oct 25 2026 21:43:21 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Mon Oct 26 2026 13:37:49 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

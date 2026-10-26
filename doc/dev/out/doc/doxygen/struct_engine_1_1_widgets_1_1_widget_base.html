@@ -167,6 +167,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../../plugins/resources/api/docs/resources.html">Resources</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../plugins/root/api/docs/root.html">Root</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../plugins/misc/scene/docs/scene.html">Scene</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../plugins/misc/scene/docs/scene.html#conventions">Conventions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../plugins/misc/scene/docs/scene.html#behaviors">Behaviors</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../plugins/misc/scene/docs/scene.html#locking">Locking</a></li>
 </ul>
@@ -326,8 +327,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:afd24e6873394342f4a43d3690e41aa77"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa63283e62cc5317021fe497e7a569a47"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_widget_base.html#aa63283e62cc5317021fe497e7a569a47">applyGeometry</a> ()</td></tr>
 <tr class="separator:aa63283e62cc5317021fe497e7a569a47"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a36a621b10d71ce1c736f5ac3eff92e4d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_widget_base.html#a36a621b10d71ce1c736f5ac3eff92e4d">applyGeometry</a> (const <a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Math::Vector3</a> &amp;parentSize, const <a class="el" href="struct_engine_1_1_math_1_1_vector2.html">Math::Vector2</a> &amp;parentPos=<a class="el" href="struct_engine_1_1_math_1_1_vector2.html#a41fef5eda2a9db80cb2157a0dda14f3c">Math::Vector2::ZERO</a>)</td></tr>
-<tr class="separator:a36a621b10d71ce1c736f5ac3eff92e4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2815783e7fe3a4fcf0c424c6002c6000"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_widget_base.html#a2815783e7fe3a4fcf0c424c6002c6000">applyGeometry</a> (const <a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Math::Vector3</a> &amp;parentSize, const <a class="el" href="struct_engine_1_1_math_1_1_vector2.html">Math::Vector2</a> &amp;parentClientPos=<a class="el" href="struct_engine_1_1_math_1_1_vector2.html#a41fef5eda2a9db80cb2157a0dda14f3c">Math::Vector2::ZERO</a>)</td></tr>
+<tr class="separator:a2815783e7fe3a4fcf0c424c6002c6000"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7122efad06b0829cfbed8e3e3fb4374d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_execution_1_1_signal_stub.html">Execution::SignalStub</a>&lt; <a class="el" href="classvoid.html">void</a>, const <a class="el" href="struct_engine_1_1_platform_1_1_input_1_1_axis_event.html">Platform::Input::AxisEvent</a> &amp; &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_widget_base.html#a7122efad06b0829cfbed8e3e3fb4374d">axisEvent</a> ()</td></tr>
 <tr class="separator:a7122efad06b0829cfbed8e3e3fb4374d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aed5d767abb30511ef5827de746a9ec5f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_widgets_1_1_geometry.html">Geometry</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_widget_base.html#aed5d767abb30511ef5827de746a9ec5f">calculateGeometry</a> (uint16_t activeConditions, <a class="el" href="struct_engine_1_1_widgets_1_1_geometry_source_info.html">GeometrySourceInfo</a> *source=nullptr)</td></tr>
@@ -361,8 +362,6 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a5aabe47350f3f8fb8c078d4dd3617f26"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a671a4b6b25ebe886301938d69cb4de49"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_widget_base.html#a671a4b6b25ebe886301938d69cb4de49">fetchActiveConditions</a> (std::vector&lt; <a class="el" href="struct_engine_1_1_widgets_1_1_condition.html">Condition</a> * &gt; *conditions=nullptr)</td></tr>
 <tr class="separator:a671a4b6b25ebe886301938d69cb4de49"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa2c3bf5736f5b94f4a4a1ff4ea5da264"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_math_1_1_vector2.html">Math::Vector2</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_widget_base.html#aa2c3bf5736f5b94f4a4a1ff4ea5da264">getAbsolutePosition</a> () const</td></tr>
-<tr class="separator:aa2c3bf5736f5b94f4a4a1ff4ea5da264"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a34456a84edb8cec76aebf23270f637d8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Math::Vector3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_widget_base.html#a34456a84edb8cec76aebf23270f637d8">getAbsoluteSize</a> () const</td></tr>
 <tr class="separator:a34456a84edb8cec76aebf23270f637d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a52506a7053426dd2969b31058a9965d2"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_widgets_1_1_widget_base.html">WidgetBase</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_widget_base.html#a52506a7053426dd2969b31058a9965d2">getChildRecursive</a> (std::string_view name)</td></tr>
@@ -372,6 +371,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:adbd2d264e00ddefca4d89b7bc18c9eaa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa2ad511dcd5997ca739bfaa93e3aa0b8"><td class="memItemLeft" align="right" valign="top">virtual const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_widget_base.html#aa2ad511dcd5997ca739bfaa93e3aa0b8">getClass</a> () const</td></tr>
 <tr class="separator:aa2ad511dcd5997ca739bfaa93e3aa0b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8779ce5d7b14538060b702517ca1107"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_math_1_1_vector2.html">Math::Vector2</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_widget_base.html#ac8779ce5d7b14538060b702517ca1107">getClientSpacePosition</a> () const</td></tr>
+<tr class="separator:ac8779ce5d7b14538060b702517ca1107"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae09e34ae03864b5aca9f99599aae7099"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_widgets_1_1_geometry.html">Geometry</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_widget_base.html#ae09e34ae03864b5aca9f99599aae7099">getGeometry</a> ()</td></tr>
 <tr class="separator:ae09e34ae03864b5aca9f99599aae7099"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a40c9a9035f7986b1f3ec3a23f91d9abb"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_widgets_1_1_widget_base.html">WidgetBase</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_widget_base.html#a40c9a9035f7986b1f3ec3a23f91d9abb">getHoveredDown</a> (const <a class="el" href="struct_engine_1_1_math_1_1_vector2.html">Math::Vector2</a> &amp;point, const <a class="el" href="struct_engine_1_1_math_1_1_rect2i.html">Math::Rect2i</a> &amp;screenSpace)</td></tr>
@@ -384,6 +385,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a2d38909602a27caa7fc08e664cb90c75"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a40525d53c2bf19552ece8c5669b1bd58"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="struct_engine_1_1_math_1_1_matrix3.html">Math::Matrix3</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_widget_base.html#a40525d53c2bf19552ece8c5669b1bd58">getSize</a> ()</td></tr>
 <tr class="separator:a40525d53c2bf19552ece8c5669b1bd58"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a441ea3e64facd0d88a04e0a4b214c507"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_math_1_1_vector2.html">Math::Vector2</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_widget_base.html#a441ea3e64facd0d88a04e0a4b214c507">getWindowPosition</a> () const</td></tr>
+<tr class="separator:a441ea3e64facd0d88a04e0a4b214c507"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a89fe20c7afc87ba68d00c3a59c21a10e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_widget_base.html#a89fe20c7afc87ba68d00c3a59c21a10e">hide</a> ()</td></tr>
 <tr class="separator:a89fe20c7afc87ba68d00c3a59c21a10e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0d07819f8043da0278984eda51513fe3"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_widget_base.html#a0d07819f8043da0278984eda51513fe3">injectAxisEvent</a> (const <a class="el" href="struct_engine_1_1_platform_1_1_input_1_1_axis_event.html">Platform::Input::AxisEvent</a> &amp;arg)</td></tr>
@@ -442,14 +445,14 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a6c596fce2091c6c6594b45bcd7758367"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae3e2c62ca76915bf8a442b2c9cd49663"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_widget_base.html#ae3e2c62ca76915bf8a442b2c9cd49663">render</a> (<a class="el" href="struct_engine_1_1_widgets_1_1_widgets_render_data.html">WidgetsRenderData</a> &amp;renderData)</td></tr>
 <tr class="separator:ae3e2c62ca76915bf8a442b2c9cd49663"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8f62883a870369d546f0725b9ea7fb79"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_widget_base.html#a8f62883a870369d546f0725b9ea7fb79">setAbsolutePosition</a> (const <a class="el" href="struct_engine_1_1_math_1_1_vector2.html">Math::Vector2</a> &amp;pos)</td></tr>
-<tr class="separator:a8f62883a870369d546f0725b9ea7fb79"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3f64d07d12c7cbcdaf3d03448b480578"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_widget_base.html#a3f64d07d12c7cbcdaf3d03448b480578">setAbsoluteSize</a> (const <a class="el" href="struct_engine_1_1_math_1_1_vector3.html">Math::Vector3</a> &amp;size)</td></tr>
 <tr class="separator:a3f64d07d12c7cbcdaf3d03448b480578"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9705f3666297b6987708227d7d249a54"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_widget_base.html#a9705f3666297b6987708227d7d249a54">setAcceptsPointerEvents</a> (bool v)</td></tr>
 <tr class="separator:a9705f3666297b6987708227d7d249a54"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a11507446acdabcd60ffd8ab9cfb1ce5f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_widget_base.html#a11507446acdabcd60ffd8ab9cfb1ce5f">setAllowsDragging</a> (bool v)</td></tr>
 <tr class="separator:a11507446acdabcd60ffd8ab9cfb1ce5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a83a08b3bd8dd67f29b313d41411567e2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_widget_base.html#a83a08b3bd8dd67f29b313d41411567e2">setClientSpacePosition</a> (const <a class="el" href="struct_engine_1_1_math_1_1_vector2.html">Math::Vector2</a> &amp;pos)</td></tr>
+<tr class="separator:a83a08b3bd8dd67f29b313d41411567e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af8770b03e7bb30a3898ff387876b3a43"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_widget_base.html#af8770b03e7bb30a3898ff387876b3a43">setOpacity</a> (float <a class="el" href="struct_engine_1_1_widgets_1_1_widget_base.html#ad48a6f661d40fa14ce654890f1dfb67c">opacity</a>)</td></tr>
 <tr class="separator:af8770b03e7bb30a3898ff387876b3a43"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a09b3086e325ec96ab83ac42ff8fa677c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_widget_base.html#a09b3086e325ec96ab83ac42ff8fa677c">setParent</a> (<a class="el" href="struct_engine_1_1_widgets_1_1_widget_base.html">WidgetBase</a> *parent)</td></tr>
@@ -916,14 +919,31 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="aa2c3bf5736f5b94f4a4a1ff4ea5da264" name="aa2c3bf5736f5b94f4a4a1ff4ea5da264"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa2c3bf5736f5b94f4a4a1ff4ea5da264">&#9670;&#160;</a></span>getAbsolutePosition()</h2>
+<a id="ac8779ce5d7b14538060b702517ca1107" name="ac8779ce5d7b14538060b702517ca1107"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac8779ce5d7b14538060b702517ca1107">&#9670;&#160;</a></span>getClientSpacePosition()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="struct_engine_1_1_math_1_1_vector2.html">Math::Vector2</a> Engine::Widgets::WidgetBase::getAbsolutePosition </td>
+          <td class="memname"><a class="el" href="struct_engine_1_1_math_1_1_vector2.html">Math::Vector2</a> Engine::Widgets::WidgetBase::getClientSpacePosition </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a441ea3e64facd0d88a04e0a4b214c507" name="a441ea3e64facd0d88a04e0a4b214c507"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a441ea3e64facd0d88a04e0a4b214c507">&#9670;&#160;</a></span>getWindowPosition()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_engine_1_1_math_1_1_vector2.html">Math::Vector2</a> Engine::Widgets::WidgetBase::getWindowPosition </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -951,14 +971,14 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a8f62883a870369d546f0725b9ea7fb79" name="a8f62883a870369d546f0725b9ea7fb79"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8f62883a870369d546f0725b9ea7fb79">&#9670;&#160;</a></span>setAbsolutePosition()</h2>
+<a id="a83a08b3bd8dd67f29b313d41411567e2" name="a83a08b3bd8dd67f29b313d41411567e2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a83a08b3bd8dd67f29b313d41411567e2">&#9670;&#160;</a></span>setClientSpacePosition()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Widgets::WidgetBase::setAbsolutePosition </td>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Widgets::WidgetBase::setClientSpacePosition </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="struct_engine_1_1_math_1_1_vector2.html">Math::Vector2</a> &amp;&#160;</td>
           <td class="paramname"><em>pos</em></td><td>)</td>
@@ -986,8 +1006,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a36a621b10d71ce1c736f5ac3eff92e4d" name="a36a621b10d71ce1c736f5ac3eff92e4d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a36a621b10d71ce1c736f5ac3eff92e4d">&#9670;&#160;</a></span>applyGeometry() <span class="overload">[2/2]</span></h2>
+<a id="a2815783e7fe3a4fcf0c424c6002c6000" name="a2815783e7fe3a4fcf0c424c6002c6000"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2815783e7fe3a4fcf0c424c6002c6000">&#9670;&#160;</a></span>applyGeometry() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1002,7 +1022,7 @@ Protected Attributes</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const <a class="el" href="struct_engine_1_1_math_1_1_vector2.html">Math::Vector2</a> &amp;&#160;</td>
-          <td class="paramname"><em>parentPos</em> = <code><a class="el" href="struct_engine_1_1_math_1_1_vector2.html#a41fef5eda2a9db80cb2157a0dda14f3c">Math::Vector2::ZERO</a></code>&#160;</td>
+          <td class="paramname"><em>parentClientPos</em> = <code><a class="el" href="struct_engine_1_1_math_1_1_vector2.html#a41fef5eda2a9db80cb2157a0dda14f3c">Math::Vector2::ZERO</a></code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -2852,7 +2872,7 @@ template&lt;typename Sender &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Oct 25 2026 21:43:22 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Mon Oct 26 2026 13:37:49 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>
