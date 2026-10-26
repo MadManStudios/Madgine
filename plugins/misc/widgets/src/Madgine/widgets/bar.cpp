@@ -24,7 +24,7 @@ namespace Widgets {
 
     void Bar::render(WidgetsRenderData &renderData)
     {
-        Math::Vector2 pos = getAbsolutePosition();
+        Math::Vector2 pos = getClientSpacePosition();
         Math::Vector3 size = getAbsoluteSize();
 
         Math::Color4 color = mColor;

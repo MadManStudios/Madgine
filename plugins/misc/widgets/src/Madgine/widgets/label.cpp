@@ -24,7 +24,7 @@ namespace Widgets {
     {
         if (mTextRenderData.available()) {
 
-            Math::Vector2 pos = getAbsolutePosition();
+            Math::Vector2 pos = getClientSpacePosition();
             Math::Vector3 size = getAbsoluteSize();
 
             auto keep = renderData.pushClipRect(pos, size.xy());

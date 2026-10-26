@@ -140,7 +140,7 @@ namespace Tools {
         ImGuiIO &io = ImGui::GetIO();
 
         Math::Vector3 absoluteSize = widget->getAbsoluteSize();
-        Math::Vector2 absolutePos = widget->getAbsolutePosition() + Math::Vector2 { screenOffset };
+        Math::Vector2 absolutePos = widget->getClientSpacePosition() + Math::Vector2 { screenOffset };
 
         Math::Bounds bounds(absolutePos.x, absolutePos.y + absoluteSize.y, absolutePos.x + absoluteSize.x, absolutePos.y);
 

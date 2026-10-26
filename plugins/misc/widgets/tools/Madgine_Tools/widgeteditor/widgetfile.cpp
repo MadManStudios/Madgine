@@ -282,7 +282,7 @@ namespace Tools {
                     editor().renderWidgetBorders(selectedWidget, screenSpace.mTopLeft, IM_COL32(255, 255, 255, 255));
 
                     Math::Vector3 absoluteSize = selectedWidget->getAbsoluteSize();
-                    Math::Vector2 absolutePos = selectedWidget->getAbsolutePosition() + Math::Vector2 { screenSpace.mTopLeft };
+                    Math::Vector2 absolutePos = selectedWidget->getWindowPosition();
 
                     Math::Bounds bounds(absolutePos.x, absolutePos.y + absoluteSize.y, absolutePos.x + absoluteSize.x, absolutePos.y);
 

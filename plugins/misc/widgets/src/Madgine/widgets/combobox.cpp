@@ -39,7 +39,7 @@ namespace Widgets {
 
     void Combobox::render(WidgetsRenderData &renderData)
     {
-        Math::Vector2 pos = getAbsolutePosition();
+        Math::Vector2 pos = getClientSpacePosition();
         Math::Vector3 size = getAbsoluteSize();
 
         const ColorRenderData &color = mEnabled ? ((mHovered || mOpen) ? mColorTintRenderData.mHighlightedColor : mColorTintRenderData.mNormalColor)
@@ -145,7 +145,7 @@ namespace Widgets {
     bool Combobox::containsPoint(const Math::Vector2 &point, const Math::Rect2i &screenSpace, float extend) const
     {
         Math::Vector3 absoluteSize = getAbsoluteSize();
-        Math::Vector2 absolutePos = getAbsolutePosition();
+        Math::Vector2 absolutePos = getClientSpacePosition();
 
         if (mOpen) {
             float additionalHeight = mItems.size() * (mTextRenderData.calculateLineHeight(absoluteSize.z) + mSpacing) + mSpacing;
@@ -177,7 +177,7 @@ namespace Widgets {
     {
 
         Math::Vector3 size = getAbsoluteSize();
-        Math::Vector2 pos = getAbsolutePosition();
+        Math::Vector2 pos = getClientSpacePosition();
 
         if (mOpen) {
             Math::Vector2i clientSpaceSize = manager().getClientSpace().mSize;

@@ -108,7 +108,7 @@ namespace Widgets {
             for (size_t i = 0; i < pos.mRowSpan; ++i)
                 height += rows[pos.mRow + i].mConstraints.apply(rowFactor);
 
-            Math::Vector2 absolutePosition = getAbsolutePosition() + Math::Vector2 { cols[pos.mColumn].mOffset, rows[pos.mRow].mOffset };
+            Math::Vector2 absolutePosition = getClientSpacePosition() + Math::Vector2 { cols[pos.mColumn].mOffset, rows[pos.mRow].mOffset };
             if (size.mConstraints.mWidth.mMax < width) {
                 absolutePosition.x += pos.mXAlign * (width - size.mConstraints.mWidth.mMax);
             }
@@ -121,7 +121,7 @@ namespace Widgets {
                 getAbsoluteSize().z
             };
 
-            child->setAbsolutePosition(absolutePosition);
+            child->setClientSpacePosition(absolutePosition);
             child->setAbsoluteSize(absoluteSize);
         }
     }

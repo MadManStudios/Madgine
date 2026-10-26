@@ -210,7 +210,7 @@ namespace Widgets {
 
             mDragStartEvent = DragBeginEvent { arg.mWindowPosition, arg.mScreenPosition, arg.mButton, arg.mControlKeys };
 
-            Math::Vector2i pos = mFocusedWidget->getAbsolutePosition().floor();
+            Math::Vector2i pos = mFocusedWidget->getClientSpacePosition().floor();
             mDragStartEvent.mWindowPosition = mDragStartEvent.mWindowPosition - Platform::PlatformVector { pos.x, pos.y };
 
             mDragStartTime = std::chrono::steady_clock::now();
@@ -273,7 +273,7 @@ namespace Widgets {
 
         if (mFocusedWidget) {
 
-            Math::Vector2i pos = mFocusedWidget->getAbsolutePosition().floor();
+            Math::Vector2i pos = mFocusedWidget->getClientSpacePosition().floor();
             arg.mWindowPosition = arg.mWindowPosition - Platform::PlatformVector { pos.x, pos.y };
             if (mDragging) {
                 if (!mDraggingAborted)
@@ -336,7 +336,7 @@ namespace Widgets {
             }
 
             if (mDragging && !mDraggingAborted) {
-                Math::Vector2i pos = mFocusedWidget->getAbsolutePosition().floor();
+                Math::Vector2i pos = mFocusedWidget->getClientSpacePosition().floor();
                 arg.mWindowPosition = arg.mWindowPosition - Platform::PlatformVector { pos.x, pos.y };
                 mFocusedWidget->injectDragMove(DragMoveEvent { arg.mWindowPosition, arg.mScreenPosition, mDragStartEvent.mButton, arg.mMoveDelta, arg.mControlKeys });
             }
@@ -349,7 +349,7 @@ namespace Widgets {
         updateHovered();
 
         if (mPointerEventTargetWidget) {
-            Math::Vector2i pos = mPointerEventTargetWidget->getAbsolutePosition().floor();
+            Math::Vector2i pos = mPointerEventTargetWidget->getClientSpacePosition().floor();
             arg.mWindowPosition = arg.mWindowPosition - Platform::PlatformVector { pos.x, pos.y };
 
             mPointerEventTargetWidget->injectPointerMove(arg);
@@ -465,7 +465,7 @@ namespace Widgets {
             Platform::PlatformVector storedWindowPosition = mCachedPointerMoveEvent.mWindowPosition;
 
             if (mPointerEventTargetWidget) {
-                Math::Vector2i pos = mPointerEventTargetWidget->getAbsolutePosition().floor();
+                Math::Vector2i pos = mPointerEventTargetWidget->getClientSpacePosition().floor();
                 mCachedPointerMoveEvent.mWindowPosition = mCachedPointerMoveEvent.mWindowPosition - Platform::PlatformVector { pos.x, pos.y };
                 mPointerEventTargetWidget->injectPointerLeave(mCachedPointerMoveEvent);
             }
@@ -473,7 +473,7 @@ namespace Widgets {
             mPointerEventTargetWidget = newPointerEventTarget;
 
             if (mPointerEventTargetWidget) {
-                Math::Vector2i pos = mPointerEventTargetWidget->getAbsolutePosition().floor();
+                Math::Vector2i pos = mPointerEventTargetWidget->getClientSpacePosition().floor();
                 mCachedPointerMoveEvent.mWindowPosition = mCachedPointerMoveEvent.mWindowPosition - Platform::PlatformVector { pos.x, pos.y };
                 mPointerEventTargetWidget->injectPointerEnter(mCachedPointerMoveEvent);
             }

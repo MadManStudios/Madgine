@@ -60,12 +60,13 @@ namespace Widgets {
         float opacity() const;
 
         Math::Vector3 getAbsoluteSize() const;
-        Math::Vector2 getAbsolutePosition() const;
+        Math::Vector2 getClientSpacePosition() const;
+        Math::Vector2 getWindowPosition() const;
         void setAbsoluteSize(const Math::Vector3 &size);
-        void setAbsolutePosition(const Math::Vector2 &pos);
+        void setClientSpacePosition(const Math::Vector2 &pos);
 
         void applyGeometry();
-        void applyGeometry(const Math::Vector3 &parentSize, const Math::Vector2 &parentPos = Math::Vector2::ZERO);
+        void applyGeometry(const Math::Vector3 &parentSize, const Math::Vector2 &parentClientPos = Math::Vector2::ZERO);
         Geometry getGeometry();
 
         template <typename WidgetType = WidgetBase>
@@ -207,7 +208,7 @@ namespace Widgets {
 
         WidgetBase *mParent;
 
-        Math::Vector2 mAbsolutePos;
+        Math::Vector2 mClientSpacePos;
         Math::Vector3 mAbsoluteSize;
 
         float mOpacity = 1.0f;

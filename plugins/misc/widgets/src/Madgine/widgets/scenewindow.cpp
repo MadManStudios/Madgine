@@ -39,7 +39,7 @@ namespace Widgets {
     {
         if (mSource) {
 
-            Math::Vector2 pos = getAbsolutePosition();
+            Math::Vector2 pos = getClientSpacePosition();
             Math::Vector3 size = getAbsoluteSize();
 
             renderData.renderQuad(pos, size.xy(), {}, { mSource->texture()->resourceBlock() });

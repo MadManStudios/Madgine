@@ -60,7 +60,7 @@ namespace Widgets {
         WidgetBase::updateChildrenGeometry();
 
         for (const std::unique_ptr<WidgetBase> &child : mTemplateWidgets) {
-            child->applyGeometry(getAbsoluteSize(), getAbsolutePosition());
+            child->applyGeometry(getAbsoluteSize(), getClientSpacePosition());
         }
     }
 

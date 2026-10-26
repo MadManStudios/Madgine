@@ -117,9 +117,14 @@ namespace Widgets {
         return mAbsoluteSize;
     }
 
-    Math::Vector2 WidgetBase::getAbsolutePosition() const
+    Math::Vector2 WidgetBase::getClientSpacePosition() const
     {
-        return mAbsolutePos;
+        return mClientSpacePos;
+    }
+
+    Math::Vector2 WidgetBase::getWindowPosition() const
+    {
+        return mClientSpacePos + Math::Vector2 { mManager.getClientSpace().mTopLeft };
     }
 
     void WidgetBase::setAbsoluteSize(const Math::Vector3 &size)
@@ -131,24 +136,24 @@ namespace Widgets {
         updateChildrenGeometry();
     }
 
-    void WidgetBase::setAbsolutePosition(const Math::Vector2 &pos)
+    void WidgetBase::setClientSpacePosition(const Math::Vector2 &pos)
     {
-        mAbsolutePos = pos;
+        mClientSpacePos = pos;
     }
 
     void WidgetBase::applyGeometry()
     {
         if (mParent)
-            applyGeometry(mParent->getAbsoluteSize(), mParent->getAbsolutePosition());
+            applyGeometry(mParent->getAbsoluteSize(), mParent->getClientSpacePosition());
         else
             applyGeometry(Math::Vector3 { Math::Vector2 { manager().getClientSpace().mSize }, 1.0f });
     }
 
-    void WidgetBase::applyGeometry(const Math::Vector3 &parentSize, const Math::Vector2 &parentPos)
+    void WidgetBase::applyGeometry(const Math::Vector3 &parentSize, const Math::Vector2 &parentClientPos)
     {
         Geometry geometry = getGeometry();
 
-        setAbsolutePosition((geometry.mPos * parentSize).xy() + parentPos);
+        setClientSpacePosition((geometry.mPos * parentSize).xy() + parentClientPos);
         setAbsoluteSize(geometry.mSize * parentSize);
     }
 
@@ -160,7 +165,7 @@ namespace Widgets {
     void WidgetBase::updateChildrenGeometry()
     {
         for (WidgetBase *child : children()) {
-            child->applyGeometry(mAbsoluteSize, mAbsolutePos);
+            child->applyGeometry(mAbsoluteSize, mClientSpacePos);
         }
     }
 
@@ -300,7 +305,7 @@ namespace Widgets {
             parent->mChildren.emplace_back(std::move(*it));
             mParent->mChildren.erase(it);
             mParent = parent;
-            applyGeometry(parent->getAbsoluteSize(), parent->getAbsolutePosition());
+            applyGeometry(parent->getAbsoluteSize(), parent->getClientSpacePosition());
         }
     }
 
@@ -448,7 +453,7 @@ namespace Widgets {
 
     bool WidgetBase::containsPoint(const Math::Vector2 &point, const Math::Rect2i &screenSpace, float extend) const
     {
-        Math::Vector2 min = mAbsolutePos + Math::Vector2 { screenSpace.mTopLeft } - extend;
+        Math::Vector2 min = mClientSpacePos + Math::Vector2 { screenSpace.mTopLeft } - extend;
         Math::Vector2 max = mAbsoluteSize.xy() + min + 2 * extend;
         return min.x <= point.x && min.y <= point.y && max.x >= point.x && max.y >= point.y;
     }

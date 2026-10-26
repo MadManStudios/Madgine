@@ -78,7 +78,7 @@ namespace Widgets {
         const Math::Atlas2::Entry *entry = manager().lookUpImage(mImageRenderData.image());
         if (entry) {
 
-            Math::Vector2 pos = getAbsolutePosition();
+            Math::Vector2 pos = getClientSpacePosition();
             Math::Vector3 size = getAbsoluteSize();
 
             mImageRenderData.renderImage(renderData, pos, size, *entry);
