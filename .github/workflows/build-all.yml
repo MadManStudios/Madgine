@@ -36,7 +36,7 @@ jobs:
         \"Windows\": \"windows-latest\", 
         \"macOS\": \"macos-latest\", 
         \"iOS\": \"macos-latest\", 
-        \"Linux\": \"ubuntu-latest\", 
+        \"Linux\": \"ubuntu-24.04\", 
         \"Android_arm64\": \"ubuntu-latest\", 
         \"Android_x64\": \"ubuntu-latest\", 
         \"Emscripten\": \"ubuntu-latest\"}"
@@ -61,7 +61,7 @@ jobs:
       fail-fast: false
 
       matrix:
-        platform: [ubuntu-latest, windows-latest, macos-15] 
+        platform: [ubuntu-24.04, windows-latest, macos-latest] 
 
     steps:
     - uses: actions/checkout@v4
