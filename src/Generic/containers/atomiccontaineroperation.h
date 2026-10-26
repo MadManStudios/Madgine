@@ -3,45 +3,37 @@
 namespace Engine {
 namespace Containers {
 
-    DERIVE_TYPENAME(ResetOperation)
-
     template <typename C, typename... Args>
     decltype(auto) resetOperation(C &c, bool controlled, Args &&...args)
     {
-        if constexpr (has_typename_ResetOperation<C>)
+        if constexpr (requires { typename C::ResetOperation; })
             return typename C::ResetOperation { c, controlled, std::forward<Args>(args)... };
         else
             return c;
     }
 
-    DERIVE_TYPENAME(InsertOperation)
-
     template <typename C, typename... Args>
     decltype(auto) insertOperation(C &c, Args &&...args)
     {
-        if constexpr (has_typename_InsertOperation<C>)
+        if constexpr (requires { typename C::InsertOperation; })
             return typename C::InsertOperation { c, std::forward<Args>(args)... };
         else
             return c;
     }
 
-    DERIVE_TYPENAME(MultiInsertOperation)
-
     template <typename C, typename... Args>
     decltype(auto) multiInsertOperation(C &c, Args &&...args)
     {
-        if constexpr (has_typename_MultiInsertOperation<C>)
+        if constexpr (requires { typename C::MultiInsertOperation; })
             return typename C::MultiInsertOperation { c, std::forward<Args>(args)... };
         else
             return c;
     }
 
-    DERIVE_TYPENAME(RemoveOperation)
-
     template <typename C, typename... Args>
     decltype(auto) removeOperation(C &c, Args &&...args)
     {
-        if constexpr (has_typename_RemoveOperation<C>)
+        if constexpr (requires { typename C::RemoveOperation; })
             return typename C::RemoveOperation { c, std::forward<Args>(args)... };
         else
             return c;

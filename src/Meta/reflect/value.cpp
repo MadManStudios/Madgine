@@ -221,7 +221,7 @@ namespace Reflect {
                 break;
             case TypeEnum::OwnedValueValue:
                 throw 0;
-                //std::get<OwnedScopePtr>(mUnion).construct(*type.mSecondary.mMetaTable, {});
+                // std::get<OwnedScopePtr>(mUnion).construct(*type.mSecondary.mMetaTable, {});
                 break;
             default:
                 break;
@@ -263,15 +263,13 @@ namespace Reflect {
         return { *this, nullptr };
     }
 
-    DERIVE_OPERATOR(StreamOut, <<)
-
     std::ostream &operator<<(std::ostream &stream,
         const Value &v)
     {
         stream << "<" << v.getTypeString() << ">";
 
         v.visit([&](const auto &v) {
-            if constexpr (has_operator_StreamOut<decltype(v), std::ostream &> || has_operator_StreamOut<std::ostream &, decltype(v)>)
+            if constexpr (requires { stream << std::forward<decltype(v)>(v); })
                 stream << std::forward<decltype(v)>(v);
         });
 

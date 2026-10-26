@@ -148,7 +148,8 @@ namespace Containers {
             mImpl->getValue(cb);
         }
 
-        value_type operator*() const {
+        value_type operator*() const
+        {
             value_type result;
             get([&result](RefT... v) { result = { v... }; });
             return result;
@@ -267,7 +268,7 @@ namespace Containers {
             {
                 if constexpr (std::ranges::borrowed_range<C> || Concepts::InstanceOf<std::ranges::range_value_t<C>, std::reference_wrapper>)
                     return true;
-                else if constexpr (has_function_isReference_v<C>)
+                else if constexpr (requires { mContainer.isReference(); })
                     return mContainer.isReference();
                 else
                     return false;

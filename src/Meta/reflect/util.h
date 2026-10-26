@@ -592,7 +592,7 @@ namespace Reflect {
     template <typename T>
     void toValue(Value &v, T &&t)
     {
-        if constexpr (has_function_customScopePtr_v<std::remove_pointer_t<T>>) {
+        if constexpr (requires { t.customScopePtr(); }) {
             toValue_impl(v, convert_Value(resolveCustomScopePtr(std::forward<T>(t))));
         } else {
             toValue_impl(v, convert_Value(std::forward<T>(t)));

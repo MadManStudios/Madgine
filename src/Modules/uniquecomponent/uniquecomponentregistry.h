@@ -6,14 +6,6 @@
 #include "annotations.h"
 #include "typeinfo.h"
 
-namespace Engine {
-namespace Plugins {
-
-    DERIVE_TYPENAME(VBase)
-
-}
-}
-
 #if ENABLE_PLUGINS
 
 namespace Engine {
@@ -118,7 +110,7 @@ namespace Plugins {
                 mComponents.emplace_back(type_holder<T>, type_holder<ActualType>);
                 std::vector<TypeInfo> elementInfos;
                 elementInfos.push_back(info);
-                if constexpr (has_typename_VBase<T>) {
+                if constexpr (requires { typename T::VBase; }) {
                     elementInfos.push_back(typeInfo<typename T::VBase>());
                 }
                 mElementInfos.emplace_back(std::move(elementInfos), actualTi);

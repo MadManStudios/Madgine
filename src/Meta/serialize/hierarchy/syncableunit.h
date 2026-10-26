@@ -49,6 +49,9 @@ namespace Serialize {
 
         bool isMaster() const;
 
+        SerializableUnitPtr customUnitPtr();
+        SerializableUnitConstPtr customUnitPtr() const;
+
         friend META_EXPORT WriteMessage getSlaveRequestMessageTarget(const SyncableUnitBase *unit, ParticipantId requester, MessageId requestId, GenericMessageReceiver receiver);
         friend META_EXPORT std::vector<WriteMessage> getMasterActionMessageTargets(const SyncableUnitBase *unit, ParticipantId answerTarget, MessageId answerId,
             const std::set<ParticipantId> &targets);
@@ -100,10 +103,6 @@ namespace Serialize {
             unit.setActive(active, existenceChanged, context);
         }
         friend META_EXPORT StreamResult convertSyncablePtr(FormattedSerializeStream &in, UnitId id, SyncableUnitBase *&out, const SerializeTable *&type);
-
-        DERIVE_FRIEND(customUnitPtr)
-        SerializableUnitPtr customUnitPtr();
-        SerializableUnitConstPtr customUnitPtr() const;
 
     private:
         UnitId mSlaveId = 0;

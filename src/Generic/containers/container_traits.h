@@ -3,8 +3,6 @@
 #include "../indextype.h"
 #include "underlying_container.h"
 
-DERIVE_FUNCTION(isReference)
-
 namespace Engine {
 namespace Containers {
 

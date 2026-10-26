@@ -28,8 +28,6 @@
 namespace Engine {
 namespace Reflect {
 
-    DERIVE_OPERATOR(Equal, ==);
-
     struct META_EXPORT Value {
 
         using Union = std::variant<
@@ -73,7 +71,7 @@ namespace Reflect {
         bool operator==(const V &v) const
         {
             return visit([&]<typename U>(const U &u) {
-                if constexpr (has_operator_Equal<V, U>)
+                if constexpr (requires { {v == u}->std::same_as<bool>; })
                     return v == u;
                 else
                     return false;

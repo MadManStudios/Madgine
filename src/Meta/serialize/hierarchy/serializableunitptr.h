@@ -8,8 +8,6 @@
 namespace Engine {
 namespace Serialize {
 
-    DERIVE_FUNCTION(customUnitPtr)
-
     struct META_EXPORT SerializableDataConstPtr {
     private:
         template <typename T>
@@ -29,7 +27,7 @@ namespace Serialize {
 
         template <typename T>
         SerializableDataConstPtr(const T *t)
-            : SerializableDataConstPtr(t, has_function_customUnitPtr<T> {})
+            : SerializableDataConstPtr(t, std::bool_constant<requires { t->customUnitPtr(); }> {})
         {
         }
 
@@ -96,7 +94,7 @@ namespace Serialize {
         template <typename T>
             requires(!std::is_const_v<T>)
         SerializableDataPtr(T *t)
-            : SerializableDataPtr(t, has_function_customUnitPtr<T> {})
+            : SerializableDataPtr(t, std::bool_constant<requires { t->customUnitPtr(); }> {})
         {
         }
 
@@ -163,7 +161,7 @@ namespace Serialize {
         template <std::derived_from<SerializableUnitBase> T>
             requires(!std::same_as<SerializableUnitBase, T>)
         SerializableUnitConstPtr(const T *t)
-            : SerializableUnitConstPtr(t, has_function_customUnitPtr<T> {})
+            : SerializableUnitConstPtr(t, std::bool_constant<requires { t->customUnitPtr(); }> {})
         {
         }
 
@@ -223,7 +221,7 @@ namespace Serialize {
         template <std::derived_from<SerializableUnitBase> T>
             requires(!std::same_as<SerializableUnitBase, T> && !std::is_const_v<T>)
         SerializableUnitPtr(T *t)
-            : SerializableUnitPtr(t, has_function_customUnitPtr<T> {})
+            : SerializableUnitPtr(t, std::bool_constant<requires { t->customUnitPtr(); }> {})
         {
             static_assert(!std::same_as<T, SyncableUnitBase>);
         }

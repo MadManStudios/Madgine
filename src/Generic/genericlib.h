@@ -37,8 +37,6 @@
 #include "type_pack.h"
 #include "tag_invoke.h"
 
-#include "derive.h"
-
 #include "compatibility/compatibility.h"
 
 

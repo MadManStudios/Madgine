@@ -23,12 +23,10 @@ namespace Reflect {
 #include "valuedefinclude.h"
         >;
 
-    DERIVE_FUNCTION(customScopePtr)
-
     template <typename T>
     auto resolveCustomScopePtr(T *t)
     {
-        if constexpr (has_function_customScopePtr_v<T>) {
+        if constexpr (requires { t->customScopePtr(); }) {
             if (t) {
                 return t->customScopePtr();
             } else {
@@ -396,8 +394,8 @@ namespace Reflect {
             return toType<std::decay_t<std::invoke_result_t<convert_Value_t<isReferenceWrapped>, T>>, isReferenceWrapped>();
         } else if constexpr (Concepts::InstanceOf<T, std::reference_wrapper>) {
             return toType<typename T::type, true>();
-        } else if constexpr (Concepts::InstanceOf<T, Pointer>){
-            return toType<typename T::type*>();
+        } else if constexpr (Concepts::InstanceOf<T, Pointer>) {
+            return toType<typename T::type *>();
         } else if constexpr (Concepts::InstanceOf<T, std::variant>) {
             return { { ExtendedTypeEnum::VariantType }, { toType<typename Concepts::is_instance<T, std::variant>::argument_types::template select<0>>(), toType<typename Concepts::is_instance<T, std::variant>::argument_types::template select<1>>() } };
         } else if constexpr (std::same_as<T, ScopePtr>) {

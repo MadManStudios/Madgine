@@ -3,16 +3,13 @@
 namespace Engine {
 namespace Serialize {
 
-    DERIVE_FUNCTION(physical)
-
     template <typename T>
     decltype(auto) physical(T &t)
     {
-        if constexpr (has_function_physical_v<T>)
+        if constexpr (requires { t.physical(); })
             return t.physical();
         else
             return t;
     }
-
 }
 }

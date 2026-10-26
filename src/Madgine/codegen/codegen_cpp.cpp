@@ -127,8 +127,6 @@ void CppFile::generate(std::ostream &stream, const Constructor &con)
     throw 0;
 }
 
-DERIVE_OPERATOR(StreamOut, <<)
-
 void CppFile::generate(std::ostream &stream, const Constant<int> &c)
 {
     stream << c.mValue;
