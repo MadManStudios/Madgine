@@ -15,6 +15,7 @@
 #include "entitycomponentbase.h"
 #include "entitycomponentcollector.h"
 #include "entitycomponentlistbase.h"
+#include "entitysender.h"
 
 namespace Engine {
 
@@ -91,7 +92,7 @@ namespace Scene {
         {
         }*/
 
-        Entity::Entity(EntityHandle &handle, SceneContainer &container, const std::string &name, EntityPtr parent)
+        Entity::Entity(SceneContainer &container, const std::string &name, EntityPtr parent, EntityHandle *handle)
             : mName(name)
             , mHandle(handle)
             , mContainer(container)
@@ -214,7 +215,7 @@ namespace Scene {
             return mSelf;
         }
 
-        EntityHandle &Entity::handle()
+        EntityHandle *Entity::handle()
         {
             return mHandle;
         }
@@ -222,15 +223,16 @@ namespace Scene {
         Execution::Future<Serialize::MessageResult, EntityPtr> Entity::createNestedEntity(const std::string &name, EntityDescriptor init, Closure<void(EntityPtr)> cb, Closure<void(Serialize::MessageResult)> onError)
         {
             Execution::Promise<Serialize::MessageResult, EntityPtr> promise;
-            Execution::Future<Serialize::MessageResult, EntityPtr> future = promise.getFuture();
+            Execution::Future<Serialize::MessageResult, EntityPtr> future = promise.getFuture();            
 
-            SceneContainer &container = mContainer;
-
-            mLifetime.attach(
-                mutex().locked(AccessMode::WRITE, [this, name, init { std::move(init) }, &container, parent { pointer() }]() mutable {
-                    return TupleUnpacker::invokeFlatten(LIFT(container.mEntities.emplace_async, &container), container.mEntities.end(), container.createEntityData(name, std::move(init), std::move(parent)));
-                })
-                | Execution::let_value(std::identity {}) | Execution::then([cb { std::move(cb) }](auto it) { if (cb) cb(it->ptr()); return it->ptr(); }) | Execution::onError(onError ? std::move(onError) : [](Serialize::MessageResult) {}) | Execution::with_receiver(std::move(promise)));
+            mLifetime.attach(mContainer.mutex().locked(AccessMode::WRITE, [this, name, init{std::move(init)}]() mutable {
+                EntityPtr result;
+                mLifetime.attach(
+                    EntitySender { {}, mContainer, name, mSelf, std::move(init), result });
+                assert(result);
+                return result;
+            }) | Execution::then([cb { std::move(cb) }](auto ptr) { if (cb) cb(ptr); return ptr; })
+                | Execution::onError(onError ? std::move(onError) : [](Serialize::MessageResult) {}) | Execution::with_receiver(std::move(promise)));
 
             return future;
         }

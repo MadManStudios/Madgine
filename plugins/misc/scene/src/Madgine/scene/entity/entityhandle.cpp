@@ -103,10 +103,7 @@ namespace Scene {
 
         EntityHandle::EntityHandle(SceneContainer &container, const std::string &name, const EntityDescriptor &init, EntityPtr parent)
         {
-            container.lifetime().attach(EntitySender { {}, *this, container, name, std::move(parent), [&](Entity &e) {
-                                                          init.apply(e);                                                              
-                                                          mPtr = e.pointer();
-                                                      } });
+            container.lifetime().attach(EntitySender { {}, container, name, std::move(parent), init, mPtr, this });
             assert(mPtr);
         }
 

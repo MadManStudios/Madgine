@@ -6,18 +6,20 @@ namespace Engine {
 namespace Scene {
     namespace Entity {
 
-        template <typename F, typename Rec>
+        template <typename Rec>
         struct EntityState {
 
-            EntityState(EntityHandle &handle, SceneContainer &container, std::string name, EntityPtr parent, F init, Rec &&rec)
-                : mEntity(handle, container, name, std::move(parent))
-                , mState(Execution::connect(mEntity.lifetimeSender(), std::forward<Rec>(rec)))
+            EntityState(SceneContainer &container, std::string name, EntityPtr parent, EntityHandle *handle, EntityDescriptor init, EntityPtr &outWrite, Rec &&rec)
+                : mEntity(container, name, std::move(parent), handle)
+                , mState(Execution::connect(mEntity.lifetimeSender(outWrite), std::forward<Rec>(rec)))
             {
-                std::forward<F>(init)(mEntity);
+                // The caller is expected to hold the Scene Lock while attaching this state
+                init.apply(mEntity);                 
             }
 
             void start()
             {
+                // Start is guaranteed and required to happen as well while holding the lock and attaching the state
                 mState.start();
             }
 
@@ -26,13 +28,12 @@ namespace Scene {
                 mEntity.endLifetime();
             }
 
-            using State = Execution::connect_result_t<std::invoke_result_t<decltype(&Entity::lifetimeSender), Entity &>, Rec>;
+            using State = Execution::connect_result_t<std::invoke_result_t<decltype(&Entity::lifetimeSender), Entity &, EntityPtr &>, Rec>;
 
             Entity mEntity;
             State mState;
         };
 
-        template <typename F>
         struct EntitySender : Execution::base_sender {
 
             using result_type = void;
@@ -42,18 +43,16 @@ namespace Scene {
             template <typename Rec>
             friend auto tag_invoke(Execution::connect_t, EntitySender &&sender, Rec &&rec)
             {
-                return EntityState<F, Rec> { sender.mHandle, sender.mContainer, std::move(sender.mName), std::move(sender.mParent), std::forward<F>(sender.mInit), std::forward<Rec>(rec) };
+                return EntityState<Rec> { sender.mContainer, std::move(sender.mName), std::move(sender.mParent), sender.mHandle, std::move(sender.mInit), sender.mOutWrite, std::forward<Rec>(rec) };
             }
 
-            EntityHandle &mHandle;
             SceneContainer &mContainer;
             std::string mName;
             EntityPtr mParent;
-            F mInit;
+            EntityDescriptor mInit;
+            EntityPtr &mOutWrite;
+            EntityHandle *mHandle = nullptr;
         };
-
-        template <typename F>
-        EntitySender(Execution::base_sender, EntityHandle &, SceneContainer &, const std::string &, EntityPtr, F &&) -> EntitySender<F>;
 
     }
 }

@@ -18,7 +18,6 @@ namespace Execution {
         struct state;
 
     public:
-
         struct ControlPtr {
             ControlPtr() = default;
             ControlPtr(ControlBlock &block)
@@ -83,7 +82,7 @@ namespace Execution {
 
             ControlBlock *mBlock = nullptr;
         };
-                
+
         template <typename Rec>
         using virtual_state = VirtualState<state, Rec>;
 
@@ -189,7 +188,6 @@ namespace Execution {
         }
 
     private:
-
         struct ControlBlock {
             ControlBlock(state &state)
                 : mState(state)
@@ -331,12 +329,16 @@ namespace Execution {
             state(Lifetime &lifetime, F &&callback)
                 : state(lifetime)
             {
-                std::forward<F>(callback)(mControl);
+                mOutCallback = std::forward<F>(callback);
             }
 
             void start()
             {
                 this->mLifetime.mPtr = this->mControl;
+                if (mOutCallback) {
+                    mOutCallback(mControl);
+                    mOutCallback = {};
+                }
             }
 
             void stop()
@@ -362,6 +364,7 @@ namespace Execution {
             ControlPtr mControl;
             StopSource mStopSource;
             Lifetime &mLifetime;
+            Closure<void(ControlPtr)> mOutCallback;
         };
 
         ControlPtr mPtr;

@@ -54,7 +54,7 @@ namespace Serialize {
     void Operations<Scene::Entity::EntityPtr>::write(FormattedSerializeStream &out, const Scene::Entity::EntityPtr &e, const char *name, ContextPtr context)
     {
         if (!Execution::access_binding(e, [&](Scene::Entity::Entity &e) {
-                Serialize::write(out, &e.handle(), name);
+                Serialize::write(out, e.handle(), name);
             })) {
             Serialize::write(out, static_cast<Scene::Entity::EntityHandle *>(nullptr), name, context);
         }

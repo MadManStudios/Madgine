@@ -30,7 +30,7 @@ namespace Scene {
             //             Entity(Entity &&, bool local);
             Entity(Entity &&) = delete;
 
-            Entity(EntityHandle &handle, SceneContainer &container, const std::string &name, EntityPtr parent = {});
+            Entity(SceneContainer &container, const std::string &name, EntityPtr parent = {}, EntityHandle *handle = nullptr);
             Entity(const Entity &) = delete;
             ~Entity();
 
@@ -38,7 +38,7 @@ namespace Scene {
             void endLifetime();
 
             EntityPtr pointer();
-            EntityHandle &handle();
+            EntityHandle *handle();
 
             void setParent(EntityPtr parent);
             const EntityPtr &parent() const;
@@ -113,9 +113,9 @@ namespace Scene {
 
             Execution::Future<Serialize::MessageResult, EntityPtr> createNestedEntity(const std::string &name = "", EntityDescriptor init = {}, Closure<void(EntityPtr)> cb = {}, Closure<void(Serialize::MessageResult)> onError = {});
 
-            auto lifetimeSender()
+            auto lifetimeSender(EntityPtr &outWrite)
             {
-                return Execution::sequence(mLifetime.tracked([this](auto lifetimePtr) { mSelf = EntityPtr { std::move(lifetimePtr), Execution::ConstantBinding { *this } }; })
+                return Execution::sequence(mLifetime.tracked([this, &outWrite](auto lifetimePtr) mutable { mSelf = EntityPtr { std::move(lifetimePtr), Execution::ConstantBinding { *this } }; outWrite = mSelf; })
                         | Behavior::context_set(mSelf),
                     mutex().locked(AccessMode::WRITE, [this]() { dtor(); }));
             }
@@ -148,7 +148,7 @@ namespace Scene {
 
             SERIALIZABLE_CONTAINER(mComponents, Containers::mutable_set<EntityComponentHandle, std::less<>>, ParentFunctor<&Entity::handleEntityEvent>);
 
-            EntityHandle &mHandle;
+            EntityHandle *mHandle = nullptr;
 
             SceneContainer &mContainer;
 
