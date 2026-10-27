@@ -211,7 +211,7 @@ namespace Widgets {
     }
 
     WidgetPtr WidgetBase::pointer()
-    {                
+    {
         return lifetime().bind(Execution::ConstantBinding { *this });
     }
 
@@ -471,7 +471,7 @@ namespace Widgets {
 
     WidgetBase *WidgetBase::getHoveredDown(const Math::Vector2 &point, const Math::Rect2i &screenSpace, bool isPointerEvent)
     {
-        if (!mVisible || !containsPoint(point, screenSpace) || (isPointerEvent && !acceptsPointerEvents()))
+        if (!mVisible || !containsPoint(point, screenSpace))
             return nullptr;
 
         for (WidgetBase *w : mChildren | std::views::transform(projectionUniquePtrToPtr)) {
@@ -480,7 +480,7 @@ namespace Widgets {
             }
         }
 
-        return this;
+        return (isPointerEvent && !acceptsPointerEvents()) ? nullptr : this;
     }
 
     void WidgetBase::render(WidgetsRenderData &renderData)
