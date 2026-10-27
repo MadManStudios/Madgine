@@ -306,7 +306,7 @@ namespace Tools {
             LOG_ERROR("Reading icons.ttf failed!");
         }
 
-        //io.FontGlobalScale = 1.0f / Window::platformCapabilities.mScalingFactor;
+        // io.FontGlobalScale = 1.0f / Window::platformCapabilities.mScalingFactor;
 
         addDependency(&mRenderData);
 
@@ -351,14 +351,20 @@ namespace Tools {
         co_return;
     }
 
-    void ClientImRoot::addRenderTarget(Render::RenderTarget *target)
+    void ClientImRoot::preRender(std::vector<Threading::TaskFuture<Render::RenderFuture>> &dependencies, Render::RenderContext *context)
     {
-        addDependency(target);
+        for (Render::RenderTarget* target : mNextFrameRenderTargets) {
+            dependencies.push_back(target->update(context));
+        }
+
+        mNextFrameRenderTargets.clear();
+
+        RenderPass::preRender(dependencies, context);
     }
 
-    void ClientImRoot::removeRenderTarget(Render::RenderTarget *target)
+    void ClientImRoot::nextFrameRenderTarget(Render::RenderTarget *target)
     {
-        removeDependency(target);
+        mNextFrameRenderTargets.push_back(target);
     }
 
     static Platform::Input::CursorIcon convertCursorIcon(ImGuiMouseCursor cursor)
@@ -730,7 +736,7 @@ namespace Tools {
     {
         ImGui::Image((void *)tex.get(), image_size, uv0, uv1);
 
-        mTextureCache.push_back(std::move(tex));        
+        mTextureCache.push_back(std::move(tex));
     }
 
     void ClientImRoot::Image(const Platform::Filesystem::Path &path, Math::Vector2i image_size)

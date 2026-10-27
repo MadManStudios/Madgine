@@ -76,14 +76,10 @@ namespace Tools {
         mRenderTargetSampled->addRenderPass(&mIm3DRenderer);
 
         mRenderTarget = context->createRenderTexture({ 1000, 1000 }, { .mName = "SceneView", .mFormat = Render::FORMAT_RGBA8_SRGB, .mBlitSource = mRenderTargetSampled.get() });
-
-        static_cast<ClientImRoot &>(mEditor.tool().root()).addRenderTarget(mRenderTarget.get());
     }
 
     SceneView::~SceneView()
     {
-        static_cast<ClientImRoot &>(mEditor.tool().root()).removeRenderTarget(mRenderTarget.get());
-
         mRenderTargetSampled->removeRenderPass(&mIm3DRenderer);
 
         mRenderTargetSampled->removeRenderPass(&mGridRenderer);
@@ -115,6 +111,7 @@ namespace Tools {
             if (iRegion.x > 0 && iRegion.y > 0)
                 mRenderTarget->resize(iRegion);
             ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, { 0.0f, 0.0f });
+            static_cast<ClientImRoot &>(mEditor.tool().root()).nextFrameRenderTarget(mRenderTarget.get());
             mEditor.tool().root().Image(mRenderTarget->texture(), iRegion, { 0, 0 }, { 1, 1 });
             ImGui::PopStyleVar();
 

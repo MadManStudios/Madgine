@@ -76,8 +76,8 @@ namespace Tools {
         void Image(const Platform::Filesystem::Path &path, Math::Vector2i image_size = { -1, -1 }) override;
         void DrawImage(const Platform::Filesystem::Path &path, EMSCRIPTEN_WORKAROUND(Math::Vector2i) pos, EMSCRIPTEN_WORKAROUND(Math::Vector2i) image_size = { -1, -1 }, float spinnerRadius = 15) override;
 
-        void addRenderTarget(Render::RenderTarget *target);
-        void removeRenderTarget(Render::RenderTarget *target);
+        void preRender(std::vector<Threading::TaskFuture<Render::RenderFuture>> &dependencies, Render::RenderContext *context) override;
+        void nextFrameRenderTarget(Render::RenderTarget *target);        
 
         Math::Vector2 mLeftControllerStick, mRightControllerStick;
         int mDPadState = 0;
@@ -91,7 +91,7 @@ namespace Tools {
 
         Platform::Filesystem::Path mImGuiIniFilePath;
 
-        std::vector<Render::RenderTarget *> mRenderTargets;
+        std::vector<Render::RenderTarget *> mNextFrameRenderTargets;
 
         Memory::ByteBuffer mIconsData;
 

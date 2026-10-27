@@ -38,7 +38,6 @@ namespace Tools {
         , mWidgetManager(editor.manager())
         , mRenderTarget(editor.manager().window().getRenderer()->createRenderTexture({ 1, 1 }, { .mName { resource ? resource->name() : "<Unnamed>" }, .mFormat = Render::FORMAT_RGBA8_SRGB }))
     {
-        static_cast<ClientImRoot &>(editor.root()).addRenderTarget(mRenderTarget.get());
         mRenderTarget->addRenderPass(&mWidgetManager);
         mWidgetManager.onResize({ { 0, 0 }, { 1, 1 } });
 
@@ -62,7 +61,6 @@ namespace Tools {
         mWidgetManager.clear();
 
         mRenderTarget->removeRenderPass(&mWidgetManager);
-        static_cast<ClientImRoot &>(mEditor.root()).removeRenderTarget(mRenderTarget.get());
     }
 
     void WidgetFile::saveAs(const Platform::Filesystem::Path &path)
@@ -247,6 +245,7 @@ namespace Tools {
                     mWidgetManager.onResize({ { 0, 0 }, vSize });
                 }
 
+                static_cast<ClientImRoot &>(mEditor.root()).nextFrameRenderTarget(mRenderTarget.get());
                 editor().root().Image(mRenderTarget->texture(), vSize);
 
                 ImGui::GetWindowDrawList()->PushClipRect(ImGui::GetItemRectMin(), ImGui::GetItemRectMax());
