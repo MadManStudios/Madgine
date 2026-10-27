@@ -524,9 +524,9 @@ Typedefs</h2></td></tr>
 <tr class="memitem:a0607edaba960b3bfd37ca2e476a3a362"><td class="memTemplParams" colspan="2">template&lt;typename <a class="el" href="struct_engine_1_1_execution_1_1_sender.html">Sender</a> , typename Rec &gt; </td></tr>
 <tr class="memitem:a0607edaba960b3bfd37ca2e476a3a362"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_execution.html#a0607edaba960b3bfd37ca2e476a3a362">connect_result_t</a> = decltype(<a class="el" href="namespace_engine_1_1_execution.html#acbbd90e985d42e94e2068ee0e5fe56e1">connect</a>(std::declval&lt; <a class="el" href="struct_engine_1_1_execution_1_1_sender.html">Sender</a> &gt;(), std::declval&lt; Rec &gt;()))</td></tr>
 <tr class="separator:a0607edaba960b3bfd37ca2e476a3a362"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab0d30f61aa086490f27bf10538b9c1d5"><td class="memTemplParams" colspan="2">template&lt;typename R , typename... Ty&gt; </td></tr>
-<tr class="memitem:ab0d30f61aa086490f27bf10538b9c1d5"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_execution.html#ab0d30f61aa086490f27bf10538b9c1d5">ConnectionReceiver</a> = <a class="el" href="struct_engine_1_1_execution_1_1_virtual_receiver_base_ex.html">VirtualReceiverBaseEx</a>&lt; <a class="el" href="namespace_engine.html#a4730eea0dd80156674d4302db2bdf1ce">to_type_pack</a>&lt; R &gt;, <a class="el" href="struct_engine_1_1type__pack.html">type_pack</a>&lt; Ty... &gt; &gt;</td></tr>
-<tr class="separator:ab0d30f61aa086490f27bf10538b9c1d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a41999da63391a5ac680ae2397661e046"><td class="memTemplParams" colspan="2">template&lt;typename R , typename... Ty&gt; </td></tr>
+<tr class="memitem:a41999da63391a5ac680ae2397661e046"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_execution.html#a41999da63391a5ac680ae2397661e046">ConnectionReceiver</a> = <a class="el" href="struct_engine_1_1_execution_1_1_virtual_receiver_base_ex.html">VirtualReceiverBaseEx</a>&lt; <a class="el" href="namespace_engine.html#a4730eea0dd80156674d4302db2bdf1ce">to_type_pack</a>&lt; R &gt;, <a class="el" href="struct_engine_1_1type__pack.html">type_pack</a>&lt; Ty... &gt;, <a class="el" href="namespace_engine_1_1_execution.html#ae84517eb116580e852a53a1b0a8c5557">get_stop_token</a> &gt;</td></tr>
+<tr class="separator:a41999da63391a5ac680ae2397661e046"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa3c50cf86bf6889571640d81dfff6236"><td class="memTemplParams" colspan="2">template&lt;typename <a class="el" href="struct_engine_1_1_execution_1_1_sender.html">Sender</a> &gt; </td></tr>
 <tr class="memitem:aa3c50cf86bf6889571640d81dfff6236"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_execution.html#aa3c50cf86bf6889571640d81dfff6236">ErrorStorage</a> = <a class="el" href="struct_engine_1_1_execution_1_1_error_storage_impl.html">ErrorStorageImpl</a>&lt; typename std::decay_t&lt; <a class="el" href="struct_engine_1_1_execution_1_1_sender.html">Sender</a> &gt;::result_type &gt;</td></tr>
 <tr class="separator:aa3c50cf86bf6889571640d81dfff6236"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -699,8 +699,8 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="ab0d30f61aa086490f27bf10538b9c1d5" name="ab0d30f61aa086490f27bf10538b9c1d5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab0d30f61aa086490f27bf10538b9c1d5">&#9670;&#160;</a></span>ConnectionReceiver</h2>
+<a id="a41999da63391a5ac680ae2397661e046" name="a41999da63391a5ac680ae2397661e046"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a41999da63391a5ac680ae2397661e046">&#9670;&#160;</a></span>ConnectionReceiver</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -708,7 +708,7 @@ template&lt;typename T &gt; </div>
 template&lt;typename R , typename... Ty&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="namespace_engine_1_1_execution.html#ab0d30f61aa086490f27bf10538b9c1d5">Engine::Execution::ConnectionReceiver</a> = typedef <a class="el" href="struct_engine_1_1_execution_1_1_virtual_receiver_base_ex.html">VirtualReceiverBaseEx</a>&lt;<a class="el" href="namespace_engine.html#a4730eea0dd80156674d4302db2bdf1ce">to_type_pack</a>&lt;R&gt;, <a class="el" href="struct_engine_1_1type__pack.html">type_pack</a>&lt;Ty...&gt; &gt;</td>
+          <td class="memname">using <a class="el" href="namespace_engine_1_1_execution.html#a41999da63391a5ac680ae2397661e046">Engine::Execution::ConnectionReceiver</a> = typedef <a class="el" href="struct_engine_1_1_execution_1_1_virtual_receiver_base_ex.html">VirtualReceiverBaseEx</a>&lt;<a class="el" href="namespace_engine.html#a4730eea0dd80156674d4302db2bdf1ce">to_type_pack</a>&lt;R&gt;, <a class="el" href="struct_engine_1_1type__pack.html">type_pack</a>&lt;Ty...&gt;, <a class="el" href="namespace_engine_1_1_execution.html#ae84517eb116580e852a53a1b0a8c5557">get_stop_token</a>&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1835,7 +1835,7 @@ template&lt;<a class="el" href="struct_engine_1_1fixed__string.html">fixed_strin
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Oct 27 2026 11:46:44 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Tue Oct 27 2026 12:04:20 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>
