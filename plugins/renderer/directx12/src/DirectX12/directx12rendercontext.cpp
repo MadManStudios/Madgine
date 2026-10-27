@@ -341,8 +341,10 @@ namespace Render {
     {
         Memory::Block allocation = mBufferAllocator.allocate(size);
 
-        if (!allocation.mAddress)
+        if (!allocation.mAddress) {
+            LOG_ERROR("DirectX12: out of heap memory, allocating " << size << " bytes failed");
             return {};
+        }
 
         return { allocation.mAddress, size, [=, this](void *address) { mBufferAllocator.deallocate(allocation); } };
     }
@@ -351,8 +353,10 @@ namespace Render {
     {
         Memory::Block allocation = mBufferAllocator.allocate(elementSize * count);
 
-        if (!allocation.mAddress)
+        if (!allocation.mAddress) {
+            LOG_ERROR("DirectX12: out of heap memory, allocating " << elementSize * count << " bytes failed");
             return {};
+        }
 
         return { allocation.mAddress, elementSize, count, [=, this](void *address) { mBufferAllocator.deallocate(allocation); } };
     }
