@@ -8,7 +8,7 @@ namespace Threading {
         CustomTimepoint(std::chrono::steady_clock::time_point timepoint);
         CustomTimepoint(std::chrono::steady_clock::duration dur);
 
-        std::chrono::steady_clock::time_point revert();
+        std::chrono::steady_clock::time_point revert() const;
 
         std::chrono::steady_clock::duration time_since_epoch() const;
 

@@ -1,10 +1,33 @@
 #pragma once
 
+#include "Modules/threading/customclock.h"
+
+#include "Madgine/meshloader/gpumeshdata.h"
+#include "Madgine/meshloader/gpumeshloader.h"
 #include "Madgine/render/renderdata.h"
 #include "Madgine/render/resourceblock.h"
+#include "Madgine/scene/entity/components/transform.h"
 
 namespace Engine {
 namespace Render {
+
+    struct EntityRenderData {
+
+        void ensureAlive(Scene::SceneManager &scene);
+        void markDead();
+        bool alive() const;
+
+        Scene::Entity::Transform mPreviousTransform;
+
+        Math::Matrix4 mTransformMatrix;
+
+        size_t mLastRenderedFrame = 0;
+        Threading::CustomTimepoint mLastUpdate = std::chrono::steady_clock::time_point::min();
+
+        GPUMeshLoader::Handle mMesh;
+        GPUPtr<Math::Matrix4[]> mBones;
+        GPUMeshData::Material *mMaterial = nullptr;
+    };
 
     struct MADGINE_SCENE_RENDERER_EXPORT SceneRenderData : RenderData {
 
@@ -17,13 +40,21 @@ namespace Render {
 
         ResourceBlock defaultMaterial();
 
+        decltype(auto) data() const {
+            return mData | std::views::filter(&EntityRenderData::alive);
+        }
+
     protected:
         Threading::TaskQueue *queue(RenderContext *) override;
+
+        void interpolateTransform(EntityRenderData &d, Scene::Entity::Transform &t, Scene::Entity::Entity &e);
 
     private:
         Scene::SceneManager &mScene;
 
         UniqueResourceBlock mDefaultMaterial;
+
+        std::deque<EntityRenderData> mData;
     };
 
 }

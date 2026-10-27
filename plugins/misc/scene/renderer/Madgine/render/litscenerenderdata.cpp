@@ -30,46 +30,25 @@ namespace Render {
         for (auto &[key, transforms] : mInstances)
             transforms.clear();
 
-        co_await mScene.mutex().locked(AccessMode::READ, [this]() {
-            // TODO Culling
+        // TODO Culling
 
-            for (auto &[mesh, entity] : mScene.entityComponentList<Scene::Entity::Mesh>().data()) {               
+        for (const EntityRenderData &entity : mRenderData.data()) {     
+            
+            if (!entity.mMesh)
+                continue;
 
-                if (!mesh.worldVisible(entity))
-                    continue;
-
-                if (!mesh.mMesh.available())
-                    continue;
-
-                Scene::Entity::Transform *transform = entity.getComponent<Scene::Entity::Transform>();
-                if (!transform)
-                    continue;
-
-                const GPUMeshData::Material *material = nullptr;
-                Scene::Entity::Material *materialComponent = entity.getComponent<Scene::Entity::Material>();
-                if (materialComponent) {
-                    material = &materialComponent->mMaterial;
-                } else if (mesh.mMaterial < mesh.mMesh->mMaterials.size()) {
-                    material = &mesh.mMesh->mMaterials[mesh.mMaterial];
-                }
-                ResourceBlock resource;
-                Math::Vector4 diffuseColor { 1.0f, 1.0f, 1.0f, 1.0f };
-                Math::Vector3 emissiveColor = Math::Vector3::ZERO;
-                if (material) {
-                    if (material->mResourceBlock)
-                        resource = material->mResourceBlock->mResourceBlock;
-                    diffuseColor = material->mDiffuseColor;
-                    emissiveColor = material->mEmissiveColor;
-                }
-
-                Scene::Entity::Skeleton *skeleton = entity.getComponent<Scene::Entity::Skeleton>();
-                Engine::Render::GPUPtr<Math::Matrix4[]> bones;
-                if (skeleton)
-                    bones = skeleton->mBoneMatrices;
-
-                mInstances[NonInstancedData { mesh.mMesh, resource }].push_back({ transform->worldMatrix(entity), diffuseColor, emissiveColor, bones });
+            Math::Vector4 diffuseColor { 1.0f, 1.0f, 1.0f, 1.0f };
+            Math::Vector3 emissiveColor = Math::Vector3::ZERO;
+            ResourceBlock resource;
+            if (entity.mMaterial) {
+                if (entity.mMaterial->mResourceBlock)
+                    resource = entity.mMaterial->mResourceBlock->mResourceBlock;
+                diffuseColor = entity.mMaterial->mDiffuseColor;
+                emissiveColor = entity.mMaterial->mEmissiveColor;
             }
-        });
+
+            mInstances[NonInstancedData { entity.mMesh, resource }].push_back({ entity.mTransformMatrix, diffuseColor, emissiveColor, entity.mBones });
+        }
 
         for (auto it = mInstances.begin(); it != mInstances.end();) {
             if (it->second.empty()) {

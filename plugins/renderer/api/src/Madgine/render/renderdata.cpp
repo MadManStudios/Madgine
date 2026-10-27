@@ -27,6 +27,11 @@ namespace Render {
         return mLastFrame;
     }
 
+    size_t RenderData::frame() const
+    {
+        return mFrame;
+    }
+
     Threading::TaskQueue *RenderData::queue(RenderContext *context)
     {
         return context->renderQueue();

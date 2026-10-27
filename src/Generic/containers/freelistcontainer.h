@@ -168,22 +168,22 @@ namespace Containers {
 
         nodes_iterator nodes_begin()
         {
-            return { mContainer.begin(), mContainer };
+            return mContainer.begin();
         }
 
         nodes_const_iterator nodes_begin() const
         {
-            return { mContainer.begin(), mContainer };
+            return mContainer.begin();
         }
 
         nodes_iterator nodes_end()
         {
-            return { mContainer.end(), mContainer };
+            return mContainer.end();
         }
 
         nodes_const_iterator nodes_end() const
         {
-            return { mContainer.end(), mContainer };
+            return mContainer.end();
         }
 
     private:

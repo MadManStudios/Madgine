@@ -19,6 +19,8 @@ namespace Render {
 
         virtual Threading::TaskQueue *queue(RenderContext *context);
 
+        size_t frame() const;
+
     private:
         size_t mFrame = 0;
         Threading::TaskFuture<RenderFuture> mLastFrame;

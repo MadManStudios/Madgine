@@ -21,7 +21,7 @@ namespace Threading {
     {
     }
 
-    std::chrono::steady_clock::time_point CustomTimepoint::revert()
+    std::chrono::steady_clock::time_point CustomTimepoint::revert() const
     {
         return mClock ? mClock->revert(mTimePoint) : mTimePoint;
     }

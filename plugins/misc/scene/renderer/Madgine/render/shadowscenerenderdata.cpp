@@ -28,29 +28,15 @@ namespace Render {
         for (auto &[key, transforms] : mInstances)
             transforms.clear();
 
-        co_await mScene.mutex().locked(AccessMode::READ, [this]() {
-            // TODO Culling
+        // TODO Culling
 
-            for (auto &[mesh, entity] : mScene.entityComponentList<Scene::Entity::Mesh>()) {
+        for (const EntityRenderData &entity : mRenderData.data()) {
 
-                if (!mesh.worldVisible(entity))
-                    continue;
+            if (!entity.mMesh)
+                continue;
 
-                if (!mesh.mMesh.available())
-                    continue;
-
-                Scene::Entity::Transform *transform = entity.getComponent<Scene::Entity::Transform>();
-                if (!transform)
-                    continue;
-
-                Scene::Entity::Skeleton *skeleton = entity.getComponent<Scene::Entity::Skeleton>();
-                Engine::Render::GPUPtr<Math::Matrix4[]> bones;
-                if (skeleton)
-                    bones = skeleton->mBoneMatrices;
-
-                mInstances[mesh.mMesh].push_back({ transform->worldMatrix(entity), bones });
-            }
-        });
+            mInstances[entity.mMesh].push_back({ entity.mTransformMatrix, entity.mBones });
+        }
 
         for (auto it = mInstances.begin(); it != mInstances.end();) {
             if (it->second.empty()) {
