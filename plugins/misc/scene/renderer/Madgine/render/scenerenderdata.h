@@ -26,7 +26,13 @@ namespace Render {
 
         GPUMeshLoader::Handle mMesh;
         GPUPtr<Math::Matrix4[]> mBones;
-        GPUMeshData::Material *mMaterial = nullptr;
+        ResourceBlock mResource;
+        Math::Vector4 mDiffuseColor { 1.0f, 1.0f, 1.0f, 1.0f };
+        Math::Vector3 mEmissiveColor = Math::Vector3::ZERO;
+
+        // Cached Parent
+        const Scene::Entity::Transform* mParentTransform = nullptr;
+        EntityRenderData* mParentData = nullptr;
     };
 
     struct MADGINE_SCENE_RENDERER_EXPORT SceneRenderData : RenderData {
@@ -40,7 +46,8 @@ namespace Render {
 
         ResourceBlock defaultMaterial();
 
-        decltype(auto) data() const {
+        decltype(auto) data() const
+        {
             return mData | std::views::filter(&EntityRenderData::alive);
         }
 

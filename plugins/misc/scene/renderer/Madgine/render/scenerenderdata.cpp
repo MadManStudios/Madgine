@@ -24,8 +24,9 @@ namespace Render {
         : mScene(scene)
     {
         mScene.taskQueue()->queue([this]() -> Threading::Task<void> {
+            std::chrono::steady_clock::duration acc = 0s;
             while (mScene.taskQueue()->running()) {
-                co_await mScene.simulationClock().wait(0s);
+                co_await mScene.simulationClock().wait_fixed(16667us, acc);
                 co_await mScene.mutex().locked(AccessMode::READ, [this]() {
                     auto &transforms = mScene.entityComponentList<Scene::Entity::Transform>().data();
 
@@ -60,7 +61,7 @@ namespace Render {
         if (d.mLastRenderedFrame < frame) {
             d.ensureAlive(mScene);
 
-            float alpha = Math::clamp(std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(mScene.animationClock().lastTick() - d.mLastUpdate).count() / 30.0f, 0.0f, 1.0f);
+            float alpha = Math::clamp(std::chrono::duration_cast<std::chrono::duration<float, std::micro>>(mScene.animationClock().lastTick() - d.mLastUpdate).count() / 16667.0f, 0.0f, 1.0f);
 
             Scene::Entity::Transform interpolated;
 
@@ -73,11 +74,18 @@ namespace Render {
                 Execution::access_binding(parent, [&](Scene::Entity::Entity &parent) {
                     Scene::Entity::Transform *t = parent.getComponent<Scene::Entity::Transform>();
                     if (t) {
-                        auto it = std::find_if(transforms.nodes_begin(), transforms.nodes_end(), [&](auto &node) { return &node.unsafeAccess().mComponent == t; });
-                        if (it != transforms.nodes_end()) {
-                            EntityRenderData &parentData = *std::next(mData.begin(), std::distance(transforms.nodes_begin(), it));
-                            interpolateTransform(parentData, *t, parent);
-                            d.mTransformMatrix = parentData.mTransformMatrix * d.mTransformMatrix;
+                        if (d.mParentTransform != t) {
+                            d.mParentTransform = nullptr;
+                            d.mParentData = nullptr;
+                            auto it = std::find_if(transforms.nodes_begin(), transforms.nodes_end(), [&](auto &node) { return &node.unsafeAccess().mComponent == t; });
+                            if (it != transforms.nodes_end()) {
+                                d.mParentTransform = t;
+                                d.mParentData = &*std::next(mData.begin(), std::distance(transforms.nodes_begin(), it));
+                            }
+                        }
+                        if (d.mParentData) {
+                            interpolateTransform(*d.mParentData, *t, parent);
+                            d.mTransformMatrix = d.mParentData->mTransformMatrix * d.mTransformMatrix;
                         }
                     }
                 });
@@ -116,17 +124,32 @@ namespace Render {
                 Scene::Entity::Entity &e = *it1->unsafeAccess().mEntity;
                 Scene::Entity::Transform &t = it1->unsafeAccess().mComponent;
 
-                interpolateTransform(d, t, e);
-
                 Scene::Entity::Mesh *m = e.getComponent<Scene::Entity::Mesh>();
                 d.mMesh = m && m->mMesh.available() && m->worldVisible(e) ? m->mMesh : GPUMeshLoader::Handle {};
+                if (!d.mMesh) {
+                    continue;
+                }
+
+                interpolateTransform(d, t, e);
 
                 Scene::Entity::Material *mat = e.getComponent<Scene::Entity::Material>();
 
+                GPUMeshData::Material *matData = nullptr;
                 if (mat) {
-                    d.mMaterial = &mat->mMaterial;
-                } else if (d.mMesh && m->mMaterial < d.mMesh->mMaterials.size()) {
-                    d.mMaterial = &d.mMesh->mMaterials[m->mMaterial];
+                    matData = &mat->mMaterial;
+                } else if (m->mMaterial < d.mMesh->mMaterials.size()) {
+                    matData = &d.mMesh->mMaterials[m->mMaterial];
+                }
+
+                d.mResource = {};
+                if (matData) {
+                    if (matData->mResourceBlock)
+                        d.mResource = matData->mResourceBlock->mResourceBlock;
+                    d.mDiffuseColor = matData->mDiffuseColor;
+                    d.mEmissiveColor = matData->mEmissiveColor;
+                } else {
+                    d.mDiffuseColor = { 1.0f, 1.0f, 1.0f, 1.0f };
+                    d.mEmissiveColor = Math::Vector3::ZERO;
                 }
 
                 // TODO
@@ -169,6 +192,7 @@ namespace Render {
     void EntityRenderData::markDead()
     {
         mLastUpdate = std::chrono::steady_clock::time_point::min();
+        mMesh = {};
     }
 
     bool EntityRenderData::alive() const

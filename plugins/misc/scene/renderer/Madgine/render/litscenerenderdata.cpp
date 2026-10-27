@@ -37,17 +37,7 @@ namespace Render {
             if (!entity.mMesh)
                 continue;
 
-            Math::Vector4 diffuseColor { 1.0f, 1.0f, 1.0f, 1.0f };
-            Math::Vector3 emissiveColor = Math::Vector3::ZERO;
-            ResourceBlock resource;
-            if (entity.mMaterial) {
-                if (entity.mMaterial->mResourceBlock)
-                    resource = entity.mMaterial->mResourceBlock->mResourceBlock;
-                diffuseColor = entity.mMaterial->mDiffuseColor;
-                emissiveColor = entity.mMaterial->mEmissiveColor;
-            }
-
-            mInstances[NonInstancedData { entity.mMesh, resource }].push_back({ entity.mTransformMatrix, diffuseColor, emissiveColor, entity.mBones });
+            mInstances[NonInstancedData { entity.mMesh, entity.mResource }].push_back({ entity.mTransformMatrix, entity.mDiffuseColor, entity.mEmissiveColor, entity.mBones });
         }
 
         for (auto it = mInstances.begin(); it != mInstances.end();) {
