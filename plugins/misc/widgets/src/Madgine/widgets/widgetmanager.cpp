@@ -321,6 +321,9 @@ namespace Widgets {
 
     WidgetBase *WidgetManager::getHoveredWidget(const Math::Vector2 &pos, WidgetBase *current, bool isPointerEvent)
     {
+        // Modal widgets and overlays lie above the tree of the current widget, searching up from it would miss them
+        if (!mModalWidgetList.empty() || !mOverlays.empty())
+            return getHoveredWidgetDown(pos, nullptr, isPointerEvent);
         return getHoveredWidgetDown(pos, getHoveredWidgetUp(pos, current, isPointerEvent), isPointerEvent);
     }
 
@@ -445,11 +448,11 @@ namespace Widgets {
             mHoveredWidget = nullptr;
 
         if (mFocusedWidget && std::ranges::find(mWidgets, mFocusedWidget) == mWidgets.end())
-            mFocusedWidget = nullptr;        
+            mFocusedWidget = nullptr;
 
         if (mPointerEventTargetWidget && std::ranges::find(mWidgets, mPointerEventTargetWidget) == mWidgets.end())
-            mPointerEventTargetWidget = nullptr;        
-        
+            mPointerEventTargetWidget = nullptr;
+
         mHoveredWidget = getHoveredWidget(Math::Vector2 { Math::Vector2i { &mCachedPointerMoveEvent.mWindowPosition.x } }, mHoveredWidget, false);
         WidgetBase *newPointerEventTarget = getHoveredWidget(Math::Vector2 { Math::Vector2i { &mCachedPointerMoveEvent.mWindowPosition.x } }, mPointerEventTargetWidget, true);
 
