@@ -346,6 +346,7 @@ $(function() {
 <li>mArguments&#160;:&#160;<a class="el" href="struct_code_gen_1_1_constructor.html#ab83b195bf1c2892caf7468ad9d4a6482">CodeGen::Constructor</a>, <a class="el" href="struct_code_gen_1_1_function.html#aced5850ebc7ae63690a4509007e03604">CodeGen::Function</a>, <a class="el" href="struct_engine_1_1_behavior_1_1_node_graph_1_1_sender_node.html#a3bb1a4da0b808c196ac33206bbb6cd9d">Engine::Behavior::NodeGraph::SenderNode&lt; T, Config, Algorithm, Arguments &gt;</a>, <a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_python3_behavior_sender.html#aab35b5b4f02e615597f96090489961c2">Engine::Behavior::Python3::Python3BehaviorSender</a>, <a class="el" href="struct_engine_1_1_behavior_1_1_python3_1_1_python_function_info.html#aeb4cb92fa9868751397ffec886daa9dd">Engine::Behavior::Python3::PythonFunctionInfo</a>, <a class="el" href="struct_engine_1_1_core_1_1_c_l_i_core.html#ab762b75deda38a526372a5bebed4a46e">Engine::Core::CLICore</a>, <a class="el" href="struct_engine_1_1_reflect_1_1_function_table.html#af4ebf38fb6637662891b6eab4820f482">Engine::Reflect::FunctionTable</a></li>
 <li>mArgumentsCount&#160;:&#160;<a class="el" href="struct_engine_1_1_reflect_1_1_function_table.html#a60817bfe4794c917c588464ae600078c">Engine::Reflect::FunctionTable</a></li>
 <li>mark_complete()&#160;:&#160;<a class="el" href="struct_engine_1_1_execution_1_1when__all__range__t_1_1state.html#a4f04961bff245e20b2d4782d36007131">Engine::Execution::when_all_range_t::state&lt; Rec, Sender &gt;</a></li>
+<li>markDead()&#160;:&#160;<a class="el" href="struct_engine_1_1_render_1_1_entity_render_data.html#ab77f62e6a67a4f4dff1f08ad05cece02">Engine::Render::EntityRenderData</a></li>
 <li>mAscender&#160;:&#160;<a class="el" href="struct_engine_1_1_render_1_1_type_face.html#acbdf3fcbf8a59f00fe42be5628c4bc7c">Engine::Render::TypeFace</a></li>
 <li>Mask&#160;:&#160;<a class="el" href="struct_engine_1_1_containers_1_1_bit_array.html#a645a8f894b6b8e3f23b0342f52f664fc">Engine::Containers::BitArray&lt; Count, MemberSize, type &gt;</a>, <a class="el" href="struct_engine_1_1_containers_1_1_bit_field.html#a95794ad25c59335243d0007f3528a37d">Engine::Containers::BitField&lt; FreeBits, Size, Type &gt;</a>, <a class="el" href="struct_engine_1_1_containers_1_1_bit_ptr.html#aefaa05a3d4647c88c84e55ca71e14d27">Engine::Containers::BitPtr&lt; T, FreeBits &gt;</a></li>
 <li>maskedPtr()&#160;:&#160;<a class="el" href="struct_engine_1_1_containers_1_1_bit_ptr.html#a6d99d3e052066027df3fc0d70c5aff7d">Engine::Containers::BitPtr&lt; T, FreeBits &gt;</a></li>
@@ -356,7 +357,7 @@ $(function() {
 <li>mAtlas&#160;:&#160;<a class="el" href="struct_engine_1_1_widgets_1_1_widget_manager_1_1_widget_manager_data.html#a0347c608c8d5774d7874de2f02807a2a">Engine::Widgets::WidgetManager::WidgetManagerData</a></li>
 <li>matrix()&#160;:&#160;<a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_transform.html#adc38250a9e560b0ba4e354da625012f6">Engine::Scene::Entity::Transform</a></li>
 <li>Matrix3()&#160;:&#160;<a class="el" href="struct_engine_1_1_math_1_1_matrix3.html#ab77e1f8268e2f506ff12c7487527c2a5">Engine::Math::Matrix3</a></li>
-<li>Matrix4&#160;:&#160;<a class="el" href="struct_engine_1_1_math_1_1_matrix3.html#ace502ef0a04779612fa74b63295cd7d4">Engine::Math::Matrix3</a>, <a class="el" href="struct_engine_1_1_math_1_1_matrix4.html#a8c12e8b84e60e0422323b1c398e12dc7">Engine::Math::Matrix4</a></li>
+<li>Matrix4&#160;:&#160;<a class="el" href="struct_engine_1_1_math_1_1_matrix3.html#ace502ef0a04779612fa74b63295cd7d4">Engine::Math::Matrix3</a>, <a class="el" href="struct_engine_1_1_math_1_1_matrix4.html#a592f03b8bf4c28b9f2a4762dc4415cb0">Engine::Math::Matrix4</a></li>
 <li>mAttached&#160;:&#160;<a class="el" href="struct_engine_1_1_threading_1_1_task_promise_shared_state_base.html#adb450509d0c6cd69e549ecd7e38656c6">Engine::Threading::TaskPromiseSharedStateBase</a></li>
 <li>mAutoLoad&#160;:&#160;<a class="el" href="struct_engine_1_1_resources_1_1_resource_loader_settings.html#a99e01ba6b21325bc9dde4d9c632ecb37">Engine::Resources::ResourceLoaderSettings</a></li>
 <li>mAutoReload&#160;:&#160;<a class="el" href="struct_engine_1_1_resources_1_1_resource_loader_settings.html#ac9fc706c412bcd6311e1d504c81a426d">Engine::Resources::ResourceLoaderSettings</a></li>
@@ -1001,7 +1002,7 @@ $(function() {
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Oct 27 2026 18:15:11 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Tue Oct 27 2026 19:35:36 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>
