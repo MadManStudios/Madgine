@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Madgine - Doxygen Documentation: Engine::Execution::IntervalClock&amp;lt; Timepoint &amp;gt;::state&amp;lt; Binding, Rec &amp;gt; Struct Template Reference &mdash; Madgine  documentation</title>
+  <title>Madgine - Doxygen Documentation: Engine::Execution::IntervalClock&amp;lt; Timepoint &amp;gt;::state&amp;lt; Binding, Rec, fixed &amp;gt; Struct Template Reference &mdash; Madgine  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=eafc0fe6" />
@@ -222,7 +222,7 @@
     <ul class="wy-breadcrumbs">
         
       <li><a href="../../../docs/README.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: Engine::Execution::IntervalClock&amp;lt; Timepoint &amp;gt;::state&amp;lt; Binding, Rec &amp;gt; Struct Template Reference</li>
+      <li class="breadcrumb-item active">Madgine - Doxygen Documentation: Engine::Execution::IntervalClock&amp;lt; Timepoint &amp;gt;::state&amp;lt; Binding, Rec, fixed &amp;gt; Struct Template Reference</li>
         
       <li class="wy-breadcrumbs-aside">
             <a href="../../../_sources/out/doc/doxygen/struct_engine_1_1_execution_1_1_interval_clock_1_1state.rst.txt" rel="nofollow"> View page source</a>
@@ -233,8 +233,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="state-lt-binding-rec-gt-struct-template-reference">
-<h1>state&amp;lt; Binding, Rec &amp;gt; Struct Template Reference<a class="headerlink" href="#state-lt-binding-rec-gt-struct-template-reference" title="Permalink to this heading"></a></h1>
+  <section id="state-lt-binding-rec-fixed-gt-struct-template-reference">
+<h1>state&amp;lt; Binding, Rec, fixed &amp;gt; Struct Template Reference<a class="headerlink" href="#state-lt-binding-rec-fixed-gt-struct-template-reference" title="Permalink to this heading"></a></h1>
 <div class="doxygen-content docutils container">
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
@@ -243,7 +243,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.5"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Madgine - Doxygen Documentation: Engine::Execution::IntervalClock&lt; Timepoint &gt;::state&lt; Binding, Rec &gt; Struct Template Reference</title>
+<title>Madgine - Doxygen Documentation: Engine::Execution::IntervalClock&lt; Timepoint &gt;::state&lt; Binding, Rec, fixed &gt; Struct Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -283,32 +283,38 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#friends">Friends</a> &#124;
 <a href="struct_engine_1_1_execution_1_1_interval_clock_1_1state-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">Engine::Execution::IntervalClock&lt; Timepoint &gt;::state&lt; Binding, Rec &gt; Struct Template Reference</div></div>
+  <div class="headertitle"><div class="title">Engine::Execution::IntervalClock&lt; Timepoint &gt;::state&lt; Binding, Rec, fixed &gt; Struct Template Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
 <p><code>#include &lt;intervalclock.h&gt;</code></p>
 <div class="dynheader">
-Inheritance diagram for Engine::Execution::IntervalClock&lt; Timepoint &gt;::state&lt; Binding, Rec &gt;:</div>
+Inheritance diagram for Engine::Execution::IntervalClock&lt; Timepoint &gt;::state&lt; Binding, Rec, fixed &gt;:</div>
 <div class="dyncontent">
 <div class="center"><iframe scrolling="no" frameborder="0" src="struct_engine_1_1_execution_1_1_interval_clock_1_1state__inherit__graph.svg" width="392" height="131"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:a5d5f1eb75a23e66abb9b6947ff8e63b4"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_interval_clock_1_1state.html#a5d5f1eb75a23e66abb9b6947ff8e63b4">Acc</a> = std::conditional_t&lt; fixed, std::chrono::steady_clock::duration &amp;, std::chrono::steady_clock::duration &gt;</td></tr>
+<tr class="separator:a5d5f1eb75a23e66abb9b6947ff8e63b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ad1e825eb9896670ccccbbff80ce2026f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_interval_clock_1_1state.html#ad1e825eb9896670ccccbbff80ce2026f">state</a> (Binding &amp;&amp;binding, Rec &amp;&amp;rec, std::chrono::steady_clock::duration duration, std::chrono::steady_clock::duration durationOverride, std::chrono::steady_clock::duration acc)</td></tr>
-<tr class="separator:ad1e825eb9896670ccccbbff80ce2026f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa5b655a96cc9668bfde5ac1656c89640"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_interval_clock_1_1state.html#aa5b655a96cc9668bfde5ac1656c89640">continueExecution</a> (Timepoint now) override</td></tr>
-<tr class="separator:aa5b655a96cc9668bfde5ac1656c89640"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2672710718cc49888ab08c9363f941f5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_interval_clock_1_1state.html#a2672710718cc49888ab08c9363f941f5">start</a> ()</td></tr>
-<tr class="separator:a2672710718cc49888ab08c9363f941f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a99822a267c6340810f2fcded991a091d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_interval_clock_1_1state.html#a99822a267c6340810f2fcded991a091d">stop</a> ()</td></tr>
-<tr class="separator:a99822a267c6340810f2fcded991a091d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a12ec4ff28790682c0c40efa8b2c5ac87"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_interval_clock_1_1state.html#a12ec4ff28790682c0c40efa8b2c5ac87">state</a> (Binding &amp;&amp;binding, Rec &amp;&amp;rec, std::chrono::steady_clock::duration duration, std::chrono::steady_clock::duration durationOverride, <a class="el" href="struct_engine_1_1_execution_1_1_interval_clock_1_1state.html#a5d5f1eb75a23e66abb9b6947ff8e63b4">Acc</a> acc)</td></tr>
+<tr class="separator:a12ec4ff28790682c0c40efa8b2c5ac87"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeaef0456e6a6b1ce3fed374d89c79377"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_interval_clock_1_1state.html#aeaef0456e6a6b1ce3fed374d89c79377">continueExecution</a> (Timepoint now) override</td></tr>
+<tr class="separator:aeaef0456e6a6b1ce3fed374d89c79377"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e81dbf017384b9e4afd075c17e8d500"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_interval_clock_1_1state.html#a1e81dbf017384b9e4afd075c17e8d500">start</a> ()</td></tr>
+<tr class="separator:a1e81dbf017384b9e4afd075c17e8d500"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f2196c362af2a930d73541932c0e9e2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_interval_clock_1_1state.html#a5f2196c362af2a930d73541932c0e9e2">stop</a> ()</td></tr>
+<tr class="separator:a5f2196c362af2a930d73541932c0e9e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_struct_engine_1_1_execution_1_1_interval_clock_1_1_wait_state"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_struct_engine_1_1_execution_1_1_interval_clock_1_1_wait_state')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="struct_engine_1_1_execution_1_1_interval_clock_1_1_wait_state.html">Engine::Execution::IntervalClock&lt; Timepoint &gt;::WaitState</a></td></tr>
 <tr class="memitem:a278c007ff807a2d55912dbf9888d0896 inherit pub_methods_struct_engine_1_1_execution_1_1_interval_clock_1_1_wait_state"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_interval_clock_1_1_wait_state.html#a278c007ff807a2d55912dbf9888d0896">WaitState</a> (std::chrono::steady_clock::duration duration)</td></tr>
 <tr class="separator:a278c007ff807a2d55912dbf9888d0896 inherit pub_methods_struct_engine_1_1_execution_1_1_interval_clock_1_1_wait_state"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -332,12 +338,12 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a93fb3d4f8ed2c1f531a721b120e78986"><td class="memItemLeft" align="right" valign="top">std::chrono::steady_clock::duration&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_interval_clock_1_1state.html#a93fb3d4f8ed2c1f531a721b120e78986">mAcc</a></td></tr>
-<tr class="separator:a93fb3d4f8ed2c1f531a721b120e78986"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa4e2f0246804587bf2ec92a0c0a6941f"><td class="memItemLeft" align="right" valign="top">Binding&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_interval_clock_1_1state.html#aa4e2f0246804587bf2ec92a0c0a6941f">mBinding</a></td></tr>
-<tr class="separator:aa4e2f0246804587bf2ec92a0c0a6941f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a92f94ea0aac7babddd20ea7d0dc5f4b2"><td class="memItemLeft" align="right" valign="top">std::chrono::steady_clock::duration&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_interval_clock_1_1state.html#a92f94ea0aac7babddd20ea7d0dc5f4b2">mDebugDuration</a></td></tr>
-<tr class="separator:a92f94ea0aac7babddd20ea7d0dc5f4b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb6e9bb9b4c891aa28e0be2f57013fea"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_execution_1_1_interval_clock_1_1state.html#a5d5f1eb75a23e66abb9b6947ff8e63b4">Acc</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_interval_clock_1_1state.html#aeb6e9bb9b4c891aa28e0be2f57013fea">mAcc</a></td></tr>
+<tr class="separator:aeb6e9bb9b4c891aa28e0be2f57013fea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad03bfd00d1b370c4c5ce83d56ec0c00e"><td class="memItemLeft" align="right" valign="top">Binding&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_interval_clock_1_1state.html#ad03bfd00d1b370c4c5ce83d56ec0c00e">mBinding</a></td></tr>
+<tr class="separator:ad03bfd00d1b370c4c5ce83d56ec0c00e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab948966b6fde13e93171c8ab21adad29"><td class="memItemLeft" align="right" valign="top">std::chrono::steady_clock::duration&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_interval_clock_1_1state.html#ab948966b6fde13e93171c8ab21adad29">mDebugDuration</a></td></tr>
+<tr class="separator:ab948966b6fde13e93171c8ab21adad29"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_attribs_struct_engine_1_1_execution_1_1_interval_clock_1_1_wait_state"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_struct_engine_1_1_execution_1_1_interval_clock_1_1_wait_state')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="struct_engine_1_1_execution_1_1_interval_clock_1_1_wait_state.html">Engine::Execution::IntervalClock&lt; Timepoint &gt;::WaitState</a></td></tr>
 <tr class="memitem:a5b35a13a3d095803d976059b3fb30ff5 inherit pub_attribs_struct_engine_1_1_execution_1_1_interval_clock_1_1_wait_state"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_execution_1_1_interval_clock.html">IntervalClock</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_interval_clock_1_1_wait_state.html#a5b35a13a3d095803d976059b3fb30ff5">mClock</a> = nullptr</td></tr>
 <tr class="separator:a5b35a13a3d095803d976059b3fb30ff5 inherit pub_attribs_struct_engine_1_1_execution_1_1_interval_clock_1_1_wait_state"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -354,22 +360,41 @@ Friends</h2></td></tr>
 <tr class="memitem:a08fd3fd17401e3d6db49e7c7fe7b9a4d"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_execution_1_1_interval_clock_1_1state.html#a08fd3fd17401e3d6db49e7c7fe7b9a4d">tag_invoke</a> (<a class="el" href="struct_engine_1_1_execution_1_1visit__state__t.html">Execution::visit_state_t</a>, <a class="el" href="struct_engine_1_1_execution_1_1_interval_clock_1_1state.html">state</a> *<a class="el" href="struct_engine_1_1_execution_1_1_interval_clock_1_1state.html">state</a>, auto &amp;&amp;visitor)</td></tr>
 <tr class="separator:a08fd3fd17401e3d6db49e7c7fe7b9a4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="ad1e825eb9896670ccccbbff80ce2026f" name="ad1e825eb9896670ccccbbff80ce2026f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad1e825eb9896670ccccbbff80ce2026f">&#9670;&#160;</a></span>state()</h2>
+<h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="a5d5f1eb75a23e66abb9b6947ff8e63b4" name="a5d5f1eb75a23e66abb9b6947ff8e63b4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5d5f1eb75a23e66abb9b6947ff8e63b4">&#9670;&#160;</a></span>Acc</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename Timepoint  = std::chrono::steady_clock::time_point&gt; </div>
 <div class="memtemplate">
-template&lt;Execution::Binding&lt; <a class="el" href="struct_engine_1_1_execution_1_1_interval_clock.html">IntervalClock</a> &amp; &gt; Binding, typename Rec &gt; </div>
+template&lt;Execution::Binding&lt; <a class="el" href="struct_engine_1_1_execution_1_1_interval_clock.html">IntervalClock</a> &amp; &gt; Binding, typename Rec , bool fixed&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="struct_engine_1_1_execution_1_1_interval_clock.html">Engine::Execution::IntervalClock</a>&lt; Timepoint &gt;<a class="el" href="struct_engine_1_1_execution_1_1_interval_clock_1_1state.html#a12ec4ff28790682c0c40efa8b2c5ac87">::state</a>&lt; Binding, Rec, fixed &gt;::Acc =  std::conditional_t&lt;fixed, std::chrono::steady_clock::duration &amp;, std::chrono::steady_clock::duration&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a12ec4ff28790682c0c40efa8b2c5ac87" name="a12ec4ff28790682c0c40efa8b2c5ac87"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a12ec4ff28790682c0c40efa8b2c5ac87">&#9670;&#160;</a></span>state()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Timepoint  = std::chrono::steady_clock::time_point&gt; </div>
+<div class="memtemplate">
+template&lt;Execution::Binding&lt; <a class="el" href="struct_engine_1_1_execution_1_1_interval_clock.html">IntervalClock</a> &amp; &gt; Binding, typename Rec , bool fixed&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="struct_engine_1_1_execution_1_1_interval_clock.html">Engine::Execution::IntervalClock</a>&lt; Timepoint &gt;::state&lt; Binding, Rec &gt;::state </td>
+          <td class="memname"><a class="el" href="struct_engine_1_1_execution_1_1_interval_clock.html">Engine::Execution::IntervalClock</a>&lt; Timepoint &gt;::state&lt; Binding, Rec, fixed &gt;::state </td>
           <td>(</td>
           <td class="paramtype">Binding &amp;&amp;&#160;</td>
           <td class="paramname"><em>binding</em>, </td>
@@ -395,7 +420,7 @@ template&lt;Execution::Binding&lt; <a class="el" href="struct_engine_1_1_executi
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::chrono::steady_clock::duration&#160;</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_execution_1_1_interval_clock_1_1state.html#a5d5f1eb75a23e66abb9b6947ff8e63b4">Acc</a>&#160;</td>
           <td class="paramname"><em>acc</em>&#160;</td>
         </tr>
         <tr>
@@ -414,21 +439,21 @@ template&lt;Execution::Binding&lt; <a class="el" href="struct_engine_1_1_executi
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a2672710718cc49888ab08c9363f941f5" name="a2672710718cc49888ab08c9363f941f5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2672710718cc49888ab08c9363f941f5">&#9670;&#160;</a></span>start()</h2>
+<a id="a1e81dbf017384b9e4afd075c17e8d500" name="a1e81dbf017384b9e4afd075c17e8d500"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1e81dbf017384b9e4afd075c17e8d500">&#9670;&#160;</a></span>start()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename Timepoint  = std::chrono::steady_clock::time_point&gt; </div>
 <div class="memtemplate">
-template&lt;Execution::Binding&lt; <a class="el" href="struct_engine_1_1_execution_1_1_interval_clock.html">IntervalClock</a> &amp; &gt; Binding, typename Rec &gt; </div>
+template&lt;Execution::Binding&lt; <a class="el" href="struct_engine_1_1_execution_1_1_interval_clock.html">IntervalClock</a> &amp; &gt; Binding, typename Rec , bool fixed&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classvoid.html">void</a> <a class="el" href="struct_engine_1_1_execution_1_1_interval_clock.html">Engine::Execution::IntervalClock</a>&lt; Timepoint &gt;<a class="el" href="struct_engine_1_1_execution_1_1_interval_clock_1_1state.html#ad1e825eb9896670ccccbbff80ce2026f">::state</a>&lt; Binding, Rec &gt;::start </td>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> <a class="el" href="struct_engine_1_1_execution_1_1_interval_clock.html">Engine::Execution::IntervalClock</a>&lt; Timepoint &gt;<a class="el" href="struct_engine_1_1_execution_1_1_interval_clock_1_1state.html#a12ec4ff28790682c0c40efa8b2c5ac87">::state</a>&lt; Binding, Rec, fixed &gt;::start </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -443,21 +468,21 @@ template&lt;Execution::Binding&lt; <a class="el" href="struct_engine_1_1_executi
 
 </div>
 </div>
-<a id="a99822a267c6340810f2fcded991a091d" name="a99822a267c6340810f2fcded991a091d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a99822a267c6340810f2fcded991a091d">&#9670;&#160;</a></span>stop()</h2>
+<a id="a5f2196c362af2a930d73541932c0e9e2" name="a5f2196c362af2a930d73541932c0e9e2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5f2196c362af2a930d73541932c0e9e2">&#9670;&#160;</a></span>stop()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename Timepoint  = std::chrono::steady_clock::time_point&gt; </div>
 <div class="memtemplate">
-template&lt;Execution::Binding&lt; <a class="el" href="struct_engine_1_1_execution_1_1_interval_clock.html">IntervalClock</a> &amp; &gt; Binding, typename Rec &gt; </div>
+template&lt;Execution::Binding&lt; <a class="el" href="struct_engine_1_1_execution_1_1_interval_clock.html">IntervalClock</a> &amp; &gt; Binding, typename Rec , bool fixed&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classvoid.html">void</a> <a class="el" href="struct_engine_1_1_execution_1_1_interval_clock.html">Engine::Execution::IntervalClock</a>&lt; Timepoint &gt;<a class="el" href="struct_engine_1_1_execution_1_1_interval_clock_1_1state.html#ad1e825eb9896670ccccbbff80ce2026f">::state</a>&lt; Binding, Rec &gt;::stop </td>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> <a class="el" href="struct_engine_1_1_execution_1_1_interval_clock.html">Engine::Execution::IntervalClock</a>&lt; Timepoint &gt;<a class="el" href="struct_engine_1_1_execution_1_1_interval_clock_1_1state.html#a12ec4ff28790682c0c40efa8b2c5ac87">::state</a>&lt; Binding, Rec, fixed &gt;::stop </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -472,21 +497,21 @@ template&lt;Execution::Binding&lt; <a class="el" href="struct_engine_1_1_executi
 
 </div>
 </div>
-<a id="aa5b655a96cc9668bfde5ac1656c89640" name="aa5b655a96cc9668bfde5ac1656c89640"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa5b655a96cc9668bfde5ac1656c89640">&#9670;&#160;</a></span>continueExecution()</h2>
+<a id="aeaef0456e6a6b1ce3fed374d89c79377" name="aeaef0456e6a6b1ce3fed374d89c79377"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeaef0456e6a6b1ce3fed374d89c79377">&#9670;&#160;</a></span>continueExecution()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename Timepoint  = std::chrono::steady_clock::time_point&gt; </div>
 <div class="memtemplate">
-template&lt;Execution::Binding&lt; <a class="el" href="struct_engine_1_1_execution_1_1_interval_clock.html">IntervalClock</a> &amp; &gt; Binding, typename Rec &gt; </div>
+template&lt;Execution::Binding&lt; <a class="el" href="struct_engine_1_1_execution_1_1_interval_clock.html">IntervalClock</a> &amp; &gt; Binding, typename Rec , bool fixed&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classvoid.html">void</a> <a class="el" href="struct_engine_1_1_execution_1_1_interval_clock.html">Engine::Execution::IntervalClock</a>&lt; Timepoint &gt;<a class="el" href="struct_engine_1_1_execution_1_1_interval_clock_1_1state.html#ad1e825eb9896670ccccbbff80ce2026f">::state</a>&lt; Binding, Rec &gt;::continueExecution </td>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> <a class="el" href="struct_engine_1_1_execution_1_1_interval_clock.html">Engine::Execution::IntervalClock</a>&lt; Timepoint &gt;<a class="el" href="struct_engine_1_1_execution_1_1_interval_clock_1_1state.html#a12ec4ff28790682c0c40efa8b2c5ac87">::state</a>&lt; Binding, Rec, fixed &gt;::continueExecution </td>
           <td>(</td>
           <td class="paramtype">Timepoint&#160;</td>
           <td class="paramname"><em>now</em></td><td>)</td>
@@ -513,7 +538,7 @@ template&lt;Execution::Binding&lt; <a class="el" href="struct_engine_1_1_executi
 <div class="memtemplate">
 template&lt;typename Timepoint  = std::chrono::steady_clock::time_point&gt; </div>
 <div class="memtemplate">
-template&lt;Execution::Binding&lt; <a class="el" href="struct_engine_1_1_execution_1_1_interval_clock.html">IntervalClock</a> &amp; &gt; Binding, typename Rec &gt; </div>
+template&lt;Execution::Binding&lt; <a class="el" href="struct_engine_1_1_execution_1_1_interval_clock.html">IntervalClock</a> &amp; &gt; Binding, typename Rec , bool fixed&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -527,7 +552,7 @@ template&lt;Execution::Binding&lt; <a class="el" href="struct_engine_1_1_executi
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="struct_engine_1_1_execution_1_1_interval_clock_1_1state.html">state</a>&lt; Binding, Rec &gt; *&#160;</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_execution_1_1_interval_clock_1_1state.html">state</a>&lt; Binding, Rec, fixed &gt; *&#160;</td>
           <td class="paramname"><em>state</em>, </td>
         </tr>
         <tr>
@@ -552,54 +577,54 @@ template&lt;Execution::Binding&lt; <a class="el" href="struct_engine_1_1_executi
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="aa4e2f0246804587bf2ec92a0c0a6941f" name="aa4e2f0246804587bf2ec92a0c0a6941f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa4e2f0246804587bf2ec92a0c0a6941f">&#9670;&#160;</a></span>mBinding</h2>
+<a id="ad03bfd00d1b370c4c5ce83d56ec0c00e" name="ad03bfd00d1b370c4c5ce83d56ec0c00e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad03bfd00d1b370c4c5ce83d56ec0c00e">&#9670;&#160;</a></span>mBinding</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename Timepoint  = std::chrono::steady_clock::time_point&gt; </div>
 <div class="memtemplate">
-template&lt;Execution::Binding&lt; <a class="el" href="struct_engine_1_1_execution_1_1_interval_clock.html">IntervalClock</a> &amp; &gt; Binding, typename Rec &gt; </div>
+template&lt;Execution::Binding&lt; <a class="el" href="struct_engine_1_1_execution_1_1_interval_clock.html">IntervalClock</a> &amp; &gt; Binding, typename Rec , bool fixed&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">Binding <a class="el" href="struct_engine_1_1_execution_1_1_interval_clock.html">Engine::Execution::IntervalClock</a>&lt; Timepoint &gt;<a class="el" href="struct_engine_1_1_execution_1_1_interval_clock_1_1state.html#ad1e825eb9896670ccccbbff80ce2026f">::state</a>&lt; Binding, Rec &gt;::mBinding</td>
+          <td class="memname">Binding <a class="el" href="struct_engine_1_1_execution_1_1_interval_clock.html">Engine::Execution::IntervalClock</a>&lt; Timepoint &gt;<a class="el" href="struct_engine_1_1_execution_1_1_interval_clock_1_1state.html#a12ec4ff28790682c0c40efa8b2c5ac87">::state</a>&lt; Binding, Rec, fixed &gt;::mBinding</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a92f94ea0aac7babddd20ea7d0dc5f4b2" name="a92f94ea0aac7babddd20ea7d0dc5f4b2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a92f94ea0aac7babddd20ea7d0dc5f4b2">&#9670;&#160;</a></span>mDebugDuration</h2>
+<a id="ab948966b6fde13e93171c8ab21adad29" name="ab948966b6fde13e93171c8ab21adad29"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab948966b6fde13e93171c8ab21adad29">&#9670;&#160;</a></span>mDebugDuration</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename Timepoint  = std::chrono::steady_clock::time_point&gt; </div>
 <div class="memtemplate">
-template&lt;Execution::Binding&lt; <a class="el" href="struct_engine_1_1_execution_1_1_interval_clock.html">IntervalClock</a> &amp; &gt; Binding, typename Rec &gt; </div>
+template&lt;Execution::Binding&lt; <a class="el" href="struct_engine_1_1_execution_1_1_interval_clock.html">IntervalClock</a> &amp; &gt; Binding, typename Rec , bool fixed&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">std::chrono::steady_clock::duration <a class="el" href="struct_engine_1_1_execution_1_1_interval_clock.html">Engine::Execution::IntervalClock</a>&lt; Timepoint &gt;<a class="el" href="struct_engine_1_1_execution_1_1_interval_clock_1_1state.html#ad1e825eb9896670ccccbbff80ce2026f">::state</a>&lt; Binding, Rec &gt;::mDebugDuration</td>
+          <td class="memname">std::chrono::steady_clock::duration <a class="el" href="struct_engine_1_1_execution_1_1_interval_clock.html">Engine::Execution::IntervalClock</a>&lt; Timepoint &gt;<a class="el" href="struct_engine_1_1_execution_1_1_interval_clock_1_1state.html#a12ec4ff28790682c0c40efa8b2c5ac87">::state</a>&lt; Binding, Rec, fixed &gt;::mDebugDuration</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a93fb3d4f8ed2c1f531a721b120e78986" name="a93fb3d4f8ed2c1f531a721b120e78986"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a93fb3d4f8ed2c1f531a721b120e78986">&#9670;&#160;</a></span>mAcc</h2>
+<a id="aeb6e9bb9b4c891aa28e0be2f57013fea" name="aeb6e9bb9b4c891aa28e0be2f57013fea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb6e9bb9b4c891aa28e0be2f57013fea">&#9670;&#160;</a></span>mAcc</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename Timepoint  = std::chrono::steady_clock::time_point&gt; </div>
 <div class="memtemplate">
-template&lt;Execution::Binding&lt; <a class="el" href="struct_engine_1_1_execution_1_1_interval_clock.html">IntervalClock</a> &amp; &gt; Binding, typename Rec &gt; </div>
+template&lt;Execution::Binding&lt; <a class="el" href="struct_engine_1_1_execution_1_1_interval_clock.html">IntervalClock</a> &amp; &gt; Binding, typename Rec , bool fixed&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">std::chrono::steady_clock::duration <a class="el" href="struct_engine_1_1_execution_1_1_interval_clock.html">Engine::Execution::IntervalClock</a>&lt; Timepoint &gt;<a class="el" href="struct_engine_1_1_execution_1_1_interval_clock_1_1state.html#ad1e825eb9896670ccccbbff80ce2026f">::state</a>&lt; Binding, Rec &gt;::mAcc</td>
+          <td class="memname"><a class="el" href="struct_engine_1_1_execution_1_1_interval_clock_1_1state.html#a5d5f1eb75a23e66abb9b6947ff8e63b4">Acc</a> <a class="el" href="struct_engine_1_1_execution_1_1_interval_clock.html">Engine::Execution::IntervalClock</a>&lt; Timepoint &gt;<a class="el" href="struct_engine_1_1_execution_1_1_interval_clock_1_1state.html#a12ec4ff28790682c0c40efa8b2c5ac87">::state</a>&lt; Binding, Rec, fixed &gt;::mAcc</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -612,7 +637,7 @@ template&lt;Execution::Binding&lt; <a class="el" href="struct_engine_1_1_executi
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Oct 27 2026 19:35:34 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Tue Oct 27 2026 23:17:28 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>
