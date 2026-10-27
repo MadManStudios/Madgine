@@ -32,7 +32,7 @@ namespace Render {
 
         for (const EntityRenderData &entity : mRenderData.data()) {
 
-            if (!entity.mMesh)
+            if (!entity.mMesh || !entity.mCastShadows)
                 continue;
 
             mInstances[entity.mMesh].push_back({ entity.mTransformMatrix, entity.mBones });

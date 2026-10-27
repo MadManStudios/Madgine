@@ -132,6 +132,8 @@ namespace Render {
 
                 interpolateTransform(d, t, e);
 
+                d.mCastShadows = m->mCastShadows;
+
                 Scene::Entity::Material *mat = e.getComponent<Scene::Entity::Material>();
 
                 GPUMeshData::Material *matData = nullptr;

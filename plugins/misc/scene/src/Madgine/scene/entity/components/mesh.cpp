@@ -16,8 +16,9 @@ METATABLE_BEGIN_BASE(Engine::Scene::Entity::Mesh, Engine::Scene::Entity::EntityC
     CONSTRUCTOR()
     STORAGE_END(Engine::Scene::Entity::Mesh)
     MEMBER(mMesh)
-    PROPERTY(Visible, visible, setVisible)
-    PROPERTY(InheritVisibility, inheritsVisibility, setInheritVisibility)
+    MEMBER(mIsVisible)
+    MEMBER(mInheritVisibility)
+    MEMBER(mCastShadows)
     READONLY_PROPERTY(WorldVisible, worldVisible)
     MEMBER(mMaterial)
 METATABLE_END(Engine::Scene::Entity::Mesh)
@@ -26,7 +27,8 @@ SERIALIZETABLE_BEGIN(Engine::Scene::Entity::Mesh)
     FIELD(mMesh)
     FIELD(mMaterial)
     FIELD(mIsVisible)
-    FIELD(mInheritsVisibility)
+    FIELD(mInheritVisibility)
+    FIELD(mCastShadows)
 SERIALIZETABLE_END(Engine::Scene::Entity::Mesh)
 
 namespace Engine {
@@ -43,27 +45,12 @@ namespace Scene {
             return mMesh->mAABB;
         }
 
-        void Mesh::setVisible(bool visible)
-        {
-            mIsVisible = visible;
-        }
-
-        void Mesh::setInheritVisibility(bool inherit)
-        {
-            mInheritsVisibility = inherit;
-        }
-
-        bool Mesh::visible() const
-        {
-            return mIsVisible;
-        }
-
         bool Mesh::worldVisible(Contextual<Entity &> entity) const
         {
             if (!mIsVisible)
                 return false;
             bool visible = true;
-            if (mInheritsVisibility) {
+            if (mInheritVisibility) {
                 EntityPtr parent = entity->parent();
 
                 while (Execution::access_binding(parent, [&](Entity &e) {
@@ -78,11 +65,6 @@ namespace Scene {
                     ;
             }
             return visible;
-        }
-
-        bool Mesh::inheritsVisibility() const
-        {
-            return mInheritsVisibility;
         }
 
     }

@@ -25,6 +25,7 @@ namespace Render {
         Threading::CustomTimepoint mLastUpdate = std::chrono::steady_clock::time_point::min();
 
         GPUMeshLoader::Handle mMesh;
+        bool mCastShadows = true;
         GPUPtr<Math::Matrix4[]> mBones;
         ResourceBlock mResource;
         Math::Vector4 mDiffuseColor { 1.0f, 1.0f, 1.0f, 1.0f };
