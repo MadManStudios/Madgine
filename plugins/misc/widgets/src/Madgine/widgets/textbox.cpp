@@ -141,7 +141,7 @@ namespace Widgets {
         assert(i == 0);
         Math::Vector2 pos = Math::Vector2::ZERO;
         Math::Vector3 size = getAbsoluteSize();
-        Math::Rect2 bb = mTextRenderData.calculateBoundingBox(mText, pos, size);
+        Math::Rect2 bb = mTextRenderData.calculateBoundingBox(manager(), mText, pos, size);
         row->baseline_y_delta = bb.mTopLeft.y + bb.mSize.y;
         row->num_chars = mText.size();
         row->x0 = bb.mTopLeft.x;

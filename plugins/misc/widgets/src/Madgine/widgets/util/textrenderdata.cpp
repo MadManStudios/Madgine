@@ -57,6 +57,11 @@ namespace Widgets {
         return mFont && mFont.available();
     }
 
+    Threading::TaskFuture<bool> TextRenderData::loadingState()
+    {
+        return mFont ? mFont.info()->loadingTask() : Threading::TaskFuture<bool> { false };
+    }
+
     void TextRenderData::render(WidgetsRenderData &renderData, std::string_view text, Math::Vector2 pos, Math::Vector3 size, int cursorIndex) const
     {
         renderText(renderData, text, pos, size.xy(), mFont, mStyle, size.z * mFontSize, mColor.frame(pos, size.xy()), mPivot, mShadowOffset, cursorIndex);
@@ -67,11 +72,11 @@ namespace Widgets {
         renderSelection(renderData, text, pos, size.xy(), mFont, mStyle, size.z * mFontSize, mPivot, entry, selectionStart, selectionEnd, color);
     }
 
-    float TextRenderData::calculateWidth(std::string_view text, float z)
+    float TextRenderData::calculateWidth(WidgetManager &manager, std::string_view text, float z)
     {
         FormattingStack stack { mFont, mStyle, z * mFontSize };
 
-        return calculateWidth(text, stack);
+        return calculateWidth(manager, text, stack);
     }
 
     float TextRenderData::calculateWidth(char c, float z)
@@ -91,9 +96,9 @@ namespace Widgets {
         return calculateBoundingBox(line, lineCount, lineNr, pos, size.xy(), mFont, size.z * mFontSize, mPivot);
     }
 
-    Math::Rect2 TextRenderData::calculateBoundingBox(std::string_view text, Math::Vector2 pos, Math::Vector3 size)
+    Math::Rect2 TextRenderData::calculateBoundingBox(WidgetManager &manager, std::string_view text, Math::Vector2 pos, Math::Vector3 size)
     {
-        return calculateBoundingBox(text, pos, size.xy(), mFont, mStyle, size.z * mFontSize, mPivot);
+        return calculateBoundingBox(manager, text, pos, size.xy(), mFont, mStyle, size.z * mFontSize, mPivot);
     }
 
     void TextRenderData::renderText(WidgetsRenderData &renderData, std::string_view text, Math::Vector2 pos, Math::Vector2 size, const Render::TypeFace *typeFace, Render::FontStyle style, float fontSize, ColorFrame color, Math::Vector2 pivot, Math::Vector2 shadowOffset, int cursorIndex)
@@ -107,7 +112,7 @@ namespace Widgets {
         float maxY = typeFace->mAscender / 64.0f * scale;
         float fullHeight = maxY - minY;
         FormattingStack stack { typeFace, style, fontSize, color };
-        float fullWidth = calculateWidth(text, stack);
+        float fullWidth = calculateWidth(renderData.manager(), text, stack);
 
         float originY = (size.y - fullHeight) * pivot.y + maxY;
 
@@ -172,7 +177,7 @@ namespace Widgets {
         float maxY = typeFace->mAscender / 64.0f * scale;
         float fullHeight = maxY - minY;
         FormattingStack stack { typeFace, style, fontSize };
-        float fullWidth = calculateWidth(text, stack);
+        float fullWidth = calculateWidth(renderData.manager(), text, stack);
 
         float cursorX = (size.x - fullWidth) * pivot.x;
         float originY = (size.y - fullHeight) * pivot.y + maxY;
@@ -211,14 +216,17 @@ namespace Widgets {
         renderData.renderQuadUV({ pos.x + startX, pos.y + startY }, { endX - startX, height }, color, {}, entry.mArea, { 2048, 2048 }, entry.mFlipped);
     }
 
-    float TextRenderData::calculateWidth(std::string_view text, FormattingStack &stack)
+    float TextRenderData::calculateWidth(WidgetManager &manager, std::string_view text, FormattingStack &stack)
     {
         float result = 0.0f;
 
         for (char32_t c : StringUtil::parseUTF8(text)) {
             auto [consumed, image] = stack.parse(c);
             if (!image.empty()) {
-
+                const Math::Atlas2::Entry *entry = manager.lookUpImage(image);
+                if (!entry)
+                    continue;
+                result += stack.place(entry->mArea.mSize.y).second * entry->mArea.mSize.x;
             } else if (!consumed)
                 result += stack.advance(c);
         }
@@ -254,10 +262,10 @@ namespace Widgets {
         };
     }
 
-    Math::Rect2 TextRenderData::calculateBoundingBox(std::string_view text, Math::Vector2 pos, Math::Vector2 size, const Render::TypeFace *typeFace, Render::FontStyle style, float fontSize, Math::Vector2 pivot)
+    Math::Rect2 TextRenderData::calculateBoundingBox(WidgetManager &manager, std::string_view text, Math::Vector2 pos, Math::Vector2 size, const Render::TypeFace *typeFace, Render::FontStyle style, float fontSize, Math::Vector2 pivot)
     {
         FormattingStack stack { typeFace, style, fontSize };
-        float fullWidth = calculateWidth(text, stack);
+        float fullWidth = calculateWidth(manager, text, stack);
 
         return calculateBoundingBox({ text.data(), text.data() + text.size(), fullWidth }, 1, 0, pos, size, typeFace, fontSize, pivot);
     }

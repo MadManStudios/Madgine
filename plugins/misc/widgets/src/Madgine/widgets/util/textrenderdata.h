@@ -29,22 +29,23 @@ namespace Widgets {
         void setFont(Render::FontLoader::Resource *font);
 
         bool available() const;
+        Threading::TaskFuture<bool> loadingState();
         void render(WidgetsRenderData &renderData, std::string_view text, Math::Vector2 pos, Math::Vector3 size, int cursorIndex = -1) const;
         void renderSelection(WidgetsRenderData &renderData, std::string_view text, Math::Vector2 pos, Math::Vector3 size, const Math::Atlas2::Entry &entry, int selectionStart, int selectionEnd, ColorFrame color);
-        float calculateWidth(std::string_view text, float z = 1.0f);
+        float calculateWidth(WidgetManager &manager, std::string_view text, float z = 1.0f);
         float calculateWidth(char c, float z = 1.0f);
         float calculateLineHeight(float z = 1.0f) const;
         Math::Rect2 calculateBoundingBox(const Line &line, size_t lineCount, size_t lineNr, Math::Vector2 pos, Math::Vector3 size);
-        Math::Rect2 calculateBoundingBox(std::string_view text, Math::Vector2 pos, Math::Vector3 size);
+        Math::Rect2 calculateBoundingBox(WidgetManager &manager, std::string_view text, Math::Vector2 pos, Math::Vector3 size);
 
         static void renderText(WidgetsRenderData &renderData, std::string_view text, Math::Vector2 pos, Math::Vector2 size, const Render::TypeFace *typeFace, Render::FontStyle style, float fontSize, ColorFrame color, Math::Vector2 pivot, Math::Vector2 shadowOffset = { 0.0f, 0.0f }, int cursorIndex = -1);
         static void renderLine(WidgetsRenderData &renderData, const Line &line, float originY, Math::Vector2 pos, Math::Vector2 size, FormattingStack &stack, Math::Vector2 pivot, Math::Vector2 shadowOffset = { 0.0f, 0.0f }, int cursorIndex = -1);
         static void renderSelection(WidgetsRenderData &renderData, std::string_view text, Math::Vector2 pos, Math::Vector2 size, const Render::TypeFace *typeFace, Render::FontStyle style, float fontSize, Math::Vector2 pivot, const Math::Atlas2::Entry &entry, int selectionStart, int selectionEnd, ColorFrame color);
-        static float calculateWidth(std::string_view text, FormattingStack &stack);
+        static float calculateWidth(WidgetManager &manager, std::string_view text, FormattingStack &stack);
         static float calculateWidth(char c, FormattingStack &stack);
         static float calculateLineHeight(const Render::TypeFace *typeFace, float fontSize);
         static Math::Rect2 calculateBoundingBox(const Line &line, size_t lineCount, size_t lineNr, Math::Vector2 pos, Math::Vector2 size, const Render::TypeFace *typeFace, float fontSize, Math::Vector2 pivot);
-        static Math::Rect2 calculateBoundingBox(std::string_view text, Math::Vector2 pos, Math::Vector2 size, const Render::TypeFace *typeFace, Render::FontStyle style, float fontSize, Math::Vector2 pivot);
+        static Math::Rect2 calculateBoundingBox(WidgetManager &manager, std::string_view text, Math::Vector2 pos, Math::Vector2 size, const Render::TypeFace *typeFace, Render::FontStyle style, float fontSize, Math::Vector2 pivot);
 
         int mFontSize = 16;
 
