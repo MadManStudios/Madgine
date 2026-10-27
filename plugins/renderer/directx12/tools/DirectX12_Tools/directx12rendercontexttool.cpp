@@ -14,6 +14,7 @@
 #include "Madgine_Tools/inspector/inspector.h"
 #include "Madgine_Tools/renderer/imroot.h"
 #include "imgui/imgui.h"
+#include "imgui/imguiaddons.h"
 
 #if ENABLE_TASK_TRACKING
 #    include "Madgine_Tools/tasktracker/tasktracker.h"
@@ -53,6 +54,55 @@ namespace Tools {
     Threading::Task<void> DirectX12RenderContextTool::finalize()
     {
         co_await RenderContextTool::finalize();
+    }
+
+    void DirectX12RenderContextTool::renderMetrics()
+    {
+        if (ImGui::CollapsingHeader("DirectX12")) {
+            ImGui::Text("Temp Bytes/frame:");
+            ImGui::SameLine();
+            ImGui::Bytes(mTempBytesPerFrame.average());
+            ImGui::Text("Upload Bytes/frame:");
+            ImGui::SameLine();
+            ImGui::Bytes(mUploadBytesPerFrame.average());
+            float ratio = mTempBytesPerFrame.average() / Render::DirectX12MappedHeapAllocator::goodSize;
+            ImGui::TextColored(ImColor::HSV((1.0f - ratio) / 3.0f, 1.0f, 1.0f).Value, "RingBuffer usage: %.1f%%", 100.0f * ratio);
+            ImGui::PlotHistory(mTempBytesPerFrameTrend, "Temp Bytes per Frame", ImGui::sByteUnits);
+            ratio = mUploadBytesPerFrame.average() / Render::DirectX12MappedHeapAllocator::goodSize;
+            ImGui::TextColored(ImColor::HSV((1.0f - ratio) / 3.0f, 1.0f, 1.0f).Value, "Upload usage: %.1f%%", 100.0f * ratio);
+            ImGui::PlotHistory(mUploadBytesPerFrameTrend, "Temp Bytes per Frame", ImGui::sByteUnits);
+        }
+    }
+
+    void DirectX12RenderContextTool::update()
+    {
+        size_t totalTempBytes = Render::DirectX12RenderContext::getSingleton().tempAllocatorMemoryQuota();
+        auto totalUploadBytes = Render::DirectX12RenderContext::getSingleton().uploadAllocatorMemoryQuota();
+
+        size_t frameTempBytes = totalTempBytes - mLastFrameTempBytes;
+        mLastFrameTempBytes = totalTempBytes;
+
+        size_t frameUploadBytes = TupleUnpacker::accumulate(totalUploadBytes, [](size_t val, size_t acc) { return std::max(val, acc); }, 0);
+
+        mTempBytesPerFrame << frameTempBytes;
+        mUploadBytesPerFrame << frameUploadBytes;
+
+        mTimeBank += ImGui::GetIO().DeltaTime;
+        if (mTimeBank >= 0.5f) {
+            mTimeBank = fmodf(mTimeBank, 0.5f);
+            mTempBytesPerFrameTrend << mTempBytesPerFrame.average();
+            mUploadBytesPerFrameTrend << mUploadBytesPerFrame.average();
+        }
+
+        if (ImGui::BeginStatus()) {
+            float ratio = mTempBytesPerFrame.average() / Render::DirectX12MappedHeapAllocator::goodSize;
+            ImGui::TextColored(ImColor::HSV((1.0f - ratio) / 3.0f, 1.0f, 1.0f).Value, "O %.1f%%", 100.0f * ratio);
+            ratio = mUploadBytesPerFrame.average() / Render::DirectX12MappedHeapAllocator::goodSize;
+            ImGui::TextColored(ImColor::HSV((1.0f - ratio) / 3.0f, 1.0f, 1.0f).Value, "U %.1f%%", 100.0f * ratio);
+            ImGui::EndStatus();
+        }
+
+        ToolBase::update();
     }
 
     std::string_view DirectX12RenderContextTool::key() const

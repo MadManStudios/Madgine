@@ -4,6 +4,7 @@
 
 #include "Meta/math/vector4.h"
 
+#include "Modules/threading/taskqueue.h"
 #include "Modules/threading/workgroupstorage.h"
 #include "Modules/uniquecomponent/uniquecomponent.h"
 #include "Modules/uniquecomponent/uniquecomponentcollector.h"
@@ -531,8 +532,7 @@ namespace Render {
         mNextFenceValue = mLastCompletedFenceValue + 1;
 
         mConstantBuffer = allocateBuffer<ConstantValues>();
-        auto values = mapBuffer(mConstantBuffer);
-        *values = { };
+        queue->queueTask(updateBuffer(mConstantBuffer, [](ConstantValues &values) { values = {}; }));
 
         LOG_DEBUG("Vulkan: VulkanRenderContext initialized");
     }
@@ -541,7 +541,7 @@ namespace Render {
     {
         LOG_DEBUG("Vulkan: Shutting down VulkanRenderContext");
 
-        mConstantBuffer = { };
+        mConstantBuffer = {};
 
         mSemaphore.reset();
 
@@ -574,7 +574,6 @@ namespace Render {
 
         mCommandPool.reset();
         mDescriptorPool.reset();
-        
 
         sDevice->reset();
 
@@ -619,7 +618,7 @@ namespace Render {
         return { allocation.mAddress, elementSize, count, [=, this](void *address) { mBufferAllocator.deallocate(allocation); } };
     }
 
-    Memory::WritableByteBuffer VulkanRenderContext::mapBufferImpl(const GPUPtr<void> &buffer)
+    Threading::ImmediateTask<bool> VulkanRenderContext::updateBufferImpl(GPUPtr<void> buffer, CallableView<void(void *)> write)
     {
         auto [vkBuffer, memory, offset] = mBufferMemoryHeap.resolve(buffer.get());
 
@@ -628,21 +627,14 @@ namespace Render {
         VkResult result = vkMapMemory(GetDevice(), memory, offset, buffer.size(), 0, &data);
         VK_CHECK(result);
 
-        struct UnmapDeleter {
-            VkDeviceMemory mMemory;
+        write(data);
 
-            void operator()(void *p)
-            {
-                vkUnmapMemory(GetDevice(), mMemory);
-            }
-        };
+        vkUnmapMemory(GetDevice(), memory);
 
-        std::unique_ptr<void, UnmapDeleter> dataBuffer { data, { memory } };
-
-        return { std::move(dataBuffer), buffer.size() };
+        co_return true;
     }
 
-    Memory::WritableByteBuffer VulkanRenderContext::mapBufferImpl(const GPUPtr<Void[]> &buffer)
+    Threading::ImmediateTask<bool> VulkanRenderContext::updateBufferImpl(GPUPtr<Void[]> buffer, CallableView<void(void *)> write)
     {
         auto [vkBuffer, memory, offset] = mBufferMemoryHeap.resolve(buffer.get());
 
@@ -651,18 +643,11 @@ namespace Render {
         VkResult result = vkMapMemory(GetDevice(), memory, offset, buffer.size(), 0, &data);
         VK_CHECK(result);
 
-        struct UnmapDeleter {
-            VkDeviceMemory mMemory;
+        write(data);
 
-            void operator()(void *p)
-            {
-                vkUnmapMemory(GetDevice(), mMemory);
-            }
-        };
+        vkUnmapMemory(GetDevice(), memory);
 
-        std::unique_ptr<void, UnmapDeleter> dataBuffer { data, { memory } };
-
-        return { std::move(dataBuffer), buffer.size() };
+        co_return true;
     }
 
     TexturePtr VulkanRenderContext::createTexture(TextureType type, TextureFormat format, Math::Vector2i size, const Memory::ByteBuffer &data)

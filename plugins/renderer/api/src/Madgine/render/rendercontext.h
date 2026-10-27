@@ -1,14 +1,16 @@
 #pragma once
 
 #include "Generic/bytebuffer.h"
+#include "Generic/execution/algorithm.h"
 
 #include "Meta/math/vector2i.h"
 
+#include "Modules/threading/task.h"
 #include "Modules/threading/taskfuture.h"
 #include "Modules/uniquecomponent/uniquecomponent.h"
 
-#include "Madgine/render/ptr.h"
 #include "Madgine/render/future.h"
+#include "Madgine/render/ptr.h"
 #include "Madgine/render/resourceblock.h"
 
 #include "rendertextureconfig.h"
@@ -61,14 +63,16 @@ namespace Render {
             return static_cast<GPUPtr<T>>(allocateBufferImpl(sizeof(std::remove_extent_t<T>), elementCount, hint));
         }
 
-        template <typename T>
-        auto mapBuffer(GPUPtr<T> &buffer)
+        template <typename T, typename F>
+        Threading::ImmediateTask<bool> updateBuffer(GPUPtr<T> buffer, F &&write)
         {
-            return mapBufferImpl(buffer).template cast<T>();
+            co_return co_await updateBufferImpl(std::move(buffer), [&](void *out) {
+                write(*static_cast<T *>(out));
+            });
         }
 
         virtual TexturePtr createTexture(TextureType type, TextureFormat format, Math::Vector2i size = { 0, 0 }, const Memory::ByteBuffer &data = {}) = 0;
-        
+
         virtual void setTextureSubData(const TexturePtr &tex, Math::Vector2i offset, Math::Vector2i size, const Memory::ByteBuffer &data) = 0;
 
         virtual UniqueResourceBlock createResourceBlock(std::vector<std::variant<ConstTexturePtr, GPUPtr<void>, GPUPtr<Void[]>>> data) = 0;
@@ -77,8 +81,8 @@ namespace Render {
     protected:
         virtual GPUPtr<void> allocateBufferImpl(size_t size, UsageHint hint = UsageHint::USAGE_DEFAULT) { throw 0; };
         virtual GPUPtr<Void[]> allocateBufferImpl(size_t elementSize, size_t count, UsageHint hint = UsageHint::USAGE_DEFAULT) { throw 0; };
-        virtual Memory::WritableByteBuffer mapBufferImpl(const GPUPtr<void> &buffer) { throw 0; };
-        virtual Memory::WritableByteBuffer mapBufferImpl(const GPUPtr<Void[]> &buffer) { throw 0; };
+        virtual Threading::ImmediateTask<bool> updateBufferImpl(GPUPtr<void> buffer, CallableView<void(void *)> write) { throw 0; };
+        virtual Threading::ImmediateTask<bool> updateBufferImpl(GPUPtr<Void[]> buffer, CallableView<void(void *)> write) { throw 0; };
 
     protected:
         void checkThread();

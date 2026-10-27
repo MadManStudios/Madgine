@@ -11,6 +11,7 @@ namespace Memory {
         static constexpr size_t goodSize = std::remove_reference_t<Parent>::goodSize;
 
         template <typename... Args>
+        requires std::constructible_from<Parent, Args...>
         TrackedAllocator(Args &&...args)
             : mParent(std::forward<Args>(args)...)
         {

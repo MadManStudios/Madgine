@@ -4,6 +4,8 @@
 #include "Generic/allocator/bump.h"
 #include "Generic/allocator/fixed.h"
 #include "Generic/allocator/heap.h"
+#include "Generic/allocator/tracked.h"
+#include "Generic/execution/signal.h"
 
 #include "Madgine/render/rendercontext.h"
 #include "Madgine/render/rendercontextcollector.h"
@@ -24,30 +26,30 @@ namespace Render {
         DirectX12RenderContext(Threading::TaskQueue *queue);
         ~DirectX12RenderContext();
 
-        virtual std::unique_ptr<RenderTarget> createRenderWindow(Platform::Window::OSWindow *w, size_t samples) override;
-        virtual std::unique_ptr<RenderTarget> createRenderTexture(const Math::Vector2i &size = { 1, 1 }, const RenderTextureConfig &config = {}) override;
+        std::unique_ptr<RenderTarget> createRenderWindow(Platform::Window::OSWindow *w, size_t samples) override;
+        std::unique_ptr<RenderTarget> createRenderTexture(const Math::Vector2i &size = { 1, 1 }, const RenderTextureConfig &config = {}) override;
 
-        virtual bool beginFrame() override;
-        virtual void endFrame() override;
+        bool beginFrame() override;
+        void endFrame() override;
 
-        virtual Threading::Task<void> unloadAllResources() override;
+        Threading::Task<void> unloadAllResources() override;
 
-        virtual bool supportsMultisampling() const override;
+        bool supportsMultisampling() const override;
 
-        virtual GPUPtr<void> allocateBufferImpl(size_t size, UsageHint hint = UsageHint::USAGE_DEFAULT) override;    
-        virtual GPUPtr<Void[]> allocateBufferImpl(size_t elementSize, size_t count, UsageHint hint = UsageHint::USAGE_DEFAULT) override;
-        virtual Memory::WritableByteBuffer mapBufferImpl(const GPUPtr<void> &buffer) override;
-        virtual Memory::WritableByteBuffer mapBufferImpl(const GPUPtr<Void[]> &buffer) override;
+        GPUPtr<void> allocateBufferImpl(size_t size, UsageHint hint = UsageHint::USAGE_DEFAULT) override;
+        GPUPtr<Void[]> allocateBufferImpl(size_t elementSize, size_t count, UsageHint hint = UsageHint::USAGE_DEFAULT) override;
+        Threading::ImmediateTask<bool> updateBufferImpl(GPUPtr<void> buffer, CallableView<void(void *)> write) override;
+        Threading::ImmediateTask<bool> updateBufferImpl(GPUPtr<Void[]> buffer, CallableView<void(void *)> write) override;
 
-        virtual UniqueResourceBlock createResourceBlock(std::vector<std::variant<ConstTexturePtr, GPUPtr<void>, GPUPtr<Void[]>>> textures) override;
-        virtual void destroyResourceBlock(UniqueResourceBlock &block) override;
+        UniqueResourceBlock createResourceBlock(std::vector<std::variant<ConstTexturePtr, GPUPtr<void>, GPUPtr<Void[]>>> textures) override;
+        void destroyResourceBlock(UniqueResourceBlock &block) override;
 
         TexturePtr createTexture(TextureType type, TextureFormat format, Math::Vector2i size, const Memory::ByteBuffer &data) override;
 
         void setTextureSubData(const TexturePtr &tex, Math::Vector2i offset, Math::Vector2i size, const Memory::ByteBuffer &data) override;
 
         static DirectX12RenderContext &getSingleton();
-        
+
         ID3D12RootSignature *getRootSignature(const PipelineSignature &signature);
 
         DirectX12CommandList fetchCommandList(D3D12_COMMAND_LIST_TYPE type);
@@ -55,6 +57,9 @@ namespace Render {
         DirectX12CommandAllocator *graphicsQueue();
 
         static std::vector<D3D12_INPUT_ELEMENT_DESC> createVertexLayout(VertexFormat format);
+
+        size_t tempAllocatorMemoryQuota() const;
+        std::tuple<size_t, size_t, size_t, size_t> uploadAllocatorMemoryQuota() const;
 
         DirectX12DescriptorHeap mDescriptorHeap;
         DirectX12DescriptorHeap mRenderTargetDescriptorHeap;
@@ -71,13 +76,13 @@ namespace Render {
         DirectX12CommandAllocator mComputeQueue;
 
         DirectX12MappedHeapAllocator mUploadHeap = D3D12_HEAP_TYPE_UPLOAD;
-        Memory::BucketAllocator<Memory::HeapAllocator<DirectX12MappedHeapAllocator &>, 16, 64, 16> mUploadAllocator;
+        Memory::BucketAllocator<Memory::TrackedAllocator<Memory::HeapAllocator<DirectX12MappedHeapAllocator &>>, 16, 64, 16> mUploadAllocator;
 
         DirectX12HeapAllocator mBufferMemoryHeap;
         Memory::LogBucketAllocator<Memory::HeapAllocator<DirectX12HeapAllocator &>, 64, 4096, 4> mBufferAllocator;
 
         DirectX12MappedHeapAllocator mTempMemoryHeap = D3D12_HEAP_TYPE_UPLOAD;
-        Memory::BumpAllocator<Memory::FixedAllocator<DirectX12MappedHeapAllocator &>> mTempAllocator;
+        Memory::TrackedAllocator<Memory::BumpAllocator<Memory::FixedAllocator<DirectX12MappedHeapAllocator &>>> mTempAllocator;
 
         DirectX12MappedHeapAllocator mReadbackMemoryHeap = D3D12_HEAP_TYPE_READBACK;
         Memory::BumpAllocator<Memory::FixedAllocator<DirectX12MappedHeapAllocator &>> mReadbackAllocator;
@@ -92,6 +97,8 @@ namespace Render {
         RenderFuture mFrameFences[2];
 
         D3D12_FEATURE_DATA_D3D12_OPTIONS mOptions;
+
+        Execution::Signal<void> mUploadHeapSignal;
     };
 
 }

@@ -45,6 +45,11 @@ namespace Memory {
                 TupleUnpacker::forEach(mBuckets, [](auto &bucket) { bucket.deallocateAll(); });
             }
 
+            const auto &buckets() const
+            {
+                return mBuckets;
+            }
+
         private:
             template <typename T>
             using helper = typename replace<Parent>::template tagged<AllocatorAutoSizeTag, T>;

@@ -703,82 +703,54 @@ namespace Render {
         return { allocation.mAddress, elementSize, count, [=, this](void *address) { mBufferAllocator.deallocate(allocation); } };
     }
 
-    Memory::WritableByteBuffer OpenGLRenderContext::mapBufferImpl(const GPUPtr<void> &buffer)
+    Threading::ImmediateTask<bool> OpenGLRenderContext::updateBufferImpl(GPUPtr<void> buffer, CallableView<void(void *)> write)
     {
         auto [glBuffer, offset] = mBufferMemoryHeap.resolve(buffer.get());
 
 #if !OPENGL_ES
         void *result = glMapNamedBufferRange(glBuffer, offset, buffer.size(), GL_MAP_WRITE_BIT);
 
-        struct Deleter {
-            void operator()(void *ptr)
-            {
-                glUnmapNamedBuffer(mBuffer);
-            }
+        write(result);
 
-            GLuint mBuffer;
-        };
-
-        return { std::unique_ptr<void, Deleter> { result, Deleter { glBuffer } }, buffer.size() };
+        glUnmapNamedBuffer(glBuffer);
 #else
-        struct Deleter {
-            void operator()(void *data) const
-            {
-                glBindBuffer(GL_COPY_WRITE_BUFFER, mBuffer);
-                GL_CHECK();
+        std::vector<std::byte> storage { buffer.size() };
 
-                glBufferSubData(GL_COPY_WRITE_BUFFER, mOffset, mSize, data);
-                GL_CHECK();
+        write(storage.data());
 
-                delete[] data;
-            }
+        glBindBuffer(GL_COPY_WRITE_BUFFER, glBuffer);
+        GL_CHECK();
 
-            GLuint mBuffer;
-            size_t mOffset;
-            size_t mSize;
-        };
-
-        return { std::unique_ptr<void, Deleter> { new std::byte[buffer.size()], { glBuffer, offset, buffer.size() } }, buffer.size() };
+        glBufferSubData(GL_COPY_WRITE_BUFFER, offset, buffer.size(), storage.data());
+        GL_CHECK();
 #endif
+
+        co_return true;
     }
 
-    Memory::WritableByteBuffer OpenGLRenderContext::mapBufferImpl(const GPUPtr<Void[]> &buffer)
+    Threading::ImmediateTask<bool> OpenGLRenderContext::updateBufferImpl(GPUPtr<Void[]> buffer, CallableView<void(void *)> write)
     {
         auto [glBuffer, offset] = mBufferMemoryHeap.resolve(buffer.get());
 
 #if !OPENGL_ES
         void *result = glMapNamedBufferRange(glBuffer, offset, buffer.size(), GL_MAP_WRITE_BIT);
 
-        struct Deleter {
-            void operator()(void *ptr)
-            {
-                glUnmapNamedBuffer(mBuffer);
-            }
+        write(result);
 
-            GLuint mBuffer;
-        };
-
-        return { std::unique_ptr<void, Deleter> { result, Deleter { glBuffer } }, buffer.size() };
+        glUnmapNamedBuffer(glBuffer);
 #else
-        struct Deleter {
-            void operator()(void *data) const
-            {
-                glBindBuffer(GL_COPY_WRITE_BUFFER, mBuffer);
-                GL_CHECK();
+        std::vector<std::byte> storage { buffer.size() };
 
-                glBufferSubData(GL_COPY_WRITE_BUFFER, mOffset, mSize, data);
-                GL_CHECK();
+        write(storage.data());
 
-                delete[] data;
-            }
+        glBindBuffer(GL_COPY_WRITE_BUFFER, glBuffer);
+        GL_CHECK();
 
-            GLuint mBuffer;
-            size_t mOffset;
-            size_t mSize;
-        };
-
-        return { std::unique_ptr<void, Deleter> { new std::byte[buffer.size()], { glBuffer, offset, buffer.size() } }, buffer.size() };
+        glBufferSubData(GL_COPY_WRITE_BUFFER, offset, buffer.size(), storage.data());
+        GL_CHECK();
 #endif
+
+        co_return true;
     }
 
     TexturePtr OpenGLRenderContext::createTexture(TextureType type, TextureFormat format, Math::Vector2i size, const Memory::ByteBuffer &data)

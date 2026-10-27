@@ -44,8 +44,8 @@ namespace Render {
 
         GPUPtr<void> allocateBufferImpl(size_t size, UsageHint hint = UsageHint::USAGE_DEFAULT) override;
         GPUPtr<Void[]> allocateBufferImpl(size_t elementSize, size_t count, UsageHint hint = UsageHint::USAGE_DEFAULT) override;
-        Memory::WritableByteBuffer mapBufferImpl(const GPUPtr<void> &buffer) override;
-        Memory::WritableByteBuffer mapBufferImpl(const GPUPtr<Void[]> &buffer) override;
+        Threading::ImmediateTask<bool> updateBufferImpl(GPUPtr<void> buffer, CallableView<void(void *)> write) override;
+        Threading::ImmediateTask<bool> updateBufferImpl(GPUPtr<Void[]> buffer, CallableView<void(void *)> write) override;
 
         TexturePtr createTexture(TextureType type, TextureFormat format, Math::Vector2i size, const Memory::ByteBuffer &data) override;
 

@@ -18,7 +18,8 @@ namespace Engine {
 namespace Render {
 
     struct Wrapper : GPUMeshData::ResourceBlockHolder {
-        ~Wrapper() {
+        ~Wrapper()
+        {
             if (mResourceBlock)
                 RenderContext::getSingleton().destroyResourceBlock(mResourceBlock);
         }
@@ -34,15 +35,16 @@ namespace Render {
     Threading::Task<bool> RenderMeshLoader::generate(GPUMeshData &data, const MeshData &mesh)
     {
         data.mVertices = RenderContext::getSingleton().allocateBuffer<Void[]>(mesh.mVertices.mSize);
-        {
-            auto vertices = RenderContext::getSingleton().mapBuffer(data.mVertices);
-            std::memcpy(vertices.begin(), mesh.mVertices.begin(), mesh.mVertices.mSize);
-        }
+
+        co_await RenderContext::getSingleton().updateBuffer(data.mVertices, [&](auto &vertices) {
+            std::memcpy(vertices, mesh.mVertices.begin(), mesh.mVertices.mSize);
+        });
 
         if (!mesh.mIndices.empty()) {
             data.mIndices = RenderContext::getSingleton().allocateBuffer<uint32_t[]>(mesh.mIndices.size(), UsageHint::USAGE_INDEX);
-            auto indices = RenderContext::getSingleton().mapBuffer(data.mIndices);
-            std::ranges::copy(mesh.mIndices, indices.begin());
+            co_await RenderContext::getSingleton().updateBuffer(data.mIndices, [&](auto &indices) {
+                std::ranges::copy(mesh.mIndices, indices);
+            });
         }
 
         if (!co_await GPUMeshLoader::generate(data, mesh))
@@ -88,10 +90,9 @@ namespace Render {
             };
             GPUPtr<helper> buffer = RenderContext::getSingleton().allocateBuffer<helper>();
 
-            {
-                auto mapped = RenderContext::getSingleton().mapBuffer(buffer);
-                mapped->shininess = 32.0f;
-            }
+            co_await RenderContext::getSingleton().updateBuffer(buffer, [](auto &mapped) {
+                mapped.shininess = 32.0f;
+            });
 
             std::shared_ptr<Wrapper> wrapper = std::make_shared<Wrapper>();
             wrapper->mResourceBlock = RenderContext::getSingleton().createResourceBlock({ std::move(diffuseTexture), std::move(emissiveTexture), buffer });

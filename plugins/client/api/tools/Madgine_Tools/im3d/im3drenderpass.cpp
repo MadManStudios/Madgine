@@ -27,7 +27,7 @@ namespace Render {
         setupImpl(target, HLSL::im3d_VS, HLSL::im3d_PS, { sizeof(HLSL::Im3DPerApplication), 0, sizeof(HLSL::Im3DPerObject) });
 
         HLSL::im3d_PSResourceBlock0 block;
-        mDefaultBlock = block.toResourceBlock(target->context());
+        mDefaultBlock = block.toResourceBlock(target->context()).first;
     }
 
     void Im3DRenderPass::shutdown(RenderTarget *target)

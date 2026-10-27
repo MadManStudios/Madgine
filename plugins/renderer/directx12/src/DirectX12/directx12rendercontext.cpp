@@ -2,6 +2,7 @@
 
 #include "directx12rendercontext.h"
 
+#include "Modules/threading/taskqueue.h"
 #include "Modules/threading/workgroupstorage.h"
 #include "Modules/uniquecomponent/uniquecomponentcollector.h"
 
@@ -154,8 +155,7 @@ namespace Render {
         mComputeQueue.setup();
 
         mConstantBuffer = allocateBuffer<ConstantValues>();
-        auto values = mapBuffer(mConstantBuffer);
-        *values = {};
+        queue->queueTask(updateBuffer(mConstantBuffer, [](ConstantValues &values) { values = {}; }));
     }
 
     DirectX12RenderContext::~DirectX12RenderContext()
@@ -357,94 +357,84 @@ namespace Render {
         return { allocation.mAddress, elementSize, count, [=, this](void *address) { mBufferAllocator.deallocate(allocation); } };
     }
 
-    Memory::WritableByteBuffer DirectX12RenderContext::mapBufferImpl(const GPUPtr<void> &buffer)
+    Threading::ImmediateTask<bool> DirectX12RenderContext::updateBufferImpl(GPUPtr<void> buffer, CallableView<void(void *)> write)
     {
         Memory::Block uploadAllocation = mUploadAllocator.allocate(buffer.size());
 
-        struct Deleter {
-            struct InnerDeleter {
-                void operator()(void *ptr)
-                {
-                    mContext->mUploadAllocator.deallocate({ ptr, mAllocationSize });
-                }
+        while (!uploadAllocation.mAddress) {
+            co_await mUploadHeapSignal;
+            uploadAllocation = mUploadAllocator.allocate(buffer.size());
+        }
 
-                size_t mAllocationSize;
-                DirectX12RenderContext *mContext;
-            };
+        write(uploadAllocation.mAddress);
 
-            void operator()(void *ptr)
+        auto [resource, offset] = mBufferMemoryHeap.resolve(buffer.get());
+
+        auto list = mGraphicsQueue.fetchCommandList();
+        list.Transition(resource, D3D12_RESOURCE_STATE_GENERIC_READ, D3D12_RESOURCE_STATE_COPY_DEST);
+        auto [heap, heapOffset] = mUploadHeap.resolve(uploadAllocation.mAddress);
+        list->CopyBufferRegion(resource, offset, heap, heapOffset, buffer.size());
+        list.Transition(resource, D3D12_RESOURCE_STATE_COPY_DEST, D3D12_RESOURCE_STATE_GENERIC_READ);
+
+        Execution::Signal<void> signal;
+        struct Signaler {
+            ~Signaler()
             {
-                auto [resource, offset] = mContext->mBufferMemoryHeap.resolve(mGPUAddress.get());
-
-                auto list = mContext->mGraphicsQueue.fetchCommandList();
-                list.Transition(resource, D3D12_RESOURCE_STATE_GENERIC_READ, D3D12_RESOURCE_STATE_COPY_DEST);
-                auto [heap, heapOffset] = mContext->mUploadHeap.resolve(ptr);
-                list->CopyBufferRegion(resource, offset, heap, heapOffset, mGPUAddress.size());
-                list.Transition(resource, D3D12_RESOURCE_STATE_COPY_DEST, D3D12_RESOURCE_STATE_GENERIC_READ);
-
-                list.attachResource(std::unique_ptr<void, InnerDeleter> { ptr, { mAllocationSize, mContext } });
-                list.attachResource(std::move(mGPUAddress));
-                list.execute();
+                mSignal.emit();
             }
 
-            GPUPtr<void> mGPUAddress;
-            size_t mAllocationSize;
-            DirectX12RenderContext *mContext;
+            Execution::Signal<void> &mSignal;
         };
+        list.attachResource({ Any::inplace<Signaler>, signal });
+        list.execute();
 
-        return {
-            std::unique_ptr<void, Deleter> { uploadAllocation.mAddress, {
-                                                                            buffer,
-                                                                            uploadAllocation.mSize,
-                                                                            this,
-                                                                        } },
-            buffer.size()
-        };
+        co_await signal;
+
+        mUploadAllocator.deallocate(uploadAllocation);
+
+        mUploadHeapSignal.emit();
+
+        co_return true;
     }
 
-    Memory::WritableByteBuffer DirectX12RenderContext::mapBufferImpl(const GPUPtr<Void[]> &buffer)
+    Threading::ImmediateTask<bool> DirectX12RenderContext::updateBufferImpl(GPUPtr<Void[]> buffer, CallableView<void(void *)> write)
     {
         Memory::Block uploadAllocation = mUploadAllocator.allocate(buffer.size());
 
-        struct Deleter {
-            struct InnerDeleter {
-                void operator()(void *ptr)
-                {
-                    mContext->mUploadAllocator.deallocate({ ptr, mAllocationSize });
-                }
+        while (!uploadAllocation.mAddress) {
+            co_await mUploadHeapSignal;
+            uploadAllocation = mUploadAllocator.allocate(buffer.size());
+        }
 
-                size_t mAllocationSize;
-                DirectX12RenderContext *mContext;
-            };
+        write(uploadAllocation.mAddress);
 
-            void operator()(void *ptr)
+        auto [resource, offset] = mBufferMemoryHeap.resolve(buffer.get());
+
+        auto list = mGraphicsQueue.fetchCommandList();
+        list.Transition(resource, D3D12_RESOURCE_STATE_GENERIC_READ, D3D12_RESOURCE_STATE_COPY_DEST);
+        auto [heap, heapOffset] = mUploadHeap.resolve(uploadAllocation.mAddress);
+        list->CopyBufferRegion(resource, offset, heap, heapOffset, buffer.size());
+        list.Transition(resource, D3D12_RESOURCE_STATE_COPY_DEST, D3D12_RESOURCE_STATE_GENERIC_READ);
+
+        Execution::Signal<void> signal;
+        struct Signaler {
+            ~Signaler()
             {
-                auto [resource, offset] = mContext->mBufferMemoryHeap.resolve(mGPUAddress.get());
-
-                auto list = mContext->mGraphicsQueue.fetchCommandList();
-                list.Transition(resource, D3D12_RESOURCE_STATE_GENERIC_READ, D3D12_RESOURCE_STATE_COPY_DEST);
-                auto [heap, heapOffset] = mContext->mUploadHeap.resolve(ptr);
-                list->CopyBufferRegion(resource, offset, heap, heapOffset, mGPUAddress.size());
-                list.Transition(resource, D3D12_RESOURCE_STATE_COPY_DEST, D3D12_RESOURCE_STATE_GENERIC_READ);
-
-                list.attachResource(std::unique_ptr<void, InnerDeleter> { ptr, { mAllocationSize, mContext } });
-                list.attachResource(std::move(mGPUAddress));
-                list.execute();
+                mSignal.emit();
             }
 
-            GPUPtr<Void[]> mGPUAddress;
-            size_t mAllocationSize;
-            DirectX12RenderContext *mContext;
+            Execution::Signal<void> &mSignal;
         };
+        list.attachResource({ Any::inplace<Signaler>, signal });
+        list.execute();
 
-        return {
-            std::unique_ptr<void, Deleter> { uploadAllocation.mAddress, {
-                                                                            buffer,
-                                                                            uploadAllocation.mSize,
-                                                                            this,
-                                                                        } },
-            buffer.size()
-        };
+        co_await signal;
+
+        mUploadAllocator.deallocate(uploadAllocation);
+
+        mUploadHeapSignal.emit();
+
+        co_return true;
     }
 
     UniqueResourceBlock DirectX12RenderContext::createResourceBlock(std::vector<std::variant<ConstTexturePtr, GPUPtr<void>, GPUPtr<Void[]>>> data)
@@ -587,5 +577,16 @@ namespace Render {
 
         return vertexLayoutDesc;
     }
+
+    size_t DirectX12RenderContext::tempAllocatorMemoryQuota() const
+    {
+        return mTempAllocator.totalBytes();
+    }
+
+    std::tuple<size_t, size_t, size_t, size_t> Engine::Render::DirectX12RenderContext::uploadAllocatorMemoryQuota() const
+    {
+        return TupleUnpacker::forEach(mUploadAllocator.buckets(), [](const auto &alloc) { return alloc.totalBytes(); });
+    }
+
 }
 }
