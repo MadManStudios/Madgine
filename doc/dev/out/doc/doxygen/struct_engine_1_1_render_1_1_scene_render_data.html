@@ -302,6 +302,8 @@ Inheritance diagram for Engine::Render::SceneRenderData:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ae4ac1daaf6f676683231682d28ccf1c5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_scene_render_data.html#ae4ac1daaf6f676683231682d28ccf1c5">SceneRenderData</a> (<a class="el" href="struct_engine_1_1_scene_1_1_scene_manager.html">Scene::SceneManager</a> &amp;scene)</td></tr>
 <tr class="separator:ae4ac1daaf6f676683231682d28ccf1c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe631b1e3e0c175ccc0d23f5865c0be4"><td class="memItemLeft" align="right" valign="top">const std::deque&lt; <a class="el" href="struct_engine_1_1_render_1_1_entity_render_data.html">EntityRenderData</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_scene_render_data.html#afe631b1e3e0c175ccc0d23f5865c0be4">data</a> () const</td></tr>
+<tr class="separator:afe631b1e3e0c175ccc0d23f5865c0be4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aea6543e1031325ca0abe7424025ca874"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_render_1_1_resource_block.html">ResourceBlock</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_scene_render_data.html#aea6543e1031325ca0abe7424025ca874">defaultMaterial</a> ()</td></tr>
 <tr class="separator:aea6543e1031325ca0abe7424025ca874"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a36edd5b16a148923946d04c46ad18f2e"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespace_engine_1_1_threading.html#a19fdd8ee5e722502a18f3a0bfc61873a">Threading::ImmediateTask</a>&lt; <a class="el" href="struct_engine_1_1_render_1_1_render_future.html">RenderFuture</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_scene_render_data.html#a36edd5b16a148923946d04c46ad18f2e">render</a> (<a class="el" href="struct_engine_1_1_render_1_1_render_context.html">RenderContext</a> *context) override</td></tr>
@@ -318,12 +320,17 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
+<tr class="memitem:ae4b570eb267f5ee6a375995fc28bd8ae"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_scene_render_data.html#ae4b570eb267f5ee6a375995fc28bd8ae">interpolateTransform</a> (<a class="el" href="struct_engine_1_1_render_1_1_entity_render_data.html">EntityRenderData</a> &amp;d, <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_transform.html">Scene::Entity::Transform</a> &amp;t, <a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity.html">Scene::Entity::Entity</a> &amp;e)</td></tr>
+<tr class="separator:ae4b570eb267f5ee6a375995fc28bd8ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a20b8ce10140429408bb4f506d2bba8fe"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_threading_1_1_task_queue.html">Threading::TaskQueue</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_scene_render_data.html#a20b8ce10140429408bb4f506d2bba8fe">queue</a> (<a class="el" href="struct_engine_1_1_render_1_1_render_context.html">RenderContext</a> *) override</td></tr>
 <tr class="separator:a20b8ce10140429408bb4f506d2bba8fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a797be89ffdf9a89a3a4eb09cec8aa9d1"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_threading_1_1_task_queue.html">Threading::TaskQueue</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_data.html#a797be89ffdf9a89a3a4eb09cec8aa9d1">queue</a> (<a class="el" href="struct_engine_1_1_render_1_1_render_context.html">RenderContext</a> *context)</td></tr>
-<tr class="separator:a797be89ffdf9a89a3a4eb09cec8aa9d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a955982d57bac58ed4a1c44e2402c23f0"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespace_engine_1_1_threading.html#a19fdd8ee5e722502a18f3a0bfc61873a">Threading::ImmediateTask</a>&lt; <a class="el" href="struct_engine_1_1_render_1_1_render_future.html">RenderFuture</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_data.html#a955982d57bac58ed4a1c44e2402c23f0">render</a> (<a class="el" href="struct_engine_1_1_render_1_1_render_context.html">RenderContext</a> *context)=0</td></tr>
-<tr class="separator:a955982d57bac58ed4a1c44e2402c23f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_methods_struct_engine_1_1_render_1_1_render_data"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_struct_engine_1_1_render_1_1_render_data')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="struct_engine_1_1_render_1_1_render_data.html">Engine::Render::RenderData</a></td></tr>
+<tr class="memitem:a22ab18591e8cea3783a284adf351dcc9 inherit pro_methods_struct_engine_1_1_render_1_1_render_data"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_data.html#a22ab18591e8cea3783a284adf351dcc9">frame</a> () const</td></tr>
+<tr class="separator:a22ab18591e8cea3783a284adf351dcc9 inherit pro_methods_struct_engine_1_1_render_1_1_render_data"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a797be89ffdf9a89a3a4eb09cec8aa9d1 inherit pro_methods_struct_engine_1_1_render_1_1_render_data"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_threading_1_1_task_queue.html">Threading::TaskQueue</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_data.html#a797be89ffdf9a89a3a4eb09cec8aa9d1">queue</a> (<a class="el" href="struct_engine_1_1_render_1_1_render_context.html">RenderContext</a> *context)</td></tr>
+<tr class="separator:a797be89ffdf9a89a3a4eb09cec8aa9d1 inherit pro_methods_struct_engine_1_1_render_1_1_render_data"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a955982d57bac58ed4a1c44e2402c23f0 inherit pro_methods_struct_engine_1_1_render_1_1_render_data"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespace_engine_1_1_threading.html#a19fdd8ee5e722502a18f3a0bfc61873a">Threading::ImmediateTask</a>&lt; <a class="el" href="struct_engine_1_1_render_1_1_render_future.html">RenderFuture</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_data.html#a955982d57bac58ed4a1c44e2402c23f0">render</a> (<a class="el" href="struct_engine_1_1_render_1_1_render_context.html">RenderContext</a> *context)=0</td></tr>
+<tr class="separator:a955982d57bac58ed4a1c44e2402c23f0 inherit pro_methods_struct_engine_1_1_render_1_1_render_data"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ae4ac1daaf6f676683231682d28ccf1c5" name="ae4ac1daaf6f676683231682d28ccf1c5"></a>
@@ -426,6 +433,23 @@ Protected Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="afe631b1e3e0c175ccc0d23f5865c0be4" name="afe631b1e3e0c175ccc0d23f5865c0be4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afe631b1e3e0c175ccc0d23f5865c0be4">&#9670;&#160;</a></span>data()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::deque&lt; <a class="el" href="struct_engine_1_1_render_1_1_entity_render_data.html">EntityRenderData</a> &gt; &amp; Engine::Render::SceneRenderData::data </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a20b8ce10140429408bb4f506d2bba8fe" name="a20b8ce10140429408bb4f506d2bba8fe"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a20b8ce10140429408bb4f506d2bba8fe">&#9670;&#160;</a></span>queue()</h2>
 
@@ -454,6 +478,48 @@ Protected Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="ae4b570eb267f5ee6a375995fc28bd8ae" name="ae4b570eb267f5ee6a375995fc28bd8ae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae4b570eb267f5ee6a375995fc28bd8ae">&#9670;&#160;</a></span>interpolateTransform()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Render::SceneRenderData::interpolateTransform </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_render_1_1_entity_render_data.html">EntityRenderData</a> &amp;&#160;</td>
+          <td class="paramname"><em>d</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_transform.html">Scene::Entity::Transform</a> &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_scene_1_1_entity_1_1_entity.html">Scene::Entity::Entity</a> &amp;&#160;</td>
+          <td class="paramname"><em>e</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <hr/>The documentation for this struct was generated from the following files:<ul>
 <li>plugins/misc/scene/renderer/Madgine/render/<a class="el" href="scenerenderdata_8h.html">scenerenderdata.h</a></li>
 <li>plugins/misc/scene/renderer/Madgine/render/<a class="el" href="scenerenderdata_8cpp.html">scenerenderdata.cpp</a></li>
@@ -461,7 +527,7 @@ Protected Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Oct 27 2026 12:04:21 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Tue Oct 27 2026 18:15:09 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>
