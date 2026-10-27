@@ -12,9 +12,9 @@ namespace Render {
         // Camera(const Camera &) = delete;
         ~Camera() = default;
 
-        Math::Matrix4 getViewProjectionMatrix(float aspectRatio);
-        Math::Matrix4 getViewMatrix();
-        Math::Matrix4 getProjectionMatrix(float aspectRatio);
+        Math::Matrix4 getViewProjectionMatrix(float aspectRatio) const;
+        Math::Matrix4 getViewMatrix() const;
+        Math::Matrix4 getProjectionMatrix(float aspectRatio) const;
         Math::Frustum getFrustum(float aspectRatio) const;
 
         Math::Ray3 mousePointToRay(const Math::Vector2 &mousePos, const Math::Vector2 &viewportSize) const;

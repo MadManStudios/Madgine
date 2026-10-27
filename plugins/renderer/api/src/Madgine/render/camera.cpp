@@ -30,17 +30,17 @@ namespace Render {
     {
     }
 
-    Math::Matrix4 Camera::getViewProjectionMatrix(float aspectRatio)
+    Math::Matrix4 Camera::getViewProjectionMatrix(float aspectRatio) const
     {
         return getProjectionMatrix(aspectRatio) * getViewMatrix();
     }
 
-    Math::Matrix4 Camera::getViewMatrix()
+    Math::Matrix4 Camera::getViewMatrix() const
     {
         return Math::Matrix4 { mOrientation.inverse().toMatrix() } * TranslationMatrix(-mPosition);
     }
 
-    Math::Matrix4 Camera::getProjectionMatrix(float aspectRatio)
+    Math::Matrix4 Camera::getProjectionMatrix(float aspectRatio) const
     {
         return getFrustum(aspectRatio).getProjectionMatrix();
     }
