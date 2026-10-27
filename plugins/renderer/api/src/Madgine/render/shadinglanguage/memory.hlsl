@@ -27,10 +27,6 @@ struct ArrayPtr<float4x4>{
 		return memory[buffer() - 1].Load<float4x4>(offset() + 64 * index);
 	}
 
-	operator bool(){
-		return buffer() != 0;
-	}
-
 	uint offset() {
 		return data.x;
 	}
