@@ -1,12 +1,13 @@
 #pragma once
 
 #include "virtualstate.h"
+#include "stop_source.h"
 
 namespace Engine {
 namespace Execution {
 
     template <typename R, typename... Ty>
-    using ConnectionReceiver = VirtualReceiverBaseEx<to_type_pack<R>, type_pack<Ty...>>;
+    using ConnectionReceiver = VirtualReceiverBaseEx<to_type_pack<R>, type_pack<Ty...>, get_stop_token>;
 
     template <typename Stub>
     struct Connection : Stub::template value_types<type_pack>::template prepend<typename Stub::result_type>::template instantiate<ConnectionReceiver> {
@@ -18,7 +19,11 @@ namespace Execution {
 
         void start()
         {
-            mStub.enqueue(this);
+            StopToken token = get_stop_token(*this);
+            if (token && token->stop_requested())
+                this->set_done();
+            else
+                mStub.enqueue(this);
         }
 
         void stop()
