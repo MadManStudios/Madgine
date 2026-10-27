@@ -343,10 +343,6 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a2986a8afb5fe8a45ff6368bd027f0fa0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a198c2b8e8bc6280430f279526227ea0f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_context.html#a198c2b8e8bc6280430f279526227ea0f">isFenceComplete</a> (uint64_t fenceValue)</td></tr>
 <tr class="separator:a198c2b8e8bc6280430f279526227ea0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a694a35fd9296d40bcb0687990f5dbce6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_engine_1_1_memory.html#aa4fadc0dae2c692ec3843d66a7e28217">Memory::WritableByteBuffer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_context.html#a694a35fd9296d40bcb0687990f5dbce6">mapBufferImpl</a> (const <a class="el" href="struct_engine_1_1_render_1_1_g_p_u_ptr.html">GPUPtr</a>&lt; <a class="el" href="classvoid.html">void</a> &gt; &amp;buffer) override</td></tr>
-<tr class="separator:a694a35fd9296d40bcb0687990f5dbce6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae6b4121abbee9748273cabecc15bc215"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_engine_1_1_memory.html#aa4fadc0dae2c692ec3843d66a7e28217">Memory::WritableByteBuffer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_context.html#ae6b4121abbee9748273cabecc15bc215">mapBufferImpl</a> (const <a class="el" href="struct_engine_1_1_render_1_1_g_p_u_ptr.html">GPUPtr</a>&lt; <a class="el" href="struct_engine_1_1_void.html">Void</a>[]&gt; &amp;buffer) override</td></tr>
-<tr class="separator:ae6b4121abbee9748273cabecc15bc215"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa81cf9ad0727ed7779d8e06e1a6a4438"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_context.html#aa81cf9ad0727ed7779d8e06e1a6a4438">setTextureSubData</a> (const <a class="el" href="namespace_engine_1_1_render.html#acf4d21ad6f42937445a8ef1b6ff82655">TexturePtr</a> &amp;tex, <a class="el" href="struct_engine_1_1_math_1_1_vector2i.html">Math::Vector2i</a> offset, <a class="el" href="struct_engine_1_1_math_1_1_vector2i.html">Math::Vector2i</a> size, const <a class="el" href="namespace_engine_1_1_memory.html#a38c77c0ee95b21d49869c266e211de78">Memory::ByteBuffer</a> &amp;data) override</td></tr>
 <tr class="separator:aa81cf9ad0727ed7779d8e06e1a6a4438"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac62a0d8126f959d004bea8e73ff56748"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_context.html#ac62a0d8126f959d004bea8e73ff56748">supportsMultisampling</a> () const override</td></tr>
@@ -355,6 +351,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:abc2390484cb544fb07d58b620d9b24d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0102d326a5f9d43ce6be23d5394505c7"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_threading_1_1_task.html">Threading::Task</a>&lt; <a class="el" href="classvoid.html">void</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_context.html#a0102d326a5f9d43ce6be23d5394505c7">unloadAllResources</a> () override</td></tr>
 <tr class="separator:a0102d326a5f9d43ce6be23d5394505c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa38699802e378853c4f2911d8b85093d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_engine_1_1_threading.html#a19fdd8ee5e722502a18f3a0bfc61873a">Threading::ImmediateTask</a>&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_context.html#aa38699802e378853c4f2911d8b85093d">updateBufferImpl</a> (<a class="el" href="struct_engine_1_1_render_1_1_g_p_u_ptr.html">GPUPtr</a>&lt; <a class="el" href="classvoid.html">void</a> &gt; buffer, <a class="el" href="struct_engine_1_1_callable_view.html">CallableView</a>&lt; <a class="el" href="classvoid.html">void</a>(<a class="el" href="classvoid.html">void</a> *)&gt; write) override</td></tr>
+<tr class="separator:aa38699802e378853c4f2911d8b85093d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f946a01cefcc6d5ae2091b6bb157710"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_engine_1_1_threading.html#a19fdd8ee5e722502a18f3a0bfc61873a">Threading::ImmediateTask</a>&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_render_context.html#a8f946a01cefcc6d5ae2091b6bb157710">updateBufferImpl</a> (<a class="el" href="struct_engine_1_1_render_1_1_g_p_u_ptr.html">GPUPtr</a>&lt; <a class="el" href="struct_engine_1_1_void.html">Void</a>[]&gt; buffer, <a class="el" href="struct_engine_1_1_callable_view.html">CallableView</a>&lt; <a class="el" href="classvoid.html">void</a>(<a class="el" href="classvoid.html">void</a> *)&gt; write) override</td></tr>
+<tr class="separator:a8f946a01cefcc6d5ae2091b6bb157710"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
@@ -679,8 +679,8 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a694a35fd9296d40bcb0687990f5dbce6" name="a694a35fd9296d40bcb0687990f5dbce6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a694a35fd9296d40bcb0687990f5dbce6">&#9670;&#160;</a></span>mapBufferImpl() <span class="overload">[1/2]</span></h2>
+<a id="aa38699802e378853c4f2911d8b85093d" name="aa38699802e378853c4f2911d8b85093d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa38699802e378853c4f2911d8b85093d">&#9670;&#160;</a></span>updateBufferImpl() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -689,11 +689,21 @@ Public Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespace_engine_1_1_memory.html#aa4fadc0dae2c692ec3843d66a7e28217">Memory::WritableByteBuffer</a> Engine::Render::VulkanRenderContext::mapBufferImpl </td>
+          <td class="memname"><a class="el" href="namespace_engine_1_1_threading.html#a19fdd8ee5e722502a18f3a0bfc61873a">Threading::ImmediateTask</a>&lt; bool &gt; Engine::Render::VulkanRenderContext::updateBufferImpl </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="struct_engine_1_1_render_1_1_g_p_u_ptr.html">GPUPtr</a>&lt; <a class="el" href="classvoid.html">void</a> &gt; &amp;&#160;</td>
-          <td class="paramname"><em>buffer</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_render_1_1_g_p_u_ptr.html">GPUPtr</a>&lt; <a class="el" href="classvoid.html">void</a> &gt;&#160;</td>
+          <td class="paramname"><em>buffer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_callable_view.html">CallableView</a>&lt; <a class="el" href="classvoid.html">void</a>(<a class="el" href="classvoid.html">void</a> *)&gt;&#160;</td>
+          <td class="paramname"><em>write</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -705,8 +715,8 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="ae6b4121abbee9748273cabecc15bc215" name="ae6b4121abbee9748273cabecc15bc215"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae6b4121abbee9748273cabecc15bc215">&#9670;&#160;</a></span>mapBufferImpl() <span class="overload">[2/2]</span></h2>
+<a id="a8f946a01cefcc6d5ae2091b6bb157710" name="a8f946a01cefcc6d5ae2091b6bb157710"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f946a01cefcc6d5ae2091b6bb157710">&#9670;&#160;</a></span>updateBufferImpl() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -715,11 +725,21 @@ Public Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespace_engine_1_1_memory.html#aa4fadc0dae2c692ec3843d66a7e28217">Memory::WritableByteBuffer</a> Engine::Render::VulkanRenderContext::mapBufferImpl </td>
+          <td class="memname"><a class="el" href="namespace_engine_1_1_threading.html#a19fdd8ee5e722502a18f3a0bfc61873a">Threading::ImmediateTask</a>&lt; bool &gt; Engine::Render::VulkanRenderContext::updateBufferImpl </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="struct_engine_1_1_render_1_1_g_p_u_ptr.html">GPUPtr</a>&lt; <a class="el" href="struct_engine_1_1_void.html">Void</a>[]&gt; &amp;&#160;</td>
-          <td class="paramname"><em>buffer</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_render_1_1_g_p_u_ptr.html">GPUPtr</a>&lt; <a class="el" href="struct_engine_1_1_void.html">Void</a>[]&gt;&#160;</td>
+          <td class="paramname"><em>buffer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_callable_view.html">CallableView</a>&lt; <a class="el" href="classvoid.html">void</a>(<a class="el" href="classvoid.html">void</a> *)&gt;&#160;</td>
+          <td class="paramname"><em>write</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -1553,7 +1573,7 @@ Public Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Oct 26 2026 22:52:34 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Tue Oct 27 2026 10:29:20 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

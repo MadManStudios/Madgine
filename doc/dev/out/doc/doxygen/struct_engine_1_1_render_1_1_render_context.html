@@ -327,9 +327,6 @@ requires (!std::is_array_v&lt;T&gt;)</td></tr>
 <tr class="separator:ad1ea747638b8cb6e737c379ae32ae3c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa18e2cf071757094541992b008d26573"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_context.html#aa18e2cf071757094541992b008d26573">frame</a> () const</td></tr>
 <tr class="separator:aa18e2cf071757094541992b008d26573"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a087430b8ffd4cddeaf8ba9b08eb41975"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:a087430b8ffd4cddeaf8ba9b08eb41975"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_context.html#a087430b8ffd4cddeaf8ba9b08eb41975">mapBuffer</a> (<a class="el" href="struct_engine_1_1_render_1_1_g_p_u_ptr.html">GPUPtr</a>&lt; T &gt; &amp;buffer)</td></tr>
-<tr class="separator:a087430b8ffd4cddeaf8ba9b08eb41975"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a07e1de1a8f06f0b2d3e3a19439fe22cd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_context.html#a07e1de1a8f06f0b2d3e3a19439fe22cd">removeRenderTarget</a> (<a class="el" href="struct_engine_1_1_render_1_1_render_target.html">RenderTarget</a> *target)</td></tr>
 <tr class="separator:a07e1de1a8f06f0b2d3e3a19439fe22cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab3967e1756e3be5ab3d633543d1f34d0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_threading_1_1_task.html">Threading::Task</a>&lt; <a class="el" href="classvoid.html">void</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_context.html#ab3967e1756e3be5ab3d633543d1f34d0">render</a> ()</td></tr>
@@ -342,6 +339,9 @@ requires (!std::is_array_v&lt;T&gt;)</td></tr>
 <tr class="separator:ae6de1fcb29c4fdf9af7c131775de2fbc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af2b58bc4b7db2167b33de3b09f5765bd"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_threading_1_1_task.html">Threading::Task</a>&lt; <a class="el" href="classvoid.html">void</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_context.html#af2b58bc4b7db2167b33de3b09f5765bd">unloadAllResources</a> ()</td></tr>
 <tr class="separator:af2b58bc4b7db2167b33de3b09f5765bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c61872bb2690b399816a2ec3c0036da"><td class="memTemplParams" colspan="2">template&lt;typename T , typename F &gt; </td></tr>
+<tr class="memitem:a7c61872bb2690b399816a2ec3c0036da"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="namespace_engine_1_1_threading.html#a19fdd8ee5e722502a18f3a0bfc61873a">Threading::ImmediateTask</a>&lt; bool &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_context.html#a7c61872bb2690b399816a2ec3c0036da">updateBuffer</a> (<a class="el" href="struct_engine_1_1_render_1_1_g_p_u_ptr.html">GPUPtr</a>&lt; T &gt; buffer, F &amp;&amp;write)</td></tr>
+<tr class="separator:a7c61872bb2690b399816a2ec3c0036da"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
@@ -358,10 +358,10 @@ Protected Member Functions</h2></td></tr>
 <tr class="separator:a01646c0dcb2d51e538c33100b12dc5ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad1e77ce3275e7f0072330e9aca214b7d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_context.html#ad1e77ce3275e7f0072330e9aca214b7d">checkThread</a> ()</td></tr>
 <tr class="separator:ad1e77ce3275e7f0072330e9aca214b7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5b9c925896ad293aaa06fc9f61893e06"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespace_engine_1_1_memory.html#aa4fadc0dae2c692ec3843d66a7e28217">Memory::WritableByteBuffer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_context.html#a5b9c925896ad293aaa06fc9f61893e06">mapBufferImpl</a> (const <a class="el" href="struct_engine_1_1_render_1_1_g_p_u_ptr.html">GPUPtr</a>&lt; <a class="el" href="classvoid.html">void</a> &gt; &amp;buffer)</td></tr>
-<tr class="separator:a5b9c925896ad293aaa06fc9f61893e06"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeb48402fd7c458c11b6899f8fc0abafc"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespace_engine_1_1_memory.html#aa4fadc0dae2c692ec3843d66a7e28217">Memory::WritableByteBuffer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_context.html#aeb48402fd7c458c11b6899f8fc0abafc">mapBufferImpl</a> (const <a class="el" href="struct_engine_1_1_render_1_1_g_p_u_ptr.html">GPUPtr</a>&lt; <a class="el" href="struct_engine_1_1_void.html">Void</a>[]&gt; &amp;buffer)</td></tr>
-<tr class="separator:aeb48402fd7c458c11b6899f8fc0abafc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a434ad87086681e972beb7d022c0305e3"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespace_engine_1_1_threading.html#a19fdd8ee5e722502a18f3a0bfc61873a">Threading::ImmediateTask</a>&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_context.html#a434ad87086681e972beb7d022c0305e3">updateBufferImpl</a> (<a class="el" href="struct_engine_1_1_render_1_1_g_p_u_ptr.html">GPUPtr</a>&lt; <a class="el" href="classvoid.html">void</a> &gt; buffer, <a class="el" href="struct_engine_1_1_callable_view.html">CallableView</a>&lt; <a class="el" href="classvoid.html">void</a>(<a class="el" href="classvoid.html">void</a> *)&gt; write)</td></tr>
+<tr class="separator:a434ad87086681e972beb7d022c0305e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a651146b0b24deeb9f0ea2f58bf87d8b7"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespace_engine_1_1_threading.html#a19fdd8ee5e722502a18f3a0bfc61873a">Threading::ImmediateTask</a>&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_render_context.html#a651146b0b24deeb9f0ea2f58bf87d8b7">updateBufferImpl</a> (<a class="el" href="struct_engine_1_1_render_1_1_g_p_u_ptr.html">GPUPtr</a>&lt; <a class="el" href="struct_engine_1_1_void.html">Void</a>[]&gt; buffer, <a class="el" href="struct_engine_1_1_callable_view.html">CallableView</a>&lt; <a class="el" href="classvoid.html">void</a>(<a class="el" href="classvoid.html">void</a> *)&gt; write)</td></tr>
+<tr class="separator:a651146b0b24deeb9f0ea2f58bf87d8b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-methods" name="pro-static-methods"></a>
 Static Protected Member Functions</h2></td></tr>
@@ -801,23 +801,33 @@ requires std::is_unbounded_array_v&lt;T&gt;</div>
 
 </div>
 </div>
-<a id="a087430b8ffd4cddeaf8ba9b08eb41975" name="a087430b8ffd4cddeaf8ba9b08eb41975"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a087430b8ffd4cddeaf8ba9b08eb41975">&#9670;&#160;</a></span>mapBuffer()</h2>
+<a id="a7c61872bb2690b399816a2ec3c0036da" name="a7c61872bb2690b399816a2ec3c0036da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7c61872bb2690b399816a2ec3c0036da">&#9670;&#160;</a></span>updateBuffer()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T &gt; </div>
+template&lt;typename T , typename F &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto Engine::Render::RenderContext::mapBuffer </td>
+          <td class="memname"><a class="el" href="namespace_engine_1_1_threading.html#a19fdd8ee5e722502a18f3a0bfc61873a">Threading::ImmediateTask</a>&lt; bool &gt; Engine::Render::RenderContext::updateBuffer </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_engine_1_1_render_1_1_g_p_u_ptr.html">GPUPtr</a>&lt; T &gt; &amp;&#160;</td>
-          <td class="paramname"><em>buffer</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_render_1_1_g_p_u_ptr.html">GPUPtr</a>&lt; T &gt;&#160;</td>
+          <td class="paramname"><em>buffer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">F &amp;&amp;&#160;</td>
+          <td class="paramname"><em>write</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -1055,8 +1065,8 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="a5b9c925896ad293aaa06fc9f61893e06" name="a5b9c925896ad293aaa06fc9f61893e06"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5b9c925896ad293aaa06fc9f61893e06">&#9670;&#160;</a></span>mapBufferImpl() <span class="overload">[1/2]</span></h2>
+<a id="a434ad87086681e972beb7d022c0305e3" name="a434ad87086681e972beb7d022c0305e3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a434ad87086681e972beb7d022c0305e3">&#9670;&#160;</a></span>updateBufferImpl() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1065,11 +1075,21 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual <a class="el" href="namespace_engine_1_1_memory.html#aa4fadc0dae2c692ec3843d66a7e28217">Memory::WritableByteBuffer</a> Engine::Render::RenderContext::mapBufferImpl </td>
+          <td class="memname">virtual <a class="el" href="namespace_engine_1_1_threading.html#a19fdd8ee5e722502a18f3a0bfc61873a">Threading::ImmediateTask</a>&lt; bool &gt; Engine::Render::RenderContext::updateBufferImpl </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="struct_engine_1_1_render_1_1_g_p_u_ptr.html">GPUPtr</a>&lt; <a class="el" href="classvoid.html">void</a> &gt; &amp;&#160;</td>
-          <td class="paramname"><em>buffer</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_render_1_1_g_p_u_ptr.html">GPUPtr</a>&lt; <a class="el" href="classvoid.html">void</a> &gt;&#160;</td>
+          <td class="paramname"><em>buffer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_callable_view.html">CallableView</a>&lt; <a class="el" href="classvoid.html">void</a>(<a class="el" href="classvoid.html">void</a> *)&gt;&#160;</td>
+          <td class="paramname"><em>write</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -1081,8 +1101,8 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="aeb48402fd7c458c11b6899f8fc0abafc" name="aeb48402fd7c458c11b6899f8fc0abafc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aeb48402fd7c458c11b6899f8fc0abafc">&#9670;&#160;</a></span>mapBufferImpl() <span class="overload">[2/2]</span></h2>
+<a id="a651146b0b24deeb9f0ea2f58bf87d8b7" name="a651146b0b24deeb9f0ea2f58bf87d8b7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a651146b0b24deeb9f0ea2f58bf87d8b7">&#9670;&#160;</a></span>updateBufferImpl() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1091,11 +1111,21 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual <a class="el" href="namespace_engine_1_1_memory.html#aa4fadc0dae2c692ec3843d66a7e28217">Memory::WritableByteBuffer</a> Engine::Render::RenderContext::mapBufferImpl </td>
+          <td class="memname">virtual <a class="el" href="namespace_engine_1_1_threading.html#a19fdd8ee5e722502a18f3a0bfc61873a">Threading::ImmediateTask</a>&lt; bool &gt; Engine::Render::RenderContext::updateBufferImpl </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="struct_engine_1_1_render_1_1_g_p_u_ptr.html">GPUPtr</a>&lt; <a class="el" href="struct_engine_1_1_void.html">Void</a>[]&gt; &amp;&#160;</td>
-          <td class="paramname"><em>buffer</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_render_1_1_g_p_u_ptr.html">GPUPtr</a>&lt; <a class="el" href="struct_engine_1_1_void.html">Void</a>[]&gt;&#160;</td>
+          <td class="paramname"><em>buffer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_callable_view.html">CallableView</a>&lt; <a class="el" href="classvoid.html">void</a>(<a class="el" href="classvoid.html">void</a> *)&gt;&#160;</td>
+          <td class="paramname"><em>write</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -1253,7 +1283,7 @@ template&lt;typename T &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Oct 26 2026 22:52:34 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Tue Oct 27 2026 10:29:20 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

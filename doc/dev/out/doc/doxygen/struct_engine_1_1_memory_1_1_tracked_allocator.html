@@ -294,9 +294,10 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a895ae0a6a2e03e6789fb93dcb5fd8a40"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; </td></tr>
-<tr class="memitem:a895ae0a6a2e03e6789fb93dcb5fd8a40"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_memory_1_1_tracked_allocator.html#a895ae0a6a2e03e6789fb93dcb5fd8a40">TrackedAllocator</a> (Args &amp;&amp;...args)</td></tr>
-<tr class="separator:a895ae0a6a2e03e6789fb93dcb5fd8a40"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5e05222b8e39c8a2d84f04ca2f0ee8eb"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; <br />
+requires std::constructible_from&lt;Parent, Args...&gt;</td></tr>
+<tr class="memitem:a5e05222b8e39c8a2d84f04ca2f0ee8eb"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_memory_1_1_tracked_allocator.html#a5e05222b8e39c8a2d84f04ca2f0ee8eb">TrackedAllocator</a> (Args &amp;&amp;...args)</td></tr>
+<tr class="separator:a5e05222b8e39c8a2d84f04ca2f0ee8eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a759adbb64ae6c48887c8e3438fcce134"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_memory_1_1_tracked_allocator.html#a759adbb64ae6c48887c8e3438fcce134">~TrackedAllocator</a> ()</td></tr>
 <tr class="separator:a759adbb64ae6c48887c8e3438fcce134"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a13cfc3d313600190f9f0ebf93665709d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_memory_1_1_block.html">Block</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_memory_1_1_tracked_allocator.html#a13cfc3d313600190f9f0ebf93665709d">allocate</a> (size_t size, size_t alignment=1)</td></tr>
@@ -316,15 +317,16 @@ Static Public Attributes</h2></td></tr>
 <tr class="separator:a68aca3de8b952097de8bb05e0e0d2f33"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a895ae0a6a2e03e6789fb93dcb5fd8a40" name="a895ae0a6a2e03e6789fb93dcb5fd8a40"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a895ae0a6a2e03e6789fb93dcb5fd8a40">&#9670;&#160;</a></span>TrackedAllocator()</h2>
+<a id="a5e05222b8e39c8a2d84f04ca2f0ee8eb" name="a5e05222b8e39c8a2d84f04ca2f0ee8eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5e05222b8e39c8a2d84f04ca2f0ee8eb">&#9670;&#160;</a></span>TrackedAllocator()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename Parent &gt; </div>
 <div class="memtemplate">
-template&lt;typename... Args&gt; </div>
+template&lt;typename... Args&gt; <br />
+requires std::constructible_from&lt;Parent, Args...&gt;</div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -552,7 +554,7 @@ template&lt;typename Parent &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Oct 26 2026 22:52:34 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Tue Oct 27 2026 10:29:20 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>
