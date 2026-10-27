@@ -22,6 +22,10 @@ namespace Scene {
         return wait_simulation(0s, scene);
     };
 
+    inline constexpr auto wait_fixed_simulation = [](std::chrono::steady_clock::duration duration, std::chrono::steady_clock::duration &acc, SceneContext scene = {}) {
+        return std::move(scene) | Execution::let_value([=, &acc](SceneManager &mgr) { return mgr.simulationClock().wait_fixed(duration, acc); });
+    };
+
     inline constexpr auto wait_animation = [](std::chrono::steady_clock::duration duration, SceneContext scene = {}) {
         return std::move(scene) | Execution::let_value([=](SceneManager &mgr) { return mgr.animationClock().wait(duration); });
     };
@@ -30,7 +34,7 @@ namespace Scene {
         return wait_animation(0s, scene);
     };
 
-    using yield_animation_t = decltype(yield_animation());
+    using yield_animation_t = decltype(yield_animation());    
 
     void lookAt(const Entity::EntityPtr &e, const Entity::EntityPtr &target, bool locked, std::chrono::steady_clock::duration delta);
 
