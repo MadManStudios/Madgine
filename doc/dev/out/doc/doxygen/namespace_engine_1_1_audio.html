@@ -284,8 +284,10 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
+<a href="#concepts">Concepts</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle"><div class="title">Engine::Audio Namespace Reference</div></div>
 </div><!--header-->
 <div class="contents">
@@ -301,6 +303,16 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_audio_1_1_audio_loader.html">AudioLoader</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_audio_1_1_audio_options.html">AudioOptions</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_audio_1_1_audio_source_sender.html">AudioSourceSender</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_audio_1_1_audio_source_state.html">AudioSourceState</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_audio_1_1_channel.html">Channel</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_audio_1_1_channel_ptr.html">ChannelPtr</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_audio_1_1looping__t.html">looping_t</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_audio_1_1_oboe_api.html">OboeApi</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -318,6 +330,19 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_audio_1_1_port_audio_stream.html">PortAudioStream</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_audio_1_1positional__t.html">positional_t</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_audio_1_1_source_interface.html">SourceInterface</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_audio_1_1_source_wrapper.html">SourceWrapper</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_audio_1_1volume__t.html">volume_t</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="concepts" name="concepts"></a>
+Concepts</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="concept_engine_1_1_audio_1_1_source.html">Source</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
@@ -327,18 +352,26 @@ Typedefs</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:a103e9faefe486c017f8a2f955d6ff8de"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_audio.html#a103e9faefe486c017f8a2f955d6ff8de">attach</a> (<a class="el" href="struct_engine_1_1_audio_1_1_source_interface.html">SourceInterface</a> *source, <a class="el" href="struct_engine_1_1_audio_1_1_channel_ptr.html">ChannelPtr</a> channel)</td></tr>
+<tr class="separator:a103e9faefe486c017f8a2f955d6ff8de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a02b50076672f123ea3e6fe222228ca53"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_audio.html#a02b50076672f123ea3e6fe222228ca53">attach</a> (<a class="el" href="struct_engine_1_1_audio_1_1_source_interface.html">SourceInterface</a> *source, std::string_view channel)</td></tr>
+<tr class="separator:a02b50076672f123ea3e6fe222228ca53"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3fd1db10c8cb3bc0b6343d5d284f0c9b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_stream.html">Stream</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_audio.html#a3fd1db10c8cb3bc0b6343d5d284f0c9b">DecodeOggFile</a> (<a class="el" href="struct_engine_1_1_audio_1_1_audio_info.html">AudioInfo</a> &amp;info, <a class="el" href="struct_engine_1_1_stream.html">Stream</a> &amp;&amp;file)</td></tr>
 <tr class="separator:a3fd1db10c8cb3bc0b6343d5d284f0c9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a52ea1bee1e34d43164400b1b865dd5fe"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_audio.html#a52ea1bee1e34d43164400b1b865dd5fe">ENUM_BASE</a> (AudioResult, <a class="el" href="namespace_engine.html#a266485a460bde69c54e20b6e8ecd5f2a">GenericResult</a>)</td></tr>
-<tr class="separator:a52ea1bee1e34d43164400b1b865dd5fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a33cdd3e6976d6c017858dfd2f9995f28"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_behavior_1_1_behavior.html">Behavior::Behavior</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_audio.html#a33cdd3e6976d6c017858dfd2f9995f28">play_dynamic_sound</a> (AudioLoader::Handle buffer, <a class="el" href="struct_engine_1_1_execution_1_1_binding_ptr.html">Execution::BindingPtr</a>&lt; <a class="el" href="struct_engine_1_1_math_1_1_vector2.html">Math::Vector2</a> &gt; distance, const <a class="el" href="struct_engine_1_1_audio_1_1_audio_options.html">AudioOptions</a> &amp;options={})</td></tr>
-<tr class="separator:a33cdd3e6976d6c017858dfd2f9995f28"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7c268fd500c549038d73b00027b6a2c0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_behavior_1_1_behavior.html">Behavior::Behavior</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_audio.html#a7c268fd500c549038d73b00027b6a2c0">play_dynamic_sound</a> (const <a class="el" href="struct_engine_1_1_audio_1_1_audio_buffer.html">AudioBuffer</a> &amp;buffer, <a class="el" href="struct_engine_1_1_execution_1_1_binding_ptr.html">Execution::BindingPtr</a>&lt; <a class="el" href="struct_engine_1_1_math_1_1_vector2.html">Math::Vector2</a> &gt; distance, const <a class="el" href="struct_engine_1_1_audio_1_1_audio_options.html">AudioOptions</a> &amp;options={})</td></tr>
-<tr class="separator:a7c268fd500c549038d73b00027b6a2c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaa156ef788442c2e935a40fdb5657a55"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_behavior_1_1_behavior.html">Behavior::Behavior</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_audio.html#aaa156ef788442c2e935a40fdb5657a55">play_sound</a> (AudioLoader::Handle buffer, const <a class="el" href="struct_engine_1_1_audio_1_1_audio_options.html">AudioOptions</a> &amp;options={})</td></tr>
-<tr class="separator:aaa156ef788442c2e935a40fdb5657a55"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7c9405b6094c949f2587adc9325f2147"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_behavior_1_1_behavior.html">Behavior::Behavior</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_audio.html#a7c9405b6094c949f2587adc9325f2147">play_sound</a> (const <a class="el" href="struct_engine_1_1_audio_1_1_audio_buffer.html">AudioBuffer</a> &amp;buffer, const <a class="el" href="struct_engine_1_1_audio_1_1_audio_options.html">AudioOptions</a> &amp;options={})</td></tr>
-<tr class="separator:a7c9405b6094c949f2587adc9325f2147"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a553314ae3f0aa3767ddfa8fadf1b2cc0"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_audio.html#a553314ae3f0aa3767ddfa8fadf1b2cc0">play_source</a> (Source auto &amp;&amp;source, <a class="el" href="struct_engine_1_1_audio_1_1_channel_ptr.html">ChannelPtr</a> channel)</td></tr>
+<tr class="separator:a553314ae3f0aa3767ddfa8fadf1b2cc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac661a97fc166e7ace50920aa5278d6d3"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_audio.html#ac661a97fc166e7ace50920aa5278d6d3">play_source</a> (Source auto &amp;&amp;source, std::string_view channel)</td></tr>
+<tr class="separator:ac661a97fc166e7ace50920aa5278d6d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd15c8a6d1b85f9de5a19d6252c0da57"><td class="memTemplParams" colspan="2">template&lt;Execution::Binding&lt; <a class="el" href="struct_engine_1_1_math_1_1_vector2.html">Math::Vector2</a> &gt; Binding&gt; </td></tr>
+<tr class="memitem:acd15c8a6d1b85f9de5a19d6252c0da57"><td class="memTemplItemLeft" align="right" valign="top">constexpr <a class="el" href="struct_engine_1_1_audio_1_1positional__t.html">positional_t</a>&lt; Binding &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_audio.html#acd15c8a6d1b85f9de5a19d6252c0da57">positional</a> (Binding &amp;&amp;binding, float refDistance=1.0f, float maxDistance=50.0f, float rollOff=1.0f, float width=1.0f)</td></tr>
+<tr class="separator:acd15c8a6d1b85f9de5a19d6252c0da57"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22287e6ce1ae5f4d741588bfea0569d4"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="struct_engine_1_1_audio_1_1volume__t.html">volume_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_audio.html#a22287e6ce1ae5f4d741588bfea0569d4">volume</a> (float vol)</td></tr>
+<tr class="separator:a22287e6ce1ae5f4d741588bfea0569d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a39fe25cb21297dc0d8d0102c37dc5bc8"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="struct_engine_1_1_audio_1_1looping__t.html">looping_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_audio.html#a39fe25cb21297dc0d8d0102c37dc5bc8">looping</a></td></tr>
+<tr class="separator:a39fe25cb21297dc0d8d0102c37dc5bc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Typedef Documentation</h2>
 <a id="a70dd330abbbed68631cbe7b5cf3c9ae7" name="a70dd330abbbed68631cbe7b5cf3c9ae7"></a>
@@ -358,23 +391,23 @@ template&lt;typename T &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a52ea1bee1e34d43164400b1b865dd5fe" name="a52ea1bee1e34d43164400b1b865dd5fe"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a52ea1bee1e34d43164400b1b865dd5fe">&#9670;&#160;</a></span>ENUM_BASE()</h2>
+<a id="a02b50076672f123ea3e6fe222228ca53" name="a02b50076672f123ea3e6fe222228ca53"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a02b50076672f123ea3e6fe222228ca53">&#9670;&#160;</a></span>attach() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">Engine::Audio::ENUM_BASE </td>
+          <td class="memname">MADGINE_AUDIO_EXPORT <a class="el" href="classvoid.html">void</a> Engine::Audio::attach </td>
           <td>(</td>
-          <td class="paramtype">AudioResult&#160;</td>
-          <td class="paramname">, </td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_audio_1_1_source_interface.html">SourceInterface</a> *&#160;</td>
+          <td class="paramname"><em>source</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespace_engine.html#a266485a460bde69c54e20b6e8ecd5f2a">GenericResult</a>&#160;</td>
-          <td class="paramname">&#160;</td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>channel</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -386,26 +419,23 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="aaa156ef788442c2e935a40fdb5657a55" name="aaa156ef788442c2e935a40fdb5657a55"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaa156ef788442c2e935a40fdb5657a55">&#9670;&#160;</a></span>play_sound() <span class="overload">[1/2]</span></h2>
+<a id="a103e9faefe486c017f8a2f955d6ff8de" name="a103e9faefe486c017f8a2f955d6ff8de"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a103e9faefe486c017f8a2f955d6ff8de">&#9670;&#160;</a></span>attach() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="struct_engine_1_1_behavior_1_1_behavior.html">Behavior::Behavior</a> Engine::Audio::play_sound </td>
+          <td class="memname">MADGINE_AUDIO_EXPORT <a class="el" href="classvoid.html">void</a> Engine::Audio::attach </td>
           <td>(</td>
-          <td class="paramtype">AudioLoader::Handle&#160;</td>
-          <td class="paramname"><em>buffer</em>, </td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_audio_1_1_source_interface.html">SourceInterface</a> *&#160;</td>
+          <td class="paramname"><em>source</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="struct_engine_1_1_audio_1_1_audio_options.html">AudioOptions</a> &amp;&#160;</td>
-          <td class="paramname"><em>options</em> = <code>{}</code>&#160;</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_audio_1_1_channel_ptr.html">ChannelPtr</a>&#160;</td>
+          <td class="paramname"><em>channel</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -413,131 +443,6 @@ template&lt;typename T &gt; </div>
           <td></td><td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a7c9405b6094c949f2587adc9325f2147" name="a7c9405b6094c949f2587adc9325f2147"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7c9405b6094c949f2587adc9325f2147">&#9670;&#160;</a></span>play_sound() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="struct_engine_1_1_behavior_1_1_behavior.html">Behavior::Behavior</a> Engine::Audio::play_sound </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="struct_engine_1_1_audio_1_1_audio_buffer.html">AudioBuffer</a> &amp;&#160;</td>
-          <td class="paramname"><em>buffer</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="struct_engine_1_1_audio_1_1_audio_options.html">AudioOptions</a> &amp;&#160;</td>
-          <td class="paramname"><em>options</em> = <code>{}</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a33cdd3e6976d6c017858dfd2f9995f28" name="a33cdd3e6976d6c017858dfd2f9995f28"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a33cdd3e6976d6c017858dfd2f9995f28">&#9670;&#160;</a></span>play_dynamic_sound() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="struct_engine_1_1_behavior_1_1_behavior.html">Behavior::Behavior</a> Engine::Audio::play_dynamic_sound </td>
-          <td>(</td>
-          <td class="paramtype">AudioLoader::Handle&#160;</td>
-          <td class="paramname"><em>buffer</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="struct_engine_1_1_execution_1_1_binding_ptr.html">Execution::BindingPtr</a>&lt; <a class="el" href="struct_engine_1_1_math_1_1_vector2.html">Math::Vector2</a> &gt;&#160;</td>
-          <td class="paramname"><em>distance</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="struct_engine_1_1_audio_1_1_audio_options.html">AudioOptions</a> &amp;&#160;</td>
-          <td class="paramname"><em>options</em> = <code>{}</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a7c268fd500c549038d73b00027b6a2c0" name="a7c268fd500c549038d73b00027b6a2c0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7c268fd500c549038d73b00027b6a2c0">&#9670;&#160;</a></span>play_dynamic_sound() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="struct_engine_1_1_behavior_1_1_behavior.html">Behavior::Behavior</a> Engine::Audio::play_dynamic_sound </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="struct_engine_1_1_audio_1_1_audio_buffer.html">AudioBuffer</a> &amp;&#160;</td>
-          <td class="paramname"><em>buffer</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="struct_engine_1_1_execution_1_1_binding_ptr.html">Execution::BindingPtr</a>&lt; <a class="el" href="struct_engine_1_1_math_1_1_vector2.html">Math::Vector2</a> &gt;&#160;</td>
-          <td class="paramname"><em>distance</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="struct_engine_1_1_audio_1_1_audio_options.html">AudioOptions</a> &amp;&#160;</td>
-          <td class="paramname"><em>options</em> = <code>{}</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
 </div>
@@ -570,10 +475,187 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
+<a id="ac661a97fc166e7ace50920aa5278d6d3" name="ac661a97fc166e7ace50920aa5278d6d3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac661a97fc166e7ace50920aa5278d6d3">&#9670;&#160;</a></span>play_source() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto Engine::Audio::play_source </td>
+          <td>(</td>
+          <td class="paramtype">Source auto &amp;&amp;&#160;</td>
+          <td class="paramname"><em>source</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>channel</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a553314ae3f0aa3767ddfa8fadf1b2cc0" name="a553314ae3f0aa3767ddfa8fadf1b2cc0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a553314ae3f0aa3767ddfa8fadf1b2cc0">&#9670;&#160;</a></span>play_source() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto Engine::Audio::play_source </td>
+          <td>(</td>
+          <td class="paramtype">Source auto &amp;&amp;&#160;</td>
+          <td class="paramname"><em>source</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_audio_1_1_channel_ptr.html">ChannelPtr</a>&#160;</td>
+          <td class="paramname"><em>channel</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="acd15c8a6d1b85f9de5a19d6252c0da57" name="acd15c8a6d1b85f9de5a19d6252c0da57"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acd15c8a6d1b85f9de5a19d6252c0da57">&#9670;&#160;</a></span>positional()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;Execution::Binding&lt; <a class="el" href="struct_engine_1_1_math_1_1_vector2.html">Math::Vector2</a> &gt; Binding&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="struct_engine_1_1_audio_1_1positional__t.html">positional_t</a>&lt; Binding &gt; Engine::Audio::positional </td>
+          <td>(</td>
+          <td class="paramtype">Binding &amp;&amp;&#160;</td>
+          <td class="paramname"><em>binding</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>refDistance</em> = <code>1.0f</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>maxDistance</em> = <code>50.0f</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>rollOff</em> = <code>1.0f</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>width</em> = <code>1.0f</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a22287e6ce1ae5f4d741588bfea0569d4" name="a22287e6ce1ae5f4d741588bfea0569d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a22287e6ce1ae5f4d741588bfea0569d4">&#9670;&#160;</a></span>volume()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="struct_engine_1_1_audio_1_1volume__t.html">volume_t</a> Engine::Audio::volume </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>vol</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="a39fe25cb21297dc0d8d0102c37dc5bc8" name="a39fe25cb21297dc0d8d0102c37dc5bc8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a39fe25cb21297dc0d8d0102c37dc5bc8">&#9670;&#160;</a></span>looping</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="struct_engine_1_1_audio_1_1looping__t.html">looping_t</a> Engine::Audio::looping</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Oct 28 2026 14:29:55 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Wed Oct 28 2026 21:30:31 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

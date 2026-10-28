@@ -46,7 +46,7 @@ if (edges && edges.length) {
         </defs>
 
 <script type="text/javascript">
-var viewWidth = 671;
+var viewWidth = 826;
 var viewHeight = 104;
 var sectionId = 'dynsection-0';
 </script>
@@ -58,9 +58,9 @@ var sectionId = 'dynsection-0';
 <g id="node1" class="node">
 <title>Node1</title>
 <g id="a_node1"><a xlink:title=" ">
-<polygon fill="#999999" stroke="#666666" points="373,-96 267,-96 267,-66 373,-66 373,-96"/>
-<text text-anchor="start" x="275" y="-84" font-family="Helvetica,sans-Serif" font-size="10.00">plugins/audio/api/src</text>
-<text text-anchor="middle" x="320" y="-73" font-family="Helvetica,sans-Serif" font-size="10.00">/Madgine/audiolib.h</text>
+<polygon fill="#999999" stroke="#666666" points="451,-96 345,-96 345,-66 451,-66 451,-96"/>
+<text text-anchor="start" x="353" y="-84" font-family="Helvetica,sans-Serif" font-size="10.00">plugins/audio/api/src</text>
+<text text-anchor="middle" x="398" y="-73" font-family="Helvetica,sans-Serif" font-size="10.00">/Madgine/audiolib.h</text>
 </a>
 </g>
 </g>
@@ -77,8 +77,8 @@ var sectionId = 'dynsection-0';
 <!-- Node1&#45;&gt;Node2 -->
 <g id="edge1" class="edge">
 <title>Node1&#45;&gt;Node2</title>
-<path fill="none" stroke="#63b8ff" d="M255.7,-63.54C215.68,-53.29 164.7,-40.24 126.28,-30.41"/>
-<polygon fill="#63b8ff" stroke="#63b8ff" points="254.65,-66.88 265.21,-65.97 256.39,-60.1 254.65,-66.88"/>
+<path fill="none" stroke="#63b8ff" d="M333.43,-67.4C277.77,-56.54 197.57,-40.89 140.3,-29.72"/>
+<polygon fill="#63b8ff" stroke="#63b8ff" points="332.6,-70.81 343.09,-69.28 333.94,-63.93 332.6,-70.81"/>
 </g>
 <!-- Node3 -->
 <g id="node3" class="node">
@@ -93,40 +93,56 @@ var sectionId = 'dynsection-0';
 <!-- Node1&#45;&gt;Node3 -->
 <g id="edge2" class="edge">
 <title>Node1&#45;&gt;Node3</title>
-<path fill="none" stroke="#63b8ff" d="M292.08,-58.97C279.63,-49.61 265.3,-38.81 254.11,-30.39"/>
-<polygon fill="#63b8ff" stroke="#63b8ff" points="289.83,-61.67 299.93,-64.89 294.04,-56.07 289.83,-61.67"/>
+<path fill="none" stroke="#63b8ff" d="M350.98,-61.54C325.78,-51.64 295.18,-39.63 271.74,-30.43"/>
+<polygon fill="#63b8ff" stroke="#63b8ff" points="349.42,-64.69 360.01,-65.08 351.98,-58.17 349.42,-64.69"/>
 </g>
 <!-- Node4 -->
 <g id="node4" class="node">
 <title>Node4</title>
-<g id="a_node4"><a xlink:href="oggdecode_8cpp.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="#666666" points="480.5,-30 329.5,-30 329.5,0 480.5,0 480.5,-30"/>
+<g id="a_node4"><a xlink:href="channel_8cpp.html" target="_top" xlink:title=" ">
+<polygon fill="white" stroke="#666666" points="466.5,-30 329.5,-30 329.5,0 466.5,0 466.5,-30"/>
 <text text-anchor="start" x="337.5" y="-18" font-family="Helvetica,sans-Serif" font-size="10.00">plugins/audio/api/src</text>
-<text text-anchor="middle" x="405" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">/Madgine/audio/oggdecode.cpp</text>
+<text text-anchor="middle" x="398" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">/Madgine/audio/channel.cpp</text>
 </a>
 </g>
 </g>
 <!-- Node1&#45;&gt;Node4 -->
 <g id="edge3" class="edge">
 <title>Node1&#45;&gt;Node4</title>
-<path fill="none" stroke="#63b8ff" d="M347.92,-58.97C360.37,-49.61 374.7,-38.81 385.89,-30.39"/>
-<polygon fill="#63b8ff" stroke="#63b8ff" points="345.96,-56.07 340.07,-64.89 350.17,-61.67 345.96,-56.07"/>
+<path fill="none" stroke="#63b8ff" d="M398,-54.39C398,-46.13 398,-37.28 398,-30.16"/>
+<polygon fill="#63b8ff" stroke="#63b8ff" points="394.5,-54.28 398,-64.28 401.5,-54.28 394.5,-54.28"/>
 </g>
 <!-- Node5 -->
 <g id="node5" class="node">
 <title>Node5</title>
-<g id="a_node5"><a xlink:href="oggdecodebuf_8cpp.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="#666666" points="663,-30 499,-30 499,0 663,0 663,-30"/>
-<text text-anchor="start" x="507" y="-18" font-family="Helvetica,sans-Serif" font-size="10.00">plugins/audio/api/src</text>
-<text text-anchor="middle" x="581" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">/Madgine/audio/oggdecodebuf.cpp</text>
+<g id="a_node5"><a xlink:href="oggdecode_8cpp.html" target="_top" xlink:title=" ">
+<polygon fill="white" stroke="#666666" points="635.5,-30 484.5,-30 484.5,0 635.5,0 635.5,-30"/>
+<text text-anchor="start" x="492.5" y="-18" font-family="Helvetica,sans-Serif" font-size="10.00">plugins/audio/api/src</text>
+<text text-anchor="middle" x="560" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">/Madgine/audio/oggdecode.cpp</text>
 </a>
 </g>
 </g>
 <!-- Node1&#45;&gt;Node5 -->
 <g id="edge4" class="edge">
 <title>Node1&#45;&gt;Node5</title>
-<path fill="none" stroke="#63b8ff" d="M384.43,-64.2C426.57,-53.87 481.2,-40.47 522.17,-30.43"/>
-<polygon fill="#63b8ff" stroke="#63b8ff" points="383.8,-60.75 374.92,-66.53 385.46,-67.55 383.8,-60.75"/>
+<path fill="none" stroke="#63b8ff" d="M445.06,-61.41C470.05,-51.54 500.29,-39.59 523.49,-30.43"/>
+<polygon fill="#63b8ff" stroke="#63b8ff" points="443.78,-58.15 435.76,-65.08 446.35,-64.66 443.78,-58.15"/>
+</g>
+<!-- Node6 -->
+<g id="node6" class="node">
+<title>Node6</title>
+<g id="a_node6"><a xlink:href="oggdecodebuf_8cpp.html" target="_top" xlink:title=" ">
+<polygon fill="white" stroke="#666666" points="818,-30 654,-30 654,0 818,0 818,-30"/>
+<text text-anchor="start" x="662" y="-18" font-family="Helvetica,sans-Serif" font-size="10.00">plugins/audio/api/src</text>
+<text text-anchor="middle" x="736" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">/Madgine/audio/oggdecodebuf.cpp</text>
+</a>
+</g>
+</g>
+<!-- Node1&#45;&gt;Node6 -->
+<g id="edge5" class="edge">
+<title>Node1&#45;&gt;Node6</title>
+<path fill="none" stroke="#63b8ff" d="M462.42,-67.8C518.58,-57.17 600.13,-41.73 659.58,-30.47"/>
+<polygon fill="#63b8ff" stroke="#63b8ff" points="461.85,-64.35 452.67,-69.65 463.15,-71.23 461.85,-64.35"/>
 </g>
 </g>
 </svg>

@@ -286,6 +286,8 @@ $(function() {
 <a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="struct_engine_1_1_audio_1_1_audio_api-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">Engine::Audio::AudioApi Struct Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div></div>
 </div><!--header-->
@@ -310,26 +312,28 @@ Public Types</h2></td></tr>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a63a9bc1903a880bb356ee56ad01abf78"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_audio_1_1_audio_api.html#a63a9bc1903a880bb356ee56ad01abf78">AudioApi</a> (<a class="el" href="struct_engine_1_1_core_1_1_root.html">Core::Root</a> &amp;root)</td></tr>
 <tr class="separator:a63a9bc1903a880bb356ee56ad01abf78"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad588645efe8daae6588966370b3c94ad"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_behavior_1_1_behavior.html">Behavior::Behavior</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_audio_1_1_audio_api.html#ad588645efe8daae6588966370b3c94ad">playDynamicSound</a> (AudioLoader::Handle buffer, <a class="el" href="struct_engine_1_1_execution_1_1_binding_ptr.html">Execution::BindingPtr</a>&lt; <a class="el" href="struct_engine_1_1_math_1_1_vector2.html">Math::Vector2</a> &gt; distance, const <a class="el" href="struct_engine_1_1_audio_1_1_audio_options.html">AudioOptions</a> &amp;options={})=0</td></tr>
-<tr class="separator:ad588645efe8daae6588966370b3c94ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad2a38a1df6b350b33fbf2821eadfefb9"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="struct_engine_1_1_behavior_1_1_behavior.html">Behavior::Behavior</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_audio_1_1_audio_api.html#ad2a38a1df6b350b33fbf2821eadfefb9">playDynamicSound</a> (const <a class="el" href="struct_engine_1_1_audio_1_1_audio_buffer.html">AudioBuffer</a> &amp;buffer, <a class="el" href="struct_engine_1_1_execution_1_1_binding_ptr.html">Execution::BindingPtr</a>&lt; <a class="el" href="struct_engine_1_1_math_1_1_vector2.html">Math::Vector2</a> &gt; distance, const <a class="el" href="struct_engine_1_1_audio_1_1_audio_options.html">AudioOptions</a> &amp;options={})=0</td></tr>
-<tr class="separator:ad2a38a1df6b350b33fbf2821eadfefb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a34c1afc187e1b05f7349b5c3e4bc2087"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_behavior_1_1_behavior.html">Behavior::Behavior</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_audio_1_1_audio_api.html#a34c1afc187e1b05f7349b5c3e4bc2087">playDynamicSound</a> (std::string_view name, <a class="el" href="struct_engine_1_1_execution_1_1_binding_ptr.html">Execution::BindingPtr</a>&lt; <a class="el" href="struct_engine_1_1_math_1_1_vector2.html">Math::Vector2</a> &gt; distance, const <a class="el" href="struct_engine_1_1_audio_1_1_audio_options.html">AudioOptions</a> &amp;options={})</td></tr>
-<tr class="separator:a34c1afc187e1b05f7349b5c3e4bc2087"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a399dd6f6f6eb806e39787c2961fe8bc2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_behavior_1_1_behavior.html">Behavior::Behavior</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_audio_1_1_audio_api.html#a399dd6f6f6eb806e39787c2961fe8bc2">playSound</a> (AudioLoader::Handle buffer, const <a class="el" href="struct_engine_1_1_audio_1_1_audio_options.html">AudioOptions</a> &amp;options={})</td></tr>
-<tr class="separator:a399dd6f6f6eb806e39787c2961fe8bc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa31afb8def58683a0ab5d6d7a1338ac3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_behavior_1_1_behavior.html">Behavior::Behavior</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_audio_1_1_audio_api.html#aa31afb8def58683a0ab5d6d7a1338ac3">playSound</a> (const <a class="el" href="struct_engine_1_1_audio_1_1_audio_buffer.html">AudioBuffer</a> &amp;buffer, const <a class="el" href="struct_engine_1_1_audio_1_1_audio_options.html">AudioOptions</a> &amp;options={})</td></tr>
-<tr class="separator:aa31afb8def58683a0ab5d6d7a1338ac3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abe01444d4774c6e799c88e63bc36b6b3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_behavior_1_1_behavior.html">Behavior::Behavior</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_audio_1_1_audio_api.html#abe01444d4774c6e799c88e63bc36b6b3">playSound</a> (std::string_view name, const <a class="el" href="struct_engine_1_1_audio_1_1_audio_options.html">AudioOptions</a> &amp;options={})</td></tr>
-<tr class="separator:abe01444d4774c6e799c88e63bc36b6b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a834890ca71a6a2c0a9dda899559d9dac"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_audio_1_1_audio_api.html#a834890ca71a6a2c0a9dda899559d9dac">addSourceToChannel</a> (std::string_view name, Source auto &amp;&amp;source)</td></tr>
+<tr class="separator:a834890ca71a6a2c0a9dda899559d9dac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c7ba8b477eb0157c5dbca1f828e54ae"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_audio_1_1_audio_api.html#a7c7ba8b477eb0157c5dbca1f828e54ae">addSourceToChannel</a> (std::string_view name, <a class="el" href="struct_engine_1_1_audio_1_1_source_interface.html">SourceInterface</a> *source)</td></tr>
+<tr class="separator:a7c7ba8b477eb0157c5dbca1f828e54ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:acaf0ea972b895c60ddecdc32cbacbaa2"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_audio_1_1_audio_api.html#acaf0ea972b895c60ddecdc32cbacbaa2">process</a> (<a class="el" href="classvoid.html">void</a> *&amp;output, <a class="el" href="struct_engine_1_1_audio_1_1_audio_api.html#acd688fe5a7a2bc7be83c32ee64a542c1">OutputFormat</a> format, const int16_t *&amp;source, const <a class="el" href="classvoid.html">void</a> *end, size_t frameCount, size_t channels, const <a class="el" href="struct_engine_1_1_execution_1_1_binding_ptr.html">Execution::BindingPtr</a>&lt; <a class="el" href="struct_engine_1_1_math_1_1_vector2.html">Math::Vector2</a> &gt; &amp;direction, const <a class="el" href="struct_engine_1_1_audio_1_1_audio_options.html">AudioOptions</a> &amp;options)</td></tr>
-<tr class="separator:acaf0ea972b895c60ddecdc32cbacbaa2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73aeb1f6ccfa69c274c9b3bfdeb002df"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_audio_1_1_audio_api.html#a73aeb1f6ccfa69c274c9b3bfdeb002df">process</a> (<a class="el" href="classvoid.html">void</a> *&amp;output, <a class="el" href="struct_engine_1_1_audio_1_1_audio_api.html#acd688fe5a7a2bc7be83c32ee64a542c1">OutputFormat</a> format, const float *source, size_t frameCount, size_t channels)</td></tr>
+<tr class="separator:a73aeb1f6ccfa69c274c9b3bfdeb002df"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_static_methods_struct_engine_1_1_core_1_1_virtual_root_component_base"><td colspan="2" onclick="javascript:toggleInherit('pub_static_methods_struct_engine_1_1_core_1_1_virtual_root_component_base')"><img src="closed.png" alt="-"/>&#160;Static Public Member Functions inherited from <a class="el" href="struct_engine_1_1_core_1_1_virtual_root_component_base.html">Engine::Core::VirtualRootComponentBase&lt; AudioApi &gt;</a></td></tr>
 <tr class="memitem:a8ce4ce45f13e5d5f10bd9029918d4812 inherit pub_static_methods_struct_engine_1_1_core_1_1_virtual_root_component_base"><td class="memItemLeft" align="right" valign="top">static AudioApi &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_core_1_1_virtual_root_component_base.html#a8ce4ce45f13e5d5f10bd9029918d4812">getSingleton</a> ()</td></tr>
 <tr class="separator:a8ce4ce45f13e5d5f10bd9029918d4812 inherit pub_static_methods_struct_engine_1_1_core_1_1_virtual_root_component_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:ad73d07a9c2e2673ae62a3219d50525f5"><td class="memItemLeft" align="right" valign="top">virtual std::shared_ptr&lt; <a class="el" href="struct_engine_1_1_audio_1_1_channel.html">Channel</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_audio_1_1_audio_api.html#ad73d07a9c2e2673ae62a3219d50525f5">createChannel</a> ()=0</td></tr>
+<tr class="separator:ad73d07a9c2e2673ae62a3219d50525f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:aab58349f1078945f22166d097f102ad1"><td class="memItemLeft" align="right" valign="top">std::map&lt; std::string, <a class="el" href="struct_engine_1_1_audio_1_1_channel_ptr.html">ChannelPtr</a>, std::less&lt;&gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_audio_1_1_audio_api.html#aab58349f1078945f22166d097f102ad1">mChannels</a></td></tr>
+<tr class="separator:aab58349f1078945f22166d097f102ad1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Enumeration Documentation</h2>
 <a id="acd688fe5a7a2bc7be83c32ee64a542c1" name="acd688fe5a7a2bc7be83c32ee64a542c1"></a>
@@ -370,126 +374,8 @@ Static Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="abe01444d4774c6e799c88e63bc36b6b3" name="abe01444d4774c6e799c88e63bc36b6b3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abe01444d4774c6e799c88e63bc36b6b3">&#9670;&#160;</a></span>playSound() <span class="overload">[1/3]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="struct_engine_1_1_behavior_1_1_behavior.html">Behavior::Behavior</a> Engine::Audio::AudioApi::playSound </td>
-          <td>(</td>
-          <td class="paramtype">std::string_view&#160;</td>
-          <td class="paramname"><em>name</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="struct_engine_1_1_audio_1_1_audio_options.html">AudioOptions</a> &amp;&#160;</td>
-          <td class="paramname"><em>options</em> = <code>{}</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a399dd6f6f6eb806e39787c2961fe8bc2" name="a399dd6f6f6eb806e39787c2961fe8bc2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a399dd6f6f6eb806e39787c2961fe8bc2">&#9670;&#160;</a></span>playSound() <span class="overload">[2/3]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="struct_engine_1_1_behavior_1_1_behavior.html">Behavior::Behavior</a> Engine::Audio::AudioApi::playSound </td>
-          <td>(</td>
-          <td class="paramtype">AudioLoader::Handle&#160;</td>
-          <td class="paramname"><em>buffer</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="struct_engine_1_1_audio_1_1_audio_options.html">AudioOptions</a> &amp;&#160;</td>
-          <td class="paramname"><em>options</em> = <code>{}</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="aa31afb8def58683a0ab5d6d7a1338ac3" name="aa31afb8def58683a0ab5d6d7a1338ac3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa31afb8def58683a0ab5d6d7a1338ac3">&#9670;&#160;</a></span>playSound() <span class="overload">[3/3]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="struct_engine_1_1_behavior_1_1_behavior.html">Behavior::Behavior</a> Engine::Audio::AudioApi::playSound </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="struct_engine_1_1_audio_1_1_audio_buffer.html">AudioBuffer</a> &amp;&#160;</td>
-          <td class="paramname"><em>buffer</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="struct_engine_1_1_audio_1_1_audio_options.html">AudioOptions</a> &amp;&#160;</td>
-          <td class="paramname"><em>options</em> = <code>{}</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a34c1afc187e1b05f7349b5c3e4bc2087" name="a34c1afc187e1b05f7349b5c3e4bc2087"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a34c1afc187e1b05f7349b5c3e4bc2087">&#9670;&#160;</a></span>playDynamicSound() <span class="overload">[1/3]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="struct_engine_1_1_behavior_1_1_behavior.html">Behavior::Behavior</a> Engine::Audio::AudioApi::playDynamicSound </td>
-          <td>(</td>
-          <td class="paramtype">std::string_view&#160;</td>
-          <td class="paramname"><em>name</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="struct_engine_1_1_execution_1_1_binding_ptr.html">Execution::BindingPtr</a>&lt; <a class="el" href="struct_engine_1_1_math_1_1_vector2.html">Math::Vector2</a> &gt;&#160;</td>
-          <td class="paramname"><em>distance</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="struct_engine_1_1_audio_1_1_audio_options.html">AudioOptions</a> &amp;&#160;</td>
-          <td class="paramname"><em>options</em> = <code>{}</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="ad588645efe8daae6588966370b3c94ad" name="ad588645efe8daae6588966370b3c94ad"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad588645efe8daae6588966370b3c94ad">&#9670;&#160;</a></span>playDynamicSound() <span class="overload">[2/3]</span></h2>
+<a id="a834890ca71a6a2c0a9dda899559d9dac" name="a834890ca71a6a2c0a9dda899559d9dac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a834890ca71a6a2c0a9dda899559d9dac">&#9670;&#160;</a></span>addSourceToChannel() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -498,22 +384,16 @@ Static Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual <a class="el" href="struct_engine_1_1_behavior_1_1_behavior.html">Behavior::Behavior</a> Engine::Audio::AudioApi::playDynamicSound </td>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Audio::AudioApi::addSourceToChannel </td>
           <td>(</td>
-          <td class="paramtype">AudioLoader::Handle&#160;</td>
-          <td class="paramname"><em>buffer</em>, </td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="struct_engine_1_1_execution_1_1_binding_ptr.html">Execution::BindingPtr</a>&lt; <a class="el" href="struct_engine_1_1_math_1_1_vector2.html">Math::Vector2</a> &gt;&#160;</td>
-          <td class="paramname"><em>distance</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="struct_engine_1_1_audio_1_1_audio_options.html">AudioOptions</a> &amp;&#160;</td>
-          <td class="paramname"><em>options</em> = <code>{}</code>&#160;</td>
+          <td class="paramtype">Source auto &amp;&amp;&#160;</td>
+          <td class="paramname"><em>source</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -523,39 +403,30 @@ Static Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="ad2a38a1df6b350b33fbf2821eadfefb9" name="ad2a38a1df6b350b33fbf2821eadfefb9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad2a38a1df6b350b33fbf2821eadfefb9">&#9670;&#160;</a></span>playDynamicSound() <span class="overload">[3/3]</span></h2>
+<a id="a7c7ba8b477eb0157c5dbca1f828e54ae" name="a7c7ba8b477eb0157c5dbca1f828e54ae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7c7ba8b477eb0157c5dbca1f828e54ae">&#9670;&#160;</a></span>addSourceToChannel() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual <a class="el" href="struct_engine_1_1_behavior_1_1_behavior.html">Behavior::Behavior</a> Engine::Audio::AudioApi::playDynamicSound </td>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Audio::AudioApi::addSourceToChannel </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="struct_engine_1_1_audio_1_1_audio_buffer.html">AudioBuffer</a> &amp;&#160;</td>
-          <td class="paramname"><em>buffer</em>, </td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="struct_engine_1_1_execution_1_1_binding_ptr.html">Execution::BindingPtr</a>&lt; <a class="el" href="struct_engine_1_1_math_1_1_vector2.html">Math::Vector2</a> &gt;&#160;</td>
-          <td class="paramname"><em>distance</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="struct_engine_1_1_audio_1_1_audio_options.html">AudioOptions</a> &amp;&#160;</td>
-          <td class="paramname"><em>options</em> = <code>{}</code>&#160;</td>
+          <td class="paramtype"><a class="el" href="struct_engine_1_1_audio_1_1_source_interface.html">SourceInterface</a> *&#160;</td>
+          <td class="paramname"><em>source</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -563,17 +434,12 @@ Static Public Member Functions</h2></td></tr>
           <td></td><td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="acaf0ea972b895c60ddecdc32cbacbaa2" name="acaf0ea972b895c60ddecdc32cbacbaa2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acaf0ea972b895c60ddecdc32cbacbaa2">&#9670;&#160;</a></span>process()</h2>
+<a id="a73aeb1f6ccfa69c274c9b3bfdeb002df" name="a73aeb1f6ccfa69c274c9b3bfdeb002df"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a73aeb1f6ccfa69c274c9b3bfdeb002df">&#9670;&#160;</a></span>process()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -582,7 +448,7 @@ Static Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int Engine::Audio::AudioApi::process </td>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Audio::AudioApi::process </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classvoid.html">void</a> *&amp;&#160;</td>
           <td class="paramname"><em>output</em>, </td>
@@ -596,14 +462,8 @@ Static Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const int16_t *&amp;&#160;</td>
+          <td class="paramtype">const float *&#160;</td>
           <td class="paramname"><em>source</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classvoid.html">void</a> *&#160;</td>
-          <td class="paramname"><em>end</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -615,19 +475,7 @@ Static Public Member Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>channels</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="struct_engine_1_1_execution_1_1_binding_ptr.html">Execution::BindingPtr</a>&lt; <a class="el" href="struct_engine_1_1_math_1_1_vector2.html">Math::Vector2</a> &gt; &amp;&#160;</td>
-          <td class="paramname"><em>direction</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="struct_engine_1_1_audio_1_1_audio_options.html">AudioOptions</a> &amp;&#160;</td>
-          <td class="paramname"><em>options</em>&#160;</td>
+          <td class="paramname"><em>channels</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -644,6 +492,54 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="ad73d07a9c2e2673ae62a3219d50525f5" name="ad73d07a9c2e2673ae62a3219d50525f5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad73d07a9c2e2673ae62a3219d50525f5">&#9670;&#160;</a></span>createChannel()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual std::shared_ptr&lt; <a class="el" href="struct_engine_1_1_audio_1_1_channel.html">Channel</a> &gt; Engine::Audio::AudioApi::createChannel </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="aab58349f1078945f22166d097f102ad1" name="aab58349f1078945f22166d097f102ad1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aab58349f1078945f22166d097f102ad1">&#9670;&#160;</a></span>mChannels</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::map&lt;std::string, <a class="el" href="struct_engine_1_1_audio_1_1_channel_ptr.html">ChannelPtr</a>, std::less&lt;&gt; &gt; Engine::Audio::AudioApi::mChannels</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <hr/>The documentation for this struct was generated from the following files:<ul>
 <li>plugins/audio/api/src/Madgine/audio/<a class="el" href="audioapi_8h.html">audioapi.h</a></li>
 <li>plugins/audio/api/src/Madgine/audio/<a class="el" href="audioapi_8cpp.html">audioapi.cpp</a></li>
@@ -651,7 +547,7 @@ Static Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Oct 28 2026 14:29:55 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Wed Oct 28 2026 21:30:31 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>
