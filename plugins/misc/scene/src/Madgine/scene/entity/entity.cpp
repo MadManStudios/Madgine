@@ -321,7 +321,8 @@ namespace Scene {
                 Serialize::set_synced(*this, false);
             }
 
-            container().remove(pointer());
+            if (mHandle)
+                container().remove(pointer());
 
             clearComponents();
         }
