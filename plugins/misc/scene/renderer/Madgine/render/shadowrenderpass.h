@@ -49,6 +49,8 @@ namespace Render {
         int mPriority;
 
         Math::Frustum mLightFrustum;
+
+        std::vector<const ShadowSceneRenderData::ObjectData *> mVisible;
     };
 
 }

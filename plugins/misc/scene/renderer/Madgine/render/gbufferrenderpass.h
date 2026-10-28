@@ -34,6 +34,8 @@ namespace Render {
         LitSceneRenderData mData;
 
         int mPriority;
+
+        std::vector<const LitSceneRenderData::ObjectData *> mVisible;
     };
 
 }

@@ -7,6 +7,7 @@
 
 #include "gbuffer_hlsl.h"
 
+#include "frustumculling.h"
 #include "scenerenderdata.h"
 
 namespace Engine {
@@ -43,8 +44,18 @@ namespace Render {
         mPipeline->mapParameters<HLSL::GBufferPerApplication>(0)->p = target->getClipSpaceMatrix() * mData.mCamera.getProjectionMatrix(aspectRatio);
 
         Math::Matrix4 v = mData.mCamera.getViewMatrix();
+        FrustumCuller culler { mData.mCamera.getFrustum(aspectRatio) };
 
         for (const auto &[key, objects] : mData.mInstances) {
+            // Only the instances whose bounding box reaches into the view (skinned meshes always)
+            mVisible.clear();
+            const Math::AABB &aabb = key.mMesh->mAABB;
+            for (const LitSceneRenderData::ObjectData &o : objects)
+                if (o.mBones || culler.visible(aabb, o.mTransform))
+                    mVisible.push_back(&o);
+            if (mVisible.empty())
+                continue;
+
             {
                 auto perObject = mPipeline->mapParameters<HLSL::GBufferPerObject>(2);
                 perObject->hasDistanceField = false;
@@ -54,20 +65,20 @@ namespace Render {
             mPipeline->bindResources(target, 2, key.mMaterial ? key.mMaterial : mData.mRenderData.defaultMaterial());
 
             {
-                auto instanceData = mPipeline->mapTempBuffer<HLSL::GBufferInstanceData[]>(1, objects.size());
-                std::ranges::transform(objects, instanceData.mData, [&](const LitSceneRenderData::ObjectData &o) {
-                    Math::Matrix4 mv = v * o.mTransform;
+                auto instanceData = mPipeline->mapTempBuffer<HLSL::GBufferInstanceData[]>(1, mVisible.size());
+                std::ranges::transform(mVisible, instanceData.mData, [&](const LitSceneRenderData::ObjectData *o) {
+                    Math::Matrix4 mv = v * o->mTransform;
                     return HLSL::GBufferInstanceData {
                         mv.Transpose(),
                         mv.Inverse(),
-                        o.mDiffuseColor,
-                        Math::Vector4 { o.mEmissiveColor, 0.0f }
+                        o->mDiffuseColor,
+                        Math::Vector4 { o->mEmissiveColor, 0.0f }
                     };
                 });
             }
 
             mPipeline->bindMesh(target, *key.mMesh);
-            mPipeline->renderInstanced(target, objects.size());
+            mPipeline->renderInstanced(target, mVisible.size());
         }
     }
 
