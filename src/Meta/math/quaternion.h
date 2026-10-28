@@ -9,15 +9,9 @@ namespace Math {
 
     struct Quaternion {
 
-        Quaternion()
-            : x(0.0f)
-            , y(0.0f)
-            , z(0.0f)
-            , w(1.0f)
-        {
-        }
+        constexpr Quaternion() = default;
 
-        Quaternion(float radian, const Vector3 &axis)
+        constexpr Quaternion(float radian, const Vector3 &axis)
             : w(cosf(0.5f * radian))
         {
             Vector3 v = axis;
@@ -28,7 +22,7 @@ namespace Math {
             z = v.z;
         }
 
-        Quaternion(float x, float y, float z, float w)
+        constexpr Quaternion(float x, float y, float z, float w)
             : x(x)
             , y(y)
             , z(z)
@@ -45,17 +39,17 @@ namespace Math {
         {
         }
 
-        static Quaternion FromRadian(const Vector3 &angles)
+        static constexpr Quaternion FromRadian(const Vector3 &angles)
         {
             return Quaternion(angles.z, Vector3::UNIT_Z) * Quaternion(angles.x, Vector3::UNIT_X) * Quaternion(angles.y, Vector3::UNIT_Y);
         }
 
-        static Quaternion FromDegrees(const Vector3 &angles)
+        static constexpr Quaternion FromDegrees(const Vector3 &angles)
         {
             return FromRadian(angles / 180.0f * PI);
         }
 
-        Vector3 toRadian() const
+        constexpr Vector3 toRadian() const
         {
             return {
                 std::atan2(2 * (w * x + y * z), 1 - 2 * (x * x + y * y)),
@@ -64,12 +58,12 @@ namespace Math {
             };
         }
 
-        Vector3 toDegrees() const
+        constexpr Vector3 toDegrees() const
         {
             return toRadian() / PI * 180.0f;
         }
 
-        static Quaternion FromDirection(const NormalizedVector3 &dir, const NormalizedVector3 &up = { Vector3::UNIT_Y })
+        static constexpr Quaternion FromDirection(const NormalizedVector3 &dir, const NormalizedVector3 &up = { Vector3::UNIT_Y })
         {
             NormalizedVector3 side = up.crossProduct(dir);
             NormalizedVector3 actualUp = dir.crossProduct(side);
@@ -79,7 +73,7 @@ namespace Math {
             return FromMatrix(m);
         }
 
-        static Quaternion FromDirectionLockedUp(const NormalizedVector3 &dir, const NormalizedVector3 &up = { Vector3::UNIT_Y })
+        static constexpr Quaternion FromDirectionLockedUp(const NormalizedVector3 &dir, const NormalizedVector3 &up = { Vector3::UNIT_Y })
         {
             NormalizedVector3 side = up.crossProduct(dir);
             NormalizedVector3 actualDir = side.crossProduct(up);
@@ -89,7 +83,7 @@ namespace Math {
             return FromMatrix(m);
         }
 
-        static Quaternion FromMatrix(const Matrix3 &m)
+        static constexpr Quaternion FromMatrix(const Matrix3 &m)
         {
             float qw, qx, qy, qz;
             float tr = m[0][0] + m[1][1] + m[2][2];
@@ -124,7 +118,7 @@ namespace Math {
             return { qx, qy, qz, qw };
         }
 
-        void operator*=(const Quaternion &other)
+        constexpr void operator*=(const Quaternion &other)
         {
             Vector3 v { x, y, z };
             Vector3 otherV { other.x, other.y, other.z };
@@ -136,14 +130,14 @@ namespace Math {
             w = newW;
         }
 
-        Quaternion operator*(const Quaternion &other) const
+        constexpr Quaternion operator*(const Quaternion &other) const
         {
             Quaternion q { *this };
             q *= other;
             return q;
         }
 
-        void operator+=(const Quaternion &other)
+        constexpr void operator+=(const Quaternion &other)
         {
             w += other.w;
             x += other.x;
@@ -151,14 +145,14 @@ namespace Math {
             z += other.z;
         }
 
-        Quaternion operator+(const Quaternion &other)
+        constexpr Quaternion operator+(const Quaternion &other)
         {
             Quaternion q { *this };
             q += other;
             return q;
         }
 
-        void operator-=(const Quaternion &other)
+        constexpr void operator-=(const Quaternion &other)
         {
             w -= other.w;
             x -= other.x;
@@ -166,14 +160,14 @@ namespace Math {
             z -= other.z;
         }
 
-        Quaternion operator-(const Quaternion &other)
+        constexpr Quaternion operator-(const Quaternion &other)
         {
             Quaternion q { *this };
             q -= other;
             return q;
         }
 
-        void operator*=(float c)
+        constexpr void operator*=(float c)
         {
             x *= c;
             y *= c;
@@ -181,33 +175,33 @@ namespace Math {
             w *= c;
         }
 
-        Quaternion operator*(float c)
+        constexpr Quaternion operator*(float c)
         {
             Quaternion q { *this };
             q *= c;
             return q;
         }
 
-        float dotProduct(const Quaternion &other)
+        constexpr float dotProduct(const Quaternion &other)
         {
             return w * other.w + x * other.x + y * other.y + z * other.z;
         }
 
-        void invert()
+        constexpr void invert()
         {
             x *= -1;
             y *= -1;
             z *= -1;
         }
 
-        Quaternion inverse() const
+        constexpr Quaternion inverse() const
         {
             Quaternion q { *this };
             q.invert();
             return q;
         }
 
-        Matrix3 toMatrix() const
+        constexpr Matrix3 toMatrix() const
         {
             return Matrix3 {
                 1 - 2 * (y * y + z * z), 2 * (x * y - z * w), 2 * (x * z + y * w),
@@ -216,22 +210,22 @@ namespace Math {
             };
         }
 
-        Vector3 operator*(const Vector3 &dir) const
+        constexpr Vector3 operator*(const Vector3 &dir) const
         {
             return toMatrix() * dir;
         }
 
-        bool operator==(const Quaternion &other) const
+        constexpr bool operator==(const Quaternion &other) const
         {
             return w == other.w && x == other.x && y == other.y && z == other.z;
         }
 
-        Quaternion operator-() const
+        constexpr Quaternion operator-() const
         {
             return inverse();
         }
 
-        void normalize()
+        constexpr void normalize()
         {
             float invNorm = 1.0f / sqrtf(w * w + x * x + y * y + z * z);
             x *= invNorm;
@@ -240,10 +234,10 @@ namespace Math {
             w *= invNorm;
         }
 
-        float x;
-        float y;
-        float z;
-        float w;
+        float x = 0.0f;
+        float y = 0.0f;
+        float z = 0.0f;
+        float w = 1.0f;
 
         friend std::ostream &operator<<(std::ostream &o, const Quaternion &q)
         {

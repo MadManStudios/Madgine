@@ -61,7 +61,7 @@ namespace Math {
                 @note
                     It does <b>NOT</b> initialize the matrix for efficiency.
             */
-        inline Matrix3() { }
+        inline constexpr Matrix3() = default;
         inline constexpr explicit Matrix3(const float arr[3][3])
             : m00 { arr[0][0] }
             , m01 { arr[1][0] }
