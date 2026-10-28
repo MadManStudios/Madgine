@@ -14,6 +14,7 @@
 #include "Madgine/scene/entity/entity.h"
 #include "Madgine/scene/scenemanager.h"
 
+#include "frustumculling.h"
 #include "scenemainwindowcomponent.h"
 
 // #include "Madgine/render/rendercontext.h"
@@ -61,46 +62,58 @@ namespace Render {
         if (!lightEntity)
             return;
 
-        // TODO Culling
         Scene::Entity::Entity &entity = *lightEntity;
         Scene::Entity::Transform *transform = entity.getComponent<Scene::Entity::Transform>();
         if (!transform)
             return;
 
+        Math::Frustum f {
+            Math::Vector3::ZERO,
+            Math::Quaternion {},
+            0.01f, 0.01f,
+            0.01f, 100.0f,
+            false
+        };
+
         {
             auto perApplication = mPipeline->mapParameters<HLSL::PointShadowPerApplication>(0);
 
-            Math::Frustum f {
-                Math::Vector3::ZERO,
-                Math::Quaternion {},
-                0.01f, 0.01f,
-                0.01f, 100.0f,
-                false
-            };
             perApplication->p = ProjectionMatrix(f);
         }
 
-        for (std::pair<GPUMeshLoader::Handle const, std::vector<ShadowSceneRenderData::ObjectData>> &instance : mData.mInstances) {
-            const GPUMeshLoader::Handle &meshData = instance.first;
+        static constexpr Math::Quaternion rotationQuaternions[] = {
+            { 0, 0.70710678f, 0, 0.70710678f }, // +90° around Y
+            { 0, -0.70710678f, 0, 0.70710678f }, // -90° around Y
+            { -0.70710678f, 0, 0, 0.70710678f }, // -90° around X
+            { 0.70710678f, 0, 0, 0.70710678f }, // +90° around X            
+            { 0, 0, 0, 1 }, // Identity
+            { 0, 1, 0, 0 } // 180° around Y
+        };
 
-            std::vector<HLSL::PointShadowInstanceData> instanceData;
+        Math::Vector3 worldPos = transform->worldPosition(entity);
 
-            static constexpr Math::Matrix4 rotationMatrices[] = {
-                { 0, 0, -1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1 },
-                { 0, 0, 1, 0, 0, 1, 0, 0, -1, 0, 0, 0, 0, 0, 0, 1 },
-                { 1, 0, 0, 0, 0, 0, -1, 0, 0, 1, 0, 0, 0, 0, 0, 1 },
-                { 1, 0, 0, 0, 0, 0, 1, 0, 0, -1, 0, 0, 0, 0, 0, 1 },
-                { 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1 },
-                { -1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1 }
-            };
+        Math::Matrix4 v = Math::Matrix4 { (-rotationQuaternions[iteration]).toMatrix() } * TranslationMatrix(-worldPos);
 
-            Math::Matrix4 v = rotationMatrices[iteration] * TranslationMatrix(-transform->mPosition);
+        Math::Frustum rotatedFrustum = rotationQuaternions[iteration] * f;
+        rotatedFrustum.mPosition = worldPos;
+        FrustumCuller culler { rotatedFrustum };
+
+        for (const auto &[meshData, objects] : mData.mInstances) {
+
+            // Only the instances whose bounding box reaches into the view (skinned meshes always)
+            mVisible.clear();
+            const Math::AABB &aabb = meshData->mAABB;
+            for (const ShadowSceneRenderData::ObjectData &o : objects)
+                if (o.mBones || culler.visible(aabb, o.mTransform))
+                    mVisible.push_back(&o);
+            if (mVisible.empty())
+                continue;
 
             {
-                auto instanceData = mPipeline->mapTempBuffer<HLSL::PointShadowInstanceData[]>(1, instance.second.size());
+                auto instanceData = mPipeline->mapTempBuffer<HLSL::PointShadowInstanceData[]>(1, mVisible.size());
 
-                std::ranges::transform(instance.second, instanceData.mData, [&](const ShadowSceneRenderData::ObjectData &o) {
-                    Math::Matrix4 mv = v * o.mTransform;
+                std::ranges::transform(mVisible, instanceData.mData, [&](const ShadowSceneRenderData::ObjectData *o) {
+                    Math::Matrix4 mv = v * o->mTransform;
                     return HLSL::PointShadowInstanceData {
                         mv.Transpose(),
                         // o.mBones
@@ -109,7 +122,7 @@ namespace Render {
             }
 
             mPipeline->bindMesh(target, *meshData);
-            mPipeline->renderInstanced(target, instance.second.size());
+            mPipeline->renderInstanced(target, mVisible.size());
         }
     }
 

@@ -13,7 +13,7 @@ namespace Render {
 
         LitSceneRenderData(Scene::SceneManager &scene, SceneRenderData &renderData, Camera &camera);
 
-        virtual Threading::ImmediateTask<RenderFuture> render(RenderContext *context) override;
+        Threading::ImmediateTask<RenderFuture> render(RenderContext *context) override;
 
         Scene::SceneManager &mScene;
 

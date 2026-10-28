@@ -44,6 +44,8 @@ namespace Render {
         UniqueResourceBlock mShadowResourceBlock;
 
         int mPriority;
+
+        std::vector<const LitSceneRenderData::ObjectData *> mVisible;
     };
 
 }

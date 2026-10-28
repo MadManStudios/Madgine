@@ -28,6 +28,8 @@ namespace Render {
         size_t mIndex;
 
         int mPriority;
+
+        std::vector<const ShadowSceneRenderData::ObjectData *> mVisible;
     };
 
 }

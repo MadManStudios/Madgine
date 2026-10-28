@@ -18,6 +18,7 @@
 
 #include "Meta/reflect/metatable_impl.h"
 
+#include "frustumculling.h"
 #include "light_hlsl.h"
 #include "scene_hlsl.h"
 #include "scenemainwindowcomponent.h"
@@ -132,9 +133,20 @@ namespace Render {
 
         mPipeline->bindResources(target, 3, mShadowResourceBlock);
 
-        for (const std::pair<const LitSceneRenderData::NonInstancedData, std::vector<LitSceneRenderData::ObjectData>> &instance : mData.mInstances) {
-            GPUMeshLoader::Handle meshData = instance.first.mMesh;
-            ResourceBlock material = instance.first.mMaterial;
+        FrustumCuller culler { mData.mCamera.getFrustum(aspectRatio) };
+
+        for (const auto &[key, objects] : mData.mInstances) {
+            GPUMeshLoader::Handle meshData = key.mMesh;
+            ResourceBlock material = key.mMaterial;
+            
+            // Only the instances whose bounding box reaches into the view (skinned meshes always)
+            mVisible.clear();
+            const Math::AABB &aabb = meshData->mAABB;
+            for (const LitSceneRenderData::ObjectData &o : objects)
+                if (o.mBones || culler.visible(aabb, o.mTransform))
+                    mVisible.push_back(&o);
+            if (mVisible.empty())
+                continue;            
 
             {
                 auto perObject = mPipeline->mapParameters<HLSL::ScenePerObject>(2);
@@ -150,23 +162,23 @@ namespace Render {
                 mPipeline->bindResources(target, 2, mData.mRenderData.defaultMaterial());
 
             {
-                auto instanceData = mPipeline->mapTempBuffer<HLSL::SceneInstanceData[]>(1, instance.second.size());
+                auto instanceData = mPipeline->mapTempBuffer<HLSL::SceneInstanceData[]>(1, mVisible.size());
 
-                std::ranges::transform(instance.second, instanceData.mData, [&](const LitSceneRenderData::ObjectData &o) {
-                    Math::Matrix4 mv = v * o.mTransform;
+                std::ranges::transform(mVisible, instanceData.mData, [&](const LitSceneRenderData::ObjectData *o) {
+                    Math::Matrix4 mv = v * o->mTransform;
                     return HLSL::SceneInstanceData {
                         mv.Transpose(),
                         mv.Inverse() /*.Transpose().Transpose()*/,
-                        o.mDiffuseColor,
+                        o->mDiffuseColor,
                         Math::Vector4 { 1.0f, 1.0f, 1.0f, 1.0f },
-                        Math::Vector4 { o.mEmissiveColor, 0.0f },
+                        Math::Vector4 { o->mEmissiveColor, 0.0f },
                         // o.mBones
                     };
                 });
             }
 
             mPipeline->bindMesh(target, *meshData);
-            mPipeline->renderInstanced(target, instance.second.size());
+            mPipeline->renderInstanced(target, mVisible.size());
             // mPipeline->renderMeshInstanced(target, std::move(instanceData), meshData);
         }
     }
