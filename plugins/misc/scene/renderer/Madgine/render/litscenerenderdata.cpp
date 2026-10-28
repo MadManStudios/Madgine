@@ -30,7 +30,7 @@ namespace Render {
         for (auto &[key, transforms] : mInstances)
             transforms.clear();
 
-        // TODO Culling
+        // Culled per view by the passes (FrustumCuller)
 
         for (const EntityRenderData &entity : mRenderData.data()) {     
             

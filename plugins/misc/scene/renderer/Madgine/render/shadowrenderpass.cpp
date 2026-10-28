@@ -11,6 +11,7 @@
 #include "Madgine/scene/entity/entity.h"
 #include "Madgine/scene/scenemanager.h"
 
+#include "frustumculling.h"
 #include "scenemainwindowcomponent.h"
 
 // #include "Madgine/render/rendercontext.h"
@@ -57,6 +58,8 @@ namespace Render {
         }
 
         Math::Matrix4 v = viewMatrix();
+        // The light frustum already reaches towards the sun as far as casters can throw shadows into the view
+        FrustumCuller culler { mLightFrustum };
 
         {
             auto perFrame = mPipeline->mapParameters<HLSL::LightPerFrame>(1);
@@ -68,6 +71,14 @@ namespace Render {
         for (const std::pair<GPUMeshLoader::Handle const, std::vector<ShadowSceneRenderData::ObjectData>> &instance : mData.mInstances) {
             GPUMeshLoader::Handle meshData = instance.first;
 
+            // Only the instances whose bounding box reaches into the light frustum (skinned meshes always)
+            mVisible.clear();
+            for (const ShadowSceneRenderData::ObjectData &o : instance.second)
+                if (o.mBones || culler.visible(meshData->mAABB, o.mTransform))
+                    mVisible.push_back(&o);
+            if (mVisible.empty())
+                continue;
+
             {
                 auto perObject = mPipeline->mapParameters<HLSL::ScenePerObject>(2);
 
@@ -76,13 +87,11 @@ namespace Render {
                 perObject->hasTexture = false;
             }
 
-            std::vector<HLSL::SceneInstanceData> instanceData;
-
             {
-                auto instanceData = mPipeline->mapTempBuffer<HLSL::SceneInstanceData[]>(1, instance.second.size());
+                auto instanceData = mPipeline->mapTempBuffer<HLSL::SceneInstanceData[]>(1, mVisible.size());
 
-                std::ranges::transform(instance.second, instanceData.mData, [&](const ShadowSceneRenderData::ObjectData &o) {
-                    Math::Matrix4 mv = v * o.mTransform;
+                std::ranges::transform(mVisible, instanceData.mData, [&](const ShadowSceneRenderData::ObjectData *o) {
+                    Math::Matrix4 mv = v * o->mTransform;
                     return HLSL::SceneInstanceData {
                         mv.Transpose(),
                         mv.Inverse().Transpose().Transpose(),
@@ -95,7 +104,7 @@ namespace Render {
 
             mPipeline->bindMesh(target, *meshData);
 
-            mPipeline->renderInstanced(target, instance.second.size());
+            mPipeline->renderInstanced(target, mVisible.size());
             // mPipeline->renderMeshInstanced(target, std::move(instanceData), meshData);
         }
     }

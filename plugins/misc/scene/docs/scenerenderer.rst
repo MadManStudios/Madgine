@@ -47,6 +47,9 @@ with a render pass of its own:
   the view inside a world box. ``light.hlsl`` provides the light structures and the filtered shadow lookup; define
   ``LIGHT_NO_RESOURCES`` before including it to leave out the resources of the forward renderer.
 * ``ShadowSceneRenderData`` collects the shadow casting meshes, e.g. for shadow maps of further lights.
+* ``FrustumCuller`` (``frustumculling.h``) tests world space bounding boxes against the planes of a frustum. The
+  G-buffer and the sun's shadow map use it to draw only the instances inside the camera frustum or the light frustum;
+  skinned meshes are always drawn. ``FrustumCuller::sEnabled = false`` draws everything (for comparisons).
 
 Lights are entity components at the position of the entity's ``Transform``:
 
