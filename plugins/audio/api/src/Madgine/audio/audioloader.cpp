@@ -48,5 +48,31 @@ namespace Audio {
     {
     }
 
+    std::pair<size_t, bool> AudioLoader::Handle::render(float *output, size_t frameCount, size_t channels, size_t sampleRate, size_t &offset)
+    {
+        if (!available())
+            return { 0, false };
+
+        const AudioBuffer &buffer = **this;
+
+        // TODO: resampling, handling different source formats
+
+        const int16_t *data = static_cast<const int16_t *>(buffer.mBuffer.mData);
+
+        size_t framesRemaining = buffer.mInfo.mSampleCount - offset;
+
+        size_t renderFrames = std::min(frameCount, framesRemaining);
+
+        for (size_t i = 0; i < renderFrames; ++i) {
+            for (size_t channel = 0; channel < channels; ++channel) {
+                output[i * channels + channel] = data[(offset + i) * buffer.mInfo.mChannels + (channel % buffer.mInfo.mChannels)] / 32768.0f;
+            }
+        }
+
+        offset += renderFrames;
+
+        return { renderFrames * channels, offset == buffer.mInfo.mSampleCount };
+    }
+
 }
 }

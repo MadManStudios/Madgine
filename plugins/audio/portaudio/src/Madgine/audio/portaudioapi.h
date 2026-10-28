@@ -20,21 +20,10 @@ namespace Audio {
 
         std::string_view key() const override;
 
-        Behavior::Behavior playDynamicSound(AudioLoader::Handle buffer, Execution::BindingPtr<Math::Vector2> distance, const AudioOptions &options) override;        
-        Behavior::Behavior playDynamicSound(const AudioBuffer &buffer, Execution::BindingPtr<Math::Vector2> distance, const AudioOptions &options) override;
-
     protected:
-        friend struct PlaybackState;
-        friend struct PortAudioStream;
-        PortAudioStream &fetchStream(const AudioInfo &info);
-        void reuseStream(PortAudioStream &stream);
+        std::shared_ptr<Channel> createChannel() override;
 
     private:
-        std::mutex mMutex;
-        std::list<PortAudioStream> mStreamPool;
-        std::list<PortAudioStream> mBusyStreams;
-        std::list<PortAudioStream> mClosingStreams;
-
         PaDeviceIndex mDevice;
         const PaDeviceInfo *mDeviceInfo = nullptr;
     };

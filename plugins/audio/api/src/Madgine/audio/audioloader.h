@@ -19,6 +19,18 @@ namespace Audio {
             };
         };
 
+        struct MADGINE_AUDIO_EXPORT Handle : ResourceLoader::Handle {
+
+            using ResourceLoader::Handle::Handle;
+            Handle(ResourceLoader::Handle handle)
+                : ResourceLoader::Handle(std::move(handle))
+            {
+            }
+
+            std::pair<size_t, bool> render(float *output, size_t frameCount, size_t channels, size_t sampleRate, size_t &offset);
+
+        };
+
         AudioLoader();
 
         bool loadImpl(AudioBuffer &data, ResourceDataInfo &info);

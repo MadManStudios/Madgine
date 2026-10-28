@@ -4,8 +4,9 @@
 
 #include "Modules/uniquecomponent/uniquecomponentcollector.h"
 
-#include "Madgine/audio/audioapi.h"
 #include "Madgine/audio/audioloader.h"
+#include "Madgine/audio/senders/audiosenders.h"
+#include "Madgine/audio/sources/effects.h"
 #include "Madgine/behavior/awaitables/awaitablebinding.h"
 #include "Madgine/behavior/behavior.h"
 #include "Madgine/behavior/nativebehaviorcollector.h"
@@ -58,7 +59,7 @@ Behavior::Behavior AudioTest(Scene::EntityContext self = {})
 {
     auto selfPtr = co_await *self;
 
-    co_await Audio::play_dynamic_sound(Audio::AudioLoader::load("sample"), Execution::BindingPtr<Math::Vector2> { Execution::FunctionBinding { [](Scene::Entity::Entity &e) { return Math::Vector2 { e.getComponent<Scene::Entity::Transform>()->mPosition.x, e.getComponent<Scene::Entity::Transform>()->mPosition.z }; } }(*self) }, { .mVolume = 0.1f, .mLooping = true });
+    co_await Audio::play_source(Audio::AudioLoader::Handle { Audio::AudioLoader::load("sample") } | Audio::looping | Audio::positional(Execution::FunctionBinding { [](Scene::Entity::Entity &e) { return Math::Vector2 { e.getComponent<Scene::Entity::Transform>()->mPosition.x, e.getComponent<Scene::Entity::Transform>()->mPosition.z }; } }(*self)) | Audio::volume(0.1f), "Default");
 }
 
 }

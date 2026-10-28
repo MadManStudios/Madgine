@@ -11,6 +11,7 @@
 #include "Modules/threading/awaitables/awaitabletimepoint.h"
 #include "Modules/uniquecomponent/uniquecomponentcollector.h"
 
+#include "Madgine/audio/channel.h"
 #include "Madgine/resources/sender.h"
 #include "Madgine/root/root.h"
 
@@ -26,79 +27,14 @@ UNIQUECOMPONENT(Engine::Audio::PortAudioApi)
 namespace Engine {
 namespace Audio {
 
-    struct PlaybackState : Behavior::BehaviorReceiver {
-        PlaybackState(const AudioBuffer &buffer, PortAudioApi &api, AudioOptions options, Execution::BindingPtr<Math::Vector2> direction)
-            : mBuffer(std::move(buffer))
-            , mApi(api)
-            , mOptions(std::move(options))
-            , mDirection(std::move(direction))
-        {
-        }
+    struct PortAudioStream : Channel {
 
-        void start();
-
-        void stop();
-
-        friend auto tag_invoke(Execution::visit_state_t, PlaybackState *state, auto &&visitor)
-        {
-            visitor(Execution::State::BeginBlock { "Play '"s + std::string { "Audio" } + "'" });
-
-            float progress = 0.0f;
-
-            if (state) {
-                const std::byte *start, *end, *current;
-                start = static_cast<const std::byte *>(state->mBuffer.mBuffer.begin());
-                end = static_cast<const std::byte *>(state->mEnd);
-                current = static_cast<const std::byte *>(state->mPtr);
-                progress = static_cast<float>(current - start) / (end - start);
-            }
-
-            visitor(Execution::State::Progress { progress });
-
-            visitor(Execution::State::EndBlock {});
-        }
-
-        const AudioBuffer &mBuffer;
-        PortAudioApi &mApi;
-        PortAudioStream *mStream = nullptr;
-        AudioOptions mOptions;
-        Execution::BindingPtr<Math::Vector2> mDirection;
-
-        const void *mPtr;
-        const void *mEnd;
-    };
-
-    struct PlaybackSender : Execution::base_sender {
-        using result_type = Reflect::Error;
-        template <template <typename...> typename Tuple>
-        using value_types = Tuple<>;
-
-        template <typename Rec>
-        friend auto tag_invoke(Execution::connect_t, PlaybackSender &&sender, Rec &&rec)
-        {
-            return Behavior::VirtualBehaviorState<Rec, PlaybackState> { std::forward<Rec>(rec), sender.mBuffer, sender.mApi, std::move(sender.mOptions), std::move(sender.mDirection) };
-        }
-
-        template <typename Rec>
-        friend auto tag_invoke(Execution::connect_t, PlaybackSender &sender, Rec &&rec)
-        {
-            return Behavior::VirtualBehaviorState<Rec, PlaybackState> { std::forward<Rec>(rec), sender.mBuffer, sender.mApi, sender.mOptions, sender.mDirection };
-        }
-
-        const AudioBuffer &mBuffer;
-        PortAudioApi &mApi;
-        AudioOptions mOptions;
-        Execution::BindingPtr<Math::Vector2> mDirection;
-    };
-
-    struct PortAudioStream {
-
-        PortAudioStream(const AudioInfo &info, PaDeviceIndex device, const PaDeviceInfo *deviceInfo)
-            : mChannels(info.mChannels)
-            , mSampleRate(info.mSampleRate)
+        PortAudioStream(PaDeviceIndex device, const PaDeviceInfo *deviceInfo)
+            : mChannels(2)
+            , mSampleRate(44100)
         {
             PaStreamParameters outputParameters;
-            outputParameters.channelCount = info.mChannels;
+            outputParameters.channelCount = mChannels;
             outputParameters.sampleFormat = paInt16;
             outputParameters.hostApiSpecificStreamInfo = nullptr;
             outputParameters.suggestedLatency = deviceInfo->defaultLowOutputLatency;
@@ -107,7 +43,7 @@ namespace Audio {
             PaError err = Pa_OpenStream(&mStream,
                 nullptr,
                 &outputParameters,
-                info.mSampleRate,
+                mSampleRate,
                 paFramesPerBufferUnspecified,
                 paNoFlag,
                 sCallback,
@@ -116,6 +52,10 @@ namespace Audio {
                 throw 0;
 
             err = Pa_SetStreamFinishedCallback(mStream, sFinishedCallback);
+            if (err != paNoError)
+                throw 0;
+
+            err = Pa_StartStream(mStream);
             if (err != paNoError)
                 throw 0;
         }
@@ -128,32 +68,6 @@ namespace Audio {
             mStream = nullptr;
         }
 
-        void play(PlaybackState &state)
-        {
-            assert(!mState);
-            state.mPtr = state.mBuffer.mBuffer.begin();
-            state.mEnd = state.mBuffer.mBuffer.end();
-            mState = &state;
-            assert(Pa_IsStreamStopped(mStream));
-            PaError err = Pa_StartStream(mStream);
-            if (err != paNoError) {
-                PortAudioApi &api = state.mApi;
-                mState = nullptr;
-                state.set_error(REFLECT_UNKNOWN_ERROR() << "PortAudio Error: " << err);
-                api.reuseStream(*this);
-            }
-        }
-
-        PaError abort()
-        {
-            return Pa_AbortStream(mStream);
-        }
-
-        bool isCompatible(const AudioInfo &info) const
-        {
-            return mChannels == info.mChannels && mSampleRate == info.mSampleRate;
-        }
-
     protected:
         int callback(
             void *output,
@@ -161,35 +75,20 @@ namespace Audio {
             const PaStreamCallbackTimeInfo *timeInfo,
             PaStreamCallbackFlags statusFlags)
         {
-            if (Execution::get_stop_token(*mState)->stop_requested())
-                return paAbort;
+            float buffer[2048];
+            assert(frameCount * mChannels <= 2048);
 
-            int processed = AudioApi::process(output, AudioApi::I16, reinterpret_cast<const int16_t *&>(mState->mPtr), mState->mEnd, frameCount, mChannels, mState->mDirection, mState->mOptions);
-            if (processed < 0)
-                return paAbort;
-            
-            if (mState->mPtr == mState->mEnd) {
-                if (mState->mOptions.mLooping) {
-                    mState->mPtr = mState->mBuffer.mBuffer.begin();
-                    return callback(output, frameCount - processed, timeInfo, statusFlags);
-                } else {
-                    return paComplete;
-                }
-            } else {
-                return paContinue;
-            }
+            size_t renderedCount = render(buffer, frameCount, mChannels, mSampleRate);
+            for (; renderedCount < frameCount * mChannels; ++renderedCount)
+                buffer[renderedCount] = 0.0f;
+
+            AudioApi::process(output, AudioApi::I16, buffer, frameCount, mChannels);
+
+            return paContinue;
         }
 
         void finishedCallback()
         {
-            PortAudioApi &api = mState->mApi;
-            if (Execution::get_stop_token(*mState)->stop_requested()) {
-                mState->set_done();
-            } else {
-                mState->set_value();
-            }
-            mState = nullptr;
-            api.reuseStream(*this);
         }
 
         static int
@@ -210,25 +109,10 @@ namespace Audio {
 
     private:
         PaStream *mStream = nullptr;
-        PlaybackState *mState = nullptr;
 
         int mChannels;
         int mSampleRate;
     };
-
-    void PlaybackState::start()
-    {
-        if (!mApi.state()) {
-            set_done();
-            return;
-        }
-        mStream = &mApi.fetchStream(mBuffer.mInfo);
-        mStream->play(*this);
-    }
-
-    void PlaybackState::stop()
-    {
-    }
 
     PortAudioApi::PortAudioApi(Core::Root &root)
         : AudioApiImpl<PortAudioApi>(root)
@@ -277,7 +161,7 @@ namespace Audio {
             const PaDeviceInfo *info = Pa_GetDeviceInfo(apiInfo->defaultOutputDevice);
 
             PaStreamParameters testParams;
-            testParams.channelCount = 1;
+            testParams.channelCount = 2;
             testParams.sampleFormat = paInt16;
             testParams.hostApiSpecificStreamInfo = nullptr;
             testParams.suggestedLatency = info->defaultLowOutputLatency;
@@ -291,19 +175,6 @@ namespace Audio {
             result = Pa_IsFormatSupported(nullptr, &testParams, 48000);
             if (result != paFormatIsSupported) {
                 out << "no matching format (" << 48000 << ", " << 1 << ")";
-                continue;
-            }
-
-            testParams.channelCount = 2;
-
-            result = Pa_IsFormatSupported(nullptr, &testParams, 44100);
-            if (result != paFormatIsSupported) {
-                out << "no matching format (" << 44100 << ", " << 2 << ")";
-                continue;
-            }
-            result = Pa_IsFormatSupported(nullptr, &testParams, 48000);
-            if (result != paFormatIsSupported) {
-                out << "no matching format (" << 48000 << ", " << 2 << ")";
                 continue;
             }
 
@@ -328,41 +199,13 @@ namespace Audio {
 
         LOG_DEBUG("PortAudio picked: " << mDeviceInfo->name << " (" << Pa_GetHostApiInfo(mDeviceInfo->hostApi)->name << ")");
 
-        // Potentially moving it to a separate thread altogether. Seems to wait on the thread.
-        mRoot.taskQueue()->queue([this]() -> Threading::Task<void> {
-            while (mRoot.taskQueue()->running()) {
-                {
-                    std::unique_lock lock { mMutex };
-                    while (!mClosingStreams.empty()) {
-                        PortAudioStream &stream = mClosingStreams.front();
-                        lock.unlock();
-                        PaError err = stream.abort();
-                        assert(err == paTimedOut || err == paNoError);
-
-                        if (err == paNoError) {
-                            lock.lock();
-                            mStreamPool.splice(mStreamPool.end(), mClosingStreams, mClosingStreams.begin());
-                        } else {
-                            break;
-                        }
-                    }
-                }
-                co_await 100ms;
-            }
-        });
-
         return true;
     }
 
     void PortAudioApi::finalize()
     {
-        std::vector<PortAudioStream *> streams;
-        std::ranges::transform(mBusyStreams, std::back_inserter(streams), [](auto &v) { return &v; });
-        for (PortAudioStream *stream : streams)
-            stream->abort();
-        assert(mBusyStreams.empty());
-        mStreamPool.clear();
-        mClosingStreams.clear();
+        mChannels.clear();
+
         PaError err = Pa_Terminate();
         if (err != paNoError)
             LOG_ERROR("PortAudio error: " << Pa_GetErrorText(err));
@@ -373,33 +216,9 @@ namespace Audio {
         return "PortAudio";
     }
 
-    Behavior::Behavior PortAudioApi::playDynamicSound(AudioLoader::Handle buffer, Execution::BindingPtr<Math::Vector2> distance, const AudioOptions &options)
+    std::shared_ptr<Channel> PortAudioApi::createChannel()
     {
-        return PlaybackSender { {}, *buffer.getUnsafe(), *this, options, distance } | Resources::with_handle(AudioLoader::Handle { buffer });
-    }
-
-    Behavior::Behavior PortAudioApi::playDynamicSound(const AudioBuffer &buffer, Execution::BindingPtr<Math::Vector2> distance, const AudioOptions &options)
-    {
-        return PlaybackSender { {}, buffer, *this, options, distance };
-    }
-
-    PortAudioStream &PortAudioApi::fetchStream(const AudioInfo &info)
-    {
-        std::unique_lock lock { mMutex };
-        auto it = std::ranges::find_if(mStreamPool, [&](const PortAudioStream &stream) { return stream.isCompatible(info); });
-        if (it == mStreamPool.end()) {
-            return mBusyStreams.emplace_back(info, mDevice, mDeviceInfo);
-        } else {
-            mBusyStreams.splice(mBusyStreams.end(), mStreamPool, it);
-            return *it;
-        }
-    }
-
-    void PortAudioApi::reuseStream(PortAudioStream &stream)
-    {
-        std::unique_lock lock { mMutex };
-        auto it = std::ranges::find(mBusyStreams, &stream, [](auto &v) { return &v; });
-        mClosingStreams.splice(mClosingStreams.end(), mBusyStreams, it);
+        return std::make_shared<PortAudioStream>(mDevice, mDeviceInfo);
     }
 
 }
