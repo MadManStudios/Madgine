@@ -30,7 +30,8 @@ namespace Behavior {
 
     void CoroutineBehaviorState::stop()
     {
-        mDebugLocation.mContinuation.stop();
+        if (mDebugLocation.mContinuation.stop())
+            mDebugLocation.mContinuation.done();
     }
 
     void CoroutineBehaviorState::destroy()
