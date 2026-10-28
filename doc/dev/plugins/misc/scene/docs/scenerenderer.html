@@ -284,6 +284,9 @@ textures and depth, optionally multisampled): albedo, view space normal (octahed
 the view inside a world box. <code class="docutils literal notranslate"><span class="pre">light.hlsl</span></code> provides the light structures and the filtered shadow lookup; define
 <code class="docutils literal notranslate"><span class="pre">LIGHT_NO_RESOURCES</span></code> before including it to leave out the resources of the forward renderer.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">ShadowSceneRenderData</span></code> collects the shadow casting meshes, e.g. for shadow maps of further lights.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">FrustumCuller</span></code> (<code class="docutils literal notranslate"><span class="pre">frustumculling.h</span></code>) tests world space bounding boxes against the planes of a frustum. The
+G-buffer and the sun’s shadow map use it to draw only the instances inside the camera frustum or the light frustum;
+skinned meshes are always drawn. <code class="docutils literal notranslate"><span class="pre">FrustumCuller::sEnabled</span> <span class="pre">=</span> <span class="pre">false</span></code> draws everything (for comparisons).</p></li>
 </ul>
 <p>Lights are entity components at the position of the entity’s <code class="docutils literal notranslate"><span class="pre">Transform</span></code>:</p>
 <ul class="simple">
