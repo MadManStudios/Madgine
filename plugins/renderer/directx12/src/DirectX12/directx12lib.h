@@ -41,6 +41,9 @@ inline void dx12Check(const char *file, size_t line, HRESULT result = 0)
 #define DX12_LOG(x) LOG_DEBUG("DX12: " << x)
 // #define DX12_LOG(x)
 
+// Enable to investigate device crashes
+// #define DX12_ENABLE_DEVICE_CHECKING
+
 #include "Generic/offsetptr.h"
 
 #include "Platform/helpers/win_ptrs.h"

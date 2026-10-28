@@ -6,6 +6,7 @@ using namespace Engine::Render;
 
 bool checkDevice(HRESULT &result)
 {
+#ifdef DX12_ENABLE_DEVICE_CHECKING
     if (!GetDevice())
         return true;
     HRESULT reason = GetDevice()->GetDeviceRemovedReason();
@@ -13,6 +14,7 @@ bool checkDevice(HRESULT &result)
         result = DXGI_ERROR_DEVICE_REMOVED;
         return false;
     }
+#endif
     return true;
 }
 
