@@ -5,8 +5,16 @@
 namespace Engine {
 namespace Audio {
 
-    template <typename T>
+    template <Source Source>
     struct SourceWrapper : SourceInterface {
+        std::pair<size_t, bool> render(float* output, size_t frameCount, size_t channels, size_t sampleRate, size_t& offset) override {
+            auto [rendered, done] = mSource.render(output, frameCount, channels, sampleRate, offset);
+            if (done)
+                delete this;
+            return { rendered, done };
+        }
+
+        Source mSource;
     };
 
     struct MADGINE_AUDIO_EXPORT Channel {
