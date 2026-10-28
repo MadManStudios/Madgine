@@ -1,8 +1,5 @@
 #pragma once
 
-#include <array>
-#include <cmath>
-
 #include "Meta/math/boundingbox.h"
 #include "Meta/math/frustum.h"
 #include "Meta/math/matrix4.h"
