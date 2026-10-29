@@ -13,10 +13,12 @@ namespace Audio {
 
         AudioApi(Core::Root &root);
 
-        void addSourceToChannel(std::string_view name, Source auto&& source) {
-            addSourceToChannel(name, new SourceWrapper<decltype(source)>(std::forward<decltype(source)>(source)));
+        template <Source Source>
+        Reflect::Result addSourceToChannel(std::string_view name, Source &&source)
+        {
+            return addSourceToChannel(name, new SourceWrapper<Source>(std::forward<Source>(source)));
         }
-        void addSourceToChannel(std::string_view name, SourceInterface *source);
+        Reflect::Result addSourceToChannel(std::string_view name, SourceInterface *source);
 
         enum OutputFormat {
             I16,

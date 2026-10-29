@@ -27,7 +27,7 @@ namespace Audio {
             return addSource(new SourceWrapper<decltype(source)> { std::forward<decltype(source)>(source) });
         }
 
-        float mVolume = 1.0f;
+        std::atomic<float> mVolume = 1.0f;
 
     protected:
         friend struct ChannelPtr;

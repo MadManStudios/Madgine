@@ -38,7 +38,7 @@ namespace Audio {
 
             for (size_t i = 0; i < frameCount; ++i) {
                 for (int j = 0; j < channels; ++j)
-                    *target++ = static_cast<int16_t>(Math::clamp(*source++, -1.0f, 1.0f) * 32768.0f);
+                    *target++ = static_cast<int16_t>(Math::clamp(*source++, -1.0f, 1.0f) * 32767.0f);
             }
             break;
         }
@@ -57,23 +57,30 @@ namespace Audio {
         }
     }
 
-    void attach(SourceInterface *source, std::string_view channel)
+    Reflect::Result attach(SourceInterface *source, std::string_view channel)
     {
-        AudioApi::getSingleton().addSourceToChannel(channel, source);
+        return AudioApi::getSingleton().addSourceToChannel(channel, source);
     }
 
-    void attach(SourceInterface *source, ChannelPtr channel)
+    Reflect::Result attach(SourceInterface *source, ChannelPtr channel)
     {
-        channel.mPtr->addSource(source);
+        if (!channel.mPtr->addSource(source))
+            return REFLECT_UNKNOWN_ERROR() << "Failed to attach Audio Source. Communication queue might be full";
+        return {};
     }
 
-    void AudioApi::addSourceToChannel(std::string_view name, SourceInterface *source)
+    Reflect::Result AudioApi::addSourceToChannel(std::string_view name, SourceInterface *source)
     {
         auto it = mChannels.find(name);
         if (it == mChannels.end()) {
-            it = mChannels.try_emplace(std::string { name }, createChannel()).first;
+            std::shared_ptr<Channel> channel = createChannel();
+            if (!channel)
+                return REFLECT_UNKNOWN_ERROR() << "Audio API failed to create Stream!";
+            it = mChannels.try_emplace(std::string { name }, std::move(channel)).first;
         }
-        it->second.mPtr->addSource(source);
+        if (!it->second.mPtr->addSource(source))
+            return REFLECT_UNKNOWN_ERROR() << "Failed to attach Audio Source. Communication queue might be full";
+        return {};
     }
 
 }

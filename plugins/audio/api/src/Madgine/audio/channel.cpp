@@ -68,9 +68,10 @@ namespace Audio {
         return result;
     }
 
-    std::pair<size_t, bool> ChannelPtr::render(float* output, size_t frameCount, size_t channels, size_t sampleRate, size_t& offset) {
+    std::pair<size_t, bool> ChannelPtr::render(float *output, size_t frameCount, size_t channels, size_t sampleRate, size_t &offset)
+    {
         return { mPtr->render(output, frameCount, channels, sampleRate), false };
-     }
+    }
 
 }
 }

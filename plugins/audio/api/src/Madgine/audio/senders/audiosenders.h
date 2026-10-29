@@ -2,6 +2,8 @@
 
 #include "../channel.h"
 
+#include "Madgine/behavior/behavior.h"
+
 namespace Engine {
 namespace Audio {
 
@@ -12,9 +14,9 @@ namespace Audio {
         bool mLooping = false;
     };
 
-    MADGINE_AUDIO_EXPORT void attach(SourceInterface *source, std::string_view channel);
-    MADGINE_AUDIO_EXPORT void attach(SourceInterface *source, ChannelPtr channel);
-
+    MADGINE_AUDIO_EXPORT Reflect::Result attach(SourceInterface *source, std::string_view channel);
+    MADGINE_AUDIO_EXPORT Reflect::Result attach(SourceInterface *source, ChannelPtr channel);
+    
     template <typename Rec, typename Channel, Source Source>
     struct AudioSourceState : Execution::base_state<Rec>, SourceInterface {
 
@@ -27,7 +29,8 @@ namespace Audio {
 
         void start()
         {
-            attach(this, mChannel);
+            if (Reflect::Result result = attach(this, mChannel))
+                this->mRec.set_error(std::move(*result.mError));
         }
 
         void stop()
@@ -57,7 +60,7 @@ namespace Audio {
     struct AudioSourceSender {
         using is_sender = void;
 
-        using result_type = void;
+        using result_type = Reflect::Error;
         template <template <typename...> typename Tuple>
         using value_types = Tuple<>;
 
@@ -71,14 +74,16 @@ namespace Audio {
         Source mSource;
     };
 
-    inline auto play_source(Source auto &&source, std::string_view channel)
+    template <Source Source>
+    inline auto play_source(Source &&source, std::string_view channel)
     {
-        return AudioSourceSender<std::string, decltype(source)> { std::string { channel }, std::forward<decltype(source)>(source) };
+        return AudioSourceSender<std::string, Source> { std::string { channel }, std::forward<Source>(source) };
     }
 
-    inline auto play_source(Source auto &&source, ChannelPtr channel)
+    template <Source Source>
+    inline auto play_source(Source &&source, ChannelPtr channel)
     {
-        return AudioSourceSender<ChannelPtr, decltype(source)> { std::move(channel), std::forward<decltype(source)>(source) };
+        return AudioSourceSender<ChannelPtr, Source> { std::move(channel), std::forward<Source>(source) };
     }
 
 }

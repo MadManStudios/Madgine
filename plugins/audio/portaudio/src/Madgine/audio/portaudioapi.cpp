@@ -31,7 +31,7 @@ namespace Audio {
 
         PortAudioStream(PaDeviceIndex device, const PaDeviceInfo *deviceInfo)
             : mChannels(2)
-            , mSampleRate(44100)
+            , mSampleRate(deviceInfo->defaultSampleRate)
         {
             PaStreamParameters outputParameters;
             outputParameters.channelCount = mChannels;
@@ -159,7 +159,7 @@ namespace Audio {
             }
 
             const PaDeviceInfo *info = Pa_GetDeviceInfo(apiInfo->defaultOutputDevice);
-
+            
             PaStreamParameters testParams;
             testParams.channelCount = 2;
             testParams.sampleFormat = paInt16;
@@ -167,14 +167,9 @@ namespace Audio {
             testParams.suggestedLatency = info->defaultLowOutputLatency;
             testParams.device = apiInfo->defaultOutputDevice;
 
-            PaError result = Pa_IsFormatSupported(nullptr, &testParams, 44100);
+            PaError result = Pa_IsFormatSupported(nullptr, &testParams, info->defaultSampleRate);
             if (result != paFormatIsSupported) {
-                out << "no matching format (" << 44100 << ", " << 1 << ")";
-                continue;
-            }
-            result = Pa_IsFormatSupported(nullptr, &testParams, 48000);
-            if (result != paFormatIsSupported) {
-                out << "no matching format (" << 48000 << ", " << 1 << ")";
+                out << "no matching format (" << info->defaultSampleRate << ", 2)";
                 continue;
             }
 
@@ -218,6 +213,8 @@ namespace Audio {
 
     std::shared_ptr<Channel> PortAudioApi::createChannel()
     {
+        if (!mDeviceInfo)
+            return {};
         return std::make_shared<PortAudioStream>(mDevice, mDeviceInfo);
     }
 
