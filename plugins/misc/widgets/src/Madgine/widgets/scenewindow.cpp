@@ -53,9 +53,10 @@ namespace Widgets {
         if (mSource)
             manager().removeDependency(mSource);
         mSource = source;
-        if (mSource)
+        if (mSource) {
             manager().addDependency(mSource);
-        mSource->resize(getAbsoluteSize().xy().floor());
+            mSource->resize(getAbsoluteSize().xy().floor());
+        }
     }
 
     void SceneWindow::sizeChanged(const Math::Vector3 &pixelSize)
