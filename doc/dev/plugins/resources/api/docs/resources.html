@@ -167,7 +167,14 @@
 <li class="toctree-l2"><a class="reference internal" href="../../../audio/portaudio/docs/portaudioapi.html">PortAudio</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../behavior/python3/docs/python3.html">Python3</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../renderer/api/docs/render.html">Render</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Resources</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Resources</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#resource-types">Resource-Types</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#resourceloader">ResourceLoader</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#instanceloader">InstanceLoader</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="../../../root/api/docs/root.html">Root</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../misc/scene/docs/scene.html">Scene</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../../misc/scene/docs/scene.html#conventions">Conventions</a></li>
@@ -248,6 +255,27 @@
 </dl>
 </dd></dl>
 
+<section id="resource-types">
+<h2>Resource-Types<a class="headerlink" href="#resource-types" title="Permalink to this heading"></a></h2>
+<section id="resourceloader">
+<h3>ResourceLoader<a class="headerlink" href="#resourceloader" title="Permalink to this heading"></a></h3>
+<p>ResourceLoaders are the main facility that the Madgine uses to manage resource loading and storage. ResourceLoaders register file extensions and automatically discover any assets that match.
+All loading is handled within the IO-Thread (unless explicitly overriden). Additional to discovered file Assets, manual assets may be registered through code.</p>
+<p>Loaders provide two types to manage Resource references.</p>
+<ul class="simple">
+<li><p>Handle: Handles provide refcounted access to a named resources data. As long as a Handle is held, the pointed to data will remain valid. When a Handle is reset, it is possible an</p></li>
+</ul>
+<p>unload will be triggered.
+* Ptr: Ptrs act as a unique_ptr to unnamed resources. They are mostly used for procedurally generated resources. Ptrs themselves cannot be shared. Instead the user is expected to store the
+Ptr somewhere and provide direct access to the underlying data. Loading will still be done on the IO-Thread. As soon as the Ptr is destroyed the resource will be unloaded. It can not be
+loaded again.</p>
+</section>
+<section id="instanceloader">
+<h3>InstanceLoader<a class="headerlink" href="#instanceloader" title="Permalink to this heading"></a></h3>
+<p>InstanceLoaders do not manage any data themselves. Instead they provide a convenient way to discover resource files and parse them in the IO-Thread. When loading, the user needs to provide
+a reference to an object of the Data type. It is the users responsibility to ensure the reference remains valid until loading is done. A typical usecase for InstanceLoaders is Scene loading.</p>
+</section>
+</section>
 </section>
 
 
