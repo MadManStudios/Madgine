@@ -458,23 +458,25 @@ namespace Widgets {
 
         if (mPointerEventTargetWidget != newPointerEventTarget) {
 
-            Platform::PlatformVector storedWindowPosition = mCachedPointerMoveEvent.mWindowPosition;
+            // The leave/enter handlers may show or hide widgets (e.g. a tooltip), which calls this function again. So the
+            // target is switched before they run and they get a copy of the cached event: a nested call must hit-test
+            // the window position, not the one made relative to a widget, and must not leave the old target twice.
+            WidgetBase *oldTarget = std::exchange(mPointerEventTargetWidget, newPointerEventTarget);
 
-            if (mPointerEventTargetWidget) {
-                Math::Vector2i pos = mPointerEventTargetWidget->getClientSpacePosition().floor();
-                mCachedPointerMoveEvent.mWindowPosition = mCachedPointerMoveEvent.mWindowPosition - Platform::PlatformVector { pos.x, pos.y };
-                mPointerEventTargetWidget->injectPointerLeave(mCachedPointerMoveEvent);
+            if (oldTarget) {
+                Platform::Input::PointerMoveEvent event = mCachedPointerMoveEvent;
+                Math::Vector2i pos = oldTarget->getClientSpacePosition().floor();
+                event.mWindowPosition = event.mWindowPosition - Platform::PlatformVector { pos.x, pos.y };
+                oldTarget->injectPointerLeave(event);
             }
 
-            mPointerEventTargetWidget = newPointerEventTarget;
-
-            if (mPointerEventTargetWidget) {
-                Math::Vector2i pos = mPointerEventTargetWidget->getClientSpacePosition().floor();
-                mCachedPointerMoveEvent.mWindowPosition = mCachedPointerMoveEvent.mWindowPosition - Platform::PlatformVector { pos.x, pos.y };
-                mPointerEventTargetWidget->injectPointerEnter(mCachedPointerMoveEvent);
+            // A nested call may already have moved on to another target (and entered it)
+            if (newPointerEventTarget && mPointerEventTargetWidget == newPointerEventTarget) {
+                Platform::Input::PointerMoveEvent event = mCachedPointerMoveEvent;
+                Math::Vector2i pos = newPointerEventTarget->getClientSpacePosition().floor();
+                event.mWindowPosition = event.mWindowPosition - Platform::PlatformVector { pos.x, pos.y };
+                newPointerEventTarget->injectPointerEnter(event);
             }
-
-            mCachedPointerMoveEvent.mWindowPosition = storedWindowPosition;
         }
     }
 
