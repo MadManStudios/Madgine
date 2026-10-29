@@ -59,10 +59,10 @@ struct AppData
 
 struct FragmentData
 {
-    float4 color : COLOR;
-    float3 emissive : COLOR1;
-    float3 normal : NORMAL;
-    float2 uv : TEXCOORD0;
+    centroid float4 color : COLOR;
+    centroid float3 emissive : COLOR1;
+    centroid float3 normal : NORMAL;
+    centroid float2 uv : TEXCOORD0;
     float4 position : SV_Position;
 };
 
