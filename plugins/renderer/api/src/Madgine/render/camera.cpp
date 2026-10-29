@@ -10,7 +10,7 @@
 #include "Meta/reflect/metatable_impl.h"
 
 METATABLE_BEGIN(Engine::Render::Camera)
-    //CONSTRUCTOR()
+    // CONSTRUCTOR()
     MEMBER(mName)
     MEMBER(mPosition)
     MEMBER(mOrientation)
@@ -55,6 +55,14 @@ namespace Render {
             t, r,
             mN, mF,
             mOrthographic };
+    }
+
+    Math::Vector2 Engine::Render::Camera::worldToScreen(const Math::Vector3 &worldPos, const Math::Vector2 &viewportSize) const
+    {
+        Math::Vector4 clipSpace = getViewProjectionMatrix(viewportSize.x / viewportSize.y) * Math::Vector4 { worldPos, 1.0f };        
+
+        return { (clipSpace.x / clipSpace.w + 1) / 2 * viewportSize.x, (1 - clipSpace.y / clipSpace.w) / 2 * viewportSize.y };
+
     }
 
     Math::Ray3 Camera::mousePointToRay(const Math::Vector2 &mousePos, const Math::Vector2 &viewportSize) const

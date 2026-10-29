@@ -17,6 +17,7 @@ namespace Render {
         Math::Matrix4 getProjectionMatrix(float aspectRatio) const;
         Math::Frustum getFrustum(float aspectRatio) const;
 
+        Math::Vector2 worldToScreen(const Math::Vector3 &worldPos, const Math::Vector2 &viewportSize) const;
         Math::Ray3 mousePointToRay(const Math::Vector2 &mousePos, const Math::Vector2 &viewportSize) const;
         Math::Ray3 toRay() const;
 
