@@ -36,7 +36,7 @@ namespace Math {
         A direction in 4D space represented as distances along the 3
         orthogonal axes + w (x, y, z, w).
         */
-    struct META_EXPORT Vector4 {
+    struct Vector4 {
         float x, y, z, w;
 
     public:

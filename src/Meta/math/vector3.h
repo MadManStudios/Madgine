@@ -40,7 +40,7 @@ namespace Math {
         scaling factors can be represented by a vector, depending on how
         you interpret the values.
         */
-    struct META_EXPORT Vector3 {
+    struct Vector3 {
         float x = 0.0f, y = 0.0f, z = 0.0f;
 
     public:
