@@ -52,6 +52,9 @@ namespace Render {
             return mData | std::views::filter(&EntityRenderData::alive);
         }
 
+        void setInterpolating(bool interpolating);
+        bool interpolating() const;
+
     protected:
         Threading::TaskQueue *queue(RenderContext *) override;
 
@@ -63,6 +66,8 @@ namespace Render {
         UniqueResourceBlock mDefaultMaterial;
 
         std::deque<EntityRenderData> mData;
+
+        bool mInterpolate = true;
     };
 
 }

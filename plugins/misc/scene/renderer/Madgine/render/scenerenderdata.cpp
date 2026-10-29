@@ -27,27 +27,29 @@ namespace Render {
             std::chrono::steady_clock::duration acc = 0s;
             while (mScene.taskQueue()->running()) {
                 co_await mScene.simulationClock().wait_fixed(16667us, acc);
-                co_await mScene.mutex().locked(AccessMode::READ, [this]() {
-                    auto &transforms = mScene.entityComponentList<Scene::Entity::Transform>().data();
+                if (mInterpolate) {
+                    co_await mScene.mutex().locked(AccessMode::READ, [this]() {
+                        auto &transforms = mScene.entityComponentList<Scene::Entity::Transform>().data();
 
-                    if (mData.size() < transforms.nodes_size())
-                        mData.resize(transforms.nodes_size());
+                        if (mData.size() < transforms.nodes_size())
+                            mData.resize(transforms.nodes_size());
 
-                    auto it1 = transforms.nodes_begin();
-                    auto it2 = mData.begin();
-                    for (; it1 != transforms.nodes_end(); ++it1, ++it2) {
+                        auto it1 = transforms.nodes_begin();
+                        auto it2 = mData.begin();
+                        for (; it1 != transforms.nodes_end(); ++it1, ++it2) {
 
-                        if (it1->unsafeAccess().isFree())
-                            continue;
+                            if (it1->unsafeAccess().isFree())
+                                continue;
 
-                        Scene::Entity::Entity &e = *it1->unsafeAccess().mEntity;
-                        Scene::Entity::Transform &t = it1->unsafeAccess().mComponent;
-                        EntityRenderData &d = *it2;
+                            Scene::Entity::Entity &e = *it1->unsafeAccess().mEntity;
+                            Scene::Entity::Transform &t = it1->unsafeAccess().mComponent;
+                            EntityRenderData &d = *it2;
 
-                        d.mPreviousTransform = t;
-                        d.mLastUpdate = mScene.now();
-                    }
-                });
+                            d.mPreviousTransform = t;
+                            d.mLastUpdate = mScene.now();
+                        }
+                    });
+                }
             }
         });
     }
@@ -61,14 +63,18 @@ namespace Render {
         if (d.mLastRenderedFrame < frame) {
             d.ensureAlive(mScene);
 
-            float alpha = Math::clamp(std::chrono::duration_cast<std::chrono::duration<float, std::micro>>(mScene.animationClock().lastTick() - d.mLastUpdate).count() / 16667.0f, 0.0f, 1.0f);
+            if (mInterpolate) {
+                float alpha = Math::clamp(std::chrono::duration_cast<std::chrono::duration<float, std::micro>>(mScene.animationClock().lastTick() - d.mLastUpdate).count() / 16667.0f, 0.0f, 1.0f);
 
-            Scene::Entity::Transform interpolated;
+                Scene::Entity::Transform interpolated;
 
-            interpolated.mPosition = Math::lerp(d.mPreviousTransform.mPosition, t.mPosition, alpha);
-            interpolated.mScale = t.mScale;
-            interpolated.mOrientation = Math::slerp(d.mPreviousTransform.mOrientation, t.mOrientation, alpha);
-            d.mTransformMatrix = interpolated.matrix();
+                interpolated.mPosition = Math::lerp(d.mPreviousTransform.mPosition, t.mPosition, alpha);
+                interpolated.mScale = t.mScale;
+                interpolated.mOrientation = Math::slerp(d.mPreviousTransform.mOrientation, t.mOrientation, alpha);
+                d.mTransformMatrix = interpolated.matrix();
+            } else {
+                d.mTransformMatrix = t.matrix();
+            }
 
             if (Scene::Entity::EntityPtr parent = e.parent()) {
                 Execution::access_binding(parent, [&](Scene::Entity::Entity &parent) {
@@ -178,6 +184,16 @@ namespace Render {
     ResourceBlock SceneRenderData::defaultMaterial()
     {
         return mDefaultMaterial;
+    }
+
+    void SceneRenderData::setInterpolating(bool interpolating)
+    {
+        mInterpolate = interpolating;
+    }
+
+    bool SceneRenderData::interpolating() const
+    {
+        return mInterpolate;
     }
 
     Threading::TaskQueue *SceneRenderData::queue(RenderContext *)
