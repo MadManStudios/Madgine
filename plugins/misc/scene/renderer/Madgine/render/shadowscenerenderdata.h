@@ -23,6 +23,8 @@ namespace Render {
         std::map<GPUMeshLoader::Handle, std::vector<ObjectData>> mInstances;
 
         SceneRenderData &mRenderData;
+
+        float mMinAlpha = 0.0f;
     };
 
 }

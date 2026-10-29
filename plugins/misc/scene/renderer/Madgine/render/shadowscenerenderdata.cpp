@@ -35,6 +35,9 @@ namespace Render {
             if (!entity.mMesh || !entity.mCastShadows)
                 continue;
 
+            if (entity.mDiffuseColor.w < mMinAlpha)
+                continue;
+
             mInstances[entity.mMesh].push_back({ entity.mTransformMatrix, entity.mBones });
         }
 
