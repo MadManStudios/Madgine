@@ -91,7 +91,7 @@ namespace Render {
 
         Math::Rect2i mRenderSpace;
 
-        bool mPaused = false;
+        std::atomic<bool> mPaused = false;
     };
 
 }
