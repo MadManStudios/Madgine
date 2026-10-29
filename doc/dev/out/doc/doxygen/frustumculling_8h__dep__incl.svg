@@ -46,7 +46,7 @@ if (edges && edges.length) {
         </defs>
 
 <script type="text/javascript">
-var viewWidth = 578;
+var viewWidth = 595;
 var viewHeight = 126;
 var sectionId = 'dynsection-1';
 </script>
@@ -58,80 +58,80 @@ var sectionId = 'dynsection-1';
 <g id="node1" class="node">
 <title>Node1</title>
 <g id="a_node1"><a xlink:title=" ">
-<polygon fill="#999999" stroke="#666666" points="351,-118 226,-118 226,-77 351,-77 351,-118"/>
-<text text-anchor="start" x="234" y="-106" font-family="Helvetica,sans-Serif" font-size="10.00">plugins/misc/scene</text>
-<text text-anchor="start" x="234" y="-95" font-family="Helvetica,sans-Serif" font-size="10.00">/renderer/Madgine/render</text>
-<text text-anchor="middle" x="288.5" y="-84" font-family="Helvetica,sans-Serif" font-size="10.00">/frustumculling.h</text>
+<polygon fill="#999999" stroke="#666666" points="367.5,-118 242.5,-118 242.5,-77 367.5,-77 367.5,-118"/>
+<text text-anchor="start" x="250.5" y="-106" font-family="Helvetica,sans-Serif" font-size="10.00">plugins/misc/scene</text>
+<text text-anchor="start" x="250.5" y="-95" font-family="Helvetica,sans-Serif" font-size="10.00">/renderer/Madgine/render</text>
+<text text-anchor="middle" x="305" y="-84" font-family="Helvetica,sans-Serif" font-size="10.00">/frustumculling.h</text>
 </a>
 </g>
 </g>
 <!-- Node2 -->
 <g id="node2" class="node">
 <title>Node2</title>
-<g id="a_node2"><a xlink:href="gbufferrenderpass_8cpp.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="#666666" points="125,-41 0,-41 0,0 125,0 125,-41"/>
+<g id="a_node2"><a xlink:href="camerascenerenderdata_8cpp.html" target="_top" xlink:title=" ">
+<polygon fill="white" stroke="#666666" points="142,-41 0,-41 0,0 142,0 142,-41"/>
 <text text-anchor="start" x="8" y="-29" font-family="Helvetica,sans-Serif" font-size="10.00">plugins/misc/scene</text>
 <text text-anchor="start" x="8" y="-18" font-family="Helvetica,sans-Serif" font-size="10.00">/renderer/Madgine/render</text>
-<text text-anchor="middle" x="62.5" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">/gbufferrenderpass.cpp</text>
+<text text-anchor="middle" x="71" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">/camerascenerenderdata.cpp</text>
 </a>
 </g>
 </g>
 <!-- Node1&#45;&gt;Node2 -->
 <g id="edge1" class="edge">
 <title>Node1&#45;&gt;Node2</title>
-<path fill="none" stroke="#63b8ff" d="M217.95,-73.09C187.41,-62.95 152.03,-51.21 122.75,-41.49"/>
-<polygon fill="#63b8ff" stroke="#63b8ff" points="216.5,-76.29 227.09,-76.12 218.7,-69.65 216.5,-76.29"/>
+<path fill="none" stroke="#63b8ff" d="M231.95,-73.09C200.33,-62.95 163.7,-51.21 133.38,-41.49"/>
+<polygon fill="#63b8ff" stroke="#63b8ff" points="230.87,-76.42 241.47,-76.14 233.01,-69.75 230.87,-76.42"/>
 </g>
 <!-- Node3 -->
 <g id="node3" class="node">
 <title>Node3</title>
 <g id="a_node3"><a xlink:href="pointshadowrenderpass_8cpp.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="#666666" points="283.5,-41 143.5,-41 143.5,0 283.5,0 283.5,-41"/>
-<text text-anchor="start" x="151.5" y="-29" font-family="Helvetica,sans-Serif" font-size="10.00">plugins/misc/scene</text>
-<text text-anchor="start" x="151.5" y="-18" font-family="Helvetica,sans-Serif" font-size="10.00">/renderer/Madgine/render</text>
-<text text-anchor="middle" x="213.5" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">/pointshadowrenderpass.cpp</text>
+<polygon fill="white" stroke="#666666" points="300,-41 160,-41 160,0 300,0 300,-41"/>
+<text text-anchor="start" x="168" y="-29" font-family="Helvetica,sans-Serif" font-size="10.00">plugins/misc/scene</text>
+<text text-anchor="start" x="168" y="-18" font-family="Helvetica,sans-Serif" font-size="10.00">/renderer/Madgine/render</text>
+<text text-anchor="middle" x="230" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">/pointshadowrenderpass.cpp</text>
 </a>
 </g>
 </g>
 <!-- Node1&#45;&gt;Node3 -->
 <g id="edge2" class="edge">
 <title>Node1&#45;&gt;Node3</title>
-<path fill="none" stroke="#63b8ff" d="M260.74,-68.74C251.64,-59.64 241.72,-49.72 233.33,-41.33"/>
-<polygon fill="#63b8ff" stroke="#63b8ff" points="258.18,-71.13 267.72,-75.72 263.13,-66.18 258.18,-71.13"/>
+<path fill="none" stroke="#63b8ff" d="M277.24,-68.74C268.14,-59.64 258.22,-49.72 249.83,-41.33"/>
+<polygon fill="#63b8ff" stroke="#63b8ff" points="274.68,-71.13 284.22,-75.72 279.63,-66.18 274.68,-71.13"/>
 </g>
 <!-- Node4 -->
 <g id="node4" class="node">
 <title>Node4</title>
 <g id="a_node4"><a xlink:href="scenerenderpass_8cpp.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="#666666" points="427,-41 302,-41 302,0 427,0 427,-41"/>
-<text text-anchor="start" x="310" y="-29" font-family="Helvetica,sans-Serif" font-size="10.00">plugins/misc/scene</text>
-<text text-anchor="start" x="310" y="-18" font-family="Helvetica,sans-Serif" font-size="10.00">/renderer/Madgine/render</text>
-<text text-anchor="middle" x="364.5" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">/scenerenderpass.cpp</text>
+<polygon fill="white" stroke="#666666" points="443.5,-41 318.5,-41 318.5,0 443.5,0 443.5,-41"/>
+<text text-anchor="start" x="326.5" y="-29" font-family="Helvetica,sans-Serif" font-size="10.00">plugins/misc/scene</text>
+<text text-anchor="start" x="326.5" y="-18" font-family="Helvetica,sans-Serif" font-size="10.00">/renderer/Madgine/render</text>
+<text text-anchor="middle" x="381" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">/scenerenderpass.cpp</text>
 </a>
 </g>
 </g>
 <!-- Node1&#45;&gt;Node4 -->
 <g id="edge3" class="edge">
 <title>Node1&#45;&gt;Node4</title>
-<path fill="none" stroke="#63b8ff" d="M316.63,-68.74C325.85,-59.64 335.9,-49.72 344.4,-41.33"/>
-<polygon fill="#63b8ff" stroke="#63b8ff" points="314.2,-66.22 309.55,-75.73 319.12,-71.2 314.2,-66.22"/>
+<path fill="none" stroke="#63b8ff" d="M333.13,-68.74C342.35,-59.64 352.4,-49.72 360.9,-41.33"/>
+<polygon fill="#63b8ff" stroke="#63b8ff" points="330.7,-66.22 326.05,-75.73 335.62,-71.2 330.7,-66.22"/>
 </g>
 <!-- Node5 -->
 <g id="node5" class="node">
 <title>Node5</title>
 <g id="a_node5"><a xlink:href="shadowrenderpass_8cpp.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="#666666" points="570,-41 445,-41 445,0 570,0 570,-41"/>
-<text text-anchor="start" x="453" y="-29" font-family="Helvetica,sans-Serif" font-size="10.00">plugins/misc/scene</text>
-<text text-anchor="start" x="453" y="-18" font-family="Helvetica,sans-Serif" font-size="10.00">/renderer/Madgine/render</text>
-<text text-anchor="middle" x="507.5" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">/shadowrenderpass.cpp</text>
+<polygon fill="white" stroke="#666666" points="586.5,-41 461.5,-41 461.5,0 586.5,0 586.5,-41"/>
+<text text-anchor="start" x="469.5" y="-29" font-family="Helvetica,sans-Serif" font-size="10.00">plugins/misc/scene</text>
+<text text-anchor="start" x="469.5" y="-18" font-family="Helvetica,sans-Serif" font-size="10.00">/renderer/Madgine/render</text>
+<text text-anchor="middle" x="524" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">/shadowrenderpass.cpp</text>
 </a>
 </g>
 </g>
 <!-- Node1&#45;&gt;Node5 -->
 <g id="edge4" class="edge">
 <title>Node1&#45;&gt;Node5</title>
-<path fill="none" stroke="#63b8ff" d="M357.25,-72.95C386.76,-62.85 420.86,-51.17 449.12,-41.49"/>
-<polygon fill="#63b8ff" stroke="#63b8ff" points="356.37,-69.56 348.04,-76.11 358.64,-76.18 356.37,-69.56"/>
+<path fill="none" stroke="#63b8ff" d="M373.75,-72.95C403.26,-62.85 437.36,-51.17 465.62,-41.49"/>
+<polygon fill="#63b8ff" stroke="#63b8ff" points="372.87,-69.56 364.54,-76.11 375.14,-76.18 372.87,-69.56"/>
 </g>
 </g>
 </svg>
