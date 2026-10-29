@@ -37,7 +37,7 @@ namespace Render {
             if (!entity.mMesh)
                 continue;
 
-            mInstances[NonInstancedData { entity.mMesh, entity.mResource }].push_back({ entity.mTransformMatrix, entity.mDiffuseColor, entity.mEmissiveColor, entity.mBones });
+            mInstances[NonInstancedData { entity.mMesh, entity.mResource, entity.mDiffuseColor.w < 1.0f }].push_back({ entity.mTransformMatrix, entity.mDiffuseColor, entity.mEmissiveColor, entity.mBones });
         }
 
         for (auto it = mInstances.begin(); it != mInstances.end();) {

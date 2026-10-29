@@ -22,6 +22,7 @@ namespace Render {
         struct NonInstancedData {
             GPUMeshLoader::Handle mMesh;
             ResourceBlock mMaterial;
+            bool mTransparentContent;
 
             constexpr auto operator<=>(const NonInstancedData &) const = default;
         };
