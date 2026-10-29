@@ -61,8 +61,8 @@ namespace Math {
                 @note
                     It does <b>NOT</b> initialize the matrix for efficiency.
             */
-        inline constexpr Matrix3() = default;
-        inline constexpr explicit Matrix3(const float arr[3][3])
+        constexpr Matrix3() = default;
+        constexpr explicit Matrix3(const float arr[3][3])
             : m00 { arr[0][0] }
             , m01 { arr[1][0] }
             , m02 { arr[2][0] }
@@ -74,7 +74,7 @@ namespace Math {
             , m22 { arr[2][2] }
         {
         }
-        inline constexpr Matrix3(const Matrix3 &rkMatrix) = default;
+        constexpr Matrix3(const Matrix3 &rkMatrix) = default;
 
         constexpr Matrix3(float fEntry00, float fEntry01, float fEntry02,
             float fEntry10, float fEntry11, float fEntry12,
@@ -138,19 +138,36 @@ namespace Math {
                 return (Real*)m[0];
             }*/
         Vector3 GetColumn(size_t iCol) const;
-        void SetColumn(size_t iCol, const Vector3 &vec);
-        void FromAxes(const Vector3 &xAxis, const Vector3 &yAxis, const Vector3 &zAxis);
+        constexpr void SetColumn(size_t iCol, const Vector3 &vec)
+        {
+            assert(iCol < 3);
+            float *out = &m00 + (iCol * 3);
+            out[0] = vec.x;
+            out[1] = vec.y;
+            out[2] = vec.z;
+        }
+        constexpr void FromAxes(const Vector3 &xAxis, const Vector3 &yAxis, const Vector3 &zAxis)
+        {
+            SetColumn(0, xAxis);
+            SetColumn(1, yAxis);
+            SetColumn(2, zAxis);
+        }
 
         /// Assignment and comparison
-        inline Matrix3 &operator=(const Matrix3 &rkMatrix) = default;
+        constexpr Matrix3 &operator=(const Matrix3 &rkMatrix) = default;
 
         /** Tests 2 matrices for equality.
          */
-        bool operator==(const Matrix3 &rkMatrix) const;
+        constexpr bool operator==(const Matrix3 &rkMatrix) const
+        {
+            return m00 == rkMatrix.m00 && m01 == rkMatrix.m01 && m02 == rkMatrix.m02
+                && m10 == rkMatrix.m10 && m11 == rkMatrix.m11 && m12 == rkMatrix.m12
+                && m20 == rkMatrix.m20 && m21 == rkMatrix.m21 && m22 == rkMatrix.m22;
+        }
 
         /** Tests 2 matrices for inequality.
          */
-        inline bool operator!=(const Matrix3 &rkMatrix) const
+        inline constexpr bool operator!=(const Matrix3 &rkMatrix) const
         {
             return !operator==(rkMatrix);
         }
@@ -182,26 +199,105 @@ namespace Math {
 
         /** Matrix subtraction.
          */
-        Matrix3 &operator-=(const Matrix3 &rkMatrix);
-        Matrix3 operator-(const Matrix3 &rkMatrix) const;
+        constexpr Matrix3 &operator-=(const Matrix3 &rkMatrix)
+        {
+            m00 -= rkMatrix.m00;
+            m01 -= rkMatrix.m01;
+            m02 -= rkMatrix.m02;
+            m10 -= rkMatrix.m10;
+            m11 -= rkMatrix.m11;
+            m12 -= rkMatrix.m12;
+            m20 -= rkMatrix.m20;
+            m21 -= rkMatrix.m21;
+            m22 -= rkMatrix.m22;
+            return *this;
+        }
+        constexpr Matrix3 operator-(const Matrix3 &rkMatrix) const
+        {
+            Matrix3 kDiff = *this;
+            kDiff -= rkMatrix;
+            return kDiff;
+        }
 
         /** Matrix concatenation using '*'.
          */
-        Matrix3 operator*(const Matrix3 &rkMatrix) const;
-        Matrix3 operator-() const;
+        constexpr Matrix3 operator*(const Matrix3 &rkMatrix) const
+        {
+            return {
+                m00 * rkMatrix.m00 + m10 * rkMatrix.m01 + m20 * rkMatrix.m02,
+                m00 * rkMatrix.m10 + m10 * rkMatrix.m11 + m20 * rkMatrix.m12,
+                m00 * rkMatrix.m20 + m10 * rkMatrix.m21 + m20 * rkMatrix.m22,
+                m01 * rkMatrix.m00 + m11 * rkMatrix.m01 + m21 * rkMatrix.m02,
+                m01 * rkMatrix.m10 + m11 * rkMatrix.m11 + m21 * rkMatrix.m12,
+                m01 * rkMatrix.m20 + m11 * rkMatrix.m21 + m21 * rkMatrix.m22,
+                m02 * rkMatrix.m00 + m12 * rkMatrix.m01 + m22 * rkMatrix.m02,
+                m02 * rkMatrix.m10 + m12 * rkMatrix.m11 + m22 * rkMatrix.m12,
+                m02 * rkMatrix.m20 + m12 * rkMatrix.m21 + m22 * rkMatrix.m22
+            };
+        }
+        constexpr Matrix3 operator-() const
+        {
+            return {
+                -m00,
+                -m10,
+                -m20,
+                -m01,
+                -m11,
+                -m21,
+                -m02,
+                -m12,
+                -m22
+            };
+        }
 
         /// Matrix * vector [3x3 * 3x1 = 3x1]
-        Vector3 operator*(const Vector3 &rkVector) const;
+        constexpr Vector3 operator*(const Vector3 &rkVector) const
+        {
+            return { m00 * rkVector[0] + m10 * rkVector[1] + m20 * rkVector[2],
+                m01 * rkVector[0] + m11 * rkVector[1] + m21 * rkVector[2],
+                m02 * rkVector[0] + m12 * rkVector[1] + m22 * rkVector[2] };
+        }
 
         /// Vector * matrix [1x3 * 3x3 = 1x3]
-        META_EXPORT friend Vector3 operator*(const Vector3 &rkVector,
-            const Matrix3 &rkMatrix);
+        friend constexpr Vector3 operator*(const Vector3 &rkVector,
+            const Matrix3 &rkMatrix)
+        {
+            return { rkVector[0] * rkMatrix.m00 + rkVector[1] * rkMatrix.m01 + rkVector[2] * rkMatrix.m02,
+                rkVector[0] * rkMatrix.m10 + rkVector[1] * rkMatrix.m11 + rkVector[2] * rkMatrix.m12,
+                rkVector[0] * rkMatrix.m20 + rkVector[1] * rkMatrix.m21 + rkVector[2] * rkMatrix.m22 };
+        }
 
         /// Matrix * scalar
-        Matrix3 operator*(float fScalar) const;
+        constexpr Matrix3 operator*(float fScalar) const
+        {
+            return {
+                fScalar * m00,
+                fScalar * m10,
+                fScalar * m20,
+                fScalar * m01,
+                fScalar * m11,
+                fScalar * m21,
+                fScalar * m02,
+                fScalar * m12,
+                fScalar * m22
+            };
+        }
 
         /// Scalar * matrix
-        META_EXPORT friend Matrix3 operator*(float fScalar, const Matrix3 &rkMatrix);
+        friend constexpr Matrix3 operator*(float fScalar, const Matrix3 &rkMatrix)
+        {
+            return {
+                fScalar * rkMatrix.m00,
+                fScalar * rkMatrix.m10,
+                fScalar * rkMatrix.m20,
+                fScalar * rkMatrix.m01,
+                fScalar * rkMatrix.m11,
+                fScalar * rkMatrix.m21,
+                fScalar * rkMatrix.m02,
+                fScalar * rkMatrix.m12,
+                fScalar * rkMatrix.m22
+            };
+        }
 
         // utilities
         Matrix3 Transpose() const;

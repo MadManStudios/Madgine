@@ -11,7 +11,7 @@ namespace Math {
 
         constexpr Quaternion() = default;
 
-        constexpr Quaternion(float radian, const Vector3 &axis)
+        Quaternion(float radian, const Vector3 &axis)
             : w(cosf(0.5f * radian))
         {
             Vector3 v = axis;
@@ -39,12 +39,12 @@ namespace Math {
         {
         }
 
-        static constexpr Quaternion FromRadian(const Vector3 &angles)
+        static Quaternion FromRadian(const Vector3 &angles)
         {
             return Quaternion(angles.z, Vector3::UNIT_Z) * Quaternion(angles.x, Vector3::UNIT_X) * Quaternion(angles.y, Vector3::UNIT_Y);
         }
 
-        static constexpr Quaternion FromDegrees(const Vector3 &angles)
+        static Quaternion FromDegrees(const Vector3 &angles)
         {
             return FromRadian(angles / 180.0f * PI);
         }
