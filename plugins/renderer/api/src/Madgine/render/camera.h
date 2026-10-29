@@ -27,7 +27,7 @@ namespace Render {
 
         float mF = 200.0f;
         float mN = 0.1f;
-        float mFOV = 90.0f;
+        float mFOV = 70.0f;
 
         bool mOrthographic = false;
     };
