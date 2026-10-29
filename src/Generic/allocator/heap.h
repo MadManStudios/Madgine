@@ -29,9 +29,6 @@ namespace Memory {
 
             Memory::Block allocate(size_t size, size_t alignment)
             {
-                if (size > blockSize * blockCount)
-                    return {};
-
                 auto result = std::ranges::search_n(mBlockState, (size - 1) / blockSize + 1, false);
                 if (result.begin() == mBlockState.end())
                     return {};
@@ -62,7 +59,8 @@ namespace Memory {
                 mBlockState = {};
             }
 
-            bool contains(void* p) const {
+            bool contains(void *p) const
+            {
                 return mParentMemory.mAddress <= p && p < static_cast<std::byte *>(mParentMemory.mAddress) + mParentMemory.mSize;
             }
 
@@ -84,6 +82,9 @@ namespace Memory {
         {
             assert(alignment <= blockSize);
             assert(blockSize % alignment == 0);
+
+            if (size > blockSize * blockCount)
+                return {};
 
             for (Chunk &chunk : mChunks) {
                 Memory::Block block = chunk.allocate(size, alignment);
