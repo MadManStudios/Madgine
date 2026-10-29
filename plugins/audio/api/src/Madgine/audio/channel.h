@@ -30,6 +30,7 @@ namespace Audio {
         float mVolume = 1.0f;
 
     protected:
+        friend struct ChannelPtr;
         size_t render(float *output, size_t frameCount, size_t channels, size_t sampleRate);
 
     private:
@@ -51,7 +52,9 @@ namespace Audio {
         std::vector<SourceData> mSources;
     };
 
-    struct ChannelPtr {
+    struct MADGINE_AUDIO_EXPORT ChannelPtr {
+        std::pair<size_t, bool> render(float *output, size_t frameCount, size_t channels, size_t sampleRate, size_t &offset);
+
         std::shared_ptr<Channel> mPtr;
     };
 
