@@ -47,7 +47,7 @@ namespace Render {
 
     Math::Frustum Camera::getFrustum(float aspectRatio) const
     {
-        float t = 2 * tanf((mFOV / 180.0f * Math::PI) / 2.0f) * mN;
+        float t = tanf((mFOV / 180.0f * Math::PI) / 2.0f) * mN;
         float r = t * aspectRatio;
 
         return { mPosition,
