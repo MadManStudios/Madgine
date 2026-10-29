@@ -29,6 +29,9 @@ namespace Memory {
 
             Memory::Block allocate(size_t size, size_t alignment)
             {
+                if (size > blockSize * blockCount)
+                    return {};
+
                 auto result = std::ranges::search_n(mBlockState, (size - 1) / blockSize + 1, false);
                 if (result.begin() == mBlockState.end())
                     return {};
