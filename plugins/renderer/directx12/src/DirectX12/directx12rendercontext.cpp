@@ -100,14 +100,28 @@ namespace Render {
 
         HRESULT hr;
 
-        {
+        // Debug layer only in debug builds by default (GPU based validation costs a lot of frame time):
+        // MADGINE_DX12_DEBUG=0 turns it off, 1 turns it on, gpu additionally enables GPU based validation
+#ifdef NDEBUG
+        bool debugLayer = false;
+#else
+        bool debugLayer = true;
+#endif
+        bool gpuValidation = debugLayer;
+        if (const char *debugEnv = std::getenv("MADGINE_DX12_DEBUG")) {
+            std::string_view value = debugEnv;
+            debugLayer = value != "0";
+            gpuValidation = value == "gpu";
+        }
+        if (debugLayer) {
             Platform::ReleasePtr<ID3D12Debug> debugController;
             if (SUCCEEDED(D3D12GetDebugInterface(IID_PPV_ARGS(&debugController)))) {
                 debugController->EnableDebugLayer();
+                DX12_LOG("Enabled Debug Layer");
                 Platform::ReleasePtr<ID3D12Debug1> debugController1;
-                if (SUCCEEDED(debugController->QueryInterface(IID_PPV_ARGS(&debugController1)))) {
+                if (gpuValidation && SUCCEEDED(debugController->QueryInterface(IID_PPV_ARGS(&debugController1)))) {
                     debugController1->SetEnableGPUBasedValidation(true);
-                    DX12_LOG("Enabled Debug Layer");
+                    DX12_LOG("Enabled GPU Based Validation");
                 }
             }
         }
