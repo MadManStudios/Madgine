@@ -18,6 +18,7 @@
 
 #include "Meta/reflect/metatable_impl.h"
 
+#include "camerascenerenderdata.h"
 #include "frustumculling.h"
 #include "light_hlsl.h"
 #include "scene_hlsl.h"
@@ -35,14 +36,18 @@ namespace Engine {
 namespace Render {
 
     SceneRenderPass::SceneRenderPass(Scene::SceneManager &scene, SceneRenderData &renderData, PointShadowRenderData &pointShadowRenderData, Camera &camera, int priority)
-        : mData(scene, renderData, camera)
+        : mData(renderData.registerCamera(camera))
         , mShadowPass(scene, renderData, camera, 50)
         , mPointShadowRenderData(pointShadowRenderData)
         , mPriority(priority)
+        , mScene(scene)
     {
     }
 
-    SceneRenderPass::~SceneRenderPass() = default;
+    SceneRenderPass::~SceneRenderPass()
+    {
+        mData.unregister();
+    }
 
     void SceneRenderPass::setup(RenderTarget *target)
     {
@@ -96,20 +101,20 @@ namespace Render {
         {
             auto perFrame = mPipeline->mapParameters<HLSL::LightPerFrame>(1);
 
-            perFrame->ambient = Math::Vector3 { mData.mScene.mAmbientLightColor };
+            perFrame->ambient = Math::Vector3 { mScene.mAmbientLightColor };
 
             perFrame->light.caster.reprojectionMatrix = mShadowPass.viewProjectionMatrix() * v.Inverse();
 
             perFrame->light.caster.shadowSamples = 4;
 
-            perFrame->light.light.color = Math::Vector3 { mData.mScene.mSunLightColor };
-            perFrame->light.light.dir = (v * Math::Vector4 { mData.mScene.mSunLightDirection, 0.0f }).xyz();
-            perFrame->light.light.orthographic = mData.mScene.mSunLightOrthographic;
+            perFrame->light.light.color = Math::Vector3 { mScene.mSunLightColor };
+            perFrame->light.light.dir = (v * Math::Vector4 { mScene.mSunLightDirection, 0.0f }).xyz();
+            perFrame->light.light.orthographic = mScene.mSunLightOrthographic;
 
             // The forward renderer supports two point lights, both with shadow maps: the first two shadow casting lights
             // that are switched on (see PointShadowRenderPass)
             size_t i = 0;
-            for (auto &[light, entity] : mData.mScene.entityComponentList<Scene::Entity::PointLight>()) {
+            for (auto &[light, entity] : mScene.entityComponentList<Scene::Entity::PointLight>()) {
                 if (!light.castsShadow())
                     continue;
                 if (i == 2) {
@@ -133,20 +138,9 @@ namespace Render {
 
         mPipeline->bindResources(target, 3, mShadowResourceBlock);
 
-        FrustumCuller culler { mData.mCamera.getFrustum(aspectRatio) };
-
-        for (const auto &[key, objects] : mData.mInstances) {
+        for (const auto &[key, objects] : mData.get(aspectRatio)) {
             GPUMeshLoader::Handle meshData = key.mMesh;
             ResourceBlock material = key.mMaterial;
-            
-            // Only the instances whose bounding box reaches into the view (skinned meshes always)
-            mVisible.clear();
-            const Math::AABB &aabb = meshData->mAABB;
-            for (const LitSceneRenderData::ObjectData &o : objects)
-                if (o.mBones || culler.visible(aabb, o.mTransform))
-                    mVisible.push_back(&o);
-            if (mVisible.empty())
-                continue;            
 
             {
                 auto perObject = mPipeline->mapParameters<HLSL::ScenePerObject>(2);
@@ -162,10 +156,10 @@ namespace Render {
                 mPipeline->bindResources(target, 2, mData.mRenderData.defaultMaterial());
 
             {
-                auto instanceData = mPipeline->mapTempBuffer<HLSL::SceneInstanceData[]>(1, mVisible.size());
+                auto instanceData = mPipeline->mapTempBuffer<HLSL::SceneInstanceData[]>(1, objects.size());
 
-                std::ranges::transform(mVisible, instanceData.mData, [&](const LitSceneRenderData::ObjectData *o) {
-                    Math::Matrix4 mv = v * o->mTransform;
+                std::ranges::transform(objects, instanceData.mData, [&](const EntityRenderData *o) {
+                    Math::Matrix4 mv = v * o->mTransformMatrix;
                     return HLSL::SceneInstanceData {
                         mv.Transpose(),
                         mv.Inverse() /*.Transpose().Transpose()*/,
@@ -178,7 +172,7 @@ namespace Render {
             }
 
             mPipeline->bindMesh(target, *meshData);
-            mPipeline->renderInstanced(target, mVisible.size());
+            mPipeline->renderInstanced(target, objects.size());
             // mPipeline->renderMeshInstanced(target, std::move(instanceData), meshData);
         }
     }

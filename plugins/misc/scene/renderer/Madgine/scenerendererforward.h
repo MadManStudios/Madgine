@@ -8,6 +8,8 @@ namespace Render {
     struct SceneMainWindowComponent;
     struct SceneRenderData;
     struct PointShadowRenderData;
+    struct CameraSceneRenderData;
+    struct EntityRenderData;
 }
 
 }

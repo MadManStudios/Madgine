@@ -3,7 +3,6 @@
 #include "Madgine/render/pipelineloader.h"
 #include "Madgine/render/renderpass.h"
 
-#include "litscenerenderdata.h"
 #include "pointshadowrenderpass.h"
 #include "shadowrenderpass.h"
 
@@ -33,9 +32,11 @@ namespace Render {
         float mLightSquaredFactor = 75.0f;
 
     private:
-        LitSceneRenderData mData;
+        CameraSceneRenderData &mData;
 
         ShadowRenderPass mShadowPass;
+
+        Scene::SceneManager &mScene;
 
         PointShadowRenderData &mPointShadowRenderData;
 
@@ -44,8 +45,6 @@ namespace Render {
         UniqueResourceBlock mShadowResourceBlock;
 
         int mPriority;
-
-        std::vector<const LitSceneRenderData::ObjectData *> mVisible;
     };
 
 }

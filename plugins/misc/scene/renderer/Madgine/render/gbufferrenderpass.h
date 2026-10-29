@@ -2,8 +2,6 @@
 
 #include "Madgine/render/renderpass.h"
 
-#include "litscenerenderdata.h"
-
 namespace Engine {
 namespace Render {
 
@@ -18,7 +16,8 @@ namespace Render {
     //   depth:     depth of the camera projection
     // Surfaces are not blended: (mostly) transparent pixels are cut out.
     struct MADGINE_SCENE_RENDERER_EXPORT GBufferRenderPass : RenderPass {
-        GBufferRenderPass(Scene::SceneManager &scene, SceneRenderData &renderData, Camera &camera, int priority);
+        GBufferRenderPass(SceneRenderData &renderData, Camera &camera, int priority);
+        ~GBufferRenderPass();
 
         void setup(RenderTarget *target) override;
         void shutdown(RenderTarget *target) override;
@@ -31,11 +30,9 @@ namespace Render {
         void debugCameras(CallableView<void(const Camera &, std::string_view)> handler) const override;
 
     private:
-        LitSceneRenderData mData;
+        CameraSceneRenderData &mData;
 
         int mPriority;
-
-        std::vector<const LitSceneRenderData::ObjectData *> mVisible;
     };
 
 }

@@ -32,13 +32,16 @@ namespace Render {
         Math::Vector3 mEmissiveColor = Math::Vector3::ZERO;
 
         // Cached Parent
-        const Scene::Entity::Transform* mParentTransform = nullptr;
-        EntityRenderData* mParentData = nullptr;
+        const Scene::Entity::Transform *mParentTransform = nullptr;
+        EntityRenderData *mParentData = nullptr;
     };
 
     struct MADGINE_SCENE_RENDERER_EXPORT SceneRenderData : RenderData {
 
         SceneRenderData(Scene::SceneManager &scene);
+        SceneRenderData(const SceneRenderData &) = delete;
+
+        ~SceneRenderData();
 
         virtual Threading::ImmediateTask<RenderFuture> render(RenderContext *context) override;
 
@@ -55,10 +58,16 @@ namespace Render {
         void setInterpolating(bool interpolating);
         bool interpolating() const;
 
+        CameraSceneRenderData &registerCamera(Camera &camera);
+        
+
     protected:
         Threading::TaskQueue *queue(RenderContext *) override;
 
         void interpolateTransform(EntityRenderData &d, Scene::Entity::Transform &t, Scene::Entity::Entity &e);
+
+        friend struct CameraSceneRenderData;
+        void unregisterCamera(Camera &camera);
 
     private:
         Scene::SceneManager &mScene;
@@ -68,6 +77,8 @@ namespace Render {
         std::deque<EntityRenderData> mData;
 
         bool mInterpolate = true;
+
+        std::map<Camera *, CameraSceneRenderData> mCameras;
     };
 
 }

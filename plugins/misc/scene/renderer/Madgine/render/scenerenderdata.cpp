@@ -15,6 +15,7 @@
 #include "Madgine/scene/entity/entitycomponentlist.h"
 #include "Madgine/scene/scenemanager.h"
 
+#include "camerascenerenderdata.h"
 #include "scene_hlsl.h"
 
 namespace Engine {
@@ -53,6 +54,8 @@ namespace Render {
             }
         });
     }
+
+    SceneRenderData::~SceneRenderData() { }
 
     void SceneRenderData::interpolateTransform(EntityRenderData &d, Scene::Entity::Transform &t, Scene::Entity::Entity &e)
     {
@@ -216,6 +219,18 @@ namespace Render {
     bool EntityRenderData::alive() const
     {
         return mLastUpdate.revert() != std::chrono::steady_clock::time_point::min();
+    }
+
+    CameraSceneRenderData &SceneRenderData::registerCamera(Camera &camera)
+    {
+        auto [it, b] = mCameras.try_emplace(&camera, *this, camera);
+        ++it->second.mRefCount;
+        return it->second;
+    }
+
+    void SceneRenderData::unregisterCamera(Camera &camera)
+    {
+        mCameras.erase(&camera);
     }
 
 }
