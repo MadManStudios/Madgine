@@ -15,7 +15,7 @@ A compiler supporting C++20 is necessary.
 Setup The Madgine
 ~~~~~~~~~~~~~~~~~
 
-Download the source code from `GitHub <https://github.com/MadManRises/Madgine>`_.
+Download the source code from `GitHub <https://github.com/madManStudios/Madgine>`_.
 
 Generating Project Files
 ~~~~~~~~~~~~~~~~~~~~~~~~

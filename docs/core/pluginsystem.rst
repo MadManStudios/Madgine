@@ -31,6 +31,6 @@ The library comes with two kinds of accessors to use the registered types: Conta
 Disclaimer
 ----------
 
-The implementation of this feature is highly compiler and linker specific and relies on behavior not defined by the standard. If you encounter a bug or try to use it on a new platform, please `file a bug <https://github.com/MadManRises/Madgine/issues>`_.
+The implementation of this feature is highly compiler and linker specific and relies on behavior not defined by the standard. If you encounter a bug or try to use it on a new platform, please `file a bug <https://github.com/madManStudios/Madgine/issues>`_.
 
 
