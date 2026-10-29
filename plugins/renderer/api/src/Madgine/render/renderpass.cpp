@@ -40,7 +40,9 @@ namespace Render {
 
     void RenderPass::removeDependency(RenderData *dep)
     {
-        std::erase(mDependencies, dep);
+        auto it = std::ranges::find(mDependencies, dep);
+        assert(it != mDependencies.end());
+        mDependencies.erase(it);        
     }
 
     size_t RenderPass::iterations() const
