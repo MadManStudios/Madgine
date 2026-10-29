@@ -28,10 +28,10 @@ License
 The Madgine is licensed under the MIT License, see [LICENSE.md](@ref License) for more information.
 
 [CMake]: https://www.cmake.org
-[GitHub]: https://github.com/MadManRises/Madgine/issues
+[GitHub]: https://github.com/madManStudios/Madgine/issues
 [Twitch]: https://www.twitch.tv/madmanrises
 [Patreon]: https://www.patreon.com/madmanstudios
-[Doxygen]: http://madmanrises.hopto.org/
+[Doxygen]: https://madmanstudios.github.io/Madgine/doc/dev/docs/README.html
 
 
 .. toctree::
