@@ -489,7 +489,7 @@ namespace Tools {
 
         int global_vtx_offset = 0;
         int global_idx_offset = 0;
-        ImVec2 clip_off = draw_data->DisplayPos;
+        ImVec2 clip_off = draw_data->DisplayPos * ImGui::GetIO().DisplayFramebufferScale;
         for (int n = 0; n < draw_data->CmdListsCount; n++) {
             const ImDrawList *cmd_list = draw_data->CmdLists[n];
             for (int cmd_i = 0; cmd_i < cmd_list->CmdBuffer.Size; cmd_i++) {
