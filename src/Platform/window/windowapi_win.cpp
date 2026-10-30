@@ -17,9 +17,31 @@ namespace Engine {
 namespace Platform {
     namespace Window {
 
+        // Draw at the screen's resolution: a process that is not DPI-aware is rendered at 96 dpi and its frame stretched
+        // by Windows (blurred on a 150 % display). Per-monitor aware, the widgets scale their logical sizes by the
+        // system's factor instead (applyGeometry). MADGINE_DPI_AWARE=0 keeps the stretched 96 dpi window.
+        static float initScalingFactor()
+        {
+            if (const char *env = std::getenv("MADGINE_DPI_AWARE"); env && env[0] == '0')
+                return 1.0f;
+            HMODULE user32 = GetModuleHandleA("user32.dll");
+            if (!user32)
+                return 1.0f;
+            using SetContext = BOOL(WINAPI *)(HANDLE);
+            using GetDpi = UINT(WINAPI *)();
+            auto setContext = reinterpret_cast<SetContext>(reinterpret_cast<void *>(GetProcAddress(user32, "SetProcessDpiAwarenessContext")));
+            auto getDpi = reinterpret_cast<GetDpi>(reinterpret_cast<void *>(GetProcAddress(user32, "GetDpiForSystem")));
+            if (!setContext || !getDpi)
+                return 1.0f;
+            setContext(reinterpret_cast<HANDLE>(static_cast<intptr_t>(-4))); // DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2
+            if (!IsProcessDPIAware())
+                return 1.0f;
+            return static_cast<float>(getDpi()) / 96.0f;
+        }
+
         DLL_EXPORT const PlatformCapabilities platformCapabilities {
             true,
-            1.0f
+            initScalingFactor()
         };
 
         struct WindowsWindow;
