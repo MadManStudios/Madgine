@@ -177,8 +177,24 @@ namespace Widgets {
         return mManager;
     }
 
+    static void snapToPixels(Math::Vector2 &pos, Math::Vector2 &size)
+    {
+        auto axis = [](float &p, float &s) {
+            if (s <= 0.0f)
+                return;
+            float a = std::round(p), b = std::round(p + s);
+            if (b <= a)
+                b = a + 1.0f;
+            p = a;
+            s = b - a;
+        };
+        axis(pos.x, size.x);
+        axis(pos.y, size.y);
+    }
+
     void WidgetsRenderData::renderQuad(Math::Vector2 pos, Math::Vector2 size, ColorFrame color, TextureSettings tex, Math::Vector2 topLeftUV, Math::Vector2 bottomRightUV, bool flippedUV)
     {
+        snapToPixels(pos, size);
         color.mRenderData.mColor.a *= mAlpha;
         color.mRenderData.mSecondaryColor.a *= mAlpha;
         vertexData(tex).renderQuad(Math::Vector3 { pos, 10.0f * mLayer + mSubLayer }, size, mClipRect, color, topLeftUV, bottomRightUV, flippedUV);
@@ -186,6 +202,7 @@ namespace Widgets {
 
     void WidgetsRenderData::renderQuadUV(Math::Vector2 pos, Math::Vector2 size, ColorFrame color, TextureSettings tex, Math::Rect2i rect, Math::Vector2i textureSize, bool flippedUV)
     {
+        snapToPixels(pos, size);
         color.mRenderData.mColor.a *= mAlpha;
         color.mRenderData.mSecondaryColor.a *= mAlpha;
         vertexData(tex).renderQuadUV(Math::Vector3 { pos, 10.0f * mLayer + mSubLayer }, size, mClipRect, color, rect, textureSize, flippedUV);
