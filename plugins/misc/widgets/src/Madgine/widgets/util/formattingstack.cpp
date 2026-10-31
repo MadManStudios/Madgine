@@ -19,34 +19,32 @@ namespace Widgets {
 
     FormattingStack::~FormattingStack()
     {
-        //assert(!mFormatting);
-        //assert(!mEscaped);
+        // assert(!mFormatting);
+        // assert(!mEscaped);
     }
 
     float FormattingStack::renderGlyph(WidgetsRenderData &renderData, char32_t code, const Math::Vector2 &pos)
     {
-        const Render::Glyph &glyph = mTypeFace->mFonts.at(mStyle)[code > 0xFE ? '?' : static_cast<unsigned char>(code)];
+        float scale;
 
-        bool useSmallSize = mFontSize < 32;
+        const Render::TypeFace::GlyphSet &set = mTypeFace->mFonts.at(mStyle).set(mFontSize, &scale);
 
-        TextureSettings tex { mTypeFace->mTexture->resourceBlock(), useSmallSize ? 0 : TextureFlag_IsDistanceField };
+        const Render::Glyph &glyph = set[code > 0xFE ? '?' : static_cast<unsigned char>(code)];
 
-        float scale = mFontSize / Render::FontLoader::sFontSize;
+        TextureSettings tex { mTypeFace->mTexture->resourceBlock(), scale == 1.0f ? 0 : TextureFlag_IsDistanceField };
+
         float width = glyph.mSize.x * scale;
         float height = glyph.mSize.y * scale;
 
         float startX = glyph.mBearing.x * scale;
         float startY = -glyph.mBearing.y * scale;
 
-        if (useSmallSize)
-            renderData.renderQuadUV({ pos.x + startX, pos.y + startY }, { width, height }, mColor, tex, { glyph.mUV2, glyph.mSize2 }, mTypeFace->mTexture->size(), glyph.mFlipped2);
-        else
-            renderData.renderQuadUV({ pos.x + startX, pos.y + startY }, { width, height }, mColor, tex, { glyph.mUV, glyph.mSize }, mTypeFace->mTexture->size(), glyph.mFlipped);
+        renderData.renderQuadUV({ pos.x + startX, pos.y + startY }, { width, height }, mColor, tex, { glyph.mUV, glyph.mSize }, mTypeFace->mTexture->size(), glyph.mFlipped);
 
         return glyph.mAdvance / 64.0f * scale;
     }
 
-    void FormattingStack::renderShadow(WidgetsRenderData &renderData, char32_t code, const Math::Vector2 &pos, const Math::Vector2 &offset)        
+    void FormattingStack::renderShadow(WidgetsRenderData &renderData, char32_t code, const Math::Vector2 &pos, const Math::Vector2 &offset)
     {
         float scale = mFontSize / Render::FontLoader::sFontSize;
         ColorFrame shadowFrame = ColorRenderData { Math::Color4 { 0.0f, 0.0f, 0.0f, mColor.mRenderData.mColor.a } }.frame(mColor.mPos, mColor.mSize);
@@ -57,9 +55,9 @@ namespace Widgets {
 
     float FormattingStack::advance(char32_t code)
     {
-        const Render::Glyph &g = mTypeFace->mFonts.at(mStyle)[code > 0xFE ? '?' : static_cast<unsigned char>(code)];
+        float scale;
 
-        float scale = mFontSize / Render::FontLoader::sFontSize;
+        const Render::Glyph &g = mTypeFace->mFonts.at(mStyle).set(mFontSize, &scale)[code > 0xFE ? '?' : static_cast<unsigned char>(code)];
 
         return g.mAdvance / 64.0f * scale;
     }
@@ -80,10 +78,10 @@ namespace Widgets {
         std::string image;
 
         if (mEscaped) {
-            //assert(token == '\\' || token == '<');
+            // assert(token == '\\' || token == '<');
             mEscaped = false;
         } else if (mFormatting) {
-            //assert(token != '<');
+            // assert(token != '<');
             if (token == '>') {
                 mFormatting = false;
                 auto sep = mFormatToken.find('=');

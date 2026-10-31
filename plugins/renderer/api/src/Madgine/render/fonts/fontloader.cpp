@@ -203,11 +203,12 @@ namespace Render {
             areaSize *= 2;
         };
 
+        static constexpr size_t array_size = TypeFace::sMaxBitmapFontSize - TypeFace::sMinBitmapFontSize + 1;
         struct TempData {
             std::array<Math::Vector2i, TypeFace::sFontGlyphCount> mSizes;
-            std::array<Math::Vector2i, TypeFace::sFontGlyphCount> mLowResSizes;
+            std::array<std::array<Math::Vector2i, TypeFace::sFontGlyphCount>, array_size> mLowResSizes;
             std::vector<Math::Atlas2::Entry> mEntries;
-            std::vector<Math::Atlas2::Entry> mLowResEntries;
+            std::array<std::vector<Math::Atlas2::Entry>, array_size> mLowResEntries;
             FT_Face mFace;
             Memory::ByteBuffer mBuffer;
         };
@@ -255,13 +256,13 @@ namespace Render {
             typeFace.mAscender = data.mFace->size->metrics.ascender;
             typeFace.mDescender = data.mFace->size->metrics.descender;
 
-            std::array<Math::Vector2i, TypeFace::sFontGlyphCount> extendedSizes;
+            std::array<Math::Vector2i, TypeFace::sFontGlyphCount> extendedSizes{};
 
             for (unsigned char c = 0; c < TypeFace::sFontGlyphCount; c++) {
                 if (ignore(c))
                     continue;
                 // Load character glyph
-                if (FT_Load_Char(data.mFace, c, FT_LOAD_DEFAULT)) {
+                if (FT_Load_Char(data.mFace, c, FT_LOAD_DEFAULT | FT_LOAD_NO_HINTING)) {
                     LOG_ERROR("FREETYTPE: Failed to load Glyph");
                     data.mSizes[c] = { 0, 0 };
                     extendedSizes[c] = { 0, 0 };
@@ -274,25 +275,32 @@ namespace Render {
             data.mEntries = atlas.insert(
                 extendedSizes, expand, true);
 
-            FT_Set_Pixel_Sizes(data.mFace, 0, 24);
+            extendedSizes = {};
 
-            for (unsigned char c = 0; c < TypeFace::sFontGlyphCount; c++) {
-                if (ignore(c))
-                    continue;
+            for (size_t size = TypeFace::sMinBitmapFontSize; size <= TypeFace::sMaxBitmapFontSize; ++size) {
 
-                // Load character glyph
-                if (FT_Load_Char(data.mFace, c, FT_LOAD_DEFAULT)) {
-                    LOG_ERROR("FREETYTPE: Failed to load Glyph");
-                    data.mSizes[c] = { 0, 0 };
-                    extendedSizes[c] = { 0, 0 };
-                    continue;
+                size_t i = size - TypeFace::sMinBitmapFontSize;
+
+                FT_Set_Pixel_Sizes(data.mFace, 0, size);
+
+                for (unsigned char c = 0; c < TypeFace::sFontGlyphCount; c++) {
+                    if (ignore(c))
+                        continue;
+
+                    // Load character glyph
+                    if (FT_Load_Char(data.mFace, c, FT_LOAD_RENDER | FT_LOAD_TARGET_LIGHT)) {
+                        LOG_ERROR("FREETYTPE: Failed to load Glyph");
+                        data.mLowResSizes[i][c] = { 0, 0 };
+                        extendedSizes[c] = { 0, 0 };
+                        continue;
+                    }
+                    data.mLowResSizes[i][c] = { static_cast<int>(data.mFace->glyph->bitmap.width), static_cast<int>(data.mFace->glyph->bitmap.rows) };
+                    extendedSizes[c] = { static_cast<int>(data.mFace->glyph->bitmap.width) + 1, static_cast<int>(data.mFace->glyph->bitmap.rows) + 1 };
                 }
-                data.mLowResSizes[c] = { static_cast<int>(data.mFace->glyph->bitmap.width), static_cast<int>(data.mFace->glyph->bitmap.rows) };
-                extendedSizes[c] = { static_cast<int>(data.mFace->glyph->bitmap.width) + 1, static_cast<int>(data.mFace->glyph->bitmap.rows) + 1 };
-            }
 
-            data.mLowResEntries = atlas.insert(
-                extendedSizes, expand, true);
+                data.mLowResEntries[i] = atlas.insert(
+                    extendedSizes, expand, true);
+            }
         }
 
         Math::Vector2i textureSize = { areaSize * UNIT_SIZE,
@@ -304,15 +312,16 @@ namespace Render {
         for (const auto &[style, data] : tempData) {
 
             TypeFace::Font &font = typeFace.mFonts[style];
+            TypeFace::GlyphSet &set = font.mScalableFont;
 
             FT_Set_Pixel_Sizes(data.mFace, 0, sFontSize);
 
             for (unsigned char c = 0; c < TypeFace::sFontGlyphCount; c++) {
-                if (ignore(c, &font[c]))
+                if (ignore(c, &set[c]))
                     continue;
 
                 // Load character glyph
-                if (FT_Load_Char(data.mFace, c, FT_LOAD_RENDER)) {
+                if (FT_Load_Char(data.mFace, c, FT_LOAD_RENDER | FT_LOAD_NO_HINTING)) {
                     LOG_ERROR("FREETYTPE: Failed to load Glyph");
                     continue;
                 }
@@ -340,12 +349,12 @@ namespace Render {
                 ::msdfgen::edgeColoringSimple(shape, 3);
                 ::msdfgen::generateMSDF(bm, shape, 4.0, { 1, 1 }, { static_cast<double>(-data.mFace->glyph->bitmap_left + 2), static_cast<double>(data.mSizes[c].y - data.mFace->glyph->bitmap_top - 2) });
 
-                font[c].mSize = data.mSizes[c];
-                font[c].mUV = data.mEntries[c].mArea.mTopLeft;
-                font[c].mFlipped = data.mEntries[c].mFlipped;
-                font[c].mAdvance = data.mFace->glyph->advance.x;
-                font[c].mBearing.x = data.mFace->glyph->bitmap_left - 1;
-                font[c].mBearing.y = data.mFace->glyph->bitmap_top - 1;
+                set[c].mSize = data.mSizes[c];
+                set[c].mUV = data.mEntries[c].mArea.mTopLeft;
+                set[c].mFlipped = data.mEntries[c].mFlipped;
+                set[c].mAdvance = data.mFace->glyph->advance.x;
+                set[c].mBearing.x = data.mFace->glyph->bitmap_left - 1;
+                set[c].mBearing.y = data.mFace->glyph->bitmap_top + 1;
 
                 Math::Vector2i size = data.mSizes[c];
                 if (data.mEntries[c].mFlipped)
@@ -367,47 +376,57 @@ namespace Render {
                     });
             }
 
-            FT_Set_Pixel_Sizes(data.mFace, 0, 24);
+            for (size_t size = TypeFace::sMinBitmapFontSize; size <= TypeFace::sMaxBitmapFontSize; ++size) {
 
-            for (unsigned char c = 0; c < TypeFace::sFontGlyphCount; c++) {
-                if (ignore(c))
-                    continue;
+                size_t i = size - TypeFace::sMinBitmapFontSize;
 
-                // Load character glyph
-                if (FT_Load_Char(data.mFace, c, FT_LOAD_RENDER)) {
-                    LOG_ERROR("FREETYTPE: Failed to load Glyph");
-                    continue;
+                FT_Set_Pixel_Sizes(data.mFace, 0, size);
+
+                TypeFace::GlyphSet &set2 = font.mBitmapFonts[i];
+
+                for (unsigned char c = 0; c < TypeFace::sFontGlyphCount; c++) {
+                    if (ignore(c))
+                        continue;
+
+                    // Load character glyph
+                    if (FT_Load_Char(data.mFace, c, FT_LOAD_RENDER | FT_LOAD_TARGET_LIGHT)) {
+                        LOG_ERROR("FREETYTPE: Failed to load Glyph");
+                        continue;
+                    }
+
+                    if (FT_Render_Glyph(data.mFace->glyph, FT_RENDER_MODE_NORMAL)) {
+                        LOG_ERROR("FREETYPE: Failed to render Glyph");
+                        continue;
+                    }
+
+                    AreaView<unsigned char, 2> bufferView { data.mFace->glyph->bitmap.buffer, { static_cast<size_t>(data.mLowResSizes[i][c].x), static_cast<size_t>(data.mLowResSizes[i][c].y) } };
+
+                    set2[c].mSize = data.mLowResSizes[i][c] + Math::Vector2i(2, 2);
+                    set2[c].mUV = data.mLowResEntries[i][c].mArea.mTopLeft - Math::Vector2i(1, 1);
+                    set2[c].mFlipped = data.mLowResEntries[i][c].mFlipped;
+                    set2[c].mAdvance = data.mFace->glyph->advance.x;
+                    set2[c].mBearing.x = data.mFace->glyph->bitmap_left - 1;
+                    set2[c].mBearing.y = data.mFace->glyph->bitmap_top + 1;
+
+                    Math::Vector2i size = data.mLowResSizes[i][c];
+                    if (data.mLowResEntries[i][c].mFlipped)
+                        std::swap(size.x, size.y);
+                    Math::Vector2i pos = { data.mLowResEntries[i][c].mArea.mTopLeft.x, data.mLowResEntries[i][c].mArea.mTopLeft.y };
+
+                    AreaView<std::array<unsigned char, 4>, 2> targetView = tex.subArea({ static_cast<size_t>(pos.x), static_cast<size_t>(pos.y) }, { static_cast<size_t>(size.x), static_cast<size_t>(size.y) });
+                    if (data.mLowResEntries[i][c].mFlipped)
+                        targetView.swapAxis(0, 1);
+
+                    std::ranges::transform(bufferView, targetView.begin(),
+                        [](const unsigned char f) {
+                            return std::array<unsigned char, 4> {
+                                255,
+                                255,
+                                255,
+                                f
+                            };
+                        });
                 }
-
-                if (FT_Render_Glyph(data.mFace->glyph, FT_RENDER_MODE_NORMAL)) {
-                    LOG_ERROR("FREETYPE: Failed to render Glyph");
-                    continue;
-                }
-
-                AreaView<unsigned char, 2> bufferView { data.mFace->glyph->bitmap.buffer, { static_cast<size_t>(data.mLowResSizes[c].x), static_cast<size_t>(data.mLowResSizes[c].y) } };
-
-                font[c].mSize2 = data.mLowResSizes[c] + Math::Vector2i(2, 2);
-                font[c].mUV2 = data.mLowResEntries[c].mArea.mTopLeft - Math::Vector2i(1, 1);
-                font[c].mFlipped2 = data.mLowResEntries[c].mFlipped;
-
-                Math::Vector2i size = data.mLowResSizes[c];
-                if (data.mLowResEntries[c].mFlipped)
-                    std::swap(size.x, size.y);
-                Math::Vector2i pos = { data.mLowResEntries[c].mArea.mTopLeft.x, data.mLowResEntries[c].mArea.mTopLeft.y };
-
-                AreaView<std::array<unsigned char, 4>, 2> targetView = tex.subArea({ static_cast<size_t>(pos.x), static_cast<size_t>(pos.y) }, { static_cast<size_t>(size.x), static_cast<size_t>(size.y) });
-                if (data.mLowResEntries[c].mFlipped)
-                    targetView.swapAxis(0, 1);
-
-                std::ranges::transform(bufferView, targetView.begin(),
-                    [](const unsigned char f) {
-                        return std::array<unsigned char, 4> {
-                            255,
-                            255,
-                            255,
-                            f
-                        };
-                    });
             }
 
             FT_Done_Face(data.mFace);

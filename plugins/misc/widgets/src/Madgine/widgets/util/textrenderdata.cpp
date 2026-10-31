@@ -104,7 +104,7 @@ namespace Widgets {
     void TextRenderData::renderText(WidgetsRenderData &renderData, std::string_view text, Math::Vector2 pos, Math::Vector2 size, const Render::TypeFace *typeFace, Render::FontStyle style, float fontSize, ColorFrame color, Math::Vector2 pivot, Math::Vector2 shadowOffset, int cursorIndex)
     {
         if (text.empty() && cursorIndex == -1)
-            return;
+            return;        
 
         float scale = fontSize / Render::FontLoader::sFontSize;
 
@@ -155,7 +155,7 @@ namespace Widgets {
 
             if (shadowOffset.x != 0.0f || shadowOffset.y != 0.0f) {
                 renderData.setSubLayer(baseLayer);
-                stack.renderShadow(renderData, code, { pos.x + cursorX, pos.y + originY }, shadowOffset);                
+                stack.renderShadow(renderData, code, { pos.x + cursorX, pos.y + originY }, shadowOffset);
             }
 
             renderData.setSubLayer(baseLayer + 1);
@@ -171,10 +171,11 @@ namespace Widgets {
 
     void TextRenderData::renderSelection(WidgetsRenderData &renderData, std::string_view text, Math::Vector2 pos, Math::Vector2 size, const Render::TypeFace *typeFace, Render::FontStyle style, float fontSize, Math::Vector2 pivot, const Math::Atlas2::Entry &entry, int selectionStart, int selectionEnd, ColorFrame color)
     {
-        float scale = fontSize / Render::FontLoader::sFontSize;
+        float scale;
+        const Render::TypeFace::GlyphSet &set = typeFace->mFonts.at(style).set(fontSize, &scale);
 
-        float minY = typeFace->mDescender / 64.0f * scale;
-        float maxY = typeFace->mAscender / 64.0f * scale;
+        float minY = typeFace->mDescender / 64.0f * fontSize / Render::FontLoader::sFontSize;
+        float maxY = typeFace->mAscender / 64.0f * fontSize / Render::FontLoader::sFontSize;
         float fullHeight = maxY - minY;
         FormattingStack stack { typeFace, style, fontSize };
         float fullWidth = calculateWidth(renderData.manager(), text, stack);
@@ -197,7 +198,7 @@ namespace Widgets {
             ++i;
 
             unsigned char code = c > 0xFE ? '?' : c;
-            const Render::Glyph &g = typeFace->mFonts.at(style)[code];
+            const Render::Glyph &g = set[code];
 
             cursorX += g.mAdvance / 64.0f * scale;
         }
@@ -207,7 +208,7 @@ namespace Widgets {
         if (i == selectionEnd)
             endX = cursorX;
 
-        const Render::Glyph &ref = typeFace->mFonts.at(style)['D'];
+        const Render::Glyph &ref = set['D'];
 
         float height = ref.mSize.y * scale;
 

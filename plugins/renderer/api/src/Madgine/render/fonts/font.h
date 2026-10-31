@@ -18,7 +18,17 @@ namespace Render {
         TexturePtr mTexture;
 
         static constexpr size_t sFontGlyphCount = 255;
-        using Font = std::array<Glyph, sFontGlyphCount>;
+
+        using GlyphSet = std::array<Glyph, sFontGlyphCount>;
+
+        static constexpr size_t sMaxBitmapFontSize = 24;
+        static constexpr size_t sMinBitmapFontSize = 6;
+        struct MADGINE_RENDER_EXPORT Font {
+            GlyphSet mScalableFont;
+            std::array<GlyphSet, sMaxBitmapFontSize - sMinBitmapFontSize + 1 > mBitmapFonts;
+
+            const GlyphSet &set(float fontSize, float *outScale = nullptr) const;
+        };
 
         std::map<FontStyle, Font> mFonts;
 
