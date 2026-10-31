@@ -41,6 +41,8 @@ namespace Render {
 
         virtual void debugFrustums(CallableView<void(const Math::Frustum &, std::string_view)> handler) const override;
 
+        ShadowSceneRenderData &data() { return mData; }
+
     private:
         ShadowSceneRenderData mData;
 
