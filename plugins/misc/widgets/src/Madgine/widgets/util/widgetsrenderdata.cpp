@@ -83,8 +83,8 @@ namespace Widgets {
         if (flippedUV)
             std::swap(rect.mSize.x, rect.mSize.y);
 
-        Math::Vector2 topLeftUV = Math::Vector2 { rect.mTopLeft + Math::Vector2i { 1, 1 } } / Math::Vector2 { textureSize };
-        Math::Vector2 bottomRightUV = Math::Vector2 { rect.mTopLeft + rect.mSize - Math::Vector2i { 1, 1 } } / Math::Vector2 { textureSize };
+        Math::Vector2 topLeftUV = Math::Vector2 { rect.mTopLeft } / Math::Vector2 { textureSize };
+        Math::Vector2 bottomRightUV = Math::Vector2 { rect.mTopLeft + rect.mSize } / Math::Vector2 { textureSize };
 
         renderQuad(pos, size, clipRect, color, topLeftUV, bottomRightUV, flippedUV);
     }

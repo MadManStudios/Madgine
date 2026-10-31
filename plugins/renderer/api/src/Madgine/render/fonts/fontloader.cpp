@@ -256,7 +256,7 @@ namespace Render {
             typeFace.mAscender = data.mFace->size->metrics.ascender;
             typeFace.mDescender = data.mFace->size->metrics.descender;
 
-            std::array<Math::Vector2i, TypeFace::sFontGlyphCount> extendedSizes{};
+            std::array<Math::Vector2i, TypeFace::sFontGlyphCount> extendedSizes {};
 
             for (unsigned char c = 0; c < TypeFace::sFontGlyphCount; c++) {
                 if (ignore(c))
@@ -401,8 +401,8 @@ namespace Render {
 
                     AreaView<unsigned char, 2> bufferView { data.mFace->glyph->bitmap.buffer, { static_cast<size_t>(data.mLowResSizes[i][c].x), static_cast<size_t>(data.mLowResSizes[i][c].y) } };
 
-                    set2[c].mSize = data.mLowResSizes[i][c] + Math::Vector2i(2, 2);
-                    set2[c].mUV = data.mLowResEntries[i][c].mArea.mTopLeft - Math::Vector2i(1, 1);
+                    set2[c].mSize = data.mLowResSizes[i][c];
+                    set2[c].mUV = data.mLowResEntries[i][c].mArea.mTopLeft;
                     set2[c].mFlipped = data.mLowResEntries[i][c].mFlipped;
                     set2[c].mAdvance = data.mFace->glyph->advance.x;
                     set2[c].mBearing.x = data.mFace->glyph->bitmap_left - 1;
