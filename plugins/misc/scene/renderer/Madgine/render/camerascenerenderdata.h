@@ -8,7 +8,7 @@
 namespace Engine {
 namespace Render {
 
-    struct CameraSceneRenderData : RenderData {
+    struct MADGINE_SCENE_RENDERER_EXPORT CameraSceneRenderData : RenderData {
 
         CameraSceneRenderData(SceneRenderData &renderData, Camera &camera);
         ~CameraSceneRenderData();
