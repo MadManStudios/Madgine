@@ -290,6 +290,7 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pub-static-attribs">Static Public Attributes</a> &#124;
@@ -300,10 +301,15 @@ $(function() {
 
 <p><code>#include &lt;font.h&gt;</code></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_type_face_1_1_font.html">Font</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:a319b712392f330cd9b438c4afd5b5ed8"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_type_face.html#a319b712392f330cd9b438c4afd5b5ed8">Font</a> = std::array&lt; <a class="el" href="struct_engine_1_1_render_1_1_glyph.html">Glyph</a>, <a class="el" href="struct_engine_1_1_render_1_1_type_face.html#a8a9ca959464fe21dd290bbc092e2d748">sFontGlyphCount</a> &gt;</td></tr>
-<tr class="separator:a319b712392f330cd9b438c4afd5b5ed8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a60289d5b2f0006caed80dbabbca46a7a"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_type_face.html#a60289d5b2f0006caed80dbabbca46a7a">GlyphSet</a> = std::array&lt; <a class="el" href="struct_engine_1_1_render_1_1_glyph.html">Glyph</a>, <a class="el" href="struct_engine_1_1_render_1_1_type_face.html#a8a9ca959464fe21dd290bbc092e2d748">sFontGlyphCount</a> &gt;</td></tr>
+<tr class="separator:a60289d5b2f0006caed80dbabbca46a7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -311,7 +317,7 @@ Public Attributes</h2></td></tr>
 <tr class="separator:acbdf3fcbf8a59f00fe42be5628c4bc7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2d586b9c0332d2a5f59de9d9fa73b623"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_type_face.html#a2d586b9c0332d2a5f59de9d9fa73b623">mDescender</a></td></tr>
 <tr class="separator:a2d586b9c0332d2a5f59de9d9fa73b623"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0701a2f4f18149eb3e9fd7f8fbe32749"><td class="memItemLeft" align="right" valign="top">std::map&lt; FontStyle, <a class="el" href="struct_engine_1_1_render_1_1_type_face.html#a319b712392f330cd9b438c4afd5b5ed8">Font</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_type_face.html#a0701a2f4f18149eb3e9fd7f8fbe32749">mFonts</a></td></tr>
+<tr class="memitem:a0701a2f4f18149eb3e9fd7f8fbe32749"><td class="memItemLeft" align="right" valign="top">std::map&lt; FontStyle, <a class="el" href="struct_engine_1_1_render_1_1_type_face_1_1_font.html">Font</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_type_face.html#a0701a2f4f18149eb3e9fd7f8fbe32749">mFonts</a></td></tr>
 <tr class="separator:a0701a2f4f18149eb3e9fd7f8fbe32749"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad5258d5886f3c5088b57364cb88db02a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_engine_1_1_render.html#acf4d21ad6f42937445a8ef1b6ff82655">TexturePtr</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_type_face.html#ad5258d5886f3c5088b57364cb88db02a">mTexture</a></td></tr>
 <tr class="separator:ad5258d5886f3c5088b57364cb88db02a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -320,16 +326,20 @@ Public Attributes</h2></td></tr>
 Static Public Attributes</h2></td></tr>
 <tr class="memitem:a8a9ca959464fe21dd290bbc092e2d748"><td class="memItemLeft" align="right" valign="top">static constexpr size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_type_face.html#a8a9ca959464fe21dd290bbc092e2d748">sFontGlyphCount</a> = 255</td></tr>
 <tr class="separator:a8a9ca959464fe21dd290bbc092e2d748"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a50789d8070e4fba9eeffe6087bc66211"><td class="memItemLeft" align="right" valign="top">static constexpr size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_type_face.html#a50789d8070e4fba9eeffe6087bc66211">sMaxBitmapFontSize</a> = 24</td></tr>
+<tr class="separator:a50789d8070e4fba9eeffe6087bc66211"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d0f11bf36dea455e787ba408e651e0f"><td class="memItemLeft" align="right" valign="top">static constexpr size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_type_face.html#a8d0f11bf36dea455e787ba408e651e0f">sMinBitmapFontSize</a> = 6</td></tr>
+<tr class="separator:a8d0f11bf36dea455e787ba408e651e0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Typedef Documentation</h2>
-<a id="a319b712392f330cd9b438c4afd5b5ed8" name="a319b712392f330cd9b438c4afd5b5ed8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a319b712392f330cd9b438c4afd5b5ed8">&#9670;&#160;</a></span>Font</h2>
+<a id="a60289d5b2f0006caed80dbabbca46a7a" name="a60289d5b2f0006caed80dbabbca46a7a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a60289d5b2f0006caed80dbabbca46a7a">&#9670;&#160;</a></span>GlyphSet</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="struct_engine_1_1_render_1_1_type_face.html#a319b712392f330cd9b438c4afd5b5ed8">Engine::Render::TypeFace::Font</a> =  std::array&lt;<a class="el" href="struct_engine_1_1_render_1_1_glyph.html">Glyph</a>, <a class="el" href="struct_engine_1_1_render_1_1_type_face.html#a8a9ca959464fe21dd290bbc092e2d748">sFontGlyphCount</a>&gt;</td>
+          <td class="memname">using <a class="el" href="struct_engine_1_1_render_1_1_type_face.html#a60289d5b2f0006caed80dbabbca46a7a">Engine::Render::TypeFace::GlyphSet</a> =  std::array&lt;<a class="el" href="struct_engine_1_1_render_1_1_glyph.html">Glyph</a>, <a class="el" href="struct_engine_1_1_render_1_1_type_face.html#a8a9ca959464fe21dd290bbc092e2d748">sFontGlyphCount</a>&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -373,6 +383,50 @@ Static Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a50789d8070e4fba9eeffe6087bc66211" name="a50789d8070e4fba9eeffe6087bc66211"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a50789d8070e4fba9eeffe6087bc66211">&#9670;&#160;</a></span>sMaxBitmapFontSize</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr size_t Engine::Render::TypeFace::sMaxBitmapFontSize = 24</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8d0f11bf36dea455e787ba408e651e0f" name="a8d0f11bf36dea455e787ba408e651e0f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8d0f11bf36dea455e787ba408e651e0f">&#9670;&#160;</a></span>sMinBitmapFontSize</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr size_t Engine::Render::TypeFace::sMinBitmapFontSize = 6</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a0701a2f4f18149eb3e9fd7f8fbe32749" name="a0701a2f4f18149eb3e9fd7f8fbe32749"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0701a2f4f18149eb3e9fd7f8fbe32749">&#9670;&#160;</a></span>mFonts</h2>
 
@@ -380,7 +434,7 @@ Static Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::map&lt;FontStyle, <a class="el" href="struct_engine_1_1_render_1_1_type_face.html#a319b712392f330cd9b438c4afd5b5ed8">Font</a>&gt; Engine::Render::TypeFace::mFonts</td>
+          <td class="memname">std::map&lt;FontStyle, <a class="el" href="struct_engine_1_1_render_1_1_type_face_1_1_font.html">Font</a>&gt; Engine::Render::TypeFace::mFonts</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -421,7 +475,7 @@ Static Public Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Oct 29 2026 20:38:02 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Sat Oct 31 2026 02:10:52 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>
