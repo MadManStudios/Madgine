@@ -48,11 +48,13 @@ namespace Render {
         mPipeline->mapParameters<HLSL::GBufferPerApplication>(0)->p = target->getClipSpaceMatrix() * mData.mCamera.getProjectionMatrix(aspectRatio);
 
         Math::Matrix4 v = mData.getViewMatrix();
-        
 
         for (const auto &[key, objects] : mData.get(aspectRatio)) {
-            // Only the instances whose bounding box reaches into the view (skinned meshes always)
-            
+
+            // Objects with a material alpha below 1 cannot be blended in the G-buffer: a forward pass needs to draw them over the
+            // lit image (CameraSceneRenderData::get)
+            if (key.mTransparentContent)
+                continue;
 
             {
                 auto perObject = mPipeline->mapParameters<HLSL::GBufferPerObject>(2);
