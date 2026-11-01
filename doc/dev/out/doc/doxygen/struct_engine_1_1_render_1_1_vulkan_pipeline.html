@@ -306,8 +306,8 @@ Inheritance diagram for Engine::Render::VulkanPipeline:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:af9d78fdd93acf56ba746bf1c2508ce8f"><td class="memItemLeft" align="right" valign="top">VkPipeline&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_pipeline.html#af9d78fdd93acf56ba746bf1c2508ce8f">get</a> (<a class="el" href="struct_engine_1_1_render_1_1_vertex_format.html">VertexFormat</a> format, size_t groupSize, size_t samples, VkRenderPass renderpass, bool depthChecking=true) const</td></tr>
-<tr class="separator:af9d78fdd93acf56ba746bf1c2508ce8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7dbb2c8e2e9b7780eeaf33d696c1e5b3"><td class="memItemLeft" align="right" valign="top">VkPipeline&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_pipeline.html#a7dbb2c8e2e9b7780eeaf33d696c1e5b3">get</a> (<a class="el" href="struct_engine_1_1_render_1_1_vertex_format.html">VertexFormat</a> format, size_t groupSize, size_t samples, VkRenderPass renderpass, bool depthChecking=true, bool depthWriting=true) const</td></tr>
+<tr class="separator:a7dbb2c8e2e9b7780eeaf33d696c1e5b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab4c3fb49433a455cdee9053d775487e9"><td class="memItemLeft" align="right" valign="top">VkPipelineLayout&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_pipeline.html#ab4c3fb49433a455cdee9053d775487e9">layout</a> () const</td></tr>
 <tr class="separator:ab4c3fb49433a455cdee9053d775487e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a085517748e9649378f2e0a70c6ce902a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_pipeline.html#a085517748e9649378f2e0a70c6ce902a">link</a> (<a class="el" href="struct_engine_1_1_render_1_1_pipeline_signature.html">PipelineSignature</a> signature, typename <a class="el" href="struct_engine_1_1_render_1_1_vulkan_shader_loader_1_1_handle.html">VulkanShaderLoader::Handle</a> vertexShader, std::string vs_entrypoint, typename <a class="el" href="struct_engine_1_1_render_1_1_vulkan_shader_loader_1_1_handle.html">VulkanShaderLoader::Handle</a> pixelShader, std::string ps_entrypoint)</td></tr>
@@ -412,8 +412,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="af9d78fdd93acf56ba746bf1c2508ce8f" name="af9d78fdd93acf56ba746bf1c2508ce8f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af9d78fdd93acf56ba746bf1c2508ce8f">&#9670;&#160;</a></span>get()</h2>
+<a id="a7dbb2c8e2e9b7780eeaf33d696c1e5b3" name="a7dbb2c8e2e9b7780eeaf33d696c1e5b3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7dbb2c8e2e9b7780eeaf33d696c1e5b3">&#9670;&#160;</a></span>get()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -446,7 +446,13 @@ Public Member Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>depthChecking</em> = <code>true</code>&#160;</td>
+          <td class="paramname"><em>depthChecking</em> = <code>true</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>depthWriting</em> = <code>true</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -516,7 +522,7 @@ Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Oct 31 2026 23:26:16 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Sun Nov 1 2026 15:15:30 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>
