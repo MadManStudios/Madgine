@@ -41,6 +41,7 @@ namespace Render {
         , mHandle(pipeline)
         , mConstantBufferSizes(config.bufferSizes)
         , mDepthChecking(config.depthChecking)
+        , mDepthWriting(config.depthWriting)
     {
     }
 
@@ -53,6 +54,8 @@ namespace Render {
             glEnable(GL_DEPTH_TEST);
         else
             glDisable(GL_DEPTH_TEST);
+
+        glDepthMask(mDepthWriting);
 
 #if !OPENGL_ES || OPENGL_ES >= 31
         OpenGLRenderContext::getSingleton().bindFormat(format, offset);
@@ -290,7 +293,7 @@ namespace Render {
             mHasIndices = false;
         }
 
-        mElementCount = mesh.mElementCount;        
+        mElementCount = mesh.mElementCount;
     }
 
     Memory::WritableByteBuffer OpenGLPipelineInstance::mapVertices(RenderTarget *target, VertexFormat format, size_t count) const

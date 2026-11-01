@@ -18,6 +18,7 @@ namespace Render {
         ShaderObjectPtr ps;
         std::vector<size_t> bufferSizes;
         bool depthChecking = true;
+        bool depthWriting = true;
     };
 
     struct MADGINE_RENDER_EXPORT PipelineInstance {

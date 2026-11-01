@@ -15,6 +15,7 @@ namespace Render {
         , mPipeline(pipeline)
         , mConstantBufferSizes(config.bufferSizes)
         , mDepthChecking(config.depthChecking)
+        , mDepthWriting(config.depthWriting)
     {
         mConstantGPUBufferOffsets.resize(3);
 
@@ -78,7 +79,7 @@ namespace Render {
 
         VkPipeline pipeline = mPipeline.ptr()[format][groupSize - 1][samplesBits - 1];
         if (!pipeline) {
-            pipeline = mPipeline.get(format, groupSize, samples, renderpass, mDepthChecking);
+            pipeline = mPipeline.get(format, groupSize, samples, renderpass, mDepthChecking, mDepthWriting);
             if (!pipeline)
                 return false;
         }

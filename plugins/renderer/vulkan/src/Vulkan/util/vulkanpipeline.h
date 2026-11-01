@@ -13,7 +13,7 @@ namespace Render {
         bool link(PipelineSignature signature, typename VulkanShaderLoader::Handle vertexShader, std::string vs_entrypoint, typename VulkanShaderLoader::Handle pixelShader, std::string ps_entrypoint);
         bool link(PipelineSignature signature, typename VulkanShaderLoader::Ptr vertexShader, std::string vs_entrypoint, typename VulkanShaderLoader::Ptr pixelShader, std::string ps_entrypoint);
 
-        VkPipeline get(VertexFormat format, size_t groupSize, size_t samples, VkRenderPass renderpass, bool depthChecking = true) const;
+        VkPipeline get(VertexFormat format, size_t groupSize, size_t samples, VkRenderPass renderpass, bool depthChecking = true, bool depthWriting = true) const;
 
         const std::array<std::array<VulkanPtr<VkPipeline, &vkDestroyPipeline>, 3>, 3> *ptr() const;
 

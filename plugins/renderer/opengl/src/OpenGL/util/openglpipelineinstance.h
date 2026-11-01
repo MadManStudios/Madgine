@@ -30,6 +30,7 @@ namespace Render {
         mutable GLuint mHandle = 0;
         std::vector<size_t> mConstantBufferSizes;
         bool mDepthChecking;
+        bool mDepthWriting;
         mutable GLenum mMode;
         mutable bool mHasIndices = false;
         mutable GLsizei mElementCount;

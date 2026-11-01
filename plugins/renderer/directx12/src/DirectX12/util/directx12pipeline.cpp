@@ -32,7 +32,7 @@ namespace Render {
         return true;
     }
 
-    const Platform::ReleasePtr<ID3D12PipelineState> &DirectX12Pipeline::get(VertexFormat vertexFormat, size_t groupSize, DirectX12RenderTarget *target, bool depthChecking) const
+    const Platform::ReleasePtr<ID3D12PipelineState> &DirectX12Pipeline::get(VertexFormat vertexFormat, size_t groupSize, DirectX12RenderTarget *target, bool depthChecking, bool depthWriting) const
     {
         size_t samplesBits = sqrt(target->samples());
         assert(samplesBits * samplesBits == target->samples());
@@ -122,7 +122,7 @@ namespace Render {
             pipelineDesc.BlendState.RenderTarget[0].RenderTargetWriteMask = D3D12_COLOR_WRITE_ENABLE_ALL;
 
             pipelineDesc.DepthStencilState.DepthEnable = depthChecking;
-            pipelineDesc.DepthStencilState.DepthWriteMask = D3D12_DEPTH_WRITE_MASK_ALL;
+            pipelineDesc.DepthStencilState.DepthWriteMask = depthWriting ? D3D12_DEPTH_WRITE_MASK_ALL : D3D12_DEPTH_WRITE_MASK_ZERO;
             pipelineDesc.DepthStencilState.DepthFunc = D3D12_COMPARISON_FUNC_LESS;
             pipelineDesc.DepthStencilState.StencilEnable = FALSE;
             pipelineDesc.DSVFormat = DXGI_FORMAT_D24_UNORM_S8_UINT;

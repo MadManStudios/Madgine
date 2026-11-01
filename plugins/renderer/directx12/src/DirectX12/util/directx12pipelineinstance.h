@@ -35,6 +35,7 @@ namespace Render {
         std::vector<D3D12_GPU_VIRTUAL_ADDRESS> mConstantGPUAddresses;
 
         bool mDepthChecking;
+        bool mDepthWriting;
 
         mutable std::vector<D3D12_GPU_VIRTUAL_ADDRESS> mTempGPUAddresses;
 

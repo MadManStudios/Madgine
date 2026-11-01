@@ -24,6 +24,7 @@ namespace Render {
         , mPipeline(pipeline)
         , mConstantBufferSizes(config.bufferSizes)
         , mDepthChecking(config.depthChecking)
+        , mDepthWriting(config.depthWriting)
     {
         mConstantGPUAddresses.resize(config.bufferSizes.size());
         for (size_t &size : mConstantBufferSizes)
@@ -39,7 +40,7 @@ namespace Render {
         size_t samplesBits = sqrt(target->samples());
         assert(samplesBits * samplesBits == target->samples());
 
-        const Platform::ReleasePtr<ID3D12PipelineState> &pipeline = mPipeline->get(vertexFormat, groupSize, target, mDepthChecking);
+        const Platform::ReleasePtr<ID3D12PipelineState> &pipeline = mPipeline->get(vertexFormat, groupSize, target, mDepthChecking, mDepthWriting);
         if (!pipeline) {
             return false;
         }

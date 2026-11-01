@@ -36,6 +36,7 @@ namespace Render {
         mutable std::vector<VkDescriptorSet> mTempDescriptors;
 
         bool mDepthChecking;
+        bool mDepthWriting;
 
         VkDescriptorSet mUboDescriptorSet;
 
