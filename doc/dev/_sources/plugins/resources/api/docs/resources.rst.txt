@@ -13,13 +13,11 @@ ResourceLoader
 ResourceLoaders are the main facility that the Madgine uses to manage resource loading and storage. ResourceLoaders register file extensions and automatically discover any assets that match.
 All loading is handled within the IO-Thread (unless explicitly overriden). Additional to discovered file Assets, manual assets may be registered through code.
 
-Loaders provide two types to manage Resource references.
-
-* Handle: Handles provide refcounted access to a named resources data. As long as a Handle is held, the pointed to data will remain valid. When a Handle is reset, it is possible an
-unload will be triggered.
-* Ptr: Ptrs act as a unique_ptr to unnamed resources. They are mostly used for procedurally generated resources. Ptrs themselves cannot be shared. Instead the user is expected to store the
-Ptr somewhere and provide direct access to the underlying data. Loading will still be done on the IO-Thread. As soon as the Ptr is destroyed the resource will be unloaded. It can not be
-loaded again.
+Loaders provide a Handle type that is used to manage Resource references. Handles provide refcounted access to loaded resources data. As long as a Handle is held, the pointed to data will
+remain valid. When a Handle is reset, it is possible an unload will be triggered. There exist two types of data loading, named and unnamed. When named resource is happening, the loader
+first checks for any existing loaded data with that name. If found, it will just return a reference to the existing data. If not, new data will be allocated and loaded and stored under the
+given name. Those named caches are immutable and immortal. If temporary data is desired (e.g. for procedurally generated content), unnamed loading can be used. It circumvents any caching.
+Therefore, if such Handles should be shared, it has to be done manually.
 
 InstanceLoader
 --------------

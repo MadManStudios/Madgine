@@ -312,8 +312,6 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ab4c3fb49433a455cdee9053d775487e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a085517748e9649378f2e0a70c6ce902a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_pipeline.html#a085517748e9649378f2e0a70c6ce902a">link</a> (<a class="el" href="struct_engine_1_1_render_1_1_pipeline_signature.html">PipelineSignature</a> signature, typename <a class="el" href="struct_engine_1_1_render_1_1_vulkan_shader_loader_1_1_handle.html">VulkanShaderLoader::Handle</a> vertexShader, std::string vs_entrypoint, typename <a class="el" href="struct_engine_1_1_render_1_1_vulkan_shader_loader_1_1_handle.html">VulkanShaderLoader::Handle</a> pixelShader, std::string ps_entrypoint)</td></tr>
 <tr class="separator:a085517748e9649378f2e0a70c6ce902a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a667c58d11040cf65640f515f943c8376"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_pipeline.html#a667c58d11040cf65640f515f943c8376">link</a> (<a class="el" href="struct_engine_1_1_render_1_1_pipeline_signature.html">PipelineSignature</a> signature, typename VulkanShaderLoader::Ptr vertexShader, std::string vs_entrypoint, typename VulkanShaderLoader::Ptr pixelShader, std::string ps_entrypoint)</td></tr>
-<tr class="separator:a667c58d11040cf65640f515f943c8376"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7b6748566f8fa4bc8c97ed083d73dbbd"><td class="memItemLeft" align="right" valign="top">const std::array&lt; std::array&lt; <a class="el" href="struct_engine_1_1_render_1_1_vulkan_ptr.html">VulkanPtr</a>&lt; VkPipeline, &amp;vkDestroyPipeline &gt;, 3 &gt;, 3 &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_pipeline.html#a7b6748566f8fa4bc8c97ed083d73dbbd">ptr</a> () const</td></tr>
 <tr class="separator:a7b6748566f8fa4bc8c97ed083d73dbbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a26167d89d70ec910529e88a516a481b3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_vulkan_pipeline.html#a26167d89d70ec910529e88a516a481b3">reset</a> ()</td></tr>
@@ -321,7 +319,7 @@ Public Member Functions</h2></td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a id="a085517748e9649378f2e0a70c6ce902a" name="a085517748e9649378f2e0a70c6ce902a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a085517748e9649378f2e0a70c6ce902a">&#9670;&#160;</a></span>link() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a085517748e9649378f2e0a70c6ce902a">&#9670;&#160;</a></span>link()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -348,52 +346,6 @@ Public Member Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">typename <a class="el" href="struct_engine_1_1_render_1_1_vulkan_shader_loader_1_1_handle.html">VulkanShaderLoader::Handle</a>&#160;</td>
-          <td class="paramname"><em>pixelShader</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::string&#160;</td>
-          <td class="paramname"><em>ps_entrypoint</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a667c58d11040cf65640f515f943c8376" name="a667c58d11040cf65640f515f943c8376"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a667c58d11040cf65640f515f943c8376">&#9670;&#160;</a></span>link() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool Engine::Render::VulkanPipeline::link </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_engine_1_1_render_1_1_pipeline_signature.html">PipelineSignature</a>&#160;</td>
-          <td class="paramname"><em>signature</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">typename VulkanShaderLoader::Ptr&#160;</td>
-          <td class="paramname"><em>vertexShader</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::string&#160;</td>
-          <td class="paramname"><em>vs_entrypoint</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">typename VulkanShaderLoader::Ptr&#160;</td>
           <td class="paramname"><em>pixelShader</em>, </td>
         </tr>
         <tr>
@@ -522,7 +474,7 @@ Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Nov 2 2026 00:34:53 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Mon Nov 2 2026 19:10:14 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

@@ -301,13 +301,16 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a8b461193c8b7731b8ff033f5f7e43b93"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_resource_data.html#a8b461193c8b7731b8ff033f5f7e43b93">ResourceData</a> (typename Loader::Resource *res)</td></tr>
-<tr class="separator:a8b461193c8b7731b8ff033f5f7e43b93"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a91f8a73bda33f5a5cb84b21787149958"><td class="memTemplParams" colspan="2">template&lt;typename Ctor &gt; </td></tr>
+<tr class="memitem:a91f8a73bda33f5a5cb84b21787149958"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_resource_data.html#a91f8a73bda33f5a5cb84b21787149958">ResourceData</a> (Ctor &amp;&amp;ctor, Loader *loader, typename Loader::Resource *res=nullptr, Platform::Filesystem::FileEventType event=Platform::Filesystem::FileEventType::FILE_CREATED)</td></tr>
+<tr class="separator:a91f8a73bda33f5a5cb84b21787149958"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a953a37c0f7bdca37b78c02b14816d734"><td class="memItemLeft" align="right" valign="top">Loader::Data *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_resource_data.html#a953a37c0f7bdca37b78c02b14816d734">verified</a> (bool verified)</td></tr>
 <tr class="separator:a953a37c0f7bdca37b78c02b14816d734"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
+<tr class="memitem:a978495da3602cc22e9e23e284cd7b732"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_resources_1_1_resource_control.html">ResourceControl</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_resource_data.html#a978495da3602cc22e9e23e284cd7b732">mControl</a></td></tr>
+<tr class="separator:a978495da3602cc22e9e23e284cd7b732"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2926f7050f8f98e764b5ceabc329e674"><td class="memItemLeft" align="right" valign="top">Loader::Data&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_resource_data.html#a2926f7050f8f98e764b5ceabc329e674">mData</a></td></tr>
 <tr class="separator:a2926f7050f8f98e764b5ceabc329e674"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac0f5a84a8c4a0f860ef651730c9df0cc"><td class="memItemLeft" align="right" valign="top">Containers::container_traits&lt; typenameLoader::DataContainer &gt;::position_handle&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_resource_data.html#ac0f5a84a8c4a0f860ef651730c9df0cc">mHolder</a></td></tr>
@@ -316,13 +319,15 @@ Public Attributes</h2></td></tr>
 <tr class="separator:a8cd5288c0e372668c68a1dc023e43878"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a8b461193c8b7731b8ff033f5f7e43b93" name="a8b461193c8b7731b8ff033f5f7e43b93"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8b461193c8b7731b8ff033f5f7e43b93">&#9670;&#160;</a></span>ResourceData()</h2>
+<a id="a91f8a73bda33f5a5cb84b21787149958" name="a91f8a73bda33f5a5cb84b21787149958"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a91f8a73bda33f5a5cb84b21787149958">&#9670;&#160;</a></span>ResourceData()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename Loader &gt; </div>
+<div class="memtemplate">
+template&lt;typename Ctor &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -330,9 +335,31 @@ template&lt;typename Loader &gt; </div>
         <tr>
           <td class="memname"><a class="el" href="struct_engine_1_1_resources_1_1_resource_data.html">Engine::Resources::ResourceData</a>&lt; Loader &gt;::ResourceData </td>
           <td>(</td>
-          <td class="paramtype">typename Loader::Resource *&#160;</td>
-          <td class="paramname"><em>res</em></td><td>)</td>
+          <td class="paramtype">Ctor &amp;&amp;&#160;</td>
+          <td class="paramname"><em>ctor</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">Loader *&#160;</td>
+          <td class="paramname"><em>loader</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">typename Loader::Resource *&#160;</td>
+          <td class="paramname"><em>res</em> = <code>nullptr</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Platform::Filesystem::FileEventType&#160;</td>
+          <td class="paramname"><em>event</em> = <code>Platform::Filesystem::FileEventType::FILE_CREATED</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -374,6 +401,22 @@ template&lt;typename Loader &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="a2926f7050f8f98e764b5ceabc329e674" name="a2926f7050f8f98e764b5ceabc329e674"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2926f7050f8f98e764b5ceabc329e674">&#9670;&#160;</a></span>mData</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Loader &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">Loader::Data <a class="el" href="struct_engine_1_1_resources_1_1_resource_data.html">Engine::Resources::ResourceData</a>&lt; Loader &gt;::mData</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a8cd5288c0e372668c68a1dc023e43878" name="a8cd5288c0e372668c68a1dc023e43878"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8cd5288c0e372668c68a1dc023e43878">&#9670;&#160;</a></span>mInfo</h2>
 
@@ -390,8 +433,8 @@ template&lt;typename Loader &gt; </div>
 
 </div>
 </div>
-<a id="a2926f7050f8f98e764b5ceabc329e674" name="a2926f7050f8f98e764b5ceabc329e674"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2926f7050f8f98e764b5ceabc329e674">&#9670;&#160;</a></span>mData</h2>
+<a id="a978495da3602cc22e9e23e284cd7b732" name="a978495da3602cc22e9e23e284cd7b732"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a978495da3602cc22e9e23e284cd7b732">&#9670;&#160;</a></span>mControl</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -399,7 +442,7 @@ template&lt;typename Loader &gt; </div>
 template&lt;typename Loader &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">Loader::Data <a class="el" href="struct_engine_1_1_resources_1_1_resource_data.html">Engine::Resources::ResourceData</a>&lt; Loader &gt;::mData</td>
+          <td class="memname"><a class="el" href="struct_engine_1_1_resources_1_1_resource_control.html">ResourceControl</a> <a class="el" href="struct_engine_1_1_resources_1_1_resource_data.html">Engine::Resources::ResourceData</a>&lt; Loader &gt;::mControl</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -428,7 +471,7 @@ template&lt;typename Loader &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Nov 2 2026 00:34:53 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Mon Nov 2 2026 19:10:14 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>
