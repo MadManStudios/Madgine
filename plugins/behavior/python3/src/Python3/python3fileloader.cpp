@@ -128,13 +128,8 @@ namespace Behavior {
             Python3InnerLock lock;
             Reflect::Value resourcePtr;
             REFLECT_PROPAGATE_ERROR(fromPyObject(resourcePtr, PyObjectPtr { toPyObject(spec) }.get("loader_state")));
-            Resource *res = scope_cast<Resource>(resourcePtr.as<Reflect::ScopePtr>());
-            Handle handle = create(res, Platform::Filesystem::FileEventType::FILE_CREATED, this);
-            handle.setPersistent(true);
-            PyModulePtr &module = *getDataPtr(handle, this, false);
-            assert(!module);
-            module = PyModulePtr::create(res->name());
-            return fromPyObject(result, module);
+            Resource *res = scope_cast<Resource>(resourcePtr.as<Reflect::ScopePtr>());                      
+            return fromPyObject(result, PyModulePtr::create(res->name()));
         }
 
         Reflect::Result Python3FileLoader::exec_module(Reflect::Value &result, Reflect::ObjectPtr module)
@@ -162,7 +157,7 @@ namespace Behavior {
             if (!status) {
                 return std::make_unique<Reflect::Error>(fetchError());
             }
-
+            
             PyObject *key, *value = NULL;
             Py_ssize_t pos = 0;
 
@@ -193,7 +188,7 @@ namespace Behavior {
 
             PythonFunctionInfo result { PyBytes_AsString(ascii_name), PyToValueTypeDesc(signature.get("return_annotation")) };
 
-            PyObjectPtr parameters = signature.get("parameters");
+            PyObjectPtr parameters = signature.get("parameters");            
 
             PyObjectPtr iter = PyObject_GetIter(parameters);
 
@@ -203,12 +198,15 @@ namespace Behavior {
 
                 PyObjectPtr ascii = PyUnicode_AsASCIIString(key);
 
+
                 if (Py_IS_TYPE(type, &Py_GenericAliasType)) {
-                    type = PyTuple_GetItem(type.get("__args__"), 0);
+                    type = PyTuple_GetItem(type.get("__args__"), 0);                    
                     result.mArguments.push_back({ PyBytes_AsString(ascii), Reflect::ExtendedType { Reflect::ExtendedTypeEnum::VariantType, { Reflect::toType<std::monostate>(), PyToValueTypeDesc(type) } }, Reflect::AccessorFlags_Contextual });
                 } else {
                     result.mArguments.push_back({ PyBytes_AsString(ascii), PyToValueTypeDesc(type) });
                 }
+
+                
             }
 
             return result;
