@@ -314,10 +314,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a881ac248d46c270bbdac8fbe0d9dd9d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8e0758946614088088228a86f026ad36"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_threading_1_1_task.html">Threading::Task</a>&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_font_loader.html#a8e0758946614088088228a86f026ad36">init</a> () override</td></tr>
 <tr class="separator:a8e0758946614088088228a86f026ad36"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1befe9574f6ad4ae6640d041ac659566"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_threading_1_1_task.html">Threading::Task</a>&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_font_loader.html#a1befe9574f6ad4ae6640d041ac659566">loadImpl</a> (<a class="el" href="struct_engine_1_1_render_1_1_type_face.html">TypeFace</a> &amp;typeFace, ResourceDataInfo &amp;info)</td></tr>
-<tr class="separator:a1befe9574f6ad4ae6640d041ac659566"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a47d7fa177e77fea40d0e5d269122f183"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_threading_1_1_task_queue.html">Threading::TaskQueue</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_font_loader.html#a47d7fa177e77fea40d0e5d269122f183">loadingTaskQueue</a> () const override</td></tr>
-<tr class="separator:a47d7fa177e77fea40d0e5d269122f183"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a33bf7fc2e1c42b323532e4394e5b3ef8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_threading_1_1_task.html">Threading::Task</a>&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_font_loader.html#a33bf7fc2e1c42b323532e4394e5b3ef8">loadImpl</a> (<a class="el" href="struct_engine_1_1_render_1_1_type_face.html">TypeFace</a> &amp;typeFace, const ResourceDataInfo &amp;info)</td></tr>
+<tr class="separator:a33bf7fc2e1c42b323532e4394e5b3ef8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe62bafd529343c39737b01aea07ae21"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_threading_1_1_task_queue.html">Threading::TaskQueue</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_font_loader.html#abe62bafd529343c39737b01aea07ae21">loadingTaskQueue</a> () const override</td></tr>
+<tr class="separator:abe62bafd529343c39737b01aea07ae21"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a721aead09f106ed3f0dfa7c6da93aeed"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_render_1_1_font_loader.html#a721aead09f106ed3f0dfa7c6da93aeed">unloadImpl</a> (<a class="el" href="struct_engine_1_1_render_1_1_type_face.html">TypeFace</a> &amp;typeFace)</td></tr>
 <tr class="separator:a721aead09f106ed3f0dfa7c6da93aeed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -350,8 +350,8 @@ Protected Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a1befe9574f6ad4ae6640d041ac659566" name="a1befe9574f6ad4ae6640d041ac659566"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1befe9574f6ad4ae6640d041ac659566">&#9670;&#160;</a></span>loadImpl()</h2>
+<a id="a33bf7fc2e1c42b323532e4394e5b3ef8" name="a33bf7fc2e1c42b323532e4394e5b3ef8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a33bf7fc2e1c42b323532e4394e5b3ef8">&#9670;&#160;</a></span>loadImpl()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -365,7 +365,7 @@ Protected Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">ResourceDataInfo &amp;&#160;</td>
+          <td class="paramtype">const ResourceDataInfo &amp;&#160;</td>
           <td class="paramname"><em>info</em>&#160;</td>
         </tr>
         <tr>
@@ -446,8 +446,8 @@ Protected Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a47d7fa177e77fea40d0e5d269122f183" name="a47d7fa177e77fea40d0e5d269122f183"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a47d7fa177e77fea40d0e5d269122f183">&#9670;&#160;</a></span>loadingTaskQueue()</h2>
+<a id="abe62bafd529343c39737b01aea07ae21" name="abe62bafd529343c39737b01aea07ae21"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe62bafd529343c39737b01aea07ae21">&#9670;&#160;</a></span>loadingTaskQueue()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -456,7 +456,7 @@ Protected Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="struct_engine_1_1_threading_1_1_task_queue.html">Threading::TaskQueue</a> * Engine::Render::FontLoader::loadingTaskQueue </td>
+          <td class="memname"><a class="el" href="struct_engine_1_1_threading_1_1_task_queue.html">Threading::TaskQueue</a> &amp; Engine::Render::FontLoader::loadingTaskQueue </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -537,7 +537,7 @@ Protected Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 1 2026 15:15:29 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Mon Nov 2 2026 00:34:52 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

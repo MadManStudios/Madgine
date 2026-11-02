@@ -342,8 +342,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:afd8067b051df8658462bee627d7b1bed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8f1f4e6045da827d560fc4c37bcd0d0a"><td class="memItemLeft" align="right" valign="top">const Loader::Data *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_handle.html#a8f1f4e6045da827d560fc4c37bcd0d0a">getUnsafe</a> () const</td></tr>
 <tr class="separator:a8f1f4e6045da827d560fc4c37bcd0d0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5b6b7bc5cf7f8e4904f5c383dda92cf0"><td class="memItemLeft" align="right" valign="top">Loader::ResourceDataInfo *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_handle.html#a5b6b7bc5cf7f8e4904f5c383dda92cf0">info</a> () const</td></tr>
-<tr class="separator:a5b6b7bc5cf7f8e4904f5c383dda92cf0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a31ea1bbf1fa6c4c5f3891b827db22222"><td class="memItemLeft" align="right" valign="top">const Loader::ResourceDataInfo *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_handle.html#a31ea1bbf1fa6c4c5f3891b827db22222">info</a> () const</td></tr>
+<tr class="separator:a31ea1bbf1fa6c4c5f3891b827db22222"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af93a1699965d0746426dc377e4162f5a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_threading_1_1_task_future.html">Threading::TaskFuture</a>&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_handle.html#af93a1699965d0746426dc377e4162f5a">load</a> (std::string_view <a class="el" href="struct_engine_1_1_resources_1_1_handle.html#a67c54fd9432c9d74ca77cc0a7029e541">name</a>, Loader *loader=&amp;Loader::getSingleton())</td></tr>
 <tr class="separator:af93a1699965d0746426dc377e4162f5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab347550a26cc68058a30feea8a4fe96f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_threading_1_1_task_future.html">Threading::TaskFuture</a>&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_handle.html#ab347550a26cc68058a30feea8a4fe96f">load</a> (typename Loader::Resource *<a class="el" href="struct_engine_1_1_resources_1_1_handle.html#a98d0a822fc8ecff2a7e1b2daf683be96">resource</a>, Loader *loader=&amp;Loader::getSingleton())</td></tr>
@@ -374,6 +374,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:afcbd2e97cb0d54de0559bc20a2a1cc4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a98d0a822fc8ecff2a7e1b2daf683be96"><td class="memItemLeft" align="right" valign="top">Loader::Resource *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_handle.html#a98d0a822fc8ecff2a7e1b2daf683be96">resource</a> () const</td></tr>
 <tr class="separator:a98d0a822fc8ecff2a7e1b2daf683be96"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adbbcd2791662368ed0119bd370aea96a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_handle.html#adbbcd2791662368ed0119bd370aea96a">setPersistent</a> (bool persistent)</td></tr>
+<tr class="separator:adbbcd2791662368ed0119bd370aea96a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -910,6 +912,34 @@ template&lt;typename Loader , typename Data &gt; </div>
 
 </div>
 </div>
+<a id="adbbcd2791662368ed0119bd370aea96a" name="adbbcd2791662368ed0119bd370aea96a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adbbcd2791662368ed0119bd370aea96a">&#9670;&#160;</a></span>setPersistent()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Loader , typename Data &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> <a class="el" href="struct_engine_1_1_resources_1_1_handle.html">Engine::Resources::Handle</a>&lt; Loader, Data &gt;::setPersistent </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>persistent</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a8f1f4e6045da827d560fc4c37bcd0d0a" name="a8f1f4e6045da827d560fc4c37bcd0d0a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8f1f4e6045da827d560fc4c37bcd0d0a">&#9670;&#160;</a></span>getUnsafe()</h2>
 
@@ -937,8 +967,8 @@ template&lt;typename Loader , typename Data &gt; </div>
 
 </div>
 </div>
-<a id="a5b6b7bc5cf7f8e4904f5c383dda92cf0" name="a5b6b7bc5cf7f8e4904f5c383dda92cf0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5b6b7bc5cf7f8e4904f5c383dda92cf0">&#9670;&#160;</a></span>info()</h2>
+<a id="a31ea1bbf1fa6c4c5f3891b827db22222" name="a31ea1bbf1fa6c4c5f3891b827db22222"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a31ea1bbf1fa6c4c5f3891b827db22222">&#9670;&#160;</a></span>info()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -949,7 +979,7 @@ template&lt;typename Loader , typename Data &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">Loader::ResourceDataInfo * <a class="el" href="struct_engine_1_1_resources_1_1_handle.html">Engine::Resources::Handle</a>&lt; Loader, Data &gt;::info </td>
+          <td class="memname">const Loader::ResourceDataInfo * <a class="el" href="struct_engine_1_1_resources_1_1_handle.html">Engine::Resources::Handle</a>&lt; Loader, Data &gt;::info </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -1474,7 +1504,7 @@ template&lt;typename Loader , typename Data &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 1 2026 15:15:30 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Mon Nov 2 2026 00:34:53 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

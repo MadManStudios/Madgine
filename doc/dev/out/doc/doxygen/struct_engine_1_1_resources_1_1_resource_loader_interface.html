@@ -317,8 +317,8 @@ Public Types</h2></td></tr>
 <tr class="separator:a65158457533076d3c07f71d432a787c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa21ea881b50ef5b62a9d9a70acbe03ef"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_resource_loader_interface.html#aa21ea881b50ef5b62a9d9a70acbe03ef">Container</a> = _Container</td></tr>
 <tr class="separator:aa21ea881b50ef5b62a9d9a70acbe03ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a794beaa82f175dfeffed73cdacab787e"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_resource_loader_interface.html#a794beaa82f175dfeffed73cdacab787e">Ctor</a> = <a class="el" href="namespace_engine.html#a112937bef202baff8b6ece57a2ec891e">Closure</a>&lt; <a class="el" href="struct_engine_1_1_threading_1_1_task.html">Threading::Task</a>&lt; bool &gt;(T *, <a class="el" href="struct_engine_1_1_resources_1_1_resource_loader_interface.html#a3f2da9272ebb2b9e1c13b607196abe8f">Data</a> &amp;, <a class="el" href="struct_engine_1_1_resources_1_1_resource_loader_interface.html#a0c3b0b0ec838339a868b963868c42111">ResourceDataInfo</a> &amp;, Platform::Filesystem::FileEventType event)&gt;</td></tr>
-<tr class="separator:a794beaa82f175dfeffed73cdacab787e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7d53f8578cf9cd08e5d5a8fa3d1f810"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_resource_loader_interface.html#aa7d53f8578cf9cd08e5d5a8fa3d1f810">Ctor</a> = <a class="el" href="namespace_engine.html#a112937bef202baff8b6ece57a2ec891e">Closure</a>&lt; <a class="el" href="struct_engine_1_1_threading_1_1_task.html">Threading::Task</a>&lt; bool &gt;(T *, <a class="el" href="struct_engine_1_1_resources_1_1_resource_loader_interface.html#a3f2da9272ebb2b9e1c13b607196abe8f">Data</a> &amp;, const <a class="el" href="struct_engine_1_1_resources_1_1_resource_loader_interface.html#a0c3b0b0ec838339a868b963868c42111">ResourceDataInfo</a> &amp;, Platform::Filesystem::FileEventType event)&gt;</td></tr>
+<tr class="separator:aa7d53f8578cf9cd08e5d5a8fa3d1f810"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3f2da9272ebb2b9e1c13b607196abe8f"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_resource_loader_interface.html#a3f2da9272ebb2b9e1c13b607196abe8f">Data</a> = _Data</td></tr>
 <tr class="separator:a3f2da9272ebb2b9e1c13b607196abe8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae842908c9ce2dace5ce74c17a0110209"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_resources_1_1_resource_loader_interface.html#ae842908c9ce2dace5ce74c17a0110209">DataContainer</a> = typename <a class="el" href="struct_engine_1_1replace.html">replace</a>&lt; <a class="el" href="struct_engine_1_1_resources_1_1_resource_loader_interface.html#aa21ea881b50ef5b62a9d9a70acbe03ef">Container</a> &gt;::template type&lt; <a class="el" href="struct_engine_1_1_resources_1_1_resource_data.html">ResourceData</a>&lt; T &gt; &gt;</td></tr>
@@ -528,8 +528,8 @@ template&lt;typename T , typename _Data , typename _Container  = std::list&lt;Pl
 
 </div>
 </div>
-<a id="a794beaa82f175dfeffed73cdacab787e" name="a794beaa82f175dfeffed73cdacab787e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a794beaa82f175dfeffed73cdacab787e">&#9670;&#160;</a></span>Ctor</h2>
+<a id="aa7d53f8578cf9cd08e5d5a8fa3d1f810" name="aa7d53f8578cf9cd08e5d5a8fa3d1f810"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa7d53f8578cf9cd08e5d5a8fa3d1f810">&#9670;&#160;</a></span>Ctor</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -537,7 +537,7 @@ template&lt;typename T , typename _Data , typename _Container  = std::list&lt;Pl
 template&lt;typename T , typename _Data , typename _Container  = std::list&lt;Placeholder&lt;0&gt;&gt;, typename _Storage  = Threading::GlobalStorage, typename _Base  = ResourceLoaderCollector::Base&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="struct_engine_1_1_resources_1_1_resource_loader_interface.html">Engine::Resources::ResourceLoaderInterface</a>&lt; T, _Data, _Container, _Storage, _Base &gt;::Ctor =  <a class="el" href="namespace_engine.html#a112937bef202baff8b6ece57a2ec891e">Closure</a>&lt;<a class="el" href="struct_engine_1_1_threading_1_1_task.html">Threading::Task</a>&lt;bool&gt;(T *, <a class="el" href="struct_engine_1_1_resources_1_1_resource_loader_interface.html#a3f2da9272ebb2b9e1c13b607196abe8f">Data</a> &amp;, <a class="el" href="struct_engine_1_1_resources_1_1_resource_loader_interface.html#a0c3b0b0ec838339a868b963868c42111">ResourceDataInfo</a> &amp;, Platform::Filesystem::FileEventType event)&gt;</td>
+          <td class="memname">using <a class="el" href="struct_engine_1_1_resources_1_1_resource_loader_interface.html">Engine::Resources::ResourceLoaderInterface</a>&lt; T, _Data, _Container, _Storage, _Base &gt;::Ctor =  <a class="el" href="namespace_engine.html#a112937bef202baff8b6ece57a2ec891e">Closure</a>&lt;<a class="el" href="struct_engine_1_1_threading_1_1_task.html">Threading::Task</a>&lt;bool&gt;(T *, <a class="el" href="struct_engine_1_1_resources_1_1_resource_loader_interface.html#a3f2da9272ebb2b9e1c13b607196abe8f">Data</a> &amp;, const <a class="el" href="struct_engine_1_1_resources_1_1_resource_loader_interface.html#a0c3b0b0ec838339a868b963868c42111">ResourceDataInfo</a> &amp;, Platform::Filesystem::FileEventType event)&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -654,7 +654,7 @@ template&lt;typename T , typename _Data , typename _Container  = std::list&lt;Pl
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 1 2026 15:15:30 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Mon Nov 2 2026 00:34:53 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>
