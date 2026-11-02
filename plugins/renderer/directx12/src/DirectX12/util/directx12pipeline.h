@@ -47,7 +47,6 @@ namespace Render {
     struct MADGINE_DIRECTX12_EXPORT DirectX12Pipeline : Pipeline {
 
         bool link(const PipelineSignature &signature, typename DirectX12VertexShaderLoader::Handle vertexShader, typename DirectX12PixelShaderLoader::Handle pixelShader);
-        bool link(const PipelineSignature &signature, typename DirectX12VertexShaderLoader::Ptr vertexShader, typename DirectX12PixelShaderLoader::Ptr pixelShader);
 
         const Platform::ReleasePtr<ID3D12PipelineState> &get(VertexFormat vertexFormat, size_t groupSize, DirectX12RenderTarget *target, bool depthChecking = true, bool depthWriting = true) const;
 
@@ -62,8 +61,8 @@ namespace Render {
     private:
         mutable std::unordered_map<PipelineDescriptor, Platform::ReleasePtr<ID3D12PipelineState>> mPipelines;
 
-        std::variant<typename DirectX12VertexShaderLoader::Handle, typename DirectX12VertexShaderLoader::Ptr> mVertexShader;
-        std::variant<typename DirectX12PixelShaderLoader::Handle, typename DirectX12PixelShaderLoader::Ptr> mPixelShader;
+        typename DirectX12VertexShaderLoader::Handle mVertexShader;
+        typename DirectX12PixelShaderLoader::Handle mPixelShader;
 
         std::string mName;
 

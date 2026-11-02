@@ -11,7 +11,6 @@ namespace Render {
     struct MADGINE_VULKAN_EXPORT VulkanPipeline : Pipeline {
 
         bool link(PipelineSignature signature, typename VulkanShaderLoader::Handle vertexShader, std::string vs_entrypoint, typename VulkanShaderLoader::Handle pixelShader, std::string ps_entrypoint);
-        bool link(PipelineSignature signature, typename VulkanShaderLoader::Ptr vertexShader, std::string vs_entrypoint, typename VulkanShaderLoader::Ptr pixelShader, std::string ps_entrypoint);
 
         VkPipeline get(VertexFormat format, size_t groupSize, size_t samples, VkRenderPass renderpass, bool depthChecking = true, bool depthWriting = true) const;
 
@@ -26,9 +25,9 @@ namespace Render {
         
         VkPipelineLayout mLayout;
 
-        std::variant<typename VulkanShaderLoader::Handle, typename VulkanShaderLoader::Ptr> mVertexShader;
+        typename VulkanShaderLoader::Handle mVertexShader;
         std::string mVsEntrypoint;
-        std::variant<typename VulkanShaderLoader::Handle, typename VulkanShaderLoader::Ptr> mPixelShader;
+        typename VulkanShaderLoader::Handle mPixelShader;
         std::string mPsEntrypoint;
     };
 

@@ -52,16 +52,9 @@ namespace Resources {
         }
 
         template <typename C>
-        static Threading::TaskFuture<bool> loadUnnamed(typename Base::Ptr &ptr, C &&ctor, T *loader = &Base::getSingleton())
+        static typename Base::Handle loadUnnamed(C &&ctor, T *loader = &Base::getSingleton())
         {
-            return queueLoad(loadUnnamedTask(ptr, std::forward<C>(ctor), loader), loader->loadingTaskQueue());
-        }
-
-        template <typename C = typename Base::Ctor>
-        static Threading::Task<bool> loadUnnamedTask(typename Base::Ptr &ptr, C &&ctor, T *loader = &Base::getSingleton())
-        {
-            ptr = loader->createUnnamedVImpl();
-            return Threading::make_task(std::forward<C>(ctor), (T *)loader, *ptr);
+            return loader->loadUnnamedVImpl(Base::toCtor(std::forward<C>(ctor)));
         }
 
         static typename Base::Data *getDataPtr(const typename Base::Handle &handle, T *loader = nullptr, bool verified = true)
@@ -111,7 +104,7 @@ namespace Resources {
         }
 
         virtual typename Base::Handle loadManualVImpl(std::string_view name, const Platform::Filesystem::Path &path = {}, typename Base::Ctor ctor = {}) = 0;
-        virtual typename Base::Ptr createUnnamedVImpl() = 0;
+        virtual typename Base::Handle loadUnnamedVImpl(typename Base::Ctor ctor) = 0;
         virtual typename Base::Resource *getVImpl(std::string_view name) = 0;
         virtual typename Base::Handle loadVImpl(std::string_view name) = 0;
         virtual typename Base::Handle loadVImpl(typename Base::Resource *resource) = 0;
@@ -137,9 +130,9 @@ namespace Resources {
         {
             return Self::loadManual(name, path, std::move(ctor), static_cast<T *>(this));
         }
-        typename Base::OriginalPtr createUnnamedVImpl() override
+        typename Base::OriginalHandle loadUnnamedVImpl(typename Base::Ctor ctor) override
         {
-            return Self::createUnnamed();
+            return Self::loadUnnamed(std::move(ctor));
         }
         typename Base::Resource *getVImpl(std::string_view name) override
         {

@@ -10,7 +10,6 @@
 #include "Modules/uniquecomponent/uniquecomponentcollector.h"
 
 #include "handle.h"
-#include "ptr.h"
 #include "resource.h"
 #include "resourcebase.h"
 #include "resourceloaderbase.h"

@@ -80,7 +80,7 @@ namespace Resources {
     struct ResourceData {
 
         template <typename Ctor>
-        ResourceData(Ctor &&ctor, Loader *loader, typename Loader::Resource *res, Platform::Filesystem::FileEventType event)
+        ResourceData(Ctor &&ctor, Loader *loader, typename Loader::Resource *res = nullptr, Platform::Filesystem::FileEventType event = Platform::Filesystem::FileEventType::FILE_CREATED)
             : mInfo(res)
             , mControl(std::forward<Ctor>(ctor), loader, mData, mInfo, event)
         {

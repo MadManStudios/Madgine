@@ -19,9 +19,9 @@ namespace Render {
         D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST
     };
 
-    DirectX12PipelineInstance::DirectX12PipelineInstance(const PipelineConfiguration &config, const DirectX12Pipeline *pipeline)
+    DirectX12PipelineInstance::DirectX12PipelineInstance(const PipelineConfiguration &config, DirectX12PipelineLoader::Handle pipeline)
         : PipelineInstance(config)
-        , mPipeline(pipeline)
+        , mPipeline(std::move(pipeline))
         , mConstantBufferSizes(config.bufferSizes)
         , mDepthChecking(config.depthChecking)
         , mDepthWriting(config.depthWriting)
@@ -250,18 +250,6 @@ namespace Render {
         for (size_t i = 0; i < resBlock->mSize; ++i) {
             static_cast<DirectX12RenderTarget *>(target)->mCommandList.attachResource(resBlock->mResources[i]);
         }
-    }
-
-    DirectX12PipelineInstanceHandle::DirectX12PipelineInstanceHandle(const PipelineConfiguration &config, DirectX12PipelineLoader::Handle pipeline)
-        : DirectX12PipelineInstance(config, &*pipeline)
-        , mPipelineHandle(std::move(pipeline))
-    {
-    }
-
-    DirectX12PipelineInstancePtr::DirectX12PipelineInstancePtr(const PipelineConfiguration &config, DirectX12PipelineLoader::Ptr pipeline)
-        : DirectX12PipelineInstance(config, &*pipeline)
-        , mPipelinePtr(std::move(pipeline))
-    {
     }
 
 }

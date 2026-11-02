@@ -20,18 +20,6 @@ namespace Render {
         return true;
     }
 
-    bool DirectX12Pipeline::link(const PipelineSignature &signature, typename DirectX12VertexShaderLoader::Ptr vertexShader, typename DirectX12PixelShaderLoader::Ptr pixelShader)
-    {
-        reset();
-
-        mRootSignature = DirectX12RenderContext::getSingleton().getRootSignature(signature);
-
-        mVertexShader = std::move(vertexShader);
-        mPixelShader = std::move(pixelShader);
-
-        return true;
-    }
-
     const Platform::ReleasePtr<ID3D12PipelineState> &DirectX12Pipeline::get(VertexFormat vertexFormat, size_t groupSize, DirectX12RenderTarget *target, bool depthChecking, bool depthWriting) const
     {
         size_t samplesBits = sqrt(target->samples());
@@ -51,33 +39,15 @@ namespace Render {
 
         if (!pipeline) {
 
-            auto checkVertex = [](auto &variant) {
-                return std::visit(overloaded {
-                                      [](const typename DirectX12VertexShaderLoader::Handle &handle) {
-                                          return !handle || handle.available();
-                                      },
-                                      [](const typename DirectX12VertexShaderLoader::Ptr &ptr) {
-                                          return true;
-                                      } },
-                    variant);
+            auto checkVertex = [](const typename DirectX12VertexShaderLoader::Handle &handle) {
+                return !handle || handle.available();
             };
-            auto checkPixel = [](auto &variant) {
-                return std::visit(overloaded {
-                                      [](const typename DirectX12PixelShaderLoader::Handle &handle) {
-                                          return !handle || handle.available();
-                                      },
-                                      [](const typename DirectX12PixelShaderLoader::Ptr &ptr) {
-                                          return true;
-                                      } },
-                    variant);
+            auto checkPixel = [](const typename DirectX12PixelShaderLoader::Handle &handle) {
+                return !handle || handle.available();
             };
 
-            auto resolve = [](auto &variant) -> IDxcBlob * {
-                return std::visit(
-                    [](const auto &handle) -> IDxcBlob * {
-                        return handle ? *handle : nullptr;
-                    },
-                    variant);
+            auto resolve = [](const auto &handle) -> IDxcBlob * {
+                return handle ? *handle : nullptr;
             };
 
             if (!checkVertex(mVertexShader))

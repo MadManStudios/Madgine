@@ -57,7 +57,7 @@ namespace Render {
             }))
             co_return false;
 
-        instance = std::make_unique<VulkanPipelineInstanceHandle>(config, std::move(pipeline));
+        instance = std::make_unique<VulkanPipelineInstance>(config, std::move(pipeline));
 
         co_return true;
     }

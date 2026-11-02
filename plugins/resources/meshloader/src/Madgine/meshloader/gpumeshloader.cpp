@@ -33,9 +33,9 @@ SERIALIZETABLE_END(Engine::Render::GPUMeshData::Material)
 namespace Engine {
 namespace Render {
 
-    Threading::TaskFuture<bool> GPUMeshLoader::Ptr::create(MeshData mesh)
+    Threading::TaskFuture<bool> GPUMeshLoader::Handle::createUnnamed(MeshData mesh)
     {
-        return Base::Ptr::create([mesh { std::move(mesh) }](Render::GPUMeshLoader *loader, Render::GPUMeshData &data) mutable { return loader->generate(data, std::move(mesh)); });
+        return Base::Handle::createUnnamed([mesh { std::move(mesh) }](Render::GPUMeshLoader *loader, Render::GPUMeshData &data) { return loader->generate(data, mesh); });
     }
 
     GPUMeshLoader::GPUMeshLoader()

@@ -188,6 +188,12 @@ namespace Resources {
             return loadingTask();
         }
 
+        template <typename C>
+        Threading::TaskFuture<bool> createUnnamed(C &&c, Loader *loader = &Loader::getSingleton())
+        {
+            *this = Loader::loadUnnamed(std::forward<C>(c), loader);
+            return loadingTask();
+        }
 
         void reset()
         {

@@ -9,7 +9,7 @@ namespace Render {
 
     struct MADGINE_DIRECTX12_EXPORT DirectX12PipelineInstance : PipelineInstance {
 
-        DirectX12PipelineInstance(const PipelineConfiguration &config, const DirectX12Pipeline *pipeline);
+        DirectX12PipelineInstance(const PipelineConfiguration &config, DirectX12PipelineLoader::Handle pipeline);
 
         bool bind(DirectX12RenderTarget *target, VertexFormat vertexFormat, size_t groupSize) const;
         void bindRootSignature(DirectX12RenderTarget *target) const;
@@ -29,7 +29,7 @@ namespace Render {
         virtual void bindResources(RenderTarget *target, size_t space, ResourceBlock block) const override;
 
     private:
-        const DirectX12Pipeline *mPipeline;
+        DirectX12PipelineLoader::Handle mPipeline;
 
         std::vector<size_t> mConstantBufferSizes;
         std::vector<D3D12_GPU_VIRTUAL_ADDRESS> mConstantGPUAddresses;
@@ -45,22 +45,6 @@ namespace Render {
         mutable UINT mElementCount;
         mutable VertexFormat mFormat;
         mutable size_t mGroupSize;
-    };
-
-    struct MADGINE_DIRECTX12_EXPORT DirectX12PipelineInstanceHandle : DirectX12PipelineInstance {
-
-        DirectX12PipelineInstanceHandle(const PipelineConfiguration &config, DirectX12PipelineLoader::Handle pipeline);
-
-    private:
-        DirectX12PipelineLoader::Handle mPipelineHandle;
-    };
-
-    struct MADGINE_DIRECTX12_EXPORT DirectX12PipelineInstancePtr : DirectX12PipelineInstance {
-
-        DirectX12PipelineInstancePtr(const PipelineConfiguration &config, DirectX12PipelineLoader::Ptr pipeline);
-
-    private:
-        DirectX12PipelineLoader::Ptr mPipelinePtr;
     };
 
 }

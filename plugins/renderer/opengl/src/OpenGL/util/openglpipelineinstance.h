@@ -9,7 +9,7 @@ namespace Render {
 
     struct MADGINE_OPENGL_EXPORT OpenGLPipelineInstance : PipelineInstance {
 
-        OpenGLPipelineInstance(const PipelineConfiguration &config, GLuint pipeline);
+        OpenGLPipelineInstance(const PipelineConfiguration &config, OpenGLPipelineLoader::Handle pipeline);
 
         bool bind(VertexFormat format, size_t offset = 0) const;
 
@@ -27,7 +27,7 @@ namespace Render {
 
         virtual void bindResources(RenderTarget *target, size_t space, ResourceBlock block) const override;
 
-        mutable GLuint mHandle = 0;
+        OpenGLPipelineLoader::Handle mPipeline;
         std::vector<size_t> mConstantBufferSizes;
         bool mDepthChecking;
         bool mDepthWriting;
@@ -44,20 +44,6 @@ namespace Render {
         mutable VertexFormat mFormat;
 #    endif
 #endif
-    };
-
-    struct MADGINE_OPENGL_EXPORT OpenGLPipelineInstanceHandle : OpenGLPipelineInstance {
-
-        OpenGLPipelineInstanceHandle(const PipelineConfiguration &config, OpenGLPipelineLoader::Handle pipeline);
-
-        OpenGLPipelineLoader::Handle mPipeline;
-    };
-
-    struct MADGINE_OPENGL_EXPORT OpenGLPipelineInstancePtr : OpenGLPipelineInstance {
-
-        OpenGLPipelineInstancePtr(const PipelineConfiguration &config, OpenGLPipelineLoader::Ptr pipeline);
-
-        OpenGLPipelineLoader::Ptr mPipeline;
     };
 
 }

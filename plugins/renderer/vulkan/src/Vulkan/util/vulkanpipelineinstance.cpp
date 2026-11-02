@@ -10,9 +10,9 @@
 namespace Engine {
 namespace Render {
 
-    VulkanPipelineInstance::VulkanPipelineInstance(const PipelineConfiguration &config, const VulkanPipeline &pipeline)
+    VulkanPipelineInstance::VulkanPipelineInstance(const PipelineConfiguration &config, VulkanPipelineLoader::Handle pipeline)
         : PipelineInstance(config)
-        , mPipeline(pipeline)
+        , mPipeline(std::move(pipeline))
         , mConstantBufferSizes(config.bufferSizes)
         , mDepthChecking(config.depthChecking)
         , mDepthWriting(config.depthWriting)
@@ -77,22 +77,22 @@ namespace Render {
         size_t samplesBits = sqrt(samples);
         assert(samplesBits * samplesBits == samples);
 
-        VkPipeline pipeline = mPipeline.ptr()[format][groupSize - 1][samplesBits - 1];
+        VkPipeline pipeline = mPipeline->ptr()[format][groupSize - 1][samplesBits - 1];
         if (!pipeline) {
-            pipeline = mPipeline.get(format, groupSize, samples, renderpass, mDepthChecking, mDepthWriting);
+            pipeline = mPipeline->get(format, groupSize, samples, renderpass, mDepthChecking, mDepthWriting);
             if (!pipeline)
                 return false;
         }
         vkCmdBindPipeline(commandList, VK_PIPELINE_BIND_POINT_GRAPHICS, pipeline);
 
         
-        vkCmdBindDescriptorSets(commandList, VK_PIPELINE_BIND_POINT_GRAPHICS, mPipeline.layout(), 3, 1, &VulkanRenderContext::getSingleton().mSamplerDescriptorSet, 0, nullptr);
+        vkCmdBindDescriptorSets(commandList, VK_PIPELINE_BIND_POINT_GRAPHICS, mPipeline->layout(), 3, 1, &VulkanRenderContext::getSingleton().mSamplerDescriptorSet, 0, nullptr);
 
 
-        vkCmdBindDescriptorSets(commandList, VK_PIPELINE_BIND_POINT_GRAPHICS, mPipeline.layout(), 0, 1, &mUboDescriptorSet, mConstantGPUBufferOffsets.size(), mConstantGPUBufferOffsets.data());
+        vkCmdBindDescriptorSets(commandList, VK_PIPELINE_BIND_POINT_GRAPHICS, mPipeline->layout(), 0, 1, &mUboDescriptorSet, mConstantGPUBufferOffsets.size(), mConstantGPUBufferOffsets.data());
 
         if (!mTempDescriptors.empty())
-            vkCmdBindDescriptorSets(commandList, VK_PIPELINE_BIND_POINT_GRAPHICS, mPipeline.layout(), 2, mTempDescriptors.size(), mTempDescriptors.data(), 0, nullptr);
+            vkCmdBindDescriptorSets(commandList, VK_PIPELINE_BIND_POINT_GRAPHICS, mPipeline->layout(), 2, mTempDescriptors.size(), mTempDescriptors.data(), 0, nullptr);
 
         return true;
     }
@@ -268,19 +268,7 @@ namespace Render {
         VkCommandBuffer commandList = target->mCommandList;
         VulkanResourceBlock<1> *resBlock = block;
         VkDescriptorSet set = resBlock->mHandle;
-        vkCmdBindDescriptorSets(commandList, VK_PIPELINE_BIND_POINT_GRAPHICS, mPipeline.layout(), 2 + space, 1, &set, 0, nullptr);
-    }
-
-    VulkanPipelineInstanceHandle::VulkanPipelineInstanceHandle(const PipelineConfiguration &config, VulkanPipelineLoader::Handle pipeline)
-        : VulkanPipelineInstance(config, *pipeline)
-        , mPipelineHandle(std::move(pipeline))
-    {
-    }
-
-    VulkanPipelineInstancePtr::VulkanPipelineInstancePtr(const PipelineConfiguration &config, VulkanPipelineLoader::Ptr pipeline)
-        : VulkanPipelineInstance(config, *pipeline)
-        , mPipelinePtr(std::move(pipeline))
-    {
+        vkCmdBindDescriptorSets(commandList, VK_PIPELINE_BIND_POINT_GRAPHICS, mPipeline->layout(), 2 + space, 1, &set, 0, nullptr);
     }
 
 }

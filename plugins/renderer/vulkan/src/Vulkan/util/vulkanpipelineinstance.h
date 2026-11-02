@@ -9,7 +9,7 @@ namespace Render {
 
     struct MADGINE_VULKAN_EXPORT VulkanPipelineInstance : PipelineInstance {
 
-        VulkanPipelineInstance(const PipelineConfiguration &config, const VulkanPipeline &pipeline);
+        VulkanPipelineInstance(const PipelineConfiguration &config, VulkanPipelineLoader::Handle pipeline);
         ~VulkanPipelineInstance();
 
         bool bind(VkCommandBuffer commandList, VertexFormat format, size_t groupSize, size_t samples, VkRenderPass renderpass) const;
@@ -29,7 +29,7 @@ namespace Render {
         virtual void bindResources(RenderTarget *target, size_t space, ResourceBlock block) const override;
 
     private:
-        const VulkanPipeline &mPipeline;
+        VulkanPipelineLoader::Handle mPipeline;
 
         std::vector<size_t> mConstantBufferSizes;
         std::vector<uint32_t> mConstantGPUBufferOffsets;
@@ -44,22 +44,6 @@ namespace Render {
         mutable uint32_t mElementCount;
         mutable VertexFormat mFormat;
         mutable size_t mGroupSize;
-    };
-
-    struct MADGINE_VULKAN_EXPORT VulkanPipelineInstanceHandle : VulkanPipelineInstance {
-
-        VulkanPipelineInstanceHandle(const PipelineConfiguration &config, VulkanPipelineLoader::Handle pipeline);
-
-    private:
-        VulkanPipelineLoader::Handle mPipelineHandle;
-    };
-
-    struct MADGINE_VULKAN_EXPORT VulkanPipelineInstancePtr : VulkanPipelineInstance {
-
-        VulkanPipelineInstancePtr(const PipelineConfiguration &config, VulkanPipelineLoader::Ptr pipeline);
-
-    private:
-        VulkanPipelineLoader::Ptr mPipelinePtr;
     };
 
 }

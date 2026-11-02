@@ -13,14 +13,14 @@ namespace Render {
 
         using Base = VirtualResourceLoaderBase<GPUMeshLoader, GPUMeshData, std::list<Placeholder<0>>, Threading::WorkGroupStorage>;
 
-        struct Ptr : Base::Ptr {
-            using Base::Ptr::Ptr;
-            Ptr(Base::Ptr ptr)
-                : Base::Ptr(std::move(ptr))
+        struct Handle : Base::Handle {
+            using Base::Handle::Handle;
+            Handle(Base::Handle handle)
+                : Base::Handle(std::move(handle))
             {
             }
 
-            Threading::TaskFuture<bool> create(MeshData mesh);
+            Threading::TaskFuture<bool> createUnnamed(MeshData mesh);
         };
 
         GPUMeshLoader();
@@ -38,4 +38,10 @@ namespace Render {
     };
 
 }
+
+namespace Serialize {
+    template <>
+    struct Operations<Render::GPUMeshLoader::Handle> : Operations<Render::GPUMeshLoader::Base::Handle> { };
+}
+
 }

@@ -36,9 +36,9 @@ namespace Render {
         GL_TRIANGLES
     };
 
-    OpenGLPipelineInstance::OpenGLPipelineInstance(const PipelineConfiguration &config, GLuint pipeline)
+    OpenGLPipelineInstance::OpenGLPipelineInstance(const PipelineConfiguration &config, OpenGLPipelineLoader::Handle pipeline)
         : PipelineInstance(config)
-        , mHandle(pipeline)
+        , mPipeline(std::move(pipeline))
         , mConstantBufferSizes(config.bufferSizes)
         , mDepthChecking(config.depthChecking)
         , mDepthWriting(config.depthWriting)
@@ -47,7 +47,7 @@ namespace Render {
 
     bool OpenGLPipelineInstance::bind(VertexFormat format, uintptr_t offset) const
     {
-        glUseProgram(mHandle);
+        glUseProgram(mPipeline->handle());
         GL_CHECK();
 
         if (mDepthChecking)
@@ -451,16 +451,5 @@ namespace Render {
         }
     }
 
-    OpenGLPipelineInstanceHandle::OpenGLPipelineInstanceHandle(const PipelineConfiguration &config, OpenGLPipelineLoader::Handle pipeline)
-        : OpenGLPipelineInstance(config, pipeline->handle())
-        , mPipeline(std::move(pipeline))
-    {
-    }
-
-    OpenGLPipelineInstancePtr::OpenGLPipelineInstancePtr(const PipelineConfiguration &config, OpenGLPipelineLoader::Ptr pipeline)
-        : OpenGLPipelineInstance(config, pipeline->handle())
-        , mPipeline(std::move(pipeline))
-    {
-    }
 }
 }

@@ -122,14 +122,6 @@ void main() {})";
         return link(vertexShader ? vertexShader->mHandle : 0, pixelShader ? pixelShader->mHandle : 0);
     }
 
-    bool OpenGLPipeline::link(typename OpenGLShaderLoader::Ptr vertexShader, typename OpenGLShaderLoader::Ptr pixelShader)
-    {
-        if (!vertexShader || vertexShader->mType != VertexShader || (pixelShader && pixelShader->mType != PixelShader))
-            std::terminate();
-
-        return link(vertexShader ? vertexShader->mHandle : 0, pixelShader ? pixelShader->mHandle : 0);
-    }
-
     void OpenGLPipeline::reset()
     {
         if (mHandle) {

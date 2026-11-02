@@ -10,7 +10,6 @@
 #include "Modules/uniquecomponent/uniquecomponentcollector.h"
 
 #include "handle.h"
-#include "ptr.h"
 #include "resource.h"
 #include "resourcebase.h"
 #include "resourceloaderbase.h"
@@ -39,9 +38,7 @@ namespace Resources {
         using traits = Containers::container_traits<DataContainer>;
 
         using Handle = Handle<T, typename traits::handle>;
-        using Ptr = Ptr<T, Data>;
         using OriginalHandle = Handle;
-        using OriginalPtr = Ptr;
 
         using Ctor = Closure<Threading::Task<bool>(T *, Data &, const ResourceDataInfo &, Platform::Filesystem::FileEventType event)>;
         using UnnamedCtor = Closure<Threading::Task<bool>(T *, Data &)>;
@@ -106,7 +103,6 @@ namespace Resources {
         static_assert(!traits::remove_invalidates_handles);
 
         using Handle = Handle<T, typename traits::handle>;
-        using Ptr = Ptr<T, Data>;
 
         struct Resource : Resources::Resource<T> {
 
@@ -263,22 +259,12 @@ namespace Resources {
                 Platform::Filesystem::FileEventType::FILE_CREATED, loader);
         }
 
-        static Ptr createUnnamed()
-        {
-            return std::make_unique<Data>();
-        }
-
         template <typename C>
-        static Threading::Task<bool> loadUnnamedTask(Ptr &ptr, C &&ctor, T *loader)
+        static Handle loadUnnamed(C &&ctor, T *loader = &getSingleton())
         {
-            ptr = createUnnamed();
-            return Threading::make_task(std::forward<C>(ctor), std::move(loader), *ptr);
-        }
-
-        template <typename C>
-        static Threading::TaskFuture<bool> loadUnnamed(Ptr &ptr, C &&ctor, T *loader = &getSingleton())
-        {
-            return queueLoad(loadUnnamedTask(ptr, std::forward<C>(ctor), loader), loader->loadingTaskQueue());
+            auto it = Containers::emplace(*loader->mData, loader->mData->end(), std::forward<C>(ctor), loader);
+            it->mHolder = traits::toPositionHandle(*loader->mData, it);
+            return traits::toHandle(*loader->mData, it->mHolder);
         }
 
         static Data *getDataPtr(const Handle &handle, T *loader = nullptr, bool verified = true)

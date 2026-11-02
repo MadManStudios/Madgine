@@ -21,20 +21,6 @@ namespace Render {
         return true;
     }
 
-    bool VulkanPipeline::link(PipelineSignature signature, typename VulkanShaderLoader::Ptr vertexShader, std::string vs_entrypoint, typename VulkanShaderLoader::Ptr pixelShader, std::string ps_entrypoint)
-    {
-        reset();
-
-        mLayout = VulkanRenderContext::getSingleton().fetchLayout(signature);
-
-        mVertexShader = std::move(vertexShader);
-        mVsEntrypoint = vs_entrypoint;
-        mPixelShader = std::move(pixelShader);
-        mPsEntrypoint = ps_entrypoint;
-
-        return true;
-    }
-
     VkPipeline VulkanPipeline::get(VertexFormat format, size_t groupSize, size_t samples, VkRenderPass renderpass, bool depthChecking, bool depthWriting) const
     {
         size_t samplesBits = sqrt(samples);
@@ -44,23 +30,12 @@ namespace Render {
 
         if (!pipeline) {
 
-            auto check = [](auto &variant) {
-                return std::visit(overloaded {
-                                      [](const typename VulkanShaderLoader::Handle &handle) {
-                                          return !handle || handle.available();
-                                      },
-                                      [](const typename VulkanShaderLoader::Ptr &ptr) {
-                                          return true;
-                                      } },
-                    variant);
+            auto check = [](const typename VulkanShaderLoader::Handle &handle) {
+                return !handle || handle.available();
             };
 
-            auto resolve = [](auto &variant) -> const VulkanShader * {
-                return std::visit(
-                    [](const auto &handle) -> const VulkanShader * {
-                        return handle ? &*handle : nullptr;
-                    },
-                    variant);
+            auto resolve = [](const typename VulkanShaderLoader::Handle &handle) -> const VulkanShader * {
+                return handle ? &*handle : nullptr;
             };
 
             if (!check(mVertexShader))
