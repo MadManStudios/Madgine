@@ -53,7 +53,7 @@ namespace Behavior {
         mLifetime.end();
     }
 
-    Threading::TaskQueue *HandlerBase::viewTaskQueue() const
+    Threading::TaskQueue &HandlerBase::viewTaskQueue() const
     {
         return mUI.viewTaskQueue();
     }

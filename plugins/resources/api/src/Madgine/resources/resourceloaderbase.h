@@ -34,10 +34,11 @@ namespace Resources {
 
         virtual Threading::Task<bool> init();
         virtual Threading::Task<void> finalize();
+        virtual Threading::Task<void> postFinalize();
 
         virtual Threading::Task<BakeResult> bakeResources(std::vector<Platform::Filesystem::Path> &resources, const Platform::Filesystem::Path &intermediateDir);
 
-        virtual Threading::TaskQueue *loadingTaskQueue() const;
+        virtual Threading::TaskQueue &loadingTaskQueue() const;
 
         const std::vector<std::string> &fileExtensions() const;
 
@@ -53,7 +54,7 @@ namespace Resources {
         void resourceAdded(T *res)
         {
             if (mSettings.mAutoLoad) {
-                res->loadData().info()->setPersistent(true);
+                res->loadData().setPersistent(true);
             }
         }
 

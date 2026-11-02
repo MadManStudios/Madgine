@@ -50,7 +50,7 @@ namespace Render {
         co_await VirtualResourceLoaderBase::finalize();
     }
 
-    Threading::Task<bool> GPUMeshLoader::loadImpl(GPUMeshData &mesh, ResourceDataInfo &info)
+    Threading::Task<bool> GPUMeshLoader::loadImpl(GPUMeshData &mesh, const ResourceDataInfo &info)
     {
         MeshLoader::Handle handle;
         if (!co_await handle.load(info.resource()->name()))

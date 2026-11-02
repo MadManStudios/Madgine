@@ -34,8 +34,8 @@ namespace Behavior {
 
         HandlerBase &getHandler(size_t i);
 
-        Threading::TaskQueue *viewTaskQueue() const;
-        Threading::TaskQueue *modelTaskQueue() const;
+        Threading::TaskQueue &viewTaskQueue() const;
+        Threading::TaskQueue &modelTaskQueue() const;
 
     protected:
         virtual Threading::Task<bool> init();

@@ -42,7 +42,7 @@ namespace Tools {
 
         getTool<Inspector>().addPreviewDefinition<Render::FontLoader::Resource>([this](const Traced<Render::FontLoader::Resource *> &font) {
             Render::FontLoader::Handle handle = font.get()->loadData();
-            handle.info()->setPersistent(true);
+            handle.setPersistent(true);
             if (handle.available())
                 mRoot.Image(handle->mTexture, handle->mTexture->size());
             return false;

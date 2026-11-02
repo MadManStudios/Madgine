@@ -70,7 +70,7 @@ namespace Tools {
 
         Platform::Filesystem::Path findDataFile(std::string_view name) const override;
 
-        Threading::TaskQueue *taskQueue() const override;
+        Threading::TaskQueue &taskQueue() const override;
 
         void Image(Render::ConstTexturePtr tex, Math::Vector2i image_size = { -1, -1 }, const Math::Vector2 &uv0 = { 0, 0 }, const Math::Vector2 &uv1 = { 1, 1 }) override;
         void Image(const Platform::Filesystem::Path &path, Math::Vector2i image_size = { -1, -1 }) override;

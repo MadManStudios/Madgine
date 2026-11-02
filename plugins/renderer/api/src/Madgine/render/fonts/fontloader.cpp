@@ -141,7 +141,7 @@ namespace Render {
         co_await ResourceLoader::finalize();
     }
 
-    Threading::Task<bool> FontLoader::loadImpl(TypeFace &typeFace, ResourceDataInfo &info)
+    Threading::Task<bool> FontLoader::loadImpl(TypeFace &typeFace, const ResourceDataInfo &info)
     {
 
         if (info.resource()->path().extension() == ".msdf") {
@@ -452,7 +452,7 @@ namespace Render {
         typeFace.mTexture.reset();
     }
 
-    Threading::TaskQueue *FontLoader::loadingTaskQueue() const
+    Threading::TaskQueue &FontLoader::loadingTaskQueue() const
     {
         return RenderContext::renderQueue();
     }

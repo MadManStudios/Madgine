@@ -60,7 +60,7 @@ namespace Tools {
         mInspector = &getTool<Inspector>();
 
 #ifndef MADGINE_MAINWINDOW_LAYOUT
-        mWindow->taskQueue()->queue([this]() {
+        mWindow->taskQueue().queue([this]() {
             load();
         });
 #endif
@@ -457,7 +457,7 @@ namespace Tools {
     void ProjectManager::load()
     {
         if (mLayout) {
-            mWindow->taskQueue()->queueTask(mWindow->loadLayout(mLayout));
+            mWindow->taskQueue().queueTask(mWindow->loadLayout(mLayout));
         }
     }
 #endif

@@ -33,7 +33,7 @@ namespace Render {
     {
     }
 
-    Threading::Task<bool> VulkanShaderLoader::loadImpl(VulkanShader &shader, ResourceDataInfo &info)
+    Threading::Task<bool> VulkanShaderLoader::loadImpl(VulkanShader &shader, const ResourceDataInfo &info)
     {
         std::string_view filename = info.resource()->name();
 
@@ -48,7 +48,7 @@ namespace Render {
         return generate(shader, info, type);
     }
 
-    Threading::Task<bool> VulkanShaderLoader::generate(VulkanShader &shader, ResourceDataInfo &info, ShaderType type, ShaderObjectPtr object)
+    Threading::Task<bool> VulkanShaderLoader::generate(VulkanShader &shader, const ResourceDataInfo &info, ShaderType type, ShaderObjectPtr object)
     {
         const Platform::Filesystem::Path &p = info.resource()->path();
 
@@ -82,14 +82,14 @@ namespace Render {
         return true;
     }
 
-    Threading::TaskQueue *VulkanShaderLoader::loadingTaskQueue() const
+    Threading::TaskQueue &VulkanShaderLoader::loadingTaskQueue() const
     {
         return VulkanRenderContext::renderQueue();
     }
 
     Threading::TaskFuture<bool> VulkanShaderLoader::Handle::load(ShaderObjectPtr object, ShaderType type, VulkanShaderLoader *loader)
     {
-        return Base::Handle::create(object->name(), ShaderCache::directory() / (object->entrypoint() + ".spirv"), [object, type](VulkanShaderLoader *loader, VulkanShader &shader, ResourceDataInfo &info) { return loader->generate(shader, info, type, object); }, loader);
+        return Base::Handle::create(object->name(), ShaderCache::directory() / (object->entrypoint() + ".spirv"), [object, type](VulkanShaderLoader *loader, VulkanShader &shader, const ResourceDataInfo &info) { return loader->generate(shader, info, type, object); }, loader);
     }
 }
 }

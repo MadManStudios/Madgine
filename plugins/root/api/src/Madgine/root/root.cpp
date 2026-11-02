@@ -141,9 +141,9 @@ namespace Core {
         return mErrorCode;
     }
 
-    Threading::TaskQueue *Root::taskQueue()
+    Threading::TaskQueue &Root::taskQueue()
     {
-        return &mTaskQueue;
+        return mTaskQueue;
     }
 
 }

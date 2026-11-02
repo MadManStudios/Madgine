@@ -19,9 +19,7 @@ namespace Core {
         , mEntrypoint(entrypoint)
         , mServerAPIs(*this)
     {
-        mTaskQueue.addSetupSteps(
-            [this]() { return callInit(); },
-            [this]() { return callFinalize(); });
+        addSetupSteps(mTaskQueue);
     }
 
     Server::~Server()

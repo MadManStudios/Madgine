@@ -329,7 +329,7 @@ namespace Tools {
         if (!co_await ToolBase::init())
             co_return false;
 
-        mRoot.taskQueue()->queue([this]() -> Threading::ImmediateTask<void> {
+        taskQueue().queue([this]() -> Threading::ImmediateTask<void> {
             co_await mLifetime;
         });
 

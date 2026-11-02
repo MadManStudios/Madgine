@@ -31,13 +31,13 @@ namespace Render {
         };
 
 
-        Threading::Task<bool> loadImpl(VulkanShader &shader, ResourceDataInfo &info);
-        Threading::Task<bool> generate(VulkanShader &shader, ResourceDataInfo &info, ShaderType type, ShaderObjectPtr object = {});
+        Threading::Task<bool> loadImpl(VulkanShader &shader, const ResourceDataInfo &info);
+        Threading::Task<bool> generate(VulkanShader &shader, const ResourceDataInfo &info, ShaderType type, ShaderObjectPtr object = {});
         void unloadImpl(VulkanShader &shader);
 
         bool loadFromSource(VulkanShader &shader, std::string_view name, std::vector<unsigned char> source, ShaderType type, const Platform::Filesystem::Path &path);
 
-        virtual Threading::TaskQueue *loadingTaskQueue() const override;
+        virtual Threading::TaskQueue &loadingTaskQueue() const override;
 
     private:
     };

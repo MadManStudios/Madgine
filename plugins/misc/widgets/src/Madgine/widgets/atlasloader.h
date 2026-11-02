@@ -64,7 +64,7 @@ namespace Widgets {
 
         AtlasLoader();
 
-        Threading::Task<bool> loadImpl(PreprocessedUIAtlas &data, ResourceDataInfo &info);
+        Threading::Task<bool> loadImpl(PreprocessedUIAtlas &data, const ResourceDataInfo &info);
         Threading::Task<void> unloadImpl(PreprocessedUIAtlas &data);
 
         virtual Threading::Task<Resources::BakeResult> bakeResources(std::vector<Platform::Filesystem::Path> &resourcesToBake, const Platform::Filesystem::Path &intermediateDir) override;

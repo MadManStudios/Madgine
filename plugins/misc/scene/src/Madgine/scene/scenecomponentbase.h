@@ -35,7 +35,7 @@ namespace Scene {
 
         Core::GlobalAPIBase &getGlobalAPIComponent(size_t i);
 
-        Threading::TaskQueue *taskQueue() const;
+        Threading::TaskQueue &taskQueue() const;
 
     protected:
         virtual Threading::Task<bool> init();

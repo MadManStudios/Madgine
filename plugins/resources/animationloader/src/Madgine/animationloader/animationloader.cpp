@@ -46,7 +46,7 @@ namespace Render {
     {
     }
 
-    Threading::Task<bool> AnimationLoader::loadImpl(AnimationList &animations, ResourceDataInfo &info)
+    Threading::Task<bool> AnimationLoader::loadImpl(AnimationList &animations, const ResourceDataInfo &info)
     {
         Assimp::Importer importer;
 

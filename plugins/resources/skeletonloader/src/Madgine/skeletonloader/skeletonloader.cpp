@@ -39,7 +39,7 @@ namespace Render {
     {
     }
 
-    Threading::Task<bool> SkeletonLoader::loadImpl(SkeletonDescriptor &skeleton, ResourceDataInfo &info)
+    Threading::Task<bool> SkeletonLoader::loadImpl(SkeletonDescriptor &skeleton, const ResourceDataInfo &info)
     {
         auto bufferResult = co_await info.resource()->readAsync();
         if (!bufferResult.is_value()) {

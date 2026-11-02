@@ -13,7 +13,7 @@ namespace Render {
 
         MeshLoader();
 
-        Threading::Task<bool> loadImpl(MeshData &data, ResourceDataInfo &info);
+        Threading::Task<bool> loadImpl(MeshData &data, const ResourceDataInfo &info);
         Threading::Task<void> unloadImpl(MeshData &data);
     };
 

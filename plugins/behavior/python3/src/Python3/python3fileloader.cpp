@@ -52,7 +52,7 @@ namespace Behavior {
             mTables.clear();
         }
 
-        Threading::Task<bool> Python3FileLoader::loadImpl(PyModulePtr &module, ResourceDataInfo &info, Platform::Filesystem::FileEventType event)
+        Threading::Task<bool> Python3FileLoader::loadImpl(PyModulePtr &module, const ResourceDataInfo &info, Platform::Filesystem::FileEventType event)
         {
             if (!co_await Python3Environment::getSingleton().state())
                 co_return false;
@@ -130,7 +130,7 @@ namespace Behavior {
             REFLECT_PROPAGATE_ERROR(fromPyObject(resourcePtr, PyObjectPtr { toPyObject(spec) }.get("loader_state")));
             Resource *res = scope_cast<Resource>(resourcePtr.as<Reflect::ScopePtr>());
             Handle handle = create(res, Platform::Filesystem::FileEventType::FILE_CREATED, this);
-            handle.info()->setPersistent(true);
+            handle.setPersistent(true);
             PyModulePtr &module = *getDataPtr(handle, this, false);
             assert(!module);
             module = PyModulePtr::create(res->name());
@@ -162,7 +162,7 @@ namespace Behavior {
             if (!status) {
                 return std::make_unique<Reflect::Error>(fetchError());
             }
-            
+
             PyObject *key, *value = NULL;
             Py_ssize_t pos = 0;
 
@@ -193,7 +193,7 @@ namespace Behavior {
 
             PythonFunctionInfo result { PyBytes_AsString(ascii_name), PyToValueTypeDesc(signature.get("return_annotation")) };
 
-            PyObjectPtr parameters = signature.get("parameters");            
+            PyObjectPtr parameters = signature.get("parameters");
 
             PyObjectPtr iter = PyObject_GetIter(parameters);
 
@@ -203,15 +203,12 @@ namespace Behavior {
 
                 PyObjectPtr ascii = PyUnicode_AsASCIIString(key);
 
-
                 if (Py_IS_TYPE(type, &Py_GenericAliasType)) {
-                    type = PyTuple_GetItem(type.get("__args__"), 0);                    
+                    type = PyTuple_GetItem(type.get("__args__"), 0);
                     result.mArguments.push_back({ PyBytes_AsString(ascii), Reflect::ExtendedType { Reflect::ExtendedTypeEnum::VariantType, { Reflect::toType<std::monostate>(), PyToValueTypeDesc(type) } }, Reflect::AccessorFlags_Contextual });
                 } else {
                     result.mArguments.push_back({ PyBytes_AsString(ascii), PyToValueTypeDesc(type) });
                 }
-
-                
             }
 
             return result;

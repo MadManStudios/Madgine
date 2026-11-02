@@ -10,6 +10,7 @@ namespace Threading {
         RUNNING,
         STOPPING,
         FINALIZING,
+        POST_FINALIZE,
         DONE);
 
     struct MODULES_EXPORT WorkGroup {

@@ -53,6 +53,16 @@ namespace Threading {
 
         bool wantsMainThread() const;
 
+        template <typename Init, typename Finalize, typename PostFinalize>
+        void addSetupSteps(Init &&init, Finalize &&finalize, PostFinalize &&postFinalize)
+        {
+            auto initTask = make_task(std::forward<Init>(init));
+            auto future = initTask.get_future();
+            auto finalizeTask = make_task(LIFT(TupleUnpacker::invoke), std::forward<Finalize>(finalize), std::move(future));
+            auto postFinalizeTask = make_task(std::forward<PostFinalize>(postFinalize));
+            addSetupStepTasks(std::move(initTask), std::move(finalizeTask), std::move(postFinalizeTask));
+        }
+
         template <typename Init, typename Finalize>
         void addSetupSteps(Init &&init, Finalize &&finalize)
         {
@@ -86,7 +96,7 @@ namespace Threading {
 
         void queueInternal(ScheduledTask tracker, bool resume);
 
-        void addSetupStepTasks(Task<bool> init, Task<void> finalize = {});
+        void addSetupStepTasks(Task<bool> init, Task<void> finalize = {}, Task<void> postFinalize = {});
 
         Task<bool> patchSetupTask(Task<bool> init);
 
@@ -104,9 +114,11 @@ namespace Threading {
         std::atomic<size_t> mSetupTaskInFlightCount = 0;
         bool mInitializing = true;
 
+        friend struct PostFinalize;
         std::list<ScheduledTask> mBacklog;
 
         std::list<Task<void>> mCleanupSteps;
+        std::list<Task<void>> mPostFinalizeSteps;
 
 #if !EMSCRIPTEN
         std::list<ScheduledTask> mQueue;

@@ -26,13 +26,13 @@ namespace Render {
         };
 
 
-        Threading::Task<bool> loadImpl(Platform::ReleasePtr<IDxcBlob> &shader, ResourceDataInfo &info);
-        Threading::Task<bool> generate(Platform::ReleasePtr<IDxcBlob> &shader, ResourceDataInfo &info, ShaderObjectPtr object = {});
+        Threading::Task<bool> loadImpl(Platform::ReleasePtr<IDxcBlob> &shader, const ResourceDataInfo &info);
+        Threading::Task<bool> generate(Platform::ReleasePtr<IDxcBlob> &shader, const ResourceDataInfo &info, ShaderObjectPtr object = {});
         void unloadImpl(Platform::ReleasePtr<IDxcBlob> &shader);
 
         bool loadFromSource(Platform::ReleasePtr<IDxcBlob> &shader, std::string_view name, std::string source, std::string entrypoint);
 
-        virtual Threading::TaskQueue *loadingTaskQueue() const override;
+        virtual Threading::TaskQueue &loadingTaskQueue() const override;
 
     private:
         Platform::ReleasePtr<IDxcLibrary> mLibrary;

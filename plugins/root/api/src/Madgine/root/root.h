@@ -17,7 +17,7 @@ namespace Core {
 
         int errorCode();
 
-        Threading::TaskQueue *taskQueue();
+        Threading::TaskQueue &taskQueue();
 
         template <typename T>
         T &getComponent()

@@ -46,6 +46,7 @@ namespace Resources {
 
         Threading::Task<bool> init();
         Threading::Task<void> finalize();
+        Threading::Task<void> postFinalize();
 
         ResourceLoaderContainer<std::vector<Placeholder<0>>> mCollector;
 
@@ -55,7 +56,7 @@ namespace Resources {
 
         void waitForInit();
 
-        Threading::TaskQueue *taskQueue();
+        Threading::TaskQueue &taskQueue();
 
         std::map<std::pair<std::string, Platform::Filesystem::Path>, std::vector<ResourceBase *>> buildResourceList();
         std::pair<std::string, Platform::Filesystem::Path> makeRelative(const Platform::Filesystem::Path &path) const;

@@ -583,7 +583,7 @@ namespace Render {
     }
 #endif
 
-    OpenGLRenderContext::OpenGLRenderContext(Threading::TaskQueue *queue)
+    OpenGLRenderContext::OpenGLRenderContext(Threading::TaskQueue &queue)
         : Component(queue)
         , mBufferAllocator(mBufferMemoryHeap)
         , mTempAllocator(mTempMemoryHeap)
@@ -658,10 +658,6 @@ namespace Render {
     Threading::Task<void> OpenGLRenderContext::unloadAllResources()
     {
         co_await RenderContext::unloadAllResources();
-
-        for (std::pair<const std::string, OpenGLPipelineLoader::Resource> &res : OpenGLPipelineLoader::getSingleton()) {
-            co_await res.second.forceUnload();
-        }
     }
 
     bool OpenGLRenderContext::supportsMultisampling() const

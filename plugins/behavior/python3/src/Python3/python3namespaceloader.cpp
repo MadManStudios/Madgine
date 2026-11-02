@@ -76,7 +76,7 @@ namespace Behavior {
             assert(result == 0);
         }
 
-        Threading::Task<bool> Python3NamespaceLoader::loadImpl(PyModulePtr &module, ResourceDataInfo &info, Platform::Filesystem::FileEventType event)
+        Threading::Task<bool> Python3NamespaceLoader::loadImpl(PyModulePtr &module, const ResourceDataInfo &info, Platform::Filesystem::FileEventType event)
         {
             throw 0;
         }

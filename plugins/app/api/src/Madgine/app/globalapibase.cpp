@@ -17,7 +17,7 @@ namespace Core {
     {
     }
 
-    Threading::TaskQueue *GlobalAPIBase::taskQueue() const
+    Threading::TaskQueue &GlobalAPIBase::taskQueue() const
     {
         return mApp.taskQueue();
     }

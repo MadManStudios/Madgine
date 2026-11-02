@@ -31,9 +31,7 @@ namespace Core {
     {
         pause();
 
-        mTaskQueue.addSetupSteps(
-            [this]() { return callInit(); },
-            [this]() { return callFinalize(); });
+        addSetupSteps(mTaskQueue);
     }
 
     /**
@@ -84,9 +82,9 @@ namespace Core {
      * @brief
      * @return
      */
-    Threading::TaskQueue *Application::taskQueue()
+    Threading::TaskQueue &Application::taskQueue()
     {
-        return &mTaskQueue;
+        return mTaskQueue;
     }
 
     Debug::DebuggableLifetime<> &Application::lifetime()

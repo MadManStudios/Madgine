@@ -45,7 +45,7 @@ namespace Render {
     Threading::TaskFuture<bool> PipelineLoader::Instance::create(PipelineConfiguration config, PipelineLoader *loader)
     {
         assert(!mState.valid());
-        mState = loader->loadingTaskQueue()->queueTask(loader->create(*this, std::move(config)));
+        mState = loader->loadingTaskQueue().queueTask(loader->create(*this, std::move(config)));
         return mState;
     }
 

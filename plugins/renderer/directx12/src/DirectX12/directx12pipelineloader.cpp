@@ -20,7 +20,7 @@ namespace Render {
     {
     }
 
-    bool DirectX12PipelineLoader::loadImpl(DirectX12Pipeline &pipeline, ResourceDataInfo &info)
+    bool DirectX12PipelineLoader::loadImpl(DirectX12Pipeline &pipeline, const ResourceDataInfo &info)
     {
         throw 0;
     }
@@ -37,7 +37,7 @@ namespace Render {
             name += config.ps->name();
 
         Handle pipeline;
-        if (!co_await pipeline.create(name, {}, [config](DirectX12PipelineLoader *loader, DirectX12Pipeline &pipeline, ResourceDataInfo &info) -> Threading::Task<bool> {
+        if (!co_await pipeline.create(name, {}, [config](DirectX12PipelineLoader *loader, DirectX12Pipeline &pipeline, const ResourceDataInfo &info) -> Threading::Task<bool> {
                 pipeline.setName(info.resource()->name());
                 DirectX12VertexShaderLoader::Handle vertexShader;
                 PipelineSignature signature = config.vs->signature();
@@ -62,7 +62,7 @@ namespace Render {
         co_return true;
     }
 
-    Threading::TaskQueue *DirectX12PipelineLoader::loadingTaskQueue() const
+    Threading::TaskQueue &DirectX12PipelineLoader::loadingTaskQueue() const
     {
         return DirectX12RenderContext::renderQueue();
     }

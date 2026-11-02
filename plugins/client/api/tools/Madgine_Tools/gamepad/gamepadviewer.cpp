@@ -53,6 +53,8 @@ namespace Tools {
     {
         mGamepadTexture.reset();
 
+        mImage.reset();
+
         co_await ToolBase::finalize();
     }
 

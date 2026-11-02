@@ -54,7 +54,7 @@ namespace Tools {
 
         ImRoot &root();
 
-        Threading::TaskQueue *taskQueue() const;
+        Threading::TaskQueue &taskQueue() const;
 
         ImGuiID dockSpaceId() const;
 

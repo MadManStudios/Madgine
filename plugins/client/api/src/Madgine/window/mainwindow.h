@@ -93,7 +93,7 @@ namespace Core {
         Render::RenderContext *getRenderer();
         Render::RenderTarget *getRenderWindow();
 
-        Threading::TaskQueue *taskQueue();
+        Threading::TaskQueue &taskQueue();
         void shutdown();
 
         bool onWindowEvent(const Platform::Window::WindowEvent &event, MainWindowComponentBase *component = nullptr);

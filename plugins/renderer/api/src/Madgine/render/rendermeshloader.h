@@ -13,7 +13,7 @@ namespace Render {
 
         virtual void reset(GPUMeshData &data) override;
 
-        virtual Threading::TaskQueue *loadingTaskQueue() const override;
+        virtual Threading::TaskQueue &loadingTaskQueue() const override;
     };
 }
 }

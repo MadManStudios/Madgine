@@ -25,7 +25,7 @@ namespace Audio {
         return DecodeOggFile(info, ResourceLoader::Interface::Resource::readAsStream(true));
     }
 
-    bool AudioLoader::loadImpl(AudioBuffer &data, ResourceDataInfo &info)
+    bool AudioLoader::loadImpl(AudioBuffer &data, const ResourceDataInfo &info)
     {
         Stream stream = info.resource()->readAsStream(data.mInfo);
         if (!stream)

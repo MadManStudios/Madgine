@@ -41,9 +41,9 @@ namespace Behavior {
 
         HandlerBase &getHandler(size_t i);
 
-        Threading::TaskQueue *viewTaskQueue() const;
+        Threading::TaskQueue &viewTaskQueue() const;
 
-        Threading::TaskQueue *modelTaskQueue() const;
+        Threading::TaskQueue &modelTaskQueue() const;
 
         Threading::Task<bool> init() override;
         Threading::Task<void> finalize() override;

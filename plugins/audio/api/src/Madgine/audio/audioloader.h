@@ -33,7 +33,7 @@ namespace Audio {
 
         AudioLoader();
 
-        bool loadImpl(AudioBuffer &data, ResourceDataInfo &info);
+        bool loadImpl(AudioBuffer &data, const ResourceDataInfo &info);
         void unloadImpl(AudioBuffer &data);
     };
 

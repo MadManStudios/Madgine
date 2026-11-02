@@ -117,7 +117,7 @@ namespace Audio {
     PortAudioApi::PortAudioApi(Core::Root &root)
         : AudioApiImpl<PortAudioApi>(root)
     {
-        root.taskQueue()->addSetupSteps([this]() { return callInit(); }, [this]() { return callFinalize(); });
+        addSetupSteps(root.taskQueue());
     }
 
     PortAudioApi::~PortAudioApi()

@@ -29,11 +29,6 @@ namespace Resources {
             return loader->loadVImpl(resource);
         }
 
-        static Threading::TaskFuture<void> unload(typename Base::Resource *resource, T *loader = &Base::getSingleton())
-        {
-            return loader->unloadVImpl(resource);
-        }
-
         static void unload(std::unique_ptr<_Data> ptr, T *loader = &Base::getSingleton())
         {
             return loader->unloadVImpl(std::move(ptr));
@@ -107,8 +102,7 @@ namespace Resources {
         virtual typename Base::Resource *getVImpl(std::string_view name) = 0;
         virtual typename Base::Handle loadVImpl(std::string_view name) = 0;
         virtual typename Base::Handle loadVImpl(typename Base::Resource *resource) = 0;
-        virtual Threading::TaskFuture<void> unloadVImpl(typename Base::Resource *resource) = 0;
-        virtual void unloadVImpl(std::unique_ptr<_Data> ptr) = 0;
+        virtual void unloadVImpl(std::unique_ptr<_Data> ptr) = 0;        
         virtual void resetHandleVImpl(const typename Base::Handle &handle) = 0;
         virtual typename Base::Handle refreshHandleVImpl(const typename Base::Handle &handle) = 0;
         virtual typename Base::Data *getDataPtrVImpl(const typename Base::Handle &handle, bool verified) = 0;
@@ -144,10 +138,6 @@ namespace Resources {
         virtual typename Base::OriginalHandle loadVImpl(typename Base::Resource *resource) override
         {
             return Self::load(static_cast<typename Self::Resource *>(resource), Platform::Filesystem::FileEventType::FILE_CREATED, static_cast<T *>(this));
-        }
-        virtual Threading::TaskFuture<void> unloadVImpl(typename Base::Resource *resource) override
-        {
-            return Self::unload(static_cast<typename Self::Resource *>(resource), static_cast<T *>(this));
         }
         virtual void unloadVImpl(std::unique_ptr<typename Base::Data> data) override
         {

@@ -275,7 +275,7 @@ namespace Widgets {
     {
     }
 
-    Threading::Task<bool> AtlasLoader::loadImpl(PreprocessedUIAtlas &data, ResourceDataInfo &info)
+    Threading::Task<bool> AtlasLoader::loadImpl(PreprocessedUIAtlas &data, const ResourceDataInfo &info)
     {
         Serialize::SerializeManager mgr { "Atlas" };
         Serialize::FormattedSerializeStream stream { Serialize::Formats::safebinary(), mgr.wrapStream(info.resource()->readAsStream(true), true) };

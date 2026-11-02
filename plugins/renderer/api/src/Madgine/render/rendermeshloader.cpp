@@ -113,7 +113,7 @@ namespace Render {
         GPUMeshLoader::reset(data);
     }
 
-    Threading::TaskQueue *RenderMeshLoader::loadingTaskQueue() const
+    Threading::TaskQueue &RenderMeshLoader::loadingTaskQueue() const
     {
         return RenderContext::renderQueue();
     }

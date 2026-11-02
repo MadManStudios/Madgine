@@ -25,7 +25,7 @@ namespace Render {
         : ResourceLoader({ ".fbx", ".dae", ".stl" }, { .mIconName = "grid.png" })
     {
         getOrCreateManual(
-            "quad", {}, [](MeshLoader *loader, MeshData &data, MeshLoader::ResourceDataInfo &info) -> Threading::Task<bool> {
+            "quad", {}, [](MeshLoader *loader, MeshData &data, const ResourceDataInfo &info) -> Threading::Task<bool> {
                 std::vector<Compound<VertexPos>> vertices {
                     { { -1, -1, 0 } },
                     { { 1, -1, 0 } },
@@ -43,7 +43,7 @@ namespace Render {
             this);
 
         getOrCreateManual(
-            "Cube", {}, [](MeshLoader *loader, MeshData &data, MeshLoader::ResourceDataInfo &info) -> Threading::Task<bool> {
+            "Cube", {}, [](MeshLoader *loader, MeshData &data, const ResourceDataInfo &info) -> Threading::Task<bool> {
                 std::vector<Compound<VertexPos, VertexNormal, VertexColor>> vertices {
                     { { -0.5f, -0.5f, -0.5f }, { 0, 0, -1 }, { 0, 0, 0, 1 } },
                     { { 0.5f, -0.5f, -0.5f }, { 0, 0, -1 }, { 1, 0, 0, 1 } },
@@ -86,7 +86,7 @@ namespace Render {
             this);
 
         getOrCreateManual(
-            "Plane", {}, [](MeshLoader *loader, MeshData &data, MeshLoader::ResourceDataInfo &info) -> Threading::Task<bool> {
+            "Plane", {}, [](MeshLoader *loader, MeshData &data, const ResourceDataInfo &info) -> Threading::Task<bool> {
                 std::vector<Compound<VertexPos, VertexPosW>> vertices {
                     { { 0, 0, 0 }, 1 },
                     { { 1, 0, -1 }, 0 },
@@ -223,7 +223,7 @@ namespace Render {
         return true;
     }
 
-    Threading::Task<bool> MeshLoader::loadImpl(MeshData &mesh, ResourceDataInfo &info)
+    Threading::Task<bool> MeshLoader::loadImpl(MeshData &mesh, const ResourceDataInfo &info)
     {
         Assimp::Importer importer;
 

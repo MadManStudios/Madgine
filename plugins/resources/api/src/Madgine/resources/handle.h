@@ -19,7 +19,7 @@ namespace Resources {
             : mData(other.mData)
         {
             if (mData)
-                info()->incRef();
+                Loader::getInfo(*this)->incRef();
         }
 
         Handle(Handle &&other)
@@ -52,7 +52,7 @@ namespace Resources {
             : mData(data)
         {
             if (mData)
-                info()->incRef();
+                Loader::getInfo(*this)->incRef();
         }
 
         ~Handle()
@@ -66,7 +66,7 @@ namespace Resources {
             if constexpr (std::derived_from<Loader2, Loader> || std::derived_from<Loader, Loader2>) {
                 mData = (Data)other.mData;
                 if (mData)
-                    info()->incRef();
+                    Loader::getInfo(*this)->incRef();
             } else {
                 static_assert(dependent_bool<Loader2, false>::value, "Invalid conversion-type for Handle!");
             }
@@ -77,7 +77,7 @@ namespace Resources {
             reset();
             mData = other.mData;
             if (mData)
-                info()->incRef();
+                Loader::getInfo(*this)->incRef();
             return *this;
         }
 
@@ -114,19 +114,24 @@ namespace Resources {
             return *this && info()->verify();
         }
 
+        void setPersistent(bool persistent)
+        {
+            Loader::getInfo(*this)->setPersistent(persistent);
+        }
+
         const typename Loader::Data *getUnsafe() const
         {
             return Loader::getDataPtr(*this, nullptr, false);
         }
 
-        typename Loader::ResourceDataInfo *info() const
+        const typename Loader::ResourceDataInfo *info() const
         {
             return Loader::getInfo(*this);
         }
 
         typename Loader::Resource *resource() const
         {
-            typename Loader::ResourceDataInfo *i = info();
+            const typename Loader::ResourceDataInfo *i = info();
             if (!i)
                 return nullptr;
             return static_cast<typename Loader::Resource *>(i->resource());
@@ -146,7 +151,7 @@ namespace Resources {
         Threading::TaskFuture<bool> load(std::string_view name, Loader *loader = &Loader::getSingleton())
         {
             *this = Loader::load(name, loader);
-            typename Loader::ResourceDataInfo *i = info();
+            const typename Loader::ResourceDataInfo *i = info();
             if (!i)
                 return false;
             return i->loadingTask();
@@ -155,7 +160,7 @@ namespace Resources {
         Threading::TaskFuture<bool> load(typename Loader::Resource *resource, Loader *loader = &Loader::getSingleton())
         {
             *this = Loader::load(resource, loader);
-            typename Loader::ResourceDataInfo *i = info();
+            const typename Loader::ResourceDataInfo *i = info();
             if (!i)
                 return false;
             return i->loadingTask();
@@ -170,7 +175,7 @@ namespace Resources {
         Threading::TaskFuture<bool> create(std::string_view name, const Platform::Filesystem::Path &path = {}, C &&c = {}, Loader *loader = &Loader::getSingleton())
         {
             *this = Loader::loadManual(name, path, std::forward<C>(c), loader);
-            typename Loader::ResourceDataInfo *i = info();
+            const typename Loader::ResourceDataInfo *i = info();
             if (!i)
                 return false;
             return i->loadingTask();

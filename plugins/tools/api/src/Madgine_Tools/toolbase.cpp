@@ -106,7 +106,7 @@ namespace Tools {
         return mRoot;
     }
 
-    Threading::TaskQueue *ToolBase::taskQueue() const
+    Threading::TaskQueue &ToolBase::taskQueue() const
     {
         return mRoot.taskQueue();
     }

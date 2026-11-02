@@ -11,7 +11,7 @@ namespace Resources {
 
         ImageLoader();
 
-        Threading::Task<bool> loadImpl(ImageData &data, ResourceDataInfo &info);
+        Threading::Task<bool> loadImpl(ImageData &data, const ResourceDataInfo &info);
         Threading::Task<void> unloadImpl(ImageData &data);
 
         const Platform::Filesystem::Path &iconPath(ResourceBase *res) const override;

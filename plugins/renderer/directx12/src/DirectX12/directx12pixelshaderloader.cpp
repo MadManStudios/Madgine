@@ -30,12 +30,12 @@ namespace Render {
         // if(FAILED(hr)) Handle error
     }
 
-    Threading::Task<bool> DirectX12PixelShaderLoader::loadImpl(Platform::ReleasePtr<IDxcBlob> &shader, ResourceDataInfo &info)
+    Threading::Task<bool> DirectX12PixelShaderLoader::loadImpl(Platform::ReleasePtr<IDxcBlob> &shader, const ResourceDataInfo &info)
     {
         return generate(shader, info);
     }
 
-    Threading::Task<bool> DirectX12PixelShaderLoader::generate(Platform::ReleasePtr<IDxcBlob> &shader, ResourceDataInfo &info, ShaderObjectPtr object)
+    Threading::Task<bool> DirectX12PixelShaderLoader::generate(Platform::ReleasePtr<IDxcBlob> &shader, const ResourceDataInfo &info, ShaderObjectPtr object)
     {
         const Platform::Filesystem::Path &p = info.resource()->path();
 
@@ -117,14 +117,14 @@ namespace Render {
         return true;
     }
 
-    Threading::TaskQueue *DirectX12PixelShaderLoader::loadingTaskQueue() const
+    Threading::TaskQueue &DirectX12PixelShaderLoader::loadingTaskQueue() const
     {
         return DirectX12RenderContext::renderQueue();
     }
 
     Threading::TaskFuture<bool> DirectX12PixelShaderLoader::Handle::load(ShaderObjectPtr object, DirectX12PixelShaderLoader *loader)
     {
-        return Base::Handle::create(object->name(), ShaderCache::directory() / (object->entrypoint() + ".ps_hlsl"), [object](DirectX12PixelShaderLoader *loader, Platform::ReleasePtr<IDxcBlob> &shader, ResourceDataInfo &info) { return loader->generate(shader, info, object); }, loader);
+        return Base::Handle::create(object->name(), ShaderCache::directory() / (object->entrypoint() + ".ps_hlsl"), [object](DirectX12PixelShaderLoader *loader, Platform::ReleasePtr<IDxcBlob> &shader, const ResourceDataInfo &info) { return loader->generate(shader, info, object); }, loader);
     }
 }
 }

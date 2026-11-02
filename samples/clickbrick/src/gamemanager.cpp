@@ -62,7 +62,7 @@ Engine::Threading::Task<bool> GameManager::init()
     mGameRenderTarget = mUI.window().getRenderer()->createRenderTexture({ 1, 1 }, { .mName = "Game", .mFormat = Engine::Render::FORMAT_RGBA8_SRGB });
     mGameRenderTarget->addRenderPass(&mSceneRenderer);
 
-    Engine::Render::GPUMeshLoader::load("Brick").info()->setPersistent(true);
+    Engine::Render::GPUMeshLoader::load("Brick").setPersistent(true);
 
     co_return co_await WidgetHandlerBase::init();
 }

@@ -174,7 +174,7 @@ namespace Resources {
             return mResources.end();
         }
 
-        virtual std::vector<ResourceBase *> resources() override
+        std::vector<ResourceBase *> resources() override
         {
             std::vector<ResourceBase *> result;
             std::ranges::transform(mResources, std::back_inserter(result), [](std::pair<const std::string, Resource> &p) {
@@ -183,7 +183,7 @@ namespace Resources {
             return result;
         }
 
-        virtual std::vector<std::pair<std::string_view, Reflect::ScopePtr>> typedResources() override
+        std::vector<std::pair<std::string_view, Reflect::ScopePtr>> typedResources() override
         {
             std::vector<std::pair<std::string_view, Reflect::ScopePtr>> result;
             std::ranges::transform(mResources, std::back_inserter(result), [](std::pair<const std::string, Resource> &p) {
@@ -192,7 +192,7 @@ namespace Resources {
             return result;
         }
 
-        virtual std::vector<const Reflect::MetaTable *> resourceTypes() const override
+        std::vector<const Reflect::MetaTable *> resourceTypes() const override
         {
             std::vector<const Reflect::MetaTable *> result = Base::resourceTypes();
             result.push_back(table<meta_decayed_t<Resource>>);

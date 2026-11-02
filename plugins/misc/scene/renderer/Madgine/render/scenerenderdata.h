@@ -62,7 +62,7 @@ namespace Render {
         
 
     protected:
-        Threading::TaskQueue *queue(RenderContext *) override;
+        Threading::TaskQueue &queue(RenderContext *) override;
 
         void interpolateTransform(EntityRenderData &d, Scene::Entity::Transform &t, Scene::Entity::Entity &e);
 

@@ -92,6 +92,8 @@ namespace Widgets {
     {
         mTopLevelWidgets.clear();
 
+        mWidgetsLayout.clear();
+
         mData->mAtlas.reset();
 
         co_await MainWindowComponentBase::finalize();

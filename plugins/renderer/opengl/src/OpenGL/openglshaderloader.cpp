@@ -27,7 +27,7 @@ namespace Render {
     {
     }
 
-    Threading::Task<bool> OpenGLShaderLoader::loadImpl(OpenGLShader &shader, ResourceDataInfo &info)
+    Threading::Task<bool> OpenGLShaderLoader::loadImpl(OpenGLShader &shader, const ResourceDataInfo &info)
     {
         std::string_view filename = info.resource()->name();
 
@@ -42,7 +42,7 @@ namespace Render {
         return generate(shader, info, type);
     }
 
-    Threading::Task<bool> OpenGLShaderLoader::generate(OpenGLShader &shader, ResourceDataInfo &info, ShaderType type, ShaderObjectPtr object)
+    Threading::Task<bool> OpenGLShaderLoader::generate(OpenGLShader &shader, const ResourceDataInfo &info, ShaderType type, ShaderObjectPtr object)
     {
         const Platform::Filesystem::Path &p = info.resource()->path();
 
@@ -132,14 +132,14 @@ vec3 linearToSrgb(vec3 linearRGB) {
         return true;
     }
 
-    Threading::TaskQueue *OpenGLShaderLoader::loadingTaskQueue() const
+    Threading::TaskQueue &OpenGLShaderLoader::loadingTaskQueue() const
     {
         return OpenGLRenderContext::renderQueue();
     }
 
     Threading::TaskFuture<bool> OpenGLShaderLoader::Handle::load(ShaderObjectPtr object, ShaderType type, OpenGLShaderLoader *loader)
     {
-        return Base::Handle::create(object->name(), ShaderCache::directory() / (object->entrypoint() + EXTENSION), [object, type](OpenGLShaderLoader *loader, OpenGLShader &shader, ResourceDataInfo &info) { return loader->generate(shader, info, type, object); }, loader);
+        return Base::Handle::create(object->name(), ShaderCache::directory() / (object->entrypoint() + EXTENSION), [object, type](OpenGLShaderLoader *loader, OpenGLShader &shader, const ResourceDataInfo &info) { return loader->generate(shader, info, type, object); }, loader);
     }
 }
 }

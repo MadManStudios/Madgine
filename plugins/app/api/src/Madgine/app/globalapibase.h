@@ -24,7 +24,7 @@ namespace Core {
 
         Application &app();
 
-        Threading::TaskQueue *taskQueue() const;
+        Threading::TaskQueue &taskQueue() const;
 
         virtual void startLifetime();
 

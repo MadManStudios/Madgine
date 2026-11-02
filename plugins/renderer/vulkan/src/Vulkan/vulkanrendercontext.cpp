@@ -426,7 +426,7 @@ namespace Render {
         return getEnvironment().mDevice;
     }
 
-    VulkanRenderContext::VulkanRenderContext(Threading::TaskQueue *queue)
+    VulkanRenderContext::VulkanRenderContext(Threading::TaskQueue &queue)
         : Component(queue)
         , mUploadHeap("Upload Heap")
         , mUploadAllocator(mUploadHeap)
@@ -532,7 +532,7 @@ namespace Render {
         mNextFenceValue = mLastCompletedFenceValue + 1;
 
         mConstantBuffer = allocateBuffer<ConstantValues>();
-        queue->queueTask(updateBuffer(mConstantBuffer, [](ConstantValues &values) { values = {}; }));
+        queue.queueTask(updateBuffer(mConstantBuffer, [](ConstantValues &values) { values = {}; }));
 
         LOG_DEBUG("Vulkan: VulkanRenderContext initialized");
     }
@@ -918,10 +918,6 @@ namespace Render {
     Threading::Task<void> VulkanRenderContext::unloadAllResources()
     {
         co_await RenderContext::unloadAllResources();
-
-        for (std::pair<const std::string, VulkanPipelineLoader::Resource> &res : VulkanPipelineLoader::getSingleton()) {
-            co_await res.second.forceUnload();
-        }
     }
 
     bool VulkanRenderContext::supportsMultisampling() const

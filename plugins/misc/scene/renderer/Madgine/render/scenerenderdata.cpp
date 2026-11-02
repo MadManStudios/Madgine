@@ -24,9 +24,9 @@ namespace Render {
     SceneRenderData::SceneRenderData(Scene::SceneManager &scene)
         : mScene(scene)
     {
-        mScene.taskQueue()->queue([this]() -> Threading::Task<void> {
+        mScene.taskQueue().queue([this]() -> Threading::Task<void> {
             std::chrono::steady_clock::duration acc = 0s;
-            while (mScene.taskQueue()->running()) {
+            while (mScene.taskQueue().running()) {
                 co_await mScene.simulationClock().wait_fixed(16667us, acc);
                 if (mInterpolate) {
                     co_await mScene.mutex().locked(AccessMode::READ, [this]() {
@@ -199,7 +199,7 @@ namespace Render {
         return mInterpolate;
     }
 
-    Threading::TaskQueue *SceneRenderData::queue(RenderContext *)
+    Threading::TaskQueue &SceneRenderData::queue(RenderContext *)
     {
         return mScene.taskQueue();
     }

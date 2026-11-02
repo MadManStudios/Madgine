@@ -32,7 +32,7 @@ namespace Core {
 
         GlobalAPIBase &getGlobalAPIComponent(size_t i);
 
-        Threading::TaskQueue *taskQueue();
+        Threading::TaskQueue &taskQueue();
 
         void startLifetime();
         void endLifetime();

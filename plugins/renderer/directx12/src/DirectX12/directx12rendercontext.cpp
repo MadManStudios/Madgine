@@ -79,7 +79,7 @@ namespace Render {
         return *sDevice;
     }
 
-    DirectX12RenderContext::DirectX12RenderContext(Threading::TaskQueue *queue)
+    DirectX12RenderContext::DirectX12RenderContext(Threading::TaskQueue &queue)
         : Component(queue)
         , mGraphicsQueue(D3D12_COMMAND_LIST_TYPE_DIRECT, "Graphics", &mDescriptorHeap, &mTimestampQueryHeap)
         , mCopyQueue(D3D12_COMMAND_LIST_TYPE_COPY, "Copy", &mDescriptorHeap, &mTimestampQueryHeap)
@@ -169,7 +169,7 @@ namespace Render {
         mComputeQueue.setup();
 
         mConstantBuffer = allocateBuffer<ConstantValues>();
-        queue->queueTask(updateBuffer(mConstantBuffer, [](ConstantValues &values) { values = {}; }));
+        queue.queueTask(updateBuffer(mConstantBuffer, [](ConstantValues &values) { values = {}; }));
     }
 
     DirectX12RenderContext::~DirectX12RenderContext()
@@ -336,10 +336,6 @@ namespace Render {
     Threading::Task<void> DirectX12RenderContext::unloadAllResources()
     {
         co_await RenderContext::unloadAllResources();
-
-        for (std::pair<const std::string, DirectX12PipelineLoader::Resource> &res : DirectX12PipelineLoader::getSingleton()) {
-            co_await res.second.forceUnload();
-        }
 
         mGraphicsQueue.waitForIdle();
         mComputeQueue.waitForIdle();

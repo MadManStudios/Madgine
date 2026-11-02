@@ -31,7 +31,7 @@ namespace Behavior {
         {
         }
 
-        Threading::Task<bool> NodeGraphLoader::loadImpl(NodeGraph &graph, ResourceDataInfo &info)
+        Threading::Task<bool> NodeGraphLoader::loadImpl(NodeGraph &graph, const ResourceDataInfo &info)
         {
             Serialize::StreamResult result = co_await graph.loadFromFile(info.resource()->path());
 

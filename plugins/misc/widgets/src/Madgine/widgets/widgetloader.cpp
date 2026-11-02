@@ -44,7 +44,7 @@ namespace Widgets {
         co_return true;
     }
 
-    Threading::Task<bool> WidgetLoader::loadImpl(WidgetDescriptor &descriptor, ResourceDataInfo &info)
+    Threading::Task<bool> WidgetLoader::loadImpl(WidgetDescriptor &descriptor, const ResourceDataInfo &info)
     {
         std::vector<unsigned char> blob = info.resource()->readAsBlob();
 

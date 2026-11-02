@@ -13,7 +13,7 @@ namespace Render {
 
         AnimationLoader();
 
-        Threading::Task<bool> loadImpl(AnimationList &data, ResourceDataInfo &info);
+        Threading::Task<bool> loadImpl(AnimationList &data, const ResourceDataInfo &info);
         Threading::Task<void> unloadImpl(AnimationList &data);
     };
 

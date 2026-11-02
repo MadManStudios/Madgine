@@ -51,7 +51,7 @@ namespace Scene {
         return mSceneMgr.getGlobalAPIComponent(i);
     }
 
-    Threading::TaskQueue *SceneComponentBase::taskQueue() const
+    Threading::TaskQueue &SceneComponentBase::taskQueue() const
     {
         return mSceneMgr.taskQueue();
     }

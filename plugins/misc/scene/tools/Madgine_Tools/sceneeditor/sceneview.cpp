@@ -188,7 +188,7 @@ namespace Tools {
                         [this](Scene::Entity::EntityPtr ptr) { mEditor.select(std::move(ptr)); });
                 } else if (ImGui::IsDraggableValueTypeBeingAccepted(resource)) {
                     Render::GPUMeshLoader::Handle handle = resource->loadData();
-                    handle.info()->setPersistent(true);
+                    handle.setPersistent(true);
                     if (handle.available()) {
                         Im3D::NativeMesh(&*handle, handle->mAABB, TranslationMatrix(pos));
                     }

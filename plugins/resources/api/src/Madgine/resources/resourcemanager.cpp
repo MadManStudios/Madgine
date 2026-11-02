@@ -49,9 +49,7 @@ namespace Resources {
         assert(!sSingleton);
         sSingleton = this;
 
-        root.taskQueue()->addSetupSteps(
-            [this]() { return callInit(); },
-            [this]() { return callFinalize(); });
+        addSetupSteps(root.taskQueue());
     }
 
     ResourceManager::~ResourceManager()
@@ -230,7 +228,7 @@ namespace Resources {
         }
 
         if (!Core::Root::getSingleton().toolMode())
-            taskQueue()->queueTask(update());
+            taskQueue().queueTask(update());
 
         co_return true;
     }
@@ -241,6 +239,13 @@ namespace Resources {
 
         for (const std::unique_ptr<ResourceLoaderBase> &loader : mCollector) {
             co_await loader->callFinalize();
+        }
+    }
+
+    Threading::Task<void> ResourceManager::postFinalize()
+    {
+        for (const std::unique_ptr<ResourceLoaderBase> &loader : mCollector) {
+            co_await loader->callPostFinalize();
         }
     }
 
@@ -257,7 +262,7 @@ namespace Resources {
 
     Threading::Task<void> ResourceManager::update()
     {
-        while (taskQueue()->running()) {
+        while (taskQueue().running()) {
             std::vector<Platform::Filesystem::FileEvent> events = mFileWatcher.fetchChangesReduced();
 
             std::map<std::string, std::vector<ResourceLoaderBase *>, std::less<>> loaderByExtension = getLoaderByExtension();
@@ -275,7 +280,7 @@ namespace Resources {
         mEnumerated.wait();
     }
 
-    Threading::TaskQueue *ResourceManager::taskQueue()
+    Threading::TaskQueue &ResourceManager::taskQueue()
     {
         return mRoot.taskQueue();
     }

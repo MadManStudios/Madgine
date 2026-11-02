@@ -177,6 +177,15 @@ namespace Threading {
                     }
                 }
             }
+
+            if (state == WorkGroupState::POST_FINALIZE) {
+                while (!mPostFinalizeSteps.empty()) {
+                    TaskHandle postFinalize = mPostFinalizeSteps.back().assign(this);
+                    mPostFinalizeSteps.pop_back();
+                    if (postFinalize)
+                        return postFinalize;
+                }
+            }
         }
 
         return {};
@@ -190,6 +199,8 @@ namespace Threading {
             return !mInitializing;
         case WorkGroupState::FINALIZING:
             return mCleanupSteps.empty() && mTaskInFlightCount == 0;
+        case WorkGroupState::POST_FINALIZE:
+            return mPostFinalizeSteps.empty() && mTaskInFlightCount == 0;
         default:
             return mTaskInFlightCount == 0;
         }
@@ -218,7 +229,7 @@ namespace Threading {
         co_return result;
     }
 
-    void TaskQueue::addSetupStepTasks(Task<bool> init, Task<void> finalize)
+    void TaskQueue::addSetupStepTasks(Task<bool> init, Task<void> finalize, Task<void> postFinalize)
     {
         assert(mWorkGroup.state() == WorkGroupState::INITIALIZING);
         assert(mInitializing);
@@ -237,12 +248,14 @@ namespace Threading {
         }
 
         mCleanupSteps.emplace_back(std::move(finalize));
+        mPostFinalizeSteps.emplace_back(std::move(postFinalize));
     }
 
 #ifndef NDEBUG
-    void TaskQueue::reportStuckPromises() {
+    void TaskQueue::reportStuckPromises()
+    {
         std::unique_lock lock { mPromiseMutex };
-        for (TaskPromiseBase* promise : mPromises) {
+        for (TaskPromiseBase *promise : mPromises) {
             const std::source_location &trace = promise->getSuspensionPoint();
             LOG_FATAL("Task '" << trace.function_name() << "' stuck at \n " << trace.file_name() << ":" << trace.line());
         }

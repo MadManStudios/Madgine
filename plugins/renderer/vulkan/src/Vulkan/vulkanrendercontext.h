@@ -32,7 +32,7 @@ namespace Render {
     MADGINE_VULKAN_EXPORT VkPhysicalDevice GetPhysicalDevice();
 
     struct MADGINE_VULKAN_EXPORT VulkanRenderContext : public RenderContextComponent<VulkanRenderContext> {
-        VulkanRenderContext(Threading::TaskQueue *queue);
+        VulkanRenderContext(Threading::TaskQueue &queue);
         VulkanRenderContext(const VulkanRenderContext &) = delete;
         ~VulkanRenderContext();
 

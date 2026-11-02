@@ -14,13 +14,13 @@ namespace Render {
     struct MADGINE_RENDER_EXPORT FontLoader : Resources::ResourceLoader<FontLoader, TypeFace, std::list<Placeholder<0>>, Threading::WorkGroupStorage> {
         FontLoader();
 
-        Threading::Task<bool> loadImpl(TypeFace &typeFace, ResourceDataInfo &info);
+        Threading::Task<bool> loadImpl(TypeFace &typeFace, const ResourceDataInfo &info);
         void unloadImpl(TypeFace &typeFace);
 
         Threading::Task<bool> init() override;
         Threading::Task<void> finalize() override;
 
-        Threading::TaskQueue *loadingTaskQueue() const override;
+        Threading::TaskQueue &loadingTaskQueue() const override;
 
         static constexpr int sFontSize = 48;
 

@@ -17,7 +17,7 @@ namespace Render {
     protected:
         virtual Threading::ImmediateTask<RenderFuture> render(RenderContext *context) = 0;
 
-        virtual Threading::TaskQueue *queue(RenderContext *context);
+        virtual Threading::TaskQueue &queue(RenderContext *context);
 
         size_t frame() const;
 

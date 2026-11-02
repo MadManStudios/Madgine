@@ -53,7 +53,7 @@ namespace Resources {
                 if (fut.is_ready()) {
                     handler(fut);
                 } else {
-                    Core::Root::getSingleton().taskQueue()->queueTask(fut.then(std::move(handler)));
+                    Core::Root::getSingleton().taskQueue().queueTask(fut.then(std::move(handler)));
                 }
             }
 

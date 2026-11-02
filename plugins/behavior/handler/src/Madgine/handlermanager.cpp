@@ -143,12 +143,12 @@ namespace Behavior {
         return mHandlers.get(i);
     }
 
-    Threading::TaskQueue *HandlerManager::viewTaskQueue() const
+    Threading::TaskQueue &HandlerManager::viewTaskQueue() const
     {
         return mWindow.taskQueue();
     }
 
-    Threading::TaskQueue *HandlerManager::modelTaskQueue() const
+    Threading::TaskQueue &HandlerManager::modelTaskQueue() const
     {
         return mApp.taskQueue();
     }

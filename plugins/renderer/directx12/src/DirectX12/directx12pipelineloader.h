@@ -13,11 +13,11 @@ namespace Render {
     struct MADGINE_DIRECTX12_EXPORT DirectX12PipelineLoader : Resources::VirtualResourceLoaderImpl<DirectX12PipelineLoader, DirectX12Pipeline, PipelineLoader> {
         DirectX12PipelineLoader();
 
-        bool loadImpl(DirectX12Pipeline &program, ResourceDataInfo &info);
+        bool loadImpl(DirectX12Pipeline &program, const ResourceDataInfo &info);
         void unloadImpl(DirectX12Pipeline &program);
         Threading::Task<bool> create(Instance &instance, PipelineConfiguration config) override;
 
-        Threading::TaskQueue *loadingTaskQueue() const override;
+        Threading::TaskQueue &loadingTaskQueue() const override;
 
         std::string_view extensionForTarget(std::string_view target, ShaderType type) override;
     };

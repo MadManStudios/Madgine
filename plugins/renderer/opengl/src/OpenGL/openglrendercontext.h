@@ -23,7 +23,7 @@ namespace Render {
     void swapBuffers(SurfaceHandle surface, ContextHandle context);
 
     struct MADGINE_OPENGL_EXPORT OpenGLRenderContext : public RenderContextComponent<OpenGLRenderContext> {
-        OpenGLRenderContext(Threading::TaskQueue *queue);
+        OpenGLRenderContext(Threading::TaskQueue &queue);
         ~OpenGLRenderContext();
         OpenGLRenderContext(const OpenGLRenderContext &) = delete;
 

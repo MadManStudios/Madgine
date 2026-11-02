@@ -28,7 +28,7 @@ namespace Widgets {
 
         Threading::Task<bool> init() override;
 
-        Threading::Task<bool> loadImpl(WidgetDescriptor &descriptor, ResourceDataInfo &info);
+        Threading::Task<bool> loadImpl(WidgetDescriptor &descriptor, const ResourceDataInfo &info);
         Threading::Task<void> unloadImpl(WidgetDescriptor &descriptor);
     };
 

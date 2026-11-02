@@ -13,11 +13,11 @@ namespace Render {
     struct MADGINE_VULKAN_EXPORT VulkanPipelineLoader : Resources::VirtualResourceLoaderImpl<VulkanPipelineLoader, VulkanPipeline, PipelineLoader> {
         VulkanPipelineLoader();
 
-        bool loadImpl(VulkanPipeline &program, ResourceDataInfo &info);
+        bool loadImpl(VulkanPipeline &program, const ResourceDataInfo &info);
         void unloadImpl(VulkanPipeline &program);
         Threading::Task<bool> create(Instance &instance, PipelineConfiguration config) override;
 
-        virtual Threading::TaskQueue *loadingTaskQueue() const override;
+        virtual Threading::TaskQueue &loadingTaskQueue() const override;
 
         std::string_view extensionForTarget(std::string_view target, ShaderType type) override;
     };

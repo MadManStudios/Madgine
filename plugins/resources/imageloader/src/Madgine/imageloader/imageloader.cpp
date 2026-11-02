@@ -25,7 +25,7 @@ namespace Resources {
         // getOrCreateManual("Test", "https://avatars.githubusercontent.com/u/202794897?v=4", {}, this);
     }
 
-    Threading::Task<bool> ImageLoader::loadImpl(ImageData &data, ResourceDataInfo &info)
+    Threading::Task<bool> ImageLoader::loadImpl(ImageData &data, const ResourceDataInfo &info)
     {
         auto bufferResult = co_await info.resource()->readAsync();
         if (!bufferResult.is_value()) {

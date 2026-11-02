@@ -14,7 +14,7 @@ namespace Render {
         if (context->frame() != mFrame) {
             mFrame = context->frame();
 
-            mLastFrame = queue(context)->queueTask(render(context));
+            mLastFrame = queue(context).queueTask(render(context));
         }
 
         return mLastFrame;
@@ -32,7 +32,7 @@ namespace Render {
         return mFrame;
     }
 
-    Threading::TaskQueue *RenderData::queue(RenderContext *context)
+    Threading::TaskQueue &RenderData::queue(RenderContext *context)
     {
         return context->renderQueue();
     }

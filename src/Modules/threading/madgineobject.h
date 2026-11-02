@@ -1,6 +1,7 @@
 #pragma once
 
 #include "task.h"
+#include "taskqueue.h"
 
 namespace Engine {
 namespace Threading {
@@ -37,6 +38,10 @@ namespace Threading {
 
     template <typename T>
     struct MadgineObject : MadgineObjectState {
+        void addSetupSteps(TaskQueue& queue) {
+            queue.addSetupSteps([this]() { return callInit(); }, [this]() { return callFinalize(); }, [this]() { return callPostFinalize(); });
+        }
+
         Threading::Task<bool> callInit()
         {
             assert(!mState.load().attached());
@@ -62,7 +67,18 @@ namespace Threading {
             }
             co_return;
         }
-    };
 
+        Threading::Task<void> callPostFinalize()
+        {
+            if constexpr (requires(T *t) { t->postFinalize(); }) {
+                if constexpr (Threading::IsTask<decltype(static_cast<T *>(this)->postFinalize())>) {
+                    co_await static_cast<T *>(this)->postFinalize();
+                } else {
+                    static_cast<T *>(this)->postFinalize();
+                }
+            }
+            co_return;
+        }
+    };
 }
 }

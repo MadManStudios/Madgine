@@ -24,7 +24,7 @@ namespace Render {
     };
 
     struct MADGINE_RENDER_EXPORT RenderContext {
-        RenderContext(Threading::TaskQueue *queue);
+        RenderContext(Threading::TaskQueue &queue);
         virtual ~RenderContext();
 
         virtual std::unique_ptr<RenderTarget> createRenderWindow(Platform::Window::OSWindow *w, size_t samples = 1) = 0;
@@ -45,7 +45,7 @@ namespace Render {
 
         size_t frame() const;
 
-        static Threading::TaskQueue *renderQueue();
+        static Threading::TaskQueue &renderQueue();
 
         virtual bool supportsMultisampling() const = 0;
 
@@ -92,7 +92,7 @@ namespace Render {
     protected:
         std::vector<RenderTarget *> mRenderTargets;
 
-        Threading::TaskQueue *mRenderQueue = nullptr;
+        Threading::TaskQueue &mRenderQueue;
         std::thread::id mRenderThread;
 
         size_t mFrame = 1;

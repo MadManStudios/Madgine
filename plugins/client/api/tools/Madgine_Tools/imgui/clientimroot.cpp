@@ -251,7 +251,7 @@ namespace Tools {
         Im3D::GetIO().mFetchFont = [](const char *fontName) {
             Render::FontLoader::Handle font;
             font.load(fontName);
-            font.info()->setPersistent(true);
+            font.setPersistent(true);
 
             if (font.available()) {
                 return Im3DFont {
@@ -727,7 +727,7 @@ namespace Tools {
         return Resources::ResourceManager::getSingleton().findResourceFile(name);
     }
 
-    Threading::TaskQueue *ClientImRoot::taskQueue() const
+    Threading::TaskQueue &ClientImRoot::taskQueue() const
     {
         return mWindow.taskQueue();
     }

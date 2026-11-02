@@ -162,6 +162,9 @@ namespace Threading {
                 setState(WorkGroupState::FINALIZING);
                 break;
             case WorkGroupState::FINALIZING:
+                setState(WorkGroupState::POST_FINALIZE);
+                break;
+            case WorkGroupState::POST_FINALIZE:
                 setState(WorkGroupState::DONE);
                 break;
             }

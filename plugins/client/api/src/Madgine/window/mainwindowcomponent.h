@@ -44,7 +44,7 @@ namespace Core {
 
         const int mPriority;
 
-        Threading::TaskQueue *taskQueue() const;
+        Threading::TaskQueue &taskQueue() const;
 
         virtual bool includeInLayout() const;
 

@@ -20,7 +20,7 @@ namespace Render {
     {
     }
 
-    bool OpenGLPipelineLoader::loadImpl(OpenGLPipeline &pipeline, ResourceDataInfo &info)
+    bool OpenGLPipelineLoader::loadImpl(OpenGLPipeline &pipeline, const ResourceDataInfo &info)
     {
         throw 0;
     }
@@ -37,7 +37,7 @@ namespace Render {
             name += config.ps->name();
 
         Handle pipeline;
-        if (!co_await pipeline.create(name, {}, [config](OpenGLPipelineLoader *loader, OpenGLPipeline &pipeline, ResourceDataInfo &info) -> Threading::Task<bool> {
+        if (!co_await pipeline.create(name, {}, [config](OpenGLPipelineLoader *loader, OpenGLPipeline &pipeline, const ResourceDataInfo &info) -> Threading::Task<bool> {
                 OpenGLShaderLoader::Handle vertexShader;
                 if (!co_await vertexShader.load(config.vs, VertexShader)) {
                     LOG_ERROR("Failed to load VS '" << config.vs << "'!");
@@ -65,7 +65,7 @@ namespace Render {
         co_return true;
     }
 
-    Threading::TaskQueue *OpenGLPipelineLoader::loadingTaskQueue() const
+    Threading::TaskQueue &OpenGLPipelineLoader::loadingTaskQueue() const
     {
         return OpenGLRenderContext::renderQueue();
     }

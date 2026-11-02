@@ -33,7 +33,7 @@ namespace Behavior {
             void setup();
             void cleanup();
 
-            Threading::Task<bool> loadImpl(PyModulePtr &module, ResourceDataInfo &info, Platform::Filesystem::FileEventType event);
+            Threading::Task<bool> loadImpl(PyModulePtr &module, const ResourceDataInfo &info, Platform::Filesystem::FileEventType event);
             void unloadImpl(PyModulePtr &module);
 
             Reflect::Result find_spec(Reflect::Value &result, std::string_view name, std::optional<std::vector<std::string_view>> import_path, std::optional<Reflect::ObjectPtr> target_module);

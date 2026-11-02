@@ -16,7 +16,7 @@ namespace Render {
 
     Threading::WorkgroupLocal<RenderContext *> sContext = nullptr;
 
-    RenderContext::RenderContext(Threading::TaskQueue *queue)
+    RenderContext::RenderContext(Threading::TaskQueue &queue)
         : mRenderQueue(queue)
         , mRenderThread(std::this_thread::get_id())
     {
@@ -33,13 +33,7 @@ namespace Render {
 
     Threading::Task<void> RenderContext::unloadAllResources()
     {
-        for (std::pair<const std::string, FontLoader::Resource> &res : FontLoader::getSingleton()) {
-            co_await res.second.forceUnload();
-        }
-
-        for (std::pair<const std::string, RenderMeshLoader::Resource> &res : RenderMeshLoader::getSingleton()) {
-            co_await res.second.forceUnload();
-        }
+        co_return;
     }
 
     void RenderContext::addRenderTarget(RenderTarget *target)
@@ -91,7 +85,7 @@ namespace Render {
         assert(mRenderThread == std::this_thread::get_id());
     }
 
-    Threading::TaskQueue *RenderContext::renderQueue()
+    Threading::TaskQueue &RenderContext::renderQueue()
     {
         return sContext->mRenderQueue;
     }

@@ -252,8 +252,7 @@ namespace Behavior {
         Python3Environment::Python3Environment(Core::Root &root)
             : RootComponent(root)
         {
-            root.taskQueue()->addSetupSteps([this]() { return callInit(); },
-                [this]() { return callFinalize(); });
+            addSetupSteps(root.taskQueue());
         }
 
         Threading::Task<bool> Python3Environment::init()
@@ -369,14 +368,18 @@ namespace Behavior {
 
             Python3FileLoader &loader = Python3FileLoader::getSingleton();
 
-            for (std::pair<const std::string, Python3FileLoader::Resource> &res : loader) {
-                co_await res.second.forceUnload();
-            }
-
-            lock();
+            Python3Lock lock;
 
             Python3BehaviorFactory::sFactory.mBehaviorObjects.clear();
             loader.cleanup();
+        }
+
+        Threading::Task<void> Python3Environment::postFinalize()
+        {
+            if (!Py_IsInitialized())
+                co_return;
+
+            lock();
 
             sStream.reset("stdout");
             sStream.reset("stderr");

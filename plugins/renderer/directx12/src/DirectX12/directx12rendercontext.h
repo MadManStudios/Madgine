@@ -23,7 +23,7 @@ namespace Render {
     MADGINE_DIRECTX12_EXPORT ID3D12Device *GetDevice();
 
     struct MADGINE_DIRECTX12_EXPORT DirectX12RenderContext : public RenderContextComponent<DirectX12RenderContext> {
-        DirectX12RenderContext(Threading::TaskQueue *queue);
+        DirectX12RenderContext(Threading::TaskQueue &queue);
         ~DirectX12RenderContext();
 
         std::unique_ptr<RenderTarget> createRenderWindow(Platform::Window::OSWindow *w, size_t samples) override;

@@ -29,7 +29,7 @@ namespace Core {
         return mWindow;
     }
 
-    Threading::TaskQueue *MainWindowComponentBase::taskQueue() const
+    Threading::TaskQueue &MainWindowComponentBase::taskQueue() const
     {
         return mWindow.taskQueue();
     }

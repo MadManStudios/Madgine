@@ -95,11 +95,9 @@ namespace Core {
         , mSettings(settings)
         , mTaskQueue("FrameLoop", true)
         , mComponents(*this)
-        , mRenderContext(&mTaskQueue)
+        , mRenderContext(mTaskQueue)
     {
-        mTaskQueue.addSetupSteps(
-            [this]() { return callInit(); },
-            [this]() { return callFinalize(); });
+        addSetupSteps(mTaskQueue);
     }
 
     /**
@@ -322,9 +320,9 @@ namespace Core {
      * @brief Returns a pointer to the TaskQueue
      * @return the TaskQueue
      */
-    Threading::TaskQueue *MainWindow::taskQueue()
+    Threading::TaskQueue &MainWindow::taskQueue()
     {
-        return &mTaskQueue;
+        return mTaskQueue;
     }
 
     /**

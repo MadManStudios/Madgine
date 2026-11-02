@@ -27,7 +27,7 @@ namespace Render {
 
         Threading::Task<void> finalize() override;
 
-        Threading::Task<bool> loadImpl(GPUMeshData &data, ResourceDataInfo &info);
+        Threading::Task<bool> loadImpl(GPUMeshData &data, const ResourceDataInfo &info);
         void unloadImpl(GPUMeshData &data);
 
         virtual Threading::Task<bool> generate(GPUMeshData &data, const MeshData &mesh) = 0;

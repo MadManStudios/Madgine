@@ -11,11 +11,11 @@ namespace Render {
     struct MADGINE_OPENGL_EXPORT OpenGLPipelineLoader : Resources::VirtualResourceLoaderImpl<OpenGLPipelineLoader, OpenGLPipeline, PipelineLoader> {
         OpenGLPipelineLoader();
 
-        bool loadImpl(OpenGLPipeline &pipeline, ResourceDataInfo &info);
+        bool loadImpl(OpenGLPipeline &pipeline, const ResourceDataInfo &info);
         void unloadImpl(OpenGLPipeline &pipeline);
         Threading::Task<bool> create(Instance &instance, PipelineConfiguration config) override;
 
-        virtual Threading::TaskQueue *loadingTaskQueue() const override;
+        virtual Threading::TaskQueue &loadingTaskQueue() const override;
 
         std::string_view extensionForTarget(std::string_view target, ShaderType type) override;
     };

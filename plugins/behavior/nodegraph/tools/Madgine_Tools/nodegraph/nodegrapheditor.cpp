@@ -523,7 +523,7 @@ namespace Tools {
         };
 
         if (res) {
-            mRoot.taskQueue()->queueTask(mGraphHandle.load(static_cast<Behavior::NodeGraph::NodeGraphLoader::Resource *>(res)).then(std::move(callback)));
+            taskQueue().queueTask(mGraphHandle.load(static_cast<Behavior::NodeGraph::NodeGraphLoader::Resource *>(res)).then(std::move(callback)));
         } else {
             mGraphHandle.reset();
             callback(false);

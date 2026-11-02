@@ -31,6 +31,11 @@ namespace Resources {
         co_return;
     }
 
+    Threading::Task<void> ResourceLoaderBase::postFinalize()
+    {
+        co_return;
+    }
+
     Threading::Task<BakeResult> ResourceLoaderBase::bakeResources(std::vector<Platform::Filesystem::Path> &resources, const Platform::Filesystem::Path &intermediateDir)
     {
         co_return BakeResult::NOTHING_TO_DO;
@@ -51,7 +56,7 @@ namespace Resources {
         return {};
     }
 
-    Threading::TaskQueue *ResourceLoaderBase::loadingTaskQueue() const
+    Threading::TaskQueue &ResourceLoaderBase::loadingTaskQueue() const
     {
         return ResourceManager::getSingleton().taskQueue();
     }

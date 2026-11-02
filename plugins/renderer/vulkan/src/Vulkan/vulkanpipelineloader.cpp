@@ -21,7 +21,7 @@ namespace Render {
     {
     }
 
-    bool VulkanPipelineLoader::loadImpl(VulkanPipeline &pipeline, ResourceDataInfo &info)
+    bool VulkanPipelineLoader::loadImpl(VulkanPipeline &pipeline, const ResourceDataInfo &info)
     {
         throw 0;
     }
@@ -38,7 +38,7 @@ namespace Render {
             name += config.ps->name();
 
         Handle pipeline;
-        if (!co_await pipeline.create(name, {}, [config](VulkanPipelineLoader *loader, VulkanPipeline &pipeline, ResourceDataInfo &info) -> Threading::Task<bool> {
+        if (!co_await pipeline.create(name, {}, [config](VulkanPipelineLoader *loader, VulkanPipeline &pipeline, const ResourceDataInfo &info) -> Threading::Task<bool> {
                 PipelineSignature signature = config.vs->signature();
                 VulkanShaderLoader::Handle vertexShader;
                 if (!co_await vertexShader.load(config.vs, VertexShader)) {
@@ -62,7 +62,7 @@ namespace Render {
         co_return true;
     }
 
-    Threading::TaskQueue *VulkanPipelineLoader::loadingTaskQueue() const
+    Threading::TaskQueue &VulkanPipelineLoader::loadingTaskQueue() const
     {
         return VulkanRenderContext::renderQueue();
     }

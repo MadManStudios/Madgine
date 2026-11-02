@@ -14,6 +14,7 @@ namespace Behavior {
 
             Threading::Task<bool> init();
             Threading::Task<void> finalize();
+            Threading::Task<void> postFinalize();
 
             std::string_view key() const override;
 

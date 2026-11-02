@@ -13,7 +13,7 @@ namespace Render {
 
         SkeletonLoader();
 
-        Threading::Task<bool> loadImpl(SkeletonDescriptor &data, ResourceDataInfo &info);
+        Threading::Task<bool> loadImpl(SkeletonDescriptor &data, const ResourceDataInfo &info);
         Threading::Task<void> unloadImpl(SkeletonDescriptor &data);
     };
 
