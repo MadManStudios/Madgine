@@ -11,5 +11,6 @@ namespace Resources {
     struct ResourceLoaderImpl;
     struct ResourceBase;
     struct ResourceLoaderBase;
+    struct ResourceControl;
 }
 }

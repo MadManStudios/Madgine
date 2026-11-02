@@ -49,7 +49,7 @@ namespace Resources {
                     return;
                 }
 
-                Threading::TaskFuture<bool> fut = this->mRec.mHandle.info()->loadingTask();
+                Threading::TaskFuture<bool> fut = this->mRec.mHandle.loadingTask();
                 if (fut.is_ready()) {
                     handler(fut);
                 } else {

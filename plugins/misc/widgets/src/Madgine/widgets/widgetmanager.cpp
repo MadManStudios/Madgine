@@ -80,7 +80,7 @@ namespace Widgets {
 #endif
 
         for (auto &[name, res] : WidgetLoader::getSingleton()) {
-            co_await res.loadData().info()->loadingTask();
+            co_await res.loadData().loadingTask();
         }
 
         startLifetime();
@@ -628,7 +628,7 @@ namespace Widgets {
         auto keep = renderData.pushClipRect(Math::Vector2::ZERO, Math::Vector2 { mClientSpace.mSize });
 
         for (LayoutWidget &layoutWidget : mWidgetsLayout) {
-            if (!layoutWidget.mWidget.isSet() && layoutWidget.mWidgetTemplate && layoutWidget.mWidgetTemplate.info()->loadingTask().is_ready() && layoutWidget.mWidgetTemplate.info()->loadingTask()) {
+            if (!layoutWidget.mWidget.isSet() && layoutWidget.mWidgetTemplate && layoutWidget.mWidgetTemplate.loadingTask().is_ready() && layoutWidget.mWidgetTemplate.loadingTask()) {
                 std::unique_ptr<WidgetBase> p = layoutWidget.mWidgetTemplate.create(*this);
 
                 layoutWidget.mWidget.set_value(p.get());

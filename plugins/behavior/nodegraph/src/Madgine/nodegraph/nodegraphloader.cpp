@@ -63,7 +63,7 @@ namespace Behavior {
 
         Threading::TaskFuture<bool> NodeGraphBehaviorFactory::state(const UniqueOpaquePtr &handle) const
         {
-            return handle.as<NodeGraphLoader::Handle>().info()->loadingTask();
+            return handle.as<NodeGraphLoader::Handle>().loadingTask();
         }
 
         void NodeGraphBehaviorFactory::release(UniqueOpaquePtr &ptr) const

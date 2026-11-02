@@ -90,6 +90,19 @@ namespace Resources {
             }
         }
 
+        static ResourceControl *getControl(const typename Base::Handle &handle, T *loader = nullptr)
+        {
+            if (!handle)
+                return nullptr;
+            if constexpr (Containers::container_traits<typename Base::DataContainer>::has_dependent_handle) {
+                if (!loader)
+                    loader = &Base::getSingleton();
+                return loader->getControlVImpl(handle);
+            } else {
+                return &handle.mData->mControl;
+            }
+        }
+
         virtual std::vector<const Reflect::MetaTable *> resourceTypes() const override
         {
             std::vector<const Reflect::MetaTable *> result = ResourceLoaderBase::resourceTypes();
@@ -102,11 +115,12 @@ namespace Resources {
         virtual typename Base::Resource *getVImpl(std::string_view name) = 0;
         virtual typename Base::Handle loadVImpl(std::string_view name) = 0;
         virtual typename Base::Handle loadVImpl(typename Base::Resource *resource) = 0;
-        virtual void unloadVImpl(std::unique_ptr<_Data> ptr) = 0;        
+        virtual void unloadVImpl(std::unique_ptr<_Data> ptr) = 0;
         virtual void resetHandleVImpl(const typename Base::Handle &handle) = 0;
         virtual typename Base::Handle refreshHandleVImpl(const typename Base::Handle &handle) = 0;
         virtual typename Base::Data *getDataPtrVImpl(const typename Base::Handle &handle, bool verified) = 0;
         virtual typename Base::ResourceDataInfo *getInfoVImpl(const typename Base::Handle &handle) = 0;
+        virtual ResourceControl *getControlVImpl(const typename Base::Handle &handle) = 0;
     };
 
     template <typename T, typename _Data, typename _Base>
@@ -119,61 +133,65 @@ namespace Resources {
 
         using Self::Self;
 
-        virtual typename Base::OriginalHandle loadManualVImpl(std::string_view name, const Platform::Filesystem::Path &path = {}, typename Base::Ctor ctor = {}) override
+        typename Base::OriginalHandle loadManualVImpl(std::string_view name, const Platform::Filesystem::Path &path = {}, typename Base::Ctor ctor = {}) override
         {
             return Self::loadManual(name, path, std::move(ctor), static_cast<T *>(this));
         }
-        virtual typename Base::OriginalPtr createUnnamedVImpl() override
+        typename Base::OriginalPtr createUnnamedVImpl() override
         {
             return Self::createUnnamed();
         }
-        virtual typename Base::Resource *getVImpl(std::string_view name) override
+        typename Base::Resource *getVImpl(std::string_view name) override
         {
             return Self::get(name, static_cast<T *>(this));
         }
-        virtual typename Base::OriginalHandle loadVImpl(std::string_view name) override
+        typename Base::OriginalHandle loadVImpl(std::string_view name) override
         {
             return Self::load(name, static_cast<T *>(this));
         }
-        virtual typename Base::OriginalHandle loadVImpl(typename Base::Resource *resource) override
+        typename Base::OriginalHandle loadVImpl(typename Base::Resource *resource) override
         {
             return Self::load(static_cast<typename Self::Resource *>(resource), Platform::Filesystem::FileEventType::FILE_CREATED, static_cast<T *>(this));
         }
-        virtual void unloadVImpl(std::unique_ptr<typename Base::Data> data) override
+        void unloadVImpl(std::unique_ptr<typename Base::Data> data) override
         {
             return Self::unload(std::unique_ptr<Data> { static_cast<Data *>(data.release()) });
         }
-        virtual void resetHandleVImpl(const typename Base::OriginalHandle &handle) override
+        void resetHandleVImpl(const typename Base::OriginalHandle &handle) override
         {
             Self::resetHandle(handle, static_cast<T *>(this));
         }
-        virtual typename Base::OriginalHandle refreshHandleVImpl(const typename Base::OriginalHandle &handle) override
+        typename Base::OriginalHandle refreshHandleVImpl(const typename Base::OriginalHandle &handle) override
         {
             return Self::refreshHandle(handle, static_cast<T *>(this));
         }
-        virtual typename Base::Data *getDataPtrVImpl(const typename Base::OriginalHandle &handle, bool verified) override
+        typename Base::Data *getDataPtrVImpl(const typename Base::OriginalHandle &handle, bool verified) override
         {
             return Self::getDataPtr(handle, static_cast<T *>(this), verified);
         }
-        virtual typename Base::ResourceDataInfo *getInfoVImpl(const typename Base::OriginalHandle &handle) override
+        typename Base::ResourceDataInfo *getInfoVImpl(const typename Base::OriginalHandle &handle) override
         {
             return Self::getInfo(handle, static_cast<T *>(this));
+        }
+        ResourceControl *getControlVImpl(const typename Base::OriginalHandle &handle) override
+        {
+            return Self::getControl(handle, static_cast<T *>(this));
         }
     };
 
 }
 }
 
-#define VIRTUALRESOURCELOADERBASE(Loader)                                         \
-    VIRTUALUNIQUECOMPONENTBASE(Loader)                                            \
-                                                                                  \
-    METATABLE_BEGIN_EX(1, Loader)                                                 \
-    METATABLE_END_EX(2, Loader)                                                   \
-                                                                                  \
-    METATABLE_BEGIN_BASE_EX(3, Loader::Resource, Engine::Resources::ResourceBase) \
-        STORAGE_BEGIN_EX(4, Loader::Resource, Loader::Resource *)                 \
-        FACTORY_EX(5, [](std::string_view name){return Loader::get(name);}, std::string)                                   \
-        STORAGE_END_EX(6, Loader::Resource)                                       \
+#define VIRTUALRESOURCELOADERBASE(Loader)                                                   \
+    VIRTUALUNIQUECOMPONENTBASE(Loader)                                                      \
+                                                                                            \
+    METATABLE_BEGIN_EX(1, Loader)                                                           \
+    METATABLE_END_EX(2, Loader)                                                             \
+                                                                                            \
+    METATABLE_BEGIN_BASE_EX(3, Loader::Resource, Engine::Resources::ResourceBase)           \
+        STORAGE_BEGIN_EX(4, Loader::Resource, Loader::Resource *)                           \
+        FACTORY_EX(5, [](std::string_view name) { return Loader::get(name); }, std::string) \
+        STORAGE_END_EX(6, Loader::Resource)                                                 \
     METATABLE_END_EX(7, Loader::Resource)
 
 #define VIRTUALRESOURCELOADERIMPL(Loader, Base)                  \

@@ -59,7 +59,7 @@ namespace Widgets {
 
     Threading::TaskFuture<bool> TextRenderData::loadingState()
     {
-        return mFont ? mFont.info()->loadingTask() : Threading::TaskFuture<bool> { false };
+        return mFont ? mFont.loadingTask() : Threading::TaskFuture<bool> { false };
     }
 
     void TextRenderData::render(WidgetsRenderData &renderData, std::string_view text, Math::Vector2 pos, Math::Vector3 size, int cursorIndex) const

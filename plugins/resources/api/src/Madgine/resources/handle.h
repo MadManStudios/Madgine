@@ -5,6 +5,8 @@
 #include "Modules/threading/task.h"
 #include "Modules/threading/taskfuture.h"
 
+#include "resource.h"
+
 namespace Engine {
 namespace Resources {
 
@@ -19,7 +21,7 @@ namespace Resources {
             : mData(other.mData)
         {
             if (mData)
-                Loader::getInfo(*this)->incRef();
+                Loader::getControl(*this)->incRef();
         }
 
         Handle(Handle &&other)
@@ -52,7 +54,7 @@ namespace Resources {
             : mData(data)
         {
             if (mData)
-                Loader::getInfo(*this)->incRef();
+                Loader::getControl(*this)->incRef();
         }
 
         ~Handle()
@@ -66,7 +68,7 @@ namespace Resources {
             if constexpr (std::derived_from<Loader2, Loader> || std::derived_from<Loader, Loader2>) {
                 mData = (Data)other.mData;
                 if (mData)
-                    Loader::getInfo(*this)->incRef();
+                    Loader::getControl(*this)->incRef();
             } else {
                 static_assert(dependent_bool<Loader2, false>::value, "Invalid conversion-type for Handle!");
             }
@@ -77,7 +79,7 @@ namespace Resources {
             reset();
             mData = other.mData;
             if (mData)
-                Loader::getInfo(*this)->incRef();
+                Loader::getControl(*this)->incRef();
             return *this;
         }
 
@@ -111,12 +113,20 @@ namespace Resources {
 
         bool available() const
         {
-            return *this && info()->verify();
+            return *this && Loader::getControl(*this)->verify();
         }
 
         void setPersistent(bool persistent)
         {
-            Loader::getInfo(*this)->setPersistent(persistent);
+            Loader::getControl(*this)->setPersistent(persistent);
+        }
+
+        Threading::TaskFuture<bool> loadingTask() const
+        {
+            ResourceControl *control = Loader::getControl(*this);
+            if (!control)
+                return false;
+            return control->loadingTask();
         }
 
         const typename Loader::Data *getUnsafe() const
@@ -151,19 +161,19 @@ namespace Resources {
         Threading::TaskFuture<bool> load(std::string_view name, Loader *loader = &Loader::getSingleton())
         {
             *this = Loader::load(name, loader);
-            const typename Loader::ResourceDataInfo *i = info();
-            if (!i)
+            ResourceControl *control = Loader::getControl(*this);
+            if (!control)
                 return false;
-            return i->loadingTask();
+            return control->loadingTask();
         }
 
         Threading::TaskFuture<bool> load(typename Loader::Resource *resource, Loader *loader = &Loader::getSingleton())
         {
             *this = Loader::load(resource, loader);
-            const typename Loader::ResourceDataInfo *i = info();
-            if (!i)
+            ResourceControl *control = Loader::getControl(*this);
+            if (!control)
                 return false;
-            return i->loadingTask();
+            return control->loadingTask();
         }
 
         Threading::TaskFuture<bool> loadSerialize(std::string_view name)
@@ -175,21 +185,9 @@ namespace Resources {
         Threading::TaskFuture<bool> create(std::string_view name, const Platform::Filesystem::Path &path = {}, C &&c = {}, Loader *loader = &Loader::getSingleton())
         {
             *this = Loader::loadManual(name, path, std::forward<C>(c), loader);
-            const typename Loader::ResourceDataInfo *i = info();
-            if (!i)
-                return false;
-            return i->loadingTask();
+            return loadingTask();
         }
 
-        template <typename C = typename Loader::Ctor>
-        Threading::Task<bool> createTask(std::string_view name, const Platform::Filesystem::Path &path = {}, C &&c = {}, Loader *loader = &Loader::getSingleton())
-        {
-            *this = Loader::loadManual(name, path, std::forward<C>(c), loader);
-            typename Loader::ResourceDataInfo *i = info();
-            if (!i)
-                return Threading::make_ready_task(false);
-            return i->loadingTask();
-        }
 
         void reset()
         {

@@ -297,7 +297,7 @@ namespace Widgets {
     {
 
         for (auto &[name, res] : WidgetLoader::getSingleton()) {
-            co_await res.loadData().info()->loadingTask();
+            co_await res.loadData().loadingTask();
         }
 
         std::map<std::string, Resources::ImageLoader::Handle> images;
@@ -329,7 +329,7 @@ namespace Widgets {
                 LOG_ERROR("Image not found: '" << name << "'!");
                 co_return Resources::BakeResult::UNKNOWN_ERROR;
             }
-            if (!co_await handle.info()->loadingTask()) {
+            if (!co_await handle.loadingTask()) {
                 LOG_ERROR("Failed to load image '" << name << "'!");
                 co_return Resources::BakeResult::UNKNOWN_ERROR;
             }

@@ -162,6 +162,15 @@ namespace Resources {
                 return &data->mInfo;
         }
 
+        static ResourceControl *getControl(const Handle &handle, T *loader = nullptr)
+        {
+            ResourceData<T> *data = getData(handle, loader);
+            if (!data)
+                return nullptr;
+            else
+                return &data->mControl;
+        }
+
         template <typename C = Ctor>
         static Resource *getOrCreateManual(std::string_view name, const Platform::Filesystem::Path &path = {}, C &&ctor = {}, T *loader = &getSingleton())
         {
@@ -176,23 +185,6 @@ namespace Resources {
             return resource;
         }
 
-        static Handle create(Resource *resource, Platform::Filesystem::FileEventType event = Platform::Filesystem::FileEventType::FILE_CREATED, T *loader = nullptr)
-        {
-            Handle handle { (typename traits::handle) * resource->mData };
-            assert(event == Platform::Filesystem::FileEventType::FILE_CREATED || handle);
-            if (!handle || event != Platform::Filesystem::FileEventType::FILE_CREATED) {
-                if (event == Platform::Filesystem::FileEventType::FILE_CREATED || !loader->mSettings.mInplaceReload) {
-                    if (!loader)
-                        loader = &getSingleton();
-                    auto it = Containers::emplace(*loader->mData, loader->mData->end(), resource);
-                    it->mHolder = traits::toPositionHandle(*loader->mData, it);
-                    handle = traits::toHandle(*loader->mData, it->mHolder);
-                    *resource->mData = (decltype(*resource->mData))handle.mData;
-                }
-            }
-            return handle;
-        }
-
         static Handle load(Resource *resource, Platform::Filesystem::FileEventType event, T *loader = nullptr)
         {
             if (!resource)
@@ -203,10 +195,18 @@ namespace Resources {
             if (!handle || event != Platform::Filesystem::FileEventType::FILE_CREATED) {
                 if (!loader)
                     loader = &getSingleton();
-                handle = create(resource, event, loader);
 
-                ResourceDataInfo &info = *getInfo(handle, loader);
-                info.setLoadingTask(resource->mCtor(loader, *getDataPtr(handle, loader, false), info, event), loader->loadingTaskQueue());
+                if (event == Platform::Filesystem::FileEventType::FILE_CREATED || !loader->mSettings.mInplaceReload) {
+                    if (!loader)
+                        loader = &getSingleton();
+                    auto it = Containers::emplace(*loader->mData, loader->mData->end(), resource->mCtor, loader, resource, event);
+                    it->mHolder = traits::toPositionHandle(*loader->mData, it);
+                    handle = traits::toHandle(*loader->mData, it->mHolder);
+                    *resource->mData = (decltype(*resource->mData))handle.mData;
+                } else {
+                    ResourceDataInfo &info = *getInfo(handle, loader);
+                    queueLoad(resource->mCtor(loader, *getDataPtr(handle, loader, false), info, event), loader->loadingTaskQueue());
+                }
             }
 
             return handle;
@@ -223,26 +223,22 @@ namespace Resources {
         static void resetHandle(const Handle &handle, T *loader = nullptr)
         {
             assert(handle);
-            if (!getInfo(handle)->decRef()) {
+            if (!getControl(handle)->decRef()) {
                 if (!loader)
                     loader = &getSingleton();
 
-                ResourceDataInfo &info = *getInfo(handle, loader);
-                Threading::TaskFuture<void> task = info.unloadingTask();
-
-                if (!task.valid()) {
-                    task = info.setUnloadingTask(Threading::make_task(&T::unloadImpl, std::move(loader), *getDataPtr(handle, loader, false)), loader->loadingTaskQueue());
-                }
-
                 Resource *resource = handle.resource();
-                queueUnload(task.then([&data { *loader->mData }, handle { getData(handle)->mHolder }]() {
-                    typename traits::iterator it = traits::toIterator(data, handle);
-                    data.erase(it);
-                }),
-                    loader->loadingTaskQueue());
 
-                if ((typename traits::handle) * resource->mData == handle.mData)
+                if (resource && (typename traits::handle) * resource->mData == handle.mData)
                     *resource->mData = {};
+
+                queueUnload([](T *loader, ResourceData<T> &data) -> Threading::Task<void> {
+                    co_await data.mControl.loadingTask();
+                    co_await Threading::make_task(&T::unloadImpl, std::move(loader), data.mData);
+                    typename traits::iterator it = traits::toIterator(*loader->mData, data.mHolder);
+                    loader->mData->erase(it);
+                }(loader, *getData(handle, loader)),
+                    loader->loadingTaskQueue());
             }
         }
 
@@ -403,7 +399,6 @@ namespace Resources {
 
     template <typename Loader>
     constexpr auto sLoaderGetHelper = [](std::string_view name) { return Loader::get(name); };
-
 }
 }
 
