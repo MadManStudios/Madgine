@@ -120,11 +120,6 @@ namespace Render {
         return true;
     }
 
-    Threading::TaskQueue &DirectX12VertexShaderLoader::loadingTaskQueue() const
-    {
-        return DirectX12RenderContext::renderQueue();
-    }
-
     Threading::TaskFuture<bool> DirectX12VertexShaderLoader::Handle::load(ShaderObjectPtr object, DirectX12VertexShaderLoader *loader)
     {
         return Base::Handle::create(object->name(), ShaderCache::directory() / (object->entrypoint() + ".vs_hlsl"), [object](DirectX12VertexShaderLoader *loader, Platform::ReleasePtr<IDxcBlob> &shader, const ResourceDataInfo &info) { return loader->generate(shader, info, object); }, loader);

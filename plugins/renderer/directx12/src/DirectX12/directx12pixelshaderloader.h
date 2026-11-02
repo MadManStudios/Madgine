@@ -32,8 +32,6 @@ namespace Render {
 
         bool loadFromSource(Platform::ReleasePtr<IDxcBlob> &shader, std::string_view name, std::string source, std::string entrypoint);
 
-        virtual Threading::TaskQueue &loadingTaskQueue() const override;
-
     private:
         Platform::ReleasePtr<IDxcLibrary> mLibrary;
         Platform::ReleasePtr<IDxcCompiler3> mCompiler;
