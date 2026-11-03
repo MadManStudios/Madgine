@@ -43,7 +43,7 @@ namespace Threading {
         void unregisterTaskInFlight(TaskPromiseBase *promise);
         size_t taskInFlightCount() const;
 
-        bool idle() const;
+        bool idle() const;        
 
         const std::string &name() const;
 
@@ -114,7 +114,6 @@ namespace Threading {
         std::atomic<size_t> mSetupTaskInFlightCount = 0;
         bool mInitializing = true;
 
-        friend struct PostFinalize;
         std::list<ScheduledTask> mBacklog;
 
         std::list<Task<void>> mCleanupSteps;

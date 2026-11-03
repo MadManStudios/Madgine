@@ -81,10 +81,7 @@ namespace Threading {
             TaskHandle handle;
             if (mHandle) {
                 mHandle->setQueue(queue);
-                bool immediate = mHandle->immediate();
                 handle = { std::move(mHandle) };
-                if (immediate)
-                    handle();
             }
             return handle;
         }
