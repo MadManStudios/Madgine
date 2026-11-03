@@ -405,8 +405,8 @@ namespace Render {
                     set2[c].mUV = data.mLowResEntries[i][c].mArea.mTopLeft;
                     set2[c].mFlipped = data.mLowResEntries[i][c].mFlipped;
                     set2[c].mAdvance = data.mFace->glyph->advance.x;
-                    set2[c].mBearing.x = data.mFace->glyph->bitmap_left - 1;
-                    set2[c].mBearing.y = data.mFace->glyph->bitmap_top + 1;
+                    set2[c].mBearing.x = data.mFace->glyph->bitmap_left;
+                    set2[c].mBearing.y = data.mFace->glyph->bitmap_top;
 
                     Math::Vector2i size = data.mLowResSizes[i][c];
                     if (data.mLowResEntries[i][c].mFlipped)
