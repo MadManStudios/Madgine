@@ -24,9 +24,13 @@ namespace Widgets {
         void renderImage(WidgetsRenderData &renderData, Math::Vector2 pos, Math::Vector3 size, const Math::Atlas2::Entry &entry, const ColorFrame &color = {});
 
         uint16_t mLeftBorder = 0;
+        uint16_t mLeftBorderAbsolute = 0;
         uint16_t mTopBorder = 0;
+        uint16_t mTopBorderAbsolute = 0;
         uint16_t mBottomBorder = 0;
+        uint16_t mBottomBorderAbsolute = 0;
         uint16_t mRightBorder = 0;
+        uint16_t mRightBorderAbsolute = 0;
 
     private:
         Resources::ImageLoader::Resource *mImage = nullptr;

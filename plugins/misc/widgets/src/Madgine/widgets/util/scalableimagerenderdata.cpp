@@ -12,17 +12,25 @@
 METATABLE_BEGIN_BASE(Engine::Widgets::ScalableImageRenderData, Engine::Widgets::RenderData)
     PROPERTY(Image, image, setImage)
     MEMBER(mLeftBorder)
+    MEMBER(mLeftBorderAbsolute)
     MEMBER(mTopBorder)
+    MEMBER(mTopBorderAbsolute)
     MEMBER(mBottomBorder)
+    MEMBER(mBottomBorderAbsolute)
     MEMBER(mRightBorder)
+    MEMBER(mRightBorderAbsolute)
 METATABLE_END(Engine::Widgets::ScalableImageRenderData)
 
 SERIALIZETABLE_INHERIT_BEGIN(Engine::Widgets::ScalableImageRenderData, Engine::Widgets::RenderData)
     ENCAPSULATED_FIELD(Image, imageName, setImageName, Engine::Serialize::Tags<"Image">)
     FIELD(mLeftBorder)
+    FIELD(mLeftBorderAbsolute)
     FIELD(mTopBorder)
+    FIELD(mTopBorderAbsolute)
     FIELD(mBottomBorder)
+    FIELD(mBottomBorderAbsolute)
     FIELD(mRightBorder)
+    FIELD(mRightBorderAbsolute)
 SERIALIZETABLE_END(Engine::Widgets::ScalableImageRenderData)
 
 namespace Engine {
@@ -61,53 +69,58 @@ namespace Widgets {
 
         const Math::Vector2i &imageSize = entry.mArea.mSize;
 
-        if (mLeftBorder > 0) {
-            pos.x += size.z * mLeftBorder;
-            size.x -= size.z * mLeftBorder;
-            topLeftUV.x += mLeftBorder * uvSize.x / imageSize.x;
+        float leftBorder = size.z * mLeftBorder + mLeftBorderAbsolute;
+        float topBorder = size.z * mTopBorder + mTopBorderAbsolute;
+        float rightBorder = size.z * mRightBorder + mRightBorderAbsolute;
+        float bottomBorder = size.z * mBottomBorder + mBottomBorderAbsolute;
+
+        if (leftBorder > 0) {
+            pos.x += leftBorder;
+            size.x -= leftBorder;
+            topLeftUV.x += (mLeftBorder + mLeftBorderAbsolute) * uvSize.x / imageSize.x;
         }
 
-        if (mTopBorder > 0) {
-            pos.y += size.z * mTopBorder;
-            size.y -= size.z * mTopBorder;
-            topLeftUV.y += mTopBorder * uvSize.y / imageSize.y;
+        if (topBorder > 0) {
+            pos.y += topBorder;
+            size.y -= topBorder;
+            topLeftUV.y += (mTopBorder + mTopBorderAbsolute) * uvSize.y / imageSize.y;
         }
 
-        if (mRightBorder > 0) {
-            size.x -= size.z * mRightBorder;
-            bottomRightUV.x -= mRightBorder * uvSize.x / imageSize.x;
+        if (rightBorder > 0) {
+            size.x -= rightBorder;
+            bottomRightUV.x -= (mRightBorder + mRightBorderAbsolute) * uvSize.x / imageSize.x;
         }
 
-        if (mBottomBorder > 0) {
-            size.y -= size.z * mBottomBorder;
-            bottomRightUV.y -= mBottomBorder * uvSize.y / imageSize.y;
+        if (bottomBorder > 0) {
+            size.y -= bottomBorder;
+            bottomRightUV.y -= (mBottomBorder + mBottomBorderAbsolute) * uvSize.y / imageSize.y;
         }
 
         renderData.renderQuad(pos, size.xy(), color, {}, topLeftUV, bottomRightUV, entry.mFlipped);
 
-        if (mLeftBorder > 0)
-            renderData.renderQuad({ posOuter.x, pos.y }, { size.z * mLeftBorder, size.y }, color, {}, { topLeftUVOuter.x, topLeftUV.y }, { topLeftUV.x, bottomRightUV.y }, entry.mFlipped);
+        if (leftBorder > 0)
+            renderData.renderQuad({ posOuter.x, pos.y }, { leftBorder, size.y }, color, {}, { topLeftUVOuter.x, topLeftUV.y }, { topLeftUV.x, bottomRightUV.y }, entry.mFlipped);
 
-        if (mTopBorder > 0)
-            renderData.renderQuad({ pos.x, posOuter.y }, { size.x, size.z * mTopBorder }, color, {}, { topLeftUV.x, topLeftUVOuter.y }, { bottomRightUV.x, topLeftUV.y }, entry.mFlipped);
+        if (topBorder > 0)
+            renderData.renderQuad({ pos.x, posOuter.y }, { size.x, topBorder }, color, {}, { topLeftUV.x, topLeftUVOuter.y }, { bottomRightUV.x, topLeftUV.y }, entry.mFlipped);
 
-        if (mRightBorder > 0)
-            renderData.renderQuad({ pos.x + size.x, pos.y }, { size.z * mRightBorder, size.y }, color, {}, { bottomRightUV.x, topLeftUV.y }, { bottomRightUVOuter.x, bottomRightUV.y }, entry.mFlipped);
+        if (rightBorder > 0)
+            renderData.renderQuad({ pos.x + size.x, pos.y }, { rightBorder, size.y }, color, {}, { bottomRightUV.x, topLeftUV.y }, { bottomRightUVOuter.x, bottomRightUV.y }, entry.mFlipped);
 
-        if (mBottomBorder > 0)
-            renderData.renderQuad({ pos.x, pos.y + size.y }, { size.x, size.z * mBottomBorder }, color, {}, { topLeftUV.x, bottomRightUV.y }, { bottomRightUV.x, bottomRightUVOuter.y }, entry.mFlipped);
+        if (bottomBorder > 0)
+            renderData.renderQuad({ pos.x, pos.y + size.y }, { size.x, bottomBorder }, color, {}, { topLeftUV.x, bottomRightUV.y }, { bottomRightUV.x, bottomRightUVOuter.y }, entry.mFlipped);
 
-        if (mLeftBorder > 0 && mTopBorder > 0)
-            renderData.renderQuad(posOuter, { size.z * mLeftBorder, size.z * mTopBorder }, color, {}, topLeftUVOuter, topLeftUV, entry.mFlipped);
+        if (leftBorder > 0 && topBorder > 0)
+            renderData.renderQuad(posOuter, { leftBorder, topBorder }, color, {}, topLeftUVOuter, topLeftUV, entry.mFlipped);
 
-        if (mRightBorder > 0 && mBottomBorder > 0)
-            renderData.renderQuad({ pos.x + size.x, pos.y + size.y }, { size.z * mRightBorder, size.z * mBottomBorder }, color, {}, bottomRightUV, bottomRightUVOuter, entry.mFlipped);
+        if (rightBorder > 0 && bottomBorder > 0)
+            renderData.renderQuad({ pos.x + size.x, pos.y + size.y }, { rightBorder, bottomBorder }, color, {}, bottomRightUV, bottomRightUVOuter, entry.mFlipped);
 
-        if (mLeftBorder > 0 && mBottomBorder > 0)
-            renderData.renderQuad({ posOuter.x, pos.y + size.y }, { size.z * mLeftBorder, size.z * mBottomBorder }, color, {}, { topLeftUVOuter.x, bottomRightUV.y }, { topLeftUV.x, bottomRightUVOuter.y }, entry.mFlipped);
+        if (leftBorder > 0 && bottomBorder > 0)
+            renderData.renderQuad({ posOuter.x, pos.y + size.y }, { leftBorder, bottomBorder }, color, {}, { topLeftUVOuter.x, bottomRightUV.y }, { topLeftUV.x, bottomRightUVOuter.y }, entry.mFlipped);
 
-        if (mRightBorder > 0 && mTopBorder > 0)
-            renderData.renderQuad({ pos.x + size.x, posOuter.y }, { size.z * mRightBorder, size.z * mTopBorder }, color, {}, { bottomRightUV.x, topLeftUVOuter.y }, { bottomRightUVOuter.x, topLeftUV.y }, entry.mFlipped);
+        if (rightBorder > 0 && topBorder > 0)
+            renderData.renderQuad({ pos.x + size.x, posOuter.y }, { rightBorder, topBorder }, color, {}, { bottomRightUV.x, topLeftUVOuter.y }, { bottomRightUVOuter.x, topLeftUV.y }, entry.mFlipped);
     }
 
 }
