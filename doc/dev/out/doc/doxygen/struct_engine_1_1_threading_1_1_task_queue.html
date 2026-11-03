@@ -318,8 +318,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ade6e733cce7265ab911876610f57e3ad"><td class="memTemplParams" colspan="2">template&lt;typename Init , typename Finalize &gt; </td></tr>
 <tr class="memitem:ade6e733cce7265ab911876610f57e3ad"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_task_queue.html#ade6e733cce7265ab911876610f57e3ad">addSetupSteps</a> (Init &amp;&amp;init, Finalize &amp;&amp;finalize)</td></tr>
 <tr class="separator:ade6e733cce7265ab911876610f57e3ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aac586142fb91d7caac2f5c9d507edad2"><td class="memTemplParams" colspan="2">template&lt;typename Init , typename Finalize , typename <a class="el" href="struct_engine_1_1_threading_1_1_task_queue.html#aa27244fb012f6cb5aa1a23feb2e1361e">PostFinalize</a> &gt; </td></tr>
-<tr class="memitem:aac586142fb91d7caac2f5c9d507edad2"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_task_queue.html#aac586142fb91d7caac2f5c9d507edad2">addSetupSteps</a> (Init &amp;&amp;init, Finalize &amp;&amp;finalize, <a class="el" href="struct_engine_1_1_threading_1_1_task_queue.html#aa27244fb012f6cb5aa1a23feb2e1361e">PostFinalize</a> &amp;&amp;postFinalize)</td></tr>
+<tr class="memitem:aac586142fb91d7caac2f5c9d507edad2"><td class="memTemplParams" colspan="2">template&lt;typename Init , typename Finalize , typename PostFinalize &gt; </td></tr>
+<tr class="memitem:aac586142fb91d7caac2f5c9d507edad2"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_task_queue.html#aac586142fb91d7caac2f5c9d507edad2">addSetupSteps</a> (Init &amp;&amp;init, Finalize &amp;&amp;finalize, PostFinalize &amp;&amp;postFinalize)</td></tr>
 <tr class="separator:aac586142fb91d7caac2f5c9d507edad2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8bc72b57a29eea461c58049df2542f57"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_task_queue.html#a8bc72b57a29eea461c58049df2542f57">idle</a> () const</td></tr>
 <tr class="separator:a8bc72b57a29eea461c58049df2542f57"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -367,8 +367,6 @@ Protected Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
 Friends</h2></td></tr>
-<tr class="memitem:aa27244fb012f6cb5aa1a23feb2e1361e"><td class="memItemLeft" align="right" valign="top">struct&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_task_queue.html#aa27244fb012f6cb5aa1a23feb2e1361e">PostFinalize</a></td></tr>
-<tr class="separator:aa27244fb012f6cb5aa1a23feb2e1361e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a28e673aa68455b4a9267fbb82942d396"><td class="memItemLeft" align="right" valign="top">struct&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_task_queue.html#a28e673aa68455b4a9267fbb82942d396">TaskHandle</a></td></tr>
 <tr class="separator:a28e673aa68455b4a9267fbb82942d396"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae98b31349a732bddada051f67e4d80fe"><td class="memItemLeft" align="right" valign="top">struct&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_task_queue.html#ae98b31349a732bddada051f67e4d80fe">TaskQualifiers</a></td></tr>
@@ -693,7 +691,7 @@ template&lt;typename F &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Init , typename Finalize , typename <a class="el" href="struct_engine_1_1_threading_1_1_task_queue.html#aa27244fb012f6cb5aa1a23feb2e1361e">PostFinalize</a> &gt; </div>
+template&lt;typename Init , typename Finalize , typename PostFinalize &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -713,7 +711,7 @@ template&lt;typename Init , typename Finalize , typename <a class="el" href="str
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="struct_engine_1_1_threading_1_1_task_queue.html#aa27244fb012f6cb5aa1a23feb2e1361e">PostFinalize</a> &amp;&amp;&#160;</td>
+          <td class="paramtype">PostFinalize &amp;&amp;&#160;</td>
           <td class="paramname"><em>postFinalize</em>&#160;</td>
         </tr>
         <tr>
@@ -1030,28 +1028,6 @@ template&lt;typename Init &gt; </div>
 
 </div>
 </div>
-<a id="aa27244fb012f6cb5aa1a23feb2e1361e" name="aa27244fb012f6cb5aa1a23feb2e1361e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa27244fb012f6cb5aa1a23feb2e1361e">&#9670;&#160;</a></span>PostFinalize</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">friend struct PostFinalize</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <hr/>The documentation for this struct was generated from the following files:<ul>
 <li>src/Modules/threading/<a class="el" href="taskqueue_8h.html">taskqueue.h</a></li>
 <li>src/Modules/threading/<a class="el" href="taskqueue_8cpp.html">taskqueue.cpp</a></li>
@@ -1059,7 +1035,7 @@ template&lt;typename Init &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Nov 2 2026 19:17:06 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Tue Nov 3 2026 00:45:53 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>
