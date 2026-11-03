@@ -17,7 +17,7 @@ namespace Render {
     const TypeFace::GlyphSet &TypeFace::Font::set(float fontSize, float *outScale) const
     {
         if (fontSize <= TypeFace::sMaxBitmapFontSize) {
-            size_t size = std::max(TypeFace::sMinBitmapFontSize, static_cast<size_t>(fontSize));
+            size_t size = std::max(TypeFace::sMinBitmapFontSize, static_cast<size_t>(std::max(fontSize, 1.0f)));
             if (outScale)
                 *outScale = 1.0f;
             return mBitmapFonts[size - sMinBitmapFontSize];
