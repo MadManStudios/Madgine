@@ -37,6 +37,9 @@ namespace Render {
 
         mViewMatrix = mCamera.getViewMatrix();
 
+        if (mMaxAspectRatio == 0.0f)
+            mMaxAspectRatio = 4.0f;
+
         FrustumCuller culler { mCamera.getFrustum(mMaxAspectRatio) };
 
         mMaxAspectRatio = 0.0f;
