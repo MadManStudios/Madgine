@@ -224,7 +224,7 @@ namespace Platform {
             size.LowPart = fad.nFileSizeLow;
             result.mSize = size.QuadPart;
 
-            FILETIME ft = fad.ftLastAccessTime;
+            FILETIME ft = fad.ftLastWriteTime;
             std::chrono::file_clock::duration d { (static_cast<int64_t>(ft.dwHighDateTime) << 32)
                 | ft.dwLowDateTime };
             result.mLastModified = std::chrono::file_clock::time_point { d };
