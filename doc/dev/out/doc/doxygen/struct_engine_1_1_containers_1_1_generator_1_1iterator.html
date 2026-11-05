@@ -309,8 +309,10 @@ Classes</h2></td></tr>
 Public Types</h2></td></tr>
 <tr class="memitem:aa75f8555d7e7141f82ca224d9cf42533"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_containers_1_1_generator_1_1iterator.html#aa75f8555d7e7141f82ca224d9cf42533">difference_type</a> = std::ptrdiff_t</td></tr>
 <tr class="separator:aa75f8555d7e7141f82ca224d9cf42533"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a18a7010df62483a8d9f85affb1122498"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_containers_1_1_generator_1_1iterator.html#a18a7010df62483a8d9f85affb1122498">reference_type</a> = const T &amp;</td></tr>
-<tr class="separator:a18a7010df62483a8d9f85affb1122498"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0bc87e023dc294f81ab5c887e8ec12ff"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_containers_1_1_generator_1_1iterator.html#a0bc87e023dc294f81ab5c887e8ec12ff">iterator_category</a> = std::input_iterator_tag</td></tr>
+<tr class="separator:a0bc87e023dc294f81ab5c887e8ec12ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe4886d1c1ffbcb8477a808fd0a30f27"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_containers_1_1_generator_1_1iterator.html#afe4886d1c1ffbcb8477a808fd0a30f27">reference</a> = const T &amp;</td></tr>
+<tr class="separator:afe4886d1c1ffbcb8477a808fd0a30f27"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a992a9f860953c4810e52c70e9a4bf06e"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_containers_1_1_generator_1_1iterator.html#a992a9f860953c4810e52c70e9a4bf06e">value_type</a> = <a class="el" href="namespace_engine.html#a1ea2ca5e8f96e113be72baa7a9a703ed">forward_ref_t</a>&lt; T &gt;</td></tr>
 <tr class="separator:a992a9f860953c4810e52c70e9a4bf06e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -328,6 +330,22 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a6ddf526a6824d2e50b69f59578c7072a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="a0bc87e023dc294f81ab5c887e8ec12ff" name="a0bc87e023dc294f81ab5c887e8ec12ff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0bc87e023dc294f81ab5c887e8ec12ff">&#9670;&#160;</a></span>iterator_category</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="struct_engine_1_1_containers_1_1_generator.html">Engine::Containers::Generator</a>&lt; T &gt;::iterator::iterator_category =  std::input_iterator_tag</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="aa75f8555d7e7141f82ca224d9cf42533" name="aa75f8555d7e7141f82ca224d9cf42533"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa75f8555d7e7141f82ca224d9cf42533">&#9670;&#160;</a></span>difference_type</h2>
 
@@ -360,8 +378,8 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="a18a7010df62483a8d9f85affb1122498" name="a18a7010df62483a8d9f85affb1122498"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a18a7010df62483a8d9f85affb1122498">&#9670;&#160;</a></span>reference_type</h2>
+<a id="afe4886d1c1ffbcb8477a808fd0a30f27" name="afe4886d1c1ffbcb8477a808fd0a30f27"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afe4886d1c1ffbcb8477a808fd0a30f27">&#9670;&#160;</a></span>reference</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -369,7 +387,7 @@ template&lt;typename T &gt; </div>
 template&lt;typename T &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="struct_engine_1_1_containers_1_1_generator.html">Engine::Containers::Generator</a>&lt; T &gt;::iterator::reference_type =  const T &amp;</td>
+          <td class="memname">using <a class="el" href="struct_engine_1_1_containers_1_1_generator.html">Engine::Containers::Generator</a>&lt; T &gt;::iterator::reference =  const T &amp;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -522,7 +540,7 @@ template&lt;typename T &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Nov 4 2026 16:35:17 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Thu Nov 5 2026 15:07:45 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

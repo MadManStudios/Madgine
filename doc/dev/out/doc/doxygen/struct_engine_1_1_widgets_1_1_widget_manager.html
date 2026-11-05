@@ -375,6 +375,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:aa5e01e8fc026dbda58a25a3fd5bbfd26"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a48e280702debf56e3f24acfe88ce1ec7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_widget_manager.html#a48e280702debf56e3f24acfe88ce1ec7">injectPointerRelease</a> (const <a class="el" href="struct_engine_1_1_platform_1_1_input_1_1_pointer_release_event.html">Platform::Input::PointerReleaseEvent</a> &amp;arg)</td></tr>
 <tr class="separator:a48e280702debf56e3f24acfe88ce1ec7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab11182a1a3cd96d2fadba487b4a478e6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_widget_manager.html#ab11182a1a3cd96d2fadba487b4a478e6">injectTextInput</a> (const <a class="el" href="struct_engine_1_1_platform_1_1_input_1_1_text_input_event.html">Platform::Input::TextInputEvent</a> &amp;arg)</td></tr>
+<tr class="separator:ab11182a1a3cd96d2fadba487b4a478e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adf060f85b124bb45867a511d90fe48a1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_widget_manager.html#adf060f85b124bb45867a511d90fe48a1">isHovered</a> (<a class="el" href="struct_engine_1_1_widgets_1_1_widget_base.html">WidgetBase</a> *w)</td></tr>
 <tr class="separator:adf060f85b124bb45867a511d90fe48a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4ec8b2da28d0e2fa1df70b2ce1049d2d"><td class="memItemLeft" align="right" valign="top">std::list&lt; <a class="el" href="struct_engine_1_1_widgets_1_1_layout_widget.html">LayoutWidget</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_widget_manager.html#a4ec8b2da28d0e2fa1df70b2ce1049d2d">layoutWidgets</a> ()</td></tr>
@@ -387,7 +389,7 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a4c8de4961f920aeee59fe6bbd0365f2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7391d2cbd86d9bc0a44dab8472801bdc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_widget_manager.html#a7391d2cbd86d9bc0a44dab8472801bdc">onResize</a> (const <a class="el" href="struct_engine_1_1_math_1_1_rect2i.html">Math::Rect2i</a> &amp;space) override</td></tr>
 <tr class="separator:a7391d2cbd86d9bc0a44dab8472801bdc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aca621463508117800d0923652ec2d0f0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_widget_manager.html#aca621463508117800d0923652ec2d0f0">onWindowEvent</a> (const <a class="el" href="namespace_engine_1_1_platform_1_1_window.html#a5aa522b8abcf1367061fe059b60b2228">Platform::Window::WindowEvent</a> &amp;arg) override</td></tr>
+<tr class="memitem:aca621463508117800d0923652ec2d0f0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_widget_manager.html#aca621463508117800d0923652ec2d0f0">onWindowEvent</a> (const <a class="el" href="namespace_engine_1_1_platform_1_1_window.html#af42011ccd9ac26c305546d909c255e6e">Platform::Window::WindowEvent</a> &amp;arg) override</td></tr>
 <tr class="separator:aca621463508117800d0923652ec2d0f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab85a6d43589631b7535c69e804bd16f9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_widgets_1_1_widget_manager.html#ab85a6d43589631b7535c69e804bd16f9">openLayout</a> (std::string_view name)</td></tr>
 <tr class="separator:ab85a6d43589631b7535c69e804bd16f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1076,7 +1078,7 @@ Friends</h2></td></tr>
         <tr>
           <td class="memname">bool Engine::Widgets::WidgetManager::onWindowEvent </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="namespace_engine_1_1_platform_1_1_window.html#a5aa522b8abcf1367061fe059b60b2228">Platform::Window::WindowEvent</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="namespace_engine_1_1_platform_1_1_window.html#af42011ccd9ac26c305546d909c255e6e">Platform::Window::WindowEvent</a> &amp;&#160;</td>
           <td class="paramname"><em>arg</em></td><td>)</td>
           <td></td>
         </tr>
@@ -1190,6 +1192,24 @@ Friends</h2></td></tr>
           <td class="memname">bool Engine::Widgets::WidgetManager::injectKeyRelease </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="struct_engine_1_1_platform_1_1_input_1_1_key_release_event.html">Platform::Input::KeyReleaseEvent</a> &amp;&#160;</td>
+          <td class="paramname"><em>arg</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab11182a1a3cd96d2fadba487b4a478e6" name="ab11182a1a3cd96d2fadba487b4a478e6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab11182a1a3cd96d2fadba487b4a478e6">&#9670;&#160;</a></span>injectTextInput()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Engine::Widgets::WidgetManager::injectTextInput </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_engine_1_1_platform_1_1_input_1_1_text_input_event.html">Platform::Input::TextInputEvent</a> &amp;&#160;</td>
           <td class="paramname"><em>arg</em></td><td>)</td>
           <td></td>
         </tr>
@@ -1837,7 +1857,7 @@ Friends</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Nov 4 2026 16:35:19 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Thu Nov 5 2026 15:07:47 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

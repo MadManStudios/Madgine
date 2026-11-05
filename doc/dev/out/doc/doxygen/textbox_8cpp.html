@@ -323,7 +323,7 @@ Macros</h2></td></tr>
 <tr class="separator:ade8f1a617b962d4405a2492cc3ed0468"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7f8890a32305a5193e74a5ec995282e6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="textbox_8cpp.html#a7f8890a32305a5193e74a5ec995282e6">STB_TEXTEDIT_INSERTCHARS</a>(obj,  i,  c,  n)&#160;&#160;&#160;(obj-&gt;mText.insert(i, c, n), true)</td></tr>
 <tr class="separator:a7f8890a32305a5193e74a5ec995282e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0ade8031681b3197d3d44fbe16e625d6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="textbox_8cpp.html#a0ade8031681b3197d3d44fbe16e625d6">STB_TEXTEDIT_K</a>(key)&#160;&#160;&#160;(static_cast&lt;uint16_t&gt;(key) &lt;&lt; 8)</td></tr>
+<tr class="memitem:a0ade8031681b3197d3d44fbe16e625d6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="textbox_8cpp.html#a0ade8031681b3197d3d44fbe16e625d6">STB_TEXTEDIT_K</a>(key)&#160;&#160;&#160;(static_cast&lt;uint64_t&gt;(key) &lt;&lt; 32)</td></tr>
 <tr class="separator:a0ade8031681b3197d3d44fbe16e625d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a436a147e85256c7a3e2fee4a69e3aa72"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="textbox_8cpp.html#a436a147e85256c7a3e2fee4a69e3aa72">STB_TEXTEDIT_K_BACKSPACE</a>&#160;&#160;&#160;<a class="el" href="textbox_8cpp.html#a0ade8031681b3197d3d44fbe16e625d6">STB_TEXTEDIT_K</a>(<a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a172afd2e88b723f275033fc681f7e784">Engine::Platform::Input::Key::Backspace</a>) | 8</td></tr>
 <tr class="separator:a436a147e85256c7a3e2fee4a69e3aa72"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -355,9 +355,9 @@ Macros</h2></td></tr>
 <tr class="separator:aabfc2cec24f396fb94d03d9f103a910e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a579019adb9b5fbb8432121dc10d59755"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="textbox_8cpp.html#a579019adb9b5fbb8432121dc10d59755">STB_TEXTEDIT_K_UP</a>&#160;&#160;&#160;<a class="el" href="textbox_8cpp.html#a0ade8031681b3197d3d44fbe16e625d6">STB_TEXTEDIT_K</a>(<a class="el" href="namespace_engine_1_1_platform_1_1_input_1_1_key.html#acc830e29a87e19a7d2f97672dab85b07a1311b1e042a38e2b8b57b99aa1d6fa70">Engine::Platform::Input::Key::UpArrow</a>)</td></tr>
 <tr class="separator:a579019adb9b5fbb8432121dc10d59755"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0844607fb86d874eb8b1173c7d40053d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="textbox_8cpp.html#a0844607fb86d874eb8b1173c7d40053d">STB_TEXTEDIT_KEYTOTEXT</a>(k)&#160;&#160;&#160;static_cast&lt;char&gt;(k)</td></tr>
+<tr class="memitem:a0844607fb86d874eb8b1173c7d40053d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="textbox_8cpp.html#a0844607fb86d874eb8b1173c7d40053d">STB_TEXTEDIT_KEYTOTEXT</a>(k)&#160;&#160;&#160;static_cast&lt;char32_t&gt;(k)</td></tr>
 <tr class="separator:a0844607fb86d874eb8b1173c7d40053d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a010ea37f20ef02d3c9909c59a87f3639"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="textbox_8cpp.html#a010ea37f20ef02d3c9909c59a87f3639">STB_TEXTEDIT_KEYTYPE</a>&#160;&#160;&#160;uint16_t</td></tr>
+<tr class="memitem:a010ea37f20ef02d3c9909c59a87f3639"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="textbox_8cpp.html#a010ea37f20ef02d3c9909c59a87f3639">STB_TEXTEDIT_KEYTYPE</a>&#160;&#160;&#160;uint64_t</td></tr>
 <tr class="separator:a010ea37f20ef02d3c9909c59a87f3639"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa4972f151a8c89cf3b23673c3da8a21c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="textbox_8cpp.html#aa4972f151a8c89cf3b23673c3da8a21c">STB_TEXTEDIT_LAYOUTROW</a>(result,  obj,  n)&#160;&#160;&#160;obj-&gt;layoutRow(result, n)</td></tr>
 <tr class="separator:aa4972f151a8c89cf3b23673c3da8a21c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -381,7 +381,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define STB_TEXTEDIT_KEYTYPE&#160;&#160;&#160;uint16_t</td>
+          <td class="memname">#define STB_TEXTEDIT_KEYTYPE&#160;&#160;&#160;uint64_t</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -499,7 +499,7 @@ Functions</h2></td></tr>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">k</td><td>)</td>
-          <td>&#160;&#160;&#160;static_cast&lt;char&gt;(k)</td>
+          <td>&#160;&#160;&#160;static_cast&lt;char32_t&gt;(k)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -633,7 +633,7 @@ Functions</h2></td></tr>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">key</td><td>)</td>
-          <td>&#160;&#160;&#160;(static_cast&lt;uint16_t&gt;(key) &lt;&lt; 8)</td>
+          <td>&#160;&#160;&#160;(static_cast&lt;uint64_t&gt;(key) &lt;&lt; 32)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -896,7 +896,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Nov 4 2026 16:35:14 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Thu Nov 5 2026 15:07:43 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>

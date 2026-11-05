@@ -372,8 +372,6 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_containers_1_1mutable__set.html">mutable_set</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_containers_1_1_safe_iterator.html">SafeIterator</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_containers_1_1_sorted_container_api.html">SortedContainerApi</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_containers_1_1_tiny_vector.html">TinyVector</a></td></tr>
@@ -457,9 +455,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a70a87b78ecb036a13ad9ed6008eb9000"><td class="memTemplParams" colspan="2">template&lt;typename C , typename... Args&gt; </td></tr>
 <tr class="memitem:a70a87b78ecb036a13ad9ed6008eb9000"><td class="memTemplItemLeft" align="right" valign="top">decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_containers.html#a70a87b78ecb036a13ad9ed6008eb9000">resetOperation</a> (C &amp;c, bool controlled, Args &amp;&amp;...args)</td></tr>
 <tr class="separator:a70a87b78ecb036a13ad9ed6008eb9000"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a070d6d2a12af272d4fbe005830c9eb27"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:a070d6d2a12af272d4fbe005830c9eb27"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="struct_engine_1_1_containers_1_1_safe_iterator.html">SafeIterator</a>&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_containers.html#a070d6d2a12af272d4fbe005830c9eb27">safeIterate</a> (T &amp;&amp;t)</td></tr>
-<tr class="separator:a070d6d2a12af272d4fbe005830c9eb27"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7d277abe8f0d0a5b07649c924185f56"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:ab7d277abe8f0d0a5b07649c924185f56"><td class="memTemplItemLeft" align="right" valign="top">std::vector&lt; std::ranges::range_value_t&lt; T &gt; &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_engine_1_1_containers.html#ab7d277abe8f0d0a5b07649c924185f56">safeIterate</a> (T &amp;&amp;t)</td></tr>
+<tr class="separator:ab7d277abe8f0d0a5b07649c924185f56"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
@@ -674,8 +672,8 @@ template&lt;typename C , typename... Args&gt; </div>
 
 </div>
 </div>
-<a id="a070d6d2a12af272d4fbe005830c9eb27" name="a070d6d2a12af272d4fbe005830c9eb27"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a070d6d2a12af272d4fbe005830c9eb27">&#9670;&#160;</a></span>safeIterate()</h2>
+<a id="ab7d277abe8f0d0a5b07649c924185f56" name="ab7d277abe8f0d0a5b07649c924185f56"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab7d277abe8f0d0a5b07649c924185f56">&#9670;&#160;</a></span>safeIterate()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -683,7 +681,7 @@ template&lt;typename C , typename... Args&gt; </div>
 template&lt;typename T &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="struct_engine_1_1_containers_1_1_safe_iterator.html">SafeIterator</a>&lt; T &gt; Engine::Containers::safeIterate </td>
+          <td class="memname">std::vector&lt; std::ranges::range_value_t&lt; T &gt; &gt; Engine::Containers::safeIterate </td>
           <td>(</td>
           <td class="paramtype">T &amp;&amp;&#160;</td>
           <td class="paramname"><em>t</em></td><td>)</td>
@@ -744,7 +742,7 @@ template&lt;typename T &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Nov 4 2026 16:35:17 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Thu Nov 5 2026 15:07:45 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>
