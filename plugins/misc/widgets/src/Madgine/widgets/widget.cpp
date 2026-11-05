@@ -511,6 +511,7 @@ namespace Widgets {
             if (c->mVisible) {
                 renderData.setAlpha(oldAlpha * c->opacity());
                 renderData.setLayer(oldLayer + 1);
+                auto keep = renderData.pushClipRect(c->mClientSpacePos, c->mAbsoluteSize.xy());
                 c->render(renderData);
             }
         }

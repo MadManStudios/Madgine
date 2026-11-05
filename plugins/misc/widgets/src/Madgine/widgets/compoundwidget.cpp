@@ -48,6 +48,7 @@ namespace Widgets {
         float oldAlpha = renderData.alpha();
         for (const std::unique_ptr<WidgetBase> &templateWidget : mTemplateWidgets) {
             renderData.setAlpha(oldAlpha * templateWidget->opacity());
+            auto keep = renderData.pushClipRect(templateWidget->getClientSpacePosition(), templateWidget->getAbsoluteSize().xy());
             templateWidget->render(renderData);
         }
         renderData.setAlpha(oldAlpha);

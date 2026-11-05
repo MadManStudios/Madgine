@@ -70,7 +70,6 @@ namespace Widgets {
         if (mTextRenderData.available()) {
             std::string text = mText.get();
             mTextRenderData.updateText(renderData.manager(), text, size);
-            auto keep = renderData.pushClipRect(pos, size.xy());
             mTextRenderData.render(renderData, pos, size);
         }
 

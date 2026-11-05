@@ -245,6 +245,10 @@ namespace Widgets {
 
     WidgetsRenderData::WidgetsRenderDataClipRectKeep WidgetsRenderData::pushClipRect(Math::Vector2 pos, Math::Vector2 size)
     {
+        pos = Math::max(pos, mClipRect.mTopLeft);
+        Math::Vector2 bottomRight = Math::min(pos + size, mClipRect.mTopLeft + mClipRect.mSize);
+        size = bottomRight - pos;
+
         WidgetsRenderDataClipRectKeep keep {
             mClipRect,
             *this

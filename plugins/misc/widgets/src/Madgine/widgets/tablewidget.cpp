@@ -109,8 +109,6 @@ namespace Widgets {
             Math::Vector3 size = getAbsoluteSize();
             renderData.setSubLayer(1);
 
-            auto keep = renderData.pushClipRect(pos, size.xy());
-
             if (mNeedResize)
                 sizeChanged(size);
 
