@@ -1,0 +1,456 @@
+<Widget serId=1>
+    <mChildren>
+        <ScrollArea serId=2>
+            <mChildren>
+                <Bar serId=3>
+                    <mChildren>
+                    </mChildren>
+                    <mName>Bar</mName>
+                    <mPos>[0, 0, 0, 1, 1, 0, 0, 0, 0]</mPos>
+                    <mSize>[1, 10, 0, 50, 20, 0, 1000, 30, 1]</mSize>
+                    <mOpacity>1</mOpacity>
+                    <mConditions>
+                    </mConditions>
+                    <mProperties>
+                    </mProperties>
+                </Bar>
+                <Button serId=4>
+                    <mText>Button</mText>
+                    <mTextRenderData serId=5>
+                        <mFontSize>22</mFontSize>
+                        <mPivot>[0.5, 0.5]</mPivot>
+                        <mColor serId=6>
+                            <mColor>(1, 1, 1, 1)</mColor>
+                            <mSecondaryColor>(1, 1, 1, 1)</mSecondaryColor>
+                            <mGradient>[0, 0]</mGradient>
+                        </mColor>
+                        <mFont>OpenSans</mFont>
+                        <mStyle>FontStyle::Bold</mStyle>
+                        <mShadowOffset>[0, 0]</mShadowOffset>
+                        <mParseFormatting>false</mParseFormatting>
+                    </mTextRenderData>
+                    <mImageRenderData serId=7>
+                        <Image>SampleBackground</Image>
+                        <mLeftBorder>0</mLeftBorder>
+                        <mLeftBorderAbsolute>4</mLeftBorderAbsolute>
+                        <mTopBorder>0</mTopBorder>
+                        <mTopBorderAbsolute>4</mTopBorderAbsolute>
+                        <mBottomBorder>0</mBottomBorder>
+                        <mBottomBorderAbsolute>4</mBottomBorderAbsolute>
+                        <mRightBorder>0</mRightBorder>
+                        <mRightBorderAbsolute>4</mRightBorderAbsolute>
+                    </mImageRenderData>
+                    <mColorTintRenderData serId=8>
+                        <mNormalColor serId=9>
+                            <mColor>(1, 1, 1, 1)</mColor>
+                            <mSecondaryColor>(1, 1, 1, 1)</mSecondaryColor>
+                            <mGradient>[0, 0]</mGradient>
+                        </mNormalColor>
+                        <mHighlightedColor serId=10>
+                            <mColor>(1.2, 1.2, 1.2, 1)</mColor>
+                            <mSecondaryColor>(1, 1, 1, 1)</mSecondaryColor>
+                            <mGradient>[0, 0]</mGradient>
+                        </mHighlightedColor>
+                        <mPressedColor serId=11>
+                            <mColor>(1.3, 1.3, 1.3, 1)</mColor>
+                            <mSecondaryColor>(1, 1, 1, 1)</mSecondaryColor>
+                            <mGradient>[0, 0]</mGradient>
+                        </mPressedColor>
+                        <mSelectedColor serId=12>
+                            <mColor>(1.1, 1.1, 1.1, 1)</mColor>
+                            <mSecondaryColor>(1, 1, 1, 1)</mSecondaryColor>
+                            <mGradient>[0, 0]</mGradient>
+                        </mSelectedColor>
+                        <mDisabledColor serId=13>
+                            <mColor>(0.4, 0.4, 0.4, 1)</mColor>
+                            <mSecondaryColor>(1, 1, 1, 1)</mSecondaryColor>
+                            <mGradient>[0, 0]</mGradient>
+                        </mDisabledColor>
+                    </mColorTintRenderData>
+                    <mEnabled>true</mEnabled>
+                    <mChildren>
+                    </mChildren>
+                    <mName>Button</mName>
+                    <mPos>[1, 0, 0, 1, 1, 0, 1, 0, 0]</mPos>
+                    <mSize>[40, 10, 0, 80, 20, 0, 1000, 30, 1]</mSize>
+                    <mOpacity>1</mOpacity>
+                    <mConditions>
+                    </mConditions>
+                    <mProperties>
+                    </mProperties>
+                </Button>
+                <Checkbox serId=14>
+                    <mChildren>
+                    </mChildren>
+                    <mName>Checkbox</mName>
+                    <mPos>[0, 1, 0, 1, 1, 0, 0.5, 0, 0]</mPos>
+                    <mSize>[10, 10, 0, 20, 20, 0, 30, 30, 1]</mSize>
+                    <mOpacity>1</mOpacity>
+                    <mConditions>
+                    </mConditions>
+                    <mProperties>
+                    </mProperties>
+                </Checkbox>
+                <Combobox serId=15>
+                    <mItems>
+                        <Item></Item>
+                        <Item></Item>
+                    </mItems>
+                    <mTextRenderData serId=16>
+                        <mFontSize>16</mFontSize>
+                        <mPivot>[0.5, 0.5]</mPivot>
+                        <mColor serId=17>
+                            <mColor>(1, 1, 1, 1)</mColor>
+                            <mSecondaryColor>(1, 1, 1, 1)</mSecondaryColor>
+                            <mGradient>[0, 0]</mGradient>
+                        </mColor>
+                        <mFont>OpenSans</mFont>
+                        <mStyle>0</mStyle>
+                        <mShadowOffset>[0, 0]</mShadowOffset>
+                        <mParseFormatting>false</mParseFormatting>
+                    </mTextRenderData>
+                    <mBackgroundRenderData serId=18>
+                        <Image>SampleBackground</Image>
+                        <mLeftBorder>0</mLeftBorder>
+                        <mLeftBorderAbsolute>4</mLeftBorderAbsolute>
+                        <mTopBorder>0</mTopBorder>
+                        <mTopBorderAbsolute>4</mTopBorderAbsolute>
+                        <mBottomBorder>0</mBottomBorder>
+                        <mBottomBorderAbsolute>4</mBottomBorderAbsolute>
+                        <mRightBorder>0</mRightBorder>
+                        <mRightBorderAbsolute>4</mRightBorderAbsolute>
+                    </mBackgroundRenderData>
+                    <mButtonRenderData serId=19>
+                        <Image>SampleBackground</Image>
+                        <mLeftBorder>0</mLeftBorder>
+                        <mLeftBorderAbsolute>4</mLeftBorderAbsolute>
+                        <mTopBorder>0</mTopBorder>
+                        <mTopBorderAbsolute>4</mTopBorderAbsolute>
+                        <mBottomBorder>0</mBottomBorder>
+                        <mBottomBorderAbsolute>4</mBottomBorderAbsolute>
+                        <mRightBorder>0</mRightBorder>
+                        <mRightBorderAbsolute>4</mRightBorderAbsolute>
+                    </mButtonRenderData>
+                    <mColorTintRenderData serId=20>
+                        <mNormalColor serId=21>
+                            <mColor>(1, 1, 1, 1)</mColor>
+                            <mSecondaryColor>(1, 1, 1, 1)</mSecondaryColor>
+                            <mGradient>[0, 0]</mGradient>
+                        </mNormalColor>
+                        <mHighlightedColor serId=22>
+                            <mColor>(1.2, 1.2, 1.2, 1)</mColor>
+                            <mSecondaryColor>(1, 1, 1, 1)</mSecondaryColor>
+                            <mGradient>[0, 0]</mGradient>
+                        </mHighlightedColor>
+                        <mPressedColor serId=23>
+                            <mColor>(1.3, 1.3, 1.3, 1)</mColor>
+                            <mSecondaryColor>(1, 1, 1, 1)</mSecondaryColor>
+                            <mGradient>[0, 0]</mGradient>
+                        </mPressedColor>
+                        <mSelectedColor serId=24>
+                            <mColor>(1.1, 1.1, 1.1, 1)</mColor>
+                            <mSecondaryColor>(1, 1, 1, 1)</mSecondaryColor>
+                            <mGradient>[0, 0]</mGradient>
+                        </mSelectedColor>
+                        <mDisabledColor serId=25>
+                            <mColor>(0.4, 0.4, 0.4, 1)</mColor>
+                            <mSecondaryColor>(1, 1, 1, 1)</mSecondaryColor>
+                            <mGradient>[0, 0]</mGradient>
+                        </mDisabledColor>
+                    </mColorTintRenderData>
+                    <mSelectionColorRenderData serId=26>
+                        <mColor>(1, 1, 1, 1)</mColor>
+                        <mSecondaryColor>(1, 1, 1, 1)</mSecondaryColor>
+                        <mGradient>[0, 0]</mGradient>
+                    </mSelectionColorRenderData>
+                    <mSpacing>2</mSpacing>
+                    <mChildren>
+                    </mChildren>
+                    <mName>Combobox</mName>
+                    <mPos>[1, 1, 0, 1, 1, 0, 1, 0, 0]</mPos>
+                    <mSize>[100, 10, 0, 200, 20, 0, 2000, 30, 1]</mSize>
+                    <mOpacity>1</mOpacity>
+                    <mConditions>
+                    </mConditions>
+                    <mProperties>
+                    </mProperties>
+                </Combobox>
+                <Image serId=27>
+                    <mImageRenderData serId=28>
+                        <Image>Gamepad</Image>
+                        <mLeftBorder>0</mLeftBorder>
+                        <mLeftBorderAbsolute>0</mLeftBorderAbsolute>
+                        <mTopBorder>0</mTopBorder>
+                        <mTopBorderAbsolute>0</mTopBorderAbsolute>
+                        <mBottomBorder>0</mBottomBorder>
+                        <mBottomBorderAbsolute>0</mBottomBorderAbsolute>
+                        <mRightBorder>0</mRightBorder>
+                        <mRightBorderAbsolute>0</mRightBorderAbsolute>
+                    </mImageRenderData>
+                    <mColor serId=29>
+                        <mColor>(1, 1, 1, 1)</mColor>
+                        <mSecondaryColor>(1, 1, 1, 1)</mSecondaryColor>
+                        <mGradient>[0, 0]</mGradient>
+                    </mColor>
+                    <mChildren>
+                    </mChildren>
+                    <mName>Image</mName>
+                    <mPos>[0, 4, 0, 1, 2, 0, 0, 0, 0]</mPos>
+                    <mSize>[50, 100, 0, 100, 200, 0, 1000, 300, 1]</mSize>
+                    <mOpacity>1</mOpacity>
+                    <mConditions>
+                    </mConditions>
+                    <mProperties>
+                    </mProperties>
+                </Image>
+                <Label serId=30>
+                    <mText>Label</mText>
+                    <mTextRenderData serId=31>
+                        <mFontSize>16</mFontSize>
+                        <mPivot>[0.5, 0.5]</mPivot>
+                        <mColor serId=32>
+                            <mColor>(1, 1, 1, 1)</mColor>
+                            <mSecondaryColor>(1, 1, 1, 1)</mSecondaryColor>
+                            <mGradient>[0, 0]</mGradient>
+                        </mColor>
+                        <mFont>OpenSans</mFont>
+                        <mStyle>0</mStyle>
+                        <mShadowOffset>[0, 0]</mShadowOffset>
+                        <mParseFormatting>false</mParseFormatting>
+                    </mTextRenderData>
+                    <mChildren>
+                    </mChildren>
+                    <mName>Label</mName>
+                    <mPos>[0, 2, 0, 1, 1, 0, 0, 0, 0]</mPos>
+                    <mSize>[50, 10, 0, 100, 20, 0, 1000, 30, 1]</mSize>
+                    <mOpacity>1</mOpacity>
+                    <mConditions>
+                    </mConditions>
+                    <mProperties>
+                    </mProperties>
+                </Label>
+                <TabBar serId=33>
+                    <mTabNames>
+                        <Item></Item>
+                        <Item></Item>
+                    </mTabNames>
+                    <mTextRenderData serId=34>
+                        <mFontSize>16</mFontSize>
+                        <mPivot>[0.5, 0.5]</mPivot>
+                        <mColor serId=35>
+                            <mColor>(1, 1, 1, 1)</mColor>
+                            <mSecondaryColor>(1, 1, 1, 1)</mSecondaryColor>
+                            <mGradient>[0, 0]</mGradient>
+                        </mColor>
+                        <mFont>OpenSans</mFont>
+                        <mStyle>0</mStyle>
+                        <mShadowOffset>[0, 0]</mShadowOffset>
+                        <mParseFormatting>false</mParseFormatting>
+                    </mTextRenderData>
+                    <mImageRenderData serId=36>
+                        <Image>SampleBackground</Image>
+                        <mLeftBorder>0</mLeftBorder>
+                        <mLeftBorderAbsolute>4</mLeftBorderAbsolute>
+                        <mTopBorder>0</mTopBorder>
+                        <mTopBorderAbsolute>4</mTopBorderAbsolute>
+                        <mBottomBorder>0</mBottomBorder>
+                        <mBottomBorderAbsolute>4</mBottomBorderAbsolute>
+                        <mRightBorder>0</mRightBorder>
+                        <mRightBorderAbsolute>4</mRightBorderAbsolute>
+                    </mImageRenderData>
+                    <mColorTintRenderData serId=37>
+                        <mNormalColor serId=38>
+                            <mColor>(1, 1, 1, 1)</mColor>
+                            <mSecondaryColor>(1, 1, 1, 1)</mSecondaryColor>
+                            <mGradient>[0, 0]</mGradient>
+                        </mNormalColor>
+                        <mHighlightedColor serId=39>
+                            <mColor>(1.2, 1.2, 1.2, 1)</mColor>
+                            <mSecondaryColor>(1, 1, 1, 1)</mSecondaryColor>
+                            <mGradient>[0, 0]</mGradient>
+                        </mHighlightedColor>
+                        <mPressedColor serId=40>
+                            <mColor>(1.3, 1.3, 1.3, 1)</mColor>
+                            <mSecondaryColor>(1, 1, 1, 1)</mSecondaryColor>
+                            <mGradient>[0, 0]</mGradient>
+                        </mPressedColor>
+                        <mSelectedColor serId=41>
+                            <mColor>(1.1, 1.1, 1.1, 1)</mColor>
+                            <mSecondaryColor>(1, 1, 1, 1)</mSecondaryColor>
+                            <mGradient>[0, 0]</mGradient>
+                        </mSelectedColor>
+                        <mDisabledColor serId=42>
+                            <mColor>(0.4, 0.4, 0.4, 1)</mColor>
+                            <mSecondaryColor>(1, 1, 1, 1)</mSecondaryColor>
+                            <mGradient>[0, 0]</mGradient>
+                        </mDisabledColor>
+                    </mColorTintRenderData>
+                    <mChildren>
+                    </mChildren>
+                    <mName>TabBar</mName>
+                    <mPos>[0, 6, 0, 1, 1, 0, 0, 0, 0]</mPos>
+                    <mSize>[50, 10, 0, 100, 20, 0, 1000, 30, 1]</mSize>
+                    <mOpacity>1</mOpacity>
+                    <mConditions>
+                    </mConditions>
+                    <mProperties>
+                    </mProperties>
+                </TabBar>
+                <TableWidget serId=43>
+                    <mTextRenderData serId=44>
+                        <mFontSize>16</mFontSize>
+                        <mPivot>[0.5, 0.5]</mPivot>
+                        <mColor serId=45>
+                            <mColor>(1, 1, 1, 1)</mColor>
+                            <mSecondaryColor>(0, 0, 0, 1)</mSecondaryColor>
+                            <mGradient>[0.75, 0.75]</mGradient>
+                        </mColor>
+                        <mFont>OpenSans</mFont>
+                        <mStyle>0</mStyle>
+                        <mShadowOffset>[0, 0]</mShadowOffset>
+                        <mParseFormatting>false</mParseFormatting>
+                    </mTextRenderData>
+                    <mRowCount>30</mRowCount>
+                    <mSelectionRenderData serId=46>
+                        <mNormalColor serId=47>
+                            <mColor>(0.451477, 0.451477, 0.451477, 1)</mColor>
+                            <mSecondaryColor>(1, 0.236287, 0.236287, 1)</mSecondaryColor>
+                            <mGradient>[0.15, 0.3]</mGradient>
+                        </mNormalColor>
+                        <mHighlightedColor serId=48>
+                            <mColor>(1.2, 1.2, 1.2, 1)</mColor>
+                            <mSecondaryColor>(1, 1, 1, 1)</mSecondaryColor>
+                            <mGradient>[0, 0]</mGradient>
+                        </mHighlightedColor>
+                        <mPressedColor serId=49>
+                            <mColor>(1.3, 1.3, 1.3, 1)</mColor>
+                            <mSecondaryColor>(1, 1, 1, 1)</mSecondaryColor>
+                            <mGradient>[0, 0]</mGradient>
+                        </mPressedColor>
+                        <mSelectedColor serId=50>
+                            <mColor>(1.1, 1.1, 1.1, 1)</mColor>
+                            <mSecondaryColor>(1, 1, 1, 1)</mSecondaryColor>
+                            <mGradient>[0, 0]</mGradient>
+                        </mSelectedColor>
+                        <mDisabledColor serId=51>
+                            <mColor>(0.4, 0.4, 0.4, 1)</mColor>
+                            <mSecondaryColor>(1, 1, 1, 1)</mSecondaryColor>
+                            <mGradient>[0, 0]</mGradient>
+                        </mDisabledColor>
+                    </mSelectionRenderData>
+                    <mColumnConfigs>
+                        <Item serId=52>
+                            <mSizingPolicy>SizingPolicy::STRETCH</mSizingPolicy>
+                            <mFactor>1</mFactor>
+                        </Item>
+                        <Item serId=53>
+                            <mSizingPolicy>SizingPolicy::STRETCH</mSizingPolicy>
+                            <mFactor>1</mFactor>
+                        </Item>
+                    </mColumnConfigs>
+                    <mChildren>
+                    </mChildren>
+                    <mName>Table</mName>
+                    <mPos>[0, 7, 0, 1, 3, 0, 0, 0, 0]</mPos>
+                    <mSize>[100, 100, 0, 200, 200, 0, 1000, 1000, 1]</mSize>
+                    <mOpacity>1</mOpacity>
+                    <mConditions>
+                    </mConditions>
+                    <mProperties>
+                    </mProperties>
+                </TableWidget>
+                <TextEdit serId=54>
+                    <Text>Hello World</Text>
+                    <mTextRenderData serId=55>
+                        <mFontSize>16</mFontSize>
+                        <mPivot>[0.5, 0.5]</mPivot>
+                        <mColor serId=56>
+                            <mColor>(1, 1, 1, 1)</mColor>
+                            <mSecondaryColor>(1, 1, 1, 1)</mSecondaryColor>
+                            <mGradient>[0, 0]</mGradient>
+                        </mColor>
+                        <mFont>OpenSans</mFont>
+                        <mStyle>0</mStyle>
+                        <mShadowOffset>[0, 0]</mShadowOffset>
+                        <mParseFormatting>false</mParseFormatting>
+                    </mTextRenderData>
+                    <mImageRenderData serId=57>
+                        <Image>SampleBackground</Image>
+                        <mLeftBorder>0</mLeftBorder>
+                        <mLeftBorderAbsolute>4</mLeftBorderAbsolute>
+                        <mTopBorder>0</mTopBorder>
+                        <mTopBorderAbsolute>4</mTopBorderAbsolute>
+                        <mBottomBorder>0</mBottomBorder>
+                        <mBottomBorderAbsolute>4</mBottomBorderAbsolute>
+                        <mRightBorder>0</mRightBorder>
+                        <mRightBorderAbsolute>4</mRightBorderAbsolute>
+                    </mImageRenderData>
+                    <Border>[0, 0]</Border>
+                    <Editable>true</Editable>
+                    <mChildren>
+                    </mChildren>
+                    <mName>TextEdit</mName>
+                    <mPos>[1, 2, 0, 1, 8, 0, 0, 0, 0]</mPos>
+                    <mSize>[100, 100, 0, 200, 200, 0, 2000, 1000, 1]</mSize>
+                    <mOpacity>1</mOpacity>
+                    <mConditions>
+                    </mConditions>
+                    <mProperties>
+                    </mProperties>
+                </TextEdit>
+                <Textbox serId=58>
+                    <mTextRenderData serId=59>
+                        <mFontSize>16</mFontSize>
+                        <mPivot>[0.5, 0.5]</mPivot>
+                        <mColor serId=60>
+                            <mColor>(1, 1, 1, 1)</mColor>
+                            <mSecondaryColor>(1, 1, 1, 1)</mSecondaryColor>
+                            <mGradient>[0, 0]</mGradient>
+                        </mColor>
+                        <mFont>OpenSans</mFont>
+                        <mStyle>0</mStyle>
+                        <mShadowOffset>[0, 0]</mShadowOffset>
+                        <mParseFormatting>false</mParseFormatting>
+                    </mTextRenderData>
+                    <mImageRenderData serId=61>
+                        <Image>SampleBackground</Image>
+                        <mLeftBorder>0</mLeftBorder>
+                        <mLeftBorderAbsolute>4</mLeftBorderAbsolute>
+                        <mTopBorder>0</mTopBorder>
+                        <mTopBorderAbsolute>4</mTopBorderAbsolute>
+                        <mBottomBorder>0</mBottomBorder>
+                        <mBottomBorderAbsolute>4</mBottomBorderAbsolute>
+                        <mRightBorder>0</mRightBorder>
+                        <mRightBorderAbsolute>4</mRightBorderAbsolute>
+                    </mImageRenderData>
+                    <mChildren>
+                    </mChildren>
+                    <mName>TextBox</mName>
+                    <mPos>[0, 3, 0, 1, 1, 0, 0, 0, 0]</mPos>
+                    <mSize>[50, 10, 0, 100, 20, 0, 1000, 30, 1]</mSize>
+                    <mOpacity>1</mOpacity>
+                    <mConditions>
+                    </mConditions>
+                    <mProperties>
+                    </mProperties>
+                </Textbox>
+            </mChildren>
+            <mName>ScrollArea</mName>
+            <mPos>[0, 0, 0, 0, 0.2, 0, 0, 0, 0]</mPos>
+            <mSize>[1, 0, 0, 0, 0.6, 0, 0, 0, 1]</mSize>
+            <mOpacity>1</mOpacity>
+            <mConditions>
+            </mConditions>
+            <mProperties>
+            </mProperties>
+        </ScrollArea>
+    </mChildren>
+    <mName>Gallery</mName>
+    <mPos>[0, 0, 0, 0, 0, 0, 0, 0, 0]</mPos>
+    <mSize>[1, 0, 0, 0, 1, 0, 0, 0, 1]</mSize>
+    <mOpacity>1</mOpacity>
+    <mConditions>
+    </mConditions>
+    <mProperties>
+    </mProperties>
+</Widget>

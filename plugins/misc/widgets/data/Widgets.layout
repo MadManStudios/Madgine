@@ -1,0 +1,25 @@
+<Layout serId=1>
+    <mComponents>
+        <SceneMainWindowComponent serId=2>
+            <RenderingEnabled>false</RenderingEnabled>
+        </SceneMainWindowComponent>
+        <WidgetManager serId=3>
+            <mWidgetsLayout>
+                <Item serId=4>
+                    <mName>Gallery</mName>
+                    <mWidgetTemplate>WidgetGallery</mWidgetTemplate>
+                    <mType>WidgetType::ROOT_WIDGET</mType>
+                    <mDefaultVisibility>true</mDefaultVisibility>
+                </Item>
+                <Item serId=5>
+                    <mName>Ingame</mName>
+                    <mWidgetTemplate>ingame</mWidgetTemplate>
+                    <mType>WidgetType::ROOT_WIDGET</mType>
+                    <mDefaultVisibility>false</mDefaultVisibility>
+                </Item>
+            </mWidgetsLayout>
+        </WidgetManager>
+        <ReadbackMainWindowComponent serId=8>
+        </ReadbackMainWindowComponent>
+    </mComponents>
+</Layout>
