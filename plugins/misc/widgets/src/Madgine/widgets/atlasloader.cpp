@@ -112,8 +112,13 @@ namespace Widgets {
                 targetArea[height + 1][0] = sourceArea[height - 1][0];
                 targetArea[height + 1][width + 1] = sourceArea[height - 1][width - 1];
 
-                it = mEntries.try_emplace(std::string { image->name() }, entry).first;
                 Render::RenderContext::getSingleton().setTextureSubData(mTexture, entry.mArea.mTopLeft, { static_cast<int>(targetWidth), static_cast<int>(targetHeight) }, targetBuffer);
+
+                entry.mArea.mTopLeft += { 1, 1 };
+                entry.mArea.mSize -= { 2, 2 };
+
+                it = mEntries.try_emplace(std::string { image->name() }, entry).first;
+                
                 mImageLoadingTasks.erase(data);
             }
         }
