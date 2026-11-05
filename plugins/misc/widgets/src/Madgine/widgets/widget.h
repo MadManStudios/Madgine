@@ -17,6 +17,7 @@
 
 #include "condition.h"
 #include "properties.h"
+#include "util/layouts/sizeconstraints.h"
 #include "util/widgetsrenderdata.h"
 #include "widgetcollector.h"
 #include "widgetloader.h"
@@ -24,6 +25,20 @@
 
 namespace Engine {
 namespace Widgets {
+
+    struct LayoutPos {
+        float mColumn;
+        float mColumnSpan;
+        float mXAlign;
+        float mRow;
+        float mRowSpan;
+        float mYAlign;
+    };
+
+    struct LayoutSize {
+        SizeConstraints2 mConstraints;
+        Math::Vector3 mDefaultZ;
+    };
 
     struct WidgetConfig {
         bool acceptsPointerEvents = false;
@@ -52,9 +67,14 @@ namespace Widgets {
         void setVisible(bool v);
 
         void setSize(const Math::Matrix3 &size);
-        const Math::Matrix3 &getSize();
+        const Math::Matrix3 &getSize() const;
         void setPos(const Math::Matrix3 &pos);
         const Math::Matrix3 &getPos() const;
+
+        void setLayoutSize(const LayoutSize &size);
+        const LayoutSize &layoutSize() const;
+        void setLayoutPos(const LayoutPos &pos);
+        const LayoutPos &layoutPos() const;
 
         void setOpacity(float opacity);
         float opacity() const;
@@ -93,6 +113,8 @@ namespace Widgets {
         void setParent(WidgetBase *parent);
         WidgetBase *getParent() const;
 
+        virtual bool appliesLayout() const;
+
         void setAcceptsPointerEvents(bool v);
         bool acceptsPointerEvents() const;
 
@@ -120,7 +142,7 @@ namespace Widgets {
 
         Execution::SignalStub<void, const Platform::Input::PointerMoveEvent &> &pointerMoveEvent();
         Execution::SignalStub<void, const PointerClickEvent &> &pointerClickEvent();
-        Execution::SignalStub<void, const Platform::Input::PointerMoveEvent &> &pointerEnterEvent();
+        Execution::SignalStub<void, const Platform::Input::PointerMoveEvent &> &pointerEnterEvent();        
         Execution::SignalStub<void, const Platform::Input::PointerMoveEvent &> &pointerLeaveEvent();
         Execution::SignalStub<void, const DragBeginEvent &> &dragBeginEvent();
         Execution::SignalStub<void, const DragMoveEvent &> &dragMoveEvent();
@@ -209,8 +231,15 @@ namespace Widgets {
 
         PropertyList mProperties;
 
-        Math::Matrix3 mPos = Math::Matrix3::ZERO;
-        Math::Matrix3 mSize = Math::Matrix3::IDENTITY;
+        // The interpretation depends on whether the parent is a layout widget or not
+        union {
+            Math::Matrix3 mPos = Math::Matrix3::ZERO;
+            LayoutPos mLayoutPos;
+        };
+        union {
+            Math::Matrix3 mSize = Math::Matrix3::IDENTITY;
+            LayoutSize mLayoutSize;
+        };
 
     public:
         using WidgetCreator = Serialize::ParentCreator<&WidgetBase::readWidget, &WidgetBase::writeWidget, nullptr, &WidgetBase::scanWidget>;

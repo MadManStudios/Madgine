@@ -8,6 +8,7 @@ namespace Widgets {
         using Widget::Widget;
         virtual ~Layout() = default;
 
+        bool appliesLayout() const override;
         void updateChildrenGeometry() override;
     };
 }

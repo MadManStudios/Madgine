@@ -13,6 +13,31 @@
 #include "widgetmanager.h"
 #include "widgetptr.h"
 
+METATABLE_BEGIN(Engine::Widgets::SizeConstraints)
+    MEMBER(mMin)
+    MEMBER(mPreferred)
+    MEMBER(mMax)
+METATABLE_END(Engine::Widgets::SizeConstraints)
+
+METATABLE_BEGIN(Engine::Widgets::SizeConstraints2)
+    MEMBER(mWidth)
+    MEMBER(mHeight)
+METATABLE_END(Engine::Widgets::SizeConstraints2)
+
+METATABLE_BEGIN(Engine::Widgets::LayoutPos)
+    MEMBER(mColumn)
+    MEMBER(mColumnSpan)
+    MEMBER(mXAlign)
+    MEMBER(mRow)
+    MEMBER(mRowSpan)
+    MEMBER(mYAlign)
+METATABLE_END(Engine::Widgets::LayoutPos)
+
+METATABLE_BEGIN(Engine::Widgets::LayoutSize)
+    MEMBER(mConstraints)
+    MEMBER(mDefaultZ)
+METATABLE_END(Engine::Widgets::LayoutSize)
+
 METATABLE_BEGIN(Engine::Widgets::WidgetBase)
     STORAGE_BEGIN(Engine::Widgets::WidgetBase, Engine::Widgets::WidgetPtr)
     STORAGE_END(Engine::Widgets::WidgetBase)
@@ -20,6 +45,8 @@ METATABLE_BEGIN(Engine::Widgets::WidgetBase)
     MEMBER(mName)
     READONLY_PROPERTY(Pos, getPos)
     READONLY_PROPERTY(Size, getSize)
+    MEMBER(mLayoutPos)
+    MEMBER(mLayoutSize)
     MEMBER(mOpacity)
     READONLY_PROPERTY(PointerEnter, pointerEnterEvent)
     READONLY_PROPERTY(PointerLeave, pointerLeaveEvent)
@@ -94,7 +121,7 @@ namespace Widgets {
         applyGeometry();
     }
 
-    const Math::Matrix3 &WidgetBase::getSize()
+    const Math::Matrix3 &WidgetBase::getSize() const
     {
         return mSize;
     }
@@ -108,6 +135,26 @@ namespace Widgets {
     const Math::Matrix3 &WidgetBase::getPos() const
     {
         return mPos;
+    }
+
+    void WidgetBase::setLayoutSize(const LayoutSize &size)
+    {
+        mLayoutSize = size;
+    }
+
+    const LayoutSize &WidgetBase::layoutSize() const
+    {
+        return mLayoutSize;
+    }
+
+    void WidgetBase::setLayoutPos(const LayoutPos &pos)
+    {
+        mLayoutPos = pos;
+    }
+
+    const LayoutPos &WidgetBase::layoutPos() const
+    {
+        return mLayoutPos;
     }
 
     void WidgetBase::setOpacity(float opacity)
@@ -168,6 +215,11 @@ namespace Widgets {
     Geometry WidgetBase::getGeometry()
     {
         return calculateGeometry(fetchActiveConditions());
+    }
+
+    bool WidgetBase::appliesLayout() const
+    {
+        return false;
     }
 
     void WidgetBase::updateChildrenGeometry()
@@ -505,7 +557,7 @@ namespace Widgets {
     void WidgetBase::render(WidgetsRenderData &renderData)
     {
         float oldAlpha = renderData.alpha();
-        size_t oldLayer = renderData.layer();
+        size_t oldLayer = renderData.layer();        
 
         for (const std::unique_ptr<WidgetBase> &c : mChildren) {
             if (c->mVisible) {

@@ -19,24 +19,15 @@ SERIALIZETABLE_END(Engine::Widgets::Layout)
 namespace Engine {
 namespace Widgets {
 
-    struct LayoutPos {
-        float mColumn;
-        float mColumnSpan;
-        float mXAlign;
-        float mRow;
-        float mRowSpan;
-        float mYAlign;
-    };
-
-    struct LayoutSize {
-        SizeConstraints2 mConstraints;
-        Math::Vector3 mDefaultZ;
-    };
-
     struct LayoutAxisElement {
         SizeConstraints mConstraints;
         float mOffset;
     };
+
+    bool Layout::appliesLayout() const
+    {
+        return true;
+    }
 
     void Layout::updateChildrenGeometry()
     {
@@ -45,11 +36,8 @@ namespace Widgets {
         std::vector<LayoutAxisElement> cols;
 
         for (WidgetBase *child : children()) {
-            Math::Matrix3 matrixPos = child->getPos().Transpose();
-            Math::Matrix3 matrixSize = child->getSize().Transpose();
-
-            LayoutPos pos = reinterpret_cast<LayoutPos &>(matrixPos);
-            LayoutSize size = reinterpret_cast<LayoutSize &>(matrixSize);
+            LayoutPos pos = child->layoutPos();
+            LayoutSize size = child->layoutSize();
 
             int col = pos.mColumn;
             int row = pos.mRow;
@@ -95,11 +83,11 @@ namespace Widgets {
 
             Geometry geometry = child->getGeometry();
 
-            Math::Matrix3 matrixPos = geometry.mPos.Transpose();
-            Math::Matrix3 matrixSize = geometry.mSize.Transpose();
+            LayoutPos pos = child->layoutPos();
+            LayoutSize size = child->layoutSize();
 
-            LayoutPos pos = reinterpret_cast<LayoutPos &>(matrixPos);
-            LayoutSize size = reinterpret_cast<LayoutSize &>(matrixSize);
+            if (pos.mColumnSpan == 0 || pos.mRowSpan == 0)
+                continue;
 
             float width = 0.0f;
             float height = 0.0f;

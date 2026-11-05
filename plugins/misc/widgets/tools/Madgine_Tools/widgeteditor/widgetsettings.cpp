@@ -2,6 +2,8 @@
 
 #include "widgetsettings.h"
 
+#include "Meta/reflect/scopeiterator.h"
+
 #include "Madgine/behavior/behaviorsender.h"
 #include "Madgine/widgets/geometry.h"
 #include "Madgine/widgets/widget.h"
@@ -40,6 +42,8 @@ namespace Tools {
     bool WidgetSettings::render(UndoStack &history)
     {
         bool changed = false;
+
+        TracedRoot<Reflect::ScopePtr> traced { history, mWidget };
 
         if (ImGui::CollapsingHeader("Geometry", ImGuiTreeNodeFlags_SpanFullWidth)) {
 
@@ -116,97 +120,107 @@ namespace Tools {
                 effectiveConditional = activeConditions;
             }
 
-            Widgets::GeometrySourceInfo source;
-            Widgets::Geometry geometry = mWidget->calculateGeometry(effectiveConditional, &source);
-
             if (ImGui::BeginTable("Geometry-columns", 2, ImGuiTableFlags_Resizable)) {
-                ImGui::TableNextRow();
-                ImGui::TableNextColumn();
-                ImGui::Indent();
-                ImGui::Text("Pos");
-                ImGui::Unindent();
-                ImGui::TableNextColumn();
 
-                ImGui::BeginGroup();
-                ImGui::PushID("##pos");
+                if (!mWidget->getParent() || !mWidget->getParent()->appliesLayout()) {
 
-                for (int i = 0; i < 3; ++i) {
-                    ImGui::PushMultiItemsWidths(3, std::min(300.0f, ImGui::CalcItemWidth()));
-                    for (int j = 0; j < 3; ++j) {
-                        int compoundId = 3 * i + j;
-                        ImGui::PushID(compoundId);
-                        if (j > 0)
-                            ImGui::SameLine(0, 5.0f);
-                        if (source.mPos[compoundId] == mCurrentConditional && mCurrentConditional != 0) {
-                            ImGui::PushStyleColor(ImGuiCol_FrameBg, IM_COL32(150, 150, 0, 255));
-                            ImGui::PushStyleColor(ImGuiCol_FrameBgActive, IM_COL32(255, 255, 0, 255));
-                            ImGui::PushStyleColor(ImGuiCol_FrameBgHovered, IM_COL32(220, 220, 0, 255));
-                            ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(0, 0, 0, 255));
-                        }
-                        if (ImGui::DragFloat("", &geometry.mPos[i][j], j == 2 ? 1.0f : 0.01f)) {
-                            mWidget->setPosValue(compoundId, geometry.mPos[i][j], mCurrentConditional);
-                            changed = true;
-                        }
-                        if (source.mPos[compoundId] == mCurrentConditional && mCurrentConditional != 0) {
-                            ImGui::PopStyleColor(4);
-                            if (ImGui::BeginPopupCompoundContextItem()) {
-                                if (ImGui::MenuItem("Reset")) {
-                                    mWidget->unsetPosValue(compoundId, mCurrentConditional);
-                                }
-                                ImGui::EndPopup();
+                    Widgets::GeometrySourceInfo source;
+                    Widgets::Geometry geometry = mWidget->calculateGeometry(effectiveConditional, &source);
+
+                    ImGui::TableNextRow();
+                    ImGui::TableNextColumn();
+                    ImGui::Indent();
+                    ImGui::Text("Pos");
+                    ImGui::Unindent();
+                    ImGui::TableNextColumn();
+
+                    ImGui::BeginGroup();
+                    ImGui::PushID("##pos");
+
+                    for (int i = 0; i < 3; ++i) {
+                        ImGui::PushMultiItemsWidths(3, std::min(300.0f, ImGui::CalcItemWidth()));
+                        for (int j = 0; j < 3; ++j) {
+                            int compoundId = 3 * i + j;
+                            ImGui::PushID(compoundId);
+                            if (j > 0)
+                                ImGui::SameLine(0, 5.0f);
+                            if (source.mPos[compoundId] == mCurrentConditional && mCurrentConditional != 0) {
+                                ImGui::PushStyleColor(ImGuiCol_FrameBg, IM_COL32(150, 150, 0, 255));
+                                ImGui::PushStyleColor(ImGuiCol_FrameBgActive, IM_COL32(255, 255, 0, 255));
+                                ImGui::PushStyleColor(ImGuiCol_FrameBgHovered, IM_COL32(220, 220, 0, 255));
+                                ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(0, 0, 0, 255));
                             }
-                        }
-                        ImGui::PopID();
-                        ImGui::PopItemWidth();
-                    }
-                }
-
-                ImGui::PopID();
-                ImGui::EndGroup();
-
-                ImGui::TableNextRow();
-                ImGui::TableNextColumn();
-                ImGui::Indent();
-                ImGui::Text("Size");
-                ImGui::Unindent();
-                ImGui::TableNextColumn();
-
-                ImGui::BeginGroup();
-                ImGui::PushID("##size");
-
-                for (int i = 0; i < 3; ++i) {
-                    ImGui::PushMultiItemsWidths(3, std::min(300.0f, ImGui::CalcItemWidth()));
-                    for (int j = 0; j < 3; ++j) {
-                        int compoundId = 3 * i + j;
-                        ImGui::PushID(compoundId);
-                        if (j > 0)
-                            ImGui::SameLine(0, 5.0f);
-                        if (source.mSize[compoundId] == mCurrentConditional && mCurrentConditional != 0) {
-                            ImGui::PushStyleColor(ImGuiCol_FrameBg, IM_COL32(150, 150, 0, 255));
-                            ImGui::PushStyleColor(ImGuiCol_FrameBgActive, IM_COL32(255, 255, 0, 255));
-                            ImGui::PushStyleColor(ImGuiCol_FrameBgHovered, IM_COL32(220, 220, 0, 255));
-                            ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(0, 0, 0, 255));
-                        }
-                        if (ImGui::DragFloat("", &geometry.mSize[i][j], j == 2 ? 1.0f : 0.01f)) {
-                            mWidget->setSizeValue(compoundId, geometry.mSize[i][j], mCurrentConditional);
-                            changed = true;
-                        }
-                        if (source.mSize[compoundId] == mCurrentConditional && mCurrentConditional != 0) {
-                            ImGui::PopStyleColor(4);
-                            if (ImGui::BeginPopupCompoundContextItem()) {
-                                if (ImGui::MenuItem("Reset")) {
-                                    mWidget->unsetSizeValue(compoundId, mCurrentConditional);
-                                }
-                                ImGui::EndPopup();
+                            if (ImGui::DragFloat("", &geometry.mPos[i][j], j == 2 ? 1.0f : 0.01f)) {
+                                mWidget->setPosValue(compoundId, geometry.mPos[i][j], mCurrentConditional);
+                                changed = true;
                             }
+                            if (source.mPos[compoundId] == mCurrentConditional && mCurrentConditional != 0) {
+                                ImGui::PopStyleColor(4);
+                                if (ImGui::BeginPopupCompoundContextItem()) {
+                                    if (ImGui::MenuItem("Reset")) {
+                                        mWidget->unsetPosValue(compoundId, mCurrentConditional);
+                                    }
+                                    ImGui::EndPopup();
+                                }
+                            }
+                            ImGui::PopID();
+                            ImGui::PopItemWidth();
                         }
-                        ImGui::PopID();
-                        ImGui::PopItemWidth();
                     }
-                }
 
-                ImGui::PopID();
-                ImGui::EndGroup();
+                    ImGui::PopID();
+                    ImGui::EndGroup();
+
+                    ImGui::TableNextRow();
+                    ImGui::TableNextColumn();
+                    ImGui::Indent();
+                    ImGui::Text("Size");
+                    ImGui::Unindent();
+                    ImGui::TableNextColumn();
+
+                    ImGui::BeginGroup();
+                    ImGui::PushID("##size");
+
+                    for (int i = 0; i < 3; ++i) {
+                        ImGui::PushMultiItemsWidths(3, std::min(300.0f, ImGui::CalcItemWidth()));
+                        for (int j = 0; j < 3; ++j) {
+                            int compoundId = 3 * i + j;
+                            ImGui::PushID(compoundId);
+                            if (j > 0)
+                                ImGui::SameLine(0, 5.0f);
+                            if (source.mSize[compoundId] == mCurrentConditional && mCurrentConditional != 0) {
+                                ImGui::PushStyleColor(ImGuiCol_FrameBg, IM_COL32(150, 150, 0, 255));
+                                ImGui::PushStyleColor(ImGuiCol_FrameBgActive, IM_COL32(255, 255, 0, 255));
+                                ImGui::PushStyleColor(ImGuiCol_FrameBgHovered, IM_COL32(220, 220, 0, 255));
+                                ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(0, 0, 0, 255));
+                            }
+                            if (ImGui::DragFloat("", &geometry.mSize[i][j], j == 2 ? 1.0f : 0.01f)) {
+                                mWidget->setSizeValue(compoundId, geometry.mSize[i][j], mCurrentConditional);
+                                changed = true;
+                            }
+                            if (source.mSize[compoundId] == mCurrentConditional && mCurrentConditional != 0) {
+                                ImGui::PopStyleColor(4);
+                                if (ImGui::BeginPopupCompoundContextItem()) {
+                                    if (ImGui::MenuItem("Reset")) {
+                                        mWidget->unsetSizeValue(compoundId, mCurrentConditional);
+                                    }
+                                    ImGui::EndPopup();
+                                }
+                            }
+                            ImGui::PopID();
+                            ImGui::PopItemWidth();
+                        }
+                    }
+
+                    ImGui::PopID();
+                    ImGui::EndGroup();
+                } else {
+                    const Traced<Reflect::ScopeIterator> &pos = traced.trace([](const Reflect::ScopePtr &widget) { return widget.find("mLayoutPos"); });
+                    mInspector.drawMember(pos);
+
+                    const Traced<Reflect::ScopeIterator> &size = traced.trace([](const Reflect::ScopePtr &widget) { return widget.find("mLayoutSize"); });
+                    mInspector.drawMember(size);
+                }
 
                 ImGui::TableNextRow();
                 ImGui::TableNextColumn();
@@ -239,8 +253,7 @@ namespace Tools {
 
         if (ImGui::CollapsingHeader("WidgetData")) {
             if (ImGui::BeginTable("WidgetData-columns", 2, ImGuiTableFlags_Resizable)) {
-                TracedRoot<Reflect::ScopePtr> traced { history, mWidget };
-                changed |= mInspector.drawMembers(traced, { "Pos", "Size", "Children", "mConditions" });
+                changed |= mInspector.drawMembers(traced, { "Pos", "Size", "mLayoutPos", "mLayoutSize", "Children", "mConditions" });
                 ImGui::EndTable();
             }
         }
