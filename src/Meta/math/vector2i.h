@@ -44,6 +44,13 @@ namespace Math {
             return { x + other.x, y + other.y };
         }
 
+        constexpr Vector2i &operator-=(const Vector2i &other)
+        {
+            x -= other.x;
+            y -= other.y;
+            return *this;
+        }
+
         constexpr Vector2i operator-(const Vector2i &other) const
         {
             return { x - other.x, y - other.y };

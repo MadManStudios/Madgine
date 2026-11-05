@@ -566,6 +566,20 @@ namespace Math {
             return { static_cast<int>(x), static_cast<int>(y) };
         }
     };
+    
+    constexpr Vector2 min(const Vector2 &v1, const Vector2 &v2)
+    {
+        return {
+            std::min(v1.x, v2.x), std::min(v1.y, v2.y)
+        };
+    }
+
+    constexpr Vector2 max(const Vector2 &v1, const Vector2 &v2)
+    {
+        return {
+            std::max(v1.x, v2.x), std::max(v1.y, v2.y)
+        };
+    }
 
     struct NormalizedVector2 : Vector2 {
 
