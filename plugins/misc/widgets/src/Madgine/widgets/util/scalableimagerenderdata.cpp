@@ -60,8 +60,8 @@ namespace Widgets {
     {
         Math::Vector2 posOuter = pos;
 
-        Math::Vector2 topLeftUV = Math::Vector2 { entry.mArea.mTopLeft + Math::Vector2i { 1, 1 } } / (2048.f /* * mData->mUIAtlasSize*/);
-        Math::Vector2 uvSize = Math::Vector2 { entry.mArea.mSize - Math::Vector2i { 2, 2 } } / (2048.f /* * mData->mUIAtlasSize*/);
+        Math::Vector2 topLeftUV = Math::Vector2 { entry.mArea.mTopLeft } / (2048.f /* * mData->mUIAtlasSize*/);
+        Math::Vector2 uvSize = Math::Vector2 { entry.mArea.mSize } / (2048.f /* * mData->mUIAtlasSize*/);
         Math::Vector2 bottomRightUV = topLeftUV + uvSize;
 
         Math::Vector2 topLeftUVOuter = topLeftUV;
