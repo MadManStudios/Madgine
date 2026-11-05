@@ -70,7 +70,7 @@ namespace Widgets {
         if (mTextRenderData.available()) {
             std::string text = mText.get();
             mTextRenderData.updateText(renderData.manager(), text, size);
-            mTextRenderData.render(renderData, pos, size);
+            mTextRenderData.render(renderData, text, pos, size);
         }
 
         WidgetBase::render(renderData);

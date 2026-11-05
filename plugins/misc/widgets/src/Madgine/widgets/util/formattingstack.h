@@ -11,11 +11,12 @@ namespace Widgets {
 
     struct FormattingStack {
 
-        FormattingStack(const Render::TypeFace *typeFace, Render::FontStyle style, float fontSize, ColorFrame color = {});
+        FormattingStack(const Render::TypeFace *typeFace, Render::FontStyle style, float fontSize, bool parseFormatting = false, ColorFrame color = {});
         ~FormattingStack();
 
         float renderGlyph(WidgetsRenderData &renderData, char32_t code, const Math::Vector2 &pos);
         void renderShadow(WidgetsRenderData &renderData, char32_t code, const Math::Vector2 &pos, const Math::Vector2 &shadowOffset);
+        void renderCursor(WidgetsRenderData &renderData, const Math::Vector2 &pos);
         float advance(char32_t code);
         std::pair<float, float> place(float height);    
 
@@ -31,6 +32,7 @@ namespace Widgets {
 
         bool mEscaped = false;
         bool mFormatting = false;
+        bool mParseFormatting;
         std::string mFormatToken;
 
         std::stack<std::pair<Math::Color4, Math::Color4>> mColorStack;

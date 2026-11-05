@@ -9,11 +9,12 @@
 namespace Engine {
 namespace Widgets {
 
-    FormattingStack::FormattingStack(const Render::TypeFace *typeFace, Render::FontStyle style, float fontSize, ColorFrame color)
+    FormattingStack::FormattingStack(const Render::TypeFace *typeFace, Render::FontStyle style, float fontSize, bool parseFormatting, ColorFrame color)
         : mTypeFace(typeFace)
         , mStyle(style)
         , mFontSize(fontSize)
         , mColor(color)
+        , mParseFormatting(parseFormatting)
     {
     }
 
@@ -53,6 +54,18 @@ namespace Widgets {
         std::swap(mColor, shadowFrame);
     }
 
+    void FormattingStack::renderCursor(WidgetsRenderData &renderData, const Math::Vector2 &pos)
+    {
+        float scale;
+        const Render::Glyph &glyph = mTypeFace->mFonts.at(mStyle).set(mFontSize, &scale)['D'];
+
+        float height = glyph.mSize.y * scale;
+
+        float startY = -glyph.mBearing.y * scale;
+
+        renderData.renderLine({ { pos.x, pos.y + startY }, { pos.x, pos.y + startY + height } });
+    }
+
     float FormattingStack::advance(char32_t code)
     {
         float scale;
@@ -77,75 +90,77 @@ namespace Widgets {
         bool consumed = false;
         std::string image;
 
-        if (mEscaped) {
-            // assert(token == '\\' || token == '<');
-            mEscaped = false;
-        } else if (mFormatting) {
-            // assert(token != '<');
-            if (token == '>') {
-                mFormatting = false;
-                auto sep = mFormatToken.find('=');
-                if (sep != std::string_view::npos) {
-                    std::string_view command { mFormatToken };
-                    std::string_view type = StringUtil::trim(command.substr(0, sep));
-                    std::string_view arg = StringUtil::trim(command.substr(sep + 1));
-                    if (type == "color") {
-                        uint32_t intColor;
-                        auto result = std::from_chars(arg.data() + 1, arg.data() + arg.size() - 1, intColor, 16);
+        if (mParseFormatting) {
+            if (mEscaped) {
+                // assert(token == '\\' || token == '<');
+                mEscaped = false;
+            } else if (mFormatting) {
+                // assert(token != '<');
+                if (token == '>') {
+                    mFormatting = false;
+                    auto sep = mFormatToken.find('=');
+                    if (sep != std::string_view::npos) {
+                        std::string_view command { mFormatToken };
+                        std::string_view type = StringUtil::trim(command.substr(0, sep));
+                        std::string_view arg = StringUtil::trim(command.substr(sep + 1));
+                        if (type == "color") {
+                            uint32_t intColor;
+                            auto result = std::from_chars(arg.data() + 1, arg.data() + arg.size() - 1, intColor, 16);
 
-                        Math::Color4 targetColor { 0.0f, 0.0f, 0.0f, 1.0f };
-                        if (arg.size() >= 10) {
-                            targetColor.a = (intColor & 0xFF) / 255.0f;
+                            Math::Color4 targetColor { 0.0f, 0.0f, 0.0f, 1.0f };
+                            if (arg.size() >= 10) {
+                                targetColor.a = (intColor & 0xFF) / 255.0f;
+                                intColor >>= 8;
+                            }
+                            targetColor.b = (intColor & 0xFF) / 255.0f;
                             intColor >>= 8;
+                            targetColor.g = (intColor & 0xFF) / 255.0f;
+                            intColor >>= 8;
+                            targetColor.r = (intColor & 0xFF) / 255.0f;
+
+                            mColorStack.push({ mColor.mRenderData.mColor, mColor.mRenderData.mSecondaryColor });
+
+                            mColor.mRenderData.mColor = targetColor;
+                            mColor.mRenderData.mSecondaryColor = targetColor;
+
+                        } else if (type == "size") {
+                            mSizeStack.push(mFontSize);
+                            auto result = std::from_chars(arg.data(), arg.data() + arg.size(), mFontSize);
+                        } else if (type == "icon") {
+                            image = std::string { arg.substr(1, arg.size() - 2) };
+                        } else {
+                            // Failed
                         }
-                        targetColor.b = (intColor & 0xFF) / 255.0f;
-                        intColor >>= 8;
-                        targetColor.g = (intColor & 0xFF) / 255.0f;
-                        intColor >>= 8;
-                        targetColor.r = (intColor & 0xFF) / 255.0f;
-
-                        mColorStack.push({ mColor.mRenderData.mColor, mColor.mRenderData.mSecondaryColor });
-
-                        mColor.mRenderData.mColor = targetColor;
-                        mColor.mRenderData.mSecondaryColor = targetColor;
-
-                    } else if (type == "size") {
-                        mSizeStack.push(mFontSize);
-                        auto result = std::from_chars(arg.data(), arg.data() + arg.size(), mFontSize);
-                    } else if (type == "icon") {
-                        image = std::string { arg.substr(1, arg.size() - 2) };
+                    } else if (mFormatToken == "bold") {
+                        mStyle = Render::FontStyle::Bold;
+                    } else if (mFormatToken == "/bold") {
+                        mStyle = Render::FontStyle::Default;
+                    } else if (mFormatToken == "/color") {
+                        if (!mColorStack.empty()) {
+                            mColor.mRenderData.mColor = mColorStack.top().first;
+                            mColor.mRenderData.mSecondaryColor = mColorStack.top().second;
+                            mColorStack.pop();
+                        }
+                    } else if (mFormatToken == "/size") {
+                        if (!mSizeStack.empty()) {
+                            mFontSize = mSizeStack.top();
+                            mSizeStack.pop();
+                        }
                     } else {
-                        // Failed
-                    }
-                } else if (mFormatToken == "bold") {
-                    mStyle = Render::FontStyle::Bold;
-                } else if (mFormatToken == "/bold") {
-                    mStyle = Render::FontStyle::Default;
-                } else if (mFormatToken == "/color") {
-                    if (!mColorStack.empty()) {
-                        mColor.mRenderData.mColor = mColorStack.top().first;
-                        mColor.mRenderData.mSecondaryColor = mColorStack.top().second;
-                        mColorStack.pop();
-                    }
-                } else if (mFormatToken == "/size") {
-                    if (!mSizeStack.empty()) {
-                        mFontSize = mSizeStack.top();
-                        mSizeStack.pop();
                     }
                 } else {
+                    mFormatToken += token;
                 }
+                consumed = true;
             } else {
-                mFormatToken += token;
-            }
-            consumed = true;
-        } else {
-            if (token == '\\') {
-                mEscaped = true;
-                consumed = true;
-            } else if (token == '<') {
-                mFormatting = true;
-                mFormatToken.clear();
-                consumed = true;
+                if (token == '\\') {
+                    mEscaped = true;
+                    consumed = true;
+                } else if (token == '<') {
+                    mFormatting = true;
+                    mFormatToken.clear();
+                    consumed = true;
+                }
             }
         }
 
