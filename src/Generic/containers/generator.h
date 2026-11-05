@@ -60,9 +60,10 @@ namespace Containers {
         Generator &operator=(Generator &&) = default;
 
         struct iterator {
+            using iterator_category = std::input_iterator_tag;
             using difference_type = std::ptrdiff_t;
             using value_type = forward_ref_t<T>;
-            using reference_type = const T &;
+            using reference = const T &;
 
             iterator(Generator<T> &gen)
                 : mGen(&gen)
