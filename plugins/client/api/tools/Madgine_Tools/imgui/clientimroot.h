@@ -55,6 +55,7 @@ namespace Tools {
         bool onWindowEvent(const Platform::Window::WindowEvent &arg) override;
         bool injectKeyPress(const Platform::Input::KeyPressEvent &arg);
         bool injectKeyRelease(const Platform::Input::KeyReleaseEvent &arg);
+        bool injectTextInput(const Platform::Input::TextInputEvent &arg);
         bool injectPointerPress(const Platform::Input::PointerPressEvent &arg);
         bool injectPointerRelease(const Platform::Input::PointerReleaseEvent &arg);
         bool injectPointerMove(const Platform::Input::PointerMoveEvent &arg);

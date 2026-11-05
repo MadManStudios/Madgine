@@ -176,13 +176,16 @@ namespace Platform {
 
         struct KeyPressEvent {
             Key::Key mScancode = static_cast<Key::Key>(0);
-            char mText = 0;
             ControlKeyState mControlKeys;
         };
 
         struct KeyReleaseEvent {
             Key::Key mScancode = static_cast<Key::Key>(0);
-            char mText = 0;
+            ControlKeyState mControlKeys;
+        };
+
+        struct TextInputEvent {
+            char32_t mText;
             ControlKeyState mControlKeys;
         };
 

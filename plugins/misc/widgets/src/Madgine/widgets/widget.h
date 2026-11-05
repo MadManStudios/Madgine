@@ -116,23 +116,12 @@ namespace Widgets {
         virtual bool injectAxisEvent(const Platform::Input::AxisEvent &arg);
         virtual bool injectKeyPress(const Platform::Input::KeyPressEvent &arg);
         virtual bool injectKeyRelease(const Platform::Input::KeyReleaseEvent &arg);
+        virtual bool injectTextInput(const Platform::Input::TextInputEvent &arg);
 
         Execution::SignalStub<void, const Platform::Input::PointerMoveEvent &> &pointerMoveEvent();
         Execution::SignalStub<void, const PointerClickEvent &> &pointerClickEvent();
         Execution::SignalStub<void, const Platform::Input::PointerMoveEvent &> &pointerEnterEvent();
-        auto pointerEnterSender()
-        {
-            return mPointerEnterSignal | Execution::then([](const Platform::Input::PointerMoveEvent &args) {
-                return 3;
-            });
-        }
         Execution::SignalStub<void, const Platform::Input::PointerMoveEvent &> &pointerLeaveEvent();
-        auto pointerLeaveSender()
-        {
-            return mPointerLeaveSignal | Execution::then([](const Platform::Input::PointerMoveEvent &args) {
-                return 3;
-            });
-        }
         Execution::SignalStub<void, const DragBeginEvent &> &dragBeginEvent();
         Execution::SignalStub<void, const DragMoveEvent &> &dragMoveEvent();
         Execution::SignalStub<void, const DragEndEvent &> &dragEndEvent();
@@ -140,6 +129,7 @@ namespace Widgets {
         Execution::SignalStub<void, const Platform::Input::AxisEvent &> &axisEvent();
         Execution::SignalStub<void, const Platform::Input::KeyPressEvent &> &keyPressEvent();
         Execution::SignalStub<void, const Platform::Input::KeyReleaseEvent &> &keyReleaseEvent();
+        Execution::SignalStub<void, const Platform::Input::TextInputEvent &> &textInputEvent();
 
         virtual bool containsPoint(const Math::Vector2 &point, const Math::Rect2i &screenSpace, float extend = 0.0f) const;
         WidgetBase *getHoveredUp(const Math::Vector2 &point, const Math::Rect2i &screenSpace, bool isPointerEvent);
@@ -200,6 +190,7 @@ namespace Widgets {
         Execution::Signal<void, const Platform::Input::AxisEvent &> mAxisEventSignal;
         Execution::Signal<void, const Platform::Input::KeyPressEvent &> mKeyPressSignal;
         Execution::Signal<void, const Platform::Input::KeyReleaseEvent &> mKeyReleaseSignal;
+        Execution::Signal<void, const Platform::Input::TextInputEvent &> mTextInputSignal;
 
         std::vector<std::unique_ptr<WidgetBase>> mChildren;
 

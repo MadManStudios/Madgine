@@ -9,19 +9,19 @@
 
 #include "widgetmanager.h"
 
-#define STB_TEXTEDIT_KEYTYPE uint16_t
+#define STB_TEXTEDIT_KEYTYPE uint64_t
 
 #define STB_TEXTEDIT_STRING Engine::Widgets::Textbox
 #define STB_TEXTEDIT_STRINGLEN(obj) obj->mText.size()
 #define STB_TEXTEDIT_LAYOUTROW(result, obj, n) obj->layoutRow(result, n)
 #define STB_TEXTEDIT_GETWIDTH(obj, n, i) obj->calculateWidth(i, n)
-#define STB_TEXTEDIT_KEYTOTEXT(k) static_cast<char>(k)
+#define STB_TEXTEDIT_KEYTOTEXT(k) static_cast<char32_t>(k)
 #define STB_TEXTEDIT_GETCHAR(obj, i) obj->mText.at(i)
 #define STB_TEXTEDIT_NEWLINE '\n'
 #define STB_TEXTEDIT_DELETECHARS(obj, i, n) obj->mText.erase(i, n)
 #define STB_TEXTEDIT_INSERTCHARS(obj, i, c, n) (obj->mText.insert(i, c, n), true)
 
-#define STB_TEXTEDIT_K(key) (static_cast<uint16_t>(key) << 8)
+#define STB_TEXTEDIT_K(key) (static_cast<uint64_t>(key) << 32)
 
 #define STB_TEXTEDIT_K_SHIFT STB_TEXTEDIT_K(Engine::Platform::Input::Key::Shift)
 #define STB_TEXTEDIT_K_LEFT STB_TEXTEDIT_K(Engine::Platform::Input::Key::LeftArrow)
@@ -118,8 +118,7 @@ namespace Widgets {
 
     bool Textbox::injectKeyPress(const Platform::Input::KeyPressEvent &arg)
     {
-        if (std::isalnum(arg.mText)
-            || arg.mScancode == Platform::Input::Key::Control
+        if (arg.mScancode == Platform::Input::Key::Control
             || arg.mScancode == Platform::Input::Key::LeftArrow
             || arg.mScancode == Platform::Input::Key::RightArrow
             || arg.mScancode == Platform::Input::Key::UpArrow
@@ -127,10 +126,16 @@ namespace Widgets {
             || arg.mScancode == Platform::Input::Key::Backspace
             || arg.mScancode == Platform::Input::Key::Delete
             || arg.mScancode == Platform::Input::Key::Space) {
-            uint32_t val = (static_cast<uint16_t>(arg.mScancode) << 8) | arg.mText;
+            uint64_t val = (static_cast<uint64_t>(arg.mScancode) << 32);
             stb_textedit_key(this, &mState, val);
         }
         return WidgetBase::injectKeyPress(arg);
+    }
+
+    bool Textbox::injectTextInput(const Platform::Input::TextInputEvent &arg)
+    {
+        stb_textedit_key(this, &mState, arg.mText);
+        return true;
     }
 
     void Textbox::layoutRow(StbTexteditRow *row, size_t i)
@@ -152,8 +157,7 @@ namespace Widgets {
 
     float Textbox::calculateWidth(size_t i, size_t n)
     {
-
-        return mTextRenderData.calculateWidth(mText.at(i), getAbsoluteSize().z);
+        return mTextRenderData.calculateWidth(*std::next(StringUtil::parseUTF8(mText).begin(), i), getAbsoluteSize().z);
     }
 }
 }

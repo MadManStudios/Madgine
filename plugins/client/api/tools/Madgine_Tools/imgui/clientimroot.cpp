@@ -353,7 +353,7 @@ namespace Tools {
 
     void ClientImRoot::preRender(std::vector<Threading::TaskFuture<Render::RenderFuture>> &dependencies, Render::RenderContext *context)
     {
-        for (Render::RenderTarget* target : mNextFrameRenderTargets) {
+        for (Render::RenderTarget *target : mNextFrameRenderTargets) {
             dependencies.push_back(target->update(context));
         }
 
@@ -584,10 +584,14 @@ namespace Tools {
     {
         return std::visit(overloaded {
                               [&](const Platform::Window::ResizeEvent &e) { return false; },
-                              [&](const Platform::Window::CloseEvent &e) { dialogs().show(closeDialog(), [this]() { mWindow.onWindowEvent(Platform::Window::CloseEvent {}, this); }); return true; },
+                              [&](const Platform::Window::CloseEvent &e) {
+                                  dialogs().show(closeDialog(), [this]() { mWindow.onWindowEvent(Platform::Window::CloseEvent {}, this); });
+                                  return true;
+                              },
                               [&](const Platform::Window::RepaintEvent &e) { return false; },
                               [&](const Platform::Input::KeyPressEvent &e) { return injectKeyPress(e); },
                               [&](const Platform::Input::KeyReleaseEvent &e) { return injectKeyRelease(e); },
+                              [&](const Platform::Input::TextInputEvent &e) { return injectTextInput(e); },
                               [&](const Platform::Input::PointerPressEvent &e) { return injectPointerPress(e); },
                               [&](const Platform::Input::PointerReleaseEvent &e) { return injectPointerRelease(e); },
                               [&](const Platform::Input::PointerMoveEvent &e) { return injectPointerMove(e); },
@@ -601,12 +605,10 @@ namespace Tools {
 
         auto it = sKeyMap.find(arg.mScancode);
         if (it == sKeyMap.end()) {
-            LOG_ERROR("Unhandled Keycode encountered in ClientImRoot: " << (int)arg.mScancode << ", text: " << arg.mText);
+            LOG_ERROR("Unhandled Keycode encountered in ClientImRoot: " << (int)arg.mScancode);
         } else {
             io.AddKeyEvent(it->second, true);
         }
-        if (arg.mText > 0)
-            io.AddInputCharacter(arg.mText);
 
         io.AddKeyEvent(ImGuiMod_Ctrl, arg.mControlKeys.mCtrl);
         io.AddKeyEvent(ImGuiMod_Shift, arg.mControlKeys.mShift);
@@ -622,7 +624,7 @@ namespace Tools {
 
         auto it = sKeyMap.find(arg.mScancode);
         if (it == sKeyMap.end()) {
-            LOG_ERROR("Unhandled Keycode encountered in ClientImRoot: " << arg.mScancode << ", text: " << arg.mText);
+            LOG_ERROR("Unhandled Keycode encountered in ClientImRoot: " << arg.mScancode);
         } else {
             io.AddKeyEvent(it->second, false);
         }
@@ -633,6 +635,14 @@ namespace Tools {
         // io.AddKeyEvent(ImGuiMod_Super, al_key_down(&keys, ALLEGRO_KEY_LWIN) || al_key_down(&keys, ALLEGRO_KEY_RWIN));
 
         return io.WantCaptureKeyboard;
+    }
+
+    bool ClientImRoot::injectTextInput(const Platform::Input::TextInputEvent &arg)
+    {
+        ImGuiIO &io = ImGui::GetIO();        
+        io.AddInputCharacter(arg.mText);
+
+        return io.WantTextInput;
     }
 
     bool ClientImRoot::injectPointerPress(const Platform::Input::PointerPressEvent &arg)

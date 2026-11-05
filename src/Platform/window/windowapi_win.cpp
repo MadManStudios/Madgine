@@ -108,16 +108,7 @@ namespace Platform {
                         if (keycode == Input::Key::Alt) {
                             mKeyDown[extended ? Input::Key::RAlt : Input::Key::LAlt] = std::numeric_limits<BYTE>::max();
                         }
-
-                        WORD buffer;
-                        switch (keycode) {
-                        case Input::Key::Key::Return:
-                            buffer = '\n';
-                            break;
-                        default:
-                            ToAscii(keycode, scancode, mKeyDown, &buffer, 0);
-                        }
-                        onEvent(Input::KeyPressEvent { keycode, static_cast<char>(buffer), controlKeyState() });
+                        onEvent(Input::KeyPressEvent { keycode, controlKeyState() });
                         break;
                     case WM_KEYUP:
                     case WM_SYSKEYUP:
@@ -125,9 +116,10 @@ namespace Platform {
                         if (keycode == Input::Key::Alt) {
                             mKeyDown[extended ? Input::Key::RAlt : Input::Key::LAlt] = 0;
                         }
-                        onEvent(Input::KeyReleaseEvent { keycode, 0, controlKeyState() });
+                        onEvent(Input::KeyReleaseEvent { keycode, controlKeyState() });
                         break;
                     case WM_CHAR:
+                        onEvent(Input::TextInputEvent { static_cast<char32_t>(wParam), controlKeyState() });
                         break;
                     default:
                         handled = false;

@@ -44,6 +44,7 @@ namespace Platform {
     namespace Input {
         struct KeyPressEvent;
         struct KeyReleaseEvent;
+        struct TextInputEvent;
         struct PointerPressEvent;
         struct PointerReleaseEvent;
         struct PointerMoveEvent;
@@ -66,7 +67,7 @@ namespace Platform {
         struct CloseEvent;
         struct RepaintEvent;
 
-        using WindowEvent = std::variant<ResizeEvent, CloseEvent, RepaintEvent, Input::KeyPressEvent, Input::KeyReleaseEvent, Input::PointerPressEvent, Input::PointerReleaseEvent, Input::PointerMoveEvent, Input::AxisEvent>;
+        using WindowEvent = std::variant<ResizeEvent, CloseEvent, RepaintEvent, Input::KeyPressEvent, Input::KeyReleaseEvent, Input::TextInputEvent, Input::PointerPressEvent, Input::PointerReleaseEvent, Input::PointerMoveEvent, Input::AxisEvent>;
 
     }
 

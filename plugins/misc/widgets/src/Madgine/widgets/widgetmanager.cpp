@@ -189,6 +189,7 @@ namespace Widgets {
                               [&](const Platform::Window::RepaintEvent &e) { return false; },
                               [&](const Platform::Input::KeyPressEvent &e) { return injectKeyPress(e); },
                               [&](const Platform::Input::KeyReleaseEvent &e) { return injectKeyRelease(e); },
+                              [&](const Platform::Input::TextInputEvent &e) { return injectTextInput(e); },
                               [&](const Platform::Input::PointerPressEvent &e) { return injectPointerPress(e); },
                               [&](const Platform::Input::PointerReleaseEvent &e) { return injectPointerRelease(e); },
                               [&](const Platform::Input::PointerMoveEvent &e) { return injectPointerMove(e); },
@@ -261,6 +262,26 @@ namespace Widgets {
         WidgetBase *w = mFocusedWidget;
         while (w) {
             if (w->injectKeyRelease(arg))
+                return true;
+            w = w->getParent();
+        }
+
+        return false;
+    }
+
+    bool WidgetManager::injectTextInput(const Platform::Input::TextInputEvent &arg)
+    {
+        for (WidgetBase *modalWidget : std::views::reverse(mModalWidgetList)) {
+            while (modalWidget) {
+                if (modalWidget->injectTextInput(arg))
+                    return true;
+                modalWidget = modalWidget->getParent();
+            }
+        }
+
+        WidgetBase *w = mFocusedWidget;
+        while (w) {
+            if (w->injectTextInput(arg))
                 return true;
             w = w->getParent();
         }
@@ -372,8 +393,13 @@ namespace Widgets {
         if (mHoveredWidget && std::ranges::find(mWidgets, mHoveredWidget) == mWidgets.end())
             mHoveredWidget = nullptr;
 
-        if (mHoveredWidget)
-            return mHoveredWidget->injectAxisEvent(arg);
+        WidgetBase *widget = mHoveredWidget;
+        while (widget) {
+            if (widget->injectAxisEvent(arg))
+                return true;
+            widget = widget->getParent();
+        }
+            
 
         return false;
     }

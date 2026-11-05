@@ -10,19 +10,19 @@
 
 #include "widgetmanager.h"
 
-#define STB_TEXTEDIT_KEYTYPE uint32_t
+#define STB_TEXTEDIT_KEYTYPE uint64_t
 
 #define STB_TEXTEDIT_STRING Engine::Widgets::TextEdit
 #define STB_TEXTEDIT_STRINGLEN(obj) obj->size()
 #define STB_TEXTEDIT_LAYOUTROW(result, obj, n) obj->layoutRow(result, n)
 #define STB_TEXTEDIT_GETWIDTH(obj, n, i) obj->calculateWidth(i, n)
-#define STB_TEXTEDIT_KEYTOTEXT(k) static_cast<char>(k)
+#define STB_TEXTEDIT_KEYTOTEXT(k) static_cast<char32_t>(k)
 #define STB_TEXTEDIT_GETCHAR(obj, i) obj->at(i)
 #define STB_TEXTEDIT_NEWLINE '\n'
 #define STB_TEXTEDIT_DELETECHARS(obj, i, n) obj->erase(i, n)
 #define STB_TEXTEDIT_INSERTCHARS(obj, i, c, n) obj->insert(i, { c, static_cast<size_t>(n) })
 
-#define STB_TEXTEDIT_K(key) (static_cast<uint32_t>(key) << 8)
+#define STB_TEXTEDIT_K(key) (static_cast<uint64_t>(key) << 32)
 
 #define STB_TEXTEDIT_K_SHIFT 0x10000
 #define STB_TEXTEDIT_K_LEFT STB_TEXTEDIT_K(Engine::Platform::Input::Key::LeftArrow)
@@ -135,12 +135,12 @@ namespace Widgets {
                 auto keep = renderData.pushClipRect(textPos, textSize.xy());
                 Math::Vector2 scrolledPos { textPos.x, textPos.y - mVerticalScroll };
 
-                mTextRenderData.render(renderData, scrolledPos, textSize, isFocused() && mTextRenderData.animationInterval(1200ms, 600ms) ? mState.cursor : -1);
+                mTextRenderData.render(renderData, mText, scrolledPos, textSize, isFocused() && mTextRenderData.animationInterval(1200ms, 600ms) ? mState.cursor : -1);
                 if (mState.select_start != mState.select_end) {
                     const Math::Atlas2::Entry *blankEntry = manager().lookUpImage("blank_white");
                     if (blankEntry) {
                         Math::Color4 color = { 0.0f, 0.0f, 0.8f, 0.8f };
-                        mTextRenderData.renderSelection(renderData, scrolledPos, textSize, *blankEntry, mState.select_start, mState.select_end, ColorRenderData { color }.frame(textPos, textSize.xy()));
+                        mTextRenderData.renderSelection(renderData, mText, scrolledPos, textSize, *blankEntry, mState.select_start, mState.select_end, ColorRenderData { color }.frame(textPos, textSize.xy()));
                     }
                 }
             }
@@ -180,8 +180,7 @@ namespace Widgets {
     bool TextEdit::injectKeyPress(const Platform::Input::KeyPressEvent &arg)
     {
         if (mEditable) {
-            if (std::isalnum(arg.mText)
-                || arg.mScancode == Platform::Input::Key::LeftArrow
+            if (arg.mScancode == Platform::Input::Key::LeftArrow
                 || arg.mScancode == Platform::Input::Key::RightArrow
                 || arg.mScancode == Platform::Input::Key::UpArrow
                 || arg.mScancode == Platform::Input::Key::DownArrow
@@ -189,11 +188,10 @@ namespace Widgets {
                 || arg.mScancode == Platform::Input::Key::Delete
                 || arg.mScancode == Platform::Input::Key::Space
                 || arg.mScancode == Platform::Input::Key::Return) {
-                uint32_t val = (static_cast<uint32_t>(arg.mControlKeys.mAlt) << 18)
-                    | (static_cast<uint32_t>(arg.mControlKeys.mCtrl) << 17)
-                    | (static_cast<uint32_t>(arg.mControlKeys.mShift) << 16)
-                    | (static_cast<uint32_t>(arg.mScancode) << 8)
-                    | arg.mText;
+                uint64_t val = (static_cast<uint64_t>(arg.mControlKeys.mAlt) << 42)
+                    | (static_cast<uint64_t>(arg.mControlKeys.mCtrl) << 41)
+                    | (static_cast<uint64_t>(arg.mControlKeys.mShift) << 40)
+                    | (static_cast<uint64_t>(arg.mScancode) << 32);
                 stb_textedit_key(this, &mState, val);
             } else if (arg.mControlKeys.mCtrl && arg.mScancode == Platform::Input::Key::V) {
                 std::string s = Platform::Window::OSWindow::getClipboardString();
@@ -212,6 +210,12 @@ namespace Widgets {
             }
         }
         return WidgetBase::injectKeyPress(arg);
+    }
+
+    bool TextEdit::injectTextInput(const Platform::Input::TextInputEvent &arg)
+    {
+        stb_textedit_key(this, &mState, arg.mText);
+        return true;
     }
 
     bool TextEdit::injectAxisEvent(const Platform::Input::AxisEvent &arg)
@@ -235,7 +239,7 @@ namespace Widgets {
         if (lines.empty())
             return;
 
-        auto it = std::ranges::find_if(lines, [&](const TextRenderData::Line &line) { return line.mBegin <= mText.data() + i && mText.data() + i <= line.mEnd; });
+        auto it = std::ranges::find_if(lines, [&](const TextRenderData::Line &line) { return line.mBegin <= i && i <= line.mEnd; });
         Math::Rect2 bb = mTextRenderData.calculateBoundingBox(*it, lines.size(), std::distance(lines.begin(), it), pos, size);
         row->baseline_y_delta = bb.mSize.y;
         row->num_chars = it->mEnd - it->mBegin;
@@ -254,7 +258,7 @@ namespace Widgets {
 
     float TextEdit::calculateWidth(size_t i, size_t n)
     {
-        return mTextRenderData.calculateWidth(mText.at(i), getAbsoluteSize().z);
+        return mTextRenderData.calculateWidth(*std::next(StringUtil::parseUTF8(mText).begin(), i), getAbsoluteSize().z);
     }
 
     Math::Vector3 TextEdit::getAbsoluteTextSize()

@@ -82,6 +82,7 @@ namespace Widgets {
         bool injectAxisEvent(const Platform::Input::AxisEvent &arg);
         bool injectKeyPress(const Platform::Input::KeyPressEvent &arg);
         bool injectKeyRelease(const Platform::Input::KeyReleaseEvent &arg);
+        bool injectTextInput(const Platform::Input::TextInputEvent &arg);
 
         void onResize(const Math::Rect2i &space) override;
         void setup(Render::RenderTarget *target) override;

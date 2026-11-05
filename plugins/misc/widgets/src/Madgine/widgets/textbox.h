@@ -7,7 +7,7 @@
 #define STB_TEXTEDIT_CHARTYPE char
 #define STB_TEXTEDIT_POSTIONTYPE size_t
 #define STB_TEXTEDIT_UNDOSTATECOUNT 1
-#define STB_TEXTEDIT_UNDCHARCOUNT 1
+#define STB_TEXTEDIT_UNDOCHARCOUNT 1
 #include "stb_textedit.h"
 
 namespace Engine {
@@ -26,6 +26,7 @@ namespace Widgets {
         void injectDragBegin(const DragBeginEvent &arg) override;
         void injectDragMove(const DragMoveEvent &arg) override;
         bool injectKeyPress(const Platform::Input::KeyPressEvent &arg) override;
+        bool injectTextInput(const Platform::Input::TextInputEvent &arg) override;
 
         void layoutRow(StbTexteditRow *row, size_t i);
         float calculateWidth(size_t i, size_t n);

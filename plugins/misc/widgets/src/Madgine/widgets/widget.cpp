@@ -21,8 +21,8 @@ METATABLE_BEGIN(Engine::Widgets::WidgetBase)
     READONLY_PROPERTY(Pos, getPos)
     READONLY_PROPERTY(Size, getSize)
     MEMBER(mOpacity)
-    READONLY_PROPERTY(PointerEnter, pointerEnterSender)
-    READONLY_PROPERTY(PointerLeave, pointerLeaveSender)
+    READONLY_PROPERTY(PointerEnter, pointerEnterEvent)
+    READONLY_PROPERTY(PointerLeave, pointerLeaveEvent)
     MEMBER(mVisible)
     MEMBER(mConditions)
 METATABLE_END(Engine::Widgets::WidgetBase)
@@ -36,6 +36,14 @@ SERIALIZETABLE_BEGIN(Engine::Widgets::WidgetBase)
     FIELD(mConditions)
     FIELD(mProperties)
 SERIALIZETABLE_END(Engine::Widgets::WidgetBase)
+
+METATABLE_BEGIN(Engine::Platform::Input::PointerMoveEvent)
+    STORAGE_BEGIN(Engine::Platform::Input::PointerMoveEvent, Engine::Platform::Input::PointerMoveEvent)
+    STORAGE_END(Engine::Platform::Input::PointerMoveEvent)
+METATABLE_END(Engine::Platform::Input::PointerMoveEvent)
+
+SERIALIZETABLE_BEGIN(Engine::Platform::Input::PointerMoveEvent)
+SERIALIZETABLE_END(Engine::Platform::Input::PointerMoveEvent)
 
 namespace Engine {
 
@@ -377,7 +385,7 @@ namespace Widgets {
     bool WidgetBase::injectAxisEvent(const Platform::Input::AxisEvent &arg)
     {
         mAxisEventSignal.emit(arg);
-        return true;
+        return false;
     }
 
     bool WidgetBase::injectKeyPress(const Platform::Input::KeyPressEvent &arg)
@@ -390,6 +398,12 @@ namespace Widgets {
     {
         mKeyReleaseSignal.emit(arg);
         return true;
+    }
+
+    bool WidgetBase::injectTextInput(const Platform::Input::TextInputEvent &arg)
+    {
+        mTextInputSignal.emit(arg);
+        return false;
     }
 
     void WidgetBase::onFocusLost()
@@ -449,6 +463,11 @@ namespace Widgets {
     Execution::SignalStub<void, const Platform::Input::KeyReleaseEvent &> &WidgetBase::keyReleaseEvent()
     {
         return mKeyReleaseSignal;
+    }
+
+    Execution::SignalStub<void, const Platform::Input::TextInputEvent &> &WidgetBase::textInputEvent()
+    {
+        return mTextInputSignal;
     }
 
     bool WidgetBase::containsPoint(const Math::Vector2 &point, const Math::Rect2i &screenSpace, float extend) const

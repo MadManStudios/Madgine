@@ -2,6 +2,8 @@
 
 #include "widgetfile.h"
 
+#include "Generic/containers/safeiterator.h"
+
 #include "Meta/math/bounds.h"
 #include "Meta/serialize/container/container_operations.h"
 #include "Meta/serialize/formats.h"
@@ -146,7 +148,7 @@ namespace Tools {
 
         if (open) {
             if (!aborted) {
-                for (Widgets::WidgetBase *child : w->children()) {
+                for (Widgets::WidgetBase *child : Containers::safeIterate(w->children())) {
                     if (!drawWidget(child, hoveredWidget)) {
                         break;
                     }

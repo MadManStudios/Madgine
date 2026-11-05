@@ -7,7 +7,7 @@
 #define STB_TEXTEDIT_CHARTYPE char
 #define STB_TEXTEDIT_POSTIONTYPE size_t
 #define STB_TEXTEDIT_UNDOSTATECOUNT 1
-#define STB_TEXTEDIT_UNDCHARCOUNT 1
+#define STB_TEXTEDIT_UNDOCHARCOUNT 1
 #include "stb_textedit.h"
 
 namespace Engine {
@@ -30,16 +30,17 @@ namespace Widgets {
 
         void render(WidgetsRenderData &renderData) override;
 
-        virtual void sizeChanged(const Math::Vector3 &pixelSize) override;
+        void sizeChanged(const Math::Vector3 &pixelSize) override;
 
         void onActivate(Serialize::CallbackTiming, bool b);
 
-        virtual void injectPointerClick(const PointerClickEvent &arg) override;
-        virtual void injectDragBegin(const DragBeginEvent &arg) override;
-        virtual void injectDragMove(const DragMoveEvent &arg) override;
-        virtual bool injectKeyPress(const Platform::Input::KeyPressEvent &arg) override;
+        void injectPointerClick(const PointerClickEvent &arg) override;
+        void injectDragBegin(const DragBeginEvent &arg) override;
+        void injectDragMove(const DragMoveEvent &arg) override;
+        bool injectKeyPress(const Platform::Input::KeyPressEvent &arg) override;
+        bool injectTextInput(const Platform::Input::TextInputEvent &arg) override;
 
-        virtual bool injectAxisEvent(const Platform::Input::AxisEvent &arg) override;
+        bool injectAxisEvent(const Platform::Input::AxisEvent &arg) override;
 
         void layoutRow(StbTexteditRow *row, size_t i);
         float calculateWidth(size_t i, size_t n);
