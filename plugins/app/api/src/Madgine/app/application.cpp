@@ -52,7 +52,9 @@ namespace Core {
                 co_return false;
         }
 
-        startLifetime();
+        mTaskQueue.queue([this]() {
+            startLifetime();
+        });
 
         co_return true;
     }

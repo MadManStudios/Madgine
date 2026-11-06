@@ -174,7 +174,9 @@ namespace Core {
 
         mTaskQueue.queueTask(renderLoop());
 
-        startLifetime();
+        mTaskQueue.queue([this]() {
+            startLifetime();
+        });
 
         co_return true;
     }
