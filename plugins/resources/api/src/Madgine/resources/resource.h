@@ -30,7 +30,7 @@ namespace Resources {
     struct ResourceControl {
         template <typename Ctor, typename Loader>
         ResourceControl(Ctor &&ctor, Loader *loader, auto &data, const auto &info, Platform::Filesystem::FileEventType event)
-            : mLoadingTask(queueLoad(ctor(loader, data, info, event), loader->loadingTaskQueue()))
+            : mLoadingTask(queueLoad([](Ctor ctor, Loader *loader, auto &data, const auto &info, Platform::Filesystem::FileEventType event) -> Threading::Task<bool> { co_return co_await ctor(loader, data, info, event); }(std::forward<Ctor>(ctor), loader, data, info, event), loader->loadingTaskQueue()))
         {
         }
 
