@@ -44,7 +44,7 @@ namespace Audio {
                 nullptr,
                 &outputParameters,
                 mSampleRate,
-                paFramesPerBufferUnspecified,
+                1024,
                 paNoFlag,
                 sCallback,
                 this);
