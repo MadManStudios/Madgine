@@ -399,7 +399,6 @@ namespace Widgets {
                 return true;
             widget = widget->getParent();
         }
-            
 
         return false;
     }
@@ -707,6 +706,9 @@ namespace Widgets {
         for (auto &[layer, layerData] : renderData.vertexData()) {
             for (auto &[tex, vertexData] : layerData) {
                 if (vertexData.mTriangleVertices.empty())
+                    continue;
+                // Drawn from the atlas before it has a texture: nothing to sample yet
+                if (!tex.mResource && !mData->mAtlas.resource())
                     continue;
 
                 {

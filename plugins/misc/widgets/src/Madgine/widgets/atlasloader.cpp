@@ -118,7 +118,7 @@ namespace Widgets {
                 entry.mArea.mSize -= { 2, 2 };
 
                 it = mEntries.try_emplace(std::string { image->name() }, entry).first;
-                
+
                 mImageLoadingTasks.erase(data);
             }
         }
@@ -132,6 +132,8 @@ namespace Widgets {
 
     Render::ResourceBlock UIAtlas::resource()
     {
+        if (!mTexture)
+            return {};
         return mTexture->resourceBlock();
     }
 
@@ -311,7 +313,7 @@ namespace Widgets {
             if (path.extension() == ".widget") {
                 WidgetLoader::Resource res { "", path };
                 Serialize::SerializeManager mgr { "Widget" };
-                Serialize::FormattedSerializeStream stream = Serialize::FormattedSerializeStream { Serialize::Formats::xml(), mgr.wrapStream(res.readAsStream(), true) };                
+                Serialize::FormattedSerializeStream stream = Serialize::FormattedSerializeStream { Serialize::Formats::xml(), mgr.wrapStream(res.readAsStream(), true) };
                 Serialize::StreamResult result = Serialize::scanPrimitive<CompoundWidget, std::string>(stream, "Widget", [&](const std::string &s, const char *name, std::span<std::string_view> tags, size_t depth) {
                     if (!s.empty() && std::ranges::contains(tags, "Image"))
                         images[s];
