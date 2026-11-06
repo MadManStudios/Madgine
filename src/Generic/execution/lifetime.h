@@ -105,6 +105,8 @@ namespace Execution {
 
         bool end()
         {
+            if (!mPtr)
+                return false;
             return mPtr.mBlock->request_stop();
         }
 
