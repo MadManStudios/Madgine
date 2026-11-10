@@ -294,6 +294,8 @@ namespace Widgets {
         if (mDragStartEvent.mButton != arg.mButton)
             return false;
 
+        mDragStartEvent.mButton = Platform::Input::MouseButton::NO_BUTTON;
+
         if (mFocusedWidget) {
 
             Math::Vector2i pos = mFocusedWidget->getClientSpacePosition().floor();
@@ -305,8 +307,6 @@ namespace Widgets {
             } else {
                 mFocusedWidget->injectPointerClick(PointerClickEvent { arg.mWindowPosition, arg.mScreenPosition, arg.mButton, arg.mControlKeys });
             }
-
-            mDragStartEvent.mButton = Platform::Input::MouseButton::NO_BUTTON;
 
             return true;
         }
