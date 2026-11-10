@@ -349,6 +349,12 @@ namespace Render {
 
     GPUPtr<void> DirectX12RenderContext::allocateBufferImpl(size_t size, UsageHint hint)
     {
+        if (size == 0)
+        {
+            LOG_ERROR("DirectX12: allocating heap memory of size 0 is illegal");
+            return {};
+        }
+
         Memory::Block allocation = mBufferAllocator.allocate(size);
 
         if (!allocation.mAddress) {
