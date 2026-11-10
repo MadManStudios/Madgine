@@ -13,7 +13,7 @@ namespace Render {
 
         using Base = VirtualResourceLoaderBase<GPUMeshLoader, GPUMeshData, std::list<Placeholder<0>>, Threading::WorkGroupStorage>;
 
-        struct Handle : Base::Handle {
+        struct MADGINE_MESHLOADER_EXPORT Handle : Base::Handle {
             using Base::Handle::Handle;
             Handle(Base::Handle handle)
                 : Base::Handle(std::move(handle))
