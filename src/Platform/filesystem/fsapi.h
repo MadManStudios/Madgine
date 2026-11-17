@@ -41,8 +41,8 @@ namespace Platform {
         PLATFORM_EXPORT bool isSeparator(char c);
         PLATFORM_EXPORT bool isEqual(const Path &p1, const Path &p2);
 
-        PLATFORM_EXPORT Stream openFileRead(const Path &p, bool isBinary = false);
-        PLATFORM_EXPORT Stream openFileWrite(const Path &p, bool isBinary = false);
+        PLATFORM_EXPORT Stream openFileRead(const Path &p);
+        PLATFORM_EXPORT Stream openFileWrite(const Path &p);
         PLATFORM_EXPORT FileInfo fileInfo(const Path &p);
     }
 }

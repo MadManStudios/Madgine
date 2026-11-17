@@ -23,7 +23,7 @@ namespace Platform {
             Path exactTarget = target;
             if (isDir(exactTarget))
                 exactTarget /= p.filename();
-            Stream out = openFileWrite(exactTarget, true);
+            Stream out = openFileWrite(exactTarget);
             assert(out);
             Stream in = openFileRead(p);
             assert(in);

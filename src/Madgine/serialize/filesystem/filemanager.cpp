@@ -24,7 +24,7 @@ namespace Serialize {
 
         std::unique_ptr<Serialize::Formatter> formatter = format();
 
-        Stream stream = Platform::Filesystem::openFileRead(path, formatter->mBinary);
+        Stream stream = Platform::Filesystem::openFileRead(path);
         if (stream) {
             return Serialize::FormattedSerializeStream {
                 std::move(formatter),
@@ -39,7 +39,7 @@ namespace Serialize {
     {
         std::unique_ptr<Serialize::Formatter> formatter = format();
 
-        Stream stream = Platform::Filesystem::openFileWrite(path, formatter->mBinary);
+        Stream stream = Platform::Filesystem::openFileWrite(path);
         if (stream) {
             return Serialize::FormattedSerializeStream {
                 std::move(formatter),

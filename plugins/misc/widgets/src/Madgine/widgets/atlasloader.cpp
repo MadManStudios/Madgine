@@ -285,7 +285,7 @@ namespace Widgets {
     Threading::Task<bool> AtlasLoader::loadImpl(PreprocessedUIAtlas &data, const ResourceDataInfo &info)
     {
         Serialize::SerializeManager mgr { "Atlas" };
-        Serialize::FormattedSerializeStream stream { Serialize::Formats::safebinary(), mgr.wrapStream(info.resource()->readAsStream(true), true) };
+        Serialize::FormattedSerializeStream stream { Serialize::Formats::safebinary(), mgr.wrapStream(info.resource()->readAsStream(), true) };
         Serialize::StreamResult result = Serialize::read(stream, data, "Atlas");
         if (result.mState != Serialize::StreamState::OK) {
             LOG_ERROR("Failed loading Atlas " << info.resource()->path());

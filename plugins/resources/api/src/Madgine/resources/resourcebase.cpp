@@ -45,9 +45,9 @@ namespace Resources {
         return mName;
     }
 
-    Stream ResourceBase::readAsStream(bool isBinary) const
+    Stream ResourceBase::readAsStream() const
     {
-        return Platform::Filesystem::openFileRead(mPath, isBinary);
+        return Platform::Filesystem::openFileRead(mPath);
     }
 
     std::string ResourceBase::readAsText() const
@@ -58,7 +58,7 @@ namespace Resources {
 
     std::vector<unsigned char> ResourceBase::readAsBlob() const
     {
-        Stream buffer = readAsStream(true);
+        Stream buffer = readAsStream();
         return std::vector<unsigned char> { buffer.iterator(), buffer.end() };
     }
 

@@ -21,7 +21,7 @@ namespace Resources {
 
         std::string plugin() const;
 
-        Stream readAsStream(bool isBinary = false) const;
+        Stream readAsStream() const;
         std::string readAsText() const;
         std::vector<unsigned char> readAsBlob() const;
 

@@ -22,7 +22,7 @@ namespace Audio {
 
     Stream AudioLoader::Interface::Resource::readAsStream(AudioInfo &info)
     {
-        return DecodeOggFile(info, ResourceLoader::Interface::Resource::readAsStream(true));
+        return DecodeOggFile(info, ResourceLoader::Interface::Resource::readAsStream());
     }
 
     bool AudioLoader::loadImpl(AudioBuffer &data, const ResourceDataInfo &info)

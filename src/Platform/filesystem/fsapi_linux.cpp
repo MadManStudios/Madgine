@@ -105,23 +105,23 @@ namespace Platform {
             return p1 == p2;
         }
 
-        Stream openFileRead(const Path &p, bool isBinary)
+        Stream openFileRead(const Path &p)
         {
             std::unique_ptr<std::filebuf> buffer = std::make_unique<std::filebuf>();
             std::string s = p.str();
             makeNormalized(s);
-            if (buffer->open(s.c_str(), static_cast<std::ios_base::openmode>(std::ios_base::in | (isBinary ? std::ios_base::binary : 0))))
+            if (buffer->open(s.c_str(), static_cast<std::ios_base::openmode>(std::ios_base::in | std::ios_base::binary)))
                 return { std::move(buffer) };
             else
                 return {};
         }
 
-        Stream openFileWrite(const Path &p, bool isBinary)
+        Stream openFileWrite(const Path &p)
         {
             std::unique_ptr<std::filebuf> buffer = std::make_unique<std::filebuf>();
             std::string s = p.str();
             makeNormalized(s);
-            if (buffer->open(s.c_str(), static_cast<std::ios_base::openmode>(std::ios_base::out | (isBinary ? std::ios_base::binary : 0))))
+            if (buffer->open(s.c_str(), static_cast<std::ios_base::openmode>(std::ios_base::out | std::ios_base::binary)))
                 return { std::move(buffer) };
             else
                 return {};

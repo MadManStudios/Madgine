@@ -192,26 +192,26 @@ namespace Platform {
             AAsset *mAsset;
         };
 
-        Stream openFileRead(const Path &p, bool isBinary)
+        Stream openFileRead(const Path &p)
         {
             if (isAssetPath(p)) {
                 return { std::make_unique<AAsset_Streambuf>(assetPath(p)) };
             } else {
                 std::unique_ptr<std::filebuf> buffer = std::make_unique<std::filebuf>();
-                if (buffer->open(p.c_str(), static_cast<std::ios_base::openmode>(std::ios_base::in | (isBinary ? std::ios_base::binary : 0))))
+                if (buffer->open(p.c_str(), static_cast<std::ios_base::openmode>(std::ios_base::in | std::ios_base::binary)))
                     return { std::move(buffer) };
                 else
                     return {};
             }
         }
 
-        Stream openFileWrite(const Path &p, bool isBinary)
+        Stream openFileWrite(const Path &p)
         {
             if (isAssetPath(p)) {
                 return {};
             } else {
                 std::unique_ptr<std::filebuf> buffer = std::make_unique<std::filebuf>();
-                if (buffer->open(p.c_str(), static_cast<std::ios_base::openmode>(std::ios_base::out | (isBinary ? std::ios_base::binary : 0))))
+                if (buffer->open(p.c_str(), static_cast<std::ios_base::openmode>(std::ios_base::out | std::ios_base::binary)))
                     return { std::move(buffer) };
                 else
                     return {};
