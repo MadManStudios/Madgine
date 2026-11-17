@@ -71,6 +71,9 @@ namespace Debug {
         template <Execution::AnySender Sender>
         void attach(Sender &&sender)
         {
+            if (!running())
+                LOG_WARNING("Attaching to a lifetime that is not running!");
+
             ContextInfo &context = createContext();
             mLifetime.attach(std::forward<Sender>(sender) | Execution::with_debug_location() | Debug::with_debug_context(context));
         }
