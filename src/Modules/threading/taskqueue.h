@@ -6,6 +6,8 @@
 #    include "../debug/tasktracking/tasktracker.h"
 #endif
 
+#include "Platform/helpers/condition_variable.h"
+
 #include "taskqualifiers.h"
 
 namespace Engine {
@@ -43,7 +45,7 @@ namespace Threading {
         void unregisterTaskInFlight(TaskPromiseBase *promise);
         size_t taskInFlightCount() const;
 
-        bool idle() const;        
+        bool idle() const;
 
         const std::string &name() const;
 
@@ -121,7 +123,7 @@ namespace Threading {
 
 #if !EMSCRIPTEN
         std::list<ScheduledTask> mQueue;
-        std::condition_variable mCv;
+        Platform::condition_variable mCv;
 #endif
 
         mutable std::mutex mMutex;
