@@ -10,7 +10,7 @@ namespace Engine {
 namespace Threading {
 
     DataMutex::Lock::Lock(DataMutex &mutex, AccessMode mode)
-        : LockState { &mutex, mode }
+        : LockState { mutex, mode }
     {
         if (!mutex.lockImpl(this)) {
             std::unique_lock lock { mCvMutex };
@@ -20,22 +20,22 @@ namespace Threading {
 
     DataMutex::Lock::~Lock()
     {
-        if (mMutex)
-            mMutex->unlockImpl(this);
+        mMutex.run(mMutex.unlockImpl(this));
     }
 
-    bool DataMutex::Lock::isHeld() const
-    {
-        return mMutex;
-    }
-
-    void DataMutex::Lock::onLockAcquired()
+    bool DataMutex::Lock::onLockAcquired()
     {
         {
             std::unique_lock lock { mCvMutex };
             mWasTriggered = true;
         }
         mCv.notify_one();
+
+        return false;
+    }
+
+    void DataMutex::Lock::complete()
+    {
     }
 
     DataMutex::DataMutex(std::string_view name)
@@ -76,12 +76,9 @@ namespace Threading {
 
         bool success = mMutex.try_lock_shared();
         if (!success) {
-            bool wasFirstItem = mReadQueue.push(state);
-            if (wasFirstItem) {
-                if (mMutex.try_lock_shared()) {
-                    if (!unrollRead())
-                        mMutex.unlock_shared();
-                }
+            mReadQueue.push(state);
+            if (mMutex.try_lock_shared()) {
+                run(unlockRead());
             }
         }
 
@@ -92,78 +89,103 @@ namespace Threading {
     {
         bool success = mMutex.try_lock();
         if (!success) {
-            bool wasFirstItem = mWriteQueue.push(state);
-            if (wasFirstItem) {
-                if (mMutex.try_lock()) {
-                    if (!unrollWrite())
-                        mMutex.unlock();
-                }
+            mWriteQueue.push(state);
+            if (mMutex.try_lock()) {
+                run(unlockWrite());
             }
         }
 
         return success;
     }
 
-    void DataMutex::unlockImpl(LockState *state)
+    DataMutex::LockState *DataMutex::unlockImpl(LockState *state)
     {
         switch (state->mMode) {
         case AccessMode::READ:
-            return unlockRead(state);
+            return unlockRead();
         case AccessMode::WRITE:
-            return unlockWrite(state);
+            return unlockWrite();
         default:
             throw 0;
         }
     }
 
-    void DataMutex::unlockRead(LockState *state)
-    {
-        if (!unrollRead()) {
-            mMutex.unlock_shared();
-            if (!mWriteQueue.empty()) {
-                if (mMutex.try_lock()) {
-                    if (!unrollWrite())
-                        mMutex.unlock();
-                }
-            }
-        }
-    }
-
-    void DataMutex::unlockWrite(LockState *state)
-    {
-        if (!unrollWrite()) {
-            mMutex.unlock();
-            if (!mReadQueue.empty()) {
-                if (mMutex.try_lock_shared()) {
-                    if (!unrollRead())
-                        mMutex.unlock_shared();
-                }
-            }
-        }
-    }
-
-    bool DataMutex::unrollRead()
+    DataMutex::LockState *DataMutex::unlockRead()
     {
         LockState *head = mReadQueue.pop();
-        if (head) {
-            assert(head->mMode == AccessMode::READ);
-            head->onLockAcquired();
-            return true;
-        } else {
-            return false;
+        if (head)
+            return head;
+
+        mMutex.unlock_shared();
+
+        return nullptr;
+    }
+
+    DataMutex::LockState *DataMutex::unlockWrite()
+    {
+        LockState *head = mWriteQueue.pop();
+        if (head)
+            return head;
+
+        mMutex.unlock();
+
+        return nullptr;
+    }
+
+    void DataMutex::run(LockState *state)
+    {
+        std::atomic<LockState *> initial = nullptr;
+        std::atomic<LockState *> *nextPtr = &initial;
+        while (state) {
+            if (!state->onLockAcquired())
+                break;
+
+            *nextPtr = state;
+            nextPtr = &state->mNext;
+
+            LockState *next = unlockImpl(state);
+
+            if (!next) {
+                if (!mReadQueue.empty()) {
+                    if (mMutex.try_lock_shared()) {
+                        next = mReadQueue.pop();
+                        if (!next)
+                            mMutex.unlock_shared();
+                    }
+                }
+            }
+            if (!next) {
+                if (!mWriteQueue.empty()) {
+                    if (mMutex.try_lock()) {
+                        next = mWriteQueue.pop();
+                        if (!next)
+                            mMutex.unlock();
+                    }
+                }
+            }
+
+            state = next;
+        }
+
+        state = initial;
+        while (state) {
+            LockState *next = state->mNext;
+            state->complete();
+            state = next;
         }
     }
 
-    bool DataMutex::unrollWrite()
+    bool DataMutex::cancel(LockState *state)
     {
-        LockState *head = mWriteQueue.pop();
-        if (head) {
-            assert(head->mMode == AccessMode::WRITE);
-            head->onLockAcquired();
-            return true;
-        } else {
-            return false;
+        switch (state->mMode) {
+        case AccessMode::READ:
+            return mReadQueue.extract(state);
+            break;
+        case AccessMode::WRITE:
+            return mWriteQueue.extract(state);
+            break;
         }
     }
+
 }
 }

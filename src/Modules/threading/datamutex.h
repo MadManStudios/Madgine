@@ -10,19 +10,20 @@ namespace Threading {
     struct MODULES_EXPORT DataMutex {
 
         struct LockState {
-            LockState(DataMutex *mutex, AccessMode mode)
+            LockState(DataMutex &mutex, AccessMode mode)
                 : mMutex(mutex)
                 , mMode(mode)
             {
             }
 
-            virtual void onLockAcquired() = 0;
+            virtual bool onLockAcquired() = 0;
+            virtual void complete() = 0;
             void cancel()
             {
                 throw 0;
             }
 
-            DataMutex *mMutex = nullptr;
+            DataMutex &mMutex;
             AccessMode mMode;
 
             std::atomic<LockState *> mNext = nullptr;
@@ -32,10 +33,9 @@ namespace Threading {
             Lock(DataMutex &mutex, AccessMode mode);
             ~Lock();
 
-            bool isHeld() const;
-
         protected:
-            virtual void onLockAcquired() override;
+            bool onLockAcquired() override;
+            void complete() override;
 
         private:
             std::mutex mCvMutex;
@@ -46,7 +46,7 @@ namespace Threading {
         template <typename Rec, typename F>
         struct state : LockState, Execution::base_state<Rec> {
 
-            state(DataMutex *mutex, AccessMode mode, Rec &&rec, F &&f)
+            state(DataMutex &mutex, AccessMode mode, Rec &&rec, F &&f)
                 : LockState(mutex, mode)
                 , Execution::base_state<Rec>(std::forward<Rec>(rec))
                 , mF(std::forward<F>(f))
@@ -55,27 +55,35 @@ namespace Threading {
 
             void start()
             {
-                if (mMutex->lockImpl(this)) {
-                    onLockAcquired();
+                if (mMutex.lockImpl(this)) {
+                    mMutex.run(this);
                 }
             }
 
-            bool stop()
+            void stop()
             {
-                throw 0;
-                return false;
+                if (mMutex.cancel(this))
+                    this->set_done();
             }
 
-            virtual void onLockAcquired() override
+            bool onLockAcquired() override
             {
                 if constexpr (std::same_as<std::invoke_result_t<F>, void>) {
                     mF();
-                    mMutex->unlockImpl(this);
+                } else {
+                    construct(mResult, mF());
+                }
+                return true;
+            }
+
+            void complete() override
+            {
+                if constexpr (std::same_as<std::invoke_result_t<F>, void>) {
                     this->mRec.set_value();
                 } else {
-                    auto &&result = mF();
-                    mMutex->unlockImpl(this);
-                    this->mRec.set_value(std::forward<decltype(result)>(result));
+                    std::invoke_result_t<F> result = std::forward<std::invoke_result_t<F>>(*mResult);
+                    destruct(mResult);
+                    this->mRec.set_value(std::forward<std::invoke_result_t<F>>(result));
                 }
             }
 
@@ -85,6 +93,7 @@ namespace Threading {
             }
 
             F mF;
+            ManualLifetime<forward_ref_t<patch_void_t<std::invoke_result_t<F>>>> mResult;
         };
 
         template <typename F>
@@ -102,7 +111,7 @@ namespace Threading {
                 return state<Rec, F> { sender.mMutex, sender.mMode, std::forward<Rec>(rec), std::forward<F>(sender.mF) };
             }
 
-            DataMutex *mMutex;
+            DataMutex &mMutex;
             AccessMode mMode;
             F mF;
         };
@@ -117,20 +126,20 @@ namespace Threading {
         template <typename F>
         auto locked(AccessMode mode, F &&f)
         {
-            return sender<F> { this, mode, std::forward<F>(f) };
+            return sender<F> { *this, mode, std::forward<F>(f) };
         }
 
     protected:
         bool lockImpl(LockState *state);
-        void unlockImpl(LockState *state);
+        LockState *unlockImpl(LockState *state);
 
         bool lockRead(LockState *state);
         bool lockWrite(LockState *state);
-        void unlockRead(LockState *state);
-        void unlockWrite(LockState *state);
+        LockState *unlockRead();
+        LockState *unlockWrite();
 
-        bool unrollRead();
-        bool unrollWrite();
+        void run(LockState *state);
+        bool cancel(LockState *state);
 
     private:
         std::shared_mutex mMutex;
