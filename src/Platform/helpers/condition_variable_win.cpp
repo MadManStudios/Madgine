@@ -107,8 +107,12 @@ namespace Platform {
 
         lock.lock();
 
-        bool extracted = mWaiters.extract(&waiter);
-        assert(!extracted || !notified);
+        if (!notified) {
+            bool extracted = mWaiters.extract(&waiter);
+            if (!extracted) {
+                WaitForSingleObject(data.mEvent, INFINITE);
+            }
+        }
 
         return notified ? std::cv_status::no_timeout : std::cv_status::timeout;
     }
