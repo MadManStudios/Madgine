@@ -72,6 +72,34 @@ namespace Execution {
             }
         }
 
+        bool extract(T *con)
+        {
+            assert(con);
+
+            std::lock_guard guard { mMutex };
+
+            std::atomic<T *> *next = &mHead;
+            T *current = mHead;
+            while (current) {
+                if (current == con) {
+                    if (next->compare_exchange_strong(current, current->mNext.load())) {
+                        current->mNext = nullptr;
+                        if (mTail == con) {
+                            mTail = nullptr;
+                        }
+                        return true;
+                    } else {
+                        return false;
+                    }
+                } else {
+                    next = &current->mNext;
+                    current = *next;
+                }
+            }
+            return false;
+        }
+
+
         std::mutex &mutex() const
         {
             return mMutex;
