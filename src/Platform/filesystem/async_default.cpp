@@ -34,7 +34,7 @@ namespace Platform {
 
         void AsyncFileReadState::start()
         {
-            Stream file = openFileRead(mPath, true);
+            Stream file = openFileRead(mPath);
             if (!file)
                 set_error(GenericResult::UNKNOWN_ERROR);
             else
