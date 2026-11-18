@@ -314,13 +314,13 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a138fc25cc89ee96409ab1aa620661ec9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa309cbfc0a6d128544f8aee2c13bea59"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_data_mutex_1_1_lock.html#aa309cbfc0a6d128544f8aee2c13bea59">~Lock</a> ()</td></tr>
 <tr class="separator:aa309cbfc0a6d128544f8aee2c13bea59"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a137b8cfa709d11b0ad8c5146600b4656"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_data_mutex_1_1_lock.html#a137b8cfa709d11b0ad8c5146600b4656">isHeld</a> () const</td></tr>
-<tr class="separator:a137b8cfa709d11b0ad8c5146600b4656"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:a16ff4f20133cb90cbbb8b03d0ee37c55"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_data_mutex_1_1_lock.html#a16ff4f20133cb90cbbb8b03d0ee37c55">onLockAcquired</a> () override</td></tr>
-<tr class="separator:a16ff4f20133cb90cbbb8b03d0ee37c55"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a359112df10901ed471ecc251e07f03ee"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classvoid.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_data_mutex_1_1_lock.html#a359112df10901ed471ecc251e07f03ee">complete</a> () override</td></tr>
+<tr class="separator:a359112df10901ed471ecc251e07f03ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb4dae9c4966f9a66be26c543fefb0cf"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_engine_1_1_threading_1_1_data_mutex_1_1_lock.html#abb4dae9c4966f9a66be26c543fefb0cf">onLockAcquired</a> () override</td></tr>
+<tr class="separator:abb4dae9c4966f9a66be26c543fefb0cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a138fc25cc89ee96409ab1aa620661ec9" name="a138fc25cc89ee96409ab1aa620661ec9"></a>
@@ -369,25 +369,8 @@ Protected Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a137b8cfa709d11b0ad8c5146600b4656" name="a137b8cfa709d11b0ad8c5146600b4656"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a137b8cfa709d11b0ad8c5146600b4656">&#9670;&#160;</a></span>isHeld()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool Engine::Threading::DataMutex::Lock::isHeld </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a16ff4f20133cb90cbbb8b03d0ee37c55" name="a16ff4f20133cb90cbbb8b03d0ee37c55"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a16ff4f20133cb90cbbb8b03d0ee37c55">&#9670;&#160;</a></span>onLockAcquired()</h2>
+<a id="abb4dae9c4966f9a66be26c543fefb0cf" name="abb4dae9c4966f9a66be26c543fefb0cf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abb4dae9c4966f9a66be26c543fefb0cf">&#9670;&#160;</a></span>onLockAcquired()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -396,7 +379,7 @@ Protected Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Threading::DataMutex::Lock::onLockAcquired </td>
+          <td class="memname">bool Engine::Threading::DataMutex::Lock::onLockAcquired </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -409,7 +392,34 @@ Protected Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implements <a class="el" href="struct_engine_1_1_threading_1_1_data_mutex_1_1_lock_state.html#adb849b83a98e1b2409ddcee1fdbaeac5">Engine::Threading::DataMutex::LockState</a>.</p>
+<p>Implements <a class="el" href="struct_engine_1_1_threading_1_1_data_mutex_1_1_lock_state.html#afab59ff5c63e0577d690d48bc10f7874">Engine::Threading::DataMutex::LockState</a>.</p>
+
+</div>
+</div>
+<a id="a359112df10901ed471ecc251e07f03ee" name="a359112df10901ed471ecc251e07f03ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a359112df10901ed471ecc251e07f03ee">&#9670;&#160;</a></span>complete()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvoid.html">void</a> Engine::Threading::DataMutex::Lock::complete </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implements <a class="el" href="struct_engine_1_1_threading_1_1_data_mutex_1_1_lock_state.html#ac9d3bfd57c33fb9935af67afb4b69fe1">Engine::Threading::DataMutex::LockState</a>.</p>
 
 </div>
 </div>
@@ -420,7 +430,7 @@ Protected Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Nov 17 2026 01:54:41 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+Generated on Wed Nov 18 2026 23:50:05 for Madgine - Doxygen Documentation by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
 </small></address>
 </body>
 </html>
