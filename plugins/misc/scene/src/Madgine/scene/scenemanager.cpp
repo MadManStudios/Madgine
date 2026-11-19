@@ -99,8 +99,6 @@ namespace Scene {
             }
         });
 
-        startLifetime();
-
         co_return true;
     }
 

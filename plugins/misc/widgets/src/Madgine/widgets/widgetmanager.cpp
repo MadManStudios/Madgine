@@ -83,8 +83,6 @@ namespace Widgets {
             co_await res.loadData().loadingTask();
         }
 
-        startLifetime();
-
         co_return true;
     }
 
