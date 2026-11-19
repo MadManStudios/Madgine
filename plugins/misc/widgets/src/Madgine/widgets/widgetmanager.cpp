@@ -474,8 +474,11 @@ namespace Widgets {
         if (mHoveredWidget && std::ranges::find(mWidgets, mHoveredWidget) == mWidgets.end())
             mHoveredWidget = nullptr;
 
-        if (mFocusedWidget && std::ranges::find(mWidgets, mFocusedWidget) == mWidgets.end())
+        if (mFocusedWidget && std::ranges::find(mWidgets, mFocusedWidget) == mWidgets.end()) {
+            mDragStartEvent.mButton = Platform::Input::MouseButton::NO_BUTTON;
+            mDragging = false;
             mFocusedWidget = nullptr;
+        }
 
         if (mPointerEventTargetWidget && std::ranges::find(mWidgets, mPointerEventTargetWidget) == mWidgets.end())
             mPointerEventTargetWidget = nullptr;
