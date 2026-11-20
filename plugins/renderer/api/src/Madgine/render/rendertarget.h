@@ -17,7 +17,7 @@ namespace Render {
     struct MADGINE_RENDER_EXPORT RenderTarget : RenderData {
         RenderTarget(RenderContext *context, bool global, std::string name, bool flipFlop = false, RenderTarget *blitSource = nullptr, bool clearOnBeginFrame = true);
         RenderTarget(const RenderTarget &) = delete;
-        RenderTarget(RenderTarget &&) = default;
+        RenderTarget(RenderTarget &&) = delete;
         virtual ~RenderTarget();
 
         virtual void clearDepthBuffer() = 0;
