@@ -136,36 +136,38 @@ namespace Threading {
     {
         std::atomic<LockState *> initial = nullptr;
         std::atomic<LockState *> *nextPtr = &initial;
-        while (state) {
+        while (true) {            
+            if (!state) {
+                if (!mReadQueue.empty()) {
+                    if (mMutex.try_lock_shared()) {
+                        state = mReadQueue.pop();
+                        if (!state)
+                            mMutex.unlock_shared();
+                    }
+                }
+            }
+            if (!state) {
+                if (!mWriteQueue.empty()) {
+                    if (mMutex.try_lock()) {
+                        state = mWriteQueue.pop();
+                        if (!state)
+                            mMutex.unlock();
+                    }
+                }
+            }
+
+            if (!state)
+                break;
+
             if (!state->onLockAcquired())
                 break;
 
             *nextPtr = state;
             nextPtr = &state->mNext;
 
-            LockState *next = unlockImpl(state);
-
-            if (!next) {
-                if (!mReadQueue.empty()) {
-                    if (mMutex.try_lock_shared()) {
-                        next = mReadQueue.pop();
-                        if (!next)
-                            mMutex.unlock_shared();
-                    }
-                }
-            }
-            if (!next) {
-                if (!mWriteQueue.empty()) {
-                    if (mMutex.try_lock()) {
-                        next = mWriteQueue.pop();
-                        if (!next)
-                            mMutex.unlock();
-                    }
-                }
-            }
-
-            state = next;
+            state = unlockImpl(state);
         }
+        *nextPtr = nullptr;
 
         state = initial;
         while (state) {
