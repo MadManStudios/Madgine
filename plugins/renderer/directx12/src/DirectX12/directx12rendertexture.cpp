@@ -35,7 +35,7 @@ namespace Render {
             return false;
 
         const Threading::TaskFuture<RenderFuture> &future = lastFrame();
-        if (future.is_ready() && context()->graphicsQueue()->isComplete(future)) {
+        if (!future.valid() || (future.is_ready() && context()->graphicsQueue()->isComplete(future))) {
             resizeBuffers(size);
             mResizePending = false;
         } else {
