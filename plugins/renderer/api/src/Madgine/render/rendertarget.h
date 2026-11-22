@@ -68,6 +68,8 @@ namespace Render {
     protected:
         virtual Threading::ImmediateTask<RenderFuture> render(RenderContext *context) override;
 
+        void onResize(const Math::Vector2i &size);
+
         virtual void flipTextures(size_t startIndex, size_t count);
 
         RenderTarget *mBlitSource;

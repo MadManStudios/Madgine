@@ -65,6 +65,8 @@ namespace Render {
             GetDevice()->CreateDepthStencilView(mDepthTexture->resource(), &dsvDesc, DirectX12RenderContext::getSingleton().mDepthStencilDescriptorHeap.cpuHandle(mDepthStencilViews[i]));
             DX12_CHECK();
         }
+
+        onResize(size);
     }
 
     void DirectX12RenderTarget::beginFrame()

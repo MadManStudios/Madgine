@@ -158,16 +158,17 @@ namespace Render {
         return mName;
     }
 
+    void RenderTarget::onResize(const Math::Vector2i &size)
+    {
+        for (RenderPass *pass : mRenderPasses)
+            pass->onTargetResize(size);        
+    }
+
     bool RenderTarget::resize(const Math::Vector2i &size)
     {
         if (mBlitSource)
             mBlitSource->resize(size);
-        bool resized = resizeImpl(size);
-        if (resized) {
-            for (RenderPass *pass : mRenderPasses)
-                pass->onTargetResize(size);
-        }
-        return resized;
+        return resizeImpl(size);
     }
 
     Math::Matrix4 RenderTarget::getClipSpaceMatrix() const
