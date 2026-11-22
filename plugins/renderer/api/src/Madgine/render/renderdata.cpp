@@ -20,10 +20,8 @@ namespace Render {
         return mLastFrame;
     }
 
-    RenderFuture RenderData::lastFrame() const
+    const Threading::TaskFuture<RenderFuture> &RenderData::lastFrame() const
     {
-        if (!mLastFrame.valid())
-            return {};
         return mLastFrame;
     }
 

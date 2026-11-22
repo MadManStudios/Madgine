@@ -12,7 +12,7 @@ namespace Render {
 
         Threading::TaskFuture<RenderFuture> update(RenderContext *context);
 
-        RenderFuture lastFrame() const;
+        const Threading::TaskFuture<RenderFuture> &lastFrame() const;
 
     protected:
         virtual Threading::ImmediateTask<RenderFuture> render(RenderContext *context) = 0;
