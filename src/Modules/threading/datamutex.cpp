@@ -186,6 +186,8 @@ namespace Threading {
         case AccessMode::WRITE:
             return mWriteQueue.extract(state);
             break;
+        default:
+            throw 0;
         }
     }
 
