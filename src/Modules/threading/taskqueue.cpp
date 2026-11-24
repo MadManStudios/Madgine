@@ -11,6 +11,8 @@
 namespace Engine {
 namespace Threading {
 
+    thread_local TaskQueue *sThreadQueue = nullptr;
+
 #if EMSCRIPTEN
 
     void emscripten_resume(void *address)
@@ -54,6 +56,11 @@ namespace Threading {
     bool TaskQueue::wantsMainThread() const
     {
         return mWantsMainThread;
+    }
+
+    TaskQueue *TaskQueue::currentThreadQueue()
+    {
+        return sThreadQueue;
     }
 
     void TaskQueue::queueInternal(ScheduledTask task, bool resume)

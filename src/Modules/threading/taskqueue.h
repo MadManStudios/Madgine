@@ -54,6 +54,7 @@ namespace Threading {
         Execution::StopToken stopToken();
 
         bool wantsMainThread() const;
+        static TaskQueue *currentThreadQueue();
 
         template <typename Init, typename Finalize, typename PostFinalize>
         void addSetupSteps(Init &&init, Finalize &&finalize, PostFinalize &&postFinalize)

@@ -10,6 +10,8 @@
 namespace Engine {
 namespace Threading {
 
+    extern thread_local TaskQueue *sThreadQueue;
+
     Scheduler::Scheduler()
         : mWorkgroup(WorkGroup::self())
     {
@@ -68,6 +70,7 @@ namespace Threading {
         queue->mTracker.mThread = std::this_thread::get_id();
 #endif
         Platform::Threading::setCurrentThreadName(mWorkgroup.name() + "_" + queue->name() + tags);
+        sThreadQueue = queue;
     }
 
 }
