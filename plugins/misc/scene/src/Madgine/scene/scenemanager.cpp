@@ -52,7 +52,7 @@ namespace Scene {
 
     SceneManager::SceneManager(Core::Application &app)
         : VirtualScope(app)
-        , mMutex("SceneData")
+        , mMutex("SceneData", app.taskQueue())
         , mLifetime(&app.lifetime())
         , mSimulationClock(app.clock().now())
         , mAnimationClock(app.clock().now())
@@ -64,7 +64,7 @@ namespace Scene {
 
     SceneManager::SceneManager(Core::Application &app, std::nullopt_t)
         : VirtualScope(app)
-        , mMutex("SceneData")
+        , mMutex("SceneData", app.taskQueue())
         , mLifetime(std::nullopt)
         , mSimulationClock(app.clock().now())
         , mAnimationClock(app.clock().now())

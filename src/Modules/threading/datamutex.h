@@ -116,7 +116,7 @@ namespace Threading {
             F mF;
         };
 
-        DataMutex(std::string_view name);
+        DataMutex(std::string_view name, TaskQueue &taskQueue);
         ~DataMutex();
 
         const std::string &name() const;
@@ -144,6 +144,8 @@ namespace Threading {
     private:
         std::shared_mutex mMutex;
         std::string mName;
+
+        TaskQueue &mTaskQueue;
 
         Execution::ConnectionQueue<LockState> mReadQueue;
         Execution::ConnectionQueue<LockState> mWriteQueue;

@@ -38,8 +38,9 @@ namespace Threading {
     {
     }
 
-    DataMutex::DataMutex(std::string_view name)
+    DataMutex::DataMutex(std::string_view name, TaskQueue &taskQueue)
         : mName(name)
+        , mTaskQueue(taskQueue)
     {
     }
 
@@ -87,7 +88,7 @@ namespace Threading {
 
     bool DataMutex::lockWrite(LockState *state)
     {
-        bool success = mMutex.try_lock();
+        bool success = &mTaskQueue == TaskQueue::currentThreadQueue() && mMutex.try_lock();
         if (!success) {
             mWriteQueue.push(state);
             if (mMutex.try_lock()) {
@@ -113,23 +114,19 @@ namespace Threading {
     DataMutex::LockState *DataMutex::unlockRead()
     {
         LockState *head = mReadQueue.pop();
-        if (head)
-            return head;
+        if (!head)
+            mMutex.unlock_shared();
 
-        mMutex.unlock_shared();
-
-        return nullptr;
+        return head;
     }
 
     DataMutex::LockState *DataMutex::unlockWrite()
     {
         LockState *head = mWriteQueue.pop();
-        if (head)
-            return head;
+        if (!head)
+            mMutex.unlock();
 
-        mMutex.unlock();
-
-        return nullptr;
+        return head;
     }
 
     void DataMutex::run(LockState *state)
@@ -140,24 +137,27 @@ namespace Threading {
             if (!state) {
                 if (!mReadQueue.empty()) {
                     if (mMutex.try_lock_shared()) {
-                        state = mReadQueue.pop();
-                        if (!state)
-                            mMutex.unlock_shared();
+                        state = unlockRead();
                     }
                 }
             }
             if (!state) {
                 if (!mWriteQueue.empty()) {
                     if (mMutex.try_lock()) {
-                        state = mWriteQueue.pop();
-                        if (!state)
-                            mMutex.unlock();
+                        state = unlockWrite();
                     }
                 }
             }
 
             if (!state)
                 break;
+
+            if (state->mMode == AccessMode::WRITE && &mTaskQueue != TaskQueue::currentThreadQueue()) {
+                mTaskQueue.queue([this, state]() {
+                    run(state);
+                });
+                break;
+            }
 
             if (!state->onLockAcquired())
                 break;
