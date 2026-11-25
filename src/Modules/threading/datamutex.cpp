@@ -78,9 +78,7 @@ namespace Threading {
         bool success = mMutex.try_lock_shared();
         if (!success) {
             mReadQueue.push(state);
-            if (mMutex.try_lock_shared()) {
-                run(unlockRead());
-            }
+            run(nullptr, false);            
         }
 
         return success;
@@ -88,12 +86,12 @@ namespace Threading {
 
     bool DataMutex::lockWrite(LockState *state)
     {
-        bool success = &mTaskQueue == TaskQueue::currentThreadQueue() && mMutex.try_lock();
+        bool onThread = &mTaskQueue == TaskQueue::currentThreadQueue();
+
+        bool success = onThread && mMutex.try_lock();
         if (!success) {
             mWriteQueue.push(state);
-            if (mMutex.try_lock()) {
-                run(unlockWrite());
-            }
+            run(nullptr, onThread);
         }
 
         return success;
@@ -129,7 +127,7 @@ namespace Threading {
         return head;
     }
 
-    void DataMutex::run(LockState *state)
+    void DataMutex::run(LockState *state, bool onThread)
     {
         std::atomic<LockState *> initial = nullptr;
         std::atomic<LockState *> *nextPtr = &initial;
@@ -152,9 +150,9 @@ namespace Threading {
             if (!state)
                 break;
 
-            if (state->mMode == AccessMode::WRITE && &mTaskQueue != TaskQueue::currentThreadQueue()) {
+            if (state->mMode == AccessMode::WRITE && !onThread) {
                 mTaskQueue.queue([this, state]() {
-                    run(state);
+                    run(state, true);
                 });
                 break;
             }

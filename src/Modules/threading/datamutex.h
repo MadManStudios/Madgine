@@ -138,7 +138,7 @@ namespace Threading {
         LockState *unlockRead();
         LockState *unlockWrite();
 
-        void run(LockState *state);
+        void run(LockState *state, bool onThread);
         bool cancel(LockState *state);
 
     private:
